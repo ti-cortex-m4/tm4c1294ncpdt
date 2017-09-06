@@ -47,9 +47,6 @@ uchar                   mpbBuffPhones2[PHONE2_RECORD];
 // счётчики
 ulong                   cdwPhones20, cdwPhones21, cdwPhones22, cdwPhones23, cdwPhones24, cdwPhones25;
 
-// промежуточный буфер
-char                    mpbInBuffSave2[100];
-
 
 
 cache const           	chPortPhones2 = {PORT_PHONES2, &bPortPhones2, sizeof(uchar)};

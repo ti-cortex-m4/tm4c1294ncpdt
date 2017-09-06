@@ -33,7 +33,7 @@ void    TestPhones2(void) {
   AddPh2Record(EVE_PH2_DEBUG);
   memset(&mpbBuffPhones2, 0, sizeof(mpbBuffPhones2));
 
-  RunPhones2(false);
+  RunPhones2(true);
 
   AddPh2Record(EVE_PH2_FINISH);
 

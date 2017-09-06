@@ -25,26 +25,8 @@ PHONES2_SERIAL*C
 #include "../../nvram/cache.h"
 #include "../../nvram/cache2.h"
 #include "phones2_modem.h"
+#include "phones2.h"
 
-
-
-extern char                   mpbInBuffSave2[100];
-extern float                  reValPhones2;
-
-
-uint    PushMessage(char*  msT)
-{
-uint  i = 0;
-
-  while (1)
-  {
-    if (!*msT) break;
-    PushChar(*msT++);
-    i++;
-  }
-
-  return i;
-}
 
 
 void    QueryMessageMode(void) {
@@ -68,16 +50,16 @@ void    QueryMessage1(uchar  ibPhn) {
   InitPush(0);
   PushString("AT+CMGS=");
 
-  line phT = mpphPhones2[ibPhn];
+  line ph = mpphPhones2[ibPhn];
 
   Clear();
-  strcpy(szLo, phT.szLine);
+  strcpy(szLo, ph.szLine);
 
   uchar i;
   for (i=0; i<bLINE_SIZE; i++)
   {
-    if (phT.szLine[i] == 0) break;
-    PushChar(phT.szLine[i]);
+    if (ph.szLine[i] == 0) break;
+    PushChar(ph.szLine[i]);
   }
 
   PushChar(0x0D);
@@ -88,29 +70,37 @@ void    QueryMessage1(uchar  ibPhn) {
 
 
 void    QueryMessage2(bool  fDebug) {
-uint  i;
+  uint wSize = 0;
 
   InitPush(0);
 
-  sprintf(mpbInBuffSave2, "SEM-2 %02u:%02u:%02u %02u.%02u.20%02u - ",
-    tiCurr.bHour,
-    tiCurr.bMinute,
-    tiCurr.bSecond,
-    tiCurr.bDay,
-    tiCurr.bMonth,
-    tiCurr.bYear
-  );
+  wSize += PushString("SEM-2 ");
 
-  i = PushMessage(mpbInBuffSave2);
+  wSize += PushCharDec2Txt(tiCurr.bHour);
+  wSize += PushString(":");
+  wSize += PushCharDec2Txt(tiCurr.bMinute);
+  wSize += PushString(":");
+  wSize += PushCharDec2Txt(tiCurr.bSecond);
+  wSize += PushString(" ");
+  wSize += PushCharDec2Txt(tiCurr.bDay);
+  wSize += PushString(".");
+  wSize += PushCharDec2Txt(tiCurr.bMonth);
+  wSize += PushString(".20");
+  wSize += PushCharDec2Txt(tiCurr.bYear);
+  wSize += PushString(" - ");
 
-  if (fDebug == true)
-    sprintf(mpbInBuffSave2+i, "test");
-  else
-    sprintf(mpbInBuffSave2+i, "prognoz %.3f bolsche limita %.3f !", reValPhones2, reMaxPhones2);
+  if (fDebug == true) {
+    wSize += PushString("test");
+  }
+  else {
+    wSize += PushString("prognoz ");
+    wSize += PushFloat3(reValPhones2);
+    wSize += PushString(" bolsche limita ");
+    wSize += PushFloat3(reMaxPhones2);
+    wSize += PushString(" !");
+  }
 
-  i += PushMessage(mpbInBuffSave2+i);
+  wSize += PushChar(0x1A);   // 0x1A - send message, 0x1B - don't send message
 
-  PushChar(0x1A);   // 0x1A - send message, 0x1B - don't send message
-
-  Query(100, i+1, 1);
+  Query(100, wSize+1, 1);
 }
