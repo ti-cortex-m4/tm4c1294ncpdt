@@ -279,7 +279,7 @@ typedef enum
 
   PORT_PHONES2          = SKIP_FAILURE_REPEATS + sizeof(bool) + bNVRAM_MARGIN,
   PHONES2               = PORT_PHONES2 + sizeof(uchar) + bNVRAM_MARGIN,
-  MAXX_PHONES2          = PHONES2 + sizeof(mpphPhones2) + bNVRAM_MARGIN,
+  MAX_PHONES2           = PHONES2 + sizeof(mpphPhones2) + bNVRAM_MARGIN,
 
-  NVRAM_END             = MAXX_PHONES2 + sizeof(float) + bNVRAM_MARGIN
+  NVRAM_END             = MAX_PHONES2 + sizeof(float) + bNVRAM_MARGIN
 } nvram;
