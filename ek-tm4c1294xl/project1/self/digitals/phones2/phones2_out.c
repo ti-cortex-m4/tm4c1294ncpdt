@@ -21,7 +21,7 @@ void    OutPhones2(void) {
 
   InitPushCRC();
 
-  PushChar(boShowMessages);
+  PushBool(boShowMessages);
   PushChar(UsePhones2());
   PushChar(bPortPhones2);
 
@@ -36,7 +36,10 @@ void    OutPhones2(void) {
   Push(&mpbAnswer1Phones2, sizeof(mpbAnswer1Phones2));
   Push(&mpbAnswer2Phones2, sizeof(mpbAnswer2Phones2));
 
-  Push(&mpstPhones2, sizeof(mpstPhones2));
+  for (i=0; i<PHONE2_CODES; i++) {
+    PushIntBig(mpstPhones2[i].cwSelf);
+    PushTime(mpstPhones2[i].tiSelf);
+  }
 
   Push(&mpbBuffPhones2, sizeof(mpbBuffPhones2));
 
