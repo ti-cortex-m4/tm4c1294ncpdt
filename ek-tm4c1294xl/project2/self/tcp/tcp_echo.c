@@ -1,13 +1,16 @@
 /*------------------------------------------------------------------------------
-tcp_echo.c
+tcp_echo,c
 
 
 ------------------------------------------------------------------------------*/
 
+#include "../main.h"
 #include "lwip/opt.h"
 #include "lwip/debug.h"
 #include "lwip/stats.h"
 #include "lwip/tcp.h"
+#include "../kernel/settings.h"
+#include "../kernel/log.h"
 
 
 
@@ -45,11 +48,11 @@ void InitTCPEcho(void)
   if (fTCPEchoFlag == true)
   {
     echo_pcb = tcp_new();
+    tcp_nagle_disable(echo_pcb);
+
     if (echo_pcb != NULL)
     {
-      err_t err;
-
-      err = tcp_bind(echo_pcb, IP_ADDR_ANY, 7);
+      err_t err = tcp_bind(echo_pcb, IP_ADDR_ANY, wTCPEchoPort);
       if (err == ERR_OK)
       {
         echo_pcb = tcp_listen(echo_pcb);
@@ -57,12 +60,12 @@ void InitTCPEcho(void)
       }
       else
       {
-        /* abort? output diagnostic? */
+        ERROR("TCP echo failed during tcp_bind, error=%d\n", err);
       }
     }
     else
     {
-      /* abort? output diagnostic? */
+      ERROR("TCP echo failed during tcp_new\n");
     }
   }
 }
