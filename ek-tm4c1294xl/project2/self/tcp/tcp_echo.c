@@ -48,7 +48,6 @@ void InitTCPEcho(void)
   if (fTCPEchoFlag == true)
   {
     echo_pcb = tcp_new();
-    tcp_nagle_disable(echo_pcb);
 
     if (echo_pcb != NULL)
     {
@@ -282,6 +281,9 @@ echo_send(struct tcp_pcb *tpcb, struct echo_state *es)
   wr_err = tcp_write(tpcb, ptr->payload, ptr->len, 1);
   if (wr_err == ERR_OK)
   {
+     tcp_nagle_disable(tpcb);
+     tcp_output(tpcb);
+
      u16_t plen;
       u8_t freed;
 
