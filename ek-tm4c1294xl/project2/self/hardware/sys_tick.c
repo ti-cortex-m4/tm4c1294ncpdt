@@ -11,8 +11,8 @@ sys_tick.c
 
 
 
-#define SYS_TICK_FREQ   100
-#define SYS_TICK_PERIOD (1000 / SYS_TICK_FREQ) // milliseconds
+#define SYS_TICK_FREQ   1000
+#define SYS_TICK_PERIOD 1
 
 
 
