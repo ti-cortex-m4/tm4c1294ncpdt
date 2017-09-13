@@ -92,6 +92,12 @@ const entity * const mpenEntities[] =
   &enStopBits3,
   &enStopBits4,
 
+  &enLoopback0,
+  &enLoopback1,
+  &enLoopback2,
+  &enLoopback3,
+  &enLoopback4,
+
   &enWatchdogFlag,
   &enDebugMode,
 
