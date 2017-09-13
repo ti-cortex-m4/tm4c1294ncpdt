@@ -4,9 +4,4 @@ tcp_echo.h
 
 ------------------------------------------------------------------------------*/
 
-#ifndef __ECHO_H__
-#define __ECHO_H__
-
-void echo_init(void);
-
-#endif /* __MINIMAL_ECHO_H */
+void InitTCPEcho(void);
