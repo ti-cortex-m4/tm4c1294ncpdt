@@ -38,30 +38,35 @@ err_t echo_sent(void *arg, struct tcp_pcb *tpcb, u16_t len);
 void echo_send(struct tcp_pcb *tpcb, struct echo_state *es);
 void echo_close(struct tcp_pcb *tpcb, struct echo_state *es);
 
-void
-InitTCPEcho(void)
-{
-  echo_pcb = tcp_new();
-  if (echo_pcb != NULL)
-  {
-    err_t err;
 
-    err = tcp_bind(echo_pcb, IP_ADDR_ANY, 7);
-    if (err == ERR_OK)
+
+void InitTCPEcho(void)
+{
+  if (fTCPEchoFlag == true)
+  {
+    echo_pcb = tcp_new();
+    if (echo_pcb != NULL)
     {
-      echo_pcb = tcp_listen(echo_pcb);
-      tcp_accept(echo_pcb, echo_accept);
+      err_t err;
+
+      err = tcp_bind(echo_pcb, IP_ADDR_ANY, 7);
+      if (err == ERR_OK)
+      {
+        echo_pcb = tcp_listen(echo_pcb);
+        tcp_accept(echo_pcb, echo_accept);
+      }
+      else
+      {
+        /* abort? output diagnostic? */
+      }
     }
-    else 
+    else
     {
       /* abort? output diagnostic? */
     }
   }
-  else
-  {
-    /* abort? output diagnostic? */
-  }
 }
+
 
 
 err_t
