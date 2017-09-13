@@ -75,3 +75,9 @@ extern const entity enStopBits1;
 extern const entity enStopBits2;
 extern const entity enStopBits3;
 extern const entity enStopBits4;
+
+extern const entity enLoopback0;
+extern const entity enLoopback1;
+extern const entity enLoopback2;
+extern const entity enLoopback3;
+extern const entity enLoopback4;

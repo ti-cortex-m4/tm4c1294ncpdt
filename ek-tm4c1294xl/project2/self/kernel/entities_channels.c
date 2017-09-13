@@ -373,36 +373,36 @@ const entity enStopBits4 = {
 
 
 const entity enLoopback0 = {
-  EEPROM_LOOPBACK0, &mibLoopback[0], sizeof(uchar), CHAR, 0,
-  0, LOOPBACKCOUNT-1, LOOPBACKDEFAULT,
+  EEPROM_LOOPBACK_0, &mfLoopback[0], sizeof(uchar), CHAR, 0,
+  0, 1, 0,
   "LOOPBACK@0",
   "AI=LOOPBACK@0;D=Loopback mode;T=INT;C=STATIC;O=0-No/0/1-Yes/1",
 };
 
 const entity enLoopback1 = {
-  EEPROM_LOOPBACK1, &mibLoopback[1], sizeof(uchar), CHAR, 0,
-  0, LOOPBACKCOUNT-1, LOOPBACKDEFAULT,
+  EEPROM_LOOPBACK_1, &mfLoopback[1], sizeof(uchar), CHAR, 0,
+  0, 1, 0,
   "LOOPBACK@1",
   "AI=LOOPBACK@1;D=Loopback mode;T=INT;C=STATIC;O=0-No/0/1-Yes/1",
 };
 
 const entity enLoopback2 = {
-  EEPROM_LOOPBACK2, &mibLoopback[2], sizeof(uchar), CHAR, 0,
-  0, LOOPBACKCOUNT-1, LOOPBACKDEFAULT,
+  EEPROM_LOOPBACK_2, &mfLoopback[2], sizeof(uchar), CHAR, 0,
+  0, 1, 0,
   "LOOPBACK@2",
   "AI=LOOPBACK@2;D=Loopback mode;T=INT;C=STATIC;O=0-No/0/1-Yes/1",
 };
 
 const entity enLoopback3 = {
-  EEPROM_LOOPBACK3, &mibLoopback[3], sizeof(uchar), CHAR, 0,
-  0, LOOPBACKCOUNT-1, LOOPBACKDEFAULT,
+  EEPROM_LOOPBACK_3, &mfLoopback[3], sizeof(uchar), CHAR, 0,
+  0, 1, 0,
   "LOOPBACK@3",
   "AI=LOOPBACK@3;D=Loopback mode;T=INT;C=STATIC;O=0-No/0/1-Yes/1",
 };
 
 const entity enLoopback4 = {
-  EEPROM_LOOPBACK4, &mibLoopback[4], sizeof(uchar), CHAR, 0,
-  0, LOOPBACKCOUNT-1, LOOPBACKDEFAULT,
+  EEPROM_LOOPBACK_4, &mfLoopback[4], sizeof(uchar), CHAR, 0,
+  0, 1, 0,
   "LOOPBACK@4",
   "AI=LOOPBACK@4;D=Loopback mode;T=INT;C=STATIC;O=0-No/0/1-Yes/1",
 };

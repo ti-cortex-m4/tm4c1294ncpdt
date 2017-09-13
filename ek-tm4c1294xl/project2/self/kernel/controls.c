@@ -42,6 +42,7 @@ const message * const mppcszControls[] =
   &enParity0.szName,
   &enDataBits0.szName,
   &enStopBits0.szName,
+  &enLoopback0.szName,
 
   &szCanal1,
   &enConnectionTimeout1.szName,
@@ -56,6 +57,7 @@ const message * const mppcszControls[] =
   &enParity1.szName,
   &enDataBits1.szName,
   &enStopBits1.szName,
+  &enLoopback1.szName,
 
   &szCanal2,
   &enConnectionTimeout2.szName,
@@ -70,6 +72,7 @@ const message * const mppcszControls[] =
   &enParity2.szName,
   &enDataBits2.szName,
   &enStopBits2.szName,
+  &enLoopback2.szName,
 
   &szCanal3,
   &enConnectionTimeout3.szName,
@@ -84,6 +87,7 @@ const message * const mppcszControls[] =
   &enParity3.szName,
   &enDataBits3.szName,
   &enStopBits3.szName,
+  &enLoopback3.szName,
 
   &szCanal4,
   &enConnectionTimeout4.szName,
@@ -98,6 +102,7 @@ const message * const mppcszControls[] =
   &enParity4.szName,
   &enDataBits4.szName,
   &enStopBits4.szName,
+  &enLoopback4.szName,
 
   &szSetup,
   &enSerialNumber.szName,
