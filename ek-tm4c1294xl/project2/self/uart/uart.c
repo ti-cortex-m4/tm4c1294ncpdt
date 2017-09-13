@@ -113,7 +113,6 @@ static void InitUART0(ulong dwClockFreq, bool fDebugModeUART)
   {
     if (mfLoopback[0] == true)
     {
-      // This register write will set the UART to operate in loopback mode. Any data sent on the TX output will be received on the RX input.
       HWREG(UART0_BASE + UART_O_CTL) |= UART_CTL_LBE;
     }
 
@@ -140,7 +139,6 @@ static void InitUART4(ulong dwClockFreq)
 
   if (mfLoopback[1] == true)
   {
-    // This register write will set the UART to operate in loopback mode. Any data sent on the TX output will be received on the RX input.
     HWREG(UART4_BASE + UART_O_CTL) |= UART_CTL_LBE;
   }
 
@@ -169,7 +167,6 @@ static void InitUART3(ulong dwClockFreq)
 
   if (mfLoopback[2] == true)
   {
-    // This register write will set the UART to operate in loopback mode. Any data sent on the TX output will be received on the RX input.
     HWREG(UART3_BASE + UART_O_CTL) |= UART_CTL_LBE;
   }
 
@@ -198,7 +195,6 @@ static void InitUART2(ulong dwClockFreq)
 
   if (mfLoopback[3] == true)
   {
-    // This register write will set the UART to operate in loopback mode. Any data sent on the TX output will be received on the RX input.
     HWREG(UART2_BASE + UART_O_CTL) |= UART_CTL_LBE;
   }
 
@@ -227,7 +223,6 @@ static void InitUART1(ulong dwClockFreq)
 
   if (mfLoopback[4] == true)
   {
-    // This register write will set the UART to operate in loopback mode. Any data sent on the TX output will be received on the RX input.
     HWREG(UART1_BASE + UART_O_CTL) |= UART_CTL_LBE;
   }
 
