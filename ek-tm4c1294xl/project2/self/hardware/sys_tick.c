@@ -11,8 +11,8 @@ sys_tick.c
 
 
 
-#define SYS_TICK_FREQ   100
-#define SYS_TICK_PERIOD (1000 / SYS_TICK_FREQ) // milliseconds
+#define SYS_TICK_FREQUENCY  100
+#define SYS_TICK_PERIOD     (1000 / SYS_TICK_FREQUENCY) // milliseconds
 
 
 
@@ -38,7 +38,7 @@ void SysTickIntHandler(void)
 
 void InitSysTick(ulong dwClockFreq)
 {
-  SysTickPeriodSet(dwClockFreq / SYS_TICK_FREQ);
+  SysTickPeriodSet(dwClockFreq / SYS_TICK_FREQUENCY);
   SysTickEnable();
   SysTickIntEnable();
 }
