@@ -9,7 +9,7 @@ tcp_echo.c
 #include "lwip/stats.h"
 #include "lwip/tcp.h"
 
-#if LWIP_TCP
+
 
 static struct tcp_pcb *echo_pcb;
 
@@ -39,7 +39,7 @@ void echo_send(struct tcp_pcb *tpcb, struct echo_state *es);
 void echo_close(struct tcp_pcb *tpcb, struct echo_state *es);
 
 void
-echo_init(void)
+InitTCPEcho(void)
 {
   echo_pcb = tcp_new();
   if (echo_pcb != NULL)
@@ -322,5 +322,3 @@ echo_close(struct tcp_pcb *tpcb, struct echo_state *es)
   }  
   tcp_close(tpcb);
 }
-
-#endif /* LWIP_TCP */

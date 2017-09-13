@@ -36,6 +36,7 @@ MAIN,C
 #include "udp/udp_log.h"
 #include "udp/udp_handler.h"
 #include "tcp/telnet.h"
+#include "tcp/tcp_echo.h"
 
 
 
@@ -130,6 +131,7 @@ int     main(void)
 
   SerialInit();
   TelnetInit();
+  InitTCPEcho();
 
   InitUDPHandler();
   InitSysTick(dwClockFreq);
