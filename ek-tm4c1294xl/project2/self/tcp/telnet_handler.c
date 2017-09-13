@@ -222,6 +222,9 @@ void TelnetHandler(void)
                 tcp_write(pState->pConnectPCB, pucTemp, lIndex, 1);
             }
 
+            // https://en.wikipedia.org/wiki/Nagle%27s_algorithm -> Interactions with real-time systems
+            tcp_nagle_disable(pState->pConnectPCB);
+
             // Flush the data that has been written into the TCP output buffer.
             tcp_output(pState->pConnectPCB);
             pState->ulLastTCPSendTime = g_ulSystemTimeMS;
