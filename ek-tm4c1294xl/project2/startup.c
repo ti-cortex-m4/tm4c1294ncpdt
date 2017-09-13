@@ -65,7 +65,6 @@ extern void UART3IntHandler(void);
 extern void UART2IntHandler(void);
 extern void UART1IntHandler(void);
 
-extern void Timer1IntHandler(void);
 extern void Timer2IntHandler(void);
 
 //*****************************************************************************
@@ -116,7 +115,7 @@ void (* const g_pfnVectors[])(void) =
     IntDefaultHandler,                      // Watchdog timer
     IntDefaultHandler,                      // Timer 0 subtimer A
     IntDefaultHandler,                      // Timer 0 subtimer B
-    Timer1IntHandler,                      // Timer 1 subtimer A
+    IntDefaultHandler,                      // Timer 1 subtimer A
     IntDefaultHandler,                      // Timer 1 subtimer B
 	Timer2IntHandler,                      // Timer 2 subtimer A
     IntDefaultHandler,                      // Timer 2 subtimer B
