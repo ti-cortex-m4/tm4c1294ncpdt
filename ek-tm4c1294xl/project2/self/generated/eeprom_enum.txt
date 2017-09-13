@@ -115,5 +115,8 @@ typedef enum
   EEPROM_LOOPBACK_4            = EEPROM_LOOPBACK_3 + 4,
   EEPROM_LOOPBACK_5            = EEPROM_LOOPBACK_4 + 4,
 
-  EEPROM_END                   = EEPROM_LOOPBACK_5 + 4
+  EEPROM_TCP_ECHO_FLAG         = EEPROM_LOOPBACK_5 + 4,
+  EEPROM_TCP_ECHO_PORT         = EEPROM_TCP_ECHO_FLAG + 4,
+
+  EEPROM_END                   = EEPROM_TCP_ECHO_PORT + 4
 } eeprom;

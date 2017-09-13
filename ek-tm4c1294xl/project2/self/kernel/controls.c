@@ -112,6 +112,8 @@ const message * const mppcszControls[] =
   &enUDPDebugPort.szName,
   &enLWIPDebugFlag.szName,
   &enLWIPDebugTimeout.szName,
+  &enTCPEchoFlag.szName,
+  &enTCPEchoPort.szName,
   &enDataDebugFlag.szName,
   &enIOModeDebugFlag.szName,
   &enLED0Mode.szName,

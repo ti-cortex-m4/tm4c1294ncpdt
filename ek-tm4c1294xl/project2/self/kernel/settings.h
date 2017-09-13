@@ -51,6 +51,9 @@ extern uint                    wUDPDebugPort;
 extern bool                    fLWIPDebugFlag;
 extern uint                    wLWIPDebugTimeout;
 
+extern bool                    fTCPEchoFlag;
+extern uint                    wTCPEchoPort;
+
 extern bool                    fDataDebugFlag;
 extern bool                    fIOModeDebugFlag;
 
