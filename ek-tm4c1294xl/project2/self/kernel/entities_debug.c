@@ -49,6 +49,21 @@ const entity enLWIPDebugTimeout = {
 };
 
 
+const entity enTCPEchoFlag = {
+  EEPROM_TCP_ECHO_FLAG, &fTCPEchoFlag, sizeof(uchar), CHAR, 0,
+  0, 1, 0,
+  "TCP_ECHO_FLAG",
+  "AI=TCP_ECHO_FLAG;D=TCP echo;T=INT;C=STATIC;O=0-No/0/1-Yes/1",
+};
+
+const entity enTCPEchoPort = {
+  EEPROM_TCP_ECHO_PORT, &wTCPEchoPort, sizeof(uint), INT, 0,
+  0, 3600, 7,
+  "TCP_ECHO_PORT",
+  "AI=TCP_ECHO_PORT;E=1;D=TCP echo port;T=INT;C=EDIT;V=LWIPDT>3600?\"Maximum timeout is 3600 seconds\":\"\";S=TCP_ECHO_FLAG!=0?\"e\":\"i\"",
+};
+
+
 const entity enDataDebugFlag = {
   EEPROM_DATA_DEBUG_FLAG, &fDataDebugFlag, sizeof(uchar), CHAR, 0,
   0, 1, 0,
