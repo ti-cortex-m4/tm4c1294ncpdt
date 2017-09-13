@@ -38,6 +38,7 @@ extern uchar                   mibBaudRate[UART_COUNT];
 extern uchar                   mibParity[UART_COUNT];
 extern uchar                   mibDataBits[UART_COUNT];
 extern uchar                   mibStopBits[UART_COUNT];
+extern bool                    mfLoopback[UART_COUNT];
 
 extern bool                    fWatchdogFlag;
 extern bool                    fWatchdogReset;

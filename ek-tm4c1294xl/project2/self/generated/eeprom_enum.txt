@@ -108,5 +108,12 @@ typedef enum
   EEPROM_MODEM_TO_SERVER_TIMEOUT_3 = EEPROM_MODEM_TO_SERVER_TIMEOUT_2 + 4,
   EEPROM_MODEM_TO_SERVER_TIMEOUT_4 = EEPROM_MODEM_TO_SERVER_TIMEOUT_3 + 4,
 
-  EEPROM_END                   = EEPROM_MODEM_TO_SERVER_TIMEOUT_4 + 4
+  LOOPBACK_0                   = EEPROM_MODEM_TO_SERVER_TIMEOUT_4 + 4,
+  LOOPBACK_1                   = LOOPBACK_0 + 4,
+  LOOPBACK_2                   = LOOPBACK_1 + 4,
+  LOOPBACK_3                   = LOOPBACK_2 + 4,
+  LOOPBACK_4                   = LOOPBACK_3 + 4,
+  LOOPBACK_5                   = LOOPBACK_4 + 4,
+
+  EEPROM_END                   = LOOPBACK_5 + 4
 } eeprom;
