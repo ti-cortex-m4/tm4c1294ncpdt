@@ -12,7 +12,7 @@ delay.c
 
 void Nop(void)
 {
-  __asm("nop");
+  __asm(" nop");
 }
 
 
