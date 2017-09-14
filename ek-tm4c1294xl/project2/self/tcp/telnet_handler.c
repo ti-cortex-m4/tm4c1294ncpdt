@@ -222,7 +222,7 @@ void TelnetHandler(void)
                 tcp_write(pState->pConnectPCB, pucTemp, lIndex, 1);
             }
 
-            // https://en.wikipedia.org/wiki/Nagle%27s_algorithm -> Interactions with real-time systems
+            // https://en.wikipedia.org/wiki/Nagle%27s_algorithm#Interactions_with_real-time_systems
             tcp_nagle_disable(pState->pConnectPCB);
 
             // Flush the data that has been written into the TCP output buffer.
