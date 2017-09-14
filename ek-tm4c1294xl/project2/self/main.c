@@ -21,7 +21,6 @@ MAIN,C
 #include "hardware/gpio.h"
 #include "hardware/led.h"
 #include "hardware/sys_tick.h"
-#include "hardware/timer1.h"
 #include "hardware/timer2.h"
 #include "hardware/delay.h"
 #include "hardware/rom.h"
@@ -37,6 +36,7 @@ MAIN,C
 #include "udp/udp_log.h"
 #include "udp/udp_handler.h"
 #include "tcp/telnet.h"
+#include "tcp/tcp_echo.h"
 
 
 
@@ -131,6 +131,7 @@ int     main(void)
 
   SerialInit();
   TelnetInit();
+  InitTCPEcho();
 
   InitUDPHandler();
   InitSysTick(dwClockFreq);
@@ -139,7 +140,6 @@ int     main(void)
   InitModem();
   InitModemToServer();
   InitServerToModem();
-  InitTimer1(dwClockFreq);
   InitTimer2(dwClockFreq);
 
   // Set the interrupt priorities.  We set the SysTick interrupt to a higher

@@ -19,7 +19,7 @@ timer2.c
 
 
 
-#define TIMER2_FREQ     10
+#define TIMER2_FREQUENCY    10
 
 
 
@@ -28,7 +28,7 @@ void InitTimer2(ulong dwClockFreq)
   SysCtlPeripheralEnable(SYSCTL_PERIPH_TIMER2);
 
   TimerConfigure(TIMER2_BASE, TIMER_CFG_PERIODIC);
-  TimerLoadSet(TIMER2_BASE, TIMER_A, dwClockFreq / TIMER2_FREQ);
+  TimerLoadSet(TIMER2_BASE, TIMER_A, dwClockFreq / TIMER2_FREQUENCY);
 
   IntEnable(INT_TIMER2A);
   TimerIntEnable(TIMER2_BASE, TIMER_TIMA_TIMEOUT);

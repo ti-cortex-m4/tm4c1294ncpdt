@@ -38,7 +38,7 @@
 // ---------- Stellaris / lwIP Port Options ----------
 //
 //*****************************************************************************
-#define HOST_TMR_INTERVAL               50         // default is 0
+#define HOST_TMR_INTERVAL               1         // default is 0
 //#define DHCP_EXPIRE_TIMER_MSECS         (60 * 1000)
 //#define LWIP_HTTPD_SSI                  1
 //#define LWIP_HTTPD_CGI                  1

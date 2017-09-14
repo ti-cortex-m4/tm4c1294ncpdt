@@ -1,52 +1,18 @@
-/*
- * Copyright (c) 2001-2004 Swedish Institute of Computer Science.
- * All rights reserved. 
- * 
- * Redistribution and use in source and binary forms, with or without modification, 
- * are permitted provided that the following conditions are met:
- *
- * 1. Redistributions of source code must retain the above copyright notice,
- *    this list of conditions and the following disclaimer.
- * 2. Redistributions in binary form must reproduce the above copyright notice,
- *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution.
- * 3. The name of the author may not be used to endorse or promote products
- *    derived from this software without specific prior written permission. 
- *
- * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED 
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
- * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT 
- * SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, 
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT 
- * OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
- * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN 
- * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING 
- * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
- * OF SUCH DAMAGE.
- *
- * This file is part of and a contribution to the lwIP TCP/IP stack.
- *
- * Credits go to Adam Dunkels (and the current maintainers) of this software.
- *
- * Christiaan Simons rewrote this file to get a more stable echo example.
- */
-
-/**
- * @file
- * TCP echo server example using raw API.
- *
- * Echos all bytes sent by connecting client,
- * and passively closes when client is done.
- *
- */
+/*------------------------------------------------------------------------------
+tcp_echo,c
 
 
+------------------------------------------------------------------------------*/
+
+#include "../main.h"
 #include "lwip/opt.h"
 #include "lwip/debug.h"
 #include "lwip/stats.h"
 #include "lwip/tcp.h"
+#include "../kernel/settings.h"
+#include "../kernel/log.h"
 
-#if LWIP_TCP
+
 
 static struct tcp_pcb *echo_pcb;
 
@@ -75,30 +41,34 @@ err_t echo_sent(void *arg, struct tcp_pcb *tpcb, u16_t len);
 void echo_send(struct tcp_pcb *tpcb, struct echo_state *es);
 void echo_close(struct tcp_pcb *tpcb, struct echo_state *es);
 
-void
-echo_init(void)
-{
-  echo_pcb = tcp_new();
-  if (echo_pcb != NULL)
-  {
-    err_t err;
 
-    err = tcp_bind(echo_pcb, IP_ADDR_ANY, 7);
-    if (err == ERR_OK)
-    {
-      echo_pcb = tcp_listen(echo_pcb);
-      tcp_accept(echo_pcb, echo_accept);
-    }
-    else 
-    {
-      /* abort? output diagnostic? */
-    }
-  }
-  else
+
+void InitTCPEcho(void)
+{
+  if (fTCPEchoFlag == true)
   {
-    /* abort? output diagnostic? */
+    echo_pcb = tcp_new();
+
+    if (echo_pcb != NULL)
+    {
+      err_t err = tcp_bind(echo_pcb, IP_ADDR_ANY, wTCPEchoPort);
+      if (err == ERR_OK)
+      {
+        echo_pcb = tcp_listen(echo_pcb);
+        tcp_accept(echo_pcb, echo_accept);
+      }
+      else
+      {
+        ERROR("TCP echo failed during tcp_bind, error=%d\n", err);
+      }
+    }
+    else
+    {
+      ERROR("TCP echo failed during tcp_new\n");
+    }
   }
 }
+
 
 
 err_t
@@ -311,6 +281,9 @@ echo_send(struct tcp_pcb *tpcb, struct echo_state *es)
   wr_err = tcp_write(tpcb, ptr->payload, ptr->len, 1);
   if (wr_err == ERR_OK)
   {
+     tcp_nagle_disable(tpcb);
+     tcp_output(tpcb);
+
      u16_t plen;
       u8_t freed;
 
@@ -359,5 +332,3 @@ echo_close(struct tcp_pcb *tpcb, struct echo_state *es)
   }  
   tcp_close(tpcb);
 }
-
-#endif /* LWIP_TCP */

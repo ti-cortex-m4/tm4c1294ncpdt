@@ -7,6 +7,8 @@ uart.c
 #include "../main.h"
 #include "inc/hw_ints.h"
 #include "inc/hw_memmap.h"
+#include "inc/hw_types.h"
+#include "inc/hw_uart.h"
 #include "driverlib/gpio.h"
 #include "driverlib/pin_map.h"
 #include "driverlib/sysctl.h"
@@ -109,6 +111,11 @@ static void InitUART0(ulong dwClockFreq, bool fDebugModeUART)
 
   if (!fDebugModeUART)
   {
+    if (mfLoopback[0] == true)
+    {
+      HWREG(UART0_BASE + UART_O_CTL) |= UART_CTL_LBE;
+    }
+
     IntEnable(INT_UART0);
     UARTIntEnable(UART0_BASE, UART_INT_RX | UART_INT_RT | UART_INT_TX);
 
@@ -129,6 +136,11 @@ static void InitUART4(ulong dwClockFreq)
   UARTFIFOLevelSet(UART4_BASE, UART_FIFO_TX1_8, UART_FIFO_RX1_8);
   UARTTxIntModeSet(UART4_BASE, UART_TXINT_MODE_EOT);
   UARTFIFODisable(UART4_BASE);
+
+  if (mfLoopback[1] == true)
+  {
+    HWREG(UART4_BASE + UART_O_CTL) |= UART_CTL_LBE;
+  }
 
   IntEnable(INT_UART4);
   UARTIntEnable(UART4_BASE, UART_INT_RX | UART_INT_RT | UART_INT_TX);
@@ -153,6 +165,11 @@ static void InitUART3(ulong dwClockFreq)
   UARTTxIntModeSet(UART3_BASE, UART_TXINT_MODE_EOT);
   UARTFIFODisable(UART3_BASE);
 
+  if (mfLoopback[2] == true)
+  {
+    HWREG(UART3_BASE + UART_O_CTL) |= UART_CTL_LBE;
+  }
+
   IntEnable(INT_UART3);
   UARTIntEnable(UART3_BASE, UART_INT_RX | UART_INT_RT | UART_INT_TX);
 
@@ -176,6 +193,11 @@ static void InitUART2(ulong dwClockFreq)
   UARTTxIntModeSet(UART2_BASE, UART_TXINT_MODE_EOT);
   UARTFIFODisable(UART2_BASE);
 
+  if (mfLoopback[3] == true)
+  {
+    HWREG(UART2_BASE + UART_O_CTL) |= UART_CTL_LBE;
+  }
+
   IntEnable(INT_UART2);
   UARTIntEnable(UART2_BASE, UART_INT_RX | UART_INT_RT | UART_INT_TX);
 
@@ -198,6 +220,11 @@ static void InitUART1(ulong dwClockFreq)
   UARTFIFOLevelSet(UART1_BASE, UART_FIFO_TX1_8, UART_FIFO_RX1_8);
   UARTTxIntModeSet(UART1_BASE, UART_TXINT_MODE_EOT);
   UARTFIFODisable(UART1_BASE);
+
+  if (mfLoopback[4] == true)
+  {
+    HWREG(UART1_BASE + UART_O_CTL) |= UART_CTL_LBE;
+  }
 
   IntEnable(INT_UART1);
   UARTIntEnable(UART1_BASE, UART_INT_RX | UART_INT_RT | UART_INT_TX);
