@@ -58,7 +58,7 @@ void    ReadParamU4(void)
 }
 
 
-bool    ReadParamU(void)
+float2  ReadParamU(void)
 {
   Clear();
 
@@ -67,28 +67,28 @@ bool    ReadParamU(void)
     QueryCloseU();
     QueryParamU1();
 
-    if (BccInput() != SER_GOODCHECK) return(0);
+    if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
     ReadParamU1();
 
 
     QueryCloseU();
     QueryParamU2();
 
-    if (BccInput() != SER_GOODCHECK) return(0);
+    if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
     ReadParamU2();
 
 
     QueryCloseU();
     QueryParamU3();
 
-    if (BccInput() != SER_GOODCHECK) return(0);
+    if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
     ReadParamU3();
 
 
     QueryCloseU();
     QueryParamU4();
 
-    if (BccInput() != SER_GOODCHECK) return(0);
+    if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
     ReadParamU4();
 
 
@@ -97,22 +97,20 @@ bool    ReadParamU(void)
 
   switch (diCurr.ibLine)
   {
-    case PAR_P1 : reValue = mpreParam[PAR_P1];  break;
-    case PAR_P2 : reValue = mpreParam[PAR_P2];  break;
-    case PAR_P3 : reValue = mpreParam[PAR_P3];  break;
+    case PAR_P1 : return GetFloat2(mpreParam[PAR_P1], true);
+    case PAR_P2 : return GetFloat2(mpreParam[PAR_P2], true);
+    case PAR_P3 : return GetFloat2(mpreParam[PAR_P3], true);
 
-    case PAR_I1 : reValue = mpreParam[PAR_I1];  break;
-    case PAR_I2 : reValue = mpreParam[PAR_I2];  break;
-    case PAR_I3 : reValue = mpreParam[PAR_I3];  break;
+    case PAR_I1 : return GetFloat2(mpreParam[PAR_I1], true);
+    case PAR_I2 : return GetFloat2(mpreParam[PAR_I2], true);
+    case PAR_I3 : return GetFloat2(mpreParam[PAR_I3], true);
 
-    case PAR_U1 : reValue = mpreParam[PAR_U1];  break;
-    case PAR_U2 : reValue = mpreParam[PAR_U2];  break;
-    case PAR_U3 : reValue = mpreParam[PAR_U3];  break;
+    case PAR_U1 : return GetFloat2(mpreParam[PAR_U1], true);
+    case PAR_U2 : return GetFloat2(mpreParam[PAR_U2], true);
+    case PAR_U3 : return GetFloat2(mpreParam[PAR_U3], true);
 
-    case PAR_F  : reValue = mpreParam[PAR_F];   break;
+    case PAR_F  : return GetFloat2(mpreParam[PAR_F], true);
 
-    default: return(0);
+    default: return GetFloat2Error();
   }
-
-  return(1);
 }
