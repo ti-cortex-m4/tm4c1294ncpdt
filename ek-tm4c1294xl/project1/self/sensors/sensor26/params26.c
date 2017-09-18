@@ -20,44 +20,6 @@ extern  bool                    fBeginParam;
 
 
 
-void    ReadParamU1(void)
-{
-  InitPop(1);
-
-  mpreParam[PAR_I1] = PopDoubleQ()*1000;
-  mpreParam[PAR_I2] = PopDoubleQ()*1000;
-  mpreParam[PAR_I3] = PopDoubleQ()*1000;
-}
-
-
-void    ReadParamU2(void)
-{
-  InitPop(1);
-
-  mpreParam[PAR_U1] = PopDoubleQ();
-  mpreParam[PAR_U2] = PopDoubleQ();
-  mpreParam[PAR_U3] = PopDoubleQ();
-}
-
-
-void    ReadParamU3(void)
-{
-  InitPop(1);
-
-  mpreParam[PAR_P1] = PopDoubleQ()*1000;
-  mpreParam[PAR_P2] = PopDoubleQ()*1000;
-  mpreParam[PAR_P3] = PopDoubleQ()*1000;
-}
-
-
-void    ReadParamU4(void)
-{
-  InitPop(1);
-
-  mpreParam[PAR_F] = PopDoubleQ();
-}
-
-
 float2  ReadParamU(void)
 {
   Clear();

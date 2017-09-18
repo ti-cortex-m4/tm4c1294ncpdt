@@ -36,10 +36,5 @@ bool    ReadDataU(void);
 
 void    ReadCurrentU(uchar  bMaxLine);
 
-void    QueryParamU1(void);
-void    QueryParamU2(void);
-void    QueryParamU3(void);
-void    QueryParamU4(void);
-
 #endif
 
