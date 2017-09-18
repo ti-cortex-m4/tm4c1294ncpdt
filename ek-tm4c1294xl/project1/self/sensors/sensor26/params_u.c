@@ -5,6 +5,14 @@ PARAMS_U,C
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
+#include "../../memory/mem_digitals.h"
+#include "../../memory/mem_params.h"
+#include "../../serial/ports.h"
+#include "../../serial/ports_devices.h"
+#include "../../display/display.h"
+#include "../../sensors/device_k.h"
+#include "../../sensors/device_q.h"
+#include "params_u.h"
 
 
 
