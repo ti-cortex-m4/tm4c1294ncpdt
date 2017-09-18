@@ -1074,7 +1074,7 @@ float2  ReadParam(uint  iwPrm)
 
 #ifndef SKIP_U
     case 26:
-    case 28: return ReadParamU();
+    case 28: return ReadParam26();
 #endif
 
 #ifndef SKIP_V

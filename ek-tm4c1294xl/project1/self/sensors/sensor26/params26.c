@@ -21,7 +21,7 @@ extern  bool                    fBeginParam;
 
 
 
-float2  ReadParamU(void)
+float2  ReadParam26(void) // CE301
 {
   Clear();
 
