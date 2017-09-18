@@ -4,14 +4,14 @@ PARAMS_U,H
 
 ------------------------------------------------------------------------------*/
 
-void    QueryParamU1(void);
-void    ReadParamU1(void);
+void    QueryParamU_I123(void);
+void    ReadParamU_I123(void);
 
-void    QueryParamU2(void);
-void    ReadParamU2(void);
+void    QueryParamU_U123(void);
+void    ReadParamU_U123(void);
 
-void    QueryParamU3(void);
-void    ReadParamU3(void);
+void    QueryParamU_P123(void);
+void    ReadParamU_P123(void);
 
-void    QueryParamU4(void);
-void    ReadParamU4(void);
+void    QueryParamU_Ft(void);
+void    ReadParamU_Ft(void);

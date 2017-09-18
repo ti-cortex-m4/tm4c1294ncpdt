@@ -28,31 +28,31 @@ float2  ReadParamU(void)
   if (fBeginParam == false)
   {
     QueryCloseU();
-    QueryParamU1();
+    QueryParamU_I123();
 
     if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
-    ReadParamU1();
+    ReadParamU_I123();
 
 
     QueryCloseU();
-    QueryParamU2();
+    QueryParamU_U123();
 
     if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
-    ReadParamU2();
+    ReadParamU_U123();
 
 
     QueryCloseU();
-    QueryParamU3();
+    QueryParamU_P123();
 
     if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
-    ReadParamU3();
+    ReadParamU_P123();
 
 
     QueryCloseU();
-    QueryParamU4();
+    QueryParamU_Ft();
 
     if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
-    ReadParamU4();
+    ReadParamU_Ft();
 
 
     fBeginParam = true;
