@@ -12,6 +12,7 @@ PARAMS26,C
 #include "../../display/display.h"
 #include "../../sensors/device_q.h"
 #include "../../sensors/sensor26/device_u.h"
+#include "params_u.h"
 #include "params26.h"
 
 
