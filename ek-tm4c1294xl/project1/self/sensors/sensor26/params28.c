@@ -49,6 +49,13 @@ float2  ReadParam28(void) // CE303
 
 
     QueryCloseU();
+    QueryParamU_Q123();
+
+    if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
+    ReadParamU_Q123();
+
+
+    QueryCloseU();
     QueryParamU_Ft();
 
     if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
@@ -63,6 +70,10 @@ float2  ReadParam28(void) // CE303
     case PAR_P1 : return GetFloat2(mpreParam[PAR_P1], true);
     case PAR_P2 : return GetFloat2(mpreParam[PAR_P2], true);
     case PAR_P3 : return GetFloat2(mpreParam[PAR_P3], true);
+
+    case PAR_Q1 : return GetFloat2(mpreParam[PAR_Q1], true);
+    case PAR_Q2 : return GetFloat2(mpreParam[PAR_Q2], true);
+    case PAR_Q3 : return GetFloat2(mpreParam[PAR_Q3], true);
 
     case PAR_I1 : return GetFloat2(mpreParam[PAR_I1], true);
     case PAR_I2 : return GetFloat2(mpreParam[PAR_I2], true);

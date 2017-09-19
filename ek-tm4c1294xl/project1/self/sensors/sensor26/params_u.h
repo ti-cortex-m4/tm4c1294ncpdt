@@ -13,5 +13,8 @@ void    ReadParamU_U123(void);
 void    QueryParamU_P123(void);
 void    ReadParamU_P123(void);
 
+void    QueryParamU_Q123(void);
+void    ReadParamU_Q123(void);
+
 void    QueryParamU_Ft(void);
 void    ReadParamU_Ft(void);
