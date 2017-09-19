@@ -66,7 +66,7 @@ float2  ReadParam28(void) // CE303
 
     QueryParamU_Ct123();
 
-    if (BccInput() /*!*/== SER_GOODCHECK)
+    if (BccInput() != SER_GOODCHECK)
     {
       mpreParam[PAR_C] = CalcC(mpreParam[PAR_P], mpreParam[PAR_Q]);
       mpreParam[PAR_C1] = CalcC(mpreParam[PAR_P1], mpreParam[PAR_Q1]);

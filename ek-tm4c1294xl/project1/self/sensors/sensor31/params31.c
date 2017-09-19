@@ -4,12 +4,12 @@ PARAMS31.C
 
 ------------------------------------------------------------------------------*/
 
-#include <math.h>
 #include "../../main.h"
 #include "../../memory/mem_digitals.h"
 #include "../../serial/ports.h"
 #include "../../display/display.h"
 #include "../../time/delay.h"
+#include "../../digitals/params/params.h"
 #include "automatic31.h"
 #include "device31.h"
 #include "params31.h"
@@ -54,7 +54,7 @@ static float2 CalcParamS(uchar ibP, uchar ibQ)
   InitPop(ibQ);
   float flQ = PopDouble31();
 
-  float flS = sqrtf(flP*flP + flQ*flQ);
+  float flS = CalcS(flP, flQ);
 
   return GetFloat2(flS, true);
 }
@@ -68,8 +68,7 @@ static float2 CalcParamC(uchar ibP, uchar ibQ)
   InitPop(ibQ);
   float flQ = PopDouble31();
 
-  float flS = sqrtf(flP*flP + flQ*flQ);
-  float flC = (flS == 0) ? 0 : flP/flS;
+  float flC = CalcC(flP, flQ);
 
   return GetFloat2(flC, true);
 }
