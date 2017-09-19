@@ -27,13 +27,13 @@ float2  ReadParam26(void) // CE301
 
   if (fBeginParam == false)
   {
-    QueryParamU_I123();
-    if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
-    ReadParamU_I123();
-
     QueryParamU_U123();
     if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
     ReadParamU_U123();
+
+    QueryParamU_I123();
+    if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
+    ReadParamU_I123();
 
     QueryParamU_Pt();
     if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
@@ -68,18 +68,17 @@ float2  ReadParam26(void) // CE301
   switch (diCurr.ibLine)
   {
     case PAR_P  : return GetFloat2(mpreParam[PAR_P], true);
-
     case PAR_P1 : return GetFloat2(mpreParam[PAR_P1], true);
     case PAR_P2 : return GetFloat2(mpreParam[PAR_P2], true);
     case PAR_P3 : return GetFloat2(mpreParam[PAR_P3], true);
 
-    case PAR_I1 : return GetFloat2(mpreParam[PAR_I1], true);
-    case PAR_I2 : return GetFloat2(mpreParam[PAR_I2], true);
-    case PAR_I3 : return GetFloat2(mpreParam[PAR_I3], true);
-
     case PAR_U1 : return GetFloat2(mpreParam[PAR_U1], true);
     case PAR_U2 : return GetFloat2(mpreParam[PAR_U2], true);
     case PAR_U3 : return GetFloat2(mpreParam[PAR_U3], true);
+
+    case PAR_I1 : return GetFloat2(mpreParam[PAR_I1], true);
+    case PAR_I2 : return GetFloat2(mpreParam[PAR_I2], true);
+    case PAR_I3 : return GetFloat2(mpreParam[PAR_I3], true);
 
     case PAR_C :  return GetFloat2(mpreParam[PAR_C], true);
     case PAR_C1 : return GetFloat2(mpreParam[PAR_C1], true);
