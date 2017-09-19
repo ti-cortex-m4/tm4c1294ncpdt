@@ -81,9 +81,13 @@ float2  ReadParam28(void) // CE303
 
   switch (diCurr.ibLine)
   {
+    case PAR_P  : return GetFloat2(mpreParam[PAR_P], true);
+
     case PAR_P1 : return GetFloat2(mpreParam[PAR_P1], true);
     case PAR_P2 : return GetFloat2(mpreParam[PAR_P2], true);
     case PAR_P3 : return GetFloat2(mpreParam[PAR_P3], true);
+
+    case PAR_Q  : return GetFloat2(mpreParam[PAR_Q], true);
 
     case PAR_Q1 : return GetFloat2(mpreParam[PAR_Q1], true);
     case PAR_Q2 : return GetFloat2(mpreParam[PAR_Q2], true);

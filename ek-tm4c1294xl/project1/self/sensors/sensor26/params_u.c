@@ -89,7 +89,7 @@ void    QueryParamU_Pt(void)
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
-  BccQueryIO(1+3*28+2, n+8+1, 3);
+  BccQueryIO(1+2*28+2, n+8+1, 2);
 }
 
 
@@ -145,7 +145,7 @@ void    QueryParamU_Qt(void)
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
-  BccQueryIO(1+3*28+2, n+8+1, 3);
+  BccQueryIO(1+2*28+2, n+8+1, 2);
 }
 
 
