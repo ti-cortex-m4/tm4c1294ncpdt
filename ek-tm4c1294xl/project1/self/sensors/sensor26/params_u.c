@@ -104,6 +104,35 @@ void    ReadParamU_P123(void)
 
 
 
+void    QueryParamU_Q123(void)
+{
+  uchar n = PushAddress2Bcc();
+
+  PushChar1Bcc('P');
+  PushChar1Bcc('O');
+  PushChar1Bcc('W');
+  PushChar1Bcc('P');
+  PushChar1Bcc('Q');
+
+  PushChar1Bcc('(');
+  PushChar1Bcc(')');
+  PushChar1Bcc(0x03);
+
+  BccQueryIO(1+3*28+2, n+8+1, 3);
+}
+
+
+void    ReadParamU_Q123(void)
+{
+  InitPop(1);
+
+  mpreParam[PAR_Q1] = PopDoubleQ()*1000;
+  mpreParam[PAR_Q2] = PopDoubleQ()*1000;
+  mpreParam[PAR_Q3] = PopDoubleQ()*1000;
+}
+
+
+
 void    QueryParamU_Ft(void)
 {
   uchar n = PushAddress2Bcc();
