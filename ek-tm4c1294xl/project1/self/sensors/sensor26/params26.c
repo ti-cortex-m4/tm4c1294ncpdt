@@ -44,8 +44,18 @@ float2  ReadParam26(void) // CE301
     ReadParamU_P123();
 
     QueryParamU_Ct123();
-    if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
-    ReadParamU_Ct123();
+    if (BccInput() != SER_GOODCHECK)
+    {
+      combo32 co;
+      co.dwBuff = MAX_LONG;
+
+      mpreParam[PAR_C] = co.flBuff;
+      mpreParam[PAR_C1] = co.flBuff;
+      mpreParam[PAR_C2] = co.flBuff;
+      mpreParam[PAR_C3] = co.flBuff;
+    }
+    else
+      ReadParamU_Ct123();
 
     QueryParamU_Ft();
     if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
