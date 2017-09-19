@@ -13,6 +13,7 @@ extern  uchar                   ibLineQ;
 
 
 double  PopDoubleQ(void);
+double  PopDoubleQ_WithSign(void);
 
 void    QueryCloseQ(void);
 void    QueryOptionQ(void);
