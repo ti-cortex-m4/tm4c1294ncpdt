@@ -27,49 +27,42 @@ float2  ReadParam28(void) // CE303
 
   if (fBeginParam == false)
   {
-    QueryCloseU();
     QueryParamU_I123();
 
     if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
     ReadParamU_I123();
 
 
-    QueryCloseU();
     QueryParamU_U123();
 
     if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
     ReadParamU_U123();
 
 
-    QueryCloseU();
     QueryParamU_Pt();
 
     if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
     ReadParamU_Pt();
 
 
-    QueryCloseU();
     QueryParamU_P123();
 
     if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
     ReadParamU_P123();
 
 
-    QueryCloseU();
     QueryParamU_Qt();
 
     if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
     ReadParamU_Qt();
 
 
-    QueryCloseU();
     QueryParamU_Q123();
 
     if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
     ReadParamU_Q123();
 
 
-    QueryCloseU();
     QueryParamU_Ft();
 
     if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
