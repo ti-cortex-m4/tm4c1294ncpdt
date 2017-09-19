@@ -198,12 +198,14 @@ void    ShowParam(uint  iwPrm)
 
 
 
+float   CalcS(float  flP, float  flQ)
+{
+  return sqrtf(flP*flP + flQ*flQ);
+}
+
+
 float   CalcC(float  flP, float  flQ)
 {
-  float flS = sqrtf(flP*flP + flQ*flQ);
-  if (flS == 0) {
-    return 0;
-  } else {
-    return flP/flS;
-  }
+  float flS = CalcS(flP, flQ);
+  return (flS == 0) ? 0 : flP/flS;
 }

@@ -42,4 +42,5 @@ uchar   GetParamLine(uint  iwPrm);
 
 void    ShowParam(uint  iwPrm);
 
+float   CalcS(float  flP, float  flQ);
 float   CalcC(float  flP, float  flQ);
