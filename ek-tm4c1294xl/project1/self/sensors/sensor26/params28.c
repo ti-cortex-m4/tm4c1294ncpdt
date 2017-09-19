@@ -12,6 +12,7 @@ PARAMS28,C
 #include "../../display/display.h"
 #include "../../sensors/device_q.h"
 #include "../../sensors/sensor26/device_u.h"
+#include "../../digitals/params/params.h"
 #include "params_u.h"
 #include "params28.h"
 
@@ -65,8 +66,15 @@ float2  ReadParam28(void) // CE303
 
     QueryParamU_Ct123();
 
-    if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
-    ReadParamU_Ct123();
+    if (BccInput() /*!*/== SER_GOODCHECK)
+    {
+      mpreParam[PAR_C] = CalcC(mpreParam[PAR_P], mpreParam[PAR_Q]);
+      mpreParam[PAR_C1] = CalcC(mpreParam[PAR_P1], mpreParam[PAR_Q1]);
+      mpreParam[PAR_C2] = CalcC(mpreParam[PAR_P2], mpreParam[PAR_Q2]);
+      mpreParam[PAR_C3] = CalcC(mpreParam[PAR_P3], mpreParam[PAR_Q3]);
+    }
+    else
+      ReadParamU_Ct123();
 
 
     QueryParamU_Ft();
