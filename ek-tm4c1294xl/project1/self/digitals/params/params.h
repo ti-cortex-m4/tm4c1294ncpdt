@@ -41,3 +41,5 @@ uchar   GetParamAddress(uint  iwPrm);
 uchar   GetParamLine(uint  iwPrm);
 
 void    ShowParam(uint  iwPrm);
+
+float   CalcC(float  flP, float  flQ);
