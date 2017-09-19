@@ -75,6 +75,33 @@ void    ReadParamU_U123(void)
 
 
 
+void    QueryParamU_Pt(void)
+{
+  uchar n = PushAddress2Bcc();
+
+  PushChar1Bcc('P');
+  PushChar1Bcc('O');
+  PushChar1Bcc('W');
+  PushChar1Bcc('E');
+  PushChar1Bcc('P');
+
+  PushChar1Bcc('(');
+  PushChar1Bcc(')');
+  PushChar1Bcc(0x03);
+
+  BccQueryIO(1+3*28+2, n+8+1, 3);
+}
+
+
+void    ReadParamU_Pt(void)
+{
+  InitPop(1);
+
+  mpreParam[PAR_P] = PopDoubleQ()*1000 - PopDoubleQ()*1000;
+}
+
+
+
 void    QueryParamU_P123(void)
 {
   uchar n = PushAddress2Bcc();
@@ -100,6 +127,33 @@ void    ReadParamU_P123(void)
   mpreParam[PAR_P1] = PopDoubleQ_WithSign()*1000;
   mpreParam[PAR_P2] = PopDoubleQ_WithSign()*1000;
   mpreParam[PAR_P3] = PopDoubleQ_WithSign()*1000;
+}
+
+
+
+void    QueryParamU_Qt(void)
+{
+  uchar n = PushAddress2Bcc();
+
+  PushChar1Bcc('P');
+  PushChar1Bcc('O');
+  PushChar1Bcc('W');
+  PushChar1Bcc('E');
+  PushChar1Bcc('Q');
+
+  PushChar1Bcc('(');
+  PushChar1Bcc(')');
+  PushChar1Bcc(0x03);
+
+  BccQueryIO(1+3*28+2, n+8+1, 3);
+}
+
+
+void    ReadParamU_Qt(void)
+{
+  InitPop(1);
+
+  mpreParam[PAR_Q] = PopDoubleQ()*1000 - PopDoubleQ()*1000;
 }
 
 

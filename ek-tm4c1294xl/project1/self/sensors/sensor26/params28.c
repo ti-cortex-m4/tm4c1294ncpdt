@@ -42,10 +42,24 @@ float2  ReadParam28(void) // CE303
 
 
     QueryCloseU();
+    QueryParamU_Pt();
+
+    if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
+    ReadParamU_Pt();
+
+
+    QueryCloseU();
     QueryParamU_P123();
 
     if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
     ReadParamU_P123();
+
+
+    QueryCloseU();
+    QueryParamU_Qt();
+
+    if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
+    ReadParamU_Qt();
 
 
     QueryCloseU();
