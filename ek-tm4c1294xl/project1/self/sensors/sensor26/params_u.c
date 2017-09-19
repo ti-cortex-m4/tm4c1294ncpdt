@@ -97,9 +97,9 @@ void    ReadParamU_P123(void)
 {
   InitPop(1);
 
-  mpreParam[PAR_P1] = PopDoubleQ()*1000;
-  mpreParam[PAR_P2] = PopDoubleQ()*1000;
-  mpreParam[PAR_P3] = PopDoubleQ()*1000;
+  mpreParam[PAR_P1] = PopDoubleQ_WithSign()*1000;
+  mpreParam[PAR_P2] = PopDoubleQ_WithSign()*1000;
+  mpreParam[PAR_P3] = PopDoubleQ_WithSign()*1000;
 }
 
 
@@ -126,9 +126,9 @@ void    ReadParamU_Q123(void)
 {
   InitPop(1);
 
-  mpreParam[PAR_Q1] = PopDoubleQ()*1000;
-  mpreParam[PAR_Q2] = PopDoubleQ()*1000;
-  mpreParam[PAR_Q3] = PopDoubleQ()*1000;
+  mpreParam[PAR_Q1] = PopDoubleQ_WithSign()*1000;
+  mpreParam[PAR_Q2] = PopDoubleQ_WithSign()*1000;
+  mpreParam[PAR_Q3] = PopDoubleQ_WithSign()*1000;
 }
 
 

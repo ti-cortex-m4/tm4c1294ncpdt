@@ -85,6 +85,7 @@ double  dbA,dbB;
 
   uchar a = 0;
   uchar b = 0;
+  schar sign = 1;
 
   uchar i;
   for (i=0; i<40; i++)
@@ -100,12 +101,13 @@ double  dbA,dbB;
     }
     else
     {
+      if (bT == '-') { a = i+1; sign = -1; continue; }
       if (bT == '.') { b = i-1; continue; }
 
       if ((bT == ')') || (bT == ','))
       {
         for (i=a; i<b; i++) dbA *= 10;
-        return dbA;
+        return sign*dbA;
       }
 
       if ((bT >= '0') && (bT <= '9'))
