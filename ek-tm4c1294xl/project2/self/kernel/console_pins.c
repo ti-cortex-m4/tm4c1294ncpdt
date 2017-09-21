@@ -13,7 +13,7 @@ console_pins.c
 
 
 
-static void OutStrengthAndPadType(const char *pcszCode, uint32_t dwPort, uint8_t bPin)
+void OutStrengthAndPadType(const char *pcszCode, uint32_t dwPort, uint8_t bPin)
 {
   uint32_t dwStrength = 0;
   uint32_t dwPadType = 0;
@@ -21,9 +21,10 @@ static void OutStrengthAndPadType(const char *pcszCode, uint32_t dwPort, uint8_t
   CONSOLE("%s %X, %X\n", pcszCode, dwStrength, dwPadType);
 }
 
+
 void ConsolePins(void)
 {
-#if 1
+#if 0
   CONSOLE("UART0 \n");
   OutStrengthAndPadType("A0", GPIO_PORTA_BASE, 0);
   OutStrengthAndPadType("A1", GPIO_PORTA_BASE, 1);
@@ -40,7 +41,7 @@ void ConsolePins(void)
   OutStrengthAndPadType("B0", GPIO_PORTB_BASE, 0);
   OutStrengthAndPadType("B1", GPIO_PORTB_BASE, 1);
 
-  CONSOLE("\n");
+  CONSOLE("I/O \n");
   OutStrengthAndPadType("F3", GPIO_PORTF_BASE, 3);
   OutStrengthAndPadType("F2", GPIO_PORTF_BASE, 2);
   OutStrengthAndPadType("F1", GPIO_PORTF_BASE, 1);
