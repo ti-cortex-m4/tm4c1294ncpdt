@@ -121,7 +121,7 @@ int     main(void)
   mbMAC[5] = wSerialNumber % 0x100;
 
   ASSERT(dwIP != 0);
-  lwIPInit(dwClockFreq, mbMAC, dwIP, dwGateway, dwNetmask, IPADDR_USE_STATIC);
+  lwIPInit(dwClockFreq, mbMAC, dwIP, dwNetmask, dwGateway, IPADDR_USE_STATIC);
 
   InitUDPLog();
   InitEthernetLEDs();
