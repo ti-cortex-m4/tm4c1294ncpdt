@@ -22,7 +22,11 @@ main.h
 #define MINOR_VERSION   15
 
 
+#ifndef SINGLE_UART
 #define UART_COUNT      5
+#else
+#define UART_COUNT      1
+#endif
 
 
 extern uint32_t g_ulSystemTimeMS;
