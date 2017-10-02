@@ -31,6 +31,8 @@ static void OutMode0(void)
 }
 
 
+#ifndef SINGLE_UART
+
 static void InMode1(void)
 {
   mbIOModes[1] = IO_MODE_INPUT;
@@ -82,6 +84,7 @@ static void OutMode4(void)
   HWREG(GPIO_PORTF_AHB_BASE + GPIO_O_DATA + 0x0004) = 0x0001;
 }
 
+#endif
 
 
 typedef void (*fn_io_mode)(void);
@@ -90,19 +93,23 @@ typedef void (*fn_io_mode)(void);
 static const fn_io_mode mfnInModes[UART_COUNT] =
 {
   &InMode0,
+#ifndef SINGLE_UART
   &InMode1,
   &InMode2,
   &InMode3,
   &InMode4,
+#endif
 };
 
 static const fn_io_mode mfnOutModes[UART_COUNT] =
 {
   &OutMode0,
+#ifndef SINGLE_UART
   &OutMode1,
   &OutMode2,
   &OutMode3,
   &OutMode4,
+#endif
 };
 
 
@@ -188,10 +195,12 @@ void InitIOModes(void)
   }
 
   InitIOMode0();
+#ifndef SINGLE_UART
   InitIOMode1();
   InitIOMode2();
   InitIOMode3();
   InitIOMode4();
+#endif
 }
 
 
