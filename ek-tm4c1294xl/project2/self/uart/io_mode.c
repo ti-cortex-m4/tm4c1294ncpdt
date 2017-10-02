@@ -141,6 +141,9 @@ static void InitIOMode0(void)
 {
 }
 
+
+#ifndef SINGLE_UART
+
 static void InitIOMode1(void) // PF3
 {
   HWREG(SYSCTL_RCGCGPIO) |= SYSCTL_RCGCGPIO_R5; // GPIO Port F Run Mode Clock Gating Control
@@ -184,6 +187,8 @@ static void InitIOMode4(void) // PF0
 
   InMode(4);
 }
+
+#endif
 
 
 void InitIOModes(void)
