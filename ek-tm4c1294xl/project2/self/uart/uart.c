@@ -240,8 +240,10 @@ static void InitUART1(ulong dwClockFreq)
 void InitUARTs(ulong dwClockFreq)
 {
   InitUART0(dwClockFreq, (ibDebugMode == DEBUG_MODE_UART));
+#ifndef SINGLE_UART
   InitUART4(dwClockFreq);
   InitUART3(dwClockFreq);
   InitUART2(dwClockFreq);
   InitUART1(dwClockFreq);
+#endif
 }
