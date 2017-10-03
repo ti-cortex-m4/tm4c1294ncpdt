@@ -145,20 +145,28 @@ void UART0IntHandler(void)
 
 void UART4IntHandler(void)
 {
+#ifndef SINGLE_UART
   SerialUARTIntHandler(1);
+#endif
 }
 
 void UART3IntHandler(void)
 {
+#ifndef SINGLE_UART
   SerialUARTIntHandler(2);
+#endif
 }
 
 void UART2IntHandler(void)
 {
+#ifndef SINGLE_UART
   SerialUARTIntHandler(3);
+#endif
 }
 
 void UART1IntHandler(void)
 {
+#ifndef SINGLE_UART
   SerialUARTIntHandler(4);
+#endif
 }

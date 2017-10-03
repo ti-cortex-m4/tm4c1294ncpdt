@@ -124,6 +124,8 @@ static void InitUART0(ulong dwClockFreq, bool fDebugModeUART)
 }
 
 
+#ifndef SINGLE_UART
+
 static void InitUART4(ulong dwClockFreq)
 {
   SysCtlPeripheralEnable(SYSCTL_PERIPH_UART4);
@@ -235,13 +237,16 @@ static void InitUART1(ulong dwClockFreq)
   InitUART(4, dwClockFreq);
 }
 
+#endif
 
 
 void InitUARTs(ulong dwClockFreq)
 {
   InitUART0(dwClockFreq, (ibDebugMode == DEBUG_MODE_UART));
+#ifndef SINGLE_UART
   InitUART4(dwClockFreq);
   InitUART3(dwClockFreq);
   InitUART2(dwClockFreq);
   InitUART1(dwClockFreq);
+#endif
 }
