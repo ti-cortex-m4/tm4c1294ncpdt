@@ -301,32 +301,32 @@ err_t GetRoutingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_add
     return ibStart.err;
   }
 
-  uint2 w2 = PopInt(p, ibStart.b, 10, '@');
+  uint2 w2 = PopInt(p, ibStart.b, 10, '|');
   if (InvalidInt2(w2)) {
     WARNING("routing status: wrong index\n");
     return w2.err;
   }
   uint wIdx = w2.w;
 
-  ibStart = GetBorderIndex(p, '@');
-  if (InvalidChar2(ibStart)) {
-    WARNING("routing status: not found '@'\n");
-    return ibStart.err;
-  }
+//  ibStart = GetBorderIndex(p, '@');
+//  if (InvalidChar2(ibStart)) {
+//    WARNING("routing status: not found '@'\n");
+//    return ibStart.err;
+//  }
+//
+//  uchar2 b2 = PopCharDec(p, ibStart.b);
+//  if (InvalidChar2(b2)) {
+//    WARNING("routing status: wrong port\n");
+//    return b2.err;
+//  }
+//
+//  uchar bPort = b2.b;
+//  if (!(bPort >= 1) && (bPort <= UART_COUNT)) {
+//    WARNING("routing status: wrong port %u\n", bPort);
+//    return GetError();
+//  }
 
-  uchar2 b2 = PopCharDec(p, ibStart.b);
-  if (InvalidChar2(b2)) {
-    WARNING("routing status: wrong port\n");
-    return b2.err;
-  }
-
-  uchar bPort = b2.b;
-  if (!(bPort >= 1) && (bPort <= UART_COUNT)) {
-    WARNING("routing status: wrong port %u\n", bPort);
-    return GetError();
-  }
-
-  uchar u = bPort-1;
+  uchar u = 0;
   ASSERT(u < UART_COUNT);
 
   switch (ibRoutingStatus) {
