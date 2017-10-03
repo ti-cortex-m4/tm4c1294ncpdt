@@ -45,7 +45,7 @@ static message szBodyEnd = "</table></body>";
 
 
 
-void NextRouingStatus(void) {
+void NextRoutingStatus(void) {
   ibRoutingStatus = ++ibRoutingStatus % 4;
 }
 
@@ -61,7 +61,7 @@ bool IsRoutingStatusSize(struct pbuf *p) {
 }
 
 
-err_t GetRouingStatusSize(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast) {
+err_t GetRoutingStatusSize(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast) {
   uchar bSize;
   switch (ibRoutingStatus) {
     case 0: bSize = 15; break;
@@ -122,7 +122,7 @@ static err_t OutTCPError(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *ad
 
 
 
-static err_t GetRouingStatusContent0(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const uint wIdx, const uchar u) {
+static err_t GetRoutingStatusContent0(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const uint wIdx, const uchar u) {
   switch (wIdx) {
     case 0: return OutStringZ(pcb,p,addr,port,broadcast,szHead);
     case 1: return OutStringZ(pcb,p,addr,port,broadcast,szBodyStart);
@@ -148,7 +148,7 @@ static err_t GetRouingStatusContent0(struct udp_pcb *pcb, struct pbuf *p, struct
 }
 
 
-static err_t GetRouingStatusContent1(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const uint wIdx, const uchar u) {
+static err_t GetRoutingStatusContent1(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const uint wIdx, const uchar u) {
   switch (wIdx) {
     case 0: return OutStringZ(pcb,p,addr,port,broadcast,szHead);
     case 1: return OutStringZ(pcb,p,addr,port,broadcast,szBodyStart);
@@ -169,7 +169,7 @@ static err_t GetRouingStatusContent1(struct udp_pcb *pcb, struct pbuf *p, struct
 }
 
 
-static err_t GetRouingStatusContent2(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const uint wIdx, const uchar u) {
+static err_t GetRoutingStatusContent2(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const uint wIdx, const uchar u) {
   switch (wIdx) {
     case 0: return OutStringZ(pcb,p,addr,port,broadcast,szHead);
     case 1: return OutStringZ(pcb,p,addr,port,broadcast,szBodyStart);
@@ -192,7 +192,7 @@ static err_t GetRouingStatusContent2(struct udp_pcb *pcb, struct pbuf *p, struct
 }
 
 
-static err_t GetRouingStatusContent3(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const uint wIdx, const uchar u) {
+static err_t GetRoutingStatusContent3(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const uint wIdx, const uchar u) {
   if (u == 0) {
     switch (wIdx) {
       case 0: return OutStringZ(pcb,p,addr,port,broadcast,szHead);
@@ -223,7 +223,7 @@ static err_t GetRouingStatusContent3(struct udp_pcb *pcb, struct pbuf *p, struct
 }
 
 
-err_t GetRouingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast) {
+err_t GetRoutingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast) {
   uchar2 ibStart = GetCmdEndIndex(p, "FU");
   if (InvalidChar2(ibStart)) {
     WARNING("routing status: not found 'FU'\n");
@@ -259,9 +259,9 @@ err_t GetRouingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr
   ASSERT(u < UART_COUNT);
 
   switch (ibRoutingStatus) {
-    case 0: return GetRouingStatusContent0(pcb,p,addr,port,broadcast,wIdx,u);
-    case 1: return GetRouingStatusContent1(pcb,p,addr,port,broadcast,wIdx,u);
-    case 2: return GetRouingStatusContent2(pcb,p,addr,port,broadcast,wIdx,u);
-    default: return GetRouingStatusContent3(pcb,p,addr,port,broadcast,wIdx,u);
+    case 0: return GetRoutingStatusContent0(pcb,p,addr,port,broadcast,wIdx,u);
+    case 1: return GetRoutingStatusContent1(pcb,p,addr,port,broadcast,wIdx,u);
+    case 2: return GetRoutingStatusContent2(pcb,p,addr,port,broadcast,wIdx,u);
+    default: return GetRoutingStatusContent3(pcb,p,addr,port,broadcast,wIdx,u);
   }
 }
