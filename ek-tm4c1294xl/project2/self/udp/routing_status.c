@@ -23,6 +23,8 @@ routing_status.c
 #include "routing_status.h"
 
 
+#define UART_COUNT_5    5
+
 
 static uchar            ibRoutingStatus = 0;
 
@@ -108,7 +110,7 @@ static err_t OutRemoteIP(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *ad
 
 static err_t OutTCPError(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const char *pcszName, const uchar op, const uchar u) {
   ASSERT(op < TCP_OPERATIONS);
-  ASSERT(u < UART_COUNT);
+  ASSERT(u < UART_COUNT_5);
 
   date_t days = SecondsToDate(mdwErrTCPClockSeconds[u][op]);
   return OutBuff(pcb,p,addr,port,broadcast,
@@ -250,13 +252,13 @@ err_t GetRoutingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_add
   }
 
   uchar bPort = b2.b;
-  if (!(bPort >= 1) && (bPort <= UART_COUNT)) {
+  if (!(bPort >= 1) && (bPort <= UART_COUNT_5)) {
     WARNING("routing status: wrong port %u\n", bPort);
     return GetError();
   }
 
   uchar u = bPort-1;
-  ASSERT(u < UART_COUNT);
+  ASSERT(u < UART_COUNT_5);
 
   switch (ibRoutingStatus) {
     case 0: return GetRoutingStatusContent0(pcb,p,addr,port,broadcast,wIdx,u);
