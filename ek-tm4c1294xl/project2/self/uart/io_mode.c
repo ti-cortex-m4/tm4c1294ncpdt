@@ -18,6 +18,8 @@ io_mode.c
 
 
 
+#ifndef SINGLE_UART
+
 static ioMode           mbIOModes[UART_COUNT];
 
 
@@ -201,3 +203,19 @@ ioMode GetIOMode(uchar u)
   ASSERT(u < UART_COUNT);
   return mbIOModes[u];
 }
+
+#else
+
+void InitIOModes(void)
+{
+}
+
+
+
+ioMode GetIOMode(uchar u)
+{
+  ASSERT(u < UART_COUNT);
+  return IO_MODE_DEFAULT;
+}
+
+#endif
