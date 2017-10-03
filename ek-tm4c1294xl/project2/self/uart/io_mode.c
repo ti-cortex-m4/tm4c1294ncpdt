@@ -206,6 +206,18 @@ ioMode GetIOMode(uchar u)
 
 #else
 
+void InMode(uchar u)
+{
+  ASSERT(u < UART_COUNT);
+}
+
+
+void OutMode(uchar u)
+{
+  ASSERT(u < UART_COUNT);
+}
+
+
 void InitIOModes(void)
 {
 }
