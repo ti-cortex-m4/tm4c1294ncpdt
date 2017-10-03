@@ -19,10 +19,14 @@ main.h
 
 
 #define MAJOR_VERSION   0
-#define MINOR_VERSION   15
+#define MINOR_VERSION   16
 
 
+#ifndef SINGLE_UART
 #define UART_COUNT      5
+#else
+#define UART_COUNT      1
+#endif
 
 
 extern uint32_t g_ulSystemTimeMS;

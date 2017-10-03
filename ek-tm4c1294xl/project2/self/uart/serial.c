@@ -47,20 +47,24 @@ tRingBufObject g_sTxBuf[UART_COUNT];
 const uint32_t g_ulUARTBase[UART_COUNT] =
 {
     UART0_BASE,
+#ifndef SINGLE_UART
     UART4_BASE,
     UART3_BASE,
     UART2_BASE,
     UART1_BASE,
+#endif
 };
 
 // The interrupt address for the UART associated with a port.
 const uint32_t g_ulIntUART[UART_COUNT] =
 {
     INT_UART0,
+#ifndef SINGLE_UART
     INT_UART4,
     INT_UART3,
     INT_UART2,
     INT_UART1,
+#endif
 };
 
 

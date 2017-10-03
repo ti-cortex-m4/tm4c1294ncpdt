@@ -12,10 +12,12 @@ controls.c
 
 static message szGeneral = "AI=$GENERAL;D=General;T=GROUP";
 static message szCanal0 = "AI=$CANAL1;D=Canal1;T=GROUP";
+#ifndef SINGLE_UART
 static message szCanal1 = "AI=$CANAL2;D=Canal2;T=GROUP";
 static message szCanal2 = "AI=$CANAL3;D=Canal3;T=GROUP";
 static message szCanal3 = "AI=$CANAL4;D=Canal4;T=GROUP";
 static message szCanal4 = "AI=$CANAL5;D=Canal5;T=GROUP";
+#endif
 static message szSetup = "AI=$SETUP;D=Setup;T=GROUP";
 
 
@@ -44,6 +46,7 @@ const message * const mppcszControls[] =
   &enStopBits0.szName,
   &enLoopback0.szName,
 
+#ifndef SINGLE_UART
   &szCanal1,
   &enConnectionTimeout1.szName,
   &enRoutingMode1.szName,
@@ -103,6 +106,7 @@ const message * const mppcszControls[] =
   &enDataBits4.szName,
   &enStopBits4.szName,
   &enLoopback4.szName,
+#endif
 
   &szSetup,
   &enSerialNumber.szName,
