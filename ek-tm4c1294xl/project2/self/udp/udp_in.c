@@ -70,9 +70,9 @@ void    UDPInput(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr 
   } else if (IsSomeEnity(pcb,p,addr,port,broadcast)) {
     //
   } else if (IsRoutingStatusSize(p)) {
-    GetRouingStatusSize(pcb,p,addr,port,broadcast);
+    GetRoutingStatusSize(pcb,p,addr,port,broadcast);
   } else if (IsRoutingStatusContent(p)) {
-    GetRouingStatusContent(pcb,p,addr,port,broadcast);
+    GetRoutingStatusContent(pcb,p,addr,port,broadcast);
   } else {
     WARNING("UDPInput: unknown command\n");
   }

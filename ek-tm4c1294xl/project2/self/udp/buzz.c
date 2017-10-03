@@ -46,7 +46,7 @@ err_t OutBuzz(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint po
 
   err_t err = Out(pcb,p,addr,port,broadcast);
 
-  NextRouingStatus();
+  NextRoutingStatus();
   Buzz();
 
   return err;
