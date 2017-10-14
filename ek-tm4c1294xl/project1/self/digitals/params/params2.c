@@ -28,6 +28,8 @@ PARAMS2!C
 #include    "../../sensors/automatic_s.h"
 #include    "../../sensors/device_q.h"
 #include    "../../sensors/sensor26/device_u.h"
+#include    "../../sensors/sensor26/params26.h"
+#include    "../../sensors/sensor26/params28.h"
 #include    "../../sensors/device_v.h"
 #include    "../../sensors/device_w.h"
 #include    "../../sensors/sensor31/params31.h"
@@ -853,109 +855,6 @@ bool    ReadParamT(void)
 
 
 
-#ifndef SKIP_U
-
-void    ReadParamU1(void)
-{
-  InitPop(1);
-
-  mpreParam[PAR_I1] = PopDoubleQ()*1000;
-  mpreParam[PAR_I2] = PopDoubleQ()*1000;
-  mpreParam[PAR_I3] = PopDoubleQ()*1000;
-}
-
-
-void    ReadParamU2(void)
-{
-  InitPop(1);
-
-  mpreParam[PAR_U1] = PopDoubleQ();
-  mpreParam[PAR_U2] = PopDoubleQ();
-  mpreParam[PAR_U3] = PopDoubleQ();
-}
-
-
-void    ReadParamU3(void)
-{
-  InitPop(1);
-
-  mpreParam[PAR_P1] = PopDoubleQ()*1000;
-  mpreParam[PAR_P2] = PopDoubleQ()*1000;
-  mpreParam[PAR_P3] = PopDoubleQ()*1000;
-}
-
-
-void    ReadParamU4(void)
-{
-  InitPop(1);
-
-  mpreParam[PAR_F] = PopDoubleQ();
-}
-
-
-bool    ReadParamU(void)
-{
-  Clear();
-
-  if (fBeginParam == false)
-  {
-    QueryCloseU();
-    QueryParamU1();
-
-    if (BccInput() != SER_GOODCHECK) return(0);
-    ReadParamU1();
-
-
-    QueryCloseU();
-    QueryParamU2();
-
-    if (BccInput() != SER_GOODCHECK) return(0);
-    ReadParamU2();
-
-
-    QueryCloseU();
-    QueryParamU3();
-
-    if (BccInput() != SER_GOODCHECK) return(0);
-    ReadParamU3();
-
-
-    QueryCloseU();
-    QueryParamU4();
-
-    if (BccInput() != SER_GOODCHECK) return(0);
-    ReadParamU4();
-
-
-    fBeginParam = true;
-  }
-
-  switch (diCurr.ibLine)
-  {
-    case PAR_P1 : reValue = mpreParam[PAR_P1];  break;
-    case PAR_P2 : reValue = mpreParam[PAR_P2];  break;
-    case PAR_P3 : reValue = mpreParam[PAR_P3];  break;
-
-    case PAR_I1 : reValue = mpreParam[PAR_I1];  break;
-    case PAR_I2 : reValue = mpreParam[PAR_I2];  break;
-    case PAR_I3 : reValue = mpreParam[PAR_I3];  break;
-
-    case PAR_U1 : reValue = mpreParam[PAR_U1];  break;
-    case PAR_U2 : reValue = mpreParam[PAR_U2];  break;
-    case PAR_U3 : reValue = mpreParam[PAR_U3];  break;
-
-    case PAR_F  : reValue = mpreParam[PAR_F];   break;
-
-    default: return(0);
-  }
-
-  return(1);
-}
-
-#endif
-
-
-
 #ifndef SKIP_V
 
 void    QueryParamV1(void)
@@ -1174,8 +1073,8 @@ float2  ReadParam(uint  iwPrm)
 #endif
 
 #ifndef SKIP_U
-    case 26:
-    case 28: return GetFloat2(reValue, ReadParamU());
+    case 26: return ReadParam26();
+    case 28: return ReadParam28();
 #endif
 
 #ifndef SKIP_V
