@@ -10,15 +10,17 @@ DELAY!C
 
 
 
-void    Nop(void) {
-  __asm("nop");
+void Nop(void) {
+  __asm(" nop");
 }
 
 
-void    DelayGPIO(void) {
-__asm("   nop\n"
-      "   nop\n"
-      "   nop\n");
+void DelayGPIO(void) {
+  Nop();
+  Nop();
+  Nop();
+  Nop();
+  Nop();
 }
 
 

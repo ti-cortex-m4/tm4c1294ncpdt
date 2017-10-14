@@ -4,10 +4,11 @@ PARAMS,C
  ћгновенные параметры
 ------------------------------------------------------------------------------*/
 
-#include    "../../main.h"
-#include    "../../display/display.h"
-#include    "../../nvram/cache.h"
-#include    "params.h"
+#include <math.h>
+#include "../../main.h"
+#include "../../display/display.h"
+#include "../../nvram/cache.h"
+#include "params.h"
 
 
 
@@ -195,3 +196,16 @@ void    ShowParam(uint  iwPrm)
   (mpboEnblParams[iwPrm] == true) ? (szHi[12] = '+') : (szHi[12] = '-');
 }
 
+
+
+float   CalcS(float  flP, float  flQ)
+{
+  return sqrtf(flP*flP + flQ*flQ);
+}
+
+
+float   CalcC(float  flP, float  flQ)
+{
+  float flS = CalcS(flP, flQ);
+  return (flS == 0) ? 0 : flP/flS;
+}

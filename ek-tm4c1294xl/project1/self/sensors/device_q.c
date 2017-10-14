@@ -79,6 +79,52 @@ double  dbA,dbB;
 }
 
 
+double  PopDoubleQ_WithSign(void)
+{
+double  dbA,dbB;
+
+  uchar a = 0;
+  uchar b = 0;
+  schar sign = 1;
+
+  uchar i;
+  for (i=0; i<40; i++)
+  {
+    uchar bT = PopChar() & 0x7F;
+
+    if (a == 0)
+    {
+      if (bT == '(') a = i+1;
+
+      dbA = 0;
+      dbB = 1;
+    }
+    else
+    {
+      if (bT == '-') { a = i+1; sign = -1; continue; }
+      if (bT == '.') { b = i-1; continue; }
+
+      if ((bT == ')') || (bT == ','))
+      {
+        for (i=a; i<b; i++) dbA *= 10;
+        return sign*dbA;
+      }
+
+      if ((bT >= '0') && (bT <= '9'))
+        bT -= '0';
+      else
+        break;
+
+      dbA += dbB*bT;
+      dbB /= 10;
+    }
+  }
+
+  return -1;
+}
+
+
+
 void    QueryCloseQ(void)
 {
   QueryCloseK();
