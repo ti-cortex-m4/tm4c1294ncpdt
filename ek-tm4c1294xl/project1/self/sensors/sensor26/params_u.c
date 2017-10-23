@@ -34,7 +34,7 @@ void    QueryModelU(void)
 }
 
 
-uchar   ReadModelU(void)
+ulong2  ReadModelU(void)
 {
   InitPop(1);
 
@@ -101,7 +101,34 @@ void    ReadParamU_U123(void)
 
 
 
-void    QueryParamU_Pt(void)
+void    QueryParamU_Pt_1Direction(void)
+{
+  uchar n = PushAddress2Bcc();
+
+  PushChar1Bcc('P');
+  PushChar1Bcc('O');
+  PushChar1Bcc('W');
+  PushChar1Bcc('E');
+  PushChar1Bcc('P');
+
+  PushChar1Bcc('(');
+  PushChar1Bcc(')');
+  PushChar1Bcc(0x03);
+
+  BccQueryIO(1+1*28+2, n+8+1, 1);
+}
+
+
+void    ReadParamU_Pt_1Direction(void)
+{
+  InitPop(1);
+
+  mpreParam[PAR_P] = PopDoubleQ()*1000;
+}
+
+
+
+void    QueryParamU_Pt_2Directions(void)
 {
   uchar n = PushAddress2Bcc();
 
@@ -119,7 +146,7 @@ void    QueryParamU_Pt(void)
 }
 
 
-void    ReadParamU_Pt(void)
+void    ReadParamU_Pt_2Directions(void)
 {
   InitPop(1);
 
