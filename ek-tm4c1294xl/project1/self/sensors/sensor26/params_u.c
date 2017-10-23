@@ -16,6 +16,32 @@ PARAMS_U,C
 
 
 
+void    QueryModelU(void)
+{
+  uchar n = PushAddress2Bcc();
+
+  PushChar1Bcc('M');
+  PushChar1Bcc('O');
+  PushChar1Bcc('D');
+  PushChar1Bcc('E');
+  PushChar1Bcc('L');
+
+  PushChar1Bcc('(');
+  PushChar1Bcc(')');
+  PushChar1Bcc(0x03);
+
+  BccQueryIO(1+28+2, n+8+1, 1);
+}
+
+
+uchar   ReadModelU(void)
+{
+  InitPop(1);
+
+  return PopLongQ();
+}
+
+
 
 void    QueryParamU_I123(void)
 {

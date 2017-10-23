@@ -4,6 +4,9 @@ PARAMS_U,H
 
 ------------------------------------------------------------------------------*/
 
+void    QueryModelU(void);
+uchar   ReadModelU(void);
+
 void    QueryParamU_I123(void);
 void    ReadParamU_I123(void);
 
