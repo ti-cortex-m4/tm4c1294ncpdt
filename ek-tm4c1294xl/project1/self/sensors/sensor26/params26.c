@@ -27,6 +27,15 @@ float2  ReadParam26(void) // CE301
 
   if (fBeginParam == false)
   {
+    QueryModelU();
+    if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
+    ulong2 dw2 = ReadModelU();
+    if (dw2.fValid == false) return GetFloat2Error();
+    if (dw2.dwValue > 0xFF) return GetFloat2Error();
+
+    uchar bModel = dw2.dwValue;
+    bool f1Direction = ((bModel & 0x80) == 0);
+
     QueryParamU_U123();
     if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
     ReadParamU_U123();
@@ -35,9 +44,18 @@ float2  ReadParam26(void) // CE301
     if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
     ReadParamU_I123();
 
-    QueryParamU_Pt();
-    if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
-    ReadParamU_Pt();
+    if (f1Direction)
+    {
+      QueryParamU_Pt_1Direction();
+      if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
+      ReadParamU_Pt_1Direction();
+    }
+    else
+    {
+      QueryParamU_Pt_2Directions();
+      if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
+      ReadParamU_Pt_2Directions();
+    }
 
     QueryParamU_P123();
     if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
