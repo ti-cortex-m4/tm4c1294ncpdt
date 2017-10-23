@@ -124,15 +124,16 @@ double  dbA,dbB;
 }
 
 
-ulong   PopLongQ(void)
+ulong2  PopLongQ(void)
 {
   bool open = false;
 
   ulong dwA = 0;
 
-  while (GetPopSize() < IndexInBuff())
+  uchar i;
+  for (i=0; i<40; i++)
   {
-    uchar b = PopChar0Bcc();
+    uchar b = PopChar() & 0x7F;
     if (open == false)
     {
       if (b == '(')
@@ -141,7 +142,7 @@ ulong   PopLongQ(void)
     else
     {
       if (b == ')')
-        return dwA;
+        return GetLong2(dwA, true);
       else
       {
         if ((b >= '0') && (b <= '9'))
@@ -154,7 +155,7 @@ ulong   PopLongQ(void)
     }
   }
 
-  return 0;
+  return GetLong2Error();
 }
 
 
