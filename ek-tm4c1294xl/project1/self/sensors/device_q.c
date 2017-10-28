@@ -124,6 +124,41 @@ double  dbA,dbB;
 }
 
 
+ulong2  PopLongQ(void)
+{
+  bool open = false;
+
+  ulong dwA = 0;
+
+  uchar i;
+  for (i=0; i<40; i++)
+  {
+    uchar b = PopChar() & 0x7F;
+    if (open == false)
+    {
+      if (b == '(')
+        open = true;
+    }
+    else
+    {
+      if (b == ')')
+        return GetLong2(dwA, true);
+      else
+      {
+        if ((b >= '0') && (b <= '9'))
+        {
+          b -= '0';
+          dwA = dwA*10 + b;
+        }
+        else break;
+      }
+    }
+  }
+
+  return GetLong2Error();
+}
+
+
 
 void    QueryCloseQ(void)
 {

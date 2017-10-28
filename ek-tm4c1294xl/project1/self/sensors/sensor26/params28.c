@@ -36,9 +36,9 @@ float2  ReadParam28(void) // CE303
     if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
     ReadParamU_I123();
 
-    QueryParamU_Pt();
+    QueryParamU_Pt_2Directions();
     if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
-    ReadParamU_Pt();
+    ReadParamU_Pt_2Directions();
 
     QueryParamU_P123();
     if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
