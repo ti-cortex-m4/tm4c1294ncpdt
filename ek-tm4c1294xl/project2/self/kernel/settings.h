@@ -60,6 +60,8 @@ extern bool                    fIOModeDebugFlag;
 extern ledMode                 bLED0Mode;
 extern ledMode                 bLED1Mode;
 
+extern uchar                   mbCustomerSettings[UART_COUNT];
+
 extern uint                    cwErrSettingsInitStorage;
 extern uint                    cwErrSettingsSaveEntity;
 extern uint                    cwErrSettingsLoadIP;

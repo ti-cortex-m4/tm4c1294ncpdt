@@ -45,6 +45,7 @@ const message * const mppcszControls[] =
   &enDataBits0.szName,
   &enStopBits0.szName,
   &enLoopback0.szName,
+  &enCustomerSettings0.szName,
 
 #ifndef SINGLE_UART
   &szCanal1,
@@ -61,6 +62,7 @@ const message * const mppcszControls[] =
   &enDataBits1.szName,
   &enStopBits1.szName,
   &enLoopback1.szName,
+  &enCustomerSettings1.szName,
 
   &szCanal2,
   &enConnectionTimeout2.szName,
@@ -76,6 +78,7 @@ const message * const mppcszControls[] =
   &enDataBits2.szName,
   &enStopBits2.szName,
   &enLoopback2.szName,
+  &enCustomerSettings2.szName,
 
   &szCanal3,
   &enConnectionTimeout3.szName,
@@ -91,6 +94,7 @@ const message * const mppcszControls[] =
   &enDataBits3.szName,
   &enStopBits3.szName,
   &enLoopback3.szName,
+  &enCustomerSettings3.szName,
 
   &szCanal4,
   &enConnectionTimeout4.szName,
@@ -106,6 +110,7 @@ const message * const mppcszControls[] =
   &enDataBits4.szName,
   &enStopBits4.szName,
   &enLoopback4.szName,
+  &enCustomerSettings4.szName,
 #endif
 
   &szSetup,

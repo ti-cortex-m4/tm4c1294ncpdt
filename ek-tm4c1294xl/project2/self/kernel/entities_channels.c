@@ -480,3 +480,40 @@ const entity enModemToServerTimeout4 = {
   "MTST@4",
   "AI=MTST@4;E=1;D=Fallback timeout from Modem to Server (seconds);T=INT;C=EDIT/SPIN/0/1/1/10;O=0-Disabled/0;V=MTST@4>255?\"Maximum timeout is 255 seconds\":\"\";S=RM@4==2?\"e\":\"i\"",
 };
+
+
+
+const entity enCustomerSettings0 = {
+  EEPROM_CUSTOMES_SETTINGS_0, &mbCustomerSettings[0], sizeof(uchar), CHAR, 0,
+  0, 1, 0,
+  "CUSTOMES_SETTINGS@0",
+  "AI=CUSTOMES_SETTINGS@0;D=Customer settings;T=INT;C=STATIC;O=0-No/0/1-Settings 1/1",
+};
+
+const entity enCustomerSettings1 = {
+  EEPROM_CUSTOMES_SETTINGS_1, &mbCustomerSettings[1], sizeof(uchar), CHAR, 0,
+  0, 1, 0,
+  "CUSTOMES_SETTINGS@1",
+  "AI=CUSTOMES_SETTINGS@1;D=Customer settings;T=INT;C=STATIC;O=0-No/0/1-Settings 1/1",
+};
+
+const entity enCustomerSettings2 = {
+  EEPROM_CUSTOMES_SETTINGS_2, &mbCustomerSettings[2], sizeof(uchar), CHAR, 0,
+  0, 1, 0,
+  "CUSTOMES_SETTINGS@2",
+  "AI=CUSTOMES_SETTINGS@2;D=Customer settings;T=INT;C=STATIC;O=0-No/0/1-Settings 1/1",
+};
+
+const entity enCustomerSettings3 = {
+  EEPROM_CUSTOMES_SETTINGS_3, &mbCustomerSettings[3], sizeof(uchar), CHAR, 0,
+  0, 1, 0,
+  "CUSTOMES_SETTINGS@3",
+  "AI=CUSTOMES_SETTINGS@3;D=Customer settings;T=INT;C=STATIC;O=0-No/0/1-Settings 1/1",
+};
+
+const entity enCustomerSettings4 = {
+  EEPROM_CUSTOMES_SETTINGS_4, &mbCustomerSettings[4], sizeof(uchar), CHAR, 0,
+  0, 1, 0,
+  "CUSTOMES_SETTINGS@4",
+  "AI=CUSTOMES_SETTINGS@4;D=Customer settings;T=INT;C=STATIC;O=0-No/0/1-Settings 1/1",
+};
