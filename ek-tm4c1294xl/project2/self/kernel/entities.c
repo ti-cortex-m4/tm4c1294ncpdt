@@ -141,6 +141,14 @@ const entity * const mpenEntities[] =
 
   &enLED0Mode,
   &enLED1Mode,
+
+  &enCustomerSettings0,
+#ifndef SINGLE_UART
+  &enCustomerSettings1,
+  &enCustomerSettings2,
+  &enCustomerSettings3,
+  &enCustomerSettings4,
+#endif
 };
 
 
