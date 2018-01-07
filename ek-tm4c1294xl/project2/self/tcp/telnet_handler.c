@@ -10,6 +10,7 @@ telnet_handler.c
 #include "../uart/serial_send.h"
 #include "../uart/serial_receive.h"
 #include "../uart/io_mode.h"
+#include "../uart/settings_1.h"
 #include "../kernel/settings.h"
 #include "../kernel/log.h"
 #include "telnet.h"
@@ -116,6 +117,8 @@ void TelnetHandler(void)
         // pbufs received on the telnet interface.
         while(!SerialSendFull(u))
         {
+            Settings1_SerialSend(u);
+
             // Pop a pbuf off of the RX queue, if one is available, and we are
             // not already processing a pbuf.
             if(pState->pBufHead == NULL)
