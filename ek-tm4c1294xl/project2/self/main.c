@@ -33,7 +33,7 @@ MAIN,C
 #include "uart/modem.h"
 #include "uart/modem_to_server.h"
 #include "uart/server_to_modem.h"
-#include "uart/settings_1.h"
+#include "uart/customer_settings_1.h"
 #include "udp/udp_log.h"
 #include "udp/udp_handler.h"
 #include "tcp/telnet.h"
@@ -142,7 +142,7 @@ int     main(void)
   InitModemToServer();
   InitServerToModem();
   InitTimer2(dwClockFreq);
-  InitSettings1();
+  InitCustomerSettings1();
 
   // Set the interrupt priorities.  We set the SysTick interrupt to a higher
   // priority than the Ethernet interrupt to ensure that the file system
