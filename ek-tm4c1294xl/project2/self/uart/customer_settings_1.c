@@ -6,6 +6,7 @@ customer_settings_1.c
 
 #include "../main.h"
 #include "../kernel/settings.h"
+#include "../hardware/delay.h"
 #include "../uart/io_mode.h"
 #include "../uart/serial_send.h"
 #include "customer_settings_1.h"
@@ -42,6 +43,8 @@ void CustomerSettings1_SerialSend(uchar u) {
 
       OutMode(u);
       SerialSend(u, 0x99);
+
+      DelayMilliSecond(mbCustomerSetting1_Delay[u]);
     }
   }
 }
