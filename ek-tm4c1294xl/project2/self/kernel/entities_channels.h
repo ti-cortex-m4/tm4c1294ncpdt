@@ -87,3 +87,9 @@ extern const entity enCustomerSettings1;
 extern const entity enCustomerSettings2;
 extern const entity enCustomerSettings3;
 extern const entity enCustomerSettings4;
+
+extern const entity enCustomerSetting1Delay0;
+extern const entity enCustomerSetting1Delay1;
+extern const entity enCustomerSetting1Delay2;
+extern const entity enCustomerSetting1Delay3;
+extern const entity enCustomerSetting1Delay4;
