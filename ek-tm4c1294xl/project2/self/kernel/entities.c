@@ -149,6 +149,14 @@ const entity * const mpenEntities[] =
   &enCustomerSettings3,
   &enCustomerSettings4,
 #endif
+
+  &enCustomerSetting1Delay0,
+#ifndef SINGLE_UART
+  &enCustomerSetting1Delay1,
+  &enCustomerSetting1Delay2,
+  &enCustomerSetting1Delay3,
+  &enCustomerSetting1Delay4,
+#endif
 };
 
 
