@@ -1,9 +1,9 @@
 /*------------------------------------------------------------------------------
-settings_1.h
+customer_settings_1.h
 
 
 ------------------------------------------------------------------------------*/
 
-void InitSettings1(void);
-void Settings1_TelnetReceive(uchar u);
-void Settings1_SerialSend(uchar u);
+void InitCustomerSettings1(void);
+void CustomerSettings1_TelnetReceive(uchar u);
+void CustomerSettings1_SerialSend(uchar u);
