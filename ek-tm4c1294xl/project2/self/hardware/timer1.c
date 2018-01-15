@@ -16,7 +16,7 @@ timer1.c
 
 
 
-#define TIMER1_FREQUENCY    100
+#define TIMER1_FREQUENCY    1000
 
 
 
@@ -39,5 +39,5 @@ void Timer1IntHandler(void)
 {
   HWREG(TIMER1_BASE + TIMER_O_ICR) = TIMER_TIMA_TIMEOUT;
 
-  CustomerSettings1_100Hz();
+  CustomerSettings1_1000Hz();
 }

@@ -14,15 +14,27 @@ customer_settings_1.c
 
 
 static volatile bool    mbFlags[UART_COUNT];
+static volatile uchar   mbTimeout[UART_COUNT];
 
 
 
-void InitCustomerSettings1(void)
-{
+void InitCustomerSettings1(void) {
   uchar u;
-  for (u = 0; u < UART_COUNT; u++)
-  {
+  for (u = 0; u < UART_COUNT; u++) {
     mbFlags[u] = false;
+    mbTimeout[u] = 0;
+  }
+}
+
+
+void CustomerSettings1_1000Hz(void) {
+  uchar u;
+  for (u = 0; u < UART_COUNT; u++) {
+    if (mbCustomerSettings[u] == 1) {
+      if (mbTimeout[u] > 0) {
+        mbTimeout[u]--;
+      }
+    }
   }
 }
 
@@ -30,7 +42,10 @@ void InitCustomerSettings1(void)
 void CustomerSettings1_TelnetReceive(uchar u) {
   ASSERT(u < UART_COUNT);
   if (mbCustomerSettings[u] == 1) {
-    mbFlags[u] = true;
+    if (mbTimeout[u] == 0) {
+      mbFlags[u] = true;
+      mbTimeout[u] = mbCustomerSetting1_Delay[u] + 200;
+    }
   }
 }
 

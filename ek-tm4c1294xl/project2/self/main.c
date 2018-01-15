@@ -21,6 +21,7 @@ MAIN,C
 #include "hardware/gpio.h"
 #include "hardware/led.h"
 #include "hardware/sys_tick.h"
+#include "hardware/timer1.h"
 #include "hardware/timer2.h"
 #include "hardware/delay.h"
 #include "hardware/rom.h"
@@ -141,6 +142,7 @@ int     main(void)
   InitModem();
   InitModemToServer();
   InitServerToModem();
+  InitTimer1(dwClockFreq);
   InitTimer2(dwClockFreq);
   InitCustomerSettings1();
 
