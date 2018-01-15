@@ -117,8 +117,6 @@ void TelnetHandler(void)
         // pbufs received on the telnet interface.
         while(!SerialSendFull(u))
         {
-            CustomerSettings1_SerialSend(u);
-
             // Pop a pbuf off of the RX queue, if one is available, and we are
             // not already processing a pbuf.
             if(pState->pBufHead == NULL)
@@ -141,6 +139,8 @@ void TelnetHandler(void)
             {
                 break;
             }
+
+            CustomerSettings1_SerialSend(u);
 
             // Setup the data pointer for the current buffer.
             uint8_t *pucData = pState->pBufCurrent->payload;
