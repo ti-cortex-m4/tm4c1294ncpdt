@@ -14,6 +14,7 @@ serial_handler.c
 #include "modem_to_server.h"
 #include "server_to_modem.h"
 #include "serial_handler.h"
+#include "customer_settings_1.h"
 
 
 
@@ -121,6 +122,8 @@ static void SerialUARTIntHandler(uint8_t ucPort)
 
             // Write the next character into the transmit FIFO.
             UARTCharPut(g_ulUARTBase[ucPort], ucChar);
+
+            CustomerSettings1_SerialProcessCharacter(ucPort, ucChar);
 
             mcwUARTTxOut[ucPort]--;
 
