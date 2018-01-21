@@ -61,8 +61,6 @@ void CustomerSettings1_TelnetProcessCharacter(uchar u) {
       SerialSend(u, 0x99);
 
       mcwUARTTxOut[u]++;
-
-      //DelayMilliSecond(mbCustomerSetting1_Delay[u]);
     }
   }
 }
