@@ -140,7 +140,7 @@ void TelnetHandler(void)
                 break;
             }
 
-            CustomerSettings1_SerialSend(u);
+            CustomerSettings1_TelnetProcessCharacter(u);
 
             // Setup the data pointer for the current buffer.
             uint8_t *pucData = pState->pBufCurrent->payload;

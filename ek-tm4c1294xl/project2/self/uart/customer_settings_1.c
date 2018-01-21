@@ -8,6 +8,7 @@ customer_settings_1.c
 #include "../kernel/settings.h"
 #include "../hardware/delay.h"
 #include "../uart/io_mode.h"
+#include "../uart/serial.h"
 #include "../uart/serial_send.h"
 #include "customer_settings_1.h"
 
@@ -50,7 +51,7 @@ void CustomerSettings1_TelnetReceive(uchar u) {
 }
 
 
-void CustomerSettings1_SerialSend(uchar u) {
+void CustomerSettings1_TelnetProcessCharacter(uchar u) {
   ASSERT(u < UART_COUNT);
   if (mbCustomerSettings[u] == 1) {
     if (mbFlags[u] == true) {
@@ -59,6 +60,18 @@ void CustomerSettings1_SerialSend(uchar u) {
       OutMode(u);
       SerialSend(u, 0x99);
 
+      mcwUARTTxOut[u]++;
+
+      //DelayMilliSecond(mbCustomerSetting1_Delay[u]);
+    }
+  }
+}
+
+
+void CustomerSettings1_SerialProcessCharacter(uchar u, uchar b) {
+  ASSERT(u < UART_COUNT);
+  if (mbCustomerSettings[u] == 1) {
+    if (b == 0x99) {
       DelayMilliSecond(mbCustomerSetting1_Delay[u]);
     }
   }
