@@ -522,35 +522,72 @@ const entity enCustomerSettings4 = {
 
 const entity enCustomerSetting1Delay0 = {
   EEPROM_CUSTOMES_SETTING_1_DELAY_0, &mbCustomerSetting1_Delay[0], sizeof(uchar), CHAR, 0,
-  0, 5, 255,
+  0, 5, 250,
   "CUSTOMES_SETTING_1_DELAY@0",
-  "AI=CUSTOMES_SETTING_1_DELAY@0;E=1;D=Delay (milliseconds);T=INT;C=EDIT;V=CUSTOMES_SETTING_1_DELAY@0>255?\"Delay must be between 0 and 255 milliseconds\":\"\";S=CUSTOMES_SETTINGS@0==1?\"e\":\"i\""
+  "AI=CUSTOMES_SETTING_1_DELAY@0;E=1;D=Delay (milliseconds);T=INT;C=EDIT;V=CUSTOMES_SETTING_1_DELAY@0>250?\"Delay must be between 0 and 250 milliseconds\":\"\";S=CUSTOMES_SETTINGS@0==1?\"e\":\"i\""
 };
 
 const entity enCustomerSetting1Delay1 = {
   EEPROM_CUSTOMES_SETTING_1_DELAY_1, &mbCustomerSetting1_Delay[1], sizeof(uchar), CHAR, 0,
-  0, 5, 255,
+  0, 5, 250,
   "CUSTOMES_SETTING_1_DELAY@1",
-  "AI=CUSTOMES_SETTING_1_DELAY@1;E=1;D=Delay (milliseconds);T=INT;C=EDIT;V=CUSTOMES_SETTING_1_DELAY@1>255?\"Delay must be between 0 and 255 milliseconds\":\"\";S=CUSTOMES_SETTINGS@1==1?\"e\":\"i\""
+  "AI=CUSTOMES_SETTING_1_DELAY@1;E=1;D=Delay (milliseconds);T=INT;C=EDIT;V=CUSTOMES_SETTING_1_DELAY@1>250?\"Delay must be between 0 and 250 milliseconds\":\"\";S=CUSTOMES_SETTINGS@1==1?\"e\":\"i\""
 };
 
 const entity enCustomerSetting1Delay2 = {
   EEPROM_CUSTOMES_SETTING_1_DELAY_2, &mbCustomerSetting1_Delay[2], sizeof(uchar), CHAR, 0,
-  0, 5, 255,
+  0, 5, 250,
   "CUSTOMES_SETTING_1_DELAY@2",
-  "AI=CUSTOMES_SETTING_1_DELAY@2;E=1;D=Delay (milliseconds);T=INT;C=EDIT;V=CUSTOMES_SETTING_1_DELAY@2>255?\"Delay must be between 0 and 255 milliseconds\":\"\";S=CUSTOMES_SETTINGS@2==1?\"e\":\"i\""
+  "AI=CUSTOMES_SETTING_1_DELAY@2;E=1;D=Delay (milliseconds);T=INT;C=EDIT;V=CUSTOMES_SETTING_1_DELAY@2>250?\"Delay must be between 0 and 250 milliseconds\":\"\";S=CUSTOMES_SETTINGS@2==1?\"e\":\"i\""
 };
 
 const entity enCustomerSetting1Delay3 = {
   EEPROM_CUSTOMES_SETTING_1_DELAY_3, &mbCustomerSetting1_Delay[3], sizeof(uchar), CHAR, 0,
-  0, 5, 255,
+  0, 5, 250,
   "CUSTOMES_SETTING_1_DELAY@3",
-  "AI=CUSTOMES_SETTING_1_DELAY@3;E=1;D=Delay (milliseconds);T=INT;C=EDIT;V=CUSTOMES_SETTING_1_DELAY@3>255?\"Delay must be between 0 and 255 milliseconds\":\"\";S=CUSTOMES_SETTINGS@3==1?\"e\":\"i\""
+  "AI=CUSTOMES_SETTING_1_DELAY@3;E=1;D=Delay (milliseconds);T=INT;C=EDIT;V=CUSTOMES_SETTING_1_DELAY@3>250?\"Delay must be between 0 and 250 milliseconds\":\"\";S=CUSTOMES_SETTINGS@3==1?\"e\":\"i\""
 };
 
 const entity enCustomerSetting1Delay4 = {
   EEPROM_CUSTOMES_SETTING_1_DELAY_4, &mbCustomerSetting1_Delay[4], sizeof(uchar), CHAR, 0,
-  0, 5, 255,
+  0, 5, 250,
   "CUSTOMES_SETTING_1_DELAY@4",
-  "AI=CUSTOMES_SETTING_1_DELAY@4;E=1;D=Delay (milliseconds);T=INT;C=EDIT;V=CUSTOMES_SETTING_1_DELAY@4>255?\"Delay must be between 0 and 255 milliseconds\":\"\";S=CUSTOMES_SETTINGS@4==1?\"e\":\"i\""
+  "AI=CUSTOMES_SETTING_1_DELAY@4;E=1;D=Delay (milliseconds);T=INT;C=EDIT;V=CUSTOMES_SETTING_1_DELAY@4>250?\"Delay must be between 0 and 250 milliseconds\":\"\";S=CUSTOMES_SETTINGS@4==1?\"e\":\"i\""
+};
+
+
+
+const entity enCustomerSetting1Timeout0 = {
+  EEPROM_CUSTOMES_SETTING_1_TIMEOUT_0, &mwCustomerSetting1_Timeout[0], sizeof(uchar), INT, 0,
+  0, 500, 1000,
+  "CUSTOMES_SETTING_1_TIMEOUT@0",
+  "AI=CUSTOMES_SETTING_1_TIMEOUT@0;E=1;D=Timeout (milliseconds);T=INT;C=EDIT;V=CUSTOMES_SETTING_1_TIMEOUT@0>1000?\"Timeout must be between 0 and 1000 milliseconds\":\"\";S=CUSTOMES_SETTINGS@0==1?\"e\":\"i\""
+};
+
+const entity enCustomerSetting1Timeout1 = {
+  EEPROM_CUSTOMES_SETTING_1_TIMEOUT_1, &mwCustomerSetting1_Timeout[1], sizeof(uchar), INT, 0,
+  0, 500, 1000,
+  "CUSTOMES_SETTING_1_TIMEOUT@1",
+  "AI=CUSTOMES_SETTING_1_TIMEOUT@1;E=1;D=Timeout (milliseconds);T=INT;C=EDIT;V=CUSTOMES_SETTING_1_TIMEOUT@1>1000?\"Timeout must be between 0 and 1000 milliseconds\":\"\";S=CUSTOMES_SETTINGS@1==1?\"e\":\"i\""
+};
+
+const entity enCustomerSetting1Timeout2 = {
+  EEPROM_CUSTOMES_SETTING_1_TIMEOUT_2, &mwCustomerSetting1_Timeout[2], sizeof(uchar), INT, 0,
+  0, 500, 1000,
+  "CUSTOMES_SETTING_1_TIMEOUT@2",
+  "AI=CUSTOMES_SETTING_1_TIMEOUT@2;E=1;D=Timeout (milliseconds);T=INT;C=EDIT;V=CUSTOMES_SETTING_1_TIMEOUT@2>1000?\"Timeout must be between 0 and 1000 milliseconds\":\"\";S=CUSTOMES_SETTINGS@2==1?\"e\":\"i\""
+};
+
+const entity enCustomerSetting1Timeout3 = {
+  EEPROM_CUSTOMES_SETTING_1_TIMEOUT_3, &mwCustomerSetting1_Timeout[3], sizeof(uchar), INT, 0,
+  0, 500, 1000,
+  "CUSTOMES_SETTING_1_TIMEOUT@3",
+  "AI=CUSTOMES_SETTING_1_TIMEOUT@3;E=1;D=Timeout (milliseconds);T=INT;C=EDIT;V=CUSTOMES_SETTING_1_TIMEOUT@3>1000?\"Timeout must be between 0 and 1000 milliseconds\":\"\";S=CUSTOMES_SETTINGS@3==1?\"e\":\"i\""
+};
+
+const entity enCustomerSetting1Timeout4 = {
+  EEPROM_CUSTOMES_SETTING_1_TIMEOUT_4, &mwCustomerSetting1_Timeout[4], sizeof(uchar), INT, 0,
+  0, 500, 1000,
+  "CUSTOMES_SETTING_1_TIMEOUT@4",
+  "AI=CUSTOMES_SETTING_1_TIMEOUT@4;E=1;D=Timeout (milliseconds);T=INT;C=EDIT;V=CUSTOMES_SETTING_1_TIMEOUT@4>1000?\"Timeout must be between 0 and 1000 milliseconds\":\"\";S=CUSTOMES_SETTINGS@4==1?\"e\":\"i\""
 };

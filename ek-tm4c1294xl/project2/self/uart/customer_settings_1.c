@@ -45,7 +45,7 @@ void CustomerSettings1_TelnetReceive(uchar u) {
   if (mbCustomerSettings[u] == 1) {
     if (mbTimeout[u] == 0) {
       mbFlags[u] = true;
-      mbTimeout[u] = mbCustomerSetting1_Delay[u] + 200;
+      mbTimeout[u] = mbCustomerSetting1_Delay[u] + mwCustomerSetting1_Timeout[u];
     }
   }
 }
