@@ -9,6 +9,7 @@ telnet_receive,c
 #include "lwip/sys.h"
 #include "../kernel/tasks.h"
 #include "../kernel/log.h"
+#include "../uart/customer_settings_1.h"
 #include "tcp_errors.h"
 #include "telnet.h"
 #include "telnet_receive.h"
@@ -101,6 +102,8 @@ err_t TelnetReceive(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
 
         StartConnection(pState->ucSerialPort);
     }
+
+    CustomerSettings1_TelnetReceive(pState->ucSerialPort);
 
     return(ERR_OK);
 }

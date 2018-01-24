@@ -81,3 +81,21 @@ extern const entity enLoopback1;
 extern const entity enLoopback2;
 extern const entity enLoopback3;
 extern const entity enLoopback4;
+
+extern const entity enCustomerSettings0;
+extern const entity enCustomerSettings1;
+extern const entity enCustomerSettings2;
+extern const entity enCustomerSettings3;
+extern const entity enCustomerSettings4;
+
+extern const entity enCustomerSetting1Delay0;
+extern const entity enCustomerSetting1Delay1;
+extern const entity enCustomerSetting1Delay2;
+extern const entity enCustomerSetting1Delay3;
+extern const entity enCustomerSetting1Delay4;
+
+extern const entity enCustomerSetting1Timeout0;
+extern const entity enCustomerSetting1Timeout1;
+extern const entity enCustomerSetting1Timeout2;
+extern const entity enCustomerSetting1Timeout3;
+extern const entity enCustomerSetting1Timeout4;

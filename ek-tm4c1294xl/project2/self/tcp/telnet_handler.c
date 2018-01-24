@@ -10,6 +10,7 @@ telnet_handler.c
 #include "../uart/serial_send.h"
 #include "../uart/serial_receive.h"
 #include "../uart/io_mode.h"
+#include "../uart/customer_settings_1.h"
 #include "../kernel/settings.h"
 #include "../kernel/log.h"
 #include "telnet.h"
@@ -138,6 +139,8 @@ void TelnetHandler(void)
             {
                 break;
             }
+
+            CustomerSettings1_TelnetProcessCharacter(u);
 
             // Setup the data pointer for the current buffer.
             uint8_t *pucData = pState->pBufCurrent->payload;
