@@ -68,6 +68,10 @@ bool                    fIOModeDebugFlag;
 ledMode                 bLED0Mode = LED_MODE_LINK;
 ledMode                 bLED1Mode;
 
+uchar                   mbCustomerSettings[UART_COUNT];
+uchar                   mbCustomerSetting1_Delay[UART_COUNT];
+uint                    mwCustomerSetting1_Timeout[UART_COUNT];
+
 uint                    cwErrSettingsInitStorage;
 uint                    cwErrSettingsSaveEntity;
 uint                    cwErrSettingsLoadIP;

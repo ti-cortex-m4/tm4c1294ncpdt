@@ -21,6 +21,7 @@ MAIN,C
 #include "hardware/gpio.h"
 #include "hardware/led.h"
 #include "hardware/sys_tick.h"
+#include "hardware/timer1.h"
 #include "hardware/timer2.h"
 #include "hardware/delay.h"
 #include "hardware/rom.h"
@@ -33,6 +34,7 @@ MAIN,C
 #include "uart/modem.h"
 #include "uart/modem_to_server.h"
 #include "uart/server_to_modem.h"
+#include "uart/customer_settings_1.h"
 #include "udp/udp_log.h"
 #include "udp/udp_handler.h"
 #include "tcp/telnet.h"
@@ -140,7 +142,9 @@ int     main(void)
   InitModem();
   InitModemToServer();
   InitServerToModem();
+  InitTimer1(dwClockFreq);
   InitTimer2(dwClockFreq);
+  InitCustomerSettings1();
 
   // Set the interrupt priorities.  We set the SysTick interrupt to a higher
   // priority than the Ethernet interrupt to ensure that the file system
