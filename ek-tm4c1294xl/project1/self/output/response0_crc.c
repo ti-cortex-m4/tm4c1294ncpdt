@@ -243,7 +243,10 @@ void    Response0_CRC_StartError(void)
 {
     switch (bInBuff4)
     {
-      case bINQ_SETKEY: OutSetKey(); break;
+      case bINQ_GETCURRTIME: OutGetCurrTimeDate(); break;
+      case bINQ_GETLOGICAL: LongResult(bLogical); break;
+      case bINQ_GETPRIVATE: Common(&wPrivate, sizeof(uint)); break;
+
       case bINQ_GETDISPLAY: OutGetDisplay(); break;
 
       default:

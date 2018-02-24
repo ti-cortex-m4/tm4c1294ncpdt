@@ -566,25 +566,6 @@ void    RunResponseEsc_StartError(void)
 
     switch (bQuery)
     {
-      case 0x30: Esc0(); return;
-
-      case 0x31:
-      case 0x32:
-      case 0x33:
-      case 0x34:
-      case 0x35:
-      case 0x36:
-      case 0x37:
-      case 0x38:
-      case 0x39:
-      case 0x3A:
-      case 0x3B:
-      case 0x3C:
-      case 0x3D:
-      case 0x3E:
-      case 0x3F:
-      case 0x40: EscNumber(); return;
-
       case 'A': Esc_A(); return;
     }
 /*
@@ -605,20 +586,8 @@ void    RunResponseEsc_StartError(void)
 */
     switch (bQuery)
     {
-      case 'à':
-      case 'á':
-      case 'â':
-      case 'ã':
-      case 'ä':
-      case 'å':
-      case 'æ':
-      case 'ç':
-      case 'è':
-      case 'é':
-      case 'ê':
-      case 'ë':
-      case 'ì':
-      case 'í': EscKey(); break;
+      case 'T': Esc_T(); break;
+      case 'R': Esc_R(); break;
 
       case 'î': EscDisplay(); break;
 
