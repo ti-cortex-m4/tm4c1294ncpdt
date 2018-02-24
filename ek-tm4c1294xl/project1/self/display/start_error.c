@@ -46,17 +46,10 @@ void    StartError()
 
   while (1)
   {
-    ResetWatchdog(); // TODO
+    ResetWatchdog();
 
-//    RunLocal_All(); // TODO
-//    RunSlaveModem_All(); // TODO
-//
     RunResponseCRC_All_StartError();
     RunResponseEsc_All_StartError();
-//    RunResponseUni_All(); // TODO
-//    RunResponseFlow_All(); // TODO
-//
-//    RunThroughput(); // TODO
   }
 }
 
