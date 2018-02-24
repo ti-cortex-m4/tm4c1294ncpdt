@@ -126,20 +126,20 @@ void    RunResponseCRC_StartError(void) {
     bInBuffA = InBuff(10);
 
     bQuery = bInBuff4;
-
+/*
     if ((bInBuff0 != 0) || (bInBuff1 != 0)) {
       if ((bInBuff0 != bLogical) || (bInBuff1 != 0)) {
         ShowResponseCRC(bSTA_BADNUMBER);
         return;
       }
     }
-
+*/
     if (bInBuff2 + bInBuff3*0x100 != IndexInBuff()) {
       ShowResponseCRC(bSTA_BADSIZE);
       Result(bRES_BADSIZE);
       return;
     }
-
+/*
     if ((fDsblAnswer == true) && IsAnswerDisabled()) {
       if (bInBuff4 != bINQ_ENBL_ANSWER) {
         ShowResponseCRC(bSTA_BUSY);
@@ -147,12 +147,13 @@ void    RunResponseCRC_StartError(void) {
         return;
       }
     }
-
+*/
     ShowResponseCRC(bSTA_OK);
     Response0_CRC_StartError();
   }
 }
 #endif
+
 
 void    RunResponseCRC_All(void) {
   ibPort = 0;
@@ -177,9 +178,9 @@ void    RunResponseCRC_All_StartError(void) {
   RunResponseCRC_StartError();
 
   ibPort = 2;
-  RunResponseCRC();
+  RunResponseCRC_StartError();
 
   ibPort = 3;
-  RunResponseCRC();
+  RunResponseCRC_StartError();
 }
 #endif

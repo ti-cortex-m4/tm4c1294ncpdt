@@ -31,12 +31,12 @@ void    StartError()
 {
   InitSpeeds(); // TODO
 
-  InitSerial0(); // TODO
-  InitSerial1(); // TODO
-  InitSerial2(); // TODO
-  InitSerial3(); // TODO
+  InitSerial0();
+  InitSerial1();
+  InitSerial2();
+  InitSerial3();
 
-  const uint32_t ui32SysClockFreq = GetSystemClockFrequency(); // TODO
+  const uint32_t ui32SysClockFreq = GetSystemClockFrequency();
   InitTimer0(ui32SysClockFreq); // TODO
   InitTimer1(ui32SysClockFreq); // TODO
   InitTimer2(ui32SysClockFreq); // TODO
@@ -51,8 +51,8 @@ void    StartError()
 //    RunLocal_All(); // TODO
 //    RunSlaveModem_All(); // TODO
 //
-    RunResponseCRC_All_StartError(); // TODO
-    RunResponseEsc_All(); // TODO
+    RunResponseCRC_All_StartError();
+    RunResponseEsc_All_StartError();
 //    RunResponseUni_All(); // TODO
 //    RunResponseFlow_All(); // TODO
 //
