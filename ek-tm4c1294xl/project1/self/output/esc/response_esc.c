@@ -541,6 +541,101 @@ void    RunResponseEsc(void)
   }
 }
 
+#ifdef NO_DISPLAY
+void    RunResponseEsc_StartError(void)
+{
+  if (mpSerial[ibPort] == SER_CTRL_Z)
+  {
+    mpSerial[ibPort] = SER_BEGIN;
+
+    ShowCtrlZ();
+  }
+  else if (mpSerial[ibPort] == SER_CHAR)
+  {
+    mpSerial[ibPort] = SER_BEGIN;
+
+    if (enGlobal == GLB_PROGRAM)
+        return;
+
+    if (boBlockEsc == (bool)0x55)
+      return;
+
+    bQuery = InBuff(0);
+
+    ibActiveEsc = mpibActiveEsc[ibPort];
+
+    switch (bQuery)
+    {
+      case 0x30: Esc0(); return;
+
+      case 0x31:
+      case 0x32:
+      case 0x33:
+      case 0x34:
+      case 0x35:
+      case 0x36:
+      case 0x37:
+      case 0x38:
+      case 0x39:
+      case 0x3A:
+      case 0x3B:
+      case 0x3C:
+      case 0x3D:
+      case 0x3E:
+      case 0x3F:
+      case 0x40: EscNumber(); return;
+
+      case 'A': Esc_A(); return;
+    }
+
+    if (ibActiveEsc >= bMachinesEsc) return;
+
+    ShowEsc();
+
+    if (boBlockEsc == true)
+    {
+      if (bQuery != 'R')
+      {
+        InitPush(0);
+        Push("Disabled !",10);
+        Esc(10);
+        return;
+      }
+    }
+
+    switch (bQuery)
+    {
+      case 'T': Esc_T(); break;
+      case 'R': Esc_R(); break;
+      case 'w': Esc_w(); break;
+      case 'W': Esc_W(); break;
+
+      case '*': EscTariffs(); break;
+
+      case 'à':
+      case 'á':
+      case 'â':
+      case 'ã':
+      case 'ä':
+      case 'å':
+      case 'æ':
+      case 'ç':
+      case 'è':
+      case 'é':
+      case 'ê':
+      case 'ë':
+      case 'ì':
+      case 'í': EscKey(); break;
+
+      case 'î': EscDisplay(); break;
+
+      case 0x1F: EscTransit(); break;
+
+      case 'Þ': EscId(); break;
+    }
+  }
+}
+#endif
 
 
 void    RunResponseEsc_All(void)
@@ -557,3 +652,20 @@ void    RunResponseEsc_All(void)
   ibPort = 3;
   RunResponseEsc();
 }
+
+#ifdef NO_DISPLAY
+void    RunResponseEsc_All_StartError(void)
+{
+  ibPort = 0;
+  RunResponseEsc_StartError();
+
+  ibPort = 1;
+  RunResponseEsc_StartError();
+
+  ibPort = 2;
+  RunResponseEsc_StartError();
+
+  ibPort = 3;
+  RunResponseEsc_StartError();
+}
+#endif
