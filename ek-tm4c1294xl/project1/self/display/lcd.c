@@ -222,6 +222,9 @@ void    TestOK(void)
 // вывод сообщения о ошибке теста
 void    TestError(const char  *szT)
 {
+#ifdef NO_DISPLAY
+  StartError(szT);
+#else
 	IntMasterDisable();
 
   ShowMsgLCD(0x80, (const uchar *)szAlarm);
@@ -232,6 +235,7 @@ void    TestError(const char  *szT)
     ResetWatchdog();
     DelayMsg(); Beep();
   }
+#endif
 }
 
 
