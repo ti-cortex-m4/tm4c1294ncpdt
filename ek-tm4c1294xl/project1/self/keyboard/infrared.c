@@ -17,6 +17,8 @@ INFRARED,C
 
 
 
+#ifndef NO_DISPLAY
+
 void    InitInfrared(void)
 {
   HWREG(SYSCTL_RCGCGPIO) |= SYSCTL_RCGCGPIO_R13; // GPIO Port P Run Mode Clock Gating Control
@@ -74,3 +76,5 @@ void    RunInfrared(void)
     }
   }
 }
+
+#endif

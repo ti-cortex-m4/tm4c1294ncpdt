@@ -4,6 +4,10 @@ INFRARED,H
 
 ------------------------------------------------------------------------------*/
 
+#ifndef NO_DISPLAY
+
 void    InitInfrared(void);
 
 void    RunInfrared(void);
+
+#endif
