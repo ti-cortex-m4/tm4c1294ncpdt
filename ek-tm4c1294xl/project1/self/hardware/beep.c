@@ -17,9 +17,11 @@ BEEP.C
 static void BeepOn(void)
 {
 #ifdef ENABLE_BEEP
+#ifndef NO_DISPLAY
 
   HWREG(GPIO_PORTE_AHB_BASE + GPIO_O_DATA + 0x0010) = 0x0004;
 
+#endif
 #endif
 }
 
@@ -27,9 +29,11 @@ static void BeepOn(void)
 static void BeepOff(void)
 {
 #ifdef ENABLE_BEEP
+#ifndef NO_DISPLAY
 
   HWREG(GPIO_PORTE_AHB_BASE + GPIO_O_DATA + 0x0010) = ~0x0004;
 
+#endif
 #endif
 }
 
@@ -38,12 +42,14 @@ static void BeepOff(void)
 void    InitBeep(void)
 {
 #ifdef ENABLE_BEEP
+#ifndef NO_DISPLAY
 
   HWREG(SYSCTL_RCGCGPIO) |= SYSCTL_RCGCGPIO_R4; // GPIO Port E Run Mode Clock Gating Control
   DelayGPIO();
   HWREG(GPIO_PORTE_AHB_BASE + GPIO_O_DIR) |= 0x0004; // GPIO Direction
   HWREG(GPIO_PORTE_AHB_BASE + GPIO_O_DEN) |= 0x0004; // GPIO Digital Enable
 
+#endif
 #endif
 
   Beep();
