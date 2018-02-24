@@ -28,7 +28,6 @@ start_error.c
 
 
 #ifdef NO_DISPLAY
-
 void    StartError(const char  *sz)
 {
   ShowHi(szAlarm);
@@ -53,9 +52,8 @@ void    StartError(const char  *sz)
   {
     ResetWatchdog();
 
-    RunResponseCRC_All_StartError();
-    RunResponseEsc_All_StartError();
+    RunResponseCRC_All_StartError(); // TODO
+    RunResponseEsc_All_StartError(); // TODO
   }
 }
-
 #endif
