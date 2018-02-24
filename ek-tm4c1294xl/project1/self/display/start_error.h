@@ -5,5 +5,5 @@ start_error.h
 ------------------------------------------------------------------------------*/
 
 #ifdef NO_DISPLAY
-void    StartError(void);
+void    StartError(const char  *sz);
 #endif

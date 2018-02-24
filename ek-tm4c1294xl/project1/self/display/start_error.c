@@ -21,14 +21,19 @@ start_error.c
 #include "../isr/serial3.h"
 #include "../output/response_crc.h"
 #include "../output/esc/response_esc.h"
+#include "../display/display.h"
+#include "../display/messages.h"
 #include "start_error.h"
 
 
 
 #ifdef NO_DISPLAY
 
-void    StartError()
+void    StartError(const char  *sz)
 {
+  ShowHi(szAlarm);
+  ShowLo(sz);
+
   InitSpeeds(); // TODO
 
   InitSerial0();
