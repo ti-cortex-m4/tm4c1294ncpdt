@@ -149,7 +149,7 @@ void    RunResponseCRC_StartError(void) {
     }
 
     ShowResponseCRC(bSTA_OK);
-    Response0_CRC();
+    Response0_CRC_StartError();
   }
 }
 #endif

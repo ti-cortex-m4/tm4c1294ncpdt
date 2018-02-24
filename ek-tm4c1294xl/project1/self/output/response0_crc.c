@@ -238,6 +238,7 @@ void    Response0_CRC(void)
   }
 }
 
+#ifdef NO_DISPLAY
 void    Response0_CRC_StartError(void)
 {
     switch (bInBuff4)
@@ -435,3 +436,4 @@ void    Response0_CRC_StartError(void)
         break;
   }
 }
+#endif
