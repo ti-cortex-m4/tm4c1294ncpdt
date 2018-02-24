@@ -553,13 +553,13 @@ void    RunResponseEsc_StartError(void)
   else if (mpSerial[ibPort] == SER_CHAR)
   {
     mpSerial[ibPort] = SER_BEGIN;
-
+/*
     if (enGlobal == GLB_PROGRAM)
         return;
 
     if (boBlockEsc == (bool)0x55)
       return;
-
+*/
     bQuery = InBuff(0);
 
     ibActiveEsc = mpibActiveEsc[ibPort];
@@ -587,11 +587,11 @@ void    RunResponseEsc_StartError(void)
 
       case 'A': Esc_A(); return;
     }
-
+/*
     if (ibActiveEsc >= bMachinesEsc) return;
-
+*/
     ShowEsc();
-
+/*
     if (boBlockEsc == true)
     {
       if (bQuery != 'R')
@@ -602,16 +602,9 @@ void    RunResponseEsc_StartError(void)
         return;
       }
     }
-
+*/
     switch (bQuery)
     {
-      case 'T': Esc_T(); break;
-      case 'R': Esc_R(); break;
-      case 'w': Esc_w(); break;
-      case 'W': Esc_W(); break;
-
-      case '*': EscTariffs(); break;
-
       case 'à':
       case 'á':
       case 'â':
@@ -628,8 +621,6 @@ void    RunResponseEsc_StartError(void)
       case 'í': EscKey(); break;
 
       case 'î': EscDisplay(); break;
-
-      case 0x1F: EscTransit(); break;
 
       case 'Þ': EscId(); break;
     }
