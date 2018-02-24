@@ -122,7 +122,9 @@ int     main(void)
   InitRecords();
   InitSettings();
   InitInfrared();
+#ifndef NO_DISPLAY
   InitKey();
+#endif
   InitKeyboard();
   InitImpulses();
   InitFactors();

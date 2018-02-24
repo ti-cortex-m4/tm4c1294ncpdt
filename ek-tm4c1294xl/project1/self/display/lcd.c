@@ -6,7 +6,6 @@ LCD!C
 
 #include <stdint.h>
 #include <stdio.h>
-
 #include "../main.h"
 #include "inc/hw_sysctl.h"
 #include "inc/hw_gpio.h"
@@ -19,6 +18,7 @@ LCD!C
 #include "../hardware/beep.h"
 #include "../hardware/watchdog.h"
 #include "cp1251.h"
+#include "start_error.h"
 #include "lcd.h"
 
 #define LCD_FLAG_COMM    0x00 // передать команду
