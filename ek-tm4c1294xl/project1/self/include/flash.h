@@ -74,7 +74,11 @@ FLASH!H
 #endif
 
 
+#ifdef NO_DISPLAY
+#include "../generated/flash_enum.no_display.txt"
+#else
 #include "../generated/flash_enum.txt"
+#endif
 
 
 #if (LOCAL_END >= wPAGES)
