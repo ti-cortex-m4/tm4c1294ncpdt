@@ -15,8 +15,6 @@ KEY!C
 
 
 
-#ifndef NO_DISPLAY
-
 static uchar            bRepeat;        // счётчик для обработка антидребезга
 static uchar            bPrevKey;       // код нажатой клавишы за предыдущий период сканирования
 
@@ -24,6 +22,7 @@ static uchar            bPrevKey;       // код нажатой клавишы за предыдущий пер
 
 void    InitKey(void)
 {
+#ifndef NO_DISPLAY
   HWREG(SYSCTL_RCGCGPIO) |= SYSCTL_RCGCGPIO_R12; // GPIO Port N Run Mode Clock Gating Control
   DelayGPIO();
   HWREG(GPIO_PORTN_BASE + GPIO_O_DIR) &= 0xFFC0; // GPIO Direction
@@ -38,6 +37,7 @@ void    InitKey(void)
   DelayGPIO();
   HWREG(GPIO_PORTQ_BASE + GPIO_O_DIR) &= 0xFFF0; // GPIO Direction
   HWREG(GPIO_PORTQ_BASE + GPIO_O_DEN) |= 0x000F; // GPIO Digital Enable
+#endif
 }
 
 
@@ -90,6 +90,7 @@ static uchar ConvertKey(uint  i)
 }
 
 
+#ifndef NO_DISPLAY
 void    Key_Timer0(void)
 {
 uint   i;
@@ -120,5 +121,4 @@ uint   i;
     }
   }
 }
-
 #endif
