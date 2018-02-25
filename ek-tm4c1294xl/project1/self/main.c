@@ -121,10 +121,8 @@ int     main(void)
   InitAsserts();
   InitRecords();
   InitSettings();
-#ifndef NO_DISPLAY
   InitInfrared();
   InitKey();
-#endif
   InitKeyboard();
   InitImpulses();
   InitFactors();
@@ -199,9 +197,7 @@ int     main(void)
 
     RunRealtime();
     RunDevices();
-#ifndef NO_DISPLAY
     RunInfrared();
-#endif
     RunKeyboard();
 
     RunLocal_All();

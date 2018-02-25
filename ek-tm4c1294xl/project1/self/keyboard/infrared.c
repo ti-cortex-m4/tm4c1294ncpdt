@@ -17,18 +17,18 @@ INFRARED,C
 
 
 
-#ifndef NO_DISPLAY
-
 void    InitInfrared(void)
 {
+#ifndef NO_DISPLAY
   HWREG(SYSCTL_RCGCGPIO) |= SYSCTL_RCGCGPIO_R13; // GPIO Port P Run Mode Clock Gating Control
   DelayGPIO();
   HWREG(GPIO_PORTP_BASE + GPIO_O_DIR) &= 0xFFFE; // GPIO Direction
   HWREG(GPIO_PORTP_BASE + GPIO_O_DEN) |= 0x0001; // GPIO Digital Enable
+#endif
 }
 
 
-
+#ifndef NO_DISPLAY
 static uchar ConvertKey(uint  i)
 {
   switch (i)
@@ -48,10 +48,12 @@ static uchar ConvertKey(uint  i)
     default: return 0xFF;
   }
 }
+#endif
 
 
 void    RunInfrared(void)
 {
+#ifndef NO_DISPLAY
   static IRMP_DATA irmp_data;
 
   if (irmp_get_data(&irmp_data))
@@ -75,6 +77,5 @@ void    RunInfrared(void)
       }
     }
   }
-}
-
 #endif
+}
