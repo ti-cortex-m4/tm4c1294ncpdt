@@ -44,5 +44,7 @@ void Timer2IntHandler(void)
 {
   HWREG(TIMER2_BASE + TIMER_O_ICR) = TIMER_TIMA_TIMEOUT;
 
+#ifndef NO_DISPLAY
   irmp_ISR();
+#endif
 }

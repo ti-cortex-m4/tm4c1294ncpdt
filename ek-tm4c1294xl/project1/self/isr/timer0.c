@@ -55,8 +55,8 @@ void Timer0IntHandler(void)
   Pause();
 
   Impulses_Timer0();
-  LCD_Timer0();
 #ifndef NO_DISPLAY
+  LCD_Timer0();
   Key_Timer0();
 #endif
   PulseGenerator_350Hz();
