@@ -25,8 +25,10 @@ void    InitSlide(void)
   Delay(500); // TODO
   fSlide = false;
 
+#ifndef NO_DISPLAY
   ShowHiDirect(szRun);
   ShowLoDirect(szClear);
+#endif
 }
 
 
