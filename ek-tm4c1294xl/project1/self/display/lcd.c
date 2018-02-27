@@ -29,6 +29,9 @@ static uchar const      szName[]        = "    СЭМ-2.01    ",
                         szTest[]        = "                ";
 
 
+
+#ifndef NO_DISPLAY
+
 static uchar const      mpbUserFonts[64] =
 {
   0x1F, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -142,6 +145,8 @@ void  ShowMsgLCD2(uchar  bT, char  *szT)
     SetDataLCD( mpbCyrillic[ *szT++ ] );
   }
 }
+
+#endif
 
 
 // вывод отметки о прохождении очередного теста
