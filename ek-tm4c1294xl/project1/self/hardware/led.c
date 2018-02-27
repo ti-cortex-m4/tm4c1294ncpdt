@@ -6,53 +6,43 @@ led.c
 
 #include "../main.h"
 #include "inc/hw_memmap.h"
-#include "inc/hw_emac.h"
-#include "inc/hw_types.h"
-#include "driverlib/sysctl.h"
 #include "driverlib/gpio.h"
-#include "driverlib/pin_map.h"
-#include "driverlib/emac.h"
+#include "../time/delay.h"
 #include "led.h"
 
 
 
 #ifdef NO_DISPLAY
 
-void InitLEDs(void)
+void InitLED(void)
 {
-  GPIOPinTypeGPIOOutput(GPIO_PORTK_BASE, GPIO_PIN_4 | GPIO_PIN_6);
+  GPIOPinTypeGPIOOutput(GPIO_PORTP_BASE, GPIO_PIN_2 | GPIO_PIN_3);
 
-  GPIOPinWrite(GPIO_PORTK_BASE, GPIO_PIN_4 | GPIO_PIN_4, 0);
-  GPIOPadConfigSet(GPIO_PORTK_BASE, GPIO_PIN_4 | GPIO_PIN_6, GPIO_STRENGTH_12MA, GPIO_PIN_TYPE_STD);
-
-  OnLED0();
-  OnLED1();
-  DelayMilliSecond(300);
-  OffLED0();
-  OffLED1();
+  GPIOPinWrite(GPIO_PORTP_BASE, GPIO_PIN_2 | GPIO_PIN_2, 0);
+  GPIOPadConfigSet(GPIO_PORTP_BASE, GPIO_PIN_2 | GPIO_PIN_3, GPIO_STRENGTH_12MA, GPIO_PIN_TYPE_STD);
 }
 
 
 
 void OffLED0(void)
 {
-  GPIOPinWrite(GPIO_PORTK_BASE, GPIO_PIN_4, GPIO_PIN_4);
+  GPIOPinWrite(GPIO_PORTP_BASE, GPIO_PIN_2, GPIO_PIN_2);
 }
 
 void OnLED0(void)
 {
-  GPIOPinWrite(GPIO_PORTK_BASE, GPIO_PIN_4, 0);
+  GPIOPinWrite(GPIO_PORTP_BASE, GPIO_PIN_2, 0);
 }
 
 
 void OffLED1(void)
 {
-  GPIOPinWrite(GPIO_PORTK_BASE, GPIO_PIN_6, GPIO_PIN_6);
+  GPIOPinWrite(GPIO_PORTP_BASE, GPIO_PIN_3, GPIO_PIN_3);
 }
 
 void OnLED1(void)
 {
-  GPIOPinWrite(GPIO_PORTK_BASE, GPIO_PIN_6, 0);
+  GPIOPinWrite(GPIO_PORTP_BASE, GPIO_PIN_3, 0);
 }
 
 #endif
