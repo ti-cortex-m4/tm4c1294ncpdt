@@ -89,8 +89,10 @@ time    tiT;
                    tiT.bMonth,
                    tiT.bYear);
 
+#ifndef NO_DISPLAY
     ShowMsgLCD2(0x80, szHi);
     ShowMsgLCD2(0xC0, szLo);
+#endif
 
     tiPrev = tiCurr;
   }
