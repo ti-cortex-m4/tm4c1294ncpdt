@@ -147,7 +147,9 @@ void  ShowMsgLCD2(uchar  bT, char  *szT)
 // вывод отметки о прохождении очередного теста
 void    TestOK(void)
 {
+#ifndef NO_DISPLAY
   ReadyLCD();   SetDataLCD('-');
+#endif
 }
 
 
@@ -173,6 +175,7 @@ void    TestError(const char  *szT)
 
 void    InitLCD(void)
 {
+#ifndef NO_DISPLAY
 uchar  i;
 
   InitGPIO_LCD();
@@ -198,9 +201,12 @@ uchar  i;
   ShowMsgLCD(0xC0, szTest);
 
   ReadyLCD();   SetCommLCD(0xC4);
+#endif
 }
 
- uchar bPos =0;
+
+#ifndef NO_DISPLAY
+uchar bPos =0;
 void LCD_Timer0() {
 	  if (GetCommLCD() == 0)
 	  {
@@ -232,4 +238,4 @@ void LCD_Timer0() {
 	      bPos = 0;
 	  }
 }
-
+#endif
