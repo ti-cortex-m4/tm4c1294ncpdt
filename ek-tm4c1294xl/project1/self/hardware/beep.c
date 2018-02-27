@@ -10,6 +10,7 @@ BEEP.C
 #include "inc/hw_memmap.h"
 #include "inc/hw_types.h"
 #include "../time/delay.h"
+#include "led.h"
 #include "beep.h"
 
 
@@ -20,6 +21,11 @@ static void BeepOn(void)
 #ifndef NO_DISPLAY
 
   HWREG(GPIO_PORTE_AHB_BASE + GPIO_O_DATA + 0x0010) = 0x0004;
+
+#else
+
+  OnLED0();
+  OnLED1();
 
 #endif
 #endif
@@ -32,6 +38,11 @@ static void BeepOff(void)
 #ifndef NO_DISPLAY
 
   HWREG(GPIO_PORTE_AHB_BASE + GPIO_O_DATA + 0x0010) = ~0x0004;
+
+#else
+
+  OffLED0();
+  OffLED1();
 
 #endif
 #endif
@@ -48,6 +59,10 @@ void    InitBeep(void)
   DelayGPIO();
   HWREG(GPIO_PORTE_AHB_BASE + GPIO_O_DIR) |= 0x0004; // GPIO Direction
   HWREG(GPIO_PORTE_AHB_BASE + GPIO_O_DEN) |= 0x0004; // GPIO Digital Enable
+
+#else
+
+  InitLED();
 
 #endif
 #endif
