@@ -34,7 +34,7 @@ void    StartError(const char  *sz)
   ShowHi(szAlarm);
   ShowLo(sz);
 
-  InitSpeeds(); // TODO
+  InitSpeeds_StartError();
 
   InitSerial0();
   InitSerial1();
