@@ -1,10 +1,12 @@
 /*------------------------------------------------------------------------------
-RESPONSE_ESC,H
+panel.h
 
 
 ------------------------------------------------------------------------------*/
 
-void    RunResponseEsc_All(void);
 #ifdef NO_DISPLAY
-void    RunResponseEsc_All_Panel(void);
+
+void    StartPanel(void);
+void    RunPanel(void);
+
 #endif

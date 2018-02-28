@@ -170,7 +170,7 @@ void    RunResponseCRC_All(void) {
 }
 
 #ifdef NO_DISPLAY
-void    RunResponseCRC_All_StartError(void) {
+void    RunResponseCRC_All_Panel(void) {
   ibPort = 0;
   RunResponseCRC_StartError();
 
