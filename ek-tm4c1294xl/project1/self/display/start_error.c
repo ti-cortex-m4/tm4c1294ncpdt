@@ -19,10 +19,11 @@ start_error.c
 #include "../isr/serial1.h"
 #include "../isr/serial2.h"
 #include "../isr/serial3.h"
-#include "../output/response_crc.h"
-#include "../output/esc/response_esc.h"
+//#include "../output/response_crc.h"
+//#include "../output/esc/response_esc.h"
 #include "../display/display.h"
 #include "../display/messages.h"
+#include "panel.h"
 #include "start_error.h"
 
 
@@ -52,8 +53,7 @@ void    StartError(const char  *sz)
   {
     ResetWatchdog();
 
-    RunResponseCRC_All_StartError(); // TODO
-    RunResponseEsc_All_StartError(); // TODO
+    RunPanel();
   }
 }
 #endif

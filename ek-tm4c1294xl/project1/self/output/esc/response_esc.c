@@ -614,7 +614,7 @@ void    RunResponseEsc_All(void)
 }
 
 #ifdef NO_DISPLAY
-void    RunResponseEsc_All_StartError(void)
+void    RunResponseEsc_All_Panel(void)
 {
   ibPort = 0;
   RunResponseEsc_StartError();
