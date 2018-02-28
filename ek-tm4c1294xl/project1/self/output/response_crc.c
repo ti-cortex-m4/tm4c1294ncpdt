@@ -101,7 +101,7 @@ void    RunResponseCRC(void) {
 }
 
 #ifdef NO_DISPLAY
-void    RunResponseCRC_StartError(void) {
+void    RunResponseCRC_Panel(void) {
   if (mpSerial[ibPort] == SER_POSTINPUT_SLAVE) {
 
     mpSerial[ibPort] = SER_BEGIN;
@@ -172,15 +172,9 @@ void    RunResponseCRC_All(void) {
 #ifdef NO_DISPLAY
 void    RunResponseCRC_All_Panel(void) {
   ibPort = 0;
-  RunResponseCRC_StartError();
-
-  ibPort = 1;
-  RunResponseCRC_StartError();
+  RunResponseCRC_Panel();
 
   ibPort = 2;
-  RunResponseCRC_StartError();
-
-  ibPort = 3;
-  RunResponseCRC_StartError();
+  RunResponseCRC_Panel();
 }
 #endif

@@ -542,7 +542,7 @@ void    RunResponseEsc(void)
 }
 
 #ifdef NO_DISPLAY
-void    RunResponseEsc_StartError(void)
+void    RunResponseEsc_Panel(void)
 {
   if (mpSerial[ibPort] == SER_CTRL_Z)
   {
@@ -617,15 +617,9 @@ void    RunResponseEsc_All(void)
 void    RunResponseEsc_All_Panel(void)
 {
   ibPort = 0;
-  RunResponseEsc_StartError();
-
-  ibPort = 1;
-  RunResponseEsc_StartError();
+  RunResponseEsc_Panel();
 
   ibPort = 2;
-  RunResponseEsc_StartError();
-
-  ibPort = 3;
-  RunResponseEsc_StartError();
+  RunResponseEsc_Panel();
 }
 #endif
