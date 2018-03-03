@@ -183,6 +183,18 @@ uchar   p;
     SetSpeed(p);
     CheckCorrectLimit(p);
   }
+
+#ifdef NO_DISPLAY
+  mppoPorts[0].ibBaud  = 3;
+  mppoPorts[0].ibParity = 0;
+  mppoPorts[0].enStream = STR_SLAVEESC;
+
+  SetDefaultDelay(0);
+  SetSpeed(0);
+
+  mpboLocalDisable[0] = false;
+  SaveLocalDisable();
+#endif
 }
 
 
@@ -200,6 +212,7 @@ void    InitSpeeds_StartError(void)
     SetSpeed(p);
 
     mpboLocalDisable[p] = false;
+    SaveLocalDisable();
   }
 }
 #endif

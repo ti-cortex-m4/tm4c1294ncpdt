@@ -15,8 +15,10 @@ KEY!C
 
 
 
+#ifndef NO_DISPLAY
 static uchar            bRepeat;        // счётчик для обработка антидребезга
 static uchar            bPrevKey;       // код нажатой клавишы за предыдущий период сканирования
+#endif
 
 
 
@@ -67,6 +69,8 @@ uint  i = 0;
 }
 
 
+#ifndef NO_DISPLAY
+
 static uchar ConvertKey(uint  i)
 {
   switch (i)
@@ -90,7 +94,6 @@ static uchar ConvertKey(uint  i)
 }
 
 
-#ifndef NO_DISPLAY
 void    Key_Timer0(void)
 {
 uint   i;
@@ -121,4 +124,5 @@ uint   i;
     }
   }
 }
+
 #endif

@@ -25,12 +25,13 @@ LCD!C
 #define LCD_FLAG_DATA    0x01 // передать данные
 
 
+
+#ifndef NO_DISPLAY
+
 static uchar const      szName[]        = "    —Ёћ-2.01    ",
                         szTest[]        = "                ";
 
 
-
-#ifndef NO_DISPLAY
 
 static uchar const      mpbUserFonts[64] =
 {
