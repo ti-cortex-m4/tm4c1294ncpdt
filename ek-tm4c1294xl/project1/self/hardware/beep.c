@@ -24,8 +24,8 @@ static void BeepOn(void)
 
 #else
 
-  OnLED0();
-  OnLED1();
+  LEDGreenOn();
+  LEDRedOn();
 
 #endif
 #endif
@@ -41,8 +41,8 @@ static void BeepOff(void)
 
 #else
 
-  OffLED0();
-  OffLED1();
+  LEDGreenOff();
+  LEDRedOff();
 
 #endif
 #endif

@@ -29,14 +29,14 @@ void InitLED(void)
 
 
 
-void OffLED0(void)
+void LEDGreenOff(void)
 {
 #ifndef NO_LED
   GPIOPinWrite(GPIO_PORTP_BASE, GPIO_PIN_2, GPIO_PIN_2);
 #endif
 }
 
-void OnLED0(void)
+void LEDGreenOn(void)
 {
 #ifndef NO_LED
   GPIOPinWrite(GPIO_PORTP_BASE, GPIO_PIN_2, 0);
@@ -44,14 +44,14 @@ void OnLED0(void)
 }
 
 
-void OffLED1(void)
+void LEDRedOff(void)
 {
 #ifndef NO_LED
   GPIOPinWrite(GPIO_PORTP_BASE, GPIO_PIN_3, GPIO_PIN_3);
 #endif
 }
 
-void OnLED1(void)
+void LEDRedOn(void)
 {
 #ifndef NO_LED
   GPIOPinWrite(GPIO_PORTP_BASE, GPIO_PIN_3, 0);
@@ -65,12 +65,12 @@ void RunLED_StartError(void) {
 
   dw++;
   if (dw > 0x10000) {
-    OffLED1();
-    OnLED0();
+    LEDRedOff();
+    LEDGreenOn();
   }
   if (dw > 0x20000) {
-    OffLED0();
-    OnLED1();
+    LEDGreenOff();
+    LEDRedOn();
     dw = 0;
   }
 }
@@ -80,23 +80,24 @@ void RunLED_RealTime(void) {
 
   dw++;
   if (dw > 0x10) {
-    OffLED0();
+    LEDGreenOff();
   }
   if (dw > 0x20) {
-    OnLED0();
+    LEDGreenOn();
     dw = 0;
   }
 }
 
 void RunLED_Reset(void) {
   static ulong dw = 0;
+  LEDGreenOn();
 
   dw++;
-  if (dw > 0x10) {
-    OffLED1();
+  if (dw > 0x40) {
+    LEDRedOff();
   }
-  if (dw > 0x20) {
-    OnLED1();
+  if (dw > 0x80) {
+    LEDRedOn();
     dw = 0;
   }
 }
