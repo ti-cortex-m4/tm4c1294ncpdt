@@ -237,3 +237,22 @@ void    Response0_CRC(void)
         break;
   }
 }
+
+#ifdef NO_DISPLAY
+void    Response0_CRC_Panel(void)
+{
+    switch (bInBuff4)
+    {
+      case bINQ_GETCURRTIME: OutGetCurrTimeDate(); break;
+      case bINQ_GETLOGICAL: LongResult(bLogical); break;
+      case bINQ_GETPRIVATE: Common(&wPrivate, sizeof(uint)); break;
+
+      case bINQ_GETDISPLAY: OutGetDisplay(); break;
+
+      default:
+        ShowResponseCRC(bSTA_BADCOMMAND);
+        Result(bRES_BADCOMMAND);
+        break;
+  }
+}
+#endif

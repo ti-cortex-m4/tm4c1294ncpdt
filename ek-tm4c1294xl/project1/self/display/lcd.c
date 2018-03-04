@@ -6,7 +6,6 @@ LCD!C
 
 #include <stdint.h>
 #include <stdio.h>
-
 #include "../main.h"
 #include "inc/hw_sysctl.h"
 #include "inc/hw_gpio.h"
@@ -19,14 +18,19 @@ LCD!C
 #include "../hardware/beep.h"
 #include "../hardware/watchdog.h"
 #include "cp1251.h"
+#include "start_error.h"
 #include "lcd.h"
 
 #define LCD_FLAG_COMM    0x00 // передать команду
 #define LCD_FLAG_DATA    0x01 // передать данные
 
 
+
+#ifndef NO_DISPLAY
+
 static uchar const      szName[]        = "    СЭМ-2.01    ",
                         szTest[]        = "                ";
+
 
 
 static uchar const      mpbUserFonts[64] =
@@ -61,52 +65,6 @@ static void _Delay(unsigned long ulgTime)
 }
 
 
-/*
-//Включает мерцание курсора
-void CursorOnLCD(void)
-{
-  ReadyLCD();  SetCommLCD(0x0D);
-}
-
-//Отключает мерцание курсора
-void CursorOffLCD(void)
-{
-  ReadyLCD();  SetCommLCD(0x0C);
-}
-
-//Возвращает курсор в начальную позицию
-void CursorClearPosLCD(void)
-{
-  ReadyLCD();  SetCommLCD(0x02);
-  bCursorPos = 0;
-}
-
-//Смещает курсор вправо на одну позицию (если конец строки, то переходит на следующую)
-void CursorRShiftLCD(void)
-{
-  ReadyLCD();  SetCommLCD(0x14);
-  bCursorPos++;
-}
-
-//Смещает курсор влево на одну позицию (если конец строки, то переходит на следующую)
-void CursorLShiftLCD(void)
-{
-  ReadyLCD(); SetCommLCD(0x10);
-  bCursorPos--;
-}
-
-//установка курсора в заданную позицию (0..15 - верхняя строка, 16..31 - нижняя строка)
-void CursorSetPosLCD(unsigned char bPos)
-{
- if(bPos != bCursorPos)
- {
-  CursorOffLCD();
-  if(bPos > bCursorPos) while(bCursorPos != bPos) CursorRShiftLCD();
-  else  while(bCursorPos != bPos) CursorLShiftLCD();
-  CursorOnLCD();
- }
-}
-*/
 // Запись команды в контроллер ЖКИ
 void SetCommLCD(unsigned char  bT)
 {
@@ -130,28 +88,6 @@ void    ReadyLCD(void)
 {
  // при готовности контроллера ЖКИ, бит готовности = 0
   while ( GetCommLCD() );
-}
-
-//Вывод байта в заданную позицию ЖКИ в HEX(два символа)
-void  ShowCharLCD_HEX(unsigned char  bPos, unsigned char  bHEX)
-{
- ReadyLCD(); SetCommLCD(bPos);
- ReadyLCD(); if(((bHEX >> 4)& 0x0F) > 9) SetDataLCD( (((bHEX >> 4) & 0x0F) - 10) + 0x41);
-             else SetDataLCD( ((bHEX >> 4) & 0x0F) + 0x30 );
-
- ReadyLCD(); SetCommLCD(bPos+1);
- ReadyLCD(); if((bHEX & 0x0F) > 9) SetDataLCD( ((bHEX & 0x0F) - 10) + 0x41);
-             else SetDataLCD( (bHEX & 0x0F) + 0x30 );
-}
-
-//Вывод байта в заданную позицию ЖКИ в BCD(два символа)
-void  ShowCharLCD_BCD(unsigned char  bPos, unsigned char  bBCD)
-{
- ReadyLCD(); SetCommLCD(bPos);
- ReadyLCD(); SetDataLCD( ((bBCD >> 4) & 0x0F) + 0x30 );
-
- ReadyLCD(); SetCommLCD(bPos+1);
- ReadyLCD(); SetDataLCD( (bBCD & 0x0F) + 0x30 );
 }
 
 //Вывод символа в заданную позицию ЖКИ
@@ -211,18 +147,25 @@ void  ShowMsgLCD2(uchar  bT, char  *szT)
   }
 }
 
+#endif
+
 
 // вывод отметки о прохождении очередного теста
 void    TestOK(void)
 {
+#ifndef NO_DISPLAY
   ReadyLCD();   SetDataLCD('-');
+#endif
 }
 
 
 // вывод сообщения о ошибке теста
 void    TestError(const char  *szT)
 {
-	IntMasterDisable();
+#ifdef NO_DISPLAY
+  StartError(szT);
+#else
+  IntMasterDisable();
 
   ShowMsgLCD(0x80, (const uchar *)szAlarm);
   ShowMsgLCD(0xC0, (const uchar *)szT);
@@ -232,11 +175,13 @@ void    TestError(const char  *szT)
     ResetWatchdog();
     DelayMsg(); Beep();
   }
+#endif
 }
 
 
 void    InitLCD(void)
 {
+#ifndef NO_DISPLAY
 uchar  i;
 
   InitGPIO_LCD();
@@ -262,9 +207,12 @@ uchar  i;
   ShowMsgLCD(0xC0, szTest);
 
   ReadyLCD();   SetCommLCD(0xC4);
+#endif
 }
 
- uchar bPos =0;
+
+#ifndef NO_DISPLAY
+uchar bPos =0;
 void LCD_Timer0() {
 	  if (GetCommLCD() == 0)
 	  {
@@ -296,4 +244,4 @@ void LCD_Timer0() {
 	      bPos = 0;
 	  }
 }
-
+#endif

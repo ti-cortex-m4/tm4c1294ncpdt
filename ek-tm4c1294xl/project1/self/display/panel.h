@@ -1,10 +1,9 @@
 /*------------------------------------------------------------------------------
-RESPONSE0_CRC,H
+panel.h
 
 
 ------------------------------------------------------------------------------*/
 
-void    Response0_CRC(void);
 #ifdef NO_DISPLAY
-void    Response0_CRC_Panel(void);
+void    RunPanel(void);
 #endif

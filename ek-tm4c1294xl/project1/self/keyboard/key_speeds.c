@@ -62,7 +62,11 @@ static uchar ibPrt;
 
   else if (bKey == bKEY_POINT)
   {
-    if ((enGlobal != GLB_WORK) && (enKeyboard == KBD_POSTENTER))
+    if ((enGlobal != GLB_WORK) && (enKeyboard == KBD_POSTENTER)
+#ifdef NO_DISPLAY
+        && (ibPrt != 0)
+#endif
+       )
     {
       uchar ibBaudMax = ((ibPrt == 0) || (ibPrt == 1)) ? bBAUDS : 7;
 
@@ -80,7 +84,11 @@ static uchar ibPrt;
 
   else if (bKey == bKEY_MINUS)
   {
-    if ((enGlobal != GLB_WORK) && (enKeyboard == KBD_POSTENTER))
+    if ((enGlobal != GLB_WORK) && (enKeyboard == KBD_POSTENTER)
+#ifdef NO_DISPLAY
+        && (ibPrt != 0)
+#endif
+       )
     {
       if (++mppoPorts[ibPrt].enStream >= bSTREAMS)
         mppoPorts[ibPrt].enStream = STR_SLAVEESC;
@@ -97,7 +105,11 @@ static uchar ibPrt;
 
   else if (bKey == 0)
   {
-    if ((enGlobal != GLB_WORK) && (enKeyboard == KBD_POSTENTER))
+    if ((enGlobal != GLB_WORK) && (enKeyboard == KBD_POSTENTER)
+#ifdef NO_DISPLAY
+        && (ibPrt != 0)
+#endif
+       )
     {
       if (++mppoPorts[ibPrt].ibParity >= bPARITYS)
         mppoPorts[ibPrt].ibParity = 0;
@@ -113,7 +125,11 @@ static uchar ibPrt;
 
   else if (bKey == 1)
   {
-    if ((enGlobal != GLB_WORK) && (enKeyboard == KBD_POSTENTER))
+    if ((enGlobal != GLB_WORK) && (enKeyboard == KBD_POSTENTER)
+#ifdef NO_DISPLAY
+        && (ibPrt != 0)
+#endif
+       )
     {
       if (IsMaster(ibPrt) == 1)
       {

@@ -67,7 +67,11 @@ void    OutFlashStack(void)
 
   PushChar(0x0D); PushChar(0x0A);
 
-  #include "../generated/out_flash.txt"
+#ifdef NO_DISPLAY
+#include "../generated/out_flash.no_display.txt"
+#else
+#include "../generated/out_flash.txt"
+#endif
 
   Output(3000);
 }

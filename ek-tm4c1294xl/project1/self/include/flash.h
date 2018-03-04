@@ -27,8 +27,11 @@ FLASH!H
 #define wPAGES          8192
 
 // количество страниц
+#ifdef NO_DISPLAY
+#define wPAGES_TOTAL    (wPAGES*1)
+#else
 #define wPAGES_TOTAL    (wPAGES*2)
-
+#endif
 
 // количество повторов при чтении регистра состояния (TODO: use milliseconds)
 #define STATUS_REPEATS  50000
@@ -74,7 +77,11 @@ FLASH!H
 #endif
 
 
+#ifdef NO_DISPLAY
+#include "../generated/flash_enum.no_display.txt"
+#else
 #include "../generated/flash_enum.txt"
+#endif
 
 
 #if (LOCAL_END >= wPAGES)

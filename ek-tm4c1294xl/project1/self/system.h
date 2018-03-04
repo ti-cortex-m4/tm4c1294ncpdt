@@ -90,7 +90,11 @@ SYSTEM!H
 
 
 // мажорна€ верси€ прибора
+#ifdef NO_DISPLAY
+#define bMAXVERSION     5
+#else
 #define bMAXVERSION     4
+#endif
 
 // минорна€ верси€ прибора
 #define bMINVERSION     18
