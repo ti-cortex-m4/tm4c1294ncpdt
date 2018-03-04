@@ -10,6 +10,7 @@ STORAGE!C
 #include "../memory/mem_realtime.h"
 #include "../memory/mem_energy.h"
 #include "../hardware/watchdog.h"
+#include "../hardware/led.h"
 #include "../flash/flash.h"
 #include "../nvram/23x1024.h"
 #include "../energy2.h"
@@ -43,6 +44,7 @@ void    ShowFlashErase(void)
   ShowPercent((ulong)100*(++wPage)/(IMPHOUCAN_PAGES + bMINUTES + bDAYS*2 + bMONTHS*3 + PARAMS_PAGES*wTIMES + bRECORD_PAGES*6 + wRECORD2_PAGES*1));
 #ifdef NO_DISPLAY
   RunPanel();
+  LED_Reset();
 #endif
 }
 
@@ -53,6 +55,7 @@ void    ShowFlashRead(void)
   ShowPercent((ulong)100*(++wPage)/(FLASH_END-FLASH_BEGIN+1));
 #ifdef NO_DISPLAY
   RunPanel();
+  LED_Reset();
 #endif
 }
 
@@ -107,6 +110,7 @@ uint    i;
     ShowPercent(0 + (uint)20*i/(dwNVRAM_BYTES/1000));
 #ifdef NO_DISPLAY
     RunPanel();
+    LED_Reset();
 #endif
   }
 
@@ -118,6 +122,7 @@ uint    i;
     ShowPercent(20 + (uint)20*i/(dwNVRAM_BYTES/1000));
 #ifdef NO_DISPLAY
     RunPanel();
+    LED_Reset();
 #endif
   }
 
@@ -129,6 +134,7 @@ uint    i;
     ShowPercent(40 + (uint)20*i/(dwNVRAM_BYTES/1000));
 #ifdef NO_DISPLAY
     RunPanel();
+    LED_Reset();
 #endif
   }
 
@@ -140,6 +146,7 @@ uint    i;
     ShowPercent(60 + (uint)20*i/(dwNVRAM_BYTES/1000));
 #ifdef NO_DISPLAY
     RunPanel();
+    LED_Reset();
 #endif
   }
 
@@ -151,6 +158,7 @@ uint    i;
     ShowPercent(80 + (uint)20*i/(dwNVRAM_BYTES/1000));
 #ifdef NO_DISPLAY
     RunPanel();
+    LED_Reset();
 #endif
   }
 
