@@ -23,8 +23,10 @@ extern  char                    szAlfa[bDISPLAY + bMARGIN],
 void    ShowHi(char const  *szT);
 void    ShowLo(char const  *szT);
 
+#ifndef NO_DISPLAY
 void    ShowHiDirect(char const  *szT);
 void    ShowLoDirect(char const  *szT);
+#endif
 
 void    InitDisplay(void);
 

@@ -5,25 +5,26 @@ KEY!C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-#include 		    "inc/hw_gpio.h"
-#include 		    "inc/hw_memmap.h"
-#include 		    "inc/hw_sysctl.h"
-#include 		    "inc/hw_types.h"
+#include "inc/hw_gpio.h"
+#include "inc/hw_memmap.h"
+#include "inc/hw_sysctl.h"
+#include "inc/hw_types.h"
 #include "../time/delay.h"
 #include "keyboard.h"
 #include "key.h"
 
 
 
+#ifndef NO_DISPLAY
 static uchar            bRepeat;        // счётчик для обработка антидребезга
 static uchar            bPrevKey;       // код нажатой клавишы за предыдущий период сканирования
+#endif
 
 
 
 void    InitKey(void)
 {
-#ifdef NATIVE_KEYBOARD
-
+#ifndef NO_DISPLAY
   HWREG(SYSCTL_RCGCGPIO) |= SYSCTL_RCGCGPIO_R12; // GPIO Port N Run Mode Clock Gating Control
   DelayGPIO();
   HWREG(GPIO_PORTN_BASE + GPIO_O_DIR) &= 0xFFC0; // GPIO Direction
@@ -38,7 +39,6 @@ void    InitKey(void)
   DelayGPIO();
   HWREG(GPIO_PORTQ_BASE + GPIO_O_DIR) &= 0xFFF0; // GPIO Direction
   HWREG(GPIO_PORTQ_BASE + GPIO_O_DEN) |= 0x000F; // GPIO Digital Enable
-
 #endif
 }
 
@@ -68,6 +68,8 @@ uint  i = 0;
   return i;
 }
 
+
+#ifndef NO_DISPLAY
 
 static uchar ConvertKey(uint  i)
 {
@@ -122,3 +124,5 @@ uint   i;
     }
   }
 }
+
+#endif

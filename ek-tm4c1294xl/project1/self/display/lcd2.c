@@ -20,7 +20,7 @@ LCD2!C
 
 
 
-#ifdef NATIVE_LCD
+#ifndef NO_DISPLAY
 
 //#define PF2_TO_PD0_WR
 

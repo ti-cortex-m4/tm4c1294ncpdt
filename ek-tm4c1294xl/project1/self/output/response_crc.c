@@ -100,6 +100,45 @@ void    RunResponseCRC(void) {
   }
 }
 
+#ifdef NO_DISPLAY
+void    RunResponseCRC_Panel(void) {
+  if (mpSerial[ibPort] == SER_POSTINPUT_SLAVE) {
+
+    mpSerial[ibPort] = SER_BEGIN;
+    ShowResponseCRC(bSTA_BEGIN);
+
+    MakeCRC16InBuff( 0, IndexInBuff() );
+    if ((bCRCHi != 0) || (bCRCLo != 0)) {
+      ShowResponseCRC(bSTA_BADCRC);
+      return;
+    }
+
+    bInBuff0 = InBuff(0);
+    bInBuff1 = InBuff(1);
+    bInBuff2 = InBuff(2);
+    bInBuff3 = InBuff(3);
+    bInBuff4 = InBuff(4);
+    bInBuff5 = InBuff(5);
+    bInBuff6 = InBuff(6);
+    bInBuff7 = InBuff(7);
+    bInBuff8 = InBuff(8);
+    bInBuff9 = InBuff(9);
+    bInBuffA = InBuff(10);
+
+    bQuery = bInBuff4;
+
+    if (bInBuff2 + bInBuff3*0x100 != IndexInBuff()) {
+      ShowResponseCRC(bSTA_BADSIZE);
+      Result(bRES_BADSIZE);
+      return;
+    }
+
+    ShowResponseCRC(bSTA_OK);
+    Response0_CRC_Panel();
+  }
+}
+#endif
+
 
 void    RunResponseCRC_All(void) {
   ibPort = 0;
@@ -115,3 +154,12 @@ void    RunResponseCRC_All(void) {
   RunResponseCRC();
 }
 
+#ifdef NO_DISPLAY
+void    RunResponseCRC_All_Panel(void) {
+  ibPort = 0;
+  RunResponseCRC_Panel();
+
+  ibPort = 2;
+  RunResponseCRC_Panel();
+}
+#endif

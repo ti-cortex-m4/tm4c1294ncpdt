@@ -4,7 +4,8 @@ KEY!H
 
 ------------------------------------------------------------------------------*/
 
-#define NATIVE_KEYBOARD
-
 void    InitKey(void);
-void	  Key_Timer0(void);
+
+#ifndef NO_DISPLAY
+void    Key_Timer0(void);
+#endif

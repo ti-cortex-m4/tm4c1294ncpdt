@@ -541,6 +541,61 @@ void    RunResponseEsc(void)
   }
 }
 
+#ifdef NO_DISPLAY
+void    RunResponseEsc_Panel(void)
+{
+  if (mpSerial[ibPort] == SER_CTRL_Z)
+  {
+    mpSerial[ibPort] = SER_BEGIN;
+
+    ShowCtrlZ();
+  }
+  else if (mpSerial[ibPort] == SER_CHAR)
+  {
+    mpSerial[ibPort] = SER_BEGIN;
+/*
+    if (enGlobal == GLB_PROGRAM)
+        return;
+
+    if (boBlockEsc == (bool)0x55)
+      return;
+*/
+    bQuery = InBuff(0);
+
+    ibActiveEsc = mpibActiveEsc[ibPort];
+
+    switch (bQuery)
+    {
+      case 'A': Esc_A(); return;
+    }
+/*
+    if (ibActiveEsc >= bMachinesEsc) return;
+*/
+    ShowEsc();
+/*
+    if (boBlockEsc == true)
+    {
+      if (bQuery != 'R')
+      {
+        InitPush(0);
+        Push("Disabled !",10);
+        Esc(10);
+        return;
+      }
+    }
+*/
+    switch (bQuery)
+    {
+      case 'T': Esc_T(); break;
+      case 'R': Esc_R(); break;
+
+      case 'î': EscDisplay(); break;
+
+      case 'Þ': EscId(); break;
+    }
+  }
+}
+#endif
 
 
 void    RunResponseEsc_All(void)
@@ -557,3 +612,14 @@ void    RunResponseEsc_All(void)
   ibPort = 3;
   RunResponseEsc();
 }
+
+#ifdef NO_DISPLAY
+void    RunResponseEsc_All_Panel(void)
+{
+  ibPort = 0;
+  RunResponseEsc_Panel();
+
+  ibPort = 2;
+  RunResponseEsc_Panel();
+}
+#endif

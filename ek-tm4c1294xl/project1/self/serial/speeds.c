@@ -183,8 +183,39 @@ uchar   p;
     SetSpeed(p);
     CheckCorrectLimit(p);
   }
+
+#ifdef NO_DISPLAY
+  mppoPorts[0].ibBaud  = 3;
+  mppoPorts[0].ibParity = 0;
+  mppoPorts[0].enStream = STR_SLAVEESC;
+
+  SetDefaultDelay(0);
+  SetSpeed(0);
+
+  mpboLocalDisable[0] = false;
+  SaveLocalDisable();
+#endif
 }
 
+
+#ifdef NO_DISPLAY
+void    InitSpeeds_StartError(void)
+{
+  uchar p;
+  for (p=0; p<bPORTS; p++)
+  {
+    mppoPorts[p].ibBaud  = 3;
+    mppoPorts[p].ibParity = 0;
+    mppoPorts[p].enStream = STR_SLAVEESC;
+
+    SetDefaultDelay(p);
+    SetSpeed(p);
+
+    mpboLocalDisable[p] = false;
+    SaveLocalDisable();
+  }
+}
+#endif
 
 
 void    ResetSpeeds(void)

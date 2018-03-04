@@ -46,11 +46,13 @@ bool    ValidKey(uchar  bKey)
     return false;
   else
   {
+#ifndef NO_DISPLAY
     if ((enGlobal == GLB_WORK) && (wProgram == bSET_PASSWORD))
     {
       if ((bKey == bKEY_ENTER) && (SuperUser() == 0))
         return false;
     }
+#endif
 
     if ((enGlobal != GLB_WORK) && (wProgram == bSET_SPEED))
     {

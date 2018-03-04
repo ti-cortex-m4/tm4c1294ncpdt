@@ -42,7 +42,7 @@ void    ShowLo(char const  *szT)
 }
 
 
-
+#ifndef NO_DISPLAY
 void    ShowHiDirect(char const  *szT)
 {
   ShowMsgLCD(0x80, (const uchar *)szT);
@@ -53,6 +53,7 @@ void    ShowLoDirect(char const  *szT)
 {
   ShowMsgLCD(0xC0, (const uchar *)szT);
 }
+#endif
 
 
 void    InitDisplay(void)
