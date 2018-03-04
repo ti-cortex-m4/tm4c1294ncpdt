@@ -15,8 +15,10 @@ REALTIME_INIT!C
 #include "../time/delay.h"
 #include "../display/display.h"
 #include "../display/lcd.h"
+#include "../display/panel.h"
 #include "../hardware/watchdog.h"
 #include "../hardware/beep.h"
+#include "../hardware/led.h"
 #include "../serial/print.h"
 #include "../nvram/cache.h"
 #include "../settings.h"
@@ -92,6 +94,11 @@ time    tiT;
 #ifndef NO_DISPLAY
     ShowMsgLCD2(0x80, szHi);
     ShowMsgLCD2(0xC0, szLo);
+#else
+    if (tiCurr.bMinute == 0) {
+      RunPanel();
+    }
+    RunLED_RealTime();
 #endif
 
     tiPrev = tiCurr;

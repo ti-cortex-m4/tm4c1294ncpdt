@@ -17,8 +17,8 @@ void OnLED0(void);
 void OffLED1(void);
 void OnLED1(void);
 
-void LED_StartError(void);
-void LED_RealTime(void);
-void LED_Reset(void);
+void RunLED_StartError(void);
+void RunLED_RealTime(void);
+void RunLED_Reset(void);
 
 #endif
