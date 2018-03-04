@@ -5,8 +5,5 @@ panel.h
 ------------------------------------------------------------------------------*/
 
 #ifdef NO_DISPLAY
-
-void    StartPanel(void);
 void    RunPanel(void);
-
 #endif
