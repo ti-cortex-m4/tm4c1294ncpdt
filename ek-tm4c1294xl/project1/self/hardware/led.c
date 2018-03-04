@@ -64,10 +64,11 @@ void LED_StartError(void) {
   static ulong dw = 0;
 
   dw++;
-  if (dw > 0x40000) {
+  if (dw > 0x20000) {
     OffLED1();
     OnLED0();
-  } else if (dw > 0x80000) {
+  }
+  if (dw > 0x40000) {
     OffLED0();
     OnLED1();
     dw = 0;
@@ -80,7 +81,8 @@ void LED_RealTime(void) {
   dw++;
   if (dw > 0x100) {
     OffLED0();
-  } else if (dw > 0x200) {
+  }
+  if (dw > 0x200) {
     OnLED0();
     dw = 0;
   }
@@ -92,7 +94,8 @@ void LED_Reset(void) {
   dw++;
   if (dw > 0x100) {
     OffLED1();
-  } else if (dw > 0x200) {
+  }
+  if (dw > 0x200) {
     OnLED1();
     dw = 0;
   }

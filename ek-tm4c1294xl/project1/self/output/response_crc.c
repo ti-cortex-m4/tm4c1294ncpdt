@@ -126,30 +126,15 @@ void    RunResponseCRC_Panel(void) {
     bInBuffA = InBuff(10);
 
     bQuery = bInBuff4;
-/*
-    if ((bInBuff0 != 0) || (bInBuff1 != 0)) {
-      if ((bInBuff0 != bLogical) || (bInBuff1 != 0)) {
-        ShowResponseCRC(bSTA_BADNUMBER);
-        return;
-      }
-    }
-*/
+
     if (bInBuff2 + bInBuff3*0x100 != IndexInBuff()) {
       ShowResponseCRC(bSTA_BADSIZE);
       Result(bRES_BADSIZE);
       return;
     }
-/*
-    if ((fDsblAnswer == true) && IsAnswerDisabled()) {
-      if (bInBuff4 != bINQ_ENBL_ANSWER) {
-        ShowResponseCRC(bSTA_BUSY);
-        Result(bRES_BUSY);
-        return;
-      }
-    }
-*/
+
     ShowResponseCRC(bSTA_OK);
-    Response0_CRC_StartError();
+    Response0_CRC_Panel();
   }
 }
 #endif
