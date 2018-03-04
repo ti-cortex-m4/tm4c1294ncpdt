@@ -12,10 +12,10 @@ led.h
 
 void InitLED(void);
 
-void OffLED0(void);
-void OnLED0(void);
-void OffLED1(void);
-void OnLED1(void);
+void LEDGreenOff(void);
+void LEDGreenOn(void);
+void LEDRedOff(void);
+void LEDRedOn(void);
 
 void RunLED_StartError(void);
 void RunLED_RealTime(void);
