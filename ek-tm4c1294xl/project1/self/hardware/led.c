@@ -102,4 +102,18 @@ void RunLED_Reset(void) {
   }
 }
 
+void RunLED_Cleaning(void) {
+  static ulong dw = 0;
+  LEDGreenOn();
+
+  dw++;
+  if (dw > 0x40) {
+    LEDRedOff();
+  }
+  if (dw > 0x80) {
+    LEDRedOn();
+    dw = 0;
+  }
+}
+
 #endif

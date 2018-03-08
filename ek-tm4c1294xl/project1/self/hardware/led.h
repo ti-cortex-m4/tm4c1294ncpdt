@@ -20,5 +20,6 @@ void LEDRedOn(void);
 void RunLED_StartError(void);
 void RunLED_RealTime(void);
 void RunLED_Reset(void);
+void RunLED_Cleaning(void);
 
 #endif

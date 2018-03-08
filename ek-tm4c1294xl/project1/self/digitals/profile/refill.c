@@ -9,6 +9,7 @@ REFILL!C
 #include "../../memory/mem_energy_spec.h"
 #include "../../display/display.h"
 #include "../../keyboard/keyboard.h"
+#include "../../display/panel.h"
 #include "../../realtime/realtime_spec.h"
 #include "../../digitals/digitals.h"
 #include "../../devices/devices.h"
@@ -63,6 +64,9 @@ void    DoRefill(void)
   while (iwHhr != iwBmax) {
     if (fKey == true) { fKey = 0; Beep(); }
     if ((iwHhr % 0x10) == 0) NexttimeMnt();
+#ifdef NO_DISPLAY
+    RunPanel_CleaningHhr(iwHhr);
+#endif
 
     Clear();
     sprintf(szLo,"обработано: %u",++iwB);

@@ -8,6 +8,7 @@ KEY_AUTOMATIC!C
 #include "../../memory/mem_digitals.h"
 #include "../keyboard.h"
 #include "../../display/display.h"
+#include "../../display/panel.h"
 #include "../../serial/ports.h"
 #include "../../serial/speeds_display.h"
 #include "../../serial/modems.h"
@@ -203,6 +204,9 @@ uchar   i;
         fKey = 0;
 
         if (bRes == 0xFF) break;
+#ifdef NO_DISPLAY
+        RunPanel();
+#endif
       }
 
       ShowHi(szAutomatic);

@@ -6,6 +6,7 @@ RECALC!C
 
 #include "../main.h"
 #include "../console.h"
+#include "../display/panel.h"
 #include "../memory/mem_energy.h"
 #include "../memory/mem_energy_spec.h"
 #include "../memory/mem_profile.h"
@@ -80,12 +81,18 @@ uchar   i;
     {
       if (SaveImpDay(0,i,0) == 0) return(0);
       ShowPercent(cbPercent++);
+#ifdef NO_DISPLAY
+      RunPanel_Cleaning();
+#endif
     }
 
     for (i=0; i<bMONTHS; i++)
     {
       if (SaveImpMon(0,i,0) == 0) return(0);
       ShowPercent(cbPercent++);
+#ifdef NO_DISPLAY
+      RunPanel_Cleaning();
+#endif
     }
 
     ResetDef();
@@ -100,12 +107,18 @@ uchar   i;
     {
       if (SavePowDay(0,i,0) == 0) return(0);
       ShowPercent(cbPercent++);
+#ifdef NO_DISPLAY
+      RunPanel_Cleaning();
+#endif
     }
 
     for (i=0; i<bMONTHS; i++)
     {
       if (SavePowMon(0,i,0) == 0) return(0);
       ShowPercent(cbPercent++);
+#ifdef NO_DISPLAY
+      RunPanel_Cleaning();
+#endif
     }
   }
 
@@ -125,6 +138,9 @@ uchar   i;
     if (fKey == true) { fKey = 0; Beep(); }
     if ((iwHhr % 0x10) == 0) ShowPercent((ulong)100*iwHhr/(wHOURS-1));
     if ((iwHhr % 0x10) == 0) NexttimeMnt();
+#ifdef NO_DISPLAY
+    RunPanel_CleaningHhr(iwHhr);
+#endif
 
     iwDigHou = (wHOURS + iwHardHou - iwHhr - bHhrInc) % wHOURS;
 
@@ -192,6 +208,9 @@ bool    ClearCanals(uchar  ibDigMin, uchar  ibDigMax, uint  wHhrMin, uint  wHhrM
     if (fKey == true) { fKey = 0; Beep(); }
     if ((iwHhr % 0x10) == 0) ShowPercent((ulong)100*iwHhr/(wHOURS-1));
     if ((iwHhr % 0x10) == 0) NexttimeMnt();
+#ifdef NO_DISPLAY
+    RunPanel_CleaningHhr(iwHhr);
+#endif
 
     iwDigHou = (wHOURS + iwHardHou - iwHhr - bHhrInc) % wHOURS;
 
