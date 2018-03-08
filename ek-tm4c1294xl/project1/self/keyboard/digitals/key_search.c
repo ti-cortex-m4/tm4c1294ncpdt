@@ -8,6 +8,7 @@ KEY_SEARCH!C
 #include "../../memory/mem_digitals.h"
 #include "../../memory/mem_ports.h"
 #include "../../display/display.h"
+#include "../../display/panel.h"
 #include "../keyboard.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports_devices.h"
@@ -367,6 +368,10 @@ void    key_SearchBySpeed(void)
         Stop();
       else if (bRes == 0)
         Error();
+
+#ifdef NO_DISPLAY
+        RunPanel();
+#endif
     }
   }
 
@@ -669,6 +674,9 @@ void    key_SearchByNumber(void)
         if (fKey == true) { fKey = 0; bRes = 0xFF; }
 
         if (bRes == 0xFF) break;
+#ifdef NO_DISPLAY
+        RunPanel();
+#endif
       }
 
       ShowHi(szSearch); OK();
