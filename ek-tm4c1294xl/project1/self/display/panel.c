@@ -29,7 +29,7 @@ void    RunPanel_Cleaning(void)
 
 void    RunPanel_CleaningHhr(uint iwHhr)
 {
-  if ((iwHhr % 0x10) == 0)
+  if ((iwHhr % 0x80) == 0)
   {
     RunPanel_Cleaning();
   }
