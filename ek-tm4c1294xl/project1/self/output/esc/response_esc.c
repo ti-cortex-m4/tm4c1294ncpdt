@@ -589,6 +589,21 @@ void    RunResponseEsc_Panel(void)
       case 'T': Esc_T(); break;
       case 'R': Esc_R(); break;
 
+      case 'à':
+      case 'á':
+      case 'â':
+      case 'ã':
+      case 'ä':
+      case 'å':
+      case 'æ':
+      case 'ç':
+      case 'è':
+      case 'é':
+      case 'ê':
+      case 'ë':
+      case 'ì':
+      case 'í': EscKey(); break;
+
       case 'î': EscDisplay(); break;
 
       case 'Þ': EscId(); break;
