@@ -16,6 +16,8 @@ DISPLAY!C
 #include "messages.h"
 #include "slides.h"
 #include "lcd.h"
+#include "panel.h"
+#include "display.h"
 
 
 
@@ -139,7 +141,11 @@ void    ShowAnswer(void)
 
 void    ShowPercent(uchar  bT)
 {
-  sprintf(szLo+5,"%3u%c",bT,'%'); ResetWatchdog();
+  sprintf(szLo+5,"%3u%c",bT,'%');
+  ResetWatchdog();
+#ifdef NO_DISPLAY
+  RunPanel();
+#endif
 }
 
 

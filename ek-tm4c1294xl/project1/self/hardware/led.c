@@ -107,7 +107,7 @@ void RunLED_Cleaning(void) {
   LEDGreenOn();
 
   dw++;
-  if (dw > 0x40) {
+  if (dw > 0x20) {
     LEDRedOff();
   }
   if (dw > 0x80) {
