@@ -17,7 +17,7 @@ panel.c
 void    RunPanel(void)
 {
   RunResponseCRC_All_Panel();
-  RunResponseEsc_All_Panel(); // TODO
+  RunResponseEsc_All_Panel();
 }
 
 

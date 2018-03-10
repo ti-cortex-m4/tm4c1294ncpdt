@@ -315,6 +315,10 @@ void    key_SearchBySpeed(void)
 
         for (ibYmax=0; ibYmax<bPARITYS; ibYmax++)
         {
+#ifdef NO_DISPLAY
+          RunPanel();
+#endif
+
           mppoPorts[ibX].ibParity = ibYmax;
 
           SetSpeed(ibX);
@@ -368,10 +372,6 @@ void    key_SearchBySpeed(void)
         Stop();
       else if (bRes == 0)
         Error();
-
-#ifdef NO_DISPLAY
-        RunPanel();
-#endif
     }
   }
 
@@ -629,6 +629,10 @@ void    key_SearchByNumber(void)
       ibYmin = 0;
       for (ibY=ibYmax; ibY<255; ibY++)
       {
+#ifdef NO_DISPLAY
+        RunPanel();
+#endif
+
         sprintf(szLo+8,"%03u", ibY);
 
         uchar bRes = 0;                                // результат операции
@@ -674,9 +678,6 @@ void    key_SearchByNumber(void)
         if (fKey == true) { fKey = 0; bRes = 0xFF; }
 
         if (bRes == 0xFF) break;
-#ifdef NO_DISPLAY
-        RunPanel();
-#endif
       }
 
       ShowHi(szSearch); OK();
