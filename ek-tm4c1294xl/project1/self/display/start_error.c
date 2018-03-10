@@ -8,6 +8,7 @@ start_error.c
 #include <stdbool.h>
 #include "driverlib/interrupt.h"
 #include "../main.h"
+#include "../memory/mem_flow.h"
 #include "../serial/speeds.h"
 #include "../hardware/system_clock.h"
 #include "../hardware/watchdog.h"
