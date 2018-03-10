@@ -164,7 +164,7 @@ void    RunResponseCRC_All(void) {
 #ifdef NO_DISPLAY
 void    RunResponseCRC_All_Panel(void) {
   ibPort = 0;
-  RunResponseCRC_Panel();
+  if (IsFlow0() == 0) RunResponseCRC_Panel();
 
   ibPort = 2;
   RunResponseCRC_Panel();

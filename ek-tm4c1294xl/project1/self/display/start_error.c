@@ -46,6 +46,9 @@ void    StartError(const char  *sz)
   InitTimer2(ui32SysClockFreq); // TODO
   InitTimer3(ui32SysClockFreq); // TODO
 
+  fFlow = 0;
+  cbFlowDelay = 0;
+
   IntMasterEnable();
 
   while (1)
