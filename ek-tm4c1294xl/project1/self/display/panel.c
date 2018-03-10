@@ -24,7 +24,6 @@ void    RunPanel(void)
 void    RunPanel_Cleaning(void)
 {
   RunPanel();
-  RunLED_Cleaning();
 }
 
 void    RunPanel_CleaningHhr(uint iwHhr)
