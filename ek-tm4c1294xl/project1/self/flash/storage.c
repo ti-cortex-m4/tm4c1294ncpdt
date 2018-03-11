@@ -18,7 +18,6 @@ STORAGE!C
 #include "../kernel/arrays_buff.h"
 #include "../display/lcd.h"
 #include "../display/display.h"
-#include "../display/panel.h"
 #include "../time/delay.h"
 #include "../time/calendar.h"
 #include "../realtime/realtime_init.h"
@@ -43,7 +42,6 @@ void    ShowFlashErase(void)
   ResetWatchdog();
   ShowPercent((ulong)100*(++wPage)/(IMPHOUCAN_PAGES + bMINUTES + bDAYS*2 + bMONTHS*3 + PARAMS_PAGES*wTIMES + bRECORD_PAGES*6 + wRECORD2_PAGES*1));
 #ifdef NO_DISPLAY
-  RunPanel();
   RunLED_Reset();
 #endif
 }
@@ -54,7 +52,6 @@ void    ShowFlashRead(void)
   ResetWatchdog();
   ShowPercent((ulong)100*(++wPage)/(FLASH_END-FLASH_BEGIN+1));
 #ifdef NO_DISPLAY
-  RunPanel();
   RunLED_Reset();
 #endif
 }
@@ -109,7 +106,6 @@ uint    i;
     if (Test1ReadNvramBuff(i*1000, 1000) == false) return false;
     ShowPercent(0 + (uint)20*i/(dwNVRAM_BYTES/1000));
 #ifdef NO_DISPLAY
-    RunPanel();
     RunLED_Reset();
 #endif
   }
@@ -121,7 +117,6 @@ uint    i;
     if (Test2ReadNvramBuff(i*1000, 1000, 0x55) == false) return false;
     ShowPercent(20 + (uint)20*i/(dwNVRAM_BYTES/1000));
 #ifdef NO_DISPLAY
-    RunPanel();
     RunLED_Reset();
 #endif
   }
@@ -133,7 +128,6 @@ uint    i;
     if (Test2ReadNvramBuff(i*1000, 1000, 0xAA) == false) return false;
     ShowPercent(40 + (uint)20*i/(dwNVRAM_BYTES/1000));
 #ifdef NO_DISPLAY
-    RunPanel();
     RunLED_Reset();
 #endif
   }
@@ -145,7 +139,6 @@ uint    i;
     if (Test2ReadNvramBuff(i*1000, 1000, 0xFF) == false) return false;
     ShowPercent(60 + (uint)20*i/(dwNVRAM_BYTES/1000));
 #ifdef NO_DISPLAY
-    RunPanel();
     RunLED_Reset();
 #endif
   }
@@ -157,7 +150,6 @@ uint    i;
     if (Test2ReadNvramBuff(i*1000, 1000, 0x00) == false) return false;
     ShowPercent(80 + (uint)20*i/(dwNVRAM_BYTES/1000));
 #ifdef NO_DISPLAY
-    RunPanel();
     RunLED_Reset();
 #endif
   }

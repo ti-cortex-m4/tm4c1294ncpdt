@@ -8,6 +8,7 @@ KEY_SET_PROFILES!C
 #include "../../memory/mem_energy_spec.h"
 #include "../../memory/mem_profile.h"
 #include "../../console.h"
+#include "../../display/panel.h"
 #include "../../access.h"
 #include "../../realtime/realtime.h"
 #include "../../realtime/realtime_spec.h"
@@ -80,6 +81,9 @@ void    SetProfiles(uchar  ibDigMin, uchar  ibDigMax, uint  wHhrMin, uint  wHhrM
     if (fKey == true) { fKey = 0; Beep(); }
     if ((iwHhr % 0x10) == 0) ShowPercent((ulong)100*iwHhr/(wHOURS-1));
     if ((iwHhr % 0x10) == 0) NexttimeMnt();
+#ifdef NO_DISPLAY
+    RunPanel_CleaningHhr(iwHhr);
+#endif
 
     iwDigHou = (wHOURS + iwHardHou - iwHhr - bHhrInc) % wHOURS;
 

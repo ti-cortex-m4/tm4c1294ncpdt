@@ -8,6 +8,7 @@ start_error.c
 #include <stdbool.h>
 #include "driverlib/interrupt.h"
 #include "../main.h"
+#include "../memory/mem_flow.h"
 #include "../serial/speeds.h"
 #include "../hardware/system_clock.h"
 #include "../hardware/watchdog.h"
@@ -45,6 +46,9 @@ void    StartError(const char  *sz)
   InitTimer1(ui32SysClockFreq); // TODO
   InitTimer2(ui32SysClockFreq); // TODO
   InitTimer3(ui32SysClockFreq); // TODO
+
+  fFlow = 0;
+  cbFlowDelay = 0;
 
   IntMasterEnable();
 

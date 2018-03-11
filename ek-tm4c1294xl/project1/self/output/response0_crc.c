@@ -243,11 +243,16 @@ void    Response0_CRC_Panel(void)
 {
     switch (bInBuff4)
     {
+      case bINQ_GETGLOBAL: LongResult(enGlobal); break;
+
       case bINQ_GETCURRTIME: OutGetCurrTimeDate(); break;
       case bINQ_GETLOGICAL: LongResult(bLogical); break;
       case bINQ_GETPRIVATE: Common(&wPrivate, sizeof(uint)); break;
 
+      case bINQ_SETKEY: OutSetKey(); break;
       case bINQ_GETDISPLAY: OutGetDisplay(); break;
+
+      case bINQ_RESPONSE_255: Response255_CRC_Panel(); break;
 
       default:
         ShowResponseCRC(bSTA_BADCOMMAND);
