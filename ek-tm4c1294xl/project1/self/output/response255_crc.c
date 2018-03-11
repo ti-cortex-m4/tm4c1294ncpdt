@@ -256,3 +256,19 @@ void    Response255_CRC(void)
       break;
   }
 }
+
+
+#ifdef NO_DISPLAY
+void    Response255_CRC_Panel(void)
+{
+  switch (bInBuff5)
+  {
+    case bEXT_GETVERSION: OutVersion(); break;
+
+    default:
+      ShowResponseCRC(bSTA_BADCOMMAND);
+      Result(bRES_BADCOMMAND);
+      break;
+  }
+}
+#endif

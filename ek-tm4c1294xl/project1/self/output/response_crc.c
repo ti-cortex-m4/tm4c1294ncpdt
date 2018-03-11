@@ -127,6 +127,13 @@ void    RunResponseCRC_Panel(void) {
 
     bQuery = bInBuff4;
 
+    if ((bInBuff0 != 0) || (bInBuff1 != 0)) {
+      if ((bInBuff0 != bLogical) || (bInBuff1 != 0)) {
+        ShowResponseCRC(bSTA_BADNUMBER);
+        return;
+      }
+    }
+
     if (bInBuff2 + bInBuff3*0x100 != IndexInBuff()) {
       ShowResponseCRC(bSTA_BADSIZE);
       Result(bRES_BADSIZE);
@@ -157,7 +164,7 @@ void    RunResponseCRC_All(void) {
 #ifdef NO_DISPLAY
 void    RunResponseCRC_All_Panel(void) {
   ibPort = 0;
-  RunResponseCRC_Panel();
+  if (IsFlow0() == 0) RunResponseCRC_Panel();
 
   ibPort = 2;
   RunResponseCRC_Panel();

@@ -8,6 +8,7 @@ KEY_SEARCH!C
 #include "../../memory/mem_digitals.h"
 #include "../../memory/mem_ports.h"
 #include "../../display/display.h"
+#include "../../display/panel.h"
 #include "../keyboard.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports_devices.h"
@@ -314,6 +315,10 @@ void    key_SearchBySpeed(void)
 
         for (ibYmax=0; ibYmax<bPARITYS; ibYmax++)
         {
+#ifdef NO_DISPLAY
+          RunPanel();
+#endif
+
           mppoPorts[ibX].ibParity = ibYmax;
 
           SetSpeed(ibX);
@@ -624,6 +629,10 @@ void    key_SearchByNumber(void)
       ibYmin = 0;
       for (ibY=ibYmax; ibY<255; ibY++)
       {
+#ifdef NO_DISPLAY
+        RunPanel();
+#endif
+
         sprintf(szLo+8,"%03u", ibY);
 
         uchar bRes = 0;                                // результат операции
