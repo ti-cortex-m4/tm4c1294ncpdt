@@ -268,7 +268,7 @@ bool    PageWrite2(uint const  wPageOut)
 }
 
 
-
+#ifndef NO_DISPLAY
 static void InitGPIO(void)
 {
   HWREG(SYSCTL_RCGCGPIO) |= SYSCTL_RCGCGPIO_R3; // GPIO Port D Run Mode Clock Gating Control
@@ -280,12 +280,17 @@ static void InitGPIO(void)
 
   HWREG(GPIO_PORTD_AHB_BASE + GPIO_O_DEN) |= 0x000F; // GPIO Digital Enable
 }
+#endif
 
 
 void    InitFlash2(void)
 {
+#ifndef NO_DISPLAY
+
   InitGPIO();
   Disable();
 
   if (SafeReadStatus2() == false) TestError(szBadFlash2);
+
+#endif
 }
