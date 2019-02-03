@@ -84,3 +84,7 @@ extern  bool                    fEnblAnswerCurr;
 extern  ulong                   cdwAnswerDisabled, cdwAnswerEnabled;
 
 extern  time                    tiAnswerDisabled, tiAnswerEnabled;
+
+
+
+extern  uchar                   bTimeZone34;
