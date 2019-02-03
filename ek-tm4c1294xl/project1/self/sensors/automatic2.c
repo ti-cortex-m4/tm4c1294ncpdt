@@ -2019,6 +2019,10 @@ time2   ReadTimeCan(uchar  ibCan)
     case 33: return ReadTimeCan33();
 #endif
 
+#ifndef SKIP_34
+    case 34: return ReadTimeCan34();
+#endif
+
     default: return GetTime2Error();
   }
 }
