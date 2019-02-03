@@ -3,27 +3,26 @@ DEVICE34.C
 
 
 ------------------------------------------------------------------------------*/
-/*
-#include "device34.h"
 
 #include "../../main.h"
-#include "../../memory/mem_digitals.h"
-#include "../../memory/mem_current.h"
-#include "../../memory/mem_factors.h"
-#include "../../memory/mem_realtime.h"
+//#include "../../memory/mem_digitals.h"
+//#include "../../memory/mem_current.h"
+//#include "../../memory/mem_factors.h"
+//#include "../../memory/mem_realtime.h"
 #include "../../serial/ports.h"
-#include "../../serial/ports_devices.h"
-#include "../../display/display.h"
-#include "../../time/timedate.h"
-#include "../../time/delay.h"
-#include "../../devices/devices.h"
-#include "../../digitals/current/current_run.h"
-#include "../../digitals/digitals_messages.h"
-#include "../sensor31/automatic31.h"
-#include "automatic33.h"
+//#include "../../serial/ports_devices.h"
+//#include "../../display/display.h"
+//#include "../../time/timedate.h"
+//#include "../../time/delay.h"
+//#include "../../devices/devices.h"
+//#include "../../digitals/current/current_run.h"
+//#include "../../digitals/digitals_messages.h"
+//#include "../sensor31/automatic31.h"
+//#include "automatic33.h"
+#include "device34.h"
 
 
-
+/*
 #ifndef SKIP_33
 
 static uchar            bVersion33;
@@ -104,10 +103,10 @@ uchar   GetVersion33(void)
 {
   return bVersion33;
 }
+*/
 
 
-
-void    QueryTime33(void)
+void    QueryTime34(void)
 {
   InitPush(0);
 
@@ -119,7 +118,7 @@ void    QueryTime33(void)
 }
 
 
-time    ReadTime33(void)
+time    ReadTime34(void)
 {
   InitPop(3);
 
@@ -135,7 +134,7 @@ time    ReadTime33(void)
   return ti;
 }
 
-
+/*
 time    ReadPackTime33(void)
 {
   InitPop(3);
