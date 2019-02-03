@@ -121,3 +121,8 @@ ulong                   cdwAnswerDisabled, cdwAnswerEnabled;
 
 // время/дата
 time                    tiAnswerDisabled, tiAnswerEnabled;
+
+
+
+// временная зона для счетчиков ESM
+uchar                   bTimeZone34;

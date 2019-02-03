@@ -11,7 +11,7 @@ KEY_TIME_ZONE34.C
 
 
 //                                         0123456789ABCDEF
-static char const       szMessage[]     = "Часовой пояс    ",
+static char const       szMessage[]     = "Часовой пояс ESM",
                         szMask[]        = "      ___       ";
 
 
