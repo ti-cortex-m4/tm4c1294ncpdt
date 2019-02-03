@@ -16,7 +16,7 @@ AUTOMATIC34.C
 //#include "../../digitals/wait_answer.h"
 //#include "../automatic1.h"
 //#include "../sensor31/automatic31.h"
-//#include "device33.h"
+#include "device34.h"
 #include "automatic34.h"
 
 
@@ -58,7 +58,7 @@ bool    QueryOpen33_Full(uchar  bPercent)
 }
 */
 
-time2   QueryTime33_Full(uchar  bPercent)
+time2   QueryTime34_Full(uchar  bPercent)
 {
   uchar r;
   for (r=0; r<MaxRepeats(); r++)
@@ -91,7 +91,7 @@ bool    Automatic33(void)
 */
 
 
-time2   ReadTimeCan33(void)
+time2   ReadTimeCan34(void)
 {
   time2 ti2 = QueryTime34_Full(50);
   if (ti2.fValid == false) return GetTime2Error();
