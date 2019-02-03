@@ -5,12 +5,12 @@ DEVICE34.C
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-//#include "../../memory/mem_digitals.h"
+#include "../../memory/mem_digitals.h"
 //#include "../../memory/mem_current.h"
 //#include "../../memory/mem_factors.h"
 //#include "../../memory/mem_realtime.h"
 #include "../../serial/ports.h"
-//#include "../../serial/ports_devices.h"
+#include "../../serial/ports_devices.h"
 //#include "../../display/display.h"
 //#include "../../time/timedate.h"
 //#include "../../time/delay.h"
@@ -110,11 +110,14 @@ void    QueryTime34(void)
 {
   InitPush(0);
 
-  PushChar(0x7E);
+  PushChar(diCurr.bAddress);
+  PushChar(0x64);
   PushChar(0x00);
-  PushChar(0x07);
+  PushChar(0x46);
+  PushChar(0x00);
+  PushChar(0x09);
 
-  Query33(3+8+1, 3+1);
+  QueryIO(3+18+2, 6+2);
 }
 
 
