@@ -281,5 +281,7 @@ typedef enum
   PHONES2               = PORT_PHONES2 + sizeof(uchar) + bNVRAM_MARGIN,
   MAX_PHONES2           = PHONES2 + sizeof(mpphPhones2) + bNVRAM_MARGIN,
 
-  NVRAM_END             = MAX_PHONES2 + sizeof(float) + bNVRAM_MARGIN
+  TIME_ZONE_34          = MAX_PHONES2 + sizeof(float) + bNVRAM_MARGIN,
+
+  NVRAM_END             = TIME_ZONE_34 + sizeof(uchar) + bNVRAM_MARGIN
 } nvram;
