@@ -1,12 +1,12 @@
 /*------------------------------------------------------------------------------
-KEY_GPS_GMT!C
+KEY_TIME_ZONE34.C
 
 
 ------------------------------------------------------------------------------*/
 
-#include "../../main.h"
 #include "../../console.h"
-#include "../../time/gps.h"
+#include "../../devices/devices_init.h"
+#include "key_time_zone34.h"
 
 
 
@@ -23,7 +23,7 @@ static void Show(void)
 
 
 
-void    key_SetGpsGmt(void)
+void    key_SetTimeZone34(void)
 {
   if (bKey == bKEY_ENTER)
   {
