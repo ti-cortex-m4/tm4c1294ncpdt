@@ -56,7 +56,7 @@ bool    QueryOpen33_Full(uchar  bPercent)
 
   return true;
 }
-
+*/
 
 time2   QueryTime33_Full(uchar  bPercent)
 {
@@ -64,20 +64,20 @@ time2   QueryTime33_Full(uchar  bPercent)
   for (r=0; r<MaxRepeats(); r++)
   {
     DelayOff();
-    QueryTime33();
+    QueryTime34();
 
-    if (Input33() == SER_GOODCHECK) break;
+    if (Input() == SER_GOODCHECK) break;
     if (fKey == true) return GetTime2Error();
   }
 
   if (r == MaxRepeats()) return GetTime2Error();
   ShowPercent(bPercent);
 
-  return GetTime2(ReadTime33(), true);
+  return GetTime2(ReadTime34(), true);
 }
 
 
-
+/*
 bool    Automatic33(void)
 {
   if (QueryOpen33_Full(25) == false) return false;
@@ -88,21 +88,19 @@ bool    Automatic33(void)
 
   return true;
 }
-
+*/
 
 
 time2   ReadTimeCan33(void)
 {
-  if (QueryOpen33_Full(25) == 0) GetTime2Error();
-
-  time2 ti2 = QueryTime33_Full(50);
+  time2 ti2 = QueryTime34_Full(50);
   if (ti2.fValid == false) return GetTime2Error();
 
 
   tiChannelC = ti2.tiValue;
 
   uchar i;
-  for (i=0; i<MAX_LINE_N33; i++)
+  for (i=0; i<MAX_LINE_N34; i++)
   {
     mpboChannelsA[i] = true;
   }
@@ -111,7 +109,7 @@ time2   ReadTimeCan33(void)
 }
 
 
-
+/*
 double2 ReadCntCurr33(void)
 {
   if (QueryOpen33_Full(25) == 0) GetDouble2Error();
