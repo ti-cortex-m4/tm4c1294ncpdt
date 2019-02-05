@@ -22,6 +22,7 @@ KEY_SEARCH!C
 #include "../../sensors/device_a.h"
 #include "../../sensors/device_b.h"
 #include "../../sensors/sensor3/device_c.h"
+#include "../../sensors/sensor34/device34.h"
 
 
 
@@ -355,6 +356,10 @@ void    key_SearchBySpeed(void)
 #ifndef SKIP_N
             case 19:  if (ChangeSpeedN() == 1) bRes = 0xEE;  break;
 #endif
+
+#ifndef SKIP_34
+            case 34:  if (ChangeSpeed34() == 1) bRes = 0xEE;  break;
+#endif
             default:  Error();  return;
           }
 
@@ -666,6 +671,11 @@ void    key_SearchByNumber(void)
 #ifndef SKIP_N
           case 19:  if (ChangeNumberN() == 1) bRes = 0xEE;  break;
 #endif
+
+#ifndef SKIP_34
+         case 34:   if (ChangeNumber34(ibY) == 1) bRes = 0xEE;  break;
+#endif
+
         default:  Error();  return;
         }
 

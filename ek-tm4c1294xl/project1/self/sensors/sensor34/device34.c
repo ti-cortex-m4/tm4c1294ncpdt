@@ -9,11 +9,58 @@ DEVICE34.C
 #include "../../serial/ports.h"
 #include "../../serial/ports_devices.h"
 #include "../../time/unix_time.h"
+#include "../../hardware/beep.h"
 #include "device34.h"
 
 
 
+void    ShowFoundNumber(uchar  i);
+
+
+
 #ifndef SKIP_34
+
+bool    ChangeNumber34(uchar  bNumber)
+{
+  InitPush(0);
+
+  PushChar(bNumber);
+  PushChar(0x64);
+  PushChar(0x00);
+  PushChar(0x46);
+  PushChar(0x00);
+  PushChar(0x09);
+
+  QueryIO(3+18+2, 6+2);
+
+  if (Input() != SER_GOODCHECK) return(0);
+  Beep();
+
+  return(1);
+}
+
+
+bool    ChangeSpeed34(void)
+{
+  InitPush(0);
+
+  PushChar(0);
+  PushChar(0x64);
+  PushChar(0x00);
+  PushChar(0x46);
+  PushChar(0x00);
+  PushChar(0x09);
+
+  QueryIO(3+18+2, 6+2);
+
+  if (Input() != SER_GOODCHECK) return(0);
+  Beep();
+
+  ShowFoundNumber(InBuff(0));
+  return(1);
+}
+
+
 
 void    QueryTime34(void)
 {
