@@ -8,6 +8,9 @@ DEVICE34.H
 
 
 
+bool    ChangeNumber34(uchar  bNumber);
+bool    ChangeSpeed34(void);
+
 void    QueryTime34(void);
 time    ReadTime34(void);
 
