@@ -62,7 +62,8 @@ void    ReadEng34(void)
   uchar i;
   for (i=0; i<MAX_LINE_N34; i++)
   {
-    mpddwChannels34[i] = PopLongLtl() + (uint64_t)(0x100000000*PopLongLtl());
+    mpddwChannels34[i] = PopLongLtl();
+    mpddwChannels34[i] += 0x100000000*PopLongLtl();
   }
 }
 
