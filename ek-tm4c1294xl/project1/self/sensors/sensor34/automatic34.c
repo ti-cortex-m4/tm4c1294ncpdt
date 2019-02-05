@@ -16,7 +16,47 @@ AUTOMATIC34.C
 
 
 
+void    SetupFactors(factors  fc);
+
+
+
 #ifndef SKIP_34
+
+double2 QueryConfig34_Full(void)
+{
+  uchar r;
+  for (r=0; r<MaxRepeats(); r++)
+  {
+    DelayOff();
+    QueryConfig34();
+
+    if (Input() == SER_GOODCHECK) break;
+    if (fKey == true) return GetDouble2Error();
+  }
+
+  if (r == MaxRepeats()) return GetDouble2Error();
+  ShowPercent(50);
+
+
+  InitPop(27);
+
+  return GetDouble2(PopFloat34(), true);
+}
+
+
+bool    Automatic34(void)
+{
+  double2 db2 = QueryConfig34_Full();
+  if (db2.fValid == false) return false;
+
+  ShowPercent(100);
+
+  SetupFactors(GetFactors(db2.dbValue, 1000));
+
+  return true;
+}
+
+
 
 time2   QueryTime34_Full(uchar  bPercent)
 {

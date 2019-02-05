@@ -20,6 +20,20 @@ void    ShowFoundNumber(uchar  i);
 
 #ifndef SKIP_34
 
+float   PopFloat34(void)
+{
+  static combo32 co;
+
+  co.mpbBuff[0] = PopChar();
+  co.mpbBuff[1] = PopChar();
+  co.mpbBuff[2] = PopChar();
+  co.mpbBuff[3] = PopChar();
+
+  return co.flBuff;
+}
+
+
+
 bool    ChangeNumber34(uchar  bNumber)
 {
   InitPush(0);
@@ -58,6 +72,18 @@ bool    ChangeSpeed34(void)
 
   ShowFoundNumber(InBuff(0));
   return(1);
+}
+
+
+
+void    QueryConfig34(void)
+{
+  InitPush(0);
+
+  PushChar(diCurr.bAddress);
+  PushChar(0x6C);
+
+  QueryIO(3+32+2, 2+2);
 }
 
 
