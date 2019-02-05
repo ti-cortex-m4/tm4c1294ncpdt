@@ -8,8 +8,12 @@ DEVICE34.H
 
 
 
+float   PopFloat34(void);
+
 bool    ChangeNumber34(uchar  bNumber);
 bool    ChangeSpeed34(void);
+
+void    QueryConfig34(void);
 
 void    QueryTime34(void);
 time    ReadTime34(void);
