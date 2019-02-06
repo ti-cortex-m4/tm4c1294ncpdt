@@ -16,13 +16,13 @@ ACCESS,C
 bool    SuperUser(void)
 {
   return ((mpbPassTwo[0] == 2) &&
-          (mpbPassTwo[1] == 6) &&
-          (mpbPassTwo[2] == 1) &&
-          (mpbPassTwo[3] == 1) &&
-          (mpbPassTwo[4] == 3) &&
-          (mpbPassTwo[5] == 7) &&
-          (mpbPassTwo[6] == 9) &&
-          (mpbPassTwo[7] == 1));
+          (mpbPassTwo[1] == 0) &&
+          (mpbPassTwo[2] == 0) &&
+          (mpbPassTwo[3] == 7) &&
+          (mpbPassTwo[4] == 1) &&
+          (mpbPassTwo[5] == 9) &&
+          (mpbPassTwo[6] == 6) &&
+          (mpbPassTwo[7] == 9));
 }
 
 
