@@ -140,5 +140,22 @@ void    ReadEng34(void)
   }
 }
 
+
+
+void    ReadCurrent34(void)
+{
+  ReadEng31();
+
+  double dbPulse = mpdbPulseMnt[ibDig];
+
+  uchar i;
+  for (i=0; i<MAX_LINE_N31; i++)
+  {
+    mpdwBaseDig[i] = mpdbChannelsC[i] * dbPulse;
+  }
+
+  MakeCurrent();
+}
+
 #endif
 

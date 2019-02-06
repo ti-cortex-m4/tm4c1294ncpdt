@@ -20,3 +20,5 @@ time    ReadTime34(void);
 
 void    QueryEngAbs34(void);
 void    ReadEng34(void);
+
+void    ReadCurrent34(void);
