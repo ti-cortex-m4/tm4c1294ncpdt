@@ -51,7 +51,7 @@ bool    Automatic34(void)
 
   ShowPercent(100);
 
-  SetupFactors(GetFactors(db2.dbValue, 1000));
+  SetupFactors(GetFactors(db2.dbValue, 1));
 
   return true;
 }

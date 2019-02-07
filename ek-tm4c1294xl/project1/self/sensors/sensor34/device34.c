@@ -5,11 +5,15 @@ DEVICE34.C
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
+#include "../../memory/mem_factors.h"
 #include "../../memory/mem_digitals.h"
+#include "../../memory/mem_current.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports_devices.h"
 #include "../../time/unix_time.h"
 #include "../../hardware/beep.h"
+#include "../../devices/devices.h"
+#include "../../digitals/current/current_run.h"
 #include "device34.h"
 
 
@@ -144,14 +148,14 @@ void    ReadEng34(void)
 
 void    ReadCurrent34(void)
 {
-  ReadEng31();
+  ReadEng34();
 
   double dbPulse = mpdbPulseMnt[ibDig];
 
   uchar i;
-  for (i=0; i<MAX_LINE_N31; i++)
+  for (i=0; i<MAX_LINE_N34; i++)
   {
-    mpdwBaseDig[i] = mpdbChannelsC[i] * dbPulse;
+    mpdwBaseDig[i] = mpddwChannels34[i] * dbPulse;
   }
 
   MakeCurrent();

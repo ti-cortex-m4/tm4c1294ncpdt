@@ -60,6 +60,7 @@ DEVICES.C
 #include "../sensors/sensor32/profile32.h"
 #include "../sensors/sensor33/device33.h"
 #include "../sensors/sensor33/profile33.h"
+#include "../sensors/sensor34/device34.h"
 #include "../serial/ports.h"
 #include "../serial/ports_modems.h"
 #include "../serial/modems.h"
@@ -5483,6 +5484,32 @@ void    RunDevices(void)
         cbRepeat = MaxRepeats();
         QueryHeader33();
         SetCurr(DEV_HEADER_33P);
+      }
+      break;
+
+#endif
+#ifndef SKIP_34
+
+    case DEV_START_34C:
+      cbRepeat = MaxRepeats();
+      QueryEngAbs34();
+      SetCurr(DEV_ENERGY_34C);
+      break;
+
+    case DEV_ENERGY_34C:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+        ReadCurrent34();
+      else
+      {
+        if (cbRepeat == 0) ErrorCurrent();
+        else
+        {
+          ErrorLink();
+          cbRepeat--;
+
+          QueryEngAbs34();
+          SetCurr(DEV_ENERGY_34C);
+        }
       }
       break;
 
