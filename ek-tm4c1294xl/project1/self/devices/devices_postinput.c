@@ -28,7 +28,8 @@ void    DevicesPostInput(void)
         (diCurr.bDevice ==  2) || (diCurr.bDevice ==  8) || (diCurr.bDevice == 12) ||
         (diCurr.bDevice ==  6) ||
         (diCurr.bDevice == 18) ||
-        (diCurr.bDevice == 19))
+        (diCurr.bDevice == 19) ||
+        (diCurr.bDevice == 34))
     {
       MonitorIn();
       MakeCRC16InBuff( 0, CountInBuff() );
