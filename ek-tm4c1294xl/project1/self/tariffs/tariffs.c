@@ -227,6 +227,12 @@ void    MakeAllCurrTariffs(void)
 uchar  ibMonth, ibMode;
 
   time ti = *GetCurrTimeDate();
+  if (!ValidTimeDateRTC(ti))
+  {
+    DelayInf();
+    ShowHiDirect(szAlarm);
+    ShowLoDirect(szBadTimeRTC);
+  }
   ASSERT(ValidTimeDateRTC(ti));
 
   if (boGapsFlag == false)
