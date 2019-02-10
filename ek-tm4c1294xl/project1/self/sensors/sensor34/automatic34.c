@@ -51,7 +51,11 @@ bool    Automatic34(void)
 
   ShowPercent(100);
 
-  SetupFactors(GetFactors(db2.dbValue, 1));
+  mpdbTransEng[ibDig] = db2.dbValue;
+  mpdbTransCnt[ibDig] = db2.dbValue;
+
+  mpdbPulseHou[ibDig] = 1;
+  mpdbPulseMnt[ibDig] = 1;
 
   return true;
 }
