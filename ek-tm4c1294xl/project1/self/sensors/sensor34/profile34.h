@@ -4,8 +4,6 @@ PROFILE34.H
 
 ------------------------------------------------------------------------------*/
 
-void    QueryTop34(void);
-bool    ReadTop34(void);
-
-void    QueryHeader34(void);
-bool    ReadHeader34(void);
+void    QueryProfileOpen34();
+void    QueryProfileRead34(void);
+void    QueryProfileClose34(void);

@@ -5,7 +5,6 @@ DEVICE34.C
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-#include "../../memory/mem_factors.h"
 #include "../../memory/mem_digitals.h"
 #include "../../memory/mem_current.h"
 #include "../../serial/ports.h"
@@ -110,7 +109,7 @@ void    QueryTime34(void)
 time    ReadTime34(void)
 {
   InitPop(3);
-  return UnixTimeToDate(PopLongLtl());
+  return UnixTimeToTime(PopLongLtl());
 }
 
 
@@ -150,12 +149,10 @@ void    ReadCurrent34(void)
 {
   ReadEng34();
 
-  double dbPulse = mpdbPulseMnt[ibDig];
-
   uchar i;
   for (i=0; i<MAX_LINE_N34; i++)
   {
-    mpdwBaseDig[i] = mpddwChannels34[i] * dbPulse;
+    mpdwBaseDig[i] = mpddwChannels34[i];
   }
 
   MakeCurrent();
