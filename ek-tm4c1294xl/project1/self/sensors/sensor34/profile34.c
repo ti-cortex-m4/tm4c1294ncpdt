@@ -6,6 +6,7 @@ PROFILE34.C
 
 #include "../../main.h"
 #include "../../memory/mem_digitals.h"
+#include "../../memory/mem_realtime.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports_devices.h"
 #include "../../time/calendar.h"
@@ -23,8 +24,11 @@ uint                    iwProfile34;
 
 
 
-void    InitProfileOpen34(void);
+void    InitProfileOpen34(void)
 {
+  ibJournal34 = 0;
+  tiProfile34 = tiCurr;
+  ibDay34 = 0;
 }
 
 
@@ -47,6 +51,12 @@ void    QueryProfileOpen34(void)
 
 
 
+void    InitProfileRead34(void)
+{
+  iwProfile34 = 0;
+}
+
+
 void    QueryProfileRead34(void)
 {
   InitPush(0);
@@ -62,6 +72,34 @@ void    QueryProfileRead34(void)
 }
 
 
+bool    ReadProfileRead34(void)
+{
+   InitPop(4);
+/*
+   wCount := PopByte + PopByte*$100;
+   cwProfile := PopByte + PopByte*$100;
+
+   for i := 1 to wCount do begin
+     AddInfo(
+       PackStrR(IntToStr(PopLongLE),GetColWidth) +
+       PackStrR(IntToStr(PopLongLE),GetColWidth) +
+       PackStrR(IntToStr(PopLongLE),GetColWidth) +
+       PackStrR(IntToStr(PopLongLE),GetColWidth) +
+       Times2Str(UnixTimeToDateFromGMT(PopLongLE)) + '  ' +
+       IntToHEx(PopInt, 4) + '  ' +
+       IntToHEx(PopInt, 4)
+     );
+   end;
+
+   if (wCount = 10) then begin
+     QueryGetProfile2Read
+   end else begin
+     BoxGetProfile2Close;
+   end;
+*/
+}
+
+
 
 void    QueryProfileClose34(void)
 {
@@ -73,6 +111,12 @@ void    QueryProfileClose34(void)
   PushChar(ibJournal34);
 
   QueryIO(3+1+2, 1+3+2);
+}
+
+
+bool    ReadProfileClose34(void)
+{
+  return 0;
 }
 
 #endif

@@ -735,6 +735,14 @@ typedef enum
   DEV_START_34C         =  0x2000,
   DEV_ENERGY_34C        =  0x2001,
 
+  DEV_START_34P         =  0x2002,
+  DEV_PREVOPEN_34P      =  0x2003,
+  DEV_OPEN_34P          =  0x2004,
+  DEV_PREVREAD_34P      =  0x2005,
+  DEV_READ_34P          =  0x2006,
+  DEV_PREVCLOSE_34P     =  0x2007,
+  DEV_CLOSE_34P         =  0x2008,
+
 #endif
 
   DEV_PAUSE             =  1
