@@ -71,7 +71,7 @@ void    QueryProfileRead34(void)
   PushChar(iwProfile34 % 0x100);
   PushChar(iwProfile34 / 0x100);
 
-  QueryIO(250, 1+5+2); // ???
+  QueryIO(1000, 1+5+2);
 }
 
 
