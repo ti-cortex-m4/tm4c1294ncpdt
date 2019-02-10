@@ -5523,6 +5523,7 @@ void    RunDevices(void)
 
     case DEV_PREVOPEN_34P:
       InitProfileOpen34();
+
       cbRepeat = MaxRepeats();
       QueryProfileOpen34();
       MakePause(DEV_OPEN_34P);
@@ -5533,7 +5534,7 @@ void    RunDevices(void)
         MakePause(DEV_PREVREAD_34P);
       else
       {
-        if (cbRepeat == 0) ErrorCurrent();
+        if (cbRepeat == 0) ErrorProfile();
         else
         {
           ErrorLink();
@@ -5547,6 +5548,7 @@ void    RunDevices(void)
 
     case DEV_PREVREAD_34P:
       InitProfileRead34();
+
       cbRepeat = MaxRepeats();
       QueryProfileRead34();
       MakePause(DEV_READ_34P);
@@ -5563,7 +5565,7 @@ void    RunDevices(void)
         }
       else
       {
-        if (cbRepeat == 0) ErrorCurrent();
+        if (cbRepeat == 0) ErrorProfile();
         else
         {
           ErrorLink();
@@ -5592,7 +5594,7 @@ void    RunDevices(void)
         }
       else
       {
-        if (cbRepeat == 0) ErrorCurrent();
+        if (cbRepeat == 0) ErrorProfile();
         else
         {
           ErrorLink();

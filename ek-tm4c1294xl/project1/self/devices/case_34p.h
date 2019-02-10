@@ -6,6 +6,7 @@
 
     case DEV_PREVOPEN_34P:
       InitProfileOpen34();
+
       cbRepeat = MaxRepeats();
       QueryProfileOpen34();
       MakePause(DEV_OPEN_34P);
@@ -16,7 +17,7 @@
         MakePause(DEV_PREVREAD_34P);
       else
       {
-        if (cbRepeat == 0) ErrorCurrent();
+        if (cbRepeat == 0) ErrorProfile();
         else
         {
           ErrorLink();
@@ -30,6 +31,7 @@
 
     case DEV_PREVREAD_34P:
       InitProfileRead34();
+
       cbRepeat = MaxRepeats();
       QueryProfileRead34();
       MakePause(DEV_READ_34P);
@@ -46,7 +48,7 @@
         }
       else
       {
-        if (cbRepeat == 0) ErrorCurrent();
+        if (cbRepeat == 0) ErrorProfile();
         else
         {
           ErrorLink();
@@ -75,7 +77,7 @@
         }
       else
       {
-        if (cbRepeat == 0) ErrorCurrent();
+        if (cbRepeat == 0) ErrorProfile();
         else
         {
           ErrorLink();
