@@ -7,10 +7,13 @@ PROFILE34.C
 #include "../../main.h"
 #include "../../memory/mem_digitals.h"
 #include "../../memory/mem_realtime.h"
+#include "../../memory/mem_energy_spec.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports_devices.h"
 #include "../../time/calendar.h"
 #include "../../time/unix_time.h"
+#include "../../display/display.h"
+#include "unix_time_gmt34.h"
 #include "profile34.h"
 
 
@@ -74,29 +77,30 @@ void    QueryProfileRead34(void)
 
 bool    ReadProfileRead34(void)
 {
-   InitPop(4);
-/*
-   wCount := PopByte + PopByte*$100;
-   cwProfile := PopByte + PopByte*$100;
+  InitPop(4);
 
-   for i := 1 to wCount do begin
-     AddInfo(
-       PackStrR(IntToStr(PopLongLE),GetColWidth) +
-       PackStrR(IntToStr(PopLongLE),GetColWidth) +
-       PackStrR(IntToStr(PopLongLE),GetColWidth) +
-       PackStrR(IntToStr(PopLongLE),GetColWidth) +
-       Times2Str(UnixTimeToDateFromGMT(PopLongLE)) + '  ' +
-       IntToHEx(PopInt, 4) + '  ' +
-       IntToHEx(PopInt, 4)
-     );
-   end;
+  uint wSize = PopIntLtl();
 
-   if (wCount = 10) then begin
-     QueryGetProfile2Read
-   end else begin
-     BoxGetProfile2Close;
-   end;
-*/
+  iwProfile34 = PopIntLtl();
+
+  uchar s;
+  for (s=0; s<wSize; s++) {
+    uchar i;
+    for (i=0; i<4; i++) {
+      mpwChannels[i] = PopLongLtl() / 0x100;
+    }
+
+    time tm = UnixTimeToTimeFromGMT34(PopLongLtl());
+    sprintf(szLo," %02u:%02u %02u.%02u.%02u", tm.bHour,tm.bMinute, tm.bDay,tm.bMonth,tm.bYear);
+
+    uint w1 = PopIntLtl();
+    uint w2 = PopIntLtl();
+  }
+
+  if (wSize == 10)
+    return 1;
+  else
+    return 0;
 }
 
 
@@ -116,7 +120,10 @@ void    QueryProfileClose34(void)
 
 bool    ReadProfileClose34(void)
 {
-  return 0;
+  if (++ibDay34 < wHOURS/48)
+    return 1;
+  else
+    return 0;
 }
 
 #endif
