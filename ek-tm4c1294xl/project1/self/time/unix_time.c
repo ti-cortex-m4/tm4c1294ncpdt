@@ -63,9 +63,9 @@ time        UnixTimeToTime(uint32_t  t)
 
 uint32_t    TimeToUnixTime(time  tm)
 {
-  uint_t y;
-  uint_t m;
-  uint_t d;
+  uint16_t y;
+  uint16_t m;
+  uint16_t d;
 
   uint32_t t;
 
