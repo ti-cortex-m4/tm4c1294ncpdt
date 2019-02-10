@@ -69,12 +69,9 @@ uint32_t    TimeToUnixTime(time  tm)
 
   uint32_t t;
 
-  // year
   y = tm.bYear;
-  // month of year
-  m = tm.month;
-  // day of month
-  d = tm.day;
+  m = tm.bMonth;
+  d = tm.bDay;
 
   // January and February are counted as months 13 and 14 of the previous year
   if (m <= 2)
