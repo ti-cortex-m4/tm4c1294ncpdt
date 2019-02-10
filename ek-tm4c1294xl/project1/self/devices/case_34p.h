@@ -70,8 +70,8 @@
       if (mpSerial[ibPort] == SER_GOODCHECK)
         if (ReadProfileClose34()) {
           cbRepeat = MaxRepeats();
-          QueryProfileRead34();
-          MakePause(DEV_READ_34P);
+          QueryProfileOpen34();
+          MakePause(DEV_OPEN_34P);
         } else {
           DoneProfile();
         }

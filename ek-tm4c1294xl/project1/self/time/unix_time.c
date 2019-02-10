@@ -69,7 +69,7 @@ uint32_t    TimeToUnixTime(time  tm)
 
   uint32_t t;
 
-  y = tm.bYear;
+  y = tm.bYear + 2000;
   m = tm.bMonth;
   d = tm.bDay;
 

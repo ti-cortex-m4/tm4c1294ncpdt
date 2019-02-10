@@ -12,6 +12,7 @@ DEVICES_INPUT,C
 #include "../sensors/unpack_s.h"
 #include "../sensors/unpack_v.h"
 #include "../sensors/unpack_w.h"
+#include "../sensors/sensor34/unpack_34.h"
 #include "../serial/ports.h"
 #include "devices_input.h"
 
@@ -166,6 +167,14 @@ void    DevicesInput(void)
       {
         UnpackW(true, 3);
       }
+    }
+#endif
+
+#ifndef SKIP_C
+    if (diCurr.bDevice == 34)
+    {
+      if (GetCurr() == DEV_READ_34P)
+        Unpack34();
     }
 #endif
 }
