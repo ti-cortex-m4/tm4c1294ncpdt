@@ -23,7 +23,12 @@ uint                    iwProfile34;
 
 
 
-void    QueryProfileOpen34()
+void    InitProfileOpen34(void);
+{
+}
+
+
+void    QueryProfileOpen34(void)
 {
   time ti1 = DayIndexToDate(DateToDayIndex(tiProfile34) - ibDay34);
   time ti2 = DayIndexToDate(DateToDayIndex(ti1)         + 1);
