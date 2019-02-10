@@ -4,4 +4,5 @@ UNIX_TIME.H
 
 ------------------------------------------------------------------------------*/
 
-time    UnixTimeToDate(uint32_t  t);
+time        UnixTimeToTime(uint32_t  t);
+uint32_t    TimeToUnixTime(time  tm);
