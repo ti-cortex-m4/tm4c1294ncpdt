@@ -9,7 +9,7 @@
 
       cbRepeat = MaxRepeats();
       QueryProfileOpen34();
-      MakePause(DEV_OPEN_34P);
+      SetCurr(DEV_OPEN_34P);
       break;
 
     case DEV_OPEN_34P:
@@ -34,7 +34,7 @@
 
       cbRepeat = MaxRepeats();
       QueryProfileRead34();
-      MakePause(DEV_READ_34P);
+      SetCurr(DEV_READ_34P);
       break;
 
     case DEV_READ_34P:
@@ -42,7 +42,7 @@
         if (ReadProfileRead34()) {
           cbRepeat = MaxRepeats();
           QueryProfileRead34();
-          MakePause(DEV_READ_34P);
+          SetCurr(DEV_READ_34P);
         } else {
           MakePause(DEV_PREVCLOSE_34P);
         }
@@ -63,7 +63,7 @@
     case DEV_PREVCLOSE_34P:
       cbRepeat = MaxRepeats();
       QueryProfileClose34();
-      MakePause(DEV_CLOSE_34P);
+      SetCurr(DEV_CLOSE_34P);
       break;
 
     case DEV_CLOSE_34P:
@@ -71,7 +71,7 @@
         if (ReadProfileClose34()) {
           cbRepeat = MaxRepeats();
           QueryProfileOpen34();
-          MakePause(DEV_OPEN_34P);
+          SetCurr(DEV_OPEN_34P);
         } else {
           DoneProfile();
         }
