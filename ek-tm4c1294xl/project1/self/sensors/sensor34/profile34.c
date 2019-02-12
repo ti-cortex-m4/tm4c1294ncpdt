@@ -10,6 +10,9 @@ PROFILE34.C
 #include "../../memory/mem_energy_spec.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports_devices.h"
+#include "../../devices/devices.h"
+#include "../../devices/devices_time.h"
+#include "../../special/special.h"
 #include "../../time/calendar.h"
 #include "../../time/unix_time.h"
 #include "../../display/display.h"
@@ -87,11 +90,17 @@ bool    ReadProfileRead34(void)
   for (s=0; s<wSize; s++) {
     uchar i;
     for (i=0; i<4; i++) {
-      mpwChannels[i] = PopLongLtl() / 0x100;
+      mpwChannels[i] = PopLongLtl() / 100;
     }
 
     time tm = UnixTimeToTimeFromGMT34(PopLongLtl());
     sprintf(szLo," %02u:%02u %02u.%02u.%02u", tm.bHour,tm.bMinute, tm.bDay,tm.bMonth,tm.bYear);
+
+    SearchDefHouIndex(tm);
+    ShowProgressDigHou();
+
+    MakeSpecial(tm);
+//    if (MakeStopHou(0) == 0) return 0;
 
     uint w1 = PopIntLtl();
     uint w2 = PopIntLtl();
