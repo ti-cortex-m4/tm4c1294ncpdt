@@ -82,12 +82,12 @@ bool    ReadProfileRead34(void)
 {
   InitPop(4);
 
-  uint wSize = PopIntLtl();
+  uint wCount = PopIntLtl();
 
   iwProfile34 = PopIntLtl();
 
-  uchar s;
-  for (s=0; s<wSize; s++) {
+  uchar j;
+  for (j=0; j<wCount; j++) {
     uchar i;
     for (i=0; i<4; i++) {
       mpwChannels[i] = PopLongLtl() / 100;
@@ -97,16 +97,14 @@ bool    ReadProfileRead34(void)
     sprintf(szLo," %02u:%02u %02u.%02u.%02u", tm.bHour,tm.bMinute, tm.bDay,tm.bMonth,tm.bYear);
 
     SearchDefHouIndex(tm);
-    ShowProgressDigHou();
 
     MakeSpecial(tm);
-//    if (MakeStopHou(0) == 0) return 0;
 
     uint w1 = PopIntLtl();
     uint w2 = PopIntLtl();
   }
 
-  if (wSize == 10)
+  if (wCount == 10)
     return 1;
   else
     return 0;
@@ -129,6 +127,8 @@ void    QueryProfileClose34(void)
 
 bool    ReadProfileClose34(void)
 {
+  ShowProgressDigHou();
+
   if (++ibDay34 < wHOURS/48)
     return 1;
   else

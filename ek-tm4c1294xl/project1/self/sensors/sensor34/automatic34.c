@@ -54,8 +54,8 @@ bool    Automatic34(void)
   mpdbTransEng[ibDig] = db2.dbValue;
   mpdbTransCnt[ibDig] = db2.dbValue;
 
-  mpdbPulseHou[ibDig] = 1000;
-  mpdbPulseMnt[ibDig] = 1000;
+  mpdbPulseHou[ibDig] = 10000;
+  mpdbPulseMnt[ibDig] = 10000;
 
   return true;
 }
