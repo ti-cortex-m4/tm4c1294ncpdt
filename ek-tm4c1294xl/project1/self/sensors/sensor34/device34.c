@@ -152,7 +152,7 @@ void    ReadCurrent34(void)
   uchar i;
   for (i=0; i<MAX_LINE_N34; i++)
   {
-    mpdwBaseDig[i] = mpddwChannels34[i];
+    mpdwBaseDig[i] = mpddwChannels34[i] / 100;
   }
 
   MakeCurrent();
