@@ -24,6 +24,10 @@ CALC!C
 
 
 
+bool    IsProfile34(uchar  ibDig, uchar  ibCan);
+
+
+
 bool                    fLoadHou, fLoadDay, fLoadMon,
                         fLoadMem, fSaveDay, fSaveMon;
 
@@ -125,7 +129,7 @@ void    CalcDigCanals(time  ti)
   for (c=0; c<bCANALS; c++)                           
   {
     LoadPrevDigital(c);
-    if (CompareCurrPrevLines(ibDig, c) == true)
+    if ((CompareCurrPrevLines(ibDig, c) == true) && IsProfile34(ibDig, c))
     {
       uint w;
       if (iwDigHou == iwHardHou)

@@ -10,6 +10,7 @@ PROFILE34.C
 #include "../../memory/mem_energy_spec.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports_devices.h"
+#include "../../digitals/digitals.h"
 #include "../../devices/devices.h"
 #include "../../devices/devices_time.h"
 #include "../../special/special.h"
@@ -133,6 +134,14 @@ bool    ReadProfileClose34(void)
     return 1;
   else
     return 0;
+}
+
+
+
+bool    IsProfile34(uchar  ibDig, uchar  ibCan)
+{
+  return ((GetDigitalDevice(ibDig) != 34) ||
+          (GetDigitalLine(ibDig) / 4 == GetDigitalLine(ibCan) / 4));
 }
 
 #endif
