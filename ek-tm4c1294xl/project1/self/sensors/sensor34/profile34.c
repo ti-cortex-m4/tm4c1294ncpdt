@@ -138,7 +138,7 @@ bool    ReadProfileClose34(void)
 
 
 
-bool    IsProfile34(uchar  ibDig, uchar  ibCan)
+bool    ValidLine34(uchar  ibDig, uchar  ibCan)
 {
   return ((GetDigitalDevice(ibDig) != 34) ||
           (GetDigitalLine(ibDig) / 4 == GetDigitalLine(ibCan) / 4));
