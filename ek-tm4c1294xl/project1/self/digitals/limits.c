@@ -13,6 +13,10 @@ LIMITS!C
 
 
 
+bool    ActualLine34(uchar  ibDig, uchar  ibCan);
+
+
+
 cache const             chUseBounds = {USE_BOUNDS, &fUseBounds, sizeof(bool)};
 
 cache const             chStartRelCan = {START_REL_CAN, &mpcwStartRelCan, sizeof(mpcwStartRelCan)};
@@ -146,7 +150,7 @@ void    NewLimits(void)
   for (c=0; c<bCANALS; c++)
   {
     LoadPrevDigital(c);
-    if (CompareCurrPrevLines(ibDig, c) == true)
+    if (CompareCurrPrevLines(ibDig, c) && ActualLine34(ibDig, c))
     {
       mpcwStartRelCan[c] = 0;
       mpcwStartAbs16Can[c] = 0;
