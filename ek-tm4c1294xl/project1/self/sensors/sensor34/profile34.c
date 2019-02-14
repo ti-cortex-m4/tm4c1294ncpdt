@@ -5,6 +5,7 @@ PROFILE34.C
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
+#include "../../memory/mem_factors.h"
 #include "../../memory/mem_digitals.h"
 #include "../../memory/mem_realtime.h"
 #include "../../memory/mem_energy_spec.h"
@@ -33,7 +34,7 @@ uint                    iwProfile34;
 
 void    InitProfileOpen34(void)
 {
-  ibJournal34 = 0;
+  ibJournal34 = diCurr.ibLine / 4;
   tiProfile34 = tiCurr;
   ibDay34 = 0;
 }
@@ -88,10 +89,20 @@ bool    ReadProfileRead34(void)
   iwProfile34 = PopIntLtl();
 
   uchar j;
-  for (j=0; j<wCount; j++) {
-    uchar i;
-    for (i=0; i<4; i++) {
-      mpwChannels[i] = PopLongLtl() / 100;
+  for (j=0; j<wCount; j++)
+  {
+    uchar k;
+    for (k=0; k<4; k++)
+    {
+      uchar i = ibJournal34*4 + k;
+
+      long dw = PopLongLtl();
+      mpdbEngFracDigCan8[ibDig][i] += (double)dw/100;
+
+      uint w = (uint)(mpdbEngFracDigCan8[ibDig][i]);
+      mpwChannels[i] = w;
+
+      mpdbEngFracDigCan8[ibDig][i] -= (double)w;
     }
 
     time tm = UnixTimeToTimeFromGMT34(PopLongLtl());
@@ -130,15 +141,20 @@ bool    ReadProfileClose34(void)
 {
   ShowProgressDigHou();
 
+  ibDay34++;
+
+  return MakeStopHou(0);
+/*
   if (++ibDay34 < wHOURS/48)
     return 1;
   else
     return 0;
+*/
 }
 
 
 
-bool    ValidLine34(uchar  ibDig, uchar  ibCan)
+bool    ActualLine34(uchar  ibDig, uchar  ibCan)
 {
   return ((GetDigitalDevice(ibDig) != 34) ||
           (GetDigitalLine(ibDig) / 4 == GetDigitalLine(ibCan) / 4));
