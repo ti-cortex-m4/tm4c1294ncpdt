@@ -5,6 +5,7 @@ PROFILE34.C
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
+#include "../../memory/mem_factors.h"
 #include "../../memory/mem_digitals.h"
 #include "../../memory/mem_realtime.h"
 #include "../../memory/mem_energy_spec.h"
@@ -24,18 +25,20 @@ PROFILE34.C
 
 #ifndef SKIP_34
 
-uchar                   ibJournal34;
-time                    tiProfile34;
-uchar                   ibDay34;
-uint                    iwProfile34;
+static  uchar           ibJournal34;
+static  time            tiProfile34;
+static  uchar           ibDay34;
+static  uint            iwProfile34;
+static  uint            cwOffline;
 
 
 
 void    InitProfileOpen34(void)
 {
-  ibJournal34 = 0;
+  ibJournal34 = diCurr.ibLine / 4;
   tiProfile34 = tiCurr;
   ibDay34 = 0;
+  cwOffline = 0;
 }
 
 
@@ -84,14 +87,29 @@ bool    ReadProfileRead34(void)
   InitPop(4);
 
   uint wCount = PopIntLtl();
+  if (wCount == 0) {
+    sprintf(szLo," выключено: %-2u  ",++cwOffline);
+  } else {
+    cwOffline = 0;
+  }
 
   iwProfile34 = PopIntLtl();
 
   uchar j;
-  for (j=0; j<wCount; j++) {
-    uchar i;
-    for (i=0; i<4; i++) {
-      mpwChannels[i] = PopLongLtl() / 100;
+  for (j=0; j<wCount; j++)
+  {
+    uchar k;
+    for (k=0; k<4; k++)
+    {
+      uchar i = ibJournal34*4 + k;
+
+      long dw = PopLongLtl();
+      mpdbEngFracDigCan8[ibDig][i] += (double)dw/100;
+
+      uint w = (uint)(mpdbEngFracDigCan8[ibDig][i]);
+      mpwChannels[i] = w;
+
+      mpdbEngFracDigCan8[ibDig][i] -= (double)w;
     }
 
     time tm = UnixTimeToTimeFromGMT34(PopLongLtl());
@@ -130,15 +148,23 @@ bool    ReadProfileClose34(void)
 {
   ShowProgressDigHou();
 
+  ibDay34++;
+
+  if (cwOffline > 30)
+    return 0;
+  else
+    return MakeStopHou(0);
+/*
   if (++ibDay34 < wHOURS/48)
     return 1;
   else
     return 0;
+*/
 }
 
 
 
-bool    ValidLine34(uchar  ibDig, uchar  ibCan)
+bool    ActualLine34(uchar  ibDig, uchar  ibCan)
 {
   return ((GetDigitalDevice(ibDig) != 34) ||
           (GetDigitalLine(ibDig) / 4 == GetDigitalLine(ibCan) / 4));

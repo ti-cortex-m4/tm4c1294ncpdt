@@ -1,11 +1,10 @@
 /*------------------------------------------------------------------------------
-AUTOMATIC34.H
+ENG_DATES34.H
 
 
 ------------------------------------------------------------------------------*/
 
-bool    Automatic34(void);
+bool    QueryEngDates34_Full(uchar  bPercent);
 
-time2   ReadTimeCan34(void);
-double2 ReadCntCurr34(void);
-double2 ReadCntMonCan34(uchar  ibMon);
+bool    HasEngDay34(time  ti);
+bool    HasEngMon34(time  ti);

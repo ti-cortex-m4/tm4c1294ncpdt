@@ -5,6 +5,7 @@ UNIX_TIME_GMT34.C
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
+#include "../../time/timedate.h"
 #include "../../time/unix_time.h"
 #include "unix_time_gmt34.h"
 
@@ -16,7 +17,10 @@ extern  uchar                   bTimeZone34;
 
 time        UnixTimeToTimeFromGMT34(uint32_t  t)
 {
-  return UnixTimeToTime(t + (ulong)3600*bTimeZone34);
+  if (t == 0)
+    return tiZero;
+  else
+    return UnixTimeToTime(t + (ulong)3600*bTimeZone34);
 }
 
 
