@@ -12,6 +12,9 @@ AUTOMATIC34.C
 #include "../../devices/devices.h"
 #include "../../time/calendar.h"
 #include "device34.h"
+#include "eng_dates34.h"
+#include "eng_day34.h"
+#include "eng_mon34.h"
 #include "automatic34.h"
 
 
@@ -99,10 +102,13 @@ double2 QueryEngAbs34_Full(uchar  bPercent)
 
   ReadEng34();
 
+  double dbTrans = mpdbTransCnt[ibDig];
+
   uchar i;
   for (i=0; i<MAX_LINE_N34; i++)
   {
     mpdbChannelsC[i] = (double)mpddwChannels34[i] / 1000000;
+    mpdbChannelsC[i] *= dbTrans;
     mpboChannelsA[i] = true;
   }
 
@@ -117,7 +123,6 @@ time2   ReadTimeCan34(void)
   if (ti2.fValid == false) return GetTime2Error();
 
 
-  ti2.tiValue = SecIndexToDate(DateToSecIndex(ti2.tiValue) + (ulong)3600*bTimeZone34);
   tiChannelC = ti2.tiValue;
 
   uchar i;
@@ -136,17 +141,55 @@ double2 ReadCntCurr34(void)
   double2 db2 = QueryEngAbs34_Full(50);
   if (db2.fValid == false) return GetDouble2Error();
 
-
-  double dbTrans = mpdbTransCnt[ibDig];
-
-  uchar i;
-  for (i=0; i<MAX_LINE_N34; i++)
-  {
-    mpdbChannelsC[i] *= dbTrans;
-    mpboChannelsA[i] = true;
-  }
-
   return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
+}
+
+
+
+double2 ReadCntMonCan34(uchar  ibMon)
+{
+  time2 ti2 = QueryTime34_Full(50);
+  if (ti2.fValid == false) return GetDouble2Error();
+
+  if (QueryEngDates34_Full(60) == 0) return GetDouble2Error();
+
+  if (ti2.tiValue.bMonth != ibMon+1) // значение счЄтчиков на конец всех мес€цев, кроме текущего
+  {
+    time ti = ti2.tiValue;
+    ti.bSecond = 0;
+    ti.bMinute = 0;
+    ti.bHour   = 0;
+    ti.bDay    = 1;
+
+    uchar m = (ibMon+1) % 12 + 1;
+    ti.bYear   = (m > ti.bMonth) ? ti.bYear-1 : ti.bYear;
+    ti.bMonth  = m;
+
+    if (HasEngMon34(ti) == 0) {
+      Clear();
+      sprintf(szLo+1,"мес€ц %02u.%02u ?", ti.bMonth,ti.bYear);
+      Delay(1000);
+      return GetDouble2Error();
+    } else {
+      return QueryEngMon34_Full(ti, 80);
+    }
+  }
+  else // значение счЄтчиков на начало текущих суток
+  {
+    time ti = ti2.tiValue;
+    ti.bSecond = 0;
+    ti.bMinute = 0;
+    ti.bHour   = 0;
+
+    if (HasEngDay34(ti) == 0) {
+      Clear();
+      sprintf(szLo+1,"сутки %02u.%02u.%02u ?", ti.bDay,ti.bMonth,ti.bYear);
+      Delay(1000);
+      return GetDouble2Error();
+    } else {
+      return QueryEngDay34_Full(ti, 70);
+    }
+  }
 }
 
 #endif
