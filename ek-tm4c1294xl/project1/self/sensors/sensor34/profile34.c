@@ -25,10 +25,11 @@ PROFILE34.C
 
 #ifndef SKIP_34
 
-uchar                   ibJournal34;
-time                    tiProfile34;
-uchar                   ibDay34;
-uint                    iwProfile34;
+static  uchar           ibJournal34;
+static  time            tiProfile34;
+static  uchar           ibDay34;
+static  uint            iwProfile34;
+static  uint            cwOffline;
 
 
 
@@ -37,6 +38,7 @@ void    InitProfileOpen34(void)
   ibJournal34 = diCurr.ibLine / 4;
   tiProfile34 = tiCurr;
   ibDay34 = 0;
+  cwOffline = 0;
 }
 
 
@@ -85,6 +87,11 @@ bool    ReadProfileRead34(void)
   InitPop(4);
 
   uint wCount = PopIntLtl();
+  if (wCount == 0) {
+    sprintf(szLo," выключено: %-2u  ",++cwOffline);
+  } else {
+    cwOffline = 0;
+  }
 
   iwProfile34 = PopIntLtl();
 
@@ -143,7 +150,10 @@ bool    ReadProfileClose34(void)
 
   ibDay34++;
 
-  return MakeStopHou(0);
+  if (cwOffline > 30)
+    return 0;
+  else
+    return MakeStopHou(0);
 /*
   if (++ibDay34 < wHOURS/48)
     return 1;
