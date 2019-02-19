@@ -12,6 +12,7 @@ AUTOMATIC34.C
 #include "../../devices/devices.h"
 #include "../../time/calendar.h"
 #include "device34.h"
+#include "eng_dates34.h"
 #include "automatic34.h"
 
 
@@ -156,13 +157,24 @@ double2 ReadCntMonCan34(uchar  ibMon)
   if (ti2.fValid == false) return GetDouble2Error();
   time ti = ti2.tiValue;
 
+  if (QueryEngDates34_Full(60) == 0) return GetDouble2Error();
+
   if (ti.bMonth != ibMon+1) // значение счЄтчиков на начало всех мес€цев, кроме текущего
   {
     return GetDouble2Error();
   }
   else // значение счЄтчиков на начало текущих суток
   {
-    return GetDouble2Error();
+    time ti = ti2.tiValue;
+    ti.bHour   = 0;
+    ti.bMinute = 0;
+    ti.bSecond = 0;
+
+    if (HasEngDay34(ti) == 0) {
+      return GetDouble2Error();
+    } else {
+      return QueryEngDay34_Full(ti, 70);
+    }
   }
 }
 

@@ -4,5 +4,7 @@ ENG_DATES34.H
 
 ------------------------------------------------------------------------------*/
 
-void    QueryEngDates34(void);
-void    ReadEngDates34(void);
+bool    QueryEngDates34_Full(uchar  bPercent);
+
+bool    HasEngDay34(time  ti);
+bool    HasEngMon34(time  ti);
