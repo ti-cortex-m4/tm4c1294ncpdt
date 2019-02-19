@@ -84,8 +84,27 @@ bool    HasEngDay34(time  ti)
 {
   uchar i;
   for (i=0; i<10; i++) {
-    if (mptiEngMon[i] == ti)
-      return 1;
+    if ((mptiEngDay[i].bSecond == ti.bSecond) &&
+        (mptiEngDay[i].bMinute == ti.bMinute) &&
+        (mptiEngDay[i].bHour   == ti.bHour)   &&
+        (mptiEngDay[i].bDay    == ti.bDay)    &&
+        (mptiEngDay[i].bMonth  == ti.bMonth)  &&
+        (mptiEngDay[i].bYear   == ti.bYear)) return 1;
+  }
+  return 0;
+}
+
+
+bool    HasEngMon34(time  ti)
+{
+  uchar i;
+  for (i=0; i<10; i++) {
+    if ((mptiEngMon[i].bSecond == ti.bSecond) &&
+        (mptiEngMon[i].bMinute == ti.bMinute) &&
+        (mptiEngMon[i].bHour   == ti.bHour)   &&
+        (mptiEngMon[i].bDay    == ti.bDay)    &&
+        (mptiEngMon[i].bMonth  == ti.bMonth)  &&
+        (mptiEngMon[i].bYear   == ti.bYear)) return 1;
   }
   return 0;
 }
