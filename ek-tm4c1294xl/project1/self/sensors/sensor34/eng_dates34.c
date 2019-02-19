@@ -7,20 +7,15 @@ ENG_DATES34.C
 #include "../../main.h"
 #include "../../console.h"
 #include "../../memory/mem_digitals.h"
-//#include "../../memory/mem_current.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports_devices.h"
-//#include "../../hardware/beep.h"
 #include "../../devices/devices.h"
-//#include "../../display/display.h"
-//#include "../../time/delay.h"
 #include "unix_time_gmt34.h"
 #include "eng_dates34.h"
 
 
 
 static  time            mptiEngDay[10], mptiEngMon[10];
-static  uchar             cbEngDay,   cbEngMon;
 
 
 
@@ -48,25 +43,17 @@ void    ReadEngDates34(void)
 
   PopChar();
   PopChar();
-  cbEngDay = 0;
 
   uchar i;
   for (i=0; i<10; i++) {
-    time ti = UnixTimeToTimeFromGMT34(PopLongLtl());
-    if (ti.bYear > 0) {
-      mptiEngDay[cbEngDay++] = ti;
-    }
+    mptiEngDay[i] = UnixTimeToTimeFromGMT34(PopLongLtl());
   }
 
   PopChar();
   PopChar();
-  cbEngMon = 0;
 
   for (i=0; i<10; i++) {
-    time ti = UnixTimeToTimeFromGMT34(PopLongLtl());
-    if (ti.bYear > 0) {
-      mptiEngMon[cbEngMon++] = ti;
-    }
+    mptiEngMon[i] = UnixTimeToTimeFromGMT34(PopLongLtl());
   }
 }
 
@@ -89,4 +76,16 @@ bool    QueryEngDates34_Full(uchar  bPercent)
   ReadEngDates34();
 
   return 1;
+}
+
+
+
+bool    HasEngDay34(time  ti)
+{
+  uchar i;
+  for (i=0; i<10; i++) {
+    if (mptiEngMon[i] == ti)
+      return 1;
+  }
+  return 0;
 }
