@@ -14,6 +14,7 @@ AUTOMATIC34.C
 #include "device34.h"
 #include "eng_dates34.h"
 #include "eng_day34.h"
+#include "eng_mon34.h"
 #include "automatic34.h"
 
 
@@ -154,19 +155,13 @@ double2 ReadCntMonCan34(uchar  ibMon)
 
   if (ti2.tiValue.bMonth != ibMon+1) // значение счЄтчиков на конец всех мес€цев, кроме текущего
   {
-    // uchar m = (12 + ti.bMonth - (ibMon+1) - 1) % 12;
-
-    // ti.bMonth = ibMon+2;
-    // ti.bYear = (ibMon+2 > ti.bMonth) ? ti.bYear-1 : ti.bYear;
-
-    // ti.bYear = (ibMon+1 > ti.bMonth) ? ti.bYear-1 : ti.bYear;
-    // ti.bMonth = ibMon+1;
-
     time ti = ti2.tiValue;
     ti.bSecond = 0;
     ti.bMinute = 0;
     ti.bHour   = 0;
     ti.bDay    = 1;
+    ti.bMonth  = ibMon+2;
+    ti.bYear   = (ibMon+2 > ti.bMonth) ? ti.bYear-1 : ti.bYear;
 
     if (HasEngMon34(ti) == 0) {
       Clear();
@@ -174,7 +169,7 @@ double2 ReadCntMonCan34(uchar  ibMon)
       Delay(1000);
       return GetDouble2Error();
     } else {
-      return QueryEngDay34_Full(ti, 80);
+      return QueryEngMon34_Full(ti, 80);
     }
   }
   else // значение счЄтчиков на начало текущих суток
