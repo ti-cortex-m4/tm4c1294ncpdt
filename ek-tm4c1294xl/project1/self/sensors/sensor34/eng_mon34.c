@@ -16,13 +16,13 @@ ENG_DAY34.C
 
 
 
-void    QueryEngDay34(time  ti)
+void    QueryEngMon34(time  ti)
 {
   InitPush(0);
 
   PushChar(diCurr.bAddress);
   PushChar(0x67);
-  PushChar(1);
+  PushChar(2);
   PushChar(0xFF);
   PushLongLtl(TimeToUnixTimeToGMT34(ti));
 
@@ -30,13 +30,13 @@ void    QueryEngDay34(time  ti)
 }
 
 
-double2 QueryEngDay34_Full(time  ti, uchar  bPercent)
+double2 QueryEngMon34_Full(time  ti, uchar  bPercent)
 {
   uchar r;
   for (r=0; r<MaxRepeats(); r++)
   {
     DelayOff();
-    QueryEngDay34(ti);
+    QueryEngMon34(ti);
 
     if (Input() == SER_GOODCHECK) break;
     if (fKey == true) return GetDouble2Error();

@@ -155,16 +155,32 @@ double2 ReadCntMonCan34(uchar  ibMon)
 
   if (ti.bMonth != ibMon+1) // значение счЄтчиков на начало всех мес€цев, кроме текущего
   {
-    return GetDouble2Error();
+    time ti = ti2.tiValue;
+    ti.bSecond = 0;
+    ti.bMinute = 0;
+    ti.bHour   = 0;
+    ti.bDay    = 1;
+
+    if (HasEngMon34(ti) == 0) {
+      Clear();
+      sprintf(szLo+1,"мес€ц %02u.%02u ?", ti.bMonth,ti.bYear);
+      Delay(1000);
+      return GetDouble2Error();
+    } else {
+      return QueryEngDay34_Full(ti, 80);
+    }
   }
   else // значение счЄтчиков на начало текущих суток
   {
     time ti = ti2.tiValue;
-    ti.bHour   = 0;
-    ti.bMinute = 0;
     ti.bSecond = 0;
+    ti.bMinute = 0;
+    ti.bHour   = 0;
 
     if (HasEngDay34(ti) == 0) {
+      Clear();
+      sprintf(szLo+1,"сутки %02u.%02u.%02u ?", ti.bDay,ti.bMonth,ti.bYear);
+      Delay(1000);
       return GetDouble2Error();
     } else {
       return QueryEngDay34_Full(ti, 70);
