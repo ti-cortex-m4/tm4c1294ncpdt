@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
-ENG_DAY34.H
+ENG_MON34.H
 
 
 ------------------------------------------------------------------------------*/
 
-double2 QueryEngDay34_Full(time  ti, uchar  bPercent);
+double2 QueryEngMon34_Full(time  ti, uchar  bPercent);
