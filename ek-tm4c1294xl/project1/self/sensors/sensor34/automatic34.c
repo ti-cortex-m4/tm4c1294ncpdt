@@ -153,30 +153,18 @@ double2 ReadCntCurr34(void)
 
 double2 ReadCntMonCan34(uchar  ibMon)
 {
-/*
-    if (QueryOpen33_Full(25) == 0) GetDouble2Error();
+  time2 ti2 = QueryTime34_Full(50);
+  if (ti2.fValid == false) return GetDouble2Error();
+  time ti = ti2.tiValue;
 
-    time2 ti2 = QueryTime33_Full(50);
-    if (ti2.fValid == false) return GetDouble2Error();
-    time ti = ti2.tiValue;
-
-
-      if (ti.bMonth != ibMon+1) // значение счЄтчиков на начало всех мес€цев, кроме текущего
-      {
-        if ((GetVersion33() == 16) || (GetVersion33() == 18))
-          return ReadCntPrevMonCan(ibMon, ti);
-        else
-        {
-          Clear(); sprintf(szLo+3,"необходимы"); Delay(1000);
-          Clear(); sprintf(szLo+2,"версии 16,18"); Delay(1000);
-          return GetDouble2Error();
-        }
-      }
-      else // значение счЄтчиков на начало текущих суток
-      {
-        return ReadCntCurrMonCan();
-      }
-*/
+  if (ti.bMonth != ibMon+1) // значение счЄтчиков на начало всех мес€цев, кроме текущего
+  {
+    return GetDouble2Error();
+  }
+  else // значение счЄтчиков на начало текущих суток
+  {
+    return GetDouble2Error();
+  }
 }
 
 #endif
