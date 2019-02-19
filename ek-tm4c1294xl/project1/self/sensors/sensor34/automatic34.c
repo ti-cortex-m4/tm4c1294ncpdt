@@ -149,12 +149,19 @@ double2 ReadCntMonCan34(uchar  ibMon)
 {
   time2 ti2 = QueryTime34_Full(50);
   if (ti2.fValid == false) return GetDouble2Error();
-  time ti = ti2.tiValue;
 
   if (QueryEngDates34_Full(60) == 0) return GetDouble2Error();
 
-  if (ti.bMonth != ibMon+1) // значение счЄтчиков на начало всех мес€цев, кроме текущего
+  if (ti2.tiValue.bMonth != ibMon+1) // значение счЄтчиков на конец всех мес€цев, кроме текущего
   {
+    // uchar m = (12 + ti.bMonth - (ibMon+1) - 1) % 12;
+
+    // ti.bMonth = ibMon+2;
+    // ti.bYear = (ibMon+2 > ti.bMonth) ? ti.bYear-1 : ti.bYear;
+
+    // ti.bYear = (ibMon+1 > ti.bMonth) ? ti.bYear-1 : ti.bYear;
+    // ti.bMonth = ibMon+1;
+
     time ti = ti2.tiValue;
     ti.bSecond = 0;
     ti.bMinute = 0;
