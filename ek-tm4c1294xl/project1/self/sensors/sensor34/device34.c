@@ -9,10 +9,10 @@ DEVICE34.C
 #include "../../memory/mem_current.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports_devices.h"
-#include "../../time/unix_time.h"
 #include "../../hardware/beep.h"
 #include "../../devices/devices.h"
 #include "../../digitals/current/current_run.h"
+#include "unix_time_gmt34.h"
 #include "device34.h"
 
 
@@ -109,7 +109,7 @@ void    QueryTime34(void)
 time    ReadTime34(void)
 {
   InitPop(3);
-  return UnixTimeToTime(PopLongLtl());
+  return UnixTimeToTimeFromGMT34(PopLongLtl());
 }
 
 
