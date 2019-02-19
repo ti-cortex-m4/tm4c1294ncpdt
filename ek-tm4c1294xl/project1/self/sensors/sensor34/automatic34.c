@@ -117,7 +117,6 @@ time2   ReadTimeCan34(void)
   if (ti2.fValid == false) return GetTime2Error();
 
 
-  ti2.tiValue = SecIndexToDate(DateToSecIndex(ti2.tiValue) + (ulong)3600*bTimeZone34);
   tiChannelC = ti2.tiValue;
 
   uchar i;

@@ -3,3 +3,6 @@ ENG_DATES34.H
 
 
 ------------------------------------------------------------------------------*/
+
+void    QueryEngDates34(void);
+void    ReadEngDates34(void);
