@@ -101,10 +101,13 @@ double2 QueryEngAbs34_Full(uchar  bPercent)
 
   ReadEng34();
 
+  double dbTrans = mpdbTransCnt[ibDig];
+
   uchar i;
   for (i=0; i<MAX_LINE_N34; i++)
   {
     mpdbChannelsC[i] = (double)mpddwChannels34[i] / 1000000;
+    mpdbChannelsC[i] *= dbTrans;
     mpboChannelsA[i] = true;
   }
 
@@ -136,16 +139,6 @@ double2 ReadCntCurr34(void)
 {
   double2 db2 = QueryEngAbs34_Full(50);
   if (db2.fValid == false) return GetDouble2Error();
-
-
-  double dbTrans = mpdbTransCnt[ibDig];
-
-  uchar i;
-  for (i=0; i<MAX_LINE_N34; i++)
-  {
-    mpdbChannelsC[i] *= dbTrans;
-    mpboChannelsA[i] = true;
-  }
 
   return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
 }
