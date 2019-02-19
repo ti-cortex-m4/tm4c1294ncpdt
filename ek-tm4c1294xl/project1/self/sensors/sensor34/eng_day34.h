@@ -4,4 +4,4 @@ ENG_DAY34.H
 
 ------------------------------------------------------------------------------*/
 
-bool    QueryEngDay34_Full(time  ti, uchar  bPercent);
+double2 QueryEngDay34_Full(time  ti, uchar  bPercent);
