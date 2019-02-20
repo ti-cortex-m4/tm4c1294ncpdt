@@ -160,8 +160,10 @@ double2 ReadCntMonCan34(uchar  ibMon)
     ti.bMinute = 0;
     ti.bHour   = 0;
     ti.bDay    = 1;
-    ti.bMonth  = ibMon+2;
-    ti.bYear   = (ibMon+2 > ti.bMonth) ? ti.bYear-1 : ti.bYear;
+
+    uchar m = (ibMon+1) % 12 + 1;
+    ti.bYear   = (m > ti.bMonth) ? ti.bYear-1 : ti.bYear;
+    ti.bMonth  = m;
 
     if (HasEngMon34(ti) == 0) {
       Clear();
