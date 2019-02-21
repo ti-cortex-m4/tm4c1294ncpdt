@@ -14,11 +14,10 @@ uint32_t                mpbHash[16];
 
 
 
-void    Md5(void)
+void    MD5(uint32_t *pui32DataSrc, uint32_t ui32DataLength, uint32_t *pui32HashResult)
 {
   SHAMD5ConfigSet(SHAMD5_BASE, SHAMD5_ALGO_MD5); // MAP_ ?
-  uchar mpbPass[] = {'1', '1', '1', '1', '1', '1'};
-  SHAMD5DataProcess(SHAMD5_BASE, (uint32_t *)mpbPass, 6, (uint32_t *)mpbHash);
+  SHAMD5DataProcess(SHAMD5_BASE, pui32DataSrc, ui32DataLength, pui32HashResult);
 }
 
 

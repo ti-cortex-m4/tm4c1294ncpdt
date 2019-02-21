@@ -3,3 +3,5 @@ md5.h
 
 
 ------------------------------------------------------------------------------*/
+
+void    MD5(uint32_t *pui32DataSrc, uint32_t ui32DataLength, uint32_t *pui32HashResult);
