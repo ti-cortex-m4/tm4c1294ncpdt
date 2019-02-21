@@ -6,7 +6,7 @@ authentication34.c
 
 #include "../../main.h"
 //#include "../../console.h"
-#include "../../memory/mem_factors.h"
+#include "../../memory/mem_digitals.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports_devices.h"
 #include "../../devices/devices.h"
@@ -16,7 +16,7 @@ authentication34.c
 
 
 
-static  uchar           mpbAuthRequest[16];
+/*static*/  uchar           mpbAuthRequest[16];
 
 
 
