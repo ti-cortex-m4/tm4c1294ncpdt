@@ -6,10 +6,10 @@ authentication34.c
 
 #include "../../main.h"
 //#include "../../console.h"
-//#include "../../memory/mem_factors.h"
+#include "../../memory/mem_factors.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports_devices.h"
-//#include "../../devices/devices.h"
+#include "../../devices/devices.h"
 //#include "unix_time_gmt34.h"
 //#include "device34.h"
 #include "authentication34.h"
@@ -41,6 +41,6 @@ void    ReadAuthRequest(void)
 
   uchar i;
   for (i=0; i<16; i++) {
-    mpbAuthRequest[i] = PopByte();
+    mpbAuthRequest[i] = PopChar();
   }
 }
