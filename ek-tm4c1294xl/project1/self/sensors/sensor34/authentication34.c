@@ -45,6 +45,35 @@ void    ReadAuthKey(void)
 
 
 
+void    MakeAuthRequest(void)
+{
+  uchar mpbPass[16];
+
+  memset(&mpbPass, 0, sizeof(mpbPass));
+
+  if (boEnblKeys != true)
+  {
+    mpbPass[0] = '1';
+    mpbPass[1] = '1';
+    mpbPass[2] = '1';
+    mpbPass[3] = '1';
+    mpbPass[4] = '1';
+    mpbPass[5] = '1';
+  }
+  else
+  {
+    line ln = mpphKeys[ibDig];
+
+    uchar i;
+    for (i=0; i<bLINE_SIZE; i++)
+    {
+      if (ph.szLine[i] == 0) break;
+      mpbPass[i] = ph.szLine[i];
+    }
+  }
+}
+
+
 
 void    QueryAuthRequest(void)
 {
