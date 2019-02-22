@@ -71,6 +71,8 @@ void    MakeAuthRequest(void)
       mpbPass[i] = ph.szLine[i];
     }
   }
+
+  HashMD5(mpbPass, strlen(mpbPass), md5Out);
 }
 
 
