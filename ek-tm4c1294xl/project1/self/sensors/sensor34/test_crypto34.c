@@ -16,12 +16,13 @@ static void assert(bool b) {
 }
 
 
-static void _MD5(const uchar *d, size_t size, uchar *md)
+uchar*  MD5(const uchar *d, size_t size, uchar *md)
 {
   MD5_CTX ctx;
   MD5_Init(&ctx);
   MD5_Update(&ctx, d, size);
   MD5_Final(md, &ctx);
+  return md;
 }
 
 

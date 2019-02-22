@@ -5,18 +5,16 @@ authentication34.c
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-//#include "../../console.h"
 #include "../../memory/mem_digitals.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports_devices.h"
 #include "../../devices/devices.h"
-//#include "unix_time_gmt34.h"
-//#include "device34.h"
 #include "authentication34.h"
 
 
 
-/*static*/  uchar           mpbAuthRequest[16];
+static  uchar           mpbAuthRequest[16];
+static  uchar           mpbAuthResponse[16];
 
 
 
@@ -31,7 +29,7 @@ void    QueryAuthRequest(void)
   PushChar(0x00);
   PushChar(0x08);
 
-  QueryIO(3+81+2, 6+2);
+  QueryIO(3+16+2, 6+2);
 }
 
 
@@ -43,4 +41,35 @@ void    ReadAuthRequest(void)
   for (i=0; i<16; i++) {
     mpbAuthRequest[i] = PopChar();
   }
+}
+
+
+
+
+void    QueryAuthResponse(void)
+{
+  InitPush(0);
+
+  PushChar(diCurr.bAddress);
+  PushChar(0x65);
+  PushChar(0x00);
+  PushChar(0x00);
+  PushChar(0x00);
+  PushChar(0x09);
+  PushChar(0x12);
+
+  PushIntLtl(1);
+
+  uchar i;
+  for (i=0; i<16; i++) {
+      PushChar(mpbAuthResponse[i]);
+  }
+
+  QueryIO(3+3+2, 7+2+16+2);
+}
+
+
+bool    ReadAuthResponse(void)
+{
+  return (InBuff(1) & 0x80) != 0;
 }
