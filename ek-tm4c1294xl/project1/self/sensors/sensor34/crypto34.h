@@ -1,7 +1,8 @@
 /*------------------------------------------------------------------------------
-test_crypto34.h
+crypto34.h
 
 
 ------------------------------------------------------------------------------*/
 
-void    TestCrypto34(void);
+void    HashMD5(const uchar *in, size_t size, uchar *out);
+void    EncryptAES(const uchar *userKey, const uchar *in, uchar *out);
