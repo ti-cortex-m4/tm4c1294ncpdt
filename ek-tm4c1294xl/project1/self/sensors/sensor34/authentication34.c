@@ -14,7 +14,7 @@ authentication34.c
 
 
 static  uchar           mpbAuthKey[16];
-static  uchar           mpbAuthResponse[16];
+static  uchar           mpbAuthRequest[16];
 
 
 
@@ -46,7 +46,7 @@ void    ReadAuthKey(void)
 
 
 
-void    QueryAuthResponse(void)
+void    QueryAuthRequest(void)
 {
   InitPush(0);
 
@@ -58,18 +58,18 @@ void    QueryAuthResponse(void)
   PushChar(0x09);
   PushChar(0x12);
 
-  PushIntLtl(1);
+  PushIntLtl(1); // уровень доступа: 1,2
 
   uchar i;
   for (i=0; i<16; i++) {
-      PushChar(mpbAuthResponse[i]);
+    PushChar(mpbAuthRequest[i]);
   }
 
   QueryIO(3+3+2, 7+2+16+2);
 }
 
 
-bool    ReadAuthResponse(void)
+bool    ReadAuthRequest(void)
 {
   return (InBuff(1) & 0x80) != 0;
 }
