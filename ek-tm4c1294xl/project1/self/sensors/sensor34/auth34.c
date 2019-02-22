@@ -25,7 +25,7 @@ static  uchar           mpbAuthReq[16];
 
 
 
-void    QueryAuthKey(void)
+void    QueryAuthKey34(void)
 {
   InitPush(0);
 
@@ -40,7 +40,7 @@ void    QueryAuthKey(void)
 }
 
 
-void    ReadAuthKey(void)
+void    ReadAuthKey34(void)
 {
   InitPop(3);
 
@@ -52,7 +52,7 @@ void    ReadAuthKey(void)
 
 
 
-static void MakeAuthRequest(void)
+static void MakeAuthRequest34(void)
 {
   uchar mpbPass[16];
 
@@ -113,7 +113,7 @@ static void MakeAuthRequest(void)
 
 
 
-void    QueryAuthReq(void)
+void    QueryAuthReq34(void)
 {
   InitPush(0);
 
@@ -127,7 +127,7 @@ void    QueryAuthReq(void)
 
   PushIntLtl(1); // уровени доступа: 1,2
 
-  MakeAuthRequest();
+  MakeAuthRequest34();
 
   uchar i;
   for (i=0; i<16; i++) {
@@ -157,14 +157,14 @@ bool    ReadAuthReq(void)
 bool    TestAuth34(void)
 {
   DelayOff();
-  QueryAuthKey();
+  QueryAuthKey34();
   if (Input() != SER_GOODCHECK)
     return 0;
 
-  ReadAuthKey();
+  ReadAuthKey34();
 
   DelayOff();
-  QueryAuthReq();
+  QueryAuthReq34();
   if (Input() != SER_GOODCHECK)
     return 0;
 
@@ -172,7 +172,7 @@ bool    TestAuth34(void)
 
 #if MONITOR_34
   MonitorString("\n result ");
-  MonitorChar(b);
+  MonitorCharDec(b);
 #endif
 
   return b;
