@@ -160,6 +160,7 @@ bool    TestAuth34(void)
   QueryAuthKey();
   if (Input() != SER_GOODCHECK)
     return 0;
+
   ReadAuthKey();
 
   DelayOff();
