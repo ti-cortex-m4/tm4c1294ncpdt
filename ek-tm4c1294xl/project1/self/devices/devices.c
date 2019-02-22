@@ -61,6 +61,7 @@ DEVICES.C
 #include "../sensors/sensor33/device33.h"
 #include "../sensors/sensor33/profile33.h"
 #include "../sensors/sensor34/device34.h"
+#include "../sensors/sensor34/time34.h"
 #include "../sensors/sensor34/profile34.h"
 #include "../serial/ports.h"
 #include "../serial/ports_modems.h"
@@ -5561,11 +5562,11 @@ void    RunDevices(void)
           //dwCorrectW = dwSecond2 - dwSecond1;
 
           if (AbsLong(dwSecond1 - dwSecond2) < GetCorrectLimit()) // без коррекции
-          { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_34); }
+          { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_34P); }
           else if (AbsLong(dwSecond1 - dwSecond2) < 10) // простая коррекция
           {
             ShowLo(szCorrectYes); DelayInf();
-            MakePause(DEV_POSTCORRECT_34);
+            MakePause(DEV_POSTCORRECT_34P);
           }
           else
           { ShowLo(szCorrectBig); DelayMsg(); ErrorProfile(); } // разница времени слишком велика, коррекция невозможна
@@ -5573,7 +5574,7 @@ void    RunDevices(void)
       }
       break;
 
-    case DEV_POSTCORRECT_34:
+    case DEV_POSTCORRECT_34P:
       MakePause(DEV_PREVOPEN_34P);
       break;
 
