@@ -13,12 +13,12 @@ authentication34.c
 
 
 
-static  uchar           mpbAuthRequest[16];
+static  uchar           mpbAuthKey[16];
 static  uchar           mpbAuthResponse[16];
 
 
 
-void    QueryAuthRequest(void)
+void    QueryAuthKey(void)
 {
   InitPush(0);
 
@@ -33,13 +33,13 @@ void    QueryAuthRequest(void)
 }
 
 
-void    ReadAuthRequest(void)
+void    ReadAuthKey(void)
 {
   InitPop(4);
 
   uchar i;
   for (i=0; i<16; i++) {
-    mpbAuthRequest[i] = PopChar();
+    mpbAuthKey[i] = PopChar();
   }
 }
 
