@@ -37,26 +37,26 @@
         ulong dwSecond2 = GetSecondIndex(tiCurr);
 
         if (DifferentDay(GetTimeCurr34(), tiCurr))
-        { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); } // пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+        { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); } // даты не совпадают, коррекция невозможна
         else
         {
           ShowDigitalDeltaTime(ibDig, dwSecond1, dwSecond2);
           //dwCorrectW = dwSecond2 - dwSecond1;
 
-          if (AbsLong(dwSecond1 - dwSecond2) < GetCorrectLimit()) // пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-          { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_34); }
-          else if (AbsLong(dwSecond1 - dwSecond2) < 10) // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+          if (AbsLong(dwSecond1 - dwSecond2) < GetCorrectLimit()) // без коррекции
+          { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_34P); }
+          else if (AbsLong(dwSecond1 - dwSecond2) < 10) // простая коррекция
           {
             ShowLo(szCorrectYes); DelayInf();
-            MakePause(DEV_POSTCORRECT_34);
+            MakePause(DEV_POSTCORRECT_34P);
           }
           else
-          { ShowLo(szCorrectBig); DelayMsg(); ErrorProfile(); } // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+          { ShowLo(szCorrectBig); DelayMsg(); ErrorProfile(); } // разница времени слишком велика, коррекция невозможна
         }
       }
       break;
 
-    case DEV_POSTCORRECT_34:
+    case DEV_POSTCORRECT_34P:
       MakePause(DEV_PREVOPEN_34P);
       break;
 

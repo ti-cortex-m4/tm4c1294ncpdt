@@ -12,6 +12,7 @@ AUTOMATIC34.C
 #include "../../devices/devices.h"
 #include "../../time/calendar.h"
 #include "device34.h"
+#include "time34.h"
 #include "eng_dates34.h"
 #include "eng_day34.h"
 #include "eng_mon34.h"

@@ -9,11 +9,13 @@ time34.c
 #include "../../serial/ports.h"
 #include "../../serial/ports_devices.h"
 #include "../../devices/devices.h"
+#include "unix_time_gmt34.h"
 #include "time34.h"
 
 
 
 static time             tmCurr34;
+
 
 
 void    SetTimeCurr34(time tm)
