@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-authentication34.c
+auth34.c
 
 
 ------------------------------------------------------------------------------*/
@@ -11,8 +11,8 @@ authentication34.c
 #include "../../serial/monitor.h"
 #include "../../devices/devices.h"
 #include "../../time/delay.h"
+#include "auth34.h"
 #include "crypto34.h"
-#include "authentication34.h"
 
 
 
@@ -153,7 +153,7 @@ bool    ReadAuthRequest(void)
 
 
 
-bool    Auth34(void)
+bool    TestAuth34(void)
 {
   DelayOff();
   QueryAuthKey();
