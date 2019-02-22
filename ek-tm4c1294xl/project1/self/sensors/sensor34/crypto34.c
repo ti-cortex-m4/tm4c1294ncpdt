@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-test_crypto34.c
+crypto34.c
 
 
 ------------------------------------------------------------------------------*/
@@ -7,8 +7,30 @@ test_crypto34.c
 #include "../../main.h"
 #include "../../../openssl/include/openssl/md5.h"
 #include "../../../openssl/include/openssl/aes.h"
+#include "crypto34.h"
 
 
+
+void    HashMD5(const uchar *in, size_t size, uchar *out)
+{
+  MD5_CTX ctx;
+  MD5_Init(&ctx);
+  MD5_Update(&ctx, in, size);
+  MD5_Final(out, &ctx);
+}
+
+
+
+void    EncryptAES(const uchar *userKey, const uchar *in, uchar *out)
+{
+  AES_KEY key;
+  AES_set_encrypt_key(userKey, 128, &key);
+  AES_encrypt(in, out, &key);
+}
+
+
+
+#if 1
 
 static void assert(bool b) {
   while (!b) {
@@ -16,21 +38,11 @@ static void assert(bool b) {
 }
 
 
-uchar*  MD5(const uchar *d, size_t size, uchar *md)
-{
-  MD5_CTX ctx;
-  MD5_Init(&ctx);
-  MD5_Update(&ctx, d, size);
-  MD5_Final(md, &ctx);
-  return md;
-}
-
-
 void    TestCrypto34(void) {
   const uchar *md5In = "111111";
   uchar md5Out[16];
 
-  _MD5(md5In, 6, md5Out);
+  HashMD5(md5In, 6, md5Out);
 
   uchar md5Out2[16] = {0x96,0xE7,0x92,0x18,0x96,0x5E,0xB7,0x2C,0x92,0xA5,0x49,0xDD,0x5A,0x33,0x01,0x12};
   uchar i;
@@ -51,5 +63,4 @@ void    TestCrypto34(void) {
   }
 }
 
-
-
+#endif
