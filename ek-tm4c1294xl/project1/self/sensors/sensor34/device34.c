@@ -91,29 +91,6 @@ void    QueryConfig34(void)
 
 
 
-void    QueryTime34(void)
-{
-  InitPush(0);
-
-  PushChar(diCurr.bAddress);
-  PushChar(0x64);
-  PushChar(0x00);
-  PushChar(0x46);
-  PushChar(0x00);
-  PushChar(0x09);
-
-  QueryIO(3+18+2, 6+2);
-}
-
-
-time    ReadTime34(void)
-{
-  InitPop(3);
-  return UnixTimeToTimeFromGMT34(PopLongLtl());
-}
-
-
-
 void    QueryEngAbs34(void)
 {
   InitPush(0);

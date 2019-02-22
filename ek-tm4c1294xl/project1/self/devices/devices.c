@@ -5518,8 +5518,65 @@ void    RunDevices(void)
 #ifndef SKIP_34
 
     case DEV_START_34P:
+      MakePause(DEV_PREVTIME_34P);
+      break;
+
+
+    case DEV_PREVTIME_34P:
+      cbRepeat = MaxRepeats();
+      QueryTime34();
+      SetCurr(DEV_TIME_34P);
+      break;
+
+    case DEV_TIME_34P:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+      {
+        SetTimeCurr34(ReadTime34());
+        MakePause(DEV_POSTTIME_34P);
+      }
+      else
+      {
+        if (cbRepeat == 0) ErrorProfile();
+        else
+        {
+          ErrorLink();
+          cbRepeat--;
+
+          QueryTime34();
+          SetCurr(DEV_TIME_34P);
+        }
+      }
+      break;
+
+    case DEV_POSTTIME_34P:
+      {
+        ulong dwSecond1 = GetSecondIndex(GetTimeCurr34());
+        ulong dwSecond2 = GetSecondIndex(tiCurr);
+
+        if (DifferentDay(GetTimeCurr34(), tiCurr))
+        { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); } // даты не совпадают, коррекция невозможна
+        else
+        {
+          ShowDigitalDeltaTime(ibDig, dwSecond1, dwSecond2);
+          //dwCorrectW = dwSecond2 - dwSecond1;
+
+          if (AbsLong(dwSecond1 - dwSecond2) < GetCorrectLimit()) // без коррекции
+          { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_34); }
+          else if (AbsLong(dwSecond1 - dwSecond2) < 10) // простая коррекция
+          {
+            ShowLo(szCorrectYes); DelayInf();
+            MakePause(DEV_POSTCORRECT_34);
+          }
+          else
+          { ShowLo(szCorrectBig); DelayMsg(); ErrorProfile(); } // разница времени слишком велика, коррекция невозможна
+        }
+      }
+      break;
+
+    case DEV_POSTCORRECT_34:
       MakePause(DEV_PREVOPEN_34P);
       break;
+
 
     case DEV_PREVOPEN_34P:
       InitProfileOpen34();
