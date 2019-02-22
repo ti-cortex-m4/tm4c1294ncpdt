@@ -13,6 +13,45 @@ time34.c
 
 
 
+static time             tmCurr34;
+
+
+void    SetTimeCurr34(time tm)
+{
+  tmCurr34 = tm;
+}
+
+
+time    GetTimeCurr34(void)
+{
+  return tmCurr34;
+}
+
+
+
+void    QueryTime34(void)
+{
+  InitPush(0);
+
+  PushChar(diCurr.bAddress);
+  PushChar(0x64);
+  PushChar(0x00);
+  PushChar(0x46);
+  PushChar(0x00);
+  PushChar(0x09);
+
+  QueryIO(3+18+2, 6+2);
+}
+
+
+time    ReadTime34(void)
+{
+  InitPop(3);
+  return UnixTimeToTimeFromGMT34(PopLongLtl());
+}
+
+
+
 void    QueryCorrectTime34(int32_t  dwSecond)
 {
   InitPush(0);

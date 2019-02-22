@@ -15,9 +15,6 @@ bool    ChangeSpeed34(void);
 
 void    QueryConfig34(void);
 
-void    QueryTime34(void);
-time    ReadTime34(void);
-
 void    QueryEngAbs34(void);
 void    ReadEng34(void);
 
