@@ -82,7 +82,7 @@ static void MakeAuthRequest(void)
 #if MONITOR_34
   MonitorString("\n password ");
   MonitorIntDec(strlen(mpbPass));
-  MonitorString(" ");
+  MonitorString("    ");
 
   uchar i;
   for (i=0; i<16; i++)
@@ -93,11 +93,11 @@ static void MakeAuthRequest(void)
   HashMD5(mpbPass, strlen(mpbPass), mpbRgbKey);
 
 #if MONITOR_34
-  MonitorString("\n private key ");
+  MonitorString("\n rgb key       ");
   for (i=0; i<16; i++)
     MonitorCharHex(mpbRgbKey[i]);
 
-  MonitorString("\n auth. key ");
+  MonitorString("\n auth. key     ");
   for (i=0; i<16; i++)
     MonitorCharHex(mpbAuthKey[i]);
 #endif
@@ -113,7 +113,7 @@ static void MakeAuthRequest(void)
 
 
 
-void    QueryAuthRequest(void)
+void    QueryAuthReq(void)
 {
   InitPush(0);
 
@@ -125,7 +125,7 @@ void    QueryAuthRequest(void)
   PushChar(0x09);
   PushChar(0x12);
 
-  PushIntLtl(1); // уровень доступа: 1,2
+  PushIntLtl(1); // уровени доступа: 1,2
 
   MakeAuthRequest();
 
@@ -138,7 +138,7 @@ void    QueryAuthRequest(void)
 }
 
 
-bool    ReadAuthRequest(void)
+bool    ReadAuthReq(void)
 {
 #if MONITOR_34
   MonitorString("\n response [1] ");
@@ -152,6 +152,7 @@ bool    ReadAuthRequest(void)
 }
 
 
+#if 1
 
 bool    TestAuth34(void)
 {
@@ -162,10 +163,18 @@ bool    TestAuth34(void)
   ReadAuthKey();
 
   DelayOff();
-  QueryAuthRequest();
+  QueryAuthReq();
   if (Input() != SER_GOODCHECK)
     return 0;
 
-  return ReadAuthRequest();
+  bool b = ReadAuthReq();
+
+#if MONITOR_34
+  MonitorString("\n result ");
+  MonitorChar(b);
+#endif
+
+  return b;
 }
 
+#endif
