@@ -29,7 +29,6 @@ void    EncryptAES(const uchar *userKey, const uchar *in, uchar *out)
 }
 
 
-
 #if 1
 
 void    TestCrypto34(void) {
