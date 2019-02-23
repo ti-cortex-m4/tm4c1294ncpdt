@@ -47,6 +47,7 @@ static status QueryCntMonTariff34_Full(time  tmMon, uchar  ibTrf) // на начало м
   }
 
   if (r == MaxRepeats()) return ST_BADDIGITAL;
+  ShowPercent(61+ibTrf*2);
 
   ReadEng34();
 
@@ -66,86 +67,24 @@ static status QueryCntMonTariff34_Full(time  tmMon, uchar  ibTrf) // на начало м
 
 status ReadCntMonCanTariff34(uchar  ibMon, uchar  ibTrf) // на начало мес€ца
 {
-  if (QueryEngDates34_Full(60+ibTrf) == 0) return ST_BADDIGITAL;
+  if (QueryEngDates34_Full(60+ibTrf*2) == 0) return ST_BADDIGITAL;
 
-  time ti = ti2.tiValue;
-  ti.bSecond = 0;
-  ti.bMinute = 0;
-  ti.bHour   = 0;
-  ti.bDay    = 1;
+  time tm = tiCurr;
+  tm.bSecond = 0;
+  tm.bMinute = 0;
+  tm.bHour   = 0;
+  tm.bDay    = 1;
 
-  uchar m = (ibMon+1) % 12 + 1;
-  ti.bYear   = (m > ti.bMonth) ? ti.bYear-1 : ti.bYear;
-  ti.bMonth  = m;
+  uchar m = (ibMon+1) % 12 + 1; не конец мес€цев, а начало
+  tm.bYear   = (m > tm.bMonth) ? tm.bYear-1 : tm.bYear;
+  tm.bMonth  = m;
 
-  if (HasEngMon34(ti) == 0) {
+  if (HasEngMon34(tm) == 0) {
     Clear();
-    sprintf(szLo+1,"мес€ц %02u.%02u ?", ti.bMonth,ti.bYear);
+    sprintf(szLo+1,"мес€ц %02u.%02u ?", tm.bMonth,tm.bYear);
     Delay(1000);
     return ST_NOTPRESENTED;
   } else {
-    return QueryCntMonTariff34_Full(ti, ibTrf);
+    return QueryCntMonTariff34_Full(tm, ibTrf);
   }
 }
-
-
-/*
-static void QueryCntMonTariff34(uchar  ibMon, uchar  bTrf) // на начало мес€ца
-{
-  InitPush(0);
-
-  PushChar(diCurr.bAddress);
-  PushChar(0x67);
-  PushChar(2);
-  PushChar(0xFF);
-  PushChar(0);
-  PushChar(0);
-  PushChar(0);
-  PushChar(0);
-
-  QueryIO(3+81+2, 8+2);
-}
-
-
-static bool QueryCntMonTariff34_Full(uchar  ibMon, uchar  bTrf) // на начало мес€ца
-{
-  uchar i;
-  for (i=0; i<MaxRepeats(); i++)
-  {
-    DelayOff();
-    QueryCntMonTariffB(ibMon, bTrf);
-
-    if (Input() == SER_GOODCHECK) break;
-    if (fKey == true) return false;
-  }
-
-  if (i == MaxRepeats()) return false;
-
-  ReadEnergyB();
-  return true;
-}
-
-
-status ReadCntMonCanTariff34(uchar  ibCan, uchar  ibMon, uchar  ibTrf) // на начало мес€ца
-{
-  Clear();
-  if (ReadKoeffDeviceB(ibCan) == 0) return ST_BADDIGITAL;
-
-  double dbK = dbKtrans/dbKpulse;
-
-
-  if (QueryCntMonTariffB_Full(ibMon, ibTrf) == 0) return ST_BADDIGITAL;
-
-  ShowPercent(60+ibTrf);
-
-
-  uchar i;
-  for (i=0; i<4; i++)
-  {
-    mpdbChannelsC[i] = mpdwChannelsA[i] * dbK;
-    mpboChannelsA[i] = true;
-  }
-
-  return ST_OK;
-}
-*/
