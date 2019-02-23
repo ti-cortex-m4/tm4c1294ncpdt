@@ -9,8 +9,10 @@ time34.c
 #include "../../memory/mem_digitals.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports_devices.h"
+#include "../../serial/monitor.h"
 #include "../../devices/devices.h"
 #include "unix_time_gmt34.h"
+#include "device34.h"
 #include "time34.h"
 
 
@@ -34,7 +36,7 @@ time    GetTimeCurr34(void)
 
 uchar   GetTimeCurrIndex34(void)
 {
-  return tmCurr34.bHour*2 + tmCurr34.bMinute/30
+  return tmCurr34.bHour*2 + tmCurr34.bMinute/30;
 }
 
 
@@ -69,6 +71,10 @@ void    SetCorrectSecond34(int32_t dw)
 
 void    QueryCorrect34(void)
 {
+#if MONITOR_34
+  MonitorString("\n query time correct");
+#endif
+
   InitPush(0);
 
   PushChar(diCurr.bAddress);
@@ -90,7 +96,7 @@ void    QueryCorrect34(void)
 }
 
 
-bool    ReadCorrect34(void)
+void    ReadCorrect34(void)
 {
   if ((CountInBuff() != 8) || ((InBuff(1) & 0x80) != 0)) {
     SaveDisplay();
@@ -101,17 +107,17 @@ bool    ReadCorrect34(void)
 
     Delay(1000);
     LoadDisplay();
-
-    return (InBuff(2) == 0x05); // нельзя корректировать время, можно установить время
   }
-
-  return 0;
 }
 
 
 
 void    QueryManage34(void)
 {
+#if MONITOR_34
+  MonitorString("\n query time manage");
+#endif
+
   InitPush(0);
 
   PushChar(diCurr.bAddress);
