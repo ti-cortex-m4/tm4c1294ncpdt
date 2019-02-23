@@ -62,6 +62,7 @@ DEVICES.C
 #include "../sensors/sensor33/profile33.h"
 #include "../sensors/sensor34/device34.h"
 #include "../sensors/sensor34/time34.h"
+#include "../sensors/sensor34/auth34.h"
 #include "../sensors/sensor34/profile34.h"
 #include "../serial/ports.h"
 #include "../serial/ports_modems.h"
@@ -5570,13 +5571,70 @@ void    RunDevices(void)
           {
             SetCorrectSecond34(dwSecond1 - dwSecond2);
             ShowLo(szCorrectYes); DelayInf();
-            MakePause(DEV_PREVCORRECT_34P);
+            MakePause(DEV_PREVAUTHKEY_34P);
           }
           else
           { ShowLo(szCorrectBig); DelayMsg(); ErrorProfile(); } // разница времени слишком велика, коррекция невозможна
         }
       }
       break;
+
+
+    case DEV_PREVAUTHKEY_34P:
+      cbRepeat = MaxRepeats();
+      QueryAuthKey34();
+      SetCurr(DEV_AUTHKEY_34P);
+      break;
+
+    case DEV_AUTHKEY_34P:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+      {
+        ReadAuthKey34();
+        MakePause(DEV_POSTAUTHKEY_34P);
+      }
+      else
+      {
+        if (cbRepeat == 0) ErrorProfile();
+        else
+        {
+          ErrorLink();
+          cbRepeat--;
+
+          QueryAuthKey34();
+          SetCurr(DEV_AUTHKEY_34P);
+        }
+      }
+      break;
+
+
+    case DEV_POSTAUTHKEY_34P:
+      cbRepeat = MaxRepeats();
+      QueryAuthReq34();
+      SetCurr(DEV_AUTHREQ_34P);
+      break;
+
+    case DEV_AUTHREQ_34P:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+      {
+        if (ReadAuthReq())
+          MakePause(DEV_PREVCORRECT_34P);
+        else
+          ErrorProfile();
+      }
+      else
+      {
+        if (cbRepeat == 0) ErrorProfile();
+        else
+        {
+          ErrorLink();
+          cbRepeat--;
+
+          QueryAuthReq34();
+          SetCurr(DEV_AUTHREQ_34P);
+        }
+      }
+      break;
+
 
     case DEV_PREVCORRECT_34P:
       cbRepeat = MaxRepeats();
