@@ -739,6 +739,8 @@ typedef enum
   DEV_PREVTIME_34P      =  0x2003,
   DEV_TIME_34P          =  0x2004,
   DEV_POSTTIME_34P      =  0x2005,
+  DEV_PREVCORRECT_34P   =  0x2016,
+  DEV_CORRECT_34P       =  0x2017,
   DEV_POSTCORRECT_34P   =  0x2006,
   DEV_PREVOPEN_34P      =  0x2007,
   DEV_OPEN_34P          =  0x2008,
