@@ -5,6 +5,7 @@ time34.c
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
+#include "../../console.h"
 #include "../../memory/mem_digitals.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports_devices.h"
@@ -83,7 +84,16 @@ void    QueryCorrect34(void)
 }
 
 
-bool    ReadCorrect34(void)
+void    ReadCorrect34(void)
 {
-  return (InBuff(1) & 0x80) == 0;
+  if ((CountInBuff() != 8) || ((InBuff(1) & 0x80) != 0)) {
+    SaveDisplay();
+
+    sprintf(szHi,"Ошибка коррекции");
+    Clear();
+    sprintf(szLo+2,"времени: %02X",InBuff(2));
+
+    Delay(1000);
+    LoadDisplay();
+  }
 }

@@ -173,8 +173,10 @@ void    DevicesInput(void)
 #ifndef SKIP_C
     if (diCurr.bDevice == 34)
     {
-      if (GetCurr() == DEV_READ_34P)
-        Unpack34();
+      if (GetCurr() == DEV_CORRECT_34P)
+        UnpackCorrect34();
+      else if (GetCurr() == DEV_READ_34P)
+        UnpackProfile34();
     }
 #endif
 }

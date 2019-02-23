@@ -5562,14 +5562,13 @@ void    RunDevices(void)
         else
         {
           ShowDigitalDeltaTime(ibDig, dwSecond1, dwSecond2);
-          //dwCorrectW = dwSecond2 - dwSecond1;
 
           ulong dwDelta = AbsLong(dwSecond1 - dwSecond2);
           if (dwDelta < GetCorrectLimit()) // без коррекции
           { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_34P); }
           else if (dwDelta < CORRECT_LIMIT_34) // простая коррекция
           {
-            SetCorrectSecond34(dwDelta);
+            SetCorrectSecond34(dwSecond1 - dwSecond2);
             ShowLo(szCorrectYes); DelayInf();
             MakePause(DEV_PREVCORRECT_34P);
           }
