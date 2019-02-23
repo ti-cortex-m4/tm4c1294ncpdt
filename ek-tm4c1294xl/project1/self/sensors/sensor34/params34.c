@@ -5,12 +5,13 @@ params34.c
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-//#include "../../memory/mem_digitals.h"
-//#include "../../serial/ports.h"
-//#include "../../display/display.h"
-//#include "../../time/delay.h"
-//#include "automatic33.h"
-//#include "device33.h"
+#include "../../memory/mem_digitals.h"
+#include "../../serial/ports.h"
+#include "../../serial/ports_devices.h"
+#include "../../digitals/params/params2.h"
+#include "../../display/display.h"
+#include "../../time/delay.h"
+#include "device34.h"
 #include "params34.h"
 
 
@@ -21,18 +22,19 @@ static void QueryParam34(void)
 
   PushChar(diCurr.bAddress);
   PushChar(0x66);
-  PushIntLtl(128+0);
   PushChar(0);
-  PushChar(4*7);
+  PushChar(0x80);
+  PushChar(0);
+  PushChar(4*7); // 1C
 
-  QueryIO(3+28+2, 6+2);
+  QueryIO(3+4*7*4+2, 6+2); // 272
 }
 
 
 static float2 ReadValue34(uchar  i)
 {
   InitPop(3+4*i);
-  return GetFloat2(PopFloat(), true);
+  return GetFloat2(PopFloat34(), true);
 }
 
 

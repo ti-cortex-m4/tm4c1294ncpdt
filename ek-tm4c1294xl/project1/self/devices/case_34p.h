@@ -135,8 +135,9 @@
     case DEV_CORRECT_34P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        if (ReadCorrect34())
-          MakePause(DEV_PREVAUTH2KEY_34P);
+        ReadCorrect34();
+        if (InBuff(2) == 0x05)
+          MakePause(DEV_PREVAUTH2KEY_34P); // нельзя корректировать время, можно установить время
         else
           MakePause(DEV_PREVOPEN_34P);
       }
@@ -224,7 +225,7 @@
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
         ReadManage34();
-        MakePause(DEV_POSTMANAGE_34P);
+        MakePause(DEV_PREVOPEN_34P);
       }
       else
       {
