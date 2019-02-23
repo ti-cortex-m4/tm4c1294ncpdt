@@ -1,7 +1,10 @@
 #ifndef SKIP_34
 
     case DEV_START_34P:
-      MakePause(DEV_PREVTIME_34P);
+      if (fCurrCtrl == true)
+        MakePause(DEV_PREVTIME_34P);
+      else
+        MakePause(DEV_POSTCORRECT_34P);
       break;
 
 
@@ -43,15 +46,43 @@
           ShowDigitalDeltaTime(ibDig, dwSecond1, dwSecond2);
           //dwCorrectW = dwSecond2 - dwSecond1;
 
-          if (AbsLong(dwSecond1 - dwSecond2) < GetCorrectLimit()) // без коррекции
+          ulong dwDelta = AbsLong(dwSecond1 - dwSecond2);
+          if (dwDelta < GetCorrectLimit()) // без коррекции
           { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_34P); }
-          else if (AbsLong(dwSecond1 - dwSecond2) < 10) // простая коррекция
+          else if (dwDelta < CORRECT_LIMIT_34) // простая коррекция
           {
+            SetCorrectSecond34(dwDelta);
             ShowLo(szCorrectYes); DelayInf();
-            MakePause(DEV_POSTCORRECT_34P);
+            MakePause(DEV_PREVCORRECT_34P);
           }
           else
           { ShowLo(szCorrectBig); DelayMsg(); ErrorProfile(); } // разница времени слишком велика, коррекция невозможна
+        }
+      }
+      break;
+
+    case DEV_PREVCORRECT_34P:
+      cbRepeat = MaxRepeats();
+      QueryCorrect34();
+      SetCurr(DEV_CORRECT_34P);
+      break;
+
+    case DEV_CORRECT_34P:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+      {
+        ReadCorrect34();
+        MakePause(DEV_POSTCORRECT_34P);
+      }
+      else
+      {
+        if (cbRepeat == 0) ErrorProfile();
+        else
+        {
+          ErrorLink();
+          cbRepeat--;
+
+          QueryCorrect34();
+          SetCurr(DEV_CORRECT_34P);
         }
       }
       break;

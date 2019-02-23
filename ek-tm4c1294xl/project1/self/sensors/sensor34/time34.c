@@ -15,6 +15,7 @@ time34.c
 
 
 static time             tmCurr34;
+static int32_t          dwCorrectSecond;
 
 
 
@@ -28,7 +29,6 @@ time    GetTimeCurr34(void)
 {
   return tmCurr34;
 }
-
 
 
 void    QueryTime34(void)
@@ -54,7 +54,13 @@ time    ReadTime34(void)
 
 
 
-void    QueryCorrectTime34(int32_t  dwSecond)
+void    SetCorrectSecond34(int32_t dw)
+{
+    dwCorrectSecond = dw;
+}
+
+
+void    QueryCorrect34(void)
 {
   InitPush(0);
 
@@ -71,13 +77,13 @@ void    QueryCorrectTime34(int32_t  dwSecond)
   PushChar(0x00);
   PushChar(0x00);
 
-  PushLongLtl(dwSecond);
+  PushLongLtl(dwCorrectSecond);
 
   QueryIO(3+3+2, 7+4+4+2);
 }
 
 
-bool    ReadCorrectTime34(void)
+bool    ReadCorrect34(void)
 {
   return (InBuff(1) & 0x80) == 0;
 }

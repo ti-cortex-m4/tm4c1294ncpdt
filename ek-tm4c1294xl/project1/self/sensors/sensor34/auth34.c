@@ -11,12 +11,9 @@ auth34.c
 #include "../../serial/monitor.h"
 #include "../../devices/devices.h"
 #include "../../time/delay.h"
+#include "device34.h"
 #include "auth34.h"
 #include "crypto34.h"
-
-
-
-#define MONITOR_34  1
 
 
 

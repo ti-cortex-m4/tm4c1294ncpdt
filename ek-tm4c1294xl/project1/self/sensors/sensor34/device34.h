@@ -6,6 +6,8 @@ DEVICE34.H
 
 #define MAX_LINE_N34    8
 
+#define MONITOR_34      1
+
 
 
 float   PopFloat34(void);
