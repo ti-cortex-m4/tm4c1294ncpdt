@@ -41,8 +41,8 @@ static void QueryParam2(void)
 
   PushChar(diCurr.bAddress);
   PushChar(0x66);
-  PushChar(0x01);
-  PushChar(0x98);
+  PushChar(0);
+  PushChar(0xC6);
   PushChar(0);
   PushChar(4*1);
 
