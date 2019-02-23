@@ -8,6 +8,7 @@ UNPACK_34.C
 #include "../../serial/ports.h"
 #include "../../serial/ports2.h"
 #include "../../serial/monitor.h"
+#include "../../kernel/crc-16.h"
 #include "device34.h"
 #include "unpack_34.h"
 
@@ -19,11 +20,15 @@ void    UnpackCorrect34(void)
 {
   if (IndexInBuff() == 5)
   {
+    MakeCRC16InBuff(0, IndexInBuff());
+    if ((bCRCHi == 0) && (bCRCLo == 0))
+    {
 #if MONITOR_34
-    MonitorString("\n unpack: time correct");
+      MonitorString("\n unpack: time correct");
 #endif
-    SetCountInBuff(IndexInBuff());
-    mpSerial[ibPort] = SER_POSTINPUT_MASTER;
+      SetCountInBuff(IndexInBuff());
+      mpSerial[ibPort] = SER_POSTINPUT_MASTER;
+    }
   }
 }
 
