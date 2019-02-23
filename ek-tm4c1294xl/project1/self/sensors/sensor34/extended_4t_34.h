@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
-EXTENDED_4T_B,H
+extended_4t_34.h
 
 
 ------------------------------------------------------------------------------*/
 
-status  ReadCntMonCanTariffB(uchar  ibCan, uchar  ibMon, uchar  ibTrf);
+status  ReadCntMonCanTariff34(uchar  ibCan, uchar  ibMon, uchar  ibTrf);
