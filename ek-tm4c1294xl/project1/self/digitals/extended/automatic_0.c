@@ -28,6 +28,7 @@ AUTOMATIC_0!C
 #include "../../sensors/sensor32/automatic32.h"
 #include "../../sensors/sensor33/device33.h"
 #include "../../sensors/sensor33/automatic33.h"
+#include "../../sensors/sensor34/time34.h"
 #include "../../console.h"
 #include "../../time/timedate.h"
 #include "automatic_0.h"
@@ -498,6 +499,21 @@ time2   ReadTimeCan33_Short(void)
 #endif
 
 
+#ifndef SKIP_34
+
+time2   ReadTimeCan34_Short(void)
+{
+  DelayOff();
+  QueryTime34();
+
+  if (Input() != SER_GOODCHECK) return GetTime2Error();
+
+  return GetTime2(ReadTime34(), true);
+}
+
+#endif
+
+
 
 time2   ReadTimeCan_Short(uchar  ibCan)
 {
@@ -613,6 +629,10 @@ time2   ReadTimeCan_Short(uchar  ibCan)
 
 #ifndef SKIP_33
     case 33: return ReadTimeCan33_Short();
+#endif
+
+#ifndef SKIP_34
+    case 34: return ReadTimeCan34_Short();
 #endif
 
     default: return GetTime2Error();
