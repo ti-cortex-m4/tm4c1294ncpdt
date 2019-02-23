@@ -5,45 +5,48 @@ extended_4t_34.c
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-//#include "../../memory/mem_digitals.h"
-//#include "../../console.h"
-//#include "../../serial/ports_stack.h"
-//#include "../../serial/ports_devices.h"
-//#include "../../sensors/device_b.h"
-//#include "../../sensors/automatic1.h"
-//#include "../../digitals/max_repeats.h"
+#include "../../console.h"
+#include "../../memory/mem_factors.h"
+#include "../../memory/mem_digitals.h"
+#include "../../serial/ports.h"
+#include "../../serial/ports_devices.h"
+#include "../../devices/devices.h"
+#include "unix_time_gmt34.h"
+#include "eng_dates34.h"
+#include "device34.h"
 #include "extended_4t_34.h"
 
 
 
-void    QueryEngMon34_(time  ti)
+void    QueryCntMonTariff34(time  tmMon, uchar  ibTrf) // на начало мес€ца
 {
+  ASSERT(ibTrf < 4);
+
   InitPush(0);
 
   PushChar(diCurr.bAddress);
   PushChar(0x67);
   PushChar(2);
-  PushChar(0xFF);
-  PushLongLtl(TimeToUnixTimeToGMT34(ti));
+  PushChar(ibTrf);
+  PushLongLtl(TimeToUnixTimeToGMT34(tmMon));
 
   QueryIO(3+81+2, 8+2);
 }
 
 
-double2 QueryEngMon34_Full_(time  ti, uchar  bPercent)
+static status QueryCntMonTariff34_Full(time  tmMon, uchar  ibTrf) // на начало мес€ца
 {
   uchar r;
   for (r=0; r<MaxRepeats(); r++)
   {
     DelayOff();
-    QueryEngMon34(ti);
+    QueryCntMonTariff34(tmMon, ibTrf);
 
     if (Input() == SER_GOODCHECK) break;
-    if (fKey == true) return GetDouble2Error();
+    if (fKey == true) return ST_BADDIGITAL;
   }
 
-  if (r == MaxRepeats()) return GetDouble2Error();
-  ShowPercent(bPercent);
+  if (r == MaxRepeats()) return ST_BADDIGITAL;
 
   ReadEng34();
 
@@ -57,16 +60,13 @@ double2 QueryEngMon34_Full_(time  ti, uchar  bPercent)
     mpboChannelsA[i] = true;
   }
 
-  return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
+  return ST_OK;
 }
 
 
-status ReadCntMonCanTariff34(uchar  ibCan, uchar  ibMon, uchar  ibTrf) // на начало мес€ца
+status ReadCntMonCanTariff34(uchar  ibMon, uchar  ibTrf) // на начало мес€ца
 {
-  time2 ti2 = QueryTime34_Full(50);
-  if (ti2.fValid == false) return GetDouble2Error();
-
-  if (QueryEngDates34_Full(60) == 0) return GetDouble2Error();
+  if (QueryEngDates34_Full(60+ibTrf) == 0) return ST_BADDIGITAL;
 
   time ti = ti2.tiValue;
   ti.bSecond = 0;
@@ -81,15 +81,15 @@ status ReadCntMonCanTariff34(uchar  ibCan, uchar  ibMon, uchar  ibTrf) // на нач
   if (HasEngMon34(ti) == 0) {
     Clear();
     sprintf(szLo+1,"мес€ц %02u.%02u ?", ti.bMonth,ti.bYear);
-     Delay(1000);
-    return GetDouble2Error();
+    Delay(1000);
+    return ST_NOTPRESENTED;
   } else {
-    return QueryEngMon34_Full(ti, 80);
+    return QueryCntMonTariff34_Full(ti, ibTrf);
   }
 }
 
 
-
+/*
 static void QueryCntMonTariff34(uchar  ibMon, uchar  bTrf) // на начало мес€ца
 {
   InitPush(0);
@@ -125,7 +125,7 @@ static bool QueryCntMonTariff34_Full(uchar  ibMon, uchar  bTrf) // на начало мес
   return true;
 }
 
-/*
+
 status ReadCntMonCanTariff34(uchar  ibCan, uchar  ibMon, uchar  ibTrf) // на начало мес€ца
 {
   Clear();
