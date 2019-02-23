@@ -32,6 +32,12 @@ time    GetTimeCurr34(void)
 }
 
 
+uchar   GetTimeCurrIndex34(void)
+{
+  return tmCurr34.bHour*2 + tmCurr34.bMinute/30
+}
+
+
 void    QueryTime34(void)
 {
   InitPush(0);
@@ -90,6 +96,45 @@ void    ReadCorrect34(void)
     SaveDisplay();
 
     sprintf(szHi,"Ошибка коррекции");
+    Clear();
+    sprintf(szLo+2,"времени: %02X",InBuff(2));
+
+    Delay(1000);
+    LoadDisplay();
+  }
+}
+
+
+
+void    QueryManage34(void)
+{
+  InitPush(0);
+
+  PushChar(diCurr.bAddress);
+  PushChar(0x65);
+  PushChar(0x00);
+  PushChar(0x46);
+  PushChar(0x00);
+  PushChar(0x04);
+  PushChar(0x08);
+
+  PushLongLtl(TimeToUnixTimeToGMT34(tiCurr));
+
+  PushChar(0x00);
+  PushChar(0x00);
+  PushChar(0x00);
+  PushChar(0x00);
+
+  QueryIO(3+3+2, 7+4+4+2);
+}
+
+
+void    ReadManage34(void)
+{
+  if ((CountInBuff() != 8) || ((InBuff(1) & 0x80) != 0)) {
+    SaveDisplay();
+
+    sprintf(szHi,"Ошибка установки");
     Clear();
     sprintf(szLo+2,"времени: %02X",InBuff(2));
 
