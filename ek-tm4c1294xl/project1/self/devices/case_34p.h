@@ -46,21 +46,20 @@
           ShowDigitalDeltaTime(ibDig, dwSecond1, dwSecond2);
 
           ulong dwDelta = AbsLong(dwSecond1 - dwSecond2);
-          if (dwDelta < GetCorrectLimit()) // без коррекции
-          {
+          if (dwDelta < GetCorrectLimit()) {
             ShowLo(szCorrectNo); DelayInf();
-            MakePause(DEV_PREVOPEN_34P);
+            MakePause(DEV_PREVOPEN_34P); // без коррекции
           }
-          else if (dwDelta < CORRECT_LIMIT_34) // коррекция времени
+          else if (GetCurrHouIndex() == GetTimeCurrIndex34())
           {
-            SetCorrectSecond34(dwSecond1 - dwSecond2);
-            ShowLo(szCorrectYes); DelayInf();
-            MakePause(DEV_PREVAUTH1KEY_34P);
-          }
-          else if (GetCurrHouIndex() == GetTimeCurrIndex34()) // установка времени
-          {
-            ShowLo(szManageYes); DelayInf();
-            MakePause(DEV_PREVAUTH2KEY_34P);
+            if (dwDelta < CORRECT_LIMIT_34) {
+              SetCorrectSecond34(dwSecond1 - dwSecond2);
+              ShowLo(szCorrectYes); DelayInf();
+              MakePause(DEV_PREVAUTH1KEY_34P); // коррекция времени
+            } else {
+              ShowLo(szManageYes); DelayInf();
+              MakePause(DEV_PREVAUTH2KEY_34P); // установка времени
+            }
           }
           else
           { ShowLo(szCorrectBig); DelayMsg(); ErrorProfile(); } // разница времени слишком велика, коррекция невозможна
