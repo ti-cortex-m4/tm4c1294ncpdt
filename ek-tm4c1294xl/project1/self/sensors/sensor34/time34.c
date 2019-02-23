@@ -90,7 +90,7 @@ void    QueryCorrect34(void)
 }
 
 
-void    ReadCorrect34(void)
+bool    ReadCorrect34(void)
 {
   if ((CountInBuff() != 8) || ((InBuff(1) & 0x80) != 0)) {
     SaveDisplay();
@@ -101,7 +101,11 @@ void    ReadCorrect34(void)
 
     Delay(1000);
     LoadDisplay();
+
+    return (InBuff(2) == 0x05); // нельзя корректировать время, можно установить время
   }
+
+  return 0;
 }
 
 

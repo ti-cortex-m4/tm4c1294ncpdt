@@ -135,8 +135,10 @@
     case DEV_CORRECT_34P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        ReadCorrect34(); // ?
-        MakePause(DEV_PREVOPEN_34P);
+        if (ReadCorrect34())
+          MakePause(DEV_PREVAUTH2KEY_34P);
+        else
+          MakePause(DEV_PREVOPEN_34P);
       }
       else
       {
@@ -232,7 +234,7 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryMANAGE34();
+          QueryManage34();
           SetCurr(DEV_MANAGE_34P);
         }
       }

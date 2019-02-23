@@ -24,7 +24,24 @@ void    UnpackCorrect34(void)
     if ((bCRCHi == 0) && (bCRCLo == 0))
     {
 #if MONITOR_34
-      MonitorString("\n unpack: time correct");
+      MonitorString("\n time correct: unpack");
+#endif
+      SetCountInBuff(IndexInBuff());
+      mpSerial[ibPort] = SER_POSTINPUT_MASTER;
+    }
+  }
+}
+
+
+void    UnpackManage34(void)
+{
+  if (IndexInBuff() == 5)
+  {
+    MakeCRC16InBuff(0, IndexInBuff());
+    if ((bCRCHi == 0) && (bCRCLo == 0))
+    {
+#if MONITOR_34
+      MonitorString("\n time manage: unpack");
 #endif
       SetCountInBuff(IndexInBuff());
       mpSerial[ibPort] = SER_POSTINPUT_MASTER;

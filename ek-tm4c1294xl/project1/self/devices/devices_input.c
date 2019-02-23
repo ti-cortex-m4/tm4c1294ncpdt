@@ -175,6 +175,8 @@ void    DevicesInput(void)
     {
       if (GetCurr() == DEV_CORRECT_34P)
         UnpackCorrect34();
+      else if (GetCurr() == DEV_MANAGE_34P)
+        UnpackManage34();
       else if (GetCurr() == DEV_READ_34P)
         UnpackProfile34();
     }
