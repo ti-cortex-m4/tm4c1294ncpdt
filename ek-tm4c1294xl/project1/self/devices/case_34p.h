@@ -4,7 +4,7 @@
       if (fCurrCtrl == true)
         MakePause(DEV_PREVTIME_34P);
       else
-        MakePause(DEV_POSTCORRECT_34P);
+        MakePause(DEV_PREVOPEN_34P);
       break;
 
 
@@ -47,12 +47,20 @@
 
           ulong dwDelta = AbsLong(dwSecond1 - dwSecond2);
           if (dwDelta < GetCorrectLimit()) // без коррекции
-          { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_34P); }
-          else if (dwDelta < CORRECT_LIMIT_34) // простая коррекция
+          {
+            ShowLo(szCorrectNo); DelayInf();
+            MakePause(DEV_PREVOPEN_34P);
+          }
+          else if (dwDelta < CORRECT_LIMIT_34) // коррекция времени
           {
             SetCorrectSecond34(dwSecond1 - dwSecond2);
             ShowLo(szCorrectYes); DelayInf();
-            MakePause(DEV_PREVAUTHKEY_34P);
+            MakePause(DEV_PREVAUTH1KEY_34P);
+          }
+          else if (GetCurrHouIndex() == GetTimeCurrIndex34()) // установка времени
+          {
+            ShowLo(szManageYes); DelayInf();
+            MakePause(DEV_PREVAUTH2KEY_34P);
           }
           else
           { ShowLo(szCorrectBig); DelayMsg(); ErrorProfile(); } // разница времени слишком велика, коррекция невозможна
@@ -60,18 +68,19 @@
       }
       break;
 
+// начало коррекции времени
 
-    case DEV_PREVAUTHKEY_34P:
+    case DEV_PREVAUTH1KEY_34P:
       cbRepeat = MaxRepeats();
       QueryAuthKey34();
-      SetCurr(DEV_AUTHKEY_34P);
+      SetCurr(DEV_AUTH1KEY_34P);
       break;
 
-    case DEV_AUTHKEY_34P:
+    case DEV_AUTH1KEY_34P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
         ReadAuthKey34();
-        MakePause(DEV_POSTAUTHKEY_34P);
+        MakePause(DEV_POSTAUTH1KEY_34P);
       }
       else
       {
@@ -82,19 +91,19 @@
           cbRepeat--;
 
           QueryAuthKey34();
-          SetCurr(DEV_AUTHKEY_34P);
+          SetCurr(DEV_AUTH1KEY_34P);
         }
       }
       break;
 
 
-    case DEV_POSTAUTHKEY_34P:
+    case DEV_POSTAUTH1KEY_34P:
       cbRepeat = MaxRepeats();
       QueryAuthReq34();
-      SetCurr(DEV_AUTHREQ_34P);
+      SetCurr(DEV_AUTH1REQ_34P);
       break;
 
-    case DEV_AUTHREQ_34P:
+    case DEV_AUTH1REQ_34P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
         if (ReadAuthReq())
@@ -111,7 +120,7 @@
           cbRepeat--;
 
           QueryAuthReq34();
-          SetCurr(DEV_AUTHREQ_34P);
+          SetCurr(DEV_AUTH1REQ_34P);
         }
       }
       break;
@@ -126,8 +135,8 @@
     case DEV_CORRECT_34P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        ReadCorrect34();
-        MakePause(DEV_POSTCORRECT_34P);
+        ReadCorrect34(); // ?
+        MakePause(DEV_PREVOPEN_34P);
       }
       else
       {
@@ -143,10 +152,93 @@
       }
       break;
 
-    case DEV_POSTCORRECT_34P:
-      MakePause(DEV_PREVOPEN_34P);
+// конец коррекции времени
+
+// начало установки времени
+
+    case DEV_PREVAUTH2KEY_34P:
+      cbRepeat = MaxRepeats();
+      QueryAuthKey34();
+      SetCurr(DEV_AUTH2KEY_34P);
       break;
 
+    case DEV_AUTH2KEY_34P:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+      {
+        ReadAuthKey34();
+        MakePause(DEV_POSTAUTH2KEY_34P);
+      }
+      else
+      {
+        if (cbRepeat == 0) ErrorProfile();
+        else
+        {
+          ErrorLink();
+          cbRepeat--;
+
+          QueryAuthKey34();
+          SetCurr(DEV_AUTH2KEY_34P);
+        }
+      }
+      break;
+
+
+    case DEV_POSTAUTH2KEY_34P:
+      cbRepeat = MaxRepeats();
+      QueryAuthReq34();
+      SetCurr(DEV_AUTH2REQ_34P);
+      break;
+
+    case DEV_AUTH2REQ_34P:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+      {
+        if (ReadAuthReq())
+          MakePause(DEV_PREVMANAGE_34P);
+        else
+          ErrorProfile();
+      }
+      else
+      {
+        if (cbRepeat == 0) ErrorProfile();
+        else
+        {
+          ErrorLink();
+          cbRepeat--;
+
+          QueryAuthReq34();
+          SetCurr(DEV_AUTH2REQ_34P);
+        }
+      }
+      break;
+
+
+    case DEV_PREVMANAGE_34P:
+      cbRepeat = MaxRepeats();
+      QueryManage34();
+      SetCurr(DEV_MANAGE_34P);
+      break;
+
+    case DEV_MANAGE_34P:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+      {
+        ReadManage34();
+        MakePause(DEV_POSTMANAGE_34P);
+      }
+      else
+      {
+        if (cbRepeat == 0) ErrorProfile();
+        else
+        {
+          ErrorLink();
+          cbRepeat--;
+
+          QueryMANAGE34();
+          SetCurr(DEV_MANAGE_34P);
+        }
+      }
+      break;
+
+// конец установки времени
 
     case DEV_PREVOPEN_34P:
       InitProfileOpen34();
