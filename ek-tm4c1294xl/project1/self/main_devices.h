@@ -755,7 +755,6 @@ typedef enum
 
   DEV_PREVMANAGE_34P    =  0x2011,
   DEV_MANAGE_34P        =  0x2012,
-  DEV_POSTMANAGE_34P    =  0x2013,
 
   DEV_PREVOPEN_34P      =  0x2014,
   DEV_OPEN_34P          =  0x2015,

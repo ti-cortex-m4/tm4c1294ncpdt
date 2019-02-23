@@ -57,12 +57,12 @@ static void MakeAuthRequest34(void)
 
   if (boEnblKeys != true)
   {
-    mpbPass[0] = '1';
-    mpbPass[1] = '1';
-    mpbPass[2] = '1';
-    mpbPass[3] = '1';
-    mpbPass[4] = '1';
-    mpbPass[5] = '1';
+    mpbPass[0] = '2';
+    mpbPass[1] = '2';
+    mpbPass[2] = '2';
+    mpbPass[3] = '2';
+    mpbPass[4] = '2';
+    mpbPass[5] = '2';
   }
   else
   {
@@ -122,7 +122,7 @@ void    QueryAuthReq34(void)
   PushChar(0x09);
   PushChar(0x12);
 
-  PushIntLtl(1); // уровени доступа: 1,2
+  PushIntLtl(2); // уровени доступа: 1,2
 
   MakeAuthRequest34();
 
