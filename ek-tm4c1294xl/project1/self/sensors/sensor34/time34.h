@@ -17,4 +17,4 @@ time    ReadTime34(void);
 
 void    SetCorrectSecond34(int32_t dw);
 void    QueryCorrect34(void);
-bool    ReadCorrect34(void);
+void    ReadCorrect34(void);

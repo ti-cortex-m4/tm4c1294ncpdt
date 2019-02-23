@@ -4,4 +4,5 @@ UNPACK_34.H
 
 ------------------------------------------------------------------------------*/
 
-void    Unpack34(void);
+void    UnpackCorrect34(void);
+void    UnpackProfile34(void);
