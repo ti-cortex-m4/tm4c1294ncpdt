@@ -5572,7 +5572,7 @@ void    RunDevices(void)
           else if (GetCurrHouIndex() == GetTimeCurrIndex34())
           {
             if (dwDelta < CORRECT_LIMIT_34) {
-              SetCorrectSecond34(dwSecond1 - dwSecond2);
+              SetCorrectSecond34(dwSecond2 - dwSecond1);
               ShowLo(szCorrectYes); DelayInf();
               MakePause(DEV_PREVAUTH1KEY_34P); // коррекция времени
             } else {
@@ -5654,10 +5654,12 @@ void    RunDevices(void)
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
         ReadCorrect34();
-        if (InBuff(2) == 0x05)
+        if (InBuff(2) == 0x05) {
+          ShowLo(szManageYes); DelayInf();
           MakePause(DEV_PREVAUTH2KEY_34P); // нельзя корректировать время, можно установить время
-        else
+        } else {
           MakePause(DEV_PREVOPEN_34P);
+        }
       }
       else
       {
