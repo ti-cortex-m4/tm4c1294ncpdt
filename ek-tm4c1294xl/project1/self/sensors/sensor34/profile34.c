@@ -123,7 +123,7 @@ bool    ReadProfileRead34(void)
     uint w2 = PopIntLtl();
   }
 
-  if (wCount == 10)
+  if (wCount > 0)
     return 1;
   else
     return 0;
@@ -154,12 +154,6 @@ bool    ReadProfileClose34(void)
     return 0;
   else
     return MakeStopHou(0);
-/*
-  if (++ibDay34 < wHOURS/48)
-    return 1;
-  else
-    return 0;
-*/
 }
 
 
