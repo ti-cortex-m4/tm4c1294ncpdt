@@ -11,36 +11,36 @@ profile_frac8.c
 
 
 
-bool    SaveProfileFrac6(uint  c)
+bool    SaveProfileFrac8(uint  c)
 {
   ASSERT(c < bCANALS);
-  return SaveArrayX(PROFILE_FRAC_6, sizeof(mpdbEngFracDigCan[0]), c, mpdbEngFracDigCan[c]);
+  return SaveArrayX(PROFILE_FRAC_8, sizeof(mpdbEngFracDigCan8[0]), c, mpdbEngFracDigCan8[c]);
 }
 
 
-bool    LoadProfileFrac6(uint  c)
+bool    LoadProfileFrac8(uint  c)
 {
   ASSERT(c < bCANALS);
-  return LoadArrayX(PROFILE_FRAC_6, sizeof(mpdbEngFracDigCan[0]), c, mpdbEngFracDigCan[c]);
+  return LoadArrayX(PROFILE_FRAC_8, sizeof(mpdbEngFracDigCan8[0]), c, mpdbEngFracDigCan8[c]);
 }
 
 
 
-void    SaveProfileFrac6_All(void)
+void    SaveProfileFrac8_All(void)
 {
   uchar c;
   for (c=0; c<bCANALS; c++)
   {
-    SaveProfileFrac6(c);
+    SaveProfileFrac8(c);
   }
 }
 
 
-void    LoadProfileFrac6_All(void)
+void    LoadProfileFrac8_All(void)
 {
   uchar c;
   for (c=0; c<bCANALS; c++)
   {
-    LoadProfileFrac6(c);
+    LoadProfileFrac8(c);
   }
 }

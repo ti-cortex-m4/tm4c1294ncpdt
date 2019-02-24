@@ -282,6 +282,7 @@ RESERVE(PHONES2, sizeof(mpphPhones2) + bNVRAM_MARGIN)
 RESERVE(MAX_PHONES2, sizeof(float) + bNVRAM_MARGIN)
 
 RESERVE(TIME_ZONE_34, sizeof(uchar) + bNVRAM_MARGIN)
+RESERVE(PROFILE_FRAC_8, (sizeof(mpdbEngFracDigCan8[0]) + bNVRAM_MARGIN)*bCANALS)
 
 END(NVRAM_END)
 } nvram;

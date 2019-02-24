@@ -1,11 +1,11 @@
 /*------------------------------------------------------------------------------
-PROFILE_FRAC!C
+profile_frac8.h
 
 
 ------------------------------------------------------------------------------*/
 
-bool    SaveProfileFrac6(uint  c);
-bool    LoadProfileFrac6(uint  c);
+bool    SaveProfileFrac8(uint  c);
+bool    LoadProfileFrac8(uint  c);
 
-void    SaveProfileFrac6_All(void);
-void    LoadProfileFrac6_All(void);
+void    SaveProfileFrac8_All(void);
+void    LoadProfileFrac8_All(void);
