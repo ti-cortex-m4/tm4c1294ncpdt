@@ -21,7 +21,7 @@ auth34.c
 //                                          0123456789ABCDEF
 static char const       szError4Hi[]     = "  Неправильный  ",
                         szError4Lo[]     = "     пароль     ",
-                        szError6Hi[]     = "  Неправильный  ",
+                        szError6Hi[]     = " Несуществующий ",
                         szError6Lo[]     = "уровень доступа ",
                         szError7Hi[]     = "Ключ авторизации",
                         szError7Lo[]     = "    устарел     ",
