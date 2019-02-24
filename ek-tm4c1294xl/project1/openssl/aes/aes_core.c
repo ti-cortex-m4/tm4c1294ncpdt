@@ -36,7 +36,7 @@
 /* Note: rewritten a little bit to provide error control and an OpenSSL-
    compatible API */
 
-//#include <assert.h>
+#include <assert.h>
 
 #include <stdlib.h>
 //#include <openssl/crypto.h>
@@ -793,7 +793,7 @@ void AES_encrypt(const unsigned char *in, unsigned char *out,
     int r;
 #endif /* ?FULL_UNROLL */
 
-//    assert(in && out && key);
+    assert(in && out && key);
     rk = key->rd_key;
 
     /*
@@ -985,7 +985,7 @@ void AES_decrypt(const unsigned char *in, unsigned char *out,
     int r;
 #endif /* ?FULL_UNROLL */
 
-//    assert(in && out && key);
+    assert(in && out && key);
     rk = key->rd_key;
 
     /*
