@@ -19,7 +19,7 @@ extended_5_34.c
 
 
 
-void    QueryCntDayTariff34(time  tmDay, uchar  ibTrf) // на начало суток
+void    QueryCntDayTariff34(time  tmDay, uchar  ibTrf) // на начало суток, индекс тарифа
 {
   ASSERT(ibTrf < 4);
 
@@ -27,28 +27,28 @@ void    QueryCntDayTariff34(time  tmDay, uchar  ibTrf) // на начало суток
 
   PushChar(diCurr.bAddress);
   PushChar(0x67);
-  PushChar(2);
+  PushChar(1);
   PushChar(ibTrf);
-  PushLongLtl(TimeToUnixTimeToGMT34(tmMon));
+  PushLongLtl(TimeToUnixTimeToGMT34(tmDay));
 
   QueryIO(3+81+2, 8+2);
 }
 
 
-static status QueryCntDayTariff34_Full(time  tmDay, uchar  ibTrf) // на начало суток
+static status QueryCntDayTariff34_Full(time  tmDay, uchar  bTrf) // на начало суток, номер тарифа
 {
   uchar r;
   for (r=0; r<MaxRepeats(); r++)
   {
     DelayOff();
-    QueryCntDayTariff34(tmDay, ibTrf);
+    QueryCntDayTariff34(tmDay, bTrf-1);
 
     if (Input() == SER_GOODCHECK) break;
     if (fKey == true) return ST_BADDIGITAL;
   }
 
   if (r == MaxRepeats()) return ST_BADDIGITAL;
-  ShowPercent(61+ibTrf*2);
+  ShowPercent(61+bTrf*2);
 
   ReadEng34();
 
@@ -66,31 +66,25 @@ static status QueryCntDayTariff34_Full(time  tmDay, uchar  ibTrf) // на начало с
 }
 
 
-bool    ReadCntDayTariff34(uchar  ibCan, uchar  bTrf) // на начало суток
+bool    ReadCntDayTariff34(uchar  ibCan, uchar  bTrf) // на начало суток, номер тарифа
 {
-  if (QueryEngDates34_Full(60+ibTrf*2) == 0) return ST_BADDIGITAL;
+  if (QueryEngDates34_Full(60+bTrf*2) == 0) return false;
 
   time tm = tiCurr;
   tm.bSecond = 0;
   tm.bMinute = 0;
   tm.bHour   = 0;
-  tm.bDay    = 1;
-
-  uchar m = ibMon + 1;
-  tm.bYear   = (m > tm.bMonth) ? tm.bYear-1 : tm.bYear;
-  tm.bMonth  = m;
 
 #if MONITOR_34
-  MonitorString("\n month index "); MonitorCharDec(ibMon);
-  MonitorString("\n month begin date "); MonitorTime(tm);
+  MonitorString("\n day begin date "); MonitorTime(tm);
 #endif
 
   if (HasEngDay34(tm) == 0) {
     Clear();
-    sprintf(szLo+1,"сутки %02u.%02u.%02u ?", ti.bDay,ti.bMonth,ti.bYear);
+    sprintf(szLo+1,"сутки %02u.%02u.%02u ?", tm.bDay,tm.bMonth,tm.bYear);
     Delay(1000);
     return ST_NOTPRESENTED;
   } else {
-    return QueryCntDayTariff34_Full(tm, ibTrf);
+    return QueryCntDayTariff34_Full(tm, bTrf);
   }
 }
