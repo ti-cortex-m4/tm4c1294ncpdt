@@ -11,9 +11,22 @@ auth34.c
 #include "../../serial/monitor.h"
 #include "../../devices/devices.h"
 #include "../../time/delay.h"
+#include "../../display/display.h"
 #include "device34.h"
 #include "auth34.h"
 #include "crypto34.h"
+
+
+
+//                                          0123456789ABCDEF
+static char const       szError4Hi[]       = "Таймауты        ",
+                        szError4Lo[]       = "  расширенные   ",
+                        szError6Hi[]       = "  расширенные   ",
+                        szError6Lo[]       = "  расширенные   ",
+                        szError7Hi[]       = "  расширенные   ",
+                        szError7Lo[]       = "  расширенные   ",
+                        szErrorHi[]        = "  расширенные   ",
+                        szErrorLo[]        = "  расширенные   ";
 
 
 
@@ -145,6 +158,20 @@ bool    ReadAuthReq(void)
   MonitorCharHex(InBuff(2));
 #endif
 
+  if ((CountInBuff() != 8) || ((InBuff(1) & 0x80) != 0)) {
+    SaveDisplay();
+
+    switch (InBuff(2)) {
+      case 4:  sprintf(szHi, szError4Hi); sprintf(szLo, szError4Lo); break;
+      case 6:  sprintf(szHi, szError6Hi); sprintf(szLo, szError6Lo); break;
+      case 7:  sprintf(szHi, szError7Hi); sprintf(szLo, szError7Lo); break;
+      default: sprintf(szHi, szErrorHi);  sprintf(szLo, szErrorLo, InBuff(2)); break;
+    }
+
+    Delay(1000);
+    LoadDisplay();
+  }
+
   return (InBuff(1) & 0x80) == 0;
 }
 
@@ -155,20 +182,18 @@ bool    TestAuth34(void)
 {
   DelayOff();
   QueryAuthKey34();
-  if (Input() != SER_GOODCHECK)
-    return 0;
+  if (Input() != SER_GOODCHECK) return 0;
 
   ReadAuthKey34();
 
   DelayOff();
   QueryAuthReq34();
-  if (Input() != SER_GOODCHECK)
-    return 0;
+  if (Input() != SER_GOODCHECK) return 0;
 
   bool b = ReadAuthReq();
 
 #if MONITOR_34
-  MonitorString("\n result ");
+  MonitorString("\n authentication ");
   MonitorCharDec(b);
 #endif
 
