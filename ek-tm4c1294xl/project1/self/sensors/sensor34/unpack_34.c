@@ -50,6 +50,23 @@ void    UnpackManage34(void)
 }
 
 
+void    UnpackAuth34(void)
+{
+  if (IndexInBuff() == 5)
+  {
+    MakeCRC16InBuff(0, IndexInBuff());
+    if ((bCRCHi == 0) && (bCRCLo == 0))
+    {
+#if MONITOR_34
+      MonitorString("\n authentication: unpack");
+#endif
+      SetCountInBuff(IndexInBuff());
+      mpSerial[ibPort] = SER_POSTINPUT_MASTER;
+    }
+  }
+}
+
+
 void    UnpackProfile34(void)
 {
   if (IndexInBuff() > 6)
