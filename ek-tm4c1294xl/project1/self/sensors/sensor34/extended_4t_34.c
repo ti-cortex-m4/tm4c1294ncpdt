@@ -10,6 +10,7 @@ extended_4t_34.c
 #include "../../memory/mem_digitals.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports_devices.h"
+#include "../../serial/monitor.h"
 #include "../../devices/devices.h"
 #include "unix_time_gmt34.h"
 #include "eng_dates34.h"
@@ -75,9 +76,14 @@ status ReadCntMonCanTariff34(uchar  ibMon, uchar  ibTrf) // на начало мес€ца
   tm.bHour   = 0;
   tm.bDay    = 1;
 
-  uchar m = (ibMon+1) % 12 + 1; не конец мес€цев, а начало
+  uchar m = ibMon + 1;
   tm.bYear   = (m > tm.bMonth) ? tm.bYear-1 : tm.bYear;
   tm.bMonth  = m;
+
+#if MONITOR_34
+  MonitorString("\n month index "); MonitorCharDec(ibMon);
+  MonitorString("\n month begin date "); MonitorTime(tm);
+#endif
 
   if (HasEngMon34(tm) == 0) {
     Clear();
