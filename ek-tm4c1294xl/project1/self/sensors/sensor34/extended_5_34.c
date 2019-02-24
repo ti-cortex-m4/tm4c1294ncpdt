@@ -35,20 +35,20 @@ void    QueryCntDayTariff34(time  tmDay, uchar  ibTrf) // на начало суток, индек
 }
 
 
-static status QueryCntDayTariff34_Full(time  tmDay, uchar  bTrf) // на начало суток, номер тарифа
+static status QueryCntDayTariff34_Full(time  tmDay, uchar  ibTrf) // на начало суток, индекс тарифа
 {
   uchar r;
   for (r=0; r<MaxRepeats(); r++)
   {
     DelayOff();
-    QueryCntDayTariff34(tmDay, bTrf-1);
+    QueryCntDayTariff34(tmDay, ibTrf);
 
     if (Input() == SER_GOODCHECK) break;
     if (fKey == true) return ST_BADDIGITAL;
   }
 
   if (r == MaxRepeats()) return ST_BADDIGITAL;
-  ShowPercent(61+bTrf*2);
+  ShowPercent(61+ibTrf*2);
 
   ReadEng34();
 
@@ -66,9 +66,9 @@ static status QueryCntDayTariff34_Full(time  tmDay, uchar  bTrf) // на начало су
 }
 
 
-bool    ReadCntDayTariff34(uchar  ibCan, uchar  bTrf) // на начало суток, номер тарифа
+bool    ReadCntDayTariff34(uchar  ibCan, uchar  ibTrf) // на начало суток, индекс тарифа
 {
-  if (QueryEngDates34_Full(60+bTrf*2) == 0) return false;
+  if (QueryEngDates34_Full(60+ibTrf*2) == 0) return false;
 
   time tm = tiCurr;
   tm.bSecond = 0;
@@ -85,6 +85,6 @@ bool    ReadCntDayTariff34(uchar  ibCan, uchar  bTrf) // на начало суток, номер 
     Delay(1000);
     return ST_NOTPRESENTED;
   } else {
-    return QueryCntDayTariff34_Full(tm, bTrf);
+    return QueryCntDayTariff34_Full(tm, ibTrf);
   }
 }

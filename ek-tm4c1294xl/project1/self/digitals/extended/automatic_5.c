@@ -5,10 +5,11 @@ AUTOMATIC_5,C
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
+#include "../../console.h"
 #include "../../memory/mem_digitals.h"
 #include "../../digitals/digitals.h"
 #include "../../serial/ports.h"
-#include "../../console.h"
+#include "../../sensors/sensor34/extended_5_34.h"
 #include "extended_5_a.h"
 #include "extended_5_b.h"
 #include "extended_5_c.h"
@@ -41,6 +42,10 @@ bool    ReadCntDayTariff(uchar  ibCan, uchar  bTrf)
 
 #ifndef SKIP_H
     case 10: return ReadCntDayTariffH(bTrf);
+#endif
+
+#ifndef SKIP_34
+    case 34: return ReadCntDayTariff34(ibCan, bTrf-1); // не номер тарифа, а индекс тарифа
 #endif
 
     default: return false;
