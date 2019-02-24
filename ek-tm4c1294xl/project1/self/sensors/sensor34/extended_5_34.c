@@ -5,117 +5,92 @@ extended_5_34.c
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
+#include "../../console.h"
+#include "../../memory/mem_factors.h"
 #include "../../memory/mem_digitals.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports_devices.h"
+#include "../../serial/monitor.h"
+#include "../../devices/devices.h"
+#include "unix_time_gmt34.h"
+#include "eng_dates34.h"
 #include "device34.h"
 #include "extended_5_34.h"
 
 
 
-#ifndef SKIP_34
-
-static void QueryEngDayTariff34(uchar  bTrf)
+void    QueryCntDayTariff34(time  tmDay, uchar  ibTrf) // на начало суток
 {
+  ASSERT(ibTrf < 4);
+
   InitPush(0);
 
   PushChar(diCurr.bAddress);
-  PushChar(3);
+  PushChar(0x67);
   PushChar(2);
+  PushChar(ibTrf);
+  PushLongLtl(TimeToUnixTimeToGMT34(tmMon));
 
-  PushChar(0);
-  PushChar(bTrf);
-  PushChar(0);
-
-  RevQueryIO(4+16+2, 3+3+2);
+  QueryIO(3+81+2, 8+2);
 }
 
 
-static void QueryEngAbsTariff34(uchar  bTrf)
+static status QueryCntDayTariff34_Full(time  tmDay, uchar  ibTrf) // на начало суток
 {
-  InitPush(0);
-
-  PushChar(diCurr.bAddress);
-  PushChar(3);
-  PushChar(1);
-
-  PushChar(0);
-  PushChar(bTrf);
-  PushChar(0);
-
-  RevQueryIO(4+16+2, 3+3+2);
-}
-
-
-static bool QueryEngDayTariff34_Full(uchar  bTrf)
-{
-uchar   i;
-
-  for (i=0; i<MaxRepeats(); i++)
+  uchar r;
+  for (r=0; r<MaxRepeats(); r++)
   {
     DelayOff();
-    QueryEngDayTariff34(bTrf);
+    QueryCntDayTariff34(tmDay, ibTrf);
 
-    if (RevInput() == SER_GOODCHECK) break;
-    if (fKey == true) return false;
+    if (Input() == SER_GOODCHECK) break;
+    if (fKey == true) return ST_BADDIGITAL;
   }
 
-  if (i == MaxRepeats()) return false;
+  if (r == MaxRepeats()) return ST_BADDIGITAL;
+  ShowPercent(61+ibTrf*2);
 
-  ReadEnergyC();
-  return true;
-}
+  ReadEng34();
 
+  double dbTrans = mpdbTransCnt[ibDig];
 
-static bool QueryEngAbsTariff34_Full(uchar  bTrf)
-{
   uchar i;
-  for (i=0; i<MaxRepeats(); i++)
+  for (i=0; i<MAX_LINE_N34; i++)
   {
-    DelayOff();
-    QueryEngAbsTariff34(bTrf);
-
-    if (RevInput() == SER_GOODCHECK) break;
-    if (fKey == true) return false;
-  }
-
-  if (i == MaxRepeats()) return false;
-
-  ReadEnergyC();
-  return true;
-}
-
-
-bool    ReadCntDayTariff34(uchar  ibCan, uchar  bTrf)
-{
-uchar   i;
-
-  Clear();
-  if (ReadKoeffDeviceC(ibCan) == 0) return false;
-
-  double dbK = dbKtrans/dbKpulse;
-
-
-  if (QueryEngDayTariff34_Full(bTrf) == 0) return false; // энергия за текущие сутки
-  ShowPercent(60+bTrf);
-
-  for (i=0; i<4; i++)
-  {
-    mpdwChannelsB[i] = mpdwChannelsA[i];
-  }
-
-
-  if (QueryEngAbsTariff34_Full(bTrf) == 0) return false; // энергия всего
-  ShowPercent(80+bTrf);
-
-  for (i=0; i<4; i++)
-  {
-    mpdwChannelsB[i] = mpdwChannelsA[i] - mpdwChannelsB[i]; // энергия всего минус энергия за текущие сутки равно значению счетчика на начало текущих суток
-    mpdbChannelsC[i] = mpdwChannelsB[i] * dbK;
+    mpdbChannelsC[i] = (double)mpddwChannels34[i] / 1000000;
+    mpdbChannelsC[i] *= dbTrans;
     mpboChannelsA[i] = true;
   }
 
-  return true;
+  return ST_OK;
 }
 
+
+bool    ReadCntDayTariff34(uchar  ibCan, uchar  bTrf) // на начало суток
+{
+  if (QueryEngDates34_Full(60+ibTrf*2) == 0) return ST_BADDIGITAL;
+
+  time tm = tiCurr;
+  tm.bSecond = 0;
+  tm.bMinute = 0;
+  tm.bHour   = 0;
+  tm.bDay    = 1;
+
+  uchar m = ibMon + 1;
+  tm.bYear   = (m > tm.bMonth) ? tm.bYear-1 : tm.bYear;
+  tm.bMonth  = m;
+
+#if MONITOR_34
+  MonitorString("\n month index "); MonitorCharDec(ibMon);
+  MonitorString("\n month begin date "); MonitorTime(tm);
 #endif
+
+  if (HasEngDay34(tm) == 0) {
+    Clear();
+    sprintf(szLo+1,"сутки %02u.%02u.%02u ?", ti.bDay,ti.bMonth,ti.bYear);
+    Delay(1000);
+    return ST_NOTPRESENTED;
+  } else {
+    return QueryCntDayTariff34_Full(tm, ibTrf);
+  }
+}
