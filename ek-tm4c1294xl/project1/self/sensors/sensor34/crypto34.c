@@ -5,8 +5,8 @@ crypto34.c
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-#include "../../../openssl/include/openssl/md5.h"
-#include "../../../openssl/include/openssl/aes.h"
+#include "../../../openssl/md5/md5.h"
+#include "../../../openssl/aes/aes.h"
 #include "crypto34.h"
 
 

@@ -40,7 +40,7 @@
 
 #include <stdlib.h>
 //#include <openssl/crypto.h>
-#include "../../include/openssl/aes.h"
+#include "aes.h"
 #include "aes_locl.h"
 
 #ifndef AES_ASM
