@@ -7,7 +7,7 @@
  * https://www.openssl.org/source/license.html
  */
 
-//#include <assert.h>
+#include <assert.h>
 
 #include "aes.h"
 #include "aes_locl.h"
@@ -16,8 +16,8 @@ void AES_ecb_encrypt(const unsigned char *in, unsigned char *out,
                      const AES_KEY *key, const int enc)
 {
 
-//    assert(in && out && key);
-//    assert((AES_ENCRYPT == enc) || (AES_DECRYPT == enc));
+    assert(in && out && key);
+    assert((AES_ENCRYPT == enc) || (AES_DECRYPT == enc));
 
     if (AES_ENCRYPT == enc)
         AES_encrypt(in, out, key);
