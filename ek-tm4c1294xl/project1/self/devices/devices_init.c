@@ -32,6 +32,7 @@ DEVICES_INIT!C
 #include "../digitals/dsbl_answer.h"
 #include "../digitals/profile/refill.h"
 #include "../digitals/profile/profile_frac.h"
+#include "../digitals/profile/profile_frac8.h"
 #include "../digitals/schedule/schedule.h"
 #include "../digitals/dsbl_answer.h"
 #include "../digitals/skip_failure.h"
@@ -90,6 +91,7 @@ void    InitDevices1(void)
   LoadCacheChar(&chTimeZone34, 0, 13, 3);
 
   LoadProfileFrac6_All();
+  LoadProfileFrac8_All();
 
   InitMaxRepeats();
   InitMaxShutdown();
@@ -175,6 +177,8 @@ void    ResetDevices(bool  fFull)
 
   memset(&mpdbEngFracDigCan, 0, sizeof(mpdbEngFracDigCan));
   SaveProfileFrac6_All();
+  memset(&mpdbEngFracDigCan8, 0, sizeof(mpdbEngFracDigCan8));
+  SaveProfileFrac8_All();
 
   ResetMaxRepeats();
   ResetMaxShutdown();
