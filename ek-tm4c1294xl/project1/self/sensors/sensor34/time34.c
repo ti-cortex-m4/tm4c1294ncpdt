@@ -17,6 +17,16 @@ time34.c
 
 
 
+//                                          0123456789ABCDEF
+static char const       szError4Hi[]     = "  Неправильный  ",
+                        szError4Lo[]     = "     пароль     ",
+                        szError5Hi[]     = " Несуществующий ",
+                        szError5Lo[]     = "уровень доступа ",
+                        szErrorHi[]      = "     Ошибка     ",
+                        szErrorLo[]      = "авторизации %02X  ";
+
+
+
 static time             tmCurr34;
 static int32_t          dwCorrectSecond;
 
@@ -100,6 +110,12 @@ void    ReadCorrect34(void)
 {
   if ((CountInBuff() != 8) || ((InBuff(1) & 0x80) != 0)) {
     SaveDisplay();
+
+    switch (InBuff(2)) {
+      case 4:  sprintf(szHi, szError4Hi); sprintf(szLo, szError4Lo); break;
+      case 5:  sprintf(szHi, szError5Hi); sprintf(szLo, szError5Lo); break;
+      default: sprintf(szHi, szErrorHi);  sprintf(szLo, szErrorLo, InBuff(2)); break;
+    }
 
     sprintf(szHi,"Ошибка коррекции");
     Clear();
