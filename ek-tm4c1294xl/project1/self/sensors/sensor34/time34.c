@@ -17,13 +17,20 @@ time34.c
 
 
 
-//                                          0123456789ABCDEF
-static char const       szError4Hi[]     = "  Неправильный  ",
-                        szError4Lo[]     = "     пароль     ",
-                        szError5Hi[]     = " Несуществующий ",
-                        szError5Lo[]     = "уровень доступа ",
-                        szErrorHi[]      = "     Ошибка     ",
-                        szErrorLo[]      = "авторизации %02X  ";
+//                                              0123456789ABCDEF
+static char const       szCorrectError4Hi[]  = "Уровень доступа ",
+                        szCorrectError4Lo[]  = "     ниже 1     ",
+                        szCorrectError5Hi[]  = "Размер коррекции",
+                        szCorrectError5Lo[]  = "времени превышен",
+                        szCorrectErrorHi[]   = "Ошибка коррекции",
+                        szCorrectErrorLo[]   = "   времени %02X   ",
+
+                        szManageError4Hi[]   = "Уровень доступа ",
+                        szManageError4Lo[]   = "     ниже 2     ",
+                        szManageError5Hi[]   = "Размер установки",
+                        szManageError5Lo[]   = "времени превышен",
+                        szManageErrorHi[]    = "Ошибка установки",
+                        szManageErrorLo[]    = "   времени %02X   ";
 
 
 
@@ -82,7 +89,7 @@ void    SetCorrectSecond34(int32_t dw)
 void    QueryCorrect34(void)
 {
 #if MONITOR_34
-  MonitorString("\n query time correct");
+  MonitorString("\n time correct: query");
 #endif
 
   InitPush(0);
@@ -108,18 +115,20 @@ void    QueryCorrect34(void)
 
 void    ReadCorrect34(void)
 {
+#if MONITOR_34
+  MonitorString("\n time correct: answer size "); MonitorIntDec(CountInBuff());
+  MonitorString("\n in[1] "); MonitorCharHex(InBuff(1));
+  MonitorString("\n in[2] "); MonitorCharHex(InBuff(2));
+#endif
+
   if ((CountInBuff() != 8) || ((InBuff(1) & 0x80) != 0)) {
     SaveDisplay();
 
     switch (InBuff(2)) {
-      case 4:  sprintf(szHi, szError4Hi); sprintf(szLo, szError4Lo); break;
-      case 5:  sprintf(szHi, szError5Hi); sprintf(szLo, szError5Lo); break;
-      default: sprintf(szHi, szErrorHi);  sprintf(szLo, szErrorLo, InBuff(2)); break;
+      case 4:  sprintf(szHi, szCorrectError4Hi); sprintf(szLo, szCorrectError4Lo); break;
+      case 5:  sprintf(szHi, szCorrectError5Hi); sprintf(szLo, szCorrectError5Lo); break;
+      default: sprintf(szHi, szCorrectErrorHi);  sprintf(szLo, szCorrectErrorLo, InBuff(2)); break;
     }
-
-    sprintf(szHi,"Ошибка коррекции");
-    Clear();
-    sprintf(szLo+2,"времени: %02X",InBuff(2));
 
     Delay(1000);
     LoadDisplay();
@@ -131,7 +140,7 @@ void    ReadCorrect34(void)
 void    QueryManage34(void)
 {
 #if MONITOR_34
-  MonitorString("\n query time manage");
+  MonitorString("\n time manage: query");
 #endif
 
   InitPush(0);
@@ -157,12 +166,20 @@ void    QueryManage34(void)
 
 void    ReadManage34(void)
 {
+#if MONITOR_34
+  MonitorString("\n time manage: answer size "); MonitorIntDec(CountInBuff());
+  MonitorString("\n in[1] "); MonitorCharHex(InBuff(1));
+  MonitorString("\n in[2] "); MonitorCharHex(InBuff(2));
+#endif
+
   if ((CountInBuff() != 8) || ((InBuff(1) & 0x80) != 0)) {
     SaveDisplay();
 
-    sprintf(szHi,"Ошибка установки");
-    Clear();
-    sprintf(szLo+2,"времени: %02X",InBuff(2));
+    switch (InBuff(2)) {
+      case 4:  sprintf(szHi, szManageError4Hi); sprintf(szLo, szManageError4Lo); break;
+      case 5:  sprintf(szHi, szManageError5Hi); sprintf(szLo, szManageError5Lo); break;
+      default: sprintf(szHi, szManageErrorHi);  sprintf(szLo, szManageErrorLo, InBuff(2)); break;
+    }
 
     Delay(1000);
     LoadDisplay();

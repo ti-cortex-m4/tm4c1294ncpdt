@@ -28,7 +28,7 @@ static char const       szError4Hi[]     = "  Неправильный  ",
                         szError8Hi[]     = " Много попыток  ",
                         szError8Lo[]     = "  ввода пароля  ",
                         szErrorHi[]      = "     Ошибка     ",
-                        szErrorLo[]      = "авторизации %02X  ";
+                        szErrorLo[]      = " авторизации %02X ";
 
 
 
@@ -153,11 +153,9 @@ void    QueryAuthReq34(void)
 bool    ReadAuthReq(void)
 {
 #if MONITOR_34
-  MonitorString("\n response [1] ");
-  MonitorCharHex(InBuff(1));
-
-  MonitorString("\n response [2] ");
-  MonitorCharHex(InBuff(2));
+  MonitorString("\n auth. request: answer size "); MonitorIntDec(CountInBuff());
+  MonitorString("\n in[1] "); MonitorCharHex(InBuff(1));
+  MonitorString("\n in[2] "); MonitorCharHex(InBuff(2));
 #endif
 
   if ((CountInBuff() != 8) || ((InBuff(1) & 0x80) != 0)) {
