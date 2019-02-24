@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <string.h>
 //#include <openssl/e_os2.h>
-#include "../../include/openssl/md5.h"
+#include "md5.h"
 
 #ifdef MD5_ASM
 # if defined(__i386) || defined(__i386__) || defined(_M_IX86) || \
@@ -42,7 +42,7 @@ void md5_block_data_order(MD5_CTX *c, const void *p, size_t num);
         } while (0)
 #define HASH_BLOCK_DATA_ORDER   md5_block_data_order
 
-#include "../include/internal/md32_common.h"
+#include "../md32_common.h"
 
 /*-
 #define F(x,y,z)        (((x) & (y))  |  ((~(x)) & (z)))
