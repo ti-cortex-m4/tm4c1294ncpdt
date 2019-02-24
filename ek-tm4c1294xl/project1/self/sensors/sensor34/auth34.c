@@ -19,14 +19,16 @@ auth34.c
 
 
 //                                          0123456789ABCDEF
-static char const       szError4Hi[]       = "Таймауты        ",
-                        szError4Lo[]       = "  расширенные   ",
-                        szError6Hi[]       = "  расширенные   ",
-                        szError6Lo[]       = "  расширенные   ",
-                        szError7Hi[]       = "  расширенные   ",
-                        szError7Lo[]       = "  расширенные   ",
-                        szErrorHi[]        = "  расширенные   ",
-                        szErrorLo[]        = "  расширенные   ";
+static char const       szError4Hi[]     = "  Неправильный  ",
+                        szError4Lo[]     = "     пароль     ",
+                        szError6Hi[]     = "  Неправильный  ",
+                        szError6Lo[]     = "уровень доступа ",
+                        szError7Hi[]     = "Ключ авторизации",
+                        szError7Lo[]     = "    устарел     ",
+                        szError8Hi[]     = " Много попыток  ",
+                        szError8Lo[]     = "  ввода пароля  ",
+                        szErrorHi[]      = "     Ошибка     ",
+                        szErrorLo[]      = "авторизации %02X  ";
 
 
 
@@ -91,7 +93,7 @@ static void MakeAuthRequest34(void)
 
 #if MONITOR_34
   MonitorString("\n password ");
-  MonitorIntDec(strlen(mpbPass));
+  MonitorIntDec(strlen((char const *)mpbPass));
   MonitorString("    ");
 
   uchar i;
@@ -100,7 +102,7 @@ static void MakeAuthRequest34(void)
 #endif
 
   uchar mpbRgbKey[16];
-  HashMD5(mpbPass, strlen(mpbPass), mpbRgbKey);
+  HashMD5((uchar const *)mpbPass, strlen((char const *)mpbPass), mpbRgbKey);
 
 #if MONITOR_34
   MonitorString("\n rgb key       ");
@@ -165,6 +167,7 @@ bool    ReadAuthReq(void)
       case 4:  sprintf(szHi, szError4Hi); sprintf(szLo, szError4Lo); break;
       case 6:  sprintf(szHi, szError6Hi); sprintf(szLo, szError6Lo); break;
       case 7:  sprintf(szHi, szError7Hi); sprintf(szLo, szError7Lo); break;
+      case 8:  sprintf(szHi, szError8Hi); sprintf(szLo, szError8Lo); break;
       default: sprintf(szHi, szErrorHi);  sprintf(szLo, szErrorLo, InBuff(2)); break;
     }
 
@@ -176,7 +179,7 @@ bool    ReadAuthReq(void)
 }
 
 
-#if 1
+#if 0
 
 bool    TestAuth34(void)
 {

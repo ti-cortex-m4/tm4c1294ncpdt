@@ -42,6 +42,7 @@ static void MakeKeys(uchar  ibCan, uchar  bDevice)
     case 2:   strcpy((char *)&mpphKeys[ibCan].szLine, "222222");    break;
     case 4:   strcpy((char *)&mpphKeys[ibCan].szLine, "00000000");  break;
     case 21:  strcpy((char *)&mpphKeys[ibCan].szLine, "00000000");  break;
+    case 34:  strcpy((char *)&mpphKeys[ibCan].szLine, "222222");    break;
     default:  strcpy((char *)&mpphKeys[ibCan].szLine, "0");         break;
   }
 
