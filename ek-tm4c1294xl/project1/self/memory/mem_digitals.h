@@ -87,6 +87,4 @@ extern  time                    tiAnswerDisabled, tiAnswerEnabled;
 
 
 
-extern  uchar                   bTimeZone34;
-
 extern  uint64_t                mpddwChannels34[8+2];

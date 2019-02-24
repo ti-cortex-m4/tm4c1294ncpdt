@@ -124,8 +124,5 @@ time                    tiAnswerDisabled, tiAnswerEnabled;
 
 
 
-// временная зона счетчиков ESM
-uchar                   bTimeZone34;
-
 // значения энергии счетчиков ESM (10 значений предоставляет счетчик, 8 первых значений использует сумматор)
 uint64_t                mpddwChannels34[8+2];

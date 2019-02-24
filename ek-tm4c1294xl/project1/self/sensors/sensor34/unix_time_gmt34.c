@@ -11,7 +11,8 @@ UNIX_TIME_GMT34.C
 
 
 
-extern  uchar                   bTimeZone34;
+// временная зона счетчиков ESM
+uchar                   bTimeZone34;
 
 
 
