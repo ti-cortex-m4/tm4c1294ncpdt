@@ -11,6 +11,7 @@ OUT_PROFILE,C
 #include "../../memory/mem_digitals.h"
 #include "../../serial/ports.h"
 #include "../../digitals/profile/profile_frac.h"
+#include "../../digitals/profile/profile_frac8.h"
 #include "out_profile.h"
 
 
@@ -53,7 +54,7 @@ void    OutGetEngFrac(void)
 }
 
 
-void    OutGetEngFracDigCan(void)
+void    OutGetEngFracDigCan6(void)
 {
   InitPushCRC();
 
@@ -71,6 +72,24 @@ void    OutGetEngFracDigCan(void)
 }
 
 
+void    OutGetEngFracDigCan8(void)
+{
+  InitPushCRC();
+
+  uchar c;
+  for (c=0; c<bCANALS; c++)
+  {
+    uchar i;
+    for (i=0; i<8; i++)
+    {
+      PushDouble(mpdbEngFracDigCan8[c][i]);
+    }
+  }
+
+  Output(sizeof(mpdbEngFracDigCan8));
+}
+
+
 void    OutResetEngFrac(void)
 {
   if (enGlobal == GLB_REPROGRAM)
@@ -80,7 +99,7 @@ void    OutResetEngFrac(void)
 }
 
 
-void    OutResetEngFracDigCan(void)
+void    OutResetEngFracDigCan6(void)
 {
   if (enGlobal == GLB_REPROGRAM)
   {
@@ -91,6 +110,17 @@ void    OutResetEngFracDigCan(void)
     Result(bRES_NEEDREPROGRAM);
 }
 
+
+void    OutResetEngFracDigCan8(void)
+{
+  if (enGlobal == GLB_REPROGRAM)
+  {
+    memset(&mpdbEngFracDigCan8, 0, sizeof(mpdbEngFracDigCan8));
+    SaveProfileFrac8_All();
+  }
+  else
+    Result(bRES_NEEDREPROGRAM);
+}
 
 
 void    OutCorrectLimit(void)

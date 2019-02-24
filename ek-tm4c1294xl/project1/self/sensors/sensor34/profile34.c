@@ -6,7 +6,7 @@ PROFILE34.C
 
 #include "../../main.h"
 #include "../../memory/mem_factors.h"
-#include "../../memory/mem_digitals.h"
+#include "../../memory/mem_profile.h"
 #include "../../memory/mem_realtime.h"
 #include "../../memory/mem_energy_spec.h"
 #include "../../serial/ports.h"
@@ -15,6 +15,7 @@ PROFILE34.C
 #include "../../devices/devices.h"
 #include "../../devices/devices_time.h"
 #include "../../special/special.h"
+#include "../../digitals/profile/profile_frac8.h"
 #include "../../time/calendar.h"
 #include "../../time/unix_time.h"
 #include "../../display/display.h"
@@ -122,6 +123,8 @@ bool    ReadProfileRead34(void)
     uint w1 = PopIntLtl();
     uint w2 = PopIntLtl();
   }
+
+  SaveProfileFrac8(ibDig);
 
   if (wCount > 0)
     return 1;
