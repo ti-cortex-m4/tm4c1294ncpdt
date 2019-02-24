@@ -4,4 +4,4 @@ extended_5_34.h
 
 ------------------------------------------------------------------------------*/
 
-bool    ReadCntDayTariff34(uchar  ibCan, uchar  bTrf);
+bool    ReadCntDayTariff34(uchar  ibCan, uchar  ibTrf);
