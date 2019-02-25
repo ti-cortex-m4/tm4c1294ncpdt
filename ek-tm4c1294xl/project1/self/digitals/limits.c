@@ -92,7 +92,7 @@ void    NewBoundsRel(uint  wRel)
   for (c=0; c<bCANALS; c++)
   {
     LoadPrevDigital(c);
-    if (CompareCurrPrevLines(ibDig, c) == true)
+    if (CompareCurrPrevLines(ibDig, c) && ActualLine34(ibDig, c))
     {
       mpcwStartRelCan[c] = wRel;
     }
