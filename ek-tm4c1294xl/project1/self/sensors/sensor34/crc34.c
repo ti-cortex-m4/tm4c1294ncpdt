@@ -9,7 +9,7 @@ crc34.c
 
 
 
-unsigned short CRC34(unsigned short  *data, int  count) {
+unsigned short MakeCRC34(unsigned short *data, int count) {
   const unsigned long base = 7;
 
   unsigned long hash = base;
