@@ -7,19 +7,24 @@ PROFILE34.C
 #include "../../main.h"
 #include "../../memory/mem_factors.h"
 #include "../../memory/mem_profile.h"
+#include "../../memory/mem_limits.h"
 #include "../../memory/mem_realtime.h"
 #include "../../memory/mem_energy_spec.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports_devices.h"
+#include "../../serial/monitor.h"
 #include "../../digitals/digitals.h"
 #include "../../devices/devices.h"
 #include "../../devices/devices_time.h"
 #include "../../special/special.h"
 #include "../../digitals/profile/profile_frac8.h"
+#include "../../digitals/limits.h"
+#include "../../time/delay.h"
 #include "../../time/calendar.h"
 #include "../../time/unix_time.h"
 #include "../../display/display.h"
 #include "unix_time_gmt34.h"
+#include "monitor34.h"
 #include "profile34.h"
 
 
@@ -38,8 +43,21 @@ void    InitProfileOpen34(void)
 {
   ibJournal34 = diCurr.ibLine / 4;
   tiProfile34 = tiCurr;
-  ibDay34 = 0;
   cwOffline = 0;
+
+  if (!UseBounds())
+    ibDay34 = 0;
+  else
+  {
+    ibDay34 = mpcwStartRelCan[ibDig]/48;
+    Clear();
+    sprintf(szLo+4,"начало %u",ibDay34);
+    if (boShowMessages == true) DelayMsg();
+  }
+
+#if MONITOR_34
+  MonitorString("\n start day "); MonitorIntDec(ibDay34);
+#endif
 }
 
 
@@ -89,7 +107,10 @@ bool    ReadProfileRead34(void)
 
   uint wCount = PopIntLtl();
   if (wCount == 0) {
-    sprintf(szLo," выключено: %-2u  ",++cwOffline);
+    cwOffline++;
+    if (cwOffline > 1) {
+      sprintf(szLo," выключено: %-2u  ",cwOffline);
+    }
   } else {
     cwOffline = 0;
   }
@@ -152,11 +173,39 @@ bool    ReadProfileClose34(void)
   ShowProgressDigHou();
 
   ibDay34++;
+#if MONITOR_34
+  MonitorString("\n day "); MonitorCharDec(ibDay34);
+#endif
 
-  if (cwOffline > 30)
+  if (cwOffline > 30) {
+    #if MONITOR_34
+      MonitorString("\n offline limit "); MonitorCharDec(cwOffline);
+    #endif
     return 0;
-  else
-    return MakeStopHou(0);
+  } else {
+    if (cwOffline > 1) {
+      time tm = DayIndexToDate(DateToDayIndex(tiProfile34) - ibDay34);
+      #if MONITOR_34
+        MonitorString("\n date "); MonitorTime(tm);
+      #endif
+      if (SearchDefHouIndex(tm)) {
+        #if MONITOR_34
+          MonitorString("\n day found ");
+        #endif
+        return MakeStopHou(0);
+      } else {
+        #if MONITOR_34
+          MonitorString("\n day not found "); MonitorCharDec(ibDay34 < wHOURS/48);
+        #endif
+        return ibDay34 < wHOURS/48;
+      }
+    } else {
+      #if MONITOR_34
+        MonitorString("\n online ");
+      #endif
+      return MakeStopHou(0);
+    }
+  }
 }
 
 
