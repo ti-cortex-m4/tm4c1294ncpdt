@@ -100,6 +100,21 @@ void    QueryProfileRead34(void)
   QueryIO(1000, 1+5+2);
 }
 
+/*
+static unsigned short CRC(uchar  j) {
+  static unsigned short mpwBuff[12];
+
+  uint x = 4+2+2+24*(j-1);
+
+  uchar i;
+  for (i=0; i<12; i++) {
+    uint y = x + i*2;
+    mpwBuff[i] = InBuff(y) + InBuff(y+1)*0x100;
+  }
+
+  return CRC34(mpwBuff, 12);
+}
+*/
 
 bool    ReadProfileRead34(void)
 {
