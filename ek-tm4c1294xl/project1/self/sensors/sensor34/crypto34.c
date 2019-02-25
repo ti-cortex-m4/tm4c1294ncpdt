@@ -29,7 +29,7 @@ void    EncryptAES(const uchar *userKey, const uchar *in, uchar *out)
 }
 
 
-#if 1
+#if 0
 
 void    TestCrypto34(void) {
   const uchar *mpbPass = "111111";
