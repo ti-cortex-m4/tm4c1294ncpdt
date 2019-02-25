@@ -12,7 +12,7 @@ auth34.c
 #include "../../devices/devices.h"
 #include "../../time/delay.h"
 #include "../../display/display.h"
-#include "device34.h"
+#include "monitor34.h"
 #include "auth34.h"
 #include "crypto34.h"
 
