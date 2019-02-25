@@ -4,3 +4,4 @@ crc34.h
 
 ------------------------------------------------------------------------------*/
 
+unsigned short MakeCRC34(unsigned short *data, int count);
