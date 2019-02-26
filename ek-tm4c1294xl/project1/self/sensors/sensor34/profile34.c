@@ -17,7 +17,7 @@ PROFILE34.C
 #include "../../devices/devices.h"
 #include "../../devices/devices_time.h"
 #include "../../special/special.h"
-#include "../../digitals/profile/profile_frac8.h"
+#include "../../digitals/profile/profile_frac.h"
 #include "../../digitals/limits.h"
 #include "../../time/delay.h"
 #include "../../time/calendar.h"
@@ -41,7 +41,7 @@ static  uint            cwOffline;
 
 void    InitProfileOpen34(void)
 {
-  ibJournal34 = diCurr.ibLine / 4;
+  ibJournal34 = 0; // diCurr.ibLine / 4;
   tiProfile34 = tiCurr;
   cwOffline = 0;
 
@@ -141,12 +141,12 @@ bool    ReadProfileRead34(void)
       uchar i = ibJournal34*4 + k;
 
       long dw = PopLongLtl();
-      mpdbEngFracDigCan8[ibDig][i] += (double)dw/100;
+      mpdbEngFracDigCan[ibDig][i] += (double)dw/100;
 
-      uint w = (uint)(mpdbEngFracDigCan8[ibDig][i]);
+      uint w = (uint)(mpdbEngFracDigCan[ibDig][i]);
       mpwChannels[i] = w;
 
-      mpdbEngFracDigCan8[ibDig][i] -= (double)w;
+      mpdbEngFracDigCan[ibDig][i] -= (double)w;
     }
 
     time tm = UnixTimeToTimeFromGMT34(PopLongLtl());
@@ -160,7 +160,7 @@ bool    ReadProfileRead34(void)
     uint w2 = PopIntLtl();
   }
 
-  SaveProfileFrac8(ibDig);
+  SaveProfileFrac6(ibDig);
 
   if (wCount > 0)
     return 1;
@@ -224,11 +224,11 @@ bool    ReadProfileClose34(void)
 }
 
 
-
+/*
 bool    ActualLine34(uchar  ibDig, uchar  ibCan)
 {
   return ((GetDigitalDevice(ibDig) != 34) ||
           (GetDigitalLine(ibDig) / 4 == GetDigitalLine(ibCan) / 4));
 }
-
+*/
 #endif

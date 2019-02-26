@@ -24,10 +24,6 @@ CALC!C
 
 
 
-bool    ActualLine34(uchar  ibDig, uchar  ibCan);
-
-
-
 bool                    fLoadHou, fLoadDay, fLoadMon,
                         fLoadMem, fSaveDay, fSaveMon;
 
@@ -129,7 +125,7 @@ void    CalcDigCanals(time  ti)
   for (c=0; c<bCANALS; c++)                           
   {
     LoadPrevDigital(c);
-    if (CompareCurrPrevLines(ibDig, c) && ActualLine34(ibDig, c))
+    if (CompareCurrPrevLines(ibDig, c) == true)
     {
       uint w;
       if (iwDigHou == iwHardHou)
