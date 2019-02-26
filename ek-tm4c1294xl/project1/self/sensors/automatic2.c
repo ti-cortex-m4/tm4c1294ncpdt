@@ -49,6 +49,7 @@ AUTOMATIC2!C
 #include "sensor32/cntmon32.h"
 #include "sensor33/automatic33.h"
 #include "sensor33/cntmon33.h"
+#include "sensor34/automatic34.h"
 #include "automatic2.h"
 
 
@@ -1894,6 +1895,10 @@ double2 ReadCntCurrCan(uchar  ibCan)
     case 33: return ReadCntCurr33();
 #endif
 
+#ifndef SKIP_34
+    case 34: return ReadCntCurr34();
+#endif
+
     default: return GetDouble2Error();
   }
 }
@@ -2017,6 +2022,10 @@ time2   ReadTimeCan(uchar  ibCan)
 
 #ifndef SKIP_33
     case 33: return ReadTimeCan33();
+#endif
+
+#ifndef SKIP_34
+    case 34: return ReadTimeCan34();
 #endif
 
     default: return GetTime2Error();
@@ -2159,6 +2168,10 @@ double2 ReadCntMonCan(uchar  ibMon, uchar  ibCan)
 
 #ifndef SKIP_33
     case 33: return ReadCntMonCan33(ibMon);
+#endif
+
+#ifndef SKIP_34
+    case 34: return ReadCntMonCan34(ibMon);
 #endif
 
     default: return GetDouble2Error();

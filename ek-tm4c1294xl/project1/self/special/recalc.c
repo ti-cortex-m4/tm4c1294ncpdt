@@ -16,6 +16,7 @@ RECALC!C
 #include "../impulses/energy_spec.h"
 #include "../digitals/digitals.h"
 #include "../digitals/profile/profile_frac.h"
+#include "../digitals/profile/profile_frac8.h"
 #include "../flash/records.h"
 #include "../time/timedate.h"
 #include "../time/calendar.h"
@@ -176,6 +177,8 @@ bool    ClearCanals(uchar  ibDigMin, uchar  ibDigMax, uint  wHhrMin, uint  wHhrM
   memset(&mpdbEngFrac, 0, sizeof(mpdbEngFrac));
   memset(&mpdbEngFracDigCan, 0, sizeof(mpdbEngFracDigCan));
   SaveProfileFrac6_All();
+  memset(&mpdbEngFracDigCan8, 0, sizeof(mpdbEngFracDigCan8));
+  SaveProfileFrac8_All();
 
   uint wStop = ((wHOURS + iwHardHou - wHhrMin) % wHOURS) + 4;
 

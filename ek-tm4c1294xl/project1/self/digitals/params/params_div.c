@@ -313,6 +313,10 @@ void    MakeParamDiv(uint  iwPrm)
       default: fl = 1; break;
     }
   }
+  else if (GetParamDevice(iwPrm) == 34)
+  {
+    fl = 1;
+  }
 
   mpreParamsDiv[iwPrm] = fl;
 }

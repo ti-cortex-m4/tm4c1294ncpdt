@@ -86,11 +86,14 @@ ulong                   dwValueC, dwValueS;
 // промежуточный массив
 double                  mpdbBuffCanHou[4][48];
 
-// промежуточный массив
+// дробные значения 30-мин. профилей
 double                  mpdbEngFrac[bCANALS];
 
-// промежуточный массив
+// дробные значения 30-мин. профилей
 double                  mpdbEngFracDigCan[bCANALS][6];
+
+// дробные значения 30-мин. профилей
+double                  mpdbEngFracDigCan8[bCANALS][8];
 
 // счетчики переполнений получасовых графиков
 uint                    mpcwOverflowHhr[bCANALS];

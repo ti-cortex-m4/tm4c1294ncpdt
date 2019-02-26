@@ -121,3 +121,4 @@ ulong                   cdwAnswerDisabled, cdwAnswerEnabled;
 
 // время/дата
 time                    tiAnswerDisabled, tiAnswerEnabled;
+

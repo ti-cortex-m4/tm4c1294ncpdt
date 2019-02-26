@@ -69,6 +69,8 @@ extern  double                  mpdbEngFrac[bCANALS];
 
 extern  double                  mpdbEngFracDigCan[bCANALS][6];
 
+extern  double                  mpdbEngFracDigCan8[bCANALS][8];
+
 extern  uint                    mpcwOverflowHhr[bCANALS];
 
 extern  uint                    mpcwErrorLink[bCANALS];

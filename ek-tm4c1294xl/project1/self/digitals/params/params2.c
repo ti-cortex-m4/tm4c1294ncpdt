@@ -35,6 +35,7 @@ PARAMS2!C
 #include    "../../sensors/sensor31/params31.h"
 #include    "../../sensors/sensor32/params32.h"
 #include    "../../sensors/sensor33/params33.h"
+#include    "../../sensors/sensor34/params34.h"
 #include    "../../time/delay.h"
 #include    "../../console.h"
 #include    "../../flash/files.h"
@@ -1096,6 +1097,10 @@ float2  ReadParam(uint  iwPrm)
 
 #ifndef SKIP_33
     case 33: return ReadParam33();
+#endif
+
+#ifndef SKIP_34
+    case 34: return ReadParam34();
 #endif
 
     default: return GetFloat2Error();

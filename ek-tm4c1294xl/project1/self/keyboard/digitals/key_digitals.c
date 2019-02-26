@@ -42,6 +42,7 @@ static void MakeKeys(uchar  ibCan, uchar  bDevice)
     case 2:   strcpy((char *)&mpphKeys[ibCan].szLine, "222222");    break;
     case 4:   strcpy((char *)&mpphKeys[ibCan].szLine, "00000000");  break;
     case 21:  strcpy((char *)&mpphKeys[ibCan].szLine, "00000000");  break;
+    case 34:  strcpy((char *)&mpphKeys[ibCan].szLine, "222222");    break;
     default:  strcpy((char *)&mpphKeys[ibCan].szLine, "0");         break;
   }
 
@@ -63,6 +64,7 @@ static void MakeInDelays(uchar  ibPort, uchar  ibPhone, uchar  bDevice)
       case 11:
       case 20:
       case 18:
+      case 34:
         mpwMajorInDelay[ibPort] = (uint)(wFREQUENCY_T0*0.4);
         mpwMinorInDelay[ibPort] = (uint)(wFREQUENCY_T0*0.4); break;
 
@@ -108,6 +110,7 @@ static void MakeInDelays(uchar  ibPort, uchar  ibPhone, uchar  bDevice)
       case 11:
       case 20:
       case 18:
+      case 34:
         mpwMajorInDelay[ibPort] = (uint)(wFREQUENCY_T0*2);
         mpwMinorInDelay[ibPort] = (uint)(wFREQUENCY_T0*2); break;
 
