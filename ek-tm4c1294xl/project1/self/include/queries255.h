@@ -151,12 +151,14 @@ QUERIES2!H
 #define bEXT_GET_ERROR_LINK            134
 
 #define bEXT_GET_ENGFRAC               133
-#define bEXT_GET_ENGFRACDIGCAN         110
+#define bEXT_GET_ENGFRACDIGCAN6        110
+#define bEXT_GET_ENGFRACDIGCAN8        117
 
 #define bEXT_GET_CNTCURR               135
 
 #define bEXT_RESET_ENGFRAC             248
-#define bEXT_RESET_ENGFRACDIGCAN       249
+#define bEXT_RESET_ENGFRACDIGCAN6      249
+#define bEXT_RESET_ENGFRACDIGCAN8      247
 
 #define bEXT_FLASH_CONTROL             250
 

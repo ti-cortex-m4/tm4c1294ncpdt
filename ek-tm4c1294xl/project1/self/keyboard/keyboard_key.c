@@ -109,6 +109,7 @@ KEYBOARD_KEY!C
 #include "digitals/key_max_repeats.h"
 #include "digitals/key_max_shutdown.h"
 #include "sensors/key_control_w.h"
+#include "sensors/key_time_zone34.h"
 #include "digitals/review/key_review_flag.h"
 #include "digitals/review/key_review_can.h"
 #include "digitals/review/key_review_read_id.h"
@@ -365,6 +366,7 @@ void    Keyboard_Key(void)
       case wSET_ENBL_DIAGRAM:   key_SetEnblDiagram();   break;
       case wSET_SKIP_FAILURE_ENBL: key_SetSkipFailureEnbl(); break;
       case wSET_SKIP_FAILURE_REPEATS: key_SetSkipFailureRepeats(); break;
+      case wSET_TIME_ZONE_34:   key_SetTimeZone34();    break;
 
       case wSET_REVIEW_FLAG:    key_SetReviewFlag();    break;
       case wSET_REVIEW_CAN:     key_SetReviewCan();     break;
@@ -683,6 +685,7 @@ void    Keyboard_Key(void)
       case wSET_ENBL_DIAGRAM:   key_SetEnblDiagram();   break;
       case wSET_SKIP_FAILURE_ENBL: key_SetSkipFailureEnbl(); break;
       case wSET_SKIP_FAILURE_REPEATS: key_SetSkipFailureRepeats(); break;
+      case wSET_TIME_ZONE_34:   key_SetTimeZone34();    break;
 
       case wSET_REVIEW_FLAG:    key_SetReviewFlag();    break;
       case wSET_REVIEW_CAN:     key_SetReviewCan();     break;
@@ -921,6 +924,7 @@ void    Keyboard_Key(void)
       case wSET_ENBL_DIAGRAM:   key_SetEnblDiagram();   break;
       case wSET_SKIP_FAILURE_ENBL: key_SetSkipFailureEnbl(); break;
       case wSET_SKIP_FAILURE_REPEATS: key_SetSkipFailureRepeats(); break;
+      case wSET_TIME_ZONE_34:   key_SetTimeZone34();    break;
 
       case wSET_REVIEW_FLAG:    key_SetReviewFlag();    break;
       case wSET_REVIEW_CAN:     key_SetReviewCan();     break;

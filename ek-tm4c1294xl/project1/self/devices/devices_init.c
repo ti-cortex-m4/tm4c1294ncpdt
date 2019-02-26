@@ -32,6 +32,7 @@ DEVICES_INIT!C
 #include "../digitals/dsbl_answer.h"
 #include "../digitals/profile/refill.h"
 #include "../digitals/profile/profile_frac.h"
+#include "../digitals/profile/profile_frac8.h"
 #include "../digitals/schedule/schedule.h"
 #include "../digitals/dsbl_answer.h"
 #include "../digitals/skip_failure.h"
@@ -45,6 +46,7 @@ DEVICES_INIT!C
 #include "../digitals/extended/extended_5.h"
 #include "../digitals/extended/extended_6.h"
 #include "../digitals/extended/extended_7.h"
+#include "../sensors/sensor34/unix_time_gmt34.h"
 #include "devices_input.h"
 #include "devices_postinput.h"
 #include "devices_pause.h"
@@ -67,6 +69,7 @@ cache const             chPlcUFlag = {PLC_U_FLAG, &boPlcUFlag, sizeof(bool)};
 cache const             chPlcUSize = {PLC_U_SIZE, &bPlcUSize, sizeof(uchar)};
 cache const             chPlcUShutdown = {PLC_U_SHUTDOWN, &wPlcUShutdown, sizeof(uint)};
 cache const             chControlW = {CONTROL_W, &boControlW, sizeof(bool)};
+cache const             chTimeZone34 = {TIME_ZONE_34, &bTimeZone34, sizeof(uchar)};
 
 
 
@@ -86,8 +89,10 @@ void    InitDevices1(void)
   LoadCacheChar(&chPlcUSize, 1, 8, 6);
   LoadCacheInt(&chPlcUShutdown, 10, 500, 100);
   LoadCacheBool(&chControlW, false);
+  LoadCacheChar(&chTimeZone34, 0, 13, 3);
 
   LoadProfileFrac6_All();
+  LoadProfileFrac8_All();
 
   InitMaxRepeats();
   InitMaxShutdown();
@@ -169,8 +174,12 @@ void    ResetDevices(bool  fFull)
 
   SaveCacheBool(&chControlW, false);
 
+  SaveCacheChar(&chTimeZone34, 3);
+
   memset(&mpdbEngFracDigCan, 0, sizeof(mpdbEngFracDigCan));
   SaveProfileFrac6_All();
+  memset(&mpdbEngFracDigCan8, 0, sizeof(mpdbEngFracDigCan8));
+  SaveProfileFrac8_All();
 
   ResetMaxRepeats();
   ResetMaxShutdown();

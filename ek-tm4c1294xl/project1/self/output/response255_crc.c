@@ -241,10 +241,14 @@ void    Response255_CRC(void)
     case bINQ_FAILURE2: OutGetFailure2(); break;
     case bEXT_OVERFLOW_HHR: OutGetOverflowHhr(); break;
     case bEXT_GET_ERROR_LINK: OutGetErrorLink(); break;
+
     case bEXT_GET_ENGFRAC: OutGetEngFrac(); break;
-    case bEXT_GET_ENGFRACDIGCAN: OutGetEngFracDigCan(); break;
+    case bEXT_GET_ENGFRACDIGCAN6: OutGetEngFracDigCan6(); break;
+    case bEXT_GET_ENGFRACDIGCAN8: OutGetEngFracDigCan8(); break;
+
     case bEXT_RESET_ENGFRAC: OutResetEngFrac(); break;
-    case bEXT_RESET_ENGFRACDIGCAN: OutResetEngFracDigCan(); break;
+    case bEXT_RESET_ENGFRACDIGCAN6: OutResetEngFracDigCan6(); break;
+    case bEXT_RESET_ENGFRACDIGCAN8: OutResetEngFracDigCan8(); break;
 
     case bEXT_GET_CNTCURR: OutCntCanCurr(false); break;
 
