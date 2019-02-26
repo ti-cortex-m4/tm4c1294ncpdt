@@ -15,6 +15,7 @@ extended_4t_34.c
 #include "unix_time_gmt34.h"
 #include "energy_dates34.h"
 #include "monitor34.h"
+#include "energy34.h"
 #include "device34.h"
 #include "extended_4t_34.h"
 

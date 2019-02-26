@@ -11,6 +11,7 @@ ENG_DAY34.C
 #include "../../serial/ports_devices.h"
 #include "../../devices/devices.h"
 #include "unix_time_gmt34.h"
+#include "energy34.h"
 #include "device34.h"
 #include "energy_day34.h"
 
