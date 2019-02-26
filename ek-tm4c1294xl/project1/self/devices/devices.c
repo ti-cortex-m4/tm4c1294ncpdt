@@ -5523,7 +5523,7 @@ void    RunDevices(void)
       if (fCurrCtrl == true)
         MakePause(DEV_PREVTIME_34P);
       else
-        MakePause(DEV_PREVOPEN_34P);
+        MakePause(DEV_PREVINIT_34P);
       break;
 
 
@@ -5567,7 +5567,7 @@ void    RunDevices(void)
           ulong dwDelta = AbsLong(dwSecond1 - dwSecond2);
           if (dwDelta < GetCorrectLimit()) {
             ShowLo(szCorrectNo); DelayInf();
-            MakePause(DEV_PREVOPEN_34P); // без коррекции
+            MakePause(DEV_PREVINIT_34P); // без коррекции
           }
           else if (GetCurrHouIndex() == GetTimeCurrIndex34())
           {
@@ -5658,7 +5658,7 @@ void    RunDevices(void)
           ShowLo(szManageYes); DelayInf();
           MakePause(DEV_PREVAUTH2KEY_34P); // нельзя корректировать время, можно установить время
         } else {
-          MakePause(DEV_PREVOPEN_34P);
+          MakePause(DEV_PREVINIT_34P);
         }
       }
       else
@@ -5745,7 +5745,7 @@ void    RunDevices(void)
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
         ReadManage34();
-        MakePause(DEV_PREVOPEN_34P);
+        MakePause(DEV_PREVINIT_34P);
       }
       else
       {
@@ -5762,6 +5762,30 @@ void    RunDevices(void)
       break;
 
 // конец установки времени
+
+    case DEV_PREVINIT_34P:
+      cbRepeat = MaxRepeats();
+      QueryProfileClose34();
+      SetCurr(DEV_INIT_34P);
+      break;
+
+    case DEV_INIT_34P:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+        MakePause(DEV_PREVOPEN_34P);
+      else
+      {
+        if (cbRepeat == 0) ErrorProfile();
+        else
+        {
+          ErrorLink();
+          cbRepeat--;
+
+          QueryProfileClose34();
+          SetCurr(DEV_INIT_34P);
+        }
+      }
+      break;
+
 
     case DEV_PREVOPEN_34P:
       InitProfileOpen34();
