@@ -15,6 +15,7 @@ extended_5_34.c
 #include "unix_time_gmt34.h"
 #include "energy_dates34.h"
 #include "monitor34.h"
+#include "energy34.h"
 #include "device34.h"
 #include "extended_5_34.h"
 
@@ -51,17 +52,7 @@ static status QueryCntDayTariff34_Full(time  tmDay, uchar  ibTrf) // на начало с
   if (r == MaxRepeats()) return ST_BADDIGITAL;
   ShowPercent(61+ibTrf*2);
 
-  ReadEng34();
-
-  double dbTrans = mpdbTransCnt[ibDig];
-
-  uchar i;
-  for (i=0; i<MAX_LINE_N34; i++)
-  {
-    mpdbChannelsC[i] = (double)mpddwChannels34[i] / 1000000;
-    mpdbChannelsC[i] *= dbTrans;
-    mpboChannelsA[i] = true;
-  }
+  ReadEngWithTrans34();
 
   return ST_OK;
 }

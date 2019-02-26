@@ -13,6 +13,7 @@ DEVICE34.C
 #include "../../devices/devices.h"
 #include "../../digitals/current/current_run.h"
 #include "unix_time_gmt34.h"
+#include "energy34.h"
 #include "device34.h"
 
 

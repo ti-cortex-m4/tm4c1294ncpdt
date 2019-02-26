@@ -13,9 +13,10 @@ AUTOMATIC34.C
 #include "../../time/calendar.h"
 #include "device34.h"
 #include "time34.h"
-#include "eng_dates34.h"
-#include "eng_day34.h"
-#include "eng_mon34.h"
+#include "energy34.h"
+#include "energy_dates34.h"
+#include "energy_day34.h"
+#include "energy_mon34.h"
 #include "automatic34.h"
 
 
@@ -101,17 +102,7 @@ double2 QueryEngAbs34_Full(uchar  bPercent)
   if (r == MaxRepeats()) return GetDouble2Error();
   ShowPercent(bPercent);
 
-  ReadEng34();
-
-  double dbTrans = mpdbTransCnt[ibDig];
-
-  uchar i;
-  for (i=0; i<MAX_LINE_N34; i++)
-  {
-    mpdbChannelsC[i] = (double)mpddwChannels34[i] / 1000000;
-    mpdbChannelsC[i] *= dbTrans;
-    mpboChannelsA[i] = true;
-  }
+  ReadEngWithTrans34();
 
   return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
 }
