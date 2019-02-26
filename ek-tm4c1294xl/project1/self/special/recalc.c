@@ -16,6 +16,7 @@ RECALC!C
 #include "../impulses/energy_spec.h"
 #include "../digitals/digitals.h"
 #include "../digitals/profile/profile_frac.h"
+#include "../digitals/profile/profile_frac8.h"
 #include "../flash/records.h"
 #include "../time/timedate.h"
 #include "../time/calendar.h"

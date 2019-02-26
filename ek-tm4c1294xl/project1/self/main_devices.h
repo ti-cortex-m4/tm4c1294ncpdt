@@ -756,12 +756,14 @@ typedef enum
   DEV_PREVMANAGE_34P    =  0x2010,
   DEV_MANAGE_34P        =  0x2011,
 
-  DEV_PREVOPEN_34P      =  0x2012,
-  DEV_OPEN_34P          =  0x2013,
-  DEV_PREVREAD_34P      =  0x2014,
-  DEV_READ_34P          =  0x2015,
-  DEV_PREVCLOSE_34P     =  0x2016,
-  DEV_CLOSE_34P         =  0x2017,
+  DEV_PREVINIT_34P      =  0x2012,
+  DEV_INIT_34P          =  0x2013,
+  DEV_PREVOPEN_34P      =  0x2014,
+  DEV_OPEN_34P          =  0x2015,
+  DEV_PREVREAD_34P      =  0x2016,
+  DEV_READ_34P          =  0x2017,
+  DEV_PREVCLOSE_34P     =  0x2018,
+  DEV_CLOSE_34P         =  0x2019,
 
 #endif
 
