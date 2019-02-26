@@ -5,3 +5,7 @@ energy34.h
 ------------------------------------------------------------------------------*/
 
 extern  uint64_t                mpddwChannels34[8+2];
+
+
+
+void    ReadEngWithTrans34(void);
