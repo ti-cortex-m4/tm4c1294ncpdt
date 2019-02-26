@@ -5,16 +5,9 @@ energy34.c
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-//#include "../../console.h"
 #include "../../memory/mem_factors.h"
 #include "../../memory/mem_digitals.h"
-//#include "../../serial/ports.h"
-//#include "../../serial/ports_devices.h"
-//#include "../../serial/monitor.h"
 #include "../../devices/devices.h"
-//#include "unix_time_gmt34.h"
-//#include "energy_dates34.h"
-//#include "monitor34.h"
 #include "device34.h"
 #include "energy34.h"
 
