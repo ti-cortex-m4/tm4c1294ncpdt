@@ -85,6 +85,3 @@ extern  ulong                   cdwAnswerDisabled, cdwAnswerEnabled;
 
 extern  time                    tiAnswerDisabled, tiAnswerEnabled;
 
-
-
-extern  uint64_t                mpddwChannels34[8+2];

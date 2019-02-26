@@ -122,7 +122,3 @@ ulong                   cdwAnswerDisabled, cdwAnswerEnabled;
 // время/дата
 time                    tiAnswerDisabled, tiAnswerEnabled;
 
-
-
-// значения энергии счетчиков ESM (10 значений предоставляет счетчик, 8 первых значений использует сумматор)
-uint64_t                mpddwChannels34[8+2];
