@@ -24,6 +24,7 @@ PROFILE34.C
 #include "../../time/unix_time.h"
 #include "../../display/display.h"
 #include "unix_time_gmt34.h"
+#include "crc34.h"
 #include "monitor34.h"
 #include "profile34.h"
 
@@ -100,19 +101,22 @@ void    QueryProfileRead34(void)
   QueryIO(1000, 1+5+2);
 }
 
-/*
-static unsigned short CRC(uchar  j) {
-  static unsigned short mpwBuff[12];
 
-  uint x = 4+2+2+24*(j-1);
+/*
+bool    CheckCRC(uchar  j)
+{
+  static uchar mpw[24];
+
+  uint x = 4+2+2+24*j;
 
   uchar i;
-  for (i=0; i<12; i++) {
-    uint y = x + i*2;
-    mpwBuff[i] = InBuff(y) + InBuff(y+1)*0x100;
+  for (i=0; i<24; i++) {
+    mpw[i] = InBuff(x + i);
   }
 
-  return CRC34(mpwBuff, 12);
+  unsigned short wCRC = CRC34((unsigned short *)mpw, 22);
+
+  return wCRC == (mpw[23]*0x100 + mpw[22]);
 }
 */
 
@@ -135,6 +139,8 @@ bool    ReadProfileRead34(void)
   uchar j;
   for (j=0; j<wCount; j++)
   {
+    // szHi[10] = CheckCRC(j) ? ' ' : '?';
+
     uchar k;
     for (k=0; k<4; k++)
     {
