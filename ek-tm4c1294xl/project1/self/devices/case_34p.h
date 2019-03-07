@@ -332,7 +332,7 @@
 
     case DEV_CLOSE_34P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
-        if (ReadProfileClose34()) {
+        if (ReadProfileClose34_Safe()) {
           cbRepeat = MaxRepeats();
           QueryProfileOpen34();
           SetCurr(DEV_OPEN_34P);

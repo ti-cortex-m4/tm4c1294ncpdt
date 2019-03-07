@@ -12,4 +12,4 @@ void    QueryProfileRead34(void);
 bool    ReadProfileRead34(void);
 
 void    QueryProfileClose34(void);
-bool    ReadProfileClose34(void);
+bool    ReadProfileClose34_Safe(void);
