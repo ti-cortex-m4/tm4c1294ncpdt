@@ -32,11 +32,18 @@ PROFILE34.C
 
 #ifndef SKIP_34
 
+//                                              0123456789ABCDEF
+static char const       szCRCErrorHi[]       = "Число ошибок CRC",
+                        szCRCErrorLo[]       = " профилей: %u    ";
+
+
+
 static  uchar           ibJournal34;
 static  time            tiProfile34;
 static  uchar           ibDay34;
 static  uint            iwProfile34;
 static  uint            cwOffline;
+static  uint            cwCRCError;
 
 
 
@@ -45,6 +52,7 @@ void    InitProfileOpen34(void)
   ibJournal34 = 0; // diCurr.ibLine / 4;
   tiProfile34 = tiCurr;
   cwOffline = 0;
+  cwCRCError = 0;
 
   if (!UseBounds())
     ibDay34 = 0;
@@ -102,8 +110,8 @@ void    QueryProfileRead34(void)
 }
 
 
-/*
-bool    CheckCRC(uchar  j)
+
+static bool CheckCRC(uchar  j)
 {
   static uchar mpw[24];
 
@@ -115,10 +123,12 @@ bool    CheckCRC(uchar  j)
   }
 
   unsigned short wCRC = CRC34((unsigned short *)mpw, 22);
-
+#if MONITOR_34
+  MonitorString("\n CRC "); MonitorIntHex(wCRC);
+#endif
   return wCRC == (mpw[23]*0x100 + mpw[22]);
 }
-*/
+
 
 bool    ReadProfileRead34(void)
 {
@@ -139,7 +149,9 @@ bool    ReadProfileRead34(void)
   uchar j;
   for (j=0; j<wCount; j++)
   {
-    // szHi[10] = CheckCRC(j) ? ' ' : '?';
+    bool fCRC = CheckCRC(j);
+    szHi[10] = fCRC ? ' ' : '?';
+    if (!fCRC) { cwCRCError++; DelayOff(); continue; }
 
     uchar k;
     for (k=0; k<4; k++)
@@ -189,7 +201,7 @@ void    QueryProfileClose34(void)
 }
 
 
-bool    ReadProfileClose34(void)
+static bool ReadProfileClose34(void)
 {
   ShowProgressDigHou();
 
@@ -227,6 +239,24 @@ bool    ReadProfileClose34(void)
       return MakeStopHou(0);
     }
   }
+}
+
+
+bool    ReadProfileClose34_Safe(void)
+{
+  bool fMoreProfile = ReadProfileClose34();
+  if ((!fMoreProfile) && (cwCRCError == 0))
+  {
+    SaveDisplay();
+
+    sprintf(szHi, szCRCErrorHi);
+    sprintf(szLo, szCRCErrorLo, cwCRCError);
+
+    Delay(1000);
+    LoadDisplay();
+  }
+
+  return fMoreProfile;
 }
 
 
