@@ -149,9 +149,9 @@ bool    ReadProfileRead34(void)
   uchar j;
   for (j=0; j<wCount; j++)
   {
-    bool fCRC = CheckCRC(j);
-    szHi[10] = fCRC ? ' ' : '?';
-    if (!fCRC) { cwCRCError++; DelayOff(); continue; }
+    bool fOk = CheckCRC(j);
+    szHi[10] = fOk ? ' ' : '?';
+    if (!fOk) { cwCRCError++; DelayOff(); continue; }
 
     uchar k;
     for (k=0; k<4; k++)
@@ -244,8 +244,8 @@ static bool ReadProfileClose34(void)
 
 bool    ReadProfileClose34_Safe(void)
 {
-  bool fMoreProfile = ReadProfileClose34();
-  if ((!fMoreProfile) && (cwCRCError == 0))
+  bool fNextDay = ReadProfileClose34();
+  if ((!fNextDay) && (cwCRCError > 0))
   {
     SaveDisplay();
 
@@ -256,7 +256,7 @@ bool    ReadProfileClose34_Safe(void)
     LoadDisplay();
   }
 
-  return fMoreProfile;
+  return fNextDay;
 }
 
 
