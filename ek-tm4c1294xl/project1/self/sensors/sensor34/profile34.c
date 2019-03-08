@@ -23,6 +23,7 @@ PROFILE34.C
 #include "../../time/calendar.h"
 #include "../../time/unix_time.h"
 #include "../../display/display.h"
+#include "../../keyboard/time/key_timedate.h"
 #include "unix_time_gmt34.h"
 #include "crc34.h"
 #include "monitor34.h"
@@ -244,6 +245,8 @@ static bool ReadProfileClose34(void)
 
 bool    ReadProfileClose34_Safe(void)
 {
+  HideCurrTime(1);
+
   bool fNextDay = ReadProfileClose34();
   if ((!fNextDay) && (cwCRCError > 0))
   {
