@@ -87,7 +87,7 @@ void    QueryConfig34(void)
   PushChar(diCurr.bAddress);
   PushChar(0x6C);
 
-  QueryIO(3+32+2, 2+2);
+  QueryIO(3+36+2, 2+2);
 }
 
 
