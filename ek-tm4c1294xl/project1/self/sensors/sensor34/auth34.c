@@ -150,7 +150,7 @@ void    QueryAuthReq34(void)
 }
 
 
-bool    ReadAuthReq(void)
+bool    ReadAuthReq34(void)
 {
 #if MONITOR_34
   MonitorString("\n auth. request: answer size "); MonitorIntDec(CountInBuff());
@@ -191,7 +191,7 @@ bool    TestAuth34(void)
   QueryAuthReq34();
   if (Input() != SER_GOODCHECK) return 0;
 
-  bool b = ReadAuthReq();
+  bool b = ReadAuthReq34();
 
 #if MONITOR_34
   MonitorString("\n authentication ");

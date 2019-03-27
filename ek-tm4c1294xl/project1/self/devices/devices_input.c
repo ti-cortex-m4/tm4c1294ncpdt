@@ -177,7 +177,7 @@ void    DevicesInput(void)
         UnpackCorrect34();
       else if (GetCurr() == DEV_MANAGE_34P)
         UnpackManage34();
-      else if ((GetCurr() == DEV_AUTH1REQ_34P) || (GetCurr() == DEV_AUTH2REQ_34P))
+      else if (GetCurr() == DEV_AUTHREQ_34P)
         UnpackAuth34();
       else if (GetCurr() == DEV_READ_34P)
         UnpackProfile34();
