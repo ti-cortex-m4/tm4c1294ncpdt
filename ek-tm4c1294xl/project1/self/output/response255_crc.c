@@ -69,7 +69,7 @@ void    Response255_CRC(void)
 {
   switch (bInBuff5)
   {
-    case bEXT_CORRECT1: OutCorrectExt1(); break;
+    //case bEXT_CORRECT1: OutCorrectExt1(); break;
     case bEXT_CORRECT2: OutCorrectExt2(); break;
     case bEXT_CORRECT20: OutCorrectExt20(); break;
     case bEXT_CORRECT21: OutCorrectExt21(); break;

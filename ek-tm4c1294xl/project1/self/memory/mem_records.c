@@ -24,7 +24,7 @@ ulong                   cdwKeyRecord,
 uchar                   mpfRecordDsbl[256];
 
 // глобальная переменная - время
-time                    tiRecordTime;
+time                    tiRecordTime, tiRecordTime2;
 
 // глобальная переменная - канал
 uchar                   ibRecordCan;
