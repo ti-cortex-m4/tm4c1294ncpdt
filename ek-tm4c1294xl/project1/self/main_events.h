@@ -155,7 +155,7 @@ typedef enum
   EVE_ESC_k              = 213,
   EVE_INQ_CORRECT1       = 214,
   EVE_INQ_CORRECT2       = 215,
-  EVE_INQ_CORRECT4       = 216,
+  EVE_INQ_CORRECT4       = 209, // 216
   EVE_TIME_OK            = 217,
   EVE_GPS_GOODGPS_2      = 218,
   EVE_UNI_CORRECT        = 219,

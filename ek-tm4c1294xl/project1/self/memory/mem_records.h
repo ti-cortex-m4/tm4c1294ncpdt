@@ -16,7 +16,7 @@ extern  ulong                   cdwKeyRecord,
 
 extern  uchar                   mpfRecordDsbl[256];
 
-extern  time                    tiRecordTime;
+extern  time                    tiRecordTime, tiRecordTime2;
 
 extern  uchar                   ibRecordCan;
 
