@@ -12,6 +12,8 @@ OUT_CORRECT,C
 #include "../serial/ports.h"
 #include "../time/rtc.h"
 #include "../time/timedate.h"
+#include "../time/calendar.h"
+#include "../time/calendar2.h"
 #include "../time/correct1.h"
 #include "../time/correct2.h"
 #include "../time/correct3.h"
@@ -60,26 +62,34 @@ void    OutCorrect4(void)
   ti.bSecond = bInBuff5;
   ti.bMinute = bInBuff6;
   ti.bHour   = bInBuff7;
+  ti.bDay    = tiCurr.bDay;
+  ti.bMonth  = tiCurr.bMonth;
+  ti.bYear   = tiCurr.bYear;
+  time ti2 = ti;
 
-  ulong dw = GetSecondIndex(ti);
+  ulong dwSecI = TimeToSecIndex(ti);
+  ulong dwSecC = TimeToSecIndex(tiCurr);
 
-  ti.bSecond = tiCurr.bSecond;
-  ti.bMinute = tiCurr.bMinute;
-  ti.bHour   = tiCurr.bHour;
-
-  if (dw > GetSecondIndex(ti))
+  if (dwSecI > dwSecC)
   {
-    dw = dw - GetSecondIndex(ti);
+    ulong dw = dwSecI - dwSecC; // коррекция времени вперед
 
     if (dw < wMAXCORRECT)
     {
-      time ti2;
-      ti2.bSecond = bInBuff5;
-      ti2.bMinute = bInBuff6;
-      ti2.bHour   = bInBuff7;
+      if (TimeToHouIndex(ti) != TimeToHouIndex(tiCurr))
+      {
+        ti2 = HouIndexToDate(DateToHouIndex(tiCurr) + 1);
+        ti2 = SecIndexToDate(DateToSecIndex(ti2) - 1);
 
+        dwSecI = TimeToSecIndex(ti2);
+        dw = dwSecI - dwSecC;
+      }
+
+      tiRecordTime = ti;
+      tiRecordTime2 = ti2;
       AddKeyRecord(EVE_INQ_CORRECT4);
       SetCurrTime(ti2);
+      tiPrev = ti2;
       AddKeyRecord(EVE_TIME_OK);
 
       uchar i = GetCorrectIndex(EVE_INQ_CORRECT4);
@@ -97,17 +107,25 @@ void    OutCorrect4(void)
   }
   else
   {
-    dw = GetSecondIndex(ti) - dw;
+    ulong dw = dwSecC - dwSecI; // коррекция времени назад
 
     if (dw < wMAXCORRECT)
     {
-      time ti2;
-      ti2.bSecond = bInBuff5;
-      ti2.bMinute = bInBuff6;
-      ti2.bHour   = bInBuff7;
+      if (TimeToHouIndex(ti) != TimeToHouIndex(tiCurr))
+      {
+        ti2 = HouIndexToDate(DateToHouIndex(tiCurr));
+        ti2 = SecIndexToDate(DateToSecIndex(ti2) + 1);
 
+        dwSecI = TimeToSecIndex(ti2);
+        dw = dwSecC - dwSecI;
+      }
+
+      tiRecordTime = ti;
+      tiRecordTime2 = ti2;
       AddKeyRecord(EVE_INQ_CORRECT4);
       SetCurrTime(ti2);
+      tiPrev = ti2;
+      AddKeyRecord(EVE_TIME_OK);
 
       uchar i = GetCorrectIndex(EVE_INQ_CORRECT4);
 
@@ -125,7 +143,7 @@ void    OutCorrect4(void)
 }
 
 
-
+/*
 void    OutCorrectExt1(void)
 {
   if (Correct2Disabled()) { Correct2(EVE_EXT_CORRECT2); Result(bRES_BADACCESS); return; }
@@ -143,7 +161,7 @@ void    OutCorrectExt1(void)
   }
   else Result(bRES_BADDATA);
 }
-
+*/
 
 
 void    OutCorrectExt2(void)
