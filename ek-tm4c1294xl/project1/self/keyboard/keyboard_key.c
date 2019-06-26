@@ -20,6 +20,7 @@ KEYBOARD_KEY!C
 #include "digitals/schedule/key_ctrl_hours.h"
 #include "digitals/schedule/key_recalc_time.h"
 #include "digitals/schedule/key_recalc_always.h"
+#include "digitals/schedule/key_recalc3.h"
 #include "digitals/schedule/key_recalc.h"
 #include "digitals/key_enbl_canals.h"
 #include "digitals/current/key_enbl_current.h"
@@ -317,6 +318,7 @@ void    Keyboard_Key(void)
 
       case bSET_RECALC_TIME:    key_SetRecalcTime();    break;
       case bSET_RECALC_ALWAYS:  key_SetRecalcAlways();  break;
+      case wSET_RECALC_3:       key_SetRecalc3();       break;
 
       case bGET_CNTCURR_110:
       case bGET_READTIMEDATE1:
@@ -553,6 +555,7 @@ void    Keyboard_Key(void)
 
       case bSET_RECALC_TIME:    key_SetRecalcTime();    break;
       case bSET_RECALC_ALWAYS:  key_SetRecalcAlways();  break;
+      case wSET_RECALC_3:       key_SetRecalc3();       break;
 
       case bGET_CNTCURR_10:
       case bGET_CNTCURR_110:
@@ -870,6 +873,7 @@ void    Keyboard_Key(void)
 
       case bSET_RECALC_TIME:    key_SetRecalcTime();    break;
       case bSET_RECALC_ALWAYS:  key_SetRecalcAlways();  break;
+      case wSET_RECALC_3:       key_SetRecalc3();       break;
 
       case bSET_RECALC_FULL:
       case bSET_RECALC_MAXPOW:

@@ -24,3 +24,6 @@ bool                    boRecalcAlways;
 
 // глобальная переменная
 bool                    boRecalcCurr;
+
+// признак
+bool                    boRecalcMaxPowCurrDay;
