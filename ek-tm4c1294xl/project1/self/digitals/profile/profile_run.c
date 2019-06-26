@@ -32,6 +32,7 @@ PROFILE_RUN!C
 #include "../../digitals/skip_failure.h"
 #include "../../special/special.h"
 #include "../../special/recalc.h"
+#include "../../special/recalc3.h"
 #include "../../time/decret.h"
 #include "../../flash/records.h"
 #include "../limits.h"
