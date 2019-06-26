@@ -7,6 +7,7 @@ SCHEDULE!C
 #include    "../../main.h"
 #include    "../../memory/mem_schedule.h"
 #include    "../../nvram/cache.h"
+#include    "../../nvram/cache2.h"
 #include    "enbl_hours.h"
 #include    "schedule.h"
 
@@ -30,6 +31,8 @@ void    InitSchedule(void)
 
   LoadCache(&chRecalcHou);
   LoadCache(&chRecalcAlways);
+
+  LoadCacheBool(&chRecalcMaxPowCurrDay, false);
 }
 
 
@@ -62,4 +65,6 @@ void    ResetSchedule(void)
 
    boRecalcAlways = true;
    SaveCache(&chRecalcAlways);
+
+   SaveCacheBool(&chRecalcMaxPowCurrDay, false);
 }
