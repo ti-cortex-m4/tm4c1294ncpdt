@@ -269,6 +269,7 @@ PROGRAMS!H
 
 #define bSET_RECALC_TIME            230
 #define bSET_RECALC_ALWAYS          231
+#define wSET_SETCALC_3              340
 
 #define bSET_RECALC_FULL            240
 #define bSET_RECALC_MAXPOW          241
