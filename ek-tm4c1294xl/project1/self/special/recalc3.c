@@ -89,10 +89,13 @@ void    Recalc_MaxPowCurrDay(void)
     dwHouIndex--;                                   // индекс обрабатываемого получаса
 
 
-    MakeAllPrevTariffs(ti);
+    if (DateToDayIndex(ti) == DateToDayIndex(tiCurr))
+    {
+      MakeAllPrevTariffs(ti);
 
-    fLoadMem = 0;
-    CalcAllGroups_MaxPowCurrDay(ti);
+      fLoadMem = 0;
+      CalcAllGroups_MaxPowCurrDay(ti);
+    }
   }
 
 
