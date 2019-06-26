@@ -18,6 +18,7 @@ cache const             chCtrlHou = {CTRL_HOU, &mpboCtrlHou, sizeof(mpboCtrlHou)
 
 cache const             chRecalcHou = {RECALC_HOU, &mpboRecalcHou, sizeof(mpboRecalcHou)};
 cache const             chRecalcAlways = {RECALC_ALWAYS, &boRecalcAlways, sizeof(bool)};
+cache const             chRecalcMaxPowCurrDay = {RECALC_MAX_POW_CURR_DAY, &boRecalcMaxPowCurrDay, sizeof(bool)};
 
 
 
