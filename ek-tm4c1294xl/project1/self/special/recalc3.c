@@ -22,7 +22,7 @@ recalc3.c
 
 
 //                                         0123456789ABCDEF
-static char const       szRecalc3[]     = "   расчет...    ";
+static char const       szRecalc3[]     = "Расчет данных   ";
 
 
 
@@ -64,7 +64,7 @@ void    CalcAllGroups_MaxPowCurrDay(time  ti)
 
 void    Recalc_MaxPowCurrDay(void)
 { 
-  ShowLo(szRecalc3);
+  ShowHi(szRecalc3); Clear();
   OpenCalc_MaxPowCurrDay();
 
 
