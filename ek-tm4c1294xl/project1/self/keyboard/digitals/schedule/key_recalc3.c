@@ -5,7 +5,7 @@ key_recalc3.c
 ------------------------------------------------------------------------------*/
 
 #include "../../../main.h"
-#include "../../../memory/mem_schedule.h"
+#include "../../../digitals/schedule/schedule.h"
 #include "../../common/key_bool.h"
 
 
