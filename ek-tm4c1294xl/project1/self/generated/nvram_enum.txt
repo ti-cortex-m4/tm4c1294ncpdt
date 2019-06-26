@@ -284,5 +284,7 @@ typedef enum
   TIME_ZONE_34          = MAX_PHONES2 + sizeof(float) + bNVRAM_MARGIN,
   PROFILE_FRAC_8        = TIME_ZONE_34 + sizeof(uchar) + bNVRAM_MARGIN,
 
-  NVRAM_END             = PROFILE_FRAC_8 + (sizeof(mpdbEngFracDigCan8[0]) + bNVRAM_MARGIN)*bCANALS
+  RECALC_MAX_POW_CURR_DAY = PROFILE_FRAC_8 + (sizeof(mpdbEngFracDigCan8[0]) + bNVRAM_MARGIN)*bCANALS,
+
+  NVRAM_END             = RECALC_MAX_POW_CURR_DAY + sizeof(bool) + bNVRAM_MARGIN
 } nvram;

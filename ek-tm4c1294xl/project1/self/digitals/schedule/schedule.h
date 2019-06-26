@@ -10,6 +10,7 @@ extern  cache const             chCtrlHou;
 
 extern  cache const             chRecalcHou;
 extern  cache const             chRecalcAlways;
+extern  cache const             chRecalcMaxPowCurrDay;
 
 
 

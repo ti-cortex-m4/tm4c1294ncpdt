@@ -7,6 +7,7 @@ SCHEDULE!C
 #include    "../../main.h"
 #include    "../../memory/mem_schedule.h"
 #include    "../../nvram/cache.h"
+#include    "../../nvram/cache2.h"
 #include    "enbl_hours.h"
 #include    "schedule.h"
 
@@ -18,6 +19,7 @@ cache const             chCtrlHou = {CTRL_HOU, &mpboCtrlHou, sizeof(mpboCtrlHou)
 
 cache const             chRecalcHou = {RECALC_HOU, &mpboRecalcHou, sizeof(mpboRecalcHou)};
 cache const             chRecalcAlways = {RECALC_ALWAYS, &boRecalcAlways, sizeof(bool)};
+cache const             chRecalcMaxPowCurrDay = {RECALC_MAX_POW_CURR_DAY, &boRecalcMaxPowCurrDay, sizeof(bool)};
 
 
 
@@ -29,6 +31,8 @@ void    InitSchedule(void)
 
   LoadCache(&chRecalcHou);
   LoadCache(&chRecalcAlways);
+
+  LoadCacheBool(&chRecalcMaxPowCurrDay, false);
 }
 
 
@@ -61,4 +65,6 @@ void    ResetSchedule(void)
 
    boRecalcAlways = true;
    SaveCache(&chRecalcAlways);
+
+   SaveCacheBool(&chRecalcMaxPowCurrDay, false);
 }
