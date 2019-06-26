@@ -6,22 +6,23 @@ recalc3.c
 
 #include "../main.h"
 #include "../console.h"
-//#include "../display/panel.h"
-//#include "../memory/mem_energy.h"
+#include "../display/panel.h"
+#include "../memory/mem_energy.h"
 #include "../memory/mem_energy_spec.h"
 //#include "../memory/mem_profile.h"
 //#include "../memory/mem_settings.h"
-//#include "../realtime/realtime_spec.h"
+#include "../realtime/realtime_spec.h"
 #include "../tariffs/tariffs.h"
-//#include "../impulses/energy_spec.h"
+#include "../impulses/energy_spec.h"
+#include "../impulses/max_power.h"
 //#include "../digitals/digitals.h"
 //#include "../digitals/profile/profile_frac.h"
 //#include "../digitals/profile/profile_frac8.h"
 //#include "../flash/records.h"
 //#include "../time/timedate.h"
-//#include "../time/calendar.h"
+#include "../time/calendar.h"
 //#include "../energy2.h"
-//#include "calc.h"
+#include "calc.h"
 //#include "special.h"
 //#include "recalc_def.h"
 #include "recalc3.h"
@@ -29,7 +30,7 @@ recalc3.c
 
 
 //                                         0123456789ABCDEF
-static char const       szRecalc[]      = "   расчет...    ";
+static char const       szRecalc3[]     = "   расчет...    ";
 
 
 
@@ -49,7 +50,7 @@ void    CloseCalc_MaxPowCurrDay(void)
 }
 
 
-void    CalcAllGroups_MaxPowCurrDay(void)
+void    CalcAllGroups_MaxPowCurrDay(time  ti)
 {
   if (fLoadMem == 0)
   { 
@@ -57,23 +58,23 @@ void    CalcAllGroups_MaxPowCurrDay(void)
     LoadImpHouSpec(iwDigHou,0);
   }
 
-  for (ibGrp=0; ibGrp<bGROUPS; ibGrp++)
+  uchar g;
+  for (g=0; g<bGROUPS; g++)
   {
-    if (mpboUsedGroups[ibGrp] == boFalse) continue;
+    if (mpfUsedGroups[g] == false) continue;
 
-    MakeMaxPowSpec( mppoDayGrpSpec );
+    MakeMaxPowSpec( mppoDayGrpSpec, g, ti );
   }
 }
 
 
 void    Recalc_MaxPowCurrDay(void)
 { 
-  ShowLo(szCalc3);
+  ShowLo(szRecalc3);
   OpenCalc_MaxPowCurrDay();
 
 
-  tiAlt = tiCurr;
-  dwHouIndex = DateToHouIndex();
+  ulong dwHouIndex = DateToHouIndex(tiCurr);        // индекс текущего получаса
 
   bHhrInc = 0;
 
@@ -88,18 +89,16 @@ void    Recalc_MaxPowCurrDay(void)
 #endif
 
     iwDigHou = (wHOURS + iwHardHou - iwHhr - bHhrInc) % wHOURS;
-  
-    iwDigHou = (wHOURS + iwHardHou - iwHou - bHouInc) % wHOURS;
 
 
-    HouIndexToDate(dwHouIndex);
-    dwHouIndex--;
+    time ti = HouIndexToDate(dwHouIndex);
+    dwHouIndex--;                                   // индекс обрабатываемого получаса
 
 
-    MakeAllPrevTariffs();
+    MakeAllPrevTariffs(ti);
 
     fLoadMem = 0;
-    CalcAllGroups_MaxPowCurrDay();
+    CalcAllGroups_MaxPowCurrDay(ti);
   }
 
 
