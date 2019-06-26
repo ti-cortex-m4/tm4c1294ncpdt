@@ -9,22 +9,14 @@ recalc3.c
 #include "../display/panel.h"
 #include "../memory/mem_energy.h"
 #include "../memory/mem_energy_spec.h"
-//#include "../memory/mem_profile.h"
-//#include "../memory/mem_settings.h"
+#include "../kernel/arrays_buff.h"
 #include "../realtime/realtime_spec.h"
 #include "../tariffs/tariffs.h"
 #include "../impulses/energy_spec.h"
 #include "../impulses/max_power.h"
-//#include "../digitals/digitals.h"
-//#include "../digitals/profile/profile_frac.h"
-//#include "../digitals/profile/profile_frac8.h"
-//#include "../flash/records.h"
-//#include "../time/timedate.h"
 #include "../time/calendar.h"
-//#include "../energy2.h"
 #include "calc.h"
-//#include "special.h"
-//#include "recalc_def.h"
+#include "recalc.h"
 #include "recalc3.h"
 
 
@@ -37,6 +29,7 @@ static char const       szRecalc3[]     = "   расчет...    ";
 void    OpenCalc_MaxPowCurrDay(void)
 {
   boOpenCalc = true;
+  SaveCache(&chOpenCalc);
 
   memset(&mppoDayGrpSpec, 0, sizeof(power)*bGROUPS);
 }
@@ -47,6 +40,7 @@ void    CloseCalc_MaxPowCurrDay(void)
   memcpy(mppoDayGrp[ ibSoftDay ], mppoDayGrpSpec, sizeof(power)*bGROUPS);
 
   boOpenCalc = false;
+  SaveCache(&chOpenCalc);
 }
 
 
@@ -103,4 +97,6 @@ void    Recalc_MaxPowCurrDay(void)
 
 
   CloseCalc_MaxPowCurrDay();
+
+  SavePowDayBuff();
 }
