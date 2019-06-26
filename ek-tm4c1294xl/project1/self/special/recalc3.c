@@ -1,32 +1,41 @@
 /*------------------------------------------------------------------------------
-CALC3.C
+recalc3.c
 
 
 ------------------------------------------------------------------------------*/
 
-#include        "main.h"
-#include        "xdata.h"
-#include        "display.h"
-#include        "engine.h"
-#include        "beep.h"
-#include        "keyboard.h"
-#include        "nexttime.h"
-#include        "special.h"
-#include        "tariffs.h"
-#include        "power.h"
-#include        "timedate.h"
-#include        "essential.h"
+#include "../main.h"
+#include "../console.h"
+//#include "../display/panel.h"
+//#include "../memory/mem_energy.h"
+#include "../memory/mem_energy_spec.h"
+//#include "../memory/mem_profile.h"
+//#include "../memory/mem_settings.h"
+//#include "../realtime/realtime_spec.h"
+#include "../tariffs/tariffs.h"
+//#include "../impulses/energy_spec.h"
+//#include "../digitals/digitals.h"
+//#include "../digitals/profile/profile_frac.h"
+//#include "../digitals/profile/profile_frac8.h"
+//#include "../flash/records.h"
+//#include "../time/timedate.h"
+//#include "../time/calendar.h"
+//#include "../energy2.h"
+//#include "calc.h"
+//#include "special.h"
+//#include "recalc_def.h"
+#include "recalc3.h"
 
 
 
 //                                         0123456789ABCDEF
-message         code    szCalc3         = "   расчет...    ";
+static char const       szRecalc[]      = "   расчет...    ";
 
 
 
 void    OpenCalc_MaxPowCurrDay(void)
 {
-  boOpenCalc = boTrue;
+  boOpenCalc = true;
 
   memset(&mppoDayGrpSpec, 0, sizeof(power)*bGROUPS);
 }
@@ -36,7 +45,7 @@ void    CloseCalc_MaxPowCurrDay(void)
 {
   memcpy(mppoDayGrp[ ibSoftDay ], mppoDayGrpSpec, sizeof(power)*bGROUPS);
 
-  boOpenCalc = boFalse;
+  boOpenCalc = false;
 }
 
 
@@ -66,12 +75,19 @@ void    Recalc_MaxPowCurrDay(void)
   tiAlt = tiCurr;
   dwHouIndex = DateToHouIndex();
 
-  bHouInc = 0;
-  for (iwHou=0; iwHou<=GetHouIndex(); iwHou++) 
+  bHhrInc = 0;
+
+  uint iwHhr;
+  for (iwHhr=0; iwHhr<wHOURS; iwHhr++)
   {
-//    if (fKey == 1) { fKey = 0; Beep(); }
-//    if ((iwHou % 0x10) == 0) ShowPercent((ulong)100*iwHou/(wHOURS-1));    
-    if ((iwHou % 0x10) == 0) NexttimeMnt();
+    if (fKey == true) { fKey = 0; Beep(); }
+    if ((iwHhr % 0x10) == 0) ShowPercent((ulong)100*iwHhr/(wHOURS-1));
+    if ((iwHhr % 0x10) == 0) NexttimeMnt();
+#ifdef NO_DISPLAY
+    RunPanel_CleaningHhr(iwHhr);
+#endif
+
+    iwDigHou = (wHOURS + iwHardHou - iwHhr - bHhrInc) % wHOURS;
   
     iwDigHou = (wHOURS + iwHardHou - iwHou - bHouInc) % wHOURS;
 
