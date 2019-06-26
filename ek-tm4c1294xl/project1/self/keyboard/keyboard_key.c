@@ -318,7 +318,7 @@ void    Keyboard_Key(void)
 
       case bSET_RECALC_TIME:    key_SetRecalcTime();    break;
       case bSET_RECALC_ALWAYS:  key_SetRecalcAlways();  break;
-      case wSET_SETCALC_3:      key_SetCalc3();         break;
+      case wSET_RECALC_3:       key_SetRecalc3();       break;
 
       case bGET_CNTCURR_110:
       case bGET_READTIMEDATE1:
@@ -555,7 +555,7 @@ void    Keyboard_Key(void)
 
       case bSET_RECALC_TIME:    key_SetRecalcTime();    break;
       case bSET_RECALC_ALWAYS:  key_SetRecalcAlways();  break;
-      case wSET_SETCALC_3:      key_SetCalc3();         break;
+      case wSET_RECALC_3:       key_SetRecalc3();       break;
 
       case bGET_CNTCURR_10:
       case bGET_CNTCURR_110:
@@ -873,7 +873,7 @@ void    Keyboard_Key(void)
 
       case bSET_RECALC_TIME:    key_SetRecalcTime();    break;
       case bSET_RECALC_ALWAYS:  key_SetRecalcAlways();  break;
-      case wSET_SETCALC_3:      key_SetCalc3();         break;
+      case wSET_RECALC_3:       key_SetRecalc3();       break;
 
       case bSET_RECALC_FULL:
       case bSET_RECALC_MAXPOW:

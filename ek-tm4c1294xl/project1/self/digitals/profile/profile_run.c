@@ -347,10 +347,10 @@ void    NextProfile(void)
       Recalc(1,1);
       AddDigRecord(EVE_RECALC21);
     }
-//    else if (boRecalcMaxPowCurrDay == true)
-//    {
-//      Recalc_MaxPowCurrDay();
-//    }
+    else if (boRecalcMaxPowCurrDay == true)
+    {
+      Recalc_MaxPowCurrDay();
+    }
 
 //    if ((boRecalcCurr == true) && (boRecalcEnable == true))
 //    {
