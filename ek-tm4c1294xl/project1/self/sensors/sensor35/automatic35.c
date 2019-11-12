@@ -1,34 +1,34 @@
 /*------------------------------------------------------------------------------
-AUTOMATIC_35!C
+AUTOMATIC35!C
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-//#include "../memory/mem_profile.h"
-//#include "../memory/mem_factors.h"
-//#include "../display/display.h"
-//#include "../keyboard/keyboard.h"
-//#include "../time/delay.h"
-//#include "../time/timedate.h"
-//#include "../hardware/watchdog.h"
-//#include "../kernel/crc_s.h"
-//#include "../serial/ports.h"
-//#include "../serial/ports2.h"
-//#include "../serial/ports_devices.h"
-//#include "../serial/input_wrapper.h"
-//#include "../devices/devices.h"
-//#include "../sensors/unpack_35.h"
-//#include "../digitals/digitals.h"
-//#include "../digitals/wait_answer.h"
-//#include "automatic1.h"
+//#include "../../memory/mem_profile.h"
+//#include "../../memory/mem_factors.h"
+#include "../../display/display.h"
+#include "../../keyboard/keyboard.h"
+#include "../../time/delay.h"
+#include "../../time/timedate.h"
+#include "../../hardware/watchdog.h"
+#include "../../kernel/crc_s.h"
+#include "../../serial/ports.h"
+#include "../../serial/ports2.h"
+#include "../../serial/ports_devices.h"
+#include "../../serial/input_wrapper.h"
+#include "../../devices/devices.h"
+#include "../../digitals/digitals.h"
+#include "../../digitals/wait_answer.h"
+#include "automatic1.h"
+#include "unpack35.h"
 #include "device35.h"
 #include "automatic35.h"
 
 
 
 #ifndef SKIP_35
-/*
+
 void    Query35(uchar  cbIn, uchar  cbOut)
 {
   uchar bCrc = MakeCrcSOutBuff(1, cbOut-3);
@@ -108,7 +108,7 @@ serial  Input35(void)
 }
 
 
-
+/*
 bool    QueryConfigS_Full(uchar  bPercent)
 {
   uchar i;
@@ -127,9 +127,9 @@ bool    QueryConfigS_Full(uchar  bPercent)
   ReadConfig35();
   return(1);
 }
+*/
 
-
-time2   QueryTimeS_Full(uchar  bPercent)
+time2   QueryTime35_Full(uchar  bPercent)
 {
   uchar i;
   for (i=0; i<MaxRepeat35(); i++)
@@ -147,7 +147,7 @@ time2   QueryTimeS_Full(uchar  bPercent)
   return GetTime2(ReadTime35(), true);
 }
 
-
+/*
 bool    QueryEngDayS_Full(uchar  bTime, uchar  bPercent)
 {
   uchar i;
@@ -186,14 +186,14 @@ bool    QueryEngMonS_Full(uchar  bTime, uchar  bPercent)
   ReadEnergy35();
   return(1);
 }
-
+*/
 
 
 time2   ReadTimeCan35(void)
 {
   Clear();
 
-  time2 ti2 = QueryTimeS_Full(50);
+  time2 ti2 = QueryTime35_Full(50);
   if (ti2.fValid == false) return GetTime2Error();
 
   tiChannelC = ti2.tiValue;
@@ -202,7 +202,7 @@ time2   ReadTimeCan35(void)
   return GetTime2(ti2.tiValue, true);
 }
 
-
+/*
 double2 ReadCntCurr35(void)
 {
   Clear();

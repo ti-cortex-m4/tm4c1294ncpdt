@@ -1,11 +1,11 @@
 /*------------------------------------------------------------------------------
-AUTOMATIC_35.C
+AUTOMATIC35.C
 
 
 ------------------------------------------------------------------------------*/
 
-//void    Query35(uchar  cbIn, uchar  cbOut);
-//serial  Input35(void);
+void    Query35(uchar  cbIn, uchar  cbOut);
+serial  Input35(void);
 
 //bool    QueryConfigS_Full(uchar  bPercent);
 //time2   QueryTimeS_Full(uchar  bPercent);
