@@ -4,19 +4,19 @@ DECOMPRESS_35!C
 
 ------------------------------------------------------------------------------*/
 
-#include "../main.h"
-#include "../memory/mem_settings.h"
-#include "../memory/mem_ports.h"
-#include "../memory/mem_digitals.h"
-#include "../memory/mem_profile.h"
-#include "../kernel/crc_s.h"
-#include "../serial/ports.h"
-#include "../serial/ports2.h"
-#include "../serial/monitor.h"
-#include "../devices/devices.h"
-#include "../display/display.h"
-#include "../time/delay.h"
-#include "unpack_35.h"
+#include "../../main.h"
+#include "../../memory/mem_settings.h"
+#include "../../memory/mem_ports.h"
+#include "../../memory/mem_digitals.h"
+#include "../../memory/mem_profile.h"
+#include "../../kernel/crc_s.h"
+#include "../../serial/ports.h"
+#include "../../serial/ports2.h"
+#include "../../serial/monitor.h"
+#include "../../devices/devices.h"
+#include "../../display/display.h"
+#include "../../time/delay.h"
+#include "unpack35.h"
 
 
 
