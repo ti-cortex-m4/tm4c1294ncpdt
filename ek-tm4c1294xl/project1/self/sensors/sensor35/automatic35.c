@@ -30,18 +30,24 @@ AUTOMATIC35!C
 
 void    Query35(uchar  cbIn, uchar  cbOut)
 {
-  uchar bCrc = MakeCrcSOutBuff(1, cbOut-3);
+  if (cbOut > 0)
+  {
+    uchar bCrc = MakeCrcSOutBuff(1, cbOut-3);
 
-  InitPush(0);
-  PushChar(0xC0);
+    InitPush(0);
+    PushChar(0xC0);
+
+    uchar i;
+    for (i=0; i<cbOut-3; i++) SkipChar();
+
+    PushChar(bCrc);
+    PushChar(0xC0);
+
+    for (i=0; i<cbOut-1; i++)
+      SetOutBuff(13+i, OutBuff(i));
+  }
 
   uchar i;
-  for (i=0; i<cbOut-3; i++) SkipChar();
-
-  PushChar(bCrc);
-  PushChar(0xC0);
-
-
   for (i=0; i<=cbOut-1; i++)
     mpbOutBuffSave[i] = OutBuff(i);
 
