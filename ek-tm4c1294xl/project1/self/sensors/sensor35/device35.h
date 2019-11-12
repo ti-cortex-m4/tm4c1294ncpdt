@@ -1,14 +1,14 @@
 /*------------------------------------------------------------------------------
-DEVICE_35.C
+DEVICE35.C
 
 
 ------------------------------------------------------------------------------*/
 
 //void    PushAddress35(void);
-//
-//void    QueryTime35(void);
-//time    ReadTime35(void);
-//
+
+void    QueryTime35(void);
+time    ReadTime35(void);
+
 //void    QueryControl35(time  ti);
 //
 //void    QueryConfig35(void);
