@@ -12,7 +12,6 @@ AUTOMATIC35!C
 #include "../../time/delay.h"
 #include "../../time/timedate.h"
 #include "../../hardware/watchdog.h"
-#include "../../kernel/crc_s.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports2.h"
 #include "../../serial/ports_devices.h"
@@ -28,7 +27,7 @@ AUTOMATIC35!C
 
 #ifndef SKIP_35
 
-static void Query35_(uchar  cbIn, uchar  cbOut, uchar  bCommand)
+static void Query35Internal(uchar  cbIn, uchar  cbOut, uchar  bCommand)
 {
   if (cbOut > 0)
   {
@@ -69,15 +68,15 @@ static void Query35_(uchar  cbIn, uchar  cbOut, uchar  bCommand)
 
   PushChar(0x00);
 
-//  InitPush(13+quCurr.cwOut);
+  InitPush(13+cbOut);
 
-//  j := CRCnncl2(mpbOut, 1, 13 + quCurr.cwOut - 1);
-//  PushChar(j div 0x100);
-//  PushChar(j mod 0x100);
+  uint w := MakeCrc35OutBuff(1, 13+cbOut-1);
+  PushChar(w / 0x100);
+  PushChar(w % 0x100);
 
   PushChar(0xC0);
 
-//  quCurr.cwOut := 13 + quCurr.cwOut + 3;
+  cbOut = 13+cbOut+3;
 
 
   uchar i;
@@ -112,7 +111,7 @@ static void Query35_(uchar  cbIn, uchar  cbOut, uchar  bCommand)
 
 void    Query35(uchar  cbIn, uchar  cbOut)
 {
-  Query35_(cbIn, cbOut, 0x11);
+  Query35Internal(cbIn, cbOut, 0x11);
 }
 
 
