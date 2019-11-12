@@ -28,7 +28,7 @@ AUTOMATIC35!C
 
 #ifndef SKIP_35
 
-void    Query35(uchar  cbIn, uchar  cbOut)
+static void Query35_(uchar  cbIn, uchar  cbOut, uchar  bCommand)
 {
   if (cbOut > 0)
   {
@@ -44,41 +44,41 @@ void    Query35(uchar  cbIn, uchar  cbOut)
     PushChar(0xC0);
 
     for (i=0; i<cbOut; i++)
-      SetOutBuff(cbOut+12-i), OutBuff(cbOut-1-i));
+      SetOutBuff(cbOut+12-i, OutBuff(cbOut-1-i));
   }
 
-/*
+
   InitPush(0);
-  PushByte($C0);
+  PushChar(0xC0);
 
-  PushByte($02);
+  PushChar(0x02);
 
-  PushByte(0);
-  PushByte(0);
-  PushByte(0);
-  PushByte(0);
+  PushChar(0);
+  PushChar(0);
+  PushChar(0);
+  PushChar(0);
 
-  PushByte($00);
+  PushChar(0x00);
 
-  PushByte(quCurr.bCommand);
+  PushChar(bCommand);
 
-  PushByte($B6);
-  PushByte($59);
-  PushByte($00);
-  PushByte($00);
+  PushChar(0xB6);
+  PushChar(0x59);
+  PushChar(0x00);
+  PushChar(0x00);
 
-  PushByte($00);
+  PushChar(0x00);
 
-  InitPush(13+quCurr.cwOut);
+//  InitPush(13+quCurr.cwOut);
 
-  j := CRCnncl2(mpbOut, 1, 13 + quCurr.cwOut - 1);
-  PushByte(j div $100);
-  PushByte(j mod $100);
+//  j := CRCnncl2(mpbOut, 1, 13 + quCurr.cwOut - 1);
+//  PushChar(j div 0x100);
+//  PushChar(j mod 0x100);
 
-  PushByte($C0);
+  PushChar(0xC0);
 
-  quCurr.cwOut := 13 + quCurr.cwOut + 3;
-*/
+//  quCurr.cwOut := 13 + quCurr.cwOut + 3;
+
 
   uchar i;
   for (i=0; i<=cbOut-1; i++)
@@ -107,6 +107,12 @@ void    Query35(uchar  cbIn, uchar  cbOut)
 
 
   Query(cbIn,j,true);
+}
+
+
+void    Query35(uchar  cbIn, uchar  cbOut)
+{
+  Query35_(cbIn, cbOut, 0x11);
 }
 
 
