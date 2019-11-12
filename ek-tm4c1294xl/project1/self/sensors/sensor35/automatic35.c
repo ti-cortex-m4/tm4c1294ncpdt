@@ -20,7 +20,6 @@ AUTOMATIC35!C
 #include "../../devices/devices.h"
 #include "../../digitals/digitals.h"
 #include "../../digitals/wait_answer.h"
-#include "automatic1.h"
 #include "unpack35.h"
 #include "device35.h"
 #include "automatic35.h"
@@ -112,7 +111,7 @@ serial  Input35(void)
 bool    QueryConfigS_Full(uchar  bPercent)
 {
   uchar i;
-  for (i=0; i<MaxRepeat35(); i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryConfig35();
@@ -121,7 +120,7 @@ bool    QueryConfigS_Full(uchar  bPercent)
     if (fKey == true) return(0);
   }
 
-  if (i == MaxRepeat35()) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(bPercent);
 
   ReadConfig35();
@@ -132,7 +131,7 @@ bool    QueryConfigS_Full(uchar  bPercent)
 time2   QueryTime35_Full(uchar  bPercent)
 {
   uchar i;
-  for (i=0; i<MaxRepeat35(); i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryTime35();
@@ -141,7 +140,7 @@ time2   QueryTime35_Full(uchar  bPercent)
     if (fKey == true) return GetTime2Error();
   }
 
-  if (i == MaxRepeat35()) return GetTime2Error();
+  if (i == MaxRepeats()) return GetTime2Error();
   ShowPercent(bPercent);
 
   return GetTime2(ReadTime35(), true);
@@ -151,7 +150,7 @@ time2   QueryTime35_Full(uchar  bPercent)
 bool    QueryEngDayS_Full(uchar  bTime, uchar  bPercent)
 {
   uchar i;
-  for (i=0; i<MaxRepeat35(); i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryEngDay35(bTime);
@@ -160,7 +159,7 @@ bool    QueryEngDayS_Full(uchar  bTime, uchar  bPercent)
     if (fKey == true) return(0);
   }
 
-  if (i == MaxRepeat35()) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(bPercent);
 
   ReadEnergy35();
@@ -171,7 +170,7 @@ bool    QueryEngDayS_Full(uchar  bTime, uchar  bPercent)
 bool    QueryEngMonS_Full(uchar  bTime, uchar  bPercent)
 {
   uchar i;
-  for (i=0; i<MaxRepeat35(); i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryEngMon35(bTime);
@@ -180,7 +179,7 @@ bool    QueryEngMonS_Full(uchar  bTime, uchar  bPercent)
     if (fKey == true) return(0);
   }
 
-  if (i == MaxRepeat35()) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(bPercent);
 
   ReadEnergy35();

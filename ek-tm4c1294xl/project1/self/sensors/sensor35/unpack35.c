@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-DECOMPRESS_35!C
+DECOMPRESS35!C
 
 
 ------------------------------------------------------------------------------*/
@@ -21,7 +21,7 @@ DECOMPRESS_35!C
 
 
 #ifndef SKIP_35
-/*
+
 static uchar Repack35(uchar  bCode)
 {
   uchar i;
@@ -66,7 +66,7 @@ uchar   i,j;
 
     f = 0;
 
-    j = RepackS(0xDD);
+    j = Repack35(0xDD);
     if (j != 0)
     {
       SetInBuff(j, 0xDB);
@@ -76,7 +76,7 @@ uchar   i,j;
       continue;
     }
 
-    j = RepackS(0xDC);
+    j = Repack35(0xDC);
     if (j != 0)
     {
       SetInBuff(j, 0xC0);
@@ -115,7 +115,7 @@ static uchar Check35(void)
 
 uchar   Checksum35(void)
 {
-  uchar i = CheckS();
+  uchar i = Check35();
   if (i != 0)
   {
     Clear(); sprintf(szLo+1,"ошибка: 24.2.%u",i);
@@ -124,5 +124,5 @@ uchar   Checksum35(void)
 
   return i;
 }
-*/
+
 #endif

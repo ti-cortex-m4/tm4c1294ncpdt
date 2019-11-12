@@ -36,7 +36,7 @@ DEVICE35!C
 
 
 #ifndef SKIP_35
-/*
+
 void    PushAddress35(void)
 {
   PushIntLtl(mpdwAddress1[diCurr.bAddress-1] % 0x10000);
@@ -44,7 +44,7 @@ void    PushAddress35(void)
 
   PushLongLtl(mpdwAddress2[diCurr.bAddress-1]);
 }
-*/
+
 
 
 void    QueryTime35(void)
