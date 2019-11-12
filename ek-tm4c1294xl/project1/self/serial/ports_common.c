@@ -18,6 +18,7 @@ PORTS_COMMON!C
 #include "../kernel/crc_v.h"
 #include "../kernel/crc_els.h"
 #include "../kernel/crc_n31.h"
+#include "../kernel/crc_35.h"
 #include "ports.h"
 
 
@@ -256,6 +257,37 @@ uint    MakeCrc16Bit32InBuff(uchar  bOffset, uint  wSize)
     case 1:  return MakeCrc16Bit32(mpbInBuff1 + bOffset, wSize);
     case 2:  return MakeCrc16Bit32(mpbInBuff2 + bOffset, wSize);
     case 3:  return MakeCrc16Bit32(mpbInBuff3 + bOffset, wSize);
+    default: ASSERT(false); return 0;
+  }
+}
+
+#endif
+
+
+
+#ifndef SKIP_35
+
+uchar   MakeCrc35OutBuff(uchar  bOffset, uint  wSize)
+{
+  switch (ibPort)
+  {
+    case 0:  return MakeCrc35(mpbOutBuff0 + bOffset, wSize);
+    case 1:  return MakeCrc35(mpbOutBuff1 + bOffset, wSize);
+    case 2:  return MakeCrc35(mpbOutBuff2 + bOffset, wSize);
+    case 3:  return MakeCrc35(mpbOutBuff3 + bOffset, wSize);
+    default: ASSERT(false); return 0;
+  }
+}
+
+
+uchar   MakeCrc35InBuff(uchar  bOffset, uint  wSize)
+{
+  switch (ibPort)
+  {
+    case 0:  return MakeCrc35(mpbInBuff0 + bOffset, wSize);
+    case 1:  return MakeCrc35(mpbInBuff1 + bOffset, wSize);
+    case 2:  return MakeCrc35(mpbInBuff2 + bOffset, wSize);
+    case 3:  return MakeCrc35(mpbInBuff3 + bOffset, wSize);
     default: ASSERT(false); return 0;
   }
 }
