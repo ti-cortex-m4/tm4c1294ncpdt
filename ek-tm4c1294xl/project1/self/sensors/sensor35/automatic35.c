@@ -43,9 +43,42 @@ void    Query35(uchar  cbIn, uchar  cbOut)
     PushChar(bCrc);
     PushChar(0xC0);
 
-    for (i=0; i<cbOut-1; i++)
-      SetOutBuff(13+i, OutBuff(i));
+    for (i=0; i<cbOut; i++)
+      SetOutBuff(cbOut+12-i), OutBuff(cbOut-1-i));
   }
+
+/*
+  InitPush(0);
+  PushByte($C0);
+
+  PushByte($02);
+
+  PushByte(0);
+  PushByte(0);
+  PushByte(0);
+  PushByte(0);
+
+  PushByte($00);
+
+  PushByte(quCurr.bCommand);
+
+  PushByte($B6);
+  PushByte($59);
+  PushByte($00);
+  PushByte($00);
+
+  PushByte($00);
+
+  InitPush(13+quCurr.cwOut);
+
+  j := CRCnncl2(mpbOut, 1, 13 + quCurr.cwOut - 1);
+  PushByte(j div $100);
+  PushByte(j mod $100);
+
+  PushByte($C0);
+
+  quCurr.cwOut := 13 + quCurr.cwOut + 3;
+*/
 
   uchar i;
   for (i=0; i<=cbOut-1; i++)
