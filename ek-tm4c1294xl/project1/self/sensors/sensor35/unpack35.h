@@ -1,8 +1,8 @@
 /*------------------------------------------------------------------------------
-DECOMPRESS_35!H
+DECOMPRESS35!H
 
 
 ------------------------------------------------------------------------------*/
 
-//void    Decompress35(void);
-//uchar   Checksum35(void); 
+void    Decompress35(void);
+uchar   Checksum35(void);
