@@ -70,7 +70,7 @@ static void Query35Internal(uchar  cbIn, uchar  cbOut, uchar  bCommand)
 
   InitPush(13+cbOut);
 
-  uint w := MakeCrc35OutBuff(1, 13+cbOut-1);
+  uint w = MakeCrc35OutBuff(1, 13+cbOut-1);
   PushChar(w / 0x100);
   PushChar(w % 0x100);
 
