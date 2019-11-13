@@ -5,4 +5,4 @@ DECOMPRESS35!H
 ------------------------------------------------------------------------------*/
 
 void    Decompress35(void);
-uchar   Checksum35A(void);
+uchar   Checksum35(void);
