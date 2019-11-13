@@ -115,7 +115,8 @@ void    Query35(uchar  cbIn, uchar  cbOut)
 }
 
 
-serial  Input35(void)
+
+static serial Input35Internal(void)
 {
   InputStart();
   InitWaitAnswer();
@@ -146,6 +147,57 @@ serial  Input35(void)
     else if ((mpSerial[ibPort] == SER_OVERFLOW) ||
              (mpSerial[ibPort] == SER_BADLINK)) break;
   }
+
+  return mpSerial[ibPort];
+}
+
+
+serial  Input35(void)
+{
+  bool repeat = false;
+  do
+  {
+    Input35Internal();
+
+    if (mpSerial[ibPort] == SER_GOODCHECK)
+    {
+       if (InBuff(7) == 0x14)
+       {
+         MonitorString("\n NNCL2 repeat");
+
+         Query35Internal(1000, 0, 0x12);
+         repeat = true;
+       }
+       else if (InBuff(7) == 0x12)
+       {
+         if (IndexInBuff() < 15)
+         {
+           MonitorString("\n NNCL2 wrong size");
+           MonitorIntDec(IndexInBuff());
+
+           Clear(); sprintf(szLo+1,"ошибка: 35.3.%u",InBuff(7));
+           DelayInf();
+           mpSerial[ibPort] = SER_BADCHECK;
+         }
+         else
+         {
+           MonitorString("\n NNCL2 competed");
+
+           for (i=0; i<IndexInBuff()-15; i++)
+             SetInBuff(i, InBuff(12+i));
+         }
+       }
+       else
+       {
+         MonitorString("\n NNCL2 error");
+         MonitorCharDec(InBuff(7));
+
+         Clear(); sprintf(szLo+1,"ошибка: 35.4.%u",InBuff(7));
+         DelayInf();
+         mpSerial[ibPort] = SER_BADCHECK;
+       }
+    }
+  } while (repeat);
 
   return mpSerial[ibPort];
 }

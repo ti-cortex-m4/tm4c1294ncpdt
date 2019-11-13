@@ -47,9 +47,34 @@ uchar   i,j;
 
   MonitorIn();
 
+/*
+  i = 1;
+  j = 1;
+  while i < wSize do {
+    if (mpbIn[i] = 0xDB) and (mpbIn[i+1] = 0xDD) {
+      MonitorString('Распаковка символа 0хDB при приеме: позиция ' + IntToStr(i));
+      mpbIn[j] = 0xDB;
+      i++; i++;
+      j++;
+    } else if (mpbIn[i] = 0xDB) and (mpbIn[i+1] = 0xDC) {
+      MonitorString('Распаковка символа 0хC0 при приеме: позиция ' + IntToStr(i));
+      mpbIn[j] = 0xC0;
+      i++; i++;
+      j++;
+    } else {
+      mpbIn[j] = mpbIn[i];
+      i++;
+      j++;
+    };
+  };
+
+  wSize = j;
+  ShowInData(wSize);
+*/
+
   if ((InBuff(6) & 0xF0) != 0x50)
   {
-    Clear(); sprintf(szLo+1,"ошибка: 24.1.%u",(InBuff(6) & 0xF0));
+    Clear(); sprintf(szLo+1,"ошибка: 35.1.%u",(InBuff(6) & 0xF0));
     DelayInf();
 
     mpcwErrorLink[ibDig]++;
@@ -95,18 +120,18 @@ uchar   i,j;
 static uchar Check35(void)
 {
   if (InBuff(0) != 0xC0) return 1;
-  if (InBuff(1) != 0x48) return 2;
-
-  if (InBuffIntLtl(2) != wPrivate) return 3;
-  if (InBuffIntLtl(4) != (mpdwAddress1[diCurr.bAddress-1] % 0x10000)) return 4;
-
-  if ((InBuff(6) & 0xF0) != 0x50) return 5;
-  if ((IndexInBuff() >= 11) && (IndexInBuff() != (InBuff(6) & 0x0F) + 11)) return 6;
-
-  if (InBuff(7) != OutBuff(11)) return 7;
-  if (InBuff(8) != OutBuff(12)) return 8;
-
-  if (MakeCrcSInBuff(1, IndexInBuff()-2) != 0) return 9;
+//  if (InBuff(1) != 0x48) return 2;
+//
+//  if (InBuffIntLtl(2) != wPrivate) return 3;
+//  if (InBuffIntLtl(4) != (mpdwAddress1[diCurr.bAddress-1] % 0x10000)) return 4;
+//
+//  if ((InBuff(6) & 0xF0) != 0x50) return 5;
+//  if ((IndexInBuff() >= 11) && (IndexInBuff() != (InBuff(6) & 0x0F) + 11)) return 6;
+//
+//  if (InBuff(7) != OutBuff(11)) return 7;
+//  if (InBuff(8) != OutBuff(12)) return 8;
+//
+//  if (MakeCrcSInBuff(1, IndexInBuff()-2) != 0) return 9;
   if (InBuff(IndexInBuff()-1) != 0xC0) return 10;
 
   return 0;
@@ -118,7 +143,7 @@ uchar   Checksum35(void)
   uchar i = Check35();
   if (i != 0)
   {
-    Clear(); sprintf(szLo+1,"ошибка: 24.2.%u",i);
+    Clear(); sprintf(szLo+1,"ошибка: 35.2.%u",i);
     DelayInf();
   }
 
