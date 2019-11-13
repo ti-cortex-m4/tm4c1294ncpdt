@@ -16,6 +16,7 @@ AUTOMATIC35!C
 #include "../../serial/ports2.h"
 #include "../../serial/ports_devices.h"
 #include "../../serial/input_wrapper.h"
+#include "../../serial/monitor.h"
 #include "../../devices/devices.h"
 #include "../../digitals/digitals.h"
 #include "../../digitals/wait_answer.h"
@@ -165,7 +166,7 @@ serial  Input35(void)
        {
          MonitorString("\n NNCL2 repeat");
 
-         Query35Internal(1000, 0, 0x12);
+         Query35Internal(250, 0, 0x12);
          repeat = true;
        }
        else if (InBuff(7) == 0x12)
@@ -183,6 +184,7 @@ serial  Input35(void)
          {
            MonitorString("\n NNCL2 competed");
 
+           uchar i;
            for (i=0; i<IndexInBuff()-15; i++)
              SetInBuff(i, InBuff(12+i));
          }
