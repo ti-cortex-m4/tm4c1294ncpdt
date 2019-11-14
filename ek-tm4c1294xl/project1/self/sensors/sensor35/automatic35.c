@@ -162,15 +162,20 @@ static serial Input35Internal(void)
 
 serial  Input35(void)
 {
-  bool repeat = false;
+  uint r = 0;
+
+  bool repeat;
   do
   {
     Input35Internal();
+    repeat = false;
 
     if (mpSerial[ibPort] == SER_GOODCHECK)
     {
        if (InBuff(7) == 0x14)
        {
+         sprintf(szLo," повтор: %u", ++r); DelayInf();
+
          MonitorString("\n NNCL2 repeat");
 
          Query35Internal(250, 0, 0x12);
