@@ -66,7 +66,7 @@ static void Query35Internal(uchar  cbIn, uchar  cbOut, uchar  bCommand)
 
   PushChar(bCommand);
 
-  PushChar(0xB6);   // TODO
+  PushChar(0xB6);   // TODO 35
   PushChar(0x59);
   PushChar(0x00);
   PushChar(0x00);
@@ -174,7 +174,7 @@ serial  Input35(void)
     {
        if (InBuff(7) == 0x14)
        {
-         sprintf(szLo," повтор: %u", ++r); DelayInf();
+         sprintf(szLo," повтор: %u", ++r); DelayInf(); // TODO 35
 
          MonitorString("\n NNCL2 repeat");
 

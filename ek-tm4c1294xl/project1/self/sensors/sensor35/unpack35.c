@@ -22,7 +22,7 @@ DECOMPRESS35!C
 
 #ifndef SKIP_35
 /*
-static uchar Repack35(uchar  bCode)
+static uchar Repack35(uchar  bCode) // TODO 35
 {
   uchar i;
   for (i=1; i<=IndexInBuff()-2; i++)
@@ -75,7 +75,7 @@ uchar   i,j;
   MonitorIn();
 
 /*
-  if ((InBuff(6) & 0xF0) != 0x50)
+  if ((InBuff(6) & 0xF0) != 0x50) // TODO 35
   {
     Clear(); sprintf(szLo+1,"ошибка: 35.1.%u",(InBuff(6) & 0xF0));
     DelayInf();
@@ -120,7 +120,7 @@ uchar   i,j;
 
 
 
-static uchar Check35(void) // TODO
+static uchar Check35(void) // TODO 35
 {
   if (InBuff(0) != 0xC0) return 1;
 //  if (InBuff(1) != 0x48) return 2;
