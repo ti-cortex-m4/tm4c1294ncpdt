@@ -267,7 +267,7 @@ uint    MakeCrc16Bit32InBuff(uchar  bOffset, uint  wSize)
 
 #ifndef SKIP_35
 
-uchar   MakeCrc35OutBuff(uchar  bOffset, uint  wSize)
+uint    MakeCrc35OutBuff(uchar  bOffset, uint  wSize)
 {
   switch (ibPort)
   {
@@ -280,7 +280,7 @@ uchar   MakeCrc35OutBuff(uchar  bOffset, uint  wSize)
 }
 
 
-uchar   MakeCrc35InBuff(uchar  bOffset, uint  wSize)
+uint    MakeCrc35InBuff(uchar  bOffset, uint  wSize)
 {
   switch (ibPort)
   {

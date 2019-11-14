@@ -3,4 +3,4 @@ CRC_35.H
 
 ------------------------------------------------------------------------------*/
 
-uchar   MakeCrc35(uchar  *pbData, uint  wSize);
+uint    MakeCrc35(uchar  *pbData, uint  wSize);

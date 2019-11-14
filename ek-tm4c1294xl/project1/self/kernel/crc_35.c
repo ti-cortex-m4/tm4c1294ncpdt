@@ -9,16 +9,16 @@ CRC_35.C
 
 
 
-uchar   MakeCrc35(uchar  *pbData, uint  wSize)
+uint    MakeCrc35(uchar  *pbData, uint  wSize)
 {
   uint wCRC = 0;
 
   while (wSize-- > 0)
   {
-    wCRC ^= *(pbData++) << 8;
+    wCRC ^= (*pbData << 8);
 
     uchar i;
-    for (i = 0; i < 8; i++)
+    for (i=0; i<8; i++)
     {
       if (wCRC & 0x8000)
       {
@@ -30,6 +30,8 @@ uchar   MakeCrc35(uchar  *pbData, uint  wSize)
         wCRC <<= 1;
       }
     }
+
+    pbData++;
   }
 
   return wCRC;
