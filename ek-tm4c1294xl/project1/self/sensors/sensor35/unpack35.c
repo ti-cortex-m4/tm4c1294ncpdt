@@ -21,7 +21,7 @@ DECOMPRESS35!C
 
 
 #ifndef SKIP_35
-
+/*
 static uchar Repack35(uchar  bCode)
 {
   uchar i;
@@ -30,6 +30,7 @@ static uchar Repack35(uchar  bCode)
 
   return 0;
 }
+*/
 
 
 void    Decompress35(void)
@@ -45,33 +46,35 @@ uchar   i,j;
   if ((InBuff(0) != 0xC0) || (InBuff(IndexInBuff()-1) != 0xC0))
     return;
 
+  MonitorString("\n Unpack start");
   MonitorIn();
 
-/*
   i = 1;
   j = 1;
-  while i < wSize do {
-    if (mpbIn[i] = 0xDB) and (mpbIn[i+1] = 0xDD) {
-      MonitorString('Распаковка символа 0хDB при приеме: позиция ' + IntToStr(i));
-      mpbIn[j] = 0xDB;
+  while (i < IndexInBuff()) {
+    if ((InBuff(i) == 0xDB) && (InBuff(i+1) == 0xDD)) {
+      MonitorString("\n Unpack character 0хDB after input: "); MonitorCharDec(i);
+      SetInBuff(j, 0xDB);
       i++; i++;
       j++;
-    } else if (mpbIn[i] = 0xDB) and (mpbIn[i+1] = 0xDC) {
-      MonitorString('Распаковка символа 0хC0 при приеме: позиция ' + IntToStr(i));
-      mpbIn[j] = 0xC0;
+    } else if ((InBuff(i) == 0xDB) && (InBuff(i+1) == 0xDC)) {
+      MonitorString("\n Unpack character 0хC0 after input: "); MonitorCharDec(i);
+      SetInBuff(j, 0xC0);
       i++; i++;
       j++;
     } else {
-      mpbIn[j] = mpbIn[i];
+      SetInBuff(j, InBuff(i));
       i++;
       j++;
-    };
-  };
+    }
+  }
 
-  wSize = j;
-  ShowInData(wSize);
-*/
+  SetIndexInBuff(j);
 
+  MonitorString("\n Unpack finish");
+  MonitorIn();
+
+/*
   if ((InBuff(6) & 0xF0) != 0x50)
   {
     Clear(); sprintf(szLo+1,"ошибка: 35.1.%u",(InBuff(6) & 0xF0));
@@ -111,13 +114,13 @@ uchar   i,j;
       continue;
     }
   }
-
+*/
   mpSerial[ibPort] = SER_POSTINPUT_MASTER;
 }
 
 
 
-static uchar Check35(void)
+static uchar Check35(void) // TODO
 {
   if (InBuff(0) != 0xC0) return 1;
 //  if (InBuff(1) != 0x48) return 2;
