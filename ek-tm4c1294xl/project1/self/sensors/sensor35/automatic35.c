@@ -32,6 +32,7 @@ static void Query35Internal(uchar  cbIn, uchar  cbOut, uchar  bCommand)
 {
   if (cbOut > 0)
   {
+    // расчет CRC счетчика
     uchar bCrc = MakeCrcSOutBuff(1, cbOut-3);
 
     InitPush(0);
@@ -43,11 +44,14 @@ static void Query35Internal(uchar  cbIn, uchar  cbOut, uchar  bCommand)
     PushChar(bCrc);
     PushChar(0xC0);
 
+
+    // перенос пакета счетчика внутри пакета концентратора
     for (i=0; i<cbOut; i++)
       SetOutBuff(cbOut+12-i, OutBuff(cbOut-1-i));
   }
 
 
+  // заполнение пакета концентратора
   InitPush(0);
   PushChar(0xC0);
 
@@ -62,13 +66,15 @@ static void Query35Internal(uchar  cbIn, uchar  cbOut, uchar  bCommand)
 
   PushChar(bCommand);
 
-  PushChar(0xB6);
+  PushChar(0xB6);   // TODO
   PushChar(0x59);
   PushChar(0x00);
   PushChar(0x00);
 
   PushChar(0x00);
 
+
+  // расчет CRC концентратора
   InitPush(13+cbOut);
 
   uint w = MakeCrc35OutBuff(1, 13+cbOut-1);
@@ -80,6 +86,7 @@ static void Query35Internal(uchar  cbIn, uchar  cbOut, uchar  bCommand)
   cbOut = 13+cbOut+3;
 
 
+  // упаковка по протоколу SLIP
   uchar i;
   for (i=0; i<=cbOut-1; i++)
     mpbOutBuffSave[i] = OutBuff(i);
