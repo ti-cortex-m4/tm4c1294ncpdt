@@ -182,7 +182,7 @@ uchar   Checksum35Sensor(void)
   uchar i = Check35Sensor();
   if (i != 0)
   {
-    Clear(); sprintf(szLo+1,"ошибка: 35.2.%u",i);
+    Clear(); sprintf(szLo+1,"ошибка: 35.3.%u",i);
     DelayInf();
   }
 
