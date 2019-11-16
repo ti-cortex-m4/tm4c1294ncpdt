@@ -12,6 +12,7 @@ params35.c
 #include "../../display/display.h"
 #include "../../time/delay.h"
 #include "device35.h"
+#include "io35.h"
 #include "params35.h"
 
 
@@ -35,7 +36,7 @@ void    QueryParam35_P(void)
 }
 
 
-void    ReadParam35_P(void)
+long    ReadParam35_P(void)
 {
   InitPop(9);
 
@@ -43,25 +44,23 @@ void    ReadParam35_P(void)
   dw += PopChar()*100;
   dw += PopChar()*10000;
 
-  reValue = dw*10;
+  return dw*10;
 }
 
 
-bool    ReadParam35(void)
+float2  ReadParam35(void)
 {
   Clear();
 
   QueryParam35_P();
-  if (InputS() != SER_GOODCHECK) return(0);
+  if (Input35() != SER_GOODCHECK) return GetFloat2Error();
 
   switch (diCurr.ibLine)
   {
-    case PAR_P : ReadParam35_P(); break;
+    case PAR_P : return GetFloat2(ReadParam35_P(), true);
 
-    default: return(0);
+    default: return GetFloat2Error();
   }
-
-  return(1);
 }
 
 #endif

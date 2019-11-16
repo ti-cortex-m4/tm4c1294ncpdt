@@ -10,8 +10,8 @@ DEVICE35!C
 #include "../../memory/mem_settings.h"
 #include "../../memory/mem_digitals.h"
 #include "../../memory/mem_ports.h"
-//#include "../../memory/mem_current.h"
-//#include "../../memory/mem_factors.h"
+#include "../../memory/mem_current.h"
+#include "../../memory/mem_factors.h"
 //#include "../../memory/mem_realtime.h"
 //#include "../../memory/mem_energy_spec.h"
 //#include "../../memory/mem_profile.h"
@@ -26,7 +26,7 @@ DEVICE35!C
 #include "../../serial/monitor.h"
 #include "../../devices/devices.h"
 #include "../../devices/devices_time.h"
-//#include "../../digitals/current/current_run.h"
+#include "../../digitals/current/current_run.h"
 //#include "../../digitals/limits.h"
 //#include "../../special/special.h"
 #include "../../hardware/watchdog.h"
@@ -348,17 +348,17 @@ bool    ReadHeader35(void)
 
   return(1);
 }
-
+*/
 
 
 void    ReadCurrent35(void)
 {
   ReadEnergy35();
-  mpdwBaseDig[0] = coEnergy.dwBuff*mpdbPulseMnt[ibDig]/wDividerS;
+  mpdwBaseDig[0] = coEnergy.dwBuff*mpdbPulseMnt[ibDig]/GetDivider35();
 
   MakeCurrent();
 }
-*/
+
 #endif
 
 // device_24: чтение данных по сезонному времени

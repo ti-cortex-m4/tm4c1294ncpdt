@@ -4,7 +4,7 @@ DEVICE35.C
 
 ------------------------------------------------------------------------------*/
 
-//void    PushAddress35(void);
+void    PushAddress35(void);
 
 void    QueryTime35(void);
 time    ReadTime35(void);
@@ -25,5 +25,5 @@ void    ReadEnergy35(void);
 //void    InitHeader35(void);
 //void    QueryHeader35(void);
 //bool    ReadHeader35(void);
-//
-//void    ReadCurrent35(void);
+
+void    ReadCurrent35(void);
