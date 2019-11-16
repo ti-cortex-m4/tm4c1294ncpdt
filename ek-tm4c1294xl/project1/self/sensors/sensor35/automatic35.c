@@ -142,7 +142,7 @@ static serial Input35Internal(void)
 
     if (mpSerial[ibPort] == SER_POSTINPUT_MASTER)
     {
-      if (Checksum35() == 0)
+      if (Checksum35Router() == 0)
       {
         InputGoodCheck();
         mpSerial[ibPort] = SER_GOODCHECK;
@@ -176,7 +176,7 @@ serial  Input35(void)
     {
        if (InBuff(7) == 0x14)
        {
-         sprintf(szLo,"   повтор: %u    ", ++r); DelayInf();
+         sprintf(szLo,"  ожидание: %u   ",(r++ / 2) + 1); Delay(500);
 
          MonitorString("\n NNCL2 repeat");
 
@@ -190,13 +190,13 @@ serial  Input35(void)
            MonitorString("\n NNCL2 wrong size");
            MonitorIntDec(IndexInBuff());
 
-           Clear(); sprintf(szLo+1,"ошибка: 35.3.%u",InBuff(7));
+           Clear(); sprintf(szLo+1,"ошибка: 35.3.%u",InBuff(7)); // TODO 35
            DelayInf();
            mpSerial[ibPort] = SER_BADCHECK;
          }
          else
          {
-           MonitorString("\n NNCL2 competed");
+           MonitorString("\n NNCL2 success");
 
            uchar i;
            for (i=0; i<IndexInBuff()-15; i++)
@@ -207,7 +207,7 @@ serial  Input35(void)
        }
        else
        {
-         MonitorString("\n NNCL2 error");
+         MonitorString("\n NNCL2 failure");
          MonitorCharDec(InBuff(7));
 
          Clear(); sprintf(szLo+1,"ошибка: 35.4.%u",InBuff(7));
