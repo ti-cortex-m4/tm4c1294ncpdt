@@ -162,6 +162,8 @@ static serial Input35Internal(void)
 
 serial  Input35(void)
 {
+  SaveDisplay();
+
   uint r = 0;
 
   bool repeat;
@@ -174,7 +176,7 @@ serial  Input35(void)
     {
        if (InBuff(7) == 0x14)
        {
-         sprintf(szLo," повтор: %u", ++r); DelayInf(); // TODO 35
+         sprintf(szLo,"   повтор: %u    ", ++r); DelayInf();
 
          MonitorString("\n NNCL2 repeat");
 
@@ -214,6 +216,8 @@ serial  Input35(void)
        }
     }
   } while (repeat);
+
+  LoadDisplay();
 
   return mpSerial[ibPort];
 }
