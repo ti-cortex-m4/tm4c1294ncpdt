@@ -64,6 +64,7 @@ DEVICES.C
 #include "../sensors/sensor34/time34.h"
 #include "../sensors/sensor34/auth34.h"
 #include "../sensors/sensor34/profile34.h"
+#include "../sensors/sensor35/device35.h"
 #include "../serial/ports.h"
 #include "../serial/ports_modems.h"
 #include "../serial/modems.h"
