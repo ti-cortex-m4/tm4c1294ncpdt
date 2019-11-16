@@ -2183,6 +2183,10 @@ double2 ReadCntMonCan(uchar  ibMon, uchar  ibCan)
     case 34: return ReadCntMonCan34(ibMon);
 #endif
 
+#ifndef SKIP_35
+    case 35: return ReadCntMonCan35(ibMon);
+#endif
+
     default: return GetDouble2Error();
   }
 }
