@@ -1103,6 +1103,10 @@ float2  ReadParam(uint  iwPrm)
     case 34: return ReadParam34();
 #endif
 
+#ifndef SKIP_35
+    case 35: return GetFloat2(reValue, ReadParam35());
+#endif
+
     default: return GetFloat2Error();
   }
 }
