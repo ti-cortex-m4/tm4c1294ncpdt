@@ -763,6 +763,15 @@ typedef enum
 
 #endif
 
+#ifndef SKIP_35
+
+  DEV_START_35C         =  0x2100,
+  DEV_CONFIG_35C        =  0x2101,
+  DEV_POSTCONFIG_35C    =  0x2102,
+  DEV_ENERGY_35C        =  0x2103,
+
+#endif
+
   DEV_PAUSE             =  1
 
 } device;
