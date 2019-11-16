@@ -30,7 +30,7 @@ DEVICE35!C
 //#include "../../digitals/limits.h"
 //#include "../../special/special.h"
 #include "../../hardware/watchdog.h"
-#include "automatic35.h"
+#include "io35.h"
 #include "device35.h"
 
 

@@ -18,6 +18,7 @@ AUTOMATIC35!C
 #include "../../serial/input_wrapper.h"
 #include "../../serial/monitor.h"
 #include "../../devices/devices.h"
+#include "../../sensors/automatic1.h"
 #include "../../digitals/digitals.h"
 #include "../../digitals/wait_answer.h"
 #include "unpack35.h"
@@ -28,21 +29,6 @@ AUTOMATIC35!C
 
 
 #ifndef SKIP_35
-
-bool    Automatic35(void)
-{
-  Clear();
-
-  if (QueryConfigS_Full(50) == 0) return(0);
-
-  dbKpulse = wDividerS;                 // K преобразования
-  dbKtrans = 1;                         // K трансформации
-  SetAllFactors(dbKpulse,dbKtrans);     // сохранение К преобразования и К трансформации
-
-  return(1);
-}
-
-
 
 bool    QueryConfig35_Full(uchar  bPercent)
 {
@@ -62,6 +48,21 @@ bool    QueryConfig35_Full(uchar  bPercent)
   ReadConfig35();
   return(1);
 }
+
+
+bool    Automatic35(void)
+{
+  Clear();
+
+  if (QueryConfig35_Full(50) == 0) return(0);
+
+  dbKpulse = GetDivider35();            // K преобразования
+  dbKtrans = 1;                         // K трансформации
+  SetAllFactors(dbKpulse,dbKtrans);     // сохранение К преобразования и К трансформации
+
+  return(1);
+}
+
 
 
 time2   QueryTime35_Full(uchar  bPercent)
@@ -172,7 +173,7 @@ double2 ReadCntMonCan35(uchar  ibMon)
     if (QueryEngDay35_Full(1, 75) == 0) return GetDouble2Error();
   }
 
-  mpdbChannelsC[0] = (double)mpdwChannelsA[0] / wDividerS;
+  mpdbChannelsC[0] = (double)mpdwChannelsA[0] / GetDivider35();
   mpboChannelsA[0] = true;
 
   return GetDouble2(mpdbChannelsC[0], true);
