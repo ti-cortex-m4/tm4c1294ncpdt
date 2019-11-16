@@ -37,6 +37,10 @@ DEVICE35!C
 
 #ifndef SKIP_35
 
+static uint             wDivider35;
+
+
+
 void    PushAddress35(void)
 {
   PushIntLtl(22966 /*mpdwAddress1[diCurr.bAddress-1] % 0x10000*/);  // TODO 35
@@ -110,7 +114,7 @@ void    QueryControl35(time  ti)
 
   Query35(100+11, 22);
 }
-
+*/
 
 
 void    QueryConfig35(void)
@@ -136,15 +140,21 @@ void    ReadConfig35(void)
 
   switch (PopChar() & 0x03)
   {
-    case 0x00: wDividerS = 1; break;
-    case 0x01: wDividerS = 10; break;
-    case 0x02: wDividerS = 100; break;
-    default:   wDividerS = 1000; break;
+    case 0x00: wDivider35 = 1; break;
+    case 0x01: wDivider35 = 10; break;
+    case 0x02: wDivider35 = 100; break;
+    default:   wDivider35 = 1000; break;
   }
 }
 
 
+uint    GetDivider35(void)
+{
+  return wDivider35;
+}
 
+
+/*
 void    QueryVersion35(void)
 {
   InitPush(0);
@@ -169,7 +179,7 @@ void    ReadVersion35(void)
   Clear();
   sprintf(szLo+1, "версия %u.%u.%u", PopChar(), PopChar(), PopChar());
 }
-
+*/
 
 
 void    QueryEngDay35(uchar  bDay)
@@ -222,7 +232,7 @@ void    ReadEnergy35(void)
 }
 
 
-
+/*
 void    InitHeader35(void)
 {
   if (!UseBounds())

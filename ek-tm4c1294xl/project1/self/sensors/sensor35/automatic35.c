@@ -199,6 +199,8 @@ serial  Input35(void)
            uchar i;
            for (i=0; i<IndexInBuff()-15; i++)
              SetInBuff(i, InBuff(12+i));
+
+           // TODO 35 проверить данные
          }
        }
        else
@@ -217,8 +219,8 @@ serial  Input35(void)
 }
 
 
-/*
-bool    QueryConfigS_Full(uchar  bPercent)
+
+bool    QueryConfig35_Full(uchar  bPercent)
 {
   uchar i;
   for (i=0; i<MaxRepeats(); i++)
@@ -236,7 +238,7 @@ bool    QueryConfigS_Full(uchar  bPercent)
   ReadConfig35();
   return(1);
 }
-*/
+
 
 time2   QueryTime35_Full(uchar  bPercent)
 {
@@ -256,8 +258,8 @@ time2   QueryTime35_Full(uchar  bPercent)
   return GetTime2(ReadTime35(), true);
 }
 
-/*
-bool    QueryEngDayS_Full(uchar  bTime, uchar  bPercent)
+
+bool    QueryEngDay35_Full(uchar  bTime, uchar  bPercent)
 {
   uchar i;
   for (i=0; i<MaxRepeats(); i++)
@@ -277,7 +279,7 @@ bool    QueryEngDayS_Full(uchar  bTime, uchar  bPercent)
 }
 
 
-bool    QueryEngMonS_Full(uchar  bTime, uchar  bPercent)
+bool    QueryEngMon35_Full(uchar  bTime, uchar  bPercent)
 {
   uchar i;
   for (i=0; i<MaxRepeats(); i++)
@@ -295,7 +297,7 @@ bool    QueryEngMonS_Full(uchar  bTime, uchar  bPercent)
   ReadEnergy35();
   return(1);
 }
-*/
+
 
 
 time2   ReadTimeCan35(void)
@@ -311,39 +313,39 @@ time2   ReadTimeCan35(void)
   return GetTime2(ti2.tiValue, true);
 }
 
-/*
+
 double2 ReadCntCurr35(void)
 {
   Clear();
 
-  if (QueryConfigS_Full(50) == 0) return GetDouble2Error();
+  if (QueryConfig35_Full(50) == 0) return GetDouble2Error();
 
-  if (QueryEngMonS_Full(0, 75) == 0) return GetDouble2Error();
+  if (QueryEngMon35_Full(0, 75) == 0) return GetDouble2Error();
 
-  mpdbChannelsC[0] = (double)mpdwChannelsA[0] / wDividerS;
+  mpdbChannelsC[0] = (double)mpdwChannelsA[0] / GetDivider35();
   mpboChannelsA[0] = true;
 
   return GetDouble2(mpdbChannelsC[0], true);
 }
 
-
+/*
 double2 ReadCntMonCan35(uchar  ibMon)
 {
   Clear();
 
-  if (QueryConfigS_Full(25) == 0) return GetDouble2Error();
+  if (QueryConfig35_Full(25) == 0) return GetDouble2Error();
 
-  time2 ti2 = QueryTimeS_Full(50);
+  time2 ti2 = QueryTime35_Full(50);
   if (ti2.fValid == false) return GetDouble2Error();
   time ti = ti2.tiValue;
 
   if (ti.bMonth != ibMon+1)
   {
-    if (QueryEngMonS_Full((bMONTHS+ti.bMonth-1-ibMon) % bMONTHS, 75) == 0) return GetDouble2Error();
+    if (QueryEngMon35_Full((bMONTHS+ti.bMonth-1-ibMon) % bMONTHS, 75) == 0) return GetDouble2Error();
   }
   else
   {
-    if (QueryEngDayS_Full(1, 75) == 0) return GetDouble2Error();
+    if (QueryEngDay35_Full(1, 75) == 0) return GetDouble2Error();
   }
 
   mpdbChannelsC[0] = (double)mpdwChannelsA[0] / wDividerS;
