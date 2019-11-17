@@ -1,6 +1,27 @@
 
 #ifndef SKIP_35
 
+    case DEV_DATAGET_35:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+      {
+        PostInput35();
+      }
+      else
+      {
+        if (cbRepeat == 0) ErrorCurrent();
+        else
+        {
+          ErrorLink();
+          cbRepeat--;
+
+          Query35Internal(250, 0, 0x12);
+          SetCurr(DEV_DATAGET_35);
+        }
+      }
+      break;
+
+
+
     case DEV_START_35C:
       ShowPercent(25);
 

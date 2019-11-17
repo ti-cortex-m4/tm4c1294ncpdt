@@ -17,8 +17,9 @@ POSTINPUT35!C
 #include "../../serial/ports_devices.h"
 #include "../../serial/input_wrapper.h"
 #include "../../serial/monitor.h"
-//#include "../../devices/devices.h"
+#include "../../devices/devices.h"
 //#include "../../digitals/digitals.h"
+#include "../../digitals/digitals_status.h"
 #include "../../digitals/wait_answer.h"
 #include "unpack35.h"
 #include "device35.h"
@@ -34,52 +35,51 @@ volatile device         deCurr35;
 
 
 
+device  GetCurr35(void)
+{
+  return deCurr35;
+}
+
+
+
 void    PostInput35(void)
 {
     if (InBuff(7) == 0x14)
     {
-//      sprintf(szLo,"  ожидание: %u   ",(r++ / 2) + 1); Delay(500);
-//
-//      MonitorString("\n NNCL2 repeat");
-//
+      Clear(); sprintf(szLo+2,"ожидание: %u",(cbRepeat35++ / 2) + 1); Delay(100);
 
       deCurr35 = GetCurr();
 
       cbRepeat = MaxRepeats();
       Query35Internal(250, 0, 0x12);
       SetCurr(DEV_DATAGET_35);
-//      repeat = true;
     }
     else if (InBuff(7) == 0x12)
     {
-//      if (IndexInBuff() < 15)
-//      {
-//        MonitorString("\n NNCL2 wrong size");
-//        MonitorIntDec(IndexInBuff());
-//
-//        Clear(); sprintf(szLo+1,"ошибка: 35.4.%u",InBuff(7)); // TODO 35
-//        DelayInf();
-//        mpSerial[ibPort] = SER_BADCHECK;
-//      }
-//      else
-//      {
-//        MonitorString("\n NNCL2 success");
-//
-//        uchar i;
-//        for (i=0; i<IndexInBuff()-15; i++)
-//          SetInBuff(i, InBuff(12+i));
-//
-//        // TODO 35 проверить данные
-//      }
+      if (IndexInBuff() < 15)
+      {
+        Clear(); sprintf(szLo+1,"ошибка: 35.4.%u",InBuff(7));
+        DelayInf();
+      }
+      else
+      {
+        uchar i;
+        for (i=0; i<IndexInBuff()-15; i++)
+          SetInBuff(i, InBuff(12+i));
+
+        if (Checksum35Sensor() == 0)
+        {
+          MakePause(GetCurr35());
+        }
+        else
+        {
+        }
+      }
     }
     else
     {
-//      MonitorString("\n NNCL2 failure");
-//      MonitorCharDec(InBuff(7));
-//
-//      Clear(); sprintf(szLo+1,"ошибка: 35.5.%u",InBuff(7));
-//      DelayInf();
-//      mpSerial[ibPort] = SER_BADCHECK;
+      Clear(); sprintf(szLo+1,"ошибка: 35.5.%u",InBuff(7));
+      DelayInf();
     }
 }
 
