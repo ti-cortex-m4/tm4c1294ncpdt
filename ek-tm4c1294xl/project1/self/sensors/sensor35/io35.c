@@ -5,30 +5,29 @@ IO35!C
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-//#include "../../memory/mem_profile.h"
-//#include "../../memory/mem_factors.h"
 #include "../../display/display.h"
 #include "../../keyboard/keyboard.h"
 #include "../../time/delay.h"
-//#include "../../time/timedate.h"
 #include "../../hardware/watchdog.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports2.h"
 #include "../../serial/ports_devices.h"
 #include "../../serial/input_wrapper.h"
 #include "../../serial/monitor.h"
-//#include "../../devices/devices.h"
-//#include "../../digitals/digitals.h"
 #include "../../digitals/wait_answer.h"
 #include "unpack35.h"
 #include "device35.h"
-#include "automatic35.h"
+//#include "automatic35.h"
+#include "io35.h"
 
 
 
 #ifndef SKIP_35
 
-static void Query35Internal(uchar  cbIn, uchar  cbOut, uchar  bCommand)
+uchar                       cbRepeat35;
+
+
+void    Query35Internal(uchar  cbIn, uchar  cbOut, uchar  bCommand)
 {
   if (cbOut > 0)
   {
@@ -119,6 +118,7 @@ static void Query35Internal(uchar  cbIn, uchar  cbOut, uchar  bCommand)
 
 void    Query35(uchar  cbIn, uchar  cbOut)
 {
+  cbRepeat35 = 0;
   Query35Internal(cbIn, cbOut, 0x11);
 }
 
