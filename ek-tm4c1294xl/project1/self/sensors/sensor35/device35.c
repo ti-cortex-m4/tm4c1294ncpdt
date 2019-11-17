@@ -44,7 +44,7 @@ static uint             wDivider35;
 void    PushAddress35(void)
 {
   PushIntLtl(22966 /*mpdwAddress1[diCurr.bAddress-1] % 0x10000*/);  // TODO 35
-  PushIntLtl(0xFD /*wPrivate*/);
+  PushIntLtl(wPrivate);
 
   PushLongLtl(mpdwAddress2[diCurr.bAddress-1]);
 }
