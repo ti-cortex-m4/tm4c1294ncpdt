@@ -13,6 +13,7 @@ DEVICES_INPUT,C
 #include "../sensors/unpack_v.h"
 #include "../sensors/unpack_w.h"
 #include "../sensors/sensor34/unpack_34.h"
+#include "../sensors/sensor35/unpack35.h"
 #include "../serial/ports.h"
 #include "devices_input.h"
 
@@ -181,6 +182,13 @@ void    DevicesInput(void)
         UnpackAuth34();
       else if (GetCurr() == DEV_READ_34P)
         UnpackProfile34();
+    }
+#endif
+
+#ifndef SKIP_35
+    else if (diCurr.bDevice == 35)
+    {
+      Decompress35();
     }
 #endif
 }
