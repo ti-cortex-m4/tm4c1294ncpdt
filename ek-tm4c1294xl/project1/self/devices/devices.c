@@ -65,10 +65,13 @@ DEVICES.C
 #include "../sensors/sensor34/auth34.h"
 #include "../sensors/sensor34/profile34.h"
 #include "../sensors/sensor35/device35.h"
+#include "../sensors/sensor35/io35.h"
+#include "../sensors/sensor35/postinput35.h"
 #include "../serial/ports.h"
 #include "../serial/ports_modems.h"
 #include "../serial/modems.h"
 #include "../serial/speeds_display.h"
+#include "../serial/monitor.h"
 #include "../digitals/dsbl_answer.h"
 #include "../digitals/limits.h"
 #include "../digitals/digitals_display.h"
@@ -5829,6 +5832,7 @@ void    RunDevices(void)
     case DEV_DATAGET_35:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
+        MonitorString("\n repeat: completed");
         MakePause(GetCurr35());
       }
       else
@@ -5836,10 +5840,12 @@ void    RunDevices(void)
         if (cbRepeat == 0) ErrorCurrent();
         else
         {
-          ErrorLink();
+          //ErrorLink();
           cbRepeat--;
 
-          Query35Internal(250, 0, 0x12);
+          MonitorString("\n repeat: repeat");
+
+          Query35Internal(250, 0, NNCL2_DATA_GET);
           SetCurr(DEV_DATAGET_35);
         }
       }
@@ -5853,16 +5859,18 @@ void    RunDevices(void)
       cbRepeat = MaxRepeats();
       QueryConfig35();
       SetCurr(DEV_CONFIG_35C);
+      SetCurr35(DEV_CONFIG_35C);
       break;
 
     case DEV_CONFIG_35C:
-      if (mpSerial[ibPort] == SER_GOODCHECK)
+      if (mpSerial[ibPort] == SER_PAUSE) // SER_GOODCHECK
       {
         ReadConfig35();
         MakePause(DEV_POSTCONFIG_35C);
       }
       else
       {
+        MonitorString("\n read config: repeat "); MonitorIntDec(cbRepeat); MonitorString(" "); MonitorCharDec(mpSerial[ibPort]);
         if (cbRepeat == 0) ErrorCurrent();
         else
         {
@@ -5871,6 +5879,7 @@ void    RunDevices(void)
 
           QueryConfig35();
           SetCurr(DEV_CONFIG_35C);
+          SetCurr35(DEV_CONFIG_35C);
         }
       }
       break;
@@ -5881,13 +5890,16 @@ void    RunDevices(void)
       cbRepeat = MaxRepeats();
       QueryEngMon35(0);
       SetCurr(DEV_ENERGY_35C);
+      SetCurr35(DEV_ENERGY_35C);
       break;
 
     case DEV_ENERGY_35C:
-      if (mpSerial[ibPort] == SER_GOODCHECK)
+      if (mpSerial[ibPort] == SER_PAUSE) // SER_GOODCHECK
         ReadCurrent35();
       else
       {
+        MonitorString("\n read energy: repeat "); MonitorIntDec(cbRepeat);
+
         if (cbRepeat == 0) ErrorCurrent();
         else
         {
@@ -5896,6 +5908,7 @@ void    RunDevices(void)
 
           QueryEngMon35(0);
           SetCurr(DEV_ENERGY_35C);
+          SetCurr35(DEV_ENERGY_35C);
         }
       }
       break;

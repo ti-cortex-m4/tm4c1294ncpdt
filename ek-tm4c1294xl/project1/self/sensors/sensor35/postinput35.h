@@ -4,6 +4,7 @@ POSTINPUT35!H
 
 ------------------------------------------------------------------------------*/
 
+void    SetCurr35(device  de);
 device  GetCurr35(void);
 
 void    PostInput35(void);
