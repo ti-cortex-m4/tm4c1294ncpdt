@@ -24,7 +24,7 @@ DECOMPRESS35!C
 
 
 //                                          0123456789ABCDEF
-static char const       szError[]        = "    Ошибка      ";
+static char const       szError35[]      = "    Ошибка      ";
 
 
 
@@ -155,7 +155,7 @@ uchar   Checksum35Router(void)
   {
     SaveDisplay();
 
-    ShowHi(szError);
+    ShowHi(szError35);
     Clear(); sprintf(szLo+3,"роутера: %u",i);
 
     MonitorString("\n router frame error: "); MonitorCharHex(i);
@@ -198,7 +198,7 @@ uchar   Checksum35Sensor(void)
   {
     SaveDisplay();
 
-    ShowHi(szError);
+    ShowHi(szError35);
     Clear(); sprintf(szLo+2,"счетчика: %u",i);
     MonitorString("\n sensor frame error: "); MonitorCharHex(i);
 

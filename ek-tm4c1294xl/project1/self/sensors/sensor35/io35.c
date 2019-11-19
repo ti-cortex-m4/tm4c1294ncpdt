@@ -18,13 +18,12 @@ IO35!C
 #include "unpack35.h"
 #include "device35.h"
 //#include "automatic35.h"
+#include "timer35.h"
 #include "io35.h"
 
 
 
 #ifndef SKIP_35
-
-uchar                       cbRepeat35;
 
 static uchar                cbInSave;
 static uchar                cbOutSave;
@@ -128,7 +127,7 @@ void    Query35Internal(uchar  cbIn, uchar  cbOut, uchar  bCommand)
 
 void    Query35(uchar  cbIn, uchar  cbOut)
 {
-  cbRepeat35 = 0;
+  SetTimer35(0);
   Query35Internal(cbIn, cbOut, NNCL2_DATA_SET);
 }
 

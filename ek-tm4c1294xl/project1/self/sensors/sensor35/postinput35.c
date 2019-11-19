@@ -25,6 +25,7 @@ POSTINPUT35!C
 #include "device35.h"
 #include "automatic35.h"
 #include "io35.h"
+#include "timer35.h"
 #include "postinput35.h"
 
 
@@ -54,9 +55,10 @@ void    PostInput35(void)
 {
     if (InBuff(7) == NNCL2_TIME)
     {
-      Clear(); sprintf(szLo+2,"ожидание: %u",(cbRepeat35++ / 2) + 1);
-      Delay(1000); // Inf
-      MonitorString("\n repeat");
+      uint w = GetTimer35();
+      Clear(); sprintf(szLo+2,"ожидание: %u.%u",w/10,w%10);
+      Delay(500); // Inf
+      MonitorString("\n repeat: start");
 
       cbRepeat = MaxRepeats();
       Query35Internal(250, 0, NNCL2_DATA_GET);
