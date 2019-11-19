@@ -11,10 +11,6 @@ IO35!H
 
 
 
-extern  uchar                       cbRepeat35;
-
-
-
 void    Query35Internal(uchar  cbIn, uchar  cbOut, uchar  bCommand);
 void    Query35Repeat(void);
 void    Query35(uchar  cbIn, uchar  cbOut);
