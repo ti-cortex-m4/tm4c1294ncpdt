@@ -24,8 +24,7 @@ DECOMPRESS35!C
 
 
 //                                          0123456789ABCDEF
-static char const       szRouterError[]  = "  Router error  ",
-                        szSensorError[]  = "  Sensor error  ";
+static char const       szError[]        = "    Ошибка      ";
 
 
 
@@ -155,10 +154,13 @@ uchar   Checksum35Router(void)
   if (i != 0)
   {
     SaveDisplay();
-    ShowHi(szRouterError);
 
-    Clear(); sprintf(szLo+1,"ошибка: 35.2.%u",i);
-    DelayInf();
+    ShowHi(szError);
+    Clear(); sprintf(szLo+3,"роутера: %u",i);
+
+    MonitorString("\n router frame error: "); MonitorCharHex(i);
+
+    Delay(1000); // Inf
     LoadDisplay();
   }
 
@@ -174,16 +176,16 @@ static uchar Check35Sensor(void)
   if (InBuff(1) != 0x48) return 2;
 
   if (InBuffIntLtl(2) != wPrivate) return 3;
-  if (InBuffIntLtl(4) != (mpdwAddress1[diCurr.bAddress-1] % 0x10000)) return 4;
+//  if (InBuffIntLtl(4) != (mpdwAddress1[diCurr.bAddress-1] % 0x10000)) return 4; TODO 35
 
   if ((InBuff(6) & 0xF0) != 0x50) return 5;
-  if ((IndexInBuff() >= 11) && (IndexInBuff() != (InBuff(6) & 0x0F) + 11)) return 6;
+//  if ((IndexInBuff() >= 11) && (IndexInBuff() != (InBuff(6) & 0x0F) + 11)) return 6;
+//
+//  if (InBuff(7) != OutBuff(11)) return 7;
+//  if (InBuff(8) != OutBuff(12)) return 8;
 
-  if (InBuff(7) != OutBuff(11)) return 7;
-  if (InBuff(8) != OutBuff(12)) return 8;
-
-  if (MakeCrcSInBuff(1, IndexInBuff()-2) != 0) return 9;
-  if (InBuff(IndexInBuff()-1) != 0xC0) return 10;
+//  if (MakeCrcSInBuff(1, IndexInBuff()-2) != 0) return 9;
+//  if (InBuff(IndexInBuff()-1) != 0xC0) return 10;
 
   return 0;
 }
@@ -195,10 +197,12 @@ uchar   Checksum35Sensor(void)
   if (i != 0)
   {
     SaveDisplay();
-    ShowHi(szSensorError);
 
-    Clear(); sprintf(szLo+1,"ошибка: 35.3.%u",i);
-    DelayInf();
+    ShowHi(szError);
+    Clear(); sprintf(szLo+2,"счетчика: %u",i);
+    MonitorString("\n sensor frame error: "); MonitorCharHex(i);
+
+    Delay(1000); // Inf
     LoadDisplay();
   }
 

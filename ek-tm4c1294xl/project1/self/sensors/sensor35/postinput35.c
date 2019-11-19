@@ -35,8 +35,16 @@ volatile device         deCurr35;
 
 
 
+void    SetCurr35(device  de)
+{
+  deCurr35 = de;
+  MonitorString("\n set pause: "); MonitorIntHex(deCurr35);
+}
+
+
 device  GetCurr35(void)
 {
+  MonitorString("\n get pause: "); MonitorIntHex(deCurr35);
   return deCurr35;
 }
 
@@ -46,20 +54,23 @@ void    PostInput35(void)
 {
     if (InBuff(7) == NNCL2_TIME)
     {
-      Clear(); sprintf(szLo+2,"ожидание: %u",(cbRepeat35++ / 2) + 1); Delay(100);
-
-      deCurr35 = GetCurr();
+      Clear(); sprintf(szLo+2,"ожидание: %u",(cbRepeat35++ / 2) + 1);
+      Delay(1000); // Inf
+      MonitorString("\n repeat");
 
       cbRepeat = MaxRepeats();
       Query35Internal(250, 0, NNCL2_DATA_GET);
       SetCurr(DEV_DATAGET_35);
+
+      return;
     }
     else if (InBuff(7) == NNCL2_DATA_GET)
     {
       if (IndexInBuff() < 15)
       {
         Clear(); sprintf(szLo+1,"длина ? %u",IndexInBuff());
-        DelayInf();
+        MonitorString("\n sensor error: bad size "); MonitorIntDec(IndexInBuff());
+        Delay(1000); // Inf
       }
       else
       {
@@ -67,8 +78,13 @@ void    PostInput35(void)
         for (i=0; i<IndexInBuff()-15; i++)
           SetInBuff(i, InBuff(12+i));
 
+        MonitorString("\n unwrap finished");
+        MonitorIn();
+
         if (Checksum35Sensor() == 0)
         {
+          MonitorString("\n sensor success");
+
           InputGoodCheck();
           mpSerial[ibPort] = SER_GOODCHECK;
           return;
@@ -78,12 +94,14 @@ void    PostInput35(void)
     else if (InBuff(7) == NNCL2_ERROR)
     {
       Clear(); sprintf(szLo+1,"ошибка ? %u",InBuff(8));
-      DelayInf();
+      MonitorString("\n router error: "); MonitorCharDec(InBuff(8));
+      Delay(1000); // Inf
     }
     else
     {
       Clear(); sprintf(szLo+1,"команда ? %u",InBuff(7));
-      DelayInf();
+      MonitorString("\n router unknown command: "); MonitorCharDec(InBuff(7));
+      Delay(1000); // Inf
     }
 
   mpSerial[ibPort] = SER_BADCHECK;

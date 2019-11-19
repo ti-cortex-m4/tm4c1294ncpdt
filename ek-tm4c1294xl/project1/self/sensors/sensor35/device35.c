@@ -119,6 +119,8 @@ void    QueryControl35(time  ti)
 
 void    QueryConfig35(void)
 {
+  MonitorString("\n query: config");
+
   InitPush(0);
 
   PushChar(0xC0);
@@ -136,6 +138,8 @@ void    QueryConfig35(void)
 
 void    ReadConfig35(void)
 {
+  MonitorString("\n read: config");
+
   InitPop(9);
 
   switch (PopChar() & 0x03)
@@ -202,6 +206,8 @@ void    QueryEngDay35(uchar  bDay)
 
 void    QueryEngMon35(uchar  bMonth)
 {
+  MonitorString("\n query: eng mon");
+
   InitPush(0);
 
   PushChar(0xC0);
@@ -220,6 +226,8 @@ void    QueryEngMon35(uchar  bMonth)
 
 void    ReadEnergy35(void)
 {
+  MonitorString("\n read: eng mon");
+
   InitPop(9);
 
   coEnergy.mpbBuff[0] = PopChar();
@@ -353,6 +361,8 @@ bool    ReadHeader35(void)
 
 void    ReadCurrent35(void)
 {
+  MonitorString("\n read: current");
+
   ReadEnergy35();
   mpdwBaseDig[0] = coEnergy.dwBuff*mpdbPulseMnt[ibDig]/GetDivider35();
 
