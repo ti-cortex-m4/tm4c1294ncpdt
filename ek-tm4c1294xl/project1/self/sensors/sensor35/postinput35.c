@@ -56,8 +56,8 @@ void    PostInput35(void)
     if (InBuff(7) == NNCL2_TIME)
     {
       uint w = GetTimer35();
-      Clear(); sprintf(szLo+2,"ожидание: %u.%u",w/10,w%10);
-      Delay(500); // Inf
+      Clear(); sprintf(szLo+2,"ожидание: %u",w/10);
+      Delay(300); // Inf
       MonitorString("\n repeat: start");
 
       cbRepeat = MaxRepeats();
