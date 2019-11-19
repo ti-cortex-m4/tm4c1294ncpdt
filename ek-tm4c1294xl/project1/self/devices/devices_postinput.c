@@ -17,7 +17,9 @@ DEVICES_POSTINPUT,C
 #include "../sensors/sensor31/unpack31.h"
 #include "../sensors/automatic_w.h"
 #include "../sensors/sensor21/input_p.h"
+#include "../sensors/sensor35/io35.h"
 #include "../sensors/sensor35/unpack35.h"
+#include "../sensors/sensor35/postinput35.h"
 #include "../digitals/digitals_status.h"
 #include "devices_postinput.h"
 
@@ -260,11 +262,12 @@ void    DevicesPostInput(void)
     {
       if (Checksum35Router() == 0)
       {
-        InputGoodCheck();
-        mpSerial[ibPort] = SER_GOODCHECK;
+        PostInput35();
       }
       else
-        mpSerial[ibPort] = SER_BADCHECK;
+      {
+        Query35Repeat();
+      }
     }
 #endif
 }

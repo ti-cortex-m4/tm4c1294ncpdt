@@ -44,21 +44,21 @@ device  GetCurr35(void)
 
 void    PostInput35(void)
 {
-    if (InBuff(7) == 0x14)
+    if (InBuff(7) == NNCL2_TIME)
     {
       Clear(); sprintf(szLo+2,"ожидание: %u",(cbRepeat35++ / 2) + 1); Delay(100);
 
       deCurr35 = GetCurr();
 
       cbRepeat = MaxRepeats();
-      Query35Internal(250, 0, 0x12);
+      Query35Internal(250, 0, NNCL2_DATA_GET);
       SetCurr(DEV_DATAGET_35);
     }
-    else if (InBuff(7) == 0x12)
+    else if (InBuff(7) == NNCL2_DATA_GET)
     {
       if (IndexInBuff() < 15)
       {
-        Clear(); sprintf(szLo+1,"ошибка: 35.4.%u",InBuff(7));
+        Clear(); sprintf(szLo+1,"длина ? %u",IndexInBuff());
         DelayInf();
       }
       else
@@ -69,18 +69,24 @@ void    PostInput35(void)
 
         if (Checksum35Sensor() == 0)
         {
-          MakePause(GetCurr35());
-        }
-        else
-        {
+          InputGoodCheck();
+          mpSerial[ibPort] = SER_GOODCHECK;
+          return;
         }
       }
     }
-    else
+    else if (InBuff(7) == NNCL2_ERROR)
     {
-      Clear(); sprintf(szLo+1,"ошибка: 35.5.%u",InBuff(7));
+      Clear(); sprintf(szLo+1,"ошибка ? %u",InBuff(8));
       DelayInf();
     }
+    else
+    {
+      Clear(); sprintf(szLo+1,"команда ? %u",InBuff(7));
+      DelayInf();
+    }
+
+  mpSerial[ibPort] = SER_BADCHECK;
 }
 
 #endif

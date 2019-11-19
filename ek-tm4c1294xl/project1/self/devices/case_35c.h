@@ -4,7 +4,7 @@
     case DEV_DATAGET_35:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        PostInput35();
+        MakePause(GetCurr35());
       }
       else
       {
