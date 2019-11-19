@@ -26,9 +26,19 @@ IO35!C
 
 uchar                       cbRepeat35;
 
+static uchar                cbInSave;
+static uchar                cbOutSave;
+static uchar                bCommandSave;
+
+
 
 void    Query35Internal(uchar  cbIn, uchar  cbOut, uchar  bCommand)
 {
+  cbInSave     = cbIn;
+  cbOutSave    = cbOut;
+  bCommandSave = bCommand;
+
+
   if (cbOut > 0)
   {
     // расчет CRC счетчика
@@ -119,7 +129,13 @@ void    Query35Internal(uchar  cbIn, uchar  cbOut, uchar  bCommand)
 void    Query35(uchar  cbIn, uchar  cbOut)
 {
   cbRepeat35 = 0;
-  Query35Internal(cbIn, cbOut, 0x11);
+  Query35Internal(cbIn, cbOut, NNCL2_DATA_SET);
+}
+
+
+void    Query35Repeat(void)
+{
+  Query35Internal(cbInSave, cbOutSave, bCommandSave);
 }
 
 

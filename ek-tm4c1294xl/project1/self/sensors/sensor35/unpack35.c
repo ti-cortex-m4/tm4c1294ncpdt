@@ -21,6 +21,14 @@ DECOMPRESS35!C
 
 
 #ifndef SKIP_35
+
+
+//                                          0123456789ABCDEF
+static char const       szRouterError[]  = "  Router error  ",
+                        szSensorError[]  = "  Sensor error  ";
+
+
+
 /*
 static uchar Repack35(uchar  bCode) // TODO 35
 {
@@ -146,8 +154,12 @@ uchar   Checksum35Router(void)
   uchar i = Check35Router();
   if (i != 0)
   {
+    SaveDisplay();
+    ShowHi(szRouterError);
+
     Clear(); sprintf(szLo+1,"ошибка: 35.2.%u",i);
     DelayInf();
+    LoadDisplay();
   }
 
   return i;
@@ -182,8 +194,12 @@ uchar   Checksum35Sensor(void)
   uchar i = Check35Sensor();
   if (i != 0)
   {
+    SaveDisplay();
+    ShowHi(szSensorError);
+
     Clear(); sprintf(szLo+1,"ошибка: 35.3.%u",i);
     DelayInf();
+    LoadDisplay();
   }
 
   return i;
