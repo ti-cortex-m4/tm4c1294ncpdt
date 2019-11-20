@@ -26,6 +26,7 @@ POSTINPUT35!C
 #include "automatic35.h"
 #include "io35.h"
 #include "timer35.h"
+#include "timeout35.h"
 #include "status35.h"
 #include "postinput35.h"
 
@@ -51,6 +52,8 @@ void    PostInput35(void)
     }
     else if (InBuff(7) == NNCL2_DATA_GET)
     {
+      TimeoutHistogram35(GetTimer35());
+
       if (IndexInBuff() < 15)
       {
         Clear(); sprintf(szLo+1,"длина ? %u",IndexInBuff());

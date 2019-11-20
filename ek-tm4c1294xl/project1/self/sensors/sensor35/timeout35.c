@@ -5,6 +5,7 @@ timeout35.c
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
+#include "../../memory/mem_settings.h"
 #include "../../serial/ports.h"
 #include "timeout35.h"
 
@@ -29,7 +30,7 @@ void    ResetTimeoutHistogramDay35(void)
 
 
 
-void    TimeoutHistogramDay35(uint  wTimeout)
+void    TimeoutHistogram35(uint  wTimeout)
 {
   uchar i = wTimeout < 0x100 ? wTimeout : 0xFF;
 

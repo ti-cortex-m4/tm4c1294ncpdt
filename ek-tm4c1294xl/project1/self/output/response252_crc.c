@@ -27,7 +27,7 @@ RESPONSE252_CRC,C
 #include "../output/out_digitals.h"
 #include "../digitals/review/review_out.h"
 #include "../digitals/review/review_buff.h"
-#include "../sensors/sensor35.h"
+#include "../sensors/sensor35/timeout35.h"
 #include "../output/out_echo.h"
 
 
@@ -86,8 +86,8 @@ void    Response252_CRC(void)
     case 30: OutEcho1toN(); break;
 
     case 31: OutTimeoutHistogramAll35(); break;
-    case 32: OutTimeoutHistogramAll35(); break;
-    case 33: OutTimeoutHistogramDay35(); break;
+    case 32: OutResetTimeoutHistogramAll35(); break;
+    case 33: OutResetTimeoutHistogramDay35(); break;
 
     default:
       ShowResponseCRC(bSTA_BADCOMMAND);
