@@ -5,6 +5,7 @@ timeout35.c
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
+#include "../../serial/ports.h"
 #include "timeout35.h"
 
 
@@ -34,4 +35,32 @@ void    TimeoutHistogramDay35(uint  wTimeout)
 
   mwTimeoutHistogramAbs35[i]++;
   mwTimeoutHistogramDay35[i]++;
+}
+
+
+
+void    OutTimeoutHistogramAll35(void)
+{
+  InitPushCRC();
+  Push(&mwTimeoutHistogramAbs35, sizeof(mwTimeoutHistogramAbs35));
+  Push(&mwTimeoutHistogramDay35, sizeof(mwTimeoutHistogramDay35));
+  Output(sizeof(mwTimeoutHistogramAbs35)+sizeof(mwTimeoutHistogramDay35));
+}
+
+
+void    OutResetTimeoutHistogramAll35(void)
+{
+  if (enGlobal == GLB_REPROGRAM)
+    ResetTimeoutHistogramAll35();
+  else
+    Result(bRES_NEEDREPROGRAM);
+}
+
+
+void    OutResetTimeoutHistogramDay35(void)
+{
+  if (enGlobal == GLB_REPROGRAM)
+    ResetTimeoutHistogramDay35();
+  else
+    Result(bRES_NEEDREPROGRAM);
 }
