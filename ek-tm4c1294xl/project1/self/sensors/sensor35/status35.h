@@ -4,5 +4,5 @@ STATUS35!H
 
 ------------------------------------------------------------------------------*/
 
-void    SetCurr35(device  de);
-device  GetCurr35(void);
+void    SetCurr35Internal(device  de);
+device  GetCurr35Internal(void);
