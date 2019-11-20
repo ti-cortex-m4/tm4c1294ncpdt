@@ -772,6 +772,22 @@ typedef enum
   DEV_POSTCONFIG_35C    =  0x2103,
   DEV_ENERGY_35C        =  0x2104,
 
+  DEV_START_35P         =  0x2110,
+  DEV_VERSION_35P       =  0x2111,
+  DEV_POSTVERSION_35P   =  0x2112,
+  DEV_POSTOPENCANAL_35P =  0x2113,
+  DEV_TIME_35P          =  0x2114,
+  DEV_POSTTIME_35P      =  0x2115,
+  DEV_CONTROL_35P       =  0x2116,
+  DEV_POSTCORRECT_35P   =  0x2117,
+  DEV_CONFIG_35P        =  0x2118,
+  DEV_POSTCONFIG_35P    =  0x2119,
+  DEV_VALUE_35P         =  0x211A,
+  DEV_POSTVALUE_35P     =  0x211B,
+  DEV_HEADER_35P        =  0x211C,
+  DEV_POSTHEADER_35P    =  0x211D,
+  DEV_DATA_35P          =  0x211E,
+
 #endif
 
   DEV_PAUSE             =  1
