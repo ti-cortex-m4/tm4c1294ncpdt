@@ -7,4 +7,4 @@ timer35.h
 void    SetTimer35(uint  w);
 uint    GetTimer35(void);
 
-void    Timer35_10Hz(void);
+void    Timer35_1Hz(void);
