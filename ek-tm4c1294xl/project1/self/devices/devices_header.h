@@ -67,6 +67,7 @@ DEVICES.C
 #include "../sensors/sensor35/device35.h"
 #include "../sensors/sensor35/io35.h"
 #include "../sensors/sensor35/postinput35.h"
+#include "../sensors/sensor35/status35.h"
 #include "../serial/ports.h"
 #include "../serial/ports_modems.h"
 #include "../serial/modems.h"

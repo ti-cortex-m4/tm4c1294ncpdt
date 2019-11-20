@@ -67,6 +67,7 @@ DEVICES.C
 #include "../sensors/sensor35/device35.h"
 #include "../sensors/sensor35/io35.h"
 #include "../sensors/sensor35/postinput35.h"
+#include "../sensors/sensor35/status35.h"
 #include "../serial/ports.h"
 #include "../serial/ports_modems.h"
 #include "../serial/modems.h"
@@ -5854,7 +5855,7 @@ void    RunDevices(void)
 
 
     case DEV_START_35C:
-      ShowPercent(25);
+      Clear(); ShowPercent(25);
 
       cbRepeat = MaxRepeats();
       QueryConfig35();
@@ -5885,7 +5886,7 @@ void    RunDevices(void)
       break;
 
     case DEV_POSTCONFIG_35C:
-      ShowPercent(50);
+      Clear(); ShowPercent(50);
 
       cbRepeat = MaxRepeats();
       QueryEngMon35(0);

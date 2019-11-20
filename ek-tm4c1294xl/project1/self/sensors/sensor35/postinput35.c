@@ -26,37 +26,19 @@ POSTINPUT35!C
 #include "automatic35.h"
 #include "io35.h"
 #include "timer35.h"
+#include "status35.h"
 #include "postinput35.h"
 
 
 
 #ifndef SKIP_35
 
-volatile device         deCurr35;
-
-
-
-void    SetCurr35(device  de)
-{
-  deCurr35 = de;
-  MonitorString("\n set pause: "); MonitorIntHex(deCurr35);
-}
-
-
-device  GetCurr35(void)
-{
-  MonitorString("\n get pause: "); MonitorIntHex(deCurr35);
-  return deCurr35;
-}
-
-
-
 void    PostInput35(void)
 {
     if (InBuff(7) == NNCL2_TIME)
     {
       uint w = GetTimer35();
-      Clear(); sprintf(szLo+2,"ожидание: %u",w/10);
+      Clear(); sprintf(szLo+2,"ожидание: %u",w);
       Delay(300); // Inf
       MonitorString("\n repeat: start");
 
