@@ -105,13 +105,11 @@ static bool ReadData35(uchar  i)
   dw += PopChar()*0x100;
   dw += PopChar()*0x10000;
 
-  MonitorString("\n read profile: "); MonitorLongHex(dw);
-
   if (dw != 0xFFFFFF)
   {
     double dbPulse = mpdbPulseHou[ibDig];
 
-    double db = (double)dw/wDividerS;
+    double db = (double)dw/GetDivider35();
     mpdbEngFrac[ibDig] += db;
 
     uint w;
@@ -119,8 +117,6 @@ static bool ReadData35(uchar  i)
     { w = (uint)(mpdbEngFrac[ibDig]*dbPulse); }
     else
     { w = 0xFFFF; mpcwOverflowHhr[ibDig]++; }
-
-    MonitorString(" === "); MonitorIntDec(w);
 
     mpwChannels[0] = w;
     mpdbEngFrac[ibDig] -= (double)w/dbPulse;
