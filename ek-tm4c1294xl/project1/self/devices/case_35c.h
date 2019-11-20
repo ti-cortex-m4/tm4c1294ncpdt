@@ -26,7 +26,7 @@
 
 
     case DEV_START_35C:
-      ShowPercent(25);
+      Clear(); ShowPercent(25);
 
       cbRepeat = MaxRepeats();
       QueryConfig35();
@@ -57,7 +57,7 @@
       break;
 
     case DEV_POSTCONFIG_35C:
-      ShowPercent(50);
+      Clear(); ShowPercent(50);
 
       cbRepeat = MaxRepeats();
       QueryEngMon35(0);
