@@ -35,9 +35,9 @@
     case DEV_POSTVERSION_35P:
       cbCorrects = 0;
 
-      if (fCurrCtrl == true)
-        MakePause(DEV_POSTOPENCANAL_35P);
-      else
+//      if (fCurrCtrl == true)
+//        MakePause(DEV_POSTOPENCANAL_35P);
+//      else
         MakePause(DEV_POSTCORRECT_35P);
       break;
 
@@ -133,7 +133,7 @@
       break;
 
     case DEV_POSTCONFIG_35P:
-      ShowPercent(50);
+      Clear(); ShowPercent(50);
 
       cbRepeat = MaxRepeats();
       QueryTime35();
@@ -163,7 +163,8 @@
       break;
 
     case DEV_POSTVALUE_35P:
-      ShowPercent(75);
+      Clear(); ShowPercent(75);
+
       InitHeader35();
 
       cbRepeat = MaxRepeats();
