@@ -22,8 +22,4 @@ void    QueryEngDay35(uchar  bDay);
 void    QueryEngMon35(uchar  bMonth);
 void    ReadEnergy35(void);
 
-//void    InitHeader35(void);
-//void    QueryHeader35(void);
-//bool    ReadHeader35(void);
-
 void    ReadCurrent35(void);
