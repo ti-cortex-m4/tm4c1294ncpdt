@@ -12,18 +12,15 @@ DEVICE35!C
 #include "../../memory/mem_ports.h"
 #include "../../memory/mem_current.h"
 #include "../../memory/mem_factors.h"
-//#include "../../memory/mem_realtime.h"
-//#include "../../memory/mem_energy_spec.h"
-//#include "../../memory/mem_profile.h"
-//#include "../../memory/mem_limits.h"
+#include "../../memory/mem_realtime.h"
 #include "../../display/display.h"
-#include "../../keyboard/time/key_timedate.h"
+//#include "../../keyboard/time/key_timedate.h"
 #include "../../time/timedate.h"
 #include "../../time/calendar.h"
 #include "../../time/delay.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports_devices.h"
-#include "../../serial/monitor.h"
+//#include "../../serial/monitor.h"
 #include "../../devices/devices.h"
 #include "../../devices/devices_time.h"
 #include "../../digitals/current/current_run.h"
@@ -119,8 +116,6 @@ void    QueryControl35(time  ti)
 
 void    QueryConfig35(void)
 {
-  MonitorString("\n query: config");
-
   InitPush(0);
 
   PushChar(0xC0);
@@ -138,8 +133,6 @@ void    QueryConfig35(void)
 
 void    ReadConfig35(void)
 {
-  MonitorString("\n read: config");
-
   InitPop(9);
 
   switch (PopChar() & 0x03)
@@ -206,8 +199,6 @@ void    QueryEngDay35(uchar  bDay)
 
 void    QueryEngMon35(uchar  bMonth)
 {
-  MonitorString("\n query: eng mon");
-
   InitPush(0);
 
   PushChar(0xC0);
@@ -226,8 +217,6 @@ void    QueryEngMon35(uchar  bMonth)
 
 void    ReadEnergy35(void)
 {
-  MonitorString("\n read: eng mon");
-
   InitPop(9);
 
   coEnergy.mpbBuff[0] = PopChar();
@@ -242,8 +231,6 @@ void    ReadEnergy35(void)
 
 void    ReadCurrent35(void)
 {
-  MonitorString("\n read: current");
-
   ReadEnergy35();
   mpdwBaseDig[0] = coEnergy.dwBuff*mpdbPulseMnt[ibDig]/GetDivider35();
 
