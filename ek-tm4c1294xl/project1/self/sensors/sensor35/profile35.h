@@ -1,10 +1,9 @@
 /*------------------------------------------------------------------------------
-STATUS35!H
+profile35.h
 
 
 ------------------------------------------------------------------------------*/
 
-void    SetCurr35Internal(device  de);
-device  GetCurr35Internal(void);
-
-void    SetCurr35(device  de);
+void    InitHeader35(void);
+void    QueryHeader35(void);
+bool    ReadHeader35(void);

@@ -88,7 +88,7 @@ time    ReadTime35(void)
 }
 
 
-/*
+
 void    QueryControl35(time  ti)
 {
   InitPush(0);
@@ -114,7 +114,7 @@ void    QueryControl35(time  ti)
 
   Query35(100+11, 22);
 }
-*/
+
 
 
 void    QueryConfig35(void)
@@ -158,7 +158,7 @@ uint    GetDivider35(void)
 }
 
 
-/*
+
 void    QueryVersion35(void)
 {
   InitPush(0);
@@ -183,7 +183,7 @@ void    ReadVersion35(void)
   Clear();
   sprintf(szLo+1, "версия %u.%u.%u", PopChar(), PopChar(), PopChar());
 }
-*/
+
 
 
 void    QueryEngDay35(uchar  bDay)
@@ -238,125 +238,6 @@ void    ReadEnergy35(void)
   mpdwChannelsA[0] = coEnergy.dwBuff;
   mpboChannelsA[0] = true;
 }
-
-
-/*
-void    InitHeader35(void)
-{
-  if (!UseBounds())
-    wBaseCurr = 0;
-  else
-  {
-    wBaseCurr = (mpcwStartRelCan[ibDig] / 6) * 6;
-    Clear(); sprintf(szLo+1,"начало %04u:%02u",wBaseCurr,(uchar)(wBaseCurr/48 + 1));
-    if (boShowMessages == true) DelayMsg();
-  }
-
-  tiDigPrev = tiCurr;
-
-  uchar i = tiDigPrev.bHour*2 + tiDigPrev.bMinute/30;
-  i = (i / 4) * 4;
-
-  tiDigPrev.bHour = i / 2;
-  tiDigPrev.bMinute = (i % 2)*30;
-}
-
-
-void    QueryHeader35(void)
-{
-  HideCurrTime(1);
-
-
-  ulong dw = DateToHouIndex(tiDigPrev);
-  dw -= wBaseCurr;
-  tiDig = HouIndexToDate(dw);
-
-
-  InitPush(0);
-
-  PushChar(0xC0);
-  PushChar(0x48);
-
-  PushAddress35();
-
-  PushChar(0xD5);
-  PushChar(0x01);
-  PushChar(0x34);
-
-  PushChar(ToBCD(tiDig.bDay));
-  PushChar(ToBCD(tiDig.bMonth));
-  PushChar(ToBCD(tiDig.bYear));
-  PushChar(tiDig.bHour*2 + tiDig.bMinute/30);
-  PushChar(4);
-
-  Query35(100+23, 20);
-}
-
-
-static bool ReadData35(uchar  i)
-{
-  sprintf(szLo," %02u    %02u.%02u.%02u", tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
-
-  if (SearchDefHouIndex(tiDig) == 0) return(1);
-
-
-  ShowProgressDigHou();
-
-  InitPop(9+i*3);
-
-  ulong dw = PopChar();
-  dw += PopChar()*0x100;
-  dw += PopChar()*0x10000;
-
-  if (dw != 0xFFFFFF)
-  {
-    double dbPulse = mpdbPulseHou[ibDig];
-
-    double db = (double)dw/wDividerS;
-    mpdbEngFrac[ibDig] += db;
-
-    uint w;
-    if ((ulong)(mpdbEngFrac[ibDig]*dbPulse) < 0xFFFF)
-    { w = (uint)(mpdbEngFrac[ibDig]*dbPulse); }
-    else
-    { w = 0xFFFF; mpcwOverflowHhr[ibDig]++; }
-
-    mpwChannels[0] = w;
-    mpdbEngFrac[ibDig] -= (double)w/dbPulse;
-
-    MakeSpecial(tiDig);
-    return(MakeStopHou(0));
-  }
-  else
-  {
-    szLo[15] = '*';
-    return(MakeStopHou(0));
-  }
-}
-
-
-bool    ReadHeader35(void)
-{
-  uchar i;
-  for (i=0; i<4; i++)
-  {
-    ulong dw = DateToHouIndex(tiDigPrev);
-
-    dw += 4-1;
-    dw -= (wBaseCurr + i);
-
-    tiDig = HouIndexToDate(dw);
-
-    if (dw < dwValueS)
-      if (ReadData35(4-1-i) == 0) return(0);
-  }
-
-  wBaseCurr += 4;
-  if (wBaseCurr > wHOURS) return(0);
-
-  return(1);
-}
-*/
 
 
 void    ReadCurrent35(void)

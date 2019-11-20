@@ -4,11 +4,11 @@
     case DEV_START_35P:
       cbRepeat = MaxRepeats();
       QueryVersion35();
-      SetCurr(DEV_VERSION_35P);
+      SetCurr35(DEV_VERSION_35P);
       break;
 
     case DEV_VERSION_35P:
-      if (mpSerial[ibPort] == SER_GOODCHECK)
+      if (mpSerial[ibPort] == SER_PAUSE) // SER_GOODCHECK
       {
         ReadVersion35();
 
@@ -26,7 +26,7 @@
           cbRepeat--;
 
           QueryVersion35();
-          SetCurr(DEV_VERSION_35P);
+          SetCurr35(DEV_VERSION_35P);
         }
       }
       break;
@@ -47,11 +47,11 @@
 
       cbRepeat = MaxRepeats();
       QueryTime35();
-      SetCurr(DEV_TIME_35P);
+      SetCurr35(DEV_TIME_35P);
       break;
 
     case DEV_TIME_35P:
-      if (mpSerial[ibPort] == SER_GOODCHECK)
+      if (mpSerial[ibPort] == SER_PAUSE) // SER_GOODCHECK
       {
         tiDig = ReadTime35();
         MakePause(DEV_POSTTIME_35P);
@@ -65,7 +65,7 @@
           cbRepeat--;
 
           QueryTime35();
-          SetCurr(DEV_TIME_35P);
+          SetCurr35(DEV_TIME_35P);
         }
       }
       break;
@@ -99,7 +99,7 @@
       {
         cbRepeat = MaxRepeats();
         QueryControl35(tiCurr);
-        SetCurr(DEV_POSTOPENCANAL_35P);
+        SetCurr35(DEV_POSTOPENCANAL_35P);
       }
       break;
 
@@ -109,11 +109,11 @@
 
       cbRepeat = MaxRepeats();
       QueryConfig35();
-      SetCurr(DEV_CONFIG_35P);
+      SetCurr35(DEV_CONFIG_35P);
       break;
 
     case DEV_CONFIG_35P:
-      if (mpSerial[ibPort] == SER_GOODCHECK)
+      if (mpSerial[ibPort] == SER_PAUSE) // SER_GOODCHECK
       {
         ReadConfig35();
         MakePause(DEV_POSTCONFIG_35P);
@@ -127,7 +127,7 @@
           cbRepeat--;
 
           QueryConfig35();
-          SetCurr(DEV_CONFIG_35P);
+          SetCurr35(DEV_CONFIG_35P);
         }
       }
       break;
@@ -137,11 +137,11 @@
 
       cbRepeat = MaxRepeats();
       QueryTime35();
-      SetCurr(DEV_VALUE_35P);
+      SetCurr35(DEV_VALUE_35P);
       break;
 
     case DEV_VALUE_35P:
-      if (mpSerial[ibPort] == SER_GOODCHECK)
+      if (mpSerial[ibPort] == SER_PAUSE) // SER_GOODCHECK
       {
         tiValueS = ReadTime35();
         dwValueS = DateToHouIndex(tiValueS);
@@ -157,7 +157,7 @@
           cbRepeat--;
 
           QueryTime35();
-          SetCurr(DEV_VALUE_35P);
+          SetCurr35(DEV_VALUE_35P);
         }
       }
       break;
@@ -168,11 +168,11 @@
 
       cbRepeat = MaxRepeats();
       QueryHeader35();
-      SetCurr(DEV_HEADER_35P);
+      SetCurr35(DEV_HEADER_35P);
       break;
 
     case DEV_HEADER_35P:
-      if (mpSerial[ibPort] == SER_GOODCHECK)
+      if (mpSerial[ibPort] == SER_PAUSE) // SER_GOODCHECK
         MakePause(DEV_POSTHEADER_35P);
       else
       {
@@ -183,7 +183,7 @@
           cbRepeat--;
 
           QueryHeader35();
-          SetCurr(DEV_HEADER_35P);
+          SetCurr35(DEV_HEADER_35P);
         }
       }
       break;
@@ -198,7 +198,7 @@
     case DEV_DATA_35P:
       cbRepeat = MaxRepeats();
       QueryHeader35();
-      SetCurr(DEV_HEADER_35P);
+      SetCurr35(DEV_HEADER_35P);
       break;
 
 #endif

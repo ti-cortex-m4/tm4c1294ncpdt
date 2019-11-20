@@ -29,4 +29,12 @@ device  GetCurr35Internal(void)
   return deCurr35;
 }
 
+
+
+void    SetCurr35(device  de)
+{
+  SetCurr35Internal(de);
+  SetCurr(de);
+}
+
 #endif
