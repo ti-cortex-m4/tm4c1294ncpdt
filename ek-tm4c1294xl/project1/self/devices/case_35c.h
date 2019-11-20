@@ -5,7 +5,7 @@
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
         MonitorString("\n repeat: completed");
-        MakePause(GetCurr35());
+        MakePause(GetCurr35Internal());
       }
       else
       {
@@ -31,7 +31,7 @@
       cbRepeat = MaxRepeats();
       QueryConfig35();
       SetCurr(DEV_CONFIG_35C);
-      SetCurr35(DEV_CONFIG_35C);
+      SetCurr35Internal(DEV_CONFIG_35C);
       break;
 
     case DEV_CONFIG_35C:
@@ -51,7 +51,7 @@
 
           QueryConfig35();
           SetCurr(DEV_CONFIG_35C);
-          SetCurr35(DEV_CONFIG_35C);
+          SetCurr35Internal(DEV_CONFIG_35C);
         }
       }
       break;
@@ -62,7 +62,7 @@
       cbRepeat = MaxRepeats();
       QueryEngMon35(0);
       SetCurr(DEV_ENERGY_35C);
-      SetCurr35(DEV_ENERGY_35C);
+      SetCurr35Internal(DEV_ENERGY_35C);
       break;
 
     case DEV_ENERGY_35C:
@@ -80,7 +80,7 @@
 
           QueryEngMon35(0);
           SetCurr(DEV_ENERGY_35C);
-          SetCurr35(DEV_ENERGY_35C);
+          SetCurr35Internal(DEV_ENERGY_35C);
         }
       }
       break;
