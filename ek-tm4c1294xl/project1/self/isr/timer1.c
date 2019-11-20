@@ -21,6 +21,7 @@ TODO volatile
 #include "../serial/flow.h"
 #include "../serial/monitor.h"
 #include "../serial/slave_modem.h"
+#include "../sensors/sensor35/timer35.h"
 
 
 
@@ -61,4 +62,5 @@ void Timer1IntHandler(void)
   DelayFlow_1Hz();
   DelayMonitor_1Hz();
   SlaveModem_1Hz();
+  Timer35_1Hz();
 }
