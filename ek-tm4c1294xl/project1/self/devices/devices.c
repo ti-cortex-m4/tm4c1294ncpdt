@@ -68,6 +68,7 @@ DEVICES.C
 #include "../sensors/sensor35/io35.h"
 #include "../sensors/sensor35/postinput35.h"
 #include "../sensors/sensor35/status35.h"
+#include "../sensors/sensor35/profile35.h"
 #include "../serial/ports.h"
 #include "../serial/ports_modems.h"
 #include "../serial/modems.h"
@@ -5879,8 +5880,7 @@ void    RunDevices(void)
           cbRepeat--;
 
           QueryConfig35();
-          SetCurr(DEV_CONFIG_35C);
-          SetCurr35Internal(DEV_CONFIG_35C);
+          SetCurr35(DEV_CONFIG_35C);
         }
       }
       break;
@@ -5890,8 +5890,7 @@ void    RunDevices(void)
 
       cbRepeat = MaxRepeats();
       QueryEngMon35(0);
-      SetCurr(DEV_ENERGY_35C);
-      SetCurr35Internal(DEV_ENERGY_35C);
+      SetCurr35(DEV_ENERGY_35C);
       break;
 
     case DEV_ENERGY_35C:
@@ -5908,8 +5907,7 @@ void    RunDevices(void)
           cbRepeat--;
 
           QueryEngMon35(0);
-          SetCurr(DEV_ENERGY_35C);
-          SetCurr35Internal(DEV_ENERGY_35C);
+          SetCurr35(DEV_ENERGY_35C);
         }
       }
       break;
