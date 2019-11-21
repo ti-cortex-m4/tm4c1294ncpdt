@@ -54,7 +54,7 @@ void    OutResetTimeoutHistogramAll35(void)
   if (enGlobal == GLB_REPROGRAM)
   {
     InitTimeoutHistogram35();
-    LongResult(bRES_OK);
+    Result(bRES_OK);
   }
   else
     Result(bRES_NEEDREPROGRAM);
@@ -66,7 +66,7 @@ void    OutResetTimeoutHistogramDay35(void)
   if (enGlobal == GLB_REPROGRAM)
   {
     NextDayResetTimeoutHistogram35();
-    LongResult(bRES_OK);
+    Result(bRES_OK);
   }
   else
     Result(bRES_NEEDREPROGRAM);

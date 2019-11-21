@@ -5950,9 +5950,9 @@ void    RunDevices(void)
     case DEV_POSTVERSION_35P:
       cbCorrects = 0;
 
-//      if (fCurrCtrl == true)
-//        MakePause(DEV_POSTOPENCANAL_35P);
-//      else
+      if (fCurrCtrl == true)
+        MakePause(DEV_POSTOPENCANAL_35P);
+      else
         MakePause(DEV_POSTCORRECT_35P);
       break;
 
