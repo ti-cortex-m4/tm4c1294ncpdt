@@ -9,7 +9,13 @@
       }
       else
       {
-        if (cbRepeat == 0) ErrorCurrent();
+        if (cbRepeat == 0)
+        {
+          if (exExtended == EXT_CURRENT_3MIN)
+            ErrorCurrent();
+          else
+            ErrorProfile();
+        }
         else
         {
           //ErrorLink();

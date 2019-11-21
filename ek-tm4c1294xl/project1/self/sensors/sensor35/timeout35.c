@@ -38,7 +38,7 @@ void    NextDayResetTimeoutHistogram35(void)
 
 
 
-void    TimeoutHistogram35(uint  wTimeout)
+void    Timeout35(uint  wTimeout)
 {
   uchar i = wTimeout < 0x100 ? wTimeout : 0xFF;
 
