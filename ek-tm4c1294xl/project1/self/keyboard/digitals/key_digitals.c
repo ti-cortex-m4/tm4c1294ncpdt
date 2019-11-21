@@ -65,6 +65,7 @@ static void MakeInDelays(uchar  ibPort, uchar  ibPhone, uchar  bDevice)
       case 20:
       case 18:
       case 34:
+      case 35:
         mpwMajorInDelay[ibPort] = (uint)(wFREQUENCY_T0*0.4);
         mpwMinorInDelay[ibPort] = (uint)(wFREQUENCY_T0*0.4); break;
 

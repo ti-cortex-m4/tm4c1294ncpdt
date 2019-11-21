@@ -28,18 +28,6 @@ static char const       szError35[]      = "    Ошибка      ";
 
 
 
-/*
-static uchar Repack35(uchar  bCode) // TODO 35
-{
-  uchar i;
-  for (i=1; i<=IndexInBuff()-2; i++)
-    if ((InBuff(i) == 0xDB) && (InBuff(i+1) == bCode)) return i;
-
-  return 0;
-}
-*/
-
-
 void    Decompress35(void)
 {
 uchar   i,j;

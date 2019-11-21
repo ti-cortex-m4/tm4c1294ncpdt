@@ -189,16 +189,18 @@ serial  Input35(void)
 
     if (mpSerial[ibPort] == SER_GOODCHECK)
     {
-       if (InBuff(7) == 0x14)
+       if (InBuff(7) == NNCL2_TIME)
        {
-         sprintf(szLo,"  ожидание: %u   ",(r++ / 2) + 1); Delay(500);
+//         sprintf(szLo,"  ожидание: %u   ",(r++ / 2) + 1);
+         sprintf(szLo+10,"%2u",r++);
+         Delay(500);
 
          MonitorString("\n NNCL2 repeat");
 
          Query35Internal(250, 0, 0x12);
          repeat = true;
        }
-       else if (InBuff(7) == 0x12)
+       else if (InBuff(7) == NNCL2_DATA_GET)
        {
          if (IndexInBuff() < 15)
          {
@@ -217,15 +219,30 @@ serial  Input35(void)
            for (i=0; i<IndexInBuff()-15; i++)
              SetInBuff(i, InBuff(12+i));
 
+           if (Checksum35Sensor() != 0)
+           {
+             Clear(); sprintf(szLo+1,"ошибка: 35.5.%u",InBuff(8));
+             DelayInf();
+             mpSerial[ibPort] = SER_BADCHECK;
+           }
            // TODO 35 проверить данные
          }
+       }
+       else if (InBuff(7) == NNCL2_ERROR)
+       {
+           MonitorString("\n NNCL2 error");
+           MonitorCharDec(InBuff(7));
+
+           Clear(); sprintf(szLo+1,"ошибка: 35.6.%u",InBuff(8));
+           DelayInf();
+           mpSerial[ibPort] = SER_BADCHECK;
        }
        else
        {
          MonitorString("\n NNCL2 failure");
          MonitorCharDec(InBuff(7));
 
-         Clear(); sprintf(szLo+1,"ошибка: 35.5.%u",InBuff(7));
+         Clear(); sprintf(szLo+1,"ошибка: 35.7.%u",InBuff(7));
          DelayInf();
          mpSerial[ibPort] = SER_BADCHECK;
        }
