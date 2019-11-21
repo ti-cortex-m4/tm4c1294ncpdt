@@ -14,12 +14,20 @@ timeout35.c
 static uint             mwTimeoutHistogramAbs35[0x100],
                         mwTimeoutHistogramDay35[0x100];
 
+#define DELTA_SIZE      10
+
+static uint             cwTimeoutDelta35;
+static uchar            mbTimeoutDelta35[DELTA_SIZE];
+
 
 
 void    InitTimeoutHistogram35(void)
 {
   memset(&mwTimeoutHistogramAbs35, 0, sizeof(mwTimeoutHistogramAbs35));
   memset(&mwTimeoutHistogramDay35, 0, sizeof(mwTimeoutHistogramDay35));
+
+  cwTimeoutDelta35 = 0;
+  memset(&mbTimeoutDelta35, 0, sizeof(mbTimeoutDelta35));
 }
 
 
@@ -36,6 +44,30 @@ void    TimeoutHistogram35(uint  wTimeout)
 
   mwTimeoutHistogramAbs35[i]++;
   mwTimeoutHistogramDay35[i]++;
+
+  mbTimeoutDelta35[cwTimeoutDelta35++ % DELTA_SIZE] = i;
+}
+
+
+
+uchar   GetTimeoutDelta35(void)
+{
+  uchar i,j;
+
+  uint  w = 0;
+  uchar c = 0;
+
+  for (i=0; i<DELTA_SIZE; i++)
+  {
+    j = mbTimeoutDelta35[(DELTA_SIZE + cwTimeoutDelta35 - i) % DELTA_SIZE];
+    if (j != 0)
+    {
+      w += j;
+      c++;
+    }
+  }
+
+  return w/c;
 }
 
 
@@ -43,9 +75,15 @@ void    TimeoutHistogram35(uint  wTimeout)
 void    OutTimeoutHistogramAll35(void)
 {
   InitPushCRC();
+
+  PushIntLtl(cwTimeoutDelta35);
+  Push(&mbTimeoutDelta35, sizeof(mbTimeoutDelta35));
+  PushChar(GetTimeoutDelta35());
+
   Push(&mwTimeoutHistogramAbs35, sizeof(mwTimeoutHistogramAbs35));
   Push(&mwTimeoutHistogramDay35, sizeof(mwTimeoutHistogramDay35));
-  Output(sizeof(mwTimeoutHistogramAbs35)+sizeof(mwTimeoutHistogramDay35));
+
+  Output(2+sizeof(mbTimeoutDelta35)+1+sizeof(mwTimeoutHistogramAbs35)+sizeof(mwTimeoutHistogramDay35));
 }
 
 
