@@ -40,7 +40,7 @@ void    PostInput35(void)
     {
       uint w = GetTimer35();
       //Clear(); sprintf(szLo+2,"ожидание: %u",w);
-      sprintf(szHi+10,"%2u",w);
+      sprintf(szLo+10,"%2u",w);
       Delay(300); // Inf
       MonitorString("\n repeat: start");
 
