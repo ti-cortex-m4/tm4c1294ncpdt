@@ -21,6 +21,7 @@ NEXT_DAY!C
 #include "../digitals/extended/extended_7.h"
 #include "../special/defects.h"
 #include "../special/recalc_def.h"
+#include "../sensors/sensor35/timeout35.h"
 #include "realtime_storage.h"
 
 
@@ -55,6 +56,8 @@ void    NextDay(void)
 
   // обработка достоверности по суткам
   NextDayDef();
+
+  NextDayResetTimeoutHistogram35();
 
   EnableAnswer();
   ResetSendAT_All();

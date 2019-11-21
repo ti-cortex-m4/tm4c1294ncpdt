@@ -4,8 +4,8 @@ timeout35.h
 
 ------------------------------------------------------------------------------*/
 
-void    ResetTimeoutHistogramAll35(void);
-void    ResetTimeoutHistogramDay35(void);
+void    InitTimeoutHistogram35(void);
+void    NextDayResetTimeoutHistogram35(void);
 
 void    TimeoutHistogram35(uint  wTimeout);
 

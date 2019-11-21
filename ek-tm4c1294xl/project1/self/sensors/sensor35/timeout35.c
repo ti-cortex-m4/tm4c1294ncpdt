@@ -16,14 +16,14 @@ static uint             mwTimeoutHistogramAbs35[0x100],
 
 
 
-void    ResetTimeoutHistogramAll35(void)
+void    InitTimeoutHistogram35(void)
 {
   memset(&mwTimeoutHistogramAbs35, 0, sizeof(mwTimeoutHistogramAbs35));
   memset(&mwTimeoutHistogramDay35, 0, sizeof(mwTimeoutHistogramDay35));
 }
 
 
-void    ResetTimeoutHistogramDay35(void)
+void    NextDayResetTimeoutHistogram35(void)
 {
   memset(&mwTimeoutHistogramDay35, 0, sizeof(mwTimeoutHistogramDay35));
 }
@@ -52,7 +52,10 @@ void    OutTimeoutHistogramAll35(void)
 void    OutResetTimeoutHistogramAll35(void)
 {
   if (enGlobal == GLB_REPROGRAM)
-    ResetTimeoutHistogramAll35();
+  {
+    InitTimeoutHistogram35();
+    LongResult(bRES_OK);
+  }
   else
     Result(bRES_NEEDREPROGRAM);
 }
@@ -61,7 +64,10 @@ void    OutResetTimeoutHistogramAll35(void)
 void    OutResetTimeoutHistogramDay35(void)
 {
   if (enGlobal == GLB_REPROGRAM)
-    ResetTimeoutHistogramDay35();
+  {
+    NextDayResetTimeoutHistogram35();
+    LongResult(bRES_OK);
+  }
   else
     Result(bRES_NEEDREPROGRAM);
 }
