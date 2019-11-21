@@ -7,7 +7,7 @@ timeout35.h
 void    InitTimeoutHistogram35(void);
 void    NextDayResetTimeoutHistogram35(void);
 
-void    TimeoutHistogram35(uint  wTimeout);
+void    Timeout35(uint  wTimeout);
 
 uchar   GetTimeoutDelta35(void);
 

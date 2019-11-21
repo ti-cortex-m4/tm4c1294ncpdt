@@ -40,7 +40,7 @@ void    PostInput35(void)
     {
       uint w = GetTimer35();
       //Clear(); sprintf(szLo+2,"ожидание: %u",w);
-      sprintf(szLo+10,"%2u",w);
+      sprintf(szHi+10,"%2u",w);
       Delay(300); // Inf
       MonitorString("\n repeat: start");
 
@@ -52,7 +52,7 @@ void    PostInput35(void)
     }
     else if (InBuff(7) == NNCL2_DATA_GET)
     {
-      TimeoutHistogram35(GetTimer35());
+      Timeout35(GetTimer35());
 
       if (IndexInBuff() < 15)
       {
@@ -77,20 +77,24 @@ void    PostInput35(void)
           mpSerial[ibPort] = SER_GOODCHECK;
           return;
         }
+        else
+        {
+        // TODO 35
+        }
       }
     }
-    else if (InBuff(7) == NNCL2_ERROR)
-    {
-      Clear(); sprintf(szLo+1,"ошибка ? %u",InBuff(8));
-      MonitorString("\n router error: "); MonitorCharDec(InBuff(8));
-      Delay(1000); // Inf
-    }
-    else
-    {
-      Clear(); sprintf(szLo+1,"команда ? %u",InBuff(7));
-      MonitorString("\n router unknown command: "); MonitorCharDec(InBuff(7));
-      Delay(1000); // Inf
-    }
+  else if (InBuff(7) == NNCL2_ERROR)
+  {
+    Clear(); sprintf(szLo+1,"ошибка ? %u",InBuff(8));
+    MonitorString("\n router error: "); MonitorCharDec(InBuff(8));
+    Delay(1000); // Inf
+  }
+  else
+  {
+    Clear(); sprintf(szLo+1,"команда ? %u",InBuff(7));
+    MonitorString("\n router unknown command: "); MonitorCharDec(InBuff(7));
+    Delay(1000); // Inf
+  }
 
   mpSerial[ibPort] = SER_BADCHECK;
 }

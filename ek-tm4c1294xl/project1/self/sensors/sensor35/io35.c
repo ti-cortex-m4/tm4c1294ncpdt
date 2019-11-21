@@ -179,8 +179,6 @@ serial  Input35(void)
 {
   SaveDisplay();
 
-  uint r = 0;
-
   bool repeat;
   do
   {
@@ -191,8 +189,7 @@ serial  Input35(void)
     {
        if (InBuff(7) == NNCL2_TIME)
        {
-//         sprintf(szLo,"  ожидание: %u   ",(r++ / 2) + 1);
-         sprintf(szLo+10,"%2u",r++);
+         sprintf(szLo+10,"%2u",GetTimer35());
          Delay(500);
 
          MonitorString("\n NNCL2 repeat");
@@ -204,8 +201,7 @@ serial  Input35(void)
        {
          if (IndexInBuff() < 15)
          {
-           MonitorString("\n NNCL2 wrong size");
-           MonitorIntDec(IndexInBuff());
+           MonitorString("\n NNCL2 wrong size"); MonitorIntDec(IndexInBuff());
 
            Clear(); sprintf(szLo+1,"ошибка: 35.4.%u",InBuff(7)); // TODO 35
            DelayInf();
@@ -225,22 +221,19 @@ serial  Input35(void)
              DelayInf();
              mpSerial[ibPort] = SER_BADCHECK;
            }
-           // TODO 35 проверить данные
          }
        }
        else if (InBuff(7) == NNCL2_ERROR)
        {
-           MonitorString("\n NNCL2 error");
-           MonitorCharDec(InBuff(7));
+         MonitorString("\n NNCL2 error"); MonitorCharDec(InBuff(7));
 
-           Clear(); sprintf(szLo+1,"ошибка: 35.6.%u",InBuff(8));
-           DelayInf();
-           mpSerial[ibPort] = SER_BADCHECK;
+         Clear(); sprintf(szLo+1,"ошибка: 35.6.%u",InBuff(8));
+         DelayInf();
+         mpSerial[ibPort] = SER_BADCHECK;
        }
        else
        {
-         MonitorString("\n NNCL2 failure");
-         MonitorCharDec(InBuff(7));
+         MonitorString("\n NNCL2 failure"); MonitorCharDec(InBuff(7));
 
          Clear(); sprintf(szLo+1,"ошибка: 35.7.%u",InBuff(7));
          DelayInf();

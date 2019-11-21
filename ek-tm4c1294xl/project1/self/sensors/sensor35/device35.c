@@ -89,7 +89,7 @@ time    ReadTime35(void)
 void    QueryControl35(time  ti)
 {
   ulong dw = DateToSecIndex(ti);
-  dw += 7;
+  dw += 7; // TODO 35
   ti = SecIndexToDate(dw);
 
 
