@@ -14,20 +14,16 @@ DEVICE35!C
 #include "../../memory/mem_factors.h"
 #include "../../memory/mem_realtime.h"
 #include "../../display/display.h"
-//#include "../../keyboard/time/key_timedate.h"
 #include "../../time/timedate.h"
 #include "../../time/calendar.h"
 #include "../../time/delay.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports_devices.h"
-//#include "../../serial/monitor.h"
 #include "../../devices/devices.h"
 #include "../../devices/devices_time.h"
 #include "../../digitals/current/current_run.h"
-//#include "../../digitals/limits.h"
-//#include "../../special/special.h"
-#include "../../hardware/watchdog.h"
 #include "io35.h"
+#include "timeout35.h"
 #include "device35.h"
 
 
@@ -89,7 +85,7 @@ time    ReadTime35(void)
 void    QueryControl35(time  ti)
 {
   ulong dw = DateToSecIndex(ti);
-  dw += 7; // TODO 35
+  dw += GetTimeoutDelta35();
   ti = SecIndexToDate(dw);
 
 
