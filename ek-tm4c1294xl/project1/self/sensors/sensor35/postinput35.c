@@ -38,17 +38,26 @@ void    PostInput35(void)
 {
     if (InBuff(7) == NNCL2_TIME)
     {
-      uint w = GetTimer35();
-      //Clear(); sprintf(szLo+2,"ожидание: %u",w);
-      sprintf(szHi+10,"%2u",w);
+      sprintf(szHi+10,"%2u",GetTimer35());
       Delay(300); // Inf
-      MonitorString("\n repeat: start");
 
-      cbRepeat = MaxRepeats();
-      Query35Internal(250, 0, NNCL2_DATA_GET);
-      SetCurr(DEV_DATAGET_35);
+      if (GetTimer35() >= 99)
+      {
+        // TODO 35
+        Clear(); sprintf(szLo+1,"время ? %u",GetTimer35());
+        MonitorString("\n sensor error: bad time "); MonitorIntDec(IndexInBuff());
+        Delay(1000); // Inf
+      }
+      else
+      {
+        MonitorString("\n repeat: start");
 
-      return;
+        cbRepeat = MaxRepeats();
+        Query35Internal(250, 0, NNCL2_DATA_GET);
+        SetCurr(DEV_DATAGET_35);
+
+        return;
+      }
     }
     else if (InBuff(7) == NNCL2_DATA_GET)
     {
@@ -62,6 +71,8 @@ void    PostInput35(void)
       }
       else
       {
+        MonitorString("\n sensor success: good size ");
+
         uchar i;
         for (i=0; i<IndexInBuff()-15; i++)
           SetInBuff(i, InBuff(12+i));
@@ -79,6 +90,7 @@ void    PostInput35(void)
         }
         else
         {
+            MonitorString("\n sensor failure");
         // TODO 35
         }
       }
@@ -96,6 +108,7 @@ void    PostInput35(void)
     Delay(1000); // Inf
   }
 
+  MonitorString("\n repeat: bad check");
   mpSerial[ibPort] = SER_BADCHECK;
 }
 
