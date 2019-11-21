@@ -88,6 +88,11 @@ time    ReadTime35(void)
 
 void    QueryControl35(time  ti)
 {
+  ulong dw = DateToSecIndex(ti);
+  dw += 7;
+  ti = SecIndexToDate(dw);
+
+
   InitPush(0);
 
   PushChar(0xC0);
@@ -99,15 +104,15 @@ void    QueryControl35(time  ti)
   PushChar(0x01);
   PushChar(0x21);
 
-  PushChar(ToBCD(tiCurr.bSecond));
-  PushChar(ToBCD(tiCurr.bMinute));
-  PushChar(ToBCD(tiCurr.bHour));
+  PushChar(ToBCD(ti.bSecond));
+  PushChar(ToBCD(ti.bMinute));
+  PushChar(ToBCD(ti.bHour));
 
   PushChar((GetWeekdayYMD(ti.bYear, ti.bMonth, ti.bDay) + 1) % 7);
 
-  PushChar(ToBCD(tiCurr.bDay));
-  PushChar(ToBCD(tiCurr.bMonth));
-  PushChar(ToBCD(tiCurr.bYear));
+  PushChar(ToBCD(ti.bDay));
+  PushChar(ToBCD(ti.bMonth));
+  PushChar(ToBCD(ti.bYear));
 
   Query35(100+11, 22);
 }
