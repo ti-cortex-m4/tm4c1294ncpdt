@@ -5,25 +5,25 @@ action35.c
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-//#include "../../display/display.h"
-//#include "../../keyboard/keyboard.h"
-//#include "../../time/delay.h"
+#include "../../display/display.h"
+#include "../../keyboard/keyboard.h"
+#include "../../time/delay.h"
 //#include "../../hardware/watchdog.h"
-//#include "../../serial/ports.h"
-//#include "../../serial/ports2.h"
-//#include "../../serial/ports_devices.h"
+#include "../../serial/ports.h"
+#include "../../serial/ports2.h"
+#include "../../serial/ports_devices.h"
 //#include "../../serial/input_wrapper.h"
-//#include "../../serial/monitor.h"
+#include "../../serial/monitor.h"
 //#include "../../devices/devices.h"
 //#include "../../digitals/digitals_status.h"
 //#include "../../digitals/wait_answer.h"
-//#include "unpack35.h"
+#include "unpack35.h"
 //#include "device35.h"
 //#include "automatic35.h"
 //#include "io35.h"
-//#include "timer35.h"
-//#include "timeout35.h"
-//#include "status35.h"
+#include "timer35.h"
+#include "timeout35.h"
+#include "log35.h"
 #include "action35.h"
 
 
@@ -35,13 +35,13 @@ static void Delay35() {
 }
 
 
-static step35 step(bool fLog, event35 enEvent, action35 enAction, uint  wData) {
-  step35 step;
-  step.fLog = fLog;
-  step.enEvent = enEvent;
-  step.enAction = enAction;
-  step.wData = wData;
-  return event;  
+static step35 event(bool fLog, event35 enEvent, action35 enAction, uint  wData) {
+  step35 step1;
+  step1.fLog = fLog;
+  step1.enEvent = enEvent;
+  step1.enAction = enAction;
+  step1.wData = wData;
+  return step1;
 }
 
 
@@ -58,7 +58,7 @@ static step35 Step35(bool hi) {
       uint w = GetTimer35();
       MonitorString("\n repeat: error by timeout "); MonitorCharDec(w);
       Clear(); sprintf(szLo+1,"время ? %u",w); Delay35();
-      return event(true, E35_REPEAT_ERROR_TIMEOUT, A35_ERROR, w));
+      return event(true, E35_REPEAT_ERROR_TIMEOUT, A35_ERROR, w);
     }
     else {
       MonitorString("\n repeat: start");
