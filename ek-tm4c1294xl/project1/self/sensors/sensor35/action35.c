@@ -1,41 +1,38 @@
 /*------------------------------------------------------------------------------
-POSTINPUT35!C
+action35.c
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-//#include "../../memory/mem_profile.h"
-//#include "../../memory/mem_factors.h"
-#include "../../display/display.h"
-#include "../../keyboard/keyboard.h"
-#include "../../time/delay.h"
-//#include "../../time/timedate.h"
-#include "../../hardware/watchdog.h"
-#include "../../serial/ports.h"
-#include "../../serial/ports2.h"
-#include "../../serial/ports_devices.h"
-#include "../../serial/input_wrapper.h"
-#include "../../serial/monitor.h"
-#include "../../devices/devices.h"
-//#include "../../digitals/digitals.h"
-#include "../../digitals/digitals_status.h"
-#include "../../digitals/wait_answer.h"
-#include "unpack35.h"
-#include "device35.h"
-#include "automatic35.h"
-#include "io35.h"
-#include "timer35.h"
-#include "timeout35.h"
-#include "status35.h"
-#include "postinput35.h"
+//#include "../../display/display.h"
+//#include "../../keyboard/keyboard.h"
+//#include "../../time/delay.h"
+//#include "../../hardware/watchdog.h"
+//#include "../../serial/ports.h"
+//#include "../../serial/ports2.h"
+//#include "../../serial/ports_devices.h"
+//#include "../../serial/input_wrapper.h"
+//#include "../../serial/monitor.h"
+//#include "../../devices/devices.h"
+//#include "../../digitals/digitals_status.h"
+//#include "../../digitals/wait_answer.h"
+//#include "unpack35.h"
+//#include "device35.h"
+//#include "automatic35.h"
+//#include "io35.h"
+//#include "timer35.h"
+//#include "timeout35.h"
+//#include "status35.h"
+#include "action35.h"
 
 
 
 #ifndef SKIP_35
 
-void    PostInput35(void)
+void    Action35(void)
 {
+/*
     if (InBuff(7) == NNCL2_TIME)
     {
       sprintf(szHi+10,"%2u",GetTimer35());
@@ -110,6 +107,7 @@ void    PostInput35(void)
 
   MonitorString("\n repeat: bad check");
   mpSerial[ibPort] = SER_BADCHECK;
+*/
 }
 
 #endif
