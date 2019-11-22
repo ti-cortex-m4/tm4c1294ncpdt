@@ -25,6 +25,7 @@ POSTINPUT35!C
 #include "timer35.h"
 #include "timeout35.h"
 #include "status35.h"
+#include "action35.h"
 #include "postinput35.h"
 
 
@@ -33,6 +34,24 @@ POSTINPUT35!C
 
 void    PostInput35(void)
 {
+  action35 action = Action35(true);
+
+  if (action == A35_WAIT)
+  {
+    cbRepeat = MaxRepeats();
+    Query35Internal(250, 0, NNCL2_DATA_GET);
+    SetCurr(DEV_DATAGET_35);
+  }
+  else if (action == A35_SUCCESS)
+  {
+    InputGoodCheck();
+    mpSerial[ibPort] = SER_GOODCHECK;
+  }
+  else if (action == A35_ERROR)
+  {
+    mpSerial[ibPort] = SER_BADCHECK;
+  }
+/*
     if (InBuff(7) == NNCL2_TIME)
     {
       sprintf(szHi+10,"%2u",GetTimer35());
@@ -107,6 +126,7 @@ void    PostInput35(void)
 
   MonitorString("\n repeat: bad check");
   mpSerial[ibPort] = SER_BADCHECK;
+*/
 }
 
 #endif

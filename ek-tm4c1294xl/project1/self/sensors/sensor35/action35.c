@@ -8,18 +8,12 @@ action35.c
 #include "../../display/display.h"
 #include "../../keyboard/keyboard.h"
 #include "../../time/delay.h"
-//#include "../../hardware/watchdog.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports2.h"
 #include "../../serial/ports_devices.h"
-//#include "../../serial/input_wrapper.h"
 #include "../../serial/monitor.h"
-//#include "../../devices/devices.h"
-//#include "../../digitals/digitals_status.h"
-//#include "../../digitals/wait_answer.h"
 #include "include35.h"
 #include "unpack35.h"
-//#include "automatic35.h"
 #include "io35.h"
 #include "timer35.h"
 #include "timeout35.h"
@@ -46,7 +40,7 @@ static step35 event1(bool fLog, event35 enEvent, action35 enAction, uint  wData)
 
 
 static step35 Step35(bool hi) {
-  if (InBuff(7) == NNCL2_TIME){
+  if (InBuff(7) == NNCL2_TIME) {
     if (hi) {
       sprintf(szHi+10,"%2u",GetTimer35());
       Delay(300); // Inf
@@ -59,8 +53,7 @@ static step35 Step35(bool hi) {
       MonitorString("\n repeat: error by timeout "); MonitorCharDec(w);
       Clear(); sprintf(szLo+1,"время ? %u",w); Delay35();
       return event1(true, E35_REPEAT_ERROR_TIMEOUT, A35_ERROR, w);
-    }
-    else {
+    } else {
       MonitorString("\n repeat: start");
       return event1(false, E35_REPEAT_START, A35_WAIT, 0);
     }
