@@ -5,23 +5,14 @@ AUTOMATIC35!C
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-//#include "../../memory/mem_profile.h"
 #include "../../memory/mem_factors.h"
 #include "../../display/display.h"
 #include "../../keyboard/keyboard.h"
 #include "../../time/delay.h"
-//#include "../../time/timedate.h"
-//#include "../../hardware/watchdog.h"
 #include "../../serial/ports.h"
-//#include "../../serial/ports2.h"
-//#include "../../serial/ports_devices.h"
-//#include "../../serial/input_wrapper.h"
-//#include "../../serial/monitor.h"
 #include "../../devices/devices.h"
 #include "../../sensors/automatic1.h"
 #include "../../digitals/digitals.h"
-//#include "../../digitals/wait_answer.h"
-//#include "unpack35.h"
 #include "device35.h"
 #include "io35.h"
 #include "automatic35.h"
@@ -136,6 +127,18 @@ time2   ReadTimeCan35(void)
   mpboChannelsA[0] = true;
 
   return GetTime2(ti2.tiValue, true);
+}
+
+
+time2   ReadTimeCanS_Short(void)
+{
+  DelayOff();
+  QueryTime35();
+
+  if (Input35() != SER_GOODCHECK) return GetTime2Error();
+
+
+  return GetTime2(ReadTime35(), true);
 }
 
 

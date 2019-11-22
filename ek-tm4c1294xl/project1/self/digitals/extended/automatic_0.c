@@ -29,6 +29,7 @@ AUTOMATIC_0!C
 #include "../../sensors/sensor33/device33.h"
 #include "../../sensors/sensor33/automatic33.h"
 #include "../../sensors/sensor34/time34.h"
+#include "../../sensors/sensor35/automatic35.h"
 #include "../../console.h"
 #include "../../time/timedate.h"
 #include "automatic_0.h"
@@ -633,6 +634,10 @@ time2   ReadTimeCan_Short(uchar  ibCan)
 
 #ifndef SKIP_34
     case 34: return ReadTimeCan34_Short();
+#endif
+
+#ifndef SKIP_35
+    case 35: return ReadTimeCan35_Short();
 #endif
 
     default: return GetTime2Error();
