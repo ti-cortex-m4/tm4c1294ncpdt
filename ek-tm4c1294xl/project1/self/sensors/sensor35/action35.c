@@ -30,7 +30,7 @@ action35.c
 
 #ifndef SKIP_35
 
-void    Action35(void)
+action35    Action35(void)
 {
 /*
     if (InBuff(7) == NNCL2_TIME)
