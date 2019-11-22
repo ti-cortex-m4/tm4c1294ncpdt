@@ -5,12 +5,9 @@ POSTINPUT35!C
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-//#include "../../memory/mem_profile.h"
-//#include "../../memory/mem_factors.h"
 #include "../../display/display.h"
 #include "../../keyboard/keyboard.h"
 #include "../../time/delay.h"
-//#include "../../time/timedate.h"
 #include "../../hardware/watchdog.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports2.h"
@@ -18,9 +15,9 @@ POSTINPUT35!C
 #include "../../serial/input_wrapper.h"
 #include "../../serial/monitor.h"
 #include "../../devices/devices.h"
-//#include "../../digitals/digitals.h"
 #include "../../digitals/digitals_status.h"
 #include "../../digitals/wait_answer.h"
+#include "include35.h"
 #include "unpack35.h"
 #include "device35.h"
 #include "automatic35.h"

@@ -8,6 +8,12 @@ include35.h
 #define __INCLUDE35
 
 
+#define NNCL2_DATA_SET  17
+#define NNCL2_DATA_GET  18
+#define NNCL2_TIME      20
+#define NNCL2_ERROR     31
+
+
 typedef enum
 {
   E35_REPEAT_START         = 0,
