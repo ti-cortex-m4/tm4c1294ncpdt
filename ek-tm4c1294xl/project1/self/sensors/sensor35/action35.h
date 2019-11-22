@@ -4,4 +4,17 @@ action35.h
 
 ------------------------------------------------------------------------------*/
 
-void    Action35(void);
+#ifndef __ACTION35
+#define __ACTION35
+
+
+action35    Action35(void);
+
+
+typedef enum
+{
+  ERROR                 = 0,
+} action35;
+
+
+#endif
