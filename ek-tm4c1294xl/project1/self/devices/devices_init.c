@@ -48,6 +48,7 @@ DEVICES_INIT!C
 #include "../digitals/extended/extended_7.h"
 #include "../sensors/sensor34/unix_time_gmt34.h"
 #include "../sensors/sensor35/timeout35.h"
+#include "../sensors/sensor35/log35.h"
 #include "devices_input.h"
 #include "devices_postinput.h"
 #include "devices_pause.h"
@@ -114,6 +115,7 @@ void    InitDevices1(void)
   InitSkipFailure();
 
   InitTimeoutHistogram35();
+  InitLog35();
 }
 
 
