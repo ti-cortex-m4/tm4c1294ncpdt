@@ -130,7 +130,7 @@ time2   ReadTimeCan35(void)
 }
 
 
-time2   ReadTimeCanS_Short(void)
+time2   ReadTimeCan35_Short(void)
 {
   DelayOff();
   QueryTime35();
