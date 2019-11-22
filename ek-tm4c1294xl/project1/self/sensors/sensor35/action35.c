@@ -30,84 +30,90 @@ action35.c
 
 #ifndef SKIP_35
 
-action35    Action35(void)
-{
-/*
-    if (InBuff(7) == NNCL2_TIME)
-    {
+static void Delay35() {
+  Delay(1000); // DelayInf();
+}
+
+
+static step35 step(bool fLog, event35 enEvent, action35 enAction, uint  wData) {
+  step35 step;
+  step.fLog = fLog;
+  step.enEvent = enEvent;
+  step.enAction = enAction;
+  step.wData = wData;
+  return event;  
+}
+
+
+static step35 Step35(bool hi) {
+  if (InBuff(7) == NNCL2_TIME){
+    if (hi) {
       sprintf(szHi+10,"%2u",GetTimer35());
       Delay(300); // Inf
+    } else {
+      sprintf(szLo+10,"%2u",GetTimer35());
+    }
 
-      if (GetTimer35() >= 99)
-      {
-        // TODO 35
-        Clear(); sprintf(szLo+1,"время ? %u",GetTimer35());
-        MonitorString("\n sensor error: bad time "); MonitorIntDec(IndexInBuff());
-        Delay(1000); // Inf
+    if (GetTimer35() >= 99) {
+      uint w = GetTimer35();
+      MonitorString("\n repeat: error by timeout "); MonitorCharDec(w);
+      Clear(); sprintf(szLo+1,"время ? %u",w); Delay35();
+      return event(true, E35_REPEAT_ERROR_TIMEOUT, A35_ERROR, w));
+    }
+    else {
+      MonitorString("\n repeat: start");
+      return event(false, E35_REPEAT_START, A35_WAIT, 0);
+    }
+  }
+  else if (InBuff(7) == NNCL2_DATA_GET) {
+    Timeout35(GetTimer35());
+
+    if (IndexInBuff() < 15) {
+      uint w = IndexInBuff();
+      MonitorString("\n sensor error: bad size "); MonitorIntDec(w);
+      Clear(); sprintf(szLo+1,"длина ? %u",w); Delay35();
+      return event(true, E35_ROUTER_ERROR_SIZE, A35_ERROR, w);
+    }
+    else {
+      MonitorString("\n sensor success: good size ");
+
+      uchar i;
+      for (i=0; i<IndexInBuff()-15; i++)
+        SetInBuff(i, InBuff(12+i));
+
+      MonitorString("\n unwrap finished"); MonitorIn();
+
+      if (Checksum35Sensor() == 0) {
+        MonitorString("\n sensor success");
+        return event(false, E35_SENSOR_SUCCESS, A35_SUCCESS, 0);
       }
-      else
-      {
-        MonitorString("\n repeat: start");
-
-        cbRepeat = MaxRepeats();
-        Query35Internal(250, 0, NNCL2_DATA_GET);
-        SetCurr(DEV_DATAGET_35);
-
-        return;
+      else {
+        MonitorString("\n sensor failure");
+        return event(true, E35_SENSOR_FAILURE, A35_ERROR, 0);
       }
     }
-    else if (InBuff(7) == NNCL2_DATA_GET)
-    {
-      Timeout35(GetTimer35());
-
-      if (IndexInBuff() < 15)
-      {
-        Clear(); sprintf(szLo+1,"длина ? %u",IndexInBuff());
-        MonitorString("\n sensor error: bad size "); MonitorIntDec(IndexInBuff());
-        Delay(1000); // Inf
-      }
-      else
-      {
-        MonitorString("\n sensor success: good size ");
-
-        uchar i;
-        for (i=0; i<IndexInBuff()-15; i++)
-          SetInBuff(i, InBuff(12+i));
-
-        MonitorString("\n unwrap finished");
-        MonitorIn();
-
-        if (Checksum35Sensor() == 0)
-        {
-          MonitorString("\n sensor success");
-
-          InputGoodCheck();
-          mpSerial[ibPort] = SER_GOODCHECK;
-          return;
-        }
-        else
-        {
-            MonitorString("\n sensor failure");
-        // TODO 35
-        }
-      }
-    }
-  else if (InBuff(7) == NNCL2_ERROR)
-  {
-    Clear(); sprintf(szLo+1,"ошибка ? %u",InBuff(8));
-    MonitorString("\n router error: "); MonitorCharDec(InBuff(8));
-    Delay(1000); // Inf
   }
-  else
-  {
-    Clear(); sprintf(szLo+1,"команда ? %u",InBuff(7));
-    MonitorString("\n router unknown command: "); MonitorCharDec(InBuff(7));
-    Delay(1000); // Inf
+  else if (InBuff(7) == NNCL2_ERROR) {
+    uint w = InBuff(12);
+    MonitorString("\n router error: "); MonitorCharDec(w);
+    Clear(); sprintf(szLo+1,"ошибка ? %u",w); Delay35();
+    return event(true, E35_ROUTER_ERROR_ERROR, A35_ERROR, w);
   }
+  else {
+    uint w = InBuff(7);
+    MonitorString("\n router unknown command: "); MonitorCharDec(w);
+    Clear(); sprintf(szLo+1,"команда ? %u",w); Delay35();
+    return event(true, E35_ROUTER_ERROR_COMMAND, A35_ERROR, w);
+  }
+}
 
-  MonitorString("\n repeat: bad check");
-  mpSerial[ibPort] = SER_BADCHECK;
-*/
+
+action35 Action35(bool hi) {
+  step35 step = Step35(hi);
+  if (step.fLog) {
+    Log35(step.enAction, step.wData);
+  }
+  return step.enAction;
 }
 
 #endif
