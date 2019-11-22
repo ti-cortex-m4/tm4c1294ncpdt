@@ -17,8 +17,8 @@ action35.c
 //#include "../../devices/devices.h"
 //#include "../../digitals/digitals_status.h"
 //#include "../../digitals/wait_answer.h"
+#include "include35.h"
 #include "unpack35.h"
-//#include "device35.h"
 //#include "automatic35.h"
 #include "io35.h"
 #include "timer35.h"
@@ -108,7 +108,7 @@ static step35 Step35(bool hi) {
 }
 
 
-action35 Action35(bool hi) {
+action35 Action35(bool  hi) {
   step35 step = Step35(hi);
   if (step.fLog) {
     Log35(step.enEvent, step.wData);

@@ -15,6 +15,7 @@ IO35!C
 #include "../../serial/input_wrapper.h"
 #include "../../serial/monitor.h"
 #include "../../digitals/wait_answer.h"
+#include "include35.h"
 #include "unpack35.h"
 #include "device35.h"
 //#include "automatic35.h"

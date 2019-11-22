@@ -9,6 +9,7 @@ log35.c
 #include "../../serial/ports2.h"
 #include "../../serial/ports_devices.h"
 #include "../../time/rtc.h"
+#include "include35.h"
 #include "action35.h"
 #include "log35.h"
 
