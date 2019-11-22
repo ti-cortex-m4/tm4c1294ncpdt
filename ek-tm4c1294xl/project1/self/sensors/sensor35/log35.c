@@ -8,6 +8,8 @@ log35.c
 #include "../../serial/ports.h"
 #include "../../serial/ports2.h"
 #include "../../serial/ports_devices.h"
+#include "../../time/rtc.h"
+#include "action35.h"
 #include "log35.h"
 
 
@@ -33,18 +35,18 @@ void    InitLog35(void)
 }
 
 
-void    Log35(action35  enAction, uint  wData)
+void    Log35(event35  enEvent, uint  wData)
 {
   log35 log;
   log.tiNow = *GetCurrTimeDate();
-  log.enAction = enAction;
+  log.enEvent = enEvent;
   log.wData = wData;
 
   mLog35[cwLog35++ % LOG35_SIZE] = log;
 
-  ASSERT(enAction < COUNTER35_SIZE);
-  mCounter35[enAction].tiNow = log.tiNow;
-  mCounter35[enAction].wCounter++;
+  ASSERT(enEvent < COUNTER35_SIZE);
+  mCounter35[enEvent].tiNow = log.tiNow;
+  mCounter35[enEvent].wCounter++;
 }
 
 
