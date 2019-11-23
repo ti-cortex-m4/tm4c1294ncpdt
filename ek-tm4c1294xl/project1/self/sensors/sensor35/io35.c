@@ -18,7 +18,7 @@ IO35!C
 #include "include35.h"
 #include "unpack35.h"
 #include "device35.h"
-//#include "automatic35.h"
+#include "action35.h"
 #include "timer35.h"
 #include "io35.h"
 
@@ -188,6 +188,26 @@ serial  Input35(void)
 
     if (mpSerial[ibPort] == SER_GOODCHECK)
     {
+        action35 action = Action35(false);
+
+        if (action == A35_WAIT)
+        {
+          Query35Internal(250, 0, 0x12);
+          repeat = true;
+        }
+        else if (action == A35_SUCCESS)
+        {
+          mpSerial[ibPort] = SER_GOODCHECK;
+        }
+        else if (action == A35_ERROR)
+        {
+          mpSerial[ibPort] = SER_BADCHECK;
+        }
+        else
+        {
+          ASSERT(false);
+        }
+/* TODO 35
        if (InBuff(7) == NNCL2_TIME)
        {
          sprintf(szLo+10,"%2u",GetTimer35());
@@ -253,6 +273,7 @@ serial  Input35(void)
          DelayInf();
          mpSerial[ibPort] = SER_BADCHECK;
        }
+*/
     }
   } while (repeat);
 
