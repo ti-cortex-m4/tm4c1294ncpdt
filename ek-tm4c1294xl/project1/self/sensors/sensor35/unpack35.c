@@ -118,8 +118,8 @@ uchar   i,j;
 static uchar CheckRouter35(void) // TODO 35
 {
   if (InBuff(0) != 0xC0) return 1;
-//  if (InBuff(1) != 0x48) return 2;
-//
+  if (InBuff(1) != 0x02) return 2;
+
 //  if (InBuffIntLtl(2) != wPrivate) return 3;
 //  if (InBuffIntLtl(4) != (mpdwAddress1[diCurr.bAddress-1] % 0x10000)) return 4;
 //
@@ -141,15 +141,8 @@ uchar   ChecksumRouter35(void)
   uchar i = CheckRouter35();
   if (i != 0)
   {
-    SaveDisplay();
-
-    ShowHi(szError35);
-    Clear(); sprintf(szLo+3,"роутера: %u",i);
-
-    MonitorString("\n router frame error: "); MonitorCharHex(i);
-
+    Clear(); sprintf(szLo+1,"ошибка: 35.1.%u",i);
     DelayInf();
-    LoadDisplay();
   }
 
   return i;
@@ -184,15 +177,8 @@ uchar   ChecksumSensor35(void)
   uchar i = CheckSensor35();
   if (i != 0)
   {
-    SaveDisplay();
-
-    ShowHi(szError35);
-    Clear(); sprintf(szLo+2,"счетчика: %u",i);
-
-    MonitorString("\n sensor frame error: "); MonitorCharHex(i);
-
+    Clear(); sprintf(szLo+1,"ошибка: 35.2.%u",i);
     DelayInf();
-    LoadDisplay();
   }
 
   return i;
