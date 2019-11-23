@@ -260,7 +260,7 @@ void    DevicesPostInput(void)
 #ifndef SKIP_35
     else if (diCurr.bDevice == 35)
     {
-      if (Checksum35Router() == 0)
+      if (ChecksumRouter35() == 0)
       {
         PostInput35();
       }

@@ -155,7 +155,7 @@ static serial Input35Internal(void)
 
     if (mpSerial[ibPort] == SER_POSTINPUT_MASTER)
     {
-      if (Checksum35Router() == 0)
+      if (ChecksumRouter35() == 0)
       {
         InputGoodCheck();
         mpSerial[ibPort] = SER_GOODCHECK;

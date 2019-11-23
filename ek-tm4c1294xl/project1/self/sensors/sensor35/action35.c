@@ -74,9 +74,11 @@ static event35 Event35(bool  display) {
       for (i=0; i<IndexInBuff()-15; i++)
         SetInBuff(i, InBuff(12+i));
 
+      SetIndexInBuff(IndexInBuff()-15);
+
       MonitorString("\n unwrap finished"); MonitorIn();
 
-      if (Checksum35Sensor() == 0) {
+      if (ChecksumSensor35() == 0) {
         MonitorString("\n sensor success");
         return event0(false, R35_SENSOR_SUCCESS, A35_SUCCESS, 0);
       } else {
