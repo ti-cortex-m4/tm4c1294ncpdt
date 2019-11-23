@@ -41,7 +41,7 @@ void    QueryEngMonTariff35(uchar  ibMon, uchar  ibTrf)
   PushChar(0xC0);
   PushChar(0x48);
 
-  PushAddress35();
+  PushAddressPassword35();
 
   PushChar(0xD2);
   PushChar(0x01);

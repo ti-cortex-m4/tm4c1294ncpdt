@@ -4,7 +4,7 @@ DEVICE35.H
 
 ------------------------------------------------------------------------------*/
 
-void    PushAddress35(void);
+void    PushAddressPassword35(void);
 
 void    QueryTime35(void);
 time    ReadTime35(void);
