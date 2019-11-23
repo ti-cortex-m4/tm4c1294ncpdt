@@ -74,7 +74,7 @@ void    QueryHeader35(void)
   PushChar(0xC0);
   PushChar(0x48);
 
-  PushAddressPassword35();
+  PushSensorAddress35();
 
   PushChar(0xD5);
   PushChar(0x01);
