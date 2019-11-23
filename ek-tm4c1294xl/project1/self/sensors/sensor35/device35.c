@@ -34,7 +34,7 @@ static uint             wDivider35;
 
 
 
-void    PushAddress35(void)
+void    PushAddressPassword35(void)
 {
   PushIntLtl(mpdwAddress1[diCurr.bAddress-1] % 0x10000);
   PushIntLtl(wPrivate);
@@ -51,7 +51,7 @@ void    QueryTime35(void)
   PushChar(0xC0);
   PushChar(0x48);
 
-  PushAddress35();
+  PushAddressPassword35();
 
   PushChar(0xD0);
   PushChar(0x01);
@@ -94,7 +94,7 @@ void    QueryControl35(time  ti)
   PushChar(0xC0);
   PushChar(0x48);
 
-  PushAddress35();
+  PushAddressPassword35();
 
   PushChar(0xD7);
   PushChar(0x01);
@@ -122,7 +122,7 @@ void    QueryConfig35(void)
   PushChar(0xC0);
   PushChar(0x48);
 
-  PushAddress35();
+  PushAddressPassword35();
 
   PushChar(0xD0);
   PushChar(0x01);
@@ -160,7 +160,7 @@ void    QueryVersion35(void)
   PushChar(0xC0);
   PushChar(0x48);
 
-  PushAddress35();
+  PushAddressPassword35();
 
   PushChar(0xD0);
   PushChar(0x01);
@@ -187,7 +187,7 @@ void    QueryEngDay35(uchar  bDay)
   PushChar(0xC0);
   PushChar(0x48);
 
-  PushAddress35();
+  PushAddressPassword35();
 
   PushChar(0xD1);
   PushChar(0x01);
@@ -205,7 +205,7 @@ void    QueryEngMon35(uchar  bMonth)
   PushChar(0xC0);
   PushChar(0x48);
 
-  PushAddress35();
+  PushAddressPassword35();
 
   PushChar(0xD1);
   PushChar(0x01);

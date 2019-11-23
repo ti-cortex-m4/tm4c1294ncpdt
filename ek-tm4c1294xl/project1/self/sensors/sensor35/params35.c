@@ -26,7 +26,7 @@ void    QueryParam35_P(void)
   PushChar(0xC0);
   PushChar(0x48);
 
-  PushAddress35();
+  PushAddressPassword35();
 
   PushChar(0xD0);
   PushChar(0x01);
