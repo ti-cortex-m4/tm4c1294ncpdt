@@ -34,16 +34,17 @@ static uint             wDivider35;
 
 
 
-void    PushAddress35(void)
+void    PushRouterAddress35(void)
 {
   PushIntLtl(mpdwAddress1[diCurr.bAddress-1] % 0x10000);
-  PushIntLtl(wPrivate);
+  PushIntLtl(0);
 }
 
 
-void    PushAddressPassword35(void)
+void    PushSensorAddress35(void)
 {
-  PushAddress35();
+  PushIntLtl(mpdwAddress1[diCurr.bAddress-1] % 0x10000);
+  PushIntLtl(wPrivate);
 
   PushLongLtl(mpdwAddress2[diCurr.bAddress-1]);
 }
@@ -57,7 +58,7 @@ void    QueryTime35(void)
   PushChar(0xC0);
   PushChar(0x48);
 
-  PushAddressPassword35();
+  PushSensorAddress35();
 
   PushChar(0xD0);
   PushChar(0x01);
@@ -100,7 +101,7 @@ void    QueryControl35(time  ti)
   PushChar(0xC0);
   PushChar(0x48);
 
-  PushAddressPassword35();
+  PushSensorAddress35();
 
   PushChar(0xD7);
   PushChar(0x01);
@@ -128,7 +129,7 @@ void    QueryConfig35(void)
   PushChar(0xC0);
   PushChar(0x48);
 
-  PushAddressPassword35();
+  PushSensorAddress35();
 
   PushChar(0xD0);
   PushChar(0x01);
@@ -166,7 +167,7 @@ void    QueryVersion35(void)
   PushChar(0xC0);
   PushChar(0x48);
 
-  PushAddressPassword35();
+  PushSensorAddress35();
 
   PushChar(0xD0);
   PushChar(0x01);
@@ -193,7 +194,7 @@ void    QueryEngDay35(uchar  bDay)
   PushChar(0xC0);
   PushChar(0x48);
 
-  PushAddressPassword35();
+  PushSensorAddress35();
 
   PushChar(0xD1);
   PushChar(0x01);
@@ -211,7 +212,7 @@ void    QueryEngMon35(uchar  bMonth)
   PushChar(0xC0);
   PushChar(0x48);
 
-  PushAddressPassword35();
+  PushSensorAddress35();
 
   PushChar(0xD1);
   PushChar(0x01);
