@@ -29,13 +29,13 @@ static void Delay35() {
 }
 
 
-static step35 event1(bool fLog, event35 enEvent, action35 enAction, uint  wData) {
-  step35 step1;
-  step1.fLog = fLog;
-  step1.enEvent = enEvent;
-  step1.enAction = enAction;
-  step1.wData = wData;
-  return step1;
+static step35 event1(bool  fLog, event35  enEvent, action35  enAction, uint  wData) {
+  step35 step;
+  step.fLog = fLog;
+  step.enEvent = enEvent;
+  step.enAction = enAction;
+  step.wData = wData;
+  return step;
 }
 
 
@@ -67,8 +67,7 @@ static step35 Step35(bool  display) {
       MonitorString("\n sensor error: bad size "); MonitorIntDec(w);
       Clear(); sprintf(szLo+1,"длина ? %u",w); Delay35();
       return event1(true, E35_ROUTER_ERROR_SIZE, A35_ERROR, w);
-    }
-    else {
+    } else {
       MonitorString("\n sensor success: good size ");
 
       uchar i;
@@ -80,20 +79,17 @@ static step35 Step35(bool  display) {
       if (Checksum35Sensor() == 0) {
         MonitorString("\n sensor success");
         return event1(false, E35_SENSOR_SUCCESS, A35_SUCCESS, 0);
-      }
-      else {
+      } else {
         MonitorString("\n sensor failure");
         return event1(true, E35_SENSOR_FAILURE, A35_ERROR, 0);
       }
     }
-  }
-  else if (InBuff(7) == NNCL2_ERROR) {
+  } else if (InBuff(7) == NNCL2_ERROR) {
     uint w = InBuff(12);
     MonitorString("\n router error: "); MonitorCharDec(w);
     Clear(); sprintf(szLo+1,"ошибка ? %u",w); Delay35();
     return event1(true, E35_ROUTER_ERROR_ERROR, A35_ERROR, w);
-  }
-  else {
+  } else {
     uint w = InBuff(7);
     MonitorString("\n router unknown command: "); MonitorCharDec(w);
     Clear(); sprintf(szLo+1,"команда ? %u",w); Delay35();
@@ -102,8 +98,8 @@ static step35 Step35(bool  display) {
 }
 
 
-action35 Action35(bool  hi) {
-  step35 step = Step35(hi);
+action35 Action35(bool  display) {
+  step35 step = Step35(display);
   if (step.fLog) {
     Log35(step.enEvent, step.wData);
   }
