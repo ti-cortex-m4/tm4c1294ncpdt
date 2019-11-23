@@ -115,8 +115,8 @@ static uchar CheckRouter35(void)
   if (InBuff(0) != 0xC0) return 1;
   if (InBuff(1) != 0x02) return 2;
 
-//  if (InBuffIntLtl(7) != (mpdwAddress1[diCurr.bAddress-1] % 0x10000)) return 3;
-//  if (InBuffIntLtl(9) != 0) return 4;
+  if (InBuffIntLtl(8) != (mpdwAddress1[diCurr.bAddress-1] % 0x10000)) return 3;
+  if (InBuffIntLtl(10) != 0) return 4;
 
   if (MakeCrc35InBuff(1, IndexInBuff()-2) != 0) return 5;
   if (InBuff(IndexInBuff()-1) != 0xC0) return 6;
