@@ -148,7 +148,7 @@ uchar   Checksum35Router(void)
 
     MonitorString("\n router frame error: "); MonitorCharHex(i);
 
-    Delay(1000); // Inf
+    DelayInf();
     LoadDisplay();
   }
 
@@ -188,9 +188,10 @@ uchar   Checksum35Sensor(void)
 
     ShowHi(szError35);
     Clear(); sprintf(szLo+2,"счетчика: %u",i);
+
     MonitorString("\n sensor frame error: "); MonitorCharHex(i);
 
-    Delay(1000); // Inf
+    DelayInf();
     LoadDisplay();
   }
 
