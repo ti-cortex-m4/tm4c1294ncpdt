@@ -4,7 +4,7 @@ DEVICE35.H
 
 ------------------------------------------------------------------------------*/
 
-void    PushRouterAddress35(void);
+void    PushModemAddress35(void);
 void    PushSensorAddress35(void);
 
 void    QueryTime35(void);
