@@ -51,7 +51,11 @@ void    PostInput35(void)
   {
     mpSerial[ibPort] = SER_BADCHECK;
   }
-/*
+  else
+  {
+    ASSERT(false);
+  }
+/*  TODO 35
     if (InBuff(7) == NNCL2_TIME)
     {
       sprintf(szHi+10,"%2u",GetTimer35());

@@ -34,10 +34,16 @@ static uint             wDivider35;
 
 
 
-void    PushAddressPassword35(void)
+void    PushAddress35(void)
 {
   PushIntLtl(mpdwAddress1[diCurr.bAddress-1] % 0x10000);
   PushIntLtl(wPrivate);
+}
+
+
+void    PushAddressPassword35(void)
+{
+  PushAddress35();
 
   PushLongLtl(mpdwAddress2[diCurr.bAddress-1]);
 }

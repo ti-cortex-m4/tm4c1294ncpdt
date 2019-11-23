@@ -46,6 +46,7 @@ static step35 Step35(bool hi) {
       Delay(300); // Inf
     } else {
       sprintf(szLo+10,"%2u",GetTimer35());
+      Delay(500); // TODO 35
     }
 
     if (GetTimer35() >= 99) {
