@@ -36,18 +36,18 @@ void    InitLog35(void)
 }
 
 
-void    Log35(event35  enEvent, uint  wData)
+void    Log35(result35  enResult, uint  wData)
 {
   log35 log;
   log.tiNow = *GetCurrTimeDate();
-  log.enEvent = enEvent;
+  log.enResult = enResult;
   log.wData = wData;
 
   mLog35[cwLog35++ % LOG35_SIZE] = log;
 
-  ASSERT(enEvent < COUNTER35_SIZE);
-  mCounter35[enEvent].tiNow = log.tiNow;
-  mCounter35[enEvent].wCounter++;
+  ASSERT(enResult < COUNTER35_SIZE);
+  mCounter35[enResult].tiNow = log.tiNow;
+  mCounter35[enResult].wCounter++;
 }
 
 

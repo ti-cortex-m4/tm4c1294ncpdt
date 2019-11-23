@@ -16,16 +16,16 @@ include35.h
 
 typedef enum
 {
-  E35_REPEAT_START         = 0,
-  E35_REPEAT_ERROR_TIMEOUT = 1,
+  R35_REPEAT_START         = 0,
+  R35_REPEAT_ERROR_TIMEOUT = 1,
 
-  E35_ROUTER_ERROR_SIZE    = 2,
-  E35_ROUTER_ERROR_ERROR   = 3,
-  E35_ROUTER_ERROR_COMMAND = 4,
+  R35_ROUTER_ERROR_SIZE    = 2,
+  R35_ROUTER_ERROR_ERROR   = 3,
+  R35_ROUTER_ERROR_COMMAND = 4,
 
-  E35_SENSOR_SUCCESS       = 5,
-  E35_SENSOR_FAILURE       = 6
-} event35;
+  R35_SENSOR_SUCCESS       = 5,
+  R35_SENSOR_FAILURE       = 6
+} result35;
 
 
 typedef enum
@@ -39,16 +39,16 @@ typedef enum
 typedef struct
 {
   bool          fLog;
-  event35       enEvent;
+  result35      enResult;
   action35      enAction;
   uint          wData;
-} step35;
+} event35;
 
 
 typedef struct
 {
   time          tiNow;
-  event35       enEvent;
+  result35      enResult;
   uint          wData;
 } log35;
 
