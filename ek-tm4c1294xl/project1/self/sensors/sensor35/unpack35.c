@@ -23,11 +23,6 @@ DECOMPRESS35!C
 #ifndef SKIP_35
 
 
-//                                          0123456789ABCDEF
-static char const       szError35[]      = "    Îøèáêà      ";
-
-
-
 void    Decompress35(void)
 {
 uchar   i,j;
@@ -115,22 +110,16 @@ uchar   i,j;
 
 
 
-static uchar CheckRouter35(void) // TODO 35
+static uchar CheckRouter35(void)
 {
   if (InBuff(0) != 0xC0) return 1;
   if (InBuff(1) != 0x02) return 2;
 
-//  if (InBuffIntLtl(2) != wPrivate) return 3;
-//  if (InBuffIntLtl(4) != (mpdwAddress1[diCurr.bAddress-1] % 0x10000)) return 4;
-//
-//  if ((InBuff(6) & 0xF0) != 0x50) return 5;
-//  if ((IndexInBuff() >= 11) && (IndexInBuff() != (InBuff(6) & 0x0F) + 11)) return 6;
-//
-//  if (InBuff(7) != OutBuff(11)) return 7;
-//  if (InBuff(8) != OutBuff(12)) return 8;
-//
-//  if (MakeCrcSInBuff(1, IndexInBuff()-2) != 0) return 9;
-  if (InBuff(IndexInBuff()-1) != 0xC0) return 10;
+//  if (InBuffIntLtl(7) != (mpdwAddress1[diCurr.bAddress-1] % 0x10000)) return 3;
+//  if (InBuffIntLtl(9) != 0) return 4;
+
+  if (MakeCrc35InBuff(1, IndexInBuff()-2) != 0) return 5;
+  if (InBuff(IndexInBuff()-1) != 0xC0) return 6;
 
   return 0;
 }
