@@ -60,31 +60,27 @@ void    Query35Internal(uchar  cbIn, uchar  cbOut, uchar  bCommand)
   }
 
 
-  // заполнение пакета концентратора
+  // заполнение пакета маршрутизатора
   InitPush(0);
   PushChar(0xC0);
 
-  PushChar(0x02);
+  PushChar(0x02); // идентификатор протокола
 
+  PushChar(0); // адрес маршрутизатора
   PushChar(0);
   PushChar(0);
   PushChar(0);
-  PushChar(0);
 
-  PushChar(0x00);
+  PushChar(0x00); // флаги пакета и команды
 
-  PushChar(bCommand);
+  PushChar(bCommand); // код команды
 
-  PushRouterAddress35();
-//  PushChar(0xB6);   // TODO 35
-//  PushChar(0x59);
-//  PushChar(0x00);
-//  PushChar(0x00);
+  PushModemAddress35(); // адрес модема
 
   PushChar(0x00);
 
 
-  // расчет CRC концентратора
+  // расчет CRC маршрутизатора
   InitPush(13+cbOut);
 
   uint w = MakeCrc35OutBuff(1, 13+cbOut-1);

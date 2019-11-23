@@ -34,7 +34,7 @@ static uint             wDivider35;
 
 
 
-void    PushRouterAddress35(void)
+void    PushModemAddress35(void)
 {
   PushIntLtl(mpdwAddress1[diCurr.bAddress-1] % 0x10000);
   PushIntLtl(0);

@@ -39,14 +39,14 @@ static step35 event1(bool fLog, event35 enEvent, action35 enAction, uint  wData)
 }
 
 
-static step35 Step35(bool hi) {
+static step35 Step35(bool  display) {
   if (InBuff(7) == NNCL2_TIME) {
-    if (hi) {
+    if (display) {
       sprintf(szHi+10,"%2u",GetTimer35());
-      Delay(300); // Inf
+      DelayOff();
     } else {
       sprintf(szLo+10,"%2u",GetTimer35());
-      Delay(500); // TODO 35
+      DelayOff();
     }
 
     if (GetTimer35() >= 99) {
