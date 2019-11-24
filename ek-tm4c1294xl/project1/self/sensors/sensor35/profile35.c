@@ -66,6 +66,7 @@ void    QueryHeader35(void)
   dw -= wBaseCurr;
   tiDig = HouIndexToDate(dw);
 
+  MonitorString("\n ******************************");
   MonitorString("\n query header "); MonitorTime(tiDig);
 
 
@@ -134,6 +135,9 @@ static bool ReadData35(uchar  i)
 
 bool    ReadHeader35(void)
 {
+    MonitorString("\n ******************************");
+    MonitorString("\n read header ");
+
   uchar i;
   for (i=0; i<4; i++)
   {
