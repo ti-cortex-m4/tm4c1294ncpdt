@@ -185,92 +185,24 @@ serial  Input35(void)
 
     if (mpSerial[ibPort] == SER_GOODCHECK)
     {
-        action35 action = Action35(false);
-
-        if (action == A35_WAIT)
-        {
-          Query35Internal(250, 0, 0x12);
-          repeat = true;
-        }
-        else if (action == A35_SUCCESS)
-        {
-          mpSerial[ibPort] = SER_GOODCHECK;
-        }
-        else if (action == A35_ERROR)
-        {
-          mpSerial[ibPort] = SER_BADCHECK;
-        }
-        else
-        {
-          ASSERT(false);
-        }
-/* TODO 35
-       if (InBuff(7) == NNCL2_TIME)
-       {
-         sprintf(szLo+10,"%2u",GetTimer35());
-         Delay(500);
-
-         MonitorString("\n NNCL2 repeat");
-
-         if (GetTimer35() >= 99)
-         {
-           Clear(); sprintf(szLo+1,"время ? %u",GetTimer35()); // TODO 35
-           DelayInf();
-           mpSerial[ibPort] = SER_BADCHECK;
-         }
-         else
-         {
-           Query35Internal(250, 0, 0x12);
-           repeat = true;
-         }
-       }
-       else if (InBuff(7) == NNCL2_DATA_GET)
-       {
-         if (IndexInBuff() < 15)
-         {
-           MonitorString("\n NNCL2 wrong size"); MonitorIntDec(IndexInBuff());
-
-           Clear(); sprintf(szLo+1,"длина ? %u",IndexInBuff()); // TODO 35
-           DelayInf();
-           mpSerial[ibPort] = SER_BADCHECK;
-         }
-         else
-         {
-           MonitorString("\n NNCL2 success");
-
-           uchar i;
-           for (i=0; i<IndexInBuff()-15; i++)
-             SetInBuff(i, InBuff(12+i));
-
-           if (Checksum35Sensor() != 0)
-           {
-//             Clear(); sprintf(szLo+1,"ошибка: 35.5.%u",InBuff(8));
-//             DelayInf();
-             mpSerial[ibPort] = SER_BADCHECK;
-           }
-           else
-           {
-             // TODO 35
-           }
-         }
-       }
-       else if (InBuff(7) == NNCL2_ERROR)
-       {
-         MonitorString("\n NNCL2 error"); MonitorCharDec(InBuff(7));
-
-         Clear(); sprintf(szLo+1,"ошибка ? %u",InBuff(8));
-         DelayInf();
-         mpSerial[ibPort] = SER_BADCHECK;
-       }
-       else
-       {
-         MonitorString("\n NNCL2 failure"); MonitorCharDec(InBuff(7));
-
-         Clear(); sprintf(szLo+1,"команда ? %u",InBuff(7));
-         DelayInf();
-         mpSerial[ibPort] = SER_BADCHECK;
-       }
-*/
+      action35 action = Action35(false);
+      if (action == A35_WAIT)
+      {
+        Query35Internal(250, 0, 0x12);
+        repeat = true;
+      }
+      else if (action == A35_SUCCESS)
+      {
+        mpSerial[ibPort] = SER_GOODCHECK;
+      }
+      else if (action == A35_ERROR)
+      {
+        mpSerial[ibPort] = SER_BADCHECK;
+      }
+      else
+      {
+        ASSERT(false);
+      }
     }
   } while (repeat);
 
