@@ -66,6 +66,8 @@ void    QueryHeader35(void)
   dw -= wBaseCurr;
   tiDig = HouIndexToDate(dw);
 
+  MonitorString("\n query header "); MonitorTime(tiDig);
+
 
   InitPush(0);
 

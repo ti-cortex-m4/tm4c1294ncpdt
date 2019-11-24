@@ -36,19 +36,19 @@ uchar   i,j;
   if ((InBuff(0) != 0xC0) || (InBuff(IndexInBuff()-1) != 0xC0))
     return;
 
-  MonitorString("\n Unpack start");
+  MonitorString("\n input unpack start");
   MonitorIn();
 
   i = 1;
   j = 1;
   while (i < IndexInBuff()) {
     if ((InBuff(i) == 0xDB) && (InBuff(i+1) == 0xDD)) {
-      MonitorString("\n Unpack character 0хDB after input: "); MonitorCharDec(i);
+      MonitorString("\n unpack character 0xDB at position "); MonitorCharDec(i);
       SetInBuff(j, 0xDB);
       i++; i++;
       j++;
     } else if ((InBuff(i) == 0xDB) && (InBuff(i+1) == 0xDC)) {
-      MonitorString("\n Unpack character 0хC0 after input: "); MonitorCharDec(i);
+      MonitorString("\n unpack character 0xC0 at position "); MonitorCharDec(i);
       SetInBuff(j, 0xC0);
       i++; i++;
       j++;
@@ -61,7 +61,7 @@ uchar   i,j;
 
   SetIndexInBuff(j);
 
-  MonitorString("\n Unpack finish");
+  MonitorString("\n input unpack finish");
   MonitorIn();
 
 /*
@@ -132,6 +132,7 @@ uchar   ChecksumRouter35(void)
   {
     Clear(); sprintf(szLo+1,"ошибка: 35.1.%u",i);
     DelayInf();
+    MonitorString("\n router packet error: "); MonitorCharDec(i);
   }
 
   return i;
@@ -148,8 +149,11 @@ static uchar CheckSensor35(void)
   if (InBuffIntLtl(2) != wPrivate) return 3;
   if (InBuffIntLtl(4) != (mpdwAddress1[diCurr.bAddress-1] % 0x10000)) return 4;
 
+  uchar b = InBuff(6);
+  MonitorString("\n InBuff(6) "); MonitorCharHex(b); MonitorString(" "); MonitorCharHex(b & 0xF0); // TODO 35
+
   if ((InBuff(6) & 0xF0) != 0x50) return 5;
-  if ((IndexInBuff() >= 11) && (IndexInBuff() != (InBuff(6) & 0x0F) + 11)) return 6;
+//  if ((IndexInBuff() >= 11) && (IndexInBuff() != (InBuff(6) & 0x0F) + 11)) return 6; // TODO 35
 
 //  if (InBuff(7) != OutBuff(11)) return 7;
 //  if (InBuff(8) != OutBuff(12)) return 8;
@@ -168,6 +172,7 @@ uchar   ChecksumSensor35(void)
   {
     Clear(); sprintf(szLo+1,"ошибка: 35.2.%u",i);
     DelayInf();
+    MonitorString("\n sensor packet error: "); MonitorCharDec(i);
   }
 
   return i;

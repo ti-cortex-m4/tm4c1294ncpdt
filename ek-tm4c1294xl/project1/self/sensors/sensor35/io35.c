@@ -39,6 +39,9 @@ void    Query35Internal(uchar  cbIn, uchar  cbOut, uchar  bCommand)
   bCommandSave = bCommand;
 
 
+  MonitorOut(cbIn, cbOut);
+
+
   if (cbOut > 0)
   {
     // расчет CRC счетчика
