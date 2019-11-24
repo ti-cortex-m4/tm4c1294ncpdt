@@ -48,7 +48,6 @@
       }
       else
       {
-        MonitorString("\n read config: repeat "); MonitorIntDec(cbRepeat); MonitorString(" "); MonitorCharDec(mpSerial[ibPort]);
         if (cbRepeat == 0) ErrorCurrent();
         else
         {
@@ -74,8 +73,6 @@
         ReadCurrent35();
       else
       {
-        MonitorString("\n read energy: repeat "); MonitorIntDec(cbRepeat);
-
         if (cbRepeat == 0) ErrorCurrent();
         else
         {
