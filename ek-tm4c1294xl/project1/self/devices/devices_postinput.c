@@ -266,6 +266,7 @@ void    DevicesPostInput(void)
       }
       else
       {
+        MonitorString("\n repeat last query");
         Query35Repeat();
       }
     }
