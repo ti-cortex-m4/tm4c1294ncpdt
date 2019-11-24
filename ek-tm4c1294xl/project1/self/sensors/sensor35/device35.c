@@ -124,6 +124,9 @@ void    QueryControl35(time  ti)
 
 void    QueryConfig35(void)
 {
+    MonitorString("\n ******************************");
+    MonitorString("\n query config ");
+
   InitPush(0);
 
   PushChar(0xC0);
@@ -141,6 +144,9 @@ void    QueryConfig35(void)
 
 void    ReadConfig35(void)
 {
+    MonitorString("\n ******************************");
+    MonitorString("\n read config ");
+
   InitPop(9);
 
   switch (PopChar() & 0x03)
@@ -162,6 +168,9 @@ uint    GetDivider35(void)
 
 void    QueryVersion35(void)
 {
+    MonitorString("\n ******************************");
+    MonitorString("\n query version ");
+
   InitPush(0);
 
   PushChar(0xC0);
@@ -179,6 +188,9 @@ void    QueryVersion35(void)
 
 void    ReadVersion35(void)
 {
+    MonitorString("\n ******************************");
+    MonitorString("\n read version ");
+
   InitPop(9);
 
   Clear();
