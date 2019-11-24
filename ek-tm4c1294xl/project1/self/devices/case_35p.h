@@ -8,7 +8,7 @@
       break;
 
     case DEV_VERSION_35P:
-      if (mpSerial[ibPort] == SER_PAUSE) // SER_GOODCHECK
+      if (IsSerial35())
       {
         ReadVersion35();
 
@@ -51,7 +51,7 @@
       break;
 
     case DEV_TIME_35P:
-      if (mpSerial[ibPort] == SER_PAUSE) // SER_GOODCHECK
+      if (IsSerial35())
       {
         tiDig = ReadTime35();
         MakePause(DEV_POSTTIME_35P);
@@ -113,7 +113,7 @@
       break;
 
     case DEV_CONFIG_35P:
-      if (mpSerial[ibPort] == SER_PAUSE) // SER_GOODCHECK
+      if (IsSerial35())
       {
         ReadConfig35();
         MakePause(DEV_POSTCONFIG_35P);
@@ -141,7 +141,7 @@
       break;
 
     case DEV_VALUE_35P:
-      if (mpSerial[ibPort] == SER_PAUSE) // SER_GOODCHECK
+      if (IsSerial35())
       {
         tiValueS = ReadTime35();
         dwValueS = DateToHouIndex(tiValueS);
@@ -173,7 +173,7 @@
       break;
 
     case DEV_HEADER_35P:
-      if (mpSerial[ibPort] == SER_PAUSE) // SER_GOODCHECK
+      if (IsSerial35())
         MakePause(DEV_POSTHEADER_35P);
       else
       {

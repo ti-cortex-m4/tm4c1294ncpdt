@@ -5835,13 +5835,15 @@ void    RunDevices(void)
     case DEV_DATAGET_35:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        MonitorString("\n repeat: completed");
+        MonitorString("\n REPEAT: COMPLETED"); // TODO 35
+        Serial35 = SER_GOODCHECK;
         MakePause(GetCurr35Internal());
       }
       else
       {
         if (cbRepeat == 0)
         {
+          MonitorString("\n REPEAT: ERROR");  // TODO 35
           if (exExtended == EXT_CURRENT_3MIN)
             ErrorCurrent();
           else
@@ -5852,7 +5854,7 @@ void    RunDevices(void)
           //ErrorLink();
           cbRepeat--;
 
-          MonitorString("\n repeat: repeat");
+          MonitorString("\n REPEAT: REPEAT "); MonitorCharDec(mpSerial[ibPort]);  // TODO 35
 
           Query35Internal(250, 0, NNCL2_DATA_GET);
           SetCurr(DEV_DATAGET_35);
@@ -5867,12 +5869,11 @@ void    RunDevices(void)
 
       cbRepeat = MaxRepeats();
       QueryConfig35();
-      SetCurr(DEV_CONFIG_35C);
-      SetCurr35Internal(DEV_CONFIG_35C);
+      SetCurr35(DEV_CONFIG_35C);
       break;
 
     case DEV_CONFIG_35C:
-      if (mpSerial[ibPort] == SER_PAUSE) // SER_GOODCHECK
+      if (IsSerial35())
       {
         ReadConfig35();
         MakePause(DEV_POSTCONFIG_35C);
@@ -5900,7 +5901,7 @@ void    RunDevices(void)
       break;
 
     case DEV_ENERGY_35C:
-      if (mpSerial[ibPort] == SER_PAUSE) // SER_GOODCHECK
+      if (IsSerial35())
         ReadCurrent35();
       else
       {
@@ -5927,7 +5928,7 @@ void    RunDevices(void)
       break;
 
     case DEV_VERSION_35P:
-      if (mpSerial[ibPort] == SER_PAUSE) // SER_GOODCHECK
+      if (IsSerial35())
       {
         ReadVersion35();
 
@@ -5970,7 +5971,7 @@ void    RunDevices(void)
       break;
 
     case DEV_TIME_35P:
-      if (mpSerial[ibPort] == SER_PAUSE) // SER_GOODCHECK
+      if (IsSerial35())
       {
         tiDig = ReadTime35();
         MakePause(DEV_POSTTIME_35P);
@@ -6032,7 +6033,7 @@ void    RunDevices(void)
       break;
 
     case DEV_CONFIG_35P:
-      if (mpSerial[ibPort] == SER_PAUSE) // SER_GOODCHECK
+      if (IsSerial35())
       {
         ReadConfig35();
         MakePause(DEV_POSTCONFIG_35P);
@@ -6060,7 +6061,7 @@ void    RunDevices(void)
       break;
 
     case DEV_VALUE_35P:
-      if (mpSerial[ibPort] == SER_PAUSE) // SER_GOODCHECK
+      if (IsSerial35())
       {
         tiValueS = ReadTime35();
         dwValueS = DateToHouIndex(tiValueS);
@@ -6092,7 +6093,7 @@ void    RunDevices(void)
       break;
 
     case DEV_HEADER_35P:
-      if (mpSerial[ibPort] == SER_PAUSE) // SER_GOODCHECK
+      if (IsSerial35())
         MakePause(DEV_POSTHEADER_35P);
       else
       {
