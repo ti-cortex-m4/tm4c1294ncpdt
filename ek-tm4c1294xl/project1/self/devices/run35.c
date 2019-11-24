@@ -113,13 +113,42 @@ void    Run35(device  d)
 {
   switch (d)
   {
+  case DEV_DATAGET_35:
+    MonitorString("\n repeat: ??? "); MonitorCharDec(mpSerial[ibPort]);
+//    if (mpSerial[ibPort] == SER_GOODCHECK)
+//    {
+//      MonitorString("\n repeat: completed");
+//      MakePause(GetCurr35Internal());
+//    }
+//    else
+//    {
+//      if (cbRepeat == 0)
+//      {
+//        if (exExtended == EXT_CURRENT_3MIN)
+//          ErrorCurrent();
+//        else
+//          ErrorProfile();
+//      }
+//      else
+//      {
+//        //ErrorLink();
+//        cbRepeat--;
+//
+//        MonitorString("\n repeat: repeat");
+//
+//        Query35Internal(250, 0, NNCL2_DATA_GET);
+//        SetCurr(DEV_DATAGET_35);
+//      }
+//    }
+    break;
+
+
   case DEV_START_35C:
     Clear(); ShowPercent(25);
 
     cbRepeat = MaxRepeats();
     QueryConfig35();
-    SetCurr(DEV_CONFIG_35C);
-    SetCurr35Internal(DEV_CONFIG_35C);
+    SetCurr35(DEV_CONFIG_35C);
     break;
 
   case DEV_CONFIG_35C:
