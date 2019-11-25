@@ -260,13 +260,9 @@ void    DevicesPostInput(void)
 #ifndef SKIP_35
     else if (diCurr.bDevice == 35)
     {
-      if (ChecksumRouter35() == 0)
-      {
+      if (ChecksumRouter35() == 0) {
         PostInput35();
-      }
-      else
-      {
-        MonitorString("\n repeat last query");
+      } else {
         Query35Repeat();
       }
     }
