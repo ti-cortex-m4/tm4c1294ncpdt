@@ -47,6 +47,7 @@ DEVICES_INIT!C
 #include "../digitals/extended/extended_6.h"
 #include "../digitals/extended/extended_7.h"
 #include "../sensors/sensor34/unix_time_gmt34.h"
+#include "../sensors/sensor35/action35.h"
 #include "../sensors/sensor35/timeout35.h"
 #include "../sensors/sensor35/log35.h"
 #include "devices_input.h"
@@ -72,7 +73,7 @@ cache const             chPlcUSize = {PLC_U_SIZE, &bPlcUSize, sizeof(uchar)};
 cache const             chPlcUShutdown = {PLC_U_SHUTDOWN, &wPlcUShutdown, sizeof(uint)};
 cache const             chControlW = {CONTROL_W, &boControlW, sizeof(bool)};
 cache const             chTimeZone34 = {TIME_ZONE_34, &bTimeZone34, sizeof(uchar)};
-cache const             chMaxTimer35 = {TIMER_35, &bTimer35, sizeof(uchar)};
+cache const             chMaxTimer35 = {MAX_TIMER_35, &bMaxTimer35, sizeof(uchar)};
 
 
 
@@ -93,6 +94,7 @@ void    InitDevices1(void)
   LoadCacheInt(&chPlcUShutdown, 10, 500, 100);
   LoadCacheBool(&chControlW, false);
   LoadCacheChar(&chTimeZone34, 0, 13, 3);
+  LoadCacheChar(&chMaxTimer35, 60, 250, 120);
 
   LoadProfileFrac6_All();
   LoadProfileFrac8_All();
@@ -181,6 +183,7 @@ void    ResetDevices(bool  fFull)
   SaveCacheBool(&chControlW, false);
 
   SaveCacheChar(&chTimeZone34, 3);
+  SaveCacheChar(&chMaxTimer35, 120);
 
   memset(&mpdbEngFracDigCan, 0, sizeof(mpdbEngFracDigCan));
   SaveProfileFrac6_All();

@@ -4,4 +4,12 @@ action35.h
 
 ------------------------------------------------------------------------------*/
 
+#include "include35.h"
+
+
+
+extern  uchar                   bMaxTimer35;
+
+
+
 action35 Action35(bool  display);

@@ -12,13 +12,15 @@ KEY_MAX_TIMER35.C
 
 
 //                                         0123456789ABCDEF
-static char const       szMessage[]     = "Часовой пояс ESM";
+static char const       szMessage1[]    = "  Макс. время   ",
+                        szMessage2[]    = "ожидания ответа ",
+                        szMessage3[]    = "  СЕ102 NNCL2   ";
 
-static char const       *pszMessages[]  = { szMessage, szNumberLimits, "" };
+static char const       *pszMessages[]  = { szMessage1, szMessage2, szMessage3, szNumberLimits, "" };
 
 
 
 void    key_SetMaxTimer35(void)
 {
-  key_SetChar(&chTimer34, pszMessages, 0, 13);
+  key_SetChar(&chMaxTimer35, pszMessages, 60, 250);
 }
