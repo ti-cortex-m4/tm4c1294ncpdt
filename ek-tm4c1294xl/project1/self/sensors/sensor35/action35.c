@@ -45,15 +45,16 @@ static event35 event0(bool  fLog, result35  enResult, action35  enAction, uint  
 
 static event35 Event35(bool  display) {
   if (InBuff(7) == NNCL2_TIME) {
+    uint tm = GetTimer35();
     if (display) {
-      sprintf(szHi+10,"%2u",GetTimer35());
+      if (tm > 99) sprintf(szHi+10,"%2X",tm); else sprintf(szHi+10,"%2u",tm);
       DelayOff();
     } else {
-      sprintf(szLo+10,"%2u",GetTimer35());
+      if (tm > 99) sprintf(szLo+10,"%2X",tm); else sprintf(szLo+10,"%2u",tm);
       DelayOff();
     }
 
-    if (GetTimer35() >= 99) {
+    if (GetTimer35() >= bMaxTimer35) {
       uint w = GetTimer35();
       MonitorString("\n repeat: error by timeout "); MonitorCharDec(w);
       Clear(); sprintf(szLo+2,"время ? %u",w); Delay35();
