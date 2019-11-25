@@ -72,6 +72,7 @@ cache const             chPlcUSize = {PLC_U_SIZE, &bPlcUSize, sizeof(uchar)};
 cache const             chPlcUShutdown = {PLC_U_SHUTDOWN, &wPlcUShutdown, sizeof(uint)};
 cache const             chControlW = {CONTROL_W, &boControlW, sizeof(bool)};
 cache const             chTimeZone34 = {TIME_ZONE_34, &bTimeZone34, sizeof(uchar)};
+cache const             chMaxTimer35 = {TIMER_35, &bTimer35, sizeof(uchar)};
 
 
 
