@@ -32,7 +32,8 @@ typedef enum
 {
   A35_WAIT      = 0,
   A35_SUCCESS   = 1,
-  A35_ERROR     = 2
+  A35_ERROR     = 2,
+  A35_BREAK     = 3
 } action35;
 
 
