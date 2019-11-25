@@ -43,9 +43,15 @@ void    SetCurr35(device  de)
 
 
 
+void    SetSerial35(serial  se)
+{
+  Serial35 = se;
+}
+
+
 bool    IsSerial35(void)
 {
-  return mpSerial[ibPort] == SER_PAUSE;
+  return Serial35 == SER_GOODCHECK; // mpSerial[ibPort] == SER_PAUSE;
 }
 
 #endif
