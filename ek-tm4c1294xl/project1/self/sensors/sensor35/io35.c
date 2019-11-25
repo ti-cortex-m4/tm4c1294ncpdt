@@ -202,6 +202,10 @@ serial  Input35(void)
       {
         mpSerial[ibPort] = SER_BADCHECK;
       }
+      else if (action == A35_BREAK)
+      {
+        mpSerial[ibPort] = SER_BADCHECK; // TODO 35
+      }
       else
       {
         ASSERT(false);
