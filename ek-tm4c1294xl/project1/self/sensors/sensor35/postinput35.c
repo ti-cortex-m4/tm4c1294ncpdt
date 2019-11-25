@@ -7,10 +7,13 @@ POSTINPUT35!C
 #include "../../main.h"
 #include "../../serial/ports.h"
 #include "../../serial/input_wrapper.h"
+#include "../../serial/monitor.h"
 #include "../../devices/devices.h"
 #include "../../digitals/digitals_status.h"
+#include "../../digitals/digitals_pause.h"
 #include "include35.h"
 #include "io35.h"
+#include "status35.h"
 #include "action35.h"
 #include "postinput35.h"
 
@@ -23,18 +26,25 @@ void    PostInput35(void)
   action35 action = Action35(true);
   if (action == A35_WAIT)
   {
-    cbRepeat = MaxRepeats();
-    Query35Internal(250, 0, NNCL2_DATA_GET);
-    SetCurr(DEV_DATAGET_35);
+    MonitorString("\n postinput: run wait");
+    SetCurr(DEV_RUN_WAIT_35);
   }
   else if (action == A35_SUCCESS)
   {
+    MonitorString("\n postinput: success");
     InputGoodCheck();
     mpSerial[ibPort] = SER_GOODCHECK;
   }
   else if (action == A35_ERROR)
   {
+    MonitorString("\n postinput: error");
     mpSerial[ibPort] = SER_BADCHECK;
+  }
+  else if (action == A35_BREAK)
+  {
+    MonitorString("\n postinput: run break");
+    mpSerial[ibPort] = SER_BADCHECK;
+    SetCurr(DEV_RUN_BREAK_35);
   }
   else
   {

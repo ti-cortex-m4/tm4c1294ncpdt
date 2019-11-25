@@ -22,6 +22,10 @@ action35.c
 
 
 
+uchar                   bMaxTimer35;
+
+
+
 #ifndef SKIP_35
 
 static void Delay35() {
@@ -90,7 +94,7 @@ static event35 Event35(bool  display) {
     uint w = InBuff(12);
     MonitorString("\n router error: "); MonitorCharDec(w);
     Clear(); sprintf(szLo+2,"ошибка ? %u",w); Delay35();
-    return event0(true, R35_ROUTER_ERROR_ERROR, A35_ERROR, w);
+    return event0(true, R35_ROUTER_ERROR_ERROR, A35_BREAK, w);
   } else {
     uint w = InBuff(7);
     MonitorString("\n router unknown command: "); MonitorCharDec(w);

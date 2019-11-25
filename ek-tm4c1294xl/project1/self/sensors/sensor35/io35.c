@@ -20,6 +20,7 @@ IO35!C
 #include "device35.h"
 #include "action35.h"
 #include "timer35.h"
+#include "log35.h"
 #include "io35.h"
 
 
@@ -128,6 +129,8 @@ void    Query35Internal(uchar  cbIn, uchar  cbOut, uchar  bCommand)
 
 void    Query35(uchar  cbIn, uchar  cbOut)
 {
+  MonitorString("\n ******************************"); // TODO 35
+
   SetTimer35(0);
   Query35Internal(cbIn, cbOut, NNCL2_DATA_SET);
 }
@@ -135,6 +138,9 @@ void    Query35(uchar  cbIn, uchar  cbOut)
 
 void    Query35Repeat(void)
 {
+  MonitorString("\n repeat last query");
+  Log35(R35_REPEAT_LAST_QUERY, bCommandSave);
+
   Query35Internal(cbInSave, cbOutSave, bCommandSave);
 }
 
