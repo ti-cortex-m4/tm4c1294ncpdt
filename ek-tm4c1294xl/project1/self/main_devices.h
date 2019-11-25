@@ -765,8 +765,8 @@ typedef enum
 
 #ifndef SKIP_35
 
-  DEV_DATAGET_1_35      =  0x2100,
-  DEV_DATAGET_2_35      =  0x2101,
+  DEV_RUN_WAIT_35       =  0x2100,
+  DEV_RUN_BREAK_35      =  0x2101,
   DEV_DATAGET_35        =  0x2102,
 
   DEV_START_35C         =  0x2111,
