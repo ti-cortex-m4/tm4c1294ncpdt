@@ -2,15 +2,14 @@
 #ifndef SKIP_35
 
     case DEV_RUN_WAIT_35:
-      MonitorString("\n case: wait");
+      MonitorString("\t run: wait"); // TODO 35
 
-      cbRepeat = MaxRepeats();
       Query35Internal(250, 0, NNCL2_DATA_GET);
-      SetCurr(DEV_DATAGET_35);
+      SetCurr(DEV_RUN_DATA_GET_35);
       break;
 
     case DEV_RUN_BREAK_35:
-      MonitorString("\n case: break");
+      MonitorString("\t run: break");
 
       if (exExtended == EXT_CURRENT_3MIN)
         ErrorCurrent();
@@ -18,17 +17,17 @@
         ErrorProfile();
       break;
 
-    case DEV_DATAGET_35:
+    case DEV_RUN_DATA_GET_35:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        MonitorString("\n data get: good check"); // TODO 35
+        MonitorString("\t run: good check");
 
         SetSerial35(SER_GOODCHECK);
         MakePause(GetCurr35Internal());
       }
       else
       {
-        MonitorString("\n data get: bad check"); // TODO 35
+        MonitorString("\t run: bad check");
 
         SetSerial35(SER_BADCHECK);
         MakePause(GetCurr35Internal());
