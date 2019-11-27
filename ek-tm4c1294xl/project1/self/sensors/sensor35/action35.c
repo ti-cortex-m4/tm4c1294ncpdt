@@ -29,7 +29,7 @@ uchar                   bMaxTimer35;
 #ifndef SKIP_35
 
 static void Delay35() {
-  Delay(1000); // DelayInf();
+  Delay(1000); // DelayInf(); TODO 35
 }
 
 
@@ -56,11 +56,11 @@ static event35 Event35(bool  display) {
 
     if (GetTimer35() >= bMaxTimer35) {
       uint w = GetTimer35();
-      MonitorString("\n repeat: error by timeout "); MonitorCharDec(w);
+      MonitorString("\t repeat: error by timeout "); MonitorCharDec(w);
       Clear(); sprintf(szLo+2,"время ? %u",w); Delay35();
       return event0(true, R35_REPEAT_ERROR_TIMEOUT, A35_ERROR, w);
     } else {
-      MonitorString("\n repeat: start");
+      MonitorString("\t repeat: start");
       return event0(false, R35_REPEAT_START, A35_WAIT, 0);
     }
   }
@@ -69,11 +69,11 @@ static event35 Event35(bool  display) {
 
     if (IndexInBuff() < 15) {
       uint w = IndexInBuff();
-      MonitorString("\n sensor error: bad size "); MonitorIntDec(w);
+      MonitorString("\t sensor error: bad size "); MonitorIntDec(w);
       Clear(); sprintf(szLo+2,"длина ? %u",w); Delay35();
       return event0(true, R35_ROUTER_ERROR_SIZE, A35_ERROR, w);
     } else {
-      MonitorString("\n sensor success: good size ");
+      MonitorString("\t sensor success: good size ");
 
       uchar i;
       for (i=0; i<IndexInBuff()-15; i++)
@@ -81,24 +81,24 @@ static event35 Event35(bool  display) {
 
       SetIndexInBuff(IndexInBuff()-15);
 
-      MonitorString("\n unwrap finished"); MonitorIn();
+      MonitorString("\t unwrap finished"); MonitorIn();
 
       if (ChecksumSensor35() == 0) {
-        MonitorString("\n sensor success");
+        MonitorString("\t sensor success");
         return event0(false, R35_SENSOR_SUCCESS, A35_SUCCESS, 0);
       } else {
-        MonitorString("\n sensor failure");
+        MonitorString("\t sensor failure");
         return event0(true, R35_SENSOR_FAILURE, A35_ERROR, 0);
       }
     }
   } else if (InBuff(7) == NNCL2_ERROR) {
     uint w = InBuff(12);
-    MonitorString("\n router error: "); MonitorCharDec(w);
+    MonitorString("\t router error: "); MonitorCharDec(w);
     Clear(); sprintf(szLo+2,"ошибка ? %u",w); Delay35();
     return event0(true, R35_ROUTER_ERROR_ERROR, A35_BREAK, w);
   } else {
     uint w = InBuff(7);
-    MonitorString("\n router unknown command: "); MonitorCharDec(w);
+    MonitorString("\t router unknown command: "); MonitorCharDec(w);
     Clear(); sprintf(szLo+2,"команда ? %u",w); Delay35();
     return event0(true, R35_ROUTER_ERROR_COMMAND, A35_ERROR, w);
   }

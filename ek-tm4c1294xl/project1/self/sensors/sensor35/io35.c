@@ -58,6 +58,44 @@ void    Query35Internal(uchar  cbIn, uchar  cbOut, uchar  bCommand)
     PushChar(0xC0);
 
 
+#ifdef MONITOR_35
+    MonitorString("\n before pack 1");
+    MonitorOut(cbIn, cbOut);
+#endif
+
+
+    for (i=0; i<=cbOut-1; i++)
+      mpbOutBuffSave[i] = OutBuff(i);
+
+    uchar j = 0;
+    SetOutBuff(j++, 0xC0);
+    for (i=1; i<=cbOut-2; i++)
+    {
+      if (mpbOutBuffSave[i] == 0xC0)
+      {
+        SetOutBuff(j++, 0xDB);
+        SetOutBuff(j++, 0xDC);
+      }
+      else if (mpbOutBuffSave[i] == 0xDB)
+      {
+        SetOutBuff(j++, 0xDB);
+        SetOutBuff(j++, 0xDD);
+      }
+      else
+      {
+        SetOutBuff(j++, mpbOutBuffSave[i]);
+      }
+    }
+    SetOutBuff(j++, 0xC0);
+    cbOut = j;
+
+
+#ifdef MONITOR_35
+    MonitorString("\n after pack 1");
+    MonitorOut(cbIn, cbOut);
+#endif
+
+
     // перенос пакета счетчика внутри пакета концентратора
     for (i=0; i<cbOut; i++)
       SetOutBuff(cbOut+12-i, OutBuff(cbOut-1-i));
@@ -96,6 +134,12 @@ void    Query35Internal(uchar  cbIn, uchar  cbOut, uchar  bCommand)
   cbOut = 13+cbOut+3;
 
 
+#ifdef MONITOR_35
+  MonitorString("\n before pack 2");
+  MonitorOut(cbIn, cbOut);
+#endif
+
+
   // упаковка по протоколу SLIP
   uchar i;
   for (i=0; i<=cbOut-1; i++)
@@ -121,6 +165,11 @@ void    Query35Internal(uchar  cbIn, uchar  cbOut, uchar  bCommand)
     }
   }
   SetOutBuff(j++, 0xC0);
+
+
+#ifdef MONITOR_35
+  MonitorString("\n after pack 2");
+#endif
 
 
   Query(cbIn,j,true);
