@@ -26,23 +26,23 @@ void    PostInput35(void)
   action35 action = Action35(true);
   if (action == A35_WAIT)
   {
-    MonitorString("\n postinput: run wait");
+    MonitorString("\t postinput: run wait");
     SetCurr(DEV_RUN_WAIT_35);
   }
   else if (action == A35_SUCCESS)
   {
-    MonitorString("\n postinput: success");
+    MonitorString("\t postinput: success");
     InputGoodCheck();
     mpSerial[ibPort] = SER_GOODCHECK;
   }
   else if (action == A35_ERROR)
   {
-    MonitorString("\n postinput: error");
+    MonitorString("\t postinput: error");
     mpSerial[ibPort] = SER_BADCHECK;
   }
   else if (action == A35_BREAK)
   {
-    MonitorString("\n postinput: run break");
+    MonitorString("\t postinput: run break");
     mpSerial[ibPort] = SER_BADCHECK;
     SetCurr(DEV_RUN_BREAK_35);
   }

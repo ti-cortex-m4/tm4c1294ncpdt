@@ -23,13 +23,13 @@ volatile serial         Serial35;
 void    SetCurr35Internal(device  de)
 {
   deCurr35 = de;
-  MonitorString("\n set pause: "); MonitorIntHex(deCurr35);
+  MonitorString("\t set pause: "); MonitorIntHex(deCurr35);
 }
 
 
 device  GetCurr35Internal(void)
 {
-  MonitorString("\n get pause: "); MonitorIntHex(deCurr35);
+  MonitorString("\t get pause: "); MonitorIntHex(deCurr35);
   return deCurr35;
 }
 
