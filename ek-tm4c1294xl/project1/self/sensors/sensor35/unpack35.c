@@ -36,19 +36,25 @@ uchar   i,j;
   if ((InBuff(0) != 0xC0) || (InBuff(IndexInBuff()-1) != 0xC0))
     return;
 
-  MonitorString("\n input unpack start");
+#ifdef MONITOR_35
+  MonitorString("\n router unpack start");
   MonitorIn();
+#endif
 
   i = 1;
   j = 1;
   while (i < IndexInBuff()) {
     if ((InBuff(i) == 0xDB) && (InBuff(i+1) == 0xDD)) {
+#ifdef MONITOR_35
       MonitorString("\n unpack character 0xDB at position "); MonitorCharDec(i);
+#endif
       SetInBuff(j, 0xDB);
       i++; i++;
       j++;
     } else if ((InBuff(i) == 0xDB) && (InBuff(i+1) == 0xDC)) {
+#ifdef MONITOR_35
       MonitorString("\n unpack character 0xC0 at position "); MonitorCharDec(i);
+#endif
       SetInBuff(j, 0xC0);
       i++; i++;
       j++;
@@ -61,50 +67,11 @@ uchar   i,j;
 
   SetIndexInBuff(j);
 
-  MonitorString("\n input unpack finish");
+#ifdef MONITOR_35
+  MonitorString("\n router unpack finish");
   MonitorIn();
+#endif
 
-/*
-  if ((InBuff(6) & 0xF0) != 0x50) // TODO 35
-  {
-    Clear(); sprintf(szLo+1,"ошибка: 35.1.%u",(InBuff(6) & 0xF0));
-    DelayInf();
-
-    mpcwErrorLink[ibDig]++;
-
-    mpSerial[ibPort] = SER_BADLINK;
-    return;
-  }
-
-  bool f = 1;
-  while ((f == 1) && (IndexInBuff() > 11) && (IndexInBuff() != (InBuff(6) & 0x0F) + 11))
-  {
-    MonitorString("\n Unpack");
-    MonitorIn();
-
-    f = 0;
-
-    j = Repack35(0xDD);
-    if (j != 0)
-    {
-      SetInBuff(j, 0xDB);
-      for (i=j+1; i<=IndexInBuff()-2; i++) SetInBuff(i, InBuff(i+1));
-      SetIndexInBuff(IndexInBuff()-1);
-      f = 1;
-      continue;
-    }
-
-    j = Repack35(0xDC);
-    if (j != 0)
-    {
-      SetInBuff(j, 0xC0);
-      for (i=j+1; i<=IndexInBuff()-2; i++) SetInBuff(i, InBuff(i+1));
-      SetIndexInBuff(IndexInBuff()-1);
-      f = 1;
-      continue;
-    }
-  }
-*/
   mpSerial[ibPort] = SER_POSTINPUT_MASTER;
 }
 

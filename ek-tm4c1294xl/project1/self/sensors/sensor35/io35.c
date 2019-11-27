@@ -59,7 +59,7 @@ void    Query35Internal(uchar  cbIn, uchar  cbOut, uchar  bCommand)
 
 
 #ifdef MONITOR_35
-    MonitorString("\n before pack 1");
+    MonitorString("\n sensor pack start");
     MonitorOut(cbIn, cbOut);
 #endif
 
@@ -91,7 +91,7 @@ void    Query35Internal(uchar  cbIn, uchar  cbOut, uchar  bCommand)
 
 
 #ifdef MONITOR_35
-    MonitorString("\n after pack 1");
+    MonitorString("\n sensor pack finish");
     MonitorOut(cbIn, cbOut);
 #endif
 
@@ -135,7 +135,7 @@ void    Query35Internal(uchar  cbIn, uchar  cbOut, uchar  bCommand)
 
 
 #ifdef MONITOR_35
-  MonitorString("\n before pack 2");
+  MonitorString("\n router pack start");
   MonitorOut(cbIn, cbOut);
 #endif
 
@@ -168,7 +168,7 @@ void    Query35Internal(uchar  cbIn, uchar  cbOut, uchar  bCommand)
 
 
 #ifdef MONITOR_35
-  MonitorString("\n after pack 2");
+  MonitorString("\n router pack finish");
 #endif
 
 
@@ -178,8 +178,6 @@ void    Query35Internal(uchar  cbIn, uchar  cbOut, uchar  bCommand)
 
 void    Query35(uchar  cbIn, uchar  cbOut)
 {
-  MonitorString("\n ******************************"); // TODO 35
-
   SetTimer35(0);
   Query35Internal(cbIn, cbOut, NNCL2_DATA_SET);
 }

@@ -767,7 +767,7 @@ typedef enum
 
   DEV_RUN_WAIT_35       =  0x2100,
   DEV_RUN_BREAK_35      =  0x2101,
-  DEV_DATAGET_35        =  0x2102,
+  DEV_RUN_DATA_GET_35   =  0x2102,
 
   DEV_START_35C         =  0x2111,
   DEV_CONFIG_35C        =  0x2112,
