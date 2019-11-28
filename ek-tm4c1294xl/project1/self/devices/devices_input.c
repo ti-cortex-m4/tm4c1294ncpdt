@@ -13,7 +13,7 @@ DEVICES_INPUT,C
 #include "../sensors/unpack_v.h"
 #include "../sensors/unpack_w.h"
 #include "../sensors/sensor34/unpack_34.h"
-#include "../sensors/sensor35/unpack35.h"
+#include "../sensors/sensor35/router35.h"
 #include "../serial/ports.h"
 #include "devices_input.h"
 
