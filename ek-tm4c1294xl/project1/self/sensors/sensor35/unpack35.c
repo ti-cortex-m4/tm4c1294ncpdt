@@ -22,10 +22,42 @@ DECOMPRESS35!C
 
 #ifndef SKIP_35
 
+void    Unpack35(void)
+{
+  uchar i,j;
+
+  i = 1;
+  j = 1;
+
+  while (i < IndexInBuff()) {
+    if ((InBuff(i) == 0xDB) && (InBuff(i+1) == 0xDD)) {
+#ifdef MONITOR_35
+      MonitorString("\n unpack 0xDB at "); MonitorCharDec(i);
+#endif
+      SetInBuff(j, 0xDB);
+      i++; i++;
+      j++;
+    } else if ((InBuff(i) == 0xDB) && (InBuff(i+1) == 0xDC)) {
+#ifdef MONITOR_35
+      MonitorString("\n unpack 0xC0 at "); MonitorCharDec(i);
+#endif
+      SetInBuff(j, 0xC0);
+      i++; i++;
+      j++;
+    } else {
+      SetInBuff(j, InBuff(i));
+      i++;
+      j++;
+    }
+  }
+
+  SetIndexInBuff(j);
+}
+
 
 void    Decompress35(void)
 {
-uchar   i,j;
+  uchar i,j;
 
   if (mpSerial[ibPort] != SER_INPUT_MASTER) return;
 
@@ -41,31 +73,7 @@ uchar   i,j;
   MonitorIn();
 #endif
 
-  i = 1;
-  j = 1;
-  while (i < IndexInBuff()) {
-    if ((InBuff(i) == 0xDB) && (InBuff(i+1) == 0xDD)) {
-#ifdef MONITOR_35
-      MonitorString("\n unpack character 0xDB at position "); MonitorCharDec(i);
-#endif
-      SetInBuff(j, 0xDB);
-      i++; i++;
-      j++;
-    } else if ((InBuff(i) == 0xDB) && (InBuff(i+1) == 0xDC)) {
-#ifdef MONITOR_35
-      MonitorString("\n unpack character 0xC0 at position "); MonitorCharDec(i);
-#endif
-      SetInBuff(j, 0xC0);
-      i++; i++;
-      j++;
-    } else {
-      SetInBuff(j, InBuff(i));
-      i++;
-      j++;
-    }
-  }
-
-  SetIndexInBuff(j);
+  Unpack35();
 
 #ifdef MONITOR_35
   MonitorString("\n router unpack finish");
@@ -104,7 +112,6 @@ uchar   ChecksumRouter35(void)
 
   return i;
 }
-
 
 
 

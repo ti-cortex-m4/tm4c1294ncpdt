@@ -2,7 +2,7 @@
 #ifndef SKIP_35
 
     case DEV_RUN_WAIT_35:
-      MonitorString("\t run: wait"); // TODO 35
+      MonitorString("\t run: wait");
 
       Query35Internal(250, 0, NNCL2_DATA_GET);
       SetCurr(DEV_RUN_DATA_GET_35);

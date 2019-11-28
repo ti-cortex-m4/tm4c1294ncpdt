@@ -135,9 +135,6 @@ static bool ReadData35(uchar  i)
 
 bool    ReadHeader35(void)
 {
-    MonitorString("\n ******************************");
-    MonitorString("\n read header ");
-
   uchar i;
   for (i=0; i<4; i++)
   {
