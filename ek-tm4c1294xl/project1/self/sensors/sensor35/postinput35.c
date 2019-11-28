@@ -26,7 +26,7 @@ void    PostInput35(void)
   action35 action = Action35(true);
   if (action == A35_WAIT)
   {
-    MonitorString("\t postinput: run wait");
+    MonitorString("\t postinput: wait");
     SetCurr(DEV_RUN_WAIT_35);
   }
   else if (action == A35_SUCCESS)

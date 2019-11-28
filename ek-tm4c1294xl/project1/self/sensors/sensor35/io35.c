@@ -35,31 +35,33 @@ static uchar                bCommandSave;
 
 uchar   Pack35(uchar  cbOut)
 {
-    for (i=0; i<=cbOut-1; i++)
-      mpbOutBuffSave[i] = OutBuff(i);
+  uchar i;
+  for (i=0; i<=cbOut-1; i++)
+    mpbOutBuffSave[i] = OutBuff(i);
 
-    uchar j = 0;
-    SetOutBuff(j++, 0xC0);
-    for (i=1; i<=cbOut-2; i++)
+  uchar j = 0;
+
+  SetOutBuff(j++, 0xC0);
+  for (i=1; i<=cbOut-2; i++)
+  {
+    if (mpbOutBuffSave[i] == 0xC0)
     {
-      if (mpbOutBuffSave[i] == 0xC0)
-      {
-        SetOutBuff(j++, 0xDB);
-        SetOutBuff(j++, 0xDC);
-      }
-      else if (mpbOutBuffSave[i] == 0xDB)
-      {
-        SetOutBuff(j++, 0xDB);
-        SetOutBuff(j++, 0xDD);
-      }
-      else
-      {
-        SetOutBuff(j++, mpbOutBuffSave[i]);
-      }
+      SetOutBuff(j++, 0xDB);
+      SetOutBuff(j++, 0xDC);
     }
-    SetOutBuff(j++, 0xC0);
+    else if (mpbOutBuffSave[i] == 0xDB)
+    {
+      SetOutBuff(j++, 0xDB);
+      SetOutBuff(j++, 0xDD);
+    }
+    else
+    {
+      SetOutBuff(j++, mpbOutBuffSave[i]);
+    }
+  }
+  SetOutBuff(j++, 0xC0);
 
-    return j;
+  return j;
 }
 
 
@@ -94,30 +96,7 @@ void    Query35Internal(uchar  cbIn, uchar  cbOut, uchar  bCommand)
 #endif
 
 
-    for (i=0; i<=cbOut-1; i++)
-      mpbOutBuffSave[i] = OutBuff(i);
-
-    uchar j = 0;
-    SetOutBuff(j++, 0xC0);
-    for (i=1; i<=cbOut-2; i++)
-    {
-      if (mpbOutBuffSave[i] == 0xC0)
-      {
-        SetOutBuff(j++, 0xDB);
-        SetOutBuff(j++, 0xDC);
-      }
-      else if (mpbOutBuffSave[i] == 0xDB)
-      {
-        SetOutBuff(j++, 0xDB);
-        SetOutBuff(j++, 0xDD);
-      }
-      else
-      {
-        SetOutBuff(j++, mpbOutBuffSave[i]);
-      }
-    }
-    SetOutBuff(j++, 0xC0);
-    cbOut = j;
+    cbOut = Pack35(cbOut);
 
 
 #ifdef MONITOR_35
@@ -170,31 +149,7 @@ void    Query35Internal(uchar  cbIn, uchar  cbOut, uchar  bCommand)
 #endif
 
 
-  // упаковка по протоколу SLIP
-  uchar i;
-  for (i=0; i<=cbOut-1; i++)
-    mpbOutBuffSave[i] = OutBuff(i);
-
-  uchar j = 0;
-  SetOutBuff(j++, 0xC0);
-  for (i=1; i<=cbOut-2; i++)
-  {
-    if (mpbOutBuffSave[i] == 0xC0)
-    {
-      SetOutBuff(j++, 0xDB);
-      SetOutBuff(j++, 0xDC);
-    }
-    else if (mpbOutBuffSave[i] == 0xDB)
-    {
-      SetOutBuff(j++, 0xDB);
-      SetOutBuff(j++, 0xDD);
-    }
-    else
-    {
-      SetOutBuff(j++, mpbOutBuffSave[i]);
-    }
-  }
-  SetOutBuff(j++, 0xC0);
+  cbOut = Pack35(cbOut);
 
 
 #ifdef MONITOR_35
@@ -202,7 +157,7 @@ void    Query35Internal(uchar  cbIn, uchar  cbOut, uchar  bCommand)
 #endif
 
 
-  Query(cbIn,j,true);
+  Query(cbIn,cbOut,true);
 }
 
 
