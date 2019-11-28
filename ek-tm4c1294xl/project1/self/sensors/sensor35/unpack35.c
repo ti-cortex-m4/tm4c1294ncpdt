@@ -1,69 +1,45 @@
 /*------------------------------------------------------------------------------
-log35.c
+unpack35.c
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
+#include "../../memory/mem_ports.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports2.h"
-#include "../../serial/ports_devices.h"
-#include "../../time/rtc.h"
-#include "include35.h"
-#include "action35.h"
-#include "log35.h"
+#include "unpack35.h"
 
 
 
-#define LOG35_SIZE      100
-
-static uint             cwLog35;
-static log35            mLog35[LOG35_SIZE];
-
-
-#define COUNTER35_SIZE  10
-
-static counter35        mCounter35[COUNTER35_SIZE];
-
-
-
-void    InitLog35(void)
+void    Unpack35(void)
 {
-  cwLog35 = 0;
-  memset(&mLog35, 0, sizeof(mLog35));
+  uchar i,j;
 
-  memset(&mCounter35, 0, sizeof(mCounter35));
-}
+  i = 1;
+  j = 1;
 
+  while (i < IndexInBuff()) {
+    if ((InBuff(i) == 0xDB) && (InBuff(i+1) == 0xDD)) {
+#ifdef MONITOR_35
+      MonitorString("\n unpack 0xDB at "); MonitorCharDec(i);
+#endif
+      SetInBuff(j, 0xDB);
+      i++; i++;
+      j++;
+    } else if ((InBuff(i) == 0xDB) && (InBuff(i+1) == 0xDC)) {
+#ifdef MONITOR_35
+      MonitorString("\n unpack 0xC0 at "); MonitorCharDec(i);
+#endif
+      SetInBuff(j, 0xC0);
+      i++; i++;
+      j++;
+    } else {
+      SetInBuff(j, InBuff(i));
+      i++;
+      j++;
+    }
+  }
 
-void    Log35(result35  enResult, uint  wData)
-{
-  log35 log;
-  log.tiNow = *GetCurrTimeDate();
-  log.enResult = enResult;
-  log.wData = wData;
-
-  mLog35[cwLog35++ % LOG35_SIZE] = log;
-
-  ASSERT(enResult < COUNTER35_SIZE);
-  mCounter35[enResult].tiNow = log.tiNow;
-  mCounter35[enResult].wCounter++;
-}
-
-
-
-void    OutLog35(void)
-{
-  InitPushCRC();
-  PushIntLtl(cwLog35);
-  Push(&mLog35, sizeof(mLog35));
-  Output(2+sizeof(mLog35));
-}
-
-
-void    OutCounter35(void)
-{
-  InitPushCRC();
-  Push(&mCounter35, sizeof(mCounter35));
-  Output(sizeof(mCounter35));
+  SetIndexInBuff(j);
 }
