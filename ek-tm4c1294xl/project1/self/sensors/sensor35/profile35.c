@@ -36,17 +36,13 @@ profile35.c
 
 #ifndef SKIP_35
 
-static uchar const      bBlock35 = 8;
-
-
-
 void    InitHeader35(void)
 {
   if (!UseBounds())
     wBaseCurr = 0;
   else
   {
-    wBaseCurr = (mpcwStartRelCan[ibDig] / bBlock35) * bBlock35;
+    wBaseCurr = (mpcwStartRelCan[ibDig] / 4) * 4;
     Clear(); sprintf(szLo+1,"начало %04u:%02u",wBaseCurr,(uchar)(wBaseCurr/48 + 1));
     if (boShowMessages == true) DelayMsg();
   }
@@ -54,7 +50,7 @@ void    InitHeader35(void)
   tiDigPrev = tiCurr;
 
   uchar i = tiDigPrev.bHour*2 + tiDigPrev.bMinute/30;
-  i = (i / bBlock35) * bBlock35;
+  i = (i / 4) * 4;
 
   tiDigPrev.bHour = i / 2;
   tiDigPrev.bMinute = (i % 2)*30;
@@ -143,20 +139,20 @@ bool    ReadHeader35(void)
     MonitorString("\n read header ");
 
   uchar i;
-  for (i=0; i<bBlock35; i++)
+  for (i=0; i<4; i++)
   {
     ulong dw = DateToHouIndex(tiDigPrev);
 
-    dw += bBlock35-1;
+    dw += 4-1;
     dw -= (wBaseCurr + i);
 
     tiDig = HouIndexToDate(dw);
 
     if (dw < dwValueS)
-      if (ReadData35(bBlock35-1-i) == 0) return(0);
+      if (ReadData35(4-1-i) == 0) return(0);
   }
 
-  wBaseCurr += bBlock35;
+  wBaseCurr += 4;
   if (wBaseCurr > wHOURS) return(0);
 
   return(1);
