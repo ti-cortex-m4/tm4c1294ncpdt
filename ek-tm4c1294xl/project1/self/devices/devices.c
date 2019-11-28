@@ -5833,15 +5833,14 @@ void    RunDevices(void)
 #ifndef SKIP_35
 
     case DEV_RUN_WAIT_35:
-      MonitorString("\n case: wait");
+      MonitorString("\t run: wait");
 
-      cbRepeat = MaxRepeats();
       Query35Internal(250, 0, NNCL2_DATA_GET);
-      SetCurr(DEV_DATAGET_35);
+      SetCurr(DEV_RUN_DATA_GET_35);
       break;
 
     case DEV_RUN_BREAK_35:
-      MonitorString("\n case: break");
+      MonitorString("\t run: break");
 
       if (exExtended == EXT_CURRENT_3MIN)
         ErrorCurrent();
@@ -5849,17 +5848,17 @@ void    RunDevices(void)
         ErrorProfile();
       break;
 
-    case DEV_DATAGET_35:
+    case DEV_RUN_DATA_GET_35:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        MonitorString("\n data get: good check"); // TODO 35
+        MonitorString("\t run: good check");
 
         SetSerial35(SER_GOODCHECK);
         MakePause(GetCurr35Internal());
       }
       else
       {
-        MonitorString("\n data get: bad check"); // TODO 35
+        MonitorString("\t run: bad check");
 
         SetSerial35(SER_BADCHECK);
         MakePause(GetCurr35Internal());
@@ -6098,12 +6097,20 @@ void    RunDevices(void)
 
     case DEV_HEADER_35P:
       if (IsSerial35())
+      {
+        MonitorString("\n header35: ok");
         MakePause(DEV_POSTHEADER_35P);
+      }
       else
       {
-        if (cbRepeat == 0) ErrorProfile();
+        if (cbRepeat == 0)
+        {
+          MonitorString("\n header35: error profile");
+          ErrorProfile();
+        }
         else
         {
+          MonitorString("\n header35: repeat "); MonitorCharDec(cbRepeat);
           ErrorLink();
           cbRepeat--;
 
@@ -6114,6 +6121,7 @@ void    RunDevices(void)
       break;
 
     case DEV_POSTHEADER_35P:
+      MonitorString("\n post header35");
       if (ReadHeader35() == 0)
         DoneProfile();
       else
@@ -6121,6 +6129,7 @@ void    RunDevices(void)
       break;
 
     case DEV_DATA_35P:
+      MonitorString("\n data35");
       cbRepeat = MaxRepeats();
       QueryHeader35();
       SetCurr35(DEV_HEADER_35P);
