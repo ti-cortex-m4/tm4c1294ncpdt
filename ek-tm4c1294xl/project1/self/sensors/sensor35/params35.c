@@ -17,8 +17,6 @@ params35.c
 
 
 
-#ifndef SKIP_35
-
 void    QueryParam35_P(void)
 {
   InitPush(0);
@@ -48,6 +46,7 @@ long    ReadParam35_P(void)
 }
 
 
+
 float2  ReadParam35(void)
 {
   Clear();
@@ -62,5 +61,3 @@ float2  ReadParam35(void)
     default: return GetFloat2Error();
   }
 }
-
-#endif
