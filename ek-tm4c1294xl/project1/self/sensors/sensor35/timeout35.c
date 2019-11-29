@@ -14,6 +14,8 @@ timeout35.c
 static uint             mwTimeoutHistogramAbs35[0x100],
                         mwTimeoutHistogramDay35[0x100];
 
+
+
 #define DELTA_SIZE      10
 
 static uint             cwTimeoutDelta35;
@@ -52,14 +54,13 @@ void    Timeout35(uint  wTimeout)
 
 uchar   GetTimeoutDelta35(void)
 {
-  uchar i,j;
-
   uint  w = 0;
   uchar c = 0;
 
+  uchar i;
   for (i=0; i<DELTA_SIZE; i++)
   {
-    j = mbTimeoutDelta35[(DELTA_SIZE + cwTimeoutDelta35 - i) % DELTA_SIZE];
+    uchar j = mbTimeoutDelta35[(DELTA_SIZE + cwTimeoutDelta35 - i) % DELTA_SIZE];
     if (j != 0)
     {
       w += j;
