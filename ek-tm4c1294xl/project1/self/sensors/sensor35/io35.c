@@ -16,6 +16,7 @@ IO35!C
 #include "../../serial/monitor.h"
 #include "../../digitals/wait_answer.h"
 #include "include35.h"
+#include "pack35.h"
 #include "router35.h"
 #include "device35.h"
 #include "action35.h"

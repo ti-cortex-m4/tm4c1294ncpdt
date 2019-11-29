@@ -21,6 +21,7 @@ static uint             cwLog35;
 static log35            mLog35[LOG35_SIZE];
 
 
+
 #define COUNTER35_SIZE  10
 
 static counter35        mCounter35[COUNTER35_SIZE];
@@ -46,6 +47,7 @@ void    Log35(result35  enResult, uint  wData)
   mLog35[cwLog35++ % LOG35_SIZE] = log;
 
   ASSERT(enResult < COUNTER35_SIZE);
+
   mCounter35[enResult].tiNow = log.tiNow;
   mCounter35[enResult].wCounter++;
 }
