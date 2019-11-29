@@ -9,16 +9,16 @@ timer35.c
 
 
 
-static volatile     bool        f = true;
+static volatile     bool        fEnabled = true;
 static volatile     uint        wTimer = 0;
 
 
 
 void    SetTimer35(uint  w)
 {
-  f = false;
+  fEnabled = false;
   wTimer = w;
-  f = true;
+  fEnabled = true;
 }
 
 
@@ -31,7 +31,7 @@ uint    GetTimer35(void)
 
 void    Timer35_1Hz(void)
 {
-  if (f)
+  if (fEnabled)
   {
     wTimer++;
   }
