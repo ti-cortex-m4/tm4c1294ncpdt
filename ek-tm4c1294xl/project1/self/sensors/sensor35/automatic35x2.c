@@ -5,29 +5,17 @@ AUTOMATIC35x2!C
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-#include "../../memory/mem_profile.h"
-#include "../../memory/mem_factors.h"
 #include "../../display/display.h"
 #include "../../keyboard/keyboard.h"
 #include "../../time/delay.h"
-#include "../../time/timedate.h"
-#include "../../hardware/watchdog.h"
-#include "../../kernel/crc_s.h"
 #include "../../serial/ports.h"
-#include "../../serial/ports2.h"
-#include "../../serial/ports_devices.h"
-#include "../../devices/devices.h"
-#include "../../sensors/unpack_s.h"
 #include "../../digitals/digitals.h"
-#include "../../digitals/wait_answer.h"
 #include "device35.h"
 #include "io35.h"
 #include "automatic35.h"
 #include "automatic35x2.h"
 
 
-
-#ifndef SKIP_35
 
 // ReadTariffValue [0x0130]
 // Чтение значения энергии по тарифу.
@@ -94,5 +82,3 @@ status  ReadCntMonCanTariff35(uchar  ibMonth, uchar  ibTrf) // на начало месяца
 
   return ST_OK;
 }
-
-#endif
