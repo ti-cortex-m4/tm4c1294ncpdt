@@ -6097,20 +6097,12 @@ void    RunDevices(void)
 
     case DEV_HEADER_35P:
       if (IsSerial35())
-      {
-        MonitorString("\n header35: ok");
         MakePause(DEV_POSTHEADER_35P);
-      }
       else
       {
-        if (cbRepeat == 0)
-        {
-          MonitorString("\n header35: error profile");
-          ErrorProfile();
-        }
+        if (cbRepeat == 0) ErrorProfile();
         else
         {
-          MonitorString("\n header35: repeat "); MonitorCharDec(cbRepeat);
           ErrorLink();
           cbRepeat--;
 
@@ -6121,7 +6113,6 @@ void    RunDevices(void)
       break;
 
     case DEV_POSTHEADER_35P:
-      MonitorString("\n post header35");
       if (ReadHeader35() == 0)
         DoneProfile();
       else
@@ -6129,7 +6120,6 @@ void    RunDevices(void)
       break;
 
     case DEV_DATA_35P:
-      MonitorString("\n data35");
       cbRepeat = MaxRepeats();
       QueryHeader35();
       SetCurr35(DEV_HEADER_35P);

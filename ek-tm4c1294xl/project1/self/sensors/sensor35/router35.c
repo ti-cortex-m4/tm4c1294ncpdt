@@ -16,11 +16,11 @@ ROUTER35!C
 #include "../../devices/devices.h"
 #include "../../display/display.h"
 #include "../../time/delay.h"
+#include "device35.h"
+#include "unpack35.h"
 #include "router35.h"
 
 
-
-#ifndef SKIP_35
 
 void    Decompress35(void)
 {
@@ -87,20 +87,15 @@ static uchar CheckSensor35(void)
   if (InBuff(0) != 0xC0) return 1;
   if (InBuff(1) != 0x48) return 2;
 
-  if (InBuffIntLtl(2) != wPrivate) return 3;
+  MonitorString("\n GetExchange35 "); MonitorIntHex(InBuffIntLtl(2)); MonitorString(" vs "); MonitorIntHex(GetExchange35());
+
+  if (InBuffIntLtl(2) != GetExchange35()) return 3;
   if (InBuffIntLtl(4) != (mpdwAddress1[diCurr.bAddress-1] % 0x10000)) return 4;
 
-  uchar b = InBuff(6);
-  MonitorString("\n InBuff(6) "); MonitorCharHex(b); MonitorString(" "); MonitorCharHex(b & 0xF0); // TODO 35
-
   if ((InBuff(6) & 0xF0) != 0x50) return 5;
-//  if ((IndexInBuff() >= 11) && (IndexInBuff() != (InBuff(6) & 0x0F) + 11)) return 6; // TODO 35
 
-//  if (InBuff(7) != OutBuff(11)) return 7;
-//  if (InBuff(8) != OutBuff(12)) return 8;
-
-  if (MakeCrcSInBuff(1, IndexInBuff()-2) != 0) return 9;
-  if (InBuff(IndexInBuff()-1) != 0xC0) return 10;
+  if (MakeCrcSInBuff(1, IndexInBuff()-2) != 0) return 6;
+  if (InBuff(IndexInBuff()-1) != 0xC0) return 7;
 
   return 0;
 }
@@ -118,5 +113,3 @@ uchar   ChecksumSensor35(void)
 
   return i;
 }
-
-#endif

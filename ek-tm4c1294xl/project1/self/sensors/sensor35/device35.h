@@ -4,6 +4,9 @@ DEVICE35.H
 
 ------------------------------------------------------------------------------*/
 
+uint    GetExchange35(void);
+void    IncExchange35(void);
+
 void    PushModemAddress35(void);
 void    PushSensorAddress35(void);
 
