@@ -5,30 +5,22 @@ DEVICE35!C
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-#include "../../serial/ports_stack.h"
-#include "../../serial/ports_devices.h"
 #include "../../memory/mem_settings.h"
 #include "../../memory/mem_digitals.h"
-#include "../../memory/mem_ports.h"
 #include "../../memory/mem_current.h"
 #include "../../memory/mem_factors.h"
-#include "../../memory/mem_realtime.h"
 #include "../../display/display.h"
 #include "../../time/timedate.h"
 #include "../../time/calendar.h"
 #include "../../time/delay.h"
 #include "../../serial/ports.h"
-#include "../../serial/ports_devices.h"
 #include "../../devices/devices.h"
-#include "../../devices/devices_time.h"
 #include "../../digitals/current/current_run.h"
 #include "io35.h"
 #include "timeout35.h"
 #include "device35.h"
 
 
-
-#ifndef SKIP_35
 
 static uint             wDivider35;
 
@@ -244,10 +236,3 @@ void    ReadCurrent35(void)
 
   MakeCurrent();
 }
-
-#endif
-
-// device_24: чтение данных по сезонному времени
-// поиск счетчиков
-// признаки переполнения получасов - проверить изменение коэффициентов
-// разрыв получасового опроса
