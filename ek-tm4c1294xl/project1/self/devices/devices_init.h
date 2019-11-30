@@ -19,6 +19,8 @@ extern  cache const             chPlcUSize;
 extern  cache const             chPlcUShutdown;
 extern  cache const             chControlW;
 extern  cache const             chTimeZone34;
+
+extern  uchar                   bMaxTimer35;
 extern  cache const             chMaxTimer35;
 
 
