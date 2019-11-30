@@ -19,8 +19,6 @@ AUTOMATIC35!C
 
 
 
-#ifndef SKIP_35
-
 bool    QueryConfig35_Full(uchar  bPercent)
 {
   uchar i;
@@ -181,5 +179,3 @@ double2 ReadCntMonCan35(uchar  ibMon)
 
   return GetDouble2(mpdbChannelsC[0], true);
 }
-
-#endif
