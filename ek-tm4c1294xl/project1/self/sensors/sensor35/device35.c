@@ -23,6 +23,21 @@ DEVICE35!C
 
 
 static uint             wDivider35;
+static uint             wExchange35;
+
+
+
+uint    GetExchange35(void)
+{
+  return wExchange35;
+}
+
+
+void    IncExchange35(void)
+{
+  wExchange35++;
+  MonitorString("\n IncExchange35 "); MonitorIntDec(wExchange35);
+}
 
 
 
@@ -35,8 +50,10 @@ void    PushModemAddress35(void)
 
 void    PushSensorAddress35(void)
 {
+  IncExchange35();
+
   PushIntLtl(mpdwAddress1[diCurr.bAddress-1] % 0x10000);
-  PushIntLtl(wPrivate);
+  PushIntLtl(GetExchange35());
 
   PushLongLtl(mpdwAddress2[diCurr.bAddress-1]);
 }
