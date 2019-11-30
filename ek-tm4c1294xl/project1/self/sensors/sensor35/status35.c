@@ -12,8 +12,6 @@ STATUS35!C
 
 
 
-#ifndef SKIP_35
-
 volatile device         deCurr35;
 
 volatile serial         Serial35;
@@ -53,5 +51,3 @@ bool    IsSerial35(void)
 {
   return Serial35 == SER_GOODCHECK; // mpSerial[ibPort] == SER_PAUSE;
 }
-
-#endif
