@@ -8,7 +8,6 @@ action35.h
 
 
 
-extern  uchar                   bMaxTimer35;
 
 
 

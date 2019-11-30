@@ -12,6 +12,7 @@ action35.c
 #include "../../serial/ports2.h"
 #include "../../serial/ports_devices.h"
 #include "../../serial/monitor.h"
+#include "../../devices/devices_init.h"
 #include "include35.h"
 #include "router35.h"
 #include "io35.h"
@@ -22,11 +23,6 @@ action35.c
 
 
 
-uchar                   bMaxTimer35;
-
-
-
-#ifndef SKIP_35
 
 static event35 event0(bool  fLog, result35  enResult, action35  enAction, uint  wData) {
   event35 event;
@@ -120,5 +116,3 @@ action35 Action35(bool  display) {
   }
   return event.enAction;
 }
-
-#endif
