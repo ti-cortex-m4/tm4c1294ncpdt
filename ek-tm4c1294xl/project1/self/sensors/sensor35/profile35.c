@@ -5,11 +5,7 @@ profile35.c
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-#include "../../serial/ports_stack.h"
-#include "../../serial/ports_devices.h"
-#include "../../memory/mem_settings.h"
 #include "../../memory/mem_digitals.h"
-#include "../../memory/mem_ports.h"
 #include "../../memory/mem_factors.h"
 #include "../../memory/mem_realtime.h"
 #include "../../memory/mem_energy_spec.h"
@@ -17,12 +13,9 @@ profile35.c
 #include "../../memory/mem_limits.h"
 #include "../../display/display.h"
 #include "../../keyboard/time/key_timedate.h"
-#include "../../time/timedate.h"
 #include "../../time/calendar.h"
 #include "../../time/delay.h"
 #include "../../serial/ports.h"
-#include "../../serial/ports_devices.h"
-#include "../../serial/monitor.h"
 #include "../../devices/devices.h"
 #include "../../devices/devices_time.h"
 #include "../../digitals/limits.h"
@@ -33,8 +26,6 @@ profile35.c
 #include "profile35.h"
 
 
-
-#ifndef SKIP_35
 
 void    InitHeader35(void)
 {
@@ -65,9 +56,6 @@ void    QueryHeader35(void)
   ulong dw = DateToHouIndex(tiDigPrev);
   dw -= wBaseCurr;
   tiDig = HouIndexToDate(dw);
-
-  MonitorString("\n ******************************");
-  MonitorString("\n query header "); MonitorTime(tiDig);
 
 
   InitPush(0);
@@ -154,5 +142,3 @@ bool    ReadHeader35(void)
 
   return(1);
 }
-
-#endif
