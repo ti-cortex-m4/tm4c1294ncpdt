@@ -87,8 +87,6 @@ static uchar CheckSensor35(void)
   if (InBuff(0) != 0xC0) return 1;
   if (InBuff(1) != 0x48) return 2;
 
-  MonitorString("\n GetExchange35 "); MonitorIntHex(InBuffIntLtl(2)); MonitorString(" vs "); MonitorIntHex(GetExchange35());
-
   if (InBuffIntLtl(2) != GetExchange35()) return 3;
   if (InBuffIntLtl(4) != (mpdwAddress1[diCurr.bAddress-1] % 0x10000)) return 4;
 
