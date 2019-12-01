@@ -36,7 +36,6 @@ uint    GetExchange35(void)
 void    IncExchange35(void)
 {
   wExchange35++;
-  MonitorString("\n IncExchange35 "); MonitorIntDec(wExchange35);
 }
 
 
@@ -58,6 +57,34 @@ void    PushSensorAddress35(void)
   PushLongLtl(mpdwAddress2[diCurr.bAddress-1]);
 }
 
+
+/*
+void    QueryJournal35(uchar  i)
+{
+  InitPush(0);
+
+  PushChar(0xC0);
+  PushChar(0x48);
+
+  PushSensorAddress35();
+
+  PushChar(0xD2);
+  PushChar(0x01);
+  PushChar(0x38);
+
+  PushChar(0x0C);
+  PushChar(i);
+
+  Query35(100+18, 15+2);
+}
+
+
+void    ReadJournal35(void)
+{
+  ReadTime35();
+  PopChar();
+}
+*/
 
 
 void    QueryTime35(void)
