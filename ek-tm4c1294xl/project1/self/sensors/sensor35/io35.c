@@ -26,13 +26,9 @@ IO35!C
 
 
 
-#ifndef SKIP_35
-
 static uchar                cbInSave;
 static uchar                cbOutSave;
 static uchar                bCommandSave;
-
-
 
 
 
@@ -60,21 +56,17 @@ void    Query35Internal(uchar  cbIn, uchar  cbOut, uchar  bCommand)
     PushChar(bCrc);
     PushChar(0xC0);
 
-
 #ifdef MONITOR_35
     MonitorString("\n sensor pack start");
     MonitorOut(cbIn, cbOut);
 #endif
 
-
     cbOut = Pack35(cbOut);
-
 
 #ifdef MONITOR_35
     MonitorString("\n sensor pack finish");
     MonitorOut(cbIn, cbOut);
 #endif
-
 
     // перенос пакета счетчика внутри пакета концентратора
     for (i=0; i<cbOut; i++)
@@ -113,20 +105,16 @@ void    Query35Internal(uchar  cbIn, uchar  cbOut, uchar  bCommand)
 
   cbOut = 13+cbOut+3;
 
-
 #ifdef MONITOR_35
   MonitorString("\n router pack start");
   MonitorOut(cbIn, cbOut);
 #endif
 
-
   cbOut = Pack35(cbOut);
-
 
 #ifdef MONITOR_35
   MonitorString("\n router pack finish");
 #endif
-
 
   Query(cbIn,cbOut,true);
 }
@@ -200,7 +188,7 @@ serial  Input35(void)
       action35 action = Action35(false);
       if (action == A35_WAIT)
       {
-        Query35Internal(250, 0, 0x12);
+        Query35Internal(250, 0, NNCL2_DATA_GET);
         repeat = true;
       }
       else if (action == A35_SUCCESS)
@@ -213,7 +201,7 @@ serial  Input35(void)
       }
       else if (action == A35_BREAK)
       {
-        mpSerial[ibPort] = SER_BADCHECK; // TODO 35
+        mpSerial[ibPort] = SER_BADCHECK; // ?
       }
       else
       {
@@ -226,5 +214,3 @@ serial  Input35(void)
 
   return mpSerial[ibPort];
 }
-
-#endif

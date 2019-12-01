@@ -5851,14 +5851,14 @@ void    RunDevices(void)
     case DEV_RUN_DATA_GET_35:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        MonitorString("\t run: good check");
+        MonitorString("\t run: good data");
 
         SetSerial35(SER_GOODCHECK);
         MakePause(GetCurr35Internal());
       }
       else
       {
-        MonitorString("\t run: bad check");
+        MonitorString("\t run: bad data");
 
         SetSerial35(SER_BADCHECK);
         MakePause(GetCurr35Internal());
