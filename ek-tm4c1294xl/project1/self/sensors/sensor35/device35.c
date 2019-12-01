@@ -75,7 +75,7 @@ void    QueryJournal35(uchar  i)
   PushChar(0x0C);
   PushChar(i);
 
-  Query35(100+18, 15+2);
+  Query35(100+18, 17);
 }
 
 
@@ -271,6 +271,7 @@ void    ReadEnergy35(void)
   mpdwChannelsA[0] = coEnergy.dwBuff;
   mpboChannelsA[0] = true;
 }
+
 
 
 void    ReadCurrent35(void)

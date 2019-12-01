@@ -74,7 +74,10 @@ uchar   ChecksumRouter35(void)
   {
     Clear(); sprintf(szLo+1,"ошибка: 35.1.%u",i);
     DelayInf();
+
+#ifdef MONITOR_35
     MonitorString("\n router packet error: "); MonitorCharDec(i);
+#endif
   }
 
   return i;
@@ -106,7 +109,10 @@ uchar   ChecksumSensor35(void)
   {
     Clear(); sprintf(szLo+1,"ошибка: 35.2.%u",i);
     DelayInf();
+
+#ifdef MONITOR_35
     MonitorString("\n sensor packet error: "); MonitorCharDec(i);
+#endif
   }
 
   return i;
