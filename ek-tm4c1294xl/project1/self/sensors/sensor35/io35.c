@@ -201,7 +201,7 @@ serial  Input35(void)
       }
       else if (action == A35_BREAK)
       {
-        mpSerial[ibPort] = SER_BADCHECK; // ?
+        mpSerial[ibPort] = SER_BADCHECK; // возможно стоит применить другое решение
       }
       else
       {
