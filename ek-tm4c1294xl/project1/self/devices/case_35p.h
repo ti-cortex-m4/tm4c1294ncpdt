@@ -143,8 +143,8 @@
     case DEV_VALUE_35P:
       if (IsSerial35())
       {
-        tiValueS = ReadTime35();
-        dwValueS = DateToHouIndex(tiValueS);
+        tiValue35 = ReadTime35();
+        dwValue35 = DateToHouIndex(tiValue35);
         MakePause(DEV_POSTVALUE_35P);
       }
       else

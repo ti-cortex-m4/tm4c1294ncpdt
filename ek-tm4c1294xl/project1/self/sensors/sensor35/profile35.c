@@ -27,6 +27,11 @@ profile35.c
 
 
 
+time                    tiValue35;
+ulong                   dwValue35;
+
+
+
 void    InitHeader35(void)
 {
   if (!UseBounds())
@@ -133,7 +138,7 @@ bool    ReadHeader35(void)
 
     tiDig = HouIndexToDate(dw);
 
-    if (dw < dwValueS)
+    if (dw < dwValue35)
       if (ReadData35(4-1-i) == 0) return(0);
   }
 
