@@ -17,3 +17,7 @@ extern  bool                    boRecalcAlways;
 extern  bool                    boRecalcCurr;
 
 extern  bool                    boRecalcMaxPowCurrDay;
+
+
+
+extern  bool                    mpboTransitHou[48];

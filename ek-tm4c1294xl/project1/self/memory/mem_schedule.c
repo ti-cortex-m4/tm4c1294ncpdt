@@ -27,3 +27,8 @@ bool                    boRecalcCurr;
 
 // признак
 bool                    boRecalcMaxPowCurrDay;
+
+
+
+// график автоматического транзита по получасам
+bool                    mpboTransitHou[48];
