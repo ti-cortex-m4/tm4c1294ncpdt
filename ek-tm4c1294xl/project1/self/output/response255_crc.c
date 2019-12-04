@@ -155,6 +155,9 @@ void    Response255_CRC(void)
     case bEXT_SETRECALC1: OutSetRecalcHou1(); break;
     case bEXT_SETRECALC2: OutSetRecalcHou2(); break;
 
+    case bEXT_GETTRANSITHOU: OutGetTransitHou(); break;
+    case bEXT_SETTRANSITHOU: OutSetTransitHou(); break;
+
     case bEXT_GETEXTENDED0: OutExtended0(); break;
 
     case bEXT_GETEXTENDED30: OutExtended30(); break;
