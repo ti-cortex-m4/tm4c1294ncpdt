@@ -22,6 +22,7 @@ KEYBOARD_KEY!C
 #include "digitals/schedule/key_recalc_always.h"
 #include "digitals/schedule/key_recalc3.h"
 #include "digitals/schedule/key_recalc.h"
+#include "digitals/schedule/key_transit_hours.h"
 #include "digitals/key_enbl_canals.h"
 #include "digitals/current/key_enbl_current.h"
 #include "digitals/current/key_enbl_current2.h"
@@ -255,6 +256,7 @@ void    Keyboard_Key(void)
       case bSET_ENBL_HOURS:     key_SetEnblHours();     break;
       case bSET_CONTROL_HOURS:  key_SetCtrlHours();     break;
       case bSET_ENBL_CANALS:    key_SetEnblCanals();    break;
+      case bSET_TRANSIT_HOURS:  key_SetTransitHours();  break;
 
       case bSET_PARAMS_FLAG:    key_SetParamsFlag();    break;
       case bSET_MNT_PARAMS:     key_SetMntParams();     break;
@@ -493,6 +495,7 @@ void    Keyboard_Key(void)
       case bSET_ENBL_HOURS:     key_SetEnblHours();     break;
       case bSET_CONTROL_HOURS:  key_SetCtrlHours();     break;
       case bSET_ENBL_CANALS:    key_SetEnblCanals();    break;
+      case bSET_TRANSIT_HOURS:  key_SetTransitHours();  break;
 
       case bSET_PARAMS_FLAG:    key_SetParamsFlag();    break;
       case bSET_MNT_PARAMS:     key_SetMntParams();     break;
@@ -812,6 +815,7 @@ void    Keyboard_Key(void)
       case bSET_ENBL_HOURS:     key_SetEnblHours();     break;
       case bSET_CONTROL_HOURS:  key_SetCtrlHours();     break;
       case bSET_ENBL_CANALS:    key_SetEnblCanals();    break;
+      case bSET_TRANSIT_HOURS:  key_SetTransitHours();  break;
 
       case bSET_PARAMS_FLAG:    key_SetParamsFlag();    break;
       case bSET_MNT_PARAMS:     key_SetMntParams();     break;

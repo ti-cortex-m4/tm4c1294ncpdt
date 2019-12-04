@@ -197,6 +197,7 @@ PROGRAMS!H
 #define bSET_ENBL_HOURS             182
 #define bSET_CONTROL_HOURS          183
 #define bSET_ENBL_CANALS            185
+#define bSET_TRANSIT_HOURS          191
 
 #define bSET_PARAMS_FLAG            101
 #define bSET_MNT_PARAMS             102

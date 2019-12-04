@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-KEY_CTRL_HOURS.Ñ
+KEY_TRANSIT_HOURS.Ñ
 
  
 ------------------------------------------------------------------------------*/
@@ -23,7 +23,7 @@ static void Show(void)
   Clear();
   sprintf(szLo+1,"%02u:%02u", ibX/2, (ibX%2)*30);
 
-  if (mpboCtrlHou[ibX] == false)
+  if (mpboTransitHou[ibX] == false)
     strcpy(szLo+8,szNo);
   else         
     strcpy(szLo+8,szYes);
@@ -36,7 +36,7 @@ static void Show(void)
 
 
 
-void    key_SetCtrlHours(void)
+void    key_SetTransitHours(void)
 {
   if (bKey == bKEY_ENTER)
   {                                           
@@ -77,9 +77,9 @@ void    key_SetCtrlHours(void)
   {
     if (enKeyboard == KBD_POSTENTER)
     {
-      mpboCtrlHou[ibX] = InvertBool(mpboCtrlHou[ibX]);
+      mpboTransitHou[ibX] = InvertBool(mpboTransitHou[ibX]);
 
-      SaveCache(&chCtrlHou);
+      SaveCache(&chTransitHou);
 
       Show();
     }
