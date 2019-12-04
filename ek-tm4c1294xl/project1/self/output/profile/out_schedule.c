@@ -113,3 +113,26 @@ void    OutSetRecalcHou2(void)
 
   Result(bRES_OK);
 }
+
+
+
+void    OutGetTransitHou(void)
+{
+  OutBoolArray(mpboTransitHou, 48);
+}
+
+
+void    OutSetTransitHou(void)
+{
+  InitPop(6);
+
+  uchar i;
+  for (i=0; i<48; i++)
+  {
+    mpboTransitHou[i] = CharToBool(PopChar());
+  }
+
+  SaveCache(&chTransitHou);
+
+  Result(bRES_OK);
+}
