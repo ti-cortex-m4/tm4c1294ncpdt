@@ -42,6 +42,9 @@ QUERIES2!H
 #define bEXT_GETENBLPORTHOU            15
 #define bEXT_SETENBLPORTHOU            73
 
+#define bEXT_GETTRANSITHOU             21
+#define bEXT_SETTRANSITHOU             92
+
 #define bEXT_GETRECALC                 41
 #define bEXT_SETRECALC1                74
 #define bEXT_SETRECALC2                75

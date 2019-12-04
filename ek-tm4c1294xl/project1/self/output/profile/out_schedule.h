@@ -13,3 +13,6 @@ void    OutSetCtrlHou(void);
 void    OutGetRecalcHou(void);
 void    OutSetRecalcHou1(void);
 void    OutSetRecalcHou2(void);
+
+void    OutGetTransitHou(void);
+void    OutSetTransitHou(void);
