@@ -20,4 +20,4 @@ extern  bool                    boRecalcMaxPowCurrDay;
 
 
 
-extern  bool                    mpboTransitHou[48];
+extern  bool                    mpibTransitHou[48];

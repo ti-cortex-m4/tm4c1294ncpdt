@@ -290,5 +290,5 @@ typedef enum
 
   TRANSIT_HOU           = MAX_TIMER_35 + sizeof(uchar) + bNVRAM_MARGIN,
 
-  NVRAM_END             = TRANSIT_HOU + sizeof(mpboTransitHou) + bNVRAM_MARGIN
+  NVRAM_END             = TRANSIT_HOU + sizeof(mpibTransitHou) + bNVRAM_MARGIN
 } nvram;

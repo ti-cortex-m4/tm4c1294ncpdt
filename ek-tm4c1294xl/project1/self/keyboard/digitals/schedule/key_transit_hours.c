@@ -25,9 +25,9 @@ static void Show(void)
   Clear();
   sprintf(szLo+1,"%02u:%02u", ibX/2, (ibX%2)*30);
 
-  if (mpboTransitHou[ibX] == 3-1)
+  if (mpibTransitHou[ibX] == 3-1)
     strcpy(szLo+5,szPort3);
-  else if (mpboTransitHou[ibX] == 4-1)
+  else if (mpibTransitHou[ibX] == 4-1)
     strcpy(szLo+5,szPort4);
   else         
     strcpy(szLo+5,szPortNo);
@@ -81,7 +81,7 @@ void    key_SetTransitHours(void)
   {
     if (enKeyboard == KBD_POSTENTER)
     {
-      mpboTransitHou[ibX] = InvertBool(mpboTransitHou[ibX]);
+      mpibTransitHou[ibX] = InvertBool(mpibTransitHou[ibX]);
 
       SaveCache(&chTransitHou);
 

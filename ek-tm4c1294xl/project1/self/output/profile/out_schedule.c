@@ -119,7 +119,7 @@ void    OutSetRecalcHou2(void)
 void    OutGetTransitHou(void)
 {
   InitPushCRC();
-  uint wSize = Push(&mpboTransitHou, sizeof(mpboTransitHou));
+  uint wSize = Push(&mpibTransitHou, sizeof(mpibTransitHou));
   Output(wSize);
 }
 
@@ -131,7 +131,7 @@ void    OutSetTransitHou(void)
   uchar i;
   for (i=0; i<48; i++)
   {
-    mpboTransitHou[i] = PopChar();
+    mpibTransitHou[i] = PopChar();
   }
 
   SaveCache(&chTransitHou);

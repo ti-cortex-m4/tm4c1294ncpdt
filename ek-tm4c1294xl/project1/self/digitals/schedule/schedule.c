@@ -21,7 +21,7 @@ cache const             chRecalcHou = {RECALC_HOU, &mpboRecalcHou, sizeof(mpboRe
 cache const             chRecalcAlways = {RECALC_ALWAYS, &boRecalcAlways, sizeof(bool)};
 cache const             chRecalcMaxPowCurrDay = {RECALC_MAX_POW_CURR_DAY, &boRecalcMaxPowCurrDay, sizeof(bool)};
 
-cache const             chTransitHou = {TRANSIT_HOU, &mpboTransitHou, sizeof(mpboTransitHou)};
+cache const             chTransitHou = {TRANSIT_HOU, &mpibTransitHou, sizeof(mpibTransitHou)};
 
 
 
@@ -74,7 +74,7 @@ void    ResetSchedule(void)
 
 
    for (h=0; h<48; h++)
-       mpboTransitHou[h] = false;
+       mpibTransitHou[h] = false;
 
    SaveCache(&chTransitHou);
 }
