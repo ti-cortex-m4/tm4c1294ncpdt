@@ -20,28 +20,30 @@ static char const       szControl[]     = "График коррекции",
                         szPortNo[]      = "нет    ";
 
 
-static void Show(void)
+static void Show(uchar i)
 {
   Clear();
-  sprintf(szLo+1,"%02u:%02u", ibX/2, (ibX%2)*30);
+  sprintf(szLo,"%02u:%02u", i/2, (i%2)*30);
 
-  if (mpibTransitHou[ibX] == 3-1)
-    strcpy(szLo+5,szPort3);
-  else if (mpibTransitHou[ibX] == 4-1)
-    strcpy(szLo+5,szPort4);
-  else         
-    strcpy(szLo+5,szPortNo);
+  if (mpibTransitHou[i] == 3-1)
+    strcpy(szLo+7,szPort3);
+  else if (mpibTransitHou[i] == 4-1)
+    strcpy(szLo+7,szPort4);
+  else
+    strcpy(szLo+7,szPortNo);
 
   if (enGlobal != GLB_WORK)
-    szLo[4] = '.';
+    szLo[6] = '.';
 
-  sprintf(szLo+14,"%2u",ibX+1);
+  sprintf(szLo+14,"%2u",i+1);
 }
 
 
 
 void    key_SetTransitHours(void)
 {
+static uchar i;
+
   if (bKey == bKEY_ENTER)
   {                                           
     if (enKeyboard == KBD_ENTER)
@@ -55,24 +57,24 @@ void    key_SetTransitHours(void)
     {
       enKeyboard = KBD_POSTENTER;
 
-      ibX = 0;
-      Show();
+      i = 0;
+      Show(i);
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      if ((ibX = GetCharLo(10,11) - 1) < 48)
+      if ((i = GetCharLo(10,11) - 1) < 48)
       {
         enKeyboard = KBD_POSTENTER;
-        Show();
+        Show(i);
       }
       else Beep();
     }
     else if (enKeyboard == KBD_POSTENTER)
     {
-      if (++ibX >= 48) 
-        ibX = 0;
+      if (++i >= 48)
+        i = 0;
 
-      Show();
+      Show(i);
     }
   }
 
@@ -81,16 +83,16 @@ void    key_SetTransitHours(void)
   {
     if (enKeyboard == KBD_POSTENTER)
     {
-      if (mpibTransitHou[ibX] == 0)
-        mpibTransitHou[ibX] = 3-1;
-      else if (mpibTransitHou[ibX] == 3-1)
-        mpibTransitHou[ibX] = 4-1;
+      if (mpibTransitHou[i] == 3-1)
+        mpibTransitHou[i] = 4-1;
+      else if (mpibTransitHou[i] == 4-1)
+        mpibTransitHou[i] = 0;
       else
-        mpibTransitHou[ibX] = 0;
+        mpibTransitHou[i] = 3-1;
 
       SaveCache(&chTransitHou);
 
-      Show();
+      Show(i);
     }
     else Beep();
   }
