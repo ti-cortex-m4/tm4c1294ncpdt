@@ -288,7 +288,7 @@ RESERVE(RECALC_MAX_POW_CURR_DAY, sizeof(bool) + bNVRAM_MARGIN)
 
 RESERVE(MAX_TIMER_35, sizeof(uchar) + bNVRAM_MARGIN)
 
-RESERVE(TRANSIT_HOU, sizeof(mpboTransitHou) + bNVRAM_MARGIN)
+RESERVE(TRANSIT_HOU, sizeof(mpibTransitHou) + bNVRAM_MARGIN)
 
 END(NVRAM_END)
 } nvram;
