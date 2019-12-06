@@ -31,4 +31,4 @@ bool                    boRecalcMaxPowCurrDay;
 
 
 // график автоматического транзита по получасам
-bool                    mpibTransitHou[48];
+uchar                   mpibTransitHou[48];
