@@ -14,8 +14,10 @@ KEY_TRANSIT_HOURS.С
 
 
 //                                         0123456789ABCDEF
-static char const       szControl[]     = "График коррекции";
-
+static char const       szControl[]     = "График коррекции",
+                        szPort3[]       = "порт 3 ",
+                        szPort4[]       = "порт 4 ",
+                        szPortNo[]      = "нет    ";
 
 
 static void Show(void)
@@ -23,13 +25,15 @@ static void Show(void)
   Clear();
   sprintf(szLo+1,"%02u:%02u", ibX/2, (ibX%2)*30);
 
-  if (mpboTransitHou[ibX] == false)
-    strcpy(szLo+8,szNo);
+  if (mpboTransitHou[ibX] == 3-1)
+    strcpy(szLo+5,szPort3);
+  else if (mpboTransitHou[ibX] == 4-1)
+    strcpy(szLo+5,szPort4);
   else         
-    strcpy(szLo+8,szYes);
+    strcpy(szLo+5,szPortNo);
 
   if (enGlobal != GLB_WORK)
-    szLo[7] = '.';
+    szLo[4] = '.';
 
   sprintf(szLo+14,"%2u",ibX+1);
 }
