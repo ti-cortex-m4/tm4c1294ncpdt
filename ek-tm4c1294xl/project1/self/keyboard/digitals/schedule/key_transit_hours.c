@@ -81,7 +81,12 @@ void    key_SetTransitHours(void)
   {
     if (enKeyboard == KBD_POSTENTER)
     {
-      mpibTransitHou[ibX] = InvertBool(mpibTransitHou[ibX]);
+      if (mpibTransitHou[ibX] == 0)
+        mpibTransitHou[ibX] = 3-1;
+      else if (mpibTransitHou[ibX] == 3-1)
+        mpibTransitHou[ibX] = 4-1;
+      else
+        mpibTransitHou[ibX] = 0;
 
       SaveCache(&chTransitHou);
 
