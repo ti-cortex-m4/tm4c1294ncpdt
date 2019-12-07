@@ -5,8 +5,10 @@ auto_flow.c
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "../keyboard/keyboard.h"
 #include "../nvram/cache.h"
 #include "../nvram/cache2.h"
+#include "flow.h"
 #include "auto_flow.h"
 
 
@@ -56,14 +58,35 @@ void    ResetAutoFlow(void)
 
 bool    IsValidAutoFlow(auto_flow  af)
 {
-  if (af.bMinuteStart < 0) || (af.bMinuteStart >= 30)
+  if (af.bMinuteStart >= 30)
     return false;
 
-  if (af.bMinuteStop < 0) || (af.bMinuteStop >= 30)
+  if (af.bMinuteStop >= 30)
     return false;
 
   if (af.bMinuteStart >= af.bMinuteStop)
     return false;
+
+  return true;
+}
+
+
+
+bool    RunAutoFlow(uchar  p)
+{
+//  if (!fAutoFlowEnbl)
+//    return false;
+
+  if (p != 0)
+    return false;
+
+//  if (mpibAutoFlowHou[GetCurrHouIndex()] != 3-1)
+//    return false;
+
+  wProgram = wTEST_AUTO_FLOW;
+  enKeyboard = bKEY_ENTER;
+
+  RunFlow0();
 
   return true;
 }

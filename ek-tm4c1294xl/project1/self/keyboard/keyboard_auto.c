@@ -18,6 +18,7 @@ KEYBOARD_AUTO!C
 #include "test/key_test_request.h"
 #include "test/key_test_response.h"
 #include "test/key_test_flow.h"
+#include "test/key_test_auto_flow.h"
 #include "test/key_test_ports_io.h"
 #include "test/key_test_uni.h"
 #include "test/key_test_monitor.h"
@@ -45,6 +46,7 @@ void    Keyboard_Auto(void)
       case bTEST_REQUEST:       auto_TestRequest();     break;
       case bTEST_RESPONSE:      auto_TestResponse();    break;
       case bTEST_FLOW:          auto_TestFlow();        break;
+      case wTEST_AUTO_FLOW:     auto_TestAutoFlow();    break;
       case bTEST_PORTS_IO:      auto_TestPortsIO();     break;
       case bTEST_UNI:           auto_TestUni();         break;
       case wTEST_MONITOR:       auto_TestMonitor();     break;
@@ -70,6 +72,7 @@ void    Keyboard_Auto(void)
       case bTEST_REQUEST:       auto_TestRequest();     break;
       case bTEST_RESPONSE:      auto_TestResponse();    break;
       case bTEST_FLOW:          auto_TestFlow();        break;
+      case wTEST_AUTO_FLOW:     auto_TestAutoFlow();    break;
       case bTEST_PORTS_IO:      auto_TestPortsIO();     break;
       case bTEST_UNI:           auto_TestUni();         break;
       case wTEST_MONITOR:       auto_TestMonitor();     break;
@@ -129,6 +132,7 @@ void    Keyboard_Auto(void)
       case bTEST_REQUEST:       auto_TestRequest();     break;
       case bTEST_RESPONSE:      auto_TestResponse();    break;
       case bTEST_FLOW:          auto_TestFlow();        break;
+      case wTEST_AUTO_FLOW:     auto_TestAutoFlow();    break;
       case bTEST_PORTS_IO:      auto_TestPortsIO();     break;
       case bTEST_UNI:           auto_TestUni();         break;
       case wTEST_MONITOR:       auto_TestMonitor();     break;
