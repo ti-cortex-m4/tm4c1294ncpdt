@@ -6,6 +6,7 @@ auto_flow.c
 
 #include "../main.h"
 #include "../nvram/cache.h"
+#include "../nvram/cache2.h"
 #include "auto_flow.h"
 
 
@@ -25,8 +26,10 @@ cache const             chAutoFlow = {AUTO_FLOW, &stAutoFlow, sizeof(stAutoFlow)
 
 void    InitAutoFlow(void)
 {
-  LoadCache(&chAutoFlowEnbl);
+  LoadCacheBool(&chAutoFlowEnbl, false);
+
   LoadCache(&chAutoFlowHou);
+
   LoadCache(&chAutoFlow);
 }
 
@@ -34,18 +37,33 @@ void    InitAutoFlow(void)
 
 void    ResetAutoFlow(void)
 {
-  SaveCache(&chAutoFlowEnbl);
+  SaveCacheBool(&chAutoFlowEnbl, false);
 
 
-  uchar h;
-  for (h=0; h<48; h++)
-      mpibAutoFlowHou[h] = false;
+  uchar i;
+  for (i=0; i<48; i++)
+    mpibAutoFlowHou[i] = false;
 
   SaveCache(&chAutoFlowHou);
 
 
-  stAutoFlow.bMinuteStart = 3;
-  stAutoFlow.bMinuteStop  = 27;
-
+  stAutoFlow.bMinuteStart = 1;
+  stAutoFlow.bMinuteStop  = 29;
   SaveCache(&chAutoFlow);
+}
+
+
+
+bool    IsValidAutoFlow(auto_flow  af)
+{
+  if (af.bMinuteStart < 0) || (af.bMinuteStart >= 30)
+    return false;
+
+  if (af.bMinuteStop < 0) || (af.bMinuteStop >= 30)
+    return false;
+
+  if (af.bMinuteStart >= af.bMinuteStop)
+    return false;
+
+  return true;
 }

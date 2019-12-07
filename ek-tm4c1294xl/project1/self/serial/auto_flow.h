@@ -31,3 +31,4 @@ extern  cache const             chAutoFlow;
 
 void    InitAutoFlow(void);
 void    ResetAutoFlow(void);
+bool    IsValidAutoFlow(auto_flow  af);

@@ -14,9 +14,10 @@ key_auto_flow.c
 //                                          0123456789ABCDEF
 static char const       szMessage1[]     = "    Интервал    ",
                         szMessage2[]     = " авто-транзита  ",
+                        szMessage3[]     = "     0..30      ",
                         szMask[]         = "     __ __      ";
 
-static char const       *pszMessages[]   = { szMessage1, szMessage2, "" };
+static char const       *pszMessages[]   = { szMessage1, szMessage2, szMessage3, "" };
 
 
 
@@ -55,7 +56,7 @@ static auto_flow af;
     {
       af.bMinuteStop = GetCharLo(8,9);
 
-      if ((af.bMinuteStop >= 1) && (af.bMinuteStop <= 12))
+      if (IsValidAutoFlow(af))
       {
         enKeyboard = KBD_POSTENTER;
 
@@ -93,3 +94,4 @@ static auto_flow af;
   }
   else Beep();
 }
+
