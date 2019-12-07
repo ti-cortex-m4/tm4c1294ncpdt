@@ -10,7 +10,6 @@ auto_flow.h
 
 typedef struct
 {
-  bool          fEnabled;
   uchar         bMinuteStart;
   uchar         bMinuteStop;
 } auto_flow;
@@ -20,10 +19,11 @@ typedef struct
 
 
 
-extern  auto_flow               stAutoFlow;
+extern  cache const             chAutoFlowEnbl;
+extern  cache const             chAutoFlowHou;
 extern  cache const             chAutoFlow;
 
 
 
-void    InitAutoTransit(void);
+void    InitAutoFlow(void);
 void    ResetAutoFlow(void);
