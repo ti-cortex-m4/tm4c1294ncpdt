@@ -10,9 +10,9 @@ auto_transit.h
 
 typedef struct
 {
+  bool          fEnabled;
   uchar         bMinuteStart;
   uchar         bMinuteStop;
-  bool          fEnabled;
 } auto_transit;
 
 
@@ -22,3 +22,8 @@ typedef struct
 
 extern  auto_transit            stAutoTransit;
 extern  cache const             chAutoTransit;
+
+
+
+void    InitAutoTransit(void);
+void    ResetAutoTransit(void);

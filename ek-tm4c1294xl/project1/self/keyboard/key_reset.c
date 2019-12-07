@@ -25,6 +25,7 @@ KEY_RESET!C
 #include "../serial/input_mode_reset.h"
 #include "../serial/slave_modem.h"
 #include "../serial/bulk.h"
+#include "../serial/auto_transit.h"
 #include "../serial/flow.h"
 #include "../serial/monitor.h"
 #include "../output/esc/esc.h"
@@ -164,6 +165,7 @@ void    key_SetReset(void)
           ResetInputModeReset();
           ResetSlaveModem();
           ResetBulk();
+          ResetAutoTransit();
           ResetEsc();
           ResetUni();
           ResetFlow();
