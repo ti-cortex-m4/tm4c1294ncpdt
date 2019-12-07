@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-KEY_TRANSIT_HOURS.С
+key_auto_flow_hours.c
 
  
 ------------------------------------------------------------------------------*/
@@ -8,13 +8,14 @@ KEY_TRANSIT_HOURS.С
 #include "../../../console.h"
 #include "../../../memory/mem_schedule.h"
 #include "../../../digitals/digitals.h"
-#include "../../../digitals/schedule/schedule.h"
+#include "../../../serial/auto_flow.h"
 #include "../../../flash/files.h"
+#include "../../../flash/key_auto_flow_hours.h"
 
 
 
 //                                         0123456789ABCDEF
-static char const       szControl[]     = "График коррекции",
+static char const       szControl[]     = "График ???      ",
                         szPort3[]       = "порт 3 ",
                         szPort4[]       = "порт 4 ",
                         szPortNo[]      = "нет    ";
@@ -40,7 +41,7 @@ static void Show(uchar i)
 
 
 
-void    key_SetTransitHours(void)
+void    key_SetAutoFlowHours(void)
 {
 static uchar i;
 
@@ -90,7 +91,7 @@ static uchar i;
       else
         mpibAutoFlowHou[i] = 3-1;
 
-      SaveCache(&chTransitHou);
+      SaveCache(&chAutoFlowHou);
 
       Show(i);
     }

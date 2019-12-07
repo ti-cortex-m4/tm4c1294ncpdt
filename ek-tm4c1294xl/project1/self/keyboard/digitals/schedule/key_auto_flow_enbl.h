@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
-key_auto_flow_hours.h
+key_auto_flow_enbl.h
 
 
 ------------------------------------------------------------------------------*/
 
-void    key_SetAutoFlowHours(void);
+void    key_SetAutoFlowEnbl(void);
