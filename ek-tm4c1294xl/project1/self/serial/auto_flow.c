@@ -72,19 +72,20 @@ bool    IsValidAutoFlow(auto_flow  af)
 
 
 
-bool    RunAutoFlow(uchar  p)
+bool    RunAutoFlow(uchar  ibPrt)
 {
-//  if (!fAutoFlowEnbl)
-//    return false;
+  if (!fAutoFlowEnbl)
+    return false;
 
-  if (p != 0)
+  if (ibPrt != 0)
     return false;
 
 //  if (mpibAutoFlowHou[GetCurrHouIndex()] != 3-1)
 //    return false;
 
+  enKeyboard = KBD_ENTER;
+  bKey = bKEY_ENTER;
   wProgram = wTEST_AUTO_FLOW;
-  enKeyboard = bKEY_ENTER;
 
   RunFlow0();
 
