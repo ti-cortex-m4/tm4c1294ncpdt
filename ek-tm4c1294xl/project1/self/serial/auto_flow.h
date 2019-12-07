@@ -33,4 +33,4 @@ void    InitAutoFlow(void);
 void    ResetAutoFlow(void);
 bool    IsValidAutoFlow(auto_flow  af);
 
-bool    RunAutoFlow(uchar  p);
+bool    RunAutoFlow(uchar  ibPrt);
