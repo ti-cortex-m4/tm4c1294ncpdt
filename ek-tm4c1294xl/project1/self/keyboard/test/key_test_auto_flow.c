@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-KEY_TEST_FLOW.H
+key_test_auto_flow.c
 
  
 ------------------------------------------------------------------------------*/
@@ -8,15 +8,17 @@ KEY_TEST_FLOW.H
 #include "../../memory/mem_flow.h"
 #include "../keyboard.h"
 #include "../../display/display.h"
+#include "key_test_auto_flow.h"
+
 
 
 
 //                                         0123456789ABCDEF
-static char const       szTestFlow[]    = "Транзит         ";
+static char const       szTestFlow[]    = "Транзит 2       ";
 
 
 
-void    key_TestFlow(void)
+void    key_TestAutoFlow(void)
 {
   if (bKey == bKEY_ENTER)
   {
@@ -31,8 +33,10 @@ void    key_TestFlow(void)
 }
 
 
-void    auto_TestFlow(void)
+void    auto_TestAutoFlow(void)
 {
+static uchar cbFlowDelayPrev;
+
   if (enKeyboard == KBD_POSTENTER)
   {
     Hi(14, cbFlowDelay);
@@ -58,5 +62,13 @@ void    auto_TestFlow(void)
       Lo(12, iwOutFlow1 / 0x100);
       Lo(14, iwOutFlow1 % 0x100);
     }
+
+    if ((cbFlowDelayPrev > 0) && (cbFlowDelay == 0))
+    {
+      bKey = bKEY_PROGRAM;
+      fKey = true;
+    }
+
+    cbFlowDelayPrev = cbFlowDelay;
   }
 }
