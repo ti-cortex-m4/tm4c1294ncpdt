@@ -165,10 +165,10 @@ void    key_SetReset(void)
           ResetInputModeReset();
           ResetSlaveModem();
           ResetBulk();
-          ResetAutoTransit();
           ResetEsc();
           ResetUni();
           ResetFlow();
+          ResetAutoFlow();
           ResetMonitor();
 
           ResetPeriod30();

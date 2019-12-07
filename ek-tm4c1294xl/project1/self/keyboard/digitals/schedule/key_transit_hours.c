@@ -25,9 +25,9 @@ static void Show(uchar i)
   Clear();
   sprintf(szLo,"%02u:%02u", i/2, (i%2)*30);
 
-  if (mpibTransitHou[i] == 3-1)
+  if (mpibAutoFlowHou[i] == 3-1)
     strcpy(szLo+7,szPort3);
-  else if (mpibTransitHou[i] == 4-1)
+  else if (mpibAutoFlowHou[i] == 4-1)
     strcpy(szLo+7,szPort4);
   else
     strcpy(szLo+7,szPortNo);
@@ -83,12 +83,12 @@ static uchar i;
   {
     if (enKeyboard == KBD_POSTENTER)
     {
-      if (mpibTransitHou[i] == 3-1)
-        mpibTransitHou[i] = 4-1;
-      else if (mpibTransitHou[i] == 4-1)
-        mpibTransitHou[i] = 0;
+      if (mpibAutoFlowHou[i] == 3-1)
+        mpibAutoFlowHou[i] = 4-1;
+      else if (mpibAutoFlowHou[i] == 4-1)
+        mpibAutoFlowHou[i] = 0;
       else
-        mpibTransitHou[i] = 3-1;
+        mpibAutoFlowHou[i] = 3-1;
 
       SaveCache(&chTransitHou);
 

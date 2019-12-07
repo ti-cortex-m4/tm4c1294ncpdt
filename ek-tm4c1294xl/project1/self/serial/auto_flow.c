@@ -1,32 +1,32 @@
 /*------------------------------------------------------------------------------
-auto_transit.c
+auto_flow.c
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
 #include "../nvram/cache.h"
-#include "auto_transit.h"
+#include "auto_flow.h"
 
 
 
-auto_transit            stAutoTransit;
-cache const             chAutoTransit = {AUTO_TRANSIT, &stAutoTransit, sizeof(stAutoTransit)};
+auto_flow               stAutoFlow;
+cache const             chAutoFlow = {AUTO_FLOW, &stAutoFlow, sizeof(stAutoFlow)};
 
 
 
 void    InitAutoFlow(void)
 {
-  LoadCache(&chAutoTransit);
+  LoadCache(&chAutoFlow);
 }
 
 
 
 void    ResetAutoFlow(void)
 {
-  stAutoTransit.fEnabled     = false;
-  stAutoTransit.bMinuteStart = 3;
-  stAutoTransit.bMinuteStop  = 27;
+  stAutoFlow.fEnabled     = false;
+  stAutoFlow.bMinuteStart = 3;
+  stAutoFlow.bMinuteStop  = 27;
 
-  SaveCache(&chAutoTransit);
+  SaveCache(&chAutoFlow);
 }

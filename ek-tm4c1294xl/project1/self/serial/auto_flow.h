@@ -1,11 +1,11 @@
 /*------------------------------------------------------------------------------
-auto_transit.h
+auto_flow.h
 
 
 ------------------------------------------------------------------------------*/
 
-#ifndef __AUTO_TRANSIT
-#define __AUTO_TRANSIT
+#ifndef __AUTO_FLOW
+#define __AUTO_FLOW
 
 
 typedef struct
@@ -13,15 +13,15 @@ typedef struct
   bool          fEnabled;
   uchar         bMinuteStart;
   uchar         bMinuteStop;
-} auto_transit;
+} auto_flow;
 
 
 #endif
 
 
 
-extern  auto_transit            stAutoTransit;
-extern  cache const             chAutoTransit;
+extern  auto_flow               stAutoFlow;
+extern  cache const             chAutoFlow;
 
 
 

@@ -20,4 +20,4 @@ extern  bool                    boRecalcMaxPowCurrDay;
 
 
 
-extern  uchar                   mpibTransitHou[48];
+extern  uchar                   mpibAutoFlowHou[48];
