@@ -74,8 +74,8 @@ MAIN,C
 #include "serial/input_mode_reset.h"
 #include "serial/slave_modem.h"
 #include "serial/bulk.h"
-#include "serial/transit.h"
 #include "serial/flow.h"
+#include "serial/auto_flow.h"
 #include "serial/monitor.h"
 #include "output/esc/esc.h"
 #include "output/esc/response_esc.h"
@@ -148,10 +148,10 @@ int     main(void)
   InitInputModeReset();
   InitSlaveModem();
   InitBulk();
-  InitAutoTransit();
   InitEsc();
   InitUni();
   InitFlow();
+  InitAutoFlow();
   InitMonitor();
 
   InitSlide();

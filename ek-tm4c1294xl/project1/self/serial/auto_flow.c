@@ -15,14 +15,14 @@ cache const             chAutoTransit = {AUTO_TRANSIT, &stAutoTransit, sizeof(st
 
 
 
-void    InitAutoTransit(void)
+void    InitAutoFlow(void)
 {
   LoadCache(&chAutoTransit);
 }
 
 
 
-void    ResetAutoTransit(void)
+void    ResetAutoFlow(void)
 {
   stAutoTransit.fEnabled     = false;
   stAutoTransit.bMinuteStart = 3;
