@@ -65,7 +65,7 @@ static uchar cbFlowDelayPrev;
 
     if ((cbFlowDelayPrev > 0) && (cbFlowDelay == 0))
     {
-      bKey = bKEY_PROGRAM;
+      bKey = 0x07;//bKEY_PROGRAM;
       fKey = true;
     }
 

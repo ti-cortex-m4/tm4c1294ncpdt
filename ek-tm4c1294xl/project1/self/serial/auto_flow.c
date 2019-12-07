@@ -86,6 +86,7 @@ bool    RunAutoFlow(uchar  ibPrt)
   enKeyboard = KBD_ENTER;
   bKey = bKEY_ENTER;
   wProgram = wTEST_AUTO_FLOW;
+  key_TestAutoFlow();
 
   RunFlow0();
 
