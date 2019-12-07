@@ -21,8 +21,6 @@ cache const             chRecalcHou = {RECALC_HOU, &mpboRecalcHou, sizeof(mpboRe
 cache const             chRecalcAlways = {RECALC_ALWAYS, &boRecalcAlways, sizeof(bool)};
 cache const             chRecalcMaxPowCurrDay = {RECALC_MAX_POW_CURR_DAY, &boRecalcMaxPowCurrDay, sizeof(bool)};
 
-cache const             chTransitHou = {TRANSIT_HOU, &mpibAutoFlowHou, sizeof(mpibAutoFlowHou)};
-
 
 
 void    InitSchedule(void)
@@ -35,8 +33,6 @@ void    InitSchedule(void)
   LoadCache(&chRecalcAlways);
 
   LoadCacheBool(&chRecalcMaxPowCurrDay, false);
-
-  LoadCache(&chTransitHou);
 }
 
 
@@ -71,10 +67,4 @@ void    ResetSchedule(void)
    SaveCache(&chRecalcAlways);
 
    SaveCacheBool(&chRecalcMaxPowCurrDay, false);
-
-
-   for (h=0; h<48; h++)
-       mpibAutoFlowHou[h] = false;
-
-   SaveCache(&chTransitHou);
 }
