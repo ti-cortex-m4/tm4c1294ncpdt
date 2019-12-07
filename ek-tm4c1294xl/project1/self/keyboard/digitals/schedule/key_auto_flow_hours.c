@@ -15,10 +15,14 @@ key_auto_flow_hours.c
 
 
 //                                         0123456789ABCDEF
-static char const       szControl[]     = "График ???      ",
+static char const       szMessage1[]    = "     График     ",
+                        szMessage2[]    = " авто-транзита  ",
+                        szMessage3[]    = "  по получасам  ",
                         szPort3[]       = "порт 3 ",
                         szPort4[]       = "порт 4 ",
                         szPortNo[]      = "нет    ";
+
+static char const       *pszMessages[]  = { szMessage1, szMessage2, szMessage3, "" };
 
 
 static void Show(uchar i)
@@ -50,7 +54,7 @@ static uchar i;
     if (enKeyboard == KBD_ENTER)
     {
       enKeyboard = KBD_INPUT1;
-      ShowHi(szControl);
+      LoadSlide(pszMessages);
 
       HalfHour();
     } 
