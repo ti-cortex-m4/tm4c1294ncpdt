@@ -287,8 +287,8 @@ typedef enum
   RECALC_MAX_POW_CURR_DAY = PROFILE_FRAC_8 + (sizeof(mpdbEngFracDigCan8[0]) + bNVRAM_MARGIN)*bCANALS,
 
   MAX_TIMER_35          = RECALC_MAX_POW_CURR_DAY + sizeof(bool) + bNVRAM_MARGIN,
-
   TRANSIT_HOU           = MAX_TIMER_35 + sizeof(uchar) + bNVRAM_MARGIN,
+  AUTO_TRANSIT          = TRANSIT_HOU + sizeof(mpibTransitHou) + bNVRAM_MARGIN,
 
-  NVRAM_END             = TRANSIT_HOU + sizeof(mpibTransitHou) + bNVRAM_MARGIN
+  NVRAM_END             = AUTO_TRANSIT + sizeof(stAutoTransit) + bNVRAM_MARGIN
 } nvram;
