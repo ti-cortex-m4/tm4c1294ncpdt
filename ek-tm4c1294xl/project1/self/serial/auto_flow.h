@@ -26,4 +26,4 @@ extern  cache const             chAutoTransit;
 
 
 void    InitAutoTransit(void);
-void    ResetAutoTransit(void);
+void    ResetAutoFlow(void);
