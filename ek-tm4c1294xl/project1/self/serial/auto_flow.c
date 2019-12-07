@@ -25,8 +25,8 @@ cache const             chAutoFlow = {AUTO_FLOW, &stAutoFlow, sizeof(stAutoFlow)
 
 void    InitAutoFlow(void)
 {
-
-    LoadCache(&chTransitHou);
+  LoadCache(&chAutoFlowEnbl);
+  LoadCache(&chAutoFlowHou);
   LoadCache(&chAutoFlow);
 }
 
@@ -34,13 +34,16 @@ void    InitAutoFlow(void)
 
 void    ResetAutoFlow(void)
 {
+  SaveCache(&chAutoFlowEnbl);
+
+
+  uchar h;
   for (h=0; h<48; h++)
       mpibAutoFlowHou[h] = false;
 
-  SaveCache(&chTransitHou);
+  SaveCache(&chAutoFlowHou);
 
 
-  stAutoFlow.fEnabled     = false;
   stAutoFlow.bMinuteStart = 3;
   stAutoFlow.bMinuteStop  = 27;
 

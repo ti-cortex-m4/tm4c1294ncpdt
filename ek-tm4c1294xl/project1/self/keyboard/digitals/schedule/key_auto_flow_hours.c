@@ -10,7 +10,7 @@ key_auto_flow_hours.c
 #include "../../../digitals/digitals.h"
 #include "../../../serial/auto_flow.h"
 #include "../../../flash/files.h"
-#include "../../../flash/key_auto_flow_hours.h"
+#include "key_auto_flow_hours.h"
 
 
 

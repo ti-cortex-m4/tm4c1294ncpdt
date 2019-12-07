@@ -18,6 +18,10 @@ typedef struct
 #endif
 
 
+extern  bool                    fAutoFlowEnbl;
+extern  uchar                   mpibAutoFlowHou[48];
+extern  auto_flow               stAutoFlow;
+
 
 extern  cache const             chAutoFlowEnbl;
 extern  cache const             chAutoFlowHou;

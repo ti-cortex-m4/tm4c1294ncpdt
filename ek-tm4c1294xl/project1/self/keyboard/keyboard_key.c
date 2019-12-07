@@ -22,7 +22,6 @@ KEYBOARD_KEY!C
 #include "digitals/schedule/key_recalc_always.h"
 #include "digitals/schedule/key_recalc3.h"
 #include "digitals/schedule/key_recalc.h"
-#include "digitals/schedule/key_auto_flow_hours.h"
 #include "digitals/key_enbl_canals.h"
 #include "digitals/current/key_enbl_current.h"
 #include "digitals/current/key_enbl_current2.h"
@@ -121,6 +120,8 @@ KEYBOARD_KEY!C
 #include "digitals/review/key_review_margins.h"
 #include "digitals/review/key_review_wrn_trend.h"
 #include "digitals/review/key_review_wrn_top.h"
+#include "digitals/schedule/key_auto_flow_enbl.h"
+#include "digitals/schedule/key_auto_flow_hours.h"
 #include "digitals/key_dsbl_esc.h"
 #include "key_records_dsbl.h"
 #include "esc/key_machines_esc.h"
@@ -257,8 +258,6 @@ void    Keyboard_Key(void)
       case bSET_CONTROL_HOURS:  key_SetCtrlHours();     break;
       case bSET_ENBL_CANALS:    key_SetEnblCanals();    break;
 
-      case bSET_AUTO_FLOW_HOURS:key_SetAutoFlowHours(); break;
-
       case bSET_PARAMS_FLAG:    key_SetParamsFlag();    break;
       case bSET_MNT_PARAMS:     key_SetMntParams();     break;
       case bSET_PARAMS:         key_SetParams();        break;
@@ -384,6 +383,9 @@ void    Keyboard_Key(void)
       case wSET_REVIEW_WRN_TREND: key_SetReviewWrnTrend(); break;
       case wSET_REVIEW_WRN_TOP: key_SetReviewWrnTop(); break;
 
+      case wSET_AUTO_FLOW_ENBL: key_SetAutoFlowEnbl();  break;
+      case wSET_AUTO_FLOW_HOURS:key_SetAutoFlowHours(); break;
+
       case wSET_DSBL_ESC:       key_SetDsblEsc();       break;
 
       case wSET_RECORDS_DSBL:   key_SetRecordsDsbl();   break;
@@ -496,8 +498,6 @@ void    Keyboard_Key(void)
       case bSET_ENBL_HOURS:     key_SetEnblHours();     break;
       case bSET_CONTROL_HOURS:  key_SetCtrlHours();     break;
       case bSET_ENBL_CANALS:    key_SetEnblCanals();    break;
-
-      case bSET_AUTO_FLOW_HOURS:key_SetAutoFlowHours(); break;
 
       case bSET_PARAMS_FLAG:    key_SetParamsFlag();    break;
       case bSET_MNT_PARAMS:     key_SetMntParams();     break;
@@ -707,6 +707,9 @@ void    Keyboard_Key(void)
       case wSET_REVIEW_WRN_TREND: key_SetReviewWrnTrend(); break;
       case wSET_REVIEW_WRN_TOP: key_SetReviewWrnTop(); break;
 
+      case wSET_AUTO_FLOW_ENBL: key_SetAutoFlowEnbl();  break;
+      case wSET_AUTO_FLOW_HOURS:key_SetAutoFlowHours(); break;
+
       case wSET_DSBL_ESC:       key_SetDsblEsc();       break;
 
       case wSET_RECORDS_DSBL:   key_SetRecordsDsbl();   break;
@@ -817,8 +820,6 @@ void    Keyboard_Key(void)
       case bSET_ENBL_HOURS:     key_SetEnblHours();     break;
       case bSET_CONTROL_HOURS:  key_SetCtrlHours();     break;
       case bSET_ENBL_CANALS:    key_SetEnblCanals();    break;
-
-      case bSET_AUTO_FLOW_HOURS:key_SetAutoFlowHours(); break;
 
       case bSET_PARAMS_FLAG:    key_SetParamsFlag();    break;
       case bSET_MNT_PARAMS:     key_SetMntParams();     break;
@@ -949,6 +950,9 @@ void    Keyboard_Key(void)
       case wSET_REVIEW_MARGINS: key_SetReviewMargins(); break;
       case wSET_REVIEW_WRN_TREND: key_SetReviewWrnTrend(); break;
       case wSET_REVIEW_WRN_TOP: key_SetReviewWrnTop(); break;
+
+      case wSET_AUTO_FLOW_ENBL: key_SetAutoFlowEnbl();  break;
+      case wSET_AUTO_FLOW_HOURS:key_SetAutoFlowHours(); break;
 
       case wSET_DSBL_ESC:       key_SetDsblEsc();       break;
 
