@@ -12,24 +12,23 @@ key_auto_flow.c
 
 
 //                                          0123456789ABCDEF
-static char const       szMessage[]      = "Авто-транзит ?  ",
+static char const       szMessage1[]     = "    Интервал    ",
+                        szMessage2[]     = " авто-транзита  ",
                         szMask[]         = "     __ __      ";
 
-static char const       *pszMessages[]   = { szMessage, "" };
+static char const       *pszMessages[]   = { szMessage1, szMessage2, "" };
 
 
 
-static void ShowDate(time  ti)
+static void Show()
 {
-  sprintf(szLo+5,"%02u.%02u",
-                 ti.bDay,
-                 ti.bMonth);
+  sprintf(szLo+5,"%02u.%02u",stAutoFlow.bMinuteStart,stAutoFlow.bMinuteStop);
 }
 
 
 void    key_SetAutoFlow(void)
 {
-static time tiT;
+static auto_flow af;
 
   if (bKey == bKEY_ENTER)
   {
@@ -43,9 +42,9 @@ static time tiT;
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      tiT.bDay = GetCharLo(5,6);
+      af.bMinuteStart = GetCharLo(5,6);
 
-      if ((tiT.bDay > 0) && (tiT.bDay <= 31))
+      if ((af.bMinuteStart > 0) && (af.bMinuteStart <= 31))
       {
         enKeyboard = KBD_INPUT2;
         szLo[7] = '.';
@@ -54,28 +53,15 @@ static time tiT;
     }
     else if (enKeyboard == KBD_POSTINPUT2)
     {
-      tiT.bMonth = GetCharLo(8,9);
-      tiT.bYear  = GetCurrTimeDate()->bYear;
+      af.bMinuteStop = GetCharLo(8,9);
 
-      if ((tiT.bMonth >= 1) && (tiT.bMonth <= 12))
+      if ((af.bMinuteStop >= 1) && (af.bMinuteStop <= 12))
       {
-        if (tiT.bDay <= GetDaysInMonthYM(tiT.bYear, tiT.bMonth))
-        {
-          enKeyboard = KBD_POSTENTER;
+        enKeyboard = KBD_POSTENTER;
 
-          switch (wProgram)
-          {
-            case bSET_SUMMER:  tiSummer = tiT; SaveCache(&chSummer); ShowDate(tiSummer);  break;
-            case bSET_WINTER:  tiWinter = tiT; SaveCache(&chWinter); ShowDate(tiWinter);  break;
-          }
-        }
-        else
-        {  
-          enKeyboard = KBD_INPUT1;
-          LongBeep();
-
-          ShowLo(szMask);
-        }
+        stAutoFlow = af;
+        SaveCache(&chAutoFlow);
+        Show();
       }
       else Beep();
     }

@@ -331,6 +331,7 @@ PROGRAMS!H
 
 #define wSET_AUTO_FLOW_ENBL         448
 #define wSET_AUTO_FLOW_HOURS        449
+#define wSET_AUTO_FLOW              450
 
 #define wSET_DSBL_ESC               410
 
