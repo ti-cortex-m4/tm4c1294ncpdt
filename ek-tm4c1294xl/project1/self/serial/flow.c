@@ -59,7 +59,7 @@ void    ResetFlow(void)
   ibFlowPortFrom = 0;
   SaveCache(&chFlowPortFrom);
 
-  cbMaxFlowDelay = 10;
+  cbMaxFlowDelay = 250;
   SaveCache(&chMaxFlowDelay);
 
   ibFlowPortTo = 2+1;
