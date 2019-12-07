@@ -10,9 +10,15 @@ auto_flow.c
 
 
 
-cache const             chTransitHou = {TRANSIT_HOU, &mpibAutoFlowHou, sizeof(mpibAutoFlowHou)};
 
+bool                    fAutoFlowEnbl;
+uchar                   mpibAutoFlowHou[48];
 auto_flow               stAutoFlow;
+
+
+
+cache const             chAutoFlowEnbl = {AUTO_FLOW_ENBL, &fAutoFlowEnbl, sizeof(bool)};
+cache const             chAutoFlowHou = {AUTO_FLOW_HOU, &mpibAutoFlowHou, sizeof(mpibAutoFlowHou)};
 cache const             chAutoFlow = {AUTO_FLOW, &stAutoFlow, sizeof(stAutoFlow)};
 
 
