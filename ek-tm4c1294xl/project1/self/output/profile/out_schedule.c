@@ -116,7 +116,7 @@ void    OutSetRecalcHou2(void)
 
 
 
-void    OutGetTransitHou(void)
+void    OutGetAutoFlowHou(void)
 {
   InitPushCRC();
   uint wSize = Push(&mpibAutoFlowHou, sizeof(mpibAutoFlowHou));
@@ -124,7 +124,7 @@ void    OutGetTransitHou(void)
 }
 
 
-void    OutSetTransitHou(void)
+void    OutSetAutoFlowHou(void)
 {
   InitPop(6);
 
@@ -134,7 +134,7 @@ void    OutSetTransitHou(void)
     mpibAutoFlowHou[i] = PopChar();
   }
 
-  SaveCache(&chTransitHou);
+  SaveCache(&chAutoFlowHou);
 
   Result(bRES_OK);
 }
