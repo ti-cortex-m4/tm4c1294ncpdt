@@ -1,8 +1,8 @@
 /*------------------------------------------------------------------------------
-KEY_TEST_FLOW!H
+key_test_auto_flow.h
 
 
 ------------------------------------------------------------------------------*/
 
-void    key_TestFlow(void);
-void    auto_TestFlow(void);
+void    key_TestAutoFlow(void);
+void    auto_TestAutoFlow(void);
