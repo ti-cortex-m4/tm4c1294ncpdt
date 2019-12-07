@@ -11,6 +11,7 @@ NVRAM!H
 #include "../label_global.h"
 #include "../kernel/asserts.h"
 #include "../realtime/period30.h"
+#include "../serial/auto_transit.h"
 #include "../digitals/serials.h"
 #include "../digitals/review/review.h"
 #include "../memory/mem_groups.h"
