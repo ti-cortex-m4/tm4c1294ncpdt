@@ -198,8 +198,6 @@ PROGRAMS!H
 #define bSET_CONTROL_HOURS          183
 #define bSET_ENBL_CANALS            185
 
-#define bSET_AUTO_FLOW_HOURS        191
-
 #define bSET_PARAMS_FLAG            101
 #define bSET_MNT_PARAMS             102
 #define bSET_PARAMS                 103
@@ -330,6 +328,9 @@ PROGRAMS!H
 #define wSET_REVIEW_MARGINS         445
 #define wSET_REVIEW_WRN_TREND       446
 #define wSET_REVIEW_WRN_TOP         447
+
+#define wSET_AUTO_FLOW_ENBL         448
+#define wSET_AUTO_FLOW_HOURS        449
 
 #define wSET_DSBL_ESC               410
 
