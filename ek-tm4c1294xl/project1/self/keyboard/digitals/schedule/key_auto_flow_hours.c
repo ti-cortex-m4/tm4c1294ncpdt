@@ -6,8 +6,6 @@ key_auto_flow_hours.c
 
 #include "../../../main.h"
 #include "../../../console.h"
-#include "../../../memory/mem_schedule.h"
-#include "../../../digitals/digitals.h"
 #include "../../../serial/auto_flow.h"
 #include "../../../flash/files.h"
 #include "key_auto_flow_hours.h"

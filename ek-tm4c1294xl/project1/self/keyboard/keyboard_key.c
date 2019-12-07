@@ -122,6 +122,7 @@ KEYBOARD_KEY!C
 #include "digitals/review/key_review_wrn_top.h"
 #include "digitals/schedule/key_auto_flow_enbl.h"
 #include "digitals/schedule/key_auto_flow_hours.h"
+#include "digitals/schedule/key_auto_flow.h"
 #include "digitals/key_dsbl_esc.h"
 #include "key_records_dsbl.h"
 #include "esc/key_machines_esc.h"
@@ -385,6 +386,7 @@ void    Keyboard_Key(void)
 
       case wSET_AUTO_FLOW_ENBL: key_SetAutoFlowEnbl();  break;
       case wSET_AUTO_FLOW_HOURS:key_SetAutoFlowHours(); break;
+      case wSET_AUTO_FLOW:      key_SetAutoFlow();      break;
 
       case wSET_DSBL_ESC:       key_SetDsblEsc();       break;
 
@@ -709,6 +711,7 @@ void    Keyboard_Key(void)
 
       case wSET_AUTO_FLOW_ENBL: key_SetAutoFlowEnbl();  break;
       case wSET_AUTO_FLOW_HOURS:key_SetAutoFlowHours(); break;
+      case wSET_AUTO_FLOW:      key_SetAutoFlow();      break;
 
       case wSET_DSBL_ESC:       key_SetDsblEsc();       break;
 
@@ -953,6 +956,7 @@ void    Keyboard_Key(void)
 
       case wSET_AUTO_FLOW_ENBL: key_SetAutoFlowEnbl();  break;
       case wSET_AUTO_FLOW_HOURS:key_SetAutoFlowHours(); break;
+      case wSET_AUTO_FLOW:      key_SetAutoFlow();      break;
 
       case wSET_DSBL_ESC:       key_SetDsblEsc();       break;
 

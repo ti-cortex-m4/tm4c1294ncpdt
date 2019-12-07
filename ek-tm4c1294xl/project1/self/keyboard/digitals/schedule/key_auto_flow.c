@@ -4,19 +4,18 @@ key_auto_flow.c
 
 ------------------------------------------------------------------------------*/
 
-#include "../../main.h"
-#include "../../memory/mem_settings.h"
-#include "../../console.h"
-#include "../../time/rtc.h"
-#include "../../time/timedate.h"
-#include "../../time/decret.h"
+#include "../../../main.h"
+#include "../../../console.h"
+#include "../../../serial/auto_flow.h"
+#include "key_auto_flow.h"
 
 
 
-//                                         0123456789ABCDEF
-static char const       szWinter[]      = "Зимнее время    ",
-                        szSummer[]      = "Летнее время    ",
-                        szMask[]        = "     __ __      ";
+//                                          0123456789ABCDEF
+static char const       szMessage[]      = "Авто-транзит ?  ",
+                        szMask[]         = "     __ __      ";
+
+static char const       *pszMessages[]   = { szMessage, "" };
 
 
 
@@ -39,11 +38,8 @@ static time tiT;
       enKeyboard = KBD_POSTENTER;
       Clear();
 
-      switch (wProgram)
-      {
-        case bSET_SUMMER:  ShowHi(szSummer); ShowDate(tiSummer);  break;
-        case bSET_WINTER:  ShowHi(szWinter); ShowDate(tiWinter);  break;
-      }
+      LoadSlide(pszMessages);
+      Show();
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
@@ -92,13 +88,8 @@ static time tiT;
     {
       if (enGlobal != GLB_WORK)
       {
-        if (deDecret != DEC_CUSTOM)        
-          NeedProgram(bSET_DECRET); 
-        else  
-        {
-          enKeyboard = KBD_INPUT1;
-          ShowLo(szMask);
-        }
+        enKeyboard = KBD_INPUT1;
+        ShowLo(szMask);
       }
       else Beep();
     }
