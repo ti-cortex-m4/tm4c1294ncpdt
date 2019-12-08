@@ -6,13 +6,23 @@ serial_flow.c
 
 #include "../main.h"
 #include "../memory/mem_ports.h"
+#include "../memory/mem_serial0.h"
+#include "../memory/mem_serial1.h"
+#include "../memory/mem_serial2.h"
+#include "../memory/mem_serial3.h"
+#include "../memory/mem_flow.h"
+#include "../serial/ports.h"
+#include "serial0.h"
+#include "serial1.h"
+#include "serial2.h"
+#include "serial3.h"
 #include "serial_flow.h"
 
 
 
 volatile serial     mpSerialF[2];
 
-volatile uchar      mpbInBuffF[2][wINBUFF_SIZE];
+uchar               mpbInBuffF[2][wINBUFF_SIZE];
 
 volatile uint       iwInBuffF[2];
 
@@ -79,15 +89,15 @@ void    RunResponseSerialFlow2(void)
 
   if (ibFlowPortFrom == 0)
   {
-    if (mpSerial[0] == SER_POSTINPUT_SLAVE)
+    if (mpSerialF[0] == SER_POSTINPUT_SLAVE)
     {
-      mpSerial[0] = SER_BEGIN;
+      mpSerialF[0] = SER_BEGIN;
 
       cbInFlow0++;
-      iwInFlow0 = iwInBuff0;
+      iwInFlow0 = iwInBuffF[0];
 
-      memcpy(mpbOutBuff2,mpbInBuff0,iwInBuff0);
-      Query2(0xFFFF,iwInBuff0,1);
+      memcpy(mpbOutBuff2,mpbInBuffF[0],iwInBuffF[0]);
+      Query2(0xFFFF,iwInBuffF[0],1);
     }
     else if (mpSerial[2] == SER_BADLINK)
     {
@@ -103,15 +113,15 @@ void    RunResponseSerialFlow2(void)
 
   if (ibFlowPortFrom == 1)
   {
-    if (mpSerial[1] == SER_POSTINPUT_SLAVE)
+    if (mpSerialF[1] == SER_POSTINPUT_SLAVE)
     {
-      mpSerial[1] = SER_BEGIN;
+      mpSerialF[1] = SER_BEGIN;
 
       cbInFlow1++;
-      iwInFlow1 = iwInBuff1;
+      iwInFlow1 = iwInBuffF[1];
 
-      memcpy(mpbOutBuff2,mpbInBuff1,iwInBuff1);
-      Query2(0xFFFF,iwInBuff1,1);
+      memcpy(mpbOutBuff2,mpbInBuffF[1],iwInBuffF[1]);
+      Query2(0xFFFF,iwInBuffF[1],1);
     }
     else if (mpSerial[2] == SER_BADLINK)
     {
@@ -134,15 +144,15 @@ void    RunResponseSerialFlow3(void)
 
   if (ibFlowPortFrom == 0)
   {
-    if (mpSerial[0] == SER_POSTINPUT_SLAVE)
+    if (mpSerialF[0] == SER_POSTINPUT_SLAVE)
     {
-      mpSerial[0] = SER_BEGIN;
+      mpSerialF[0] = SER_BEGIN;
 
       cbInFlow0++;
-      iwInFlow0 = iwInBuff0;
+      iwInFlow0 = iwInBuffF[0];
 
-      memcpy(mpbOutBuff3,mpbInBuff0,iwInBuff0);
-      Query3(0xFFFF,iwInBuff0,1);
+      memcpy(mpbOutBuff3,mpbInBuffF[0],iwInBuffF[0]);
+      Query3(0xFFFF,iwInBuffF[0],1);
     }
     else if (mpSerial[3] == SER_BADLINK)
     {
@@ -158,15 +168,15 @@ void    RunResponseSerialFlow3(void)
 
   if (ibFlowPortFrom == 1)
   {
-    if (mpSerial[1] == SER_POSTINPUT_SLAVE)
+    if (mpSerialF[1] == SER_POSTINPUT_SLAVE)
     {
-      mpSerial[1] = SER_BEGIN;
+      mpSerialF[1] = SER_BEGIN;
 
       cbInFlow1++;
-      iwInFlow1 = iwInBuff1;
+      iwInFlow1 = iwInBuffF[1];
 
-      memcpy(mpbOutBuff3,mpbInBuff1,iwInBuff1);
-      Query3(0xFFFF,iwInBuff1,1);
+      memcpy(mpbOutBuff3,mpbInBuffF[1],iwInBuffF[1]);
+      Query3(0xFFFF,iwInBuffF[1],1);
     }
     else if (mpSerial[3] == SER_BADLINK)
     {
