@@ -5,6 +5,7 @@ serial_flow.c
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "../memory/mem_ports.h"
 #include "serial_flow.h"
 
 
@@ -21,35 +22,50 @@ volatile uint       cwInDelayF[2];
 
 void    InitSerialFlow(void)
 {
-  uchar i;
-  for (i=0; i<2; i++)
+  uchar p;
+  for (p=0; p<2; p++)
   {
-    mpSerialF[i] = SER_BEGIN;
+    mpSerialF[p] = SER_BEGIN;
   }
 }
 
 
-void    InitSerialFlow(uchar  ibPrt, uchar  b)
-{
-  if (mpSerial[0] == SER_BEGIN)
-  {
-    cwInDelay0 = mpwMinorInDelay[0];
 
-    mpSerial[0] = SER_INPUT_SLAVE;
-    iwInBuff0 = 0;
+void    InSerialFlow(uchar  p, uchar  b)
+{
+  if (mpSerialF[p] == SER_BEGIN)
+  {
+    mpSerialF[p] = SER_INPUT_SLAVE;
+    iwInBuffF[p] = 0;
   }
 
-  if (mpSerial[0] == SER_INPUT_SLAVE)
+  if (mpSerialF[p] == SER_INPUT_SLAVE)
   {
-    if (iwInBuff0 >= wINBUFF_SIZE)
+    if (iwInBuffF[p] >= wINBUFF_SIZE)
     {
-      InputMode0();
-      mpSerial[0] = SER_BEGIN;
+      mpSerialF[p] = SER_BEGIN;
     }
     else
     {
-      cwInDelay0 = mpwMinorInDelay[0];
-      mpbInBuff0[ iwInBuff0++ ] = bT;
+      cwInDelayF[p] = mpwMinorInDelay[p];
+      mpbInBuffF[p][ iwInBuffF[p]++ ] = b;
+    }
+  }
+}
+
+
+
+void    InDelaySerialFlow_Timer0(void)
+{
+  uchar p;
+  for (p=0; p<2; p++)
+  {
+    if (mpSerialF[p] == SER_INPUT_SLAVE)
+    {
+      if (cwInDelayF[p] == 0)
+        mpSerialF[p] = SER_POSTINPUT_SLAVE;
+      else
+        cwInDelayF[p]--;
     }
   }
 }
