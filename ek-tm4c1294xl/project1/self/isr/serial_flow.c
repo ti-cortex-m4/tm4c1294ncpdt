@@ -84,8 +84,8 @@ void    InDelay_SerialFlow_Timer0(void)
 
 void    RunResponseSerialFlow2(void)
 {
-  if (fFlow == 0) return;
-  if ((ibFlowPortTo != 2+1) && (!IsAutoFlowTo3())) return;
+  if (!IsAutoFlowTo3()) return;
+  fFlow = 1;
 
   if (ibFlowPortFrom == 0)
   {
@@ -139,8 +139,8 @@ void    RunResponseSerialFlow2(void)
 
 void    RunResponseSerialFlow3(void)
 {
-  if (fFlow == 0) return;
-  if ((ibFlowPortTo != 3+1) && (!IsAutoFlowTo4())) return;
+  if (!IsAutoFlowTo4()) return;
+  fFlow = 1;
 
   if (ibFlowPortFrom == 0)
   {
