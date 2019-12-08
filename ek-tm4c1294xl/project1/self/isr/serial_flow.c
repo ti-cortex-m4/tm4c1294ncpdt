@@ -72,7 +72,7 @@ void    InDelay_SerialFlow_Timer0(void)
 
 
 
-void    RunResponseSerailFlow_All(void)
+void    RunResponseSerialFlow2(void)
 {
   if (fFlow == 0) return;
   if ((ibFlowPortTo != 2+1) && (!IsAutoFlowTo3())) return;
@@ -126,3 +126,64 @@ void    RunResponseSerailFlow_All(void)
   }
 }
 
+
+void    RunResponseSerialFlow3(void)
+{
+  if (fFlow == 0) return;
+  if ((ibFlowPortTo != 3+1) && (!IsAutoFlowTo4())) return;
+
+  if (ibFlowPortFrom == 0)
+  {
+    if (mpSerial[0] == SER_POSTINPUT_SLAVE)
+    {
+      mpSerial[0] = SER_BEGIN;
+
+      cbInFlow0++;
+      iwInFlow0 = iwInBuff0;
+
+      memcpy(mpbOutBuff3,mpbInBuff0,iwInBuff0);
+      Query3(0xFFFF,iwInBuff0,1);
+    }
+    else if (mpSerial[3] == SER_BADLINK)
+    {
+      mpSerial[3] = SER_BEGIN;
+
+      cbOutFlow0++;
+      iwOutFlow0 = iwInBuff3;
+
+      memcpy(mpbOutBuff0,mpbInBuff3,iwInBuff3);
+      Answer0(iwInBuff3,SER_OUTPUT_SLAVE);
+    }
+  }
+
+  if (ibFlowPortFrom == 1)
+  {
+    if (mpSerial[1] == SER_POSTINPUT_SLAVE)
+    {
+      mpSerial[1] = SER_BEGIN;
+
+      cbInFlow1++;
+      iwInFlow1 = iwInBuff1;
+
+      memcpy(mpbOutBuff3,mpbInBuff1,iwInBuff1);
+      Query3(0xFFFF,iwInBuff1,1);
+    }
+    else if (mpSerial[3] == SER_BADLINK)
+    {
+      mpSerial[3] = SER_BEGIN;
+
+      cbOutFlow1++;
+      iwOutFlow1 = iwInBuff3;
+
+      memcpy(mpbOutBuff1,mpbInBuff3,iwInBuff3);
+      Answer1(iwInBuff3,SER_OUTPUT_SLAVE);
+    }
+  }
+}
+
+
+void    RunResponseSerialFlow_All(void)
+{
+  RunResponseSerialFlow2();
+  RunResponseSerialFlow3();
+}
