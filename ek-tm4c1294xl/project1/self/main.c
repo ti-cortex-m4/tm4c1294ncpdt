@@ -41,6 +41,7 @@ MAIN,C
 #include "isr/serial1.h"
 #include "isr/serial2.h"
 #include "isr/serial3.h"
+#include "isr/serial_flow.h"
 #include "hardware/memory.h"
 #include "hardware/power_off.h"
 #include "hardware/uart_loader.h"
@@ -176,6 +177,7 @@ int     main(void)
   InitSerial1();
   InitSerial2();
   InitSerial3();
+  InitSerialFlow();
 
   InitTimer0(ui32SysClockFreq);
   InitTimer1(ui32SysClockFreq);
@@ -209,6 +211,7 @@ int     main(void)
     RunResponseEsc_All();
     RunResponseUni_All();
     RunResponseFlow_All();
+    RunResponseSerialFlow_All();
 
     RunThroughput();
   }
