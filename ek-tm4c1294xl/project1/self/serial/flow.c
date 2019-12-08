@@ -151,7 +151,7 @@ void    DelayFlow_1Hz(void)
 
 void    RunResponseFlow2(void)
 {
-  if ((fFlow == 0) || (ibFlowPortTo != 2+1)) return;
+  if ((fFlow == 0) || !((ibFlowPortTo == 2+1) || (IsAutoFlowTo3()))) return;
 
   if (ibFlowPortFrom == 0)
   {

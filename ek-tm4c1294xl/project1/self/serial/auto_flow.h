@@ -34,3 +34,6 @@ void    ResetAutoFlow(void);
 bool    IsValidAutoFlow(auto_flow  af);
 
 bool    RunAutoFlow(uchar  ibPrt);
+
+bool    IsAutoFlowTo3(void);
+bool    IsAutoFlowTo4(void);

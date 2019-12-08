@@ -8,6 +8,7 @@ auto_flow.c
 #include "../keyboard/keyboard.h"
 #include "../nvram/cache.h"
 #include "../nvram/cache2.h"
+#include "../realtime/realtime.h"
 #include "flow.h"
 #include "auto_flow.h"
 
@@ -91,4 +92,17 @@ bool    RunAutoFlow(uchar  ibPrt)
   RunFlow0();
 
   return true;
+}
+
+
+
+bool    IsAutoFlowTo3(void)
+{
+  return fAutoFlowEnbl && (mpibAutoFlowHou[GetCurrHouIndex()] == 3-1);
+}
+
+
+bool    IsAutoFlowTo4(void)
+{
+  return fAutoFlowEnbl && (mpibAutoFlowHou[GetCurrHouIndex()] == 4-1);
 }
