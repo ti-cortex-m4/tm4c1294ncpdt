@@ -52,7 +52,7 @@ void Timer0IntHandler(void)
   InDelay1_Timer0();
   InDelay2_Timer0();
   InDelay3_Timer0();
-  InDelay_SerialFlow_Timer0();
+  InDelaySerialFlow_Timer0();
 
   Pause();
 
