@@ -12,6 +12,7 @@ serial_flow.c
 #include "../memory/mem_serial3.h"
 #include "../memory/mem_flow.h"
 #include "../serial/ports.h"
+#include "../serial/auto_flow.h"
 #include "serial0.h"
 #include "serial1.h"
 #include "serial2.h"
@@ -65,7 +66,7 @@ void    InSerialFlow(uchar  p, uchar  b)
 
 
 
-void    InDelay_SerialFlow_Timer0(void)
+void    InDelaySerialFlow_Timer0(void)
 {
   uchar p;
   for (p=0; p<2; p++)
@@ -84,14 +85,15 @@ void    InDelay_SerialFlow_Timer0(void)
 
 void    RunResponseSerialFlow2(void)
 {
-  if (!IsAutoFlowTo3()) return;
-  fFlow = 1;
-
-  if (ibFlowPortFrom == 0)
-  {
     if (mpSerialF[0] == SER_POSTINPUT_SLAVE)
     {
       mpSerialF[0] = SER_BEGIN;
+
+      if (!IsAutoFlowTo3()) return;
+      if ((fFlow == 1) && (ibFlowPortFrom == 1)) return;
+
+      fFlow = 1;
+      ibFlowPortFrom = 0;
 
       cbInFlow0++;
       iwInFlow0 = iwInBuffF[0];
@@ -109,13 +111,17 @@ void    RunResponseSerialFlow2(void)
       memcpy(mpbOutBuff0,mpbInBuff2,iwInBuff2);
       Answer0(iwInBuff2,SER_OUTPUT_SLAVE);
     }
-  }
 
-  if (ibFlowPortFrom == 1)
-  {
+
     if (mpSerialF[1] == SER_POSTINPUT_SLAVE)
     {
       mpSerialF[1] = SER_BEGIN;
+
+      if (!IsAutoFlowTo3()) return;
+      if ((fFlow == 1) && (ibFlowPortFrom == 0)) return;
+
+      fFlow = 1;
+      ibFlowPortFrom = 1;
 
       cbInFlow1++;
       iwInFlow1 = iwInBuffF[1];
@@ -133,20 +139,19 @@ void    RunResponseSerialFlow2(void)
       memcpy(mpbOutBuff1,mpbInBuff2,iwInBuff2);
       Answer1(iwInBuff2,SER_OUTPUT_SLAVE);
     }
-  }
 }
 
 
 void    RunResponseSerialFlow3(void)
 {
-  if (!IsAutoFlowTo4()) return;
-  fFlow = 1;
-
-  if (ibFlowPortFrom == 0)
-  {
     if (mpSerialF[0] == SER_POSTINPUT_SLAVE)
     {
       mpSerialF[0] = SER_BEGIN;
+
+      if (!IsAutoFlowTo4()) return;
+
+      fFlow = 1;
+      ibFlowPortFrom = 0;
 
       cbInFlow0++;
       iwInFlow0 = iwInBuffF[0];
@@ -164,13 +169,15 @@ void    RunResponseSerialFlow3(void)
       memcpy(mpbOutBuff0,mpbInBuff3,iwInBuff3);
       Answer0(iwInBuff3,SER_OUTPUT_SLAVE);
     }
-  }
 
-  if (ibFlowPortFrom == 1)
-  {
     if (mpSerialF[1] == SER_POSTINPUT_SLAVE)
     {
       mpSerialF[1] = SER_BEGIN;
+
+      if (!IsAutoFlowTo4()) return;
+
+      fFlow = 1;
+      ibFlowPortFrom = 1;
 
       cbInFlow1++;
       iwInFlow1 = iwInBuffF[1];
@@ -188,7 +195,6 @@ void    RunResponseSerialFlow3(void)
       memcpy(mpbOutBuff1,mpbInBuff3,iwInBuff3);
       Answer1(iwInBuff3,SER_OUTPUT_SLAVE);
     }
-  }
 }
 
 
