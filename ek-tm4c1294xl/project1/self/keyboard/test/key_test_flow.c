@@ -33,6 +33,19 @@ void    key_TestFlow(void)
 
 void    auto_TestFlow(void)
 {
+static bool fFlowPrev;
+
+  if (fFlowPrev != fFlow)
+  {
+    ShowHi(szClear);
+    if (fFlow)
+      sprintf(szHi,"Порт %1u->%1u",ibFlowPortFrom+1,ibFlowPortTo);
+    else
+      sprintf(szHi,"Транзит");
+  }
+
+  fFlowPrev = fFlow;
+
   if (enKeyboard == KBD_POSTENTER)
   {
     Hi(14, cbFlowDelay);
