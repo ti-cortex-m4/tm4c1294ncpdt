@@ -58,7 +58,7 @@ void    InSerialFlow(uchar  p, uchar  b)
     }
     else
     {
-      cwInDelayF[p] = mpwMinorInDelay[p];
+      cwInDelayF[p] = mpwMinorInDelay[p] / 2;
       mpbInBuffF[p][ iwInBuffF[p]++ ] = b;
     }
   }

@@ -20,6 +20,7 @@ TODO: volatile
 #include "../serial/slave_modem.h"
 #include "../kernel/crc-16.h"
 #include "../hardware/uarts.h"
+#include "serial_flow.h"
 #include "serial.h"
 
 
@@ -175,6 +176,7 @@ uint32_t ui32Status;
 
       cwIn1++;
       bIn1 = bT;
+      InSerialFlow(1, bT);
 
       if ((fSendAT == 1) && (IsFlow1() == 0))
       {
