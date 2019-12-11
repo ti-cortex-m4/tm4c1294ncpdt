@@ -73,29 +73,6 @@ bool    IsValidAutoFlow(auto_flow  af)
 
 
 
-bool    RunAutoFlow(uchar  ibPrt)
-{
-  if (!fAutoFlowEnbl)
-    return false;
-
-  if (ibPrt != 0)
-    return false;
-
-//  if (mpibAutoFlowHou[GetCurrHouIndex()] != 3-1)
-//    return false;
-
-  enKeyboard = KBD_ENTER;
-  bKey = bKEY_ENTER;
-  wProgram = wTEST_AUTO_FLOW;
-  key_TestAutoFlow();
-
-  RunFlow0();
-
-  return true;
-}
-
-
-
 bool    IsAutoFlowTo3(void)
 {
   return fAutoFlowEnbl && (mpibAutoFlowHou[GetCurrHouIndex()] == 3-1);
