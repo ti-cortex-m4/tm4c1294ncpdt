@@ -290,7 +290,6 @@ RESERVE(MAX_TIMER_35, sizeof(uchar) + bNVRAM_MARGIN)
 
 RESERVE(AUTO_FLOW_ENBL, sizeof(bool) + bNVRAM_MARGIN)
 RESERVE(AUTO_FLOW_HOU, sizeof(mpibAutoFlowHou) + bNVRAM_MARGIN)
-RESERVE(AUTO_FLOW, sizeof(stAutoFlow) + bNVRAM_MARGIN)
 
 END(NVRAM_END)
 } nvram;

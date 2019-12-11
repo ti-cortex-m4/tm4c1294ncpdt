@@ -17,13 +17,11 @@ auto_flow.c
 
 bool                    fAutoFlowEnbl;
 uchar                   mpibAutoFlowHou[48];
-auto_flow               stAutoFlow;
 
 
 
 cache const             chAutoFlowEnbl = {AUTO_FLOW_ENBL, &fAutoFlowEnbl, sizeof(bool)};
 cache const             chAutoFlowHou = {AUTO_FLOW_HOU, &mpibAutoFlowHou, sizeof(mpibAutoFlowHou)};
-cache const             chAutoFlow = {AUTO_FLOW, &stAutoFlow, sizeof(stAutoFlow)};
 
 
 
@@ -32,8 +30,6 @@ void    InitAutoFlow(void)
   LoadCacheBool(&chAutoFlowEnbl, false);
 
   LoadCache(&chAutoFlowHou);
-
-  LoadCache(&chAutoFlow);
 }
 
 
@@ -48,27 +44,6 @@ void    ResetAutoFlow(void)
     mpibAutoFlowHou[i] = false;
 
   SaveCache(&chAutoFlowHou);
-
-
-  stAutoFlow.bMinuteStart = 1;
-  stAutoFlow.bMinuteStop  = 29;
-  SaveCache(&chAutoFlow);
-}
-
-
-
-bool    IsValidAutoFlow(auto_flow  af)
-{
-  if (af.bMinuteStart >= 30)
-    return false;
-
-  if (af.bMinuteStop >= 30)
-    return false;
-
-  if (af.bMinuteStart >= af.bMinuteStop)
-    return false;
-
-  return true;
 }
 
 

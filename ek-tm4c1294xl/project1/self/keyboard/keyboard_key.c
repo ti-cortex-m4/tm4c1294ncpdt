@@ -386,7 +386,6 @@ void    Keyboard_Key(void)
 
       case wSET_AUTO_FLOW_ENBL: key_SetAutoFlowEnbl();  break;
       case wSET_AUTO_FLOW_HOURS:key_SetAutoFlowHours(); break;
-      case wSET_AUTO_FLOW:      key_SetAutoFlow();      break;
 
       case wSET_DSBL_ESC:       key_SetDsblEsc();       break;
 
@@ -955,7 +954,6 @@ void    Keyboard_Key(void)
 
       case wSET_AUTO_FLOW_ENBL: key_SetAutoFlowEnbl();  break;
       case wSET_AUTO_FLOW_HOURS:key_SetAutoFlowHours(); break;
-      case wSET_AUTO_FLOW:      key_SetAutoFlow();      break;
 
       case wSET_DSBL_ESC:       key_SetDsblEsc();       break;
 
