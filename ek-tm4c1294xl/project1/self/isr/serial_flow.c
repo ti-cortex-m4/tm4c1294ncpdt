@@ -58,12 +58,17 @@ void    InSerialFlow(uchar  p, uchar  b)
     }
     else
     {
-      cwInDelayF[p] = mpwMinorInDelay[p] / 2;
+      cwInDelayF[p] = mpwMinorInDelay[p] * 10;
       mpbInBuffF[p][ iwInBuffF[p]++ ] = b;
     }
   }
 }
 
+
+void    StopSerialFlow(uchar  p)
+{
+  mpSerialF[p] = SER_BEGIN;
+}
 
 
 void    InDelaySerialFlow_Timer0(void)
