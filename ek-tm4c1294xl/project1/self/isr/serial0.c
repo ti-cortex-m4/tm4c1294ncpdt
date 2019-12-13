@@ -251,6 +251,7 @@ uint32_t ui32Status;
             {
               InputMode0();
               mpSerial[0] = SER_POSTINPUT_SLAVE_UNI;   // приём закончен: по количеству байт
+              StopSerialFlow(0);
             }
           }
         }
@@ -282,6 +283,7 @@ uint32_t ui32Status;
           {
             InputMode0();
             mpSerial[0] = SER_POSTINPUT_SLAVE;  // приём закончен: по количеству байт
+            StopSerialFlow(0);
           }
         }
         else if (mpSerial[0] == SER_PACKET_HEADER)
