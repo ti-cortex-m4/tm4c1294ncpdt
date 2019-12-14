@@ -1,11 +1,27 @@
 /*------------------------------------------------------------------------------
-timeout35.h
+flow_counters.h
 
 
 ------------------------------------------------------------------------------*/
 
-void    InitTimeoutHistogram35(void);
-void    NextDayResetTimeoutHistogram35(void);
+#ifndef __FLOW_COUNTERS
+#define __FLOW_COUNTERS
+
+
+typedef struct
+{
+  uint      wInPackets;
+  ulong     dwInBytes;
+  uint      wOutPackets;
+  ulong     dwOutBytes;
+} flow_counter;
+
+
+#endif
+
+
+void    InitFlowCounters(void);
+void    NextDayResetFlowCounters(void);
 
 void    Timeout35(uint  wTimeout);
 
