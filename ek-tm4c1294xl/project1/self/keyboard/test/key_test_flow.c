@@ -39,7 +39,7 @@ static bool fFlowPrev;
   {
     ShowHi(szClear);
     if (fFlow)
-      sprintf(szHi,"Порт %1u->%1u",ibFlowPortFrom+1,ibFlowPortTo);
+      sprintf(szHi,"Транзит %1u->%1u",ibFlowPortFrom+1,ibFlowPortTo);
     else
       sprintf(szHi,"Транзит");
   }
