@@ -79,8 +79,8 @@ void    RunFlow(void)
 {
   if (wProgram == bTEST_FLOW)
   {
-    ShowHi(szClear);
-    sprintf(szHi,"Порт %u: лимит",ibFlowPortFrom+1);
+//    ShowHi(szClear);
+//    sprintf(szHi,"Порт %u: лимит",ibFlowPortFrom+1);
 
     Clear();
     HideCurrTime(0);
@@ -152,7 +152,6 @@ void    DelayFlow_1Hz(void)
 void    RunResponseFlow2(void)
 {
   if ((fFlow == 0) || (ibFlowPortTo != 2+1)) return;
-  if (IsAutoFlowTo3()) return;
 
   if (ibFlowPortFrom == 0)
   {
@@ -207,7 +206,6 @@ void    RunResponseFlow2(void)
 void    RunResponseFlow3(void)
 {
   if ((fFlow == 0) || (ibFlowPortTo != 3+1)) return;
-  if (IsAutoFlowTo4()) return;
 
   if (ibFlowPortFrom == 0)
   {
