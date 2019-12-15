@@ -14,6 +14,10 @@ auto_flow.c
 
 
 
+//                                          0123456789ABCDEF
+char const              szByAutoFlow[]   = " автом. транзит ";
+
+
 
 bool                    fAutoFlowEnbl;
 uchar                   mpibAutoFlowHou[48];
@@ -46,6 +50,12 @@ void    ResetAutoFlow(void)
   SaveCache(&chAutoFlowHou);
 }
 
+
+
+bool    IsAutoFlowTime(void)
+{
+  return fAutoFlowEnbl && (mpibAutoFlowHou[GetCurrHouIndex()] != 0);
+}
 
 
 bool    IsAutoFlowTo3(void)
