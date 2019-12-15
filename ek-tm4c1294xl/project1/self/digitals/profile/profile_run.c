@@ -16,6 +16,7 @@ PROFILE_RUN!C
 #include "../../realtime/realtime.h"
 #include "../../serial/ports.h"
 #include "../../serial/flow.h"
+#include "../../serial/auto_flow.h"
 #include "../../serial/dtr.h"
 #include "../../sensors/device_k.h"
 #include "../../sensors/sensor26/device_u.h"
@@ -248,7 +249,11 @@ bool    StartProfile(uchar  ibCanal)
 
 void    RunProfile(bool  _fCtrlHou)
 {
-  if (boEnblProfile == true)
+  if (boEnblProfile != true)
+    BlockProgramExt(bSET_ENBL_PROFILE);
+  else if (IsAutoFlowTime())
+    BlockBy(szByAutoFlow);
+  else
   {
 #ifdef  FLOW
     CloseFlow();
@@ -262,7 +267,7 @@ void    RunProfile(bool  _fCtrlHou)
 
     if (StartProfile(0) == 1) { OpenSpecial(); DisableAnswer(); } else { Work(); OK(); }
   }
-  else BlockProgramExt(bSET_ENBL_PROFILE);
+
 }
 
 
