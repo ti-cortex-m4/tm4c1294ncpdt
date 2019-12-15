@@ -210,8 +210,8 @@ int     main(void)
     RunResponseCRC_All();
     RunResponseEsc_All();
     RunResponseUni_All();
-    RunResponseFlow_All();
     RunResponseSerialFlow_All();
+    RunResponseFlow_All();
 
     RunThroughput();
   }

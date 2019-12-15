@@ -33,6 +33,7 @@ void    BlockProgram(uchar  bA);
 void    BlockProgram2(uint  wA, bool fBeep);
 void    BlockProgramExt(uchar  bA);
 void    BlockPrograms(uchar  bA, uchar  bB);
+void    BlockBy(char const *szT);
 void    NeedProgram(uchar  bA);
 void    NeedPrograms(uchar  bA, uchar  bB);
 

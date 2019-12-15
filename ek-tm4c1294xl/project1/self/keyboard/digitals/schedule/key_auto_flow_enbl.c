@@ -12,7 +12,7 @@ key_auto_flow_enbl.c
 
 
 //                                          0123456789ABCDEF
-static char const       szMessage[]      = "Авто-транзит ?  ";
+static char const       szMessage[]      = "Автом. транзит ?";
 
 static char const       *pszMessages[]   = { szMessage, "" };
 
