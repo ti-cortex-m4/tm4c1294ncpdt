@@ -14,7 +14,7 @@ key_auto_flow_hours.c
 
 //                                         0123456789ABCDEF
 static char const       szMessage1[]    = "     График     ",
-                        szMessage2[]    = " авто-транзита  ",
+                        szMessage2[]    = "автом. транзита ",
                         szMessage3[]    = "  по получасам  ",
                         szPort3[]       = "порт 3 ",
                         szPort4[]       = "порт 4 ",

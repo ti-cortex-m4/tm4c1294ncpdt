@@ -110,6 +110,14 @@ void    BlockPrograms(uchar  bA, uchar  bB)
 }
 
 
+void    BlockBy(char const  *szT)
+{
+  ShowHi(szBlock);
+  ShowLo(szT);
+  HideCurrTime(1);
+}
+
+
 // выводит сообщение о невыполненной программе
 void    NeedProgram(uchar  bA)
 {
