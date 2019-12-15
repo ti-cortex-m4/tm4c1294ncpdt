@@ -91,12 +91,15 @@ void    InDelaySerialFlow_Timer0(void)
 
 void    RunResponseSerialFlow2(void)
 {
+  if (!IsAutoFlowTo3())
+    return;
+
   if (mpZerial[0] == SER_POSTINPUT_SLAVE)
   {
     mpZerial[0] = SER_BEGIN;
 
-    if (!IsAutoFlowTo3()) return;
-    if ((fFlow == 1) && (ibFlowPortFrom == 1)) return;
+    if ((fFlow == 1) && (ibFlowPortFrom == 1))
+      return;
 
     ibFlowPortTo = 2+1;
     RunFlow0();
@@ -107,8 +110,8 @@ void    RunResponseSerialFlow2(void)
   {
     mpZerial[1] = SER_BEGIN;
 
-    if (!IsAutoFlowTo3()) return;
-    if ((fFlow == 1) && (ibFlowPortFrom == 0)) return;
+    if ((fFlow == 1) && (ibFlowPortFrom == 0))
+      return;
 
     ibFlowPortTo = 2+1;
     RunFlow1();
@@ -118,12 +121,15 @@ void    RunResponseSerialFlow2(void)
 
 void    RunResponseSerialFlow3(void)
 {
+  if (!IsAutoFlowTo4())
+    return;
+
   if (mpZerial[0] == SER_POSTINPUT_SLAVE)
   {
     mpZerial[0] = SER_BEGIN;
 
-    if (!IsAutoFlowTo4()) return;
-    if ((fFlow == 1) && (ibFlowPortFrom == 1)) return;
+    if ((fFlow == 1) && (ibFlowPortFrom == 1))
+      return;
 
     ibFlowPortTo = 3+1;
     RunFlow0();
@@ -133,8 +139,8 @@ void    RunResponseSerialFlow3(void)
   {
     mpZerial[1] = SER_BEGIN;
 
-    if (!IsAutoFlowTo4()) return;
-    if ((fFlow == 1) && (ibFlowPortFrom == 0)) return;
+    if ((fFlow == 1) && (ibFlowPortFrom == 0))
+      return;
 
     ibFlowPortTo = 3+1;
     RunFlow1();
