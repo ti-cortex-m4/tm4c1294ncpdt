@@ -204,7 +204,10 @@ bool    StartCurrent(uchar  ibCanal)
 
 void    RunCurrent(void)
 {
-  if (boEnblCurrent == true)
+  if (boEnblCurrent != true)
+    return;
+  else if (IsAutoFlowTime())
+    return;
   {
     CloseFlow();
 
