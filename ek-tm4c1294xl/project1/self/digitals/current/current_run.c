@@ -16,6 +16,7 @@ CURRENT_RUN!C
 #include "../../keyboard/time/key_timedate.h"
 #include "../../serial/ports.h"
 #include "../../serial/flow.h"
+#include "../../serial/auto_flow.h"
 #include "../../realtime/realtime.h"
 #include "../../sensors/device_k.h"
 #include "../../sensors/sensor21/device_p.h"
