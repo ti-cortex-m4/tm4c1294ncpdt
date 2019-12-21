@@ -596,6 +596,9 @@ void    RunResponseEsc_Panel(void)
 
 void    RunResponseEsc_All(void)
 {
+  if (IsAutoFlowTime())
+    return;
+
   ibPort = 0;
   if (IsFlow0() == 0) RunResponseEsc();
 
