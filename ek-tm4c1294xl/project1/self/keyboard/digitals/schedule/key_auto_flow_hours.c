@@ -51,10 +51,15 @@ static uchar i;
   {                                           
     if (enKeyboard == KBD_ENTER)
     {
-      enKeyboard = KBD_INPUT1;
-      LoadSlide(pszMessages);
+      if (!fAutoFlowEnbl)
+        BlockProgram2(wSET_AUTO_FLOW_ENBL, true);
+      else
+      {
+        enKeyboard = KBD_INPUT1;
+        LoadSlide(pszMessages);
 
-      HalfHour();
+        HalfHour();
+      }
     } 
     else if (enKeyboard == KBD_INPUT1)
     {

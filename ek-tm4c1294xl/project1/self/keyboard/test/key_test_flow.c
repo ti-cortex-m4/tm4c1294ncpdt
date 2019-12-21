@@ -16,6 +16,15 @@ static char const       szTestFlow[]    = "Транзит         ";
 
 
 
+static void Show(void)
+{
+  if (fFlow)
+    sprintf(szHi,"Транзит %1u->%1u",ibFlowPortFrom+1,ibFlowPortTo);
+  else
+    sprintf(szHi,"Транзит");
+}
+
+
 void    key_TestFlow(void)
 {
   if (bKey == bKEY_ENTER)
@@ -26,6 +35,7 @@ void    key_TestFlow(void)
 
       ShowHi(szTestFlow);
       Clear();
+      Show();
     }
   }
 }
@@ -38,10 +48,7 @@ static bool fFlowPrev;
   if (fFlowPrev != fFlow)
   {
     ShowHi(szClear);
-    if (fFlow)
-      sprintf(szHi,"Транзит %1u->%1u",ibFlowPortFrom+1,ibFlowPortTo);
-    else
-      sprintf(szHi,"Транзит");
+    Show();
   }
 
   fFlowPrev = fFlow;
