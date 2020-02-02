@@ -56,7 +56,7 @@ bool    ValidKey(uchar  bKey)
 
     if ((enGlobal != GLB_WORK) && (wProgram == bSET_SPEED))
     {
-      if ((bKey != bKEY_PROGRAM) && (bKey != bKEY_ENTER))
+      if ((bKey != bKEY_PROGRAM) && (bKey != bKEY_ENTER) && (bKey != bKEY_MINUS))
         return ibPort != ibSetSpeedsPort;
     }
 
