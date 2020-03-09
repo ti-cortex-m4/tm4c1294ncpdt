@@ -26,6 +26,7 @@ void    Decompress36(void)
     return;
 
 //  Unpack36();
+  MonitorIn();
 
   mpSerial[ibPort] = SER_POSTINPUT_MASTER;
 }
