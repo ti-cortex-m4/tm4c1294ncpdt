@@ -3,14 +3,13 @@ AUTOMATIC36.H
 
 
 ------------------------------------------------------------------------------*/
-/*
-bool    Automatic35(void);
 
-bool    QueryConfig35_Full(uchar  bPercent);
-time2   QueryTime35_Full(uchar  bPercent);
+//bool    Automatic36(void);
+//
+//bool    QueryConfig36_Full(uchar  bPercent);
+time2   QueryTime36_Full(uchar  bPercent);
 
-time2   ReadTimeCan35(void);
-time2   ReadTimeCan35_Short(void);
-double2 ReadCntCurr35(void);
-double2 ReadCntMonCan35(uchar  ibMon);
-*/
+time2   ReadTimeCan36(void);
+//time2   ReadTimeCan36_Short(void);
+//double2 ReadCntCurr36(void);
+//double2 ReadCntMonCan36(uchar  ibMon);
