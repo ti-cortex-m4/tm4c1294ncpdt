@@ -13,8 +13,8 @@ AUTOMATIC36!C
 #include "../../devices/devices.h"
 //#include "../../sensors/automatic1.h"
 #include "../../digitals/digitals.h"
-//#include "device36.h"
-//#include "io36.h"
+#include "device36.h"
+#include "io36.h"
 #include "automatic36.h"
 
 
