@@ -26,65 +26,8 @@ IO36!C
 
 
 
-void    Query36_Stop(void)
-{
-  InitPush(0);
-
-  PushChar(0x7E);
-  PushChar(0xA0);
-  PushChar(0x07);
-  PushChar(0x03);
-  PushChar(0x03);
-  PushChar(0x53);
-  PushChar(0x80);
-  PushChar(0xD7);
-  PushChar(0x7E);
-
-  Query(1000, 9, true);
-}
-
-
-
 void    Query36(void)
 {
-  InitPush(0);
-
-  PushChar(0x7E);
-  PushChar(0xA0);
-  PushChar(0x20);
-  PushChar(0x03);
-  PushChar(0x03);
-  PushChar(0x93);
-  PushChar(0xFE);
-  PushChar(0xC9);
-  PushChar(0x81);
-  PushChar(0x80);
-  PushChar(0x14);
-  PushChar(0x05);
-  PushChar(0x02);
-  PushChar(0x00);
-  PushChar(0x80);
-  PushChar(0x06);
-  PushChar(0x02);
-  PushChar(0x00);
-  PushChar(0x80);
-  PushChar(0x07);
-  PushChar(0x04);
-  PushChar(0x00);
-  PushChar(0x00);
-  PushChar(0x00);
-  PushChar(0x01);
-  PushChar(0x08);
-  PushChar(0x04);
-  PushChar(0x00);
-  PushChar(0x00);
-  PushChar(0x00);
-  PushChar(0x01);
-  PushChar(0xCE);
-  PushChar(0x6A);
-  PushChar(0x7E);
-
-  Query(1000, 34, true);
 }
 
 
