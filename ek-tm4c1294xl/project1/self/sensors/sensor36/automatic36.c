@@ -58,16 +58,31 @@ time2   QueryTime36_Full(uchar  bPercent)
 {
   Query36_Stop();
   Input36();
-
   DelayOff();
 
   Query36_Open1();
   Input36();
-
   DelayOff();
 
   Query36_Open2();
   Input36();
+  DelayOff();
+
+  Query36_Open3();
+  Input36();
+  DelayOff();
+
+  Query36_Open4();
+  Input36(); time ti = ReadTime36();
+  DelayOff();
+
+  Query36_Open5();
+  Input36();
+  DelayOff();
+
+  Query36_Stop();
+  Input36();
+  DelayOff();
 
 /*
   uchar i;
@@ -83,7 +98,7 @@ time2   QueryTime36_Full(uchar  bPercent)
   if (i == MaxRepeats()) return GetTime2Error();
   ShowPercent(bPercent);
 */
-  return GetTime2(ReadTime36(), true);
+  return GetTime2(ti, true);
 }
 
 /*

@@ -7,13 +7,19 @@ DEVICE36!C
 #include "../../main.h"
 #include "device36.h"
 
+
+
 #include "../../serial/ports.h"
 #include "../../serial/ports2.h"
 #include "../../serial/ports_devices.h"
+#include "../../serial/monitor.h"
+
 
 
 void    Query36_Stop(void)
 {
+  MonitorString("\n Stop");
+
   InitPush(0);
 
   PushChar(0x7E);
@@ -30,9 +36,10 @@ void    Query36_Stop(void)
 }
 
 
-
 void    Query36_Open1(void)
 {
+  MonitorString("\n Open 1");
+
   InitPush(0);
 
   PushChar(0x7E);
@@ -74,9 +81,10 @@ void    Query36_Open1(void)
 }
 
 
-
 void    Query36_Open2(void)
 {
+  MonitorString("\n Open 2");
+
   InitPush(0);
 
   PushChar(0x7E);
@@ -154,12 +162,99 @@ void    Query36_Open2(void)
 }
 
 
+void    Query36_Open3(void)
+{
+  MonitorString("\n Open 3");
+
+  InitPush(0);
+
+  PushChar(0x7E);
+  PushChar(0xA0);
+  PushChar(0x07);
+  PushChar(0x03);
+  PushChar(0x03);
+  PushChar(0x31);
+  PushChar(0x94);
+  PushChar(0x97);
+  PushChar(0x7E);
+
+  Query(1000, 9, true);
+}
+
+
+void    Query36_Open4(void)
+{
+  MonitorString("\n Open 4");
+
+  InitPush(0);
+
+  PushChar(0x7E);
+  PushChar(0xA0);
+  PushChar(0x19);
+  PushChar(0x03);
+  PushChar(0x03);
+  PushChar(0x32);
+  PushChar(0xEC);
+  PushChar(0xC8);
+  PushChar(0xE6);
+  PushChar(0xE6);
+  PushChar(0x00);
+  PushChar(0xC0);
+  PushChar(0x01);
+  PushChar(0x83);
+  PushChar(0x00);
+  PushChar(0x08);
+  PushChar(0x00);
+  PushChar(0x00);
+  PushChar(0x01);
+  PushChar(0x00);
+  PushChar(0x00);
+  PushChar(0xFF);
+  PushChar(0x02);
+  PushChar(0x00);
+  PushChar(0x47);
+  PushChar(0x7C);
+  PushChar(0x7E);
+
+  Query(1000, 27, true);
+}
+
+
+void    Query36_Open5(void)
+{
+  MonitorString("\n Open 5");
+
+  InitPush(0);
+
+  PushChar(0x7E);
+  PushChar(0xA0);
+  PushChar(0x07);
+  PushChar(0x03);
+  PushChar(0x03);
+  PushChar(0x51);
+  PushChar(0x92);
+  PushChar(0xF4);
+  PushChar(0x7E);
+
+  Query(1000, 9, true);
+}
+
 
 time    ReadTime36(void)
 {
+  InitPop(8 + 9);
+
   time ti;
 
-  ti.bSecond = 0;
+  ti.bYear   = PopIntLtl() - 2000;
+  ti.bMonth  = PopChar();
+  ti.bDay    = PopChar();
+
+  PopChar();
+
+  ti.bHour   = PopChar();
+  ti.bMinute = PopChar();
+  ti.bSecond = PopChar();
 
   return ti;
 }
