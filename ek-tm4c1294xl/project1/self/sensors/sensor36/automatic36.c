@@ -56,6 +56,15 @@ bool    Automatic36(void)
 
 time2   QueryTime36_Full(uchar  bPercent)
 {
+  Query36_Stop();
+  Input36();
+
+  DelayOff();
+
+  QueryTime36();
+  Input36();
+
+/*
   uchar i;
   for (i=0; i<MaxRepeats(); i++)
   {
@@ -68,7 +77,7 @@ time2   QueryTime36_Full(uchar  bPercent)
 
   if (i == MaxRepeats()) return GetTime2Error();
   ShowPercent(bPercent);
-
+*/
   return GetTime2(ReadTime36(), true);
 }
 

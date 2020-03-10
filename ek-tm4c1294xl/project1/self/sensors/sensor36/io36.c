@@ -26,6 +26,25 @@ IO36!C
 
 
 
+void    Query36_Stop(void)
+{
+  InitPush(0);
+
+  PushChar(0x7E);
+  PushChar(0xA0);
+  PushChar(0x07);
+  PushChar(0x03);
+  PushChar(0x03);
+  PushChar(0x53);
+  PushChar(0x80);
+  PushChar(0xD7);
+  PushChar(0x7E);
+
+  Query(1000, 9, true);
+}
+
+
+
 void    Query36(void)
 {
   InitPush(0);
@@ -65,7 +84,7 @@ void    Query36(void)
   PushChar(0x6A);
   PushChar(0x7E);
 
-  Query(1000,34,true);
+  Query(1000, 34, true);
 }
 
 
