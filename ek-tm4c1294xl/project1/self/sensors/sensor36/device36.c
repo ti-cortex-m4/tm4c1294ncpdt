@@ -18,7 +18,7 @@ DEVICE36!C
 
 void    Query36_Stop(void)
 {
-  MonitorString("\n Stop");
+  MonitorString("\n\n Stop");
 
   InitPush(0);
 
@@ -38,7 +38,7 @@ void    Query36_Stop(void)
 
 void    Query36_Open1(void)
 {
-  MonitorString("\n Open 1");
+  MonitorString("\n\n Open 1");
 
   InitPush(0);
 
@@ -83,7 +83,7 @@ void    Query36_Open1(void)
 
 void    Query36_Open2(void)
 {
-  MonitorString("\n Open 2");
+  MonitorString("\n\n Open 2");
 
   InitPush(0);
 
@@ -164,7 +164,7 @@ void    Query36_Open2(void)
 
 void    Query36_Open3(void)
 {
-  MonitorString("\n Open 3");
+  MonitorString("\n\n Open 3");
 
   InitPush(0);
 
@@ -184,7 +184,7 @@ void    Query36_Open3(void)
 
 void    Query36_Open4(void)
 {
-  MonitorString("\n Open 4");
+  MonitorString("\n\n Open 4");
 
   InitPush(0);
 
@@ -222,7 +222,7 @@ void    Query36_Open4(void)
 
 void    Query36_Open5(void)
 {
-  MonitorString("\n Open 5");
+  MonitorString("\n\n Open 5");
 
   InitPush(0);
 
@@ -246,7 +246,8 @@ time    ReadTime36(void)
 
   time ti;
 
-  ti.bYear   = PopIntLtl() - 2000;
+  uint w = PopIntLtl();
+  ti.bYear   = w - 2000;
   ti.bMonth  = PopChar();
   ti.bDay    = PopChar();
 
