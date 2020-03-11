@@ -246,7 +246,7 @@ time    ReadTime36(void)
 
   time ti;
 
-  uint w = PopIntLtl();
+  uint w = PopIntBig();
   ti.bYear   = w - 2000;
   ti.bMonth  = PopChar();
   ti.bDay    = PopChar();
