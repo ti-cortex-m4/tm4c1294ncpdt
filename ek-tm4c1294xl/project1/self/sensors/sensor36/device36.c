@@ -32,6 +32,8 @@ void    Query36_Stop(void)
   PushChar(0xD7);
   PushChar(0x7E);
 
+  uint w = MakeCRC16_X25OutBuff(1, 5); MonitorIntHex(w);
+
   Query(1000, 9, true);
 }
 
