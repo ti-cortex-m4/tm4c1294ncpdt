@@ -5,6 +5,7 @@ DEVICE36!C
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
+#include "crc16_x25.h"
 #include "device36.h"
 
 
@@ -28,11 +29,12 @@ void    Query36_Stop(void)
   PushChar(0x03);
   PushChar(0x03);
   PushChar(0x53);
-  PushChar(0x80);
-  PushChar(0xD7);
-  PushChar(0x7E);
 
-  uint w = MakeCRC16_X25OutBuff(1, 5); MonitorIntHex(w);
+  PushIntLtl(MakeCRC16_X25OutBuff(1, 5));
+//  PushChar(0x80);
+//  PushChar(0xD7);
+
+  PushChar(0x7E);
 
   Query(1000, 9, true);
 }
@@ -75,8 +77,11 @@ void    Query36_Open1(void)
   PushChar(0x00);
   PushChar(0x00);
   PushChar(0x01);
-  PushChar(0xCE);
-  PushChar(0x6A);
+
+  PushIntLtl(MakeCRC16_X25OutBuff(1, 30));
+//  PushChar(0xCE);
+//  PushChar(0x6A);
+
   PushChar(0x7E);
 
   Query(1000, 34, true);
