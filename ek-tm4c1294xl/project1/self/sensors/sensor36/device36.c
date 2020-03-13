@@ -227,7 +227,7 @@ void    Query36_Open4(void)
   PushChar(0x19);
   PushChar(0x03);
   PushChar(0x03);
-  PushChar(0x32); // GET request
+  PushChar(0x32);
   
   PushChar(0xEC); // CRC ?
   PushChar(0xC8);
@@ -238,9 +238,9 @@ void    Query36_Open4(void)
   PushChar(0xE6);
   PushChar(0x00);
   
-  PushChar(0xC0);
-  PushChar(0x01);
-  PushChar(0x83);
+  PushChar(0xC0); // Get-Request
+  PushChar(0x01); // Get-Request-Normal ?
+  PushChar(0x83); // Invoke-Id-And-Priority ?
   
   PushChar(0x00);
   PushChar(0x08); // class
