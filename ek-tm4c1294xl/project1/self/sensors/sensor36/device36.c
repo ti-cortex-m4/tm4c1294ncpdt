@@ -5,21 +5,18 @@ DEVICE36!C
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
+#include "../../serial/ports.h"
+#include "../../serial/ports2.h"
+#include "../../serial/ports_devices.h"
+#include "../../serial/monitor.h"
 #include "crc16_x25.h"
 #include "device36.h"
 
 
 
-#include "../../serial/ports.h"
-#include "../../serial/ports2.h"
-#include "../../serial/ports_devices.h"
-#include "../../serial/monitor.h"
-
-
-
-void    Query36_Stop(void)
+void    Query36_DISC(void)
 {
-  MonitorString("\n\n Stop");
+  MonitorString("\n\n DISC");
 
   InitPush(0);
 
@@ -41,7 +38,7 @@ void    Query36_Stop(void)
 }
 
 
-void    Query36_Open1(void)
+void    Query36_SNRM(void)
 {
   MonitorString("\n\n Open 1");
 
@@ -96,7 +93,7 @@ void    Query36_Open1(void)
 }
 
 
-void    Query36_Open2(void)
+void    Query36_Open2(void) // the Green Book, 11.5 Encoding of the AARQ APDU
 {
   MonitorString("\n\n Open 2");
 
@@ -115,11 +112,11 @@ void    Query36_Open2(void)
 
   // DLMS start
 
-  PushChar(0xE6);
+  PushChar(0xE6); // LLC
   PushChar(0xE6);
   PushChar(0x00);
 
-  PushChar(0x60); // AARQ tag
+  PushChar(0x60);
   PushChar(0x36); // length
   
   PushChar(0xA1);
@@ -206,8 +203,9 @@ void    Query36_Open3(void)
   PushChar(0x03);
   PushChar(0x31); //
   
-  PushChar(0x94); // CRC ?
-  PushChar(0x97);
+  PushIntLtl(MakeCRC16_X25OutBuff(1, 5));
+//  PushChar(0x94); // CRC ?
+//  PushChar(0x97);
   
   PushChar(0x7E);
 
@@ -280,8 +278,9 @@ void    Query36_Open5(void)
   PushChar(0x03);
   PushChar(0x51); //
   
-  PushChar(0x92); // CRC ?
-  PushChar(0xF4);
+  PushIntLtl(MakeCRC16_X25OutBuff(1, 5));
+//  PushChar(0x92); // CRC ?
+//  PushChar(0xF4);
   
   PushChar(0x7E);
 

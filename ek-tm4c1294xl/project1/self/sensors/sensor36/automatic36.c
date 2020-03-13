@@ -56,11 +56,11 @@ bool    Automatic36(void)
 
 time2   QueryTime36_Full(uchar  bPercent)
 {
-  Query36_Stop();
+  Query36_DISC();
   Input36();
   DelayOff();
 
-  Query36_Open1();
+  Query36_SNRM();
   Input36();
   DelayOff();
 
@@ -80,7 +80,7 @@ time2   QueryTime36_Full(uchar  bPercent)
   Input36();
   DelayOff();
 
-  Query36_Stop();
+  Query36_DISC();
   Input36();
   DelayOff();
 

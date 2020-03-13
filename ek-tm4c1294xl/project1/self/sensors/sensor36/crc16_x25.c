@@ -5,7 +5,6 @@ crc16_x25.c
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-
 #include "../../memory/mem_serial0.h"
 #include "../../memory/mem_serial1.h"
 #include "../../memory/mem_serial2.h"
@@ -15,31 +14,27 @@ crc16_x25.c
 #include "../../isr/serial2.h"
 #include "../../isr/serial3.h"
 #include "../../serial/ports.h"
-
 #include "crc16_x25.h"
 
 
 
-uint MakeCRC16_X25(uchar  *pbData, uint  wSize)
+uint    MakeCRC16_X25(uchar  *pbData, uint  wSize)
 {
- uint Crc = 0xFFFF;
+ uint w = 0xFFFF;
  uchar i;
 
  while (wSize--)
  {
-  Crc = Crc ^ (*pbData++);
+  w = w ^ (*pbData++);
   for (i = 0; i < 8; i++)
   {
-   if (Crc & 1) { Crc = (Crc >> 1) ^ 0x8408; }
-   else { Crc = Crc >> 1; }
+   if (w & 1) { w = (w >> 1) ^ 0x8408; }
+   else { w = w >> 1; }
   }
  }
 
- Crc ^= 0xFFFF;
-// bCRCLo = Crc >> 8;
-// bCRCHi = Crc;
-
- return Crc;
+ w ^= 0xFFFF;
+ return w;
 }
 
 
