@@ -52,25 +52,32 @@ void    Query36_Open1(void)
   PushChar(0x03);
   PushChar(0x03);
   PushChar(0x93); // SNRM
-  PushChar(0xFE);
+  
+  PushChar(0xFE); // CRC ?
   PushChar(0xC9);
+  
   PushChar(0x81);
   PushChar(0x80);
+  
   PushChar(0x14);
+  
   PushChar(0x05);
   PushChar(0x02);
   PushChar(0x00);
   PushChar(0x80);
+  
   PushChar(0x06);
   PushChar(0x02);
   PushChar(0x00);
   PushChar(0x80);
+  
   PushChar(0x07);
   PushChar(0x04);
   PushChar(0x00);
   PushChar(0x00);
   PushChar(0x00);
   PushChar(0x01);
+  
   PushChar(0x08);
   PushChar(0x04);
   PushChar(0x00);
@@ -100,7 +107,8 @@ void    Query36_Open2(void)
   PushChar(0x03);
   PushChar(0x03);
   PushChar(0x10); // I-frame
-  PushChar(0x65);
+  
+  PushChar(0x65); // CRC ?
   PushChar(0x94);
 
   // DLMS start
@@ -173,8 +181,9 @@ void    Query36_Open2(void)
   
   // DLMS finish
   
-  PushChar(0xAF);
+  PushChar(0xAF); // CRC ?
   PushChar(0xDF);
+  
   PushChar(0x7E);
 
   Query(1000, 70, true);
@@ -193,8 +202,10 @@ void    Query36_Open3(void)
   PushChar(0x03);
   PushChar(0x03);
   PushChar(0x31); //
-  PushChar(0x94);
+  
+  PushChar(0x94); // CRC ?
   PushChar(0x97);
+  
   PushChar(0x7E);
 
   Query(1000, 9, true);
@@ -213,7 +224,8 @@ void    Query36_Open4(void)
   PushChar(0x03);
   PushChar(0x03);
   PushChar(0x32); // GET request
-  PushChar(0xEC);
+  
+  PushChar(0xEC); // CRC ?
   PushChar(0xC8);
 
   // DLMS start
@@ -261,8 +273,10 @@ void    Query36_Open5(void)
   PushChar(0x03);
   PushChar(0x03);
   PushChar(0x51); //
-  PushChar(0x92);
+  
+  PushChar(0x92); // CRC ?
   PushChar(0xF4);
+  
   PushChar(0x7E);
 
   Query(1000, 9, true);
