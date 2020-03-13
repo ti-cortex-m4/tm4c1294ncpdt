@@ -113,7 +113,7 @@ void    Query36_Open2(void)
   PushChar(0x36); // length
   
   PushChar(0xA1);
-  PushChar(0x09);
+  PushChar(0x09); // length
   PushChar(0x06);
   PushChar(0x07);
   PushChar(0x60);
@@ -125,12 +125,12 @@ void    Query36_Open2(void)
   PushChar(0x01);
   
   PushChar(0x8A);
-  PushChar(0x02);
+  PushChar(0x02); // length
   PushChar(0x07);
   PushChar(0x80);
   
   PushChar(0x8B);
-  PushChar(0x07);
+  PushChar(0x07); // length
   PushChar(0x60);
   PushChar(0x85);
   PushChar(0x74);
@@ -138,6 +138,7 @@ void    Query36_Open2(void)
   PushChar(0x08);
   PushChar(0x02);
   PushChar(0x01);
+  
   PushChar(0xAC);
   PushChar(0x0A);
   PushChar(0x80);
@@ -150,8 +151,9 @@ void    Query36_Open2(void)
   PushChar(0x45);
   PushChar(0x78);
   PushChar(0x46);
+  
   PushChar(0xBE);
-  PushChar(0x10);
+  PushChar(0x10); // length
   PushChar(0x04);
   PushChar(0x0E);
   PushChar(0x01);
