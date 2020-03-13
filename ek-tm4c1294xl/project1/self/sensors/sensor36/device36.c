@@ -170,7 +170,9 @@ void    Query36_Open2(void)
   PushChar(0x1F);
   PushChar(0x01);
   PushChar(0x00);
-
+  
+  // DLMS finish
+  
   PushChar(0xAF);
   PushChar(0xDF);
   PushChar(0x7E);
@@ -214,22 +216,30 @@ void    Query36_Open4(void)
   PushChar(0xEC);
   PushChar(0xC8);
 
-  PushChar(0xE6);
+  // DLMS start
+  
+  PushChar(0xE6); // LLC
   PushChar(0xE6);
   PushChar(0x00);
+  
   PushChar(0xC0);
   PushChar(0x01);
   PushChar(0x83);
+  
   PushChar(0x00);
-  PushChar(0x08);
-  PushChar(0x00);
+  PushChar(0x08); // class
+  
+  PushChar(0x00); // 0-0:1.0.0*255
   PushChar(0x00);
   PushChar(0x01);
   PushChar(0x00);
   PushChar(0x00);
   PushChar(0xFF);
-  PushChar(0x02);
+  
+  PushChar(0x02); // index  
   PushChar(0x00);
+
+  // DLMS finish
 
   PushChar(0x47);
   PushChar(0x7C);
