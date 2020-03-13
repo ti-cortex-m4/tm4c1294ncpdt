@@ -24,6 +24,7 @@ void    Query36_Stop(void)
   InitPush(0);
 
   PushChar(0x7E);
+  
   PushChar(0xA0);
   PushChar(0x07);
   PushChar(0x03);
@@ -47,6 +48,7 @@ void    Query36_Open1(void)
   InitPush(0);
 
   PushChar(0x7E);
+  
   PushChar(0xA0);
   PushChar(0x20);
   PushChar(0x03);
@@ -58,28 +60,27 @@ void    Query36_Open1(void)
   
   PushChar(0x81);
   PushChar(0x80);
-  
-  PushChar(0x14);
+  PushChar(0x14); // length
   
   PushChar(0x05);
-  PushChar(0x02);
+  PushChar(0x02); // length
   PushChar(0x00);
   PushChar(0x80);
   
   PushChar(0x06);
-  PushChar(0x02);
+  PushChar(0x02); // length
   PushChar(0x00);
   PushChar(0x80);
   
   PushChar(0x07);
-  PushChar(0x04);
+  PushChar(0x04); // length
   PushChar(0x00);
   PushChar(0x00);
   PushChar(0x00);
   PushChar(0x01);
   
   PushChar(0x08);
-  PushChar(0x04);
+  PushChar(0x04); // length
   PushChar(0x00);
   PushChar(0x00);
   PushChar(0x00);
@@ -102,6 +103,7 @@ void    Query36_Open2(void)
   InitPush(0);
 
   PushChar(0x7E);
+  
   PushChar(0xA0);
   PushChar(0x44);
   PushChar(0x03);
@@ -148,7 +150,7 @@ void    Query36_Open2(void)
   PushChar(0x01);
   
   PushChar(0xAC);
-  PushChar(0x0A);
+  PushChar(0x0A); // length
   PushChar(0x80);
   PushChar(0x08);
   PushChar(0x78);
@@ -197,6 +199,7 @@ void    Query36_Open3(void)
   InitPush(0);
 
   PushChar(0x7E);
+  
   PushChar(0xA0);
   PushChar(0x07);
   PushChar(0x03);
@@ -219,6 +222,7 @@ void    Query36_Open4(void)
   InitPush(0);
 
   PushChar(0x7E);
+  
   PushChar(0xA0);
   PushChar(0x19);
   PushChar(0x03);
@@ -253,8 +257,9 @@ void    Query36_Open4(void)
 
   // DLMS finish
 
-  PushChar(0x47);
+  PushChar(0x47); // CRC
   PushChar(0x7C);
+  
   PushChar(0x7E);
 
   Query(1000, 27, true);
@@ -268,6 +273,7 @@ void    Query36_Open5(void)
   InitPush(0);
 
   PushChar(0x7E);
+  
   PushChar(0xA0);
   PushChar(0x07);
   PushChar(0x03);
