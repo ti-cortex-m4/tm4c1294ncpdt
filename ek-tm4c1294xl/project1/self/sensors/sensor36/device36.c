@@ -99,9 +99,10 @@ void    Query36_Open2(void)
   PushChar(0x44);
   PushChar(0x03);
   PushChar(0x03);
-  PushChar(0x10); //
+  PushChar(0x10); // I-frame
   PushChar(0x65);
   PushChar(0x94);
+
   PushChar(0xE6);
   PushChar(0xE6);
   PushChar(0x00);
@@ -161,6 +162,7 @@ void    Query36_Open2(void)
   PushChar(0x1F);
   PushChar(0x01);
   PushChar(0x00);
+
   PushChar(0xAF);
   PushChar(0xDF);
   PushChar(0x7E);
@@ -203,6 +205,7 @@ void    Query36_Open4(void)
   PushChar(0x32); // GET request
   PushChar(0xEC);
   PushChar(0xC8);
+
   PushChar(0xE6);
   PushChar(0xE6);
   PushChar(0x00);
@@ -219,6 +222,7 @@ void    Query36_Open4(void)
   PushChar(0xFF);
   PushChar(0x02);
   PushChar(0x00);
+
   PushChar(0x47);
   PushChar(0x7C);
   PushChar(0x7E);
