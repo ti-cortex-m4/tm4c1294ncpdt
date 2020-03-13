@@ -103,11 +103,15 @@ void    Query36_Open2(void)
   PushChar(0x65);
   PushChar(0x94);
 
+  // DLMS start
+
   PushChar(0xE6);
   PushChar(0xE6);
   PushChar(0x00);
-  PushChar(0x60);
-  PushChar(0x36);
+
+  PushChar(0x60); // AARQ tag
+  PushChar(0x36); // length
+  
   PushChar(0xA1);
   PushChar(0x09);
   PushChar(0x06);
@@ -119,10 +123,12 @@ void    Query36_Open2(void)
   PushChar(0x08);
   PushChar(0x01);
   PushChar(0x01);
+  
   PushChar(0x8A);
   PushChar(0x02);
   PushChar(0x07);
   PushChar(0x80);
+  
   PushChar(0x8B);
   PushChar(0x07);
   PushChar(0x60);
