@@ -28,7 +28,7 @@ void    Query36_Stop(void)
   PushChar(0x07);
   PushChar(0x03);
   PushChar(0x03);
-  PushChar(0x53);
+  PushChar(0x53); // DISC
 
   PushIntLtl(MakeCRC16_X25OutBuff(1, 5));
 //  PushChar(0x80);
@@ -51,7 +51,7 @@ void    Query36_Open1(void)
   PushChar(0x20);
   PushChar(0x03);
   PushChar(0x03);
-  PushChar(0x93);
+  PushChar(0x93); // SNRM
   PushChar(0xFE);
   PushChar(0xC9);
   PushChar(0x81);
@@ -99,7 +99,7 @@ void    Query36_Open2(void)
   PushChar(0x44);
   PushChar(0x03);
   PushChar(0x03);
-  PushChar(0x10);
+  PushChar(0x10); //
   PushChar(0x65);
   PushChar(0x94);
   PushChar(0xE6);
@@ -180,7 +180,7 @@ void    Query36_Open3(void)
   PushChar(0x07);
   PushChar(0x03);
   PushChar(0x03);
-  PushChar(0x31);
+  PushChar(0x31); //
   PushChar(0x94);
   PushChar(0x97);
   PushChar(0x7E);
@@ -200,7 +200,7 @@ void    Query36_Open4(void)
   PushChar(0x19);
   PushChar(0x03);
   PushChar(0x03);
-  PushChar(0x32);
+  PushChar(0x32); // GET request
   PushChar(0xEC);
   PushChar(0xC8);
   PushChar(0xE6);
@@ -238,7 +238,7 @@ void    Query36_Open5(void)
   PushChar(0x07);
   PushChar(0x03);
   PushChar(0x03);
-  PushChar(0x51);
+  PushChar(0x51); //
   PushChar(0x92);
   PushChar(0xF4);
   PushChar(0x7E);
