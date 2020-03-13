@@ -215,9 +215,9 @@ void    Query36_Open3(void)
 }
 
 
-void    Query36_Open4(void)
+void    Query36_GetTime(void)
 {
-  MonitorString("\n\n Open 4");
+  MonitorString("\n\n GetTime");
 
   InitPush(0);
 
@@ -294,9 +294,7 @@ time    ReadTime36(void)
   InitPop(8 + 9);
 
   time ti;
-
-  uint w = PopIntBig();
-  ti.bYear   = w - 2000;
+  ti.bYear   = PopIntBig() - 2000;
   ti.bMonth  = PopChar();
   ti.bDay    = PopChar();
 

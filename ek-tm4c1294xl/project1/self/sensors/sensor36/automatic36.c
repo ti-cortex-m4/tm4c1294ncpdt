@@ -72,7 +72,7 @@ time2   QueryTime36_Full(uchar  bPercent)
   Input36();
   DelayOff();
 
-  Query36_Open4();
+  Query36_GetTime();
   Input36(); time ti = ReadTime36();
   DelayOff();
 
