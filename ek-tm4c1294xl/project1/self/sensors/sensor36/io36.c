@@ -64,5 +64,6 @@ serial  Input36(void)
              (mpSerial[ibPort] == SER_BADLINK)) break;
   }
 
+  MonitorInput36();
   return mpSerial[ibPort];
 }
