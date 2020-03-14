@@ -15,13 +15,8 @@ IO36!C
 #include "../../serial/input_wrapper.h"
 #include "../../serial/monitor.h"
 #include "../../digitals/wait_answer.h"
-//#include "include35.h"
 #include "unpack36.h"
-//#include "router35.h"
-//#include "device35.h"
-//#include "action35.h"
-//#include "timer35.h"
-//#include "log35.h"
+#include "monitor36.h"
 #include "io36.h"
 
 
