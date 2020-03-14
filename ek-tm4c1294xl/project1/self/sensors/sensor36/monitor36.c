@@ -11,30 +11,16 @@ monitor36.c
 
 
 
-void    MonitorOutput36(void)
-{
-}
-
-
-
-void    MonitorInput36(void)
-{
-//  MonitorString("\n");
-  InitPop(1);
-
-  uint wFormat = PopIntLtl();
-  MonitorString("\n Format"); MonitorIntHex(wFormat);
-
-  PopChar();
-  PopChar();
-
-  uchar bControl = PopIntLtl();
+static void MonitorControl(uchar  bControl) {
   MonitorString("\n Control="); MonitorCharHex(bControl);
 
   if ((bControl & 0x01) == 0x00) {
     MonitorString(" I-frame");
+    MonitorString(" N(R)=");  MonitorCharDec((bControl & 0xE0) >> 5);
+    MonitorString(" N(S)=");  MonitorCharDec((bControl & 0x0E) >> 1);
   } else if ((bControl & 0x03) == 0x01) {
     MonitorString(" S-frame");
+    MonitorString(" N(R)=");  MonitorCharDec((bControl & 0xE0) >> 5);
   } else if ((bControl & 0x03) == 0x03) {
     MonitorString(" U-frame");
   }
@@ -44,4 +30,27 @@ void    MonitorInput36(void)
   } else {
     MonitorString(" F=1");
   }
+}
+
+
+
+void    MonitorOutput36(void)
+{
+  MonitorString("\n Format="); MonitorCharHex(OutBuff(1)); MonitorCharHex(OutBuff(2));
+  MonitorControl(OutBuff(5));
+}
+
+
+
+void    MonitorInput36(void)
+{
+  InitPop(1);
+
+  uint wFormat = PopIntLtl();
+  MonitorString("\n Format="); MonitorIntHex(wFormat);
+
+  PopChar();
+  PopChar();
+
+  MonitorControl(PopChar());
 }

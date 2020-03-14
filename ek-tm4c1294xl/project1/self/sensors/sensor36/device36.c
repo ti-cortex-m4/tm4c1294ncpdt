@@ -10,6 +10,7 @@ DEVICE36!C
 #include "../../serial/ports_devices.h"
 #include "../../serial/monitor.h"
 #include "crc16_x25.h"
+#include "io36.h"
 #include "device36.h"
 
 
@@ -34,7 +35,7 @@ void    Query36_DISC(void)
 
   PushChar(0x7E);
 
-  Query(1000, 9, true);
+  Query36(1000, 9);
 }
 
 
@@ -89,7 +90,7 @@ void    Query36_SNRM(void)
 
   PushChar(0x7E);
 
-  Query(1000, 34, true);
+  Query36(1000, 34);
 }
 
 
@@ -185,7 +186,7 @@ void    Query36_Open2(void) // the Green Book, 11.5 Encoding of the AARQ APDU
   
   PushChar(0x7E);
 
-  Query(1000, 70, true);
+  Query36(1000, 70);
 }
 
 
@@ -209,7 +210,7 @@ void    Query36_Open3(void)
   
   PushChar(0x7E);
 
-  Query(1000, 9, true);
+  Query36(1000, 9);
 }
 
 
@@ -260,7 +261,7 @@ void    Query36_GetTime(void)
   
   PushChar(0x7E);
 
-  Query(1000, 27, true);
+  Query36(1000, 27);
 }
 
 
@@ -284,7 +285,7 @@ void    Query36_Open5(void)
   
   PushChar(0x7E);
 
-  Query(1000, 9, true);
+  Query36(1000, 9);
 }
 
 

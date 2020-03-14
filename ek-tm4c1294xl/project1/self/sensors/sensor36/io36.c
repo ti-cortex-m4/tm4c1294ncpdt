@@ -21,8 +21,10 @@ IO36!C
 
 
 
-void    Query36(void)
+void    Query36(uint  cwIn, uchar  cbOut)
 {
+  MonitorOutput36();
+  Query(cwIn, cbOut, true);
 }
 
 
