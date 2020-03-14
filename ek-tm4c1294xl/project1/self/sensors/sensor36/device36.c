@@ -238,7 +238,7 @@ void    Query36_GetTime(void)
   
   PushChar(0xC0); // Get-Request
   PushChar(0x01); // Get-Request-Normal ?
-  PushChar(0x83); // Invoke-Id-And-Priority ?
+  PushChar(0x83); // Invoke-Id-And-Priority ???
   
   PushChar(0x00);
   PushChar(0x08); // class
