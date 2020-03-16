@@ -109,7 +109,7 @@ void    Query36_Open2(void) // the Green Book, 11.5 Encoding of the AARQ APDU
 
   uchar bNR = 0;
   uchar bNS = 0;
-  MonitorString("Control{R(R)=0,N(S)=0} 10 ? "); MonitorCharHex((bNR << 5) | 0x10 | (bNS << 1) | 0x00);
+  MonitorString("Control{N(R)=0,N(S)=0} 10 ? "); MonitorCharHex((bNR << 5) | 0x10 | (bNS << 1) | 0x00);
   PushChar(0x10); // I-frame
   
   PushChar(0x65); // CRC ?
@@ -208,8 +208,7 @@ void    Query36_Open3(void)
   PushChar(0x03);
 
   uchar bNR = 1;
-  uchar bNS = 0;
-  MonitorString("Control{R(R)=1,N(S)=0} 31 ? "); MonitorCharHex((bNR << 5) | 0x10 | 0x01);
+  MonitorString("Control{R(R)=1} 31 ? "); MonitorCharHex((bNR << 5) | 0x10 | 0x01);
   PushChar(0x31); //
   
   PushIntLtl(MakeCRC16_X25OutBuff(1, 5));
@@ -237,7 +236,7 @@ void    Query36_GetTime(void)
 
   uchar bNR = 1;
   uchar bNS = 1;
-  MonitorString("Control{N(R)=1,N(S)=1} 10 ? "); MonitorCharHex((bNR << 5) | 0x10 | (bNS << 1) | 0x00);
+  MonitorString("Control{N(R)=1,N(S)=1} 32 ? "); MonitorCharHex((bNR << 5) | 0x10 | (bNS << 1) | 0x00);
   PushChar(0x32);
   
   PushChar(0xEC); // CRC ?
@@ -290,9 +289,8 @@ void    Query36_Open5(void)
   PushChar(0x03);
   PushChar(0x03);
 
-  uchar bNR = w;
-  uchar bNS = 1;
-  MonitorString("Control{N(R)=2,N(S)=0} 32 ? "); MonitorCharHex((bNR << 5) | 0x10 | 0x01);
+  uchar bNR = 2;
+  MonitorString("Control{N(R)=2} 51 ? "); MonitorCharHex((bNR << 5) | 0x10 | 0x01);
   PushChar(0x51); //
   
   PushIntLtl(MakeCRC16_X25OutBuff(1, 5));
