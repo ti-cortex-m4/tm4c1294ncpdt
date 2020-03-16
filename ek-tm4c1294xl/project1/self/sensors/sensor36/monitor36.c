@@ -39,6 +39,8 @@ static void MonitorControl(uchar  bControl) {
     MonitorString(" RNR");
   } else if ((bControl & 0xEF) == 0x83) {
     MonitorString(" SNRM");
+  } else if ((bControl & 0xEF) == 0x43) {
+    MonitorString(" DISC");
   } else if ((bControl & 0xEF) == 0x63) {
     MonitorString(" UA");
   } else if ((bControl & 0xEF) == 0x0F) {
@@ -47,6 +49,8 @@ static void MonitorControl(uchar  bControl) {
     MonitorString(" FRMR");
   } else if ((bControl & 0xEF) == 0x03) {
     MonitorString(" UI");
+  } else {
+    MonitorString(" ?");
   }
 }
 
