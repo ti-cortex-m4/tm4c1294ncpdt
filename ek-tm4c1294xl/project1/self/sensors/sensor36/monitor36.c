@@ -30,6 +30,24 @@ static void MonitorControl(uchar  bControl) {
   } else {
     MonitorString(" F=1");
   }
+
+  if ((bControl & 0x01) == 0x00) {
+    MonitorString(" I");
+  } else if ((bControl & 0x0F) == 0x01) {
+    MonitorString(" RR");
+  } else if ((bControl & 0x0F) == 0x05) {
+    MonitorString(" RNR");
+  } else if ((bControl & 0xEF) == 0x83) {
+    MonitorString(" SNRM");
+  } else if ((bControl & 0xEF) == 0x63) {
+    MonitorString(" UA");
+  } else if ((bControl & 0xEF) == 0x0F) {
+    MonitorString(" DM");
+  } else if ((bControl & 0xEF) == 0x87) {
+    MonitorString(" FRMR");
+  } else if ((bControl & 0xEF) == 0x03) {
+    MonitorString(" UI");
+  }
 }
 
 
