@@ -94,9 +94,10 @@ void    Query36_SNRM(void)
 }
 
 
-void    Query36_Open2(void) // the Green Book, 11.5 Encoding of the AARQ APDU
+// Green Book, 11.5 Encoding of the AARQ APDU
+void    Query36_Open2(uchar  bNS, uchar  bNR)
 {
-  MonitorString("\n\n Open 2");
+  MonitorString("\n\n Open 2 ");
 
   InitPush(0);
 
@@ -107,8 +108,8 @@ void    Query36_Open2(void) // the Green Book, 11.5 Encoding of the AARQ APDU
   PushChar(0x03);
   PushChar(0x03);
 
-  uchar bNR = 0;
-  uchar bNS = 0;
+  bNS = 0;
+  bNR = 0;
   MonitorString("Control{N(R)=0,N(S)=0} 10 ? "); MonitorCharHex((bNR << 5) | 0x10 | (bNS << 1) | 0x00);
   PushChar(0x10); // I-frame
   
@@ -194,9 +195,9 @@ void    Query36_Open2(void) // the Green Book, 11.5 Encoding of the AARQ APDU
 }
 
 
-void    Query36_Open3(void)
+void    Query36_Open3(uchar  bNR)
 {
-  MonitorString("\n\n Open 3");
+  MonitorString("\n\n Open 3 ");
 
   InitPush(0);
 
@@ -207,7 +208,6 @@ void    Query36_Open3(void)
   PushChar(0x03);
   PushChar(0x03);
 
-  uchar bNR = 1;
   MonitorString("Control{R(R)=1} 31 ? "); MonitorCharHex((bNR << 5) | 0x10 | 0x01);
   PushChar(0x31); //
   
@@ -221,9 +221,9 @@ void    Query36_Open3(void)
 }
 
 
-void    Query36_GetTime(void)
+void    Query36_GetTime(uchar  bNS, uchar  bNR)
 {
-  MonitorString("\n\n GetTime");
+  MonitorString("\n\n GetTime ");
 
   InitPush(0);
 
@@ -234,8 +234,6 @@ void    Query36_GetTime(void)
   PushChar(0x03);
   PushChar(0x03);
 
-  uchar bNR = 1;
-  uchar bNS = 1;
   MonitorString("Control{N(R)=1,N(S)=1} 32 ? "); MonitorCharHex((bNR << 5) | 0x10 | (bNS << 1) | 0x00);
   PushChar(0x32);
   
@@ -276,9 +274,9 @@ void    Query36_GetTime(void)
 }
 
 
-void    Query36_Open5(void)
+void    Query36_Open5(uchar  bNR)
 {
-  MonitorString("\n\n Open 5");
+  MonitorString("\n\n Open 5 ");
 
   InitPush(0);
 
@@ -289,7 +287,6 @@ void    Query36_Open5(void)
   PushChar(0x03);
   PushChar(0x03);
 
-  uchar bNR = 2;
   MonitorString("Control{N(R)=2} 51 ? "); MonitorCharHex((bNR << 5) | 0x10 | 0x01);
   PushChar(0x51); //
   
