@@ -83,7 +83,7 @@ time2   QueryTime36_Full(uchar  bPercent)
   DelayOff();
 
   bNR = 2;
-  Query36_Open5(bNR);
+  Query36_Open3(bNR);
   Input36();
   DelayOff();
 

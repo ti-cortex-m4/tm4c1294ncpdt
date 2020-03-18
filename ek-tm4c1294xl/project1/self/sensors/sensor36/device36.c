@@ -209,11 +209,9 @@ void    Query36_Open3(uchar  bNR)
   PushChar(0x03);
 
   MonitorString("Control{R(R)=1} 31 ? "); MonitorCharHex((bNR << 5) | 0x10 | 0x01);
-  PushChar(0x31); //
+  PushChar((bNR << 5) | 0x10 | 0x01);
   
   PushIntLtl(MakeCRC16_X25OutBuff(1, 5));
-//  PushChar(0x94); // CRC ?
-//  PushChar(0x97);
   
   PushChar(0x7E);
 
@@ -273,7 +271,7 @@ void    Query36_GetTime(uchar  bNS, uchar  bNR)
   Query36(1000, 27);
 }
 
-
+/*
 void    Query36_Open5(uchar  bNR)
 {
   MonitorString("\n\n Open 5 ");
@@ -288,17 +286,15 @@ void    Query36_Open5(uchar  bNR)
   PushChar(0x03);
 
   MonitorString("Control{N(R)=2} 51 ? "); MonitorCharHex((bNR << 5) | 0x10 | 0x01);
-  PushChar(0x51); //
+  PushChar((bNR << 5) | 0x10 | 0x01);
   
   PushIntLtl(MakeCRC16_X25OutBuff(1, 5));
-//  PushChar(0x92); // CRC ?
-//  PushChar(0xF4);
   
   PushChar(0x7E);
 
   Query36(1000, 9);
 }
-
+*/
 
 time    ReadTime36(void)
 {
