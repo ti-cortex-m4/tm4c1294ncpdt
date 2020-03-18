@@ -9,7 +9,7 @@ void    Query36_SNRM(void);
 void    Query36_Open2(uchar  bNS, uchar  bNR);
 void    Query36_Open3(uchar  bNR);
 void    Query36_GetTime(uchar  bNS, uchar  bNR);
-void    Query36_Open5(uchar  bNR);
+//void    Query36_Open5(uchar  bNR);
 
 void    QueryTime36(void);
 time    ReadTime36(void);
