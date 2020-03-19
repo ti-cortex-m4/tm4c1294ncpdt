@@ -16,13 +16,26 @@ DEVICE36!C
 
 
 
-static addr36 GetAddr36(void)
+static addr36 GetAddr(void)
 {
   addr36 addr;
-  addr.cBuff.cBuff[0] = 0x03;
-  addr.cBuff.cBuff[1] = 0x03;
+  addr.cBuff.mpbBuff[0] = 0x03;
+  addr.cBuff.mpbBuff[1] = 0x03;
   addr.bSize = 2;
   return addr;
+}
+
+
+static void PushFormat(uint  wSize)
+{
+  PushIntBig(wSize | 0xA000);
+}
+
+
+static void PushAddr(addr36 addr)
+{
+  PushChar(addr.cBuff.mpbBuff[0]);
+  PushChar(addr.cBuff.mpbBuff[1]);
 }
 
 
@@ -32,13 +45,19 @@ void    Query36_DISC(void)
   MonitorString("\n\n DISC");
 
   InitPush(0);
+  addr36 addr = GetAddr();
+  uint wSize = 5 + addr.bSize;
 
   PushChar(0x7E);
   
-  PushChar(0xA0);
-  PushChar(0x07);
-  PushChar(0x03);
-  PushChar(0x03);
+  PushFormat(wSize);
+//  PushChar(0xA0);
+//  PushChar(0x07);
+
+  PushAddr(addr);
+//  PushChar(0x03);
+//  PushChar(0x03);
+
   PushChar(0x53); // DISC
 
   PushIntLtl(MakeCRC16_X25OutBuff(1, 5));
