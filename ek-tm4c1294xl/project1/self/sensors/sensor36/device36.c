@@ -9,9 +9,21 @@ DEVICE36!C
 #include "../../serial/ports2.h"
 #include "../../serial/ports_devices.h"
 #include "../../serial/monitor.h"
+#include "include36.h"
 #include "crc16_x25.h"
 #include "io36.h"
 #include "device36.h"
+
+
+
+static addr36 GetAddr36(void)
+{
+  addr36 addr;
+  addr.cBuff.cBuff[0] = 0x03;
+  addr.cBuff.cBuff[1] = 0x03;
+  addr.bSize = 2;
+  return addr;
+}
 
 
 
@@ -197,7 +209,7 @@ void    Query36_Open2(uchar  bNS, uchar  bNR)
 
 void    Query36_Open3(uchar  bNR)
 {
-  MonitorString("\n\n Open 3 ");
+  MonitorString("\n\n RR");
 
   InitPush(0);
 
@@ -208,7 +220,7 @@ void    Query36_Open3(uchar  bNR)
   PushChar(0x03);
   PushChar(0x03);
 
-  MonitorString("Control{R(R)=1} 31 ? "); MonitorCharHex((bNR << 5) | 0x10 | 0x01);
+  //MonitorString("Control{R(R)=1} 31 ? "); MonitorCharHex((bNR << 5) | 0x10 | 0x01);
   PushChar((bNR << 5) | 0x10 | 0x01);
   
   PushIntLtl(MakeCRC16_X25OutBuff(1, 5));
@@ -246,7 +258,7 @@ void    Query36_GetTime(uchar  bNS, uchar  bNR)
   
   PushChar(0xC0); // Get-Request
   PushChar(0x01); // Get-Request-Normal ?
-  PushChar(0x83); // Invoke-Id-And-Priority ???
+  PushChar(0x83); // Invoke-Id-And-Priority TODO ??? 0x81
   
   PushChar(0x00);
   PushChar(0x08); // class
