@@ -71,13 +71,13 @@ void    MonitorInput36(void)
   MonitorString("\n Input:");
   InitPop(1);
 
-  uint wFormat = PopIntLtl();
+  uint wFormat = PopIntBig();
   MonitorString(" Format="); MonitorIntHex(wFormat);
 
   uint wSize = wFormat & 0x0FFF;
   MonitorString(" wSize="); MonitorIntHex(wSize);
 
-  MonitorString(" CRC="); MonitorIntHex(MakeCRC16_X25InBuff(1, wSize-4));
+  MonitorString(" CRC="); MonitorIntHex(MakeCRC16_X25InBuff(1, wSize-2));
 
   PopChar();
   PopChar();
