@@ -74,6 +74,11 @@ void    MonitorInput36(void)
   uint wFormat = PopIntLtl();
   MonitorString(" Format="); MonitorIntHex(wFormat);
 
+  uint wSize = wFormat & 0x0FFF;
+  MonitorString(" wSize="); MonitorIntHex(wSize);
+
+  MonitorString(" CRC="); MonitorIntHex(MakeCRC16_X25InBuff(1, wSize-4));
+
   PopChar();
   PopChar();
 
