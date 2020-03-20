@@ -77,14 +77,7 @@ void    MonitorInput36(void)
   uint wSize = wFormat & 0x0FFF;
   MonitorString(" wSize="); MonitorIntHex(wSize);
 
-//  MonitorString(" CRC1="); MonitorIntHex(MakeCRC16_X25InBuff(1, 1));
-//  MonitorString(" CRC2="); MonitorIntHex(MakeCRC16_X25InBuff(1, 2));
-//  MonitorString(" CRC3="); MonitorIntHex(MakeCRC16_X25InBuff(1, 3));
-//  MonitorString(" CRC4="); MonitorIntHex(MakeCRC16_X25InBuff(1, 4));
-//  MonitorString(" CRC5="); MonitorIntHex(MakeCRC16_X25InBuff(1, 5));
-//  MonitorString(" CRC6="); MonitorIntHex(MakeCRC16_X25InBuff(1, 6));
-//  MonitorString(" CRC7="); MonitorIntHex(MakeCRC16_X25InBuff(1, 7));
-//  MonitorString(" CRC8="); MonitorIntHex(MakeCRC16_X25InBuff(1, 8));
+  MonitorString(" CRC="); MonitorIntHex(MakeCRC16_X25InBuff(1, wSize-2));
 
   PopChar();
   PopChar();
