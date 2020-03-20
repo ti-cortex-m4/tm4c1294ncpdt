@@ -47,7 +47,7 @@ void    Query36_DISC(void)
   InitPush(0);
 
   addr36 addr = GetAddr();
-  uint wSize = 5 + addr.bSize;
+  uint wSize = 5 + addr.bSize; // 7
 
   PushChar(0x7E);
   PushFormat(wSize);
@@ -58,7 +58,7 @@ void    Query36_DISC(void)
 //  PushChar(0x03);
   PushChar(0x53); // DISC
 
-  PushIntLtl(MakeCRC16_X25OutBuff(1, 5));
+  PushIntLtl(MakeCRC16_X25OutBuff(1, wSize-2)); // 5
 //  PushChar(0x80);
 //  PushChar(0xD7);
 
@@ -73,7 +73,7 @@ void    Query36_SNRM(void)
   MonitorString("\n\n SNRM");
 
   addr36 addr = GetAddr();
-  uint wSize = 0x20; // ? + addr.bSize;
+  uint wSize = 30 + addr.bSize; // 32
 
   InitPush(0);
   PushChar(0x7E);
@@ -118,13 +118,13 @@ void    Query36_SNRM(void)
   PushChar(0x00);
   PushChar(0x01);
 
-  PushIntLtl(MakeCRC16_X25OutBuff(1, 30));
+  PushIntLtl(MakeCRC16_X25OutBuff(1, wSize-2)); // 30
 //  PushChar(0xCE);
 //  PushChar(0x6A);
 
   PushChar(0x7E);
 
-  Query36(1000, 34);
+  Query36(1000, wSize+2); // 34
 }
 
 
@@ -133,22 +133,27 @@ void    Query36_Open2(uchar  bNS, uchar  bNR)
 {
   MonitorString("\n\n Open 2 ");
 
-  InitPush(0);
+  addr36 addr = GetAddr();
+  uint wSize = 66 + addr.bSize; // 0x44 68
 
+  InitPush(0);
   PushChar(0x7E);
   
-  PushChar(0xA0);
-  PushChar(0x44);
-  PushChar(0x03);
-  PushChar(0x03);
+  PushFormat(wSize);
+//  PushChar(0xA0);
+//  PushChar(0x44);
+  PushAddr(addr);
+//  PushChar(0x03);
+//  PushChar(0x03);
 
   bNS = 0;
   bNR = 0;
   MonitorString("Control{N(R)=0,N(S)=0} 10 ? "); MonitorCharHex((bNR << 5) | 0x10 | (bNS << 1) | 0x00);
   PushChar(0x10); // I-frame
   
-  PushChar(0x65); // CRC ?
-  PushChar(0x94);
+  PushIntLtl(MakeCRC16_X25OutBuff(1, 5));
+//  PushChar(0x65); // CRC ?
+//  PushChar(0x94);
 
   // DLMS start
 
@@ -220,12 +225,13 @@ void    Query36_Open2(uchar  bNS, uchar  bNR)
   
   // DLMS finish
   
-  PushChar(0xAF); // CRC ?
-  PushChar(0xDF);
+  PushIntLtl(MakeCRC16_X25OutBuff(1, wSize-2));
+//  PushChar(0xAF); // CRC ?
+//  PushChar(0xDF);
   
   PushChar(0x7E);
 
-  Query36(1000, 70);
+  Query36(1000, wSize+2); // 70
 }
 
 
@@ -233,11 +239,10 @@ void    Query36_RR(uchar  bNR)
 {
   MonitorString("\n\n RR");
 
-  InitPush(0);
-
   addr36 addr = GetAddr();
   uint wSize = 5 + addr.bSize;
 
+  InitPush(0);
   PushChar(0x7E);
   PushFormat(wSize);
 //  PushChar(0xA0);
@@ -249,7 +254,7 @@ void    Query36_RR(uchar  bNR)
   //MonitorString("Control{R(R)=1} 31 ? "); MonitorCharHex((bNR << 5) | 0x10 | 0x01);
   PushChar((bNR << 5) | 0x10 | 0x01);
   
-  PushIntLtl(MakeCRC16_X25OutBuff(1, 5));
+  PushIntLtl(MakeCRC16_X25OutBuff(1, wSize-2)); // 5
   PushChar(0x7E);
 
   Query36(1000, wSize+2); // 9
@@ -260,20 +265,25 @@ void    Query36_GetTime(uchar  bNS, uchar  bNR)
 {
   MonitorString("\n\n GetTime ");
 
-  InitPush(0);
+  addr36 addr = GetAddr();
+  uint wSize = 23 + addr.bSize; // 0x19 25
 
+  InitPush(0);
   PushChar(0x7E);
   
-  PushChar(0xA0);
-  PushChar(0x19);
-  PushChar(0x03);
-  PushChar(0x03);
+  PushFormat(wSize);
+//  PushChar(0xA0);
+//  PushChar(0x19);
+  PushAddr(addr);
+//  PushChar(0x03);
+//  PushChar(0x03);
 
   MonitorString("Control{N(R)=1,N(S)=1} 32 ? "); MonitorCharHex((bNR << 5) | 0x10 | (bNS << 1) | 0x00);
   PushChar(0x32);
   
-  PushChar(0xEC); // CRC ?
-  PushChar(0xC8);
+  PushIntLtl(MakeCRC16_X25OutBuff(1, 5));
+//  PushChar(0xEC); // CRC ?
+//  PushChar(0xC8);
 
   // DLMS start
   
@@ -300,12 +310,13 @@ void    Query36_GetTime(uchar  bNS, uchar  bNR)
 
   // DLMS finish
 
-  PushChar(0x47); // CRC
-  PushChar(0x7C);
+  PushIntLtl(MakeCRC16_X25OutBuff(1, wSize-2));
+//  PushChar(0x47); // CRC
+//  PushChar(0x7C);
   
   PushChar(0x7E);
 
-  Query36(1000, 27);
+  Query36(1000, wSize+2); // 27
 }
 
 /*
