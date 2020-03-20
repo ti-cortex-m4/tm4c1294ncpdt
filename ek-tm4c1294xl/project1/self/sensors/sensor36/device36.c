@@ -72,18 +72,23 @@ void    Query36_SNRM(void)
 {
   MonitorString("\n\n SNRM");
 
-  InitPush(0);
+  addr36 addr = GetAddr();
+  uint wSize = 0x20; // ? + addr.bSize;
 
+  InitPush(0);
   PushChar(0x7E);
   
-  PushChar(0xA0);
-  PushChar(0x20);
-  PushChar(0x03);
-  PushChar(0x03);
+  PushFormat(wSize);
+//  PushChar(0xA0);
+//  PushChar(0x20);
+  PushAddr(addr);
+//  PushChar(0x03);
+//  PushChar(0x03);
   PushChar(0x93); // SNRM
   
-  PushChar(0xFE); // CRC ?
-  PushChar(0xC9);
+  PushIntLtl(MakeCRC16_X25OutBuff(1, 5));
+//  PushChar(0xFE); // CRC ?
+//  PushChar(0xC9);
   
   PushChar(0x81);
   PushChar(0x80);
