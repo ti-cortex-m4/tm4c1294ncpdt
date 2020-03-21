@@ -20,7 +20,7 @@ DEVICE36!C
 #define ADDR_4
 
 
-static addr36 GetAddr(void)
+addr36 GetAddr(void)
 {
 #ifndef ADDR_4
   addr36 addr;
@@ -35,12 +35,15 @@ static addr36 GetAddr(void)
 
   uint wAddr = 1230;
 
-  addr.cBuff.mpbBuff[3] = wAddr / 0x100;
-  addr.cBuff.mpbBuff[4] = wAddr % 0x100;
+  uchar b3 = wAddr / 0x100;
+  uchar b4 = wAddr % 0x100;
 
-  addr.cBuff.mpbBuff[3]   = (addr.cBuff.mpbBuff[3] << 2) & 0xFC;
-  if(addr.cBuff.mpbBuff[4] & 0x80) addr.cBuff.mpbBuff[3] |= 0x02;
-  addr.cBuff.mpbBuff[4] = (addr.cBuff.mpbBuff[4] << 1) | 0x01;
+  b3 = (b3 << 2) & 0xFC;
+  if (b4 & 0x80) b3 |= 0x02;
+  b4 = (b4 << 1) | 0x01;
+
+  addr.cBuff.mpbBuff[2] = b3 % 0x100;
+  addr.cBuff.mpbBuff[3] = b4 % 0x100;
 
   addr.bSize = 4+1;
   return addr;
@@ -89,7 +92,7 @@ void    Query36_DISC(void)
 //  PushChar(0x03);
   PushChar(0x53); // DISC
 
-  PushIntLtl(MakeCRC16_X25OutBuff(1, wSize-2)); // 5
+  PushIntLtl(MakeCRC16_X25OutBuff(1, 3+addr.bSize)); // 5
 //  PushChar(0x80);
 //  PushChar(0xD7);
 
@@ -117,7 +120,7 @@ void    Query36_SNRM(void)
 //  PushChar(0x03);
   PushChar(0x93); // SNRM
   
-  PushIntLtl(MakeCRC16_X25OutBuff(1, 5));
+  PushIntLtl(MakeCRC16_X25OutBuff(1, 3+addr.bSize)); // 5
 //  PushChar(0xFE); // CRC ?
 //  PushChar(0xC9);
   
@@ -182,7 +185,7 @@ void    Query36_Open2(uchar  bNS, uchar  bNR)
   MonitorString("Control{N(R)=0,N(S)=0} 10 ? "); MonitorCharHex((bNR << 5) | 0x10 | (bNS << 1) | 0x00);
   PushChar(0x10); // I-frame
   
-  PushIntLtl(MakeCRC16_X25OutBuff(1, 5));
+  PushIntLtl(MakeCRC16_X25OutBuff(1, 3+addr.bSize)); // 5
 //  PushChar(0x65); // CRC ?
 //  PushChar(0x94);
 
@@ -285,7 +288,7 @@ void    Query36_RR(uchar  bNR)
   //MonitorString("Control{R(R)=1} 31 ? "); MonitorCharHex((bNR << 5) | 0x10 | 0x01);
   PushChar((bNR << 5) | 0x10 | 0x01);
   
-  PushIntLtl(MakeCRC16_X25OutBuff(1, wSize-2)); // 5
+  PushIntLtl(MakeCRC16_X25OutBuff(1, 3+addr.bSize)); // 5
   PushChar(0x7E);
 
   Query36(1000, wSize+2); // 9
@@ -312,7 +315,7 @@ void    Query36_GetTime(uchar  bNS, uchar  bNR)
   MonitorString("Control{N(R)=1,N(S)=1} 32 ? "); MonitorCharHex((bNR << 5) | 0x10 | (bNS << 1) | 0x00);
   PushChar(0x32);
   
-  PushIntLtl(MakeCRC16_X25OutBuff(1, 5));
+  PushIntLtl(MakeCRC16_X25OutBuff(1, 3+addr.bSize)); // 5
 //  PushChar(0xEC); // CRC ?
 //  PushChar(0xC8);
 
@@ -377,7 +380,9 @@ void    Query36_Open5(uchar  bNR)
 
 time    ReadTime36(void)
 {
-  InitPop(8 + 9);
+  addr36 addr = GetAddr();
+
+  InitPop(6+addr.bSize + 9);
 
   time ti;
   ti.bYear   = PopIntBig() - 2000;
