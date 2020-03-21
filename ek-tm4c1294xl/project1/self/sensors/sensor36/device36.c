@@ -12,7 +12,7 @@ DEVICE36!C
 #include "include36.h"
 #include "crc16_x25.h"
 #include "io36.h"
-#include "dlms_addresses.h"
+#include "hdlc_addresses.h"
 #include "device36.h"
 
 
@@ -30,18 +30,18 @@ void    Query36_DISC(void)
 
   InitPush(0);
 
-  uint wSize = 5+GetDlmsAddressesSize(); // 7
+  uint wSize = 5+GetHdlcAddressesSize(); // 7
 
   PushChar(0x7E);
   PushFormat(wSize);
 //  PushChar(0xA0);
 //  PushChar(0x07);
-  PushDlmsAddresses();
+  PushHdlcAddresses();
 //  PushChar(0x03);
 //  PushChar(0x03);
   PushChar(0x53); // DISC
 
-  PushIntLtl(MakeCRC16_X25OutBuff(1, 3+GetDlmsAddressesSize())); // 5
+  PushIntLtl(MakeCRC16_X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
 //  PushChar(0x80);
 //  PushChar(0xD7);
 
@@ -55,7 +55,7 @@ void    Query36_SNRM(void)
 {
   MonitorString("\n\n SNRM");
 
-  uint wSize = 30 + GetDlmsAddressesSize(); // 32
+  uint wSize = 30 + GetHdlcAddressesSize(); // 32
 
   InitPush(0);
   PushChar(0x7E);
@@ -63,12 +63,12 @@ void    Query36_SNRM(void)
   PushFormat(wSize);
 //  PushChar(0xA0);
 //  PushChar(0x20);
-  PushDlmsAddresses();
+  PushHdlcAddresses();
 //  PushChar(0x03);
 //  PushChar(0x03);
   PushChar(0x93); // SNRM
   
-  PushIntLtl(MakeCRC16_X25OutBuff(1, 3+GetDlmsAddressesSize())); // 5
+  PushIntLtl(MakeCRC16_X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
 //  PushChar(0xFE); // CRC ?
 //  PushChar(0xC9);
   
@@ -115,7 +115,7 @@ void    Query36_Open2(uchar  bNS, uchar  bNR)
 {
   MonitorString("\n\n Open 2 ");
 
-  uint wSize = 66 + GetDlmsAddressesSize(); // 0x44 68
+  uint wSize = 66 + GetHdlcAddressesSize(); // 0x44 68
 
   InitPush(0);
   PushChar(0x7E);
@@ -123,7 +123,7 @@ void    Query36_Open2(uchar  bNS, uchar  bNR)
   PushFormat(wSize);
 //  PushChar(0xA0);
 //  PushChar(0x44);
-  PushDlmsAddresses();
+  PushHdlcAddresses();
 //  PushChar(0x03);
 //  PushChar(0x03);
 
@@ -132,7 +132,7 @@ void    Query36_Open2(uchar  bNS, uchar  bNR)
   MonitorString("Control{N(R)=0,N(S)=0} 10 ? "); MonitorCharHex((bNR << 5) | 0x10 | (bNS << 1) | 0x00);
   PushChar(0x10); // I-frame
   
-  PushIntLtl(MakeCRC16_X25OutBuff(1, 3+GetDlmsAddressesSize())); // 5
+  PushIntLtl(MakeCRC16_X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
 //  PushChar(0x65); // CRC ?
 //  PushChar(0x94);
 
@@ -220,21 +220,21 @@ void    Query36_RR(uchar  bNR)
 {
   MonitorString("\n\n RR");
 
-  uint wSize = 5 + GetDlmsAddressesSize();
+  uint wSize = 5 + GetHdlcAddressesSize();
 
   InitPush(0);
   PushChar(0x7E);
   PushFormat(wSize);
 //  PushChar(0xA0);
 //  PushChar(0x07);
-  PushDlmsAddresses();
+  PushHdlcAddresses();
 //  PushChar(0x03);
 //  PushChar(0x03);
 
   //MonitorString("Control{R(R)=1} 31 ? "); MonitorCharHex((bNR << 5) | 0x10 | 0x01);
   PushChar((bNR << 5) | 0x10 | 0x01);
   
-  PushIntLtl(MakeCRC16_X25OutBuff(1, 3+GetDlmsAddressesSize())); // 5
+  PushIntLtl(MakeCRC16_X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
   PushChar(0x7E);
 
   Query36(1000, wSize+2); // 9
@@ -246,7 +246,7 @@ void    Query36_GetTime(uchar  bNS, uchar  bNR)
 {
   MonitorString("\n\n GetTime ");
 
-  uint wSize = 23 + GetDlmsAddressesSize(); // 0x19 25
+  uint wSize = 23 + GetHdlcAddressesSize(); // 0x19 25
 
   InitPush(0);
   PushChar(0x7E);
@@ -254,14 +254,14 @@ void    Query36_GetTime(uchar  bNS, uchar  bNR)
   PushFormat(wSize);
 //  PushChar(0xA0);
 //  PushChar(0x19);
-  PushDlmsAddresses();
+  PushHdlcAddresses();
 //  PushChar(0x03);
 //  PushChar(0x03);
 
   MonitorString("Control{N(R)=1,N(S)=1} 32 ? "); MonitorCharHex((bNR << 5) | 0x10 | (bNS << 1) | 0x00);
   PushChar(0x32); // TODO (bNR << 5) | 0x10 | (bNS << 1) | 0x00
   
-  PushIntLtl(MakeCRC16_X25OutBuff(1, 3+GetDlmsAddressesSize())); // 5
+  PushIntLtl(MakeCRC16_X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
 //  PushChar(0xEC); // CRC ?
 //  PushChar(0xC8);
 
@@ -302,7 +302,7 @@ void    Query36_GetTime(uchar  bNS, uchar  bNR)
 
 time    ReadTime36(void)
 {
-  InitPop(15 + GetDlmsAddressesSize());
+  InitPop(15 + GetHdlcAddressesSize());
 
   time ti;
   ti.bYear   = PopIntBig() - 2000;

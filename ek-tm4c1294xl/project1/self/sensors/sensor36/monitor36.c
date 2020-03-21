@@ -8,7 +8,7 @@ monitor36.c
 #include "../../serial/ports.h"
 #include "../../serial/monitor.h"
 #include "include36.h"
-#include "dlms_addresses.h"
+#include "hdlc_addresses.h"
 #include "crc16_x25.h"
 #include "monitor36.h"
 
@@ -74,11 +74,35 @@ void    MonitorOutput36(void)
   uint wCRCactual = OutBuff(i) + OutBuff(i+1)*0x100; //MonitorIntHex(wCRCactual);
   (wCRCexpected == wCRCactual) ? MonitorString(" CRC_ok") : MonitorString(" CRC_error");
 
-  MonitorControl(OutBuff(3 + GetDlmsAddressesSize()));
+  MonitorControl(OutBuff(3 + GetHdlcAddressesSize()));
 }
 
 
 
+bool    ValidInput36(void)
+{
+  InitPop(1);
+
+  uint wFormat = PopIntBig();
+  MonitorString(" Format="); MonitorIntHex(wFormat);
+  uint wSize = wFormat & 0x0FFF;
+  MonitorString(" wSize="); MonitorIntHex(wSize);
+
+  uint wCRCexpected = MakeCRC16_X25InBuff(1, wSize-2);
+  MonitorString(" CRC="); MonitorIntHex(wCRCexpected);
+  int i = wSize-1;
+  uint wCRCactual = InBuff(i) + InBuff(i+1)*0x100; //MonitorIntHex(wCRCactual);
+
+  if (wCRCexpected != wCRCactual) { //? MonitorString(" CRC_ok") : MonitorString(" CRC_error");
+    MonitorString(" CRC_error");
+    return false;
+  } else {
+    MonitorString(" CRC_ok");
+  }
+
+  return true;
+}
+/*
 void    MonitorInput36(void)
 {
   MonitorString("\n Input DLMS:");
@@ -97,3 +121,4 @@ void    MonitorInput36(void)
 
   MonitorControl(InBuff(3 + GetDlmsAddressesSize()));
 }
+*/
