@@ -7,9 +7,10 @@ monitor36.c
 #include "../../main.h"
 #include "../../serial/ports.h"
 #include "../../serial/monitor.h"
+#include "include36.h"
 #include "monitor36.h"
 
-
+addr36 GetAddr(void);
 
 static void MonitorControl(uchar  bControl) {
   MonitorString(" Control="); MonitorCharHex(bControl);
@@ -79,8 +80,10 @@ void    MonitorInput36(void)
 
   MonitorString(" CRC="); MonitorIntHex(MakeCRC16_X25InBuff(1, wSize-2));
 
-  PopChar();
-  PopChar();
+  addr36 addr = GetAddr();
+  uchar i;
+  for (i=0; i<addr.bSize; i++)
+    PopChar();
 
   MonitorControl(PopChar());
 }
