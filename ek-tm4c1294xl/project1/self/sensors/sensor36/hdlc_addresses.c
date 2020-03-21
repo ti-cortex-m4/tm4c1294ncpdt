@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-dlms_addresses.c
+hdlc_addresses.c
 
 
 ------------------------------------------------------------------------------*/
@@ -7,17 +7,17 @@ dlms_addresses.c
 #include "../../main.h"
 #include "../../memory/mem_settings.h"
 #include "../../serial/ports.h"
-#include "dlms_addresses.h"
+#include "hdlc_addresses.h"
 
 
 
-#define DLMS_SERVER_ADDRESS_SIZE_4
+#define HDLC_SERVER_ADDRESS_SIZE_4
 
 
 
-uchar   GetDlmsAddressesSize(void)
+uchar   GetHdlcAddressesSize(void)
 {
-#ifdef DLMS_SERVER_ADDRESS_SIZE_4
+#ifdef HDLC_SERVER_ADDRESS_SIZE_4
   return 4+1;
 #else
   return 1+1;
@@ -26,9 +26,9 @@ uchar   GetDlmsAddressesSize(void)
 
 
 
-void    PushDlmsAddresses(void)
+void    PushHdlcAddresses(void)
 {
-#ifdef DLMS_SERVER_ADDRESS_SIZE_4
+#ifdef HDLC_SERVER_ADDRESS_SIZE_4
   PushChar(0x00);
   PushChar(0x02);
 
