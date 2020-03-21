@@ -70,8 +70,8 @@ void    MonitorOutput36(void)
 
   uint wCRCexpected = MakeCRC16_X25OutBuff(1, wSize-2);
   MonitorString(" CRC="); MonitorIntHex(wCRCexpected);
-  int i = 4 + GetDlmsAddressesSize();
-  uint wCRCactual = OutBuff(i) + OutBuff(i+1)*0x100;
+  int i = wSize-1;
+  uint wCRCactual = OutBuff(i) + OutBuff(i+1)*0x100; MonitorIntHex(wCRCactual);
   (wCRCexpected == wCRCactual) ? MonitorString(" CRC_ok") : MonitorString(" CRC_error");
 
   MonitorControl(OutBuff(3 + GetDlmsAddressesSize()));
@@ -91,8 +91,8 @@ void    MonitorInput36(void)
 
   uint wCRCexpected = MakeCRC16_X25InBuff(1, wSize-2);
   MonitorString(" CRC="); MonitorIntHex(wCRCexpected);
-  int i = 4 + GetDlmsAddressesSize();
-  uint wCRCactual = InBuff(i) + InBuff(i+1)*0x100;
+  int i = wSize-1;
+  uint wCRCactual = InBuff(i) + InBuff(i+1)*0x100; MonitorIntHex(wCRCactual);
   (wCRCexpected == wCRCactual) ? MonitorString(" CRC_ok") : MonitorString(" CRC_error");
 
   MonitorControl(InBuff(3 + GetDlmsAddressesSize()));
