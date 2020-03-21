@@ -1,11 +1,13 @@
 /*------------------------------------------------------------------------------
-dlms_addr.c
+dlms_addresses.c
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-#include "dlms_addr.h"
+#include "../../memory/mem_settings.h"
+#include "../../serial/ports.h"
+#include "dlms_addresses.h"
 
 
 
@@ -15,22 +17,18 @@ dlms_addr.c
 
 uchar   GetDlmsAddressesSize(void)
 {
-#ifndef DLMS_SERVER_ADDRESS_SIZE_4
-  return 1+1;
-#else
+#ifdef DLMS_SERVER_ADDRESS_SIZE_4
   return 4+1;
+#else
+  return 1+1;
 #endif
-
 }
 
 
 
 void    PushDlmsAddresses(void)
 {
-#ifndef DLMS_SERVER_ADDRESS_SIZE_4
-  PushChar(0x03);
-  PushChar(0x03);
-#else
+#ifdef DLMS_SERVER_ADDRESS_SIZE_4
   PushChar(0x00);
   PushChar(0x02);
 
@@ -47,5 +45,8 @@ void    PushDlmsAddresses(void)
   PushChar(bLo % 0x100);
 
   PushChar((bLogical << 1) + 0x01);
+#else
+  PushChar(0x03);
+  PushChar(0x03);
 #endif
 }
