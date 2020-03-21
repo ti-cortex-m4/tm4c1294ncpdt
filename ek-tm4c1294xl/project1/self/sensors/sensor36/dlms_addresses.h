@@ -1,8 +1,8 @@
 /*------------------------------------------------------------------------------
-dlms_addr.h
+dlms_addresses.h
 
 
 ------------------------------------------------------------------------------*/
 
-uchar   GetDlmsServerAddrSize(void);
-void    PushDlmsServerAddr(void);
+uchar   GetDlmsAddressesSize(void);
+void    PushDlmsAddresses(void);
