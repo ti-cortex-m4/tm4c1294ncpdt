@@ -61,7 +61,7 @@ static void MonitorControl(uchar  bControl) {
 
 void    MonitorOutput36(void)
 {
-  MonitorString("\n Output DLMS:");
+  MonitorString("\n Output HDLC:");
 
   uint wFormat = OutBuff(1)*0x100 + OutBuff(2);
   MonitorString(" Format="); MonitorIntHex(wFormat); //MonitorCharHex(OutBuff(1)); MonitorCharHex(OutBuff(2));
@@ -81,6 +81,7 @@ void    MonitorOutput36(void)
 
 bool    ValidInput36(void)
 {
+  MonitorString("\n Input HDLC:");
   InitPop(1);
 
   uint wFormat = PopIntBig();
@@ -105,7 +106,7 @@ bool    ValidInput36(void)
 /*
 void    MonitorInput36(void)
 {
-  MonitorString("\n Input DLMS:");
+  MonitorString("\n Input HDLC:");
   InitPop(1);
 
   uint wFormat = PopIntBig();
