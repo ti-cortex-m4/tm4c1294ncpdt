@@ -17,7 +17,7 @@ DEVICE36!C
 
 
 
-#define ADDR_4
+//#define ADDR_4
 
 
 addr36 GetAddr(void)
