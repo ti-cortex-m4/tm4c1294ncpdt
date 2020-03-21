@@ -85,5 +85,5 @@ void    MonitorInput36(void)
   for (i=0; i<GetDlmsAddressesSize(); i++)
     PopChar();
 
-  MonitorControl(PopChar());
+  MonitorControl(PopChar()); // InBuff ???
 }
