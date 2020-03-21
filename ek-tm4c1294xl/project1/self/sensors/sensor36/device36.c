@@ -5,6 +5,7 @@ DEVICE36!C
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
+#include "../../memory/mem_settings.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports2.h"
 #include "../../serial/ports_devices.h"
@@ -16,13 +17,35 @@ DEVICE36!C
 
 
 
+#define ADDR_4
+
+
 static addr36 GetAddr(void)
 {
+#ifndef ADDR_4
   addr36 addr;
   addr.cBuff.mpbBuff[0] = 0x03;
   addr.cBuff.mpbBuff[1] = 0x03;
-  addr.bSize = 2;
+  addr.bSize = 1+1;
   return addr;
+#else
+  addr36 addr;
+  addr.cBuff.mpbBuff[0] = 0x00;
+  addr.cBuff.mpbBuff[1] = 0x02;
+
+  uint wAddr = 1230;
+
+  addr.cBuff.mpbBuff[3] = wAddr / 0x100;
+  addr.cBuff.mpbBuff[4] = wAddr % 0x100;
+
+  addr.cBuff.mpbBuff[3]   = (addr.cBuff.mpbBuff[3] << 2) & 0xFC;
+  if(addr.cBuff.mpbBuff[4] & 0x80) addr.cBuff.mpbBuff[3] |= 0x02;
+  addr.cBuff.mpbBuff[4] = (addr.cBuff.mpbBuff[4] << 1) | 0x01;
+
+  addr.bSize = 4+1;
+  return addr;
+#endif
+
 }
 
 
@@ -34,8 +57,16 @@ static void PushFormat(uint  wSize)
 
 static void PushAddr(addr36 addr)
 {
+#ifndef ADDR_4
   PushChar(addr.cBuff.mpbBuff[0]);
   PushChar(addr.cBuff.mpbBuff[1]);
+#else
+  PushChar(addr.cBuff.mpbBuff[0]);
+  PushChar(addr.cBuff.mpbBuff[1]);
+  PushChar(addr.cBuff.mpbBuff[2]);
+  PushChar(addr.cBuff.mpbBuff[3]);
+  PushChar((bLogical << 1) + 0x01);
+#endif
 }
 
 
