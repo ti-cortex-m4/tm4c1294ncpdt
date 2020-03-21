@@ -41,8 +41,8 @@ void    PushHdlcAddresses(void)
   if (bLo & 0x80) bHi |= 0x02;
   bLo = (bLo << 1) | 0x01;
 
-  PushChar(bHi % 0x100);
-  PushChar(bLo % 0x100);
+  PushChar(bHi);
+  PushChar(bLo);
 
   PushChar((bLogical << 1) + 0x01);
 #else

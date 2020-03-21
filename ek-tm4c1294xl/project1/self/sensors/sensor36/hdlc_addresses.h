@@ -4,5 +4,5 @@ hdlc_addresses.h
 
 ------------------------------------------------------------------------------*/
 
-uchar   GetDlmsAddressesSize(void);
-void    PushDlmsAddresses(void);
+uchar   GetHdlcAddressesSize(void);
+void    PushHdlcAddresses(void);
