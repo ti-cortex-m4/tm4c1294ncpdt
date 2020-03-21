@@ -9,6 +9,7 @@ monitor36.c
 #include "../../serial/monitor.h"
 #include "include36.h"
 #include "dlms_addresses.h"
+#include "crc16_x25.h"
 #include "monitor36.h"
 
 
@@ -60,9 +61,19 @@ static void MonitorControl(uchar  bControl) {
 
 void    MonitorOutput36(void)
 {
-  MonitorString("\n Output:");
+  MonitorString("\n Output DLMS:");
 
-  MonitorString(" Format="); MonitorCharHex(OutBuff(1)); MonitorCharHex(OutBuff(2));
+  uint wFormat = OutBuff(1)*0x100 + OutBuff(2);
+  MonitorString(" Format="); MonitorIntHex(wFormat); //MonitorCharHex(OutBuff(1)); MonitorCharHex(OutBuff(2));
+  uint wSize = wFormat & 0x0FFF;
+  MonitorString(" wSize="); MonitorIntHex(wSize);
+
+  uint wCRCexpected = MakeCRC16_X25OutBuff(1, wSize-2);
+  MonitorString(" CRC="); MonitorIntHex(wCRCexpected);
+  int i = 4 + GetDlmsAddressesSize();
+  uint wCRCactual = OutBuff(i) + OutBuff(i+1)*0x100;
+  (wCRCexpected == wCRCactual) ? MonitorString(" CRC_ok") : MonitorString(" CRC_error");
+
   MonitorControl(OutBuff(3 + GetDlmsAddressesSize()));
 }
 
@@ -70,20 +81,19 @@ void    MonitorOutput36(void)
 
 void    MonitorInput36(void)
 {
-  MonitorString("\n Input:");
+  MonitorString("\n Input DLMS:");
   InitPop(1);
 
   uint wFormat = PopIntBig();
   MonitorString(" Format="); MonitorIntHex(wFormat);
-
   uint wSize = wFormat & 0x0FFF;
   MonitorString(" wSize="); MonitorIntHex(wSize);
 
-  MonitorString(" CRC="); MonitorIntHex(MakeCRC16_X25InBuff(1, wSize-2));
+  uint wCRCexpected = MakeCRC16_X25InBuff(1, wSize-2);
+  MonitorString(" CRC="); MonitorIntHex(wCRCexpected);
+  int i = 4 + GetDlmsAddressesSize();
+  uint wCRCactual = InBuff(i) + InBuff(i+1)*0x100;
+  (wCRCexpected == wCRCactual) ? MonitorString(" CRC_ok") : MonitorString(" CRC_error");
 
-  uchar i;
-  for (i=0; i<GetDlmsAddressesSize(); i++)
-    PopChar();
-
-  MonitorControl(PopChar()); // InBuff ???
+  MonitorControl(InBuff(3 + GetDlmsAddressesSize()));
 }

@@ -241,6 +241,7 @@ void    Query36_RR(uchar  bNR)
 }
 
 
+
 void    Query36_GetTime(uchar  bNS, uchar  bNR)
 {
   MonitorString("\n\n GetTime ");
@@ -258,7 +259,7 @@ void    Query36_GetTime(uchar  bNS, uchar  bNR)
 //  PushChar(0x03);
 
   MonitorString("Control{N(R)=1,N(S)=1} 32 ? "); MonitorCharHex((bNR << 5) | 0x10 | (bNS << 1) | 0x00);
-  PushChar(0x32);
+  PushChar(0x32); // TODO (bNR << 5) | 0x10 | (bNS << 1) | 0x00
   
   PushIntLtl(MakeCRC16_X25OutBuff(1, 3+GetDlmsAddressesSize())); // 5
 //  PushChar(0xEC); // CRC ?
@@ -298,34 +299,10 @@ void    Query36_GetTime(uchar  bNS, uchar  bNR)
   Query36(1000, wSize+2); // 27
 }
 
-/*
-void    Query36_Open5(uchar  bNR)
-{
-  MonitorString("\n\n Open 5 ");
-
-  InitPush(0);
-
-  PushChar(0x7E);
-  
-  PushChar(0xA0);
-  PushChar(0x07);
-  PushChar(0x03);
-  PushChar(0x03);
-
-  MonitorString("Control{N(R)=2} 51 ? "); MonitorCharHex((bNR << 5) | 0x10 | 0x01);
-  PushChar((bNR << 5) | 0x10 | 0x01);
-  
-  PushIntLtl(MakeCRC16_X25OutBuff(1, 5));
-  
-  PushChar(0x7E);
-
-  Query36(1000, 9);
-}
-*/
 
 time    ReadTime36(void)
 {
-  InitPop(6+GetDlmsAddressesSize() + 9);
+  InitPop(15 + GetDlmsAddressesSize());
 
   time ti;
   ti.bYear   = PopIntBig() - 2000;
