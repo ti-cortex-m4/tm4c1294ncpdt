@@ -8,9 +8,10 @@ monitor36.c
 #include "../../serial/ports.h"
 #include "../../serial/monitor.h"
 #include "include36.h"
+#include "dlms_addresses.h"
 #include "monitor36.h"
 
-addr36 GetAddr(void);
+
 
 static void MonitorControl(uchar  bControl) {
   MonitorString(" Control="); MonitorCharHex(bControl);
@@ -62,7 +63,7 @@ void    MonitorOutput36(void)
   MonitorString("\n Output:");
 
   MonitorString(" Format="); MonitorCharHex(OutBuff(1)); MonitorCharHex(OutBuff(2));
-  MonitorControl(OutBuff(5));
+  MonitorControl(OutBuff(3 + GetDlmsAddressesSize()));
 }
 
 
@@ -80,9 +81,8 @@ void    MonitorInput36(void)
 
   MonitorString(" CRC="); MonitorIntHex(MakeCRC16_X25InBuff(1, wSize-2));
 
-  addr36 addr = GetAddr();
   uchar i;
-  for (i=0; i<addr.bSize; i++)
+  for (i=0; i<GetDlmsAddressesSize(); i++)
     PopChar();
 
   MonitorControl(PopChar());
