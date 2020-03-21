@@ -7,12 +7,4 @@ include36.h
 #ifndef __INCLUDE36
 #define __INCLUDE36
 
-
-typedef struct
-{
-  combo32       cBuff;
-  uchar         bSize;
-} addr36;
-
-
 #endif
