@@ -78,7 +78,7 @@ time2   QueryTime36_Full(uchar  bPercent)
 
   bNS = 1;
   bNR = 1;
-  Query36_GetTime(bNS, bNR);
+  QueryTime36(bNS, bNR);
   if (Input36() != SER_GOODCHECK) return GetTime2Error();
   time ti = ReadTime36();
   DelayOff();
@@ -183,38 +183,39 @@ double2 ReadCntCurr36(void)
   uchar bNR = 0;
 
   Query36_DISC();
-  if (Input36() != SER_GOODCHECK) return GetTime2Error();
+  if (Input36() != SER_GOODCHECK) return GetDouble2Error();
   DelayOff();
 
   Query36_SNRM();
-  if (Input36() != SER_GOODCHECK) return GetTime2Error();
+  if (Input36() != SER_GOODCHECK) return GetDouble2Error();
   DelayOff();
 
   Query36_Open2(bNS, bNR);
-  if (Input36() != SER_GOODCHECK) return GetTime2Error();
+  if (Input36() != SER_GOODCHECK) return GetDouble2Error();
   DelayOff();
 
   bNR = 1;
   Query36_RR(bNR);
-  if (Input36() != SER_GOODCHECK) return GetTime2Error();
+  if (Input36() != SER_GOODCHECK) return GetDouble2Error();
   DelayOff();
 
   bNS = 1;
   bNR = 1;
-  Query36_GetTime(bNS, bNR);
-  if (Input36() != SER_GOODCHECK) return GetTime2Error();
-  time ti = ReadTime36();
+  QueryEngAbs36(bNS, bNR);
+  if (Input36() != SER_GOODCHECK) return GetDouble2Error();
+  double db = ReadEngAbs36();
   DelayOff();
 
   bNR = 2;
   Query36_RR(bNR);
-  if (Input36() != SER_GOODCHECK) return GetTime2Error();
+  if (Input36() != SER_GOODCHECK) return GetDouble2Error();
   DelayOff();
 
   Query36_DISC(); // TODO always close
-  if (Input36() != SER_GOODCHECK) return GetTime2Error();
+  if (Input36() != SER_GOODCHECK) return GetDouble2Error();
   DelayOff();
 
+  return GetDouble2(db, true);
 /*
   Clear();
 

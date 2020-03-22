@@ -242,7 +242,7 @@ void    Query36_RR(uchar  bNR)
 
 
 
-void    Query36_GetTime(uchar  bNS, uchar  bNR)
+void    QueryTime36(uchar  bNS, uchar  bNR)
 {
   MonitorString("\n\n GetTime ");
 
@@ -316,4 +316,71 @@ time    ReadTime36(void)
   ti.bSecond = PopChar();
 
   return ti;
+}
+
+
+
+void    QueryEngAbs36(uchar  bNS, uchar  bNR)
+{
+  MonitorString("\n\n GetTime ");
+
+  uint wSize = 23 + GetHdlcAddressesSize(); // 0x19 25
+
+  InitPush(0);
+  PushChar(0x7E);
+
+  PushFormat(wSize);
+//  PushChar(0xA0);
+//  PushChar(0x19);
+  PushHdlcAddresses();
+//  PushChar(0x03);
+//  PushChar(0x03);
+
+  MonitorString("Control{N(R)=1,N(S)=1} 32 ? "); MonitorCharHex((bNR << 5) | 0x10 | (bNS << 1) | 0x00);
+  PushChar(0x32); // TODO (bNR << 5) | 0x10 | (bNS << 1) | 0x00
+
+  PushIntLtl(MakeCRC16_X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
+//  PushChar(0xEC); // CRC ?
+//  PushChar(0xC8);
+
+  // DLMS start
+
+  PushChar(0xE6); // LLC
+  PushChar(0xE6);
+  PushChar(0x00);
+
+  PushChar(0xC0); // Get-Request
+  PushChar(0x01); // Get-Request-Normal ?
+  PushChar(0x83); // Invoke-Id-And-Priority TODO ??? 0x81
+
+  PushChar(0x00);
+  PushChar(0x08); // class
+
+  PushChar(0x00); // 0-0:1.0.0*255
+  PushChar(0x00);
+  PushChar(0x01);
+  PushChar(0x00);
+  PushChar(0x00);
+  PushChar(0xFF);
+
+  PushChar(0x02); // index
+  PushChar(0x00);
+
+  // DLMS finish
+
+  PushIntLtl(MakeCRC16_X25OutBuff(1, wSize-2));
+//  PushChar(0x47); // CRC
+//  PushChar(0x7C);
+
+  PushChar(0x7E);
+
+  Query36(1000, wSize+2); // 27
+}
+
+
+double  ReadEngAbs36(void)
+{
+  InitPop(15 + GetHdlcAddressesSize());
+
+  return 0;
 }
