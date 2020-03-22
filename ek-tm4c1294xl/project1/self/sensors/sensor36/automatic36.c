@@ -76,6 +76,7 @@ time2   QueryTime36_Full(uchar  bPercent)
   bNR = 1;
   Query36_RR(bNR);
   if (Input36() != SER_GOODCHECK) return GetTime2Error();
+  if (!ValidateSframe(bNR)) return GetTime2Error();
   DelayOff();
 
   bNS++;
@@ -89,6 +90,7 @@ time2   QueryTime36_Full(uchar  bPercent)
   bNR = 2;
   Query36_RR(bNR);
   if (Input36() != SER_GOODCHECK) return GetTime2Error();
+  if (!ValidateSframe(bNR)) return GetTime2Error();
   DelayOff();
 
   Query36_DISC(); // TODO always close

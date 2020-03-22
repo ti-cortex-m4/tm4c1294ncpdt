@@ -5,8 +5,7 @@ monitor36.h
 ------------------------------------------------------------------------------*/
 
 void    MonitorOutput36(void);
-//void    MonitorInput36(void);
 bool    ValidInput36(void);
 
-bool    ValidateIframe(uchar  bNSclient, uchar  bNRclient);
-bool    ValidateSframe(uchar  bNRclient);
+bool    ValidateIframe(uchar  bNS_client, uchar  bNR_client);
+bool    ValidateSframe(uchar  bNR_client);
