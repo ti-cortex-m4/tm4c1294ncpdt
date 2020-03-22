@@ -1905,6 +1905,10 @@ double2 ReadCntCurrCan(uchar  ibCan)
     case 35: return ReadCntCurr35();
 #endif
 
+#ifndef SKIP_36
+    case 36: return ReadCntCurr36();
+#endif
+
     default: return GetDouble2Error();
   }
 }
