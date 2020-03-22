@@ -101,6 +101,8 @@ bool    ValidInput36(void)
     MonitorString(" CRC_ok");
   }
 
+  MonitorControl(InBuff(3 + GetHdlcAddressesSize()));
+
   return true;
 }
 /*
@@ -123,3 +125,36 @@ void    MonitorInput36(void)
   MonitorControl(InBuff(3 + GetDlmsAddressesSize()));
 }
 */
+
+bool    ValidateIframe(uchar  bNSclient, uchar  bNRclient)
+{
+  uchar bControl = InBuff(3 + GetHdlcAddressesSize());
+  uchar bNSserver = (bControl & 0x0E) >> 1;
+  uchar bNRserver = (bControl & 0xE0) >> 5;
+
+  if (bNSclient != bNSserver) {
+    MonitorString("I-frame N(S) client/server error"); MonitorCharHex(bNSclient); MonitorCharHex(bNSserver);
+    return false;
+  }
+
+  if ((bNRclient + 1) != bNRserver) {
+    MonitorString("I-frame N(R) client/server error"); MonitorCharHex(bNRclient); MonitorCharHex(bNRserver);
+    return false;
+  }
+
+  return true;
+}
+
+
+bool    ValidateSframe(uchar  bNRclient)
+{
+  uchar bControl = InBuff(3 + GetHdlcAddressesSize());
+  uchar bNRserver = (bControl & 0xE0) >> 5;
+
+  if (bNRclient != bNRserver) {
+    MonitorString("S-frame N(R) client/server error"); MonitorCharHex(bNRclient); MonitorCharHex(bNRserver);
+    return false;
+  }
+
+  return true;
+}
