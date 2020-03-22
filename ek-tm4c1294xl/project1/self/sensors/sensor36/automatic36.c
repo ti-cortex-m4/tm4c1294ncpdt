@@ -15,6 +15,7 @@ AUTOMATIC36!C
 #include "../../digitals/digitals.h"
 #include "device36.h"
 #include "io36.h"
+#include "monitor36.h"
 #include "automatic36.h"
 
 
@@ -56,9 +57,6 @@ bool    Automatic36(void)
 
 time2   QueryTime36_Full(uchar  bPercent)
 {
-  uchar bNS = 0;
-  uchar bNR = 0;
-
   Query36_DISC();
   if (Input36() != SER_GOODCHECK) return GetTime2Error();
   DelayOff();
@@ -67,8 +65,12 @@ time2   QueryTime36_Full(uchar  bPercent)
   if (Input36() != SER_GOODCHECK) return GetTime2Error();
   DelayOff();
 
+  uchar bNS = 0;
+  uchar bNR = 0;
+
   Query36_Open2(bNS, bNR);
   if (Input36() != SER_GOODCHECK) return GetTime2Error();
+  if (!ValidateIframe(bNS, bNR)) return GetTime2Error();
   DelayOff();
 
   bNR = 1;
@@ -76,10 +78,11 @@ time2   QueryTime36_Full(uchar  bPercent)
   if (Input36() != SER_GOODCHECK) return GetTime2Error();
   DelayOff();
 
-  bNS = 1;
+  bNS++;
   bNR = 1;
   QueryTime36(bNS, bNR);
   if (Input36() != SER_GOODCHECK) return GetTime2Error();
+  if (!ValidateIframe(bNS, bNR)) return GetTime2Error();
   time ti = ReadTime36();
   DelayOff();
 
