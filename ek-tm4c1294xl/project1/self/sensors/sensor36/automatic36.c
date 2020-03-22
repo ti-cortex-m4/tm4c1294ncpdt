@@ -175,10 +175,47 @@ time2   ReadTimeCan36_Short(void)
 
   return GetTime2(ReadTime36(), true);
 }
-
+*/
 
 double2 ReadCntCurr36(void)
 {
+  uchar bNS = 0;
+  uchar bNR = 0;
+
+  Query36_DISC();
+  if (Input36() != SER_GOODCHECK) return GetTime2Error();
+  DelayOff();
+
+  Query36_SNRM();
+  if (Input36() != SER_GOODCHECK) return GetTime2Error();
+  DelayOff();
+
+  Query36_Open2(bNS, bNR);
+  if (Input36() != SER_GOODCHECK) return GetTime2Error();
+  DelayOff();
+
+  bNR = 1;
+  Query36_RR(bNR);
+  if (Input36() != SER_GOODCHECK) return GetTime2Error();
+  DelayOff();
+
+  bNS = 1;
+  bNR = 1;
+  Query36_GetTime(bNS, bNR);
+  if (Input36() != SER_GOODCHECK) return GetTime2Error();
+  time ti = ReadTime36();
+  DelayOff();
+
+  bNR = 2;
+  Query36_RR(bNR);
+  if (Input36() != SER_GOODCHECK) return GetTime2Error();
+  DelayOff();
+
+  Query36_DISC(); // TODO always close
+  if (Input36() != SER_GOODCHECK) return GetTime2Error();
+  DelayOff();
+
+/*
   Clear();
 
   if (QueryConfig36_Full(50) == 0) return GetDouble2Error();
@@ -189,9 +226,10 @@ double2 ReadCntCurr36(void)
   mpboChannelsA[0] = true;
 
   return GetDouble2(mpdbChannelsC[0], true);
+*/
 }
 
-
+/*
 double2 ReadCntMonCan36(uchar  ibMon)
 {
   Clear();

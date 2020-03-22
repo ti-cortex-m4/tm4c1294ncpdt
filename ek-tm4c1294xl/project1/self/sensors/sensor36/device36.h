@@ -12,3 +12,6 @@ void    Query36_GetTime(uchar  bNS, uchar  bNR);
 
 void    QueryTime36(void);
 time    ReadTime36(void);
+
+void    QueryEngAbs36(void);
+void    ReadEngAbs36(void);
