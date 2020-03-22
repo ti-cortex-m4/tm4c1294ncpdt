@@ -244,7 +244,7 @@ void    Query36_RR(uchar  bNR)
 
 void    QueryTime36(uchar  bNS, uchar  bNR)
 {
-  MonitorString("\n\n GetTime ");
+  MonitorString("\n\n Get Time ");
 
   uint wSize = 23 + GetHdlcAddressesSize(); // 0x19 25
 
@@ -322,7 +322,7 @@ time    ReadTime36(void)
 
 void    QueryEngAbs36(uchar  bNS, uchar  bNR)
 {
-  MonitorString("\n\n GetTime ");
+  MonitorString("\n\n Get EngAbs ");
 
   uint wSize = 23 + GetHdlcAddressesSize(); // 0x19 25
 
@@ -351,19 +351,19 @@ void    QueryEngAbs36(uchar  bNS, uchar  bNR)
 
   PushChar(0xC0); // Get-Request
   PushChar(0x01); // Get-Request-Normal ?
-  PushChar(0x83); // Invoke-Id-And-Priority TODO ??? 0x81
+  PushChar(0x81); // Invoke-Id-And-Priority TODO ??? 0x81
 
   PushChar(0x00);
-  PushChar(0x08); // class
+  PushChar(0x03); // class
 
-  PushChar(0x00); // 0-0:1.0.0*255
-  PushChar(0x00);
-  PushChar(0x01);
-  PushChar(0x00);
-  PushChar(0x00);
-  PushChar(0xFF);
+  PushChar(1); // 1-0:1.8.0*255
+  PushChar(0);
+  PushChar(1);
+  PushChar(8);
+  PushChar(0);
+  PushChar(255);
 
-  PushChar(0x02); // index
+  PushChar(0x02);
   PushChar(0x00);
 
   // DLMS finish
@@ -380,7 +380,6 @@ void    QueryEngAbs36(uchar  bNS, uchar  bNR)
 
 double  ReadEngAbs36(void)
 {
-  InitPop(15 + GetHdlcAddressesSize());
-
-  return 0;
+  InitPop(14 + GetHdlcAddressesSize()); // 15 TODO ???
+  return (((double)PopLongBig())*0x100000000 + (double)PopLongBig())/1000;
 }
