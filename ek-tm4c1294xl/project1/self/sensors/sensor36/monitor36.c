@@ -126,19 +126,19 @@ void    MonitorInput36(void)
 }
 */
 
-bool    ValidateIframe(uchar  bNSclient, uchar  bNRclient)
+bool    ValidateIframe(uchar  bNS_client, uchar  bNR_client)
 {
   uchar bControl = InBuff(3 + GetHdlcAddressesSize());
-  uchar bNSserver = (bControl & 0x0E) >> 1;
-  uchar bNRserver = (bControl & 0xE0) >> 5;
+  uchar bNS_server = (bControl & 0x0E) >> 1;
+  uchar bNR_server = (bControl & 0xE0) >> 5;
 
-  if (bNSclient != bNSserver) {
-    MonitorString("I-frame N(S) client/server error"); MonitorCharHex(bNSclient); MonitorCharHex(bNSserver);
+  if (bNS_client != bNS_server) {
+    MonitorString("I-frame N(S) _client/_server error"); MonitorCharHex(bNS_client); MonitorCharHex(bNS_server);
     return false;
   }
 
-  if ((bNRclient + 1) != bNRserver) {
-    MonitorString("I-frame N(R) client/server error"); MonitorCharHex(bNRclient); MonitorCharHex(bNRserver);
+  if ((bNR_client + 1) != bNR_server) {
+    MonitorString("I-frame N(R) _client/_server error"); MonitorCharHex(bNR_client); MonitorCharHex(bNR_server);
     return false;
   }
 
@@ -146,13 +146,13 @@ bool    ValidateIframe(uchar  bNSclient, uchar  bNRclient)
 }
 
 
-bool    ValidateSframe(uchar  bNRclient)
+bool    ValidateSframe(uchar  bNR_client)
 {
   uchar bControl = InBuff(3 + GetHdlcAddressesSize());
-  uchar bNRserver = (bControl & 0xE0) >> 5;
+  uchar bNR_server = (bControl & 0xE0) >> 5;
 
-  if (bNRclient != bNRserver) {
-    MonitorString("S-frame N(R) client/server error"); MonitorCharHex(bNRclient); MonitorCharHex(bNRserver);
+  if (bNR_client != bNR_server) {
+    MonitorString("S-frame N(R) _client/_server error"); MonitorCharHex(bNR_client); MonitorCharHex(bNR_server);
     return false;
   }
 
