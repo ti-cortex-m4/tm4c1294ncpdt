@@ -322,7 +322,7 @@ time    ReadTime36(void)
 
 void    QueryEngAbs36(uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  ibLine)
 {
-  MonitorString("\n\n Get EngAbs ");
+  MonitorString("\n\n Get EngAbs "); MonitorCharDec(ibLine);
 
   uint wSize = 23 + GetHdlcAddressesSize(); // 0x19 25
 
