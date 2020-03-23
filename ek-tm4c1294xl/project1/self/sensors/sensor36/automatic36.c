@@ -67,6 +67,7 @@ time2   QueryTime36_Full(uchar  bPercent)
 
   uchar bNS = 0;
   uchar bNR = 0;
+  uchar bInvokeId = 0;
 
   Query36_Open2(bNS, bNR);
   if (Input36() != SER_GOODCHECK) return GetTime2Error();
@@ -81,7 +82,7 @@ time2   QueryTime36_Full(uchar  bPercent)
 
   bNS++;
   bNR = 1;
-  QueryTime36(bNS, bNR);
+  QueryTime36(bNS, bNR, bInvokeId++);
   if (Input36() != SER_GOODCHECK) return GetTime2Error();
   if (!ValidateIframe(bNS, bNR)) return GetTime2Error();
   time ti = ReadTime36();
@@ -206,7 +207,7 @@ double2 ReadCntCurr36(void)
 
   bNS = 1;
   bNR = 1;
-  QueryEngAbs36(bNS, bNR);
+  QueryEngAbs36(bNS, bNR, 0);
   if (Input36() != SER_GOODCHECK) return GetDouble2Error();
   double db = ReadEngAbs36();
   DelayOff();

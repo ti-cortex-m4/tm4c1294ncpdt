@@ -8,7 +8,7 @@ monitor36.c
 #include "../../serial/ports.h"
 #include "../../serial/monitor.h"
 #include "include36.h"
-#include "hdlc_addresses.h"
+#include "hdlc.h"
 #include "crc16_x25.h"
 #include "monitor36.h"
 
