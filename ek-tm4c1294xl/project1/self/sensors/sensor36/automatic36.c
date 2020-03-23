@@ -74,21 +74,20 @@ time2   QueryTime36_Full(uchar  bPercent)
   if (!ValidateIframe(bNS, bNR)) return GetTime2Error();
   DelayOff();
 
-  bNR = 1;
+  bNR++;
   Query36_RR(bNR);
   if (Input36() != SER_GOODCHECK) return GetTime2Error();
   if (!ValidateSframe(bNR)) return GetTime2Error();
   DelayOff();
 
   bNS++;
-  bNR = 1;
   QueryTime36(bNS, bNR, bInvokeId++);
   if (Input36() != SER_GOODCHECK) return GetTime2Error();
   if (!ValidateIframe(bNS, bNR)) return GetTime2Error();
   time ti = ReadTime36();
   DelayOff();
 
-  bNR = 2;
+  bNR++;
   Query36_RR(bNR);
   if (Input36() != SER_GOODCHECK) return GetTime2Error();
   if (!ValidateSframe(bNR)) return GetTime2Error();
@@ -202,31 +201,38 @@ double2 ReadCntCurr36(void)
   if (!ValidateIframe(bNS, bNR)) return GetDouble2Error();
   DelayOff();
 
-  bNR = 1;
+  bNR++;
   Query36_RR(bNR);
   if (Input36() != SER_GOODCHECK) return GetDouble2Error();
   if (!ValidateSframe(bNR)) return GetDouble2Error();
   DelayOff();
 
-  bNS++;
-  bNR = 1;
-  QueryEngAbs36(bNS, bNR, bInvokeId++);
-  if (Input36() != SER_GOODCHECK) return GetDouble2Error();
-  if (!ValidateIframe(bNS, bNR)) return GetDouble2Error();
-  double db = ReadEngAbs36();
-  DelayOff();
+  uchar i;
+  for (i=0; i<4; i++) {
+    bNS++;
+    QueryEngAbs36(bNS, bNR, bInvokeId++, i);
+    if (Input36() != SER_GOODCHECK) return GetDouble2Error();
+    if (!ValidateIframe(bNS, bNR)) return GetDouble2Error();
 
-  bNR = 2;
-  Query36_RR(bNR);
-  if (Input36() != SER_GOODCHECK) return GetDouble2Error();
-  if (!ValidateSframe(bNR)) return GetDouble2Error();
-  DelayOff();
+    uint64_t ddw = ReadEngAbs36();
+    mpdwChannelsA[i] = ddw % 0x100000000;
+    mpdbChannelsC[i] = (double)mpdwChannelsA[i] / 1000;
+    mpboChannelsA[i] = true;
+
+    DelayOff();
+
+    bNR++;
+    Query36_RR(bNR);
+    if (Input36() != SER_GOODCHECK) return GetDouble2Error();
+    if (!ValidateSframe(bNR)) return GetDouble2Error();
+    DelayOff();
+  }
 
   Query36_DISC(); // TODO always close
   if (Input36() != SER_GOODCHECK) return GetDouble2Error();
   DelayOff();
 
-  return GetDouble2(db, true);
+  return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
 /*
   Clear();
 

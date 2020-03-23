@@ -320,7 +320,7 @@ time    ReadTime36(void)
 
 
 
-void    QueryEngAbs36(uchar  bNS, uchar  bNR, uchar  bInvokeId)
+void    QueryEngAbs36(uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  ibLine)
 {
   MonitorString("\n\n Get EngAbs ");
 
@@ -336,8 +336,8 @@ void    QueryEngAbs36(uchar  bNS, uchar  bNR, uchar  bInvokeId)
 //  PushChar(0x03);
 //  PushChar(0x03);
 
-  MonitorString("Control{N(R)=1,N(S)=1} 32 ? "); MonitorCharHex((bNR << 5) | 0x10 | (bNS << 1) | 0x00);
-  PushChar(0x32); // TODO (bNR << 5) | 0x10 | (bNS << 1) | 0x00
+//  MonitorString("Control{N(R)=1,N(S)=1} 32 ? "); MonitorCharHex((bNR << 5) | 0x10 | (bNS << 1) | 0x00);
+  PushChar((bNR << 5) | 0x10 | (bNS << 1) | 0x00);
 
   PushIntLtl(MakeCRC16_X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
 //  PushChar(0xEC); // CRC ?
@@ -358,7 +358,7 @@ void    QueryEngAbs36(uchar  bNS, uchar  bNR, uchar  bInvokeId)
 
   PushChar(1); // 1-0:1.8.0*255
   PushChar(0);
-  PushChar(1);
+  PushChar(1 + ibLine);
   PushChar(8);
   PushChar(0);
   PushChar(255);
@@ -378,9 +378,8 @@ void    QueryEngAbs36(uchar  bNS, uchar  bNR, uchar  bInvokeId)
 }
 
 
-double  ReadEngAbs36(void)
+uint64_t ReadEngAbs36(void)
 {
   InitPop(14 + GetHdlcAddressesSize());
-  uint64_t ddw = PopLongBig()*0x100000000 + PopLongBig();
-  return ((double)ddw)/1000;
+  return PopLongBig()*0x100000000 + PopLongBig();
 }

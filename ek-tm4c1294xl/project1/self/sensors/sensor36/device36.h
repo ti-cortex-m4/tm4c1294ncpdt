@@ -12,5 +12,5 @@ void    Query36_RR(uchar  bNR);
 void    QueryTime36(uchar  bNS, uchar  bNR, uchar  bInvokeId);
 time    ReadTime36(void);
 
-void    QueryEngAbs36(uchar  bNS, uchar  bNR, uchar  bInvokeId);
-double  ReadEngAbs36(void);
+void    QueryEngAbs36(uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  ibLine);
+uint64_t ReadEngAbs36(void);
