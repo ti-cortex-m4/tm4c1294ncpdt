@@ -12,7 +12,7 @@ DEVICE36!C
 #include "include36.h"
 #include "crc16_x25.h"
 #include "io36.h"
-#include "hdlc_addresses.h"
+#include "hdlc.h"
 #include "device36.h"
 
 
@@ -242,7 +242,7 @@ void    Query36_RR(uchar  bNR)
 
 
 
-void    QueryTime36(uchar  bNS, uchar  bNR)
+void    QueryTime36(uchar  bNS, uchar  bNR, uchar  bInvokeId)
 {
   MonitorString("\n\n Get Time ");
 
@@ -272,8 +272,8 @@ void    QueryTime36(uchar  bNS, uchar  bNR)
   PushChar(0x00);
   
   PushChar(0xC0); // Get-Request
-  PushChar(0x01); // Get-Request-Normal ?
-  PushChar(0x83); // Invoke-Id-And-Priority TODO ??? 0x81
+  PushChar(0x01); // Get-Request-Normal
+  PushChar(0x80 | (bInvokeId % 16)); // Invoke-Id-And-Priority
   
   PushChar(0x00);
   PushChar(0x08); // class
@@ -320,7 +320,7 @@ time    ReadTime36(void)
 
 
 
-void    QueryEngAbs36(uchar  bNS, uchar  bNR)
+void    QueryEngAbs36(uchar  bNS, uchar  bNR, uchar  bInvokeId)
 {
   MonitorString("\n\n Get EngAbs ");
 
@@ -350,8 +350,8 @@ void    QueryEngAbs36(uchar  bNS, uchar  bNR)
   PushChar(0x00);
 
   PushChar(0xC0); // Get-Request
-  PushChar(0x01); // Get-Request-Normal ?
-  PushChar(0x81); // Invoke-Id-And-Priority TODO ??? 0x81
+  PushChar(0x01); // Get-Request-Normal
+  PushChar(0x80 | (bInvokeId % 16)); // Invoke-Id-And-Priority
 
   PushChar(0x00);
   PushChar(0x03); // class
@@ -380,6 +380,7 @@ void    QueryEngAbs36(uchar  bNS, uchar  bNR)
 
 double  ReadEngAbs36(void)
 {
-  InitPop(14 + GetHdlcAddressesSize()); // 15 TODO ???
-  return (((double)PopLongBig())*0x100000000 + (double)PopLongBig())/1000;
+  InitPop(14 + GetHdlcAddressesSize());
+  uint64_t ddw = PopLongBig()*0x100000000 + PopLongBig();
+  return ((double)ddw)/1000;
 }

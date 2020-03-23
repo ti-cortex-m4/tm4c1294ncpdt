@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-hdlc_addresses.c
+hdlc.c
 
 
 ------------------------------------------------------------------------------*/
@@ -7,7 +7,7 @@ hdlc_addresses.c
 #include "../../main.h"
 #include "../../memory/mem_settings.h"
 #include "../../serial/ports.h"
-#include "hdlc_addresses.h"
+#include "hdlc.h"
 
 
 
