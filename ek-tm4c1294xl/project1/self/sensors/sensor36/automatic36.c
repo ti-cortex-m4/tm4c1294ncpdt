@@ -185,9 +185,6 @@ time2   ReadTimeCan36_Short(void)
 
 double2 ReadCntCurr36(void)
 {
-  uchar bNS = 0;
-  uchar bNR = 0;
-
   Query36_DISC();
   if (Input36() != SER_GOODCHECK) return GetDouble2Error();
   DelayOff();
@@ -196,25 +193,33 @@ double2 ReadCntCurr36(void)
   if (Input36() != SER_GOODCHECK) return GetDouble2Error();
   DelayOff();
 
+  uchar bNS = 0;
+  uchar bNR = 0;
+  uchar bInvokeId = 0;
+
   Query36_Open2(bNS, bNR);
   if (Input36() != SER_GOODCHECK) return GetDouble2Error();
+  if (!ValidateIframe(bNS, bNR)) return GetDouble2Error();
   DelayOff();
 
   bNR = 1;
   Query36_RR(bNR);
   if (Input36() != SER_GOODCHECK) return GetDouble2Error();
+  if (!ValidateSframe(bNR)) return GetDouble2Error();
   DelayOff();
 
-  bNS = 1;
+  bNS++;
   bNR = 1;
-  QueryEngAbs36(bNS, bNR, 0);
+  QueryEngAbs36(bNS, bNR, bInvokeId++);
   if (Input36() != SER_GOODCHECK) return GetDouble2Error();
+  if (!ValidateIframe(bNS, bNR)) return GetDouble2Error();
   double db = ReadEngAbs36();
   DelayOff();
 
   bNR = 2;
   Query36_RR(bNR);
   if (Input36() != SER_GOODCHECK) return GetDouble2Error();
+  if (!ValidateSframe(bNR)) return GetDouble2Error();
   DelayOff();
 
   Query36_DISC(); // TODO always close
