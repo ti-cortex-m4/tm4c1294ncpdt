@@ -378,6 +378,13 @@ void    QueryEngAbs36(uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  ibLine)
 }
 
 
+uint64_t ReadEngAbs36(void)
+{
+  InitPop(14 + GetHdlcAddressesSize());
+  return PopLongBig()*0x100000000 + PopLongBig();
+}
+
+
 void    QueryEngMon36(uchar  bNS, uchar  bNR, uchar  bInvokeId)
 {
   MonitorString("\n\n Get EngMon ");
@@ -515,8 +522,11 @@ void    QueryEngMon36(uchar  bNS, uchar  bNR, uchar  bInvokeId)
 }
 
 
-uint64_t ReadEngAbs36(void)
+uint64_t ReadEngMon36(void)
 {
-  InitPop(14 + GetHdlcAddressesSize());
+  InitPop(18 + GetHdlcAddressesSize());
+  long x1 = PopLongBig();
+  long x2 = PopLongBig();
+  InitPop(18 + GetHdlcAddressesSize());
   return PopLongBig()*0x100000000 + PopLongBig();
 }

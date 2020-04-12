@@ -273,26 +273,23 @@ double2 ReadCntMonCan36(uchar  ibMon)
   if (!ValidateSframe(bNR)) return GetDouble2Error();
   DelayOff();
 
-  uchar i;
-  for (i=0; i<4; i++) {
-    bNS++;
-    QueryEngAbs36(bNS, bNR, bInvokeId++, i);
-    if (Input36() != SER_GOODCHECK) return GetDouble2Error();
-    if (!ValidateIframe(bNS, bNR)) return GetDouble2Error();
+  bNS++;
+  QueryEngMon36(bNS, bNR, bInvokeId++);
+  if (Input36() != SER_GOODCHECK) return GetDouble2Error();
+  if (!ValidateIframe(bNS, bNR)) return GetDouble2Error();
 
-    uint64_t ddw = ReadEngAbs36();
-    mpdwChannelsA[i] = ddw % 0x100000000;
-    mpdbChannelsC[i] = (double)mpdwChannelsA[i] / 1000;
-    mpboChannelsA[i] = true;
+  uint64_t ddw = ReadEngMon36();
+  mpdwChannelsA[0] = ddw % 0x100000000;
+  mpdbChannelsC[0] = (double)mpdwChannelsA[0] / 1000;
+  mpboChannelsA[0] = true;
 
-    DelayOff();
+  DelayOff();
 
-    bNR++;
-    Query36_RR(bNR);
-    if (Input36() != SER_GOODCHECK) return GetDouble2Error();
-    if (!ValidateSframe(bNR)) return GetDouble2Error();
-    DelayOff();
-  }
+  bNR++;
+  Query36_RR(bNR);
+  if (Input36() != SER_GOODCHECK) return GetDouble2Error();
+  if (!ValidateSframe(bNR)) return GetDouble2Error();
+  DelayOff();
 
   Query36_DISC(); // TODO always close
   if (Input36() != SER_GOODCHECK) return GetDouble2Error();
