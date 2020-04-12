@@ -382,7 +382,7 @@ void    QueryEngMon36(uchar  bNS, uchar  bNR, uchar  bInvokeId)
 {
   MonitorString("\n\n Get EngMon ");
 
-  uint wSize = 23 + GetHdlcAddressesSize(); // 0x19 25
+  uint wSize = 92 + GetHdlcAddressesSize(); // 0x5E 94
 
   InitPush(0);
   PushChar(0x7E);
@@ -411,9 +411,6 @@ void    QueryEngMon36(uchar  bNS, uchar  bNR, uchar  bInvokeId)
   PushChar(0x01); // Get-Request-Normal
   PushChar(0x80 | (bInvokeId % 16)); // Invoke-Id-And-Priority
 
-  PushChar(0xC0);
-  PushChar(0x01);
-  PushChar(0x86);
   PushChar(0x00);
   PushChar(0x07);
   PushChar(0x00);
@@ -493,9 +490,6 @@ void    QueryEngMon36(uchar  bNS, uchar  bNR, uchar  bInvokeId)
   PushChar(0x12);
   PushChar(0x00);
   PushChar(0x00);
-  PushChar(0xB5);
-  PushChar(0xDF);
-  PushChar(0x7E);
 
 /*
   PushChar(0x00);
@@ -510,16 +504,14 @@ void    QueryEngMon36(uchar  bNS, uchar  bNR, uchar  bInvokeId)
 
   PushChar(0x02);
   PushChar(0x00);
-
+*/
   // DLMS finish
 
   PushIntLtl(MakeCRC16_X25OutBuff(1, wSize-2));
-//  PushChar(0x47); // CRC
-//  PushChar(0x7C);
 
   PushChar(0x7E);
-*/
-  Query36(1000, wSize+2); // 27
+
+  Query36(1000, wSize+2);
 }
 
 
