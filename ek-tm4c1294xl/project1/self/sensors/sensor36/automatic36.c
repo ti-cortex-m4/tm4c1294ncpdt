@@ -247,9 +247,59 @@ double2 ReadCntCurr36(void)
 */
 }
 
-/*
+
 double2 ReadCntMonCan36(uchar  ibMon)
 {
+  Query36_DISC();
+  if (Input36() != SER_GOODCHECK) return GetDouble2Error();
+  DelayOff();
+
+  Query36_SNRM();
+  if (Input36() != SER_GOODCHECK) return GetDouble2Error();
+  DelayOff();
+
+  uchar bNS = 0;
+  uchar bNR = 0;
+  uchar bInvokeId = 0;
+
+  Query36_Open2(bNS, bNR);
+  if (Input36() != SER_GOODCHECK) return GetDouble2Error();
+  if (!ValidateIframe(bNS, bNR)) return GetDouble2Error();
+  DelayOff();
+
+  bNR++;
+  Query36_RR(bNR);
+  if (Input36() != SER_GOODCHECK) return GetDouble2Error();
+  if (!ValidateSframe(bNR)) return GetDouble2Error();
+  DelayOff();
+
+  uchar i;
+  for (i=0; i<4; i++) {
+    bNS++;
+    QueryEngAbs36(bNS, bNR, bInvokeId++, i);
+    if (Input36() != SER_GOODCHECK) return GetDouble2Error();
+    if (!ValidateIframe(bNS, bNR)) return GetDouble2Error();
+
+    uint64_t ddw = ReadEngAbs36();
+    mpdwChannelsA[i] = ddw % 0x100000000;
+    mpdbChannelsC[i] = (double)mpdwChannelsA[i] / 1000;
+    mpboChannelsA[i] = true;
+
+    DelayOff();
+
+    bNR++;
+    Query36_RR(bNR);
+    if (Input36() != SER_GOODCHECK) return GetDouble2Error();
+    if (!ValidateSframe(bNR)) return GetDouble2Error();
+    DelayOff();
+  }
+
+  Query36_DISC(); // TODO always close
+  if (Input36() != SER_GOODCHECK) return GetDouble2Error();
+  DelayOff();
+
+  return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
+/*
   Clear();
 
   if (QueryConfig36_Full(25) == 0) return GetDouble2Error();
@@ -271,5 +321,6 @@ double2 ReadCntMonCan36(uchar  ibMon)
   mpboChannelsA[0] = true;
 
   return GetDouble2(mpdbChannelsC[0], true);
-}
 */
+}
+

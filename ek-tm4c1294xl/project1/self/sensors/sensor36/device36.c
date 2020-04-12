@@ -380,7 +380,7 @@ void    QueryEngAbs36(uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  ibLine)
 
 void    QueryEngMon36(uchar  bNS, uchar  bNR, uchar  bInvokeId)
 {
-  MonitorString("\n\n Get EngAbs "); MonitorCharDec(ibLine);
+  MonitorString("\n\n Get EngMon ");
 
   uint wSize = 23 + GetHdlcAddressesSize(); // 0x19 25
 
@@ -411,6 +411,93 @@ void    QueryEngMon36(uchar  bNS, uchar  bNR, uchar  bInvokeId)
   PushChar(0x01); // Get-Request-Normal
   PushChar(0x80 | (bInvokeId % 16)); // Invoke-Id-And-Priority
 
+  PushChar(0xC0);
+  PushChar(0x01);
+  PushChar(0x86);
+  PushChar(0x00);
+  PushChar(0x07);
+  PushChar(0x00);
+  PushChar(0x00);
+  PushChar(0x62);
+  PushChar(0x01);
+  PushChar(0x00);
+  PushChar(0xFF);
+  PushChar(0x02);
+  PushChar(0x01);
+  PushChar(0x01);
+  PushChar(0x02);
+  PushChar(0x04);
+  PushChar(0x02);
+  PushChar(0x04);
+  PushChar(0x12);
+  PushChar(0x00);
+  PushChar(0x08);
+  PushChar(0x09);
+  PushChar(0x06);
+  PushChar(0x00);
+  PushChar(0x00);
+  PushChar(0x01);
+  PushChar(0x00);
+  PushChar(0x00);
+  PushChar(0xFF);
+  PushChar(0x0F);
+  PushChar(0x02);
+  PushChar(0x12);
+  PushChar(0x00);
+  PushChar(0x00);
+  PushChar(0x09);
+  PushChar(0x0C);
+  PushChar(0x07);
+  PushChar(0xE4);
+  PushChar(0x03);
+  PushChar(0x01);
+  PushChar(0xFF);
+  PushChar(0x00);
+  PushChar(0x00);
+  PushChar(0x01);
+  PushChar(0xFF);
+  PushChar(0x80);
+  PushChar(0x00);
+  PushChar(0xFF);
+  PushChar(0x09);
+  PushChar(0x0C);
+  PushChar(0x07);
+  PushChar(0xE4);
+  PushChar(0x04);
+  PushChar(0x01);
+  PushChar(0xFF);
+  PushChar(0x00);
+  PushChar(0x00);
+  PushChar(0x00);
+  PushChar(0xFF);
+  PushChar(0x80);
+  PushChar(0x00);
+  PushChar(0xFF);
+  PushChar(0x01);
+  PushChar(0x01);
+  PushChar(0x02);
+  PushChar(0x04);
+  PushChar(0x12);
+  PushChar(0x00);
+  PushChar(0x03);
+  PushChar(0x09);
+  PushChar(0x06);
+  PushChar(0x01);
+  PushChar(0x00);
+  PushChar(0x0F);
+  PushChar(0x08);
+  PushChar(0x00);
+  PushChar(0xFF);
+  PushChar(0x0F);
+  PushChar(0x02);
+  PushChar(0x12);
+  PushChar(0x00);
+  PushChar(0x00);
+  PushChar(0xB5);
+  PushChar(0xDF);
+  PushChar(0x7E);
+
+/*
   PushChar(0x00);
   PushChar(0x03); // class
 
@@ -431,7 +518,7 @@ void    QueryEngMon36(uchar  bNS, uchar  bNR, uchar  bInvokeId)
 //  PushChar(0x7C);
 
   PushChar(0x7E);
-
+*/
   Query36(1000, wSize+2); // 27
 }
 
