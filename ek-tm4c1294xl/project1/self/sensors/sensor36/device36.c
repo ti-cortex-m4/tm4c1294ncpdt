@@ -525,8 +525,5 @@ void    QueryEngMon36(uchar  bNS, uchar  bNR, uchar  bInvokeId)
 uint64_t ReadEngMon36(void)
 {
   InitPop(18 + GetHdlcAddressesSize());
-  long x1 = PopLongBig();
-  long x2 = PopLongBig();
-  InitPop(18 + GetHdlcAddressesSize());
   return PopLongBig()*0x100000000 + PopLongBig();
 }
