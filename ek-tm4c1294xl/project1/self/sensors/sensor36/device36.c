@@ -378,6 +378,64 @@ void    QueryEngAbs36(uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  ibLine)
 }
 
 
+void    QueryEngMon36(uchar  bNS, uchar  bNR, uchar  bInvokeId)
+{
+  MonitorString("\n\n Get EngAbs "); MonitorCharDec(ibLine);
+
+  uint wSize = 23 + GetHdlcAddressesSize(); // 0x19 25
+
+  InitPush(0);
+  PushChar(0x7E);
+
+  PushFormat(wSize);
+//  PushChar(0xA0);
+//  PushChar(0x19);
+  PushHdlcAddresses();
+//  PushChar(0x03);
+//  PushChar(0x03);
+
+//  MonitorString("Control{N(R)=1,N(S)=1} 32 ? "); MonitorCharHex((bNR << 5) | 0x10 | (bNS << 1) | 0x00);
+  PushChar((bNR << 5) | 0x10 | (bNS << 1) | 0x00);
+
+  PushIntLtl(MakeCRC16_X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
+//  PushChar(0xEC); // CRC ?
+//  PushChar(0xC8);
+
+  // DLMS start
+
+  PushChar(0xE6); // LLC
+  PushChar(0xE6);
+  PushChar(0x00);
+
+  PushChar(0xC0); // Get-Request
+  PushChar(0x01); // Get-Request-Normal
+  PushChar(0x80 | (bInvokeId % 16)); // Invoke-Id-And-Priority
+
+  PushChar(0x00);
+  PushChar(0x03); // class
+
+  PushChar(1); // 1-0:1.8.0*255
+  PushChar(0);
+  PushChar(1 + ibLine);
+  PushChar(8);
+  PushChar(0);
+  PushChar(255);
+
+  PushChar(0x02);
+  PushChar(0x00);
+
+  // DLMS finish
+
+  PushIntLtl(MakeCRC16_X25OutBuff(1, wSize-2));
+//  PushChar(0x47); // CRC
+//  PushChar(0x7C);
+
+  PushChar(0x7E);
+
+  Query36(1000, wSize+2); // 27
+}
+
+
 uint64_t ReadEngAbs36(void)
 {
   InitPop(14 + GetHdlcAddressesSize());
