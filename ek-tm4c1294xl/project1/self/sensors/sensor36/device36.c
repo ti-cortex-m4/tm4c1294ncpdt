@@ -491,8 +491,10 @@ void    QueryEngMon36(uchar  bNS, uchar  bNR, uchar  bInvokeId)
   PushChar(0x12);
   PushChar(0x00);
   PushChar(0x00);
+
   PushChar(0x09);
   PushChar(0x0C);
+
   PushChar(0x07);
   PushChar(0xE4);
   PushChar(0x03);
@@ -505,8 +507,10 @@ void    QueryEngMon36(uchar  bNS, uchar  bNR, uchar  bInvokeId)
   PushChar(0x80);
   PushChar(0x00);
   PushChar(0xFF);
+
   PushChar(0x09);
   PushChar(0x0C);
+
   PushChar(0x07);
   PushChar(0xE4);
   PushChar(0x04);
@@ -519,6 +523,7 @@ void    QueryEngMon36(uchar  bNS, uchar  bNR, uchar  bInvokeId)
   PushChar(0x80);
   PushChar(0x00);
   PushChar(0xFF);
+
   PushChar(0x01);
   PushChar(0x01);
   PushChar(0x02);
