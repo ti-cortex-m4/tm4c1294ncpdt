@@ -385,6 +385,48 @@ uint64_t ReadEngAbs36(void)
 }
 
 
+/*
+<GetRequest>
+  <GetRequestNormal>
+    <!--Priority: HIGH ServiceClass: UN_CONFIRMED invokeID: 6-->
+    <InvokeIdAndPriority Value="86" />
+    <AttributeDescriptor>
+      <!--PROFILE_GENERIC-->
+      <ClassId Value="0007" />
+      <!--0.0.98.1.0.255-->
+      <InstanceId Value="0000620100FF" />
+      <AttributeId Value="02" />
+    </AttributeDescriptor>
+    <AccessSelection>
+      <AccessSelector Value="01" />
+      <AccessParameters>
+        <Structure Qty="04" >
+          <Structure Qty="04" >
+            <UInt16 Value="0008" />
+            <!--0.0.1.0.0.255-->
+            <OctetString Value="0000010000FF" />
+            <Int8 Value="02" />
+            <UInt16 Value="0000" />
+          </Structure>
+          <!--2020-03-01 00:00:01-->
+          <OctetString Value="07E40301FF000001FF8000FF" />
+          <!--2020-04-01 00:00:00-->
+          <OctetString Value="07E40401FF000000FF8000FF" />
+          <Array Qty="01" >
+            <Structure Qty="04" >
+              <UInt16 Value="0003" />
+              <!--1.0.15.8.0.255-->
+              <OctetString Value="01000F0800FF" />
+              <Int8 Value="02" />
+              <UInt16 Value="0000" />
+            </Structure>
+          </Array>
+        </Structure>
+      </AccessParameters>
+    </AccessSelection>
+  </GetRequestNormal>
+</GetRequest>
+*/
 void    QueryEngMon36(uchar  bNS, uchar  bNR, uchar  bInvokeId)
 {
   MonitorString("\n\n Get EngMon ");
@@ -522,6 +564,25 @@ void    QueryEngMon36(uchar  bNS, uchar  bNR, uchar  bInvokeId)
 }
 
 
+/*
+<PDU>
+<GetResponse>
+  <GetResponseNormal>
+    <!--Priority: HIGH ServiceClass: UN_CONFIRMED invokeID: 6-->
+    <InvokeIdAndPriority Value="86" />
+    <Result>
+      <Data>
+        <Array Qty="01" >
+          <Structure Qty="01" >
+            <UInt64 Value="00000000000030B3" />
+          </Structure>
+        </Array>
+      </Data>
+    </Result>
+  </GetResponseNormal>
+</GetResponse>
+</PDU>
+*/
 uint64_t ReadEngMon36(void)
 {
   InitPop(18 + GetHdlcAddressesSize());
