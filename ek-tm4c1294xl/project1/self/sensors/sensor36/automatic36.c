@@ -274,7 +274,7 @@ double2 ReadCntMonCan36(uchar  ibMon)
   DelayOff();
 
   bNS++;
-  QueryEngMon36(bNS, bNR, bInvokeId++);
+  QueryEngMon36(bNS, bNR, bInvokeId++, 4, 20);
   if (Input36() != SER_GOODCHECK) return GetDouble2Error();
   if (!ValidateIframe(bNS, bNR)) return GetDouble2Error();
 
