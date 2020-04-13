@@ -388,10 +388,11 @@ uint64_t ReadEngAbs36(void)
 
 void    PushTime36(uchar  bMonth, uchar  bYear)
 {
-  PushChar(0x07);
-  PushChar(0xE4);
-  PushChar(0x04);
-  PushChar(0x01);
+  uint wYear = 2000 + bYear;
+  PushChar(wYear / 0x100);
+  PushChar(wYear % 0x100);
+  PushChar(bMonth);
+  PushChar(1);
   PushChar(0xFF);
   PushChar(0x00);
   PushChar(0x00);
