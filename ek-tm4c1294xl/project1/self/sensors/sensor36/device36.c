@@ -385,6 +385,24 @@ uint64_t ReadEngAbs36(void)
 }
 
 
+
+void    PushTime36(uchar  bMonth, uchar  bYear)
+{
+  PushChar(0x07);
+  PushChar(0xE4);
+  PushChar(0x04);
+  PushChar(0x01);
+  PushChar(0xFF);
+  PushChar(0x00);
+  PushChar(0x00);
+  PushChar(0x00);
+  PushChar(0xFF);
+  PushChar(0x80);
+  PushChar(0x00);
+  PushChar(0xFF);
+}
+
+
 /*
 <GetRequest>
   <GetRequestNormal>
@@ -427,7 +445,7 @@ uint64_t ReadEngAbs36(void)
   </GetRequestNormal>
 </GetRequest>
 */
-void    QueryEngMon36(uchar  bNS, uchar  bNR, uchar  bInvokeId)
+void    QueryEngMon36(uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  bMonth, uchar  bYear)
 {
   MonitorString("\n\n Get EngMon ");
 
@@ -494,35 +512,11 @@ void    QueryEngMon36(uchar  bNS, uchar  bNR, uchar  bInvokeId)
 
   PushChar(0x09);
   PushChar(0x0C);
-
-  PushChar(0x07);
-  PushChar(0xE4);
-  PushChar(0x03);
-  PushChar(0x01);
-  PushChar(0xFF);
-  PushChar(0x00);
-  PushChar(0x00);
-  PushChar(0x01);
-  PushChar(0xFF);
-  PushChar(0x80);
-  PushChar(0x00);
-  PushChar(0xFF);
+  PushTime36(bMonth, bYear);
 
   PushChar(0x09);
   PushChar(0x0C);
-
-  PushChar(0x07);
-  PushChar(0xE4);
-  PushChar(0x04);
-  PushChar(0x01);
-  PushChar(0xFF);
-  PushChar(0x00);
-  PushChar(0x00);
-  PushChar(0x00);
-  PushChar(0xFF);
-  PushChar(0x80);
-  PushChar(0x00);
-  PushChar(0xFF);
+  PushTime36(bMonth, bYear);
 
   PushChar(0x01);
   PushChar(0x01);
