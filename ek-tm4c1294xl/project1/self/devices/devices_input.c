@@ -9,7 +9,7 @@ DEVICES_INPUT,C
 #include "../digitals/digitals_status.h"
 #include "../sensors/sensor3/unpack_c.h"
 #include "../sensors/unpack_k.h"
-#include "../sensors/unpack_s.h"
+#include "../sensors/sensor24/unpack_s.h"
 #include "../sensors/unpack_v.h"
 #include "../sensors/unpack_w.h"
 #include "../sensors/sensor34/unpack_34.h"
