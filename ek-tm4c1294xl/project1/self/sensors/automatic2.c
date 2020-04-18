@@ -51,6 +51,7 @@ AUTOMATIC2!C
 #include "sensor33/cntmon33.h"
 #include "sensor34/automatic34.h"
 #include "sensor35/automatic35.h"
+#include "sensor35/automatic36.h"
 #include "automatic2.h"
 
 
@@ -2035,6 +2036,10 @@ time2   ReadTimeCan(uchar  ibCan)
 
 #ifndef SKIP_35
     case 35: return ReadTimeCan35();
+#endif
+
+#ifndef SKIP_36
+    case 36: return ReadTimeCan36();
 #endif
 
     default: return GetTime2Error();
