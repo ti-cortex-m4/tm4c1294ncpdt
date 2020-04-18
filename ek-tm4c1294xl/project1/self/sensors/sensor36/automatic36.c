@@ -12,7 +12,7 @@ AUTOMATIC36!C
 #include "../../serial/ports.h"
 //#include "../../devices/devices.h"
 //#include "../../sensors/automatic1.h"
-//#include "../../digitals/digitals.h"
+#include "../../digitals/digitals.h"
 #include "device36.h"
 //#include "io35.h"
 #include "automatic36.h"
