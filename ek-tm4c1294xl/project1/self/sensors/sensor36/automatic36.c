@@ -83,9 +83,44 @@ time2   ReadTimeCan36(void)
 {
   Clear();
 
-  time2 ti2;
+  uchar r;
+  for (r=0; r<MaxRepeats(); r++)
+  {
+    QueryCloseK();
+    QueryTimeK();
 
-  return GetTime2(ti2.tiValue, true);
+    if (BccInput() == SER_GOODCHECK) break;
+  }
+
+  if (r == MaxRepeats()) return GetTime2Error();
+  ShowPercent(25);
+
+  time ti = ReadTimeK();
+
+
+  for (r=0; r<MaxRepeats(); r++)
+  {
+    QueryCloseK();
+    QueryDateK();
+
+    if (BccInput() == SER_GOODCHECK) break;
+  }
+
+  if (r == MaxRepeats()) return GetTime2Error();
+  ShowPercent(50);
+
+  ti = ReadDateK(ti);
+
+
+  QueryCloseK();
+
+
+  tiChannelC = ti;
+
+  uchar i;
+  for (i=0; i<4; i++) mpboChannelsA[i] = true;
+
+  return GetTime2(ti, true);
 }
 
 /*
