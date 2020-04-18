@@ -13,9 +13,70 @@ DEVICE36!C
 //#include "../../time/timedate.h"
 //#include "../../time/calendar.h"
 //#include "../../time/delay.h"
-//#include "../../serial/ports.h"
+#include "../../serial/ports.h"
 //#include "../../devices/devices.h"
 //#include "../../digitals/current/current_run.h"
 //#include "io35.h"
 //#include "timeout35.h"
 #include "device36.h"
+
+
+
+void    QueryTime36(void)
+{
+  uchar n = PushAddress2Bcc();
+
+  PushChar1Bcc('T');
+  PushChar1Bcc('I');
+  PushChar1Bcc('M');
+  PushChar1Bcc('E');
+  PushChar1Bcc('_');
+  PushChar1Bcc('(');
+  PushChar1Bcc(')');
+  PushChar1Bcc(0x03);
+
+  BccQueryIO(1+17+2, n+8+1, 0);
+}
+
+
+time    ReadTime36(void)
+{
+  InitPop(7);
+
+  time ti;
+  ti.bHour   = PopChar2Bcc(); PopChar();
+  ti.bMinute = PopChar2Bcc(); PopChar();
+  ti.bSecond = PopChar2Bcc(); PopChar();
+
+  return ti;
+}
+
+
+
+void    QueryDate36(void)
+{
+  uchar n = PushAddress2Bcc();
+
+  PushChar1Bcc('D');
+  PushChar1Bcc('A');
+  PushChar1Bcc('T');
+  PushChar1Bcc('E');
+  PushChar1Bcc('_');
+  PushChar1Bcc('(');
+  PushChar1Bcc(')');
+  PushChar1Bcc(0x03);
+
+  BccQueryIO(1+20+2, n+8+1, 0);
+}
+
+
+time    ReadDate36(time  ti)
+{
+  InitPop(7+3);
+
+  ti.bDay   = PopChar2Bcc(); PopChar();
+  ti.bMonth = PopChar2Bcc(); PopChar();
+  ti.bYear  = PopChar2Bcc(); PopChar();
+
+  return ti;
+}
