@@ -1,13 +1,9 @@
 /*------------------------------------------------------------------------------
-DEVICE36.H
+IO36!H
 
 
 ------------------------------------------------------------------------------*/
 
-void    QueryTime36(void);
-time    ReadTime36(void);
+void    Query36(uchar  cbIn, uchar  cbOut);
 
-void    QueryDate36(void);
-time    ReadDate36(time  ti);
-
-void    QueryClose36(void);
+serial  Input36(void);
