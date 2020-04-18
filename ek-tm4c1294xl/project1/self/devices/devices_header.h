@@ -47,7 +47,7 @@ DEVICES.C
 #include "../sensors/device_k.h"
 #include "../sensors/sensor21/device_p.h"
 #include "../sensors/device_q.h"
-#include "../sensors/device_s.h"
+#include "../sensors/sensor24/device_s.h"
 #include "../sensors/sensor26/device_u.h"
 #include "../sensors/sensor26/device_u_plc.h"
 #include "../sensors/device_v.h"

@@ -39,7 +39,7 @@ AUTOMATIC2!C
 #include "sensor21/input_p.h"
 #include "sensor21/automatic_p.h"
 #include "automatic_q.h"
-#include "automatic_s.h"
+#include "sensor24/automatic_s.h"
 #include "sensor26/automatic_u.h"
 #include "automatic_v.h"
 #include "automatic_w.h"

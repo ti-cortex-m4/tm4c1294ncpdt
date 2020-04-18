@@ -12,7 +12,7 @@ DEVICES_POSTINPUT,C
 #include "../serial/monitor.h"
 #include "../serial/input_wrapper.h"
 #include "../sensors/unpack_k.h"
-#include "../sensors/unpack_s.h"
+#include "../sensors/sensor24/unpack_s.h"
 #include "../sensors/unpack_v.h"
 #include "../sensors/sensor31/unpack31.h"
 #include "../sensors/automatic_w.h"
