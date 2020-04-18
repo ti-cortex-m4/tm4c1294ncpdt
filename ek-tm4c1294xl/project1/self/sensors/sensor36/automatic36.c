@@ -9,16 +9,16 @@ AUTOMATIC36!C
 #include "../../display/display.h"
 #include "../../keyboard/keyboard.h"
 //#include "../../time/delay.h"
-//#include "../../serial/ports.h"
+#include "../../serial/ports.h"
 //#include "../../devices/devices.h"
 //#include "../../sensors/automatic1.h"
 //#include "../../digitals/digitals.h"
-//#include "device35.h"
+#include "device36.h"
 //#include "io35.h"
 #include "automatic36.h"
 
 
-
+/*
 time2   QueryTime36_Full(uchar  bPercent)
 {
   uchar i;
@@ -36,47 +36,7 @@ time2   QueryTime36_Full(uchar  bPercent)
 
   return GetTime2(ReadTime35(), true);
 }
-
-
-bool    QueryEngDay35_Full(uchar  bTime, uchar  bPercent)
-{
-  uchar i;
-  for (i=0; i<MaxRepeats(); i++)
-  {
-    DelayOff();
-    QueryEngDay35(bTime);
-
-    if (Input35() == SER_GOODCHECK) break;
-    if (fKey == true) return(0);
-  }
-
-  if (i == MaxRepeats()) return(0);
-  ShowPercent(bPercent);
-
-  ReadEnergy35();
-  return(1);
-}
-
-
-bool    QueryEngMon35_Full(uchar  bTime, uchar  bPercent)
-{
-  uchar i;
-  for (i=0; i<MaxRepeats(); i++)
-  {
-    DelayOff();
-    QueryEngMon35(bTime);
-
-    if (Input35() == SER_GOODCHECK) break;
-    if (fKey == true) return(0);
-  }
-
-  if (i == MaxRepeats()) return(0);
-  ShowPercent(bPercent);
-
-  ReadEnergy35();
-  return(1);
-}
-
+*/
 
 
 time2   ReadTimeCan36(void)
@@ -86,8 +46,8 @@ time2   ReadTimeCan36(void)
   uchar r;
   for (r=0; r<MaxRepeats(); r++)
   {
-    QueryCloseK();
-    QueryTimeK();
+    //QueryCloseK();
+    QueryTime36();
 
     if (BccInput() == SER_GOODCHECK) break;
   }
@@ -95,13 +55,13 @@ time2   ReadTimeCan36(void)
   if (r == MaxRepeats()) return GetTime2Error();
   ShowPercent(25);
 
-  time ti = ReadTimeK();
+  time ti = ReadTime36();
 
 
   for (r=0; r<MaxRepeats(); r++)
   {
-    QueryCloseK();
-    QueryDateK();
+    //QueryCloseK();
+    QueryDate36();
 
     if (BccInput() == SER_GOODCHECK) break;
   }
@@ -109,7 +69,7 @@ time2   ReadTimeCan36(void)
   if (r == MaxRepeats()) return GetTime2Error();
   ShowPercent(50);
 
-  ti = ReadDateK(ti);
+  ti = ReadDate36(ti);
 
 
   QueryCloseK();
