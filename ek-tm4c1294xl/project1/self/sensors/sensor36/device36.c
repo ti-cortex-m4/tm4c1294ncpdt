@@ -6,7 +6,7 @@ DEVICE36!C
 
 #include "../../main.h"
 //#include "../../memory/mem_settings.h"
-//#include "../../memory/mem_digitals.h"
+#include "../../memory/mem_digitals.h"
 //#include "../../memory/mem_current.h"
 //#include "../../memory/mem_factors.h"
 //#include "../../display/display.h"
@@ -79,6 +79,33 @@ time    ReadDate36(time  ti)
   ti.bYear  = PopChar2Bcc(); PopChar();
 
   return ti;
+}
+
+
+
+void    QueryEngAbs36(uchar  ibLine)
+{
+  uchar n = PushAddress2Bcc();
+
+  PushChar1Bcc('E');
+  PushChar1Bcc('T');
+  PushChar1Bcc('0');
+
+  PushLineBcc(ibLine);
+
+  PushChar1Bcc('(');
+  PushChar1Bcc(')');
+  PushChar1Bcc(0x03);
+
+  //BccQueryIO(1+6*28+2, n+8+1, 6);
+}
+
+
+void    ReadEng36(uchar  ibLine)
+{
+  InitPop(1);
+
+  mpdbChannelsC[ibLine] = PopDoubleQ();
 }
 
 
