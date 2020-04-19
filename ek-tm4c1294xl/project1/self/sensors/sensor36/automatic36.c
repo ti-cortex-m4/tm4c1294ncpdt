@@ -14,7 +14,7 @@ AUTOMATIC36!C
 //#include "../../sensors/automatic1.h"
 #include "../../digitals/digitals.h"
 #include "device36.h"
-//#include "io35.h"
+#include "io36.h"
 #include "automatic36.h"
 
 
@@ -49,7 +49,7 @@ time2   ReadTimeCan36(void)
     //QueryCloseK();
     QueryTime36();
 
-    if (BccInput() == SER_GOODCHECK) break;
+    if (Input36() == SER_GOODCHECK) break;
   }
 
   if (r == MaxRepeats()) return GetTime2Error();
@@ -63,7 +63,7 @@ time2   ReadTimeCan36(void)
     //QueryCloseK();
     QueryDate36();
 
-    if (BccInput() == SER_GOODCHECK) break;
+    if (Input36() == SER_GOODCHECK) break;
   }
 
   if (r == MaxRepeats()) return GetTime2Error();
@@ -72,7 +72,7 @@ time2   ReadTimeCan36(void)
   ti = ReadDate36(ti);
 
 
-  QueryCloseK();
+  QueryClose36();
 
 
   tiChannelC = ti;
@@ -83,15 +83,26 @@ time2   ReadTimeCan36(void)
   return GetTime2(ti, true);
 }
 
-/*
-time2   ReadTimeCan35_Short(void)
+
+time2   ReadTimeCan36_Short(void)
 {
-  DelayOff();
-  QueryTime35();
+  //QueryCloseK();
+  QueryTime36();
 
-  if (Input35() != SER_GOODCHECK) return GetTime2Error();
+  if (Input36() != SER_GOODCHECK) return GetTime2Error();
+
+  time ti = ReadTime36();
 
 
-  return GetTime2(ReadTime35(), true);
+  //QueryCloseK();
+  QueryDate36();
+
+  if (Input36() != SER_GOODCHECK) return GetTime2Error();
+
+  ti = ReadDate36(ti);
+
+
+  QueryClose36();
+
+  return GetTime2(ti, true);
 }
-*/
