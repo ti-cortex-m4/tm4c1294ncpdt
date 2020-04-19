@@ -35,7 +35,7 @@ void    QueryTime36(void)
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
-  BccQueryIO(1+17+2, n+8+1, 0);
+  //BccQueryIO(1+17+2, n+8+1, 0);
 }
 
 
@@ -66,7 +66,7 @@ void    QueryDate36(void)
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
-  BccQueryIO(1+20+2, n+8+1, 0);
+  //BccQueryIO(1+20+2, n+8+1, 0);
 }
 
 
