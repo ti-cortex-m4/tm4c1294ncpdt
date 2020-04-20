@@ -32,7 +32,7 @@ static uchar                bCommandSave;
 
 
 
-void    Query36Internal(uchar  cbIn, uchar  cbOut, uchar  bCommand)
+void    Query36Internal(uint  cwIn, uchar  cbOut, uchar  cbHeaderMax, uchar  bCommand)
 {
   cbInSave     = cbIn;
   cbOutSave    = cbOut;
@@ -45,16 +45,23 @@ void    Query36Internal(uchar  cbIn, uchar  cbOut, uchar  bCommand)
   if (cbOut > 0)
   {
     // расчет CRC счетчика
-    uchar bCrc = MakeCrcSOutBuff(1, cbOut-3);
+      cbHeaderBcc = cbHeaderMax;
+      cwInBuffBcc = 0;
 
-    InitPush(0);
-    PushChar(0xC0);
+      InitPush(0);
 
-    uchar i;
-    for (i=0; i<cbOut-3; i++) SkipChar();
+      uchar bSum = 0;
+      bool f = false;
 
-    PushChar(bCrc);
-    PushChar(0xC0);
+      uchar i;
+      for (i=0; i<cbOut-1; i++)
+      {
+        uchar b = SkipChar();
+        if (f == true) bSum += b;
+        if ((b & 0x7F) == 0x01) f = true;
+      }
+
+      PushChar1Bcc(bSum);
 
 #ifdef MONITOR_35
     MonitorString("\n sensor pack start");
@@ -120,10 +127,10 @@ void    Query36Internal(uchar  cbIn, uchar  cbOut, uchar  bCommand)
 }
 
 
-void    Query36(uchar  cbIn, uchar  cbOut)
+void    Query36(uint  cwIn, uchar  cbOut, uchar  cbHeaderMax)
 {
   SetTimer35(0);
-  Query36Internal(cbIn, cbOut, NNCL2_DATA_SET);
+  Query36Internal(cwIn, cbOut, cbHeaderMax, NNCL2_DATA_SET);
 }
 
 
