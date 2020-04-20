@@ -22,6 +22,10 @@ DEVICE36!C
 
 
 
+uchar   PushAddress2Bcc(void);
+
+
+
 void    QueryTime36(void)
 {
   uchar n = PushAddress2Bcc();
