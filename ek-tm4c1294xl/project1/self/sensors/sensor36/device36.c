@@ -16,13 +16,11 @@ DEVICE36!C
 #include "../../serial/ports.h"
 //#include "../../devices/devices.h"
 //#include "../../digitals/current/current_run.h"
-//#include "io35.h"
+#include "io36.h"
 //#include "timeout35.h"
+#include "../device_k.h"
+#include "../device_q.h"
 #include "device36.h"
-
-
-
-uchar   PushAddress2Bcc(void);
 
 
 
@@ -39,7 +37,7 @@ void    QueryTime36(void)
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
-  //BccQueryIO(1+17+2, n+8+1, 0);
+  Query36(1+17+2, n+8+1, 0);
 }
 
 

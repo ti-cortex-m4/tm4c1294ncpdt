@@ -4,6 +4,6 @@ IO36!H
 
 ------------------------------------------------------------------------------*/
 
-void    Query36(uchar  cbIn, uchar  cbOut);
+void    Query36(uint  cwIn, uchar  cbOut, uchar  cbHeaderMax);
 
 serial  Input36(void);
