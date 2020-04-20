@@ -5,23 +5,23 @@ IO36!C
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-//#include "../../display/display.h"
-//#include "../../keyboard/keyboard.h"
-//#include "../../time/delay.h"
-//#include "../../hardware/watchdog.h"
+#include "../../display/display.h"
+#include "../../keyboard/keyboard.h"
+#include "../../time/delay.h"
+#include "../../hardware/watchdog.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports2.h"
 #include "../../serial/ports_devices.h"
-//#include "../../serial/input_wrapper.h"
+#include "../../serial/input_wrapper.h"
 #include "../../serial/monitor.h"
-//#include "../../digitals/wait_answer.h"
+#include "../../digitals/wait_answer.h"
 #include "../sensor35/include35.h"
 #include "../sensor35/pack35.h"
 //#include "../sensor35/router35.h"
 //#include "device35.h"
 //#include "action35.h"
 #include "../sensor35/timer35.h"
-//#include "log35.h"
+#include "../sensor35/log35.h"
 #include "io36.h"
 
 
@@ -134,17 +134,17 @@ void    Query36(uint  cwIn, uchar  cbOut, uchar  cbHeaderMax)
 }
 
 
-void    Query35Repeat(void)
+void    Query36Repeat(void)
 {
   MonitorString("\n repeat last query");
   Log35(R35_REPEAT_LAST_QUERY, bCommandSave);
 
-  Query35Internal(cbInSave, cbOutSave, bCommandSave);
+  Query36Internal(cbInSave, cbOutSave, bCommandSave);
 }
 
 
 
-static serial Input35Internal(void)
+static serial Input36Internal(void)
 {
   InputStart();
   InitWaitAnswer();
@@ -187,7 +187,7 @@ serial  Input35(void)
   bool repeat;
   do
   {
-    Input35Internal();
+    Input36Internal();
     repeat = false;
 
     if (mpSerial[ibPort] == SER_GOODCHECK)
@@ -195,7 +195,7 @@ serial  Input35(void)
       action35 action = Action35(false);
       if (action == A35_WAIT)
       {
-        Query35Internal(250, 0, NNCL2_DATA_GET);
+        Query36Internal(250, 0, NNCL2_DATA_GET);
         repeat = true;
       }
       else if (action == A35_SUCCESS)
