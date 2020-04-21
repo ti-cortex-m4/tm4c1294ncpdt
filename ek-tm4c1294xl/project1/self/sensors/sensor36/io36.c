@@ -18,7 +18,7 @@ IO36!C
 #include "../sensor35/include35.h"
 #include "../sensor35/pack35.h"
 #include "../sensor35/router35.h"
-//#include "device35.h"
+#include "../sensor35/device35.h"
 #include "action36.h"
 #include "../sensor35/timer35.h"
 #include "../sensor35/log35.h"
@@ -28,6 +28,7 @@ IO36!C
 
 static uint                 cwInSave;
 static uchar                cbOutSave;
+static uchar                cbHeaderMaxSave;
 static uchar                bCommandSave;
 
 
@@ -36,6 +37,7 @@ void    Query36Internal(uint  cwIn, uchar  cbOut, uchar  cbHeaderMax, uchar  bCo
 {
   cwInSave     = cwIn;
   cbOutSave    = cbOut;
+  cbHeaderMaxSave = cbHeaderMax;
   bCommandSave = bCommand;
 
 
@@ -139,7 +141,7 @@ void    Query36Repeat(void)
   MonitorString("\n repeat last query");
   Log35(R35_REPEAT_LAST_QUERY, bCommandSave);
 
-  Query36Internal(cbInSave, cbOutSave, bCommandSave);
+  Query36Internal(cwInSave, cbOutSave, cbHeaderMaxSave, bCommandSave);
 }
 
 
@@ -195,7 +197,7 @@ serial  Input36(void)
       action35 action = Action36(false);
       if (action == A35_WAIT)
       {
-        Query36Internal(250, 0, NNCL2_DATA_GET);
+        Query36Internal(250, 0, 0, NNCL2_DATA_GET); // TODO ???
         repeat = true;
       }
       else if (action == A35_SUCCESS)
