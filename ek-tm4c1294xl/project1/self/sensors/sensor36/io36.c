@@ -19,7 +19,7 @@ IO36!C
 #include "../sensor35/pack35.h"
 //#include "../sensor35/router35.h"
 //#include "device35.h"
-//#include "action35.h"
+#include "action36.h"
 #include "../sensor35/timer35.h"
 #include "../sensor35/log35.h"
 #include "io36.h"
@@ -180,7 +180,7 @@ static serial Input36Internal(void)
 }
 
 
-serial  Input35(void)
+serial  Input36(void)
 {
   SaveDisplay();
 
@@ -192,7 +192,7 @@ serial  Input35(void)
 
     if (mpSerial[ibPort] == SER_GOODCHECK)
     {
-      action35 action = Action35(false);
+      action35 action = Action36(false);
       if (action == A35_WAIT)
       {
         Query36Internal(250, 0, NNCL2_DATA_GET);
