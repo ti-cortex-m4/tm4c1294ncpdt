@@ -62,7 +62,7 @@ static event35 Event36(bool  display) {
     if (IndexInBuff() < 15) {
       uint w = IndexInBuff();
       MonitorString("\t sensor error: bad size "); MonitorIntDec(w);
-      Clear(); sprintf(szLo+1,"ошибка: 35.3.%u",w); DelayInf();
+      Clear(); sprintf(szLo+1,"ошибка: 36.3.%u",w); DelayInf();
       return event0(true, R35_ROUTER_ERROR_SIZE, A35_ERROR, w);
     } else {
       MonitorString("\t sensor success: good size ");
@@ -99,12 +99,12 @@ static event35 Event36(bool  display) {
   } else if (InBuff(7) == NNCL2_ERROR) {
     uint w = InBuff(12);
     MonitorString("\t router error: "); MonitorCharDec(w);
-    Clear(); sprintf(szLo+1,"ошибка: 35.4.%u",w); DelayInf();
+    Clear(); sprintf(szLo+1,"ошибка: 36.4.%u",w); DelayInf();
     return event0(true, R35_ROUTER_ERROR_ERROR, A35_BREAK, w);
   } else {
     uint w = InBuff(7);
     MonitorString("\t router unknown command: "); MonitorCharDec(w);
-    Clear(); sprintf(szLo+1,"ошибка: 35.5.%u",w); DelayInf();
+    Clear(); sprintf(szLo+1,"ошибка: 36.5.%u",w); DelayInf();
     return event0(true, R35_ROUTER_ERROR_COMMAND, A35_ERROR, w);
   }
 }

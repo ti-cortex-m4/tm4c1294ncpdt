@@ -67,14 +67,14 @@ void    Query36Internal(uint  cwIn, uchar  cbOut, uchar  cbHeaderMax, uchar  bCo
 
 #ifdef MONITOR_35
     MonitorString("\n sensor pack start");
-    MonitorOut(cbIn, cbOut);
+    MonitorOut(cwIn, cbOut);
 #endif
 
     cbOut = Pack35(cbOut);
 
 #ifdef MONITOR_35
     MonitorString("\n sensor pack finish");
-    MonitorOut(cbIn, cbOut);
+    MonitorOut(cwIn, cbOut);
 #endif
 
     // перенос пакета счетчика внутри пакета концентратора
@@ -116,7 +116,7 @@ void    Query36Internal(uint  cwIn, uchar  cbOut, uchar  cbHeaderMax, uchar  bCo
 
 #ifdef MONITOR_35
   MonitorString("\n router pack start");
-  MonitorOut(cbIn, cbOut);
+  MonitorOut(cwIn, cbOut);
 #endif
 
   cbOut = Pack35(cbOut);
