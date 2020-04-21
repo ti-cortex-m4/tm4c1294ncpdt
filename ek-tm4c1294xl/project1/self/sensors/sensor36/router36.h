@@ -1,11 +1,10 @@
 /*------------------------------------------------------------------------------
-action36.h
+ROUTER35!H
 
 
 ------------------------------------------------------------------------------*/
 
-#include "../sensor35/include35.h"
+void    Decompress35(void);
 
-
-
-action35 Action36(bool  display);
+uchar   ChecksumRouter35(void);
+uchar   ChecksumSensor35(void);

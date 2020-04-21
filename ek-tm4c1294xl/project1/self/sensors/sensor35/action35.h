@@ -8,7 +8,4 @@ action35.h
 
 
 
-
-
-
 action35 Action35(bool  display);

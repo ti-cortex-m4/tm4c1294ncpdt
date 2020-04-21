@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-action35.c
+action36.c
 
 
 ------------------------------------------------------------------------------*/
@@ -13,14 +13,14 @@ action35.c
 #include "../../serial/ports_devices.h"
 #include "../../serial/monitor.h"
 #include "../../devices/devices_init.h"
-#include "include35.h"
-#include "router35.h"
-#include "unpack35.h"
-#include "io35.h"
-#include "timer35.h"
-#include "timeout35.h"
-#include "log35.h"
-#include "action35.h"
+#include "../sensor35/include35.h"
+//#include "router35.h"
+#include "../sensor35/unpack35.h"
+//#include "io35.h"
+#include "../sensor35/timer35.h"
+#include "../sensor35/timeout35.h"
+#include "../sensor35/log35.h"
+#include "action36.h"
 
 
 
@@ -35,7 +35,7 @@ static event35 event0(bool  fLog, result35  enResult, action35  enAction, uint  
 
 
 
-static event35 Event35(bool  display) {
+static event35 Event36(bool  display) {
   if (InBuff(7) == NNCL2_TIME) {
     uint tm = GetTimer35();
     if (display) {
@@ -111,8 +111,8 @@ static event35 Event35(bool  display) {
 
 
 
-action35 Action35(bool  display) {
-  event35 event = Event35(display);
+action35 Action36(bool  display) {
+  event35 event = Event36(display);
   if (event.fLog) {
     Log35(event.enResult, event.wData);
   }
