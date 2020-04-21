@@ -17,7 +17,7 @@ IO36!C
 #include "../../digitals/wait_answer.h"
 #include "../sensor35/include35.h"
 #include "../sensor35/pack35.h"
-//#include "../sensor35/router35.h"
+#include "../sensor35/router35.h"
 //#include "device35.h"
 #include "action36.h"
 #include "../sensor35/timer35.h"
