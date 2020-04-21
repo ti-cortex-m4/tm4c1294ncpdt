@@ -1,10 +1,10 @@
 /*------------------------------------------------------------------------------
-ROUTER35!H
+router36.h
 
 
 ------------------------------------------------------------------------------*/
 
-void    Decompress35(void);
+//void    Decompress35(void);
 
-uchar   ChecksumRouter35(void);
-uchar   ChecksumSensor35(void);
+//uchar   ChecksumRouter35(void);
+uchar   ChecksumSensor36(void);

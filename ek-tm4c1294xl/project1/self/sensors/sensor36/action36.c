@@ -15,7 +15,7 @@ action36.c
 #include "../../devices/devices_init.h"
 #include "../sensor35/include35.h"
 //#include "router35.h"
-#include "../sensor35/unpack35.h"
+//#include "unpack36.h"
 //#include "io35.h"
 #include "../sensor35/timer35.h"
 #include "../sensor35/timeout35.h"
@@ -88,7 +88,7 @@ static event35 Event36(bool  display) {
 #endif
 
 
-      if (ChecksumSensor35() == 0) {
+      if (ChecksumSensor36() == 0) {
         MonitorString("\t sensor success");
         return event0(false, R35_SENSOR_SUCCESS, A35_SUCCESS, 0);
       } else {

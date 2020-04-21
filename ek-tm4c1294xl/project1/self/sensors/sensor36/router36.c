@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-ROUTER35!C
+router36.c
 
 
 ------------------------------------------------------------------------------*/
@@ -16,12 +16,12 @@ ROUTER35!C
 #include "../../devices/devices.h"
 #include "../../display/display.h"
 #include "../../time/delay.h"
-#include "device35.h"
-#include "unpack35.h"
-#include "router35.h"
+//#include "device35.h"
+//#include "unpack35.h"
+#include "router36.h"
 
 
-
+/*
 void    Decompress35(void)
 {
   uchar i,j;
@@ -82,32 +82,32 @@ uchar   ChecksumRouter35(void)
 
   return i;
 }
+*/
 
 
-
-static uchar CheckSensor35(void)
+static uchar CheckSensor36(void)
 {
-  if (InBuff(0) != 0xC0) return 1;
-  if (InBuff(1) != 0x48) return 2;
-
-  if (InBuffIntLtl(2) != GetExchange35()) return 3;
-  if (InBuffIntLtl(4) != (mpdwAddress1[diCurr.bAddress-1] % 0x10000)) return 4;
-
-  if ((InBuff(6) & 0xF0) != 0x50) return 5;
-
-  if (MakeCrcSInBuff(1, IndexInBuff()-2) != 0) return 6;
-  if (InBuff(IndexInBuff()-1) != 0xC0) return 7;
+//  if (InBuff(0) != 0xC0) return 1;
+//  if (InBuff(1) != 0x48) return 2;
+//
+//  if (InBuffIntLtl(2) != GetExchange35()) return 3;
+//  if (InBuffIntLtl(4) != (mpdwAddress1[diCurr.bAddress-1] % 0x10000)) return 4;
+//
+//  if ((InBuff(6) & 0xF0) != 0x50) return 5;
+//
+//  if (MakeCrcSInBuff(1, IndexInBuff()-2) != 0) return 6;
+//  if (InBuff(IndexInBuff()-1) != 0xC0) return 7;
 
   return 0;
 }
 
 
-uchar   ChecksumSensor35(void)
+uchar   ChecksumSensor36(void)
 {
-  uchar i = CheckSensor35();
+  uchar i = CheckSensor36();
   if (i != 0)
   {
-    Clear(); sprintf(szLo+1,"ошибка: 35.2.%u",i);
+    Clear(); sprintf(szLo+1,"ошибка: 36.2.%u",i);
     DelayInf();
 
 #ifdef MONITOR_35
