@@ -10,9 +10,8 @@ PARAMS37,C
 #include "../../serial/ports.h"
 #include "../../serial/ports_devices.h"
 #include "../../display/display.h"
-//#include "../../sensors/device_q.h"
-//#include "../../sensors/sensor26/device_u.h"
 #include "../../digitals/params/params.h"
+#include "io36.h"
 #include "params_x.h"
 #include "params37.h"
 
@@ -29,27 +28,27 @@ float2  ReadParam37(void)
   if (fBeginParam == false)
   {
     QueryParamX_U123();
-    if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
+    if (Input36() != SER_GOODCHECK) return GetFloat2Error();
     ReadParamX_U123();
 
     QueryParamX_I123();
-    if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
+    if (Input36() != SER_GOODCHECK) return GetFloat2Error();
     ReadParamX_I123();
 
     QueryParamX_Pt_2Directions();
-    if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
+    if (Input36() != SER_GOODCHECK) return GetFloat2Error();
     ReadParamX_Pt_2Directions();
 
     QueryParamX_P123();
-    if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
+    if (Input36() != SER_GOODCHECK) return GetFloat2Error();
     ReadParamX_P123();
 
     QueryParamX_Qt();
-    if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
+    if (Input36() != SER_GOODCHECK) return GetFloat2Error();
     ReadParamX_Qt();
 
     QueryParamX_Q123();
-    if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
+    if (Input36() != SER_GOODCHECK) return GetFloat2Error();
     ReadParamX_Q123();
 
     mpreParam[PAR_S] = CalcS(mpreParam[PAR_P], mpreParam[PAR_Q]);
@@ -58,7 +57,7 @@ float2  ReadParam37(void)
     mpreParam[PAR_S3] = CalcS(mpreParam[PAR_P3], mpreParam[PAR_Q3]);
 
     QueryParamX_Ct123();
-    if (BccInput() != SER_GOODCHECK)
+    if (Input36() != SER_GOODCHECK)
     {
       mpreParam[PAR_C] = CalcC(mpreParam[PAR_P], mpreParam[PAR_Q]);
       mpreParam[PAR_C1] = CalcC(mpreParam[PAR_P1], mpreParam[PAR_Q1]);
@@ -69,7 +68,7 @@ float2  ReadParam37(void)
       ReadParamX_Ct123();
 
     QueryParamX_Ft();
-    if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
+    if (Input36() != SER_GOODCHECK) return GetFloat2Error();
     ReadParamX_Ft();
 
 

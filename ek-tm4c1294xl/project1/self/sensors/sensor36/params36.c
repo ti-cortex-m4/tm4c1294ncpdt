@@ -10,8 +10,7 @@ PARAMS36,C
 #include "../../serial/ports.h"
 #include "../../serial/ports_devices.h"
 #include "../../display/display.h"
-//#include "../../sensors/device_q.h"
-//#include "../../sensors/sensor26/device_u.h"
+#include "io36.h"
 #include "params_x.h"
 #include "params36.h"
 
@@ -28,7 +27,7 @@ float2  ReadParam36(void)
   if (fBeginParam == false)
   {
     QueryModelU();
-    if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
+    if (Input36() != SER_GOODCHECK) return GetFloat2Error();
     ulong2 dw2 = ReadModelU();
     if (dw2.fValid == false) return GetFloat2Error();
     if (dw2.dwValue > 0xFF) return GetFloat2Error();
@@ -37,32 +36,32 @@ float2  ReadParam36(void)
     bool f1Direction = ((bModel & 0x80) == 0);
 
     QueryParamX_U123();
-    if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
+    if (Input36() != SER_GOODCHECK) return GetFloat2Error();
     ReadParamX_U123();
 
     QueryParamX_I123();
-    if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
+    if (Input36() != SER_GOODCHECK) return GetFloat2Error();
     ReadParamX_I123();
 
     if (f1Direction)
     {
       QueryParamX_Pt_1Direction();
-      if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
+      if (Input36() != SER_GOODCHECK) return GetFloat2Error();
       ReadParamX_Pt_1Direction();
     }
     else
     {
       QueryParamX_Pt_2Directions();
-      if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
+      if (Input36() != SER_GOODCHECK) return GetFloat2Error();
       ReadParamX_Pt_2Directions();
     }
 
     QueryParamX_P123();
-    if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
+    if (Input36() != SER_GOODCHECK) return GetFloat2Error();
     ReadParamX_P123();
 
     QueryParamX_Ct123();
-    if (BccInput() != SER_GOODCHECK)
+    if (Input36() != SER_GOODCHECK)
     {
       combo32 co;
       co.dwBuff = MAX_LONG;
@@ -76,7 +75,7 @@ float2  ReadParam36(void)
       ReadParamX_Ct123();
 
     QueryParamX_Ft();
-    if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
+    if (Input36() != SER_GOODCHECK) return GetFloat2Error();
     ReadParamX_Ft();
 
 
