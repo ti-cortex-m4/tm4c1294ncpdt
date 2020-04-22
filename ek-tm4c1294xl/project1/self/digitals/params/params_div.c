@@ -317,6 +317,46 @@ void    MakeParamDiv(uint  iwPrm)
   {
     fl = 1;
   }
+  else if (GetParamDevice(iwPrm) == 36) // CE301 NNCL2
+  {
+    switch (GetParamLine(iwPrm))
+    {
+      case PAR_Q  :
+      case PAR_Q1 :
+      case PAR_Q2 :
+      case PAR_Q3 :
+
+      case PAR_S  :
+      case PAR_S1 :
+      case PAR_S2 :
+      case PAR_S3 :
+
+      case PAR_U  :
+
+      case PAR_I  :
+
+      case PAR_F1 :
+      case PAR_F2 :
+      case PAR_F3 : mpboEnblParams[iwPrm] = false; break;
+
+      default: fl = 1; break;
+    }
+  }
+  else if (GetParamDevice(iwPrm) == 37) // CE303 NNCL2
+  {
+    switch (GetParamLine(iwPrm))
+    {
+      case PAR_U  :
+
+      case PAR_I  :
+
+      case PAR_F1 :
+      case PAR_F2 :
+      case PAR_F3 : mpboEnblParams[iwPrm] = false; break;
+
+      default: fl = 1; break;
+    }
+  }
 
   mpreParamsDiv[iwPrm] = fl;
 }
