@@ -10,6 +10,8 @@ PARAMS36,C
 #include "../../serial/ports.h"
 #include "../../serial/ports_devices.h"
 #include "../../display/display.h"
+#include "../../sensors/device_k.h"
+#include "../../sensors/device_q.h"
 #include "io36.h"
 #include "params_x.h"
 #include "params36.h"
@@ -19,6 +21,32 @@ PARAMS36,C
 extern  bool                    fBeginParam;
 
 
+void    QueryModel36(void)
+{
+  uchar n = PushAddress2Bcc();
+
+  PushChar1Bcc('M');
+  PushChar1Bcc('O');
+  PushChar1Bcc('D');
+  PushChar1Bcc('E');
+  PushChar1Bcc('L');
+
+  PushChar1Bcc('(');
+  PushChar1Bcc(')');
+  PushChar1Bcc(0x03);
+
+  Query36(1+28+2, n+8+1, 1);
+}
+
+
+ulong2  ReadModel36(void)
+{
+  InitPop(1);
+
+  return PopLongQ();
+}
+
+
 
 float2  ReadParam36(void)
 {
@@ -26,9 +54,9 @@ float2  ReadParam36(void)
 
   if (fBeginParam == false)
   {
-    QueryModelU();
+    QueryModel36();
     if (Input36() != SER_GOODCHECK) return GetFloat2Error();
-    ulong2 dw2 = ReadModelU();
+    ulong2 dw2 = ReadModel36();
     if (dw2.fValid == false) return GetFloat2Error();
     if (dw2.dwValue > 0xFF) return GetFloat2Error();
 

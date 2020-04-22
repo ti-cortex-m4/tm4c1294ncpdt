@@ -12,6 +12,7 @@ PARAMS_U,C
 #include "../../display/display.h"
 #include "../../sensors/device_k.h"
 #include "../../sensors/device_q.h"
+#include "io36.h"
 #include "params_x.h"
 
 
