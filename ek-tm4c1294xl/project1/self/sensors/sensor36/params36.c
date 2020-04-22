@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
-PARAMS26,C
+PARAMS36,C
 
-CE301
+яе301 NNCL2
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
@@ -10,10 +10,10 @@ CE301
 #include "../../serial/ports.h"
 #include "../../serial/ports_devices.h"
 #include "../../display/display.h"
-#include "../../sensors/device_q.h"
-#include "../../sensors/sensor26/device_u.h"
-#include "params_u.h"
-#include "params26.h"
+//#include "../../sensors/device_q.h"
+//#include "../../sensors/sensor26/device_u.h"
+#include "params_x.h"
+#include "params36.h"
 
 
 
@@ -21,7 +21,7 @@ extern  bool                    fBeginParam;
 
 
 
-float2  ReadParam26(void) // CE301
+float2  ReadParam36(void)
 {
   Clear();
 
@@ -36,32 +36,32 @@ float2  ReadParam26(void) // CE301
     uchar bModel = dw2.dwValue;
     bool f1Direction = ((bModel & 0x80) == 0);
 
-    QueryParamU_U123();
+    QueryParamX_U123();
     if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
-    ReadParamU_U123();
+    ReadParamX_U123();
 
-    QueryParamU_I123();
+    QueryParamX_I123();
     if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
-    ReadParamU_I123();
+    ReadParamX_I123();
 
     if (f1Direction)
     {
-      QueryParamU_Pt_1Direction();
+      QueryParamX_Pt_1Direction();
       if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
-      ReadParamU_Pt_1Direction();
+      ReadParamX_Pt_1Direction();
     }
     else
     {
-      QueryParamU_Pt_2Directions();
+      QueryParamX_Pt_2Directions();
       if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
-      ReadParamU_Pt_2Directions();
+      ReadParamX_Pt_2Directions();
     }
 
-    QueryParamU_P123();
+    QueryParamX_P123();
     if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
-    ReadParamU_P123();
+    ReadParamX_P123();
 
-    QueryParamU_Ct123();
+    QueryParamX_Ct123();
     if (BccInput() != SER_GOODCHECK)
     {
       combo32 co;
@@ -73,11 +73,11 @@ float2  ReadParam26(void) // CE301
       mpreParam[PAR_C3] = co.flBuff;
     }
     else
-      ReadParamU_Ct123();
+      ReadParamX_Ct123();
 
-    QueryParamU_Ft();
+    QueryParamX_Ft();
     if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
-    ReadParamU_Ft();
+    ReadParamX_Ft();
 
 
     fBeginParam = true;
