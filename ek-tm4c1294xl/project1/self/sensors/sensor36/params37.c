@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
-PARAMS28,C
+PARAMS37,C
 
-
+яе303 NNCL2
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
@@ -10,11 +10,11 @@ PARAMS28,C
 #include "../../serial/ports.h"
 #include "../../serial/ports_devices.h"
 #include "../../display/display.h"
-#include "../../sensors/device_q.h"
-#include "../../sensors/sensor26/device_u.h"
+//#include "../../sensors/device_q.h"
+//#include "../../sensors/sensor26/device_u.h"
 #include "../../digitals/params/params.h"
-#include "params_u.h"
-#include "params28.h"
+#include "params_x.h"
+#include "params37.h"
 
 
 
@@ -22,42 +22,42 @@ extern  bool                    fBeginParam;
 
 
 
-float2  ReadParam28(void) // CE303
+float2  ReadParam37(void)
 {
   Clear();
 
   if (fBeginParam == false)
   {
-    QueryParamU_U123();
+    QueryParamX_U123();
     if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
-    ReadParamU_U123();
+    ReadParamX_U123();
 
-    QueryParamU_I123();
+    QueryParamX_I123();
     if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
-    ReadParamU_I123();
+    ReadParamX_I123();
 
-    QueryParamU_Pt_2Directions();
+    QueryParamX_Pt_2Directions();
     if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
-    ReadParamU_Pt_2Directions();
+    ReadParamX_Pt_2Directions();
 
-    QueryParamU_P123();
+    QueryParamX_P123();
     if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
-    ReadParamU_P123();
+    ReadParamX_P123();
 
-    QueryParamU_Qt();
+    QueryParamX_Qt();
     if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
-    ReadParamU_Qt();
+    ReadParamX_Qt();
 
-    QueryParamU_Q123();
+    QueryParamX_Q123();
     if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
-    ReadParamU_Q123();
+    ReadParamX_Q123();
 
     mpreParam[PAR_S] = CalcS(mpreParam[PAR_P], mpreParam[PAR_Q]);
     mpreParam[PAR_S1] = CalcS(mpreParam[PAR_P1], mpreParam[PAR_Q1]);
     mpreParam[PAR_S2] = CalcS(mpreParam[PAR_P2], mpreParam[PAR_Q2]);
     mpreParam[PAR_S3] = CalcS(mpreParam[PAR_P3], mpreParam[PAR_Q3]);
 
-    QueryParamU_Ct123();
+    QueryParamX_Ct123();
     if (BccInput() != SER_GOODCHECK)
     {
       mpreParam[PAR_C] = CalcC(mpreParam[PAR_P], mpreParam[PAR_Q]);
@@ -66,11 +66,11 @@ float2  ReadParam28(void) // CE303
       mpreParam[PAR_C3] = CalcC(mpreParam[PAR_P3], mpreParam[PAR_Q3]);
     }
     else
-      ReadParamU_Ct123();
+      ReadParamX_Ct123();
 
-    QueryParamU_Ft();
+    QueryParamX_Ft();
     if (BccInput() != SER_GOODCHECK) return GetFloat2Error();
-    ReadParamU_Ft();
+    ReadParamX_Ft();
 
 
     fBeginParam = true;
