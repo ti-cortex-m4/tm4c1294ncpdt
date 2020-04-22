@@ -103,6 +103,50 @@ void    QueryEngAbs36(uchar  ibLine)
 }
 
 
+void    QueryEngDay36(uchar  ibLine, time  ti)
+{
+  uchar n = PushAddress2Bcc();
+
+  PushChar1Bcc('E');
+  PushChar1Bcc('N');
+  PushChar1Bcc('D');
+
+  PushLineBcc(ibLine);
+
+  PushChar1Bcc('(');
+  PushChar2Bcc(ti.bDay);
+  PushChar1Bcc('.');
+  PushChar2Bcc(ti.bMonth);
+  PushChar1Bcc('.');
+  PushChar2Bcc(ti.bYear);
+  PushChar1Bcc(')');
+  PushChar1Bcc(0x03);
+
+  Query36(1+6*28+2, n+16+1, 6);
+}
+
+
+void    QueryEngMon36(uchar  ibLine, time  ti)
+{
+  uchar n = PushAddress2Bcc();
+
+  PushChar1Bcc('E');
+  PushChar1Bcc('N');
+  PushChar1Bcc('M');
+
+  PushLineBcc(ibLine);
+
+  PushChar1Bcc('(');
+  PushChar2Bcc(ti.bMonth);
+  PushChar1Bcc('.');
+  PushChar2Bcc(ti.bYear);
+  PushChar1Bcc(')');
+  PushChar1Bcc(0x03);
+
+  Query36(1+6*28+2, n+13+1, 6);
+}
+
+
 void    ReadEng36(uchar  ibLine)
 {
   InitPop(1);
