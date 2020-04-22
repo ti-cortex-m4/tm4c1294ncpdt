@@ -1906,7 +1906,8 @@ double2 ReadCntCurrCan(uchar  ibCan)
 #endif
 
 #ifndef SKIP_36
-    case 36: return ReadCntCurr36(4);
+    case 36: return ReadCntCurr36(2);
+    case 37: return ReadCntCurr36(4);
 #endif
 
     default: return GetDouble2Error();
