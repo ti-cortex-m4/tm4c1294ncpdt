@@ -99,7 +99,7 @@ void    QueryEngAbs36(uchar  ibLine)
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
-  //BccQueryIO(1+6*28+2, n+8+1, 6);
+  Query36(1+6*28+2, n+8+1, 6);
 }
 
 

@@ -46,9 +46,7 @@ time2   ReadTimeCan36(void)
   uchar r;
   for (r=0; r<MaxRepeats(); r++)
   {
-    //QueryCloseK();
     QueryTime36();
-
     if (Input36() == SER_GOODCHECK) break;
   }
 
@@ -60,9 +58,7 @@ time2   ReadTimeCan36(void)
 
   for (r=0; r<MaxRepeats(); r++)
   {
-    //QueryCloseK();
     QueryDate36();
-
     if (Input36() == SER_GOODCHECK) break;
   }
 
@@ -86,24 +82,15 @@ time2   ReadTimeCan36(void)
 
 time2   ReadTimeCan36_Short(void)
 {
-  //QueryCloseK();
   QueryTime36();
-
   if (Input36() != SER_GOODCHECK) return GetTime2Error();
-
   time ti = ReadTime36();
 
-
-  //QueryCloseK();
   QueryDate36();
-
   if (Input36() != SER_GOODCHECK) return GetTime2Error();
-
   ti = ReadDate36(ti);
 
-
   QueryClose36();
-
   return GetTime2(ti, true);
 }
 
@@ -122,7 +109,6 @@ double2 ReadCntCurr36(uchar  bMaxLines)
     for (r=0; r<MaxRepeats(); r++)
     {
       ShowPercent(50 + i);
-      //QueryCloseU();
       QueryEngAbs36(i);
 
       if (Input36() == SER_GOODCHECK) break;
