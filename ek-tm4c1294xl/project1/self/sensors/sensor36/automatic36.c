@@ -145,11 +145,10 @@ double2 ReadCntMonCan36(uchar  ibMon, uchar  bMaxLines)
       for (r=0; r<MaxRepeats(); r++)
       {
         ShowPercent(50 + i);
-        QueryClose36();
         QueryEngDay36(i, ti);
 
         if (Input36() == SER_GOODCHECK) break;
-        if (IndexInBuff() == 10)
+        if (IndexInBuff() == 3)
         {
           Clear();
           sprintf(szLo+0, "сутки %02u.%02u.%02u ?",ti.bDay,ti.bMonth,ti.bYear);
@@ -179,11 +178,10 @@ double2 ReadCntMonCan36(uchar  ibMon, uchar  bMaxLines)
       for (r=0; r<MaxRepeats(); r++)
       {
         ShowPercent(50 + i);
-        QueryClose36();
         QueryEngMon36(i, ti);
 
         if (Input36() == SER_GOODCHECK) break;
-        if (IndexInBuff() == 10)
+        if (IndexInBuff() == 3)
         {
           Clear();
           sprintf(szLo+1, "мес€ц %02u.%02u ?",ti.bMonth,ti.bYear);
