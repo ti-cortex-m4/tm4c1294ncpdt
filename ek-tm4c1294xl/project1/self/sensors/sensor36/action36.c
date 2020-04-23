@@ -14,6 +14,7 @@ action36.c
 #include "../../serial/monitor.h"
 #include "../../devices/devices_init.h"
 #include "../sensor35/include35.h"
+#include "include36.h"
 #include "router36.h"
 #include "../sensor35/unpack35.h"
 //#include "io35.h"
@@ -75,14 +76,7 @@ static event35 Event36(bool  display) {
       SetIndexInBuff(IndexInBuff()-15);
 
 
-#ifdef MONITOR_35
-      MonitorString("\n sensor unpack start");
-      MonitorIn();
-#endif
-
-      Unpack35();
-
-#ifdef MONITOR_35
+#ifdef MONITOR_36
       MonitorString("\n sensor unpack finish");
       MonitorIn();
 #endif
