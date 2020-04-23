@@ -17,12 +17,12 @@ router36.c
 #include "../../display/display.h"
 #include "../../time/delay.h"
 //#include "device35.h"
-//#include "unpack35.h"
+#include "../sensor35/unpack35.h"
 #include "router36.h"
 
 
-/*
-void    Decompress35(void)
+
+void    Decompress36(void)
 {
   uchar i,j;
 
@@ -35,14 +35,14 @@ void    Decompress35(void)
   if ((InBuff(0) != 0xC0) || (InBuff(IndexInBuff()-1) != 0xC0))
     return;
 
-#ifdef MONITOR_35
+#ifdef MONITOR_36
   MonitorString("\n router unpack start");
   MonitorIn();
 #endif
 
   Unpack35();
 
-#ifdef MONITOR_35
+#ifdef MONITOR_36
   MonitorString("\n router unpack finish");
   MonitorIn();
 #endif
@@ -52,7 +52,7 @@ void    Decompress35(void)
 
 
 
-static uchar CheckRouter35(void)
+static uchar CheckRouter36(void)
 {
   if (InBuff(0) != 0xC0) return 1;
   if (InBuff(1) != 0x02) return 2;
@@ -67,22 +67,22 @@ static uchar CheckRouter35(void)
 }
 
 
-uchar   ChecksumRouter35(void)
+uchar   ChecksumRouter36(void)
 {
-  uchar i = CheckRouter35();
+  uchar i = CheckRouter36();
   if (i != 0)
   {
-    Clear(); sprintf(szLo+1,"ошибка: 35.1.%u",i);
+    Clear(); sprintf(szLo+1,"ошибка: 36.1.%u",i);
     DelayInf();
 
-#ifdef MONITOR_35
+#ifdef MONITOR_36
     MonitorString("\n router packet error: "); MonitorCharDec(i);
 #endif
   }
 
   return i;
 }
-*/
+
 
 
 static uchar CheckSensor36(void)
@@ -110,7 +110,7 @@ uchar   ChecksumSensor36(void)
     Clear(); sprintf(szLo+1,"ошибка: 36.2.%u",i);
     DelayInf();
 
-#ifdef MONITOR_35
+#ifdef MONITOR_36
     MonitorString("\n sensor packet error: "); MonitorCharDec(i);
 #endif
   }

@@ -4,7 +4,7 @@ router36.h
 
 ------------------------------------------------------------------------------*/
 
-//void    Decompress35(void);
+void    Decompress36(void);
 
-//uchar   ChecksumRouter35(void);
+uchar   ChecksumRouter36(void);
 uchar   ChecksumSensor36(void);
