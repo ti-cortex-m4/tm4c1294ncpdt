@@ -17,7 +17,7 @@ IO36!C
 #include "../../digitals/wait_answer.h"
 #include "../sensor35/include35.h"
 #include "../sensor35/pack35.h"
-#include "../sensor35/router35.h"
+#include "router36.h"
 #include "../sensor35/device35.h"
 #include "action36.h"
 #include "../sensor35/timer35.h"
@@ -160,11 +160,11 @@ static serial Input36Internal(void)
     if (GetWaitAnswer()) { mpSerial[ibPort] = SER_BADLINK; break; }
 
     if (mpSerial[ibPort] == SER_INPUT_MASTER)
-      Decompress35();
+      Decompress36();
 
     if (mpSerial[ibPort] == SER_POSTINPUT_MASTER)
     {
-      if (ChecksumRouter35() == 0)
+      if (ChecksumRouter36() == 0)
       {
         InputGoodCheck();
         mpSerial[ibPort] = SER_GOODCHECK;
