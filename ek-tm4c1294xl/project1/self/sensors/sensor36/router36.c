@@ -84,6 +84,25 @@ uchar   ChecksumRouter36(void)
 }
 
 
+static bool MakeInBuff36(void)
+{
+uchar   bT;
+uint    i;
+
+  InitPop(1);
+
+  bT = 0;
+  for (i=0; i<IndexInBuff()-2; i++) {
+      uchar j = PopChar0Bcc();
+      bT += j;
+      MonitorString("\n "); MonitorCharHex(j); MonitorString(" "); MonitorCharHex(bT);
+  }
+
+  uchar k = PopChar0Bcc();
+  MonitorString("\n = "); MonitorCharHex(k); MonitorString(" "); MonitorCharHex(bT);
+  return((bT & 0x7F) == k);
+}
+
 
 static uchar CheckSensor36(void)
 {
@@ -100,7 +119,9 @@ static uchar CheckSensor36(void)
 
     //  DecompressK(0); // TODO ???
 
-    // return MakeBccInBuff() ? 0 : 1;
+  if (IndexInBuff() == 3) return 1;
+
+  if (!MakeInBuff36()) return 2;
 
   return 0;
 }
