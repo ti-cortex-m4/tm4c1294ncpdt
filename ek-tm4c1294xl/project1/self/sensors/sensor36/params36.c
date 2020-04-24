@@ -13,7 +13,7 @@ PARAMS36,C
 #include "../../sensors/device_k.h"
 #include "../../sensors/device_q.h"
 #include "io36.h"
-#include "params_x.h"
+#include "params36_common.h"
 #include "params36.h"
 
 
