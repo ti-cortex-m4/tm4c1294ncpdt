@@ -14,5 +14,6 @@ void    QueryEngAbs36(uchar  ibLine);
 void    QueryEngDay36(uchar  ibLine, time  ti);
 void    QueryEngMon36(uchar  ibLine, time  ti);
 void    ReadEng36(uchar  ibLine);
+void    ReadEngTariff36(uchar  ibLine, uchar  ibTrf);
 
 void    QueryClose36(void);
