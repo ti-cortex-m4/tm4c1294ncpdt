@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-automatic_4t_36!C
+extended_4t_36!C
 
 
 ------------------------------------------------------------------------------*/
@@ -16,16 +16,14 @@ automatic_4t_36!C
 #include "../../devices/devices.h"
 #include "../../digitals/digitals.h"
 #include "../automatic1.h"
-#include "device_u.h"
-#include "device_u2.h"
-#include "automatic_u.h"
-#include "automatic_4t_36.h"
+//#include "device_u.h"
+#include "device36.h"
+//#include "automatic_u.h"
+#include "extended_4t_36.h"
 
 
 
-#ifndef SKIP_U
-
-status   ReadEnergyMonTariffU_Full(time  ti, uchar  ibTariff, uchar  bMaxLines)
+status   ReadEnergyMonTariff36_Full(time  ti, uchar  ibTariff, uchar  bMaxLines)
 {
   uchar i;
   for (i=0; i<bMaxLines; i++)
@@ -35,19 +33,18 @@ status   ReadEnergyMonTariffU_Full(time  ti, uchar  ibTariff, uchar  bMaxLines)
     uchar r;
     for (r=0; r<MaxRepeats(); r++)
     {
-      QueryCloseU();
-      QueryEngMonU(i,ti);
+      QueryEngMon36(i,ti);
 
-      if (BccInput() == SER_GOODCHECK) break;
+      if (Input36() == SER_GOODCHECK) break;
       if (fKey == true) return ST_BADDIGITAL;
 
-      if (IndexInBuff() == 10) return ST_NOTPRESENTED;
+      if (IndexInBuff() == 3) return ST_NOTPRESENTED;
     }
 
     if (r == MaxRepeats()) return ST_BADDIGITAL;
     ShowPercent(70+i);
 
-    ReadEnergyTariffU(i,ibTariff);
+    ReadEnergyTariff36(i,ibTariff);
   }
 
   return ST_OK;
@@ -55,9 +52,9 @@ status   ReadEnergyMonTariffU_Full(time  ti, uchar  ibTariff, uchar  bMaxLines)
 
 
 
-status  ReadCntMonCanTariffU(uchar  ibMonth, uchar  ibTariff, uchar  bMaxLines) // на начало мес€ца
+status  ReadCntMonCanTariff36(uchar  ibMonth, uchar  ibTariff, uchar  bMaxLines) // на начало мес€ца
 {
-  time2 ti2 = ReadTimeCanU();
+  time2 ti2 = ReadTimeCan36();
   if (ti2.fValid == 0) return ST_BADDIGITAL;
 
   time ti = ti2.tiValue;
@@ -72,7 +69,7 @@ status  ReadCntMonCanTariffU(uchar  ibMonth, uchar  ibTariff, uchar  bMaxLines) 
     ti.bMonth = ibMonth;
   }
 
-  status st = ReadEnergyMonTariffU_Full(ti,ibTariff,bMaxLines);
+  status st = ReadEnergyMonTariff36_Full(ti,ibTariff,bMaxLines);
 
   if (st == ST_NOTPRESENTED)
   {
@@ -85,7 +82,7 @@ status  ReadCntMonCanTariffU(uchar  ibMonth, uchar  ibTariff, uchar  bMaxLines) 
   if (st != ST_OK) return st;
 
 
-  QueryCloseU();
+  QueryClose36();
 
 
   double dbTrans = mpdbTransCnt[ibDig];
@@ -99,6 +96,4 @@ status  ReadCntMonCanTariffU(uchar  ibMonth, uchar  ibTariff, uchar  bMaxLines) 
 
   return ST_OK;
 }
-
-#endif
 
