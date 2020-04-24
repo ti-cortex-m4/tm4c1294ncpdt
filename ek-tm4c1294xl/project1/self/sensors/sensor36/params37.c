@@ -12,7 +12,7 @@ PARAMS37,C
 #include "../../display/display.h"
 #include "../../digitals/params/params.h"
 #include "io36.h"
-#include "params_x.h"
+#include "params36_common.h"
 #include "params37.h"
 
 

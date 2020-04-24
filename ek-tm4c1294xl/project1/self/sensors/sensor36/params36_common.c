@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-PARAMS_U,C
+params36_common,C
 
 
 ------------------------------------------------------------------------------*/
@@ -13,7 +13,7 @@ PARAMS_U,C
 #include "../../sensors/device_k.h"
 #include "../../sensors/device_q.h"
 #include "io36.h"
-#include "params_x.h"
+#include "params36_common.h"
 
 
 
