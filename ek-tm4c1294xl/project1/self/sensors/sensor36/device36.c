@@ -24,6 +24,51 @@ DEVICE36!C
 
 
 
+void    QueryClose36(void)
+{
+  InitPush(0);
+
+  PushChar1Bcc(0x01);
+  PushChar1Bcc('B');
+  PushChar1Bcc('0');
+  PushChar1Bcc(0x03);
+
+//  BccQueryIO(0, 4+1, 0);
+//  DelayOff();
+}
+
+
+/*
+void    QueryOpen36(void)
+{
+  QueryClose36();
+
+  uchar n = PushAddress1Bcc();
+
+  PushChar1Bcc(0x0D);
+  PushChar1Bcc(0x0A);
+
+  Query(2000, n+2, 1);
+}
+
+
+void    ReadOpen36(void)
+{
+  Clear();
+  InitPop(1);
+
+  uchar i;
+  for (i=0; i<16; i++)
+  {
+    uchar b = PopChar0Bcc();
+
+    if ((b == '\r') || (b == '\n')) break;
+    szLo[i] = b;
+  }
+}
+*/
+
+
 void    QueryTime36(void)
 {
   uchar n = PushAddress2Bcc();
@@ -169,18 +214,4 @@ double db;
 
   mpdbChannelsC[ibLine] = db;
   mpboChannelsA[ibLine] = true;
-}
-
-
-void    QueryClose36(void)
-{
-  InitPush(0);
-
-  PushChar1Bcc(0x01);
-  PushChar1Bcc('B');
-  PushChar1Bcc('0');
-  PushChar1Bcc(0x03);
-
-//  BccQueryIO(0, 4+1, 0);
-//  DelayOff();
 }

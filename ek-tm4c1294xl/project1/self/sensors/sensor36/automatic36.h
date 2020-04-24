@@ -4,6 +4,8 @@ AUTOMATIC36.H
 
 ------------------------------------------------------------------------------*/
 
+bool    Automatic36(void);
+
 time2   ReadTimeCan36(void);
 time2   ReadTimeCan36_Short(void);
 
