@@ -11,11 +11,46 @@ AUTOMATIC36!C
 #include "../../time/timedate.h"
 #include "../../serial/ports.h"
 #include "../../devices/devices.h"
-//#include "../../sensors/automatic1.h"
+#include "../../sensors/automatic1.h"
 #include "../../digitals/digitals.h"
 #include "device36.h"
 #include "io36.h"
 #include "automatic36.h"
+
+
+
+bool    Automatic36(void)
+{/*
+uchar   i,bT;
+
+  for (i=0; i<MaxRepeats(); i++)
+  {
+    QueryClose36();
+    QueryOpen36();
+
+    if (Input36() == SER_GOODCHECK) break;
+    if (fKey == true) return(0);
+
+    bT = InBuff(IndexInBuff() - 1) & 0x7F;
+    if ((bT == '\r') || (bT == '\n'))
+      break;
+  }
+
+  if (i == MaxRepeats()) return(0);
+  ReadOpen36();
+
+  QueryClose36();
+
+*/
+  dbKtrans = 1;                         // K трансформации
+  dbKpulse = 5000;                      // K преобразования
+
+  Delay(1000);
+
+  SetAllFactors(dbKpulse,dbKtrans);
+
+  return(1);
+}
 
 
 
