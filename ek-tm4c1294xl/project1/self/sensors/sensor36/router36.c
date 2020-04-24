@@ -98,6 +98,10 @@ static uchar CheckSensor36(void)
 //  if (MakeCrcSInBuff(1, IndexInBuff()-2) != 0) return 6;
 //  if (InBuff(IndexInBuff()-1) != 0xC0) return 7;
 
+    //  DecompressK(0); // TODO ???
+
+    // return MakeBccInBuff() ? 0 : 1;
+
   return 0;
 }
 
