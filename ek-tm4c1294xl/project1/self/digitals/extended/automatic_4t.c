@@ -16,6 +16,7 @@ AUTOMATIC_4T,C
 #include "../../sensors/automatic_w.h"
 #include "../../sensors/sensor34/extended_4t_34.h"
 #include "../../sensors/sensor35/automatic35x2.h"
+#include "../../sensors/sensor36/extended_4t_36.h"
 #include "extended_4t_b.h"
 #include "extended_4t_c.h"
 #include "automatic_4t.h"
@@ -81,6 +82,9 @@ status  ReadCntMonCanTariff(uchar  ibCan, uchar  ibMon, uchar  ibTrf)
     case 34: return ReadCntMonCanTariff34(ibMon, ibTrf);
 
     case 35: return ReadCntMonCanTariff35(ibMon, ibTrf);
+
+    case 36: return ReadCntMonCanTariff36(ibMon, ibTrf, 2);
+    case 37: return ReadCntMonCanTariff36(ibMon, ibTrf, 4);
 
     default: return ST_NOTSUPPORTED;
   }
