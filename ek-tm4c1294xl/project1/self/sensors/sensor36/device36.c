@@ -155,6 +155,22 @@ void    ReadEng36(uchar  ibLine)
 }
 
 
+void    ReadEngTariff36(uchar  ibLine, uchar  ibTrf)
+{
+double db;
+
+  InitPop(1);
+
+  uchar i;
+  for (i=0; i<ibTrf+2; i++)
+  {
+    db = PopDoubleQ();
+  }
+
+  mpdbChannelsC[ibLine] = db;
+  mpboChannelsA[ibLine] = true;
+}
+
 
 void    QueryClose36(void)
 {

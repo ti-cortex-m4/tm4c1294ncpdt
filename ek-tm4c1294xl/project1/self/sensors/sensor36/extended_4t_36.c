@@ -16,9 +16,9 @@ extended_4t_36!C
 #include "../../devices/devices.h"
 #include "../../digitals/digitals.h"
 #include "../automatic1.h"
-//#include "device_u.h"
+#include "io36.h"
 #include "device36.h"
-//#include "automatic_u.h"
+#include "automatic36.h"
 #include "extended_4t_36.h"
 
 
@@ -44,7 +44,7 @@ status   ReadEnergyMonTariff36_Full(time  ti, uchar  ibTariff, uchar  bMaxLines)
     if (r == MaxRepeats()) return ST_BADDIGITAL;
     ShowPercent(70+i);
 
-    ReadEnergyTariff36(i,ibTariff);
+    ReadEngTariff36(i,ibTariff);
   }
 
   return ST_OK;
