@@ -86,21 +86,14 @@ uchar   ChecksumRouter36(void)
 
 static bool MakeInBuff36(void)
 {
-uchar   bT;
-uint    i;
-
   InitPop(1);
+  uchar bT = 0;
 
-  bT = 0;
-  for (i=0; i<IndexInBuff()-2; i++) {
-      uchar j = PopChar0Bcc();
-      bT += j;
-      MonitorString("\n "); MonitorCharHex(j); MonitorString(" "); MonitorCharHex(bT);
-  }
+  uint i;
+  for (i=0; i<IndexInBuff()-2; i++)
+    bT += PopChar0Bcc();
 
-  uchar k = PopChar0Bcc();
-  MonitorString("\n = "); MonitorCharHex(k); MonitorString(" "); MonitorCharHex(bT);
-  return((bT & 0x7F) == k);
+  return((bT & 0x7F) == PopChar0Bcc());
 }
 
 
