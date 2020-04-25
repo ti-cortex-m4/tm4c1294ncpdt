@@ -8,14 +8,14 @@ DEVICE36!C
 //#include "../../memory/mem_settings.h"
 #include "../../memory/mem_digitals.h"
 //#include "../../memory/mem_current.h"
-//#include "../../memory/mem_factors.h"
+#include "../../memory/mem_factors.h"
 //#include "../../display/display.h"
 //#include "../../time/timedate.h"
 //#include "../../time/calendar.h"
 //#include "../../time/delay.h"
 #include "../../serial/ports.h"
 //#include "../../devices/devices.h"
-//#include "../../digitals/current/current_run.h"
+#include "../../digitals/current/current_run.h"
 #include "io36.h"
 //#include "timeout35.h"
 #include "../device_k.h"
@@ -67,6 +67,36 @@ void    ReadOpen36(void)
   }
 }
 */
+
+void    QueryOption36(void)
+{
+uchar   i;
+
+  InitPush(0);
+  PushChar1Bcc(0x06);
+
+  switch (mppoPorts[ diCurr.ibPort ].ibBaud)
+  {
+    case 0:  i = '2'; break;
+    case 1:  i = '3'; break;
+    case 2:  i = '4'; break;
+    case 3:  i = '5'; break;
+    case 4:  i = '6'; break;
+    default: i = '7'; break;
+  }
+
+  PushChar1Bcc('0');
+  PushChar1Bcc(i);
+  PushChar1Bcc('1');
+
+  PushChar1Bcc(0x0D);
+  PushChar1Bcc(0x0A);
+
+  cbHeaderBcc = 1;
+  cwInBuffBcc = 0;
+  Query(1000, 4+2, 1);
+}
+
 
 
 void    QueryTime36(void)
@@ -200,6 +230,12 @@ void    ReadEng36(uchar  ibLine)
 }
 
 
+void    ReadEng36_SkipLine(uchar  ibLine)
+{
+  mpdbChannelsC[ibLine] = 0;
+}
+
+
 void    ReadEngTariff36(uchar  ibLine, uchar  ibTrf)
 {
 double db;
@@ -214,4 +250,40 @@ double db;
 
   mpdbChannelsC[ibLine] = db;
   mpboChannelsA[ibLine] = true;
+}
+
+
+
+void    QueryEngCurrent36(uchar  ibLine)
+{
+  InitPush(0);
+
+  PushChar1Bcc(0x01);
+  PushChar1Bcc('R');
+  PushChar1Bcc('1');
+  PushChar1Bcc(0x02);
+
+  PushChar1Bcc('E');
+  PushChar1Bcc('T');
+  PushChar1Bcc('0');
+
+  PushLineBcc(ibLine);
+
+  PushChar1Bcc('(');
+  PushChar1Bcc(')');
+  PushChar1Bcc(0x03);
+
+  BccQueryIO(1+6*28+2, 4+8+1, 6);
+}
+
+
+void    ReadCurrent36(uchar  bMaxLine)
+{
+  uchar i;
+  for (i=0; i<bMaxLine; i++)
+  {
+    mpdwBaseDig[i] = mpdbChannelsC[i] * mpdbPulseMnt[ibDig];
+  }
+
+  MakeCurrent();
 }
