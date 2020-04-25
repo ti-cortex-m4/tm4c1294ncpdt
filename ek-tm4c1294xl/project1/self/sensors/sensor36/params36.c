@@ -21,6 +21,7 @@ PARAMS36,C
 extern  bool                    fBeginParam;
 
 
+
 void    QueryModel36(void)
 {
   uchar n = PushAddress2Bcc();
