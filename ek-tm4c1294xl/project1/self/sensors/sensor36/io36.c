@@ -26,6 +26,7 @@ IO36!C
 
 
 
+static bool                 fBccSave;
 static uint                 cwInSave;
 static uchar                cbOutSave;
 static uchar                cbHeaderMaxSave;
@@ -33,10 +34,11 @@ static uchar                bCommandSave;
 
 
 
-void    Query36Internal(uint  cwIn, uchar  cbOut, uchar  cbHeaderMax, uchar  bCommand)
+void    Query36Internal(bool  fBcc, uint  cwIn, uchar  cbOut, uchar  cbHeaderMax, uchar  bCommand)
 {
-  cwInSave     = cwIn;
-  cbOutSave    = cbOut;
+  fBccSave = fBcc;
+  cwInSave = cwIn;
+  cbOutSave = cbOut;
   cbHeaderMaxSave = cbHeaderMax;
   bCommandSave = bCommand;
 
@@ -46,24 +48,27 @@ void    Query36Internal(uint  cwIn, uchar  cbOut, uchar  cbHeaderMax, uchar  bCo
 
   if (cbOut > 0)
   {
-    // расчет CRC счетчика
-    cbHeaderBcc = cbHeaderMax;
-    cwInBuffBcc = 0;
-
-    InitPush(0);
-
-    uchar bSum = 0;
-    bool f = false;
-
-    uchar i;
-    for (i=0; i<cbOut-1; i++)
+    if (fBcc)
     {
-      uchar b = SkipChar();
-      if (f == true) bSum += b;
-      if ((b & 0x7F) == 0x01) f = true;
-    }
+      // расчет CRC счетчика
+      cbHeaderBcc = cbHeaderMax;
+      cwInBuffBcc = 0;
 
-    PushChar1Bcc(bSum);
+      InitPush(0);
+
+      uchar bSum = 0;
+      bool f = false;
+
+      uchar j;
+      for (j=0; j<cbOut-1; j++)
+      {
+        uchar b = SkipChar();
+        if (f == true) bSum += b;
+        if ((b & 0x7F) == 0x01) f = true;
+      }
+
+      PushChar1Bcc(bSum);
+    }
 /*
 #ifdef MONITOR_35
     MonitorString("\n sensor pack start");
@@ -78,6 +83,7 @@ void    Query36Internal(uint  cwIn, uchar  cbOut, uchar  cbHeaderMax, uchar  bCo
 #endif
 */
     // перенос пакета счетчика внутри пакета концентратора
+    uchar i;
     for (i=0; i<cbOut; i++)
       SetOutBuff(cbOut+12-i, OutBuff(cbOut-1-i));
   }
@@ -129,10 +135,17 @@ void    Query36Internal(uint  cwIn, uchar  cbOut, uchar  cbHeaderMax, uchar  bCo
 }
 
 
+void    Query36(uint  cwIn, uchar  cbOut, uchar  cbHeaderMax)
+{
+  SetTimer35(0);
+  Query36Internal(false, cwIn, cbOut, cbHeaderMax, NNCL2_DATA_SET);
+}
+
+
 void    BccQuery36(uint  cwIn, uchar  cbOut, uchar  cbHeaderMax)
 {
   SetTimer35(0);
-  Query36Internal(cwIn, cbOut, cbHeaderMax, NNCL2_DATA_SET);
+  Query36Internal(true, cwIn, cbOut, cbHeaderMax, NNCL2_DATA_SET);
 }
 
 
@@ -141,7 +154,7 @@ void    Query36Repeat(void)
   MonitorString("\n repeat last query");
   Log35(R35_REPEAT_LAST_QUERY, bCommandSave);
 
-  Query36Internal(cwInSave, cbOutSave, cbHeaderMaxSave, bCommandSave);
+  Query36Internal(fBccSave, cwInSave, cbOutSave, cbHeaderMaxSave, bCommandSave);
 }
 
 
@@ -197,7 +210,7 @@ serial  Input36(void)
       action35 action = Action36(false);
       if (action == A35_WAIT)
       {
-        Query36Internal(250, 0, 0, NNCL2_DATA_GET); // TODO ???
+        Query36Internal(false, 250, 0, 0, NNCL2_DATA_GET); // TODO ???
         repeat = true;
       }
       else if (action == A35_SUCCESS)
