@@ -31,7 +31,7 @@ void    QueryParam36_I123(void)
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
-  Query36(1+3*28+2, n+8+1, 3);
+  BccQuery36(1+3*28+2, n+8+1, 3);
 }
 
 
@@ -60,7 +60,7 @@ void    QueryParam36_U123(void)
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
-  Query36(1+3*28+2, n+8+1, 3);
+  BccQuery36(1+3*28+2, n+8+1, 3);
 }
 
 
@@ -89,7 +89,7 @@ void    QueryParam36_Pt_1Direction(void)
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
-  Query36(1+1*28+2, n+8+1, 1);
+  BccQuery36(1+1*28+2, n+8+1, 1);
 }
 
 
@@ -116,7 +116,7 @@ void    QueryParam36_Pt_2Directions(void)
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
-  Query36(1+2*28+2, n+8+1, 2);
+  BccQuery36(1+2*28+2, n+8+1, 2);
 }
 
 
@@ -143,7 +143,7 @@ void    QueryParam36_P123(void)
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
-  Query36(1+3*28+2, n+8+1, 3);
+  BccQuery36(1+3*28+2, n+8+1, 3);
 }
 
 
@@ -172,7 +172,7 @@ void    QueryParam36_Qt(void)
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
-  Query36(1+2*28+2, n+8+1, 2);
+  BccQuery36(1+2*28+2, n+8+1, 2);
 }
 
 
@@ -199,7 +199,7 @@ void    QueryParam36_Q123(void)
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
-  Query36(1+3*28+2, n+8+1, 3);
+  BccQuery36(1+3*28+2, n+8+1, 3);
 }
 
 
@@ -228,7 +228,7 @@ void    QueryParam36_Ct123(void)
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
-  Query36(1+4*28+2, n+8+1, 4);
+  BccQuery36(1+4*28+2, n+8+1, 4);
 }
 
 
@@ -258,7 +258,7 @@ void    QueryParam36_Ft(void)
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
-  Query36(1+1*28+2, n+8+1, 1);
+  BccQuery36(1+1*28+2, n+8+1, 1);
 }
 
 

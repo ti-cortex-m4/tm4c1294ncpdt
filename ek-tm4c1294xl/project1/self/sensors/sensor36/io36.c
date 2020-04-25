@@ -129,7 +129,7 @@ void    Query36Internal(uint  cwIn, uchar  cbOut, uchar  cbHeaderMax, uchar  bCo
 }
 
 
-void    Query36(uint  cwIn, uchar  cbOut, uchar  cbHeaderMax)
+void    BccQuery36(uint  cwIn, uchar  cbOut, uchar  cbHeaderMax)
 {
   SetTimer35(0);
   Query36Internal(cwIn, cbOut, cbHeaderMax, NNCL2_DATA_SET);

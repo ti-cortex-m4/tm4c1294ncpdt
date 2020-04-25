@@ -36,7 +36,7 @@ void    QueryModel36(void)
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
-  Query36(1+28+2, n+8+1, 1);
+  BccQuery36(1+28+2, n+8+1, 1);
 }
 
 

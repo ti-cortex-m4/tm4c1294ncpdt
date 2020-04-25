@@ -14,11 +14,12 @@ current36,C
 ////#include "../../time/calendar.h"
 ////#include "../../time/delay.h"
 #include "../../serial/ports.h"
-////#include "../../devices/devices.h"
+#include "../../devices/devices.h"
+#include "../../digitals/digitals.h"
 #include "../../digitals/current/current_run.h"
 #include "io36.h"
 //#include "timeout35.h"
-//#include "../device_k.h"
+#include "../device_k.h"
 //#include "../device_q.h"
 #include "current36.h"
 
@@ -54,7 +55,7 @@ void    QueryEngCurrent36(uchar  ibLine)
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
-  Query36(1+6*28+2, 4+8+1, 6);
+  BccQuery36(1+6*28+2, 4+8+1, 6);
 }
 
 
