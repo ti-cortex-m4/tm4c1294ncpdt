@@ -118,13 +118,16 @@ static uchar CheckSensor36(void)
 }
 
 
-uchar   ChecksumSensor36(void)
+uchar   ChecksumSensor36(bool  fShowChecksumError)
 {
   uchar i = CheckSensor36();
   if (i != 0)
   {
-    Clear(); sprintf(szLo+1,"ошибка: 36.2.%u",i);
-    DelayInf();
+    if (fShowChecksumError)
+    {
+      Clear(); sprintf(szLo+1,"ошибка: 36.2.%u",i);
+      DelayInf();
+    }
 
 #ifdef MONITOR_36
     MonitorString("\n sensor packet error: "); MonitorCharDec(i);

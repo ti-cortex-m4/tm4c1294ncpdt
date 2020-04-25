@@ -8,4 +8,4 @@ action36.h
 
 
 
-action35 Action36(bool  display);
+action35 Action36(bool  display, bool  fShowChecksumError);
