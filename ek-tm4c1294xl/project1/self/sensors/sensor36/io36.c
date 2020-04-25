@@ -223,3 +223,12 @@ serial  Input36(void)
 
   return mpSerial[ibPort];
 }
+
+
+
+bool    NoData36(void) {
+  return (IndexInBuff() == 3)
+          && (InBuff(0) == 0x82)
+          && (InBuff(1) == 0x03)
+          && (InBuff(2) == 0x03);
+}

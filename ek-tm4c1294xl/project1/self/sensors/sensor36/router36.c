@@ -84,7 +84,7 @@ uchar   ChecksumRouter36(void)
 }
 
 
-static bool MakeInBuff36(void)
+static bool ChacksumInBuff36(void)
 {
   InitPop(1);
   uchar bT = 0;
@@ -99,7 +99,7 @@ static bool MakeInBuff36(void)
 
 static uchar CheckSensor36(void)
 {
-//  if (InBuff(0) != 0xC0) return 1;
+//  if (InBuff(0) != 0xC0) return 1; // TODO ???
 //  if (InBuff(1) != 0x48) return 2;
 //
 //  if (InBuffIntLtl(2) != GetExchange35()) return 3;
@@ -114,7 +114,7 @@ static uchar CheckSensor36(void)
 
   if (IndexInBuff() == 3) return 1;
 
-  if (!MakeInBuff36()) return 2;
+  if (!ChacksumInBuff36()) return 2;
 
   return 0;
 }
