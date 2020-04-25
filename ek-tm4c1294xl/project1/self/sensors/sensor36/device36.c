@@ -9,10 +9,10 @@ DEVICE36!C
 #include "../../memory/mem_digitals.h"
 //#include "../../memory/mem_current.h"
 //#include "../../memory/mem_factors.h"
-//#include "../../display/display.h"
+#include "../../display/display.h"
 //#include "../../time/timedate.h"
 //#include "../../time/calendar.h"
-//#include "../../time/delay.h"
+#include "../../time/delay.h"
 #include "../../serial/ports.h"
 //#include "../../devices/devices.h"
 //#include "../../digitals/current/current_run.h"
@@ -33,12 +33,12 @@ void    QueryClose36(void)
   PushChar1Bcc('0');
   PushChar1Bcc(0x03);
 
-//  BccQueryIO(0, 4+1, 0);
-//  DelayOff();
+  BccQuery36(0, 4+1, 0);
+  DelayOff();
 }
 
 
-/*
+
 void    QueryOpen36(void)
 {
   QueryClose36();
@@ -48,7 +48,7 @@ void    QueryOpen36(void)
   PushChar1Bcc(0x0D);
   PushChar1Bcc(0x0A);
 
-  Query(2000, n+2, 1);
+  Query36(2000, n+2, 1);
 }
 
 
@@ -66,7 +66,8 @@ void    ReadOpen36(void)
     szLo[i] = b;
   }
 }
-*/
+
+
 
 void    QueryOption36(void)
 {
@@ -94,7 +95,7 @@ uchar   i;
 
   cbHeaderBcc = 1;
   cwInBuffBcc = 0;
-  Query(1000, 4+2, 1);
+  Query36(1000, 4+2, 1);
 }
 
 

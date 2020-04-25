@@ -20,7 +20,7 @@ AUTOMATIC36!C
 
 
 bool    Automatic36(void)
-{/*
+{
 uchar   i,bT;
 
   for (i=0; i<MaxRepeats(); i++)
@@ -41,7 +41,7 @@ uchar   i,bT;
 
   QueryClose36();
 
-*/
+
   dbKtrans = 1;                         // K трансформации
   dbKpulse = 5000;                      // K преобразования
 
