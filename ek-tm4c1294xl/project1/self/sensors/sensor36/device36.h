@@ -24,7 +24,3 @@ void    QueryEngMon36(uchar  ibLine, time  ti);
 void    ReadEng36(uchar  ibLine);
 void    ReadEng36_SkipLine(uchar  ibLine);
 void    ReadEngTariff36(uchar  ibLine, uchar  ibTrf);
-
-uchar   GetMaxLine36(uchar  ibCan);
-void    QueryEngCurrent36(uchar  ibLine);
-void    ReadCurrent36(uchar  bMaxLine);
