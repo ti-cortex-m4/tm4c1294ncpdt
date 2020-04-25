@@ -70,6 +70,7 @@ DEVICES.C
 #include "../sensors/sensor35/postinput35.h"
 #include "../sensors/sensor35/status35.h"
 #include "../sensors/sensor35/profile35.h"
+#include "../sensors/sensor36/device36.h"
 #include "../serial/ports.h"
 #include "../serial/ports_modems.h"
 #include "../serial/modems.h"
@@ -6123,6 +6124,110 @@ void    RunDevices(void)
       cbRepeat = MaxRepeats();
       QueryHeader35();
       SetCurr35(DEV_HEADER_35P);
+      break;
+
+#endif
+
+#ifndef SKIP_36
+
+    case DEV_START_36C:
+      Clear(); ShowPercent(50);
+
+      cbRepeat = MaxRepeats();
+      QueryOpen36();
+      SetCurr(DEV_OPENCANAL_36C);
+      break;
+
+    case DEV_OPENCANAL_36C:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+        MakePause(DEV_POSTOPENCANAL_36C);
+      else
+      {
+        if (cbRepeat == 0) ErrorCurrent();
+        else
+        {
+          ErrorLink();
+          cbRepeat--;
+
+          QueryOpen36();
+          SetCurr(DEV_OPENCANAL_36C);
+        }
+      }
+      break;
+
+    case DEV_POSTOPENCANAL_36C:
+      Clear(); ShowPercent(51);
+
+      cbRepeat = MaxRepeats();
+      QueryOption36();
+      SetCurr(DEV_OPTION_36C);
+      break;
+
+    case DEV_OPTION_36C:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+        MakePause(DEV_POSTOPTION_36C);
+      else
+      {
+        if (cbRepeat == 0) ErrorCurrent();
+        else
+        {
+          ErrorLink();
+          cbRepeat--;
+
+          QueryOption36();
+          SetCurr(DEV_OPTION_36C);
+        }
+      }
+      break;
+
+    case DEV_POSTOPTION_36C:
+      Clear(); ShowPercent(52);
+
+      ibLineU = 0;
+      if (SkipLine(ibDig, ibLineU) == true)
+      {
+        ReadEngU_SkipLine(ibLineU);
+        ibLineU++;
+      }
+
+      cbRepeat = MaxRepeats();
+      QueryEngSpec36(ibLineU);
+      SetCurr(DEV_ENERGY_36C);
+      break;
+
+    case DEV_ENERGY_36C:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+      {
+        ReadEng36(ibLineU);
+
+        if (SkipLine(ibDig, ibLineU+1) == true)
+        {
+          ReadEngU_SkipLine(ibLineU+1);
+          ibLineU++;
+        }
+
+        uchar bMaxLine = GetMaxLine(ibDig);
+        if (++ibLineU < bMaxLine)
+        {
+          Clear(); ShowPercent(52+ibLineU);
+          QueryEngSpec36(ibLineU);
+          SetCurr(DEV_ENERGY_36C);
+        }
+        else
+          ReadCurrent36(bMaxLine);
+      }
+      else
+      {
+        if (cbRepeat == 0) ErrorCurrent();
+        else
+        {
+          ErrorLink();
+          cbRepeat--;
+
+          QueryEngSpec36(ibLineU);
+          SetCurr(DEV_ENERGY_36C);
+        }
+      }
       break;
 
 #endif

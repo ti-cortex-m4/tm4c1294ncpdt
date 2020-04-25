@@ -1,17 +1,17 @@
 
-#ifndef SKIP_U
+#ifndef SKIP_36
 
-    case DEV_START_U3:
+    case DEV_START_36C:
       Clear(); ShowPercent(50);
 
       cbRepeat = MaxRepeats();
-      QueryOpenK();
-      SetCurr(DEV_OPENCANAL_U3);
+      QueryOpen36();
+      SetCurr(DEV_OPENCANAL_36C);
       break;
 
-    case DEV_OPENCANAL_U3:
+    case DEV_OPENCANAL_36C:
       if (mpSerial[ibPort] == SER_GOODCHECK)
-        MakePause(DEV_POSTOPENCANAL_U3);
+        MakePause(DEV_POSTOPENCANAL_36C);
       else
       {
         if (cbRepeat == 0) ErrorCurrent();
@@ -20,23 +20,23 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryOpenK();
-          SetCurr(DEV_OPENCANAL_U3);
+          QueryOpen36();
+          SetCurr(DEV_OPENCANAL_36C);
         }
       }
       break;
 
-    case DEV_POSTOPENCANAL_U3:
+    case DEV_POSTOPENCANAL_36C:
       Clear(); ShowPercent(51);
 
       cbRepeat = MaxRepeats();
-      QueryOptionU();
-      SetCurr(DEV_OPTION_U3);
+      QueryOption36();
+      SetCurr(DEV_OPTION_36C);
       break;
 
-    case DEV_OPTION_U3:
+    case DEV_OPTION_36C:
       if (mpSerial[ibPort] == SER_GOODCHECK)
-        MakePause(DEV_POSTOPTION_U3);
+        MakePause(DEV_POSTOPTION_36C);
       else
       {
         if (cbRepeat == 0) ErrorCurrent();
@@ -45,13 +45,13 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryOptionK();
-          SetCurr(DEV_OPTION_U3);
+          QueryOption36();
+          SetCurr(DEV_OPTION_36C);
         }
       }
       break;
 
-    case DEV_POSTOPTION_U3:
+    case DEV_POSTOPTION_36C:
       Clear(); ShowPercent(52);
 
       ibLineU = 0;
@@ -62,14 +62,14 @@
       }
 
       cbRepeat = MaxRepeats();
-      QueryEngSpecU(ibLineU);
-      SetCurr(DEV_ENERGY_U3);
+      QueryEngSpec36(ibLineU);
+      SetCurr(DEV_ENERGY_36C);
       break;
 
-    case DEV_ENERGY_U3:
+    case DEV_ENERGY_36C:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        ReadEngU(ibLineU);
+        ReadEng36(ibLineU);
 
         if (SkipLine(ibDig, ibLineU+1) == true)
         {
@@ -81,11 +81,11 @@
         if (++ibLineU < bMaxLine)
         {
           Clear(); ShowPercent(52+ibLineU);
-          QueryEngSpecU(ibLineU);
-          SetCurr(DEV_ENERGY_U3);
+          QueryEngSpec36(ibLineU);
+          SetCurr(DEV_ENERGY_36C);
         }
         else
-          ReadCurrentU(bMaxLine);
+          ReadCurrent36(bMaxLine);
       }
       else
       {
@@ -95,8 +95,8 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryEngSpecU(ibLineU);
-          SetCurr(DEV_ENERGY_U3);
+          QueryEngSpec36(ibLineU);
+          SetCurr(DEV_ENERGY_36C);
         }
       }
       break;
