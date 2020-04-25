@@ -792,6 +792,17 @@ typedef enum
 
 #endif
 
+#ifndef SKIP_36
+
+  DEV_START_36C         =  0x2200,
+  DEV_OPENCANAL_36C     =  0x2201,
+  DEV_POSTOPENCANAL_36C =  0x2202,
+  DEV_OPTION_36C        =  0x2203,
+  DEV_POSTOPTION_36C    =  0x2204,
+  DEV_ENERGY_36C        =  0x2205,
+
+#endif
+
   DEV_PAUSE             =  1
 
 } device;
