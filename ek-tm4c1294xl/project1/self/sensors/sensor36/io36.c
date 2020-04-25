@@ -17,6 +17,7 @@ IO36!C
 #include "../../digitals/wait_answer.h"
 #include "../sensor35/include35.h"
 #include "../sensor35/pack35.h"
+#include "include36.h"
 #include "router36.h"
 #include "../sensor35/device35.h"
 #include "action36.h"
@@ -70,14 +71,14 @@ void    Query36Internal(bool  fBcc, uint  cwIn, uchar  cbOut, uchar  cbHeaderMax
       PushChar1Bcc(bSum);
     }
 /*
-#ifdef MONITOR_35
+#ifdef MONITOR_36
     MonitorString("\n sensor pack start");
     MonitorOut(cwIn, cbOut);
 #endif
 
     cbOut = Pack35(cbOut);
 
-#ifdef MONITOR_35
+#ifdef MONITOR_36
     MonitorString("\n sensor pack finish");
     MonitorOut(cwIn, cbOut);
 #endif
@@ -120,14 +121,14 @@ void    Query36Internal(bool  fBcc, uint  cwIn, uchar  cbOut, uchar  cbHeaderMax
 
   cbOut = 13+cbOut+3;
 
-#ifdef MONITOR_35
+#ifdef MONITOR_36
   MonitorString("\n router pack start");
   MonitorOut(cwIn, cbOut);
 #endif
 
   cbOut = Pack35(cbOut);
 
-#ifdef MONITOR_35
+#ifdef MONITOR_36
   MonitorString("\n router pack finish");
 #endif
 

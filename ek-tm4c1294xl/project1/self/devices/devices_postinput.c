@@ -20,6 +20,8 @@ DEVICES_POSTINPUT,C
 #include "../sensors/sensor35/io35.h"
 #include "../sensors/sensor35/router35.h"
 #include "../sensors/sensor35/postinput35.h"
+#include "../sensors/sensor36/io36.h"
+#include "../sensors/sensor36/router36.h"
 #include "../digitals/digitals_status.h"
 #include "devices_postinput.h"
 
@@ -264,6 +266,17 @@ void    DevicesPostInput(void)
         PostInput35();
       } else {
         Query35Repeat();
+      }
+    }
+#endif
+
+#ifndef SKIP_36
+    else if ((diCurr.bDevice == 36) || (diCurr.bDevice == 37))
+    {
+      if (ChecksumRouter36() == 0) {
+        PostInput35();
+      } else {
+        Query36Repeat();
       }
     }
 #endif
