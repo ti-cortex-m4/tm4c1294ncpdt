@@ -7,7 +7,7 @@ DEVICE36!C
 #include "../../main.h"
 //#include "../../memory/mem_settings.h"
 #include "../../memory/mem_digitals.h"
-//#include "../../memory/mem_current.h"
+#include "../../memory/mem_current.h"
 #include "../../memory/mem_factors.h"
 //#include "../../display/display.h"
 //#include "../../time/timedate.h"
@@ -17,7 +17,7 @@ DEVICE36!C
 //#include "../../devices/devices.h"
 #include "../../digitals/current/current_run.h"
 #include "io36.h"
-//#include "timeout35.h"
+#include "timeout35.h"
 #include "../device_k.h"
 #include "../device_q.h"
 #include "device36.h"
@@ -252,6 +252,17 @@ double db;
   mpboChannelsA[ibLine] = true;
 }
 
+
+
+uchar   GetMaxLine36(uchar  ibCan)
+{
+  switch (GetDigitalDevice(ibCan))
+  {
+    case 36: return 2;
+    case 37: return 4;
+    default: ASSERT(false); return 0;
+  }
+}
 
 
 void    QueryEngCurrent36(uchar  ibLine)

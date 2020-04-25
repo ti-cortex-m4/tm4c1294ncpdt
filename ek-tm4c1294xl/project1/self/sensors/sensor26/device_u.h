@@ -15,7 +15,7 @@ extern uchar                   ibLineU, bMaxLineU;
 
 
 
-uchar   GetMaxLine(uchar  ibCan);
+uchar   GetMaxLineU(uchar  ibCan);
 
 void    QueryCloseU(void);
 void    QueryOptionU(void);

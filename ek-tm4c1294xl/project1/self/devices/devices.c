@@ -6206,7 +6206,7 @@ void    RunDevices(void)
           ibLineU++;
         }
 
-        uchar bMaxLine = GetMaxLine(ibDig);
+        uchar bMaxLine = GetMaxLine36(ibDig);
         if (++ibLineU < bMaxLine)
         {
           Clear(); ShowPercent(52+ibLineU);
