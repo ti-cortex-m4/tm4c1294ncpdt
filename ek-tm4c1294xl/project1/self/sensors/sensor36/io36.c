@@ -195,7 +195,7 @@ static serial Input36Internal(void)
 }
 
 
-serial  Input36x(bool  fShowChecksumError)
+serial  Input36_(bool  fShowChecksumError)
 {
   SaveDisplay();
 
@@ -239,7 +239,7 @@ serial  Input36x(bool  fShowChecksumError)
 
 
 serial  Input36(void) {
-  return Input36x(true);
+  return Input36_(true);
 }
 
 

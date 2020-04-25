@@ -28,7 +28,7 @@ uchar   i,bT;
     QueryClose36();
     QueryOpen36();
 
-    if (Input36x(false) == SER_GOODCHECK) break;
+    if (Input36_(false) == SER_GOODCHECK) break;
     if (fKey == true) return(0);
 
     bT = InBuff(IndexInBuff() - 1) & 0x7F;

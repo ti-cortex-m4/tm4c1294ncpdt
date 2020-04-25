@@ -36,10 +36,10 @@ static event35 event0(bool  fLog, result35  enResult, action35  enAction, uint  
 
 
 
-static event35 Event36(bool  display, bool  fShowChecksumError) {
+static event35 Event36(bool  fShowCounter, bool  fShowChecksumError) {
   if (InBuff(7) == NNCL2_TIME) {
     uint tm = GetTimer35();
-    if (display) {
+    if (fShowCounter) {
       if (tm > 99) sprintf(szHi+10,"%2X",tm); else sprintf(szHi+10,"%2u",tm);
       DelayOff();
     } else {
@@ -105,8 +105,8 @@ static event35 Event36(bool  display, bool  fShowChecksumError) {
 
 
 
-action35 Action36(bool  display, bool  fShowChecksumError) {
-  event35 event = Event36(display, fShowChecksumError);
+action35 Action36(bool  fShowCounter, bool  fShowChecksumError) {
+  event35 event = Event36(fShowCounter, fShowChecksumError);
   if (event.fLog) {
     Log35(event.enResult, event.wData);
   }
