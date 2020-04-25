@@ -112,7 +112,7 @@ void    QueryTime36(void)
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
-  Query36(1+17+2, n+8+1, 0);
+  BccQuery36(1+17+2, n+8+1, 0);
 }
 
 
@@ -143,7 +143,7 @@ void    QueryDate36(void)
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
-  Query36(1+20+2, n+8+1, 0);
+  BccQuery36(1+20+2, n+8+1, 0);
 }
 
 
@@ -174,7 +174,7 @@ void    QueryEngAbs36(uchar  ibLine)
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
-  Query36(1+6*28+2, n+8+1, 6);
+  BccQuery36(1+6*28+2, n+8+1, 6);
 }
 
 
@@ -197,7 +197,7 @@ void    QueryEngDay36(uchar  ibLine, time  ti)
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
-  Query36(1+6*28+2, n+16+1, 6);
+  BccQuery36(1+6*28+2, n+16+1, 6);
 }
 
 
@@ -218,7 +218,7 @@ void    QueryEngMon36(uchar  ibLine, time  ti)
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
-  Query36(1+6*28+2, n+13+1, 6);
+  BccQuery36(1+6*28+2, n+13+1, 6);
 }
 
 
