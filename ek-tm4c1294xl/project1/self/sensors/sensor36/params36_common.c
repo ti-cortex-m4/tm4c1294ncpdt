@@ -17,33 +17,6 @@ params36_common,C
 
 
 
-void    QueryModelX(void)
-{
-  uchar n = PushAddress2Bcc();
-
-  PushChar1Bcc('M');
-  PushChar1Bcc('O');
-  PushChar1Bcc('D');
-  PushChar1Bcc('E');
-  PushChar1Bcc('L');
-
-  PushChar1Bcc('(');
-  PushChar1Bcc(')');
-  PushChar1Bcc(0x03);
-
-  Query36(1+28+2, n+8+1, 1);
-}
-
-
-ulong2  ReadModelX(void)
-{
-  InitPop(1);
-
-  return PopLongQ();
-}
-
-
-
 void    QueryParam36_I123(void)
 {
   uchar n = PushAddress2Bcc();
