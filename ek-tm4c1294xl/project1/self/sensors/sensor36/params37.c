@@ -27,36 +27,36 @@ float2  ReadParam37(void)
 
   if (fBeginParam == false)
   {
-    QueryParamX_U123();
+    QueryParam36_U123();
     if (Input36() != SER_GOODCHECK) return GetFloat2Error();
-    ReadParamX_U123();
+    ReadParam36_U123();
 
-    QueryParamX_I123();
+    QueryParam36_I123();
     if (Input36() != SER_GOODCHECK) return GetFloat2Error();
-    ReadParamX_I123();
+    ReadParam36_I123();
 
-    QueryParamX_Pt_2Directions();
+    QueryParam36_Pt_2Directions();
     if (Input36() != SER_GOODCHECK) return GetFloat2Error();
-    ReadParamX_Pt_2Directions();
+    ReadParam36_Pt_2Directions();
 
-    QueryParamX_P123();
+    QueryParam36_P123();
     if (Input36() != SER_GOODCHECK) return GetFloat2Error();
-    ReadParamX_P123();
+    ReadParam36_P123();
 
-    QueryParamX_Qt();
+    QueryParam36_Qt();
     if (Input36() != SER_GOODCHECK) return GetFloat2Error();
-    ReadParamX_Qt();
+    ReadParam36_Qt();
 
-    QueryParamX_Q123();
+    QueryParam36_Q123();
     if (Input36() != SER_GOODCHECK) return GetFloat2Error();
-    ReadParamX_Q123();
+    ReadParam36_Q123();
 
     mpreParam[PAR_S] = CalcS(mpreParam[PAR_P], mpreParam[PAR_Q]);
     mpreParam[PAR_S1] = CalcS(mpreParam[PAR_P1], mpreParam[PAR_Q1]);
     mpreParam[PAR_S2] = CalcS(mpreParam[PAR_P2], mpreParam[PAR_Q2]);
     mpreParam[PAR_S3] = CalcS(mpreParam[PAR_P3], mpreParam[PAR_Q3]);
 
-    QueryParamX_Ct123();
+    QueryParam36_Ct123();
     if (Input36() != SER_GOODCHECK)
     {
       mpreParam[PAR_C] = CalcC(mpreParam[PAR_P], mpreParam[PAR_Q]);
@@ -65,11 +65,11 @@ float2  ReadParam37(void)
       mpreParam[PAR_C3] = CalcC(mpreParam[PAR_P3], mpreParam[PAR_Q3]);
     }
     else
-      ReadParamX_Ct123();
+      ReadParam36_Ct123();
 
-    QueryParamX_Ft();
+    QueryParam36_Ft();
     if (Input36() != SER_GOODCHECK) return GetFloat2Error();
-    ReadParamX_Ft();
+    ReadParam36_Ft();
 
 
     fBeginParam = true;
