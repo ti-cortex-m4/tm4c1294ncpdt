@@ -57,12 +57,12 @@
       ibLineU = 0;
       if (SkipLine(ibDig, ibLineU) == true)
       {
-        ReadEngU_SkipLine(ibLineU);
+        ReadEng36_SkipLine(ibLineU);
         ibLineU++;
       }
 
       cbRepeat = MaxRepeats();
-      QueryEngSpec36(ibLineU);
+      QueryEngCurrent36(ibLineU);
       SetCurr(DEV_ENERGY_36C);
       break;
 
@@ -73,7 +73,7 @@
 
         if (SkipLine(ibDig, ibLineU+1) == true)
         {
-          ReadEngU_SkipLine(ibLineU+1);
+          ReadEng36_SkipLine(ibLineU+1);
           ibLineU++;
         }
 
@@ -81,7 +81,7 @@
         if (++ibLineU < bMaxLine)
         {
           Clear(); ShowPercent(52+ibLineU);
-          QueryEngSpec36(ibLineU);
+          QueryEngCurrent36(ibLineU);
           SetCurr(DEV_ENERGY_36C);
         }
         else
@@ -95,7 +95,7 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryEngSpec36(ibLineU);
+          QueryEngCurrent36(ibLineU);
           SetCurr(DEV_ENERGY_36C);
         }
       }
