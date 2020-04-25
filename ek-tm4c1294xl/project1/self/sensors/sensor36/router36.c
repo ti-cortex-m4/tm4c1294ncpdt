@@ -84,7 +84,7 @@ uchar   ChecksumRouter36(void)
 }
 
 
-static bool ChacksumInBuff36(void)
+static bool ChecksumInBuff36(void)
 {
   InitPop(1);
   uchar bT = 0;
@@ -112,9 +112,7 @@ static uchar CheckSensor36(void)
 
     //  DecompressK(0); // TODO ???
 
-  if (IndexInBuff() == 3) return 1;
-
-  if (!ChacksumInBuff36()) return 2;
+  if (!ChecksumInBuff36()) return 2;
 
   return 0;
 }
