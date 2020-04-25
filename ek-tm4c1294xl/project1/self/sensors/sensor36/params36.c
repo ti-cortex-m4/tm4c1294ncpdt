@@ -63,32 +63,32 @@ float2  ReadParam36(void)
     uchar bModel = dw2.dwValue;
     bool f1Direction = ((bModel & 0x80) == 0);
 
-    QueryParamX_U123();
+    QueryParam36_U123();
     if (Input36() != SER_GOODCHECK) return GetFloat2Error();
-    ReadParamX_U123();
+    ReadParam36_U123();
 
-    QueryParamX_I123();
+    QueryParam36_I123();
     if (Input36() != SER_GOODCHECK) return GetFloat2Error();
-    ReadParamX_I123();
+    ReadParam36_I123();
 
     if (f1Direction)
     {
-      QueryParamX_Pt_1Direction();
+      QueryParam36_Pt_1Direction();
       if (Input36() != SER_GOODCHECK) return GetFloat2Error();
-      ReadParamX_Pt_1Direction();
+      ReadParam36_Pt_1Direction();
     }
     else
     {
-      QueryParamX_Pt_2Directions();
+      QueryParam36_Pt_2Directions();
       if (Input36() != SER_GOODCHECK) return GetFloat2Error();
-      ReadParamX_Pt_2Directions();
+      ReadParam36_Pt_2Directions();
     }
 
-    QueryParamX_P123();
+    QueryParam36_P123();
     if (Input36() != SER_GOODCHECK) return GetFloat2Error();
-    ReadParamX_P123();
+    ReadParam36_P123();
 
-    QueryParamX_Ct123();
+    QueryParam36_Ct123();
     if (Input36() != SER_GOODCHECK)
     {
       combo32 co;
@@ -100,11 +100,11 @@ float2  ReadParam36(void)
       mpreParam[PAR_C3] = co.flBuff;
     }
     else
-      ReadParamX_Ct123();
+      ReadParam36_Ct123();
 
-    QueryParamX_Ft();
+    QueryParam36_Ft();
     if (Input36() != SER_GOODCHECK) return GetFloat2Error();
-    ReadParamX_Ft();
+    ReadParam36_Ft();
 
 
     fBeginParam = true;
