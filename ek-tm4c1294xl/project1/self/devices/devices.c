@@ -6136,11 +6136,11 @@ void    RunDevices(void)
 
       cbRepeat = MaxRepeats();
       QueryOpen36();
-      SetCurr(DEV_OPENCANAL_36C);
+      SetCurr35(DEV_OPENCANAL_36C);
       break;
 
     case DEV_OPENCANAL_36C:
-      if (mpSerial[ibPort] == SER_GOODCHECK)
+      if (IsSerial35())
         MakePause(DEV_POSTOPENCANAL_36C);
       else
       {
@@ -6151,7 +6151,7 @@ void    RunDevices(void)
           cbRepeat--;
 
           QueryOpen36();
-          SetCurr(DEV_OPENCANAL_36C);
+          SetCurr35(DEV_OPENCANAL_36C);
         }
       }
       break;
@@ -6161,11 +6161,11 @@ void    RunDevices(void)
 
       cbRepeat = MaxRepeats();
       QueryOption36();
-      SetCurr(DEV_OPTION_36C);
+      SetCurr35(DEV_OPTION_36C);
       break;
 
     case DEV_OPTION_36C:
-      if (mpSerial[ibPort] == SER_GOODCHECK)
+      if (IsSerial35())
         MakePause(DEV_POSTOPTION_36C);
       else
       {
@@ -6176,7 +6176,7 @@ void    RunDevices(void)
           cbRepeat--;
 
           QueryOption36();
-          SetCurr(DEV_OPTION_36C);
+          SetCurr35(DEV_OPTION_36C);
         }
       }
       break;
@@ -6193,11 +6193,11 @@ void    RunDevices(void)
 
       cbRepeat = MaxRepeats();
       QueryEngCurrent36(ibLineU);
-      SetCurr(DEV_ENERGY_36C);
+      SetCurr35(DEV_ENERGY_36C);
       break;
 
     case DEV_ENERGY_36C:
-      if (mpSerial[ibPort] == SER_GOODCHECK)
+      if (IsSerial35())
       {
         ReadEng36(ibLineU);
 
@@ -6212,7 +6212,7 @@ void    RunDevices(void)
         {
           Clear(); ShowPercent(52+ibLineU);
           QueryEngCurrent36(ibLineU);
-          SetCurr(DEV_ENERGY_36C);
+          SetCurr35(DEV_ENERGY_36C);
         }
         else
           ReadCurrent36(bMaxLine);
@@ -6226,7 +6226,7 @@ void    RunDevices(void)
           cbRepeat--;
 
           QueryEngCurrent36(ibLineU);
-          SetCurr(DEV_ENERGY_36C);
+          SetCurr35(DEV_ENERGY_36C);
         }
       }
       break;
