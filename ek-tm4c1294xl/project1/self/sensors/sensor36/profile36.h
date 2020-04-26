@@ -9,6 +9,10 @@ profile36!H
 
 
 
+extern  uchar                   ibLine36, bMaxLine36;
+
+
+
 void    InitHeader36(void);
 void    QueryHeader36(void);
 void    ReadHeader36(void);
