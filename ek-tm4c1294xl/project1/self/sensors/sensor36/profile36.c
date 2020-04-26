@@ -1,10 +1,7 @@
 /*------------------------------------------------------------------------------
-DEVICE_U!C
+profile36!C
 
-Энергомера СЕ301
 ------------------------------------------------------------------------------*/
-
-#include "profile36.h"
 
 #include "../../main.h"
 #include "../../serial/ports_stack.h"
@@ -33,187 +30,14 @@ DEVICE_U!C
 #include "../../digitals/limits.h"
 #include "../../special/special.h"
 #include "../../hardware/watchdog.h"
+#include "io36.h"
 #include "../device_k.h"
-#include "../device_q.h"
+#include "current36.h"
+#include "profile36.h"
 
 
 
-#ifndef SKIP_U
-
-uchar                   ibLineU, bMaxLineU;
-
-
-
-uchar   GetMaxLineU(uchar  ibCan)
-{
-  switch (GetDigitalDevice(ibCan))
-  {
-    case 26: return 2;
-    case 28: return 4;
-    default: ASSERT(false); return 0;
-  }
-}
-
-
-void    QueryCloseU(void)
-{
-  QueryCloseK();
-}
-
-
-
-void    QueryOptionU(void)
-{
-uchar   i;
-
-  InitPush(0);
-  PushChar1Bcc(0x06);
-
-  switch (mppoPorts[ diCurr.ibPort ].ibBaud)
-  {
-    case 0:  i = '2'; break;
-    case 1:  i = '3'; break;
-    case 2:  i = '4'; break;
-    case 3:  i = '5'; break;
-    case 4:  i = '6'; break;
-    default: i = '7'; break;
-  }
-
-  PushChar1Bcc('0');
-  PushChar1Bcc(i);
-  PushChar1Bcc('1');
-
-  PushChar1Bcc(0x0D);
-  PushChar1Bcc(0x0A);
-
-  cbHeaderBcc = 1;
-  cwInBuffBcc = 0;
-  Query(1000, 4+2, 1);
-}
-
-
-
-void    QueryCorrectU(void)
-{
-  InitPush(0);
-
-  PushChar1Bcc('/');
-  PushChar1Bcc('?');
-
-  PushChar1Bcc('C');
-  PushChar1Bcc('T');
-  PushChar1Bcc('I');
-  PushChar1Bcc('M');
-  PushChar1Bcc('E');
-  PushChar1Bcc('!');
-
-  PushChar1Bcc(0x0D);
-  PushChar1Bcc(0x0A);
-
-  Query(1000, 2+6+2, 1);
-}
-
-
-void    QueryEngAbsU(uchar  ibLine)
-{
-  uchar n = PushAddress2Bcc();
-
-  PushChar1Bcc('E');
-  PushChar1Bcc('T');
-  PushChar1Bcc('0');
-
-  PushLineBcc(ibLine);
-
-  PushChar1Bcc('(');
-  PushChar1Bcc(')');
-  PushChar1Bcc(0x03);
-
-  BccQueryIO(1+6*28+2, n+8+1, 6);
-}
-
-
-void    QueryEngDayU(uchar  ibLine, time  ti)
-{
-  uchar n = PushAddress2Bcc();
-
-  PushChar1Bcc('E');
-  PushChar1Bcc('N');
-  PushChar1Bcc('D');
-
-  PushLineBcc(ibLine);
-
-  PushChar1Bcc('(');
-  PushChar2Bcc(ti.bDay);
-  PushChar1Bcc('.');
-  PushChar2Bcc(ti.bMonth);
-  PushChar1Bcc('.');
-  PushChar2Bcc(ti.bYear);
-  PushChar1Bcc(')');
-  PushChar1Bcc(0x03);
-
-  BccQueryIO(1+6*28+2, n+16+1, 6);
-}
-
-
-void    QueryEngMonU(uchar  ibLine, time  ti)
-{
-  uchar n = PushAddress2Bcc();
-
-  PushChar1Bcc('E');
-  PushChar1Bcc('N');
-  PushChar1Bcc('M');
-
-  PushLineBcc(ibLine);
-
-  PushChar1Bcc('(');
-  PushChar2Bcc(ti.bMonth);
-  PushChar1Bcc('.');
-  PushChar2Bcc(ti.bYear);
-  PushChar1Bcc(')');
-  PushChar1Bcc(0x03);
-
-  BccQueryIO(1+6*28+2, n+13+1, 6);
-}
-
-
-void    QueryEngSpecU(uchar  ibLine)
-{
-  InitPush(0);
-
-  PushChar1Bcc(0x01);
-  PushChar1Bcc('R');
-  PushChar1Bcc('1');
-  PushChar1Bcc(0x02);
-
-  PushChar1Bcc('E');
-  PushChar1Bcc('T');
-  PushChar1Bcc('0');
-
-  PushLineBcc(ibLine);
-
-  PushChar1Bcc('(');
-  PushChar1Bcc(')');
-  PushChar1Bcc(0x03);
-
-  BccQueryIO(1+6*28+2, 4+8+1, 6);
-}
-
-
-void    ReadEngU(uchar  ibLine)
-{
-  InitPop(1);
-
-  mpdbChannelsC[ibLine] = PopDoubleQ();
-}
-
-
-void    ReadEngU_SkipLine(uchar  ibLine)
-{
-  mpdbChannelsC[ibLine] = 0;
-}
-
-
-void    InitHeaderU(void)
+void    InitHeader36(void)
 {
   if (!UseBounds())
     wBaseCurr = 0; // счетчик суток
@@ -257,7 +81,7 @@ void    QueryHeaderU_26(void)
 }
 
 
-void    QueryHeaderU(void)
+void    QueryHeader36(void)
 {
   HideCurrTime(1);
 
@@ -275,13 +99,13 @@ void    QueryHeaderU(void)
 
   szHi[10] = 'A' + ibLineU;
 
-  bMaxLineU = GetMaxLineU(ibDig);
+  bMaxLineU = GetMaxLine36(ibDig);
   QueryHeaderU_26();
 }
 
 
 
-void    ReadHeaderU(void)
+void    ReadHeader36(void)
 {
   InitPop(1);
 
@@ -293,7 +117,7 @@ void    ReadHeaderU(void)
 }
 
 
-void    ReadHeaderU_SkipLine(uchar  ibLine)
+void    ReadHeader36_SkipLine(uchar  ibLine)
 {
   uchar h;
   for (h=0; h<48; h++)
@@ -304,9 +128,9 @@ void    ReadHeaderU_SkipLine(uchar  ibLine)
 
 
 
-void    MakeDataU(uchar  ibHou)
+void    MakeData36(uchar  ibHou)
 {
-  ShowProgressDigHou();
+  ShowProgressDigHo36();
 
   double dbPulse = mpdbPulseHou[ibDig];
 
@@ -324,7 +148,7 @@ void    MakeDataU(uchar  ibHou)
 }
 
 
-bool    ReadDataU(void)
+bool    ReadData36(void)
 {
 uchar   j;
 
@@ -345,10 +169,10 @@ uchar   j;
   for (h=j; h<48; h++)
   {
     ResetWatchdog();
-    MakeDataU(47-h);
+    MakeData36(47-h);
 
     MakeSpecial(tiDig);
-    if (MakeStopHou(0) == 0) return(0);
+    if (MakeStopHo36(0) == 0) return(0);
 
     dwHouIndex--;
     tiDig = HouIndexToDate(dwHouIndex);
@@ -359,18 +183,3 @@ uchar   j;
   NewBoundsAbs16(++wBaseCurr);
   return(1);
 }
-
-
-
-void    ReadCurrentU(uchar  bMaxLine)
-{
-  uchar i;
-  for (i=0; i<bMaxLine; i++)
-  {
-    mpdwBaseDig[i] = mpdbChannelsC[i] * mpdbPulseMnt[ibDig];
-  }
-
-  MakeCurrent();
-}
-
-#endif
