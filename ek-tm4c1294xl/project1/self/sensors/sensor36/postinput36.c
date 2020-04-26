@@ -11,17 +11,17 @@ postinput36!C
 #include "../../devices/devices.h"
 #include "../../digitals/digitals_status.h"
 #include "../../digitals/digitals_pause.h"
-#include "include35.h"
-#include "io35.h"
-#include "status35.h"
-#include "action35.h"
+#include "include36.h"
+#include "io36.h"
+#include "../sensor35/status35.h"
+#include "action36.h"
 #include "postinput36.h"
 
 
 
 void    PostInput36(void)
 {
-  action35 action = Action36(true);
+  action35 action = Action36(true, GetCurr35Internal() == DEV_OPENCANAL_36C);
   if (action == A35_WAIT)
   {
     MonitorString("\t postinput: wait");

@@ -196,7 +196,7 @@ static serial Input36Internal(void)
 }
 
 
-serial  Input36_(bool  fShowChecksumError)
+serial  Input36_(bool  fIgnoreChecksumError)
 {
   SaveDisplay();
 
@@ -208,7 +208,7 @@ serial  Input36_(bool  fShowChecksumError)
 
     if (mpSerial[ibPort] == SER_GOODCHECK)
     {
-      action35 action = Action36(false, fShowChecksumError);
+      action35 action = Action36(false, fIgnoreChecksumError);
       if (action == A35_WAIT)
       {
         Query36Internal(false, 250, 0, 0, NNCL2_DATA_GET); // TODO ???
@@ -240,7 +240,7 @@ serial  Input36_(bool  fShowChecksumError)
 
 
 serial  Input36(void) {
-  return Input36_(true);
+  return Input36_(false);
 }
 
 
