@@ -182,6 +182,7 @@ double2 ReadCntMonCan36(uchar  ibMon, uchar  bMaxLines)
         ShowPercent(50 + i);
         QueryEngDay36(i, ti);
 
+        if ((Input36() == SER_GOODCHECK) && (!NoData36())) break;
         if (NoData36())
         {
           Clear();
@@ -189,7 +190,6 @@ double2 ReadCntMonCan36(uchar  ibMon, uchar  bMaxLines)
           Delay(1000);
           return GetDouble2Error();
         }
-        if (Input36() == SER_GOODCHECK) break;
         if (fKey == true) return GetDouble2Error();
       }
 
@@ -215,6 +215,7 @@ double2 ReadCntMonCan36(uchar  ibMon, uchar  bMaxLines)
         ShowPercent(50 + i);
         QueryEngMon36(i, ti);
 
+        if ((Input36() == SER_GOODCHECK) && (!NoData36())) break;
         if (NoData36())
         {
           Clear();
@@ -222,7 +223,6 @@ double2 ReadCntMonCan36(uchar  ibMon, uchar  bMaxLines)
           Delay(1000);
           return GetDouble2Error();
         }
-        if (Input36() == SER_GOODCHECK) break;
         if (fKey == true) return GetDouble2Error();
       }
 
