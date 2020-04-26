@@ -36,7 +36,7 @@ static event35 event0(bool  fLog, result35  enResult, action35  enAction, uint  
 
 
 
-static event35 Event36(bool  fShowCounter, bool  fShowChecksumError) {
+static event35 Event36(bool  fShowCounter, bool  fIgnoreChecksumError) {
   if (InBuff(7) == NNCL2_TIME) {
     uint tm = GetTimer35();
     if (fShowCounter) {
@@ -82,7 +82,7 @@ static event35 Event36(bool  fShowCounter, bool  fShowChecksumError) {
 #endif
 
 
-      if (ChecksumSensor36(fShowChecksumError) == 0) {
+      if (ChecksumSensor36(fIgnoreChecksumError) == 0) {
         MonitorString("\t sensor success");
         return event0(false, R35_SENSOR_SUCCESS, A35_SUCCESS, 0);
       } else {
@@ -105,8 +105,8 @@ static event35 Event36(bool  fShowCounter, bool  fShowChecksumError) {
 
 
 
-action35 Action36(bool  fShowCounter, bool  fShowChecksumError) {
-  event35 event = Event36(fShowCounter, fShowChecksumError);
+action35 Action36(bool  fShowCounter, bool  fIgnoreChecksumError) {
+  event35 event = Event36(fShowCounter, fIgnoreChecksumError);
   if (event.fLog) {
     Log35(event.enResult, event.wData);
   }
