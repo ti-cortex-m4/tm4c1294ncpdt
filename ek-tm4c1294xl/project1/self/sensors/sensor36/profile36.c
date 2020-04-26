@@ -32,8 +32,13 @@ profile36!C
 #include "../../hardware/watchdog.h"
 #include "io36.h"
 #include "../device_k.h"
+#include "../device_q.h"
 #include "current36.h"
 #include "profile36.h"
+
+
+
+uchar                   ibLine36, bMaxLine36;
 
 
 
@@ -52,7 +57,7 @@ void    InitHeader36(void)
 }
 
 
-void    QueryHeaderU_26(void)
+void    QueryHeader36Internal(void)
 {
   InitPush(0);
 
@@ -65,7 +70,7 @@ void    QueryHeaderU_26(void)
   PushChar1Bcc('R');
   PushChar1Bcc('A');
 
-  PushLineBcc(ibLineU);
+  PushLineBcc(ibLine36);
 
   PushChar1Bcc('(');
   PushChar2Bcc(tiDig.bDay);
@@ -97,10 +102,10 @@ void    QueryHeader36(void)
     tiDig.bMinute = 30;
   }
 
-  szHi[10] = 'A' + ibLineU;
+  szHi[10] = 'A' + ibLine36;
 
-  bMaxLineU = GetMaxLine36(ibDig);
-  QueryHeaderU_26();
+  bMaxLine36 = GetMaxLine36(ibDig);
+  QueryHeader36Internal();
 }
 
 
@@ -112,7 +117,7 @@ void    ReadHeader36(void)
   uchar h;
   for (h=0; h<48; h++)
   {
-    mpdbBuffCanHou[ibLineU][h] = PopDoubleQ()/2;
+    mpdbBuffCanHou[ibLine36][h] = PopDoubleQ()/2;
   }
 }
 
@@ -130,12 +135,12 @@ void    ReadHeader36_SkipLine(uchar  ibLine)
 
 void    MakeData36(uchar  ibHou)
 {
-  ShowProgressDigHo36();
+  ShowProgressDigHou();
 
   double dbPulse = mpdbPulseHou[ibDig];
 
   uchar i;
-  for (i=0; i<bMaxLineU; i++)
+  for (i=0; i<bMaxLine36; i++)
   {
     double db = mpdbBuffCanHou[i][ibHou];
     mpdbEngFracDigCan[ibDig][i] += db;
@@ -172,7 +177,7 @@ uchar   j;
     MakeData36(47-h);
 
     MakeSpecial(tiDig);
-    if (MakeStopHo36(0) == 0) return(0);
+    if (MakeStopHou(0) == 0) return(0);
 
     dwHouIndex--;
     tiDig = HouIndexToDate(dwHouIndex);
