@@ -19,7 +19,7 @@
 
     case DEV_CORRECT_36P:
       ShowLo(szCorrectQ1);
-      QueryCorrectU();
+      QueryCorrect36();
       SetCurr35(DEV_OPEN_36P);
       break;
 
@@ -27,14 +27,14 @@
       Clear(); ShowPercent(50);
 
       cbRepeat = MaxRepeats();
-      QueryOpenK();
+      QueryOpen36();
       SetCurr35(DEV_OPENCANAL_36P);
       break;
 
     case DEV_OPENCANAL_36P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        ReadOpenK();
+        ReadOpen36();
         MakeLongPause(DEV_POSTOPENCANAL_36P, 1);
       }
       else
@@ -45,7 +45,7 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryOpenK();
+          QueryOpen36();
           SetCurr35(DEV_OPENCANAL_36P);
         }
       }
@@ -55,14 +55,14 @@
       Clear(); ShowPercent(51);
 
       cbRepeat = MaxRepeats();
-      QueryOptionU();
+      QueryOption36();
       SetCurr35(DEV_OPTION_36P);
       break;
 
     case DEV_OPTION_36P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        if (HasPasswordK())
+        if (HasPassword36())
           MakePause(DEV_POSTOPTION_36P);
         else
           MakePause(DEV_POSTPASSWORD_36P);
@@ -75,7 +75,7 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryOptionU();
+          QueryOption36();
           SetCurr35(DEV_OPTION_36P);
         }
       }
@@ -85,7 +85,7 @@
       ShowPercent(52);
 
       cbRepeat = MaxRepeats();
-      QueryPasswordK();
+      QueryPassword36();
       SetCurr35(DEV_PASSWORD_36P);
       break;
 
@@ -100,7 +100,7 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryPasswordK();
+          QueryPassword36();
           SetCurr35(DEV_PASSWORD_36P);
         }
       }
@@ -117,14 +117,14 @@
       ShowPercent(53);
 
       cbRepeat = MaxRepeats();
-      QueryTimeSpecK();
+      QueryTimeSpec36();
       SetCurr35(DEV_TIME_36P);
       break;
 
     case DEV_TIME_36P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        tiDig = ReadTimeK();
+        tiDig = ReadTime36();
         MakePause(DEV_POSTTIME_36P);
       }
       else
@@ -135,7 +135,7 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryTimeSpecK();
+          QueryTimeSpec36();
           SetCurr35(DEV_TIME_36P);
         }
       }
@@ -145,14 +145,14 @@
       ShowPercent(54);
 
       cbRepeat = MaxRepeats();
-      QueryDateSpecK();
+      QueryDateSpec36();
       SetCurr35(DEV_DATE_36P);
       break;
 
     case DEV_DATE_36P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        tiDig = ReadDateK(tiDig);
+        tiDig = ReadDate36(tiDig);
         MakePause(DEV_POSTDATE_36P);
       }
       else
@@ -163,7 +163,7 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryDateSpecK();
+          QueryDateSpec36();
           SetCurr35(DEV_DATE_36P);
         }
       }
@@ -194,7 +194,7 @@
 
     case DEV_CONTROL_36P:
       cbRepeat = MaxRepeats();
-      QueryControlK();
+      QueryControl36();
       SetCurr35(DEV_POSTCONTROL_36P);
       break;
 
@@ -209,7 +209,7 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryControlK();
+          QueryControl36();
           SetCurr35(DEV_POSTCONTROL_36P);
         }
       }
@@ -229,17 +229,17 @@
 
     case DEV_PREVHEADER_36P:
       iwMajor = 0;
-      InitHeaderU();
+      InitHeader36();
 
-      ibLineU = 0;
-      if (SkipLine(ibDig, ibLineU) == 1)
+      ibLine36 = 0;
+      if (SkipLine(ibDig, ibLine36) == 1)
       {
-        ReadHeaderU_SkipLine(ibLineU);
-        ibLineU++;
+        ReadHeader36_SkipLine(ibLine36);
+        ibLine36++;
       }
 
       cbRepeat = MaxRepeats();
-      QueryHeaderU();
+      QueryHeader36();
       SetCurr35(DEV_HEADER_36P);
       break;
 
@@ -269,12 +269,12 @@
         }
         else
         {
-          ReadHeaderU();
+          ReadHeader36();
 
-          if (SkipLine(ibDig, ibLineU+1) == 1)
+          if (SkipLine(ibDig, ibLine36+1) == 1)
           {
-            ReadHeaderU_SkipLine(ibLineU+1);
-            ibLineU++;
+            ReadHeader36_SkipLine(ibLine36+1);
+            ibLine36++;
           }
 
           iwMajor = 0;                                  // если есть требуемая запись
@@ -290,22 +290,22 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryHeaderU();
+          QueryHeader36();
           SetCurr35(DEV_HEADER_36P);
         }
       }
       break;
 
     case DEV_POSTHEADER_36P:
-      if (++ibLineU < bMaxLineU)
+      if (++ibLine36 < bMaxLine36)
       {
         cbRepeat = MaxRepeats();
-        QueryHeaderU();
+        QueryHeader36();
         SetCurr35(DEV_HEADER_36P);
       }
       else
       {
-        if (ReadDataU() == 0)
+        if (ReadData36() == 0)
           DoneProfile();
         else
           MakePause(DEV_DATA_36P);
@@ -317,16 +317,16 @@
         DoneProfile();
       else
       {
-        ibLineU = 0;
+        ibLine36 = 0;
 
-        if (SkipLine(ibDig, ibLineU) == 1)
+        if (SkipLine(ibDig, ibLine36) == 1)
         {
-          ReadHeaderU_SkipLine(ibLineU);
-          ibLineU++;
+          ReadHeader36_SkipLine(ibLine36);
+          ibLine36++;
         }
 
         cbRepeat = MaxRepeats();
-        QueryHeaderU();
+        QueryHeader36();
         SetCurr35(DEV_HEADER_36P);
       }
       break;
