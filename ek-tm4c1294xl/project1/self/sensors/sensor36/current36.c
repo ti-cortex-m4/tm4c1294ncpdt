@@ -1,26 +1,19 @@
 /*------------------------------------------------------------------------------
 current36,C
 
-Энергомера СЕ301 NNCL2, СЕ303 NNCL2
+
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-////#include "../../memory/mem_settings.h"
 #include "../../memory/mem_digitals.h"
 #include "../../memory/mem_current.h"
 #include "../../memory/mem_factors.h"
-////#include "../../display/display.h"
-////#include "../../time/timedate.h"
-////#include "../../time/calendar.h"
-////#include "../../time/delay.h"
 #include "../../serial/ports.h"
 #include "../../devices/devices.h"
 #include "../../digitals/digitals.h"
 #include "../../digitals/current/current_run.h"
 #include "io36.h"
-//#include "timeout35.h"
 #include "../device_k.h"
-//#include "../device_q.h"
 #include "current36.h"
 
 
