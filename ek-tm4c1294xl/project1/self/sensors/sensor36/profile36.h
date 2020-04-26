@@ -1,40 +1,17 @@
 /*------------------------------------------------------------------------------
-DEVICE_U!H
+profile36!H
 
 
 ------------------------------------------------------------------------------*/
 
-#ifndef SKIP_U
-
 // нижний порог коррекции времени, секунд
-#define bMINORCORRECT_U 3
+#define bMINORCORRECT_36 3
 
 
 
-extern uchar                   ibLineU, bMaxLineU;
-
-
-
-uchar   GetMaxLineU(uchar  ibCan);
-
-void    QueryCloseU(void);
-void    QueryOptionU(void);
-void    QueryCorrectU(void);
-void    QueryEngAbsU(uchar  ibLine);
-void    QueryEngDayU(uchar  ibLine, time  ti);
-void    QueryEngMonU(uchar  ibLine, time  ti);
-void    QueryEngSpecU(uchar  ibLine);
-void    ReadEngU(uchar  ibLine);
-void    ReadEngU_SkipLine(uchar  ibLine);
-
-void    InitHeaderU(void);
-void    QueryHeaderU(void);
-void    ReadHeaderU(void);
-void    ReadHeaderU_SkipLine(uchar  ibLine);
-void    MakeDataU(uchar  ibHou);
-bool    ReadDataU(void);
-
-void    ReadCurrentU(uchar  bMaxLine);
-
-#endif
-
+void    InitHeader36(void);
+void    QueryHeader36(void);
+void    ReadHeader36(void);
+void    ReadHeader36_SkipLine(uchar  ibLine);
+void    MakeData36(uchar  ibHou);
+bool    ReadData36(void);
