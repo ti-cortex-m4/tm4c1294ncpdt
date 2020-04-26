@@ -35,8 +35,8 @@ status   ReadEngMonTariff36_Full(time  ti, uchar  ibTariff, uchar  bMaxLines)
     {
       QueryEngMon36(i,ti);
 
+      if ((Input36() == SER_GOODCHECK) && (!NoData36())) break;
       if (NoData36()) return ST_NOTPRESENTED;
-      if (Input36() == SER_GOODCHECK) break;
       if (fKey == true) return ST_BADDIGITAL;
     }
 
