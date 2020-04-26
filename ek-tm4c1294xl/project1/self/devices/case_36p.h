@@ -1,5 +1,5 @@
 
-#ifndef SKIP_U
+#ifndef SKIP_36
 
     case DEV_START_36P:
       if ((boControlQ == false) && (fCurrCtrl == true))
@@ -9,7 +9,7 @@
       break;
 
     case DEV_PREVCORRECT_36P:
-      if (tiCurr.bSecond < bMINORCORRECT_U) {
+      if (tiCurr.bSecond < bMINORCORRECT_36) {
         MakePause(DEV_CORRECT_36P);
       } else {
         ShowTimeOneE(ibDig);
@@ -32,7 +32,7 @@
       break;
 
     case DEV_OPENCANAL_36P:
-      if (mpSerial[ibPort] == SER_GOODCHECK)
+      if (IsSerial35())
       {
         ReadOpen36();
         MakeLongPause(DEV_POSTOPENCANAL_36P, 1);
@@ -60,7 +60,7 @@
       break;
 
     case DEV_OPTION_36P:
-      if (mpSerial[ibPort] == SER_GOODCHECK)
+      if (IsSerial35())
       {
         if (HasPassword36())
           MakePause(DEV_POSTOPTION_36P);
@@ -90,7 +90,7 @@
       break;
 
     case DEV_PASSWORD_36P:
-      if (mpSerial[ibPort] == SER_GOODCHECK)
+      if (IsSerial35())
         MakePause(DEV_POSTPASSWORD_36P);
       else
       {
@@ -122,7 +122,7 @@
       break;
 
     case DEV_TIME_36P:
-      if (mpSerial[ibPort] == SER_GOODCHECK)
+      if (IsSerial35())
       {
         tiDig = ReadTime36();
         MakePause(DEV_POSTTIME_36P);
@@ -150,7 +150,7 @@
       break;
 
     case DEV_DATE_36P:
-      if (mpSerial[ibPort] == SER_GOODCHECK)
+      if (IsSerial35())
       {
         tiDig = ReadDate36(tiDig);
         MakePause(DEV_POSTDATE_36P);
@@ -199,7 +199,7 @@
       break;
 
     case DEV_POSTCONTROL_36P:
-      if (mpSerial[ibPort] == SER_GOODCHECK)
+      if (IsSerial35())
         MakePause(DEV_POSTCORRECT_36P);
       else
       {
@@ -244,7 +244,7 @@
       break;
 
     case DEV_HEADER_36P:
-      if (mpSerial[ibPort] == SER_GOODCHECK)
+      if (IsSerial35())
       {
         if (IndexInBuff() == 3)                        // если нет требуемой записи
         {

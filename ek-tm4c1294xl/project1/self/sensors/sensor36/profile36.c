@@ -82,7 +82,7 @@ void    QueryHeader36Internal(void)
 
   PushChar1Bcc(0x03);
 
-  BccQueryIO(2000, 4+16+1, 48);
+  BccQuery36(2000, 4+16+1, 48);
 }
 
 
