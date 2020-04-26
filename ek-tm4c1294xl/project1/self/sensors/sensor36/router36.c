@@ -98,7 +98,7 @@ static bool ChecksumInBuff36(void)
 }
 
 
-static uchar CheckSensor36(void)
+static uchar CheckSensor36(bool  fIgnoreChecksumError)
 {
 //  if (InBuff(0) != 0xC0) return 1; // TODO ???
 //  if (InBuff(1) != 0x48) return 2;
@@ -113,22 +113,20 @@ static uchar CheckSensor36(void)
 
     //  DecompressK(0); // TODO ???
 
-  if (!ChecksumInBuff36()) return 2;
+  if ((!ChecksumInBuff36()) && (!fIgnoreChecksumError))
+    return 1;
 
   return 0;
 }
 
 
-uchar   ChecksumSensor36(bool  fShowChecksumError)
+uchar   ChecksumSensor36(bool  fIgnoreChecksumError)
 {
-  uchar i = CheckSensor36();
+  uchar i = CheckSensor36(fIgnoreChecksumError);
   if (i != 0)
   {
-    if (fShowChecksumError)
-    {
-      Clear(); sprintf(szLo+1,"ошибка: 36.2.%u",i);
-      DelayInf();
-    }
+    Clear(); sprintf(szLo+1,"ошибка: 36.2.%u",i);
+    DelayInf();
 
 #ifdef MONITOR_36
     MonitorString("\n sensor packet error: "); MonitorCharDec(i);
