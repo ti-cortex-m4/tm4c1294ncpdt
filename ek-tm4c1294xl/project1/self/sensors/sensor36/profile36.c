@@ -42,6 +42,83 @@ uchar                   ibLine36, bMaxLine36;
 
 
 
+bool    HasPassword36(void)
+{
+  return mpdwAddress2[diCurr.bAddress-1] != MAX_LONG;
+}
+
+
+void    QueryPassword36(void)
+{
+  InitPush(0);
+
+  PushChar1Bcc(0x01);
+  PushChar1Bcc('P');
+  PushChar1Bcc('1');
+  PushChar1Bcc(0x02);
+  PushChar1Bcc('(');
+
+  uchar n = PushNumberBcc(mpdwAddress2[diCurr.bAddress-1]);
+
+  PushChar1Bcc(')');
+  PushChar1Bcc(0x03);
+
+  BccQuery36(1+1, 5+n+2+1, 0);
+}
+
+
+
+void    QueryCorrect36(void)
+{
+  InitPush(0);
+
+  PushChar1Bcc('/');
+  PushChar1Bcc('?');
+
+  PushChar1Bcc('C');
+  PushChar1Bcc('T');
+  PushChar1Bcc('I');
+  PushChar1Bcc('M');
+  PushChar1Bcc('E');
+  PushChar1Bcc('!');
+
+  PushChar1Bcc(0x0D);
+  PushChar1Bcc(0x0A);
+
+  Query(1000, 2+6+2, 1);
+}
+
+
+void    QueryControl36(void)
+{
+  InitPush(0);
+
+  PushChar1Bcc(0x01);
+  PushChar1Bcc('W');
+  PushChar1Bcc('1');
+  PushChar1Bcc(0x02);
+
+  PushChar1Bcc('T');
+  PushChar1Bcc('I');
+  PushChar1Bcc('M');
+  PushChar1Bcc('E');
+  PushChar1Bcc('_');
+
+  PushChar1Bcc('(');
+  PushChar2Bcc(tiCurr.bHour);
+  PushChar1Bcc(':');
+  PushChar2Bcc(tiCurr.bMinute);
+  PushChar1Bcc(':');
+  PushChar2Bcc(tiCurr.bSecond);
+  PushChar1Bcc(')');
+
+  PushChar1Bcc(0x03);
+
+  BccQueryIO(1+1, 4+16+1, 0);
+}
+
+
+
 void    InitHeader36(void)
 {
   if (!UseBounds())
