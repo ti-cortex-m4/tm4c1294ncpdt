@@ -85,7 +85,7 @@ void    QueryCorrect36(void)
   PushChar1Bcc(0x0D);
   PushChar1Bcc(0x0A);
 
-  Query(1000, 2+6+2, 1);
+  Query36(1000, 2+6+2, 1);
 }
 
 
@@ -114,7 +114,52 @@ void    QueryControl36(void)
 
   PushChar1Bcc(0x03);
 
-  BccQueryIO(1+1, 4+16+1, 0);
+  BccQuery36(1+1, 4+16+1, 0);
+}
+
+
+
+void    QueryTimeSpec36(void)
+{
+  InitPush(0);
+
+  PushChar1Bcc(0x01);
+  PushChar1Bcc('R');
+  PushChar1Bcc('1');
+  PushChar1Bcc(0x02);
+
+  PushChar1Bcc('T');
+  PushChar1Bcc('I');
+  PushChar1Bcc('M');
+  PushChar1Bcc('E');
+  PushChar1Bcc('_');
+  PushChar1Bcc('(');
+  PushChar1Bcc(')');
+  PushChar1Bcc(0x03);
+
+  BccQuery36(1+17+2, 4+8+1, 0);
+}
+
+
+void    QueryDateSpec36(void)
+{
+  InitPush(0);
+
+  PushChar1Bcc(0x01);
+  PushChar1Bcc('R');
+  PushChar1Bcc('1');
+  PushChar1Bcc(0x02);
+
+  PushChar1Bcc('D');
+  PushChar1Bcc('A');
+  PushChar1Bcc('T');
+  PushChar1Bcc('E');
+  PushChar1Bcc('_');
+  PushChar1Bcc('(');
+  PushChar1Bcc(')');
+  PushChar1Bcc(0x03);
+
+  BccQuery36(1+20+2, 4+8+1, 0);
 }
 
 
