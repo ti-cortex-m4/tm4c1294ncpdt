@@ -63,7 +63,7 @@ void    QueryPassword36(void)
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
-  BccQuery36(1+1, 5+n+2+1, 0);
+  BccQuery36(2000+1+1, 5+n+2+1, 0);
 }
 
 
@@ -114,7 +114,7 @@ void    QueryControl36(void)
 
   PushChar1Bcc(0x03);
 
-  BccQuery36(1+1, 4+16+1, 0);
+  BccQuery36(2000+1+1, 4+16+1, 0);
 }
 
 
@@ -137,7 +137,7 @@ void    QueryTimeSpec36(void)
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
-  BccQuery36(1+17+2, 4+8+1, 0);
+  BccQuery36(2000+1+17+2, 4+8+1, 0);
 }
 
 
@@ -159,7 +159,7 @@ void    QueryDateSpec36(void)
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
-  BccQuery36(1+20+2, 4+8+1, 0);
+  BccQuery36(2000+1+20+2, 4+8+1, 0);
 }
 
 
