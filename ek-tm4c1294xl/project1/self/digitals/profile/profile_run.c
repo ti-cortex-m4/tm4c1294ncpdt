@@ -68,7 +68,8 @@ bool    StartProfile(uchar  ibCanal)
         (diCurr.bDevice == 29) || (diCurr.bDevice == 30) ||
         (diCurr.bDevice == 31) || (diCurr.bDevice == 32) || (diCurr.bDevice == 33) ||
         (diCurr.bDevice == 34) ||
-        (diCurr.bDevice == 35))
+        (diCurr.bDevice == 35) ||
+        (diCurr.bDevice == 36) || (diCurr.bDevice == 37))
     {
       if (mpboReadyCan[ibDig] == false)
       {
@@ -238,6 +239,11 @@ bool    StartProfile(uchar  ibCanal)
 
 #ifndef SKIP_35
     case 35: SetNext(DEV_START_35P); break;
+#endif
+
+#ifndef SKIP_36
+    case 36:
+    case 37: SetNext(DEV_START_36P);  break;
 #endif
   }
 
