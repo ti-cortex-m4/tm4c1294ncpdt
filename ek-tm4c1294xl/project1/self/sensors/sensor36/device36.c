@@ -33,8 +33,6 @@ void    QueryClose36(void)
 
 void    QueryOpen36(void)
 {
-  //QueryClose36();
-
   uchar n = PushAddress1Bcc();
 
   PushChar1Bcc(0x0D);
