@@ -71,6 +71,7 @@ DEVICES.C
 #include "../sensors/sensor35/status35.h"
 #include "../sensors/sensor35/profile35.h"
 #include "../sensors/sensor36/device36.h"
+#include "../sensors/sensor36/io36.h"
 #include "../sensors/sensor36/current36.h"
 #include "../sensors/sensor36/profile36.h"
 #include "../serial/ports.h"
@@ -6135,7 +6136,7 @@ void    RunDevices(void)
     case DEV_RUN_WAIT_36:
       MonitorString("\t run: wait");
 
-      Query36Internal(3000, 0, NNCL2_DATA_GET);
+      Query36Internal(false, 2000, 0, 0, NNCL2_DATA_GET);
       SetCurr(DEV_RUN_DATA_GET_36);
       break;
 

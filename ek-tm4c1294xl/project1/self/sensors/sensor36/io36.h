@@ -4,6 +4,7 @@ IO36!H
 
 ------------------------------------------------------------------------------*/
 
+void    Query36Internal(bool  fBcc, uint  cwIn, uchar  cbOut, uchar  cbHeaderMax, uchar  bCommand);
 void    Query36(uint  cwIn, uchar  cbOut, uchar  cbHeaderMax);
 void    BccQuery36(uint  cwIn, uchar  cbOut, uchar  cbHeaderMax);
 
