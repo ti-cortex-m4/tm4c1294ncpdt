@@ -19,9 +19,22 @@ postinput36!C
 
 
 
+bool    IgnoreChecksumError36(void)
+{
+  if (GetCurr35Internal() == DEV_OPENCANAL_36C)
+    return true;
+
+  if (GetCurr35Internal() == DEV_OPENCANAL_36P)
+    return true;
+
+  return false;
+}
+
+
+
 void    PostInput36(void)
 {
-  action35 action = Action36(true, GetCurr35Internal() == DEV_OPENCANAL_36C);
+  action35 action = Action36(true, IgnoreChecksumError36());
   if (action == A35_WAIT)
   {
     MonitorString("\t postinput: wait");
