@@ -2,9 +2,9 @@
 #ifndef SKIP_36
 
     case DEV_START_36P:
-      if ((boControlQ == false) && (fCurrCtrl == true))
-        MakePause(DEV_PREVCORRECT_36P);
-      else
+//      if ((boControlQ == false) && (fCurrCtrl == true))
+//        MakePause(DEV_PREVCORRECT_36P);
+//      else
         MakePause(DEV_OPEN_36P);
       break;
 
@@ -107,9 +107,9 @@
       break;
 
     case DEV_POSTPASSWORD_36P:
-      if ((boControlQ != false) && (fCurrCtrl == true))
-        MakePause(DEV_PREVTIME_36P);
-      else
+//      if ((boControlQ != false) && (fCurrCtrl == true))
+//        MakePause(DEV_PREVTIME_36P);
+//      else
         MakePause(DEV_POSTCORRECT_36P);
       break;
 
@@ -217,14 +217,7 @@
 
 
     case DEV_POSTCORRECT_36P:
-      if (boPlcUFlag == false)
         MakePause(DEV_PREVHEADER_36P);
-      else
-      {
-        Clear();
-        sprintf(szLo+4, "блок: %u", bPlcUSize);
-        MakeLongPause(DEV_PREVHEADER_U4, 1);
-      }
       break;
 
     case DEV_PREVHEADER_36P:
