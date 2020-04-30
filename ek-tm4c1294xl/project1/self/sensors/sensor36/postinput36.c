@@ -38,7 +38,7 @@ void    PostInput36(void)
   if (action == A35_WAIT)
   {
     MonitorString("\t postinput: wait");
-    SetCurr(DEV_RUN_WAIT_35);
+    SetCurr(DEV_RUN_WAIT_36);
   }
   else if (action == A35_SUCCESS)
   {
@@ -55,7 +55,7 @@ void    PostInput36(void)
   {
     MonitorString("\t postinput: run break");
     mpSerial[ibPort] = SER_BADCHECK;
-    SetCurr(DEV_RUN_BREAK_35);
+    SetCurr(DEV_RUN_BREAK_36);
   }
   else
   {
