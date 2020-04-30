@@ -1,6 +1,41 @@
 
 #ifndef SKIP_36
 
+    case DEV_RUN_WAIT_36:
+      MonitorString("\t run: wait");
+
+      Query36Internal(3000, 0, NNCL2_DATA_GET);
+      SetCurr(DEV_RUN_DATA_GET_36);
+      break;
+
+    case DEV_RUN_BREAK_36:
+      MonitorString("\t run: break");
+
+      if (exExtended == EXT_CURRENT_3MIN)
+        ErrorCurrent();
+      else
+        ErrorProfile();
+      break;
+
+    case DEV_RUN_DATA_GET_36:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+      {
+        MonitorString("\t run: good data");
+
+        SetSerial35(SER_GOODCHECK);
+        MakePause(GetCurr35Internal());
+      }
+      else
+      {
+        MonitorString("\t run: bad data");
+
+        SetSerial35(SER_BADCHECK);
+        MakePause(GetCurr35Internal());
+      }
+      break;
+
+
+
     case DEV_START_36C:
       Clear(); ShowPercent(50);
 
