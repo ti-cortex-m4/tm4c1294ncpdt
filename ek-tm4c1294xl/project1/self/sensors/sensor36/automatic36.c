@@ -25,7 +25,6 @@ uchar   i,bT;
 
   for (i=0; i<MaxRepeats(); i++)
   {
-    QueryClose36();
     QueryOpen36();
 
     if (Input36_(true) == SER_GOODCHECK) break;
