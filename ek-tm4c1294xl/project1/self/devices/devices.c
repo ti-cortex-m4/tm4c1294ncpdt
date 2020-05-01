@@ -6378,13 +6378,6 @@ void    RunDevices(void)
       break;
 
     case DEV_POSTPASSWORD_36P:
-//      if ((boControlQ != false) && (fCurrCtrl == true))
-        MakePause(DEV_PREVTIME_36P);
-//      else
-//        MakePause(DEV_POSTCORRECT_36P);
-      break;
-
-    case DEV_PREVTIME_36P:
       ShowPercent(53);
 
       cbRepeat = MaxRepeats();
@@ -6448,7 +6441,7 @@ void    RunDevices(void)
         ulong dwSecond1 = GetSecondIndex(tiValue36);
         ulong dwSecond2 = GetSecondIndex(tiCurr);
 
-        if (DifferentDay(tiDig, tiCurr))
+        if (DifferentDay(tiValue36, tiCurr))
         { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); }                       // даты не совпадают, коррекция невозможна
         else
         {
@@ -6456,7 +6449,7 @@ void    RunDevices(void)
 
           if (AbsLong(dwSecond1 - dwSecond2) < GetCorrectLimit())                 // без коррекции
           { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_36P); }
-          else if (GetCurrHouIndex() == (tiDig.bHour*2 + tiDig.bMinute/30))       // простая коррекция
+          else if (GetCurrHouIndex() == (tiValue36.bHour*2 + tiValue36.bMinute/30)) // простая коррекция
           { ShowLo(szCorrectYes); DelayInf(); MakePause(DEV_CONTROL_36P); }
           else
           { ShowLo(szCorrectBig); DelayMsg(); ErrorProfile(); }                   // разница времени слишком велика, коррекция невозможна
@@ -6492,10 +6485,6 @@ void    RunDevices(void)
 
 
     case DEV_POSTCORRECT_36P:
-      MakePause(DEV_PREVHEADER_36P);
-      break;
-
-    case DEV_PREVHEADER_36P:
       cwShutdown36 = 0;
       InitHeader36();
 
