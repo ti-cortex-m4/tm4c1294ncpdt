@@ -294,15 +294,14 @@
       break;
 
     case DEV_POSTHEADER_36P:
-      MonitorString("\n *** DEV_POSTHEADER_36P "); MonitorCharDec(ibLine36);
       if (++ibLine36 < bMaxLine36)
-      { MonitorString("\n *** DEV_POSTHEADER_36P A "); MonitorCharDec(ibLine36); MonitorString(" "); MonitorCharDec(bMaxLine36);
+      {
         cbRepeat = MaxRepeats();
         QueryHeader36();
         SetCurr35(DEV_HEADER_36P);
       }
       else
-      { MonitorString("\n *** DEV_POSTHEADER_36P B ");
+      {
         if (ReadData36() == 0)
           DoneProfile();
         else
@@ -311,7 +310,6 @@
       break;
 
     case DEV_DATA_36P:
-      MonitorString("\n *** DEV_DATA_36P A ");
       if (wBaseCurr > wHOURS/48)
         DoneProfile();
       else
@@ -319,7 +317,7 @@
         ibLine36 = 0;
 
         if (SkipLine(ibDig, ibLine36) == 1)
-        { MonitorString("\n *** DEV_DATA_36P B ");
+        {
           ReadHeader36_SkipLine(ibLine36);
           ibLine36++;
         }
