@@ -124,7 +124,7 @@
     case DEV_TIME_36P:
       if (IsSerial35())
       {
-        tiDig = ReadTime36();
+        tiValue36 = ReadTime36();
         MakePause(DEV_POSTTIME_36P);
       }
       else
@@ -152,7 +152,8 @@
     case DEV_DATE_36P:
       if (IsSerial35())
       {
-        tiDig = ReadDate36(tiDig);
+        tiValue36 = ReadDate36(tiValue36);
+        dwValue36 = DateToHouIndex(tiValue36);
         MakePause(DEV_POSTDATE_36P);
       }
       else
@@ -172,7 +173,7 @@
 
     case DEV_POSTDATE_36P:
       {
-        ulong dwSecond1 = GetSecondIndex(tiDig);
+        ulong dwSecond1 = GetSecondIndex(tiValue36);
         ulong dwSecond2 = GetSecondIndex(tiCurr);
 
         if (DifferentDay(tiDig, tiCurr))
