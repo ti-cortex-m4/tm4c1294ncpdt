@@ -252,14 +252,12 @@
             cwShutdown36 += 6;
             sprintf(szLo," выключено: %-4u   ",cwShutdown36);
 
-            iwDigHou = (wHOURS+iwHardHou-wBaseCurr*48)%wHOURS;
+            iwDigHou = (wHOURS+iwHardHou-wProfile36)%wHOURS;
             ShowProgressDigHou();
 
-            NewBoundsAbs16(++wBaseCurr);
-
-            if (wBaseCurr >= wHOURS/48)
+            if (MakeStopHou(0) == 0)
               DoneProfile();
-            else if (MakeStopHou(0) == 0)
+            else if (++wProfile36 > wHOURS)
               DoneProfile();
             else
               MakePause(DEV_DATA_36P);
