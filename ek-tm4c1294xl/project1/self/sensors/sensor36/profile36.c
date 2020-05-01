@@ -236,6 +236,8 @@ void    QueryHeader36(void)
 
 
   szHi[10] = 'A' + ibLine36;
+  szHi[11] = ' ';
+
 
   bMaxLine36 = GetMaxLine36(ibDig);
   QueryHeader36Internal();
@@ -245,7 +247,6 @@ void    QueryHeader36(void)
 
 void    ReadHeader36(void)
 {
-  MonitorString("\n *** ReadHeader36 ");
   InitPop(1);
 
   uchar h;
@@ -258,7 +259,6 @@ void    ReadHeader36(void)
 
 void    ReadHeader36_SkipLine(uchar  ibLine)
 {
-  MonitorString("\n *** ReadHeader36_SkipLine ");
   uchar h;
   for (h=0; h<6; h++)
   {
@@ -331,9 +331,8 @@ bool    ReadBlock36(uchar  ibBlock)
   sprintf(szLo," %02u    %02u.%02u.%02u", tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
   MonitorString("\n time "); MonitorTime(tiDig);
 
-  if (SearchDefHouIndex(tiDig) == 0) { MonitorString("\n *** return 3 "); return(1); }
+  if (SearchDefHouIndex(tiDig) == 0) return(1);
 
-  MonitorString("\n *** make data ");
   MakeData36(ibBlock);
 
   if (IsDefect(ibDig)) MakeSpecial(tiDig);
@@ -344,8 +343,6 @@ bool    ReadBlock36(uchar  ibBlock)
 
 bool    ReadData36(void)
 {
-  MonitorString("\n *** read data ");
-
   uchar i;
   for (i=0; i<6; i++)
   {
@@ -355,16 +352,13 @@ bool    ReadData36(void)
     tiDig = HouIndexToDate(dw);
 
     if (dw < dwValue36) {
-      MonitorString("\n *** time OK ");
-      if (ReadBlock36(6-1-i) == 0) { MonitorString("\n *** return 1 "); return(0); }
-    } else {
-      MonitorString("\n *** time error ");
+      if (ReadBlock36(6-1-i) == 0) return(0);
     }
   }
 
   wProfile36 += 6;
-  if (wProfile36 > wHOURS)  { MonitorString("\n *** return 2 "); return(0); }
+  if (wProfile36 > wHOURS) return(0);
 
-  MonitorString("\n *** read data: completed ");
+  MonitorString("\n");
   return(1);
 }
