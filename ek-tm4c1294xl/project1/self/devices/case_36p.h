@@ -229,7 +229,7 @@
       InitHeader36();
 
       ibLine36 = 0;
-      if (SkipLine(ibDig, ibLine36) == 1)
+      if (SkipLine(ibDig, ibLine36) == true)
       {
         ReadHeader36_SkipLine(ibLine36);
         ibLine36++;
@@ -267,7 +267,7 @@
         {
           ReadHeader36();
 
-          if (SkipLine(ibDig, ibLine36+1) == 1)
+          if (SkipLine(ibDig, ibLine36+1) == true)
           {
             ReadHeader36_SkipLine(ibLine36+1);
             ibLine36++;
@@ -315,7 +315,7 @@
       {
         ibLine36 = 0;
 
-        if (SkipLine(ibDig, ibLine36) == 1)
+        if (SkipLine(ibDig, ibLine36) == true)
         {
           ReadHeader36_SkipLine(ibLine36);
           ibLine36++;
