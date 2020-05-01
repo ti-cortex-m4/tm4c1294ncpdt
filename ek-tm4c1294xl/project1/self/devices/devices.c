@@ -6388,7 +6388,7 @@ void    RunDevices(void)
       ShowPercent(53);
 
       cbRepeat = MaxRepeats();
-      QueryTimeSpec36();
+      QueryTimeProfile36();
       SetCurr35(DEV_TIME_36P);
       break;
 
@@ -6406,7 +6406,7 @@ void    RunDevices(void)
           ErrorLink();
           cbRepeat--;
 
-          QueryTimeSpec36();
+          QueryTimeProfile36();
           SetCurr35(DEV_TIME_36P);
         }
       }
@@ -6416,7 +6416,7 @@ void    RunDevices(void)
       ShowPercent(54);
 
       cbRepeat = MaxRepeats();
-      QueryDateSpec36();
+      QueryDateProfile36();
       SetCurr35(DEV_DATE_36P);
       break;
 
@@ -6435,7 +6435,7 @@ void    RunDevices(void)
           ErrorLink();
           cbRepeat--;
 
-          QueryDateSpec36();
+          QueryDateProfile36();
           SetCurr35(DEV_DATE_36P);
         }
       }

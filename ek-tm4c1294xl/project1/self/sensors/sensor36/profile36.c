@@ -125,7 +125,7 @@ void    QueryControl36(void)
 
 
 
-void    QueryTimeSpec36(void)
+void    QueryTimeProfile36(void)
 {
   InitPush(0);
 
@@ -147,7 +147,7 @@ void    QueryTimeSpec36(void)
 }
 
 
-void    QueryDateSpec36(void)
+void    QueryDateProfile36(void)
 {
   InitPush(0);
 
