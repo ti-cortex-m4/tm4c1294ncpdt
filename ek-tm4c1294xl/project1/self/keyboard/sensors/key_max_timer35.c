@@ -14,7 +14,7 @@ KEY_MAX_TIMER35.C
 //                                         0123456789ABCDEF
 static char const       szMessage1[]    = "  Макс. время   ",
                         szMessage2[]    = "ожидания ответа ",
-                        szMessage3[]    = "  СЕ102 NNCL2   ";
+                        szMessage3[]    = "  СЕxxx NNCL2   ";
 
 static char const       *pszMessages[]  = { szMessage1, szMessage2, szMessage3, szNumberLimits, "" };
 
