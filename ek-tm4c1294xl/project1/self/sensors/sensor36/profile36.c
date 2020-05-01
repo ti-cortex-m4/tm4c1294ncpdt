@@ -23,6 +23,7 @@ profile36!C
 #include "../../serial/ports_stack.h"
 #include "../../serial/ports_devices.h"
 #include "../../serial/ports_common.h"
+#include "../../serial/monitor.h"
 #include "../../devices/devices.h"
 #include "../../devices/devices_time.h"
 #include "../../digitals/current/current_run.h"
@@ -211,17 +212,22 @@ void    QueryHeader36Internal(void)
   PushChar2Bcc(tiDig.bMonth);
   PushChar1Bcc('.');
   PushChar2Bcc(tiDig.bYear);
-  ???
+  PushChar1Bcc('.');
+  PushChar2Bcc(tiDig.bHour*2 + 1);
+  PushChar1Bcc('.');
+  PushChar1Bcc('6');
   PushChar1Bcc(')');
 
   PushChar1Bcc(0x03);
 
-  BccQuery36(2000, 4+16+1, 48);
+  BccQuery36(2000, 4+21+1, 48);
 }
 
 
 void    QueryHeader36(void)
 {
+  MonitorString("\n *** QueryHeader36 "); MonitorCharDec(ibLine36);
+
   HideCurrTime(1);
 
   ulong dw = DateToHouIndex(tiDigPrev);
@@ -239,10 +245,11 @@ void    QueryHeader36(void)
 
 void    ReadHeader36(void)
 {
+  MonitorString("\n *** ReadHeader36 ");
   InitPop(1);
 
   uchar h;
-  for (h=0; h<48; h++)
+  for (h=0; h<6; h++)
   {
     mpdbBuffCanHou[ibLine36][h] = PopDoubleQ()/2;
   }
@@ -251,8 +258,9 @@ void    ReadHeader36(void)
 
 void    ReadHeader36_SkipLine(uchar  ibLine)
 {
+  MonitorString("\n *** ReadHeader36_SkipLine ");
   uchar h;
-  for (h=0; h<48; h++)
+  for (h=0; h<6; h++)
   {
     mpdbBuffCanHou[ibLine][h] = 0;
   }
@@ -260,7 +268,7 @@ void    ReadHeader36_SkipLine(uchar  ibLine)
 
 
 
-void    MakeData36_(uchar  ibHou)
+void    MakeData36(uchar  h)
 {
   ShowProgressDigHou();
 
@@ -269,7 +277,7 @@ void    MakeData36_(uchar  ibHou)
   uchar i;
   for (i=0; i<bMaxLine36; i++)
   {
-    double db = mpdbBuffCanHou[i][ibHou];
+    double db = mpdbBuffCanHou[i][h];
     mpdbEngFracDigCan[ibDig][i] += db;
 
     uint w = (uint)(mpdbEngFracDigCan[ibDig][i]*dbPulse);
@@ -279,7 +287,7 @@ void    MakeData36_(uchar  ibHou)
   }
 }
 
-
+/*
 bool    ReadData36_(void)
 {
 uchar   j;
@@ -315,7 +323,7 @@ uchar   j;
   NewBoundsAbs16(++wBaseCurr);
   return(1);
 }
-
+*/
 
 
 bool    ReadBlock36(uchar  ibBlock)
@@ -323,21 +331,10 @@ bool    ReadBlock36(uchar  ibBlock)
   sprintf(szLo," %02u    %02u.%02u.%02u", tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
   MonitorString("\n time "); MonitorTime(tiDig);
 
-  if (SearchDefHouIndex(tiDig) == 0) return(1);
+  if (SearchDefHouIndex(tiDig) == 0) { MonitorString("\n *** return 3 "); return(1); }
 
-
-  ShowProgressDigHou();
-
-  InitPop(4+ibBlock*8);
-
-  uchar i;
-  for (i=0; i<4; i++)
-  {
-    uint w = PopChar();
-    w += PopChar()*0x100;
-
-    mpwChannels[i] = w;
-  }
+  MonitorString("\n *** make data ");
+  MakeData36(ibBlock);
 
   if (IsDefect(ibDig)) MakeSpecial(tiDig);
   return(MakeStopHou(0));
@@ -347,6 +344,8 @@ bool    ReadBlock36(uchar  ibBlock)
 
 bool    ReadData36(void)
 {
+  MonitorString("\n *** read data ");
+
   uchar i;
   for (i=0; i<6; i++)
   {
@@ -355,13 +354,17 @@ bool    ReadData36(void)
     dw -= (wProfile36 + i);
     tiDig = HouIndexToDate(dw);
 
-    if (dw < dwValue36)
-      if (ReadBlock36(6-1-i) == 0) return(0);
+    if (dw < dwValue36) {
+      MonitorString("\n *** time OK ");
+      if (ReadBlock36(6-1-i) == 0) { MonitorString("\n *** return 1 "); return(0); }
+    } else {
+      MonitorString("\n *** time error ");
+    }
   }
 
   wProfile36 += 6;
-  if (wProfile36 > wHOURS) return(0);
+  if (wProfile36 > wHOURS)  { MonitorString("\n *** return 2 "); return(0); }
 
-  MonitorString("\n");
+  MonitorString("\n *** read data: completed ");
   return(1);
 }
