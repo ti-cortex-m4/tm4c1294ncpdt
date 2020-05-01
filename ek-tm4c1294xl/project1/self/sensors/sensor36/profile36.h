@@ -9,6 +9,7 @@ profile36!H
 
 
 
+extern  uint                    wProfile36;
 extern  uint                    cwShutdown36;
 
 extern  time                    tiValue36;

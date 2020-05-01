@@ -211,7 +211,7 @@ serial  Input36_(bool  fIgnoreChecksumError)
       action35 action = Action36(false, fIgnoreChecksumError);
       if (action == A35_WAIT)
       {
-        Query36Internal(false, 2000, 0, 0, NNCL2_DATA_GET);
+        Query36Internal(false, 1000, 0, 0, NNCL2_DATA_GET);
         repeat = true;
       }
       else if (action == A35_SUCCESS)
