@@ -18,6 +18,7 @@ router36.c
 #include "../../time/delay.h"
 //#include "device35.h"
 #include "../sensor35/unpack35.h"
+#include "../sensor35/status35.h"
 #include "include36.h"
 #include "router36.h"
 
@@ -70,6 +71,10 @@ static uchar CheckRouter36(void)
 
 uchar   ChecksumRouter36(void)
 {
+#ifdef MONITOR_36
+   MonitorIn();
+#endif
+
   uchar i = CheckRouter36();
   if (i != 0)
   {
@@ -113,6 +118,65 @@ static uchar CheckSensor36(bool  fIgnoreChecksumError)
 
     //  DecompressK(0); // TODO ???
 
+  device d = GetCurr35Internal();
+  MonitorString("\n device: "); MonitorIntHex(d);
+
+  if ((d == DEV_PASSWORD_36P) && (IndexInBuff() == 1) && ((InBuff(0) & 0x7F) == 0x06))
+    return 0;
+
+  if ((d == DEV_POSTCONTROL_36P) && (IndexInBuff() == 1) && ((InBuff(0) & 0x7F) == 0x06))
+    return 0;
+
+/*
+  if ((GetCurr() == DEV_OPENCANAL_U2) || (GetCurr() == DEV_OPENCANAL_U3))
+  {
+    MonitorIn();
+    uchar b = InBuff(IndexInBuff() - 1) & 0x7F;
+    if ((b == '\r') || (b == '\n'))
+    {
+      InputGoodCheck();
+      mpSerial[ibPort] = SER_GOODCHECK;
+    }
+    else
+      mpSerial[ibPort] = SER_BADCHECK;
+  }
+
+  else if (GetCurr() == DEV_PASSWORD_U2)
+  {
+    MonitorIn();
+    if ((IndexInBuff() == 1) && ((InBuff(0) & 0x7F) == 0x06))
+    {
+      InputGoodCheck();
+      mpSerial[ibPort] = SER_GOODCHECK;
+    }
+    else
+      mpSerial[ibPort] = SER_BADCHECK;
+  }
+
+  else if (GetCurr() == DEV_POSTCONTROL_U2)
+  {
+    MonitorIn();
+    if ((IndexInBuff() == 1) && ((InBuff(0) & 0x7F) == 0x06))
+    {
+      InputGoodCheck();
+      mpSerial[ibPort] = SER_GOODCHECK;
+    }
+    else
+      mpSerial[ibPort] = SER_BADCHECK;
+  }
+
+  else if ((GetCurr() == DEV_HEADER_U2) || (GetCurr() == DEV_HEADER_U4))
+  {
+    MonitorIn();
+    if (IndexInBuff() == 3)
+    {
+      InputGoodCheck();
+      mpSerial[ibPort] = SER_GOODCHECK;
+    }
+    else
+      mpSerial[ibPort] = SER_BADCHECK;
+  }
+*/
   if ((!ChecksumInBuff36()) && (!fIgnoreChecksumError))
     return 1;
 
