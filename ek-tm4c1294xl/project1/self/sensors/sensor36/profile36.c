@@ -38,6 +38,11 @@ profile36!C
 
 
 
+static uint             wProfile36;
+
+time                    tiValue36;
+ulong                   dwValue36;
+
 uchar                   ibLine36, bMaxLine36;
 
 
@@ -167,15 +172,21 @@ void    QueryDateSpec36(void)
 void    InitHeader36(void)
 {
   if (!UseBounds())
-    wBaseCurr = 0; // счетчик суток
+    wProfile36 = 0;
   else
   {
-    wBaseCurr = mpcwStartAbs16Can[ibDig];
-    Clear(); sprintf(szLo+3,"начало %2u",wBaseCurr);
+    wProfile36 = (mpcwStartRelCan[ibDig] / 6) * 6;
+    sprintf(szLo," начало %04u:%02u ",wProfile36,(uchar)(wProfile36/48 + 1));
     if (boShowMessages == true) DelayMsg();
   }
 
   tiDigPrev = tiCurr;
+
+  uchar i = tiDigPrev.bHour*2 + tiDigPrev.bMinute/30;
+  i = (i / 6) * 6;
+
+  tiDigPrev.bHour = i / 2;
+  tiDigPrev.bMinute = (i % 2)*30;
 }
 
 
@@ -200,6 +211,7 @@ void    QueryHeader36Internal(void)
   PushChar2Bcc(tiDig.bMonth);
   PushChar1Bcc('.');
   PushChar2Bcc(tiDig.bYear);
+  ???
   PushChar1Bcc(')');
 
   PushChar1Bcc(0x03);
@@ -212,17 +224,10 @@ void    QueryHeader36(void)
 {
   HideCurrTime(1);
 
-  if (wBaseCurr == 0)
-    tiDig = tiDigPrev;
-  else
-  {
-    ulong dw = DateToDayIndex(tiDigPrev);
-    dw -= wBaseCurr;
-    tiDig = DayIndexToDate(dw);
+  ulong dw = DateToHouIndex(tiDigPrev);
+  dw -= wProfile36;
+  tiDig = HouIndexToDate(dw);
 
-    tiDig.bHour   = 23;
-    tiDig.bMinute = 30;
-  }
 
   szHi[10] = 'A' + ibLine36;
 
@@ -255,7 +260,7 @@ void    ReadHeader36_SkipLine(uchar  ibLine)
 
 
 
-void    MakeData36(uchar  ibHou)
+void    MakeData36_(uchar  ibHou)
 {
   ShowProgressDigHou();
 
@@ -275,7 +280,7 @@ void    MakeData36(uchar  ibHou)
 }
 
 
-bool    ReadData36(void)
+bool    ReadData36_(void)
 {
 uchar   j;
 
@@ -308,5 +313,55 @@ uchar   j;
   }
 
   NewBoundsAbs16(++wBaseCurr);
+  return(1);
+}
+
+
+
+bool    ReadBlock36(uchar  ibBlock)
+{
+  sprintf(szLo," %02u    %02u.%02u.%02u", tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
+  MonitorString("\n time "); MonitorTime(tiDig);
+
+  if (SearchDefHouIndex(tiDig) == 0) return(1);
+
+
+  ShowProgressDigHou();
+
+  InitPop(4+ibBlock*8);
+
+  uchar i;
+  for (i=0; i<4; i++)
+  {
+    uint w = PopChar();
+    w += PopChar()*0x100;
+
+    mpwChannels[i] = w;
+  }
+
+  if (IsDefect(ibDig)) MakeSpecial(tiDig);
+  return(MakeStopHou(0));
+}
+
+
+
+bool    ReadData36(void)
+{
+  uchar i;
+  for (i=0; i<6; i++)
+  {
+    ulong dw = DateToHouIndex(tiDigPrev);
+    dw += 6-1;
+    dw -= (wProfile36 + i);
+    tiDig = HouIndexToDate(dw);
+
+    if (dw < dwValue36)
+      if (ReadBlock36(6-1-i) == 0) return(0);
+  }
+
+  wProfile36 += 6;
+  if (wProfile36 > wHOURS) return(0);
+
+  MonitorString("\n");
   return(1);
 }

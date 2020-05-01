@@ -9,6 +9,9 @@ profile36!H
 
 
 
+extern  time                    tiValue36;
+extern  ulong                   dwValue36;
+
 extern  uchar                   ibLine36, bMaxLine36;
 
 
