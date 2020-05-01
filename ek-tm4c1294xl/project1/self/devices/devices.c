@@ -4025,7 +4025,7 @@ void    RunDevices(void)
       InitHeaderU();
 
       ibLineU = 0;
-      if (SkipLine(ibDig, ibLineU) == 1)
+      if (SkipLine(ibDig, ibLineU) == true)
       {
         ReadHeaderU_SkipLine(ibLineU);
         ibLineU++;
@@ -4064,7 +4064,7 @@ void    RunDevices(void)
         {
           ReadHeaderU();
 
-          if (SkipLine(ibDig, ibLineU+1) == 1)
+          if (SkipLine(ibDig, ibLineU+1) == true)
           {
             ReadHeaderU_SkipLine(ibLineU+1);
             ibLineU++;
@@ -4112,7 +4112,7 @@ void    RunDevices(void)
       {
         ibLineU = 0;
 
-        if (SkipLine(ibDig, ibLineU) == 1)
+        if (SkipLine(ibDig, ibLineU) == true)
         {
           ReadHeaderU_SkipLine(ibLineU);
           ibLineU++;
@@ -6500,7 +6500,7 @@ void    RunDevices(void)
       InitHeader36();
 
       ibLine36 = 0;
-      if (SkipLine(ibDig, ibLine36) == 1)
+      if (SkipLine(ibDig, ibLine36) == true)
       {
         ReadHeader36_SkipLine(ibLine36);
         ibLine36++;
@@ -6538,7 +6538,7 @@ void    RunDevices(void)
         {
           ReadHeader36();
 
-          if (SkipLine(ibDig, ibLine36+1) == 1)
+          if (SkipLine(ibDig, ibLine36+1) == true)
           {
             ReadHeader36_SkipLine(ibLine36+1);
             ibLine36++;
@@ -6586,7 +6586,7 @@ void    RunDevices(void)
       {
         ibLine36 = 0;
 
-        if (SkipLine(ibDig, ibLine36) == 1)
+        if (SkipLine(ibDig, ibLine36) == true)
         {
           ReadHeader36_SkipLine(ibLine36);
           ibLine36++;
