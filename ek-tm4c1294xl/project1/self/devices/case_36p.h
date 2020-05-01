@@ -213,7 +213,7 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryControl36();
+          QueryControl36(tiCurr);
           SetCurr35(DEV_POSTCONTROL_36P);
         }
       }
@@ -225,7 +225,7 @@
       break;
 
     case DEV_PREVHEADER_36P:
-      iwMajor = 0;
+      cwShutdown36 = 0;
       InitHeader36();
 
       ibLine36 = 0;
@@ -245,11 +245,12 @@
       {
         if (IndexInBuff() == 3)                        // если нет требуемой записи
         {
-          if (iwMajor >= 31)                           // если питание было выключено слишком долго
+          if (cwShutdown36 >= GetMaxShutdown())        // если питание было выключено слишком долго
             DoneProfile();
           else
           {
-            sprintf(szLo," выключено: %-4u   ",++iwMajor);
+            cwShutdown36 += 6;
+            sprintf(szLo," выключено: %-4u   ",cwShutdown36);
 
             iwDigHou = (wHOURS+iwHardHou-wBaseCurr*48)%wHOURS;
             ShowProgressDigHou();
@@ -274,7 +275,7 @@
             ibLine36++;
           }
 
-          iwMajor = 0;                                  // если есть требуемая запись
+          cwShutdown36 = 0;                            // если есть требуемая запись
           MakePause(DEV_POSTHEADER_36P);
         }
       }
