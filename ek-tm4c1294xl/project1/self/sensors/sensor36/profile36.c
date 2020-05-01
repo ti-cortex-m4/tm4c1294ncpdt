@@ -34,13 +34,13 @@ profile36!C
 #include "io36.h"
 #include "../device_k.h"
 #include "../device_q.h"
+#include "../sensor35/timeout35.h"
 #include "current36.h"
 #include "profile36.h"
 
 
 
-static uint             wProfile36;
-
+uint                    wProfile36;
 uint                    cwShutdown36;
 
 time                    tiValue36;
@@ -71,7 +71,7 @@ void    QueryPassword36(void)
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
-  BccQuery36(2000+1+1, 5+n+2+1, 0);
+  BccQuery36(1000+1+1, 5+n+2+1, 0);
 }
 
 
@@ -127,7 +127,7 @@ void    QueryControl36(time  ti)
 
   PushChar1Bcc(0x03);
 
-  BccQuery36(2000+1+1, 4+16+1, 0);
+  BccQuery36(1000+1+1, 4+16+1, 0);
 }
 
 
@@ -150,7 +150,7 @@ void    QueryTimeProfile36(void)
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
-  BccQuery36(2000+1+17+2, 4+8+1, 0);
+  BccQuery36(1000+1+17+2, 4+8+1, 0);
 }
 
 
@@ -172,7 +172,7 @@ void    QueryDateProfile36(void)
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
-  BccQuery36(2000+1+20+2, 4+8+1, 0);
+  BccQuery36(1000+1+20+2, 4+8+1, 0);
 }
 
 
@@ -227,14 +227,12 @@ void    QueryHeader36Internal(void)
 
   PushChar1Bcc(0x03);
 
-  BccQuery36(2000, 4+21+1, 48);
+  BccQuery36(1000, 4+21+1, 48);
 }
 
 
 void    QueryHeader36(void)
 {
-  MonitorString("\n *** QueryHeader36 "); MonitorCharDec(ibLine36);
-
   HideCurrTime(1);
 
   ulong dw = DateToHouIndex(tiDigPrev);

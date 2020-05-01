@@ -6136,7 +6136,7 @@ void    RunDevices(void)
     case DEV_RUN_WAIT_36:
       MonitorString("\t run: wait");
 
-      Query36Internal(false, 2000, 0, 0, NNCL2_DATA_GET);
+      Query36Internal(false, 1000, 0, 0, NNCL2_DATA_GET);
       SetCurr(DEV_RUN_DATA_GET_36);
       break;
 
