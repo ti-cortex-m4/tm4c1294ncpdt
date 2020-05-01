@@ -342,6 +342,16 @@ void    NextProfile(void)
     case 26:
     case 28: QueryCloseU();  break;
 #endif
+
+#ifndef SKIP_W
+    case 29:
+    case 30: QueryCloseW();  break;
+#endif
+
+#ifndef SKIP_36
+    case 36:
+    case 37: QueryClose36();  break;
+#endif
   }
 
   if (StartProfile(ibDig+1) == 0) // опрос завершён
