@@ -16,7 +16,6 @@ router36.c
 #include "../../devices/devices.h"
 #include "../../display/display.h"
 #include "../../time/delay.h"
-//#include "device35.h"
 #include "../sensor35/unpack35.h"
 #include "../sensor35/status35.h"
 #include "include36.h"
@@ -105,80 +104,45 @@ static bool ChecksumInBuff36(void)
 
 static uchar CheckSensor36(bool  fIgnoreChecksumError)
 {
-//  if (InBuff(0) != 0xC0) return 1; // TODO ???
-//  if (InBuff(1) != 0x48) return 2;
-//
-//  if (InBuffIntLtl(2) != GetExchange35()) return 3;
-//  if (InBuffIntLtl(4) != (mpdwAddress1[diCurr.bAddress-1] % 0x10000)) return 4;
-//
-//  if ((InBuff(6) & 0xF0) != 0x50) return 5;
-//
-//  if (MakeCrcSInBuff(1, IndexInBuff()-2) != 0) return 6;
-//  if (InBuff(IndexInBuff()-1) != 0xC0) return 7;
+  // DecompressK(0); // TODO ???
 
-    //  DecompressK(0); // TODO ???
+  device de = GetCurr35Internal();
 
-  device d = GetCurr35Internal();
-  MonitorString("\n device: "); MonitorIntHex(d);
-
-  if ((d == DEV_PASSWORD_36P) && (IndexInBuff() == 1) && ((InBuff(0) & 0x7F) == 0x06))
-    return 0;
-
-  if ((d == DEV_POSTCONTROL_36P) && (IndexInBuff() == 1) && ((InBuff(0) & 0x7F) == 0x06))
-    return 0;
-
-/*
-  if ((GetCurr() == DEV_OPENCANAL_U2) || (GetCurr() == DEV_OPENCANAL_U3))
+  if ((de == DEV_OPENCANAL_36P) || (de == DEV_OPENCANAL_36C))
   {
-    MonitorIn();
     uchar b = InBuff(IndexInBuff() - 1) & 0x7F;
     if ((b == '\r') || (b == '\n'))
-    {
-      InputGoodCheck();
-      mpSerial[ibPort] = SER_GOODCHECK;
-    }
+      return 0;
     else
-      mpSerial[ibPort] = SER_BADCHECK;
+      return 1;
   }
 
-  else if (GetCurr() == DEV_PASSWORD_U2)
+  else if (de == DEV_PASSWORD_36P)
   {
-    MonitorIn();
     if ((IndexInBuff() == 1) && ((InBuff(0) & 0x7F) == 0x06))
-    {
-      InputGoodCheck();
-      mpSerial[ibPort] = SER_GOODCHECK;
-    }
+      return 0;
     else
-      mpSerial[ibPort] = SER_BADCHECK;
+      return 2;
   }
 
-  else if (GetCurr() == DEV_POSTCONTROL_U2)
+  else if (de == DEV_POSTCONTROL_36P)
   {
-    MonitorIn();
     if ((IndexInBuff() == 1) && ((InBuff(0) & 0x7F) == 0x06))
-    {
-      InputGoodCheck();
-      mpSerial[ibPort] = SER_GOODCHECK;
-    }
+      return 0;
     else
-      mpSerial[ibPort] = SER_BADCHECK;
+      return 3;
   }
 
-  else if ((GetCurr() == DEV_HEADER_U2) || (GetCurr() == DEV_HEADER_U4))
+  else if (GetCurr() == DEV_HEADER_36P)
   {
-    MonitorIn();
     if (IndexInBuff() == 3)
-    {
-      InputGoodCheck();
-      mpSerial[ibPort] = SER_GOODCHECK;
-    }
+      return 0;
     else
-      mpSerial[ibPort] = SER_BADCHECK;
+      return 4;
   }
-*/
+
   if ((!ChecksumInBuff36()) && (!fIgnoreChecksumError))
-    return 1;
+    return 10;
 
   return 0;
 }

@@ -41,6 +41,8 @@ profile36!C
 
 static uint             wProfile36;
 
+uint                    cwShutdown36;
+
 time                    tiValue36;
 ulong                   dwValue36;
 
@@ -292,43 +294,6 @@ void    MakeData36(uchar  h)
   }
 }
 
-/*
-bool    ReadData36_(void)
-{
-uchar   j;
-
-  sprintf(szLo," %02u    %02u.%02u.%02u", tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
-
-  if (SearchDefHouIndex(tiDig) == 0) return(1);
-
-  if ((tiDig.bDay   == tiCurr.bDay)   &&
-      (tiDig.bMonth == tiCurr.bMonth) &&
-      (tiDig.bYear  == tiCurr.bYear))
-    j = 47-(tiCurr.bHour*2+tiCurr.bMinute/30);
-  else
-    j = 0;
-
-  ulong dwHouIndex = DateToHouIndex(tiDig);
-
-  uchar h;
-  for (h=j; h<48; h++)
-  {
-    ResetWatchdog();
-    MakeData36(47-h);
-
-    MakeSpecial(tiDig);
-    if (MakeStopHou(0) == 0) return(0);
-
-    dwHouIndex--;
-    tiDig = HouIndexToDate(dwHouIndex);
-
-    iwDigHou = (wHOURS+iwDigHou-1)%wHOURS;
-  }
-
-  NewBoundsAbs16(++wBaseCurr);
-  return(1);
-}
-*/
 
 
 bool    ReadBlock36(uchar  ibBlock)

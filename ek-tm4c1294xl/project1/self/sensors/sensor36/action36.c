@@ -17,7 +17,6 @@ action36.c
 #include "include36.h"
 #include "router36.h"
 #include "../sensor35/unpack35.h"
-//#include "io35.h"
 #include "../sensor35/timer35.h"
 #include "../sensor35/timeout35.h"
 #include "../sensor35/log35.h"
