@@ -95,8 +95,13 @@ void    QueryCorrect36(void)
 }
 
 
-void    QueryControl36(void)
+void    QueryControl36(time  ti)
 {
+  ulong dw = DateToSecIndex(ti);
+  dw += GetTimeoutDelta35();
+  ti = SecIndexToDate(dw);
+
+
   InitPush(0);
 
   PushChar1Bcc(0x01);
@@ -111,11 +116,11 @@ void    QueryControl36(void)
   PushChar1Bcc('_');
 
   PushChar1Bcc('(');
-  PushChar2Bcc(tiCurr.bHour);
+  PushChar2Bcc(ti.bHour);
   PushChar1Bcc(':');
-  PushChar2Bcc(tiCurr.bMinute);
+  PushChar2Bcc(ti.bMinute);
   PushChar1Bcc(':');
-  PushChar2Bcc(tiCurr.bSecond);
+  PushChar2Bcc(ti.bSecond);
   PushChar1Bcc(')');
 
   PushChar1Bcc(0x03);

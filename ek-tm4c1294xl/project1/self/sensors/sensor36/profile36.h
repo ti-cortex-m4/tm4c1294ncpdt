@@ -20,7 +20,7 @@ bool    HasPassword36(void);
 void    QueryPassword36(void);
 
 void    QueryCorrect36(void);
-void    QueryControl36(void);
+void    QueryControl36(time  ti);
 
 void    QueryTimeProfile36(void);
 void    QueryDateProfile36(void);

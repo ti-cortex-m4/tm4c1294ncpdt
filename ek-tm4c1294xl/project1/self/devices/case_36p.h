@@ -117,7 +117,7 @@
       ShowPercent(53);
 
       cbRepeat = MaxRepeats();
-      QueryTimeSpec36();
+      QueryTimeProfile36();
       SetCurr35(DEV_TIME_36P);
       break;
 
@@ -135,7 +135,7 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryTimeSpec36();
+          QueryTimeProfile36();
           SetCurr35(DEV_TIME_36P);
         }
       }
@@ -145,7 +145,7 @@
       ShowPercent(54);
 
       cbRepeat = MaxRepeats();
-      QueryDateSpec36();
+      QueryDateProfile36();
       SetCurr35(DEV_DATE_36P);
       break;
 
@@ -164,7 +164,7 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryDateSpec36();
+          QueryDateProfile36();
           SetCurr35(DEV_DATE_36P);
         }
       }
@@ -198,7 +198,7 @@
 
     case DEV_CONTROL_36P:
       cbRepeat = MaxRepeats();
-      QueryControl36();
+      QueryControl36(tiCurr);
       SetCurr35(DEV_POSTCONTROL_36P);
       break;
 

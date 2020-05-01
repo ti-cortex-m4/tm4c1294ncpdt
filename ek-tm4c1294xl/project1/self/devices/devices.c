@@ -6469,7 +6469,7 @@ void    RunDevices(void)
 
     case DEV_CONTROL_36P:
       cbRepeat = MaxRepeats();
-      QueryControl36();
+      QueryControl36(tiCurr);
       SetCurr35(DEV_POSTCONTROL_36P);
       break;
 
