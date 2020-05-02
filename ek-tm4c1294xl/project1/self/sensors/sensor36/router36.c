@@ -104,8 +104,6 @@ static bool ChecksumInBuff36(void)
 
 static uchar CheckSensor36(bool  fIgnoreChecksumError)
 {
-  // DecompressK(0); // TODO ???
-
   device de = GetCurr35Internal();
 
   if ((de == DEV_OPENCANAL_36P) || (de == DEV_OPENCANAL_36C))
@@ -131,14 +129,6 @@ static uchar CheckSensor36(bool  fIgnoreChecksumError)
       return 0;
     else
       return 3;
-  }
-
-  else if (GetCurr() == DEV_HEADER_36P)
-  {
-    if (IndexInBuff() == 3)
-      return 0;
-    else
-      return 4;
   }
 
   if ((!ChecksumInBuff36()) && (!fIgnoreChecksumError))

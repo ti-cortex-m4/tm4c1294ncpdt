@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
 DEVICE36!C
 
-Энергомера СЕ301 NNCL2, СЕ303 NNCL2
+Энергомера CE301 NNCL2, CE303 NNCL2
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
@@ -165,7 +165,7 @@ void    QueryEngAbs36(uchar  ibLine)
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
-  BccQuery36(1000+1+6*28+2, n+8+1, 6);
+  BccQuery36(1+6*28+2, n+8+1, 6);
 }
 
 
@@ -188,7 +188,7 @@ void    QueryEngDay36(uchar  ibLine, time  ti)
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
-  BccQuery36(1000+1+6*28+2, n+16+1, 6);
+  BccQuery36(1+6*28+2, n+16+1, 6);
 }
 
 
@@ -209,7 +209,7 @@ void    QueryEngMon36(uchar  ibLine, time  ti)
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
-  BccQuery36(1000+1+6*28+2, n+13+1, 6);
+  BccQuery36(1+6*28+2, n+13+1, 6);
 }
 
 
