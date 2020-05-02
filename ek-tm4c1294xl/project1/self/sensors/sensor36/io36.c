@@ -70,19 +70,7 @@ void    Query36Internal(bool  fBcc, uint  cwIn, uchar  cbOut, uchar  cbHeaderMax
 
       PushChar1Bcc(bSum);
     }
-/*
-#ifdef MONITOR_36
-    MonitorString("\n sensor pack start");
-    MonitorOut(cwIn, cbOut);
-#endif
 
-    cbOut = Pack35(cbOut);
-
-#ifdef MONITOR_36
-    MonitorString("\n sensor pack finish");
-    MonitorOut(cwIn, cbOut);
-#endif
-*/
     // перенос пакета счетчика внутри пакета концентратора
     uchar i;
     for (i=0; i<cbOut; i++)
