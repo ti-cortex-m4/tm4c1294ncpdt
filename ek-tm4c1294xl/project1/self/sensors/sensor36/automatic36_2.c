@@ -46,7 +46,7 @@ double2 ReadCntMonCan36_2(void)
   DelayOff();
 
   bNS++;
-  QueryEngMon36(bNS, bNR, bInvokeId++, 4, 20);
+  QueryEngCurrDay36(bNS, bNR, bInvokeId++);
   if (Input36() != SER_GOODCHECK) return GetDouble2Error();
   if (!ValidateIframe(bNS, bNR)) return GetDouble2Error();
 
