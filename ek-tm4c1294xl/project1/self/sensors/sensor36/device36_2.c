@@ -101,36 +101,57 @@ void    QueryEngCurrDay36(uchar  bNS, uchar  bNR, uchar  bInvokeId)
   PushChar(0x80 | (bInvokeId % 16)); // Invoke-Id-And-Priority
 
   PushChar(0x00);
-  PushChar(0x07);
-  PushChar(0x01);
+
+//  <AttributeDescriptor>
+  PushChar(0x07); // <ClassId Value="0007" />
+
+  PushChar(0x01); // <InstanceId Value="0100630100FF" /> <!--1.0.99.1.0.255-->
   PushChar(0x00);
   PushChar(0x63);
   PushChar(0x01);
   PushChar(0x00);
   PushChar(0xFF);
-  PushChar(0x02);
+
+  PushChar(0x02); // <InstanceId Value="0100630100FF" />
+
+//  </AttributeDescriptor>
+
+//  <AccessSelection>
+
+  PushChar(0x01); //  <AccessSelector Value="01" />
   PushChar(0x01);
-  PushChar(0x01);
+
+//    <AccessParameters>
+
+//      <Structure Qty="04" >
   PushChar(0x02);
   PushChar(0x04);
+
+//        <Structure Qty="04" >
   PushChar(0x02);
   PushChar(0x04);
-  PushChar(0x12);
+
+  PushChar(0x12); // <UInt16 Value="0008" />
   PushChar(0x00);
   PushChar(0x08);
-  PushChar(0x09);
+
+  PushChar(0x09); // <OctetString Size="6" />
   PushChar(0x06);
-  PushChar(0x00);
+  PushChar(0x00); // <OctetString Value="0000010000FF" /> <!--0.0.1.0.0.255-->
   PushChar(0x00);
   PushChar(0x01);
   PushChar(0x00);
   PushChar(0x00);
   PushChar(0xFF);
-  PushChar(0x0F);
+
+  PushChar(0x0F); // <Int8 Value="02" />
   PushChar(0x02);
-  PushChar(0x12);
+
+  PushChar(0x12); // <UInt16 Value="0000" />
   PushChar(0x00);
   PushChar(0x00);
+
+//        </Structure>
 
   PushChar(0x09); // <OctetString Size="12" >
   PushChar(0x0C);
@@ -164,12 +185,12 @@ void    QueryEngCurrDay36(uchar  bNS, uchar  bNR, uchar  bInvokeId)
   PushChar(0x00);
   PushChar(0xFF);
 
-  //   <Array Qty="02" >
+//        <Array Qty="02" >
 
   PushChar(0x01);
   PushChar(0x02);
 
-  //     <Structure Qty="04" >
+//          <Structure Qty="04" >
 
   PushChar(0x02); // <Structure Qty="04" >
   PushChar(0x04);
@@ -195,9 +216,9 @@ void    QueryEngCurrDay36(uchar  bNS, uchar  bNR, uchar  bInvokeId)
   PushChar(0x00);
   PushChar(0x00);
 
-  //     </Structure>
+//          </Structure>
 
-  //     <Structure Qty="04" >
+//          <Structure Qty="04" >
   PushChar(0x02); // <Structure Qty="04" >
   PushChar(0x04);
 
@@ -222,24 +243,12 @@ void    QueryEngCurrDay36(uchar  bNS, uchar  bNR, uchar  bInvokeId)
   PushChar(0x00);
   PushChar(0x00);
 
-  //     </Structure>
-  //   </Array>
-  // </Structure>
+//          </Structure>
+//        </Array>
+//      </Structure>
+//    </AccessParameters>
+//  </AccessSelection>
 
-/*
-  PushChar(0x00);
-  PushChar(0x03); // class
-
-  PushChar(1); // 1-0:1.8.0*255
-  PushChar(0);
-  PushChar(1 + ibLine);
-  PushChar(8);
-  PushChar(0);
-  PushChar(255);
-
-  PushChar(0x02);
-  PushChar(0x00);
-*/
   // DLMS finish
 
   PushIntLtl(MakeCRC16_X25OutBuff(1, wSize-2));
