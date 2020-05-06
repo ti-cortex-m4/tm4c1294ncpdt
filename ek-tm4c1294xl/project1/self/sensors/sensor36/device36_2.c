@@ -21,13 +21,13 @@ DEVICE36!C
 /*
 <GetRequest>
   <GetRequestNormal>
-    <!--Priority: HIGH ServiceClass: UN_CONFIRMED invokeID: 6-->
-    <InvokeIdAndPriority Value="86" />
+    <!--Priority: HIGH ServiceClass: UN_CONFIRMED invokeID: 10-->
+    <InvokeIdAndPriority Value="8A" />
     <AttributeDescriptor>
       <!--PROFILE_GENERIC-->
       <ClassId Value="0007" />
-      <!--0.0.98.1.0.255-->
-      <InstanceId Value="0000620100FF" />
+      <!--1.0.99.1.0.255-->
+      <InstanceId Value="0100630100FF" />
       <AttributeId Value="02" />
     </AttributeDescriptor>
     <AccessSelection>
@@ -41,11 +41,18 @@ DEVICE36!C
             <Int8 Value="02" />
             <UInt16 Value="0000" />
           </Structure>
-          <!--2020-03-01 00:00:01-->
-          <OctetString Value="07E40301FF000001FF8000FF" />
-          <!--2020-04-01 00:00:00-->
-          <OctetString Value="07E40401FF000000FF8000FF" />
-          <Array Qty="01" >
+          <!--2020-04-14 00:00:00-->
+          <OctetString Value="07E4040EFF000000FF8000FF" />
+          <!--2020-04-14 23:59:59-->
+          <OctetString Value="07E4040EFF173B3BFF8000FF" />
+          <Array Qty="02" >
+            <Structure Qty="04" >
+              <UInt16 Value="0008" />
+              <!--0.0.1.0.0.255-->
+              <OctetString Value="0000010000FF" />
+              <Int8 Value="02" />
+              <UInt16 Value="0000" />
+            </Structure>
             <Structure Qty="04" >
               <UInt16 Value="0003" />
               <!--1.0.15.8.0.255-->
@@ -60,7 +67,7 @@ DEVICE36!C
   </GetRequestNormal>
 </GetRequest>
 */
-void    QueryEngCurrDay36(uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  bMonth, uchar  bYear)
+void    QueryEngCurrDay36(uchar  bNS, uchar  bNR, uchar  bInvokeId)
 {
   MonitorString("\n\n Get EngCurrDay ");
 
