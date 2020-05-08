@@ -14,4 +14,13 @@ buffers36.c
 
 
 void    PrintInBuff(uint  iwStart, uint  cwSize) {
+  MonitorString("\n buffer size "); MonitorIntDec(cwSize);
+  MonitorString("\n ");
+
+  InitPop(iwStart);
+
+  uint i;
+  for (i=0; i<cwSize; i++) {
+    MonitorCharHex(PopChar());
+  }
 }

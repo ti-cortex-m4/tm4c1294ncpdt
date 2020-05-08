@@ -74,14 +74,14 @@ double2 ReadCntMonCan36_2(void)
   QueryNextBlock36(bNS, bNR, bInvokeId++, bBlockNumber);
   if (Input36() != SER_GOODCHECK) return GetDouble2Error();
 //  if (!ValidateIframe(bNS, bNR)) return GetDouble2Error();
-// input...
+  PrintInBuff(22, IndexInBuff()-22-2); // input...
   DelayOff();
 
   bNR++;
   Query36_RR(bNR);
   if (Input36() != SER_GOODCHECK) return GetDouble2Error();
 //  if (!ValidateSframe(bNR)) return GetDouble2Error();
-// input...
+  PrintInBuff(8, IndexInBuff()-8-2); // input...
   DelayOff();
 
   bNR++;
