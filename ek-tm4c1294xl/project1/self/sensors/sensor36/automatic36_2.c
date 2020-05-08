@@ -45,10 +45,51 @@ double2 ReadCntMonCan36_2(void)
   if (!ValidateSframe(bNR)) return GetDouble2Error();
   DelayOff();
 
+
   bNS++;
   QueryEngCurrDay36(bNS, bNR, bInvokeId++);
   if (Input36() != SER_GOODCHECK) return GetDouble2Error();
-  if (!ValidateIframe(bNS, bNR)) return GetDouble2Error();
+//  if (!ValidateIframe(bNS, bNR)) return GetDouble2Error();
+// input...
+  DelayOff();
+
+  bNR++;
+  Query36_RR(bNR);
+  if (Input36() != SER_GOODCHECK) return GetDouble2Error();
+//  if (!ValidateSframe(bNR)) return GetDouble2Error();
+// input...
+  DelayOff();
+
+  bNR++;
+  Query36_RR(bNR);
+  if (Input36() != SER_GOODCHECK) return GetDouble2Error();
+//  if (!ValidateSframe(bNR)) return GetDouble2Error();
+  DelayOff();
+
+
+  uchar bBlockNumber = 1;
+
+
+  bNS++;
+  QueryNextBlock36(bNS, bNR, bInvokeId++, bBlockNumber);
+  if (Input36() != SER_GOODCHECK) return GetDouble2Error();
+//  if (!ValidateIframe(bNS, bNR)) return GetDouble2Error();
+// input...
+  DelayOff();
+
+  bNR++;
+  Query36_RR(bNR);
+  if (Input36() != SER_GOODCHECK) return GetDouble2Error();
+//  if (!ValidateSframe(bNR)) return GetDouble2Error();
+// input...
+  DelayOff();
+
+  bNR++;
+  Query36_RR(bNR);
+  if (Input36() != SER_GOODCHECK) return GetDouble2Error();
+//  if (!ValidateSframe(bNR)) return GetDouble2Error();
+  DelayOff();
+
 
   uint64_t ddw = ReadEngMon36();
   mpdwChannelsA[0] = ddw % 0x100000000;
