@@ -11,7 +11,7 @@ hdlc.c
 
 
 
-#define HDLC_SERVER_ADDRESS_SIZE_4
+//#define HDLC_SERVER_ADDRESS_SIZE_4
 
 
 

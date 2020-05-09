@@ -283,7 +283,7 @@ void    QueryNextBlock36(uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  bBlock
   PushHdlcAddresses();
 
 //MonitorString("Control{R(R)=1} 31 ? "); MonitorCharHex((bNR << 5) | 0x10 | 0x01);
-  PushChar((bNR << 5) | 0x10 | 0x01);
+  PushChar((bNR << 5) | 0x10 | (bNS << 1) | 0x00);
 
   PushIntLtl(MakeCRC16_X25OutBuff(1, 3+GetHdlcAddressesSize()));
 
@@ -297,7 +297,7 @@ void    QueryNextBlock36(uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  bBlock
   PushChar(0x02); // Get-Request-Normal /// TODO ???
   PushChar(0x80 | (bInvokeId % 16)); // Invoke-Id-And-Priority
 
-  PushLongLtl(bBlockNumber); // <BlockNumber Value="00000001" /> TODO ???
+  PushLongBig(bBlockNumber); // <BlockNumber Value="00000001" /> TODO ???
 
   // DLMS finish
 

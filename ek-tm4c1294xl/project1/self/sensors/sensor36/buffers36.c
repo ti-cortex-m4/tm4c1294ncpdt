@@ -17,6 +17,8 @@ void    PrintInBuff(uint  iwStart, uint  cwSize) {
   MonitorString("\n buffer size "); MonitorIntDec(cwSize);
   MonitorString("\n ");
 
+  if (cwSize > 5000) return;
+
   InitPop(iwStart);
 
   uint i;

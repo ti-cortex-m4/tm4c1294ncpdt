@@ -86,7 +86,7 @@ bool    ValidInput36(void)
 
   uint wFormat = PopIntBig();
   MonitorString(" Format="); MonitorIntHex(wFormat);
-  uint wSize = wFormat & 0x0FFF;
+  uint wSize = wFormat & 0x07FF;
   MonitorString(" wSize="); MonitorIntHex(wSize);
 
   uint wCRCexpected = MakeCRC16_X25InBuff(1, wSize-2);

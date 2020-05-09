@@ -35,7 +35,7 @@ double2 ReadCntMonCan36_2(void)
 
   uchar bNS = 0;
   uchar bNR = 0;
-  uchar bInvokeId = 0;
+  uchar bInvokeId = 10; // TODO 0
 
   Query36_Open2(bNS, bNR);
   if (Input36() != SER_GOODCHECK) return GetDouble2Error();
@@ -48,6 +48,21 @@ double2 ReadCntMonCan36_2(void)
   if (!ValidateSframe(bNR)) return GetDouble2Error();
   DelayOff();
 
+
+/*
+  bNS++;
+  QueryTime36(bNS, bNR, bInvokeId++);
+  if (Input36() != SER_GOODCHECK) return GetDouble2Error();
+  if (!ValidateIframe(bNS, bNR)) return GetDouble2Error();
+  time ti = ReadTime36();
+  DelayOff();
+
+  bNR++;
+  Query36_RR(bNR);
+  if (Input36() != SER_GOODCHECK) return GetDouble2Error();
+  if (!ValidateSframe(bNR)) return GetDouble2Error();
+  DelayOff();
+*/
 
 
   bNS++; MonitorString("\n\n step1");
