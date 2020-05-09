@@ -14,8 +14,10 @@ AUTOMATIC36!C
 //#include "../../sensors/automatic1.h"
 #include "../../digitals/digitals.h"
 #include "device36.h"
+#include "device36_2.h"
 #include "io36.h"
 #include "monitor36.h"
+#include "buffers36.h"
 #include "automatic36_2.h"
 
 
