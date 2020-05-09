@@ -164,7 +164,7 @@ uchar   z(uchar i) {
     return i - '0';
 
   if ((i >= 'A') && (i <= 'F'))
-    return i - 'A';
+    return i - 'A' + 0xA;
 
   return 0;
 }
@@ -190,7 +190,12 @@ bool    x(const char  *psz)
     }
     uchar b = *psz++;
 
-    PushChar((z(a) << 8) || z(b));
+    uchar d= z(a);
+    uchar e= z(b);
+    uchar f= z(a) << 4;
+    uchar g= (z(a) << 4) | z(b);
+
+    PushChar((z(a) << 4) | z(b));
     wSize++;
 
     if (!*psz) {
