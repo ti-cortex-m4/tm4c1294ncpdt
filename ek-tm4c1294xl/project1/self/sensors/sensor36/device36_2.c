@@ -262,32 +262,6 @@ void    QueryEngCurrDay36(uchar  bNS, uchar  bNR, uchar  bInvokeId)
 
 
 /*
-<PDU>
-<GetResponse>
-  <GetResponseNormal>
-    <!--Priority: HIGH ServiceClass: UN_CONFIRMED invokeID: 6-->
-    <InvokeIdAndPriority Value="86" />
-    <Result>
-      <Data>
-        <Array Qty="01" >
-          <Structure Qty="01" >
-            <UInt64 Value="00000000000030B3" />
-          </Structure>
-        </Array>
-      </Data>
-    </Result>
-  </GetResponseNormal>
-</GetResponse>
-</PDU>
-*/
-uint64_t ReadEngMon36(void)
-{
-  InitPop(18 + GetHdlcAddressesSize());
-  return PopLongBig()*0x100000000 + PopLongBig();
-}
-
-
-/*
 <GetRequest>
   <GetRequestForNextDataBlock>
     <!--Priority: HIGH ServiceClass: UN_CONFIRMED invokeID: 10-->

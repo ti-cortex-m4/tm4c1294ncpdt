@@ -17,7 +17,7 @@ DEVICE36!C
 
 
 
-static void PushFormat(uint  wSize)
+void PushFormat(uint  wSize)
 {
   PushIntBig(wSize | 0xA000);
 }
