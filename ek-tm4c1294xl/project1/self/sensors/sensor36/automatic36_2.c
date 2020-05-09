@@ -171,7 +171,8 @@ uchar   z(uchar i) {
 
 bool    x(const char  *psz)
 {
-  if (!fOk) return true;
+  if (!fOk)
+    return true;
 
 
   InitPush(0);
@@ -190,13 +191,16 @@ bool    x(const char  *psz)
     uchar b = *psz++;
 
     PushChar((z(a) << 8) || z(b));
+    wSize++;
 
     if (!*psz) {
-      fOk = false; return true;
+      break;
     }
     uchar c = *psz++;
+    if (c != ' ') {
+      fOk = false; return true;
+    }
 
-    wSize++;
   }
 
   Query36(1000,wSize);
