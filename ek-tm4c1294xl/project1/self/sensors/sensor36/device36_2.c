@@ -13,6 +13,7 @@ DEVICE36!C
 #include "crc16_x25.h"
 #include "io36.h"
 #include "hdlc.h"
+#include "device36.h" //
 #include "device36_2.h"
 
 

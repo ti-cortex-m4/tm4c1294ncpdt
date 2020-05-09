@@ -1907,7 +1907,7 @@ double2 ReadCntCurrCan(uchar  ibCan)
 #endif
 
 #ifndef SKIP_36
-    case 36: return ReadCntCurr36();
+    case 36: return ReadCntMonCan36_2(); // ReadCntCurr36();
 #endif
 
     default: return GetDouble2Error();
@@ -2198,7 +2198,7 @@ double2 ReadCntMonCan(uchar  ibMon, uchar  ibCan)
 #endif
 
 #ifndef SKIP_36
-    case 36: return ReadCntMonCan36_2(); // ReadCntMonCan36(ibMon);
+    case 36: return ReadCntMonCan36(ibMon);
 #endif
 
     default: return GetDouble2Error();
