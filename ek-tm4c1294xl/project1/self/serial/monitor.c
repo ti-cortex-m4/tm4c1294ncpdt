@@ -162,7 +162,7 @@ void    MonitorOut(uint  cwIn, uint  cwOut)
     {
       MonitorString("\n\n Output: out="); MonitorIntDec(cwOut);
       MonitorString(" in="); MonitorIntDec(cwIn);
-      MonitorString(" "); MonitorTime(*GetCurrTimeDate());
+//      MonitorString(" "); MonitorTime(*GetCurrTimeDate());
     }
 
     if (fMonitorLogHex) MonitorOutHex(cwOut);
@@ -216,7 +216,7 @@ void    MonitorIn(void)
     if (fMonitorLogBasic)
     {
       MonitorString("\n Input: in="); MonitorIntDec(IndexInBuff());
-      MonitorString(" "); MonitorTime(*GetCurrTimeDate());
+//      MonitorString(" "); MonitorTime(*GetCurrTimeDate());
     }
 
     if (fMonitorLogHex) MonitorInHex(IndexInBuff());
