@@ -13,7 +13,6 @@ AUTOMATIC36!C
 #include "../../devices/devices.h"
 //#include "../../sensors/automatic1.h"
 #include "../../serial/monitor.h" //
-#include "../../time/rtc.h" //
 #include "../../digitals/digitals.h"
 #include "device36.h"
 #include "device36_2.h"
@@ -217,7 +216,7 @@ bool    x(const char  *psz)
 
 schar   y(void)
 {
-  MonitorString(" "); MonitorTime(*GetCurrTimeDate());
+  uchar bNR = 0;
 
   fOk = true;
 
@@ -351,7 +350,9 @@ schar   y(void)
   DelayOff();
 //  7E A0 36 03 03 7C 3C 5E E4 04 0E 02 15 1E 00 FF 00 B4 00 15 00 00 00 00 00 00 34 AE 02 02 09 0C 07 E4 04 0E 02 16 00 00 FF 00 B4 00 15 00 00 00 00 00 00 34 F7 88 A4 7E
 
-  if (x("7E A0 07 03 03 F1 98 51 7E")) return 27;
+  bNR = 7;
+  Query36_RR(bNR);
+//  if (x("7E A0 07 03 03 F1 98 51 7E")) return 27;
   if (Input36() != SER_GOODCHECK) return -27;
   DelayOff();
 //  7E A0 07 03 03 71 90 D5 7E
