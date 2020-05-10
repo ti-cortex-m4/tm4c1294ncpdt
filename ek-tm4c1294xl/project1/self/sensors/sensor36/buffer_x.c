@@ -37,20 +37,25 @@ uchar   PopCharX(void) {
 }
 
 
-uint    PopIntBigX(void) {
+uint    PopIntX(void) {
   return PopCharX()*0x100 + PopCharX();
 }
 
 
-ulong   PopLongBigX(void) {
-  return PopIntBigX()*0x10000 + PopIntBigX();
+ulong   PopLongX(void) {
+  return PopIntX()*0x10000 + PopIntX();
+}
+
+
+uint64_t PopLong64X(void) {
+  return PopLongX()*0x100000000 + PopLongX();
 }
 
 
 time    PopTimeDateX(void)
 {
   time ti;
-  ti.bYear   = PopIntBigX() - 2000;
+  ti.bYear   = PopIntX() - 2000;
   ti.bMonth  = PopCharX();
   ti.bDay    = PopCharX();
 
@@ -66,11 +71,5 @@ time    PopTimeDateX(void)
   PopCharX();
 
   return ti;
-}
-
-
-uint64_t PopULong64X(void)
-{
-  return PopLongBig()*0x100000000 + PopLongBigX();
 }
 

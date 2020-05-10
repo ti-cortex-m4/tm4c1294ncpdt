@@ -11,5 +11,5 @@ void    InitPopX(void);
 uchar   PopCharX(void);
 uint    PopIntBigX(void);
 ulong   PopLongBigX(void);
+uint64_t PopLong64X(void);
 time    PopTimeDateX(void);
-uint64_t PopULong64X(void);
