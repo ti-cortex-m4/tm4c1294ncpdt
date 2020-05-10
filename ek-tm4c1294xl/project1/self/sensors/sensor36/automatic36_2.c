@@ -72,14 +72,14 @@ double2 ReadCntMonCan36_1(void)
   QueryEngCurrDay36(bNS, bNR, bInvokeId++);
   if (Input36() != SER_GOODCHECK) return GetDouble2Error();
 //  if (!ValidateIframe(bNS, bNR)) return GetDouble2Error();
-  PrintInBuff(22, IndexInBuff()-22-3); // input...
+//  PrintInBuff(22, IndexInBuff()-22-3); // input...
   DelayOff();
 
   bNR++; MonitorString("\n\n step2");
   Query36_RR(bNR);
   if (Input36() != SER_GOODCHECK) return GetDouble2Error();
 //  if (!ValidateSframe(bNR)) return GetDouble2Error();
-  PrintInBuff(8, IndexInBuff()-8-3); // input...
+//  PrintInBuff(8, IndexInBuff()-8-3); // input...
   DelayOff();
 
   bNR++; MonitorString("\n\n step3");
@@ -98,14 +98,14 @@ double2 ReadCntMonCan36_1(void)
   QueryNextBlock36(bNS, bNR, bInvokeId++, bBlockNumber);
   if (Input36() != SER_GOODCHECK) return GetDouble2Error();
 //  if (!ValidateIframe(bNS, bNR)) return GetDouble2Error();
-  PrintInBuff(22, IndexInBuff()-22-3); // input...
+//  PrintInBuff(22, IndexInBuff()-22-3); // input...
   DelayOff();
 
   bNR++; MonitorString("\n\n step5");
   Query36_RR(bNR);
   if (Input36() != SER_GOODCHECK) return GetDouble2Error();
 //  if (!ValidateSframe(bNR)) return GetDouble2Error();
-  PrintInBuff(8, IndexInBuff()-8-3); // input...
+//  PrintInBuff(8, IndexInBuff()-8-3); // input...
   DelayOff();
 
   bNR++; MonitorString("\n\n step6");

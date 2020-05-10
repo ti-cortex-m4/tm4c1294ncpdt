@@ -5,7 +5,7 @@ buffers_x.c
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-#include "buffers_x.h"
+#include "buffer_x.h"
 
 
 
@@ -29,6 +29,11 @@ void    PushCharX(uchar  b) {
 
 void    InitPopX(void) {
   iwPopX = 0;
+}
+
+
+uint    GetPopCapacity(void) {
+  return sizeof(mpbBuffX) - iwPopX;
 }
 
 
