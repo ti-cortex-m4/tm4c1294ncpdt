@@ -355,10 +355,12 @@ schar   y(void)
   DelayOff();
 //  7E A0 07 03 03 51 92 F4 7E
 
-
-
-
-  if (x("7E A0 13 03 03 B4 7C F5 E6 E6 00 C0 02 8E 00 00 00 02 14 27 7E")) return 25;
+//  if (x("7E A0 13 03 03 B4 7C F5 E6 E6 00 C0 02 8E 00 00 00 02 14 27 7E")) return 25;
+  uchar bNS = 2;
+  bNR = 5;
+  uchar bInvokeId = 0xE;
+  uchar bBlockNumber = 2;
+  QueryNextBlock36(bNS, bNR, bInvokeId++, bBlockNumber);
   if (Input36() != SER_GOODCHECK) return -25;
   AddBuffer1(22, IndexInBuff()-22-3);
   DelayOff();
