@@ -13,6 +13,7 @@ AUTOMATIC36!C
 #include "../../devices/devices.h"
 //#include "../../sensors/automatic1.h"
 #include "../../serial/monitor.h" //
+#include "../../time/rtc.h" //
 #include "../../digitals/digitals.h"
 #include "device36.h"
 #include "device36_2.h"
@@ -216,6 +217,8 @@ bool    x(const char  *psz)
 
 schar   y(void)
 {
+  MonitorString(" "); MonitorTime(*GetCurrTimeDate());
+
   fOk = true;
 
   if (x("7E A0 20 03 03 93 FE C9 81 80 14 05 02 00 80 06 02 00 80 07 04 00 00 00 01 08 04 00 00 00 01 CE 6A 7E")) return 1;
