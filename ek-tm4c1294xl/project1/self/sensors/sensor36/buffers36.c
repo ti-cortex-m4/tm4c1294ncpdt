@@ -40,9 +40,28 @@ void    AddBuffer1(uint  iwStart, uint  cwSize) {
 void    FinishBuffer1(void) {
   MonitorString("\n finish size "); MonitorIntDec(iwBuff1); MonitorString("\n ");
 
-  uint i;
-  for (i=0; i<iwBuff1; i++) {
-    MonitorCharHex(mpbBuff1[i]);
+  uint i = 0;
+  MonitorCharHex(mpbBuff1[i++]);
+  MonitorCharHex(mpbBuff1[i++]);
+  MonitorString("\n\n");
+
+  while (i<iwBuff1) {
+
+    uchar k;
+    for (k=0; k<2; k++)
+      MonitorCharHex(mpbBuff1[i++]);
+
+    MonitorString("\n");
+
+    for (k=0; k<14; k++)
+      MonitorCharHex(mpbBuff1[i++]);
+
+    MonitorString("\n");
+
+    for (k=0; k<9; k++)
+      MonitorCharHex(mpbBuff1[i++]);
+
+    MonitorString("\n\n");
   }
 }
 
