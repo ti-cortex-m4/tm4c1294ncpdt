@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-buffers36.c
+buffers_x.c
 
 
 ------------------------------------------------------------------------------*/
@@ -11,32 +11,39 @@ buffers36.c
 
 uchar                       mpbBuffX[3000]; // TODO check overflow
 
-uint                        iwBuff1;
+uint                        iwPushX, iwPopX;
 
 
 
-void    StartBuffer1(void) {
+void    InitPushX(void) {
   memset(&mpbBuffX, 0xFF, sizeof(mpbBuffX));
-  iwBuff1 = 0;
+  iwPushX = 0;
 }
 
-void    AddBuffer1(uint  iwStart, uint  cwSize) {
-  MonitorString("\n buffer size "); MonitorIntDec(cwSize); MonitorString("\n ");
-  if (cwSize > 5000) return;
 
-  InitPop(iwStart);
+void    PushCharX(uchar  b) {
+  mpbBuffX[iwPushX++] = b;
+}
 
-  uint i;
-  for (i=0; i<cwSize; i++) {
-    uchar b = PopChar();
-    mpbBuffX[iwBuff1++] = b;
-    MonitorCharHex(b);
-  }
+
+
+void    InitPopX(void) {
+  iwPopX = 0;
 }
 
 
 uchar   PopCharX(void) {
-  return mpbBuffX[ iwPopDLMS++ ];
+  return mpbBuffX[iwPopX++];
+}
+
+
+uint    PopIntBigX(void) {
+  return PopCharX()*0x100 + PopCharX();
+}
+
+
+ulong   PopLongBigX(void) {
+  return PopIntBigX()*0x10000 + PopIntBigX();
 }
 
 
@@ -47,7 +54,7 @@ time    PopTimeDateX(void)
   ti.bMonth  = PopCharX();
   ti.bDay    = PopCharX();
 
-  PopChar();
+  PopCharX();
 
   ti.bHour   = PopCharX();
   ti.bMinute = PopCharX();
@@ -64,7 +71,6 @@ time    PopTimeDateX(void)
 
 uint64_t PopULong64X(void)
 {
-  return PopLongBigX()*0x100000000 + PopLongBigX();
+  return PopLongBig()*0x100000000 + PopLongBigX();
 }
-
 
