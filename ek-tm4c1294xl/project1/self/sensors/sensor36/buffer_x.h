@@ -1,11 +1,15 @@
 /*------------------------------------------------------------------------------
-buffers36.h
+buffers_x.h
 
 
 ------------------------------------------------------------------------------*/
 
-void    StartBuffer1(void);
-void    AddBuffer1(uint  iwStart, uint  cwSize);
-void    FinishBuffer1(void);
+void    InitPushX(void);
+void    PushCharX(uchar  b);
 
-void    PrintInBuff(uint  iwStart, uint  cwSize);
+void    InitPopX(void);
+uchar   PopCharX(void);
+uint    PopIntBigX(void);
+ulong   PopLongBigX(void);
+time    PopTimeDateX(void);
+uint64_t PopULong64X(void);
