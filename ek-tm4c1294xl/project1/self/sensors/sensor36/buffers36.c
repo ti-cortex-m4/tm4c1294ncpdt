@@ -33,15 +33,13 @@ uint    FinishBuffer1(void) {
   if (GetPopCapacity() < 2)
     return 1;
 
-  uint i = 0;
-
   if (PopCharX() != 1) // array
     return 2;
 
   uchar bCount = PopCharX();
 
-  uchar c;
-  for (c=0; c<bCount; c++)
+  uchar i;
+  for (i=0; i<bCount; i++)
   {
     if (GetPopCapacity() < 2 + 2+12 + 1+8)
       return 3;
@@ -61,7 +59,7 @@ uint    FinishBuffer1(void) {
     time ti = PopTimeDateX();
 
     if (PopCharX() != 0x15) // unsigned long 64
-      return 6;
+      return 8;
 
     uint64_t ddw = PopLong64X();
 
@@ -69,7 +67,6 @@ uint    FinishBuffer1(void) {
     MonitorTime(ti);
     MonitorLongDec(ddw / 1000000);
     MonitorLongDec(ddw % 1000000);
-    MonitorString("\n");
   }
 
   return 0;
