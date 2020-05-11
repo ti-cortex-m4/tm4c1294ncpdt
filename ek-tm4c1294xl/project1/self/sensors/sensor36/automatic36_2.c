@@ -342,7 +342,9 @@ schar   y(void)
   DelayOff();
 //  7E A8 89 03 03 56 21 59 E6 E7 00 C4 02 8E 00 00 00 00 02 00 81 F1 02 02 09 0C 07 E4 04 0E 02 0E 00 00 FF 00 B4 00 15 00 00 00 00 00 00 32 A2 02 02 09 0C 07 E4 04 0E 02 0E 1E 00 FF 00 B4 00 15 00 00 00 00 00 00 32 BE 02 02 09 0C 07 E4 04 0E 02 0F 00 00 FF 00 B4 00 15 00 00 00 00 00 00 32 D9 02 02 09 0C 07 E4 04 0E 02 0F 1E 00 FF 00 B4 00 15 00 00 00 00 00 00 32 F3 02 02 09 0C 07 E4 04 0E 02 10 00 00 FF 00 BC 10 7E
 
-  if (x("7E A0 07 03 03 91 9E 32 7E")) return 23;
+//  if (x("7E A0 07 03 03 91 9E 32 7E")) return 23;
+  bNR = 4;
+  Query36_RR(bNR);
   if (Input36() != SER_GOODCHECK) return -23;
   AddBuffer1(8, IndexInBuff()-8-3);
   DelayOff();
@@ -354,6 +356,8 @@ schar   y(void)
   if (Input36() != SER_GOODCHECK) return -24;
   DelayOff();
 //  7E A0 07 03 03 51 92 F4 7E
+
+
 
 //  if (x("7E A0 13 03 03 B4 7C F5 E6 E6 00 C0 02 8E 00 00 00 02 14 27 7E")) return 25;
   uchar bNS = 2;
