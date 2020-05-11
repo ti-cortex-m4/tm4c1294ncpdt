@@ -216,11 +216,12 @@ bool    x(const char  *psz)
 
 schar   y(void)
 {
-  uchar bNR = 0;
+
+//  uchar bNR = 0;
 
   fOk = true;
   StartBuffer1();
-
+/*
   if (x("7E A0 20 03 03 93 FE C9 81 80 14 05 02 00 80 06 02 00 80 07 04 00 00 00 01 08 04 00 00 00 01 CE 6A 7E")) return 1;
   if (Input36() != SER_GOODCHECK) return -1;
   DelayOff();
@@ -309,14 +310,35 @@ schar   y(void)
   if (x("7E A0 07 03 03 31 94 97 7E")) return 18;
   if (Input36() != SER_GOODCHECK) return -18;
   DelayOff();
+*/
+  Query36_DISC();
+  if (Input36() != SER_GOODCHECK) return -15;//GetDouble2Error();
+  DelayOff();
 
-
-
-
+  Query36_SNRM();
+  if (Input36() != SER_GOODCHECK) return -16;//GetDouble2Error();
+  DelayOff();
 
   uchar bNS = 0;
-  bNR = 1;
-  uchar bInvokeId = 0xE;
+  uchar bNR = 0;
+  uchar bInvokeId = 0;
+
+  Query36_Open2(bNS, bNR);
+  if (Input36() != SER_GOODCHECK) return -17;//GetDouble2Error();
+//  if (!ValidateIframe(bNS, bNR)) return GetDouble2Error();
+  DelayOff();
+
+  bNR++;
+  Query36_RR(bNR);
+  if (Input36() != SER_GOODCHECK) return -18;//GetDouble2Error();
+//  if (!ValidateSframe(bNR)) return GetDouble2Error();
+  DelayOff();
+
+
+
+  bNS++;
+  //bNR = 1;
+  bInvokeId++;
   QueryEngCurrDay36(bNS, bNR, bInvokeId/*++*/);
   if (Input36() != SER_GOODCHECK) return -19;
   AddBuffer1(22, IndexInBuff()-22-3);
