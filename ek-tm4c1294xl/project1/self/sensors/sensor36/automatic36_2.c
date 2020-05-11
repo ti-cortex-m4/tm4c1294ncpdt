@@ -336,7 +336,12 @@ schar   y(void)
 
 
 
-  if (x("7E A0 13 03 03 72 46 56 E6 E6 00 C0 02 8E 00 00 00 01 8F 15 7E")) return 22;
+//  if (x("7E A0 13 03 03 72 46 56 E6 E6 00 C0 02 8E 00 00 00 01 8F 15 7E")) return 22;
+  uchar bNS = 1;
+  bNR = 3;
+  uchar bInvokeId = 0xE;
+  uchar bBlockNumber = 1;
+  QueryNextBlock36(bNS, bNR, bInvokeId/*++*/, bBlockNumber);
   if (Input36() != SER_GOODCHECK) return -22;
   AddBuffer1(22, IndexInBuff()-22-3);
   DelayOff();
@@ -360,11 +365,11 @@ schar   y(void)
 
 
 //  if (x("7E A0 13 03 03 B4 7C F5 E6 E6 00 C0 02 8E 00 00 00 02 14 27 7E")) return 25;
-  uchar bNS = 2;
+  bNS = 2;
   bNR = 5;
-  uchar bInvokeId = 0xE;
-  uchar bBlockNumber = 2;
-  QueryNextBlock36(bNS, bNR, bInvokeId++, bBlockNumber);
+  bInvokeId = 0xE;
+  bBlockNumber = 2;
+  QueryNextBlock36(bNS, bNR, bInvokeId/*++*/, bBlockNumber);
   if (Input36() != SER_GOODCHECK) return -25;
   AddBuffer1(22, IndexInBuff()-22-3);
   DelayOff();
