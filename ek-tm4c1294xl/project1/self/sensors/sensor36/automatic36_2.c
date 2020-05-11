@@ -314,7 +314,11 @@ schar   y(void)
 
 
 
-  if (x("7E A0 70 03 03 30 79 8B E6 E6 00 C0 01 8E 00 07 01 00 63 01 00 FF 02 01 01 02 04 02 04 12 00 08 09 06 00 00 01 00 00 FF 0F 02 12 00 00 09 0C 07 E4 04 0E FF 00 00 00 FF 80 00 FF 09 0C 07 E4 04 0E FF 17 3B 3B FF 80 00 FF 01 02 02 04 12 00 08 09 06 00 00 01 00 00 FF 0F 02 12 00 00 02 04 12 00 03 09 06 01 00 0F 08 00 FF 0F 02 12 00 00 D8 17 7E")) return 19;
+  //if (x("7E A0 70 03 03 30 79 8B E6 E6 00 C0 01 8E 00 07 01 00 63 01 00 FF 02 01 01 02 04 02 04 12 00 08 09 06 00 00 01 00 00 FF 0F 02 12 00 00 09 0C 07 E4 04 0E FF 00 00 00 FF 80 00 FF 09 0C 07 E4 04 0E FF 17 3B 3B FF 80 00 FF 01 02 02 04 12 00 08 09 06 00 00 01 00 00 FF 0F 02 12 00 00 02 04 12 00 03 09 06 01 00 0F 08 00 FF 0F 02 12 00 00 D8 17 7E")) return 19;
+  uchar bNS = 0;
+  bNR = 1;
+  uchar bInvokeId = 0xE;
+  QueryEngCurrDay36(bNS, bNR, bInvokeId/*++*/);
   if (Input36() != SER_GOODCHECK) return -19;
   AddBuffer1(22, IndexInBuff()-22-3);
   DelayOff();
@@ -339,9 +343,9 @@ schar   y(void)
 
 
 //  if (x("7E A0 13 03 03 72 46 56 E6 E6 00 C0 02 8E 00 00 00 01 8F 15 7E")) return 22;
-  uchar bNS = 1;
+  bNS = 1;
   bNR = 3;
-  uchar bInvokeId = 0xE;
+  bInvokeId = 0xE;
   uchar bBlockNumber = 1;
   QueryNextBlock36(bNS, bNR, bInvokeId/*++*/, bBlockNumber);
   if (Input36() != SER_GOODCHECK) return -22;
