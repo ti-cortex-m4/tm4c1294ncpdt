@@ -322,57 +322,57 @@ schar   y(void)
   AddBuffer1(22, IndexInBuff()-22-3);
   DelayOff();
 
-  bNR = 2;
+  bNR++;// = 2;
   Query36_RR(bNR);
   if (Input36() != SER_GOODCHECK) return -20;
   AddBuffer1(8, IndexInBuff()-8-3);
   DelayOff();
 
-  bNR = 3;
+  bNR++;// = 3;
   Query36_RR(bNR);
   if (Input36() != SER_GOODCHECK) return -21;
   DelayOff();
 
 
 
-  bNS = 1;
-  bNR = 3;
-  bInvokeId = 0xE;
+  bNS++;// = 1;
+//  bNR = 3;
+//  bInvokeId = 0xE;
   uchar bBlockNumber = 1;
   QueryNextBlock36(bNS, bNR, bInvokeId/*++*/, bBlockNumber);
   if (Input36() != SER_GOODCHECK) return -22;
   AddBuffer1(22, IndexInBuff()-22-3);
   DelayOff();
 
-  bNR = 4;
+  bNR++;// = 4;
   Query36_RR(bNR);
   if (Input36() != SER_GOODCHECK) return -23;
   AddBuffer1(8, IndexInBuff()-8-3);
   DelayOff();
 
-  bNR = 5;
+  bNR++;// = 5;
   Query36_RR(bNR);
   if (Input36() != SER_GOODCHECK) return -24;
   DelayOff();
 
 
 
-  bNS = 2;
-  bNR = 5;
-  bInvokeId = 0xE;
+  bNS++;// = 2;
+//  bNR = 5;
+//  bInvokeId = 0xE;
   bBlockNumber = 2;
   QueryNextBlock36(bNS, bNR, bInvokeId/*++*/, bBlockNumber);
   if (Input36() != SER_GOODCHECK) return -25;
   AddBuffer1(22, IndexInBuff()-22-3);
   DelayOff();
 
-  bNR = 6;
+  bNR++; // 6
   Query36_RR(bNR);
   if (Input36() != SER_GOODCHECK) return -26;
   AddBuffer1(8, IndexInBuff()-8-3);
   DelayOff();
 
-  bNR = 7;
+  bNR++; // 7
   Query36_RR(bNR);
   if (Input36() != SER_GOODCHECK) return -27;
   DelayOff();
