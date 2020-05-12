@@ -78,7 +78,7 @@ void    QueryEngCurrDay36(uchar  bNS, uchar  bNR, uchar  bInvokeId)
   InitPush(0);
   PushChar(0x7E);
 
-  PushFormat(wSize);
+  PushFormatDLMS(wSize);
 //  PushChar(0xA0);
 //  PushChar(0x19);
   PushHdlcAddresses();
@@ -159,6 +159,15 @@ void    QueryEngCurrDay36(uchar  bNS, uchar  bNR, uchar  bInvokeId)
   PushChar(0x09); //  <OctetString Value="07E4040EFF000000FF8000FF" />
   PushChar(0x0C);
 
+  time ti1;
+  ti1.bYear = 20;
+  ti1.bMonth = 4;
+  ti1.bDay = 14;
+  ti1.bHour = 0;
+  ti1.bMinute = 0;
+  ti1.bSecond = 0;
+  PushTimeDLMS(ti1);
+/*
   PushChar(0x07); // <!--2020-04-14 00:00:00-->
   PushChar(0xE4);
   PushChar(0x04);
@@ -171,10 +180,19 @@ void    QueryEngCurrDay36(uchar  bNS, uchar  bNR, uchar  bInvokeId)
   PushChar(0x80);
   PushChar(0x00);
   PushChar(0xFF);
-
+*/
   PushChar(0x09); // <OctetString Value="07E4040EFF173B3BFF8000FF" />
   PushChar(0x0C);
 
+  time ti2;
+  ti2.bYear = 20;
+  ti2.bMonth = 4;
+  ti2.bDay = 14;
+  ti2.bHour = 23;
+  ti2.bMinute = 59;
+  ti2.bSecond = 59;
+  PushTimeDLMS(ti2);
+/*
   PushChar(0x07); // <!--2020-04-14 23:59:59-->
   PushChar(0xE4);
   PushChar(0x04);
@@ -187,7 +205,7 @@ void    QueryEngCurrDay36(uchar  bNS, uchar  bNR, uchar  bInvokeId)
   PushChar(0x80);
   PushChar(0x00);
   PushChar(0xFF);
-
+*/
 //        <Array Qty="02" >
 
   PushChar(0x01);
@@ -280,7 +298,7 @@ void    QueryNextBlock36(uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  bBlock
 
   InitPush(0);
   PushChar(0x7E);
-  PushFormat(wSize);
+  PushFormatDLMS(wSize);
   PushHdlcAddresses();
 
 //MonitorString("Control{R(R)=1} 31 ? "); MonitorCharHex((bNR << 5) | 0x10 | 0x01);
