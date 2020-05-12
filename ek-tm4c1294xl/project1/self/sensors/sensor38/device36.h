@@ -5,6 +5,7 @@ DEVICE36.H
 ------------------------------------------------------------------------------*/
 
 void    PushFormat(uint  wSize);
+void    PushTime36(time  ti);
 
 void    Query36_DISC(void);
 void    Query36_SNRM(void);
