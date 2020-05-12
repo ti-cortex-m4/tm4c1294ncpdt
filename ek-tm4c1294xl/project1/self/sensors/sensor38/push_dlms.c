@@ -17,13 +17,14 @@ push_dlms.c
 
 
 
-void    PushFormat(uint  wSize)
+void    PushFormatDLMS(uint  wSize)
 {
   PushIntBig(wSize | 0xA000);
 }
 
 
-void    PushMon36(uchar  bMonth, uchar  bYear)
+
+void    PushTimeMonthDLMS(uchar  bMonth, uchar  bYear)
 {
   uint wYear = 2000 + bYear;
   PushChar(wYear / 0x100);
@@ -41,16 +42,21 @@ void    PushMon36(uchar  bMonth, uchar  bYear)
 }
 
 
-void    PushTime36(time  ti)
+
+void    PushTimeDLMS(time  ti)
 {
-  PushChar(0x07); // <!--2020-04-14 23:59:59-->
-  PushChar(0xE4);
-  PushChar(0x04);
-  PushChar(0x0E);
+  uint wYear = 2000 + ti.bYear;
+  PushChar(wYear / 0x100);
+  PushChar(wYear % 0x100);
+  PushChar(ti.bMonth);
+  PushChar(ti.bDay);
+
   PushChar(0xFF);
-  PushChar(0x17);
-  PushChar(0x3B);
-  PushChar(0x3B);
+
+  PushChar(ti.bHour);
+  PushChar(ti.bMinute);
+  PushChar(ti.bSecond);
+
   PushChar(0xFF);
   PushChar(0x80);
   PushChar(0x00);

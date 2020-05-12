@@ -27,7 +27,7 @@ void    Query36_DISC(void)
   uint wSize = 5+GetHdlcAddressesSize(); // 7
 
   PushChar(0x7E);
-  PushFormat(wSize);
+  PushFormatDLMS(wSize);
 //  PushChar(0xA0);
 //  PushChar(0x07);
   PushHdlcAddresses();
@@ -54,7 +54,7 @@ void    Query36_SNRM(void)
   InitPush(0);
   PushChar(0x7E);
   
-  PushFormat(wSize);
+  PushFormatDLMS(wSize);
 //  PushChar(0xA0);
 //  PushChar(0x20);
   PushHdlcAddresses();
@@ -114,7 +114,7 @@ void    Query36_Open2(uchar  bNS, uchar  bNR)
   InitPush(0);
   PushChar(0x7E);
   
-  PushFormat(wSize);
+  PushFormatDLMS(wSize);
 //  PushChar(0xA0);
 //  PushChar(0x44);
   PushHdlcAddresses();
@@ -218,7 +218,7 @@ void    Query36_RR(uchar  bNR)
 
   InitPush(0);
   PushChar(0x7E);
-  PushFormat(wSize);
+  PushFormatDLMS(wSize);
 //  PushChar(0xA0);
 //  PushChar(0x07);
   PushHdlcAddresses();
@@ -245,7 +245,7 @@ void    QueryTime36(uchar  bNS, uchar  bNR, uchar  bInvokeId)
   InitPush(0);
   PushChar(0x7E);
   
-  PushFormat(wSize);
+  PushFormatDLMS(wSize);
 //  PushChar(0xA0);
 //  PushChar(0x19);
   PushHdlcAddresses();
@@ -323,7 +323,7 @@ void    QueryEngAbs36(uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  ibLine)
   InitPush(0);
   PushChar(0x7E);
 
-  PushFormat(wSize);
+  PushFormatDLMS(wSize);
 //  PushChar(0xA0);
 //  PushChar(0x19);
   PushHdlcAddresses();
@@ -431,7 +431,7 @@ void    QueryEngMon36(uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  bMonth, u
   InitPush(0);
   PushChar(0x7E);
 
-  PushFormat(wSize);
+  PushFormatDLMS(wSize);
 //  PushChar(0xA0);
 //  PushChar(0x19);
   PushHdlcAddresses();
@@ -489,11 +489,11 @@ void    QueryEngMon36(uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  bMonth, u
 
   PushChar(0x09);
   PushChar(0x0C);
-  PushMon36(bMonth, bYear);
+  PushTimeMonthDLMS(bMonth, bYear);
 
   PushChar(0x09);
   PushChar(0x0C);
-  PushMon36(bMonth, bYear);
+  PushTimeMonthDLMS(bMonth, bYear);
 
   PushChar(0x01);
   PushChar(0x01);
