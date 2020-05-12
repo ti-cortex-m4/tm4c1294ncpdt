@@ -22,6 +22,39 @@ void PushFormat(uint  wSize)
   PushIntBig(wSize | 0xA000);
 }
 
+void    PushMon36(uchar  bMonth, uchar  bYear)
+{
+  uint wYear = 2000 + bYear;
+  PushChar(wYear / 0x100);
+  PushChar(wYear % 0x100);
+  PushChar(bMonth);
+  PushChar(1);
+  PushChar(0xFF);
+  PushChar(0x00);
+  PushChar(0x00);
+  PushChar(0x00);
+  PushChar(0xFF);
+  PushChar(0x80);
+  PushChar(0x00);
+  PushChar(0xFF);
+}
+
+
+void    PushTime36(time  ti)
+{
+  PushChar(0x07); // <!--2020-04-14 23:59:59-->
+  PushChar(0xE4);
+  PushChar(0x04);
+  PushChar(0x0E);
+  PushChar(0xFF);
+  PushChar(0x17);
+  PushChar(0x3B);
+  PushChar(0x3B);
+  PushChar(0xFF);
+  PushChar(0x80);
+  PushChar(0x00);
+  PushChar(0xFF);
+}
 
 
 void    Query36_DISC(void)
@@ -386,24 +419,6 @@ uint64_t ReadEngAbs36(void)
 
 
 
-void    PushTime36(uchar  bMonth, uchar  bYear)
-{
-  uint wYear = 2000 + bYear;
-  PushChar(wYear / 0x100);
-  PushChar(wYear % 0x100);
-  PushChar(bMonth);
-  PushChar(1);
-  PushChar(0xFF);
-  PushChar(0x00);
-  PushChar(0x00);
-  PushChar(0x00);
-  PushChar(0xFF);
-  PushChar(0x80);
-  PushChar(0x00);
-  PushChar(0xFF);
-}
-
-
 /*
 <GetRequest>
   <GetRequestNormal>
@@ -513,11 +528,11 @@ void    QueryEngMon36(uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  bMonth, u
 
   PushChar(0x09);
   PushChar(0x0C);
-  PushTime36(bMonth, bYear);
+  PushMon36(bMonth, bYear);
 
   PushChar(0x09);
   PushChar(0x0C);
-  PushTime36(bMonth, bYear);
+  PushMon36(bMonth, bYear);
 
   PushChar(0x01);
   PushChar(0x01);
