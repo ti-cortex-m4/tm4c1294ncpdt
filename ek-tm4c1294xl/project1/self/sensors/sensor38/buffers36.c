@@ -30,6 +30,8 @@ void    AddBuffer1(uint  iwStart, uint  cwSize) {
 
 
 uint    FinishBuffer1(void) {
+  InitPopX();
+
   if (GetPopCapacity() < 2)
     return 1;
 

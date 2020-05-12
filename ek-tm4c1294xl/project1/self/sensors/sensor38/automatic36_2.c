@@ -388,13 +388,15 @@ schar   y(void)
   AddBuffer1(22, IndexInBuff()-22-3);
   DelayOff();
 
-  bNR++; // 6
-  Query36_RR(bNR);
-  if (Input36() != SER_GOODCHECK) return -26;
-  AddBuffer1(8, IndexInBuff()-8-3);
-  DelayOff();
+  while (!LastSegmentDMLS()) {
+    bNR++;
+    Query36_RR(bNR);
+    if (Input36() != SER_GOODCHECK) return -26;
+    AddBuffer1(8, IndexInBuff()-8-3);
+    DelayOff();
+  }
 
-  bNR++; // 7
+  bNR++;
   Query36_RR(bNR);
   if (Input36() != SER_GOODCHECK) return -27;
   DelayOff();
