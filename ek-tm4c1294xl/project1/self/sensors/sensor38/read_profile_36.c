@@ -55,9 +55,27 @@ schar   y(void)
 
 
 
+  time ti1;
+  ti1.bYear = 20;
+  ti1.bMonth = 4;
+  ti1.bDay = 14;
+  ti1.bHour = 0;
+  ti1.bMinute = 0;
+  ti1.bSecond = 0;
+
+  time ti2;
+  ti2.bYear = 20;
+  ti2.bMonth = 4;
+  ti2.bDay = 15;
+  ti2.bHour = 23;
+  ti2.bMinute = 59;
+  ti2.bSecond = 59;
+
+
+
   bNS++;
   bInvokeId++;
-  QueryEngCurrDay36(bNS, bNR, bInvokeId);
+  QueryEngCurrDay36(bNS, bNR, bInvokeId, ti1, ti2);
   if (Input36() != SER_GOODCHECK) return -19;
 
   bool fUseBlocks1 = UseBlocksDMLS();

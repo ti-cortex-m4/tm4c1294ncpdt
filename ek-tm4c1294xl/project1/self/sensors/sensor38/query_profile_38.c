@@ -69,7 +69,7 @@ query_next_block_36.c
   </GetRequestNormal>
 </GetRequest>
 */
-void    QueryEngCurrDay36(uchar  bNS, uchar  bNR, uchar  bInvokeId)
+void    QueryEngCurrDay36(uchar  bNS, uchar  bNR, uchar  bInvokeId, time  ti1, time  ti2)
 {
   MonitorString("\n\n Get EngCurrDay ");
 
@@ -159,13 +159,13 @@ void    QueryEngCurrDay36(uchar  bNS, uchar  bNR, uchar  bInvokeId)
   PushChar(0x09); //  <OctetString Value="07E4040EFF000000FF8000FF" />
   PushChar(0x0C);
 
-  time ti1;
-  ti1.bYear = 20;
-  ti1.bMonth = 4;
-  ti1.bDay = 14;
-  ti1.bHour = 0;
-  ti1.bMinute = 0;
-  ti1.bSecond = 0;
+//  time ti1;
+//  ti1.bYear = 20;
+//  ti1.bMonth = 4;
+//  ti1.bDay = 14;
+//  ti1.bHour = 0;
+//  ti1.bMinute = 0;
+//  ti1.bSecond = 0;
   PushTimeDLMS(ti1);
 /*
   PushChar(0x07); // <!--2020-04-14 00:00:00-->
@@ -184,13 +184,13 @@ void    QueryEngCurrDay36(uchar  bNS, uchar  bNR, uchar  bInvokeId)
   PushChar(0x09); // <OctetString Value="07E4040EFF173B3BFF8000FF" />
   PushChar(0x0C);
 
-  time ti2;
-  ti2.bYear = 20;
-  ti2.bMonth = 4;
-  ti2.bDay = 14;
-  ti2.bHour = 23;
-  ti2.bMinute = 59;
-  ti2.bSecond = 59;
+//  time ti2;
+//  ti2.bYear = 20;
+//  ti2.bMonth = 4;
+//  ti2.bDay = 14;
+//  ti2.bHour = 23;
+//  ti2.bMinute = 59;
+//  ti2.bSecond = 59;
   PushTimeDLMS(ti2);
 /*
   PushChar(0x07); // <!--2020-04-14 23:59:59-->
