@@ -11,3 +11,5 @@ bool    ValidateIframe(uchar  bNS_client, uchar  bNR_client);
 bool    ValidateSframe(uchar  bNR_client);
 
 bool    LastSegmentDMLS(void);
+bool    UseBlocksDMLS(void);
+bool    LastBlockDMLS(void);
