@@ -81,32 +81,37 @@ schar   y(void)
 
 
 
-  bNS++;
-  uchar bBlockNumber = 1;
-  QueryNextBlock36(bNS, bNR, bInvokeId, bBlockNumber);
-  if (Input36() != SER_GOODCHECK) return -22;
+  uchar bBlockNumber = 0;
 
-  bool fUseBlocks2 = UseBlocksDMLS();
-  bool fLastBlock2 = LastBlockDMLS();
+  while (fUseBlocks1 && (!fLastBlock1)) {
+    bBlockNumber++;
 
-  AddBuffer1(22, IndexInBuff()-22-3);
-  DelayOff();
+    bNS++;
+//  uchar bBlockNumber = 1;
+    QueryNextBlock36(bNS, bNR, bInvokeId, bBlockNumber);
+    if (Input36() != SER_GOODCHECK) return -22;
 
-  while (!LastSegmentDMLS()) {
+    fUseBlocks1 = UseBlocksDMLS();
+    fLastBlock1 = LastBlockDMLS();
+
+    AddBuffer1(22, IndexInBuff()-22-3);
+    DelayOff();
+
+    while (!LastSegmentDMLS()) {
+      bNR++;
+      Query36_RR(bNR);
+      if (Input36() != SER_GOODCHECK) return -23;
+      AddBuffer1(8, IndexInBuff()-8-3);
+      DelayOff();
+    }
+
     bNR++;
     Query36_RR(bNR);
-    if (Input36() != SER_GOODCHECK) return -23;
-    AddBuffer1(8, IndexInBuff()-8-3);
+    if (Input36() != SER_GOODCHECK) return -24;
     DelayOff();
   }
 
-  bNR++;
-  Query36_RR(bNR);
-  if (Input36() != SER_GOODCHECK) return -24;
-  DelayOff();
-
-
-
+/*
   bNS++;
   bBlockNumber = 2;
   QueryNextBlock36(bNS, bNR, bInvokeId, bBlockNumber);
@@ -130,7 +135,7 @@ schar   y(void)
   Query36_RR(bNR);
   if (Input36() != SER_GOODCHECK) return -27;
   DelayOff();
-
+*/
 
 
   FinishBuffer1();
