@@ -59,6 +59,10 @@ schar   y(void)
   bInvokeId++;
   QueryEngCurrDay36(bNS, bNR, bInvokeId);
   if (Input36() != SER_GOODCHECK) return -19;
+
+  bool fUseBlocks1 = UseBlocksDMLS();
+  bool fLastBlock1 = LastBlockDMLS();
+
   AddBuffer1(22, IndexInBuff()-22-3);
   DelayOff();
 
@@ -81,6 +85,10 @@ schar   y(void)
   uchar bBlockNumber = 1;
   QueryNextBlock36(bNS, bNR, bInvokeId, bBlockNumber);
   if (Input36() != SER_GOODCHECK) return -22;
+
+  bool fUseBlocks2 = UseBlocksDMLS();
+  bool fLastBlock2 = LastBlockDMLS();
+
   AddBuffer1(22, IndexInBuff()-22-3);
   DelayOff();
 
@@ -103,6 +111,10 @@ schar   y(void)
   bBlockNumber = 2;
   QueryNextBlock36(bNS, bNR, bInvokeId, bBlockNumber);
   if (Input36() != SER_GOODCHECK) return -25;
+
+  bool fUseBlocks3 = UseBlocksDMLS();
+  bool fLastBlock3 = LastBlockDMLS();
+
   AddBuffer1(22, IndexInBuff()-22-3);
   DelayOff();
 

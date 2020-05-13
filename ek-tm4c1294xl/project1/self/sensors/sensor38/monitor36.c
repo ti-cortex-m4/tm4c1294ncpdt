@@ -9,7 +9,7 @@ monitor36.c
 #include "../../serial/monitor.h"
 #include "include36.h"
 #include "hdlc.h"
-#include "crc16_x25.h"
+#include "crc16x25.h"
 #include "monitor36.h"
 
 
@@ -168,4 +168,26 @@ bool    LastSegmentDMLS(void)
   bool fLastSegment = (wFormat & 0x0800) == 0;
   MonitorString(" Last_Segment="); MonitorBool(fLastSegment);
   return fLastSegment;
+}
+
+
+
+bool    UseBlocksDMLS(void)
+{
+  InitPop(9 + GetHdlcAddressesSize());
+  uint w = PopIntBig();
+  bool fUseBlocks = (w == 0xC402);
+  MonitorString(" Use_Blocks="); MonitorIntHex(w); MonitorBool(fUseBlocks);
+  return fUseBlocks;
+}
+
+
+
+bool    LastBlockDMLS(void)
+{
+  InitPop(12 + GetHdlcAddressesSize());
+  uchar b = PopChar();
+  bool fLastBlock = (b != 0);
+  MonitorString(" Last_Block="); MonitorCharHex(b); MonitorBool(fLastBlock);
+  return fLastBlock;
 }
