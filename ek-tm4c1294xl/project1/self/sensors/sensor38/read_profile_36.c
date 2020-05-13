@@ -14,7 +14,8 @@ read_profile_36.c
 #include "../../serial/monitor.h" // TODO
 #include "../../digitals/digitals.h"
 #include "device36.h"
-#include "query_next_block_36.h"
+#include "query_profile_38.h"
+#include "query_next_block_38.h"
 #include "io36.h"
 #include "monitor36.h"
 #include "buffer_y.h"
