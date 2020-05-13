@@ -166,6 +166,6 @@ bool    LastSegmentDMLS(void)
   InitPop(1);
   uint wFormat = PopIntBig();
   bool fLastSegment = (wFormat & 0x0800) == 0;
-  MonitorString(" last segment "); MonitorBool(fLastSegment);
+  MonitorString(" Last_Segment="); MonitorBool(fLastSegment);
   return fLastSegment;
 }

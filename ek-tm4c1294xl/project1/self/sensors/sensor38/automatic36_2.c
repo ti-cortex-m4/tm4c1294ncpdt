@@ -158,7 +158,7 @@ double2 ReadCntMonCan36_1(void)
   return GetDouble2(mpdbChannelsC[0], true);
 */
 }
-
+/*
 uchar   z(uchar i) {
   if ((i >= '0') && (i <= '9'))
     return i - '0';
@@ -212,7 +212,7 @@ bool    x(const char  *psz)
 
   fOk = true; return !fOk;
 }
-
+*/
 
 schar   y(void)
 {
