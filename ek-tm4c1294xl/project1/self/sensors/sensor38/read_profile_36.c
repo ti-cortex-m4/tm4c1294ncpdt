@@ -11,11 +11,10 @@ read_profile_36.c
 #include "../../time/delay.h"
 #include "../../serial/ports.h"
 #include "../../devices/devices.h"
-//#include "../../sensors/automatic1.h"
-#include "../../serial/monitor.h" //
+#include "../../serial/monitor.h" // TODO
 #include "../../digitals/digitals.h"
 #include "device36.h"
-#include "device36_2.h"
+#include "query_next_block_36.h"
 #include "io36.h"
 #include "monitor36.h"
 #include "buffer_y.h"
@@ -27,6 +26,8 @@ read_profile_36.c
 schar   y(void)
 {
   StartBuffer1();
+
+
 
   Query36_DISC();
   if (Input36() != SER_GOODCHECK) return -15;//GetDouble2Error();
@@ -116,8 +117,6 @@ schar   y(void)
   Query36_RR(bNR);
   if (Input36() != SER_GOODCHECK) return -27;
   DelayOff();
-
-
 
 
 

@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-DEVICE36!C
+query_next_block_36.c
 
 
 ------------------------------------------------------------------------------*/
@@ -10,12 +10,12 @@ DEVICE36!C
 #include "../../serial/ports_devices.h"
 #include "../../serial/monitor.h"
 #include "include36.h"
-#include "crc16_x25.h"
+#include "crc16x25.h"
 #include "io36.h"
 #include "hdlc.h"
 #include "push_dlms.h"
 #include "device36.h" //
-#include "device36_2.h"
+#include "query_next_block_36.h"
 
 
 
