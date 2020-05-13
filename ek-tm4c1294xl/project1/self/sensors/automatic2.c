@@ -52,7 +52,7 @@ AUTOMATIC2!C
 #include "sensor34/automatic34.h"
 #include "sensor35/automatic35.h"
 #include "sensor38/automatic36.h"
-#include "sensor38/automatic36_2.h"
+#include "sensor38/read_profile_36.h"
 #include "automatic2.h"
 
 
@@ -1907,7 +1907,7 @@ double2 ReadCntCurrCan(uchar  ibCan)
 #endif
 
 #ifndef SKIP_36
-    case 36: return ReadCntMonCan36_2(); // ReadCntCurr36();
+    case 36: return ReadProfile36(); // TODO ReadCntCurr36();
 #endif
 
     default: return GetDouble2Error();
