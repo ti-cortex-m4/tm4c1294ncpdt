@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-buffers36.c
+buffer_y.c
 
 
 ------------------------------------------------------------------------------*/
@@ -10,7 +10,7 @@ buffers36.c
 #include "../../serial/ports2.h"
 #include "../../serial/monitor.h"
 #include "buffer_x.h"
-#include "buffers36.h"
+#include "buffer_y.h"
 
 
 
@@ -73,21 +73,3 @@ uint    FinishBuffer1(void) {
 
   return 0;
 }
-
-
-
-/*
-void    PrintInBuff(uint  iwStart, uint  cwSize) {
-  MonitorString("\n buffer size "); MonitorIntDec(cwSize);
-  MonitorString("\n ");
-
-  if (cwSize > 5000) return;
-
-  InitPop(iwStart);
-
-  uint i;
-  for (i=0; i<cwSize; i++) {
-    MonitorCharHex(PopChar());
-  }
-}
-*/

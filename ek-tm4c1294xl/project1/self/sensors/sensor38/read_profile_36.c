@@ -18,7 +18,7 @@ read_profile_36.c
 #include "device36_2.h"
 #include "io36.h"
 #include "monitor36.h"
-#include "buffers36.h"
+#include "buffer_y.h"
 #include "read_profile_36.h"
 
 
