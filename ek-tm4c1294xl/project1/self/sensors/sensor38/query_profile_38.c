@@ -9,7 +9,7 @@ query_next_block_36.c
 #include "../../serial/ports2.h"
 #include "../../serial/ports_devices.h"
 #include "../../serial/monitor.h"
-#include "include36.h"
+#include "include38.h"
 #include "crc16x25.h"
 #include "io36.h"
 #include "hdlc.h"

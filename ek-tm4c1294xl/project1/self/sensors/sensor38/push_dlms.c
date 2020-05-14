@@ -6,13 +6,6 @@ push_dlms.c
 
 #include "../../main.h"
 #include "../../serial/ports.h"
-//#include "../../serial/ports2.h"
-//#include "../../serial/ports_devices.h"
-//#include "../../serial/monitor.h"
-//#include "include36.h"
-//#include "crc16_x25.h"
-//#include "io36.h"
-//#include "hdlc.h"
 #include "push_dlms.h"
 
 
@@ -31,10 +24,13 @@ void    PushTimeMonthDLMS(uchar  bMonth, uchar  bYear)
   PushChar(wYear % 0x100);
   PushChar(bMonth);
   PushChar(1);
+
   PushChar(0xFF);
+
   PushChar(0x00);
   PushChar(0x00);
   PushChar(0x00);
+
   PushChar(0xFF);
   PushChar(0x80);
   PushChar(0x00);

@@ -9,8 +9,8 @@ DEVICE36!C
 #include "../../serial/ports2.h"
 #include "../../serial/ports_devices.h"
 #include "../../serial/monitor.h"
-#include "include36.h"
-#include "crc16_x25.h"
+#include "include38.h"
+#include "crc16x25.h"
 #include "io36.h"
 #include "hdlc.h"
 #include "push_dlms.h"
@@ -238,7 +238,7 @@ void    Query36_RR(uchar  bNR)
 
 void    QueryTime36(uchar  bNS, uchar  bNR, uchar  bInvokeId)
 {
-  MonitorString("\n\n Get Time ");
+  MonitorString("\n\n GetTime ");
 
   uint wSize = 23 + GetHdlcAddressesSize(); // 0x19 25
 
@@ -246,18 +246,12 @@ void    QueryTime36(uchar  bNS, uchar  bNR, uchar  bInvokeId)
   PushChar(0x7E);
   
   PushFormatDLMS(wSize);
-//  PushChar(0xA0);
-//  PushChar(0x19);
   PushHdlcAddresses();
-//  PushChar(0x03);
-//  PushChar(0x03);
 
   MonitorString("Control{N(R)=1,N(S)=1} 32 ? "); MonitorCharHex((bNR << 5) | 0x10 | (bNS << 1) | 0x00);
   PushChar(0x32); // TODO (bNR << 5) | 0x10 | (bNS << 1) | 0x00
   
   PushIntLtl(MakeCRC16_X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
-//  PushChar(0xEC); // CRC ?
-//  PushChar(0xC8);
 
   // DLMS start
   
@@ -285,8 +279,6 @@ void    QueryTime36(uchar  bNS, uchar  bNR, uchar  bInvokeId)
   // DLMS finish
 
   PushIntLtl(MakeCRC16_X25OutBuff(1, wSize-2));
-//  PushChar(0x47); // CRC
-//  PushChar(0x7C);
   
   PushChar(0x7E);
 
