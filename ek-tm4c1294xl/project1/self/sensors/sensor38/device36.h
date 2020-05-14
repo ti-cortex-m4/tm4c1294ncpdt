@@ -4,6 +4,10 @@ DEVICE36.H
 
 ------------------------------------------------------------------------------*/
 
+#include "include38.h"
+
+
+
 void    Query36_DISC(void);
 void    Query36_SNRM(void);
 void    Query36_Open2(uchar  bNS, uchar  bNR);

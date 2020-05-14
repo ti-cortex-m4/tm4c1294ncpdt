@@ -1,21 +1,22 @@
 /*------------------------------------------------------------------------------
-query_next_block_36.c
+query_next_block_38.c
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
 #include "../../serial/ports.h"
-#include "../../serial/ports2.h"
-#include "../../serial/ports_devices.h"
+//#include "../../serial/ports2.h"
+//#include "../../serial/ports_devices.h"
 #include "../../serial/monitor.h"
-#include "include38.h"
+//#include "include38.h"
 #include "crc16x25.h"
 #include "io36.h"
 #include "hdlc.h"
 #include "push_dlms.h"
-#include "device36.h" //
+//#include "device36.h" //
 #include "query_next_block_38.h"
+
 
 
 
@@ -30,7 +31,7 @@ query_next_block_36.c
 */
 void    QueryNextBlock36(uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  bBlockNumber)
 {
-  MonitorString("\n\n NextBlock"); // TODO ???
+  MonitorString("\n\n GetNextBlock "); MonitorCharDec(bBlockNumber);
 
   uint wSize = 17 + GetHdlcAddressesSize();
 
@@ -39,7 +40,6 @@ void    QueryNextBlock36(uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  bBlock
   PushFormatDLMS(wSize);
   PushHdlcAddresses();
 
-//MonitorString("Control{R(R)=1} 31 ? "); MonitorCharHex((bNR << 5) | 0x10 | 0x01);
   PushChar((bNR << 5) | 0x10 | (bNS << 1) | 0x00);
 
   PushIntLtl(MakeCRC16_X25OutBuff(1, 3+GetHdlcAddressesSize()));
@@ -54,7 +54,7 @@ void    QueryNextBlock36(uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  bBlock
   PushChar(0x02); // Get-Request-Normal /// TODO ???
   PushChar(0x80 | (bInvokeId % 16)); // Invoke-Id-And-Priority
 
-  PushLongBig(bBlockNumber); // <BlockNumber Value="00000001" /> TODO ???
+  PushLongBig(bBlockNumber); // <BlockNumber Value="00000001" />
 
   // DLMS finish
 
