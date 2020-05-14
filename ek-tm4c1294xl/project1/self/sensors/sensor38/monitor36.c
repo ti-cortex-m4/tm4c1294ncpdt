@@ -7,7 +7,7 @@ monitor36.c
 #include "../../main.h"
 #include "../../serial/ports.h"
 #include "../../serial/monitor.h"
-#include "include36.h"
+#include "include38.h"
 #include "hdlc.h"
 #include "crc16x25.h"
 #include "monitor36.h"

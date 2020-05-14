@@ -55,7 +55,7 @@ bool    Automatic36(void)
 */
 
 
-time2   QueryTime36_Full(uchar  bPercent)
+time2   QueryTime38_Full(uchar  bPercent)
 {
   Query36_DISC();
   if (Input36() != SER_GOODCHECK) return GetTime2Error();
@@ -81,7 +81,8 @@ time2   QueryTime36_Full(uchar  bPercent)
   DelayOff();
 
   bNS++;
-  QueryTime36(bNS, bNR, bInvokeId++);
+  bInvokeId++;
+  QueryTime36(bNS, bNR, bInvokeId);
   if (Input36() != SER_GOODCHECK) return GetTime2Error();
   if (!ValidateIframe(bNS, bNR)) return GetTime2Error();
   time ti = ReadTime36();
@@ -156,11 +157,11 @@ bool    QueryEngMon36_Full(uchar  bTime, uchar  bPercent)
 */
 
 
-time2   ReadTimeCan36(void)
+time2   ReadTimeCan38(void)
 {
   Clear();
 
-  time2 ti2 = QueryTime36_Full(50);
+  time2 ti2 = QueryTime38_Full(50);
   if (ti2.fValid == false) return GetTime2Error();
 
   tiChannelC = ti2.tiValue;
