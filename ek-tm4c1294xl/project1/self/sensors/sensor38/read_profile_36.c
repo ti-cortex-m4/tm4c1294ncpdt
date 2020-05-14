@@ -48,7 +48,7 @@ schar   y(void)
   DelayOff();
 
   bNR++;
-  Query36_RR(bNR);
+  Query38_RR(bNR);
   if (Input36() != SER_GOODCHECK) return -18;//GetDouble2Error();
 //  if (!ValidateSframe(bNR)) return GetDouble2Error();
   DelayOff();
@@ -86,14 +86,14 @@ schar   y(void)
 
   while (!LastSegmentDMLS()) {
     bNR++;
-    Query36_RR(bNR);
+    Query38_RR(bNR);
     if (Input36() != SER_GOODCHECK) return -20;
     AddBuffer1(8, IndexInBuff()-8-3);
     DelayOff();
   }
 
   bNR++;
-  Query36_RR(bNR);
+  Query38_RR(bNR);
   if (Input36() != SER_GOODCHECK) return -21;
   DelayOff();
 
@@ -117,14 +117,14 @@ schar   y(void)
 
     while (!LastSegmentDMLS()) {
       bNR++;
-      Query36_RR(bNR);
+      Query38_RR(bNR);
       if (Input36() != SER_GOODCHECK) return -23;
       AddBuffer1(8, IndexInBuff()-8-3);
       DelayOff();
     }
 
     bNR++;
-    Query36_RR(bNR);
+    Query38_RR(bNR);
     if (Input36() != SER_GOODCHECK) return -24;
     DelayOff();
   }
