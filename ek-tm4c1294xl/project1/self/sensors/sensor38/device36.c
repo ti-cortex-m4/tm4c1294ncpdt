@@ -210,7 +210,8 @@ void    Query36_Open2(uchar  bNS, uchar  bNR)
 }
 
 
-void    Query36_RR(uchar  bNR)
+
+void    Query38_RR(uchar  bNR)
 {
   MonitorString("\n\n RR");
 
@@ -219,13 +220,8 @@ void    Query36_RR(uchar  bNR)
   InitPush(0);
   PushChar(0x7E);
   PushFormatDLMS(wSize);
-//  PushChar(0xA0);
-//  PushChar(0x07);
   PushHdlcAddresses();
-//  PushChar(0x03);
-//  PushChar(0x03);
 
-  //MonitorString("Control{R(R)=1} 31 ? "); MonitorCharHex((bNR << 5) | 0x10 | 0x01);
   PushChar((bNR << 5) | 0x10 | 0x01);
   
   PushIntLtl(MakeCRC16_X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
@@ -236,9 +232,9 @@ void    Query36_RR(uchar  bNR)
 
 
 
-void    QueryTime36(uchar  bNS, uchar  bNR, uchar  bInvokeId)
+void    QueryTime38(uchar  bNS, uchar  bNR, uchar  bInvokeId)
 {
-  MonitorString("\n\n GetTime ");
+  MonitorString("\n\n GetTime");
 
   uint wSize = 23 + GetHdlcAddressesSize(); // 0x19 25
 
@@ -248,8 +244,7 @@ void    QueryTime36(uchar  bNS, uchar  bNR, uchar  bInvokeId)
   PushFormatDLMS(wSize);
   PushHdlcAddresses();
 
-  MonitorString("Control{N(R)=1,N(S)=1} 32 ? "); MonitorCharHex((bNR << 5) | 0x10 | (bNS << 1) | 0x00);
-  PushChar(0x32); // TODO (bNR << 5) | 0x10 | (bNS << 1) | 0x00
+  PushChar(((bNR << 5) | 0x10 | (bNS << 1) | 0x00));
   
   PushIntLtl(MakeCRC16_X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
 
@@ -308,7 +303,7 @@ time    ReadTime36(void)
 
 void    QueryEngAbs36(uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  ibLine)
 {
-  MonitorString("\n\n Get EngAbs "); MonitorCharDec(ibLine);
+  MonitorString("\n\n GetEngAbs "); MonitorCharDec(ibLine);
 
   uint wSize = 23 + GetHdlcAddressesSize(); // 0x19 25
 
@@ -316,18 +311,11 @@ void    QueryEngAbs36(uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  ibLine)
   PushChar(0x7E);
 
   PushFormatDLMS(wSize);
-//  PushChar(0xA0);
-//  PushChar(0x19);
   PushHdlcAddresses();
-//  PushChar(0x03);
-//  PushChar(0x03);
 
-//  MonitorString("Control{N(R)=1,N(S)=1} 32 ? "); MonitorCharHex((bNR << 5) | 0x10 | (bNS << 1) | 0x00);
   PushChar((bNR << 5) | 0x10 | (bNS << 1) | 0x00);
 
   PushIntLtl(MakeCRC16_X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
-//  PushChar(0xEC); // CRC ?
-//  PushChar(0xC8);
 
   // DLMS start
 
@@ -355,8 +343,6 @@ void    QueryEngAbs36(uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  ibLine)
   // DLMS finish
 
   PushIntLtl(MakeCRC16_X25OutBuff(1, wSize-2));
-//  PushChar(0x47); // CRC
-//  PushChar(0x7C);
 
   PushChar(0x7E);
 

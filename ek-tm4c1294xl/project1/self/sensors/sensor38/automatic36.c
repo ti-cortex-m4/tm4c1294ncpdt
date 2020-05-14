@@ -75,21 +75,21 @@ time2   QueryTime38_Full(uchar  bPercent)
   DelayOff();
 
   bNR++;
-  Query36_RR(bNR);
+  Query38_RR(bNR);
   if (Input36() != SER_GOODCHECK) return GetTime2Error();
   if (!ValidateSframe(bNR)) return GetTime2Error();
   DelayOff();
 
   bNS++;
   bInvokeId++;
-  QueryTime36(bNS, bNR, bInvokeId);
+  QueryTime38(bNS, bNR, bInvokeId);
   if (Input36() != SER_GOODCHECK) return GetTime2Error();
   if (!ValidateIframe(bNS, bNR)) return GetTime2Error();
   time ti = ReadTime36();
   DelayOff();
 
   bNR++;
-  Query36_RR(bNR);
+  Query38_RR(bNR);
   if (Input36() != SER_GOODCHECK) return GetTime2Error();
   if (!ValidateSframe(bNR)) return GetTime2Error();
   DelayOff();
@@ -203,7 +203,7 @@ double2 ReadCntCurr36(void)
   DelayOff();
 
   bNR++;
-  Query36_RR(bNR);
+  Query38_RR(bNR);
   if (Input36() != SER_GOODCHECK) return GetDouble2Error();
   if (!ValidateSframe(bNR)) return GetDouble2Error();
   DelayOff();
@@ -223,7 +223,7 @@ double2 ReadCntCurr36(void)
     DelayOff();
 
     bNR++;
-    Query36_RR(bNR);
+    Query38_RR(bNR);
     if (Input36() != SER_GOODCHECK) return GetDouble2Error();
     if (!ValidateSframe(bNR)) return GetDouble2Error();
     DelayOff();
@@ -269,7 +269,7 @@ double2 ReadCntMonCan36(uchar  ibMon)
   DelayOff();
 
   bNR++;
-  Query36_RR(bNR);
+  Query38_RR(bNR);
   if (Input36() != SER_GOODCHECK) return GetDouble2Error();
   if (!ValidateSframe(bNR)) return GetDouble2Error();
   DelayOff();
@@ -287,7 +287,7 @@ double2 ReadCntMonCan36(uchar  ibMon)
   DelayOff();
 
   bNR++;
-  Query36_RR(bNR);
+  Query38_RR(bNR);
   if (Input36() != SER_GOODCHECK) return GetDouble2Error();
   if (!ValidateSframe(bNR)) return GetDouble2Error();
   DelayOff();
