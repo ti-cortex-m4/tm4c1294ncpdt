@@ -1908,7 +1908,7 @@ double2 ReadCntCurrCan(uchar  ibCan)
 #endif
 
 #ifndef SKIP_36
-    case 36: return ReadProfile36(); // TODO ReadCntCurr36();
+    case 36: return ReadCntCurr38();
 #endif
 
     default: return GetDouble2Error();

@@ -97,7 +97,7 @@ bool    QueryEngMon36_Full(uchar  bTime, uchar  bPercent)
 }
 */
 
-double2 ReadCntCurr36(void)
+double2 ReadCntCurr38(void)
 {
   Query36_DISC();
   if (Input36() != SER_GOODCHECK) return GetDouble2Error();
