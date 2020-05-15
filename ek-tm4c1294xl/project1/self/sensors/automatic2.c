@@ -52,6 +52,7 @@ AUTOMATIC2!C
 #include "sensor34/automatic34.h"
 #include "sensor35/automatic35.h"
 #include "sensor38/automatic36.h"
+#include "sensor38/automatic_get_time_36.h"
 #include "sensor38/read_profile_36.h"
 #include "automatic2.h"
 
