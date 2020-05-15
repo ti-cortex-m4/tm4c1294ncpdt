@@ -9,4 +9,4 @@ io38.h
 
 
 void    Query36(uint  cwIn, uchar  cbOut);
-serial  Input36(void);
+serial  Input38(void);

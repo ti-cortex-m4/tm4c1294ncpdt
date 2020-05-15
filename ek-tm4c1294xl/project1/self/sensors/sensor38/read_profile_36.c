@@ -30,26 +30,26 @@ schar   y(void)
 
 
 
-  Query36_DISC();
-  if (Input36() != SER_GOODCHECK) return -15;//GetDouble2Error();
+  Query38_DISC();
+  if (Input38() != SER_GOODCHECK) return -15;//GetDouble2Error();
   DelayOff();
 
-  Query36_SNRM();
-  if (Input36() != SER_GOODCHECK) return -16;//GetDouble2Error();
+  Query38_SNRM();
+  if (Input38() != SER_GOODCHECK) return -16;//GetDouble2Error();
   DelayOff();
 
   uchar bNS = 0;
   uchar bNR = 0;
   uchar bInvokeId = 0;
 
-  Query36_Open2(bNS, bNR);
-  if (Input36() != SER_GOODCHECK) return -17;//GetDouble2Error();
+  Query38_Open2(bNS, bNR);
+  if (Input38() != SER_GOODCHECK) return -17;//GetDouble2Error();
 //  if (!ValidateIframe(bNS, bNR)) return GetDouble2Error();
   DelayOff();
 
   bNR++;
   Query38_RR(bNR);
-  if (Input36() != SER_GOODCHECK) return -18;//GetDouble2Error();
+  if (Input38() != SER_GOODCHECK) return -18;//GetDouble2Error();
 //  if (!ValidateSframe(bNR)) return GetDouble2Error();
   DelayOff();
 
@@ -76,7 +76,7 @@ schar   y(void)
   bNS++;
   bInvokeId++;
   QueryEngCurrDay36(bNS, bNR, bInvokeId, ti1, ti2);
-  if (Input36() != SER_GOODCHECK) return -19;
+  if (Input38() != SER_GOODCHECK) return -19;
 
   bool fUseBlocks1 = UseBlocksDMLS();
   bool fLastBlock1 = LastBlockDMLS();
@@ -87,14 +87,14 @@ schar   y(void)
   while (!LastSegmentDMLS()) {
     bNR++;
     Query38_RR(bNR);
-    if (Input36() != SER_GOODCHECK) return -20;
+    if (Input38() != SER_GOODCHECK) return -20;
     AddBuffer1(8, IndexInBuff()-8-3);
     DelayOff();
   }
 
   bNR++;
   Query38_RR(bNR);
-  if (Input36() != SER_GOODCHECK) return -21;
+  if (Input38() != SER_GOODCHECK) return -21;
   DelayOff();
 
 
@@ -107,7 +107,7 @@ schar   y(void)
     bNS++;
 //  uchar bBlockNumber = 1;
     QueryNextBlock36(bNS, bNR, bInvokeId, bBlockNumber);
-    if (Input36() != SER_GOODCHECK) return -22;
+    if (Input38() != SER_GOODCHECK) return -22;
 
     fUseBlocks1 = UseBlocksDMLS();
     fLastBlock1 = LastBlockDMLS();
@@ -118,14 +118,14 @@ schar   y(void)
     while (!LastSegmentDMLS()) {
       bNR++;
       Query38_RR(bNR);
-      if (Input36() != SER_GOODCHECK) return -23;
+      if (Input38() != SER_GOODCHECK) return -23;
       AddBuffer1(8, IndexInBuff()-8-3);
       DelayOff();
     }
 
     bNR++;
     Query38_RR(bNR);
-    if (Input36() != SER_GOODCHECK) return -24;
+    if (Input38() != SER_GOODCHECK) return -24;
     DelayOff();
   }
 
