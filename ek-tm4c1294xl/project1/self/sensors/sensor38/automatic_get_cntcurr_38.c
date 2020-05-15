@@ -84,7 +84,7 @@ double2 QueryCntCurr38_Full(void)
 
 
 
-time2   ReadCntCurr38(void)
+double2 ReadCntCurr38(void)
 {
   Clear();
 
@@ -92,22 +92,22 @@ time2   ReadCntCurr38(void)
   uchar r;
   for (r=0; r<MaxRepeats(); r++)
   {
-    time2 ti2 = QueryCntCurr38_Full();
+    double2 db2 = QueryCntCurr38_Full();
     if (fKey == true) break;
-    if (ti2.fValid)
+    if (db2.fValid)
     {
       ShowPercent(50);
 
-      tiChannelC = ti2.tiValue;
+      mpdbChannelsC[0] = db2.dbValue;
       mpboChannelsA[0] = true;
 
-      return GetTime2(ti2.tiValue, true);
+      return GetDouble2(db2.dbValue, true);
     }
   }
 
   Query38_DISC();
-  if (Input38() != SER_GOODCHECK) return GetTime2Error();
+  if (Input38() != SER_GOODCHECK) return GetDouble2Error();
   DelayOff();
 
-  return GetTime2Error();
+  return GetDouble2Error();
 }
