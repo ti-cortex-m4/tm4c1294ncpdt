@@ -13,7 +13,7 @@ automatic_get_time_36.c
 #include "device36.h"
 #include "io36.h"
 #include "monitor36.h"
-#include "automatic36.h"
+#include "automatic_get_time_36.h"
 
 
 
@@ -88,18 +88,29 @@ time2   ReadTimeCan38(void)
   {
     time2 ti2 = QueryTime38_Full();
 
-    if (ti2.fValid) break;
-    if (fKey == true) return GetTime2Error();
+    if (fKey == true) {
+      Query36_DISC();
+      if (Input36() != SER_GOODCHECK) return GetTime2Error();
+      DelayOff();
+
+      return GetTime2Error();
+    }
+
+    if (ti2.fValid) {
+      ShowPercent(50);
+
+      tiChannelC = ti2.tiValue;
+      mpboChannelsA[0] = true;
+
+      return GetTime2(ti2.tiValue, true);
+    }
   }
 
-  if (r == MaxRepeats()) return GetTime2Error();
-  ShowPercent(50);
+  Query36_DISC();
+  if (Input36() != SER_GOODCHECK) return GetTime2Error();
+  DelayOff();
 
-
-  tiChannelC = ti2.tiValue;
-  mpboChannelsA[0] = true;
-
-  return GetTime2(ti2.tiValue, true);
+  return GetTime2Error();
 }
 
 
