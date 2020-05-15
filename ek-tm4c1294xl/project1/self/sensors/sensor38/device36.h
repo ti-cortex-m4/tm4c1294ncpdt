@@ -8,9 +8,9 @@ DEVICE36.H
 
 
 
-void    Query36_DISC(void);
-void    Query36_SNRM(void);
-void    Query36_Open2(uchar  bNS, uchar  bNR);
+void    Query38_DISC(void);
+void    Query38_SNRM(void);
+void    Query38_Open2(uchar  bNS, uchar  bNR);
 void    Query38_RR(uchar  bNR);
 
 void    QueryTime38(uchar  bNS, uchar  bNR, uchar  bInvokeId);

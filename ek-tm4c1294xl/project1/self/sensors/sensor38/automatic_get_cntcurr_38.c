@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-automatic_get_cntcurr_36.c
+automatic_get_cntcurr_38.c
 
 
 ------------------------------------------------------------------------------*/
@@ -13,32 +13,32 @@ automatic_get_cntcurr_36.c
 #include "device36.h"
 #include "io36.h"
 #include "monitor36.h"
-#include "automatic_get_cntcurr_36.h"
+#include "automatic_get_cntcurr_38.h"
 
 
 
 double2 QueryCntCurr38_Full(void)
 {
-  Query36_DISC();
-  if (Input36() != SER_GOODCHECK) return GetDouble2Error();
+  Query38_DISC();
+  if (Input38() != SER_GOODCHECK) return GetDouble2Error();
   DelayOff();
 
-  Query36_SNRM();
-  if (Input36() != SER_GOODCHECK) return GetDouble2Error();
+  Query38_SNRM();
+  if (Input38() != SER_GOODCHECK) return GetDouble2Error();
   DelayOff();
 
   uchar bNS = 0;
   uchar bNR = 0;
   uchar bInvokeId = 0;
 
-  Query36_Open2(bNS, bNR);
-  if (Input36() != SER_GOODCHECK) return GetDouble2Error();
+  Query38_Open2(bNS, bNR);
+  if (Input38() != SER_GOODCHECK) return GetDouble2Error();
   if (!ValidateIframe(bNS, bNR)) return GetDouble2Error();
   DelayOff();
 
   bNR++;
   Query38_RR(bNR);
-  if (Input36() != SER_GOODCHECK) return GetDouble2Error();
+  if (Input38() != SER_GOODCHECK) return GetDouble2Error();
   if (!ValidateSframe(bNR)) return GetDouble2Error();
   DelayOff();
 
@@ -46,7 +46,7 @@ double2 QueryCntCurr38_Full(void)
   for (i=0; i<4; i++) {
     bNS++;
     QueryEngAbs36(bNS, bNR, bInvokeId++, i);
-    if (Input36() != SER_GOODCHECK) return GetDouble2Error();
+    if (Input38() != SER_GOODCHECK) return GetDouble2Error();
     if (!ValidateIframe(bNS, bNR)) return GetDouble2Error();
 
     uint64_t ddw = ReadEngAbs36();
@@ -58,13 +58,13 @@ double2 QueryCntCurr38_Full(void)
 
     bNR++;
     Query38_RR(bNR);
-    if (Input36() != SER_GOODCHECK) return GetDouble2Error();
+    if (Input38() != SER_GOODCHECK) return GetDouble2Error();
     if (!ValidateSframe(bNR)) return GetDouble2Error();
     DelayOff();
   }
 
-  Query36_DISC(); // TODO always close
-  if (Input36() != SER_GOODCHECK) return GetDouble2Error();
+  Query38_DISC(); // TODO always close
+  if (Input38() != SER_GOODCHECK) return GetDouble2Error();
   DelayOff();
 
   return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
@@ -105,8 +105,8 @@ time2   ReadCntCurr38(void)
     }
   }
 
-  Query36_DISC();
-  if (Input36() != SER_GOODCHECK) return GetTime2Error();
+  Query38_DISC();
+  if (Input38() != SER_GOODCHECK) return GetTime2Error();
   DelayOff();
 
   return GetTime2Error();

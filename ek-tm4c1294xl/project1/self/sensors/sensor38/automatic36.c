@@ -99,26 +99,26 @@ bool    QueryEngMon36_Full(uchar  bTime, uchar  bPercent)
 
 double2 ReadCntCurr38(void)
 {
-  Query36_DISC();
-  if (Input36() != SER_GOODCHECK) return GetDouble2Error();
+  Query38_DISC();
+  if (Input38() != SER_GOODCHECK) return GetDouble2Error();
   DelayOff();
 
-  Query36_SNRM();
-  if (Input36() != SER_GOODCHECK) return GetDouble2Error();
+  Query38_SNRM();
+  if (Input38() != SER_GOODCHECK) return GetDouble2Error();
   DelayOff();
 
   uchar bNS = 0;
   uchar bNR = 0;
   uchar bInvokeId = 0;
 
-  Query36_Open2(bNS, bNR);
-  if (Input36() != SER_GOODCHECK) return GetDouble2Error();
+  Query38_Open2(bNS, bNR);
+  if (Input38() != SER_GOODCHECK) return GetDouble2Error();
   if (!ValidateIframe(bNS, bNR)) return GetDouble2Error();
   DelayOff();
 
   bNR++;
   Query38_RR(bNR);
-  if (Input36() != SER_GOODCHECK) return GetDouble2Error();
+  if (Input38() != SER_GOODCHECK) return GetDouble2Error();
   if (!ValidateSframe(bNR)) return GetDouble2Error();
   DelayOff();
 
@@ -126,7 +126,7 @@ double2 ReadCntCurr38(void)
   for (i=0; i<4; i++) {
     bNS++;
     QueryEngAbs36(bNS, bNR, bInvokeId++, i);
-    if (Input36() != SER_GOODCHECK) return GetDouble2Error();
+    if (Input38() != SER_GOODCHECK) return GetDouble2Error();
     if (!ValidateIframe(bNS, bNR)) return GetDouble2Error();
 
     uint64_t ddw = ReadEngAbs36();
@@ -138,13 +138,13 @@ double2 ReadCntCurr38(void)
 
     bNR++;
     Query38_RR(bNR);
-    if (Input36() != SER_GOODCHECK) return GetDouble2Error();
+    if (Input38() != SER_GOODCHECK) return GetDouble2Error();
     if (!ValidateSframe(bNR)) return GetDouble2Error();
     DelayOff();
   }
 
-  Query36_DISC(); // TODO always close
-  if (Input36() != SER_GOODCHECK) return GetDouble2Error();
+  Query38_DISC(); // TODO always close
+  if (Input38() != SER_GOODCHECK) return GetDouble2Error();
   DelayOff();
 
   return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
@@ -165,32 +165,32 @@ double2 ReadCntCurr38(void)
 
 double2 ReadCntMonCan36(uchar  ibMon)
 {
-  Query36_DISC();
-  if (Input36() != SER_GOODCHECK) return GetDouble2Error();
+  Query38_DISC();
+  if (Input38() != SER_GOODCHECK) return GetDouble2Error();
   DelayOff();
 
-  Query36_SNRM();
-  if (Input36() != SER_GOODCHECK) return GetDouble2Error();
+  Query38_SNRM();
+  if (Input38() != SER_GOODCHECK) return GetDouble2Error();
   DelayOff();
 
   uchar bNS = 0;
   uchar bNR = 0;
   uchar bInvokeId = 0;
 
-  Query36_Open2(bNS, bNR);
-  if (Input36() != SER_GOODCHECK) return GetDouble2Error();
+  Query38_Open2(bNS, bNR);
+  if (Input38() != SER_GOODCHECK) return GetDouble2Error();
   if (!ValidateIframe(bNS, bNR)) return GetDouble2Error();
   DelayOff();
 
   bNR++;
   Query38_RR(bNR);
-  if (Input36() != SER_GOODCHECK) return GetDouble2Error();
+  if (Input38() != SER_GOODCHECK) return GetDouble2Error();
   if (!ValidateSframe(bNR)) return GetDouble2Error();
   DelayOff();
 
   bNS++;
   QueryEngMon36(bNS, bNR, bInvokeId++, 4, 20);
-  if (Input36() != SER_GOODCHECK) return GetDouble2Error();
+  if (Input38() != SER_GOODCHECK) return GetDouble2Error();
   if (!ValidateIframe(bNS, bNR)) return GetDouble2Error();
 
   uint64_t ddw = ReadEngMon36();
@@ -202,12 +202,12 @@ double2 ReadCntMonCan36(uchar  ibMon)
 
   bNR++;
   Query38_RR(bNR);
-  if (Input36() != SER_GOODCHECK) return GetDouble2Error();
+  if (Input38() != SER_GOODCHECK) return GetDouble2Error();
   if (!ValidateSframe(bNR)) return GetDouble2Error();
   DelayOff();
 
-  Query36_DISC(); // TODO always close
-  if (Input36() != SER_GOODCHECK) return GetDouble2Error();
+  Query38_DISC(); // TODO always close
+  if (Input38() != SER_GOODCHECK) return GetDouble2Error();
   DelayOff();
 
   return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
