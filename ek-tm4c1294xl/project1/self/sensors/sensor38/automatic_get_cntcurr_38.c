@@ -11,6 +11,7 @@ automatic_get_cntcurr_38.c
 #include "../../serial/ports.h"
 #include "../../digitals/digitals.h"
 #include "device36.h"
+#include "query_engabs_38.h"
 #include "io36.h"
 #include "monitor36.h"
 #include "automatic_get_cntcurr_38.h"
