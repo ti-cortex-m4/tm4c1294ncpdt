@@ -15,12 +15,6 @@ buffer_y.c
 
 
 
-extern  uchar                       mpbBuffX[3000];
-
-extern  uint                        iwPushX;
-
-
-
 void    StartBufferY(void) {
   InitPushX();
 }
@@ -64,12 +58,6 @@ buff_y  GetBufferYError(char  bError)
 
 
 buff_y  FinishBufferY(void) {
-#ifdef true
-  MonitorString("\n ReadFromBuffer: Size="); MonitorIntDec(iwPushX); MonitorString(" Array=");
-  MonitorArrayHex(mpbBuffX, iwPushX);
-#endif
-
-
   buff_y by;
   by.bError = 0;
   by.ddwValue = 0;
