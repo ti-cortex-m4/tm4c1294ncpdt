@@ -52,7 +52,7 @@ ulong64_ QueryCntMon38_Full(uchar  ibMon)
   QueryTime38(bNS, bNR, bInvokeId);
   if (Input38() != SER_GOODCHECK) return GetLong64Error();
   if (!ValidateIframe(bNS, bNR)) return GetLong64Error();
-  time ti = ReadTime36();
+  time ti = ReadTime38();
   DelayOff();
 
   bNR++;
