@@ -12,6 +12,9 @@ automatic_get_cntmon_38.c
 #include "../../digitals/digitals.h"
 #include "device36.h"
 #include "query_engmon_38.h"
+#include "query_profile_38.h"
+#include "query_next_block_38.h"
+#include "buffer_y.h"
 #include "io36.h"
 #include "monitor36.h"
 #include "automatic_get_cntmon_38.h"
@@ -80,8 +83,7 @@ ulong64_ QueryCntMon38_Full(uchar  ibMon)
   }
   else
   {
-    StartBuffer1();
-
+    StartBufferY();
 
     time ti1;
     ti1.bYear = 20;
@@ -104,25 +106,25 @@ ulong64_ QueryCntMon38_Full(uchar  ibMon)
     bNS++;
     bInvokeId++;
     QueryEngCurrDay36(bNS, bNR, bInvokeId, ti1, ti2);
-    if (Input38() != SER_GOODCHECK) return -19;
+    if (Input38() != SER_GOODCHECK) return GetLong64Error();
 
     bool fUseBlocks1 = UseBlocksDMLS();
     bool fLastBlock1 = LastBlockDMLS();
 
-    AddBuffer1(22, IndexInBuff()-22-3); // TODO GetHdlcAddressesSize
+    AddBufferY(22, IndexInBuff()-22-3); // TODO GetHdlcAddressesSize
     DelayOff();
 
     while (!LastSegmentDMLS()) {
       bNR++;
       Query38_RR(bNR);
-      if (Input38() != SER_GOODCHECK) return -20;
-      AddBuffer1(8, IndexInBuff()-8-3);
+      if (Input38() != SER_GOODCHECK) return GetLong64Error();
+      AddBufferY(8, IndexInBuff()-8-3);
       DelayOff();
     }
 
     bNR++;
     Query38_RR(bNR);
-    if (Input38() != SER_GOODCHECK) return -21;
+    if (Input38() != SER_GOODCHECK) return GetLong64Error();
     DelayOff();
 
 
@@ -135,31 +137,31 @@ ulong64_ QueryCntMon38_Full(uchar  ibMon)
       bNS++;
   //  uchar bBlockNumber = 1;
       QueryNextBlock36(bNS, bNR, bInvokeId, bBlockNumber);
-      if (Input38() != SER_GOODCHECK) return -22;
+      if (Input38() != SER_GOODCHECK) return GetLong64Error();
 
       fUseBlocks1 = UseBlocksDMLS();
       fLastBlock1 = LastBlockDMLS();
 
-      AddBuffer1(22, IndexInBuff()-22-3);
+      AddBufferY(22, IndexInBuff()-22-3);
       DelayOff();
 
       while (!LastSegmentDMLS()) {
         bNR++;
         Query38_RR(bNR);
-        if (Input38() != SER_GOODCHECK) return -23;
-        AddBuffer1(8, IndexInBuff()-8-3);
+        if (Input38() != SER_GOODCHECK) return GetLong64Error();
+        AddBufferY(8, IndexInBuff()-8-3);
         DelayOff();
       }
 
       bNR++;
       Query38_RR(bNR);
-      if (Input38() != SER_GOODCHECK) return -24;
+      if (Input38() != SER_GOODCHECK) return GetLong64Error();
       DelayOff();
     }
 
 
-    FinishBuffer1();
-    ddw = -1;
+    FinishBufferY();
+    ddw = 0;
   }
 
 

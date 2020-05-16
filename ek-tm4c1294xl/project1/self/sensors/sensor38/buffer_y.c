@@ -14,12 +14,12 @@ buffer_y.c
 
 
 
-void    StartBuffer1(void) {
+void    StartBufferY(void) {
   InitPushX();
 }
 
 
-void    AddBuffer1(uint  iwStart, uint  cwSize) {
+void    AddBufferY(uint  iwStart, uint  cwSize) {
   InitPop(iwStart);
 
   uint i;
@@ -29,7 +29,7 @@ void    AddBuffer1(uint  iwStart, uint  cwSize) {
 }
 
 
-uint    FinishBuffer1(void) {
+uint    FinishBufferY(void) {
   InitPopX();
 
   if (GetPopCapacity() < 2)
