@@ -59,6 +59,7 @@ ulong64_ QueryCntMon38_Full(uchar  ibMon)
   DelayOff();
 
 
+  uint64_t ddw;
   if (ti.bMonth != ibMon+1)
   {
     uchar bMonth = 4;
@@ -68,7 +69,7 @@ ulong64_ QueryCntMon38_Full(uchar  ibMon)
     QueryEngMon38(bNS, bNR, bInvokeId++, bMonth, bYear);
     if (Input38() != SER_GOODCHECK) return GetLong64Error();
     if (!ValidateIframe(bNS, bNR)) return GetLong64Error();
-    uint64_t ddw = ReadEngMon38();
+    ddw = ReadEngMon38();
     DelayOff();
 
     bNR++;
