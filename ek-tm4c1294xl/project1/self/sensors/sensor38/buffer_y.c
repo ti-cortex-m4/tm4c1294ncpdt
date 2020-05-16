@@ -23,8 +23,7 @@ void    StartBufferY(void) {
 
 void    AddBufferY(uint  iwStart, uint  cwSize) {
 #ifdef MONITOR_38
-  MonitorString("\n CurrentBuffer");
-  MonitorArrayHex(mpbBuffX, iwPushX);
+  MonitorX();
 
   MonitorString("\n AddToBuffer: Start="); MonitorIntDec(iwStart);
   MonitorString("\n");

@@ -4,6 +4,8 @@ buffers_x.h
 
 ------------------------------------------------------------------------------*/
 
+void    MonitorX(void);
+
 void    InitPushX(void);
 void    PushCharX(uchar  b);
 
