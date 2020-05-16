@@ -10,9 +10,10 @@ buffer_y.h
 
 typedef struct
 {
+  uchar         bError;
   uint64_t      ddwValue;
   time          tiValue;
-  bool          fValid;
+  bool          fFirst;
 } buff_y;
 
 
