@@ -101,7 +101,6 @@ time2   ReadTimeCan38_Short(void)
 {
   Clear();
 
-
   time2 ti2 = QueryTime38_Full();
   if (ti2.fValid)
   {
@@ -110,7 +109,6 @@ time2   ReadTimeCan38_Short(void)
 
     return GetTime2(ti2.tiValue, true);
   }
-
 
   Query38_DISC();
   if (Input38() != SER_GOODCHECK) return GetTime2Error();

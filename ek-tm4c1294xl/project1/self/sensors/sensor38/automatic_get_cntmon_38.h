@@ -4,4 +4,4 @@ automatic_get_cntmon_38.h
 
 ------------------------------------------------------------------------------*/
 
-double2 ReadCntMon38(uchar  ibMon);
+double2 ReadCntMonCan38(uchar  ibMon);

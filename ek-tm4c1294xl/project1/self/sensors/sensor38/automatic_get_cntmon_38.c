@@ -11,7 +11,7 @@ automatic_get_cntmon_38.c
 #include "../../serial/ports.h"
 #include "../../digitals/digitals.h"
 #include "device36.h"
-#include "query_engabs_38.h"
+#include "query_engmon_38.h"
 #include "io36.h"
 #include "monitor36.h"
 #include "automatic_get_cntmon_38.h"
@@ -45,10 +45,11 @@ ulong64_ QueryCntMon38_Full(uchar  ibMon)
 
 
   bNS++;
-  QueryEngAbs38(bNS, bNR, bInvokeId++);
+  bInvokeId++;
+  QueryTime38(bNS, bNR, bInvokeId);
   if (Input38() != SER_GOODCHECK) return GetLong64Error();
   if (!ValidateIframe(bNS, bNR)) return GetLong64Error();
-  uint64_t ddw = ReadEngAbs38();
+  time ti = ReadTime36();
   DelayOff();
 
   bNR++;
@@ -56,6 +57,29 @@ ulong64_ QueryCntMon38_Full(uchar  ibMon)
   if (Input38() != SER_GOODCHECK) return GetLong64Error();
   if (!ValidateSframe(bNR)) return GetLong64Error();
   DelayOff();
+
+
+  if (ti.bMonth != ibMon+1)
+  {
+    uchar bMonth = 4;
+    uchar bYear = 20;
+
+    bNS++;
+    QueryEngMon38(bNS, bNR, bInvokeId++, bMonth, bYear);
+    if (Input38() != SER_GOODCHECK) return GetLong64Error();
+    if (!ValidateIframe(bNS, bNR)) return GetLong64Error();
+    uint64_t ddw = ReadEngMon38();
+    DelayOff();
+
+    bNR++;
+    Query38_RR(bNR);
+    if (Input38() != SER_GOODCHECK) return GetLong64Error();
+    if (!ValidateSframe(bNR)) return GetLong64Error();
+    DelayOff();
+  }
+  else
+  {
+  }
 
 
   Query38_DISC();
@@ -67,10 +91,9 @@ ulong64_ QueryCntMon38_Full(uchar  ibMon)
 
 
 
-double2 ReadCntMon38(uchar  ibMon)
+double2 ReadCntMonCan38(uchar  ibMon)
 {
   Clear();
-
 
   uchar r;
   for (r=0; r<MaxRepeats(); r++)
