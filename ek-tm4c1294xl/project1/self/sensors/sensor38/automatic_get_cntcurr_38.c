@@ -45,10 +45,10 @@ ulong64_ QueryCntCurr38_Full(void)
 
 
   bNS++;
-  QueryEngAbs36(bNS, bNR, bInvokeId++);
+  QueryEngAbs38(bNS, bNR, bInvokeId++);
   if (Input38() != SER_GOODCHECK) return GetLong64Error();
   if (!ValidateIframe(bNS, bNR)) return GetLong64Error();
-  uint64_t ddw = ReadEngAbs36();
+  uint64_t ddw = ReadEngAbs38();
   DelayOff();
 
   bNR++;

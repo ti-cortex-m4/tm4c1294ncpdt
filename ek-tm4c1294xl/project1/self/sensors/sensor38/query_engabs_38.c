@@ -18,7 +18,7 @@ query_engabs_38.c
 
 
 
-void    QueryEngAbs36(uchar  bNS, uchar  bNR, uchar  bInvokeId)
+void    QueryEngAbs38(uchar  bNS, uchar  bNR, uchar  bInvokeId)
 {
   MonitorString("\n\n GetEngAbs ");
 
@@ -68,7 +68,7 @@ void    QueryEngAbs36(uchar  bNS, uchar  bNR, uchar  bInvokeId)
 
 
 
-uint64_t ReadEngAbs36(void)
+uint64_t ReadEngAbs38(void)
 {
   InitPop(14 + GetHdlcAddressesSize());
   return PopLongBig()*0x100000000 + PopLongBig();

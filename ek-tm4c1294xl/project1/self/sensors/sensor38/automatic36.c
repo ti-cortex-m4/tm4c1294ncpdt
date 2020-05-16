@@ -14,6 +14,7 @@ AUTOMATIC36!C
 //#include "../../sensors/automatic1.h"
 #include "../../digitals/digitals.h"
 #include "device36.h"
+#include "query_engmon_38.h"
 #include "io36.h"
 #include "monitor36.h"
 #include "automatic36.h"
@@ -105,11 +106,11 @@ double2 ReadCntMonCan36(uchar  ibMon)
   DelayOff();
 
   bNS++;
-  QueryEngMon36(bNS, bNR, bInvokeId++, 4, 20);
+  QueryEngMon38(bNS, bNR, bInvokeId++, 4, 20);
   if (Input38() != SER_GOODCHECK) return GetDouble2Error();
   if (!ValidateIframe(bNS, bNR)) return GetDouble2Error();
 
-  uint64_t ddw = ReadEngMon36();
+  uint64_t ddw = ReadEngMon38();
   mpdwChannelsA[0] = ddw % 0x100000000;
   mpdbChannelsC[0] = (double)mpdwChannelsA[0] / 1000;
   mpboChannelsA[0] = true;

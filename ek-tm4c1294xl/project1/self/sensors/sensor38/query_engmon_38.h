@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-DEVICE36.H
+query_engmon_38.h
 
 
 ------------------------------------------------------------------------------*/
@@ -8,13 +8,5 @@ DEVICE36.H
 
 
 
-void    Query38_DISC(void);
-void    Query38_SNRM(void);
-void    Query38_Open2(uchar  bNS, uchar  bNR);
-void    Query38_RR(uchar  bNR);
-
-void    QueryTime38(uchar  bNS, uchar  bNR, uchar  bInvokeId);
-time    ReadTime36(void);
-
-void    QueryEngMon36(uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  bMonth, uchar  bYear);
-uint64_t ReadEngMon36(void);
+void    QueryEngMon38(uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  bMonth, uchar  bYear);
+uint64_t ReadEngMon38(void);
