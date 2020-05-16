@@ -281,7 +281,7 @@ void    QueryTime38(uchar  bNS, uchar  bNR, uchar  bInvokeId)
 }
 
 
-time    ReadTime36(void)
+time    ReadTime38(void)
 {
   InitPop(15 + GetHdlcAddressesSize());
 

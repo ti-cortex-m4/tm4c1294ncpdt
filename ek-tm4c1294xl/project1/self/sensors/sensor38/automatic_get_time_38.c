@@ -48,7 +48,7 @@ time2   QueryTime38_Full(void)
   QueryTime38(bNS, bNR, bInvokeId);
   if (Input38() != SER_GOODCHECK) return GetTime2Error();
   if (!ValidateIframe(bNS, bNR)) return GetTime2Error();
-  time ti = ReadTime36();
+  time ti = ReadTime38();
   DelayOff();
 
   bNR++;

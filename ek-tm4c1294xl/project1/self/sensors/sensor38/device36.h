@@ -14,4 +14,4 @@ void    Query38_Open2(uchar  bNS, uchar  bNR);
 void    Query38_RR(uchar  bNR);
 
 void    QueryTime38(uchar  bNS, uchar  bNR, uchar  bInvokeId);
-time    ReadTime36(void);
+time    ReadTime38(void);
