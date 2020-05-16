@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-automatic_get_cntcurr_38.c
+automatic_get_cntmon_38.c
 
 
 ------------------------------------------------------------------------------*/
@@ -14,11 +14,11 @@ automatic_get_cntcurr_38.c
 #include "query_engabs_38.h"
 #include "io36.h"
 #include "monitor36.h"
-#include "automatic_get_cntcurr_38.h"
+#include "automatic_get_cntmon_38.h"
 
 
 
-ulong64_ QueryCntCurr38_Full(void)
+ulong64_ QueryCntMon38_Full(uchar  ibMon)
 {
   Query38_DISC();
   if (Input38() != SER_GOODCHECK) return GetLong64Error();
@@ -67,7 +67,7 @@ ulong64_ QueryCntCurr38_Full(void)
 
 
 
-double2 ReadCntCurr38(void)
+double2 ReadCntMon38(uchar  ibMon)
 {
   Clear();
 
@@ -75,7 +75,7 @@ double2 ReadCntCurr38(void)
   uchar r;
   for (r=0; r<MaxRepeats(); r++)
   {
-    ulong64_ ddw2 = QueryCntCurr38_Full();
+    ulong64_ ddw2 = QueryCntMon38_Full(ibMon);
     if (fKey == true) break;
     if (ddw2.fValid)
     {
