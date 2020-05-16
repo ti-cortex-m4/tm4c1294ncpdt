@@ -80,7 +80,7 @@ bool    QueryEngMon36_Full(uchar  bTime, uchar  bPercent)
 
 
 
-double2 ReadCntMonCan36(uchar  ibMon)
+double2 ReadCntMonCan36_(uchar  ibMon)
 {
   Query38_DISC();
   if (Input38() != SER_GOODCHECK) return GetDouble2Error();

@@ -71,7 +71,6 @@ double2 ReadCntCurr38(void)
 {
   Clear();
 
-
   uchar r;
   for (r=0; r<MaxRepeats(); r++)
   {
