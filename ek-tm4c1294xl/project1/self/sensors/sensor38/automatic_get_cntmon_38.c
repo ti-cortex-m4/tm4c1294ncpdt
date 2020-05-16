@@ -62,8 +62,8 @@ ulong64_ QueryCntMon38_Full(uchar  ibMon)
   uint64_t ddw;
   if (ti.bMonth != ibMon+1)
   {
-    uchar bMonth = 4;
-    uchar bYear = 20;
+    uchar bMonth = (ibMon+1) % 12 + 1;
+    uchar bYear = (bMonth > ti.bMonth) ? ti.bYear-1 : ti.bYear;
 
     bNS++;
     QueryEngMon38(bNS, bNR, bInvokeId++, bMonth, bYear);
@@ -80,6 +80,86 @@ ulong64_ QueryCntMon38_Full(uchar  ibMon)
   }
   else
   {
+    StartBuffer1();
+
+
+    time ti1;
+    ti1.bYear = 20;
+    ti1.bMonth = 4;
+    ti1.bDay = 14;
+    ti1.bHour = 0;
+    ti1.bMinute = 0;
+    ti1.bSecond = 0;
+
+    time ti2;
+    ti2.bYear = 20;
+    ti2.bMonth = 4;
+    ti2.bDay = 15;
+    ti2.bHour = 23;
+    ti2.bMinute = 59;
+    ti2.bSecond = 59;
+
+
+
+    bNS++;
+    bInvokeId++;
+    QueryEngCurrDay36(bNS, bNR, bInvokeId, ti1, ti2);
+    if (Input38() != SER_GOODCHECK) return -19;
+
+    bool fUseBlocks1 = UseBlocksDMLS();
+    bool fLastBlock1 = LastBlockDMLS();
+
+    AddBuffer1(22, IndexInBuff()-22-3); // TODO GetHdlcAddressesSize
+    DelayOff();
+
+    while (!LastSegmentDMLS()) {
+      bNR++;
+      Query38_RR(bNR);
+      if (Input38() != SER_GOODCHECK) return -20;
+      AddBuffer1(8, IndexInBuff()-8-3);
+      DelayOff();
+    }
+
+    bNR++;
+    Query38_RR(bNR);
+    if (Input38() != SER_GOODCHECK) return -21;
+    DelayOff();
+
+
+
+    uchar bBlockNumber = 0;
+
+    while (fUseBlocks1 && (!fLastBlock1)) {
+      bBlockNumber++;
+
+      bNS++;
+  //  uchar bBlockNumber = 1;
+      QueryNextBlock36(bNS, bNR, bInvokeId, bBlockNumber);
+      if (Input38() != SER_GOODCHECK) return -22;
+
+      fUseBlocks1 = UseBlocksDMLS();
+      fLastBlock1 = LastBlockDMLS();
+
+      AddBuffer1(22, IndexInBuff()-22-3);
+      DelayOff();
+
+      while (!LastSegmentDMLS()) {
+        bNR++;
+        Query38_RR(bNR);
+        if (Input38() != SER_GOODCHECK) return -23;
+        AddBuffer1(8, IndexInBuff()-8-3);
+        DelayOff();
+      }
+
+      bNR++;
+      Query38_RR(bNR);
+      if (Input38() != SER_GOODCHECK) return -24;
+      DelayOff();
+    }
+
+
+    FinishBuffer1();
+    ddw = -1;
   }
 
 
