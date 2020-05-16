@@ -5,6 +5,8 @@ buffers_x.c
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
+#include "../../serial/monitor.h"
+#include "include38.h"
 #include "buffer_x.h"
 
 
@@ -29,6 +31,11 @@ void    PushCharX(uchar  b) {
 
 void    InitPopX(void) {
   iwPopX = 0;
+
+#ifdef MONITOR_38
+  MonitorString("\n ReadFromBuffer");
+  MonitorArrayHex(mpbBuffX, iwPushX);
+#endif
 }
 
 

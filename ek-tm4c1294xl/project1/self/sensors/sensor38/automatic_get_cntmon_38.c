@@ -66,7 +66,7 @@ ulong64_ QueryCntMon38_Full(uchar  ibMon)
   uint64_t ddw;
   if (ti.bMonth != ibMon+1)
   {
-    uchar bMonth = (ibMon+1) % 12 + 1;
+    uchar bMonth = (ibMon+1) % 12 + 1; // TODO check all months
     uchar bYear = (bMonth > ti.bMonth) ? ti.bYear-1 : ti.bYear;
 
     bNS++;
@@ -87,17 +87,17 @@ ulong64_ QueryCntMon38_Full(uchar  ibMon)
     StartBufferY();
 
     time ti1;
-    ti1.bYear = 20;
-    ti1.bMonth = 4;
-    ti1.bDay = 14;
+    ti1.bYear = ti.bYear;
+    ti1.bMonth = ti.bMonth;
+    ti1.bDay = ti.bDay;
     ti1.bHour = 0;
     ti1.bMinute = 0;
     ti1.bSecond = 0;
 
     time ti2;
-    ti2.bYear = 20;
-    ti2.bMonth = 4;
-    ti2.bDay = 15;
+    ti2.bYear = ti.bYear;
+    ti2.bMonth = ti.bMonth;
+    ti2.bDay = ti.bDay;
     ti2.bHour = 23;
     ti2.bMinute = 59;
     ti2.bSecond = 59;
@@ -108,12 +108,15 @@ ulong64_ QueryCntMon38_Full(uchar  ibMon)
     bInvokeId++;
     QueryEngCurrDay36(bNS, bNR, bInvokeId, ti1, ti2);
     if (Input38() != SER_GOODCHECK) return GetLong64Error();
+    DelayOff();
 
     bool fUseBlocks1 = UseBlocksDMLS();
     bool fLastBlock1 = LastBlockDMLS();
 
-    AddBufferY(22, IndexInBuff()-22-3); // TODO GetHdlcAddressesSize
-    DelayOff();
+    if (fUseBlocks1)
+      AddBufferY(22, IndexInBuff()-22-3); // TODO GetHdlcAddressesSize
+    else
+      AddBufferY(15, IndexInBuff()-15-3);
 
     while (!LastSegmentDMLS()) {
       bNR++;

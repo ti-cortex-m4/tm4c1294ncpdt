@@ -78,6 +78,7 @@ schar   y(void)
   bInvokeId++;
   QueryEngCurrDay36(bNS, bNR, bInvokeId, ti1, ti2);
   if (Input38() != SER_GOODCHECK) return -19;
+  DelayOff();
 
   bool fUseBlocks1 = UseBlocksDMLS();
   bool fLastBlock1 = LastBlockDMLS();
@@ -86,7 +87,6 @@ schar   y(void)
     AddBufferY(22, IndexInBuff()-22-3); // TODO GetHdlcAddressesSize
   else
     AddBufferY(15, IndexInBuff()-15-3);
-  DelayOff();
 
   while (!LastSegmentDMLS()) {
     bNR++;
