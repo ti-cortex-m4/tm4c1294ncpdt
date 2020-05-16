@@ -27,6 +27,24 @@ ulong2  GetLong2Error(void)
 
 
 
+ulonglong2 GetLongLong2(uint64_t  ddwValue, bool  fValid)
+{
+  uint64_t ddw2;
+
+  ddw2.ddwValue = ddwValue;
+  ddw2.fValid = fValid;
+
+  return ddw2;
+}
+
+
+ulonglong2 GetLongLong2Error(void)
+{
+  return GetLongLong2(MAX_LONGLONG, false);
+}
+
+
+
 float2  GetFloat2(float  flValue, bool  fValid)
 {
   float2 fl2;
