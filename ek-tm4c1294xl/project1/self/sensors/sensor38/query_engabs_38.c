@@ -18,9 +18,9 @@ query_engabs_38.c
 
 
 
-void    QueryEngAbs36(uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  ibLine)
+void    QueryEngAbs36(uchar  bNS, uchar  bNR, uchar  bInvokeId)
 {
-  MonitorString("\n\n GetEngAbs "); MonitorCharDec(ibLine);
+  MonitorString("\n\n GetEngAbs ");
 
   uint wSize = 23 + GetHdlcAddressesSize(); // 0x19 25
 
@@ -47,12 +47,12 @@ void    QueryEngAbs36(uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  ibLine)
   PushChar(0x00);
   PushChar(0x03); // class
 
-  PushChar(1); // 1-0:1.8.0*255
-  PushChar(0);
-  PushChar(1 + ibLine);
-  PushChar(8);
-  PushChar(0);
-  PushChar(255);
+  PushChar(0x01); // <!--1.0.15.8.0.255-->
+  PushChar(0x00);
+  PushChar(0x0F);
+  PushChar(0x08);
+  PushChar(0x00);
+  PushChar(0xFF);
 
   PushChar(0x02);
   PushChar(0x00);

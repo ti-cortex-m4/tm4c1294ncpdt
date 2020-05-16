@@ -2046,7 +2046,7 @@ time2   ReadTimeCan(uchar  ibCan)
 #endif
 
 #ifndef SKIP_36
-    case 36: return ReadTimeCan38();
+    case 36: return ReadProfile36(); //ReadTimeCan38();
 #endif
 
     default: return GetTime2Error();
