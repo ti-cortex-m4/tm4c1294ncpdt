@@ -15,18 +15,37 @@ buffer_y.c
 
 
 
+extern  uchar                       mpbBuffX[3000];
+
+extern  uint                        iwPushX;
+
+
+
 void    StartBufferY(void) {
   InitPushX();
 }
 
 
 void    AddBufferY(uint  iwStart, uint  cwSize) {
+  MonitorString("\n CurrentBuffer");
+  MonitorArrayHex(mpbBuffX, iwPushX);
+
+  MonitorString("\n AddToBuffer: Start="); MonitorIntDec(iwStart);
+  MonitorString("\n");
+
   InitPop(iwStart);
 
   uint i;
   for (i=0; i<cwSize; i++) {
-    PushCharX(PopChar());
+    uchar b = PopChar();
+
+    MonitorCharHex(b);
+    if (i % 16 == 16-1) MonitorString("\n");
+
+    PushCharX(b);
   }
+
+  MonitorString("\n");
 }
 
 
@@ -45,7 +64,13 @@ buff_y  GetBufferYError(char  bError)
 
 
 buff_y  FinishBufferY(void) {
-  buff_y  by;
+#ifdef true
+  MonitorString("\n ReadFromBuffer: Size="); MonitorIntDec(iwPushX); MonitorString(" Array=");
+  MonitorArrayHex(mpbBuffX, iwPushX);
+#endif
+
+
+  buff_y by;
   by.bError = 0;
   by.ddwValue = 0;
   by.tiValue = tiZero;
@@ -61,6 +86,7 @@ buff_y  FinishBufferY(void) {
     return GetBufferYError(2);
 
   uchar bCount = PopCharX();
+  MonitorString("\n Count="); MonitorCharDec(bCount); MonitorString("\n");
 
 
   uchar i;
