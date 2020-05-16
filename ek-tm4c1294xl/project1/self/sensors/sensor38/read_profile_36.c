@@ -67,10 +67,10 @@ schar   y(void)
   time ti2;
   ti2.bYear = 20;
   ti2.bMonth = 4;
-  ti2.bDay = 15;
-  ti2.bHour = 23;
-  ti2.bMinute = 59;
-  ti2.bSecond = 59;
+  ti2.bDay = 14;
+  ti2.bHour = 11;
+  ti2.bMinute = 0;
+  ti2.bSecond = 0;
 
 
 
@@ -82,7 +82,10 @@ schar   y(void)
   bool fUseBlocks1 = UseBlocksDMLS();
   bool fLastBlock1 = LastBlockDMLS();
 
-  AddBufferY(22, IndexInBuff()-22-3); // TODO GetHdlcAddressesSize
+  if (fUseBlocks1)
+    AddBufferY(22, IndexInBuff()-22-3); // TODO GetHdlcAddressesSize
+  else
+    AddBufferY(15, IndexInBuff()-15-3);
   DelayOff();
 
   while (!LastSegmentDMLS()) {
