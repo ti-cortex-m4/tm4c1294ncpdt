@@ -19,7 +19,7 @@ typedef struct
 {
   uint64_t      ddwValue;
   bool          fValid;
-} ulonglong2;
+} ulong64_;
 
 
 typedef struct
@@ -54,8 +54,8 @@ typedef struct
 ulong2  GetLong2(ulong  dwValue, bool  fValid);
 ulong2  GetLong2Error(void);
 
-ulonglong2 GetLongLong2(uint64_t  ddwValue, bool  fValid);
-ulonglong2 GetLongLong2Error(void);
+ulong64_ GetLong64(uint64_t  ddwValue, bool  fValid);
+ulong64_ GetLong64Error(void);
 
 float2  GetFloat2(float  flValue, bool  fValid);
 float2  GetFloat2Error(void);

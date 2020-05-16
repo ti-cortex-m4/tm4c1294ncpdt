@@ -27,9 +27,9 @@ ulong2  GetLong2Error(void)
 
 
 
-ulonglong2 GetLongLong2(uint64_t  ddwValue, bool  fValid)
+ulong64_ GetLong64(uint64_t  ddwValue, bool  fValid)
 {
-  uint64_t ddw2;
+  ulong64_ ddw2;
 
   ddw2.ddwValue = ddwValue;
   ddw2.fValid = fValid;
@@ -38,9 +38,9 @@ ulonglong2 GetLongLong2(uint64_t  ddwValue, bool  fValid)
 }
 
 
-ulonglong2 GetLongLong2Error(void)
+ulong64_ GetLong64Error(void)
 {
-  return GetLongLong2(MAX_LONGLONG, false);
+  return GetLong64(MAX_LONGLONG, false);
 }
 
 
