@@ -22,3 +22,4 @@ void    MonitorTime(time  ti);
 
 void    MonitorOut(uint  cwIn, uint  cwOut);
 void    MonitorIn(void);
+void    MonitorArrayHex(uchar  *pbData, uint  wSize);

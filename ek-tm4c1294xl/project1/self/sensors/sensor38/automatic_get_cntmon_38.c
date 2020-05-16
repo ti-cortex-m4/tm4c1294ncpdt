@@ -9,6 +9,7 @@ automatic_get_cntmon_38.c
 #include "../../keyboard/keyboard.h"
 #include "../../time/delay.h"
 #include "../../serial/ports.h"
+#include "../../serial/monitor.h"
 #include "../../digitals/digitals.h"
 #include "device36.h"
 #include "query_engmon_38.h"
@@ -160,8 +161,19 @@ ulong64_ QueryCntMon38_Full(uchar  ibMon)
     }
 
 
-    buff_y byValue = FinishBufferY();
-    ddw = byValue.ddwValue;
+    buff_y by = FinishBufferY();
+    if (by.bError != 0)
+    {
+      MonitorString("\n Error="); MonitorCharDec(by.bError);
+      return GetLong64Error();
+    }
+    if (by.fFirst == false)
+    {
+      MonitorString("\n No Data");
+      return GetLong64Error();
+    }
+
+    ddw = by.ddwValue;
   }
 
 
