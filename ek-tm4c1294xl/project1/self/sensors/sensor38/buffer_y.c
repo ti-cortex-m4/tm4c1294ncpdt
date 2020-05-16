@@ -16,6 +16,10 @@ buffer_y.c
 
 void    StartBufferY(void) {
   InitPushX();
+
+  byValue.uint64_t = 0;
+  byValue.tiValue = tiZero;
+  byValue.fValid = false;
 }
 
 
@@ -29,7 +33,13 @@ void    AddBufferY(uint  iwStart, uint  cwSize) {
 }
 
 
-uint    FinishBufferY(void) {
+buff_y  FinishBufferY(void) {
+  buff_y  byValue;
+  byValue.ddwValue = 0;
+  byValue.tiValue = tiZero;
+  byValue.fValid = false;
+
+
   InitPopX();
 
   if (GetPopCapacity() < 2)
@@ -65,11 +75,17 @@ uint    FinishBufferY(void) {
 
     uint64_t ddw = PopLong64X();
 
+    if (byValue.fValid == false) {
+      byValue.ddwValue = ddw;
+      byValue.tiValue = ti;
+      byValue.fValid = true;
+    }
+
     MonitorString("\n");
     MonitorTime(ti);
     MonitorLongDec(ddw / 1000000);
     MonitorLongDec(ddw % 1000000);
   }
 
-  return 0;
+  return byValue;
 }

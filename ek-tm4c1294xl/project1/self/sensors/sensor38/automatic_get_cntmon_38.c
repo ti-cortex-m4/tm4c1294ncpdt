@@ -160,8 +160,8 @@ ulong64_ QueryCntMon38_Full(uchar  ibMon)
     }
 
 
-    FinishBufferY();
-    ddw = 0;
+    buff_y byValue = FinishBufferY();
+    ddw = byValue.ddwValue;
   }
 
 
