@@ -230,3 +230,15 @@ void    MonitorIn(void)
     if (fMonitorLogChar8) MonitorInChar8(IndexInBuff());
   }
 }
+
+
+
+void    MonitorArrayHex(uchar  *pbData, uint  wSize)
+{
+ MonitorString("\n ");
+
+ while (wSize--)
+ {
+   MonitorCharHex(*pbData++);
+ }
+}
