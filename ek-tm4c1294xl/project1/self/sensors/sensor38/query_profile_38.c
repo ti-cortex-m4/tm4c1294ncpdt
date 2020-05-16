@@ -71,7 +71,7 @@ query_next_block_36.c
 */
 void    QueryEngCurrDay36(uchar  bNS, uchar  bNR, uchar  bInvokeId, time  ti1, time  ti2)
 {
-  MonitorString("\n\n Get EngCurrDay ");
+  MonitorString("\n\n Get EngCurrDay "); MonitorTime(ti1); MonitorTime(ti2);
 
   uint wSize = 110 + GetHdlcAddressesSize(); // 0x70 112
 
@@ -79,18 +79,11 @@ void    QueryEngCurrDay36(uchar  bNS, uchar  bNR, uchar  bInvokeId, time  ti1, t
   PushChar(0x7E);
 
   PushFormatDLMS(wSize);
-//  PushChar(0xA0);
-//  PushChar(0x19);
   PushHdlcAddresses();
-//  PushChar(0x03);
-//  PushChar(0x03);
 
-//  MonitorString("Control{N(R)=1,N(S)=1} 32 ? "); MonitorCharHex((bNR << 5) | 0x10 | (bNS << 1) | 0x00);
   PushChar((bNR << 5) | 0x10 | (bNS << 1) | 0x00);
 
   PushIntLtl(MakeCRC16_X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
-//  PushChar(0xEC); // CRC ?
-//  PushChar(0xC8);
 
   // DLMS start
 

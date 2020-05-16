@@ -17,6 +17,15 @@ uint                        iwPushX, iwPopX;
 
 
 
+void    MonitorX(void) {
+#ifdef MONITOR_38
+  MonitorString("\n ReadFromBuffer");
+  MonitorArrayHex(mpbBuffX, iwPushX);
+#endif
+}
+
+
+
 void    InitPushX(void) {
   memset(&mpbBuffX, 0xFF, sizeof(mpbBuffX));
   iwPushX = 0;
@@ -30,12 +39,9 @@ void    PushCharX(uchar  b) {
 
 
 void    InitPopX(void) {
-  iwPopX = 0;
+  MonitorX();
 
-#ifdef MONITOR_38
-  MonitorString("\n ReadFromBuffer");
-  MonitorArrayHex(mpbBuffX, iwPushX);
-#endif
+  iwPopX = 0;
 }
 
 
