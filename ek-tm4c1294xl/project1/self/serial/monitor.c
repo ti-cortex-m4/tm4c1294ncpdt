@@ -235,10 +235,19 @@ void    MonitorIn(void)
 
 void    MonitorArrayHex(uchar  *pbData, uint  wSize)
 {
- MonitorString("\n ");
+  if (UseMonitor())
+  {
+    MonitorString("\n");
+    MonitorString("\n Size="); MonitorIntDec(wSize); MonitorString(" "); MonitorIntHex(wSize);
+    MonitorString("\n");
 
- while (wSize--)
- {
-   MonitorCharHex(*pbData++);
- }
+    uint i = 0;
+    while (wSize--)
+    {
+      MonitorCharHex(*pbData++);
+      if (++i % 16 == 0) MonitorString("\n");
+    }
+
+    MonitorString("\n");
+  }
 }
