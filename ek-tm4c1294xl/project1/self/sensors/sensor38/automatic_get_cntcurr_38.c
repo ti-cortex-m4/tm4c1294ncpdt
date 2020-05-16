@@ -46,7 +46,7 @@ double2 QueryCntCurr38_Full(void)
   uchar i;
   for (i=0; i<4; i++) {
     bNS++;
-    QueryEngAbs36(bNS, bNR, bInvokeId++, i);
+    QueryEngAbs36(bNS, bNR, bInvokeId++);
     if (Input38() != SER_GOODCHECK) return GetDouble2Error();
     if (!ValidateIframe(bNS, bNR)) return GetDouble2Error();
 

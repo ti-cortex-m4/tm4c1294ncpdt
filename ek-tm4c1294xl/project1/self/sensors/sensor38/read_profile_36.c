@@ -9,6 +9,7 @@ read_profile_36.c
 #include "../../display/display.h"
 #include "../../keyboard/keyboard.h"
 #include "../../time/delay.h"
+#include "../../time/timedate.h"
 #include "../../serial/ports.h"
 #include "../../devices/devices.h"
 #include "../../serial/monitor.h" // TODO
@@ -81,7 +82,7 @@ schar   y(void)
   bool fUseBlocks1 = UseBlocksDMLS();
   bool fLastBlock1 = LastBlockDMLS();
 
-  AddBuffer1(22, IndexInBuff()-22-3);
+  AddBuffer1(22, IndexInBuff()-22-3); // TODO GetHdlcAddressesSize
   DelayOff();
 
   while (!LastSegmentDMLS()) {
@@ -161,7 +162,7 @@ schar   y(void)
 }
 
 
-double2 ReadProfile36(void)
+time2   ReadProfile36(void)
 {
-  return GetDouble2(y(), true);
+  return GetTime2(tiZero, true);
 }
