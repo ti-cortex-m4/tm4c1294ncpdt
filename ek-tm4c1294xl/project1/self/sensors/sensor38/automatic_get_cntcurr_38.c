@@ -18,7 +18,7 @@ automatic_get_cntcurr_38.c
 
 
 
-ulong64 QueryCntCurr38_Full(void)
+ulong64_ QueryCntCurr38_Full(void)
 {
   Query38_DISC();
   if (Input38() != SER_GOODCHECK) return GetLong64Error();
@@ -44,26 +44,18 @@ ulong64 QueryCntCurr38_Full(void)
   DelayOff();
 
 
-  uchar i;
-  for (i=0; i<4; i++) {
-    bNS++;
-    QueryEngAbs36(bNS, bNR, bInvokeId++);
-    if (Input38() != SER_GOODCHECK) return GetLong64Error();
-    if (!ValidateIframe(bNS, bNR)) return GetLong64Error();
+  bNS++;
+  QueryEngAbs36(bNS, bNR, bInvokeId++);
+  if (Input38() != SER_GOODCHECK) return GetLong64Error();
+  if (!ValidateIframe(bNS, bNR)) return GetLong64Error();
+  uint64_t ddw = ReadEngAbs36();
+  DelayOff();
 
-    uint64_t ddw = ReadEngAbs36();
-    mpdwChannelsA[i] = ddw % 0x100000000;
-    mpdbChannelsC[i] = (double)mpdwChannelsA[i] / 1000;
-    mpboChannelsA[i] = true;
-
-    DelayOff();
-
-    bNR++;
-    Query38_RR(bNR);
-    if (Input38() != SER_GOODCHECK) return GetLong64Error();
-    if (!ValidateSframe(bNR)) return GetLong64Error();
-    DelayOff();
-  }
+  bNR++;
+  Query38_RR(bNR);
+  if (Input38() != SER_GOODCHECK) return GetLong64Error();
+  if (!ValidateSframe(bNR)) return GetLong64Error();
+  DelayOff();
 
 
   Query38_DISC();
@@ -71,18 +63,6 @@ ulong64 QueryCntCurr38_Full(void)
   DelayOff();
 
   return GetLong64(ddw, true);
-/*
-  Clear();
-
-  if (QueryConfig36_Full(50) == 0) return GetLong64Error();
-
-  if (QueryEngMon36_Full(0, 75) == 0) return GetLong64Error();
-
-  mpdbChannelsC[0] = (double)mpdwChannelsA[0] / GetDivider36();
-  mpboChannelsA[0] = true;
-
-  return GetDouble2(mpdbChannelsC[0], true);
-*/
 }
 
 
@@ -95,16 +75,17 @@ double2 ReadCntCurr38(void)
   uchar r;
   for (r=0; r<MaxRepeats(); r++)
   {
-    ulong64 ddw2 = QueryCntCurr38_Full();
+    ulong64_ ddw2 = QueryCntCurr38_Full();
     if (fKey == true) break;
     if (ddw2.fValid)
     {
       ShowPercent(50);
 
-      mpdbChannelsC[0] = db2.dbValue;
+      mpdwChannelsA[0] = ddw2.ddwValue % 0x100000000;
+      mpdbChannelsC[0] = (double)mpdwChannelsA[0] / 1000;
       mpboChannelsA[0] = true;
 
-      return GetDouble2(db2.dbValue, true);
+      return GetDouble2(mpdbChannelsC[0], true);
     }
   }
 
