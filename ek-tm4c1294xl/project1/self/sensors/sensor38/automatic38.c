@@ -15,8 +15,8 @@ AUTOMATIC36!C
 #include "../../digitals/digitals.h"
 #include "device38.h"
 #include "query_engmon_38.h"
-#include "io36.h"
-#include "monitor36.h"
+#include "io38.h"
+#include "monitor38.h"
 #include "automatic36.h"
 
 

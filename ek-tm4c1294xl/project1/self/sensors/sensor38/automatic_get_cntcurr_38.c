@@ -12,7 +12,7 @@ automatic_get_cntcurr_38.c
 #include "../../digitals/digitals.h"
 #include "device38.h"
 #include "query_engabs_38.h"
-#include "io36.h"
+#include "io38.h"
 #include "monitor38.h"
 #include "automatic_get_cntcurr_38.h"
 
