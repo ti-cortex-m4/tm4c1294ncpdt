@@ -3,7 +3,7 @@
 
     case DEV_START_38C:
       cbRepeat = MaxRepeats();
-      Query38_DISC();
+      Query38_DISC_Current();
       SetCurr(DEV_DISC_38C);
       break;
 
@@ -17,7 +17,7 @@
           ErrorLink();
           cbRepeat--;
 
-          Query38_DISC();
+          Query38_DISC_Current();
           SetCurr(DEV_DISC_38C);
         }
       }

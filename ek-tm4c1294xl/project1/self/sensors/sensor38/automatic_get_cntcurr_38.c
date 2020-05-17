@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-automatic_get_cntcurr_38.c
+automatic_get_cntcurr_38*c
 
 
 ------------------------------------------------------------------------------*/
@@ -46,7 +46,8 @@ ulong64_ QueryCntCurr38_Full(void)
 
 
   bNS++;
-  QueryEngAbs38(bNS, bNR, bInvokeId++);
+  bInvokeId++;
+  QueryEngAbs38(bNS, bNR, bInvokeId);
   if (Input38() != SER_GOODCHECK) return GetLong64Error(7);
   if (!ValidateIframe(bNS, bNR)) return GetLong64Error(8);
   uint64_t ddw = ReadEngAbs38();
