@@ -1,11 +1,11 @@
 /*------------------------------------------------------------------------------
-action35.h
+action36.h
 
 
 ------------------------------------------------------------------------------*/
 
-#include "include35.h"
+#include "../sensor35/include35.h"
 
 
 
-action35 Action35(bool  fShowCounter);
+action35 Action36(bool  fShowCounter, bool  fIgnoreChecksumError);

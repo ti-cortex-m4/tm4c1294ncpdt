@@ -19,9 +19,11 @@ PROFILE_RUN!C
 #include "../../serial/auto_flow.h"
 #include "../../serial/dtr.h"
 #include "../../sensors/device_k.h"
-#include "../../sensors/sensor26/device_u.h"
 #include "../../sensors/sensor21/device_p.h"
+#include "../../sensors/sensor26/device_u.h"
+#include "../../sensors/sensor36/device36.h"
 #include "../../sensors/device_q.h"
+#include "../../sensors/device_w.h"
 #include "../../digitals/digitals.h"
 #include "../../digitals/digitals_status.h"
 #include "../../digitals/digitals_pause.h"
@@ -68,7 +70,8 @@ bool    StartProfile(uchar  ibCanal)
         (diCurr.bDevice == 29) || (diCurr.bDevice == 30) ||
         (diCurr.bDevice == 31) || (diCurr.bDevice == 32) || (diCurr.bDevice == 33) ||
         (diCurr.bDevice == 34) ||
-        (diCurr.bDevice == 35))
+        (diCurr.bDevice == 35) ||
+        (diCurr.bDevice == 36) || (diCurr.bDevice == 37))
     {
       if (mpboReadyCan[ibDig] == false)
       {
@@ -239,6 +242,11 @@ bool    StartProfile(uchar  ibCanal)
 #ifndef SKIP_35
     case 35: SetNext(DEV_START_35P); break;
 #endif
+
+#ifndef SKIP_36
+    case 36:
+    case 37: SetNext(DEV_START_36P);  break;
+#endif
   }
 
   exExtended = EXT_PROFILE_30MIN;
@@ -335,6 +343,16 @@ void    NextProfile(void)
 #ifndef SKIP_U
     case 26:
     case 28: QueryCloseU();  break;
+#endif
+
+#ifndef SKIP_W
+    case 29:
+    case 30: QueryCloseW();  break;
+#endif
+
+#ifndef SKIP_36
+    case 36:
+    case 37: QueryClose36();  break;
 #endif
   }
 

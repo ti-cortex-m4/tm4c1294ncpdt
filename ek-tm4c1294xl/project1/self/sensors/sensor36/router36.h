@@ -1,11 +1,10 @@
 /*------------------------------------------------------------------------------
-action35.h
+router36.h
 
 
 ------------------------------------------------------------------------------*/
 
-#include "include35.h"
+void    Decompress36(void);
 
-
-
-action35 Action35(bool  fShowCounter);
+uchar   ChecksumRouter36(void);
+uchar   ChecksumSensor36(bool  fIgnoreChecksumError);

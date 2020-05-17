@@ -23,6 +23,7 @@ CURRENT_RUN!C
 #include "../../sensors/device_q.h"
 #include "../../sensors/sensor26/device_u.h"
 #include "../../sensors/device_w.h"
+#include "../../sensors/sensor36/device36.h"
 #include "../../digitals/digitals.h"
 #include "../../digitals/digitals_status.h"
 #include "../../digitals/digitals_pause.h"
@@ -66,7 +67,8 @@ bool    StartCurrent(uchar  ibCanal)
         (diCurr.bDevice == 29) || (diCurr.bDevice == 30) ||
         (diCurr.bDevice == 31) ||
         (diCurr.bDevice == 34) ||
-        (diCurr.bDevice == 35))
+        (diCurr.bDevice == 35) ||
+        (diCurr.bDevice == 36) || (diCurr.bDevice == 37))
     {
       if (mpboReadyCan[ibDig] == false)
       {
@@ -195,6 +197,11 @@ bool    StartCurrent(uchar  ibCanal)
 #ifndef SKIP_35
     case 35: SetNext(DEV_START_35C);  break;
 #endif
+
+#ifndef SKIP_36
+    case 36:
+    case 37: SetNext(DEV_START_36C);  break;
+#endif
   }
 
   exExtended = EXT_CURRENT_3MIN;
@@ -269,6 +276,11 @@ void    NextCurrent(void)
 #ifndef SKIP_W
     case 29:
     case 30: QueryCloseW();  break;
+#endif
+
+#ifndef SKIP_36
+    case 36:
+    case 37: QueryClose36();  break;
 #endif
   }
 

@@ -102,7 +102,7 @@ void    QueryHeaderU_Plc(void)
 
   szHi[10] = 'A' + ibLineU;
 
-  bMaxLineU = GetMaxLine(ibDig);
+  bMaxLineU = GetMaxLineU(ibDig);
   QueryHeaderU_Plc_Inner();
 }
 

@@ -792,6 +792,42 @@ typedef enum
 
 #endif
 
+#ifndef SKIP_36
+
+  DEV_RUN_WAIT_36       =  0x2200,
+  DEV_RUN_BREAK_36      =  0x2201,
+  DEV_RUN_DATA_GET_36   =  0x2202,
+
+  DEV_START_36C         =  0x2210,
+  DEV_OPENCANAL_36C     =  0x2211,
+  DEV_POSTOPENCANAL_36C =  0x2212,
+  DEV_OPTION_36C        =  0x2213,
+  DEV_POSTOPTION_36C    =  0x2214,
+  DEV_ENERGY_36C        =  0x2215,
+
+  DEV_START_36P         =  0x2220,
+  DEV_PREVCORRECT_36P   =  0x2221,
+  DEV_CORRECT_36P       =  0x2222,
+  DEV_OPEN_36P          =  0x2223,
+  DEV_OPENCANAL_36P     =  0x2224,
+  DEV_POSTOPENCANAL_36P =  0x2225,
+  DEV_OPTION_36P        =  0x2226,
+  DEV_POSTOPTION_36P    =  0x2227,
+  DEV_PASSWORD_36P      =  0x2228,
+  DEV_POSTPASSWORD_36P  =  0x2229,
+  DEV_TIME_36P          =  0x222A,
+  DEV_POSTTIME_36P      =  0x222B,
+  DEV_DATE_36P          =  0x222C,
+  DEV_POSTDATE_36P      =  0x222D,
+  DEV_CONTROL_36P       =  0x222E,
+  DEV_POSTCONTROL_36P   =  0x222F,
+  DEV_POSTCORRECT_36P   =  0x2230,
+  DEV_HEADER_36P        =  0x2231,
+  DEV_POSTHEADER_36P    =  0x2232,
+  DEV_DATA_36P          =  0x2233,
+
+#endif
+
   DEV_PAUSE             =  1
 
 } device;

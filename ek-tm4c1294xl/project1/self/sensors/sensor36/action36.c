@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-action35.c
+action36.c
 
 
 ------------------------------------------------------------------------------*/
@@ -13,14 +13,14 @@ action35.c
 #include "../../serial/ports_devices.h"
 #include "../../serial/monitor.h"
 #include "../../devices/devices_init.h"
-#include "include35.h"
-#include "router35.h"
-#include "unpack35.h"
-#include "io35.h"
-#include "timer35.h"
-#include "timeout35.h"
-#include "log35.h"
-#include "action35.h"
+#include "../sensor35/include35.h"
+#include "include36.h"
+#include "router36.h"
+#include "../sensor35/unpack35.h"
+#include "../sensor35/timer35.h"
+#include "../sensor35/timeout35.h"
+#include "../sensor35/log35.h"
+#include "action36.h"
 
 
 
@@ -35,7 +35,7 @@ static event35 event0(bool  fLog, result35  enResult, action35  enAction, uint  
 
 
 
-static event35 Event35(bool  fShowCounter) {
+static event35 Event36(bool  fShowCounter, bool  fIgnoreChecksumError) {
   if (InBuff(7) == NNCL2_TIME) {
     uint tm = GetTimer35();
     if (fShowCounter) {
@@ -62,7 +62,7 @@ static event35 Event35(bool  fShowCounter) {
     if (IndexInBuff() < 15) {
       uint w = IndexInBuff();
       MonitorString("\t sensor error: bad size "); MonitorIntDec(w);
-      Clear(); sprintf(szLo+1,"ошибка: 35.3.%u",w); DelayInf();
+      Clear(); sprintf(szLo+1,"ошибка: 36.3.%u",w); DelayInf();
       return event0(true, R35_ROUTER_ERROR_SIZE, A35_ERROR, w);
     } else {
       MonitorString("\t sensor success: good size ");
@@ -75,20 +75,13 @@ static event35 Event35(bool  fShowCounter) {
       SetIndexInBuff(IndexInBuff()-15);
 
 
-#ifdef MONITOR_35
-      MonitorString("\n sensor unpack start");
-      MonitorIn();
-#endif
-
-      Unpack35();
-
-#ifdef MONITOR_35
+#ifdef MONITOR_36
       MonitorString("\n sensor unpack finish");
       MonitorIn();
 #endif
 
 
-      if (ChecksumSensor35() == 0) {
+      if (ChecksumSensor36(fIgnoreChecksumError) == 0) {
         MonitorString("\t sensor success");
         return event0(false, R35_SENSOR_SUCCESS, A35_SUCCESS, 0);
       } else {
@@ -99,20 +92,20 @@ static event35 Event35(bool  fShowCounter) {
   } else if (InBuff(7) == NNCL2_ERROR) {
     uint w = InBuff(12);
     MonitorString("\t router error: "); MonitorCharDec(w);
-    Clear(); sprintf(szLo+1,"ошибка: 35.4.%u",w); DelayInf();
+    Clear(); sprintf(szLo+1,"ошибка: 36.4.%u",w); DelayInf();
     return event0(true, R35_ROUTER_ERROR_ERROR, A35_BREAK, w);
   } else {
     uint w = InBuff(7);
     MonitorString("\t router unknown command: "); MonitorCharDec(w);
-    Clear(); sprintf(szLo+1,"ошибка: 35.5.%u",w); DelayInf();
+    Clear(); sprintf(szLo+1,"ошибка: 36.5.%u",w); DelayInf();
     return event0(true, R35_ROUTER_ERROR_COMMAND, A35_ERROR, w);
   }
 }
 
 
 
-action35 Action35(bool  fShowCounter) {
-  event35 event = Event35(fShowCounter);
+action35 Action36(bool  fShowCounter, bool  fIgnoreChecksumError) {
+  event35 event = Event36(fShowCounter, fIgnoreChecksumError);
   if (event.fLog) {
     Log35(event.enResult, event.wData);
   }

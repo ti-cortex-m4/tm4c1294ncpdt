@@ -43,7 +43,7 @@ uchar                   ibLineU, bMaxLineU;
 
 
 
-uchar   GetMaxLine(uchar  ibCan)
+uchar   GetMaxLineU(uchar  ibCan)
 {
   switch (GetDigitalDevice(ibCan))
   {
@@ -274,7 +274,7 @@ void    QueryHeaderU(void)
 
   szHi[10] = 'A' + ibLineU;
 
-  bMaxLineU = GetMaxLine(ibDig);
+  bMaxLineU = GetMaxLineU(ibDig);
   QueryHeaderU_26();
 }
 

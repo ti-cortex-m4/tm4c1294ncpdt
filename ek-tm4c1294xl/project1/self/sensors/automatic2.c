@@ -39,7 +39,7 @@ AUTOMATIC2!C
 #include "sensor21/input_p.h"
 #include "sensor21/automatic_p.h"
 #include "automatic_q.h"
-#include "automatic_s.h"
+#include "sensor24/automatic_s.h"
 #include "sensor26/automatic_u.h"
 #include "automatic_v.h"
 #include "automatic_w.h"
@@ -51,6 +51,7 @@ AUTOMATIC2!C
 #include "sensor33/cntmon33.h"
 #include "sensor34/automatic34.h"
 #include "sensor35/automatic35.h"
+#include "sensor36/automatic36.h"
 #include "sensor38/automatic36.h"
 #include "sensor38/automatic_get_time_38.h"
 #include "sensor38/automatic_get_cntcurr_38.h"
@@ -1910,7 +1911,12 @@ double2 ReadCntCurrCan(uchar  ibCan)
 #endif
 
 #ifndef SKIP_36
-    case 36: return ReadCntCurr38();
+    case 36: return ReadCntCurr36(2);
+    case 37: return ReadCntCurr36(4);
+#endif
+
+#ifndef SKIP_38
+    case 38: return ReadCntCurr38();
 #endif
 
     default: return GetDouble2Error();
@@ -2047,7 +2053,12 @@ time2   ReadTimeCan(uchar  ibCan)
 #endif
 
 #ifndef SKIP_36
-    case 36: return ReadProfile36(); //ReadTimeCan38();
+    case 36:
+    case 37: return ReadTimeCan36();
+#endif
+
+#ifndef SKIP_36
+    case 38: return ReadProfile36(); //ReadTimeCan38();
 #endif
 
     default: return GetTime2Error();
@@ -2201,7 +2212,12 @@ double2 ReadCntMonCan(uchar  ibMon, uchar  ibCan)
 #endif
 
 #ifndef SKIP_36
-    case 36: return ReadCntMonCan38(ibMon);
+    case 36: return ReadCntMonCan36(ibMon,2);
+    case 37: return ReadCntMonCan36(ibMon,4);
+#endif
+
+#ifndef SKIP_38
+    case 38: return ReadCntMonCan38(ibMon);
 #endif
 
     default: return GetDouble2Error();
