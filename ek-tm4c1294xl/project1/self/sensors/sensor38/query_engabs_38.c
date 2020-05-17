@@ -63,7 +63,7 @@ void    QueryEngAbs38(uchar  bNS, uchar  bNR, uchar  bInvokeId)
 
   PushChar(0x7E);
 
-  Query36(1000, wSize+2); // 27
+  Query38(1000, wSize+2); // 27
 }
 
 

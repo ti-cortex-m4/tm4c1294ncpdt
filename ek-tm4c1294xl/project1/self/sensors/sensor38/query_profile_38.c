@@ -270,6 +270,6 @@ void    QueryEngCurrDay36(uchar  bNS, uchar  bNR, uchar  bInvokeId, time  ti1, t
 
   PushChar(0x7E);
 
-  Query36(1000, wSize+2);
+  Query38(1000, wSize+2);
 }
 
