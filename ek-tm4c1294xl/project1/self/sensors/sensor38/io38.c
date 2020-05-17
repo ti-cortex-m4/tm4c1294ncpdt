@@ -48,7 +48,6 @@ serial  Input38(void)
 
     if (mpSerial[ibPort] == SER_POSTINPUT_MASTER)
     {
-      //MonitorInput36();
       if (ValidInput38())
       {
         InputGoodCheck();
