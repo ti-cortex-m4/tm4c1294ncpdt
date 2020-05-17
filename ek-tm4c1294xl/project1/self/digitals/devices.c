@@ -48,12 +48,12 @@ message                 mpszDevices[bMAXDEVICES+1] = {
                                           ".ESM            ",
                                           ".ÑÅ102 NNCL2    ",
                                           ".ÑÅ301 NNCL2    ",
-                                          ".ÑÅ303 NNCL2    ",
+                                          ".ÑÅ303 NNCL2    "
                                           ".CC-301 DLMS    "
                                       };
 
 uchar const             mpbMaxLines[bMAXDEVICES+1] =
-{ 1, 4, 4, 4, 4, 16, 64, 16, 4, 6, 1, 1, 4, 4, 1, 4, 4, 1, 1, 1, 1, 4, 4, 4, 1, 2, 2, 1, 4, 4, 4, 6, 1, 1, 4, 1, 4, 1 };
+{ 1, 4, 4, 4, 4, 16, 64, 16, 4, 6, 1, 1, 4, 4, 1, 4, 4, 1, 1, 1, 1, 4, 4, 4, 1, 2, 2, 1, 4, 4, 4, 6, 1, 1, 4, 1, 2, 4 };
 
 
 bool    ValidDevice(uchar  bDevice)
