@@ -7,18 +7,12 @@
       break;
 
     case DEV_DISC_38C:
-      if (mpSerial[ibPort] == SER_GOODCHECK)
-      {
-//        if (ReadOpen38() == false)
-//          ErrorCurrent();
-//        else
-//          MakePause(DEV_POSTOPENCANAL_38C);
+      if (mpSerial[ibPort] == SER_GOODCHECK) {
+        MakePause(DEV_POSTDISC_38C);
       }
-      else
-      {
+      else {
         if (cbRepeat == 0) ErrorCurrent();
-        else
-        {
+        else {
           ErrorLink();
           cbRepeat--;
 
@@ -36,18 +30,12 @@
       break;
 
     case DEV_SNRM_38C:
-      if (mpSerial[ibPort] == SER_GOODCHECK)
-      {
-//        if (ReadOpen38() == false)
-//          ErrorCurrent();
-//        else
-//          MakePause(DEV_POSTOPENCANAL_38C);
+      if (mpSerial[ibPort] == SER_GOODCHECK) {
+        MakePause(DEV_POSTSNRM_38C);
       }
-      else
-      {
+      else {
         if (cbRepeat == 0) ErrorCurrent();
-        else
-        {
+        else {
           ErrorLink();
           cbRepeat--;
 
@@ -65,18 +53,15 @@
       break;
 
     case DEV_OPEN2_38C:
-      if (mpSerial[ibPort] == SER_GOODCHECK)
-      {
-//        if (ReadOpen38() == false)
-//          ErrorCurrent();
-//        else
-//          MakePause(DEV_POSTOPENCANAL_38C);
-      }
-      else
-      {
-        if (cbRepeat == 0) ErrorCurrent();
+      if (mpSerial[ibPort] == SER_GOODCHECK) {
+        if (!ValidateIframe(bNS, bNR))
+          ErrorCurrent();
         else
-        {
+          MakePause(DEV_POSTOPEN2_38C);
+      }
+      else {
+        if (cbRepeat == 0) ErrorCurrent();
+        else {
           ErrorLink();
           cbRepeat--;
 
@@ -94,18 +79,15 @@
       break;
 
     case DEV_RR1_38C:
-      if (mpSerial[ibPort] == SER_GOODCHECK)
-      {
-//        if (ReadOpen38() == false)
-//          ErrorCurrent();
-//        else
-//          MakePause(DEV_POSTOPENCANAL_38C);
-      }
-      else
-      {
-        if (cbRepeat == 0) ErrorCurrent();
+      if (mpSerial[ibPort] == SER_GOODCHECK) {
+        if (!ValidateSframe(bNR))
+          ErrorCurrent();
         else
-        {
+          MakePause(DEV_POSTRR1_38C);
+      }
+      else {
+        if (cbRepeat == 0) ErrorCurrent();
+        else {
           ErrorLink();
           cbRepeat--;
 
@@ -116,7 +98,7 @@
       break;
 
 
-    case DEV_POSTRR_38C:
+    case DEV_POSTRR1_38C:
       cbRepeat = MaxRepeats();
       QueryEngAbs38();
       SetCurr(DEV_ENGABS_38C);
@@ -125,17 +107,16 @@
     case DEV_ENGABS_38C:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        ReadCurrent38();
-//        if (ReadOpen38() == false)
-//          ErrorCurrent();
-//        else
-//          MakePause(DEV_POSTOPENCANAL_38C);
+        if (!ValidateIframe(bNS, bNR))
+          ErrorCurrent();
+        else {
+          SaveCurrent38();
+          MakePause(DEV_POSTENGABS_38C);
+        }
       }
-      else
-      {
+      else {
         if (cbRepeat == 0) ErrorCurrent();
-        else
-        {
+        else {
           ErrorLink();
           cbRepeat--;
 
@@ -155,11 +136,12 @@
     case DEV_RR2_38C:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        ReadCurrent38();
-//        if (ReadOpen38() == false)
-//          ErrorCurrent();
-//        else
-//          MakePause(DEV_POSTOPENCANAL_38C);
+        if (!ValidateSframe(bNR))
+          ErrorCurrent();
+        else {
+          ReadCurrent38();
+          MakePause(DEV_POSTOPENCANAL_38C);
+        }
       }
       else
       {
