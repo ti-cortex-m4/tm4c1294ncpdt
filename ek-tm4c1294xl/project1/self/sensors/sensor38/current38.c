@@ -33,6 +33,8 @@ void    Query38_DISC_Current(void)
   bNS = 0;
   bNR = 0;
   bInvokeId = 0;
+
+  Query38_DISC();
 }
 
 

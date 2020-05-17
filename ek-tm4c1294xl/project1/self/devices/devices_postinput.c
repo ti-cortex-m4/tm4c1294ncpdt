@@ -281,4 +281,17 @@ void    DevicesPostInput(void)
       }
     }
 #endif
+
+#ifndef SKIP_38
+    else if (diCurr.bDevice == 38)
+    {
+      if (ValidInput38())
+      {
+        InputGoodCheck();
+        mpSerial[ibPort] = SER_GOODCHECK;
+      }
+      else
+        mpSerial[ibPort] = SER_BADCHECK;
+    }
+#endif
 }
