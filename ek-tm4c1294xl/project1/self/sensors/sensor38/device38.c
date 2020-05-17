@@ -41,7 +41,7 @@ void    Query38_DISC(void)
 
   PushChar(0x7E);
 
-  Query36(1000, wSize+2); // 9
+  Query38(1000, wSize+2); // 9
 }
 
 
@@ -100,7 +100,7 @@ void    Query38_SNRM(void)
 
   PushChar(0x7E);
 
-  Query36(1000, wSize+2); // 34
+  Query38(1000, wSize+2); // 34
 }
 
 
@@ -206,7 +206,7 @@ void    Query38_Open2(uchar  bNS, uchar  bNR)
   
   PushChar(0x7E);
 
-  Query36(1000, wSize+2); // 70
+  Query38(1000, wSize+2); // 70
 }
 
 
@@ -227,7 +227,7 @@ void    Query38_RR(uchar  bNR)
   PushIntLtl(MakeCRC16_X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
   PushChar(0x7E);
 
-  Query36(1000, wSize+2); // 9
+  Query38(1000, wSize+2); // 9
 }
 
 
@@ -277,7 +277,7 @@ void    QueryTime38(uchar  bNS, uchar  bNR, uchar  bInvokeId)
   
   PushChar(0x7E);
 
-  Query36(1000, wSize+2); // 27
+  Query38(1000, wSize+2); // 27
 }
 
 

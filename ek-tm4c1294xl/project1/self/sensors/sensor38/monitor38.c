@@ -59,7 +59,7 @@ static void MonitorControl(uchar  bControl) {
 
 
 
-void    MonitorOutput36(void)
+void    MonitorOutput38(void)
 {
   MonitorString("\n Output HDLC:");
 
@@ -79,7 +79,7 @@ void    MonitorOutput36(void)
 
 
 
-bool    ValidInput36(void)
+bool    ValidInput38(void)
 {
   MonitorString("\n Input HDLC:");
   InitPop(1);
