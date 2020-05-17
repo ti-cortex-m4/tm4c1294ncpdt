@@ -20,7 +20,7 @@ query_engabs_38.c
 
 void    QueryEngAbs38(uchar  bNS, uchar  bNR, uchar  bInvokeId)
 {
-  MonitorString("\n\n GetEngAbs ");
+  MonitorString("\n\n GetEngAbs");
 
   uint wSize = 23 + GetHdlcAddressesSize(); // 0x19 25
 
