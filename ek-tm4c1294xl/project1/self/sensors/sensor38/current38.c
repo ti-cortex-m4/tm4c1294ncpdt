@@ -13,13 +13,16 @@ current38.c
 //#include "../../digitals/digitals.h"
 //#include "../../digitals/current/current_run.h"
 #include "io38.h"
-#include "device_38.h"
+#include "monitor38.h"
+#include "device38.h"
+#include "query_engabs_38.h"
 #include "current38.h"
 
 
-  uchar bNS = 0;
-  uchar bNR = 0;
-  uchar bInvokeId = 0;
+
+uchar                   bNS;
+uchar                   bNR;
+uchar                   bInvokeId;
 
 
 
@@ -33,29 +36,38 @@ void    Query38_Open2_Current(void)
 }
 
 
-
 void    Query38_RR_Current(void)
 {
+  bNR++;
   Query38_RR(bNR);
 }
 
 
-
 void    QueryEngAbs38_Current(void)
 {
+  bNS++;
   QueryEngAbs38(bNS, bNR, bInvokeId++);
 }
 
 
 
-void    ValidateSframe_Current(void)
+bool    ValidateSframe_Current(void)
 {
-  ValidateSframe(bNR);
+  return ValidateSframe(bNR);
 }
 
 
-
-void    ValidateIframe_Current(void)
+bool    ValidateIframe_Current(void)
 {
-  ValidateIframe(bNS, bNR);
-);
+  return ValidateIframe(bNS, bNR);
+};
+
+
+
+void    SaveCurrent38(void)
+{
+}
+
+void    ReadCurrent38(void)
+{
+}

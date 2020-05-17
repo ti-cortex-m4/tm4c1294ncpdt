@@ -74,6 +74,8 @@ DEVICES.C
 #include "../sensors/sensor36/io36.h"
 #include "../sensors/sensor36/current36.h"
 #include "../sensors/sensor36/profile36.h"
+#include "../sensors/sensor38/device38.h"
+#include "../sensors/sensor38/query_engabs_38.h"
 #include "../sensors/sensor38/current38.h"
 #include "../serial/ports.h"
 #include "../serial/ports_modems.h"
@@ -6589,6 +6591,7 @@ void    RunDevices(void)
       break;
 
 #endif
+
 #ifndef SKIP_38
 
     case DEV_START_38C:
@@ -6639,13 +6642,13 @@ void    RunDevices(void)
 
     case DEV_POSTSNRM_38C:
       cbRepeat = MaxRepeats();
-      Query38_Open2();
+      Query38_Open2_Current();
       SetCurr(DEV_OPEN2_38C);
       break;
 
     case DEV_OPEN2_38C:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
-        if (!ValidateIframe(bNS, bNR))
+        if (!ValidateIframe_Current())
           ErrorCurrent();
         else
           MakePause(DEV_POSTOPEN2_38C);
@@ -6656,7 +6659,7 @@ void    RunDevices(void)
           ErrorLink();
           cbRepeat--;
 
-          Query38_Open2();
+          Query38_Open2_Current();
           SetCurr(DEV_OPEN2_38C);
         }
       }
@@ -6665,13 +6668,13 @@ void    RunDevices(void)
 
     case DEV_POSTOPEN2_38C:
       cbRepeat = MaxRepeats();
-      Query38_RR();
+      Query38_RR_Current();
       SetCurr(DEV_RR1_38C);
       break;
 
     case DEV_RR1_38C:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
-        if (!ValidateSframe(bNR))
+        if (!ValidateSframe_Current())
           ErrorCurrent();
         else
           MakePause(DEV_POSTRR1_38C);
@@ -6682,7 +6685,7 @@ void    RunDevices(void)
           ErrorLink();
           cbRepeat--;
 
-          Query38_RR();
+          Query38_RR_Current();
           SetCurr(DEV_RR1_38C);
         }
       }
@@ -6691,14 +6694,14 @@ void    RunDevices(void)
 
     case DEV_POSTRR1_38C:
       cbRepeat = MaxRepeats();
-      QueryEngAbs38();
+      QueryEngAbs38_Current();
       SetCurr(DEV_ENGABS_38C);
       break;
 
     case DEV_ENGABS_38C:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        if (!ValidateIframe(bNS, bNR))
+        if (!ValidateIframe_Current())
           ErrorCurrent();
         else {
           SaveCurrent38();
@@ -6711,7 +6714,7 @@ void    RunDevices(void)
           ErrorLink();
           cbRepeat--;
 
-          QueryEngAbs38();
+          QueryEngAbs38_Current();
           SetCurr(DEV_ENGABS_38C);
         }
       }
@@ -6720,29 +6723,26 @@ void    RunDevices(void)
 
     case DEV_POSTENGABS_38C:
       cbRepeat = MaxRepeats();
-      Query38_RR();
+      Query38_RR_Current();
       SetCurr(DEV_RR2_38C);
       break;
 
     case DEV_RR2_38C:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        if (!ValidateSframe(bNR))
+        if (!ValidateSframe_Current())
           ErrorCurrent();
         else {
           ReadCurrent38();
-          MakePause(DEV_POSTOPENCANAL_38C);
         }
       }
-      else
-      {
+      else {
         if (cbRepeat == 0) ErrorCurrent();
-        else
-        {
+        else {
           ErrorLink();
           cbRepeat--;
 
-          Query38_RR();
+          Query38_RR_Current();
           SetCurr(DEV_RR2_38C);
         }
       }
