@@ -168,7 +168,7 @@ void    QueryEngMon38(uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  bMonth, u
 
   PushChar(0x7E);
 
-  Query36(1000, wSize+2);
+  Query38(1000, wSize+2);
 }
 
 
