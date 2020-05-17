@@ -66,7 +66,9 @@ bool    ValidateIframe_Current(void)
 
 void    SaveCurrent38(void)
 {
+  uint64_t ddw = ReadEngAbs38();
 }
+
 
 void    ReadCurrent38(void)
 {
