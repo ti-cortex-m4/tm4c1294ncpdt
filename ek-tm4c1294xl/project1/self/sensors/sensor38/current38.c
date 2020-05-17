@@ -12,54 +12,50 @@ current38.c
 //#include "../../devices/devices.h"
 //#include "../../digitals/digitals.h"
 //#include "../../digitals/current/current_run.h"
-//#include "io36.h"
-//#include "../device_k.h"
+#include "io38.h"
+#include "device_38.h"
 #include "current38.h"
 
 
-/*
-uchar   GetMaxLine36(uchar  ibCan)
+  uchar bNS = 0;
+  uchar bNR = 0;
+  uchar bInvokeId = 0;
+
+
+
+void    Query38_Open2_Current(void)
 {
-  switch (GetDigitalDevice(ibCan))
-  {
-    case 36: return 2;
-    case 37: return 4;
-    default: ASSERT(false); return 0;
-  }
+  bNS = 0;
+  bNR = 0;
+  bInvokeId = 0;
+
+  Query38_Open2(bNS, bNR);
 }
 
 
-void    QueryEngCurrent36(uchar  ibLine)
+
+void    Query38_RR_Current(void)
 {
-  InitPush(0);
-
-  PushChar1Bcc(0x01);
-  PushChar1Bcc('R');
-  PushChar1Bcc('1');
-  PushChar1Bcc(0x02);
-
-  PushChar1Bcc('E');
-  PushChar1Bcc('T');
-  PushChar1Bcc('0');
-
-  PushLineBcc(ibLine);
-
-  PushChar1Bcc('(');
-  PushChar1Bcc(')');
-  PushChar1Bcc(0x03);
-
-  BccQuery36(1+6*28+2, 4+8+1, 6);
+  Query38_RR(bNR);
 }
 
 
-void    ReadCurrent36(uchar  bMaxLine)
-{
-  uchar i;
-  for (i=0; i<bMaxLine; i++)
-  {
-    mpdwBaseDig[i] = mpdbChannelsC[i] * mpdbPulseMnt[ibDig];
-  }
 
-  MakeCurrent();
+void    QueryEngAbs38_Current(void)
+{
+  QueryEngAbs38(bNS, bNR, bInvokeId++);
 }
-*/
+
+
+
+void    ValidateSframe_Current(void)
+{
+  ValidateSframe(bNR);
+}
+
+
+
+void    ValidateIframe_Current(void)
+{
+  ValidateIframe(bNS, bNR);
+);
