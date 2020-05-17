@@ -11,10 +11,10 @@ query_next_block_36.c
 #include "../../serial/monitor.h"
 #include "include38.h"
 #include "crc16x25.h"
-#include "io36.h"
+#include "io38.h"
 #include "hdlc.h"
 #include "push_dlms.h"
-#include "device36.h" //
+#include "device38.h" //
 #include "query_next_block_38.h"
 
 

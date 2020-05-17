@@ -13,7 +13,7 @@ AUTOMATIC36!C
 #include "../../devices/devices.h"
 //#include "../../sensors/automatic1.h"
 #include "../../digitals/digitals.h"
-#include "device36.h"
+#include "device38.h"
 #include "query_engmon_38.h"
 #include "io36.h"
 #include "monitor36.h"

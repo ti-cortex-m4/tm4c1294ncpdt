@@ -10,9 +10,9 @@ automatic_get_time_38.c
 #include "../../time/delay.h"
 #include "../../serial/ports.h"
 #include "../../digitals/digitals.h"
-#include "device36.h"
-#include "io36.h"
-#include "monitor36.h"
+#include "device38.h"
+#include "io38.h"
+#include "monitor38.h"
 #include "automatic_get_time_38.h"
 
 

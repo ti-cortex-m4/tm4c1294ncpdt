@@ -11,7 +11,7 @@ query_engabs_38.c
 #include "../../serial/monitor.h"
 #include "include38.h"
 #include "crc16x25.h"
-#include "io36.h"
+#include "io38.h"
 #include "hdlc.h"
 #include "push_dlms.h"
 #include "query_engabs_38.h"
