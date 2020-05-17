@@ -6595,6 +6595,8 @@ void    RunDevices(void)
 #ifndef SKIP_38
 
     case DEV_START_38C:
+      Clear(); ShowPercent(50);
+
       cbRepeat = MaxRepeats();
       Query38_DISC_Current();
       SetCurr(DEV_DISC_38C);
@@ -6618,6 +6620,8 @@ void    RunDevices(void)
 
 
     case DEV_POSTDISC_38C:
+      Clear(); ShowPercent(51);
+
       cbRepeat = MaxRepeats();
       Query38_SNRM();
       SetCurr(DEV_SNRM_38C);
@@ -6641,6 +6645,8 @@ void    RunDevices(void)
 
 
     case DEV_POSTSNRM_38C:
+      Clear(); ShowPercent(52);
+
       cbRepeat = MaxRepeats();
       Query38_Open2_Current();
       SetCurr(DEV_OPEN2_38C);
@@ -6667,6 +6673,8 @@ void    RunDevices(void)
 
 
     case DEV_POSTOPEN2_38C:
+      Clear(); ShowPercent(53);
+
       cbRepeat = MaxRepeats();
       Query38_RR_Current();
       SetCurr(DEV_RR1_38C);
@@ -6693,6 +6701,8 @@ void    RunDevices(void)
 
 
     case DEV_POSTRR1_38C:
+      Clear(); ShowPercent(54);
+
       cbRepeat = MaxRepeats();
       QueryEngAbs38_Current();
       SetCurr(DEV_ENGABS_38C);
@@ -6722,6 +6732,8 @@ void    RunDevices(void)
 
 
     case DEV_POSTENGABS_38C:
+      Clear(); ShowPercent(55);
+
       cbRepeat = MaxRepeats();
       Query38_RR_Current();
       SetCurr(DEV_RR2_38C);
