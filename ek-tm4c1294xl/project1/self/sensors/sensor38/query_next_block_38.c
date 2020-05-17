@@ -62,5 +62,5 @@ void    QueryNextBlock36(uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  bBlock
 
   PushChar(0x7E);
 
-  Query36(1000, wSize+2); // 0x13
+  Query38(1000, wSize+2); // 0x13
 }

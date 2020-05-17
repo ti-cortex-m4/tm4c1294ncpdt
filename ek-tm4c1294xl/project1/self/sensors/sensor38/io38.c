@@ -21,9 +21,9 @@ IO36!C
 
 
 
-void    Query36(uint  cwIn, uchar  cbOut)
+void    Query38(uint  cwIn, uchar  cbOut)
 {
-  MonitorOutput36();
+  MonitorOutput38();
   Query(cwIn, cbOut, true);
 }
 
@@ -44,12 +44,12 @@ serial  Input38(void)
     if (GetWaitAnswer()) { mpSerial[ibPort] = SER_BADLINK; break; }
 
     if (mpSerial[ibPort] == SER_INPUT_MASTER)
-      Decompress36();
+      Decompress38();
 
     if (mpSerial[ibPort] == SER_POSTINPUT_MASTER)
     {
       //MonitorInput36();
-      if (ValidInput36())
+      if (ValidInput38())
       {
         InputGoodCheck();
         mpSerial[ibPort] = SER_GOODCHECK;
