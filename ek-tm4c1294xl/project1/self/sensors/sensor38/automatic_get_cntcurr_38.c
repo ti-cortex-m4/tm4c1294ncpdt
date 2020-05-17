@@ -72,11 +72,11 @@ double2 ReadCntCurr38(void)
 {
   Clear();
 
-//  uchar r;
-//  for (r=0; r<MaxRepeats(); r++)
-//  {
+  uchar r;
+  for (r=0; r<MaxRepeats(); r++)
+  {
     ulong64_ ddw2 = QueryCntCurr38_Full();
-//    if (fKey == true) break;
+    if (fKey == true) break;
     if (ddw2.fValid)
     {
       ShowPercent(50);
@@ -91,7 +91,7 @@ double2 ReadCntCurr38(void)
       MonitorString("\n Error="); MonitorCharDec(ddw2.bError);
 #endif
     }
-//  }
+  }
 
   Query38_DISC();
   if (Input38() != SER_GOODCHECK) return GetDouble2Error();

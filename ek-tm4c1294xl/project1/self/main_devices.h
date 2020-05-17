@@ -828,6 +828,23 @@ typedef enum
 
 #endif
 
+#ifndef SKIP_36
+
+  DEV_START_38C         =  0x2300,
+  DEV_DISC_38C          =  0x2301,
+  DEV_POSTDISC_38C      =  0x2302,
+  DEV_SNRM_38C          =  0x2303,
+  DEV_POSTSNRM_38C      =  0x2304,
+  DEV_OPEN2_38C         =  0x2305,
+  DEV_POSTOPEN2_38C     =  0x2306,
+  DEV_RR1_38C           =  0x2307,
+  DEV_POSTRR1_38C       =  0x2308,
+  DEV_ENGABS_38C        =  0x2309,
+  DEV_POSTENGABS_38C    =  0x2310,
+  DEV_RR2_38C           =  0x2311,
+
+#endif
+
   DEV_PAUSE             =  1
 
 } device;
