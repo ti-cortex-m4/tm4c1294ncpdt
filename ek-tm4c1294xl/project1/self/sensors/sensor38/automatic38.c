@@ -17,7 +17,7 @@ AUTOMATIC36!C
 #include "query_engmon_38.h"
 #include "io38.h"
 #include "monitor38.h"
-#include "automatic36.h"
+#include "automatic38.h"
 
 
 /*
