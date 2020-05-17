@@ -15,8 +15,8 @@ AUTOMATIC_0!C
 #include "../../sensors/device_k.h"
 #include "../../sensors/sensor21/input_p.h"
 #include "../../sensors/sensor21/device_p.h"
-#include "../../sensors/device_s.h"
-#include "../../sensors/automatic_s.h"
+#include "../../sensors/sensor24/device_s.h"
+#include "../../sensors/sensor24/automatic_s.h"
 #include "../../sensors/sensor26/device_u.h"
 #include "../../sensors/device_v.h"
 #include "../../sensors/automatic_v.h"
@@ -30,6 +30,7 @@ AUTOMATIC_0!C
 #include "../../sensors/sensor33/automatic33.h"
 #include "../../sensors/sensor34/time34.h"
 #include "../../sensors/sensor35/automatic35.h"
+#include "../../sensors/sensor36/automatic36.h"
 #include "../../sensors/sensor38/automatic_get_time_38.h"
 #include "../../console.h"
 #include "../../time/timedate.h"
@@ -642,7 +643,12 @@ time2   ReadTimeCan_Short(uchar  ibCan)
 #endif
 
 #ifndef SKIP_36
-    case 36: return ReadTimeCan38_Short();
+    case 36:
+    case 37: return ReadTimeCan36_Short();
+#endif
+
+#ifndef SKIP_38
+    case 38: return ReadTimeCan38_Short();
 #endif
 
     default: return GetTime2Error();

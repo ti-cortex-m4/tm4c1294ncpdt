@@ -12,7 +12,7 @@ DEVICES_POSTINPUT,C
 #include "../serial/monitor.h"
 #include "../serial/input_wrapper.h"
 #include "../sensors/unpack_k.h"
-#include "../sensors/unpack_s.h"
+#include "../sensors/sensor24/unpack_s.h"
 #include "../sensors/unpack_v.h"
 #include "../sensors/sensor31/unpack31.h"
 #include "../sensors/automatic_w.h"
@@ -20,6 +20,9 @@ DEVICES_POSTINPUT,C
 #include "../sensors/sensor35/io35.h"
 #include "../sensors/sensor35/router35.h"
 #include "../sensors/sensor35/postinput35.h"
+#include "../sensors/sensor36/io36.h"
+#include "../sensors/sensor36/router36.h"
+#include "../sensors/sensor36/postinput36.h"
 #include "../digitals/digitals_status.h"
 #include "devices_postinput.h"
 
@@ -264,6 +267,17 @@ void    DevicesPostInput(void)
         PostInput35();
       } else {
         Query35Repeat();
+      }
+    }
+#endif
+
+#ifndef SKIP_36
+    else if ((diCurr.bDevice == 36) || (diCurr.bDevice == 37))
+    {
+      if (ChecksumRouter36() == 0) {
+        PostInput36();
+      } else {
+        Query36Repeat();
       }
     }
 #endif

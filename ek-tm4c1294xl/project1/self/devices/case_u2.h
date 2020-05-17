@@ -232,7 +232,7 @@
       InitHeaderU();
 
       ibLineU = 0;
-      if (SkipLine(ibDig, ibLineU) == 1)
+      if (SkipLine(ibDig, ibLineU) == true)
       {
         ReadHeaderU_SkipLine(ibLineU);
         ibLineU++;
@@ -271,7 +271,7 @@
         {
           ReadHeaderU();
 
-          if (SkipLine(ibDig, ibLineU+1) == 1)
+          if (SkipLine(ibDig, ibLineU+1) == true)
           {
             ReadHeaderU_SkipLine(ibLineU+1);
             ibLineU++;
@@ -319,7 +319,7 @@
       {
         ibLineU = 0;
 
-        if (SkipLine(ibDig, ibLineU) == 1)
+        if (SkipLine(ibDig, ibLineU) == true)
         {
           ReadHeaderU_SkipLine(ibLineU);
           ibLineU++;

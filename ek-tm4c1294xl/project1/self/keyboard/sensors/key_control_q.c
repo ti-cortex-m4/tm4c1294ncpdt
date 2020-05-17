@@ -12,7 +12,7 @@ KEY_CONTROL_Q.C
 
 //                                         0123456789ABCDEF
 static char const       szMessage1[]    = "Контроль времени",
-                        szMessage2[]    = "для CE301, CE304",
+                        szMessage2[]    = "    для CE30x   ",
                         szTrue[]        = " установка      ",
                         szFalse[]       = " коррекция      ";
 

@@ -1,11 +1,14 @@
 /*------------------------------------------------------------------------------
-action35.h
+include36.h
 
 
 ------------------------------------------------------------------------------*/
 
-#include "include35.h"
+#ifndef __INCLUDE36
+#define __INCLUDE36
 
 
+//#define MONITOR_36  1
 
-action35 Action35(bool  fShowCounter);
+
+#endif

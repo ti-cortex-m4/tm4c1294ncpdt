@@ -1,11 +1,9 @@
 /*------------------------------------------------------------------------------
-action35.h
+current36,H
 
 
 ------------------------------------------------------------------------------*/
 
-#include "include35.h"
-
-
-
-action35 Action35(bool  fShowCounter);
+uchar   GetMaxLine36(uchar  ibCan);
+void    QueryEngCurrent36(uchar  ibLine);
+void    ReadCurrent36(uchar  bMaxLine);

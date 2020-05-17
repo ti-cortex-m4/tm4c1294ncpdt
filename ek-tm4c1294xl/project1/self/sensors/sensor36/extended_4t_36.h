@@ -1,8 +1,7 @@
 /*------------------------------------------------------------------------------
-DECOMPRESS_S!H
+extended_4t_36!H
 
 
 ------------------------------------------------------------------------------*/
 
-void    DecompressS(void);
-uchar   ChecksumS(void); 
+status  ReadCntMonCanTariff36(uchar  ibMonth, uchar  ibTariff, uchar  bMaxLines);

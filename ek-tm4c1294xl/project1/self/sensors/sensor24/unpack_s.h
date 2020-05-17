@@ -1,11 +1,8 @@
 /*------------------------------------------------------------------------------
-action35.h
+UNPACK_S!H
 
 
 ------------------------------------------------------------------------------*/
 
-#include "include35.h"
-
-
-
-action35 Action35(bool  fShowCounter);
+void    DecompressS(void);
+uchar   ChecksumS(void); 

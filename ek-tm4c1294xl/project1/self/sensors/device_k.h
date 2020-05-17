@@ -11,6 +11,7 @@ DEVICE_K.H
 
 
 
+uchar   PushAddress1Bcc(void);
 uchar   PushAddress2Bcc(void);
 void    PushLineBcc(uchar  ibLine);
 
