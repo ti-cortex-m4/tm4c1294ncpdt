@@ -49,7 +49,7 @@
 
     case DEV_POSTSNRM_38C:
       cbRepeat = MaxRepeats();
-      Query38_Open2();
+      Query38_Open2_Current();
       SetCurr(DEV_OPEN2_38C);
       break;
 
@@ -66,7 +66,7 @@
           ErrorLink();
           cbRepeat--;
 
-          Query38_Open2();
+          Query38_Open2_Current();
           SetCurr(DEV_OPEN2_38C);
         }
       }
@@ -75,7 +75,7 @@
 
     case DEV_POSTOPEN2_38C:
       cbRepeat = MaxRepeats();
-      Query38_RR();
+      Query38_RR_Current();
       SetCurr(DEV_RR1_38C);
       break;
 
@@ -92,7 +92,7 @@
           ErrorLink();
           cbRepeat--;
 
-          Query38_RR();
+          Query38_RR_Current();
           SetCurr(DEV_RR1_38C);
         }
       }
@@ -101,14 +101,14 @@
 
     case DEV_POSTRR1_38C:
       cbRepeat = MaxRepeats();
-      QueryEngAbs38();
+      QueryEngAbs38_Current();
       SetCurr(DEV_ENGABS_38C);
       break;
 
     case DEV_ENGABS_38C:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        if (!ValidateIframe(bNS, bNR))
+        if (!ValidateIframe_Current())
           ErrorCurrent();
         else {
           SaveCurrent38();
@@ -121,7 +121,7 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryEngAbs38();
+          QueryEngAbs38_Current();
           SetCurr(DEV_ENGABS_38C);
         }
       }
@@ -130,29 +130,26 @@
 
     case DEV_POSTENGABS_38C:
       cbRepeat = MaxRepeats();
-      Query38_RR();
+      Query38_RR_Current();
       SetCurr(DEV_RR2_38C);
       break;
 
     case DEV_RR2_38C:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        if (!ValidateSframe(bNR))
+        if (!ValidateSframe_Current())
           ErrorCurrent();
         else {
           ReadCurrent38();
-          MakePause(DEV_POSTOPENCANAL_38C);
         }
       }
-      else
-      {
+      else {
         if (cbRepeat == 0) ErrorCurrent();
-        else
-        {
+        else {
           ErrorLink();
           cbRepeat--;
 
-          Query38_RR();
+          Query38_RR_Current();
           SetCurr(DEV_RR2_38C);
         }
       }
