@@ -55,7 +55,7 @@
 
     case DEV_OPEN2_38C:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
-        if (!ValidateIframe(bNS, bNR))
+        if (!ValidateIframe_Current())
           ErrorCurrent();
         else
           MakePause(DEV_POSTOPEN2_38C);
@@ -81,7 +81,7 @@
 
     case DEV_RR1_38C:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
-        if (!ValidateSframe(bNR))
+        if (!ValidateSframe_Current())
           ErrorCurrent();
         else
           MakePause(DEV_POSTRR1_38C);
