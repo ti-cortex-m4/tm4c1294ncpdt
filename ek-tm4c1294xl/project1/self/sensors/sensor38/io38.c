@@ -41,10 +41,10 @@ serial  Input38(void)
     ResetWatchdog();
     ShowWaitAnswer(1);
     if (GetWaitAnswer()) { mpSerial[ibPort] = SER_BADLINK; break; }
-
+/*
     if (mpSerial[ibPort] == SER_INPUT_MASTER)
       Decompress38();
-
+*/
     if (mpSerial[ibPort] == SER_POSTINPUT_MASTER)
     {
       if (true/*ValidInput38()*/)
