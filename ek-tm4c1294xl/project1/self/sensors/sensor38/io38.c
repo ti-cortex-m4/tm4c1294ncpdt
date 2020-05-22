@@ -22,9 +22,9 @@ io38.c
 
 
 
-void    Query38(uint  cwIn, uchar  cbOut)
+void    Query38(uchar  cbIn, uchar  cbOut)
 {
-  Query(cwIn, cbOut, true);
+  Query(cbIn, cbOut, true);
 }
 
 
@@ -41,13 +41,12 @@ serial  Input38(void)
     ResetWatchdog();
     ShowWaitAnswer(1);
     if (GetWaitAnswer()) { mpSerial[ibPort] = SER_BADLINK; break; }
-/*
-    if (mpSerial[ibPort] == SER_INPUT_MASTER)
-      Decompress38();
-*/
+
     if (mpSerial[ibPort] == SER_POSTINPUT_MASTER)
     {
-      if (true/*ValidInput38()*/)
+      //MakeCRC16InBuff( 0, CountInBuff() );
+
+      if (true)
       {
         InputGoodCheck();
         mpSerial[ibPort] = SER_GOODCHECK;
@@ -61,5 +60,6 @@ serial  Input38(void)
              (mpSerial[ibPort] == SER_BADLINK)) break;
   }
 
+  MonitorIn();
   return mpSerial[ibPort];
 }
