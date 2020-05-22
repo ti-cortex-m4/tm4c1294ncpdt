@@ -16,8 +16,7 @@ io38.c
 #include "../../serial/input_wrapper.h"
 #include "../../serial/monitor.h"
 #include "../../digitals/wait_answer.h"
-#include "unpack38.h"
-#include "monitor38.h"
+//#include "unpack38.h"
 #include "io38.h"
 
 
@@ -48,7 +47,7 @@ serial  Input38(void)
 
     if (mpSerial[ibPort] == SER_POSTINPUT_MASTER)
     {
-      if (ValidInput38())
+      if (true/*ValidInput38()*/)
       {
         InputGoodCheck();
         mpSerial[ibPort] = SER_GOODCHECK;
