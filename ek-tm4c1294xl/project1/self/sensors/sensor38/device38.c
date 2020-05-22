@@ -177,7 +177,7 @@ uchar DFF_Сoder(uchar  *pbData, uchar bS)
  return(bN);
 }//DFF_Сoder
 
-
+/*
 //Перевод времени из секунд в формат дд.мм.гг чч.мм.сс
 //Возвращает дату/время в формате DateTime (в BCD)
 //DT.Status = 1,2 - ошибка перевода времени
@@ -219,9 +219,12 @@ DateTime LongSecToTime(ulong lgSec)
 
  DT.Year = (DT.Year + ZeroYear) - 2000;
 
- DT.Year = funHEXtoBCD(DT.Year);  DT.Hour = funHEXtoBCD(DT.Hour);
- DT.Mon  = funHEXtoBCD(DT.Mon);   DT.Min  = funHEXtoBCD(DT.Min);
- DT.Day  = funHEXtoBCD(DT.Day);   DT.Sec  = funHEXtoBCD(DT.Sec);
+ DT.Year = funHEXtoBCD(DT.Year);
+ DT.Hour = funHEXtoBCD(DT.Hour);
+ DT.Mon  = funHEXtoBCD(DT.Mon);
+ DT.Min  = funHEXtoBCD(DT.Min);
+ DT.Day  = funHEXtoBCD(DT.Day);
+ DT.Sec  = funHEXtoBCD(DT.Sec);
 
  return(DT);
 }//LongSecToTime
@@ -231,9 +234,12 @@ ulong TimeToLongSec(DateTime DT)
 {
  ulong lgT;
 
- DT.Year = funBCDtoHEX(DT.Year);  DT.Hour = funBCDtoHEX(DT.Hour);
- DT.Mon  = funBCDtoHEX(DT.Mon);   DT.Min  = funBCDtoHEX(DT.Min);
- DT.Day  = funBCDtoHEX(DT.Day);   DT.Sec  = funBCDtoHEX(DT.Sec);
+ DT.Year = funBCDtoHEX(DT.Year);
+ DT.Hour = funBCDtoHEX(DT.Hour);
+ DT.Mon  = funBCDtoHEX(DT.Mon);
+ DT.Min  = funBCDtoHEX(DT.Min);
+ DT.Day  = funBCDtoHEX(DT.Day);
+ DT.Sec  = funBCDtoHEX(DT.Sec);
 
  DT.Year -= (ZeroYear - 2000);
 
@@ -246,3 +252,4 @@ ulong TimeToLongSec(DateTime DT)
 
  return(lgT * SecPerDay + (ulong)DT.Hour * SecPerHour + (ulong)DT.Min * SecPerMin + (ulong)DT.Sec);
 }
+*/
