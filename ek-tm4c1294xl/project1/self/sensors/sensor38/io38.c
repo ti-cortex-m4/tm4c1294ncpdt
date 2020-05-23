@@ -16,7 +16,7 @@ io38.c
 #include "../../serial/input_wrapper.h"
 #include "../../serial/monitor.h"
 #include "../../digitals/wait_answer.h"
-//#include "unpack38.h"
+#include "pack38.h"
 #include "io38.h"
 
 
@@ -24,44 +24,17 @@ io38.c
 
 void    Query38(uchar  cbIn, uchar  cbOut)
 {
-  uchar bCrc = MakeCrcSOutBuff(1, cbOut-3);
+  InitPush(cbOut-3);
 
-  InitPush(0);
+  uint w = MakeCrc35OutBuff(1, cbOut-4);
+  PushChar(w / 0x100);
+  PushChar(w % 0x100);
+
   PushChar(0xC0);
 
-  uchar i;
-  for (i=0; i<cbOut-3; i++) SkipChar();
+  cbOut = Pack38(cbOut);
 
-  PushChar(bCrc);
-  PushChar(0xC0);
-
-
-  for (i=0; i<=cbOut-1; i++)
-    mpbOutBuffSave[i] = OutBuff(i);
-
-  uchar j = 0;
-  SetOutBuff(j++, 0xC0);
-  for (i=1; i<=cbOut-2; i++)
-  {
-    if (mpbOutBuffSave[i] == 0xC0)
-    {
-      SetOutBuff(j++, 0xDB);
-      SetOutBuff(j++, 0xDC);
-    }
-    else if (mpbOutBuffSave[i] == 0xDB)
-    {
-      SetOutBuff(j++, 0xDB);
-      SetOutBuff(j++, 0xDD);
-    }
-    else
-    {
-      SetOutBuff(j++, mpbOutBuffSave[i]);
-    }
-  }
-  SetOutBuff(j++, 0xC0);
-
-
-  Query(cbIn,j,true);
+  Query(cbIn,cbOut,true);
 }
 
 
@@ -79,11 +52,12 @@ serial  Input38(void)
     ShowWaitAnswer(1);
     if (GetWaitAnswer()) { mpSerial[ibPort] = SER_BADLINK; break; }
 
+    if (mpSerial[ibPort] == SER_INPUT_MASTER)
+      DecompressS();
+
     if (mpSerial[ibPort] == SER_POSTINPUT_MASTER)
     {
-      //MakeCRC16InBuff( 0, CountInBuff() );
-
-      if (true)
+      if (ChecksumS() == 0)
       {
         InputGoodCheck();
         mpSerial[ibPort] = SER_GOODCHECK;

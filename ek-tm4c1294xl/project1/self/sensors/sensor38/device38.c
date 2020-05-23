@@ -11,28 +11,34 @@ device38.c
 
 
 
+void    PushAddress38(void)
+{
+    PushChar(0xE8);
+    PushChar(0xB7);
+    PushChar(0xC4);
+    PushChar(0x04);
+
+//  PushLongLtl(80001000); // TODO
+}
+
+
 void    QueryTime38(void)
 {
   InitPush(0);
 
   PushChar(0xC0);
-
   PushChar(0x06);
-  PushChar(0xE8);
-  PushChar(0xB7);
-  PushChar(0xC4);
-  PushChar(0x04);
+
+  PushAddress38();
+
   PushChar(0x00);
   PushChar(0x06);
+
   PushChar(0x04);
   PushChar(0x00);
   PushChar(0x01);
-  PushChar(0x34);
-  PushChar(0xEA);
 
-  PushChar(0xC0);
-
-  Query38(18, 14);
+  Query38(100+18, 14);
 }
 
 
