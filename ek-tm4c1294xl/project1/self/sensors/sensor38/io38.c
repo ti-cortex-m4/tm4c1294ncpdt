@@ -24,7 +24,44 @@ io38.c
 
 void    Query38(uchar  cbIn, uchar  cbOut)
 {
-  Query(cbIn, cbOut, true);
+  uchar bCrc = MakeCrcSOutBuff(1, cbOut-3);
+
+  InitPush(0);
+  PushChar(0xC0);
+
+  uchar i;
+  for (i=0; i<cbOut-3; i++) SkipChar();
+
+  PushChar(bCrc);
+  PushChar(0xC0);
+
+
+  for (i=0; i<=cbOut-1; i++)
+    mpbOutBuffSave[i] = OutBuff(i);
+
+  uchar j = 0;
+  SetOutBuff(j++, 0xC0);
+  for (i=1; i<=cbOut-2; i++)
+  {
+    if (mpbOutBuffSave[i] == 0xC0)
+    {
+      SetOutBuff(j++, 0xDB);
+      SetOutBuff(j++, 0xDC);
+    }
+    else if (mpbOutBuffSave[i] == 0xDB)
+    {
+      SetOutBuff(j++, 0xDB);
+      SetOutBuff(j++, 0xDD);
+    }
+    else
+    {
+      SetOutBuff(j++, mpbOutBuffSave[i]);
+    }
+  }
+  SetOutBuff(j++, 0xC0);
+
+
+  Query(cbIn,j,true);
 }
 
 
