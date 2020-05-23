@@ -60,20 +60,12 @@ time    ReadTime38(void)
   time ti = SecIndexToDate(dw);
   ti.bYear += 12;
 
-//  ti.bSecond = 0;
-//  ti.bMinute = 0;
-//  ti.bHour   = 0;
-//
-//  ti.bDay    = 0;
-//  ti.bMonth  = 0;
-//  ti.bYear   = 0;
-
   return ti;
 }
 
 
 
-void    QueryCntCurr38(void)
+void    QueryEngAbs38(uchar  ibLine)
 {
   InitPush(0);
 
@@ -87,7 +79,7 @@ void    QueryCntCurr38(void)
 
   PushChar(0x0A);
   PushChar(0x00);
-  PushChar(0x01);
+  PushChar(0x01 + ibLine);
 
   PushChar(0x02);
   PushChar(0x00);
@@ -96,13 +88,15 @@ void    QueryCntCurr38(void)
 }
 
 
-ulong   ReadCntCurr38_(void)
+ulong   ReadEngAbs38(void)
 {
   uint w = DFF_Decoder(&mpbInBuff3[11], 0);
 
   MonitorIn();
   InitPop(11);
   ulong dw = PopChar() + PopChar()*0x100 + PopChar()*0x10000;
+
+  MonitorLongDec(dw);
 
   return dw;
 }
