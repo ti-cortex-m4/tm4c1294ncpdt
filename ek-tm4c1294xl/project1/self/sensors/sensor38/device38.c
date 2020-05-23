@@ -15,6 +15,8 @@ void    QueryTime38(void)
 {
   InitPush(0);
 
+  PushChar(0xC0);
+
   PushChar(0x06);
   PushChar(0xE8);
   PushChar(0xB7);
@@ -28,7 +30,9 @@ void    QueryTime38(void)
   PushChar(0x34);
   PushChar(0xEA);
 
-  Query38(16, 12);
+  PushChar(0xC0);
+
+  Query38(18, 14);
 }
 
 
