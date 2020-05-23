@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-pack35.c
+pack38.c
 
 
 ------------------------------------------------------------------------------*/
@@ -8,11 +8,11 @@ pack35.c
 #include "../../memory/mem_ports.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports2.h"
-#include "pack35.h"
+#include "pack38.h"
 
 
 
-uchar   Pack35(uchar  cbOut)
+uchar   Pack38(uchar  cbOut)
 {
   uchar i;
   for (i=0; i<=cbOut-1; i++)
