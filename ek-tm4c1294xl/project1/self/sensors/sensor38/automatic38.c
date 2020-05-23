@@ -22,20 +22,60 @@ automatic38.c
 
 time2   ReadTimeCan38(void)
 {
-  QueryTime38();
-  if (Input38() != SER_GOODCHECK) return GetTime2Error();
+  Clear();
+
+  uchar r;
+  for (r=0; r<MaxRepeats(); r++)
+  {
+    QueryTime38();
+    if (Input38() == SER_GOODCHECK) break;
+  }
+
+  if (r == MaxRepeats()) return GetTime2Error();
+  ShowPercent(25);
+
   time ti = ReadTime38();
 
+
+  tiChannelC = ti;
+
+  uchar i;
+  for (i=0; i<4; i++) mpboChannelsA[i] = true;
+
   return GetTime2(ti, true);
+
 }
 
 
 
 double2 ReadCntCurr38(void)
 {
-  QueryCntCurr38();
-  if (Input38() != SER_GOODCHECK) return GetDouble2Error();
-  double db = ReadCntCurr38_() / 1000;
+  Clear();
 
-  return GetDouble2(db, true);
+  uchar i;
+  for (i=0; i<4; i++)
+  {
+    uchar r;
+    for (r=0; r<MaxRepeats(); r++)
+    {
+      ShowPercent(50 + i);
+      QueryEngAbs38(i);
+
+      if (Input38() == SER_GOODCHECK) break;
+      if (fKey == true) return GetDouble2Error();
+    }
+
+    if (r == MaxRepeats()) return GetDouble2Error();
+
+    mpdbChannelsC[i] = ReadEngAbs38() / 1000;
+  }
+
+
+  for (i=0; i<4; i++)
+  {
+    mpdbChannelsC[i] *= mpdbTransCnt[ibDig];
+    mpboChannelsA[i] = true;
+  }
+
+  return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
 }
