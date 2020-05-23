@@ -17,6 +17,7 @@ io38.c
 #include "../../serial/monitor.h"
 #include "../../digitals/wait_answer.h"
 #include "pack38.h"
+#include "decompress38.h"
 #include "io38.h"
 
 
@@ -53,11 +54,11 @@ serial  Input38(void)
     if (GetWaitAnswer()) { mpSerial[ibPort] = SER_BADLINK; break; }
 
     if (mpSerial[ibPort] == SER_INPUT_MASTER)
-      DecompressS();
+      Decompress38();
 
     if (mpSerial[ibPort] == SER_POSTINPUT_MASTER)
     {
-      if (ChecksumS() == 0)
+      if (MakeCrc35InBuff(1, IndexInBuff()-2) == 0)
       {
         InputGoodCheck();
         mpSerial[ibPort] = SER_GOODCHECK;

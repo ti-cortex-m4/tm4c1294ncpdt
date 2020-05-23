@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-unpack38.c
+decompress38.c
 
 
 ------------------------------------------------------------------------------*/
@@ -9,29 +9,24 @@ unpack38.c
 #include "../../serial/ports.h"
 #include "../../serial/ports2.h"
 #include "unpack38.h"
+#include "decompress38.h"
 
 
 
-void    Unpack38(void)
+void    Decompress38(void)
 {
-  uchar i = 1;
-  uchar j = 1;
+  uchar i,j;
 
-  while (i < IndexInBuff()) {
-    if ((InBuff(i) == 0xDB) && (InBuff(i+1) == 0xDD)) {
-      SetInBuff(j, 0xDB);
-      i += 2;
-      j++;
-    } else if ((InBuff(i) == 0xDB) && (InBuff(i+1) == 0xDC)) {
-      SetInBuff(j, 0xC0);
-      i += 2;
-      j++;
-    } else {
-      SetInBuff(j, InBuff(i));
-      i++;
-      j++;
-    }
-  }
+  if (mpSerial[ibPort] != SER_INPUT_MASTER) return;
 
-  SetIndexInBuff(j);
+  j = 0;
+  for (i=0; i<IndexInBuff(); i++) if (InBuff(i) == 0xC0) j++;
+  if (j != 2) return;
+
+  if ((InBuff(0) != 0xC0) || (InBuff(IndexInBuff()-1) != 0xC0))
+    return;
+
+  Unpack38();
+
+  mpSerial[ibPort] = SER_POSTINPUT_MASTER;
 }
