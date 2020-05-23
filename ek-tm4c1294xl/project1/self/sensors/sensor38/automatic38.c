@@ -28,3 +28,14 @@ time2   ReadTimeCan38(void)
 
   return GetTime2(ti, true);
 }
+
+
+
+double2 ReadCntCurr38(void)
+{
+  QueryCntCurr38();
+  if (Input38() != SER_GOODCHECK) return GetDouble2Error();
+  double db = ReadCntCurr38_() / 1000;
+
+  return GetDouble2(db, true);
+}
