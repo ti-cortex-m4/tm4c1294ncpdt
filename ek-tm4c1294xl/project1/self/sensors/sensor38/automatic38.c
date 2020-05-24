@@ -53,7 +53,7 @@ double2 ReadCntCurr38(void)
   Clear();
 
   uchar i;
-  for (i=0; i<4; i++)
+  for (i=0; i<1/*4*/; i++)
   {
     uchar r;
     for (r=0; r<MaxRepeats(); r++)
