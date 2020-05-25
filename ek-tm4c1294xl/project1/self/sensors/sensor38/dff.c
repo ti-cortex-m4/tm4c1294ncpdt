@@ -16,13 +16,13 @@ uint64_t DffDecodeLong64(uchar  *pb) {
 
   do {
     ddw = (*pb & 0x7F);
-    result += ddw << bits;
+    result += (ddw << bits);
     bits += 7;
   }
   while (*(pb++) & 0x80);
 
-  if (ddw >> 6)
-    result |= 0xffffffffffffffff << bits;
+//  if (ddw >> 6)
+//    result |= (0xffffffffffffffff << bits);
 
   return result;
 }
@@ -36,13 +36,13 @@ ulong   DffDecodeLong(uchar  *pb) {
 
   do {
     dw = (*pb & 0x7F);
-    result += dw << bits;
+    result += (dw << bits);
     bits += 7;
   }
   while (*(pb++) & 0x80);
 
-  if (dw >> 6)
-    result |= 0xffffffff << bits;
+//  if (dw >> 6)
+//    result |= (0xffffffff << bits);
 
   return result;
 }
