@@ -78,9 +78,9 @@ void    QueryEngAbs38(uchar  ibLine)
   PushChar(0x00);
   PushChar(0x06);
 
-  PushChar(0x0A);
+  PushChar(0x0A); // GET_DATA_SINGLE_EX
   PushChar(0x00);
-  PushChar(0x01 + ibLine);
+  PushChar(0x01 + ibLine); // Текущее накопление энергии A+, A-, R+, R-
 
   PushChar(0x02);
   PushChar(0x00);
@@ -125,12 +125,12 @@ ulong   ReadEngAbs38(void)
   buff[1] = 0xAC;
   buff[2] = 0x8D;
   buff[3] = 0x03;
-  uint64_t ddw = DffDecodeLong64(buff);
+  ulong dw1 = DffDecodeLong(buff);
 
-  ulong dw1 = ddw / 0x100000000;
-  ulong dw2 = ddw % 0x100000000;
+//  ulong dw1 = ddw / 0x100000000;
+//  ulong dw2 = ddw % 0x100000000;
   MonitorIntHex(dw1 / 0x10000); MonitorIntHex(dw1 % 0x10000);
-  MonitorIntHex(dw2 / 0x10000); MonitorIntHex(dw2 % 0x10000);
+//  MonitorIntHex(dw2 / 0x10000); MonitorIntHex(dw2 % 0x10000);
 
   return dw;
 }

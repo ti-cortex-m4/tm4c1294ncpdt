@@ -9,20 +9,40 @@ dff.c
 
 
 
-uint64_t    DffDecodeLong64(uchar  *pb) {
+uint64_t DffDecodeLong64(uchar  *pb) {
   uint64_t result = 0;
-  int num = 0;
-  uint64_t ch;
+  int bits = 0;
+  uint64_t ddw;
 
   do {
-    ch = ( * pb & 0x7F); // читаем очередные 7 бит
-    result += ch << (num * 7); //добавляем к результату
-    num++; // можно num+=7;, тогда вместо (num*7) везде просто num
+    ddw = (*pb & 0x7F);
+    result += ddw << bits;
+    bits += 7;
   }
-  while (( * (pb++) & 0x80)); //условие выхода нулевой флаг lbf
+  while (*(pb++) & 0x80);
 
-  if (ch >> 6) //если последний принятый бит был 1 заполняем старшие разряды единицами
-    result |= 0xffffffffffffffff << (num * 7);
+  if (ddw >> 6)
+    result |= 0xffffffffffffffff << bits;
+
+  return result;
+}
+
+
+
+ulong   DffDecodeLong(uchar  *pb) {
+  ulong result = 0;
+  int bits = 0;
+  ulong dw;
+
+  do {
+    dw = (*pb & 0x7F);
+    result += dw << bits;
+    bits += 7;
+  }
+  while (*(pb++) & 0x80);
+
+  if (dw >> 6)
+    result |= 0xffffffff << bits;
 
   return result;
 }
