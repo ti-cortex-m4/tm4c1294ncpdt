@@ -5,3 +5,4 @@ dff.c
 ------------------------------------------------------------------------------*/
 
 uint64_t    DffDecodeLong64(uchar  *pb);
+ulong       DffDecodeLong(uchar  *pb);
