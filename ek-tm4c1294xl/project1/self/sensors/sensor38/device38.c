@@ -7,6 +7,7 @@ device38.c
 #include "../../main.h"
 #include "../../serial/ports.h"
 #include "io38.h"
+#include "dff.h"
 #include "device38.h"
 
 
@@ -87,23 +88,7 @@ void    QueryEngAbs38(uchar  ibLine)
   Query38(100+17, 16);
 }
 
-uint64_t DecodeInt(uchar  *receive_buffer_position) {
-  uint64_t result = 0;
-  int num = 0;
-  uint64_t ch;
 
-  do {
-    ch = ( * receive_buffer_position & 0x7F); // читаем очередные 7 бит
-    result += ch << (num * 7); //добавляем к результату
-    num++; // можно num+=7;, тогда вместо (num*7) везде просто num
-  }
-  while (( * (receive_buffer_position++) & 0x80)); //условие выхода нулевой флаг lbf
-
-  if (ch >> 6) //если последний принятый бит был 1 заполняем старшие разряды единицами
-    result |= 0xffffffffffffffff << (num * 7);
-
-  return result;
-}
 
 ulong   ReadEngAbs38(void)
 {
@@ -140,7 +125,7 @@ ulong   ReadEngAbs38(void)
   buff[1] = 0xAC;
   buff[2] = 0x8D;
   buff[3] = 0x03;
-  uint64_t ddw = DecodeInt(buff);
+  uint64_t ddw = DffDecodeLong64(buff);
 
   ulong dw1 = ddw / 0x100000000;
   ulong dw2 = ddw % 0x100000000;
