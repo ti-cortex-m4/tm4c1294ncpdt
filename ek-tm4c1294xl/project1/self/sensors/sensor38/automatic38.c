@@ -53,7 +53,7 @@ double2 ReadCntCurr38(void)
   Clear();
 
   uchar i;
-  for (i=0; i<1/*4*/; i++)
+  for (i=0; i<4; i++)
   {
     uchar r;
     for (r=0; r<MaxRepeats(); r++)
@@ -67,7 +67,8 @@ double2 ReadCntCurr38(void)
 
     if (r == MaxRepeats()) return GetDouble2Error();
 
-    mpdbChannelsC[i] = ReadEngAbs38() / 1000;
+    mpdwChannelsA[i] = ReadEngAbs38() % 0x100000000;
+    mpdbChannelsC[i] = (double)mpdwChannelsA[i] / 10000;
   }
 
 

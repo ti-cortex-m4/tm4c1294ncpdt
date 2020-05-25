@@ -90,47 +90,47 @@ void    QueryEngAbs38(uchar  ibLine)
 
 
 
-ulong   ReadEngAbs38(void)
+uint64_t ReadEngAbs38(void)
 {
-  uint w = DFF_Decoder(&mpbInBuff3[11], 0);
+//  uint w = DFF_Decoder(&mpbInBuff3[11], 0);
+//
+//  MonitorIn();
+//  InitPop(11);
+//  ulong dw = PopChar() + PopChar()*0x100 + PopChar()*0x10000;
+//
+//  MonitorIntHex(dw / 0x10000); MonitorIntHex(dw % 0x10000);
+//  MonitorString(" ");
+//  MonitorLongDec(dw);
+//
+//  mpbInBuff3[0] = 0xB2;
+//  mpbInBuff3[1] = 0xAC;
+//  mpbInBuff3[2] = 0x8D;
+//  mpbInBuff3[3] = 0x03;
+//
+//  MonitorString("\n ");
+//  MonitorCharHex(mpbInBuff3[0]);
+//  MonitorCharHex(mpbInBuff3[1]);
+//  MonitorCharHex(mpbInBuff3[2]);
+//  MonitorCharHex(mpbInBuff3[3]);
+//  uint w2 = DFF_Decoder(&mpbInBuff3[0], 0);
+//  MonitorString(" -> ");
+//  MonitorCharHex(mpbInBuff3[0]);
+//  MonitorCharHex(mpbInBuff3[1]);
+//  MonitorCharHex(mpbInBuff3[2]);
+//  MonitorCharHex(mpbInBuff3[3]);
+//
+//  MonitorString("\n ");
+////  uchar buff[4];
+////  buff[0] = 0xB2;
+////  buff[1] = 0xAC;
+////  buff[2] = 0x8D;
+////  buff[3] = 0x03;
+  uint64_t ddw = DffDecodeLong64(&mpbInBuff3[11]);
 
-  MonitorIn();
-  InitPop(11);
-  ulong dw = PopChar() + PopChar()*0x100 + PopChar()*0x10000;
-
-  MonitorIntHex(dw / 0x10000); MonitorIntHex(dw % 0x10000);
-  MonitorString(" ");
-  MonitorLongDec(dw);
-
-  mpbInBuff3[0] = 0xB2;
-  mpbInBuff3[1] = 0xAC;
-  mpbInBuff3[2] = 0x8D;
-  mpbInBuff3[3] = 0x03;
-
-  MonitorString("\n ");
-  MonitorCharHex(mpbInBuff3[0]);
-  MonitorCharHex(mpbInBuff3[1]);
-  MonitorCharHex(mpbInBuff3[2]);
-  MonitorCharHex(mpbInBuff3[3]);
-  uint w2 = DFF_Decoder(&mpbInBuff3[0], 0);
-  MonitorString(" -> ");
-  MonitorCharHex(mpbInBuff3[0]);
-  MonitorCharHex(mpbInBuff3[1]);
-  MonitorCharHex(mpbInBuff3[2]);
-  MonitorCharHex(mpbInBuff3[3]);
-
-  MonitorString("\n ");
-  uchar buff[4];
-  buff[0] = 0xB2;
-  buff[1] = 0xAC;
-  buff[2] = 0x8D;
-  buff[3] = 0x03;
-  ulong dw1 = DffDecodeLong(buff);
-
-//  ulong dw1 = ddw / 0x100000000;
+  ulong dw1 = ddw % 0x100000000;
 //  ulong dw2 = ddw % 0x100000000;
   MonitorIntHex(dw1 / 0x10000); MonitorIntHex(dw1 % 0x10000);
 //  MonitorIntHex(dw2 / 0x10000); MonitorIntHex(dw2 % 0x10000);
 
-  return dw;
+  return ddw;
 }
