@@ -89,6 +89,52 @@ void    QueryEngAbs38(uchar  ibLine)
 }
 
 
+void    QueryEngDay38(uchar  ibDayRel, uchar  ibLine)
+{
+  InitPush(0);
+
+  PushChar(0xC0);
+  PushChar(0x06);
+
+  PushAddress38();
+
+  PushChar(0x00);
+  PushChar(0x06);
+
+  PushChar(0x0A); // GET_DATA_SINGLE_EX
+  PushChar(0x00);
+  PushChar(0x01 + ibLine); // Текущее накопление энергии A+, A-, R+, R-
+
+  PushChar(0x02);
+  PushChar(0x00);
+
+  Query38(100+17, 16);
+}
+
+
+void    QueryEngMon38(uchar  ibMonRel, uchar  ibLine)
+{
+  InitPush(0);
+
+  PushChar(0xC0);
+  PushChar(0x06);
+
+  PushAddress38();
+
+  PushChar(0x00);
+  PushChar(0x06);
+
+  PushChar(0x0A); // GET_DATA_SINGLE_EX
+  PushChar(0x00);
+  PushChar(0x01 + ibLine); // Текущее накопление энергии A+, A-, R+, R-
+
+  PushChar(0x02);
+  PushChar(0x00);
+
+  Query38(100+17, 16);
+}
+
+
 
 uint64_t ReadEngAbs38(void)
 {

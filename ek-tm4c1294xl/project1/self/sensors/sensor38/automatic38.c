@@ -80,3 +80,33 @@ double2 ReadCntCurr38(void)
 
   return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
 }
+
+
+
+double2 ReadCntMonCan38(uchar  ibMonAbs)
+{
+/*
+  Clear();
+
+  if (QueryConfig35_Full(25) == 0) return GetDouble2Error();
+
+  time2 ti2 = QueryTime35_Full(50);
+  if (ti2.fValid == false) return GetDouble2Error();
+  time ti = ti2.tiValue;
+
+  if (ti.bMonth != ibMon+1)
+  {
+    if (QueryEngMon35_Full((bMONTHS+ti.bMonth-1-ibMon) % bMONTHS, 75) == 0) return GetDouble2Error();
+  }
+  else
+  {
+    if (QueryEngDay35_Full(1, 75) == 0) return GetDouble2Error();
+  }
+
+  mpdbChannelsC[0] = (double)mpdwChannelsA[0] / GetDivider35();
+  mpboChannelsA[0] = true;
+
+  return GetDouble2(mpdbChannelsC[0], true);
+*/
+  return GetDouble2Error();
+}

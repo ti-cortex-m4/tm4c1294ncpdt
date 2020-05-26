@@ -8,4 +8,6 @@ void    QueryTime38(void);
 time    ReadTime38(void);
 
 void    QueryEngAbs38(uchar  ibLine);
+void    QueryEngDay38(uchar  ibDayRel, uchar  ibLine);
+void    QueryEngMon38(uchar  ibMonRel, uchar  ibLine);
 uint64_t ReadEngAbs38(void);
