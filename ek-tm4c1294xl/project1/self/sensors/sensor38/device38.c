@@ -80,7 +80,7 @@ void    QueryEngAbs38(uchar  ibLine)
 
   PushChar(0x0A); // GET_DATA_SINGLE_EX
   PushChar(0x00);
-  PushChar(0x01 + ibLine); // Текущее накопление энергии A+, A-, R+, R-
+  PushChar(0x01 + ibLine); // A+, A-, R+, R-
 
   PushChar(0x02);
   PushChar(0x00);
@@ -89,6 +89,7 @@ void    QueryEngAbs38(uchar  ibLine)
 }
 
 
+// значения счетчиков на начало суток
 void    QueryEngDay38(uchar  ibDayRel, uchar  ibLine)
 {
   InitPush(0);
@@ -101,17 +102,22 @@ void    QueryEngDay38(uchar  ibDayRel, uchar  ibLine)
   PushChar(0x00);
   PushChar(0x06);
 
-  PushChar(0x0A); // GET_DATA_SINGLE_EX
+  PushChar(0x0B); // GET_DATA_MULTIPLE_EX
   PushChar(0x00);
-  PushChar(0x01 + ibLine); // Текущее накопление энергии A+, A-, R+, R-
+  PushChar(0x01 + ibLine); // A+, A-, R+, R-
 
   PushChar(0x02);
   PushChar(0x00);
 
-  Query38(100+17, 16);
+  PushChar(ibDayRel);
+  PushChar(ibDayRel);
+
+  Query38(100+17, 18);
 }
 
 
+
+// значения счетчиков на начало месяцев
 void    QueryEngMon38(uchar  ibMonRel, uchar  ibLine)
 {
   InitPush(0);
@@ -124,19 +130,22 @@ void    QueryEngMon38(uchar  ibMonRel, uchar  ibLine)
   PushChar(0x00);
   PushChar(0x06);
 
-  PushChar(0x0A); // GET_DATA_SINGLE_EX
+  PushChar(0x0B); // GET_DATA_MULTIPLE_EX
   PushChar(0x00);
-  PushChar(0x01 + ibLine); // Текущее накопление энергии A+, A-, R+, R-
+  PushChar(0x09 + ibLine); // A+, A-, R+, R-
 
   PushChar(0x02);
   PushChar(0x00);
 
-  Query38(100+17, 16);
+  PushChar(ibMonRel);
+  PushChar(ibMonRel);
+
+  Query38(100+17, 18);
 }
 
 
 
-uint64_t ReadEngAbs38(void)
+uint64_t ReadEngAbs38(uchar  ibInBuff)
 {
 //  uint w = DFF_Decoder(&mpbInBuff3[11], 0);
 //
@@ -171,12 +180,11 @@ uint64_t ReadEngAbs38(void)
 ////  buff[1] = 0xAC;
 ////  buff[2] = 0x8D;
 ////  buff[3] = 0x03;
-  uint64_t ddw = DffDecodeLong64(&mpbInBuff3[11]);
+  uint64_t ddw = DffDecodeLong64(&mpbInBuff3[ibInBuff]);
 
-  ulong dw1 = ddw % 0x100000000;
-//  ulong dw2 = ddw % 0x100000000;
-  MonitorIntHex(dw1 / 0x10000); MonitorIntHex(dw1 % 0x10000);
-//  MonitorIntHex(dw2 / 0x10000); MonitorIntHex(dw2 % 0x10000);
+  ulong dw = ddw % 0x100000000;
+  MonitorString("\n"); MonitorIntHex(dw / 0x10000); MonitorIntHex(dw % 0x10000);
+  MonitorString("\n"); MonitorIntDec(dw1);
 
   return ddw;
 }

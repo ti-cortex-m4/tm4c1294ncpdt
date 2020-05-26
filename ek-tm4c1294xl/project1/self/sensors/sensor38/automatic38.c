@@ -50,6 +50,9 @@ time2   ReadTimeCan38(void)
 
 double2 ReadCntCurr38(void)
 {
+  ReadCntMonCan38(5-1);
+  return;
+
   Clear();
 
   uchar i;
@@ -67,7 +70,7 @@ double2 ReadCntCurr38(void)
 
     if (r == MaxRepeats()) return GetDouble2Error();
 
-    mpdwChannelsA[i] = ReadEngAbs38() % 0x100000000;
+    mpdwChannelsA[i] = ReadEngAbs38(11) % 0x100000000;
     mpdbChannelsC[i] = (double)mpdwChannelsA[i] / 10000;
   }
 
@@ -85,6 +88,10 @@ double2 ReadCntCurr38(void)
 
 double2 ReadCntMonCan38(uchar  ibMonAbs)
 {
+  QueryEngDay38(0,0);
+  if (Input38() != SER_GOODCHECK) return GetDouble2Error();
+  ReadEngAbs38(12);
+
 /*
   Clear();
 
