@@ -101,6 +101,17 @@ void    MonitorLongDec(ulong  dw)
 }
 
 
+void    MonitorLongDecimal(ulong  dw, uint  wDivider)
+{
+  if (UseMonitor())
+  {
+    MonitorLongDec(dw / wDivider);
+    MonitorString(".");
+    MonitorLongDec(dw % wDivider);
+  }
+}
+
+
 void    MonitorTime(time  ti)
 {
   if (UseMonitor())
