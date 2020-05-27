@@ -165,8 +165,8 @@ void    QueryEngMon38(uchar  ibMonRel, uchar  ibLine)
 
 uint64_t ReadEngStatus38(uchar  ibInBuff)
 {
-  uint64_t ddw = DffDecodeLong64(&mpbInBuff3[ibInBuff]);  // TODO
-
+//  uint64_t ddw = DffDecodeLong64(&mpbInBuff3[ibInBuff]);  // TODO
+/*
   ulong dw = ddw % 0x100000000;
   MonitorString("\n"); MonitorLongHex(dw);
 
@@ -176,6 +176,6 @@ uint64_t ReadEngStatus38(uchar  ibInBuff)
   dw >>= 3;
   MonitorString("\n"); MonitorLongDec(dw);
   MonitorString("\n"); MonitorLongDecimal(dw, 10000);
-
-  return ddw;
+*/
+  return DffDecodeLong64(&mpbInBuff3[ibInBuff]);  // TODO
 }
