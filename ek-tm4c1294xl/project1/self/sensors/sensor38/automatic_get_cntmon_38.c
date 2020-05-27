@@ -39,7 +39,13 @@ bool    ReadEngDay38_Full(void)
 
     if (r == MaxRepeats()) return false;
 
-    mpdwChannelsA[i] = ReadEngStatus38(11) % 0x100000000;
+
+    uint64_t ddw = ReadEngStatus38(11);
+    ulong dw = ddw % 0x100000000;
+    uchar bStatus = (ddw % 0x100) & 0x03;
+    dw >>= 3;
+
+    mpdwChannelsA[i] = dw;
     mpdbChannelsC[i] = (double)mpdwChannelsA[i] / 10000;
   }
 
@@ -52,6 +58,7 @@ bool    ReadEngDay38_Full(void)
 
   return true;
 }
+
 
 
 bool    ReadEngMon38_Full(uchar  ibMonRel)
@@ -73,7 +80,13 @@ bool    ReadEngMon38_Full(uchar  ibMonRel)
 
     if (r == MaxRepeats()) return false;
 
-    mpdwChannelsA[i] = ReadEngStatus38(11) % 0x100000000;
+
+    uint64_t ddw = ReadEngStatus38(11);
+    ulong dw = ddw % 0x100000000;
+    uchar bStatus = (ddw % 0x100) & 0x03;
+    dw >>= 3;
+
+    mpdwChannelsA[i] = dw;
     mpdbChannelsC[i] = (double)mpdwChannelsA[i] / 10000;
   }
 
@@ -91,7 +104,7 @@ bool    ReadEngMon38_Full(uchar  ibMonRel)
 
 double2 ReadCntMonCan38(uchar  ibMonAbs)
 {
-  MonitorString("\n ibMonAbs="); MonitorCharDec(ibMonAbs);
+//  MonitorString("\n ibMonAbs="); MonitorCharDec(ibMonAbs);
   Clear();
 
   time2 ti2 = ReadTimeCan38();
