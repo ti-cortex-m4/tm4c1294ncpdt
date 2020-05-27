@@ -10,7 +10,7 @@ automatic_get_time_38.c
 #include "../../keyboard/keyboard.h"
 #include "../../time/timedate.h"
 // #include "../../serial/ports.h"
-// #include "../../devices/devices.h"
+ #include "../../devices/devices.h"
 // #include "../../sensors/automatic1.h"
  #include "../../digitals/digitals.h"
 #include "device38.h"

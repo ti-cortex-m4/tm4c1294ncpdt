@@ -20,26 +20,26 @@ automatic_get_cntmon_38.c
 
 
 
-double2 ReadEngDay38_Full(uchar  ibDayRel)
+bool    ReadEngDay38_Full(void)
 {
   Clear();
 
   uchar i;
-  for (i=0; i<4; i++)
+  for (i=0; i<1/*4*/; i++)
   {
     uchar r;
     for (r=0; r<MaxRepeats(); r++)
     {
       ShowPercent(50 + i);
-      QueryEngDay38(i,ibDayRel);
+      QueryEngDay38(0, i);
 
       if (Input38() == SER_GOODCHECK) break;
-      if (fKey == true) return GetDouble2Error();
+      if (fKey == true) return false;
     }
 
-    if (r == MaxRepeats()) return GetDouble2Error();
+    if (r == MaxRepeats()) return false;
 
-    mpdwChannelsA[i] = ReadEngAbs38(11) % 0x100000000;
+    mpdwChannelsA[i] = ReadEngStatus38(11) % 0x100000000;
     mpdbChannelsC[i] = (double)mpdwChannelsA[i] / 10000;
   }
 
@@ -50,30 +50,30 @@ double2 ReadEngDay38_Full(uchar  ibDayRel)
     mpboChannelsA[i] = true;
   }
 
-  return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
+  return true;
 }
 
 
-double2 ReadEngMon38_Full(uchar  ibMonRel)
+bool    ReadEngMon38_Full(uchar  ibMonRel)
 {
   Clear();
 
   uchar i;
-  for (i=0; i<4; i++)
+  for (i=0; i<1/*4*/; i++)
   {
     uchar r;
     for (r=0; r<MaxRepeats(); r++)
     {
       ShowPercent(50 + i);
-      QueryEngMon38(i,ibMonRel);
+      QueryEngMon38(ibMonRel, i);
 
       if (Input38() == SER_GOODCHECK) break;
-      if (fKey == true) return GetDouble2Error();
+      if (fKey == true) return false;
     }
 
-    if (r == MaxRepeats()) return GetDouble2Error();
+    if (r == MaxRepeats()) return false;
 
-    mpdwChannelsA[i] = ReadEngAbs38(11) % 0x100000000;
+    mpdwChannelsA[i] = ReadEngStatus38(11) % 0x100000000;
     mpdbChannelsC[i] = (double)mpdwChannelsA[i] / 10000;
   }
 
@@ -84,13 +84,14 @@ double2 ReadEngMon38_Full(uchar  ibMonRel)
     mpboChannelsA[i] = true;
   }
 
-  return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
+  return true;
 }
 
 
 
-double2 ReadCntMonCan38_(uchar  ibMonAbs)
+double2 ReadCntMonCan38(uchar  ibMonAbs)
 {
+  MonitorString("\n ibMonAbs="); MonitorCharDec(ibMonAbs);
   Clear();
 
   time2 ti2 = ReadTimeCan38();
@@ -99,12 +100,12 @@ double2 ReadCntMonCan38_(uchar  ibMonAbs)
 
   if (ti.bMonth != ibMonAbs+1)
   {
-    uchar ibMonRel = (bMONTHS+ti.bMonth-1-ibMonAbs) % bMONTHS;
-//    if (ReadEngMon38_Full(ibMonRel) == 0) return GetDouble2Error();
+    uchar ibMonRel = (bMONTHS+ti.bMonth-2-ibMonAbs) % bMONTHS;
+    if (ReadEngMon38_Full(ibMonRel) == false) return GetDouble2Error();
   }
   else
   {
-//    if (ReadEngDay38_Full() == 0) return GetDouble2Error();
+    if (ReadEngDay38_Full() == false) return GetDouble2Error();
   }
 
   return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);

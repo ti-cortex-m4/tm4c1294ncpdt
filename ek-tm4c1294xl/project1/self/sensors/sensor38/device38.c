@@ -89,9 +89,9 @@ void    QueryEngAbs38(uchar  ibLine)
 }
 
 
-uint64_t ReadEngAbs38(uchar  ibInBuff)
+uint64_t ReadEng38(uchar  ibInBuff)
 {
-  uint64_t ddw = DffDecodeLong64(&mpbInBuff3[ibInBuff]);
+  uint64_t ddw = DffDecodeLong64(&mpbInBuff3[ibInBuff]); // TODO
 
   ulong dw = ddw % 0x100000000;
   MonitorString("\n"); MonitorLongHex(dw);
@@ -106,7 +106,7 @@ uint64_t ReadEngAbs38(uchar  ibInBuff)
 // значени€ счетчиков на начало суток
 void    QueryEngDay38(uchar  ibDayRel, uchar  ibLine)
 {
-  MonitorString("\n Day="); MonitorCharDec(ibDayRel);
+  MonitorString("\n ibDayRel="); MonitorCharDec(ibDayRel);
 
   InitPush(0);
 
@@ -136,7 +136,7 @@ void    QueryEngDay38(uchar  ibDayRel, uchar  ibLine)
 // значени€ счетчиков на начало мес€цев
 void    QueryEngMon38(uchar  ibMonRel, uchar  ibLine)
 {
-  MonitorString("\n Mon="); MonitorCharDec(ibMonRel);
+  MonitorString("\n ibMonRel="); MonitorCharDec(ibMonRel);
 
   InitPush(0);
 
@@ -165,7 +165,7 @@ void    QueryEngMon38(uchar  ibMonRel, uchar  ibLine)
 
 uint64_t ReadEngStatus38(uchar  ibInBuff)
 {
-  uint64_t ddw = DffDecodeLong64(&mpbInBuff3[ibInBuff]);
+  uint64_t ddw = DffDecodeLong64(&mpbInBuff3[ibInBuff]);  // TODO
 
   ulong dw = ddw % 0x100000000;
   MonitorString("\n"); MonitorLongHex(dw);
