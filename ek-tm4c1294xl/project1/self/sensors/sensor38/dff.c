@@ -5,7 +5,30 @@ dff.c
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
+#include "../../serial/ports.h"
 #include "dff.h"
+
+
+
+uint64_t DffPopDecodeLong64(uchar  i) {
+  InitPop(i);
+
+  uint64_t result = 0;
+  int bits = 0;
+  uint64_t ddw;
+
+  do {
+    ddw = (InBuff(i) & 0x7F);
+    result += (ddw << bits);
+    bits += 7;
+  }
+  while (InBuff(i++) & 0x80);
+
+//  if (ddw >> 6)
+//    result |= (0xffffffffffffffff << bits);
+
+  return result;
+}
 
 
 
