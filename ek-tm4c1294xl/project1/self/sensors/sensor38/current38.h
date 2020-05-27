@@ -1,9 +1,12 @@
 /*------------------------------------------------------------------------------
-automatic38.h
+current38.h
 
 
 ------------------------------------------------------------------------------*/
 
-double2 temp(void);
+extern  uchar                   ibLine38;
 
 
+
+void    ReadEngAbsCurrent38(void);
+void    ReadCurrent38(void);

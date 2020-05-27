@@ -15,6 +15,7 @@ DEVICES_INPUT,C
 #include "../sensors/sensor34/unpack_34.h"
 #include "../sensors/sensor35/router35.h"
 #include "../sensors/sensor36/router36.h"
+#include "../sensors/sensor38/decompress38.h"
 #include "../serial/ports.h"
 #include "devices_input.h"
 
@@ -197,6 +198,13 @@ void    DevicesInput(void)
     else if ((diCurr.bDevice == 36) || (diCurr.bDevice == 37))
     {
       Decompress36();
+    }
+#endif
+
+#ifndef SKIP_38
+    else if (diCurr.bDevice == 38)
+    {
+      Decompress38();
     }
 #endif
 }

@@ -53,6 +53,9 @@ AUTOMATIC2!C
 #include "sensor35/automatic35.h"
 #include "sensor36/automatic36.h"
 #include "sensor38/automatic38.h"
+#include "sensor38/automatic_get_time_38.h"
+#include "sensor38/automatic_get_cntcur_38.h"
+#include "sensor38/automatic_get_cntmon_38.h"
 #include "automatic2.h"
 
 
@@ -1912,7 +1915,7 @@ double2 ReadCntCurrCan(uchar  ibCan)
 #endif
 
 #ifndef SKIP_38
-    case 38: return ReadCntCurr38();
+    case 38: return temp(); //ReadCntCurr38();
 #endif
 
     default: return GetDouble2Error();

@@ -17,6 +17,7 @@ void    MonitorIntDec(uint  w);
 void    MonitorIntDec5(uint  w);
 void    MonitorIntHex(uint  w);
 void    MonitorLongDec(ulong  dw);
+void    MonitorLongHex(ulong  dw);
 void    MonitorLongDecimal(ulong  dw, uint  wDivider);
 void    MonitorTime(time  ti);
 

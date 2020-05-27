@@ -101,6 +101,12 @@ void    MonitorLongDec(ulong  dw)
 }
 
 
+void    MonitorLongHex(ulong  dw)
+{
+  MonitorLong("%8X", dw);
+}
+
+
 void    MonitorLongDecimal(ulong  dw, uint  wDivider)
 {
   if (UseMonitor())
