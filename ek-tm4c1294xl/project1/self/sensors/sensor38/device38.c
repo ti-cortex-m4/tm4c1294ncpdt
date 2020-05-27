@@ -162,20 +162,20 @@ void    QueryEngMon38(uchar  ibMonRel, uchar  ibLine)
 }
 
 
-
-uint64_t ReadEngStatus38(uchar  ibInBuff)
-{
-//  uint64_t ddw = DffDecodeLong64(&mpbInBuff3[ibInBuff]);  // TODO
-/*
-  ulong dw = ddw % 0x100000000;
-  MonitorString("\n"); MonitorLongHex(dw);
-
-  uchar bStatus = (ddw % 0x100) & 0x03;
-  MonitorString("\n status="); MonitorCharDec(bStatus);
-
-  dw >>= 3;
-  MonitorString("\n"); MonitorLongDec(dw);
-  MonitorString("\n"); MonitorLongDecimal(dw, 10000);
-*/
-  return DffDecodeLong64(&mpbInBuff3[ibInBuff]);  // TODO
-}
+//
+//uint64_t ReadEngStatus38(uchar  ibInBuff)
+//{
+////  uint64_t ddw = DffDecodeLong64(&mpbInBuff3[ibInBuff]);  // TODO
+///*
+//  ulong dw = ddw % 0x100000000;
+//  MonitorString("\n"); MonitorLongHex(dw);
+//
+//  uchar bStatus = (ddw % 0x100) & 0x03;
+//  MonitorString("\n status="); MonitorCharDec(bStatus);
+//
+//  dw >>= 3;
+//  MonitorString("\n"); MonitorLongDec(dw);
+//  MonitorString("\n"); MonitorLongDecimal(dw, 10000);
+//*/
+//  return DffDecodeLong64(&mpbInBuff3[ibInBuff]);  // TODO
+//}
