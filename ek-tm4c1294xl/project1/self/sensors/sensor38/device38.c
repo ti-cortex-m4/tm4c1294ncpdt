@@ -89,9 +89,25 @@ void    QueryEngAbs38(uchar  ibLine)
 }
 
 
+uint64_t ReadEngAbs38(uchar  ibInBuff)
+{
+  uint64_t ddw = DffDecodeLong64(&mpbInBuff3[ibInBuff]);
+
+  ulong dw = ddw % 0x100000000;
+  MonitorString("\n"); MonitorLongHex(dw);
+  MonitorString("\n"); MonitorLongDec(dw);
+  MonitorString("\n"); MonitorLongDecimal(dw, 10000);
+
+  return ddw;
+}
+
+
+
 // значени€ счетчиков на начало суток
 void    QueryEngDay38(uchar  ibDayRel, uchar  ibLine)
 {
+  MonitorString("\n Day="); MonitorCharDec(ibDayRel);
+
   InitPush(0);
 
   PushChar(0xC0);
@@ -120,6 +136,8 @@ void    QueryEngDay38(uchar  ibDayRel, uchar  ibLine)
 // значени€ счетчиков на начало мес€цев
 void    QueryEngMon38(uchar  ibMonRel, uchar  ibLine)
 {
+  MonitorString("\n Mon="); MonitorCharDec(ibMonRel);
+
   InitPush(0);
 
   PushChar(0xC0);
@@ -145,46 +163,19 @@ void    QueryEngMon38(uchar  ibMonRel, uchar  ibLine)
 
 
 
-uint64_t ReadEngAbs38(uchar  ibInBuff)
+uint64_t ReadEngStatus38(uchar  ibInBuff)
 {
-//  uint w = DFF_Decoder(&mpbInBuff3[11], 0);
-//
-//  MonitorIn();
-//  InitPop(11);
-//  ulong dw = PopChar() + PopChar()*0x100 + PopChar()*0x10000;
-//
-//  MonitorIntHex(dw / 0x10000); MonitorIntHex(dw % 0x10000);
-//  MonitorString(" ");
-//  MonitorLongDec(dw);
-//
-//  mpbInBuff3[0] = 0xB2;
-//  mpbInBuff3[1] = 0xAC;
-//  mpbInBuff3[2] = 0x8D;
-//  mpbInBuff3[3] = 0x03;
-//
-//  MonitorString("\n ");
-//  MonitorCharHex(mpbInBuff3[0]);
-//  MonitorCharHex(mpbInBuff3[1]);
-//  MonitorCharHex(mpbInBuff3[2]);
-//  MonitorCharHex(mpbInBuff3[3]);
-//  uint w2 = DFF_Decoder(&mpbInBuff3[0], 0);
-//  MonitorString(" -> ");
-//  MonitorCharHex(mpbInBuff3[0]);
-//  MonitorCharHex(mpbInBuff3[1]);
-//  MonitorCharHex(mpbInBuff3[2]);
-//  MonitorCharHex(mpbInBuff3[3]);
-//
-//  MonitorString("\n ");
-////  uchar buff[4];
-////  buff[0] = 0xB2;
-////  buff[1] = 0xAC;
-////  buff[2] = 0x8D;
-////  buff[3] = 0x03;
   uint64_t ddw = DffDecodeLong64(&mpbInBuff3[ibInBuff]);
 
   ulong dw = ddw % 0x100000000;
-  MonitorString("\n"); MonitorIntHex(dw / 0x10000); MonitorIntHex(dw % 0x10000);
-  MonitorString("\n"); MonitorIntDec(dw1);
+  MonitorString("\n"); MonitorLongHex(dw);
+
+  uchar bStatus = (ddw % 0x100) & 0x03;
+  MonitorString("\n status="); MonitorCharDec(bStatus);
+
+  ulong dw >>= 3;
+  MonitorString("\n"); MonitorLongDec(dw);
+  MonitorString("\n"); MonitorLongDecimal(dw, 10000);
 
   return ddw;
 }

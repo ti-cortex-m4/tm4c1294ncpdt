@@ -20,100 +20,40 @@ automatic38.c
 
 
 
-time2   ReadTimeCan38(void)
+
+double2 temp(void)
 {
-  Clear();
-
-  uchar r;
-  for (r=0; r<MaxRepeats(); r++)
-  {
-    QueryTime38();
-    if (Input38() == SER_GOODCHECK) break;
-  }
-
-  if (r == MaxRepeats()) return GetTime2Error();
-  ShowPercent(25);
-
-  time ti = ReadTime38();
+  QueryEngAbs38(0);
+  if (Input38() != SER_GOODCHECK) return GetDouble2Error();
+  ReadEngAbs38(11);
 
 
-  tiChannelC = ti;
-
-  uchar i;
-  for (i=0; i<4; i++) mpboChannelsA[i] = true;
-
-  return GetTime2(ti, true);
-
-}
-
-
-
-double2 ReadCntCurr38(void)
-{
-  ReadCntMonCan38(5-1);
-  return;
-
-  Clear();
-
-  uchar i;
-  for (i=0; i<4; i++)
-  {
-    uchar r;
-    for (r=0; r<MaxRepeats(); r++)
-    {
-      ShowPercent(50 + i);
-      QueryEngAbs38(i);
-
-      if (Input38() == SER_GOODCHECK) break;
-      if (fKey == true) return GetDouble2Error();
-    }
-
-    if (r == MaxRepeats()) return GetDouble2Error();
-
-    mpdwChannelsA[i] = ReadEngAbs38(11) % 0x100000000;
-    mpdbChannelsC[i] = (double)mpdwChannelsA[i] / 10000;
-  }
-
-
-  for (i=0; i<4; i++)
-  {
-    mpdbChannelsC[i] *= mpdbTransCnt[ibDig];
-    mpboChannelsA[i] = true;
-  }
-
-  return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
-}
-
-
-
-double2 ReadCntMonCan38(uchar  ibMonAbs)
-{
   QueryEngDay38(0,0);
   if (Input38() != SER_GOODCHECK) return GetDouble2Error();
-  ReadEngAbs38(12);
+  ReadEngStatus38(11);
 
-/*
-  Clear();
+  QueryEngDay38(1,0);
+  if (Input38() != SER_GOODCHECK) return GetDouble2Error();
+  ReadEngStatus38(11);
 
-  if (QueryConfig35_Full(25) == 0) return GetDouble2Error();
+  QueryEngDay38(2,0);
+  if (Input38() != SER_GOODCHECK) return GetDouble2Error();
+  ReadEngStatus38(11);
 
-  time2 ti2 = QueryTime35_Full(50);
-  if (ti2.fValid == false) return GetDouble2Error();
-  time ti = ti2.tiValue;
 
-  if (ti.bMonth != ibMon+1)
-  {
-    if (QueryEngMon35_Full((bMONTHS+ti.bMonth-1-ibMon) % bMONTHS, 75) == 0) return GetDouble2Error();
-  }
-  else
-  {
-    if (QueryEngDay35_Full(1, 75) == 0) return GetDouble2Error();
-  }
+  QueryEngMon38(0,0);
+  if (Input38() != SER_GOODCHECK) return GetDouble2Error();
+  ReadEngStatus38(11);
 
-  mpdbChannelsC[0] = (double)mpdwChannelsA[0] / GetDivider35();
-  mpboChannelsA[0] = true;
+  QueryEngMon38(1,0);
+  if (Input38() != SER_GOODCHECK) return GetDouble2Error();
+  ReadEngStatus38(11);
 
-  return GetDouble2(mpdbChannelsC[0], true);
-*/
+  QueryEngMon38(2,0);
+  if (Input38() != SER_GOODCHECK) return GetDouble2Error();
+  ReadEngStatus38(11);
+
   return GetDouble2Error();
 }
+
+

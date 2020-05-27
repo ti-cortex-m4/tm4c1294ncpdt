@@ -74,6 +74,7 @@ DEVICES.C
 #include "../sensors/sensor36/io36.h"
 #include "../sensors/sensor36/current36.h"
 #include "../sensors/sensor36/profile36.h"
+#include "../sensors/sensor38/current38.h"
 #include "../serial/ports.h"
 #include "../serial/ports_modems.h"
 #include "../serial/modems.h"
