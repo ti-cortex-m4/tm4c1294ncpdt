@@ -173,7 +173,7 @@ uint64_t ReadEngStatus38(uchar  ibInBuff)
   uchar bStatus = (ddw % 0x100) & 0x03;
   MonitorString("\n status="); MonitorCharDec(bStatus);
 
-  ulong dw >>= 3;
+  dw >>= 3;
   MonitorString("\n"); MonitorLongDec(dw);
   MonitorString("\n"); MonitorLongDecimal(dw, 10000);
 

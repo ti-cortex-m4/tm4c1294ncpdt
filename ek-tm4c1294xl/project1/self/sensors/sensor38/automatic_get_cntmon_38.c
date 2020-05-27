@@ -12,14 +12,15 @@ automatic_get_cntmon_38.c
 #include "../../serial/ports.h"
 #include "../../devices/devices.h"
 // #include "../../sensors/automatic1.h"
-// #include "../../digitals/digitals.h"
+ #include "../../digitals/digitals.h"
 #include "device38.h"
 #include "io38.h"
+#include "automatic_get_time_38.h"
 #include "automatic_get_cntmon_38.h"
 
 
 
-double2 ReadCntDay38_Full(uchar  ibDayRel)
+double2 ReadEngDay38_Full(uchar  ibDayRel)
 {
   Clear();
 
@@ -53,7 +54,7 @@ double2 ReadCntDay38_Full(uchar  ibDayRel)
 }
 
 
-double2 ReadCntMon38_Full(uchar  ibMonRel)
+double2 ReadEngMon38_Full(uchar  ibMonRel)
 {
   Clear();
 
@@ -92,18 +93,18 @@ double2 ReadCntMonCan38_(uchar  ibMonAbs)
 {
   Clear();
 
-  time2 ti2 = ReadTimeCan38(50);
+  time2 ti2 = ReadTimeCan38();
   if (ti2.fValid == false) return GetDouble2Error();
   time ti = ti2.tiValue;
 
-  if (ti.bMonth != ibMon+1)
+  if (ti.bMonth != ibMonAbs+1)
   {
-    uchar ibMonRel = (bMONTHS+ti.bMonth-1-ibMon) % bMONTHS;
-    if (ReadEngMon38_Full(ibMonRel, 75) == 0) return GetDouble2Error();
+    uchar ibMonRel = (bMONTHS+ti.bMonth-1-ibMonAbs) % bMONTHS;
+//    if (ReadEngMon38_Full(ibMonRel) == 0) return GetDouble2Error();
   }
   else
   {
-    if (ReadEngDay38_Full(0, 75) == 0) return GetDouble2Error();
+//    if (ReadEngDay38_Full() == 0) return GetDouble2Error();
   }
 
   return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
