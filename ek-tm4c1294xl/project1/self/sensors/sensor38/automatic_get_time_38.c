@@ -12,7 +12,7 @@ automatic_get_time_38.c
 // #include "../../serial/ports.h"
 // #include "../../devices/devices.h"
 // #include "../../sensors/automatic1.h"
-// #include "../../digitals/digitals.h"
+ #include "../../digitals/digitals.h"
 #include "device38.h"
 #include "io38.h"
 #include "automatic_get_time_38.h"
