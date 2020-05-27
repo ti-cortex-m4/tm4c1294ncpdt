@@ -8,24 +8,23 @@ automatic_get_cntmon_38.c
 #include "../../memory/mem_factors.h"
 #include "../../display/display.h"
 #include "../../keyboard/keyboard.h"
-// #include "../../time/timedate.h"
 #include "../../serial/ports.h"
 #include "../../devices/devices.h"
-// #include "../../sensors/automatic1.h"
- #include "../../digitals/digitals.h"
+#include "../../digitals/digitals.h"
 #include "device38.h"
 #include "io38.h"
+#include "dff.h"
 #include "automatic_get_time_38.h"
 #include "automatic_get_cntmon_38.h"
 
 
 
-bool    ReadEngDay38_Full(void)
+bool    ReadEngDay38_Full(uchar  ibDayRel)
 {
   Clear();
 
   uchar i;
-  for (i=0; i<1/*4*/; i++)
+  for (i=0; i<4; i++)
   {
     uchar r;
     for (r=0; r<MaxRepeats(); r++)
@@ -40,10 +39,17 @@ bool    ReadEngDay38_Full(void)
     if (r == MaxRepeats()) return false;
 
 
-    uint64_t ddw = ReadEngStatus38(11);
+    uint64_t ddw = DffPopDecodeLong64(11);
     ulong dw = ddw % 0x100000000;
     uchar bStatus = (ddw % 0x100) & 0x03;
     dw >>= 3;
+
+    if (bStatus != 0) {
+      Clear();
+      sprintf(szLo+1, "сутки -%u, %u ?", ibDayRel, bStatus);
+      Delay(1000);
+      return false;
+    }
 
     mpdwChannelsA[i] = dw;
     mpdbChannelsC[i] = (double)mpdwChannelsA[i] / 10000;
@@ -66,7 +72,7 @@ bool    ReadEngMon38_Full(uchar  ibMonRel)
   Clear();
 
   uchar i;
-  for (i=0; i<1/*4*/; i++)
+  for (i=0; i<4; i++)
   {
     uchar r;
     for (r=0; r<MaxRepeats(); r++)
@@ -81,10 +87,17 @@ bool    ReadEngMon38_Full(uchar  ibMonRel)
     if (r == MaxRepeats()) return false;
 
 
-    uint64_t ddw = ReadEngStatus38(11);
+    uint64_t ddw = DffPopDecodeLong64(11);
     ulong dw = ddw % 0x100000000;
     uchar bStatus = (ddw % 0x100) & 0x03;
     dw >>= 3;
+
+    if (bStatus != 0) {
+      Clear();
+      sprintf(szLo+1, "мес€ц -%u, %u ?", ibMonRel, bStatus);
+      Delay(1000);
+      return false;
+    }
 
     mpdwChannelsA[i] = dw;
     mpdbChannelsC[i] = (double)mpdwChannelsA[i] / 10000;
@@ -104,7 +117,6 @@ bool    ReadEngMon38_Full(uchar  ibMonRel)
 
 double2 ReadCntMonCan38(uchar  ibMonAbs)
 {
-//  MonitorString("\n ibMonAbs="); MonitorCharDec(ibMonAbs);
   Clear();
 
   time2 ti2 = ReadTimeCan38();
@@ -118,7 +130,7 @@ double2 ReadCntMonCan38(uchar  ibMonAbs)
   }
   else
   {
-    if (ReadEngDay38_Full() == false) return GetDouble2Error();
+    if (ReadEngDay38_Full(0) == false) return GetDouble2Error();
   }
 
   return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
