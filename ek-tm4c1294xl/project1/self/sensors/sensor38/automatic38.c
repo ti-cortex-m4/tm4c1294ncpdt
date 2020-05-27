@@ -25,7 +25,7 @@ double2 temp(void)
 {
   QueryEngAbs38(0);
   if (Input38() != SER_GOODCHECK) return GetDouble2Error();
-  ReadEngAbs38(11);
+  ReadEng38(11);
 
 
   QueryEngDay38(0,0);

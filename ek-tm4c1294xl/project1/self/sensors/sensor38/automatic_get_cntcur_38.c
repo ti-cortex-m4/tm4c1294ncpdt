@@ -38,7 +38,7 @@ double2 ReadCntCurr38(void)
 
     if (r == MaxRepeats()) return GetDouble2Error();
 
-    mpdwChannelsA[i] = ReadEngAbs38(11) % 0x100000000;
+    mpdwChannelsA[i] = ReadEng38(11) % 0x100000000;
     mpdbChannelsC[i] = (double)mpdwChannelsA[i] / 10000;
   }
 
