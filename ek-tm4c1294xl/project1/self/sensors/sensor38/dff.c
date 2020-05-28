@@ -30,18 +30,18 @@ void left_shift2(uchar  *array, uint  wSize, uint  bits)
 }
 
 
-uchar*  DffPopDecodeBuff(uchar  i) {
-  static uchar result[1000];
-  uchar buff[1000];
+uchar*  DffPopDecodeBuff(uchar  *pb) {
+  static uchar result[8];
+  uchar buff[8];
 
-  InitPop(i);
+//  InitPop(i);
 
   memset(&result, 0, sizeof(result));
   int bits = 0;
 
   do {
     memset(&buff, 0, sizeof(buff));
-    buff[0] = (InBuff(i) & 0x7F);
+    buff[0] = (*pb /*InBuff(i)*/ & 0x7F);
 
     left_shift2(buff, sizeof(buff), bits);
 
@@ -49,9 +49,9 @@ uchar*  DffPopDecodeBuff(uchar  i) {
     for (i=0; i < sizeof(result); i++)
       result[i] |= buff[i];
 
-    bits += 7;
+    bits += 4/*7*/;
   }
-  while (InBuff(i++) & 0x80);
+  while (*(pb++)/*InBuff(i++)*/ & 0x80);
 
   return result;
 }
