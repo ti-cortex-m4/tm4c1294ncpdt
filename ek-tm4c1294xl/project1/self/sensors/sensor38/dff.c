@@ -10,6 +10,54 @@ dff.c
 
 
 
+void left_shift2(uchar  *array, uint  wSize, uint  bits)
+{
+  uint b;
+  for (b=0; b<bits; b++)
+  {
+    sint i;
+    for (i=wSize-1; i >= 0; i--)
+    {
+      array[i] = array[i] << 1;
+
+      if (i > 0)
+      {
+        uchar c = (array[i-1] >> 7) & 0x01;
+        array[i] = array[i] | c;
+      }
+    }
+  }
+}
+
+
+uchar*  DffPopDecodeBuff(uchar  i) {
+  static uchar result[1000];
+  uchar buff[1000];
+
+  InitPop(i);
+
+  memset(&result, 0, sizeof(result));
+  int bits = 0;
+
+  do {
+    memset(&buff, 0, sizeof(buff));
+    buff[0] = (InBuff(i) & 0x7F);
+
+    left_shift2(buff, sizeof(buff), bits);
+
+    uint i;
+    for (i=0; i < sizeof(result); i++)
+      result[i] |= buff[i];
+
+    bits += 7;
+  }
+  while (InBuff(i++) & 0x80);
+
+  return result;
+}
+
+
+
 uint64_t DffPopDecodeLong64(uchar  i) {
   InitPop(i);
 
