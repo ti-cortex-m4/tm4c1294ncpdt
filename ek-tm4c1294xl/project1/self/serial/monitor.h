@@ -19,7 +19,10 @@ void    MonitorIntHex(uint  w);
 void    MonitorLongDec(ulong  dw);
 void    MonitorLongHex(ulong  dw);
 void    MonitorLongDecimal(ulong  dw, uint  wDivider);
+void    MonitorLong64Hex(uint64_t  ddw);
 void    MonitorTime(time  ti);
 
 void    MonitorOut(uint  cwIn, uint  cwOut);
 void    MonitorIn(void);
+void    MonitorArrayHex(uchar  *pbData, uint  wSize);
+

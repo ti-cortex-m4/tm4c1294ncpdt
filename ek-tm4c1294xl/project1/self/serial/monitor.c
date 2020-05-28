@@ -118,6 +118,13 @@ void    MonitorLongDecimal(ulong  dw, uint  wDivider)
 }
 
 
+void    MonitorLong64Hex(uint64_t  ddw)
+{
+  MonitorLongHex(ddw / 0x100000000);
+  MonitorLongHex(ddw % 0x100000000);
+}
+
+
 void    MonitorTime(time  ti)
 {
   if (UseMonitor())
@@ -239,5 +246,26 @@ void    MonitorIn(void)
     if (fMonitorLogHex) MonitorInHex(IndexInBuff());
     if (fMonitorLogChar7) MonitorInChar7(IndexInBuff());
     if (fMonitorLogChar8) MonitorInChar8(IndexInBuff());
+  }
+}
+
+
+
+void    MonitorArrayHex(uchar  *pbData, uint  wSize)
+{
+  if (UseMonitor())
+  {
+    MonitorString("\n");
+    MonitorString("\n Size="); MonitorIntDec(wSize); MonitorString(" "); MonitorIntHex(wSize);
+    MonitorString("\n");
+
+    uint i = 0;
+    while (wSize--)
+    {
+      MonitorCharHex(*pbData++);
+      if (++i % 16 == 0) MonitorString("\n");
+    }
+
+    MonitorString("\n");
   }
 }
