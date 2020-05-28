@@ -19,6 +19,28 @@ automatic_get_cntcur_38.c
 
 double2 ReadCntCurr38(void)
 {
+  uchar mpbuff[8];
+
+  mpbuff[0] = 0xD5;
+  mpbuff[1] = 0xEC;
+  mpbuff[2] = 0xFD;
+  mpbuff[3] = 0xC1;
+  mpbuff[4] = 0x7E;
+  mpbuff[5] = 0x98;
+  mpbuff[6] = 0x09;
+
+  MonitorString("\n before ");
+//  MonitorArrayHex(mpbuff,8);
+
+  MonitorString("\n 1 ");
+  MonitorLong64Hex(DffDecodeLong64(mpbuff[0]));
+
+  MonitorString("\n 1 ");
+  MonitorLong64Hex(DffDecodeLong64(mpbuff[1]));
+
+//  MonitorString("\n after ");
+//  MonitorArrayHex(mpbuff,8);
+
   Clear();
 
   uchar i;
