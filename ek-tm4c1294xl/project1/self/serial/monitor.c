@@ -120,10 +120,9 @@ void    MonitorLongDecimal(ulong  dw, uint  wDivider)
 
 void    MonitorLong64Hex(uint64_t  ddw)
 {
-  if (UseMonitor())
-  {
-    MonitorLong("%8X_%8X", ddw / 0x100000000, ddw % 0x100000000);
-  }
+  MonitorLong("%08X", ddw / 0x100000000);
+  MonitorString("_");
+  MonitorLong("%08X", ddw % 0x100000000);
 }
 
 
