@@ -4,7 +4,8 @@
 
 void left_shift(unsigned int* array)
 {
-    for (int i=3; i >= 0; i--)
+    int i;
+    for (i=3; i >= 0; i--)
     {
         array[i] = array[i] << 1;
 
@@ -18,7 +19,8 @@ void left_shift(unsigned int* array)
 
 void right_shift(unsigned int* array)
 {
-    for (int i=0; i < 4; i++)
+    int i;
+    for (i=0; i < 4; i++)
     {
         array[i] = array[i] >> 1;
 
