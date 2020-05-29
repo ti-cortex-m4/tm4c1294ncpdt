@@ -18,26 +18,49 @@ automatic_get_cntcur_38.c
 
 
 #include "../../serial/monitor.h"
+#include "bits2.h"
 uint64_t DffDecodeLong64(uchar  *pb);
+
 
 
 double2 ReadCntCurr38(void)
 {
-  uchar mpbuff[8];
+  uchar in[8]; // E8 D5 C7 7E F0 22
+  memset(&in, 0, sizeof(in));
 
-  mpbuff[0] = 0xEC;
-  mpbuff[1] = 0xFD;
-  mpbuff[2] = 0xC1;
-  mpbuff[3] = 0x7E;
-  mpbuff[4] = 0x98;
-  mpbuff[5] = 0x09;
+  uchar out[8];
+  memset(&out, 0, sizeof(out));
 
-  MonitorString("\n 1 ");
+  in[0] = 0xE8;
+  in[1] = 0xD5;
+  in[2] = 0xC7;
+  in[3] = 0x7E;
+  in[4] = 0xF0;
+  in[5] = 0x22;
+
+  ulong out2 = 0;
+  uchar x = pucDecodeBitArr((uchar *) &out2/*&out[0]*/, &in[4]);
+//  MonitorCharHex(x);
+
+  MonitorLongHex(out2);
+  MonitorLongHex(out2 >> 3); MonitorString(" ");
+  MonitorLongDecimal(out2 >> 3, 10000);
+/*
   uint64_t ddw = DffDecodeLong64(mpbuff);
+  MonitorString("\n 1 ");
   MonitorLong64Hex(ddw);
-  MonitorString("\n 2 ");
-  MonitorLong64Hex(ddw >> 3);
 
+  ulong dw = ddw % 0x100000000;
+  MonitorString("\n 2 ");
+  MonitorLongHex(dw);
+  MonitorString("\n 3 ");
+  MonitorLongDec(dw);
+
+  MonitorString("\n 4 ");
+  MonitorLongHex(dw >> 3);
+  MonitorString("\n 5 ");
+  MonitorLongDec(dw >> 3);
+*/
   if (1+1 == 2) return GetDouble2Error();
 
   Clear();
