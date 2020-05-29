@@ -2,27 +2,28 @@
 
 
 
-unsigned char  pucDecodeBitArr(unsigned char pdataout, unsigned char *pdatain) {
-  unsigned char  in_data, out_data = 0;
-  MdUns            boId = 0, wiId = 0, woId = 0;
+unsigned char  *pucDecodeBitArr(unsigned char *pdataout, unsigned char *pdatain) {
+  unsigned char  bIn, bOut = 0;
+  unsigned int   boId = 0, wiId = 0, woId = 0;
 
   for (;;) {
-    in_data = pdatain[wiId++];
-    for (MdUns biId=0; biId<8; biId++) {
-      if (in_data & (0x01 << biId)) {
-        if (biId != 7)
-          out_data |= (0x01 << boId++);
+    bIn = pdatain[wiId++];
+    unsigned char bits;
+    for (bits=0; bits<8; bits++) {
+      if (bIn & (0x01 << bits)) {
+        if (bits != 7)
+          bOut |= (0x01 << boId++);
       }
       else {
-        if (biId == 7) {
-          pdataout[woId] = out_data;
+        if (bits == 7) {
+          pdataout[woId] = bOut;
           return &(pdatain[wiId]);
         }
-        out_data &= ~(0x01 << boId++);
+        bOut &= ~(0x01 << boId++);
       }
       if (boId >=8) {
-        pdataout[woId++] = out_data;
-        out_data = boId = 0;
+        pdataout[woId++] = bOut;
+        bOut = boId = 0;
       }
     }
     if (wiId > 256) break;
