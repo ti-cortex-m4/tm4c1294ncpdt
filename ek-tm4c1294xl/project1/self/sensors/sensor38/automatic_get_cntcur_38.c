@@ -18,6 +18,7 @@ automatic_get_cntcur_38.c
 
 
 #include "../../serial/monitor.h"
+#include "../../time/calendar.h"
 #include "bits2.h"
 uint64_t DffDecodeLong64(uchar  *pb);
 
@@ -38,13 +39,20 @@ double2 ReadCntCurr38(void)
   in[4] = 0xF0;
   in[5] = 0x22;
 
+  ulong out1 = 0;
+  uchar x = pucDecodeBitArr((uchar *) &out1/*&out[0]*/, &in[0]);
+  time ti = SecIndexToDate(out1);
+  ti.bYear += 12;
+  MonitorTime(ti);
+
   ulong out2 = 0;
-  uchar x = pucDecodeBitArr((uchar *) &out2/*&out[0]*/, &in[4]);
-//  MonitorCharHex(x);
+  pucDecodeBitArr((uchar *) &out2/*&out[0]*/, &in[4]);
 
   MonitorLongHex(out2);
   MonitorLongHex(out2 >> 3); MonitorString(" ");
   MonitorLongDecimal(out2 >> 3, 10000);
+
+
 /*
   uint64_t ddw = DffDecodeLong64(mpbuff);
   MonitorString("\n 1 ");
