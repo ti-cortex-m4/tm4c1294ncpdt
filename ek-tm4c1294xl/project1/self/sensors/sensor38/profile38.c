@@ -77,8 +77,10 @@ void    InitHeader38(void)
   tiDigPrev.bHour = i / 2;
   tiDigPrev.bMinute = (i % 2)*30;
 */
+  wProfile38 = 0;
+
   wRelStart = 0;
-  wRelEnd = 5;
+  wRelEnd = wRelStart + 5;
 
   MonitorString("\n QueryProfile38 ");
   MonitorTime(tiValue38);
@@ -270,7 +272,13 @@ bool    ReadData38(void)
     }
   }
 
-  return false;
+  wProfile38 += 6;
+  if (wProfile38 > 100/*wHOURS*/) return false;
+
+  wRelStart += 6;
+  wRelEnd = wRelStart + 5;
+
+  return true;
 }
 
 
