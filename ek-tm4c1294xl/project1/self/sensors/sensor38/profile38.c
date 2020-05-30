@@ -78,15 +78,7 @@ void    InitHeader38(void)
   tiDigPrev.bMinute = (i % 2)*30;
 */
   wRelStart = 0;
-
-  uchar i = tiValue38.bHour*2 + tiValue38.bMinute/30;
-  MonitorString(" i1="); MonitorIntDec(i);
-  i = i % 6;
-  MonitorString(" i2="); MonitorIntDec(i);
-  if (i == 0) i = 6;
-  MonitorString(" i3="); MonitorIntDec(i);
-
-  wRelEnd = i;
+  wRelEnd = 5;
 
   MonitorString("\n QueryProfile38 ");
   MonitorTime(tiValue38);
@@ -274,7 +266,7 @@ bool    ReadData38(void)
     uchar b;
     for (b=0; b<4; b++) {
       MonitorTime(mpProfiles38[a].tiTime[b]);
-      MonitorLongDecimal(mpProfiles38[b].mpdwValue[b], 10000); MonitorString("   ");
+      MonitorLongDecimal(mpProfiles38[a].mpdwValue[b], 10000); MonitorString("   ");
     }
   }
 
