@@ -14,11 +14,11 @@ profile38.c
 //#include "../../memory/mem_current.h"
 #include "../../memory/mem_factors.h"
 #include "../../memory/mem_realtime.h"
-//#include "../../memory/mem_energy_spec.h"
+#include "../../memory/mem_energy_spec.h"
 #include "../../memory/mem_profile.h"
 #include "../../memory/mem_limits.h"
 #include "../../display/display.h"
-//#include "../../keyboard/time/key_timedate.h"
+#include "../../keyboard/time/key_timedate.h"
 #include "../../time/timedate.h"
 #include "../../time/calendar.h"
 #include "../../time/delay.h"
@@ -27,11 +27,11 @@ profile38.c
 #include "../../serial/ports_common.h"
 #include "../../serial/monitor.h"
 #include "../../devices/devices.h"
-//#include "../../devices/devices_time.h"
+#include "../../devices/devices_time.h"
 //#include "../../digitals/current/current_run.h"
 #include "../../digitals/digitals.h"
 #include "../../digitals/limits.h"
-//#include "../../special/special.h"
+#include "../../special/special.h"
 //#include "../../hardware/watchdog.h"
 #include "io38.h"
 #include "dff.h"
@@ -117,11 +117,6 @@ void    QueryHeader38(void)
   tiDig = HouIndexToDate(dw);
 
 
-  szHi[10] = 'A' + ibLine38;
-  szHi[11] = ' ';
-
-
-  bMaxLine38 = GetMaxLine38(ibDig);
   QueryProfile38(0); // TODO
 }
 
@@ -134,7 +129,7 @@ void    ReadHeader38(void)
   uchar h;
   for (h=0; h<6; h++)
   {
-    mpdbBuffCanHou[ibLine38][h] = PopDoubleQ()/2;
+    mpdbBuffCanHou[0/*ibLine38*/][h] = 0; //PopDoubleQ()/2;
   }
 }
 
@@ -147,7 +142,7 @@ void    MakeData38(uchar  h)
   double dbPulse = mpdbPulseHou[ibDig];
 
   uchar i;
-  for (i=0; i<bMaxLine38; i++)
+  for (i=0; i<4; i++)
   {
     double db = mpdbBuffCanHou[i][h];
     mpdbEngFracDigCan[ibDig][i] += db;
