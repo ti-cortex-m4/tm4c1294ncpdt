@@ -17,15 +17,44 @@ automatic_get_cntcur_38.c
 
 
 
+#include "../../memory/mem_serial3.h"
 #include "../../serial/monitor.h"
 #include "../../time/calendar.h"
 #include "bits2.h"
+#include "profile38.h"
 uint64_t DffDecodeLong64(uchar  *pb);
+void    MonitorOpen(uchar  ibPrt);
 
 
 
 double2 ReadCntCurr38(void)
 {
+  MonitorOpen(0);
+  Delay(500);
+
+
+
+  QueryProfile38(0);
+  if (Input38() != SER_GOODCHECK) GetDouble2Error();
+
+
+  ulong dw1 = 0;
+  uchar x = pucDecodeBitArr((uchar *) &dw1, &mpbInBuff3[11+0]);
+  time ti = SecIndexToDate(dw1);
+  ti.bYear += 12;
+  MonitorTime(ti);
+
+  ulong dw2 = 0;
+  pucDecodeBitArr((uchar *) &dw2, &mpbInBuff3[11+4]);
+
+  MonitorLongHex(dw2);
+  MonitorLongHex(dw2 >> 3); MonitorString(" ");
+  uchar bStatus = (dw2 % 0x100) & 0x03;
+  MonitorCharDec(bStatus);
+  MonitorLongDecimal(dw2 >> 3, 10000);
+
+
+/*
   uchar in[8]; // E8 D5 C7 7E F0 22
   memset(&in, 0, sizeof(in));
 
@@ -40,18 +69,18 @@ double2 ReadCntCurr38(void)
   in[5] = 0x22;
 
   ulong out1 = 0;
-  uchar x = pucDecodeBitArr((uchar *) &out1/*&out[0]*/, &in[0]);
+  uchar x = pucDecodeBitArr((uchar *) &out1/ *&out[0]* /, &in[0]);
   time ti = SecIndexToDate(out1);
   ti.bYear += 12;
   MonitorTime(ti);
 
   ulong out2 = 0;
-  pucDecodeBitArr((uchar *) &out2/*&out[0]*/, &in[4]);
+  pucDecodeBitArr((uchar *) &out2/ *&out[0]* /, &in[4]);
 
   MonitorLongHex(out2);
   MonitorLongHex(out2 >> 3); MonitorString(" ");
   MonitorLongDecimal(out2 >> 3, 10000);
-
+*/
 
 /*
   uint64_t ddw = DffDecodeLong64(mpbuff);
@@ -69,7 +98,7 @@ double2 ReadCntCurr38(void)
   MonitorString("\n 5 ");
   MonitorLongDec(dw >> 3);
 */
-  if (1+1 == 2) return GetDouble2Error();
+  if (1+1 == 2) return GetDouble2(0, true);
 
   Clear();
 
