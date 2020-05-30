@@ -144,7 +144,7 @@ void    QueryHeader38(void)
 }
 
 
-
+/*
 void    ReadHeader38(void)
 {
   InitPop(1);
@@ -152,10 +152,10 @@ void    ReadHeader38(void)
   uchar h;
   for (h=0; h<6; h++)
   {
-    mpdbBuffCanHou[0/*ibLine38*/][h] = 0; //PopDoubleQ()/2;
+    mpdbBuffCanHou[0/ *ibLine38* /][h] = 0; //PopDoubleQ()/2;
   }
 }
-
+*/
 
 
 void    MakeData38(uchar  h)
@@ -167,7 +167,7 @@ void    MakeData38(uchar  h)
   uchar i;
   for (i=0; i<4; i++)
   {
-    double db = mpdbBuffCanHou[i][h];
+    double db = mpProfiles38[h].mpdwValue[i];// mpdbBuffCanHou[i][h];
     mpdbEngFracDigCan[ibDig][i] += db;
 
     uint w = (uint)(mpdbEngFracDigCan[ibDig][i]*dbPulse);
@@ -270,6 +270,10 @@ bool    ReadData38(void)
       MonitorTime(mpProfiles38[a].tiTime[b]);
       MonitorLongDecimal(mpProfiles38[a].mpdwValue[b], 10000); MonitorString("   ");
     }
+  }
+
+  for (a=0; a<6; a++) {
+    if (ReadBlock38(a) == false) return false;
   }
 
   wProfile38 += 6;
