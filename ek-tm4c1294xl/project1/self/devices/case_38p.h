@@ -1,41 +1,41 @@
 
-#ifndef SKIP_36
+#ifndef SKIP_38
 
-    case DEV_START_36P:
+    case DEV_START_38P:
 //      if ((boControlQ == false) && (fCurrCtrl == true))
-//        MakePause(DEV_PREVCORRECT_36P);
+//        MakePause(DEV_PREVCORRECT_38P);
 //      else
-        MakePause(DEV_OPEN_36P);
+        MakePause(DEV_OPEN_38P);
       break;
 
-    case DEV_PREVCORRECT_36P:
-      if (tiCurr.bSecond < bMINORCORRECT_36) {
-        MakePause(DEV_CORRECT_36P);
+    case DEV_PREVCORRECT_38P:
+      if (tiCurr.bSecond < bMINORCORRECT_38) {
+        MakePause(DEV_CORRECT_38P);
       } else {
         ShowTimeOneE(ibDig);
-        MakePause(DEV_PREVCORRECT_36P);
+        MakePause(DEV_PREVCORRECT_38P);
       }
       break;
 
-    case DEV_CORRECT_36P:
+    case DEV_CORRECT_38P:
       ShowLo(szCorrectQ1);
-      QueryCorrect36();
-      SetCurr35(DEV_OPEN_36P);
+      QueryCorrect38();
+      SetCurr(DEV_OPEN_38P);
       break;
 
-    case DEV_OPEN_36P:
+    case DEV_OPEN_38P:
       Clear(); ShowPercent(50);
 
       cbRepeat = MaxRepeats();
-      QueryOpen36();
-      SetCurr35(DEV_OPENCANAL_36P);
+      QueryOpen38();
+      SetCurr(DEV_OPENCANAL_38P);
       break;
 
-    case DEV_OPENCANAL_36P:
-      if (IsSerial35())
+    case DEV_OPENCANAL_38P:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        ReadOpen36();
-        MakeLongPause(DEV_POSTOPENCANAL_36P, 1);
+        ReadOpen38();
+        MakeLongPause(DEV_POSTOPENCANAL_38P, 1);
       }
       else
       {
@@ -45,27 +45,27 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryOpen36();
-          SetCurr35(DEV_OPENCANAL_36P);
+          QueryOpen38();
+          SetCurr(DEV_OPENCANAL_38P);
         }
       }
       break;
 
-    case DEV_POSTOPENCANAL_36P:
+    case DEV_POSTOPENCANAL_38P:
       Clear(); ShowPercent(51);
 
       cbRepeat = MaxRepeats();
-      QueryOption36();
-      SetCurr35(DEV_OPTION_36P);
+      QueryOption38();
+      SetCurr(DEV_OPTION_38P);
       break;
 
-    case DEV_OPTION_36P:
-      if (IsSerial35())
+    case DEV_OPTION_38P:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        if (HasPassword36())
-          MakePause(DEV_POSTOPTION_36P);
+        if (HasPassword38())
+          MakePause(DEV_POSTOPTION_38P);
         else
-          MakePause(DEV_POSTPASSWORD_36P);
+          MakePause(DEV_POSTPASSWORD_38P);
       }
       else
       {
@@ -75,23 +75,23 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryOption36();
-          SetCurr35(DEV_OPTION_36P);
+          QueryOption38();
+          SetCurr(DEV_OPTION_38P);
         }
       }
       break;
 
-    case DEV_POSTOPTION_36P:
+    case DEV_POSTOPTION_38P:
       ShowPercent(52);
 
       cbRepeat = MaxRepeats();
-      QueryPassword36();
-      SetCurr35(DEV_PASSWORD_36P);
+      QueryPassword38();
+      SetCurr(DEV_PASSWORD_38P);
       break;
 
-    case DEV_PASSWORD_36P:
-      if (IsSerial35())
-        MakePause(DEV_POSTPASSWORD_36P);
+    case DEV_PASSWORD_38P:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+        MakePause(DEV_POSTPASSWORD_38P);
       else
       {
         if (cbRepeat == 0) ErrorProfile();
@@ -100,25 +100,25 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryPassword36();
-          SetCurr35(DEV_PASSWORD_36P);
+          QueryPassword38();
+          SetCurr(DEV_PASSWORD_38P);
         }
       }
       break;
 
-    case DEV_POSTPASSWORD_36P:
+    case DEV_POSTPASSWORD_38P:
       ShowPercent(53);
 
       cbRepeat = MaxRepeats();
-      QueryTimeProfile36();
-      SetCurr35(DEV_TIME_36P);
+      QueryTimeProfile38();
+      SetCurr(DEV_TIME_38P);
       break;
 
-    case DEV_TIME_36P:
-      if (IsSerial35())
+    case DEV_TIME_38P:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        tiValue36 = ReadTime36();
-        MakePause(DEV_POSTTIME_36P);
+        tiValue38 = ReadTime38();
+        MakePause(DEV_POSTTIME_38P);
       }
       else
       {
@@ -128,26 +128,26 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryTimeProfile36();
-          SetCurr35(DEV_TIME_36P);
+          QueryTimeProfile38();
+          SetCurr(DEV_TIME_38P);
         }
       }
       break;
 
-    case DEV_POSTTIME_36P:
+    case DEV_POSTTIME_38P:
       ShowPercent(54);
 
       cbRepeat = MaxRepeats();
-      QueryDateProfile36();
-      SetCurr35(DEV_DATE_36P);
+      QueryDateProfile38();
+      SetCurr(DEV_DATE_38P);
       break;
 
-    case DEV_DATE_36P:
-      if (IsSerial35())
+    case DEV_DATE_38P:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        tiValue36 = ReadDate36(tiValue36);
-        dwValue36 = DateToHouIndex(tiValue36);
-        MakePause(DEV_POSTDATE_36P);
+        tiValue38 = ReadDate38(tiValue38);
+        dwValue38 = DateToHouIndex(tiValue38);
+        MakePause(DEV_POSTDATE_38P);
       }
       else
       {
@@ -157,113 +157,113 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryDateProfile36();
-          SetCurr35(DEV_DATE_36P);
+          QueryDateProfile38();
+          SetCurr(DEV_DATE_38P);
         }
       }
       break;
 
 
-    case DEV_POSTDATE_36P:
+    case DEV_POSTDATE_38P:
       if ((boControlQ != false) && (fCurrCtrl == true))
       {
-        ulong dwSecond1 = GetSecondIndex(tiValue36);
+        ulong dwSecond1 = GetSecondIndex(tiValue38);
         ulong dwSecond2 = GetSecondIndex(tiCurr);
 
-        if (DifferentDay(tiValue36, tiCurr))
+        if (DifferentDay(tiValue38, tiCurr))
         { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); }                       // даты не совпадают, коррекция невозможна
         else
         {
           ShowDigitalDeltaTime(ibDig, dwSecond1, dwSecond2);
 
           if (AbsLong(dwSecond1 - dwSecond2) < GetCorrectLimit())                 // без коррекции
-          { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_36P); }
-          else if (GetCurrHouIndex() == (tiValue36.bHour*2 + tiValue36.bMinute/30)) // простая коррекция
-          { ShowLo(szCorrectYes); DelayInf(); MakePause(DEV_CONTROL_36P); }
+          { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_38P); }
+          else if (GetCurrHouIndex() == (tiValue38.bHour*2 + tiValue38.bMinute/30)) // простая коррекция
+          { ShowLo(szCorrectYes); DelayInf(); MakePause(DEV_CONTROL_38P); }
           else
           { ShowLo(szCorrectBig); DelayMsg(); ErrorProfile(); }                   // разница времени слишком велика, коррекция невозможна
         }
       }
       else
-        MakePause(DEV_POSTCORRECT_36P);
+        MakePause(DEV_POSTCORRECT_38P);
       break;
 
 
-    case DEV_CONTROL_36P:
+    case DEV_CONTROL_38P:
       cbRepeat = MaxRepeats();
-      QueryControl36(tiCurr);
-      SetCurr35(DEV_POSTCONTROL_36P);
+      QueryControl38(tiCurr);
+      SetCurr(DEV_POSTCONTROL_38P);
       break;
 
-    case DEV_POSTCONTROL_36P:
-      if (IsSerial35())
-        MakePause(DEV_POSTCORRECT_36P);
+    case DEV_POSTCONTROL_38P:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+        MakePause(DEV_POSTCORRECT_38P);
       else
       {
-        if (cbRepeat == 0) MakePause(DEV_POSTCORRECT_36P);   // да !
+        if (cbRepeat == 0) MakePause(DEV_POSTCORRECT_38P);   // да !
         else
         {
           ErrorLink();
           cbRepeat--;
 
-          QueryControl36(tiCurr);
-          SetCurr35(DEV_POSTCONTROL_36P);
+          QueryControl38(tiCurr);
+          SetCurr(DEV_POSTCONTROL_38P);
         }
       }
       break;
 
 
-    case DEV_POSTCORRECT_36P:
-      cwShutdown36 = 0;
-      InitHeader36();
+    case DEV_POSTCORRECT_38P:
+      cwShutdown38 = 0;
+      InitHeader38();
 
-      ibLine36 = 0;
-      if (SkipLine(ibDig, ibLine36) == true)
+      ibLine38 = 0;
+      if (SkipLine(ibDig, ibLine38) == true)
       {
-        ReadHeader36_SkipLine(ibLine36);
-        ibLine36++;
+        ReadHeader38_SkipLine(ibLine38);
+        ibLine38++;
       }
 
       cbRepeat = MaxRepeats();
-      QueryHeader36();
-      SetCurr35(DEV_HEADER_36P);
+      QueryHeader38();
+      SetCurr(DEV_HEADER_38P);
       break;
 
-    case DEV_HEADER_36P:
-      if (IsSerial35())
+    case DEV_HEADER_38P:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
       {
         if (IndexInBuff() == 3)                        // если нет требуемой записи
         {
-          if (cwShutdown36 >= GetMaxShutdown())        // если питание было выключено слишком долго
+          if (cwShutdown38 >= GetMaxShutdown())        // если питание было выключено слишком долго
             DoneProfile();
           else
           {
-            cwShutdown36 += 6;
-            sprintf(szLo," выключено: %-4u   ",cwShutdown36);
+            cwShutdown38 += 6;
+            sprintf(szLo," выключено: %-4u   ",cwShutdown38);
 
-            iwDigHou = (wHOURS+iwHardHou-wProfile36)%wHOURS;
+            iwDigHou = (wHOURS+iwHardHou-wProfile38)%wHOURS;
             ShowProgressDigHou();
 
             if (MakeStopHou(0) == 0)
               DoneProfile();
-            else if (++wProfile36 > wHOURS)
+            else if (++wProfile38 > wHOURS)
               DoneProfile();
             else
-              MakePause(DEV_DATA_36P);
+              MakePause(DEV_DATA_38P);
           }
         }
         else
         {
-          ReadHeader36();
+          ReadHeader38();
 
-          if (SkipLine(ibDig, ibLine36+1) == true)
+          if (SkipLine(ibDig, ibLine38+1) == true)
           {
-            ReadHeader36_SkipLine(ibLine36+1);
-            ibLine36++;
+            ReadHeader38_SkipLine(ibLine38+1);
+            ibLine38++;
           }
 
-          cwShutdown36 = 0;                            // если есть требуемая запись
-          MakePause(DEV_POSTHEADER_36P);
+          cwShutdown38 = 0;                            // если есть требуемая запись
+          MakePause(DEV_POSTHEADER_38P);
         }
       }
       else
@@ -275,44 +275,44 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryHeader36();
-          SetCurr35(DEV_HEADER_36P);
+          QueryHeader38();
+          SetCurr(DEV_HEADER_38P);
         }
       }
       break;
 
-    case DEV_POSTHEADER_36P:
-      if (++ibLine36 < bMaxLine36)
+    case DEV_POSTHEADER_38P:
+      if (++ibLine38 < bMaxLine38)
       {
         cbRepeat = MaxRepeats();
-        QueryHeader36();
-        SetCurr35(DEV_HEADER_36P);
+        QueryHeader38();
+        SetCurr(DEV_HEADER_38P);
       }
       else
       {
-        if (ReadData36() == 0)
+        if (ReadData38() == 0)
           DoneProfile();
         else
-          MakePause(DEV_DATA_36P);
+          MakePause(DEV_DATA_38P);
       }
       break;
 
-    case DEV_DATA_36P:
+    case DEV_DATA_38P:
       if (wBaseCurr > wHOURS/48)
         DoneProfile();
       else
       {
-        ibLine36 = 0;
+        ibLine38 = 0;
 
-        if (SkipLine(ibDig, ibLine36) == true)
+        if (SkipLine(ibDig, ibLine38) == true)
         {
-          ReadHeader36_SkipLine(ibLine36);
-          ibLine36++;
+          ReadHeader38_SkipLine(ibLine38);
+          ibLine38++;
         }
 
         cbRepeat = MaxRepeats();
-        QueryHeader36();
-        SetCurr35(DEV_HEADER_36P);
+        QueryHeader38();
+        SetCurr(DEV_HEADER_38P);
       }
       break;
 
