@@ -45,6 +45,7 @@ double2 ReadCntCurr38(void)
   uchar j;
   for (j=0; j<4; j++)
   {
+    MonitorString("\n");
     ibIdx++;
 
     uchar k;
@@ -65,7 +66,7 @@ double2 ReadCntCurr38(void)
 //      MonitorString(" i2="); MonitorCharDec(i2); MonitorString(" ");
 
       uchar bStatus = (dw2 % 0x100) & 0x03;
-      MonitorString(" s=");MonitorCharDec(bStatus); MonitorString(" ");
+      MonitorString(" s="); MonitorCharDec(bStatus); MonitorString(" ");
       MonitorLongDecimal(dw2 >> 3, 10000);
     }
   }
