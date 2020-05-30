@@ -285,7 +285,7 @@ void    NextCurrent(void)
 
 #ifndef SKIP_36
     case 36:
-    case 37: QueryClose36();  break;
+    case 37: QueryClose36(); break;
 #endif
   }
 

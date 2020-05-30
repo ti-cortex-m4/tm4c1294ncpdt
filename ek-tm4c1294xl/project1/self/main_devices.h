@@ -833,6 +833,13 @@ typedef enum
   DEV_START_38C         =  0x2300,
   DEV_ENERGY_38C        =  0x2301,
 
+  DEV_START_38P         =  0x2310,
+  DEV_PREVTIME_38P      =  0x2311,
+  DEV_TIME_38P          =  0x2312,
+  DEV_POSTTIME_38P      =  0x2313,
+  DEV_HEADER_38P        =  0x2314,
+  DEV_DATA_38P          =  0x2315,
+
 #endif
 
   DEV_PAUSE             =  1
