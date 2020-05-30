@@ -46,23 +46,27 @@ double2 ReadCntCurr38(void)
   {
     ibIdx++;
 
-    MonitorString("\n");
-    ulong dw1 = 0;
-    uchar i1 = pucDecodeBitArr((uchar *) &dw1, &mpbInBuff3[ibIdx]);
-    ibIdx += i1; //0xFF
-    MonitorString(" i1="); MonitorCharDec(i1); MonitorString(" ");
-    time ti = SecIndexToDate(dw1);
-    ti.bYear += 12;
-    MonitorTime(ti);
+    uchar k;
+    for (k=0; k<2; k++)
+    {
+      MonitorString("\n");
+      ulong dw1 = 0;
+      uchar i1 = pucDecodeBitArr((uchar *) &dw1, &mpbInBuff3[ibIdx]);
+      ibIdx += i1; //0xFF
+      MonitorString(" i1="); MonitorCharDec(i1); MonitorString(" ");
+      time ti = SecIndexToDate(dw1);
+      ti.bYear += 12;
+      MonitorTime(ti);
 
-    ulong dw2 = 0;
-    uchar i2 = pucDecodeBitArr((uchar *) &dw2, &mpbInBuff3[ibIdx]);
-    ibIdx += i2; //0xFF
-    MonitorString(" i2="); MonitorCharDec(i2); MonitorString(" ");
+      ulong dw2 = 0;
+      uchar i2 = pucDecodeBitArr((uchar *) &dw2, &mpbInBuff3[ibIdx]);
+      ibIdx += i2; //0xFF
+      MonitorString(" i2="); MonitorCharDec(i2); MonitorString(" ");
 
-    uchar bStatus = (dw2 % 0x100) & 0x03;
-    MonitorString(" s=");MonitorCharDec(bStatus); MonitorString(" ");
-    MonitorLongDecimal(dw2 >> 3, 10000);
+      uchar bStatus = (dw2 % 0x100) & 0x03;
+      MonitorString(" s=");MonitorCharDec(bStatus); MonitorString(" ");
+      MonitorLongDecimal(dw2 >> 3, 10000);
+    }
   }
 
   if (1+1 == 2) return GetDouble2(0, true);
