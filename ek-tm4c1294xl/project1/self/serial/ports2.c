@@ -80,3 +80,17 @@ void    InputMode(void)
     default: ASSERT(false);
   }
 }
+
+
+
+uchar*  InBuffPtr(uchar  i)
+{
+  switch (ibPort)
+  {
+    case 0: return &mpbInBuff0[i];
+    case 1: return &mpbInBuff1[i];
+    case 2: return &mpbInBuff2[i];
+    case 3: return &mpbInBuff3[i];
+    default: ASSERT(false); return 0;
+  }
+}
