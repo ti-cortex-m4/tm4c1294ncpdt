@@ -27,7 +27,7 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryTimeProfile38();
+          QueryTime38();
           SetCurr(DEV_TIME_38P);
         }
       }
