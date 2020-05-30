@@ -5,13 +5,9 @@ profile38.c
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-//#include "../../serial/ports.h"
-//#include "../../serial/ports_stack.h"
-//#include "../../serial/ports_devices.h"
 #include "../../memory/mem_settings.h"
 #include "../../memory/mem_digitals.h"
 #include "../../memory/mem_ports.h"
-//#include "../../memory/mem_current.h"
 #include "../../memory/mem_factors.h"
 #include "../../memory/mem_realtime.h"
 #include "../../memory/mem_energy_spec.h"
@@ -84,8 +80,11 @@ void    InitHeader38(void)
   wRelStart = 0;
 
   uchar i = tiValue38.bHour*2 + tiValue38.bMinute/30;
+  MonitorString(" i1="); MonitorIntDec(i);
   i = i % 6;
+  MonitorString(" i2="); MonitorIntDec(i);
   if (i == 0) i = 6;
+  MonitorString(" i3="); MonitorIntDec(i);
 
   wRelEnd = i;
 
@@ -270,11 +269,12 @@ bool    ReadData38(void)
     MonitorString("\n");
 
     MonitorBool(mpProfiles38[a].fPresent);
+    MonitorString("   ");
 
     uchar b;
     for (b=0; b<4; b++) {
       MonitorTime(mpProfiles38[a].tiTime[b]);
-      MonitorLongDecimal(mpProfiles38[b].mpdwValue[b], 10000);
+      MonitorLongDecimal(mpProfiles38[b].mpdwValue[b], 10000); MonitorString("   ");
     }
   }
 
@@ -285,6 +285,12 @@ bool    ReadData38(void)
 
 void    RunProfile38(void)
 {
+  QueryTime38();
+  if (Input38() != SER_GOODCHECK) { MonitorString("\n error "); return; }
+
+  tiValue38 = ReadTime38();
+  dwValue38 = DateToHouIndex(tiValue38);
+
   InitHeader38();
 
   while (true) {
