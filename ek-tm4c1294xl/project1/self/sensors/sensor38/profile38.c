@@ -13,7 +13,7 @@ profile38.c
 
 
 
-void    QueryProfile38(uchar  ib30min)
+void    QueryProfile38(uchar  ib30MinRel)
 {
   InitPush(0);
 
@@ -30,13 +30,13 @@ void    QueryProfile38(uchar  ib30min)
 
   PushChar(0xD5); // 213
   PushChar(0x03);
-  PushChar(ib30min);
-  PushChar(ib30min);
+  PushChar(ib30MinRel);
+  PushChar(ib30MinRel);
 
   PushChar(0xD6); // 214
   PushChar(0x03);
-  PushChar(ib30min);
-  PushChar(ib30min);
+  PushChar(ib30MinRel);
+  PushChar(ib30MinRel);
 
   Query38(100+20, 21);
 }
