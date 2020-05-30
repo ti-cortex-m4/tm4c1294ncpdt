@@ -39,6 +39,12 @@ void    MonitorCharChar(uchar  b)
 }
 
 
+void    MonitorBool(bool  f)
+{
+  MonitorChar("%c", (f ? '+' : '-'));
+}
+
+
 void    MonitorCharDec(uchar  b)
 {
   MonitorChar("%u", b);

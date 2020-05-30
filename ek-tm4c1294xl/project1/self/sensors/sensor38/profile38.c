@@ -38,8 +38,24 @@ profile38.c
 
 
 
+#include "../../memory/mem_serial3.h"
+unsigned char  pucDecodeBitArr(unsigned char *pOut, unsigned char *pIn);
+
+
+typedef struct
+{
+  bool          fPresent;
+  time          tiTime[4];
+  ulong         mpdwValue[4];
+} profile38;
+
+
+
+
 uint                    wProfile38;
 static uint             wRelStart, wRelEnd;
+
+profile38               mpProfiles38[6];
 
 time                    tiValue38;
 ulong                   dwValue38;
@@ -187,6 +203,7 @@ bool    ReadBlock38(uchar  ibBlock)
 
 bool    ReadData38(void)
 {
+/*
   uchar i;
   for (i=0; i<6; i++)
   {
@@ -204,6 +221,64 @@ bool    ReadData38(void)
   if (wProfile38 > wHOURS) return(0);
 
   return(1);
+*/
+
+  memset(&mpProfiles38, 0, sizeof(mpProfiles38));
+
+  uchar ibIdx = 10;
+
+  int count = wRelEnd - wRelStart + 1;
+  MonitorString("\n count="); MonitorCharDec(count);
+
+  uchar j;
+  for (j=0; j<4; j++)
+  {
+    MonitorString("\n");
+    ibIdx++;
+
+    uchar k;
+    for (k=0; k<count; k++)
+    {
+      MonitorString("\n");
+      ulong dw1 = 0;
+      uchar i1 = pucDecodeBitArr((uchar *) &dw1, &mpbInBuff3[ibIdx]);
+      ibIdx += i1; //0xFF
+//      MonitorString(" i1="); MonitorCharDec(i1); MonitorString(" ");
+      time ti = SecIndexToDate(dw1);
+      ti.bYear += 12;
+      MonitorTime(ti);
+      mpProfiles38[k].fPresent = true;
+      mpProfiles38[k].tiTime[j] = ti;
+
+      ulong dw2 = 0;
+      uchar i2 = pucDecodeBitArr((uchar *) &dw2, &mpbInBuff3[ibIdx]);
+      ibIdx += i2; //0xFF
+//      MonitorString(" i2="); MonitorCharDec(i2); MonitorString(" ");
+
+      uchar bStatus = (dw2 % 0x100) & 0x03;
+      MonitorString(" s="); MonitorCharDec(bStatus); MonitorString(" ");
+      ulong dwValue = dw2 >> 3;
+      mpProfiles38[k].mpdwValue[j] = dwValue;
+      MonitorLongDecimal(dwValue, 10000);
+    }
+  }
+
+  MonitorString("\n Result");
+
+  uchar a;
+  for (a=0; a<6; a++) {
+    MonitorString("\n");
+
+    MonitorBool(mpProfiles38[a].fPresent);
+
+    uchar b;
+    for (b=0; b<4; b++) {
+      MonitorTime(mpProfiles38[a].tiTime[b]);
+      MonitorLongDecimal(mpProfiles38[b].mpdwValue[b], 10000);
+    }
+  }
+
+  return false;
 }
 
 

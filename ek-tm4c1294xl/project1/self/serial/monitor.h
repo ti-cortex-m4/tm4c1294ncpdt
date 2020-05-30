@@ -10,6 +10,7 @@ MONITOR.H
 
 void    MonitorString(const char  *psz);
 void    MonitorCharChar(uchar  b);
+void    MonitorBool(bool  f);
 void    MonitorCharDec(uchar  b);
 void    MonitorCharDec3(uchar  b);
 void    MonitorCharHex(uchar  b);
