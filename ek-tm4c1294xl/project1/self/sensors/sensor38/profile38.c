@@ -5,11 +5,15 @@ profile38.c
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
+#include "../../serial/ports.h"
+#include "io38.h"
+#include "dff.h"
+#include "device38.h"
 #include "profile38.h"
 
 
 
-void    QueryProfile38(void)
+void    QueryProfile38(uchar  ib30min)
 {
   InitPush(0);
 
@@ -21,12 +25,12 @@ void    QueryProfile38(void)
   PushChar(0x00);
   PushChar(0x06);
 
-  PushChar(0x0A); // GET_DATA_SINGLE_EX
+  PushChar(0x0B); //
   PushChar(0x00);
-  PushChar(0x01 + ibLine); // A+, A-, R+, R-
+  PushChar(0xD5); //
 
-  PushChar(0x02);
-  PushChar(0x00);
+  PushChar(ib30min);
+  PushChar(ib30min);
 
-  Query38(100+17, 16);
+  Query38(100+20, 17);
 }
