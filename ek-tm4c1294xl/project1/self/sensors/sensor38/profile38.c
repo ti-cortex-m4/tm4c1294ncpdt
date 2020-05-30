@@ -108,25 +108,91 @@ void    QueryProfile38(uchar  ib30MinRel)
 }
 
 
-bool    ReadHeader38(void)
+void    QueryHeader38(void)
+{
+  HideCurrTime(1);
+
+  ulong dw = DateToHouIndex(tiDigPrev);
+  dw -= wProfile38;
+  tiDig = HouIndexToDate(dw);
+
+
+  szHi[10] = 'A' + ibLine38;
+  szHi[11] = ' ';
+
+
+  bMaxLine38 = GetMaxLine38(ibDig);
+  QueryProfile38(0); // TODO
+}
+
+
+
+void    ReadHeader38(void)
+{
+  InitPop(1);
+
+  uchar h;
+  for (h=0; h<6; h++)
+  {
+    mpdbBuffCanHou[ibLine38][h] = PopDoubleQ()/2;
+  }
+}
+
+
+
+void    MakeData38(uchar  h)
+{
+  ShowProgressDigHou();
+
+  double dbPulse = mpdbPulseHou[ibDig];
+
+  uchar i;
+  for (i=0; i<bMaxLine38; i++)
+  {
+    double db = mpdbBuffCanHou[i][h];
+    mpdbEngFracDigCan[ibDig][i] += db;
+
+    uint w = (uint)(mpdbEngFracDigCan[ibDig][i]*dbPulse);
+    mpwChannels[i] = w;
+
+    mpdbEngFracDigCan[ibDig][i] -= (double)w/dbPulse;
+  }
+}
+
+
+
+bool    ReadBlock38(uchar  ibBlock)
+{
+  sprintf(szLo," %02u    %02u.%02u.%02u", tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
+  MonitorString("\n time "); MonitorTime(tiDig);
+
+  if (SearchDefHouIndex(tiDig) == 0) return(1);
+
+  MakeData38(ibBlock);
+
+  if (IsDefect(ibDig)) MakeSpecial(tiDig);
+  return(MakeStopHou(0));
+}
+
+
+
+bool    ReadData38(void)
 {
   uchar i;
   for (i=0; i<6; i++)
   {
     ulong dw = DateToHouIndex(tiDigPrev);
-    dw += 5;
+    dw += 6-1;
     dw -= (wProfile38 + i);
     tiDig = HouIndexToDate(dw);
 
-    if (dw < dwValue38)
-      if (ReadHeader38(5-i) == 0) return(0);
+    if (dw < dwValue38) {
+      if (ReadBlock38(6-1-i) == 0) return(0);
+    }
   }
 
   wProfile38 += 6;
   if (wProfile38 > wHOURS) return(0);
 
-  MonitorString("\n");
   return(1);
 }
-
-//  (wBaseCurr > wHOURS/48)
