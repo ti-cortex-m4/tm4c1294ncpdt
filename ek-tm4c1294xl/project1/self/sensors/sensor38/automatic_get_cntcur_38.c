@@ -38,23 +38,39 @@ double2 ReadCntCurr38(void)
   if (Input38() != SER_GOODCHECK) GetDouble2Error();
 
 
+  MonitorString("\n");
   ulong dw1 = 0;
-  uchar x1 = pucDecodeBitArr((uchar *) &dw1, &mpbInBuff3[11+0]);
-  MonitorCharDec(x1); MonitorString(" ");
+  uchar i1 = pucDecodeBitArr((uchar *) &dw1, &mpbInBuff3[11+0]);
+  MonitorString(" i1="); MonitorCharDec(i1); MonitorString(" ");
   time ti = SecIndexToDate(dw1);
   ti.bYear += 12;
   MonitorTime(ti);
 
   ulong dw2 = 0;
-  uchar x2 = pucDecodeBitArr((uchar *) &dw2, &mpbInBuff3[11+4]);
-  MonitorCharDec(x2); MonitorString(" ");
+  uchar i2 = pucDecodeBitArr((uchar *) &dw2, &mpbInBuff3[11+4]);
+  MonitorString(" i2="); MonitorCharDec(i2); MonitorString(" ");
 
-  MonitorLongHex(dw2);
-  MonitorLongHex(dw2 >> 3); MonitorString(" ");
   uchar bStatus = (dw2 % 0x100) & 0x03;
-  MonitorCharDec(bStatus); MonitorString(" ");
+  MonitorString(" s=");MonitorCharDec(bStatus); MonitorString(" ");
   MonitorLongDecimal(dw2 >> 3, 10000);
 
+
+
+  MonitorString("\n");
+  dw1 = 0;
+  i1 = pucDecodeBitArr((uchar *) &dw1, &mpbInBuff3[11+4+2+1]);
+  MonitorString(" i1="); MonitorCharDec(i1); MonitorString(" ");
+  ti = SecIndexToDate(dw1);
+  ti.bYear += 12;
+  MonitorTime(ti);
+
+  dw2 = 0;
+  i2 = pucDecodeBitArr((uchar *) &dw2, &mpbInBuff3[11+4+2+1+4]);
+  MonitorString(" i2="); MonitorCharDec(i2); MonitorString(" ");
+
+  bStatus = (dw2 % 0x100) & 0x03;
+  MonitorString(" s=");MonitorCharDec(bStatus); MonitorString(" ");
+  MonitorLongDecimal(dw2 >> 3, 10000);
 
 /*
   uchar in[8]; // E8 D5 C7 7E F0 22
