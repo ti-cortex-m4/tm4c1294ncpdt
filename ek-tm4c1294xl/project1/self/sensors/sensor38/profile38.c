@@ -35,6 +35,7 @@ profile38.c
 
 
 #include "../../memory/mem_serial3.h"
+#include "../../keyboard/keyboard.h"
 unsigned char  pucDecodeBitArr(unsigned char *pOut, unsigned char *pIn);
 
 
@@ -163,7 +164,7 @@ void    MakeData38(uchar  h)
   ShowProgressDigHou();
 
   double dbPulse = mpdbPulseHou[ibDig];
-
+/*
   uchar i;
   for (i=0; i<4; i++)
   {
@@ -175,6 +176,18 @@ void    MakeData38(uchar  h)
 
     mpdbEngFracDigCan[ibDig][i] -= (double)w/dbPulse;
   }
+*/
+  uchar i;
+  for (i=0; i<1; i++)
+  {
+    ulong dw = mpProfiles38[h].mpdwValue[i];
+    MonitorString("\n dw="); MonitorLongDec(dw);
+    uint w = (uint)(dw*dbPulse);
+    MonitorString("\n w="); MonitorIntDec(w);
+
+    mpwChannels[i] = w;
+  }
+
 }
 
 
@@ -273,11 +286,12 @@ bool    ReadData38(void)
   }
 
   for (a=0; a<6; a++) {
+    tiDig = mpProfiles38[a].tiTime[0];
     if (ReadBlock38(a) == false) return false;
   }
 
   wProfile38 += 6;
-  if (wProfile38 > 100/*wHOURS*/) return false;
+  if (wProfile38 > 50/*wHOURS*/) return false;
 
   wRelStart += 6;
   wRelEnd = wRelStart + 5;
@@ -303,5 +317,6 @@ void    RunProfile38(void)
 
     if (ReadData38() == false) { MonitorString("\n done "); return; }
     Delay(500);
+    if (fKey == true) return;
   }
 }
