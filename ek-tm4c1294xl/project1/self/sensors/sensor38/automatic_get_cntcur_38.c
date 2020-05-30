@@ -42,7 +42,7 @@ double2 ReadCntCurr38(void)
   ibIdx = 10;
 
   uchar j;
-  for (j=0; j<2; j++)
+  for (j=0; j<4; j++)
   {
     ibIdx++;
 
