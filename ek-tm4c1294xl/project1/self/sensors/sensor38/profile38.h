@@ -4,4 +4,4 @@ profile38.h
 
 ------------------------------------------------------------------------------*/
 
-void    QueryProfile38(uchar  ib30min);
+void    QueryProfile38(uchar  ib30MinRel);
