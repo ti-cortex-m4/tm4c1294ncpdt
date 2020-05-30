@@ -38,5 +38,15 @@ void    QueryProfile38(uchar  ib30MinRel)
   PushChar(ib30MinRel);
   PushChar(ib30MinRel);
 
-  Query38(100+20, 21);
+  PushChar(0xD7); // 215
+  PushChar(0x03);
+  PushChar(ib30MinRel);
+  PushChar(ib30MinRel);
+
+  PushChar(0xD8); // 216
+  PushChar(0x03);
+  PushChar(ib30MinRel);
+  PushChar(ib30MinRel);
+
+  Query38(100+20, 29);
 }
