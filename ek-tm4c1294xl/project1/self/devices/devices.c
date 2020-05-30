@@ -6592,7 +6592,7 @@ void    RunDevices(void)
 
 #endif
 
-#ifndef SKIP_38
+#if false
 
     case DEV_START_38C:
       Clear(); ShowPercent(50);

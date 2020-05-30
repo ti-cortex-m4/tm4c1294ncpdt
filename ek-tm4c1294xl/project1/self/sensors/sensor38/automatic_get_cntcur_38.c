@@ -76,22 +76,30 @@ double2 ReadCntCurr38(void)
 */
   Clear();
 
+  uchar r;
+  for (r=0; r<MaxRepeats(); r++)
+  {
+//    ShowPercent(50);
+    QueryEngAbs38();
+
+    if (Input38() == SER_GOODCHECK) break;
+    if (fKey == true) return GetDouble2Error();
+  }
+
+  if (r == MaxRepeats()) return GetDouble2Error();
+
+  uchar ibIdx = 10;
+
   uchar i;
   for (i=0; i<4; i++)
   {
-    uchar r;
-    for (r=0; r<MaxRepeats(); r++)
-    {
-      ShowPercent(50 + i);
-      QueryEngAbs38(i);
+    ibIdx++;
 
-      if (Input38() == SER_GOODCHECK) break;
-      if (fKey == true) return GetDouble2Error();
-    }
+    uint64_t ddw = 0;
+    uchar i1 = pucDecodeBitArr((uchar *) &ddw, &mpbInBuff3[ibIdx]); // TODO
+    ibIdx += i1; //0xFF
 
-    if (r == MaxRepeats()) return GetDouble2Error();
-
-    mpdwChannelsA[i] = ReadEng38(11) % 0x100000000;
+    mpdwChannelsA[i] = ddw % 0x100000000;
     mpdbChannelsC[i] = (double)mpdwChannelsA[i] / 10000;
   }
 
