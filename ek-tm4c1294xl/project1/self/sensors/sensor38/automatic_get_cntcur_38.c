@@ -39,18 +39,20 @@ double2 ReadCntCurr38(void)
 
 
   ulong dw1 = 0;
-  uchar x = pucDecodeBitArr((uchar *) &dw1, &mpbInBuff3[11+0]);
+  uchar x1 = pucDecodeBitArr((uchar *) &dw1, &mpbInBuff3[11+0]);
+  MonitorCharDec(x1); MonitorString(" ");
   time ti = SecIndexToDate(dw1);
   ti.bYear += 12;
   MonitorTime(ti);
 
   ulong dw2 = 0;
-  pucDecodeBitArr((uchar *) &dw2, &mpbInBuff3[11+4]);
+  uchar x2 = pucDecodeBitArr((uchar *) &dw2, &mpbInBuff3[11+4]);
+  MonitorCharDec(x2); MonitorString(" ");
 
   MonitorLongHex(dw2);
   MonitorLongHex(dw2 >> 3); MonitorString(" ");
   uchar bStatus = (dw2 % 0x100) & 0x03;
-  MonitorCharDec(bStatus);
+  MonitorCharDec(bStatus); MonitorString(" ");
   MonitorLongDecimal(dw2 >> 3, 10000);
 
 
