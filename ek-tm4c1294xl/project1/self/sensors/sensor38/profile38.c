@@ -39,6 +39,7 @@ profile38.c
 
 
 uint                    wProfile38;
+static uint             wRelStart, wRelEnd;
 
 time                    tiValue38;
 ulong                   dwValue38;
@@ -46,7 +47,7 @@ ulong                   dwValue38;
 
 
 void    InitHeader38(void)
-{
+{/*
   if (!UseBounds())
     wProfile38 = 0;
   else
@@ -63,12 +64,27 @@ void    InitHeader38(void)
 
   tiDigPrev.bHour = i / 2;
   tiDigPrev.bMinute = (i % 2)*30;
+*/
+  wRelStart = 0;
+
+  uchar i = tiValue38.bHour*2 + tiValue38.bMinute/30;
+  i = i % 6;
+  if (i == 0) i = 6;
+
+  wRelEnd = i;
+
+  MonitorString("\n QueryProfile38 ");
+  MonitorTime(tiValue38);
+  MonitorString(" wRelStart="); MonitorIntDec(wRelStart);
+  MonitorString(" wRelEnd="); MonitorIntDec(wRelEnd);
 }
 
 
 
-void    QueryProfile38(uchar  ib30MinRel)
+void    QueryProfile38(uchar  ib30MinRelStart, uchar  ib30MinRelEnd)
 {
+  MonitorString("\n QueryProfile38 "); MonitorCharDec(ib30MinRelStart); MonitorString(" "); MonitorCharDec(ib30MinRelEnd);
+
   InitPush(0);
 
   PushChar(0xC0);
@@ -84,23 +100,23 @@ void    QueryProfile38(uchar  ib30MinRel)
 
   PushChar(0xD5); // 213
   PushChar(0x03);
-  PushChar(ib30MinRel);
-  PushChar(ib30MinRel + 1);
+  PushChar(ib30MinRelStart);
+  PushChar(ib30MinRelEnd);
 
   PushChar(0xD6); // 214
   PushChar(0x03);
-  PushChar(ib30MinRel);
-  PushChar(ib30MinRel + 1);
+  PushChar(ib30MinRelStart);
+  PushChar(ib30MinRelEnd);
 
   PushChar(0xD7); // 215
   PushChar(0x03);
-  PushChar(ib30MinRel);
-  PushChar(ib30MinRel + 1);
+  PushChar(ib30MinRelStart);
+  PushChar(ib30MinRelEnd);
 
   PushChar(0xD8); // 216
   PushChar(0x03);
-  PushChar(ib30MinRel);
-  PushChar(ib30MinRel + 1);
+  PushChar(ib30MinRelStart);
+  PushChar(ib30MinRelEnd);
 
   Query38(250, 29);
 }
@@ -109,13 +125,13 @@ void    QueryProfile38(uchar  ib30MinRel)
 void    QueryHeader38(void)
 {
   HideCurrTime(1);
+//
+//  ulong dw = DateToHouIndex(tiDigPrev);
+//  dw -= wProfile38;
+//  tiDig = HouIndexToDate(dw);
+//
 
-  ulong dw = DateToHouIndex(tiDigPrev);
-  dw -= wProfile38;
-  tiDig = HouIndexToDate(dw);
-
-
-  QueryProfile38(0); // TODO
+  QueryProfile38(wRelStart, wRelEnd);
 }
 
 
@@ -188,4 +204,19 @@ bool    ReadData38(void)
   if (wProfile38 > wHOURS) return(0);
 
   return(1);
+}
+
+
+
+void    RunProfile38(void)
+{
+  InitHeader38();
+
+  while (true) {
+    QueryHeader38();
+    if (Input38() != SER_GOODCHECK) { MonitorString("\n error "); return; }
+
+    if (ReadData38() == false) { MonitorString("\n done "); return; }
+    Delay(500);
+  }
 }
