@@ -182,7 +182,7 @@ void    MakeData38(uchar  h)
   {
     ulong dw = mpProfiles38[h].mpdwValue[i];
     MonitorString("\n dw="); MonitorLongDec(dw);
-    uint w = (uint)(dw*dbPulse);
+    uint w = (uint)(dw*dbPulse/10000);
     MonitorString("\n w="); MonitorIntDec(w);
 
     mpwChannels[i] = w;
@@ -316,7 +316,7 @@ void    RunProfile38(void)
     if (Input38() != SER_GOODCHECK) { MonitorString("\n error "); return; }
 
     if (ReadData38() == false) { MonitorString("\n done "); return; }
-    Delay(500);
+    Delay(100);
     if (fKey == true) return;
   }
 }
