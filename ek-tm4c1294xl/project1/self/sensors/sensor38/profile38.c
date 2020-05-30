@@ -25,13 +25,18 @@ void    QueryProfile38(uchar  ib30min)
   PushChar(0x00);
   PushChar(0x06);
 
-  PushChar(0x0B); //
+  PushChar(0x0B); // GET_DATA_MULTIPLE_EX
   PushChar(0x00);
-  PushChar(0xD5); //
+
+  PushChar(0xD5); // 213
   PushChar(0x03);
-
   PushChar(ib30min);
   PushChar(ib30min);
 
-  Query38(100+20, 17);
+  PushChar(0xD6); // 214
+  PushChar(0x03);
+  PushChar(ib30min);
+  PushChar(ib30min);
+
+  Query38(100+20, 21);
 }
