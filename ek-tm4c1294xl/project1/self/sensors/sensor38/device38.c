@@ -66,7 +66,7 @@ time    ReadTime38(void)
 
 
 
-void    QueryEngAbs38(uchar  ibLine)
+void    QueryEngAbs38(void)
 {
   InitPush(0);
 
@@ -80,12 +80,24 @@ void    QueryEngAbs38(uchar  ibLine)
 
   PushChar(0x0A); // GET_DATA_SINGLE_EX
   PushChar(0x00);
-  PushChar(0x01 + ibLine); // A+, A-, R+, R-
 
+  PushChar(0x01); // A+
   PushChar(0x02);
   PushChar(0x00);
 
-  Query38(100+17, 16);
+  PushChar(0x02); // A-
+  PushChar(0x02);
+  PushChar(0x00);
+
+  PushChar(0x03); // R+
+  PushChar(0x02);
+  PushChar(0x00);
+
+  PushChar(0x04); // R-
+  PushChar(0x02);
+  PushChar(0x00);
+
+  Query38(250, 25);
 }
 
 
