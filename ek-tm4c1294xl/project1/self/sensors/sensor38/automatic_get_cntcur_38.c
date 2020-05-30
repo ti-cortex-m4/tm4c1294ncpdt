@@ -29,6 +29,7 @@ void    MonitorOpen(uchar  ibPrt);
 
 double2 ReadCntCurr38(void)
 {
+/*
   MonitorOpen(0);
   Delay(500);
 
@@ -72,7 +73,7 @@ double2 ReadCntCurr38(void)
   }
 
   if (1+1 == 2) return GetDouble2(0, true);
-
+*/
   Clear();
 
   uchar i;
