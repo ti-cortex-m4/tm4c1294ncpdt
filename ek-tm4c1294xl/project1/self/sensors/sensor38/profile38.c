@@ -28,6 +28,7 @@ void    QueryProfile38(uchar  ib30min)
   PushChar(0x0B); //
   PushChar(0x00);
   PushChar(0xD5); //
+  PushChar(0x03);
 
   PushChar(ib30min);
   PushChar(ib30min);
