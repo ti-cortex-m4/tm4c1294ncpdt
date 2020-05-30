@@ -6607,7 +6607,7 @@ void    RunDevices(void)
     case DEV_ENERGY_38C:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        ReadEngAbsCurrent38(ibLine38);
+        ReadEng38(11);
         if (++ibLine38 < 4)
         {
           Clear(); ShowPercent(50+ibLine38);
