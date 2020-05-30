@@ -50,3 +50,27 @@ void    QueryProfile38(uchar  ib30MinRel)
 
   Query38(250, 29);
 }
+
+
+bool    ReadHeader38(void)
+{
+  uchar i;
+  for (i=0; i<6; i++)
+  {
+    ulong dw = DateToHouIndex(tiDigPrev);
+    dw += 5;
+    dw -= (wProfileC + i);
+    tiDig = HouIndexToDate(dw);
+
+    if (dw < dwValueC)
+      if (ReadHeaderC(5-i) == 0) return(0);
+  }
+
+  wProfileC += 6;
+  if (wProfileC > wHOURS) return(0);
+
+  MonitorString("\n");
+  return(1);
+}
+
+//  (wBaseCurr > wHOURS/48)
