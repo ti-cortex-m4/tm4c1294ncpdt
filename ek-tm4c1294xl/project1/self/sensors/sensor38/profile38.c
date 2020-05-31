@@ -166,30 +166,28 @@ void    MakeData38(uchar  h)
   ShowProgressDigHou();
 
   double dbPulse = mpdbPulseHou[ibDig];
-/*
+
   uchar i;
   for (i=0; i<4; i++)
   {
     double db = mpProfiles38[h].mpdwValue[i];// mpdbBuffCanHou[i][h];
     mpdbEngFracDigCan[ibDig][i] += db;
 
-    uint w = (uint)(mpdbEngFracDigCan[ibDig][i]*dbPulse);
+    uint w = (uint)(mpdbEngFracDigCan[ibDig][i]*dbPulse/10000);
     mpwChannels[i] = w;
 
-    mpdbEngFracDigCan[ibDig][i] -= (double)w/dbPulse;
+    mpdbEngFracDigCan[ibDig][i] -= (double)w*10000/dbPulse;
   }
-*/
+/*
   uchar i;
-  for (i=0; i<1; i++)
+  for (i=0; i<4; i++)
   {
     ulong dw = mpProfiles38[h].mpdwValue[i];
-//    MonitorString("\n dw="); MonitorLongDec(dw);
     uint w = (uint)(dw*dbPulse/10000);
-//    MonitorString("\n w="); MonitorIntDec(w);
 
     mpwChannels[i] = w;
   }
-
+*/
 }
 
 
@@ -197,7 +195,7 @@ void    MakeData38(uchar  h)
 bool    ReadBlock38(uchar  ibBlock)
 {
   sprintf(szLo," %02u    %02u.%02u.%02u", tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
-  MonitorString("\n time "); MonitorTime(tiDig);
+  MonitorString(" time="); MonitorTime(tiDig);
 
   if (SearchDefHouIndex(tiDig) == 0) return(1);
 
@@ -301,19 +299,19 @@ bool    ReadData38(void)
 
     ulong dw = DateToHouIndex(tiStart38);
     dw -= (wProfile38 + a);
-    time tiVirtual38 = HouIndexToDate(dw);
+    time tiVirtual = HouIndexToDate(dw);
 
-    bool equal = CompareTimes(tiVirtual38,mpProfiles38[a].tiTime);
+    bool equal = CompareTimes(tiVirtual,mpProfiles38[a].tiTime);
 
-    MonitorString("vrt="); MonitorTime(tiVirtual38);
-    MonitorString("act="); MonitorTime(mpProfiles38[a].tiTime/*s[b]*/);
+    MonitorString(" vrt="); MonitorTime(tiVirtual);
+    MonitorString(" act="); MonitorTime(mpProfiles38[a].tiTime);
     MonitorBool(equal);
     MonitorString(" #"); MonitorCharDec(mpProfiles38[a].bStatus); MonitorString(" ");
 
     if ((equal == false) && (mpProfiles38[a].bStatus == 2))
-      tiDig = tiVirtual38;
+      tiDig = tiVirtual;
     else
-      tiDig = mpProfiles38[a].tiTime/*s[0]*/;
+      tiDig = mpProfiles38[a].tiTime;
 
     if (ReadBlock38(a) == false) return false;
   }
