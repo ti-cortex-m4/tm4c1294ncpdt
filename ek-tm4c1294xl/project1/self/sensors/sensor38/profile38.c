@@ -43,6 +43,7 @@ typedef struct
 {
   bool          fPresent;
   time          tiTime_;
+  uchar         bStatus;
 //  time          tiTimes[4];
   ulong         mpdwValue[4];
 } profile38;
@@ -208,6 +209,19 @@ bool    ReadBlock38(uchar  ibBlock)
 
 
 
+bool    CompareTimes(time  ti1, time  ti2)
+{
+  if (ti1.bSecond != ti2.bSecond) return false;
+  if (ti1.bMinute != ti2.bMinute) return false;
+  if (ti1.bHour   != ti2.bHour)   return false;
+  if (ti1.bDay    != ti2.bDay)    return false;
+  if (ti1.bMonth  != ti2.bMonth)  return false;
+  if (ti1.bYear   != ti2.bYear)   return false;
+  return true;
+}
+
+
+
 bool    ReadData38(void)
 {
 /*
@@ -263,10 +277,11 @@ bool    ReadData38(void)
 //      MonitorString(" i2="); MonitorCharDec(i2); MonitorString(" ");
 
       uchar bStatus = (dw2 % 0x100) & 0x03;
-      MonitorString(" s="); MonitorCharDec(bStatus); MonitorString(" ");
+      mpProfiles38[k].bStatus = bStatus;
+      MonitorString(" #"); MonitorCharDec(bStatus); MonitorString(" ");
       ulong dwValue = dw2 >> 3;
       mpProfiles38[k].mpdwValue[j] = dwValue;
-      MonitorLongDecimal(dwValue, 10000);
+      MonitorLongDecimal4(dwValue);
     }
   }
 
@@ -285,10 +300,12 @@ bool    ReadData38(void)
     tiVirtual38 = HouIndexToDate(dw);
     MonitorString("vrt="); MonitorTime(tiVirtual38);
     MonitorString("act="); MonitorTime(mpProfiles38[a].tiTime_/*s[b]*/);
+    MonitorBool(CompareTimes(tiVirtual38,mpProfiles38[a].tiTime_));
+    MonitorString(" #"); MonitorCharDec(mpProfiles38[a].bStatus); MonitorString(" ");
 
     uchar b;
     for (b=0; b<4; b++) {
-      MonitorLongDecimal(mpProfiles38[a].mpdwValue[b], 10000); MonitorString("   ");
+      MonitorLongDecimal4(mpProfiles38[a].mpdwValue[b]); MonitorString("   ");
     }
   }
 
