@@ -4,6 +4,11 @@ device38.h
 
 ------------------------------------------------------------------------------*/
 
+#include "include38.h"
+
+
+
+
 void    PushAddress38(void);
 
 void    QueryTime38(void);
