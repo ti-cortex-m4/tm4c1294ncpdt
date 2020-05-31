@@ -9,11 +9,13 @@ automatic_get_cntmon_38.c
 #include "../../display/display.h"
 #include "../../keyboard/keyboard.h"
 #include "../../serial/ports.h"
+#include "../../serial/ports2.h"
 #include "../../devices/devices.h"
 #include "../../digitals/digitals.h"
 #include "device38.h"
 #include "io38.h"
 #include "dff.h"
+#include "bits2.h"
 #include "automatic_get_time_38.h"
 #include "automatic_get_cntmon_38.h"
 
@@ -23,23 +25,29 @@ bool    ReadEngDay38_Full(uchar  ibDayRel)
 {
   Clear();
 
+  uchar r;
+  for (r=0; r<MaxRepeats(); r++)
+  {
+    QueryEngDay38(0);
+
+    if (Input38() == SER_GOODCHECK) break;
+    if (fKey == true) return false;
+  }
+
+  if (r == MaxRepeats()) return false;
+
+  uchar ibIn = 10;
+
   uchar i;
   for (i=0; i<4; i++)
   {
-    uchar r;
-    for (r=0; r<MaxRepeats(); r++)
-    {
-      ShowPercent(50 + i);
-      QueryEngDay38(0, i);
+    ibIn++;
 
-      if (Input38() == SER_GOODCHECK) break;
-      if (fKey == true) return false;
-    }
+    uint64_t ddw = 0;
+    uchar delta = pucDecodeBitArr((uchar *) &ddw, InBuffPtr(ibIn));
+    if (delta == 0xFF) return false;
+    ibIn += delta;
 
-    if (r == MaxRepeats()) return false;
-
-
-    uint64_t ddw = DffPopDecodeLong64(11);
     ulong dw = ddw % 0x100000000;
     uchar bStatus = (ddw % 0x100) & 0x03;
     dw >>= 3;
@@ -71,23 +79,27 @@ bool    ReadEngMon38_Full(uchar  ibMonRel)
 {
   Clear();
 
+  uchar r;
+  for (r=0; r<MaxRepeats(); r++)
+  {
+    QueryEngMon38(ibMonRel);
+
+    if (Input38() == SER_GOODCHECK) break;
+    if (fKey == true) return false;
+  }
+
+  uchar ibIn = 10;
+
   uchar i;
   for (i=0; i<4; i++)
   {
-    uchar r;
-    for (r=0; r<MaxRepeats(); r++)
-    {
-      ShowPercent(50 + i);
-      QueryEngMon38(ibMonRel, i);
+    ibIn++;
 
-      if (Input38() == SER_GOODCHECK) break;
-      if (fKey == true) return false;
-    }
+    uint64_t ddw = 0;
+    uchar delta = pucDecodeBitArr((uchar *) &ddw, InBuffPtr(ibIn));
+    if (delta == 0xFF) return false;
+    ibIn += delta;
 
-    if (r == MaxRepeats()) return false;
-
-
-    uint64_t ddw = DffPopDecodeLong64(11);
     ulong dw = ddw % 0x100000000;
     uchar bStatus = (ddw % 0x100) & 0x03;
     dw >>= 3;
