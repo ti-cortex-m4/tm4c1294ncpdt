@@ -137,28 +137,10 @@ void    QueryProfile38(uchar  ib30MinRelStart, uchar  ib30MinRelEnd)
 void    QueryHeader38(void)
 {
   HideCurrTime(1);
-//
-//  ulong dw = DateToHouIndex(tiDigPrev);
-//  dw -= wProfile38;
-//  tiDig = HouIndexToDate(dw);
-//
 
   QueryProfile38(wRelStart, wRelEnd);
 }
 
-
-/*
-void    ReadHeader38(void)
-{
-  InitPop(1);
-
-  uchar h;
-  for (h=0; h<6; h++)
-  {
-    mpdbBuffCanHou[0/ *ibLine38* /][h] = 0; //PopDoubleQ()/2;
-  }
-}
-*/
 
 
 void    MakeData38(uchar  h)
@@ -310,13 +292,14 @@ bool    ReadData38(void)
 
     if ((equal == false) && (mpProfiles38[a].bStatus == 2))
       tiDig = tiVirtual;
+    else if ((mpProfiles38[a].tiTime.bMinute % 30 != 0) && (mpProfiles38[a].bStatus == 0))
+      tiDig = tiVirtual;
     else
       tiDig = mpProfiles38[a].tiTime;
 
     if (tiDig.bMinute % 30 != 0) {
         MonitorString(" ??? ");
-        if (mpProfiles38[a].bStatus == 0)
-          tiDig.bMinute = (tiDig.bMinute / 30)*30;
+//        tiDig.bMinute = (tiDig.bMinute / 30)*30;
 //        tiDig = HouIndexToDate(DateToHouIndex(tiDig) + 1);
     } else {
         MonitorString("     ");
