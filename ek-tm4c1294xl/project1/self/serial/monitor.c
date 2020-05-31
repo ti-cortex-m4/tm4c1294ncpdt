@@ -113,13 +113,14 @@ void    MonitorLongHex(ulong  dw)
 }
 
 
-void    MonitorLongDecimal(ulong  dw, uint  wDivider)
+void    MonitorLongDecimal4(ulong  dw)
 {
   if (UseMonitor())
   {
-    MonitorLongDec(dw / wDivider);
+    uint wDivider = 10000;
+    MonitorLong("%u", dw / wDivider);
     MonitorString(".");
-    MonitorLongDec(dw % wDivider);
+    MonitorLong("%4u", dw % wDivider);
   }
 }
 

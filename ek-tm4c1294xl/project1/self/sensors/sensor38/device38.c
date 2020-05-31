@@ -108,7 +108,7 @@ uint64_t ReadEng38(uchar  ibInBuff)
   ulong dw = ddw % 0x100000000;
   MonitorString("\n"); MonitorLongHex(dw);
   MonitorString("\n"); MonitorLongDec(dw);
-  MonitorString("\n"); MonitorLongDecimal(dw, 10000);
+  MonitorString("\n"); MonitorLongDecimal4(dw);
 
   return ddw;
 }
