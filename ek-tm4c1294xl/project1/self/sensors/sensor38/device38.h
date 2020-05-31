@@ -18,7 +18,6 @@ time    ReadTime38(void);
 void    QueryEngAbs38(void);
 uint64_t ReadEng38(uchar  ibInBuff);
 
-void    QueryEngDay38(uchar  ibDayRel, uchar  ibLine);
-void    QueryEngMon38(uchar  ibMonRel, uchar  ibLine);
-//uint64_t ReadEngStatus38(uchar  ibInBuff);
+void    QueryEngDay38(uchar  ibDayRel);
+void    QueryEngMon38(uchar  ibMonRel);
 

@@ -121,7 +121,7 @@ uint64_t ReadEng38(uchar  ibInBuff)
 
 
 // значени€ счетчиков на начало суток
-void    QueryEngDay38(uchar  ibDayRel, uchar  ibLine)
+void    QueryEngDay38(uchar  ibDayRel)
 {
   MonitorString("\n ibDayRel="); MonitorCharDec(ibDayRel);
 
@@ -137,21 +137,38 @@ void    QueryEngDay38(uchar  ibDayRel, uchar  ibLine)
 
   PushChar(0x0B); // GET_DATA_MULTIPLE_EX
   PushChar(0x00);
-  PushChar(0x01 + ibLine); // A+, A-, R+, R-
 
+  PushChar(0x01); // A+
   PushChar(0x02);
   PushChar(0x00);
-
   PushChar(ibDayRel);
   PushChar(ibDayRel);
 
-  Query38(100+17, 18);
+  PushChar(0x02); // A-
+  PushChar(0x02);
+  PushChar(0x00);
+  PushChar(ibDayRel);
+  PushChar(ibDayRel);
+
+  PushChar(0x03); // R+
+  PushChar(0x02);
+  PushChar(0x00);
+  PushChar(ibDayRel);
+  PushChar(ibDayRel);
+
+  PushChar(0x04); // R-
+  PushChar(0x02);
+  PushChar(0x00);
+  PushChar(ibDayRel);
+  PushChar(ibDayRel);
+
+  Query38(250, 33);
 }
 
 
 
 // значени€ счетчиков на начало мес€цев
-void    QueryEngMon38(uchar  ibMonRel, uchar  ibLine)
+void    QueryEngMon38(uchar  ibMonRel)
 {
   MonitorString("\n ibMonRel="); MonitorCharDec(ibMonRel);
 
@@ -167,32 +184,30 @@ void    QueryEngMon38(uchar  ibMonRel, uchar  ibLine)
 
   PushChar(0x0B); // GET_DATA_MULTIPLE_EX
   PushChar(0x00);
-  PushChar(0x09 + ibLine); // A+, A-, R+, R-
 
+  PushChar(0x09); // A+
   PushChar(0x02);
   PushChar(0x00);
-
   PushChar(ibMonRel);
   PushChar(ibMonRel);
 
-  Query38(100+17, 18);
+  PushChar(0x0A); // A-
+  PushChar(0x02);
+  PushChar(0x00);
+  PushChar(ibMonRel);
+  PushChar(ibMonRel);
+
+  PushChar(0x0B); // R+
+  PushChar(0x02);
+  PushChar(0x00);
+  PushChar(ibMonRel);
+  PushChar(ibMonRel);
+
+  PushChar(0x0C); // R-
+  PushChar(0x02);
+  PushChar(0x00);
+  PushChar(ibMonRel);
+  PushChar(ibMonRel);
+
+  Query38(250, 33);
 }
-
-
-//
-//uint64_t ReadEngStatus38(uchar  ibInBuff)
-//{
-////  uint64_t ddw = DffDecodeLong64(&mpbInBuff3[ibInBuff]);  // TODO
-///*
-//  ulong dw = ddw % 0x100000000;
-//  MonitorString("\n"); MonitorLongHex(dw);
-//
-//  uchar bStatus = (ddw % 0x100) & 0x03;
-//  MonitorString("\n status="); MonitorCharDec(bStatus);
-//
-//  dw >>= 3;
-//  MonitorString("\n"); MonitorLongDec(dw);
-//  MonitorString("\n"); MonitorLongDecimal(dw, 10000);
-//*/
-//  return DffDecodeLong64(&mpbInBuff3[ibInBuff]);  // TODO
-//}
