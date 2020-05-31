@@ -195,7 +195,7 @@ void    MakeData38(uchar  h)
 bool    ReadBlock38(uchar  ibBlock)
 {
   sprintf(szLo," %02u    %02u.%02u.%02u", tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
-  MonitorString(" time="); MonitorTime(tiDig);
+  MonitorString(" effective="); MonitorTime(tiDig);
 
   if (SearchDefHouIndex(tiDig) == 0) return(1);
 
@@ -303,8 +303,8 @@ bool    ReadData38(void)
 
     bool equal = CompareTimes(tiVirtual,mpProfiles38[a].tiTime);
 
-    MonitorString(" vrt="); MonitorTime(tiVirtual);
-    MonitorString(" act="); MonitorTime(mpProfiles38[a].tiTime);
+    MonitorString(" virtual="); MonitorTime(tiVirtual);
+    MonitorString(" actual="); MonitorTime(mpProfiles38[a].tiTime);
     MonitorBool(equal);
     MonitorString(" #"); MonitorCharDec(mpProfiles38[a].bStatus); MonitorString(" ");
 
@@ -312,6 +312,15 @@ bool    ReadData38(void)
       tiDig = tiVirtual;
     else
       tiDig = mpProfiles38[a].tiTime;
+
+    if (tiDig.bMinute % 30 != 0) {
+        MonitorString(" ??? ");
+        if (mpProfiles38[a].bStatus == 0)
+          tiDig.bMinute = (tiDig.bMinute / 30)*30;
+//        tiDig = HouIndexToDate(DateToHouIndex(tiDig) + 1);
+    } else {
+        MonitorString("     ");
+    }
 
     if (ReadBlock38(a) == false) return false;
   }
@@ -326,6 +335,8 @@ bool    ReadData38(void)
 }
 
 
+
+#ifdef MONITOR_38
 
 void    RunProfile38(void)
 {
@@ -345,3 +356,5 @@ void    RunProfile38(void)
     if (fKey == true) return;
   }
 }
+
+#endif
