@@ -42,7 +42,7 @@ unsigned char  pucDecodeBitArr(unsigned char *pOut, unsigned char *pIn);
 typedef struct
 {
   bool          fPresent;
-  time          tiTime_;
+  time          tiTime;
   uchar         bStatus;
 //  time          tiTimes[4];
   ulong         mpdwValue[4];
@@ -53,7 +53,7 @@ typedef struct
 static uint             wProfile38;
 static uint             wRelStart, wRelEnd;
 static profile38        mpProfiles38[6];
-static time             tiStart38, tiVirtual38;
+static time             tiStart38;
 
 time                    tiValue38;
 ulong                   dwValue38;
@@ -269,7 +269,7 @@ bool    ReadData38(void)
       ti.bYear += 12;
       MonitorTime(ti);
       mpProfiles38[k].fPresent = true;
-      mpProfiles38[k].tiTime_/*s[j]*/ = ti;
+      mpProfiles38[k].tiTime/*s[j]*/ = ti;
 
       ulong dw2 = 0;
       uchar i2 = pucDecodeBitArr((uchar *) &dw2, &mpbInBuff3[ibIdx]);
@@ -294,23 +294,27 @@ bool    ReadData38(void)
     MonitorBool(mpProfiles38[a].fPresent);
     MonitorString("   ");
 
-    ulong dw = DateToHouIndex(tiStart38);
-//    dw += 6-1;
-    dw -= (wProfile38 + a);
-    tiVirtual38 = HouIndexToDate(dw);
-    MonitorString("vrt="); MonitorTime(tiVirtual38);
-    MonitorString("act="); MonitorTime(mpProfiles38[a].tiTime_/*s[b]*/);
-    MonitorBool(CompareTimes(tiVirtual38,mpProfiles38[a].tiTime_));
-    MonitorString(" #"); MonitorCharDec(mpProfiles38[a].bStatus); MonitorString(" ");
-
     uchar b;
     for (b=0; b<4; b++) {
       MonitorLongDecimal4(mpProfiles38[a].mpdwValue[b]); MonitorString("   ");
     }
-  }
 
-  for (a=0; a<6; a++) {
-    tiDig = mpProfiles38[a].tiTime_/*s[0]*/;
+    ulong dw = DateToHouIndex(tiStart38);
+    dw -= (wProfile38 + a);
+    time tiVirtual38 = HouIndexToDate(dw);
+
+    bool equal = CompareTimes(tiVirtual38,mpProfiles38[a].tiTime);
+
+    MonitorString("vrt="); MonitorTime(tiVirtual38);
+    MonitorString("act="); MonitorTime(mpProfiles38[a].tiTime/*s[b]*/);
+    MonitorBool(equal);
+    MonitorString(" #"); MonitorCharDec(mpProfiles38[a].bStatus); MonitorString(" ");
+
+    if ((equal == false) && (mpProfiles38[a].bStatus == 2))
+      tiDig = tiVirtual38;
+    else
+      tiDig = mpProfiles38[a].tiTime/*s[0]*/;
+
     if (ReadBlock38(a) == false) return false;
   }
 
