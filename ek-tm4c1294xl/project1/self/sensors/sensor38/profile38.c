@@ -42,17 +42,17 @@ unsigned char  pucDecodeBitArr(unsigned char *pOut, unsigned char *pIn);
 typedef struct
 {
   bool          fPresent;
-  time          tiTime[4];
+  time          tiTime_;
+//  time          tiTimes[4];
   ulong         mpdwValue[4];
 } profile38;
 
 
 
-
-uint                    wProfile38;
+static uint             wProfile38;
 static uint             wRelStart, wRelEnd;
-
-profile38               mpProfiles38[6];
+static profile38        mpProfiles38[6];
+static time             tiStart38, tiVirtual38;
 
 time                    tiValue38;
 ulong                   dwValue38;
@@ -79,6 +79,7 @@ void    InitHeader38(void)
   tiDigPrev.bMinute = (i % 2)*30;
 */
   wProfile38 = 0;
+  tiStart38 = tiValue38;
 
   wRelStart = 0;
   wRelEnd = wRelStart + 5;
@@ -181,9 +182,9 @@ void    MakeData38(uchar  h)
   for (i=0; i<1; i++)
   {
     ulong dw = mpProfiles38[h].mpdwValue[i];
-    MonitorString("\n dw="); MonitorLongDec(dw);
+//    MonitorString("\n dw="); MonitorLongDec(dw);
     uint w = (uint)(dw*dbPulse/10000);
-    MonitorString("\n w="); MonitorIntDec(w);
+//    MonitorString("\n w="); MonitorIntDec(w);
 
     mpwChannels[i] = w;
   }
@@ -254,7 +255,7 @@ bool    ReadData38(void)
       ti.bYear += 12;
       MonitorTime(ti);
       mpProfiles38[k].fPresent = true;
-      mpProfiles38[k].tiTime[j] = ti;
+      mpProfiles38[k].tiTime_/*s[j]*/ = ti;
 
       ulong dw2 = 0;
       uchar i2 = pucDecodeBitArr((uchar *) &dw2, &mpbInBuff3[ibIdx]);
@@ -278,20 +279,26 @@ bool    ReadData38(void)
     MonitorBool(mpProfiles38[a].fPresent);
     MonitorString("   ");
 
+    ulong dw = DateToHouIndex(tiStart38);
+//    dw += 6-1;
+    dw -= (wProfile38 + a);
+    tiVirtual38 = HouIndexToDate(dw);
+    MonitorString("vrt="); MonitorTime(tiVirtual38);
+    MonitorString("act="); MonitorTime(mpProfiles38[a].tiTime_/*s[b]*/);
+
     uchar b;
     for (b=0; b<4; b++) {
-      MonitorTime(mpProfiles38[a].tiTime[b]);
       MonitorLongDecimal(mpProfiles38[a].mpdwValue[b], 10000); MonitorString("   ");
     }
   }
 
   for (a=0; a<6; a++) {
-    tiDig = mpProfiles38[a].tiTime[0];
+    tiDig = mpProfiles38[a].tiTime_/*s[0]*/;
     if (ReadBlock38(a) == false) return false;
   }
 
   wProfile38 += 6;
-  if (wProfile38 > 50/*wHOURS*/) return false;
+  if (wProfile38 > 100/*wHOURS*/) return false;
 
   wRelStart += 6;
   wRelEnd = wRelStart + 5;
@@ -316,7 +323,6 @@ void    RunProfile38(void)
     if (Input38() != SER_GOODCHECK) { MonitorString("\n error "); return; }
 
     if (ReadData38() == false) { MonitorString("\n done "); return; }
-    Delay(100);
     if (fKey == true) return;
   }
 }
