@@ -5,6 +5,7 @@ device38.c
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
+#include "../../memory/mem_digitals.h"
 #include "../../serial/ports.h"
 #include "io38.h"
 #include "dff.h"
@@ -21,10 +22,11 @@ uint DFF_Decoder(uchar  *pbData, uchar bS);
 
 void    PushAddress38(void)
 {
-  PushChar(0xE8);
-  PushChar(0xB7);
-  PushChar(0xC4);
-  PushChar(0x04);
+  PushLongLtl(mpdwAddress1[diCurr.bAddress-1]);
+//  PushChar(0xE8);
+//  PushChar(0xB7);
+//  PushChar(0xC4);
+//  PushChar(0x04);
 
 //  PushLongLtl(80001000); // TODO
 }
