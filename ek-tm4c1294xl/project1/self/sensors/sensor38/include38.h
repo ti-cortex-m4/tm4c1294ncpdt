@@ -1,12 +1,14 @@
 /*------------------------------------------------------------------------------
-io38.h
+include38.h
 
 
 ------------------------------------------------------------------------------*/
 
-#include "include38.h"
+#ifndef __INCLUDE38
+#define __INCLUDE38
 
 
+#define MONITOR_38  1
 
-void    Query38(uchar  cbIn, uchar  cbOut);
-serial  Input38(void);
+
+#endif
