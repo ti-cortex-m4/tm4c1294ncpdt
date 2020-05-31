@@ -50,6 +50,14 @@ void    QueryTime38(void)
 }
 
 
+time    LongToTime38(ulong  dw)
+{
+  time ti = SecIndexToDate(dw);
+  ti.bYear += 12;
+  return ti;
+}
+
+
 time    ReadTime38(void)
 {
   uint w = DFF_Decoder(&mpbInBuff3[11], 0);
