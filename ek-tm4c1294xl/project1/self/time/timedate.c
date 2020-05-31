@@ -166,3 +166,15 @@ bool    DifferentDay(time  ti1, time  ti2)
           (ti1.bMonth != ti2.bMonth) ||
           (ti1.bYear  != ti2.bYear));
 }
+
+
+bool    DifferentDateTime(time  ti1, time  ti2)
+{
+  if (ti1.bSecond != ti2.bSecond) return true;
+  if (ti1.bMinute != ti2.bMinute) return true;
+  if (ti1.bHour   != ti2.bHour)   return true;
+  if (ti1.bDay    != ti2.bDay)    return true;
+  if (ti1.bMonth  != ti2.bMonth)  return true;
+  if (ti1.bYear   != ti2.bYear)   return true;
+  return false;
+}

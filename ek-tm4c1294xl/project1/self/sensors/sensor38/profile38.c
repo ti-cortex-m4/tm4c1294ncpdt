@@ -21,6 +21,7 @@ profile38.c
 #include "../../serial/ports_stack.h"
 #include "../../serial/ports_devices.h"
 #include "../../serial/ports_common.h"
+#include "../../serial/ports2.h"
 #include "../../serial/monitor.h"
 #include "../../devices/devices.h"
 #include "../../devices/devices_time.h"
@@ -34,17 +35,15 @@ profile38.c
 
 
 
-#include "../../memory/mem_serial3.h"
 #include "../../keyboard/keyboard.h"
 unsigned char  pucDecodeBitArr(unsigned char *pOut, unsigned char *pIn);
 
 
+
 typedef struct
 {
-  bool          fPresent;
   time          tiTime;
   uchar         bStatus;
-//  time          tiTimes[4];
   ulong         mpdwValue[4];
 } profile38;
 
@@ -204,56 +203,33 @@ bool    CompareTimes(time  ti1, time  ti2)
 
 bool    ReadData38(void)
 {
-/*
-  uchar i;
-  for (i=0; i<6; i++)
-  {
-    ulong dw = DateToHouIndex(tiDigPrev);
-    dw += 6-1;
-    dw -= (wProfile38 + i);
-    tiDig = HouIndexToDate(dw);
-
-    if (dw < dwValue38) {
-      if (ReadBlock38(6-1-i) == 0) return(0);
-    }
-  }
-
-  wProfile38 += 6;
-  if (wProfile38 > wHOURS) return(0);
-
-  return(1);
-*/
-
   memset(&mpProfiles38, 0, sizeof(mpProfiles38));
 
-  uchar ibIdx = 10;
-
-  int count = wRelEnd - wRelStart + 1;
-  MonitorString("\n count="); MonitorCharDec(count);
+  uchar ibIn = 10;
 
   uchar j;
   for (j=0; j<4; j++)
   {
     MonitorString("\n");
-    ibIdx++;
+    ibIn++;
 
     uchar k;
-    for (k=0; k<count; k++)
+    for (k=0; k<6; k++)
     {
       MonitorString("\n");
       ulong dw1 = 0;
-      uchar i1 = pucDecodeBitArr((uchar *) &dw1, &mpbInBuff3[ibIdx]);
-      ibIdx += i1; //0xFF
+      uchar i1 = pucDecodeBitArr((uchar *) &dw1, InBuffPtr(ibIn));
+      ibIn += i1; //0xFF
 //      MonitorString(" i1="); MonitorCharDec(i1); MonitorString(" ");
       time ti = SecIndexToDate(dw1);
       ti.bYear += 12;
       MonitorTime(ti);
-      mpProfiles38[k].fPresent = true;
+//      mpProfiles38[k].fPresent = true;
       mpProfiles38[k].tiTime/*s[j]*/ = ti;
 
       ulong dw2 = 0;
-      uchar i2 = pucDecodeBitArr((uchar *) &dw2, &mpbInBuff3[ibIdx]);
-      ibIdx += i2; //0xFF
+      uchar i2 = pucDecodeBitArr((uchar *) &dw2, InBuffPtr(ibIn));
+      ibIn += i2; //0xFF
 //      MonitorString(" i2="); MonitorCharDec(i2); MonitorString(" ");
 
       uchar bStatus = (dw2 % 0x100) & 0x03;
@@ -270,9 +246,6 @@ bool    ReadData38(void)
   uchar a;
   for (a=0; a<6; a++) {
     MonitorString("\n");
-
-    MonitorBool(mpProfiles38[a].fPresent);
-    MonitorString("   ");
 
     uchar b;
     for (b=0; b<4; b++) {
