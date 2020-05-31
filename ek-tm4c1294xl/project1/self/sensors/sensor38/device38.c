@@ -60,16 +60,13 @@ time    LongToTime38(ulong  dw)
 
 time    ReadTime38(void)
 {
-  uint w = DFF_Decoder(&mpbInBuff3[11], 0);
+  uint w = DFF_Decoder(&mpbInBuff3[11], 0); // TODO
 
   MonitorIn();
   InitPop(11);
   ulong dw = PopLongLtl();
 
-  time ti = SecIndexToDate(dw);
-  ti.bYear += 12;
-
-  return ti;
+  return LongToTime38(dw);
 }
 
 

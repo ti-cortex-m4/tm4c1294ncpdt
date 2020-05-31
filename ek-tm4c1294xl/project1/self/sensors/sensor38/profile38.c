@@ -176,7 +176,11 @@ void    MakeData38(uchar  h)
 bool    ReadBlock38(uchar  ibBlock)
 {
   sprintf(szLo," %02u    %02u.%02u.%02u", tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
+
+#ifdef MONITOR_38
+  if (tiDig.bMinute % 30 != 0) MonitorString(" ??? ");
   MonitorString(" effective="); MonitorTime(tiDig);
+#endif
 
   if (SearchDefHouIndex(tiDig) == 0) return(1);
 
@@ -184,19 +188,6 @@ bool    ReadBlock38(uchar  ibBlock)
 
   if (IsDefect(ibDig)) MakeSpecial(tiDig);
   return(MakeStopHou(0));
-}
-
-
-
-bool    CompareTimes(time  ti1, time  ti2)
-{
-  if (ti1.bSecond != ti2.bSecond) return false;
-  if (ti1.bMinute != ti2.bMinute) return false;
-  if (ti1.bHour   != ti2.bHour)   return false;
-  if (ti1.bDay    != ti2.bDay)    return false;
-  if (ti1.bMonth  != ti2.bMonth)  return false;
-  if (ti1.bYear   != ti2.bYear)   return false;
-  return true;
 }
 
 
@@ -221,10 +212,8 @@ bool    ReadData38(void)
       uchar i1 = pucDecodeBitArr((uchar *) &dw1, InBuffPtr(ibIn));
       ibIn += i1; //0xFF
 //      MonitorString(" i1="); MonitorCharDec(i1); MonitorString(" ");
-      time ti = SecIndexToDate(dw1);
-      ti.bYear += 12;
+      time ti = LongToTime38(dw1);
       MonitorTime(ti);
-//      mpProfiles38[k].fPresent = true;
       mpProfiles38[k].tiTime/*s[j]*/ = ti;
 
       ulong dw2 = 0;
@@ -235,50 +224,46 @@ bool    ReadData38(void)
       uchar bStatus = (dw2 % 0x100) & 0x03;
       mpProfiles38[k].bStatus = bStatus;
       MonitorString(" #"); MonitorCharDec(bStatus); MonitorString(" ");
+
       ulong dwValue = dw2 >> 3;
       mpProfiles38[k].mpdwValue[j] = dwValue;
       MonitorLongDecimal4(dwValue);
     }
   }
 
-  MonitorString("\n Result");
+  uchar h;
+  for (h=0; h<6; h++) {
 
-  uchar a;
-  for (a=0; a<6; a++) {
+#ifdef MONITOR_38
     MonitorString("\n");
 
-    uchar b;
-    for (b=0; b<4; b++) {
-      MonitorLongDecimal4(mpProfiles38[a].mpdwValue[b]); MonitorString("   ");
+    uchar i;
+    for (i=0; i<4; i++) {
+      MonitorLongDecimal4(mpProfiles38[h].mpdwValue[i]); MonitorString("  ");
     }
+#endif
 
     ulong dw = DateToHouIndex(tiStart38);
-    dw -= (wProfile38 + a);
+    dw -= (wProfile38 + h);
     time tiVirtual = HouIndexToDate(dw);
 
-    bool equal = CompareTimes(tiVirtual,mpProfiles38[a].tiTime);
+    bool different = DifferentDateTime(tiVirtual,mpProfiles38[h].tiTime);
 
+#ifdef MONITOR_38
     MonitorString(" virtual="); MonitorTime(tiVirtual);
-    MonitorString(" actual="); MonitorTime(mpProfiles38[a].tiTime);
-    MonitorBool(equal);
-    MonitorString(" #"); MonitorCharDec(mpProfiles38[a].bStatus); MonitorString(" ");
+    MonitorString(" actual="); MonitorTime(mpProfiles38[h].tiTime);
+    MonitorBool(different);
+    MonitorString(" #"); MonitorCharDec(mpProfiles38[h].bStatus); MonitorString(" ");
+#endif
 
-    if ((equal == false) && (mpProfiles38[a].bStatus == 2))
+    if ((different == true) && (mpProfiles38[h].bStatus == 2))
       tiDig = tiVirtual;
-    else if ((mpProfiles38[a].tiTime.bMinute % 30 != 0) && (mpProfiles38[a].bStatus == 0))
+    else if ((mpProfiles38[h].tiTime.bMinute % 30 != 0) && (mpProfiles38[h].bStatus == 0))
       tiDig = tiVirtual;
     else
-      tiDig = mpProfiles38[a].tiTime;
+      tiDig = mpProfiles38[h].tiTime;
 
-    if (tiDig.bMinute % 30 != 0) {
-        MonitorString(" ??? ");
-//        tiDig.bMinute = (tiDig.bMinute / 30)*30;
-//        tiDig = HouIndexToDate(DateToHouIndex(tiDig) + 1);
-    } else {
-        MonitorString("     ");
-    }
-
-    if (ReadBlock38(a) == false) return false;
+    if (ReadBlock38(h) == false) return false;
   }
 
   wProfile38 += 6;
@@ -297,7 +282,7 @@ bool    ReadData38(void)
 void    RunProfile38(void)
 {
   QueryTime38();
-  if (Input38() != SER_GOODCHECK) { MonitorString("\n error "); return; }
+  if (Input38() != SER_GOODCHECK) { MonitorString("\n error 1"); return; }
 
   tiValue38 = ReadTime38();
   dwValue38 = DateToHouIndex(tiValue38);
@@ -306,9 +291,9 @@ void    RunProfile38(void)
 
   while (true) {
     QueryHeader38();
-    if (Input38() != SER_GOODCHECK) { MonitorString("\n error "); return; }
+    if (Input38() != SER_GOODCHECK) { MonitorString("\n error 2"); return; }
 
-    if (ReadData38() == false) { MonitorString("\n done "); return; }
+    if (ReadData38() == false) { MonitorString("\n finish "); return; }
     if (fKey == true) return;
   }
 }
