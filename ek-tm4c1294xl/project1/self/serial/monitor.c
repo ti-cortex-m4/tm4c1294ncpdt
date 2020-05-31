@@ -117,9 +117,9 @@ void    MonitorLongDecimal4(ulong  dw)
 {
   if (UseMonitor())
   {
-    MonitorLong("%u", dw / 10000);
+    MonitorLong("%u", (uint)(dw / 10000));
     MonitorString(".");
-    MonitorLong("%4u", dw % 10000);
+    MonitorLong("%u", (uint)(dw % 10000));
   }
 }
 
