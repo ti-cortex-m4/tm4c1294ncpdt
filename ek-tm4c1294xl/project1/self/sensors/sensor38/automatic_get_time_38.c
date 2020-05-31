@@ -24,7 +24,7 @@ void    MonitorOpen(uchar  ibPrt);
 
 
 time2   ReadTimeCan38(void)
-{
+{/*
   MonitorOpen(0);
   Delay(500);
   RunProfile38();
@@ -35,7 +35,7 @@ time2   ReadTimeCan38(void)
 
 
 
-
+*/
   Clear();
 
   uchar r;
