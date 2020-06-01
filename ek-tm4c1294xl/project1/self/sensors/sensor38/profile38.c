@@ -51,7 +51,7 @@ typedef struct
 
 static uint             wProfile38;
 static uint             wRelStart, wRelEnd;
-static profile38        mpProfiles38[6];
+static profile38        mpPrf38[6];
 static time             tiStart38;
 
 time                    tiValue38;
@@ -151,7 +151,7 @@ void    MakeData38(uchar  h)
   uchar i;
   for (i=0; i<4; i++)
   {
-    double db = mpProfiles38[h].mpdwValue[i];// mpdbBuffCanHou[i][h];
+    double db = mpPrf38[h].mpdwValue[i];// mpdbBuffCanHou[i][h];
     mpdbEngFracDigCan[ibDig][i] += db;
 
     uint w = (uint)(mpdbEngFracDigCan[ibDig][i]*dbPulse/10000);
@@ -179,7 +179,7 @@ bool    ReadBlock38(uchar  ibBlock)
 
 #ifdef MONITOR_38
   if (tiDig.bMinute % 30 != 0) MonitorString(" ??? ");
-  MonitorString(" effective="); MonitorTime(tiDig);
+  MonitorString(" eff.="); MonitorTime(tiDig);
 #endif
 
   if (SearchDefHouIndex(tiDig) == 0) return(1);
@@ -194,7 +194,7 @@ bool    ReadBlock38(uchar  ibBlock)
 
 bool    ReadData38(void)
 {
-  memset(&mpProfiles38, 0, sizeof(mpProfiles38));
+  memset(&mpPrf38, 0, sizeof(mpPrf38));
 
   uchar ibIn = 10;
 
@@ -213,8 +213,8 @@ bool    ReadData38(void)
       ibIn += i1; //0xFF
 //      MonitorString(" i1="); MonitorCharDec(i1); MonitorString(" ");
       time ti = LongToTime38(dw1);
-      MonitorTime(ti);
-      mpProfiles38[k].tiTime/*s[j]*/ = ti;
+//      MonitorTime(ti);
+      mpPrf38[k].tiTime/*s[j]*/ = ti;
 
       ulong dw2 = 0;
       uchar i2 = pucDecodeBitArr((uchar *) &dw2, InBuffPtr(ibIn));
@@ -222,12 +222,12 @@ bool    ReadData38(void)
 //      MonitorString(" i2="); MonitorCharDec(i2); MonitorString(" ");
 
       uchar bStatus = (dw2 % 0x100) & 0x03;
-      mpProfiles38[k].bStatus = bStatus;
-      MonitorString(" #"); MonitorCharDec(bStatus); MonitorString(" ");
+      mpPrf38[k].bStatus = bStatus;
+//      MonitorString(" #"); MonitorCharDec(bStatus); MonitorString(" ");
 
       ulong dwValue = dw2 >> 3;
-      mpProfiles38[k].mpdwValue[j] = dwValue;
-      MonitorLongDecimal4(dwValue);
+      mpPrf38[k].mpdwValue[j] = dwValue;
+//      MonitorLongDecimal4(dwValue);
     }
   }
 
@@ -238,8 +238,8 @@ bool    ReadData38(void)
     MonitorString("\n");
 
     uchar i;
-    for (i=0; i<4; i++) {
-      MonitorLongDecimal4(mpProfiles38[h].mpdwValue[i]); MonitorString("  ");
+    for (i=0; i<1/*4*/; i++) {
+      MonitorLongDecimal4(mpPrf38[h].mpdwValue[i]); MonitorString("  ");
     }
 #endif
 
@@ -247,21 +247,21 @@ bool    ReadData38(void)
     dw -= (wProfile38 + h);
     time tiVirtual = HouIndexToDate(dw);
 
-    bool different = DifferentDateTime(tiVirtual,mpProfiles38[h].tiTime);
+    bool different = DifferentDateTime(tiVirtual,mpPrf38[h].tiTime);
 
 #ifdef MONITOR_38
-    MonitorString(" virtual="); MonitorTime(tiVirtual);
-    MonitorString(" actual="); MonitorTime(mpProfiles38[h].tiTime);
+    MonitorString(" vrt.="); MonitorTime(tiVirtual);
+    MonitorString(" act.="); MonitorTime(mpPrf38[h].tiTime);
     MonitorBool(different);
-    MonitorString(" #"); MonitorCharDec(mpProfiles38[h].bStatus); MonitorString(" ");
+    MonitorString(" #"); MonitorCharDec(mpPrf38[h].bStatus); MonitorString(" ");
 #endif
 
-    if ((different == true) && (mpProfiles38[h].bStatus == 2))
+    if ((different == true) && (mpPrf38[h].bStatus == 2))
       tiDig = tiVirtual;
-    else if ((mpProfiles38[h].tiTime.bMinute % 30 != 0) && (mpProfiles38[h].bStatus == 0))
+    else if ((mpPrf38[h].tiTime.bMinute % 30 != 0) && (mpPrf38[h].bStatus == 0))
       tiDig = tiVirtual;
     else
-      tiDig = mpProfiles38[h].tiTime;
+      tiDig = mpPrf38[h].tiTime;
 
     if (ReadBlock38(h) == false) return false;
   }
