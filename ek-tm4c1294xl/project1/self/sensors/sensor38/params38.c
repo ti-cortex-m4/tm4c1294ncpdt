@@ -20,7 +20,7 @@ params34.c
 
 
 
-static float        mpeValues[4];
+static float        mpeValues[3+3];
 
 
 
@@ -39,10 +39,13 @@ void    QueryParams38(void)
   PushChar(0x0A);
   PushChar(0x00);
 
-  PushChar(0x18);
+  PushChar(0x18); // напряжение
   PushChar(0x1C);
 
-  Query38(250, 16);
+  PushChar(0x16); // ток
+  PushChar(0x1C);
+
+  Query38(250, 20);
 }
 
 
@@ -58,54 +61,24 @@ float2  ReadParam38(void)
     if (Input38() != SER_GOODCHECK) return GetFloat2Error();
 
     uchar ibIn = 10;
-    ibIn++;
 
-    uchar i;
-    for (i=0; i<3; i++)
+    uchar j;
+    for (j=0; j<2; j++)
     {
+      ibIn++;
 
-      uint64_t ddw = 0;
-      uchar delta = pucDecodeBitArr((uchar *) &ddw, InBuffPtr(ibIn));
-      if (delta == 0xFF) return GetFloat2Error();
-      ibIn += delta;
+      uchar i;
+      for (i=0; i<3; i++)
+      {
+        uint64_t ddw = 0;
+        uchar delta = pucDecodeBitArr((uchar *) &ddw, InBuffPtr(ibIn));
+        if (delta == 0xFF) return GetFloat2Error();
+        ibIn += delta;
 
-      mpeValues[i] = ddw % 0x100000000;
+        mpeValues[j*3+i] = ddw % 0x100000000;
+      }
     }
 
-/*
-    ibIn = 10;
-    ibIn++;
-
-    uchar b10 = InBuff(10);
-    uchar b11 = InBuff(11);
-    uchar b12 = InBuff(12);
-    uchar b13 = InBuff(13);
-    uchar b14 = InBuff(14);
-    uchar b15 = InBuff(15);
-
-    uint64_t ddw1 = 0;
-    uchar i1 = ibIn;
-    uchar delta1 = pucDecodeBitArr((uchar *) &ddw1, InBuffPtr(ibIn));
-    if (delta1 == 0xFF) return GetFloat2Error();
-    ibIn += delta1;
-    ulong dw1 = ddw1 % 0x100000000;
-
-    uint64_t ddw2 = 0;
-    uchar i2 = ibIn;
-    uchar delta2 = pucDecodeBitArr((uchar *) &ddw2, InBuffPtr(ibIn));
-    if (delta2 == 0xFF) return GetFloat2Error();
-    ibIn += delta2;
-    ulong dw2 = ddw2 % 0x100000000;
-
-    uint64_t ddw3 = 0;
-    uchar i3 = ibIn;
-    uchar delta3 = pucDecodeBitArr((uchar *) &ddw3, InBuffPtr(ibIn));
-    if (delta3 == 0xFF) return GetFloat2Error();
-    ibIn += delta3;
-    ulong dw3 = ddw3 % 0x100000000;
-
-    uchar i4 = ibIn;
-*/
     fBeginParam = true;
   }
 
@@ -114,12 +87,10 @@ float2  ReadParam38(void)
     case PAR_U1 : return GetFloat2(mpeValues[0]/100, true);
     case PAR_U2 : return GetFloat2(mpeValues[1]/100, true);
     case PAR_U3 : return GetFloat2(mpeValues[2]/100, true);
-    case PAR_U  : return GetFloat2(-1, true);
 
-    case PAR_I1 : return GetFloat2(-1, true);
-    case PAR_I2 : return GetFloat2(-1, true);
-    case PAR_I3 : return GetFloat2(-1, true);
-    case PAR_I  : return GetFloat2(-1, true);
+    case PAR_I1 : return GetFloat2(mpeValues[3], true);
+    case PAR_I2 : return GetFloat2(mpeValues[4], true);
+    case PAR_I3 : return GetFloat2(mpeValues[5], true);
 
     case PAR_P1 : return GetFloat2(-1, true);
     case PAR_P2 : return GetFloat2(-1, true);
