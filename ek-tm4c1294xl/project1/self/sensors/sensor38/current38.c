@@ -15,21 +15,24 @@ current38.c
 #include "current38.h"
 
 
-
-uchar                   ibLine38;
-
-
-
-void    ReadEngAbsCurrent38(void)
+bool    ReadCurrent38(void)
 {
-  // InitPop(1);
+  uchar ibIn = 10;
 
-  // mpdbChannelsC[ibLine38] = PopDoubleQ();
-}
+  uchar i;
+  for (i=0; i<4; i++)
+  {
+    ibIn++;
 
+    uint64_t ddw = 0;
+    uchar delta = pucDecodeBitArr((uchar *) &ddw, InBuffPtr(ibIn));
+    if (delta == 0xFF) return false;
+    ibIn += delta;
 
-void    ReadCurrent38(void)
-{
+    mpdwChannelsA[i] = ddw % 0x100000000;
+    mpdbChannelsC[i] = (double)mpdwChannelsA[i] / 10000;
+  }
+
   uchar i;
   for (i=0; i<4; i++)
   {
@@ -37,4 +40,5 @@ void    ReadCurrent38(void)
   }
 
   MakeCurrent();
+  return true;
 }
