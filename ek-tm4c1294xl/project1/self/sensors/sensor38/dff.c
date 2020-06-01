@@ -9,6 +9,25 @@ dff.c
 #include "dff.h"
 
 
+int EncodeInt(__int64 value) {
+  int num = 0; // число записанных байт (лбф + 7 бит)
+  char ch;
+  while ((value >> (num * 7 - 1)) != -1 && (value >> (num * 7 - 1)) != 0 || num == 0) //условие остановки кодирования: оставшиеся биты и последний записанный либо нули либо едини
+  {
+    if (send_buffer_position > send_buffer + PACKETMAXSIZE) // если вышли за пределы пакета отменить операцию
+    {
+      send_buffer_position -= num;
+      return 1;
+    }
+    ch = (char)(value >> (num * 7)); // следующие 7 бит
+    * send_buffer_position++ = ch | 0x80; // запись с флагом lbf
+    num++; //записали очередные 7 бит
+  }*
+  (send_buffer_position - 1) &= 0x7F; //убрать флаг у последнего байта
+  return 0;
+}
+
+
 
 void left_shift2(uchar  *array, uint  wSize, uint  bits)
 {
