@@ -5,8 +5,16 @@ authorization38.c
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
+#include "../../time/delay.h"
+#include "../../serial/ports_stack.h"
+#include "../../serial/ports_devices.h"
+#include "../../serial/ports_common.h"
+#include "../../serial/ports2.h"
+#include "../../serial/monitor.h"
 #include "io38.h"
+#include "bits2.h"
 #include "device38.h"
+#include "hash38.h"
 #include "authorization38.h"
 
 
@@ -26,9 +34,9 @@ void    QueryAuthorizationRequest38(void)
   PushChar(6); // GET_INFO
   PushChar(0x00);
 
-  PushChar(24);
+  PushChar(24); // 0x18
 
-  Query38(250, 0); // TODO
+  Query38(250, 14);
 }
 
 
@@ -52,7 +60,7 @@ void    QueryAuthorizationResponse38(ulong  random)
 
   uchar password_size = 3;
 
-  ulong dw = Hash38(&password, password_size, random);
+  ulong dw = Hash38(&password[0], password_size, random);
 
 
   InitPush(0);
@@ -65,21 +73,17 @@ void    QueryAuthorizationResponse38(ulong  random)
   PushChar(0x00);
   PushChar(0x06);
 
-  PushChar(6); // GET_INFO
-  PushChar(0x00);
+  PushChar(7); // ?
+  PushChar(0);
+  PushChar(1);
 
-  PushChar(24);
-
-  Query38(250, 0); // TODO
+  Query38(250, 21);
 }
 
 
-ulong   ReadAuthorizationResponse38(void)
+uchar   ReadAuthorizationResponse38(void)
 {
-  uint64_t ddw = 0;
-  pucDecodeBitArr((uchar *) &ddw, InBuffPtr(10+1));
-
-  return ddw % 0x100000000;
+  return InBuff(11);
 }
 
 
@@ -96,7 +100,8 @@ void    RunAuthorization38(void)
   QueryAuthorizationResponse38(random);
   if (Input38() != SER_GOODCHECK) { MonitorString("\n error 2"); return; }
 
-  ulong dw = ReadAuthorizationResponse38();
+  uchar b = ReadAuthorizationResponse38();
+  MonitorString("authorization="); MonitorCharDec(b);
 }
 
 #endif
