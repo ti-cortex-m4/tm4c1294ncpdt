@@ -15,7 +15,7 @@ current38.c
 #include "current38.h"
 
 
-bool    ReadCurrent38(void)
+void    ReadCurrent38(void)
 {
   uchar ibIn = 10;
 
@@ -26,19 +26,12 @@ bool    ReadCurrent38(void)
 
     uint64_t ddw = 0;
     uchar delta = pucDecodeBitArr((uchar *) &ddw, InBuffPtr(ibIn));
-    if (delta == 0xFF) return false;
+    if (delta == 0xFF) { Error(); DelayInf(); return; }
     ibIn += delta;
 
-    mpdwChannelsA[i] = ddw % 0x100000000;
-    mpdbChannelsC[i] = (double)mpdwChannelsA[i] / 10000;
-  }
-
-  uchar i;
-  for (i=0; i<4; i++)
-  {
+    mpdbChannelsC[i] = (double)(ddw % 0x100000000) / 10000;
     mpdwBaseDig[i] = mpdbChannelsC[i] * mpdbPulseMnt[ibDig];
   }
 
   MakeCurrent();
-  return true;
 }
