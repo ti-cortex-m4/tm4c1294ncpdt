@@ -1,4 +1,2 @@
 
-
-
-unsigned char  pucDecodeBitArr(unsigned char *pdataout, unsigned char *pdatain);
+unsigned char  pucDecodeBitArr(unsigned char *pOut, unsigned char *pIn);

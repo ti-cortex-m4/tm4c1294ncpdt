@@ -8,11 +8,16 @@ current38.c
 #include "../../memory/mem_digitals.h"
 #include "../../memory/mem_current.h"
 #include "../../memory/mem_factors.h"
+#include "../../display/messages.h"
+#include "../../time/delay.h"
 #include "../../serial/ports.h"
+#include "../../serial/ports2.h"
 #include "../../devices/devices.h"
 #include "../../digitals/digitals.h"
 #include "../../digitals/current/current_run.h"
+#include "bits2.h"
 #include "current38.h"
+
 
 
 void    ReadCurrent38(void)

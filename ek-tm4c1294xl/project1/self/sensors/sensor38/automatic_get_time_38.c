@@ -18,16 +18,17 @@ automatic_get_time_38.c
 
 
 void    RunProfile38(void);
+void    RunAuthorization38(void);
 #include "../../serial/monitor.h"
 void    MonitorOpen(uchar  ibPrt);
 
 
 
 time2   ReadTimeCan38(void)
-{/*
+{
   MonitorOpen(0);
   Delay(500);
-  RunProfile38();
+  RunAuthorization38(); //RunProfile38();
 
 
 
@@ -35,7 +36,7 @@ time2   ReadTimeCan38(void)
 
 
 
-*/
+
   Clear();
 
   uchar r;

@@ -4,4 +4,4 @@ hash38.h
 
 ------------------------------------------------------------------------------*/
 
-ulong   Hash38(uchar*  buff, int  size, ulong  random);
+ulong   Hash38(uchar*  password, int  password_size, ulong  random);
