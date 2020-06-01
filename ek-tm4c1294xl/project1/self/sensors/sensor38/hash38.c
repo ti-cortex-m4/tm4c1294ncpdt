@@ -65,13 +65,14 @@ random - случайное число, выданное сервером при запросе авторизации
 */
 ulong   Hash38(uchar*  buff, int  size, ulong  random)
 {
-  ulong crc;
+  ulong crc = 0xffffffff;
+
   int i;
-  crc = 0xffffffffLU;
-  for( i=0; i<size; i++)
+  for(i=0; i<size; i++)
   {
     if (buff[i] == 0x00) break;
     crc = crc32_tab[ (crc ^ buff[i]) & 0xff ] ^ (crc >> 8);
   }
-  return crc ^ random ^ 0xffffffffLU;
+  
+  return crc ^ random ^ 0xffffffff;
 }

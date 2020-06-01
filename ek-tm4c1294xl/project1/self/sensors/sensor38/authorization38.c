@@ -23,28 +23,65 @@ void    QueryAuthorizationRequest38(void)
   PushChar(0x00);
   PushChar(0x06);
 
-  PushChar(0x0A); // GET_DATA_SINGLE_EX
+  PushChar(6); // GET_INFO
   PushChar(0x00);
 
-  PushChar(0x01); // A+
-  PushChar(0x02);
-  PushChar(0x00);
+  PushChar(24);
 
-  Query38(250, 25);
+  Query38(250, 0); // TODO
 }
 
 
-uint    ReadAuthorizationRequest38(uchar  ibInBuff)
+ulong   ReadAuthorizationRequest38(void)
 {
-  uint64_t ddw = DffDecodeLong64(&mpbInBuff3[ibInBuff]); // TODO
+  uint64_t ddw = 0;
+  pucDecodeBitArr((uchar *) &ddw, InBuffPtr(10+1));
 
-  ulong dw = ddw % 0x100000000;
-  MonitorString("\n"); MonitorLongHex(dw);
-  MonitorString("\n"); MonitorLongDec(dw);
-  MonitorString("\n"); MonitorLongDecimal4(dw);
-
-  return ddw;
+  return ddw % 0x100000000;
 }
+
+
+
+void    QueryAuthorizationResponse38(ulong  random)
+{
+  uchar password[16+1];
+  password[0] = 'y';
+  password[1] = 'y';
+  password[2] = 'y';
+  password[3] = 0;
+
+  uchar password_size = 3;
+
+  ulong dw = Hash38(&password, password_size, random);
+
+
+  InitPush(0);
+
+  PushChar(0xC0);
+  PushChar(0x06);
+
+  PushAddress38();
+
+  PushChar(0x00);
+  PushChar(0x06);
+
+  PushChar(6); // GET_INFO
+  PushChar(0x00);
+
+  PushChar(24);
+
+  Query38(250, 0); // TODO
+}
+
+
+ulong   ReadAuthorizationResponse38(void)
+{
+  uint64_t ddw = 0;
+  pucDecodeBitArr((uchar *) &ddw, InBuffPtr(10+1));
+
+  return ddw % 0x100000000;
+}
+
 
 
 #ifdef MONITOR_38
@@ -54,7 +91,12 @@ void    RunAuthorization38(void)
   QueryAuthorizationRequest38();
   if (Input38() != SER_GOODCHECK) { MonitorString("\n error 1"); return; }
 
-  tiValue38 = ReadAuthorizationRequest38();
+  ulong random = ReadAuthorizationRequest38();
+
+  QueryAuthorizationResponse38(random);
+  if (Input38() != SER_GOODCHECK) { MonitorString("\n error 2"); return; }
+
+  ulong dw = ReadAuthorizationResponse38();
 }
 
 #endif
