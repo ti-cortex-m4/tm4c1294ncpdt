@@ -6592,7 +6592,7 @@ void    RunDevices(void)
 
 #endif
 
-#if SKIP_38
+#ifndef SKIP_38
 
     case DEV_START_38C:
       Clear();
