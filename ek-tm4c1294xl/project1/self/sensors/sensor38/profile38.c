@@ -42,7 +42,7 @@ unsigned char  pucDecodeBitArr(unsigned char *pOut, unsigned char *pIn);
 
 typedef struct
 {
-  time          tiTime;
+  time          ti;
   uchar         bStatus;
   ulong         mpdwValue[4];
 } profile38;
@@ -147,7 +147,7 @@ void    MakeData38(uchar  h)
   ShowProgressDigHou();
 
   double dbPulse = mpdbPulseHou[ibDig];
-
+/*
   uchar i;
   for (i=0; i<4; i++)
   {
@@ -159,16 +159,15 @@ void    MakeData38(uchar  h)
 
     mpdbEngFracDigCan[ibDig][i] -= (double)w*10000/dbPulse;
   }
-/*
+*/
   uchar i;
   for (i=0; i<4; i++)
   {
-    ulong dw = mpProfiles38[h].mpdwValue[i];
+    ulong dw = mpPrf38[h].mpdwValue[i];
     uint w = (uint)(dw*dbPulse/10000);
 
     mpwChannels[i] = w;
   }
-*/
 }
 
 
@@ -201,33 +200,27 @@ bool    ReadData38(void)
   uchar j;
   for (j=0; j<4; j++)
   {
-    MonitorString("\n");
     ibIn++;
 
     uchar k;
     for (k=0; k<6; k++)
     {
-      MonitorString("\n");
       ulong dw1 = 0;
       uchar i1 = pucDecodeBitArr((uchar *) &dw1, InBuffPtr(ibIn));
       ibIn += i1; //0xFF
-//      MonitorString(" i1="); MonitorCharDec(i1); MonitorString(" ");
+
       time ti = LongToTime38(dw1);
-//      MonitorTime(ti);
-      mpPrf38[k].tiTime/*s[j]*/ = ti;
+      mpPrf38[k].ti = ti;
 
       ulong dw2 = 0;
       uchar i2 = pucDecodeBitArr((uchar *) &dw2, InBuffPtr(ibIn));
       ibIn += i2; //0xFF
-//      MonitorString(" i2="); MonitorCharDec(i2); MonitorString(" ");
 
       uchar bStatus = (dw2 % 0x100) & 0x03;
       mpPrf38[k].bStatus = bStatus;
-//      MonitorString(" #"); MonitorCharDec(bStatus); MonitorString(" ");
 
       ulong dwValue = dw2 >> 3;
       mpPrf38[k].mpdwValue[j] = dwValue;
-//      MonitorLongDecimal4(dwValue);
     }
   }
 
@@ -247,21 +240,21 @@ bool    ReadData38(void)
     dw -= (wProfile38 + h);
     time tiVirtual = HouIndexToDate(dw);
 
-    bool different = DifferentDateTime(tiVirtual,mpPrf38[h].tiTime);
+    bool different = DifferentDateTime(tiVirtual,mpPrf38[h].ti);
 
 #ifdef MONITOR_38
     MonitorString(" vrt.="); MonitorTime(tiVirtual);
-    MonitorString(" act.="); MonitorTime(mpPrf38[h].tiTime);
+    MonitorString(" act.="); MonitorTime(mpPrf38[h].ti);
     MonitorBool(different);
     MonitorString(" #"); MonitorCharDec(mpPrf38[h].bStatus); MonitorString(" ");
 #endif
 
     if ((different == true) && (mpPrf38[h].bStatus == 2))
       tiDig = tiVirtual;
-    else if ((mpPrf38[h].tiTime.bMinute % 30 != 0) && (mpPrf38[h].bStatus == 0))
+    else if ((mpPrf38[h].ti.bMinute % 30 != 0) && (mpPrf38[h].bStatus == 0))
       tiDig = tiVirtual;
     else
-      tiDig = mpPrf38[h].tiTime;
+      tiDig = mpPrf38[h].ti;
 
     if (ReadBlock38(h) == false) return false;
   }
