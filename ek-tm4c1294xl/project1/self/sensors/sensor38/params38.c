@@ -67,19 +67,24 @@ float2  ReadParam38(void)
     if (Input38() != SER_GOODCHECK) return GetFloat2Error();
 
     uchar ibIn = 10;
+    uchar* pbIn = InBuffPtr(ibIn);
 
     uchar j;
     for (j=0; j<4; j++)
     {
       ibIn++;
+      *(pbIn++);
 
       uchar i;
       for (i=0; i<3; i++)
       {
-        uint64_t ddw = 0;
-        uchar delta = pucDecodeBitArr((uchar *) &ddw, InBuffPtr(ibIn));
-        if (delta == 0xFF) return GetFloat2Error();
-        ibIn += delta;
+//        uint64_t ddw = 0;
+//        uchar delta = pucDecodeBitArr((uchar *) &ddw, InBuffPtr(ibIn));
+//        if (delta == 0xFF) return GetFloat2Error();
+//        ibIn += delta;
+
+        int64_t ddw = 0;
+        pbIn = DffDecodeLong64_(pbIn, &ddw);
 
         mpeValues[j*3+i] = ddw % 0x100000000;
       }
