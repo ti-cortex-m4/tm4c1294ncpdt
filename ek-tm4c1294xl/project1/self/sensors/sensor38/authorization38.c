@@ -18,6 +18,15 @@ authorization38.c
 #include "authorization38.h"
 
 
+typedef union
+{
+  float         fdwBuff;
+  uchar         mbBuff[4];
+  ulong         dwBuff;
+  long          dwsBuff;
+} combo1;
+
+
 
 void    QueryAuthorizationRequest38(void)
 {
@@ -75,6 +84,29 @@ void    QueryAuthorizationResponse38(ulong  random)
   PushChar(0);
   PushChar(1);
 
+  combo1   coTemp;
+  coTemp.dwBuff = Hash38(&password[0], password_size, random);
+  PushChar(coTemp.mbBuff[0]);
+  PushChar(coTemp.mbBuff[1]);
+  PushChar(coTemp.mbBuff[2]);
+  PushChar(coTemp.mbBuff[3]);
+
+  PushChar(0x3F); // 999999 сек
+  PushChar(0x42);
+  PushChar(0x0F);
+  PushChar(0x00);
+/*
+  mbOut485[7] = coTemp.mbBuff[3];
+  mbOut485[6] = coTemp.mbBuff[2];
+  mbOut485[5] = coTemp.mbBuff[1];
+  mbOut485[4] = coTemp.mbBuff[0];
+
+  //Время = 999999 сек. (такое значение посылал AdminTools)
+  mbOut485[8]  = 0x3F;
+  mbOut485[9]  = 0x42;
+  mbOut485[10] = 0x0F;
+  mbOut485[11] = 0x00;
+/*
   uchar n = EncodeInt(OutBuffPtr(11), dw);
 
   InitPush(11 + n);
@@ -83,8 +115,9 @@ void    QueryAuthorizationResponse38(ulong  random)
   PushChar(0x42);
   PushChar(0x0F);
   PushChar(0x00);
+*/
 
-  Query38(250, 21+n);
+  Query38(250, 21);
 }
 
 
