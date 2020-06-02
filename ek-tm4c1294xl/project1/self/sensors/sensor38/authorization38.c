@@ -18,6 +18,9 @@ authorization38.c
 #include "authorization38.h"
 
 
+
+#include "../../memory/mem_serial3.h"
+
 typedef union
 {
   float         fdwBuff;
@@ -51,6 +54,13 @@ void    QueryAuthorizationRequest38(void)
 
 ulong   ReadAuthorizationRequest38(void)
 {
+  //AB EF 95 9E 0E
+  mpbInBuff3[11] = 0xAB;
+  mpbInBuff3[12] = 0xEF;
+  mpbInBuff3[13] = 0x95;
+  mpbInBuff3[14] = 0x9E;
+  mpbInBuff3[15] = 0x0E;
+
   uint64_t ddw = 0;
   pucDecodeBitArr((uchar *) &ddw, InBuffPtr(10+1));
 
@@ -106,7 +116,7 @@ void    QueryAuthorizationResponse38(ulong  random)
   mbOut485[9]  = 0x42;
   mbOut485[10] = 0x0F;
   mbOut485[11] = 0x00;
-/*
+/ *
   uchar n = EncodeInt(OutBuffPtr(11), dw);
 
   InitPush(11 + n);

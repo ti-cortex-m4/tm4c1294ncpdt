@@ -4,6 +4,7 @@ params34.c
 
 ------------------------------------------------------------------------------*/
 
+#include <math.h>
 #include "../../main.h"
 #include "../../memory/mem_digitals.h"
 #include "../../serial/ports.h"
@@ -19,8 +20,9 @@ params34.c
 #include "params38.h"
 
 
+#define M_PI        3.14159265358979323846
 
-static float        mpeValues[3*6];
+static float        mpeValues[3*7];
 
 
 
@@ -57,9 +59,18 @@ void    QueryParams38(void)
   PushChar(0x1A); // f
   PushChar(0x1C);
 
-  Query38(250, 28);
+  PushChar(0x52); // Ô
+  PushChar(0x1C);
+
+  Query38(250, 30);
 }
 
+
+
+float   convert(double  degrees)
+{
+  return cos(M_PI*degrees/180);
+}
 
 
 float2  ReadParam38(void)
@@ -76,7 +87,7 @@ float2  ReadParam38(void)
     uchar* pbIn = InBuffPtr(10);
 
     uchar j;
-    for (j=0; j<6; j++)
+    for (j=0; j<7; j++)
     {
 //      ibIn++;
       *(pbIn++);
@@ -125,10 +136,9 @@ float2  ReadParam38(void)
     case PAR_F2 : return GetFloat2(mpeValues[16]/100, true);
     case PAR_F3 : return GetFloat2(mpeValues[17]/100, true);
 
-    case PAR_C1 : return GetFloat2(-1, true);
-    case PAR_C2 : return GetFloat2(-1, true);
-    case PAR_C3 : return GetFloat2(-1, true);
-    case PAR_C  : return GetFloat2(-1, true);
+    case PAR_C1 : return GetFloat2(convert(mpeValues[18]/10), true);
+    case PAR_C2 : return GetFloat2(convert(mpeValues[19]/10), true);
+    case PAR_C3 : return GetFloat2(convert(mpeValues[20]/10), true);
 
     default: return GetFloat2Error();
   }
