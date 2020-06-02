@@ -53,12 +53,10 @@ ulong   ReadAuthorizationRequest38(void)
 void    QueryAuthorizationResponse38(ulong  random)
 {
   uchar password[16+1];
-  password[0] = 'y';
-  password[1] = 'y';
-  password[2] = 'y';
-  password[3] = 0;
+  password[0] = '0';
+  password[1] = 0;
 
-  uchar password_size = 3;
+  uchar password_size = 1;
 
   ulong dw = Hash38(&password[0], password_size, random);
 
@@ -77,7 +75,16 @@ void    QueryAuthorizationResponse38(ulong  random)
   PushChar(0);
   PushChar(1);
 
-  Query38(250, 21);
+  uchar n = EncodeInt(OutBuffPtr(11), dw);
+
+  InitPush(11 + n);
+
+  PushChar(0x3F); // 999999 сек
+  PushChar(0x42);
+  PushChar(0x0F);
+  PushChar(0x00);
+
+  Query38(250, 21+n);
 }
 
 

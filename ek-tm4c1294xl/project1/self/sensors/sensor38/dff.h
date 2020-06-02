@@ -4,6 +4,8 @@ dff.c
 
 ------------------------------------------------------------------------------*/
 
+uchar   EncodeInt(uchar*  send_buffer_position, uint64_t  value);
+
 uint64_t    DffPopDecodeLong64(uchar  i);
 
 uint64_t    DffDecodeLong64(uchar  *pb);
