@@ -20,7 +20,7 @@ params34.c
 
 
 
-static float        mpeValues[3*5];
+static float        mpeValues[3*6];
 
 
 
@@ -54,7 +54,10 @@ void    QueryParams38(void)
   PushChar(0x0D); // S
   PushChar(0x1C);
 
-  Query38(250, 26);
+  PushChar(0x0D); // f
+  PushChar(0x1A);
+
+  Query38(250, 28);
 }
 
 
@@ -73,7 +76,7 @@ float2  ReadParam38(void)
     uchar* pbIn = InBuffPtr(10);
 
     uchar j;
-    for (j=0; j<5; j++)
+    for (j=0; j<6; j++)
     {
 //      ibIn++;
       *(pbIn++);
@@ -118,10 +121,10 @@ float2  ReadParam38(void)
     case PAR_S2 : return GetFloat2(mpeValues[13], true);
     case PAR_S3 : return GetFloat2(mpeValues[14], true);
 
-    case PAR_F1 : return GetFloat2(-1, true);
-    case PAR_F2 : return GetFloat2(-1, true);
-    case PAR_F3 : return GetFloat2(-1, true);
-    case PAR_F  : return GetFloat2(-1, true);
+    case PAR_F1 : return GetFloat2(mpeValues[15], true);
+    case PAR_F2 : return GetFloat2(mpeValues[16], true);
+    case PAR_F3 : return GetFloat2(mpeValues[17], true);
+//    case PAR_F  : return GetFloat2(-1, true);
 
     case PAR_C1 : return GetFloat2(-1, true);
     case PAR_C2 : return GetFloat2(-1, true);
