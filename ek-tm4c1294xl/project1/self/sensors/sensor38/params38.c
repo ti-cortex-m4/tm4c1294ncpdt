@@ -54,8 +54,8 @@ void    QueryParams38(void)
   PushChar(0x0D); // S
   PushChar(0x1C);
 
-  PushChar(0x0D); // f
-  PushChar(0x1A);
+  PushChar(0x1A); // f
+  PushChar(0x1C);
 
   Query38(250, 28);
 }
@@ -121,10 +121,9 @@ float2  ReadParam38(void)
     case PAR_S2 : return GetFloat2(mpeValues[13], true);
     case PAR_S3 : return GetFloat2(mpeValues[14], true);
 
-    case PAR_F1 : return GetFloat2(mpeValues[15], true);
-    case PAR_F2 : return GetFloat2(mpeValues[16], true);
-    case PAR_F3 : return GetFloat2(mpeValues[17], true);
-//    case PAR_F  : return GetFloat2(-1, true);
+    case PAR_F1 : return GetFloat2(mpeValues[15]/100, true);
+    case PAR_F2 : return GetFloat2(mpeValues[16]/100, true);
+    case PAR_F3 : return GetFloat2(mpeValues[17]/100, true);
 
     case PAR_C1 : return GetFloat2(-1, true);
     case PAR_C2 : return GetFloat2(-1, true);
