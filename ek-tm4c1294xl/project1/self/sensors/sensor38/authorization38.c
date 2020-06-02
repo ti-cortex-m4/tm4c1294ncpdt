@@ -142,6 +142,26 @@ uchar   ReadAuthorizationResponse38(void)
 
 void    RunAuthorization38(void)
 {
+  uchar in[4];
+  uchar out[4];
+  memset(&in, 0, sizeof(in));
+  memset(&out, 0, sizeof(out));
+  in[0] = 0x98;
+  in[1] = 0x09;
+
+  uint64_t ddw1 = 0;
+  DffDecodeLong64_(&in[0], &ddw1);
+
+  uint64_t ddw2 = 0;
+  pucDecodeBitArr((uchar *) &ddw2, &in[0]);
+
+  MonitorString("\n a="); MonitorLongHex(ddw1 % 0x100000000);
+  MonitorString("\n b="); MonitorLongHex(ddw2 % 0x100000000);
+
+  ulong dwOut = 0;
+  EncodeInt((uchar *)&dwOut, 498);
+  MonitorString("\n out="); MonitorLongHex(dwOut);
+/*
   QueryAuthorizationRequest38();
   if (Input38() != SER_GOODCHECK) { MonitorString("\n error 1"); return; }
 
@@ -152,6 +172,7 @@ void    RunAuthorization38(void)
 
   uchar b = ReadAuthorizationResponse38();
   MonitorString("authorization="); MonitorCharDec(b);
+*/
 }
 
 #endif
