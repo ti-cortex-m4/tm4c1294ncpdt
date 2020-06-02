@@ -31,7 +31,7 @@ int     EncodeInt(__int64 value) {
 }
 */
 
-
+/*
 void left_shift2(uchar  *array, uint  wSize, uint  bits)
 {
   uint b;
@@ -63,7 +63,7 @@ uchar*  DffPopDecodeBuff(uchar  *pb) {
 
   do {
     memset(&buff, 0, sizeof(buff));
-    buff[0] = (*pb /*InBuff(i)*/ & 0x7F);
+    buff[0] = (*pb / *InBuff(i)* / & 0x7F);
 
     left_shift2(buff, sizeof(buff), bits);
 
@@ -71,13 +71,13 @@ uchar*  DffPopDecodeBuff(uchar  *pb) {
     for (i=0; i < sizeof(result); i++)
       result[i] |= buff[i];
 
-    bits += 4/*7*/;
+    bits += 4/ *7* /;
   }
-  while (*(pb++)/*InBuff(i++)*/ & 0x80);
+  while (*(pb++)/ *InBuff(i++)* / & 0x80);
 
   return result;
 }
-
+*/
 
 
 uint64_t DffPopDecodeLong64(uchar  i) {
@@ -120,6 +120,23 @@ uint64_t DffDecodeLong64(uchar  *pb) {
   return result;
 }
 
+uchar*  DffDecodeLong64_(uchar  *pb, int64_t  *pOut) {
+//  uint64_t result = 0;
+  int bits = 0;
+  uint64_t ddw;
+
+  do {
+    ddw = (*pb & 0x7F);
+    (*pOut) += (ddw << bits);
+    bits += 7;
+  }
+  while (*(pb++) & 0x80);
+
+  if (ddw >> 6)
+    (*pOut) |= (0xffffffffffffffff << bits);
+
+  return pb;
+}
 
 
 ulong   DffDecodeLong(uchar  *pb) {
