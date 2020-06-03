@@ -93,16 +93,9 @@ void    InitHeader38(void)
 
 uchar   PushIndex(uint  iw30MinRel)
 {
-//  PushIntBig(0);
-//  SkipBack(-2);
-
   int64_t ddw = iw30MinRel;
-//  ulong dw = 0;
   uchar n = EncodeInt(ddw, OutBuffPtr(GetPush()));
-  MonitorString(" n="); MonitorCharDec(n);
-
-//  PushChar((dw % 0x10000) % 0x1000);
-//  PushChar((dw % 0x10000) / 0x1000);
+//  MonitorString(" n="); MonitorCharDec(n);
   Skip(n);
   return n;
 }
@@ -132,25 +125,25 @@ void    QueryProfile38(uint  iw30MinRelStart, uint  iw30MinRelEnd)
   bSize += PushChar(0x03);
   bSize += PushIndex(iw30MinRelStart);
   bSize += PushIndex(iw30MinRelEnd);
-/*
-  PushChar(0xD6); // 214
-  PushChar(0x01);
-  PushChar(0x03);
-  PushIndex(iw30MinRelStart);
-  PushIndex(iw30MinRelEnd);
 
-  PushChar(0xD7); // 215
-  PushChar(0x01);
-  PushChar(0x03);
-  PushIndex(iw30MinRelStart);
-  PushIndex(iw30MinRelEnd);
+  bSize += PushChar(0xD6); // 214
+  bSize += PushChar(0x01);
+  bSize += PushChar(0x03);
+  bSize += PushIndex(iw30MinRelStart);
+  bSize += PushIndex(iw30MinRelEnd);
 
-  PushChar(0xD8); // 216
-  PushChar(0x01);
-  PushChar(0x03);
-  PushIndex(iw30MinRelStart);
-  PushIndex(iw30MinRelEnd);
-*/
+  bSize += PushChar(0xD7); // 215
+  bSize += PushChar(0x01);
+  bSize += PushChar(0x03);
+  bSize += PushIndex(iw30MinRelStart);
+  bSize += PushIndex(iw30MinRelEnd);
+
+  bSize += PushChar(0xD8); // 216
+  bSize += PushChar(0x01);
+  bSize += PushChar(0x03);
+  bSize += PushIndex(iw30MinRelStart);
+  bSize += PushIndex(iw30MinRelEnd);
+
   Query38(250, bSize+3/*41*/);
 }
 
@@ -220,7 +213,7 @@ bool    ReadData38(void)
   uchar ibIn = 10;
 
   uchar j;
-  for (j=0; j<1/*4*/; j++)
+  for (j=0; j<4; j++)
   {
     ibIn++;
 
@@ -232,18 +225,19 @@ bool    ReadData38(void)
       ibIn += i1; //0xFF
 
       time ti = LongToTime38(dw1);
-      MonitorString("\n ti "); MonitorTime(ti);
+      MonitorString("\n "); MonitorTime(ti);
       mpPrf38[k].ti = ti;
 
       ulong dw2 = 0;
       uchar i2 = pucDecodeBitArr((uchar *) &dw2, InBuffPtr(ibIn));
-      MonitorString("\n vl "); MonitorLongDec(dw2);
       ibIn += i2; //0xFF
 
       uchar bStatus = (dw2 % 0x100) & 0x03;
       mpPrf38[k].bStatus = bStatus;
+      MonitorString(" "); MonitorCharDec(bStatus);
 
       ulong dwValue = dw2 >> 3;
+      MonitorString(" "); MonitorLongDec(dwValue);
       mpPrf38[k].mpdwValue[j] = dwValue;
     }
   }
@@ -284,7 +278,7 @@ bool    ReadData38(void)
   }
 
   wProfile38 += 6;
-  if (wProfile38 > 200/*wHOURS*/) return false;
+  if (wProfile38 > 700/*wHOURS*/) return false;
 
   wRelStart += 6;
   wRelEnd = wRelStart + 5;

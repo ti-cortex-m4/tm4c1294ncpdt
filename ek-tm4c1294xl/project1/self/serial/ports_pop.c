@@ -82,17 +82,6 @@ void    Skip(uint  wSize) {
 }
 
 
-void    SkipBack(int  wSize) {
-  switch (ibPort) {
-    case 0: iwPush0 += wSize; break;
-    case 1: iwPush1 += wSize; break;
-    case 2: iwPush2 += wSize; break;
-    case 3: iwPush3 += wSize; break;
-    default: ASSERT(false);
-  }
-}
-
-
 void    InitPop(uint  i) {
   cwPopSize = i;
 

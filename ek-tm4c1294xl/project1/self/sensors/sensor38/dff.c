@@ -34,7 +34,7 @@ uchar   EncodeInt_(uchar*  send_buffer_position, int64_t  value) {
   {
     MonitorString("\n ");
     int64_t new = value >> (bits - 1);
-    UARTprintf("%X ", new % 0x100000000);
+//    UARTprintf("%X ", new % 0x100000000);
 
     bool f1 = (new != -1);
     bool f2 = (new != 0);
