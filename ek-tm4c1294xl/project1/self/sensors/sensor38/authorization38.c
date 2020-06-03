@@ -159,7 +159,8 @@ void    RunAuthorization38(void)
   MonitorString("\n b="); MonitorLongHex(ddw2 % 0x100000000);
 
   ulong dwOut = 0;
-  EncodeInt((uchar *)&dwOut, 498);
+  int64_t value = ddw1 % 0x100000000;
+  EncodeInt((uchar *)&dwOut, value);
   MonitorString("\n out="); MonitorLongHex(dwOut);
 /*
   QueryAuthorizationRequest38();
