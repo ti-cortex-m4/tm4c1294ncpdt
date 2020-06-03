@@ -189,7 +189,7 @@ void    QueryEngMon38(uchar  ibMonRel)
 
   PushChar(0x09); // A+
   PushChar(0x02);
-  PushChar(0x00);
+  PushChar(0x00); // общая энергия
   PushChar(ibMonRel);
   PushChar(ibMonRel);
 
@@ -213,3 +213,33 @@ void    QueryEngMon38(uchar  ibMonRel)
 
   Query38(250, 33);
 }
+
+
+/*
+счетчики на начало месяцев по тарифам
+ Запрос
+03.06.2020 22:29:44.414
+06 E8 B7 C4 04 00 06
+0B GET_DATA_MULTIPLE_EX
+00
+09 // A+
+02
+1E по 4 тарифам
+01 месяц
+02 месяц
+BE A6
+
+Ответ
+03.06.2020 22:29:45.092
+06 E8 B7 C4 04 80 06 0B 00 09
+B8 D3 E5 02
+98 CE 9F 01
+A8 BE 48
+00
+A0 C7 8C 02
+C8 D9 72 E0
+9F 35
+00
+0A 92                                                                                                  ..?
+
+ */
