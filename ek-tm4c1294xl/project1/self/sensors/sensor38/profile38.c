@@ -225,7 +225,6 @@ bool    ReadData38(void)
       ibIn += i1; //0xFF
 
       time ti = LongToTime38(dw1);
-      MonitorString("\n "); MonitorTime(ti);
       mpPrf38[k].ti = ti;
 
       ulong dw2 = 0;
@@ -234,11 +233,13 @@ bool    ReadData38(void)
 
       uchar bStatus = (dw2 % 0x100) & 0x03;
       mpPrf38[k].bStatus = bStatus;
-      MonitorString(" "); MonitorCharDec(bStatus);
 
       ulong dwValue = dw2 >> 3;
-      MonitorString(" "); MonitorLongDec(dwValue);
       mpPrf38[k].mpdwValue[j] = dwValue;
+
+      MonitorString("\n "); MonitorTime(ti);
+      MonitorString(" "); MonitorLongDec(dwValue);
+      MonitorString(" "); MonitorCharDec(bStatus);
     }
   }
 
