@@ -12,20 +12,38 @@ dff.c
 
 uchar   EncodeInt(uchar*  send_buffer_position, int64_t  value) {
   int num = 0; // число записанных байт (лбф + 7 бит)
+  int bits = 0;
   // char ch;
 
-  while ((((value >> (num * 7 - 1)) != -1) && ((value >> (num * 7 - 1)) != 0)) || (num == 0)) //условие остановки кодирования: оставшиеся биты и последний записанный либо нули либо едини
+  while (true) //условие остановки кодирования: оставшиеся биты и последний записанный либо нули либо едини
   {
+    MonitorString("\n ");
+    int64_t new = value >> (bits - 1);
+    UARTprintf("%X ", new % 0x100000000);
+
+    bool f1 = (new != -1);
+    bool f2 = (new != 0);
+    bool f3 = (num == 0);
+    bool f = ((f1 && f2) || f3);
+    MonitorBool(f1);
+    MonitorBool(f2);
+    MonitorBool(f3);
+    MonitorBool(f);
+
+    if (f == false) break;
+
+//    MonitorString("\n a="); MonitorIntHex(value >> (bits - 1));
     // if (send_buffer_position > send_buffer + PACKETMAXSIZE) // если вышли за пределы пакета отменить операцию
     // {
     //   send_buffer_position -= num;
     //   return 1;
     // }
-    uchar ch = (uchar)(value >> (num * 7)); // следующие 7 бит
-    MonitorString("\n "); MonitorCharHex(ch);
+    uchar ch = (uchar)(value >> bits); // следующие 7 бит
+    MonitorString(" x="); MonitorCharHex(ch);
 
     *send_buffer_position++ = ch | 0x80; // запись с флагом lbf
     num++; //записали очередные 7 бит
+    bits += 7;
   }
 
   *(send_buffer_position - 1) &= 0x7F; //убрать флаг у последнего байта
