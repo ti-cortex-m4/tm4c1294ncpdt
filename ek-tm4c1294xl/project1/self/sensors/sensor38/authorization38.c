@@ -148,6 +148,26 @@ uchar   ReadAuthorizationResponse38(void)
 
 void    RunAuthorization38(void)
 {
+  ulong out;
+  memset(&out, 0, sizeof(out));
+
+
+  int64_t value = 100;
+  int n = EncodeInt(value, (uint8_t *)&out);
+  MonitorString("\n "); MonitorLongHex(out);
+
+  value = 160;
+  n = EncodeInt(value, (uint8_t *)&out);
+  MonitorString("\n "); MonitorLongHex(out);
+
+  value = 240;
+  n = EncodeInt(value, (uint8_t *)&out);
+  MonitorString("\n "); MonitorLongHex(out);
+
+  value = 260;
+  n = EncodeInt(value, (uint8_t *)&out);
+  MonitorString("\n "); MonitorLongHex(out);
+
 /*
   uchar in[4];
   uchar out[4];

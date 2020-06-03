@@ -28,7 +28,7 @@ time2   ReadTimeCan38(void)
 {
   MonitorOpen(0);
   Delay(500);
-  RunAuthorization38(); // RunProfile38();
+  RunProfile38(); // RunAuthorization38();
 
 
 

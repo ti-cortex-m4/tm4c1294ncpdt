@@ -12,6 +12,7 @@ uchar   PopChar2Bcc(void);
 
 uchar   SkipChar(void);
 void    Skip(uint  wSize);
+void    SkipBack(int  wSize);
 
 void    InitPop(uint  i);
 
