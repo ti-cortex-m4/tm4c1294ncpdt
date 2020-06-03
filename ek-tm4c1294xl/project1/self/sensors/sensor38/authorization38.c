@@ -20,6 +20,7 @@ authorization38.c
 
 
 #include "../../memory/mem_serial3.h"
+int EncodeInt(int64_t value, uint8_t *send_buffer_position);
 
 typedef union
 {
@@ -54,13 +55,6 @@ void    QueryAuthorizationRequest38(void)
 
 ulong   ReadAuthorizationRequest38(void)
 {
-  //AB EF 95 9E 0E
-  mpbInBuff3[11] = 0xAB;
-  mpbInBuff3[12] = 0xEF;
-  mpbInBuff3[13] = 0x95;
-  mpbInBuff3[14] = 0x9E;
-  mpbInBuff3[15] = 0x0E;
-
   uint64_t ddw = 0;
   pucDecodeBitArr((uchar *) &ddw, InBuffPtr(10+1));
 
@@ -94,6 +88,17 @@ void    QueryAuthorizationResponse38(ulong  random)
   PushChar(0);
   PushChar(1);
 
+  int n = EncodeInt(dw, OutBuffPtr(11));
+  MonitorString("n="); MonitorCharDec(n);
+
+  *OutBuffPtr(11+n-1) |= 0x80;
+
+  InitPush(11+n);
+  PushChar(0xF1);
+  PushChar(0x04);
+
+//  MonitorOut(250, 11+n+2);
+/*
   combo1   coTemp;
   coTemp.dwBuff = Hash38(&password[0], password_size, random);
   PushChar(coTemp.mbBuff[0]);
@@ -105,7 +110,7 @@ void    QueryAuthorizationResponse38(ulong  random)
   PushChar(0x42);
   PushChar(0x0F);
   PushChar(0x00);
-/*
+/ *
   mbOut485[7] = coTemp.mbBuff[3];
   mbOut485[6] = coTemp.mbBuff[2];
   mbOut485[5] = coTemp.mbBuff[1];
@@ -125,9 +130,10 @@ void    QueryAuthorizationResponse38(ulong  random)
   PushChar(0x42);
   PushChar(0x0F);
   PushChar(0x00);
+* /
 */
+  Query38(250, 11+n+3);
 
-  Query38(250, 21);
 }
 
 
@@ -142,6 +148,7 @@ uchar   ReadAuthorizationResponse38(void)
 
 void    RunAuthorization38(void)
 {
+/*
   uchar in[4];
   uchar out[4];
   memset(&in, 0, sizeof(in));
@@ -162,18 +169,27 @@ void    RunAuthorization38(void)
   int64_t value = ddw1 % 0x100000000;
   EncodeInt((uchar *)&dwOut, value);
   MonitorString("\n out="); MonitorLongHex(dwOut);
-/*
+*/
   QueryAuthorizationRequest38();
   if (Input38() != SER_GOODCHECK) { MonitorString("\n error 1"); return; }
+/*
+  //C6 89 80 BB 07
+  mpbInBuff3[11] = 0xC6;
+  mpbInBuff3[12] = 0x89;
+  mpbInBuff3[13] = 0x80;
+  mpbInBuff3[14] = 0xBB;
+  mpbInBuff3[15] = 0x07;
+*/
 
   ulong random = ReadAuthorizationRequest38();
+  MonitorString("\n random="); MonitorLongHex(random);
 
   QueryAuthorizationResponse38(random);
   if (Input38() != SER_GOODCHECK) { MonitorString("\n error 2"); return; }
 
   uchar b = ReadAuthorizationResponse38();
   MonitorString("authorization="); MonitorCharDec(b);
-*/
+
 }
 
 #endif

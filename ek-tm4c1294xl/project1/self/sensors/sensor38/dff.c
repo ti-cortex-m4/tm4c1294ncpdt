@@ -8,9 +8,24 @@ dff.c
 #include "../../serial/ports.h"
 #include "dff.h"
 
+#include "../../serial/monitor.h"
 
 
-uchar   EncodeInt(uchar*  send_buffer_position, int64_t  value) {
+int EncodeInt(int64_t value, uint8_t *send_buffer_position) {
+  int num=0; // число записанных байт (лбф + 7 бит)
+  char ch;
+
+  //условие остановки кодирования: оставшиеся биты и последний записанный либо нули либо единицы
+  while ((value>>(num*7-1)) != -1 && (value>>(num*7-1)) != 0 || num==0) {
+    ch = (char)(value>>(num*7));                         // следующие 7 бит
+    *send_buffer_position++ = ch | 0x80;                  // запись с флагом lbf
+    num++; //записали очередные 7 бит
+  }
+  *(send_buffer_position-1) &= 0x7F;                      //убрать флаг у последнего байта
+  return num;
+}
+
+uchar   EncodeInt_(uchar*  send_buffer_position, int64_t  value) {
   int num = 0; // число записанных байт (лбф + 7 бит)
   int bits = 0;
   // char ch;
