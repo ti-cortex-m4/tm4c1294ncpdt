@@ -82,6 +82,7 @@ void    Skip(uint  wSize) {
 }
 
 
+
 void    InitPop(uint  i) {
   cwPopSize = i;
 

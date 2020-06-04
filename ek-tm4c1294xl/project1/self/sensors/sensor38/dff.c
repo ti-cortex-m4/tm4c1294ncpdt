@@ -156,22 +156,23 @@ uint64_t DffDecodeLong64(uchar  *pb) {
   return result;
 }
 
-uchar*  DffDecodeLong64_(uchar  *pb, int64_t  *pOut) {
-//  uint64_t result = 0;
+
+
+uchar*      DffDecodeLong64_(uchar*  pbIn, int64_t*  pdwOut) {
   int bits = 0;
   uint64_t ddw;
 
   do {
-    ddw = (*pb & 0x7F);
-    (*pOut) += (ddw << bits);
+    ddw = (*pbIn & 0x7F);
+    (*pdwOut) += (ddw << bits);
     bits += 7;
   }
-  while (*(pb++) & 0x80);
+  while (*(pbIn++) & 0x80);
 
   if (ddw >> 6)
-    (*pOut) |= (0xffffffffffffffff << bits);
+    (*pdwOut) |= (0xffffffffffffffff << bits);
 
-  return pb;
+  return pbIn;
 }
 
 

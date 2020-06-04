@@ -12,6 +12,6 @@ uint64_t    DffPopDecodeLong64(uchar  i);
 uint64_t    DffDecodeLong64(uchar  *pb);
 ulong       DffDecodeLong(uchar  *pb);
 
-uchar*  DffDecodeLong64_(uchar  *pb, int64_t  *pOut);
+uchar*  DffDecodeLong64_(uchar*  pbIn, int64_t*  pdwOut);
 
 unsigned char  pucDecodeBitArr(unsigned char *pOut, unsigned char *pIn);
