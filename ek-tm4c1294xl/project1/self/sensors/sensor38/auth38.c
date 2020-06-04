@@ -152,45 +152,86 @@ void    RunAuth38(void)
     int64_t ddw;
     uchar n;
 
+    ddw = 1;
+    memset(&out, 0, sizeof(out));
+    n = EncodeInt(ddw, (uint8_t *)&out);
+    MonitorString("\n "); MonitorCharDec(n); MonitorString(" "); MonitorLongHex(out);
+
+    ddw = 10;
+    memset(&out, 0, sizeof(out));
+    n = EncodeInt(ddw, (uint8_t *)&out);
+    MonitorString("\n "); MonitorCharDec(n); MonitorString(" "); MonitorLongHex(out);
+
     ddw = 100;
     memset(&out, 0, sizeof(out));
     n = EncodeInt(ddw, (uint8_t *)&out);
     MonitorString("\n "); MonitorCharDec(n); MonitorString(" "); MonitorLongHex(out);
 
-    ddw = 160;
-    memset(&out, 0, sizeof(out));
-    n = EncodeInt(ddw, (uint8_t *)&out);
-    MonitorString("\n "); MonitorCharDec(n); MonitorString(" "); MonitorLongHex(out);
-
-    ddw = 240;
-    memset(&out, 0, sizeof(out));
-    n = EncodeInt(ddw, (uint8_t *)&out);
-    MonitorString("\n "); MonitorCharDec(n); MonitorString(" "); MonitorLongHex(out);
-
-    ddw = 260;
+    ddw = 1000;
     memset(&out, 0, sizeof(out));
     n = EncodeInt(ddw, (uint8_t *)&out);
     MonitorString("\n "); MonitorCharDec(n); MonitorString(" "); MonitorLongHex(out);
 
 
+    ddw = -1;
+    memset(&out, 0, sizeof(out));
+    n = EncodeInt(ddw, (uint8_t *)&out);
+    MonitorString("\n "); MonitorCharDec(n); MonitorString(" "); MonitorLongHex(out);
 
+    ddw = -10;
+    memset(&out, 0, sizeof(out));
+    n = EncodeInt(ddw, (uint8_t *)&out);
+    MonitorString("\n "); MonitorCharDec(n); MonitorString(" "); MonitorLongHex(out);
+
+    ddw = -100;
+    memset(&out, 0, sizeof(out));
+    n = EncodeInt(ddw, (uint8_t *)&out);
+    MonitorString("\n "); MonitorCharDec(n); MonitorString(" "); MonitorLongHex(out);
+
+    ddw = -1000;
+    memset(&out, 0, sizeof(out));
+    n = EncodeInt(ddw, (uint8_t *)&out);
+    MonitorString("\n "); MonitorCharDec(n); MonitorString(" "); MonitorLongHex(out);
+
+
+
+    ddw = 1;
+    memset(&out, 0, sizeof(out));
+    n = DffEncode(ddw, (uint8_t *)&out);
+    MonitorString("\n "); MonitorCharDec(n); MonitorString(" "); MonitorLongHex(out);
+
+    ddw = 10;
+    memset(&out, 0, sizeof(out));
+    n = DffEncode(ddw, (uint8_t *)&out);
+    MonitorString("\n "); MonitorCharDec(n); MonitorString(" "); MonitorLongHex(out);
 
     ddw = 100;
     memset(&out, 0, sizeof(out));
     n = DffEncode(ddw, (uint8_t *)&out);
     MonitorString("\n "); MonitorCharDec(n); MonitorString(" "); MonitorLongHex(out);
 
-    ddw = 160;
+    ddw = 1000;
     memset(&out, 0, sizeof(out));
     n = DffEncode(ddw, (uint8_t *)&out);
     MonitorString("\n "); MonitorCharDec(n); MonitorString(" "); MonitorLongHex(out);
 
-    ddw = 240;
+
+    ddw = -1;
     memset(&out, 0, sizeof(out));
     n = DffEncode(ddw, (uint8_t *)&out);
     MonitorString("\n "); MonitorCharDec(n); MonitorString(" "); MonitorLongHex(out);
 
-    ddw = 260;
+    ddw = -10;
+    memset(&out, 0, sizeof(out));
+    n = DffEncode(ddw, (uint8_t *)&out);
+    MonitorString("\n "); MonitorCharDec(n); MonitorString(" "); MonitorLongHex(out);
+
+    ddw = -100;
+    memset(&out, 0, sizeof(out));
+    n = DffEncode(ddw, (uint8_t *)&out);
+    MonitorString("\n "); MonitorCharDec(n); MonitorString(" "); MonitorLongHex(out);
+
+    ddw = -1000;
     memset(&out, 0, sizeof(out));
     n = DffEncode(ddw, (uint8_t *)&out);
     MonitorString("\n "); MonitorCharDec(n); MonitorString(" "); MonitorLongHex(out);
