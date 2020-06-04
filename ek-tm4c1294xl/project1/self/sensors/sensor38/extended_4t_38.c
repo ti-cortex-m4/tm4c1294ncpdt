@@ -103,10 +103,13 @@ status   ReadEngMonTariff38_Full(uchar  ibMonRel, uchar  ibTariff)
   uchar i;
   for (i=0; i<4; i++)
   {
+    MonitorString("\n i="); MonitorCharDec(i);
+    ibIn++;
+
     uchar t;
     for (t=0; t<4; t++)
     {
-      ibIn++;
+      MonitorString("\n t="); MonitorCharDec(t);
 
       uint64_t ddw = 0;
       uchar delta = pucDecodeBitArr((uchar *) &ddw, InBuffPtr(ibIn));
@@ -117,6 +120,8 @@ status   ReadEngMonTariff38_Full(uchar  ibMonRel, uchar  ibTariff)
       uchar bStatus = (ddw % 0x100) & 0x03;
       dw >>= 3;
 
+      MonitorString("\n "); MonitorLongDec(dw); MonitorString(" "); MonitorCharDec(bStatus);
+
       if (bStatus != 0) {
         Clear();
         sprintf(szLo+1, "мес€ц -%u, %u ?", ibMonRel, bStatus);
@@ -126,6 +131,8 @@ status   ReadEngMonTariff38_Full(uchar  ibMonRel, uchar  ibTariff)
 
       if (t == ibTariff)
       {
+        MonitorString("\n ibTariff="); MonitorCharDec(ibTariff);
+
         mpdwChannelsA[i] = dw;
         mpdbChannelsC[i] = (double)mpdwChannelsA[i] / 10000;
       }  
@@ -137,32 +144,24 @@ status   ReadEngMonTariff38_Full(uchar  ibMonRel, uchar  ibTariff)
 
 
 
-status  ReadCntMonCanTariff38(uchar  ibMonth, uchar  ibTariff, uchar  bMaxLines) // на начало мес€ца
+status  ReadCntMonCanTariff38(uchar  ibMonAbs, uchar  ibTariff) // на начало мес€ца
 {
   time2 ti2 = ReadTimeCan38();
   if (ti2.fValid == 0) return ST_BADDIGITAL;
 
-  uchar ibMonRel = (bMONTHS+ti.bMonth-2-ibMonAbs) % bMONTHS;
+  MonitorString("\n ibMonAbs="); MonitorCharDec(ibMonAbs);
+  uchar ibMonRel = (bMONTHS+ti.bMonth-1-ibMonAbs) % bMONTHS; // TODO ? 2/1
+  MonitorString("\n ibMonRel="); MonitorCharDec(ibMonRel);
 
   status st = ReadEngMonTariff38_Full(ibMonRel,ibTariff);
-
-  if (st == ST_NOTPRESENTED)
-  {
-    Clear();
-    sprintf(szLo+1, "мес€ц %02u.%02u ?",ti.bMonth,ti.bYear);
-    Delay(1000);
-    return(ST_NOTPRESENTED);
-  }
 
   if (st != ST_OK) return st;
 
 
-  double dbTrans = mpdbTransCnt[ibDig];
-
   uchar i;
   for (i=0; i<4; i++)
   {
-    mpdbChannelsC[i] *= dbTrans;
+    mpdbChannelsC[i] *= mpdbTransCnt[ibDig];
     mpboChannelsA[i] = true;
   }
 
