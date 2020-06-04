@@ -21,10 +21,27 @@ extended_4t_38.c
 #include "automatic_get_time_38.h"
 #include "extended_4t_38.h"
 
+/*
+счетчики на начало мес€цев по тарифам
+ «апрос
+03.06.2020 22:29:44.414
+06 E8 B7 C4 04 00 06
+0B GET_DATA_MULTIPLE_EX
+00
+09 // A+
+02
+1E по 4 тарифам
+01 мес€ц
+02 мес€ц
+BE A6
 
+ */
 
-void    QueryEngAbsTariff38(void)
+// значени€ счетчиков на начало мес€цев
+void    QueryEngMonTariff38(uchar  ibMonRel)
 {
+  MonitorString("\n ibMonRel="); MonitorCharDec(ibMonRel);
+
   InitPush(0);
 
   PushChar(0xC0);
@@ -35,27 +52,36 @@ void    QueryEngAbsTariff38(void)
   PushChar(0x00);
   PushChar(0x06);
 
-  PushChar(0x0A); // GET_DATA_SINGLE_EX
+  PushChar(0x0B); // GET_DATA_MULTIPLE_EX
   PushChar(0x00);
 
-  PushChar(0x01); // A+
+  PushChar(0x09); // A+
+  PushChar(0x02);
+  PushChar(0x00); // обща€ энерги€
+  PushChar(ibMonRel);
+  PushChar(ibMonRel);
+
+  PushChar(0x0A); // A-
   PushChar(0x02);
   PushChar(0x00);
+  PushChar(ibMonRel);
+  PushChar(ibMonRel);
 
-  PushChar(0x02); // A-
+  PushChar(0x0B); // R+
   PushChar(0x02);
   PushChar(0x00);
+  PushChar(ibMonRel);
+  PushChar(ibMonRel);
 
-  PushChar(0x03); // R+
+  PushChar(0x0C); // R-
   PushChar(0x02);
   PushChar(0x00);
+  PushChar(ibMonRel);
+  PushChar(ibMonRel);
 
-  PushChar(0x04); // R-
-  PushChar(0x02);
-  PushChar(0x00);
-
-  Query38(250, 25);
+  Query38(250, 33);
 }
+
 
 
 status   ReadEngMonTariff38_Full(time  ti, uchar  ibTariff)
