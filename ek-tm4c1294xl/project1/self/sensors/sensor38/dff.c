@@ -53,7 +53,7 @@ uchar   DffEncode(int64_t  dwValue, uchar*  pbOut) {
 
 
 
-uint64_t    DffDecodePositive(uchar  *pbIn) {
+uint64_t    DffDecodePositive_(uchar  *pbIn) {
   uint64_t result = 0;
   int bits = 0;
   uint64_t ch;
@@ -87,9 +87,24 @@ uchar*  DffDecode(uchar  *pbIn, int64_t  *pdwOut) {
 }
 
 
+uchar*  DffDecodePositive(uchar  *pbIn, int64_t  *pdwOut) {
+  int bits = 0;
+  uint64_t ch;
 
-unsigned char  pucDecodeBitArr(unsigned char *pOut, unsigned char *pIn) {
-  unsigned char  bIn, bOut = 0;
+  do {
+    ch = (*pbIn & 0x7F);
+    (*pdwOut) += (ch << bits);
+    bits += 7;
+  }
+  while (*(pbIn++) & 0x80);
+
+  return pbIn;
+}
+
+
+
+uchar  pucDecodeBitArr(uchar *pOut, uchar *pIn) {
+  uchar  bIn, bOut = 0;
   unsigned int   boId = 0, i = 0, o = 0;
 
   for (;;) {
