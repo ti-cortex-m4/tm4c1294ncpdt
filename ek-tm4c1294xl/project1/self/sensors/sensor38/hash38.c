@@ -58,16 +58,16 @@ static const ulong crc32_tab[] = {
 
 
 
-ulong   Hash38(uchar*  password, int  password_size, ulong  random)
+ulong   Hash38(uchar*  pbPass, uint  wPassSize, ulong  dwRandom)
 {
-  ulong crc = 0xffffffff;
+  ulong dw = 0xffffffff;
 
   int i;
-  for(i=0; i<password_size; i++)
+  for(i=0; i<wPassSize; i++)
   {
-    if (password[i] == 0x00) break;
-    crc = crc32_tab[ (crc ^ password[i]) & 0xff ] ^ (crc >> 8);
+    if (pbPass[i] == 0x00) break;
+    dw = crc32_tab[ (dw ^ pbPass[i]) & 0xff ] ^ (dw >> 8);
   }
   
-  return crc ^ random ^ 0xffffffff;
+  return dw ^ dwRandom ^ 0xffffffff;
 }
