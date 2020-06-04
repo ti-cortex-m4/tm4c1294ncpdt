@@ -103,26 +103,33 @@ status   ReadEngMonTariff38_Full(uchar  ibMonRel, uchar  ibTariff)
   uchar i;
   for (i=0; i<4; i++)
   {
-    ibIn++;
+    uchar t;
+    for (t=0; t<4; t++)
+    {
+      ibIn++;
 
-    uint64_t ddw = 0;
-    uchar delta = pucDecodeBitArr((uchar *) &ddw, InBuffPtr(ibIn));
-    if (delta == 0xFF) return false;
-    ibIn += delta;
+      uint64_t ddw = 0;
+      uchar delta = pucDecodeBitArr((uchar *) &ddw, InBuffPtr(ibIn));
+      if (delta == 0xFF) return false;
+      ibIn += delta;
 
-    ulong dw = ddw % 0x100000000;
-    uchar bStatus = (ddw % 0x100) & 0x03;
-    dw >>= 3;
+      ulong dw = ddw % 0x100000000;
+      uchar bStatus = (ddw % 0x100) & 0x03;
+      dw >>= 3;
 
-    if (bStatus != 0) {
-      Clear();
-      sprintf(szLo+1, "мес€ц -%u, %u ?", ibMonRel, bStatus);
-      Delay(1000);
-      return false;
-    }
+      if (bStatus != 0) {
+        Clear();
+        sprintf(szLo+1, "мес€ц -%u, %u ?", ibMonRel, bStatus);
+        Delay(1000);
+        return ST_NOTPRESENTED;
+      }
 
-    mpdwChannelsA[i] = dw;
-    mpdbChannelsC[i] = (double)mpdwChannelsA[i] / 10000;
+      if (t == ibTariff)
+      {
+        mpdwChannelsA[i] = dw;
+        mpdbChannelsC[i] = (double)mpdwChannelsA[i] / 10000;
+      }  
+    }  
   }
 
   return ST_OK;
