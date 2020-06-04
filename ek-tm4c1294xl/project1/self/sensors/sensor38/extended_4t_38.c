@@ -57,25 +57,25 @@ void    QueryEngMonTariff38(uchar  ibMonRel)
 
   PushChar(0x09); // A+
   PushChar(0x02);
-  PushChar(0x00); // общая энергия
+  PushChar(0x1E); // энергия по 4 тарифам
   PushChar(ibMonRel);
   PushChar(ibMonRel);
 
   PushChar(0x0A); // A-
   PushChar(0x02);
-  PushChar(0x00);
+  PushChar(0x1E);
   PushChar(ibMonRel);
   PushChar(ibMonRel);
 
   PushChar(0x0B); // R+
   PushChar(0x02);
-  PushChar(0x00);
+  PushChar(0x1E);
   PushChar(ibMonRel);
   PushChar(ibMonRel);
 
   PushChar(0x0C); // R-
   PushChar(0x02);
-  PushChar(0x00);
+  PushChar(0x1E);
   PushChar(ibMonRel);
   PushChar(ibMonRel);
 
@@ -84,27 +84,45 @@ void    QueryEngMonTariff38(uchar  ibMonRel)
 
 
 
-status   ReadEngMonTariff38_Full(time  ti, uchar  ibTariff)
+status   ReadEngMonTariff38_Full(uchar  ibMonRel, uchar  ibTariff)
 {
-  uchar i;
-  for (i=0; i<bMaxLines; i++)
+  uchar r;
+  for (r=0; r<MaxRepeats(); r++)
   {
-    if (SkipLine(ibDig, i) == true) { mpdbChannelsC[i] = 0; continue; }
+    QueryEngMonTariff38(ibMonRel);
 
-    uchar r;
-    for (r=0; r<MaxRepeats(); r++)
-    {
-      QueryEngMon38(i,ti);
+    if (Input38() == SER_GOODCHECK) break;
+    if (fKey == true) return ST_BADDIGITAL;
+  }
 
-      if ((Input38() == SER_GOODCHECK) && (!NoData38())) break;
-      if (NoData38()) return ST_NOTPRESENTED;
-      if (fKey == true) return ST_BADDIGITAL;
+  if (r == MaxRepeats()) return ST_BADDIGITAL;
+  ShowPercent(70+i);
+
+  uchar ibIn = 10;
+
+  uchar i;
+  for (i=0; i<4; i++)
+  {
+    ibIn++;
+
+    uint64_t ddw = 0;
+    uchar delta = pucDecodeBitArr((uchar *) &ddw, InBuffPtr(ibIn));
+    if (delta == 0xFF) return false;
+    ibIn += delta;
+
+    ulong dw = ddw % 0x100000000;
+    uchar bStatus = (ddw % 0x100) & 0x03;
+    dw >>= 3;
+
+    if (bStatus != 0) {
+      Clear();
+      sprintf(szLo+1, "месяц -%u, %u ?", ibMonRel, bStatus);
+      Delay(1000);
+      return false;
     }
 
-    if (r == MaxRepeats()) return ST_BADDIGITAL;
-    ShowPercent(70+i);
-
-    ReadEngTariff38(i,ibTariff);
+    mpdwChannelsA[i] = dw;
+    mpdbChannelsC[i] = (double)mpdwChannelsA[i] / 10000;
   }
 
   return ST_OK;
@@ -117,19 +135,9 @@ status  ReadCntMonCanTariff38(uchar  ibMonth, uchar  ibTariff, uchar  bMaxLines)
   time2 ti2 = ReadTimeCan38();
   if (ti2.fValid == 0) return ST_BADDIGITAL;
 
-  time ti = ti2.tiValue;
-  if (ibMonth == 0)
-  {
-    ti.bMonth = 12;
-    ti.bYear--;
-  }
-  else
-  {
-    if (ibMonth+1 > ti.bMonth) ti.bYear--;
-    ti.bMonth = ibMonth;
-  }
+  uchar ibMonRel = (bMONTHS+ti.bMonth-2-ibMonAbs) % bMONTHS;
 
-  status st = ReadEngMonTariff38_Full(ti,ibTariff,bMaxLines);
+  status st = ReadEngMonTariff38_Full(ibMonRel,ibTariff);
 
   if (st == ST_NOTPRESENTED)
   {
@@ -142,13 +150,10 @@ status  ReadCntMonCanTariff38(uchar  ibMonth, uchar  ibTariff, uchar  bMaxLines)
   if (st != ST_OK) return st;
 
 
-  QueryClose38();
-
-
   double dbTrans = mpdbTransCnt[ibDig];
 
   uchar i;
-  for (i=0; i<bMaxLines; i++)
+  for (i=0; i<4; i++)
   {
     mpdbChannelsC[i] *= dbTrans;
     mpboChannelsA[i] = true;

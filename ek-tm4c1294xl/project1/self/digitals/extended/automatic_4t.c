@@ -53,6 +53,8 @@ bool    SupportedExtended4T(uchar  ibCan)
     case 36:
     case 37: return true;
 
+    case 38: return true;
+
     default: return false;
   }
 }
