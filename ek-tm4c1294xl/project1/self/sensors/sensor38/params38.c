@@ -76,6 +76,7 @@ float   cosinusDegrees(double  degrees)
 }
 
 
+
 float2  ReadParam38(void)
 {
   Clear();

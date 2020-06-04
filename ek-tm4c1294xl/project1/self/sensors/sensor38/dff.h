@@ -4,7 +4,7 @@ dff.c
 
 ------------------------------------------------------------------------------*/
 
-uchar   EncodeInt_(uchar*  send_buffer_position, int64_t  value);
+uchar   DffEncode(int64_t  value, uchar*  send_buffer_position);
 
 int EncodeInt(int64_t value, uint8_t *send_buffer_position);
 
