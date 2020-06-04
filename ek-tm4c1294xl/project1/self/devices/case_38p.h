@@ -39,13 +39,13 @@
 
     case DEV_POSTTIME1_38P:
       {
-        ulong dwSecond1 = GetSecondIndex(dwValue38);
-        ulong dwSecond2 = GetSecondIndex(tiCurr);
-
-        if (DifferentDay(GetTimeCurr38(), tiCurr))
+        if (DifferentDay(tiValue38, tiCurr))
         { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); } // даты не совпадают, коррекция невозможна
         else
         {
+          ulong dwSecond1 = GetSecondIndex(dwValue38);
+          ulong dwSecond2 = GetSecondIndex(tiCurr);
+          
           ShowDigitalDeltaTime(ibDig, dwSecond1, dwSecond2);
 
           ulong dwDelta = AbsLong(dwSecond1 - dwSecond2);

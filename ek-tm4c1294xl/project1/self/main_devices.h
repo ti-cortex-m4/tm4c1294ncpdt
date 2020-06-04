@@ -834,11 +834,29 @@ typedef enum
   DEV_ENERGY_38C        =  0x2301,
 
   DEV_START_38P         =  0x2310,
+
   DEV_PREVTIME1_38P     =  0x2311,
   DEV_TIME1_38P         =  0x2312,
   DEV_POSTTIME1_38P     =  0x2313,  
-  DEV_HEADER_38P        =  0x2314,
-  DEV_DATA_38P          =  0x2315,
+
+  DEV_PREVAUTHKEY1_38P  =  0x2314,
+  DEV_AUTHKEY1_38P      =  0x2315,
+  DEV_POSTAUTHKEY1_38P  =  0x2316,
+  DEV_PREVCORRECT_38P   =  0x2317,
+  DEV_CORRECT_38P       =  0x2318,
+
+  DEV_PREVAUTHKEY2_38P  =  0x2319,
+  DEV_AUTHKEY2_38P      =  0x2320,
+  DEV_POSTAUTHKEY2_38P  =  0x2321,
+  DEV_PREVMANAGE_38P    =  0x2322,
+  DEV_MANAGE_38P        =  0x2323,
+
+  DEV_PREVTIME2_38P     =  0x2324,
+  DEV_TIME2_38P         =  0x2325,
+  DEV_POSTTIME2_38P     =  0x2326,  
+
+  DEV_HEADER_38P        =  0x2327,
+  DEV_DATA_38P          =  0x2328,
 
 #endif
 
