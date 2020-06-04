@@ -6679,14 +6679,14 @@ void    RunDevices(void)
           }
           else if (GetCurrHouIndex() == (tiValue38.bHour*2 + tiValue38.bMinute/30))
           {
-            if (dwDelta < GetCorrectLimit()) {
+//            if (dwDelta < GetCorrectLimit()) {
               SetCorrectSecond38(dwSecond2 - dwSecond1);
               ShowLo(szCorrectYes); DelayInf();
               MakePause(DEV_PREVAUTHKEY1_38P); // коррекция времени
-            } else {
-              ShowLo(szManageYes); DelayInf();
-              MakePause(DEV_PREVAUTHKEY2_38P); // установка времени
-            }
+//            } else {
+//              ShowLo(szManageYes); DelayInf();
+//              MakePause(DEV_PREVAUTHKEY2_38P); // установка времени
+//            }
           }
           else
           { ShowLo(szCorrectBig); DelayMsg(); ErrorProfile(); } // разница времени слишком велика, коррекция невозможна
