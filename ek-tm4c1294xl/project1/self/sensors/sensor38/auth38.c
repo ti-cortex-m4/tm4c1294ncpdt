@@ -22,13 +22,9 @@ auth38.c
 #include "../../memory/mem_serial3.h"
 int EncodeInt(int64_t value, uint8_t *send_buffer_position);
 
-typedef union
-{
-  float         fdwBuff;
-  uchar         mbBuff[4];
-  ulong         dwBuff;
-  long          dwsBuff;
-} combo1;
+
+
+static ulong            dwRandom;
 
 
 
@@ -53,17 +49,17 @@ void    QueryAuthRequest38(void)
 }
 
 
-ulong   ReadAuthRequest38(void)
+void    ReadAuthRequest38(void)
 {
   uint64_t ddw = 0;
   pucDecodeBitArr((uchar *) &ddw, InBuffPtr(10+1));
 
-  return ddw % 0x100000000;
+  dwRandom = ddw % 0x100000000;
 }
 
 
 
-void    QueryAuthResponse38(ulong  random)
+void    QueryAuthResponse38(void)
 {
   uchar password[16+1];
   password[0] = '0';
@@ -71,7 +67,7 @@ void    QueryAuthResponse38(ulong  random)
 
   uchar password_size = 1;
 
-  ulong dw = Hash38(&password[0], password_size, random);
+  ulong dw = Hash38(&password[0], password_size, dwRandom);
 
 
   InitPush(0);
@@ -242,10 +238,10 @@ void    RunAuth38(void)
   QueryAuthRequest38();
   if (Input38() != SER_GOODCHECK) { MonitorString("\n error 1"); return; }
 
-  ulong dwRandom = ReadAuthRequest38();
+  ReadAuthRequest38();
   MonitorString("\n random="); MonitorLongHex(dwRandom);
 
-  QueryAuthResponse38(dwRandom);
+  QueryAuthResponse38();
   if (Input38() != SER_GOODCHECK) { MonitorString("\n error 2"); return; }
 
   uchar b = ReadAuthResponse38();
