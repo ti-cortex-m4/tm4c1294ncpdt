@@ -4,4 +4,4 @@ extended_4t_38.h
 
 ------------------------------------------------------------------------------*/
 
-status  ReadCntMonCanTariff38(uchar  ibMonth, uchar  ibTariff);
+status  ReadCntMonCanTariff38(uchar  ibMonAbs, uchar  ibTariff);
