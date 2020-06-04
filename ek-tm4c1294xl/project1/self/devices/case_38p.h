@@ -43,17 +43,53 @@
       break;
 
 
-    case DEV_PREVAUTHKEY_38P:
-      cbRepeat = MaxRepeats();
-      QueryAuthKey38();
-      SetCurr(DEV_AUTHKEY_38P);
+*/
+    case DEV_POSTTIME1_38P:
+      {
+        ulong dwSecond1 = GetSecondIndex(dwValue38);
+        ulong dwSecond2 = GetSecondIndex(tiCurr);
+
+        if (DifferentDay(GetTimeCurr38(), tiCurr))
+        { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); } // даты не совпадают, коррекция невозможна
+        else
+        {
+          ShowDigitalDeltaTime(ibDig, dwSecond1, dwSecond2);
+
+          ulong dwDelta = AbsLong(dwSecond1 - dwSecond2);
+          if (dwDelta < GetCorrectLimit()) {
+            ShowLo(szCorrectNo); DelayInf();
+            MakePause(DEV_PREVTIME2_38P); // без коррекции
+          }
+          else if (GetCurrHouIndex() == GetTimeCurrIndex38())
+          {
+            if (dwDelta < CORRECT_LIMIT_38) {
+              SetCorrectSecond38(dwSecond2 - dwSecond1);
+              ShowLo(szCorrectYes); DelayInf();
+              MakePause(DEV_PREVAUTHKEY1_38P); // коррекция времени
+            } else {
+              ShowLo(szManageYes); DelayInf();
+              MakePause(DEV_PREVAUTHKEY2_38P); // установка времени
+            }
+          }
+          else
+          { ShowLo(szCorrectBig); DelayMsg(); ErrorProfile(); } // разница времени слишком велика, коррекция невозможна
+        }
+      }
       break;
 
-    case DEV_AUTHKEY_38P:
+
+// начало коррекции времени
+    case DEV_PREVAUTHKEY1_38P:
+      cbRepeat = MaxRepeats();
+      QueryAuthKey38();
+      SetCurr(DEV_AUTHKEY1_38P);
+      break;
+
+    case DEV_AUTHKEY1_38P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
         ReadAuthKey38();
-        MakePause(DEV_POSTAUTHKEY_38P);
+        MakePause(DEV_POSTAUTHKEY1_38P);
       }
       else
       {
@@ -64,23 +100,23 @@
           cbRepeat--;
 
           QueryAuthKey38();
-          SetCurr(DEV_AUTHKEY_38P);
+          SetCurr(DEV_AUTHKEY1_38P);
         }
       }
       break;
 
 
-    case DEV_POSTAUTHKEY_38P:
+    case DEV_POSTAUTHKEY1_38P:
       cbRepeat = MaxRepeats();
       QueryAuthReq38();
-      SetCurr(DEV_AUTHREQ_38P);
+      SetCurr(DEV_AUTHREQ1_38P);
       break;
 
-    case DEV_AUTHREQ_38P:
+    case DEV_AUTHREQ1_38P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
         if (ReadAuthReq38())
-          MakePause(DEV_POSTSTART_38P);
+          MakePause(DEV_PREVCORRECT_38P);
         else
           ErrorProfile();
       }
@@ -93,45 +129,11 @@
           cbRepeat--;
 
           QueryAuthReq38();
-          SetCurr(DEV_AUTHREQ_38P);
+          SetCurr(DEV_AUTHREQ1_38P);
         }
       }
       break;
-*/
-    case DEV_POSTTIME1_38P:
-      {
-        ulong dwSecond1 = GetSecondIndex(GetTimeCurr38());
-        ulong dwSecond2 = GetSecondIndex(tiCurr);
 
-        if (DifferentDay(GetTimeCurr38(), tiCurr))
-        { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); } // даты не совпадают, коррекция невозможна
-        else
-        {
-          ShowDigitalDeltaTime(ibDig, dwSecond1, dwSecond2);
-
-          ulong dwDelta = AbsLong(dwSecond1 - dwSecond2);
-          if (dwDelta < GetCorrectLimit()) {
-            ShowLo(szCorrectNo); DelayInf();
-            MakePause(DEV_PREVINIT_38P); // без коррекции
-          }
-          else if (GetCurrHouIndex() == GetTimeCurrIndex38())
-          {
-            if (dwDelta < CORRECT_LIMIT_38) {
-              SetCorrectSecond38(dwSecond2 - dwSecond1);
-              ShowLo(szCorrectYes); DelayInf();
-              MakePause(DEV_PREVCORRECT_38P); // коррекция времени
-            } else {
-              ShowLo(szManageYes); DelayInf();
-              MakePause(DEV_PREVMANAGE_38P); // установка времени
-            }
-          }
-          else
-          { ShowLo(szCorrectBig); DelayMsg(); ErrorProfile(); } // разница времени слишком велика, коррекция невозможна
-        }
-      }
-      break;
-/*
-// начало коррекции времени
 
     case DEV_PREVCORRECT_38P:
       cbRepeat = MaxRepeats();
@@ -142,13 +144,8 @@
     case DEV_CORRECT_38P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        ReadCorrect38();
-        if (InBuff(2) == 0x05) {
-          ShowLo(szManageYes); DelayInf();
-          MakePause(DEV_PREVMANAGE_38P); // нельзя корректировать время, можно установить время
-        } else {
-          MakePause(DEV_PREVINIT_38P);
-        }
+        ReadCorrect38();        
+        MakePause(DEV_PREVTIME2_38P);
       }
       else
       {
@@ -168,6 +165,61 @@
 
 // начало установки времени
 
+    case DEV_PREVAUTHKEY2_38P:
+      cbRepeat = MaxRepeats();
+      QueryAuthKey38();
+      SetCurr(DEV_AUTHKEY2_38P);
+      break;
+
+    case DEV_AUTHKEY2_38P:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+      {
+        ReadAuthKey38();
+        MakePause(DEV_POSTAUTHKEY2_38P);
+      }
+      else
+      {
+        if (cbRepeat == 0) ErrorProfile();
+        else
+        {
+          ErrorLink();
+          cbRepeat--;
+
+          QueryAuthKey38();
+          SetCurr(DEV_AUTHKEY2_38P);
+        }
+      }
+      break;
+
+
+    case DEV_POSTAUTHKEY2_38P:
+      cbRepeat = MaxRepeats();
+      QueryAuthReq38();
+      SetCurr(DEV_AUTHREQ2_38P);
+      break;
+
+    case DEV_AUTHREQ2_38P:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+      {
+        if (ReadAuthReq38())
+          MakePause(DEV_PREVMANAGE_38P);
+        else
+          ErrorProfile();
+      }
+      else
+      {
+        if (cbRepeat == 0) ErrorProfile();
+        else
+        {
+          ErrorLink();
+          cbRepeat--;
+
+          QueryAuthReq38();
+          SetCurr(DEV_AUTHREQ2_38P);
+        }
+      }
+      break;
+
     case DEV_PREVMANAGE_38P:
       cbRepeat = MaxRepeats();
       QueryManage38();
@@ -178,7 +230,7 @@
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
         ReadManage38();
-        MakePause(DEV_PREVINIT_38P);
+        MakePause(DEV_PREVTIME2_38P);
       }
       else
       {
