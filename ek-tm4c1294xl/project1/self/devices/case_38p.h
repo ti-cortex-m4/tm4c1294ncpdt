@@ -2,14 +2,14 @@
 #ifndef SKIP_38
 
     case DEV_START_38P:
-      // if (fCurrCtrl == true)
-      //   MakePause(DEV_PREVTIME1_38P);
-      // else
+       if (fCurrCtrl == true)
+         MakePause(DEV_PREVTIME1_38P);
+       else
         MakePause(DEV_PREVTIME2_38P);    
       break;
 
-/*
-// чтение времени для коррекции времения
+
+    // чтение времени для коррекции времения
     case DEV_PREVTIME1_38P:
       cbRepeat = MaxRepeats();
       QueryTime38();
@@ -43,7 +43,7 @@
         { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); } // даты не совпадают, коррекция невозможна
         else
         {
-          ulong dwSecond1 = GetSecondIndex(dwValue38);
+          ulong dwSecond1 = GetSecondIndex(tiValue38);
           ulong dwSecond2 = GetSecondIndex(tiCurr);
           
           ShowDigitalDeltaTime(ibDig, dwSecond1, dwSecond2);
@@ -53,9 +53,9 @@
             ShowLo(szCorrectNo); DelayInf();
             MakePause(DEV_PREVTIME2_38P); // без коррекции
           }
-          else if (GetCurrHouIndex() == GetTimeCurrIndex38())
+          else if (GetCurrHouIndex() == (tiValue38.bHour*2 + tiValue38.bMinute/30))
           {
-            if (dwDelta < CORRECT_LIMIT_38) {
+            if (dwDelta < GetCorrectLimit()) {
               SetCorrectSecond38(dwSecond2 - dwSecond1);
               ShowLo(szCorrectYes); DelayInf();
               MakePause(DEV_PREVAUTHKEY1_38P); // коррекция времени
@@ -74,14 +74,14 @@
 // начало коррекции времени
     case DEV_PREVAUTHKEY1_38P:
       cbRepeat = MaxRepeats();
-      QueryAuthKey38();
+      QueryAuthRequest38();
       SetCurr(DEV_AUTHKEY1_38P);
       break;
 
     case DEV_AUTHKEY1_38P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        ReadAuthKey38();
+        ReadAuthRequest38();
         MakePause(DEV_POSTAUTHKEY1_38P);
       }
       else
@@ -92,7 +92,7 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryAuthKey38();
+          QueryAuthRequest38();
           SetCurr(DEV_AUTHKEY1_38P);
         }
       }
@@ -101,17 +101,19 @@
 
     case DEV_POSTAUTHKEY1_38P:
       cbRepeat = MaxRepeats();
-      QueryAuthReq38();
+      QueryAuthResponse38();
       SetCurr(DEV_AUTHREQ1_38P);
       break;
 
     case DEV_AUTHREQ1_38P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        if (ReadAuthReq38())
+        if (ReadAuthResponse38() == 0)
           MakePause(DEV_PREVCORRECT_38P);
-        else
+        else {
+          // show error message
           ErrorProfile();
+        }
       }
       else
       {
@@ -121,7 +123,7 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryAuthReq38();
+          QueryAuthResponse38();
           SetCurr(DEV_AUTHREQ1_38P);
         }
       }
@@ -137,8 +139,9 @@
     case DEV_CORRECT_38P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        ReadCorrect38();        
-        MakePause(DEV_PREVTIME2_38P);
+        //ReadCorrect38();
+        DoneProfile();
+//        MakePause();
       }
       else
       {
@@ -159,11 +162,12 @@
 // начало установки времени
 
     case DEV_PREVAUTHKEY2_38P:
-      cbRepeat = MaxRepeats();
-      QueryAuthKey38();
-      SetCurr(DEV_AUTHKEY2_38P);
+      ErrorProfile();
+//      cbRepeat = MaxRepeats();
+//      QueryAuthKey38();
+//      SetCurr(DEV_AUTHKEY2_38P);
       break;
-
+/*
     case DEV_AUTHKEY2_38P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
@@ -223,7 +227,7 @@
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
         ReadManage38();
-        MakePause(DEV_PREVTIME2_38P);
+        MakePause();
       }
       else
       {
@@ -238,9 +242,9 @@
         }
       }
       break;
-
-// конец установки времени
 */
+// конец установки времени
+
 // чтение времени для чтения профилей
     case DEV_PREVTIME2_38P:
       cbRepeat = MaxRepeats();
@@ -271,13 +275,14 @@
 
 
     case DEV_POSTTIME2_38P:
-      InitHeader38();
-
-      cbRepeat = MaxRepeats();
-      QueryHeader38();
-      SetCurr(DEV_HEADER_38P);
+      DoneProfile();
+//      InitHeader38();
+//
+//      cbRepeat = MaxRepeats();
+//      QueryHeader38();
+//      SetCurr(DEV_HEADER_38P);
       break;
-
+/*
     case DEV_HEADER_38P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
@@ -306,5 +311,5 @@
       QueryHeader38();
       SetCurr(DEV_HEADER_38P);
       break;
-
+*/
 #endif
