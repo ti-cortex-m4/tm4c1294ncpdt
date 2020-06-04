@@ -6899,14 +6899,13 @@ void    RunDevices(void)
 
 
     case DEV_POSTTIME2_38P:
-      DoneProfile();
-//      InitHeader38();
-//
-//      cbRepeat = MaxRepeats();
-//      QueryHeader38();
-//      SetCurr(DEV_HEADER_38P);
+      InitHeader38();
+
+      cbRepeat = MaxRepeats();
+      QueryHeader38();
+      SetCurr(DEV_HEADER_38P);
       break;
-/*
+
     case DEV_HEADER_38P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
@@ -6935,7 +6934,7 @@ void    RunDevices(void)
       QueryHeader38();
       SetCurr(DEV_HEADER_38P);
       break;
-*/
+
 #endif
   }
 

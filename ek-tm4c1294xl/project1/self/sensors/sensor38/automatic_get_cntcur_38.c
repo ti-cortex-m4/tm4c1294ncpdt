@@ -23,7 +23,7 @@ automatic_get_cntcur_38.c
 #include "../../time/calendar.h"
 #include "dff.h"
 #include "profile38.h"
-uint64_t DffDecodeLong64(uchar  *pb);
+uint64_t DffDecodePositive(uchar  *pb);
 void    MonitorOpen(uchar  ibPrt);
 
 
