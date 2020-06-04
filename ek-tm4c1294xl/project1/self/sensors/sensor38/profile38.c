@@ -263,16 +263,16 @@ bool    ReadData38(void)
     dw -= (wProfile38 + h);
     time tiVirtual = HouIndexToDate(dw);
 
-    bool different = DifferentDateTime(tiVirtual,mpPrf38[h].ti);
+    bool difference = DifferentDateTime(tiVirtual,mpPrf38[h].ti);
 
 #ifdef MONITOR_38
     MonitorString(" vrt.="); MonitorTime(tiVirtual);
     MonitorString(" act.="); MonitorTime(mpPrf38[h].ti);
-    MonitorBool(different);
+    MonitorBool(difference);
     MonitorString(" #"); MonitorCharDec(mpPrf38[h].bStatus); MonitorString(" ");
 #endif
 
-    if ((different == true) && (mpPrf38[h].bStatus == 2))
+    if ((difference == true) && (mpPrf38[h].bStatus == 2))
       tiDig = tiVirtual;
     else if ((mpPrf38[h].ti.bMinute % 30 != 0) && (mpPrf38[h].bStatus == 0))
       tiDig = tiVirtual;
