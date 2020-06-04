@@ -15,11 +15,47 @@ extended_4t_38.c
 #include "../../serial/ports_devices.h"
 #include "../../devices/devices.h"
 #include "../../digitals/digitals.h"
-#include "../automatic1.h"
-#include "io38.h"
 #include "device38.h"
+#include "io38.h"
+#include "dff.h"
+#include "automatic_get_time_38.h"
 #include "extended_4t_38.h"
 
+
+
+void    QueryEngAbsTariff38(void)
+{
+  InitPush(0);
+
+  PushChar(0xC0);
+  PushChar(0x06);
+
+  PushAddress38();
+
+  PushChar(0x00);
+  PushChar(0x06);
+
+  PushChar(0x0A); // GET_DATA_SINGLE_EX
+  PushChar(0x00);
+
+  PushChar(0x01); // A+
+  PushChar(0x02);
+  PushChar(0x00);
+
+  PushChar(0x02); // A-
+  PushChar(0x02);
+  PushChar(0x00);
+
+  PushChar(0x03); // R+
+  PushChar(0x02);
+  PushChar(0x00);
+
+  PushChar(0x04); // R-
+  PushChar(0x02);
+  PushChar(0x00);
+
+  Query38(250, 25);
+}
 
 
 status   ReadEngMonTariff38_Full(time  ti, uchar  ibTariff)
