@@ -25,7 +25,7 @@ int EncodeInt(int64_t value, uint8_t *send_buffer_position) {
   return num;
 }
 
-uchar   EncodeInt_(uchar*  send_buffer_position, int64_t  value) {
+uchar   DffEncode(int64_t  dwValue, uchar*  pbOut) {
   int num = 0; // число записанных байт (лбф + 7 бит)
   int bits = 0;
   // char ch;
@@ -33,7 +33,7 @@ uchar   EncodeInt_(uchar*  send_buffer_position, int64_t  value) {
   while (true) //условие остановки кодирования: оставшиеся биты и последний записанный либо нули либо едини
   {
     MonitorString("\n ");
-    int64_t new = value >> (bits - 1);
+    int64_t new = dwValue >> (bits - 1);
 //    UARTprintf("%X ", new % 0x100000000);
 
     bool f1 = (new != -1);
@@ -53,17 +53,17 @@ uchar   EncodeInt_(uchar*  send_buffer_position, int64_t  value) {
     //   send_buffer_position -= num;
     //   return 1;
     // }
-    uchar ch = (uchar)(value >> bits); // следующие 7 бит
-    MonitorString(" x="); MonitorCharHex(ch);
+    uchar ch = (uchar)(dwValue >> bits); // следующие 7 бит
+    MonitorString("\n x="); MonitorCharHex(ch);
 
-    *send_buffer_position++ = ch | 0x80; // запись с флагом lbf
+    *pbOut++ = ch | 0x80; // запись с флагом lbf
     num++; //записали очередные 7 бит
     bits += 7;
   }
 
-  *(send_buffer_position - 1) &= 0x7F; //убрать флаг у последнего байта
+  *(pbOut - 1) &= 0x7F; //убрать флаг у последнего байта
   MonitorString("\n num="); MonitorCharHex(num);
-   return num;
+  return num;
 }
 
 

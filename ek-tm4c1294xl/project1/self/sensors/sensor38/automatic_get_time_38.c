@@ -19,6 +19,7 @@ automatic_get_time_38.c
 
 void    RunProfile38(void);
 void    RunAuth38(void);
+void    MakeExtended4T(void);
 #include "../../serial/monitor.h"
 void    MonitorOpen(uchar  ibPrt);
 
@@ -28,7 +29,7 @@ time2   ReadTimeCan38(void)
 {
   MonitorOpen(0);
   Delay(500);
-  RunProfile38(); // RunAuthorization38();
+  RunAuth38(); // MakeExtended4T(); //RunAuth38(); // RunProfile38();
 
 
 

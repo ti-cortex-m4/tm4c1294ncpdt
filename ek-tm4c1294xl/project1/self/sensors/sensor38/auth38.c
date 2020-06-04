@@ -148,25 +148,52 @@ uchar   ReadAuthResponse38(void)
 
 void    RunAuth38(void)
 {
-  ulong out;
-  memset(&out, 0, sizeof(out));
+    ulong out;
+    int64_t ddw;
+    uchar n;
+
+    ddw = 100;
+    memset(&out, 0, sizeof(out));
+    n = EncodeInt(ddw, (uint8_t *)&out);
+    MonitorString("\n "); MonitorCharDec(n); MonitorString(" "); MonitorLongHex(out);
+
+    ddw = 160;
+    memset(&out, 0, sizeof(out));
+    n = EncodeInt(ddw, (uint8_t *)&out);
+    MonitorString("\n "); MonitorCharDec(n); MonitorString(" "); MonitorLongHex(out);
+
+    ddw = 240;
+    memset(&out, 0, sizeof(out));
+    n = EncodeInt(ddw, (uint8_t *)&out);
+    MonitorString("\n "); MonitorCharDec(n); MonitorString(" "); MonitorLongHex(out);
+
+    ddw = 260;
+    memset(&out, 0, sizeof(out));
+    n = EncodeInt(ddw, (uint8_t *)&out);
+    MonitorString("\n "); MonitorCharDec(n); MonitorString(" "); MonitorLongHex(out);
 
 
-  int64_t value = 100;
-  int n = EncodeInt(value, (uint8_t *)&out);
-  MonitorString("\n "); MonitorLongHex(out);
 
-  value = 160;
-  n = EncodeInt(value, (uint8_t *)&out);
-  MonitorString("\n "); MonitorLongHex(out);
 
-  value = 240;
-  n = EncodeInt(value, (uint8_t *)&out);
-  MonitorString("\n "); MonitorLongHex(out);
+    ddw = 100;
+    memset(&out, 0, sizeof(out));
+    n = DffEncode(ddw, (uint8_t *)&out);
+    MonitorString("\n "); MonitorCharDec(n); MonitorString(" "); MonitorLongHex(out);
 
-  value = 260;
-  n = EncodeInt(value, (uint8_t *)&out);
-  MonitorString("\n "); MonitorLongHex(out);
+    ddw = 160;
+    memset(&out, 0, sizeof(out));
+    n = DffEncode(ddw, (uint8_t *)&out);
+    MonitorString("\n "); MonitorCharDec(n); MonitorString(" "); MonitorLongHex(out);
+
+    ddw = 240;
+    memset(&out, 0, sizeof(out));
+    n = DffEncode(ddw, (uint8_t *)&out);
+    MonitorString("\n "); MonitorCharDec(n); MonitorString(" "); MonitorLongHex(out);
+
+    ddw = 260;
+    memset(&out, 0, sizeof(out));
+    n = DffEncode(ddw, (uint8_t *)&out);
+    MonitorString("\n "); MonitorCharDec(n); MonitorString(" "); MonitorLongHex(out);
 
 /*
   uchar in[4];
