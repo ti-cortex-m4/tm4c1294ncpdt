@@ -21,7 +21,7 @@ automatic_get_cntcur_38.c
 //#include "../../memory/mem_serial3.h"
 #include "../../serial/monitor.h"
 #include "../../time/calendar.h"
-#include "bits2.h"
+#include "dff.h"
 #include "profile38.h"
 uint64_t DffDecodeLong64(uchar  *pb);
 void    MonitorOpen(uchar  ibPrt);

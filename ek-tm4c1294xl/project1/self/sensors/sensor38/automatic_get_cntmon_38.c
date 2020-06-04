@@ -15,7 +15,6 @@ automatic_get_cntmon_38.c
 #include "device38.h"
 #include "io38.h"
 #include "dff.h"
-#include "bits2.h"
 #include "automatic_get_time_38.h"
 #include "automatic_get_cntmon_38.h"
 

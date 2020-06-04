@@ -12,7 +12,7 @@ authorization38.c
 #include "../../serial/ports2.h"
 #include "../../serial/monitor.h"
 #include "io38.h"
-#include "bits2.h"
+#include "dff.h"
 #include "device38.h"
 #include "hash38.h"
 #include "authorization38.h"

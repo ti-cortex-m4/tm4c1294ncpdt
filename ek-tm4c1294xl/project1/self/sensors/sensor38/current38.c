@@ -15,7 +15,7 @@ current38.c
 #include "../../devices/devices.h"
 #include "../../digitals/digitals.h"
 #include "../../digitals/current/current_run.h"
-#include "bits2.h"
+#include "dff.h"
 #include "current38.h"
 
 
