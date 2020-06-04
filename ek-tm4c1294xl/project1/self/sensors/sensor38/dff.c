@@ -32,7 +32,7 @@ uchar   DffEncode(int64_t  dwValue, uchar*  pbOut) {
 
   while (true) //условие остановки кодирования: оставшиеся биты и последний записанный либо нули либо едини
   {
-    MonitorString("\n ");
+//    MonitorString("\n ");
     int64_t new = dwValue >> (bits - 1);
 //    UARTprintf("%X ", new % 0x100000000);
 
@@ -40,21 +40,14 @@ uchar   DffEncode(int64_t  dwValue, uchar*  pbOut) {
     bool f2 = (new != 0);
     bool f3 = (num == 0);
     bool f = ((f1 && f2) || f3);
-    MonitorBool(f1);
-    MonitorBool(f2);
-    MonitorBool(f3);
-    MonitorBool(f);
-
+//    MonitorBool(f1);
+//    MonitorBool(f2);
+//    MonitorBool(f3);
+//    MonitorBool(f);
     if (f == false) break;
 
-//    MonitorString("\n a="); MonitorIntHex(value >> (bits - 1));
-    // if (send_buffer_position > send_buffer + PACKETMAXSIZE) // если вышли за пределы пакета отменить операцию
-    // {
-    //   send_buffer_position -= num;
-    //   return 1;
-    // }
-    uchar ch = (uchar)(dwValue >> bits); // следующие 7 бит
-    MonitorString("\n x="); MonitorCharHex(ch);
+    char ch = (char)(dwValue >> bits); // следующие 7 бит
+//    MonitorString("\n x="); MonitorCharHex(ch);
 
     *pbOut++ = ch | 0x80; // запись с флагом lbf
     num++; //записали очередные 7 бит
@@ -62,7 +55,7 @@ uchar   DffEncode(int64_t  dwValue, uchar*  pbOut) {
   }
 
   *(pbOut - 1) &= 0x7F; //убрать флаг у последнего байта
-  MonitorString("\n num="); MonitorCharHex(num);
+//  MonitorString("\n num="); MonitorCharHex(num);
   return num;
 }
 
@@ -92,16 +85,16 @@ uint64_t DffDecodeLong64(uchar  *pb) {
 
 uchar*      DffDecode(uchar  *pbIn, int64_t  *pdwOut) {
   int bits = 0;
-  uint64_t ddw;
+  uint64_t ch;
 
   do {
-    ddw = (*pbIn & 0x7F);
-    (*pdwOut) += (ddw << bits);
+    ch = (*pbIn & 0x7F);
+    (*pdwOut) += (ch << bits);
     bits += 7;
   }
   while (*(pbIn++) & 0x80);
 
-  if (ddw >> 6)
+  if (ch >> 6)
     (*pdwOut) |= (0xffffffffffffffff << bits);
 
   return pbIn;
