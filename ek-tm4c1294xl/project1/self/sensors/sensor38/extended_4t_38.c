@@ -118,7 +118,7 @@ status   ReadEngMonTariff38_Full(uchar  ibMonRel, uchar  ibTariff)
 
       uint64_t ddw = 0;
       uchar delta = pucDecodeBitArr((uchar *) &ddw, InBuffPtr(ibIn));
-      if (delta == 0xFF) return false;
+      if (delta == 0xFF) return ST_BADDIGITAL;
       ibIn += delta;
 
       ulong dw = ddw % 0x100000000;

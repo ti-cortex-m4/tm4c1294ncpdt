@@ -20,7 +20,10 @@ params34.c
 #include "params38.h"
 
 
+
 #define M_PI        3.14159265358979323846
+
+
 
 static float        mpeValues[3*7];
 
@@ -67,7 +70,7 @@ void    QueryParams38(void)
 
 
 
-float   convert(double  degrees)
+float   cosinusDegrees(double  degrees)
 {
   return cos(M_PI*degrees/180);
 }
@@ -83,25 +86,18 @@ float2  ReadParam38(void)
     QueryParams38();
     if (Input38() != SER_GOODCHECK) return GetFloat2Error();
 
-//    uchar ibIn = 10;
     uchar* pbIn = InBuffPtr(10);
 
     uchar j;
     for (j=0; j<7; j++)
     {
-//      ibIn++;
       *(pbIn++);
 
       uchar i;
       for (i=0; i<3; i++)
       {
-//        uint64_t ddw = 0;
-//        uchar delta = pucDecodeBitArr((uchar *) &ddw, InBuffPtr(ibIn));
-//        if (delta == 0xFF) return GetFloat2Error();
-//        ibIn += delta;
-
         int64_t ddw = 0;
-        pbIn = DffDecodeLong64_(pbIn, &ddw);
+        pbIn = DffDecode(pbIn, &ddw);
 
         mpeValues[j*3+i] = ddw % 0x100000000;
       }
@@ -136,9 +132,9 @@ float2  ReadParam38(void)
     case PAR_F2 : return GetFloat2(mpeValues[16]/100, true);
     case PAR_F3 : return GetFloat2(mpeValues[17]/100, true);
 
-    case PAR_C1 : return GetFloat2(convert(mpeValues[18]/10), true);
-    case PAR_C2 : return GetFloat2(convert(mpeValues[19]/10), true);
-    case PAR_C3 : return GetFloat2(convert(mpeValues[20]/10), true);
+    case PAR_C1 : return GetFloat2(cosinusDegrees(mpeValues[18]/10), true);
+    case PAR_C2 : return GetFloat2(cosinusDegrees(mpeValues[19]/10), true);
+    case PAR_C3 : return GetFloat2(cosinusDegrees(mpeValues[20]/10), true);
 
     default: return GetFloat2Error();
   }
