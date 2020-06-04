@@ -13,6 +13,7 @@ extended_4t_38.c
 #include "../../time/timedate.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports_devices.h"
+#include "../../serial/ports2.h"
 #include "../../devices/devices.h"
 #include "../../digitals/digitals.h"
 #include "device38.h"
@@ -20,6 +21,10 @@ extended_4t_38.c
 #include "dff.h"
 #include "automatic_get_time_38.h"
 #include "extended_4t_38.h"
+
+
+
+#include "../../serial/monitor.h"
 
 /*
 счетчики на начало мес€цев по тарифам
@@ -96,7 +101,7 @@ status   ReadEngMonTariff38_Full(uchar  ibMonRel, uchar  ibTariff)
   }
 
   if (r == MaxRepeats()) return ST_BADDIGITAL;
-  ShowPercent(70+i);
+  ShowPercent(70+ibTariff);
 
   uchar ibIn = 10;
 
@@ -148,6 +153,7 @@ status  ReadCntMonCanTariff38(uchar  ibMonAbs, uchar  ibTariff) // на начало мес
 {
   time2 ti2 = ReadTimeCan38();
   if (ti2.fValid == 0) return ST_BADDIGITAL;
+  time ti = ti2.tiValue;
 
   MonitorString("\n ibMonAbs="); MonitorCharDec(ibMonAbs);
   uchar ibMonRel = (bMONTHS+ti.bMonth-1-ibMonAbs) % bMONTHS; // TODO ? 2/1
