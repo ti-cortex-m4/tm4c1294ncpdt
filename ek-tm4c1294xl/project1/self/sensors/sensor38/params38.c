@@ -15,7 +15,7 @@ params34.c
 #include "../../time/delay.h"
 #include "io38.h"
 #include "dff.h"
-#include "bits2.h"
+#include "dff.h"
 #include "device38.h"
 #include "params38.h"
 

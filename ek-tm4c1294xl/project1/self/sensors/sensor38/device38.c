@@ -7,6 +7,7 @@ device38.c
 #include "../../main.h"
 #include "../../memory/mem_digitals.h"
 #include "../../serial/ports.h"
+#include "../../serial/ports2.h"
 #include "io38.h"
 #include "dff.h"
 #include "device38.h"
@@ -15,8 +16,6 @@ device38.c
 
 #include "../../time/calendar.h"
 #include "../../serial/monitor.h"
-#include "../../memory/mem_serial3.h"
-uint DFF_Decoder(uchar  *pbData, uchar bS);
 
 
 
@@ -62,11 +61,14 @@ time    LongToTime38(ulong  dw)
 
 time    ReadTime38(void)
 {
-  uint w = DFF_Decoder(&mpbInBuff3[11], 0); // TODO
+//  uint w = DFF_Decoder(&mpbInBuff3[11], 0); // TODO
+  uint64_t ddw = DffDecodeLong64(InBuffPtr(11)); // TODO
 
-  MonitorIn();
-  InitPop(11);
-  ulong dw = PopLongLtl();
+  ulong dw = ddw % 0x100000000;
+
+//  MonitorIn();
+//  InitPop(11);
+//  ulong dw = PopLongLtl();
 
   return LongToTime38(dw);
 }
@@ -110,7 +112,7 @@ void    QueryEngAbs38(void)
 
 uint64_t ReadEng38(uchar  ibInBuff)
 {
-  uint64_t ddw = DffDecodeLong64(&mpbInBuff3[ibInBuff]); // TODO
+  uint64_t ddw = DffDecodeLong64(InBuffPtr(ibInBuff)); // TODO
 
   ulong dw = ddw % 0x100000000;
   MonitorString("\n"); MonitorLongHex(dw);
