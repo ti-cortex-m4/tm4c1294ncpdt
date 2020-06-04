@@ -90,7 +90,7 @@ uint64_t DffDecodeLong64(uchar  *pb) {
 
 
 
-uchar*      DffDecodeLong64_(uchar*  pbIn, int64_t*  pdwOut) {
+uchar*      DffDecode(uchar  *pbIn, int64_t  *pdwOut) {
   int bits = 0;
   uint64_t ddw;
 
