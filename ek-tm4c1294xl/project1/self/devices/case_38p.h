@@ -2,13 +2,13 @@
 #ifndef SKIP_38
 
     case DEV_START_38P:
-      if (fCurrCtrl == true)
-        MakePause(DEV_PREVTIME1_38P);
-      else
+      // if (fCurrCtrl == true)
+      //   MakePause(DEV_PREVTIME1_38P);
+      // else
         MakePause(DEV_PREVTIME2_38P);    
       break;
 
-
+/*
 // чтение времени для коррекции времения
     case DEV_PREVTIME1_38P:
       cbRepeat = MaxRepeats();
@@ -37,13 +37,6 @@
       }
       break;
 
-/*
-    case DEV_START_38P:
-      MakePause(DEV_PREVAUTHKEY_38P);
-      break;
-
-
-*/
     case DEV_POSTTIME1_38P:
       {
         ulong dwSecond1 = GetSecondIndex(dwValue38);
