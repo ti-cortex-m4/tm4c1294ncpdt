@@ -236,48 +236,20 @@ void    RunAuth38(void)
     n = DffEncode(ddw, (uint8_t *)&out);
     MonitorString("\n "); MonitorCharDec(n); MonitorString(" "); MonitorLongHex(out);
 
-/*
-  uchar in[4];
-  uchar out[4];
-  memset(&in, 0, sizeof(in));
-  memset(&out, 0, sizeof(out));
-  in[0] = 0x98;
-  in[1] = 0x09;
 
-  uint64_t ddw1 = 0;
-  DffDecodeLong64_(&in[0], &ddw1);
 
-  uint64_t ddw2 = 0;
-  pucDecodeBitArr((uchar *) &ddw2, &in[0]);
 
-  MonitorString("\n a="); MonitorLongHex(ddw1 % 0x100000000);
-  MonitorString("\n b="); MonitorLongHex(ddw2 % 0x100000000);
-
-  ulong dwOut = 0;
-  int64_t value = ddw1 % 0x100000000;
-  EncodeInt((uchar *)&dwOut, value);
-  MonitorString("\n out="); MonitorLongHex(dwOut);
-*/
   QueryAuthRequest38();
   if (Input38() != SER_GOODCHECK) { MonitorString("\n error 1"); return; }
-/*
-  //C6 89 80 BB 07
-  mpbInBuff3[11] = 0xC6;
-  mpbInBuff3[12] = 0x89;
-  mpbInBuff3[13] = 0x80;
-  mpbInBuff3[14] = 0xBB;
-  mpbInBuff3[15] = 0x07;
-*/
 
-  ulong random = ReadAuthRequest38();
-  MonitorString("\n random="); MonitorLongHex(random);
+  ulong dwRandom = ReadAuthRequest38();
+  MonitorString("\n random="); MonitorLongHex(dwRandom);
 
-  QueryAuthResponse38(random);
+  QueryAuthResponse38(dwRandom);
   if (Input38() != SER_GOODCHECK) { MonitorString("\n error 2"); return; }
 
   uchar b = ReadAuthResponse38();
   MonitorString("authorization="); MonitorCharDec(b);
-
 }
 
 #endif
