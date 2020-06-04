@@ -18,7 +18,7 @@ automatic_get_time_38.c
 
 
 void    RunProfile38(void);
-void    RunAuthorization38(void);
+void    RunAuth38(void);
 #include "../../serial/monitor.h"
 void    MonitorOpen(uchar  ibPrt);
 

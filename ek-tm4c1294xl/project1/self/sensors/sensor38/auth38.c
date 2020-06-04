@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-authorization38.c
+auth38.c
 
 
 ------------------------------------------------------------------------------*/
@@ -15,7 +15,7 @@ authorization38.c
 #include "dff.h"
 #include "device38.h"
 #include "hash38.h"
-#include "authorization38.h"
+#include "auth38.h"
 
 
 
@@ -32,7 +32,7 @@ typedef union
 
 
 
-void    QueryAuthorizationRequest38(void)
+void    QueryAuthRequest38(void)
 {
   InitPush(0);
 
@@ -53,7 +53,7 @@ void    QueryAuthorizationRequest38(void)
 }
 
 
-ulong   ReadAuthorizationRequest38(void)
+ulong   ReadAuthRequest38(void)
 {
   uint64_t ddw = 0;
   pucDecodeBitArr((uchar *) &ddw, InBuffPtr(10+1));
@@ -63,7 +63,7 @@ ulong   ReadAuthorizationRequest38(void)
 
 
 
-void    QueryAuthorizationResponse38(ulong  random)
+void    QueryAuthResponse38(ulong  random)
 {
   uchar password[16+1];
   password[0] = '0';
@@ -137,7 +137,7 @@ void    QueryAuthorizationResponse38(ulong  random)
 }
 
 
-uchar   ReadAuthorizationResponse38(void)
+uchar   ReadAuthResponse38(void)
 {
   return InBuff(11);
 }
@@ -146,7 +146,7 @@ uchar   ReadAuthorizationResponse38(void)
 
 #ifdef MONITOR_38
 
-void    RunAuthorization38(void)
+void    RunAuth38(void)
 {
   ulong out;
   memset(&out, 0, sizeof(out));
@@ -190,7 +190,7 @@ void    RunAuthorization38(void)
   EncodeInt((uchar *)&dwOut, value);
   MonitorString("\n out="); MonitorLongHex(dwOut);
 */
-  QueryAuthorizationRequest38();
+  QueryAuthRequest38();
   if (Input38() != SER_GOODCHECK) { MonitorString("\n error 1"); return; }
 /*
   //C6 89 80 BB 07
@@ -201,13 +201,13 @@ void    RunAuthorization38(void)
   mpbInBuff3[15] = 0x07;
 */
 
-  ulong random = ReadAuthorizationRequest38();
+  ulong random = ReadAuthRequest38();
   MonitorString("\n random="); MonitorLongHex(random);
 
-  QueryAuthorizationResponse38(random);
+  QueryAuthResponse38(random);
   if (Input38() != SER_GOODCHECK) { MonitorString("\n error 2"); return; }
 
-  uchar b = ReadAuthorizationResponse38();
+  uchar b = ReadAuthResponse38();
   MonitorString("authorization="); MonitorCharDec(b);
 
 }
