@@ -9,6 +9,7 @@
       break;
 
 
+// чтение времени для коррекции времения
     case DEV_PREVTIME1_38P:
       cbRepeat = MaxRepeats();
       QueryTime38();
@@ -129,7 +130,7 @@
         }
       }
       break;
-
+/*
 // начало коррекции времени
 
     case DEV_PREVCORRECT_38P:
@@ -194,8 +195,8 @@
       break;
 
 // конец установки времени
-
 */
+// чтение времени для чтения профилей
     case DEV_PREVTIME2_38P:
       cbRepeat = MaxRepeats();
       QueryTime38();
