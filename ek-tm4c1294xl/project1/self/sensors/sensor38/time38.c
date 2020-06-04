@@ -45,7 +45,7 @@ void    QueryCorrect38(void)
   PushChar(0x00);
   PushChar(0x06);
 
-  PushChar(0x07);  // PERFORM_ACTION
+  PushChar(0x07); // PERFORM_ACTION
   PushChar(0x00);
 
   PushChar(0x0F); // выполнить коррекцию времени
