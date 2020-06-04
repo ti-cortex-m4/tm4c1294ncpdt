@@ -56,7 +56,7 @@ time    LongToTime38(ulong  dw)
 time    ReadTime38(void)
 {
 //  uint w = DFF_Decoder(&mpbInBuff3[11], 0); // TODO
-  uint64_t ddw = DffDecodePositive(InBuffPtr(11)); // TODO
+  uint64_t ddw = DffDecodePositive_(InBuffPtr(11)); // TODO
 
   ulong dw = ddw % 0x100000000;
 
@@ -106,7 +106,7 @@ void    QueryEngAbs38(void)
 
 uint64_t ReadEng38(uchar  ibInBuff)
 {
-  uint64_t ddw = DffDecodePositive(InBuffPtr(ibInBuff)); // TODO
+  uint64_t ddw = DffDecodePositive_(InBuffPtr(ibInBuff)); // TODO
 
   ulong dw = ddw % 0x100000000;
   MonitorString("\n"); MonitorLongHex(dw);
