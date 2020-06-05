@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
-hash38.h
+crc38.h
 
 
 ------------------------------------------------------------------------------*/
 
-ulong   Hash38(uchar*  pbPass, uint  wPassSize, ulong  dwRandom);
+ulong   Crc38(uchar*  pbPass, uint  wPassSize, ulong  dwRandom);

@@ -15,16 +15,12 @@ auth38.c
 #include "io38.h"
 #include "dff.h"
 #include "device38.h"
-#include "hash38.h"
+#include "crc38.h"
 #include "auth38.h"
 
 
 
 extern int usprintf(char * restrict s, const char * restrict format, ...);
-
-
-
-int EncodeInt(int64_t value, uint8_t *send_buffer_position);
 
 
 
@@ -77,7 +73,7 @@ static uchar mbPass[10*2];
 //
 //  uchar password_size = 1;
 
-  ulong dw = Hash38(&mbPass[0], bPassSize, dwRandom);
+  ulong dw = Crc38(&mbPass[0], bPassSize, dwRandom);
 
 
   InitPush(0);
