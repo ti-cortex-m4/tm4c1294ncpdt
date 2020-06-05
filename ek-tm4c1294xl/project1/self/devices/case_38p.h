@@ -140,8 +140,7 @@
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
         //ReadCorrect38();
-        DoneProfile();
-//        MakePause();
+        MakePause(DEV_PREVTIME2_38P);
       }
       else
       {

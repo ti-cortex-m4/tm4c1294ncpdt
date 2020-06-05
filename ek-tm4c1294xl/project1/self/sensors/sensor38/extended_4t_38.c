@@ -129,7 +129,7 @@ status   ReadEngMonTariff38_Full(uchar  ibMonRel, uchar  ibTariff)
 
       if (bStatus != 0) {
         Clear();
-        sprintf(szLo+1, "мес€ц -%u, %u ?", ibMonRel, bStatus);
+        sprintf(szLo+1, "мес€ц -%u (%u) ?", ibMonRel, bStatus);
         Delay(1000);
         return ST_NOTPRESENTED;
       }

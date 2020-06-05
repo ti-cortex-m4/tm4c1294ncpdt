@@ -53,22 +53,6 @@ uchar   DffEncode(int64_t  dwValue, uchar*  pbOut) {
 
 
 
-uint64_t    DffDecodePositive_(uchar  *pbIn) {
-  uint64_t result = 0;
-  int bits = 0;
-  uint64_t ch;
-
-  do {
-    ch = (*pbIn & 0x7F);
-    result += (ch << bits);
-    bits += 7;
-  }
-  while (*(pbIn++) & 0x80);
-
-  return result;
-}
-
-
 uchar*  DffDecode(uchar  *pbIn, int64_t  *pdwOut) {
   int bits = 0;
   uint64_t ch;
