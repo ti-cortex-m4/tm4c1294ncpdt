@@ -27,10 +27,9 @@ void    MonitorOpen(uchar  ibPrt);
 
 time2   ReadTimeCan38(void)
 {
-
   MonitorOpen(0);
   Delay(500);
-  RunProfile38(); // MakeExtended4T(); //RunAuth38(); // RunProfile38();
+  RunAuth38(); // MakeExtended4T(); //RunAuth38(); // RunProfile38();
 
 
 

@@ -5,6 +5,7 @@ auth38.c
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
+#include "../../memory/mem_digitals.h"
 #include "../../time/delay.h"
 #include "../../serial/ports_stack.h"
 #include "../../serial/ports_devices.h"
@@ -16,6 +17,10 @@ auth38.c
 #include "device38.h"
 #include "hash38.h"
 #include "auth38.h"
+
+
+
+extern int usprintf(char * restrict s, const char * restrict format, ...);
 
 
 
@@ -61,13 +66,19 @@ void    ReadAuthRequest38(void)
 
 void    QueryAuthResponse38(void)
 {
-  uchar password[16+1];
-  password[0] = '0';
-  password[1] = 0;
+static uchar mbPass[10*2];
 
-  uchar password_size = 1;
+  memset(&mbPass, 0, sizeof(mbPass));
+  uchar bPassSize = usprintf(mbPass, "%u" ,mpdwAddress2[diCurr.bAddress-1]);
 
-  ulong dw = Hash38(&password[0], password_size, dwRandom);
+//
+//  uchar password[16+1];
+//  password[0] = '0';
+//  password[1] = 0;
+//
+//  uchar password_size = 1;
+
+  ulong dw = Hash38(&mbPass[0], bPassSize, dwRandom);
 
 
   InitPush(0);
@@ -85,7 +96,7 @@ void    QueryAuthResponse38(void)
   PushChar(1);
 
   int n = EncodeInt(dw, OutBuffPtr(11));
-  MonitorString("n="); MonitorCharDec(n);
+//  MonitorString("n="); MonitorCharDec(n);
 
   *OutBuffPtr(11+n-1) |= 0x80;
 
@@ -129,7 +140,6 @@ void    QueryAuthResponse38(void)
 * /
 */
   Query38(250, 11+n+3);
-
 }
 
 

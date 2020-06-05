@@ -30,6 +30,52 @@ void    MonitorOpen(uchar  ibPrt);
 
 double2 ReadCntCurr38(void)
 {
+    uchar ii[4];
+    memset(&ii, 0, sizeof(ii));
+
+
+    ii[0] = 0x01;
+    ii[1] = 0x00;
+    int64_t pos1 = 0;
+    DffDecode(ii, &pos1);
+
+    ii[0] = 0x7F;
+    ii[1] = 0x00;
+    int64_t neg1 = 0;
+    DffDecode(ii, &neg1);
+
+    ii[0] = 0xFF;
+    ii[1] = 0x00;
+    int64_t pos127 = 0;
+    DffDecode(ii, &pos127);
+
+    ii[0] = 0x81;
+    ii[1] = 0x7F;
+    int64_t neg127 = 0;
+    DffDecode(ii, &neg127);
+
+    ii[0] = 0x80;
+    ii[1] = 0x01;
+    int64_t pos128 = 0;
+    DffDecode(ii, &pos128);
+
+    ii[0] = 0x80;
+    ii[1] = 0x7F;
+    int64_t neg128 = 0;
+    DffDecode(ii, &neg128);
+
+    ii[0] = 0xF1;
+    ii[1] = 0x04;
+    int64_t yyy = 0;
+    DffDecode(ii, &yyy);
+
+    ii[0] = 0xD5;
+    ii[1] = 0x8a;
+    ii[2] = 0x52;
+    int64_t xxx = 0;
+    DffDecode(ii, &xxx);
+
+
     ulong out;
     int64_t ddw;
     uchar n;
@@ -64,7 +110,7 @@ double2 ReadCntCurr38(void)
     n = EncodeInt(ddw, (uint8_t *)&out);
     MonitorString("\n -128 "); MonitorCharDec(n); MonitorString(" "); MonitorLongHex(out);
 
-
+/*
     ddw = -1;
     memset(&out, 0, sizeof(out));
     n = EncodeInt(ddw, (uint8_t *)&out);
@@ -84,7 +130,7 @@ double2 ReadCntCurr38(void)
     memset(&out, 0, sizeof(out));
     n = EncodeInt(ddw, (uint8_t *)&out);
     MonitorString("\n "); MonitorCharDec(n); MonitorString(" "); MonitorLongHex(out);
-
+*/
 
 
     ddw = 1;
@@ -107,7 +153,7 @@ double2 ReadCntCurr38(void)
     n = DffEncode(ddw, (uint8_t *)&out);
     MonitorString("\n -127 "); MonitorCharDec(n); MonitorString(" "); MonitorLongHex(out);
 
-
+/*
     ddw = 128;
     memset(&out, 0, sizeof(out));
     n = DffEncode(ddw, (uint8_t *)&out);
@@ -127,7 +173,7 @@ double2 ReadCntCurr38(void)
     memset(&out, 0, sizeof(out));
     n = DffEncode(ddw, (uint8_t *)&out);
     MonitorString("\n "); MonitorCharDec(n); MonitorString(" "); MonitorLongHex(out);
-
+*/
 
   if (1+1 == 2) return GetDouble2(0, true);
 
