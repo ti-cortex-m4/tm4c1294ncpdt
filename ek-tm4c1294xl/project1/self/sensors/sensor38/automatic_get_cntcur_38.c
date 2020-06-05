@@ -18,7 +18,6 @@ automatic_get_cntcur_38.c
 
 
 
-//#include "../../memory/mem_serial3.h"
 #include "../../serial/monitor.h"
 #include "../../time/calendar.h"
 #include "dff.h"
@@ -176,6 +175,9 @@ double2 ReadCntCurr38(void)
 */
 
   if (1+1 == 2) return GetDouble2(0, true);
+
+
+
 
   Clear();
 

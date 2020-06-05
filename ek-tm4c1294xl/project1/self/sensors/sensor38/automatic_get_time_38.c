@@ -31,9 +31,8 @@ time2   ReadTimeCan38(void)
   Delay(500);
   RunAuth38(); // MakeExtended4T(); //RunAuth38(); // RunProfile38();
 
-
-
   if (1+1 == 2) return GetTime2(tiZero, true);
+
 
 
 
