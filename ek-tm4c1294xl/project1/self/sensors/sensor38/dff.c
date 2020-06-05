@@ -10,36 +10,37 @@ dff.c
 
 
 
-int     EncodeInt(int64_t value, uint8_t *send_buffer_position) {
-  int num=0; // число записанных байт (лбф + 7 бит)
+int     EncodeInt(int64_t  value, uchar  *pbOut) {
+  int num = 0; // число записанных байт (lbf + 7 бит)
   char ch;
 
-  //условие остановки кодирования: оставшиеся биты и последний записанный либо нули либо единицы
+  // условие остановки кодирования: оставшиеся биты и последний записанный либо нули либо единицы
   while ((value>>(num*7-1)) != -1 && (value>>(num*7-1)) != 0 || num==0) {
-    ch = (char)(value>>(num*7));                         // следующие 7 бит
-    *send_buffer_position++ = ch | 0x80;                  // запись с флагом lbf
-    num++; //записали очередные 7 бит
+    ch = (char)(value>>(num*7));                          // следующие 7 бит
+    *pbOut++ = ch | 0x80;                                 // запись с флагом lbf
+    num++;                                                // записали очередные 7 бит
   }
-  *(send_buffer_position-1) &= 0x7F;                      //убрать флаг у последнего байта
+
+  *(pbOut-1) &= 0x7F;                                     // убрать флаг lbf у последнего байта
   return num;
 }
 
 
 
-uchar   DffEncode(int64_t  ddwIn, uchar*  pbOut) {
+uchar   DffEncode(int64_t  value, uchar  *pbOut) {
   int bytes = 0;
   int bits = 0;
 
   while (true)
   {
-    int64_t new = ddwIn >> (bits - 1);
+    int64_t new = value >> (bits - 1);
     bool f1 = (new != -1);
     bool f2 = (new != 0);
     bool f3 = (bytes == 0);
     bool f = ((f1 && f2) || f3);
     if (f == false) break; // условие остановки кодирования: оставшиеся биты и последний записанный либо нули либо единицы
 
-    char ch = (char)(ddwIn >> bits); // следующие 7 бит
+    char ch = (char)(value >> bits); // следующие 7 бит
 
     *pbOut++ = ch | 0x80; // запись с флагом lbf
 

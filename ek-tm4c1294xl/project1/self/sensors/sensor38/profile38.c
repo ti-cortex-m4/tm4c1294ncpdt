@@ -56,7 +56,7 @@ ulong                   dwValue38;
 
 
 void    InitHeader38(void)
-{/*
+{
   if (!UseBounds())
     wProfile38 = 0;
   else
@@ -66,24 +66,18 @@ void    InitHeader38(void)
     if (boShowMessages == true) DelayMsg();
   }
 
-  tiDigPrev = tiCurr;
+  tiStart38 = HouIndexToDate(DateToHouIndex(tiValue38) - wProfile38);
 
-  uchar i = tiDigPrev.bHour*2 + tiDigPrev.bMinute/30;
-  i = (i / 6) * 6;
-
-  tiDigPrev.bHour = i / 2;
-  tiDigPrev.bMinute = (i % 2)*30;
-*/
-  wProfile38 = 0;
-  tiStart38 = tiValue38;
-
-  wRelStart = 0;
+  wRelStart = wProfile38;
   wRelEnd = wRelStart + 5;
 
+#ifdef MONITOR_38
   MonitorString("\n QueryProfile38 ");
-  MonitorTime(tiValue38);
+  MonitorString(" wProfile38="); MonitorIntDec(wProfile38);
+  MonitorString(" tiStart38="); MonitorTime(tiStart38);
   MonitorString(" wRelStart="); MonitorIntDec(wRelStart);
   MonitorString(" wRelEnd="); MonitorIntDec(wRelEnd);
+#endif
 }
 
 
@@ -161,11 +155,11 @@ void    MakeData38(uchar  h)
   ShowProgressDigHou();
 
   double dbPulse = mpdbPulseHou[ibDig];
-/*
+
   uchar i;
   for (i=0; i<4; i++)
   {
-    double db = mpPrf38[h].mpdwValue[i];// mpdbBuffCanHou[i][h];
+    double db = mpPrf38[h].mpdwValue[i];
     mpdbEngFracDigCan[ibDig][i] += db;
 
     uint w = (uint)(mpdbEngFracDigCan[ibDig][i]*dbPulse/10000);
@@ -173,7 +167,7 @@ void    MakeData38(uchar  h)
 
     mpdbEngFracDigCan[ibDig][i] -= (double)w*10000/dbPulse;
   }
-*/
+/*
   uchar i;
   for (i=0; i<4; i++)
   {
@@ -182,6 +176,7 @@ void    MakeData38(uchar  h)
 
     mpwChannels[i] = w;
   }
+*/
 }
 
 
@@ -211,8 +206,8 @@ bool    ReadData38(void)
 
   uchar* pbIn = InBuffPtr(10);
 
-  uchar j;
-  for (j=0; j<4; j++)
+  uchar c;
+  for (c=0; c<4; c++)
   {
     *(pbIn++);
 
@@ -234,7 +229,7 @@ bool    ReadData38(void)
       mpPrf38[h].bStatus = bStatus;
 
       ulong dwValue = dw2 >> 3;
-      mpPrf38[h].mpdwValue[j] = dwValue;
+      mpPrf38[h].mpdwValue[c] = dwValue;
 
 #ifdef MONITOR_38
       MonitorString("\n "); MonitorTime(tiTime);
