@@ -19,3 +19,5 @@ void    QueryEngAbs38(void);
 void    QueryEngDay38(uchar  ibDayRel);
 void    QueryEngMon38(uchar  ibMonRel);
 
+void    QuerynNumber38(void);
+ulong   ReadNumber38(void);

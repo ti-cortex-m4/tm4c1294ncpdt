@@ -37,7 +37,7 @@ void    QueryTime38(void)
   PushChar(0x00);
   PushChar(0x01);
 
-  Query38(100+18, 14);
+  Query38(250, 14);
 }
 
 
@@ -184,4 +184,33 @@ void    QueryEngMon38(uchar  ibMonRel)
   PushChar(ibMonRel);
 
   Query38(250, 33);
+}
+
+
+
+void    QuerynNumber38(void)
+{
+  InitPush(0);
+
+  PushChar(0xC0);
+  PushChar(0x06);
+
+  PushAddress38();
+
+  PushChar(0x00);
+  PushChar(0x06);
+
+  PushChar(6);
+  PushChar(0);
+  PushChar(5);
+
+  Query38(250, 14);
+}
+
+
+ulong   ReadNumber38(void)
+{
+  int64_t ddw = 0;
+  DffDecodePositive(InBuffPtr(11), &ddw);
+  return ddw % 0x100000000;
 }
