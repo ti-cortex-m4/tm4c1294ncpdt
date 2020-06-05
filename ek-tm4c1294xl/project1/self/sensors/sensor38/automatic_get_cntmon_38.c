@@ -53,7 +53,7 @@ bool    ReadEngDay38_Full(uchar  ibDayRel)
 
     if (bStatus != 0) {
       Clear();
-      sprintf(szLo+1, "сутки -%u, %u ?", ibDayRel, bStatus);
+      sprintf(szLo+1, "сутки -%u (%u) ?", ibDayRel, bStatus);
       Delay(1000);
       return false;
     }
@@ -105,7 +105,7 @@ bool    ReadEngMon38_Full(uchar  ibMonRel)
 
     if (bStatus != 0) {
       Clear();
-      sprintf(szLo+1, "мес€ц -%u, %u ?", ibMonRel, bStatus);
+      sprintf(szLo+1, "мес€ц -%u (%u) ?", ibMonRel, bStatus);
       Delay(1000);
       return false;
     }

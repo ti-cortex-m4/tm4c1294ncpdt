@@ -14,6 +14,7 @@ profile38.c
 #include "../../memory/mem_profile.h"
 #include "../../memory/mem_limits.h"
 #include "../../display/display.h"
+#include "../../keyboard/keyboard.h"
 #include "../../keyboard/time/key_timedate.h"
 #include "../../time/timedate.h"
 #include "../../time/calendar.h"
@@ -35,7 +36,6 @@ profile38.c
 
 
 
-#include "../../keyboard/keyboard.h"
 unsigned char  pucDecodeBitArr(unsigned char *pOut, unsigned char *pIn);
 
 
@@ -253,7 +253,7 @@ bool    ReadData38(void)
     MonitorString("\n");
 
     uchar i;
-    for (i=0; i<1/*4*/; i++) {
+    for (i=0; i<4; i++) {
       MonitorLongDecimal4(mpPrf38[h].mpdwValue[i]); MonitorString("  ");
     }
 #endif
@@ -262,7 +262,7 @@ bool    ReadData38(void)
     dw -= (wProfile38 + h);
     time tiVirtual = HouIndexToDate(dw);
 
-    bool difference = DifferentDateTime(tiVirtual,mpPrf38[h].ti);
+    bool difference = DifferentDateTime(tiVirtual, mpPrf38[h].ti);
 
 #ifdef MONITOR_38
     MonitorString(" vrt.="); MonitorTime(tiVirtual);
