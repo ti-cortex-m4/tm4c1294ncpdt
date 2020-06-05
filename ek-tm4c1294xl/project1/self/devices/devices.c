@@ -6732,10 +6732,11 @@ void    RunDevices(void)
     case DEV_AUTHREQ1_38P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        if (ReadAuthResponse38() == 0)
+        uchar bAuth = ReadAuthResponse38();
+        if (bAuth == 0)
           MakePause(DEV_PREVCORRECT_38P);
         else {
-          // show error message
+          Clear(); sprintf(szLo+2,"пароль: %u ?",bAuth); DelayMsg();
           ErrorProfile();
         }
       }
