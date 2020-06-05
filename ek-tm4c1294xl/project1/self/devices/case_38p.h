@@ -140,7 +140,10 @@
     case DEV_CORRECT_38P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        //ReadCorrect38();
+        uchar bCorrect = ReadCorrect38();
+        if (bCorrect != 0) {
+          Clear(); sprintf(szLo+1,"коррекция: %u ?",bCorrect); DelayMsg();
+        }
         MakePause(DEV_PREVTIME2_38P);
       }
       else

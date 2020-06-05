@@ -48,3 +48,9 @@ void    QueryCorrect38(void)
   Query38(100+18, 14+n);
 }
 
+
+
+uchar   ReadCorrect38(void)
+{
+  return InBuff(11);
+}

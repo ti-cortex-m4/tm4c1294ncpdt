@@ -44,10 +44,10 @@ uchar   DffEncode(int64_t  ddwIn, uchar*  pbOut) {
     *pbOut++ = ch | 0x80; // запись с флагом lbf
 
     bytes++;
-    bits += 7; // записали очередные 7 бит
+    bits += 7;
   }
 
-  *(pbOut - 1) &= 0x7F; //убрать флаг у последнего байта
+  *(pbOut - 1) &= 0x7F; // убрать флаг у последнего байта
 
   return bytes;
 }
