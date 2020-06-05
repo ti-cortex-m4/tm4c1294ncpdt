@@ -66,7 +66,7 @@ void    InitHeader38(void)
     if (boShowMessages == true) DelayMsg();
   }
 
-  tiStart38 = HouIndexToDate(DateToHouIndex(tiValue38) - wProfile38);
+  tiStart38 = tiValue38;
 
   wRelStart = wProfile38;
   wRelEnd = wRelStart + 5;
@@ -145,6 +145,13 @@ void    QueryHeader38(void)
 {
   HideCurrTime(1);
 
+#ifdef MONITOR_38
+  MonitorString("\n QueryHeader38 ");
+  MonitorString(" wProfile38="); MonitorIntDec(wProfile38);
+  MonitorString(" wRelStart="); MonitorIntDec(wRelStart);
+  MonitorString(" wRelEnd="); MonitorIntDec(wRelEnd);
+#endif
+
   QueryProfile38(wRelStart, wRelEnd);
 }
 
@@ -214,11 +221,10 @@ bool    ReadData38(void)
     uchar h;
     for (h=0; h<6; h++)
     {
-      int64_t ddw1 = 0;
-      pbIn = DffDecodePositive(pbIn, &ddw1);
-      ulong dw1 = ddw1 % 0x100000000;
+      int64_t ddw = 0;
+      pbIn = DffDecodePositive(pbIn, &ddw);
 
-      time tiTime = LongToTime38(dw1);
+      time tiTime = LongToTime38(ddw % 0x100000000);
       mpPrf38[h].tiTime = tiTime;
 
       int64_t ddw2 = 0;
