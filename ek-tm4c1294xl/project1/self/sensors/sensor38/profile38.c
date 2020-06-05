@@ -99,7 +99,9 @@ uchar   PushIndex(uint  iw30MinRel)
 
 void    QueryProfile38(uint  iw30MinRelStart, uint  iw30MinRelEnd)
 {
+#ifdef MONITOR_38
   MonitorString("\n QueryProfile38 "); MonitorIntDec(iw30MinRelStart); MonitorString(" "); MonitorIntDec(iw30MinRelEnd);
+#endif
 
   InitPush(0);
 

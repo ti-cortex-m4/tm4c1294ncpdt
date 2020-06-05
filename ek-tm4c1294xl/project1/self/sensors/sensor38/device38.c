@@ -8,14 +8,10 @@ device38.c
 #include "../../memory/mem_digitals.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports2.h"
+#include "../../time/calendar.h"
 #include "io38.h"
 #include "dff.h"
 #include "device38.h"
-
-
-
-#include "../../time/calendar.h"
-#include "../../serial/monitor.h"
 
 
 
@@ -101,7 +97,7 @@ void    QueryEngAbs38(void)
 // значени€ счетчиков на начало суток
 void    QueryEngDay38(uchar  ibDayRel)
 {
-  MonitorString("\n ibDayRel="); MonitorCharDec(ibDayRel);
+//  MonitorString("\n QueryEngDay38 "); MonitorCharDec(ibDayRel);
 
   InitPush(0);
 
@@ -148,7 +144,7 @@ void    QueryEngDay38(uchar  ibDayRel)
 // значени€ счетчиков на начало мес€цев
 void    QueryEngMon38(uchar  ibMonRel)
 {
-  MonitorString("\n ibMonRel="); MonitorCharDec(ibMonRel);
+//  MonitorString("\n QueryEngMon38 "); MonitorCharDec(ibMonRel);
 
   InitPush(0);
 
