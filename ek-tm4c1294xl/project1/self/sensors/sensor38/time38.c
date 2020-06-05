@@ -7,6 +7,8 @@ time38.c
 #include "../../main.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports2.h"
+#include "../../time/rtc.h"
+#include "../../time/calendar.h"
 #include "device38.h"
 #include "io38.h"
 #include "dff.h"
@@ -74,7 +76,7 @@ void    QueryManage38(void)
   PushChar(1); // текущее время/дата
 
   time ti = *GetCurrTimeDate();
-  time.bYear -= 12;
+  ti.bYear -= 12;
   ulong dw = DateToSecIndex(ti);
 
   uchar n = EncodeInt(dwCorrectSecond38, OutBuffPtr(GetPush()));
