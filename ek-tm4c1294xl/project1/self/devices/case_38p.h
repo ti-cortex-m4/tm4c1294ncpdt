@@ -166,16 +166,15 @@
 // начало установки времени
 /*
     case DEV_PREVAUTHKEY2_38P:
-      ErrorProfile();
       cbRepeat = MaxRepeats();
-      QueryAuthKey38();
+      QueryAuthRequest38();
       SetCurr(DEV_AUTHKEY2_38P);
       break;
 
     case DEV_AUTHKEY2_38P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        ReadAuthKey38();
+        ReadAuthRequest38();
         MakePause(DEV_POSTAUTHKEY2_38P);
       }
       else
@@ -186,7 +185,7 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryAuthKey38();
+          QueryAuthRequest38();
           SetCurr(DEV_AUTHKEY2_38P);
         }
       }
@@ -195,17 +194,20 @@
 
     case DEV_POSTAUTHKEY2_38P:
       cbRepeat = MaxRepeats();
-      QueryAuthReq38();
+      QueryAuthResponse38();
       SetCurr(DEV_AUTHREQ2_38P);
       break;
 
     case DEV_AUTHREQ2_38P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        if (ReadAuthReq38())
+        uchar bAuth = ReadAuthResponse38();
+        if (bAuth == 0)
           MakePause(DEV_PREVMANAGE_38P);
-        else
+        else {
+          Clear(); sprintf(szLo+2,"пароль: %u ?",bAuth); DelayMsg();
           ErrorProfile();
+        }
       }
       else
       {
@@ -215,11 +217,12 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryAuthReq38();
+          QueryAuthResponse38();
           SetCurr(DEV_AUTHREQ2_38P);
         }
       }
       break;
+
 
     case DEV_PREVMANAGE_38P:
       cbRepeat = MaxRepeats();
@@ -230,8 +233,12 @@
     case DEV_MANAGE_38P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        ReadManage38();
-        MakePause();
+        uchar bManage = ReadManage38();
+        if (bManage != 0) {
+          Clear(); sprintf(szLo+1,"установка: %u ?",bManage); DelayMsg();
+        }
+
+        MakePause(DEV_PREVTIME2_38P);
       }
       else
       {
