@@ -49,8 +49,39 @@ void    QueryCorrect38(void)
 }
 
 
-
 uchar   ReadCorrect38(void)
+{
+  return InBuff(11);
+}
+
+
+
+void    QueryManage38(void)
+{
+  InitPush(0);
+
+  PushChar(0xC0);
+  PushChar(0x06);
+
+  PushAddress38();
+
+  PushChar(0x00);
+  PushChar(0x06);
+
+  PushChar(0x07); // PERFORM_ACTION
+  PushChar(0x00);
+
+  PushChar(0x0F); // выполнить коррекцию времени
+
+  uchar n = EncodeInt(dwCorrectSecond38, OutBuffPtr(GetPush()));
+  Skip(n);
+
+  Query38(100+18, 14+n);
+}
+
+
+
+uchar   ReadManage38(void)
 {
   return InBuff(11);
 }
