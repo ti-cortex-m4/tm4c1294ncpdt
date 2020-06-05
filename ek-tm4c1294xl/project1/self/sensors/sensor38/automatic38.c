@@ -15,7 +15,7 @@ bool    Automatic38(void)
 {
   Clear();
 
-  dbKpulse = 10000         ;            // K преобразования
+  dbKpulse = 10000;                     // K преобразования
   dbKtrans = 1;                         // K трансформации
   SetAllFactors(dbKpulse,dbKtrans);     // сохранение К преобразования и К трансформации
 
