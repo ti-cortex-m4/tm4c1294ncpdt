@@ -51,8 +51,8 @@ void    QueryAuthRequest38(void)
 
 void    ReadAuthRequest38(void)
 {
-  uint64_t ddw = 0;
-  pucDecodeBitArr((uchar *) &ddw, InBuffPtr(10+1));
+  int64_t ddw = 0;
+  DffDecodePositive(InBuffPtr(10+1), &ddw);
 
   dwRandom = ddw % 0x100000000;
 }
@@ -65,13 +65,6 @@ static uchar mbPass[10*2];
 
   memset(&mbPass, 0, sizeof(mbPass));
   uchar bPassSize = usprintf((char *)&mbPass, "%u" ,mpdwAddress2[diCurr.bAddress-1]);
-
-//
-//  uchar password[16+1];
-//  password[0] = '0';
-//  password[1] = 0;
-//
-//  uchar password_size = 1;
 
   ulong dw = Crc38(&mbPass[0], bPassSize, dwRandom);
 
@@ -86,7 +79,7 @@ static uchar mbPass[10*2];
   PushChar(0x00);
   PushChar(0x06);
 
-  PushChar(7); // ?
+  PushChar(7); // PERFORM_ACTION
   PushChar(0);
   PushChar(1);
 
@@ -122,8 +115,8 @@ void    RunAuth38(void)
   QueryAuthResponse38();
   if (Input38() != SER_GOODCHECK) { MonitorString("\n error 2"); return; }
 
-  uchar b = ReadAuthResponse38();
-  MonitorString("authorization="); MonitorCharDec(b);
+  uchar bAuth = ReadAuthResponse38();
+  MonitorString("\n authorization="); MonitorCharDec(bAuth);
 }
 
 #endif

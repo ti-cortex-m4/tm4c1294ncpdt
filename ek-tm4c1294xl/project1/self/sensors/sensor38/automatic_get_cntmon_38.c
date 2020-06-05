@@ -35,21 +35,19 @@ bool    ReadEngDay38_Full(uchar  ibDayRel)
 
   if (r == MaxRepeats()) return false;
 
-  uchar ibIn = 10;
+
+  uchar* pbIn = InBuffPtr(10);
 
   uchar i;
   for (i=0; i<4; i++)
   {
-    ibIn++;
+    *(pbIn++);
 
-    uint64_t ddw = 0;
-    uchar delta = pucDecodeBitArr((uchar *) &ddw, InBuffPtr(ibIn));
-    if (delta == 0xFF) return false;
-    ibIn += delta;
+    int64_t ddw = 0;
+    pbIn = DffDecodePositive(pbIn, &ddw);
 
-    ulong dw = ddw % 0x100000000;
     uchar bStatus = (ddw % 0x100) & 0x03;
-    dw >>= 3;
+    ulong dw = (ddw >> 3) % 0x100000000;
 
     if (bStatus != 0) {
       Clear();
@@ -87,21 +85,19 @@ bool    ReadEngMon38_Full(uchar  ibMonRel)
     if (fKey == true) return false;
   }
 
-  uchar ibIn = 10;
+
+  uchar* pbIn = InBuffPtr(10);
 
   uchar i;
   for (i=0; i<4; i++)
   {
-    ibIn++;
+    *(pbIn++);
 
-    uint64_t ddw = 0;
-    uchar delta = pucDecodeBitArr((uchar *) &ddw, InBuffPtr(ibIn));
-    if (delta == 0xFF) return false;
-    ibIn += delta;
+    int64_t ddw = 0;
+    pbIn = DffDecodePositive(pbIn, &ddw);
 
-    ulong dw = ddw % 0x100000000;
     uchar bStatus = (ddw % 0x100) & 0x03;
-    dw >>= 3;
+    ulong dw = (ddw >> 3) % 0x100000000;
 
     if (bStatus != 0) {
       Clear();
