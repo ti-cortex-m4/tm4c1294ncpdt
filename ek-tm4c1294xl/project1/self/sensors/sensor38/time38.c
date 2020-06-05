@@ -68,10 +68,14 @@ void    QueryManage38(void)
   PushChar(0x00);
   PushChar(0x06);
 
-  PushChar(0x07); // PERFORM_ACTION
-  PushChar(0x00);
+  PushChar(5); // SET_OPTION
+  PushChar(0);
 
-  PushChar(0x0F); // выполнить коррекцию времени
+  PushChar(1); // текущее время/дата
+
+  time ti = *GetCurrTimeDate();
+  time.bYear -= 12;
+  ulong dw = DateToSecIndex(ti);
 
   uchar n = EncodeInt(dwCorrectSecond38, OutBuffPtr(GetPush()));
   Skip(n);
