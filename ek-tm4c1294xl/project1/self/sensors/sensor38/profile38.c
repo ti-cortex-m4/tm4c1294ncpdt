@@ -250,7 +250,7 @@ bool    ReadData38(void)
 
     uchar i;
     for (i=0; i<4; i++) {
-      MonitorLongDecimal4(mpPrf38[h].mpdwValue[i]); MonitorString("  ");
+      MonitorLongDec4(mpPrf38[h].mpdwValue[i]); MonitorString("  ");
     }
 #endif
 

@@ -14,6 +14,7 @@ automatic_get_cntcur_38.c
 #include "../../digitals/digitals.h"
 #include "device38.h"
 #include "io38.h"
+#include "dff.h"
 #include "automatic_get_cntcur_38.h"
 
 
@@ -33,17 +34,15 @@ double2 ReadCntCurr38(void)
 
   if (r == MaxRepeats()) return GetDouble2Error();
 
-  uchar ibIn = 10;
+  uchar* pbIn = InBuffPtr(10);
 
   uchar i;
   for (i=0; i<4; i++)
   {
-    ibIn++;
+    *(pbIn++);
 
-    uint64_t ddw = 0;
-    uchar delta = pucDecodeBitArr((uchar *) &ddw, InBuffPtr(ibIn));
-    if (delta == 0xFF) return GetDouble2Error();
-    ibIn += delta;
+    int64_t ddw = 0;
+    pbIn = DffDecodePositive(pbIn, &ddw);
 
     mpdwChannelsA[i] = ddw % 0x100000000;
     mpdbChannelsC[i] = (double)mpdwChannelsA[i] / 10000;

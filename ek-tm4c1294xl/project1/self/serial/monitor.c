@@ -113,7 +113,7 @@ void    MonitorLongHex(ulong  dw)
 }
 
 
-void    MonitorLongDecimal4(ulong  dw)
+void    MonitorLongDec4(ulong  dw)
 {
   if (UseMonitor())
   {
