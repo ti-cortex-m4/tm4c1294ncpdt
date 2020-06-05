@@ -19,7 +19,7 @@ void    MonitorIntDec5(uint  w);
 void    MonitorIntHex(uint  w);
 void    MonitorLongDec(ulong  dw);
 void    MonitorLongHex(ulong  dw);
-void    MonitorLongDecimal4(ulong  dw);
+void    MonitorLongDec4(ulong  dw);
 void    MonitorLong64Hex(uint64_t  ddw);
 void    MonitorTime(time  ti);
 
