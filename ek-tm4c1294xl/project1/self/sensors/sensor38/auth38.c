@@ -65,7 +65,7 @@ void    ReadAuthRequest38(void)
 
 void    QueryAuthResponse38(void)
 {
-static uchar mbPass[10*2];
+static char mbPass[10*2];
 
   memset(&mbPass, 0, sizeof(mbPass));
   uchar bPassSize = usprintf(mbPass, "%u" ,mpdwAddress2[diCurr.bAddress-1]);
