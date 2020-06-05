@@ -55,16 +55,9 @@ time    LongToTime38(ulong  dw)
 
 time    ReadTime38(void)
 {
-//  uint w = DFF_Decoder(&mpbInBuff3[11], 0); // TODO
-  uint64_t ddw = DffDecodePositive_(InBuffPtr(11)); // TODO
-
-  ulong dw = ddw % 0x100000000;
-
-//  MonitorIn();
-//  InitPop(11);
-//  ulong dw = PopLongLtl();
-
-  return LongToTime38(dw);
+  int64_t ddw = 0;
+  DffDecodePositive(InBuffPtr(11), &ddw);
+  return LongToTime38(ddw % 0x100000000);
 }
 
 
@@ -101,19 +94,6 @@ void    QueryEngAbs38(void)
   PushChar(0x00);
 
   Query38(250, 25);
-}
-
-
-uint64_t ReadEng38(uchar  ibInBuff)
-{
-  uint64_t ddw = DffDecodePositive_(InBuffPtr(ibInBuff)); // TODO
-
-  ulong dw = ddw % 0x100000000;
-  MonitorString("\n"); MonitorLongHex(dw);
-  MonitorString("\n"); MonitorLongDec(dw);
-  MonitorString("\n"); MonitorLongDecimal4(dw);
-
-  return ddw;
 }
 
 
