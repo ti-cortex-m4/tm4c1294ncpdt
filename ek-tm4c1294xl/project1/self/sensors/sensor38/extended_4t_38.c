@@ -24,14 +24,10 @@ extended_4t_38.c
 
 
 
-#include "../../serial/monitor.h"
-
-
-
 // значени€ счетчиков на начало мес€цев
 void    QueryEngMonTariff38(uchar  ibMonRel)
 {
-  MonitorString("\n ibMonRel="); MonitorCharDec(ibMonRel);
+//  MonitorString("\n QueryEngMonTariff38 "); MonitorCharDec(ibMonRel);
 
   InitPush(0);
 
@@ -89,29 +85,22 @@ status   ReadEngMonTariff38_Full(uchar  ibMonRel, uchar  ibTariff)
   if (r == MaxRepeats()) return ST_BADDIGITAL;
   ShowPercent(70+ibTariff);
 
-  uchar ibIn = 10;
+
+  uchar* pbIn = InBuffPtr(10);
 
   uchar i;
   for (i=0; i<4; i++)
   {
-    MonitorString("\n i="); MonitorCharDec(i);
-    ibIn++;
+    *(pbIn++);
 
     uchar t;
     for (t=0; t<4; t++)
     {
-      MonitorString("\n t="); MonitorCharDec(t);
+      int64_t ddw = 0;
+      pbIn = DffDecodePositive(pbIn, &ddw);
 
-      uint64_t ddw = 0;
-      uchar delta = pucDecodeBitArr((uchar *) &ddw, InBuffPtr(ibIn));
-      if (delta == 0xFF) return ST_BADDIGITAL;
-      ibIn += delta;
-
-      ulong dw = ddw % 0x100000000;
       uchar bStatus = (ddw % 0x100) & 0x03;
-      dw >>= 3;
-
-      MonitorString("\n "); MonitorLongDec(dw); MonitorString(" "); MonitorCharDec(bStatus);
+      ulong dw = (ddw >> 3) % 0x100000000;
 
       if (bStatus != 0) {
         Clear();
@@ -122,8 +111,6 @@ status   ReadEngMonTariff38_Full(uchar  ibMonRel, uchar  ibTariff)
 
       if (t == ibTariff)
       {
-        MonitorString("\n ibTariff="); MonitorCharDec(ibTariff);
-
         mpdwChannelsA[i] = dw;
         mpdbChannelsC[i] = (double)mpdwChannelsA[i] / 10000;
       }  
@@ -141,12 +128,9 @@ status  ReadCntMonCanTariff38(uchar  ibMonAbs, uchar  ibTariff) // на начало мес
   if (ti2.fValid == 0) return ST_BADDIGITAL;
   time ti = ti2.tiValue;
 
-  MonitorString("\n ibMonAbs="); MonitorCharDec(ibMonAbs);
-  uchar ibMonRel = (bMONTHS+ti.bMonth-1-ibMonAbs) % bMONTHS; // TODO ? 2/1
-  MonitorString("\n ibMonRel="); MonitorCharDec(ibMonRel);
 
-  status st = ReadEngMonTariff38_Full(ibMonRel,ibTariff);
-
+  uchar ibMonRel = (bMONTHS+ti.bMonth-1-ibMonAbs) % bMONTHS;
+  status st = ReadEngMonTariff38_Full(ibMonRel, ibTariff);
   if (st != ST_OK) return st;
 
 
