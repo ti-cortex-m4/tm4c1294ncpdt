@@ -6783,14 +6783,14 @@ void    RunDevices(void)
 // конец коррекции времени
 
 // начало установки времени
-
+/*
     case DEV_PREVAUTHKEY2_38P:
       ErrorProfile();
-//      cbRepeat = MaxRepeats();
-//      QueryAuthKey38();
-//      SetCurr(DEV_AUTHKEY2_38P);
+      cbRepeat = MaxRepeats();
+      QueryAuthKey38();
+      SetCurr(DEV_AUTHKEY2_38P);
       break;
-/*
+
     case DEV_AUTHKEY2_38P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {

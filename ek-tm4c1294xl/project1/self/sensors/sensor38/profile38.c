@@ -29,20 +29,16 @@ profile38.c
 #include "../../digitals/digitals.h"
 #include "../../digitals/limits.h"
 #include "../../special/special.h"
+#include "device38.h"
 #include "io38.h"
 #include "dff.h"
-#include "device38.h"
 #include "profile38.h"
-
-
-
-unsigned char  pucDecodeBitArr(unsigned char *pOut, unsigned char *pIn);
 
 
 
 typedef struct
 {
-  time          ti;
+  time          tiTime;
   uchar         bStatus;
   ulong         mpdwValue[4];
 } profile38;
@@ -211,35 +207,35 @@ bool    ReadData38(void)
 {
   memset(&mpPrf38, 0, sizeof(mpPrf38));
 
-  uchar ibIn = 10;
+  uchar* pbIn = InBuffPtr(10);
 
   uchar j;
   for (j=0; j<4; j++)
   {
-    ibIn++;
+    *(pbIn++);
 
-    uchar k;
-    for (k=0; k<6; k++)
+    uchar h;
+    for (h=0; h<6; h++)
     {
-      ulong dw1 = 0;
-      uchar i1 = pucDecodeBitArr((uchar *) &dw1, InBuffPtr(ibIn));
-      ibIn += i1; //0xFF
+      int64_t ddw1 = 0;
+      pbIn = DffDecodePositive(pbIn, &ddw1);
+      ulong dw1 = ddw1 % 0x100000000;
 
-      time ti = LongToTime38(dw1);
-      mpPrf38[k].ti = ti;
+      time tiTime = LongToTime38(dw1);
+      mpPrf38[h].tiTime = tiTime;
 
-      ulong dw2 = 0;
-      uchar i2 = pucDecodeBitArr((uchar *) &dw2, InBuffPtr(ibIn));
-      ibIn += i2; //0xFF
+      int64_t ddw2 = 0;
+      pbIn = DffDecodePositive(pbIn, &ddw2);
+      ulong dw2 = ddw2 % 0x100000000;
 
       uchar bStatus = (dw2 % 0x100) & 0x03;
-      mpPrf38[k].bStatus = bStatus;
+      mpPrf38[h].bStatus = bStatus;
 
       ulong dwValue = dw2 >> 3;
-      mpPrf38[k].mpdwValue[j] = dwValue;
+      mpPrf38[h].mpdwValue[j] = dwValue;
 
 #ifdef MONITOR_38
-      MonitorString("\n "); MonitorTime(ti);
+      MonitorString("\n "); MonitorTime(tiTime);
       MonitorString(" "); MonitorLongDec(dwValue);
       MonitorString(" "); MonitorCharDec(bStatus);
 #endif
@@ -262,21 +258,21 @@ bool    ReadData38(void)
     dw -= (wProfile38 + h);
     time tiVirtual = HouIndexToDate(dw);
 
-    bool difference = DifferentDateTime(tiVirtual, mpPrf38[h].ti);
+    bool difference = DifferentDateTime(tiVirtual, mpPrf38[h].tiTime);
 
 #ifdef MONITOR_38
     MonitorString(" vrt.="); MonitorTime(tiVirtual);
-    MonitorString(" act.="); MonitorTime(mpPrf38[h].ti);
+    MonitorString(" act.="); MonitorTime(mpPrf38[h].tiTime);
     MonitorBool(difference);
     MonitorString(" #"); MonitorCharDec(mpPrf38[h].bStatus); MonitorString(" ");
 #endif
 
     if ((difference == true) && (mpPrf38[h].bStatus == 2))
       tiDig = tiVirtual;
-    else if ((mpPrf38[h].ti.bMinute % 30 != 0) && (mpPrf38[h].bStatus == 0))
+    else if ((mpPrf38[h].tiTime.bMinute % 30 != 0) && (mpPrf38[h].bStatus == 0))
       tiDig = tiVirtual;
     else
-      tiDig = mpPrf38[h].ti;
+      tiDig = mpPrf38[h].tiTime;
 
     if (ReadBlock38(h) == false) return false;
   }
