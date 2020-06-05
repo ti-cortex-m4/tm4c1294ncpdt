@@ -26,21 +26,7 @@ extended_4t_38.c
 
 #include "../../serial/monitor.h"
 
-/*
-счетчики на начало мес€цев по тарифам
- «апрос
-03.06.2020 22:29:44.414
-06 E8 B7 C4 04 00 06
-0B GET_DATA_MULTIPLE_EX
-00
-09 // A+
-02
-1E по 4 тарифам
-01 мес€ц
-02 мес€ц
-BE A6
 
- */
 
 // значени€ счетчиков на начало мес€цев
 void    QueryEngMonTariff38(uchar  ibMonRel)

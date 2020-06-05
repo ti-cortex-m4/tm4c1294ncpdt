@@ -8,7 +8,6 @@ device38.h
 
 
 
-
 void    PushAddress38(void);
 
 void    QueryTime38(void);

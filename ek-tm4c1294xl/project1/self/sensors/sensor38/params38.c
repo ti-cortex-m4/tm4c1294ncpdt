@@ -13,10 +13,9 @@ params34.c
 #include "../../digitals/params/params2.h"
 #include "../../display/display.h"
 #include "../../time/delay.h"
+#include "device38.h"
 #include "io38.h"
 #include "dff.h"
-#include "dff.h"
-#include "device38.h"
 #include "params38.h"
 
 
@@ -140,5 +139,3 @@ float2  ReadParam38(void)
     default: return GetFloat2Error();
   }
 }
-
-

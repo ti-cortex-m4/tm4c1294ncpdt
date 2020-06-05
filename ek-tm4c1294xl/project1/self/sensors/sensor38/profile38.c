@@ -278,7 +278,7 @@ bool    ReadData38(void)
   }
 
   wProfile38 += 6;
-  if (wProfile38 > 900/*wHOURS*/) return false;
+  if (wProfile38 > wHOURS) return false;
 
   wRelStart += 6;
   wRelEnd = wRelStart + 5;

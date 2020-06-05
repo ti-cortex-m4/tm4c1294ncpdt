@@ -1,11 +1,11 @@
 /*------------------------------------------------------------------------------
-hash38.c
+crc38.c
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-#include "hash38.h"
+#include "crc38.h"
 
 
 
@@ -58,7 +58,7 @@ static const ulong mpwwdCrc[] = {
 
 
 
-ulong   Hash38(uchar*  pbPass, uint  wPassSize, ulong  dwRandom)
+ulong   Crc38(uchar*  pbPass, uint  wPassSize, ulong  dwRandom)
 {
   ulong dw = 0xffffffff;
 
