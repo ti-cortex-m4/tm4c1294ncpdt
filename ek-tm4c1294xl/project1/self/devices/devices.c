@@ -6768,6 +6768,7 @@ void    RunDevices(void)
         if (bCorrect != 0) {
           Clear(); sprintf(szLo+1,"коррекция: %u ?",bCorrect); DelayMsg();
         }
+
         MakePause(DEV_PREVTIME2_38P);
       }
       else
