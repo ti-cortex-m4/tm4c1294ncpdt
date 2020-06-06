@@ -4,7 +4,8 @@ time38.h
 
 ------------------------------------------------------------------------------*/
 
-time    LongToTime38(ulong  dw);
+time    SecondsToTime38(ulong  dw);
+ulong   TimeToSeconds38(time  ti);
 
 void    QueryTime38(void);
 time    ReadTime38(void);
