@@ -121,12 +121,11 @@ void    QueryManage38(void)
 
   PushChar(5); // SET_OPTION
   PushChar(0);
-
   PushChar(1); // текущее время/дата
 
   ulong dw = TimeToSeconds38(*GetCurrTimeDate());
 
-  uchar n = EncodeInt(dwCorrectSecond38, OutBuffPtr(GetPush()));
+  uchar n = EncodeInt(dw, OutBuffPtr(GetPush()));
   Skip(n);
 
   Query38(100+18, 14+n);
