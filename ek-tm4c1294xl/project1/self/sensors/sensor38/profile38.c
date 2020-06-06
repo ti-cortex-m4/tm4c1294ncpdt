@@ -225,7 +225,7 @@ bool    ReadData38(void)
       int64_t ddw = 0;
       pbIn = DffDecodePositive(pbIn, &ddw);
 
-      time tiTime = LongToTime38(ddw % 0x100000000);
+      time tiTime = SecondsToTime38(ddw % 0x100000000);
       mpPrf38[h].tiTime = tiTime;
 
       int64_t ddw2 = 0;

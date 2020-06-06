@@ -20,11 +20,18 @@ static int32_t          dwCorrectSecond38;
 
 
 
-time    LongToTime38(ulong  dw)
+time    SecondsToTime38(ulong  dw)
 {
   time ti = SecIndexToDate(dw);
   ti.bYear += 12;
   return ti;
+}
+
+
+ulong   TimeToSeconds38(time  ti)
+{
+  ti.bYear -= 12;
+  return DateToSecIndex(ti);
 }
 
 
@@ -53,7 +60,7 @@ time    ReadTime38(void)
 {
   int64_t ddw = 0;
   DffDecodePositive(InBuffPtr(11), &ddw);
-  return LongToTime38(ddw % 0x100000000);
+  return SecondsToTime38(ddw % 0x100000000);
 }
 
 
@@ -113,9 +120,7 @@ void    QueryManage38(void)
 
   PushChar(1); // текущее время/дата
 
-  time ti = *GetCurrTimeDate();
-  ti.bYear -= 12;
-  ulong dw = DateToSecIndex(ti);
+  ulong dw = TimeToSeconds38(*GetCurrTimeDate());
 
   uchar n = EncodeInt(dwCorrectSecond38, OutBuffPtr(GetPush()));
   Skip(n);
