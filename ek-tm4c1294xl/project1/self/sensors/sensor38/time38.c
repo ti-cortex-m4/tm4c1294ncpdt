@@ -7,6 +7,7 @@ time38.c
 #include "../../main.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports2.h"
+#include "../../serial/monitor.h"
 #include "../../time/rtc.h"
 #include "../../time/calendar.h"
 #include "device38.h"

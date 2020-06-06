@@ -6679,7 +6679,7 @@ void    RunDevices(void)
           }
           else if (GetCurrHouIndex() == (tiValue38.bHour*2 + tiValue38.bMinute/30))
           {
-            if (false/*bControlQ == false*/) {
+            if (boControlQ == false) {
               SetCorrectSecond38(dwSecond2 - dwSecond1);
               ShowLo(szCorrectYes); DelayInf();
               MakePause(DEV_PREVAUTHKEY1_38P); // коррекция времени

@@ -225,23 +225,18 @@ bool    ReadData38(void)
       int64_t ddw = 0;
       pbIn = DffDecodePositive(pbIn, &ddw);
 
-      time tiTime = SecondsToTime38(ddw % 0x100000000);
-      mpPrf38[h].tiTime = tiTime;
+      mpPrf38[h].tiTime = SecondsToTime38(ddw % 0x100000000);
 
-      int64_t ddw2 = 0;
-      pbIn = DffDecodePositive(pbIn, &ddw2);
-      ulong dw2 = ddw2 % 0x100000000;
+      ddw = 0;
+      pbIn = DffDecodePositive(pbIn, &ddw);
 
-      uchar bStatus = (dw2 % 0x100) & 0x03;
-      mpPrf38[h].bStatus = bStatus;
-
-      ulong dwValue = dw2 >> 3;
-      mpPrf38[h].mpdwValue[c] = dwValue;
+      mpPrf38[h].bStatus = (ddw % 0x100) & 0x03;
+      mpPrf38[h].mpdwValue[c] = (ddw >> 3) % 0x100000000;
 
 #ifdef MONITOR_38
-      MonitorString("\n "); MonitorTime(tiTime);
-      MonitorString(" "); MonitorLongDec(dwValue);
-      MonitorString(" "); MonitorCharDec(bStatus);
+      MonitorString("\n "); MonitorTime(mpPrf38[h].tiTime);
+      MonitorString(" "); MonitorLongDec(mpPrf38[h].mpdwValue[c]);
+      MonitorString(" "); MonitorCharDec(mpPrf38[h].bStatus);
 #endif
     }
   }
