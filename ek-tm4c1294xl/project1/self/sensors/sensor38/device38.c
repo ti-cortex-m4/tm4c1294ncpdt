@@ -57,7 +57,6 @@ void    QueryEngAbs38(void)
 }
 
 
-
 // значени€ счетчиков на начало суток
 void    QueryEngDay38(uchar  ibDayRel)
 {
@@ -104,8 +103,7 @@ void    QueryEngDay38(uchar  ibDayRel)
 }
 
 
-
-// значени€ счетчиков на начало мес€цев
+// значени€ счетчиков на начало мес€ца
 void    QueryEngMon38(uchar  ibMonRel)
 {
 //  MonitorString("\n QueryEngMon38 "); MonitorCharDec(ibMonRel);
