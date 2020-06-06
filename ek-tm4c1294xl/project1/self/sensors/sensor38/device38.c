@@ -21,42 +21,6 @@ void    PushAddress38(void)
 }
 
 
-void    QueryTime38(void)
-{
-  InitPush(0);
-
-  PushChar(0xC0);
-  PushChar(0x06);
-
-  PushAddress38();
-
-  PushChar(0x00);
-  PushChar(0x06);
-
-  PushChar(0x04);
-  PushChar(0x00);
-  PushChar(0x01);
-
-  Query38(250, 14);
-}
-
-
-time    LongToTime38(ulong  dw)
-{
-  time ti = SecIndexToDate(dw);
-  ti.bYear += 12;
-  return ti;
-}
-
-
-time    ReadTime38(void)
-{
-  int64_t ddw = 0;
-  DffDecodePositive(InBuffPtr(11), &ddw);
-  return LongToTime38(ddw % 0x100000000);
-}
-
-
 
 void    QueryEngAbs38(void)
 {

@@ -12,6 +12,7 @@ automatic_get_time_38.c
 #include "../../devices/devices.h"
 #include "../../digitals/digitals.h"
 #include "device38.h"
+#include "time38.h"
 #include "io38.h"
 #include "automatic_get_time_38.h"
 
