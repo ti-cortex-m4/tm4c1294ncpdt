@@ -289,13 +289,17 @@
 
     case DEV_PAUSE_38P:
       {
-        uint wSecondsNow = (tiCurr.bMinute % 30)*60 + tiCurr.bSecond;
-        uint wSecondsStr = 29*60 + 30;
-        uint wSecondsFin = 30*60 + 30;
-        if ((wSecondsNow > wSecondsStr) && (wSecondsNow < wSecondsFin))
+        ulong dwSecondsNow = DateToSecIndex(tiCurr);
+        time ti = HouIndexToDate(DateToHouIndex(tiCurr) + 1);
+        MonitorString(" \n tiNext="); MonitorTime(ti);
+        ulong dwSecondsX = DateToSecIndex(ti);
+        ulong dwSecondsStr = dwSecondsX - 30;
+        ulong dwSecondsFin = dwSecondsX + 30;
+        if ((dwSecondsNow > dwSecondsStr) && (dwSecondsNow < dwSecondsFin))
         {
           Clear();
-          sprintf(szLo+3, "пауза: %u", wSecondsFin-wSecondsNow);
+          MonitorString(" \n Delta="); MonitorLongDec(dwSecondsFin-dwSecondsNow);
+          sprintf(szLo+3, "пауза: %u", dwSecondsFin-dwSecondsNow);
           MakeLongPause(DEV_PAUSE_38P, 1);
         }
         else
