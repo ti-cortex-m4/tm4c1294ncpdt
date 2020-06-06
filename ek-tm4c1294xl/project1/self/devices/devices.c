@@ -6889,7 +6889,7 @@ void    RunDevices(void)
       {
         tiValue38 = ReadTime38();
         dwValue38 = DateToHouIndex(tiValue38);
-        MakePause(DEV_POSTTIME2_38P);
+        MakePause(DEV_INITHEADER_38P);
       }
       else
       {
@@ -6906,12 +6906,29 @@ void    RunDevices(void)
       break;
 
 
-    case DEV_POSTTIME2_38P:
+    case DEV_INITHEADER_38P:
       InitHeader38();
+      MakePause(DEV_PAUSE_38P);
+      break;
 
-      cbRepeat = MaxRepeats();
-      QueryHeader38();
-      SetCurr(DEV_HEADER_38P);
+    case DEV_PAUSE_38P:
+      {
+        uint wSecondsNow = (tiCurr.bMinute % 30)*60 + tiCurr.bSecond;
+        uint wSecondsStr = 29*60 + 30;
+        uint wSecondsFin = 30*60 + 30;
+        if ((wSecondsNow > wSecondsStr) && (wSecondsNow < wSecondsFin))
+        {
+          Clear();
+          sprintf(szLo+3, "пауза: %u", wSecondsFin-wSecondsNow);
+          MakeLongPause(DEV_PAUSE_38P, 1);
+        }
+        else
+        {
+          cbRepeat = MaxRepeats();
+          QueryHeader38();
+          SetCurr(DEV_HEADER_38P);
+        }
+      }
       break;
 
     case DEV_HEADER_38P:
@@ -6920,7 +6937,7 @@ void    RunDevices(void)
         if (ReadData38() == false)
           DoneProfile();
         else
-          MakePause(DEV_DATA_38P);
+          MakePause(DEV_PAUSE_38P);
       }
       else
       {
@@ -6935,12 +6952,6 @@ void    RunDevices(void)
           SetCurr(DEV_HEADER_38P);
         }
       }
-      break;
-
-    case DEV_DATA_38P:
-      cbRepeat = MaxRepeats();
-      QueryHeader38();
-      SetCurr(DEV_HEADER_38P);
       break;
 
 #endif

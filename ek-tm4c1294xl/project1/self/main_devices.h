@@ -855,10 +855,10 @@ typedef enum
 
   DEV_PREVTIME2_38P     =  0x2326,
   DEV_TIME2_38P         =  0x2327,
-  DEV_POSTTIME2_38P     =  0x2328,
 
-  DEV_HEADER_38P        =  0x2329,
-  DEV_DATA_38P          =  0x232A,
+  DEV_INITHEADER_38P    =  0x2328,
+  DEV_PAUSE_38P         =  0x2329,
+  DEV_HEADER_38P        =  0x232B,
 
 #endif
 
