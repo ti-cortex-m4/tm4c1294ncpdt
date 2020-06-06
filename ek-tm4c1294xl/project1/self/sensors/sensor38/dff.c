@@ -33,19 +33,15 @@ uchar   DffEncode(int64_t  ddwValue, uchar  *pbOut) {
 
   while (true)
   {
-    int64_t ddw = ddwValue >> (shift - 1);
-    bool f1 = (ddw != -1);
-    bool f2 = (ddw != 0);
-    bool f3 = (bytes == 0);
-    bool f = ((f1 && f2) || f3);
-    if (f == false) break; // условие остановки кодирования: оставшиеся биты и последний записанный либо нули либо единицы
-
     char ch = (char)(ddwValue >> shift); // следующие 7 бит
-
     *pbOut++ = ch | 0x80; // запись с флагом lbf
 
     bytes++;
     shift += 7;
+
+    int64_t ddw = ddwValue >> (shift - 1);
+    if ((ddw == -1) || (ddw == 0))
+      break; // условие остановки кодирования: оставшиеся биты и последний записанный либо нули либо единицы
   }
 
   *(pbOut - 1) &= 0x7F; // убрать флаг lbf у последнего байта

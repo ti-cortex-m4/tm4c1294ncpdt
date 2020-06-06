@@ -75,7 +75,7 @@ void    SetCorrectSecond38(int64_t  ddw)
 
 void    QueryCorrect38(void)
 {
-  MonitorString("\n QueryCorrect38 ");
+//  MonitorString("\n QueryCorrect38 ");
 
   InitPush(0);
 
@@ -108,7 +108,7 @@ uchar   ReadCorrect38(void)
 
 void    QueryManage38(void)
 {
-  MonitorString("\n QueryManage38 ");
+//  MonitorString("\n QueryManage38 ");
 
   InitPush(0);
 
