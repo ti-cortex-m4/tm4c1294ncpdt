@@ -92,7 +92,7 @@ void    QueryCorrect38(void)
 
   PushChar(0x0F); // выполнить коррекцию времени
 
-  uchar n = EncodeInt(dwCorrectSecond38, OutBuffPtr(GetPush()));
+  uchar n = Encode38(dwCorrectSecond38, OutBuffPtr(GetPush()));
   Skip(n);
 
   Query38(100+18, 14+n);
@@ -126,7 +126,7 @@ void    QueryManage38(void)
 
   ulong dw = TimeToSeconds38(*GetCurrTimeDate());
 
-  uchar n = EncodeInt(dw, OutBuffPtr(GetPush()));
+  uchar n = Encode38(dw, OutBuffPtr(GetPush()));
   Skip(n);
 
   Query38(100+18, 14+n);

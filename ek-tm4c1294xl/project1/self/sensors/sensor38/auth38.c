@@ -83,7 +83,7 @@ static uchar mbPass[10*2];
   PushChar(0);
   PushChar(1);
 
-  int n = EncodeInt(dw, OutBuffPtr(11));
+  int n = Encode38(dw, OutBuffPtr(11));
 
   *OutBuffPtr(11+n-1) |= 0x80;
 
