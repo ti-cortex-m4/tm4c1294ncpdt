@@ -10,7 +10,7 @@ dff.c
 
 
 
-int     EncodeInt(int64_t  ddwValue, uchar  *pbOut) {
+int     Encode38(int64_t  ddwValue, uchar  *pbOut) {
   int num = 0; // число записанных байт (lbf + 7 бит)
   char ch;
 

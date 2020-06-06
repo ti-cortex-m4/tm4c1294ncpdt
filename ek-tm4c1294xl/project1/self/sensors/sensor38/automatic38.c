@@ -26,7 +26,7 @@ bool    Automatic38(void)
   Delay(1000);
 
 
-  dbKpulse = 10000;                     // K преобразования
+  dbKpulse = 1000;                      // K преобразования
   dbKtrans = 1;                         // K трансформации
   SetAllFactors(dbKpulse,dbKtrans);     // сохранение К преобразования и К трансформации
 

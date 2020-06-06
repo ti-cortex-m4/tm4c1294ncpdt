@@ -86,7 +86,7 @@ void    InitHeader38(void)
 uchar   PushIndex(uint  iw30MinRel)
 {
   int64_t ddw = iw30MinRel;
-  uchar n = EncodeInt(ddw, OutBuffPtr(GetPush()));
+  uchar n = Encode38(ddw, OutBuffPtr(GetPush()));
   Skip(n);
   return n;
 }
