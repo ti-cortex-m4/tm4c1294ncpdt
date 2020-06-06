@@ -849,15 +849,16 @@ typedef enum
   DEV_PREVAUTHKEY2_38P  =  0x2320,
   DEV_AUTHKEY2_38P      =  0x2321,
   DEV_POSTAUTHKEY2_38P  =  0x2322,
-  DEV_PREVMANAGE_38P    =  0x2323,
-  DEV_MANAGE_38P        =  0x2324,
+  DEV_AUTHREQ2_38P      =  0x2323,
+  DEV_PREVMANAGE_38P    =  0x2324,
+  DEV_MANAGE_38P        =  0x2325,
 
-  DEV_PREVTIME2_38P     =  0x2325,
-  DEV_TIME2_38P         =  0x2326,
-  DEV_POSTTIME2_38P     =  0x2327,
+  DEV_PREVTIME2_38P     =  0x2326,
+  DEV_TIME2_38P         =  0x2327,
+  DEV_POSTTIME2_38P     =  0x2328,
 
-  DEV_HEADER_38P        =  0x2328,
-  DEV_DATA_38P          =  0x2329,
+  DEV_HEADER_38P        =  0x2329,
+  DEV_DATA_38P          =  0x232A,
 
 #endif
 
