@@ -30,6 +30,7 @@ profile38.c
 #include "../../digitals/limits.h"
 #include "../../special/special.h"
 #include "device38.h"
+#include "time38.h"
 #include "io38.h"
 #include "dff.h"
 #include "profile38.h"

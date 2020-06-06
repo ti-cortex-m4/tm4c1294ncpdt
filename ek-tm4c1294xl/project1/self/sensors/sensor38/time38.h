@@ -4,8 +4,12 @@ time38.h
 
 ------------------------------------------------------------------------------*/
 
-void    SetCorrectSecond38(int64_t  ddw);
+time    LongToTime38(ulong  dw);
 
+void    QueryTime38(void);
+time    ReadTime38(void);
+
+void    SetCorrectSecond38(int64_t  ddw);
 void    QueryCorrect38(void);
 uchar   ReadCorrect38(void);
 
