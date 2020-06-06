@@ -55,7 +55,7 @@
           }
           else if (GetCurrHouIndex() == (tiValue38.bHour*2 + tiValue38.bMinute/30))
           {
-            if (chControlQ == false) {
+            if (false/*bControlQ == false*/) {
               SetCorrectSecond38(dwSecond2 - dwSecond1);
               ShowLo(szCorrectYes); DelayInf();
               MakePause(DEV_PREVAUTHKEY1_38P); // коррекция времени
@@ -160,11 +160,9 @@
         }
       }
       break;
-
 // конец коррекции времени
 
 // начало установки времени
-/*
     case DEV_PREVAUTHKEY2_38P:
       cbRepeat = MaxRepeats();
       QueryAuthRequest38();
@@ -253,7 +251,6 @@
         }
       }
       break;
-*/
 // конец установки времени
 
 // чтение времени для чтения профилей
