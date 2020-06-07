@@ -289,17 +289,24 @@
 
     case DEV_PAUSE_38P:
       {
+        MonitorString(" \n tiCurr="); MonitorTime(tiCurr);
+
         ulong dwSecondsNow = DateToSecIndex(tiCurr);
-        time ti = HouIndexToDate(DateToHouIndex(tiCurr) + 1);
-        MonitorString(" \n tiNext="); MonitorTime(ti);
-        ulong dwSecondsX = DateToSecIndex(ti);
-        ulong dwSecondsStr = dwSecondsX - 30;
-        ulong dwSecondsFin = dwSecondsX + 30;
-        if ((dwSecondsNow > dwSecondsStr) && (dwSecondsNow < dwSecondsFin))
+        ulong dwHou = DateToHouIndex(tiCurr);
+        ulong dwSecondsPrev = DateToSecIndex(HouIndexToDate(dwHou));
+        ulong dwSecondsNext = DateToSecIndex(HouIndexToDate(dwHou+1));
+        bool f1 = (dwSecondsNext - dwSecondsNow < 20);
+        bool f2 = (dwSecondsNow - dwSecondsPrev < 20);
+
+        MonitorString(" \n tiPrev="); MonitorTime(HouIndexToDate(dwHou));
+        MonitorString(" \n tiNext="); MonitorTime(HouIndexToDate(dwHou+1));
+        MonitorBool(f1); MonitorBool(f2);
+        if (f1 || f2)
         {
           Clear();
-          MonitorString(" \n Delta="); MonitorLongDec(dwSecondsFin-dwSecondsNow);
-          sprintf(szLo+3, "пауза: %u", dwSecondsFin-dwSecondsNow);
+          uchar bDelta = f1 ? 20 + (dwSecondsNext - dwSecondsNow) : (dwSecondsNow - dwSecondsPrev);
+          MonitorString(" \n Delta="); MonitorLongDec(bDelta);
+          sprintf(szLo+3, "пауза: %u", bDelta);
           MakeLongPause(DEV_PAUSE_38P, 1);
         }
         else
