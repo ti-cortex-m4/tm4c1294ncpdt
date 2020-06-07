@@ -50,6 +50,7 @@ static uint             wProfile38;
 static uint             wRelStart, wRelEnd;
 static profile38        mpPrf38[6];
 static time             tiStart38;
+static ulong            dwHouStart;
 
 time                    tiValue38;
 ulong                   dwValue38;
@@ -68,6 +69,7 @@ void    InitHeader38(void)
   }
 
   tiStart38 = tiValue38;
+  dwHouStart = DateToHouIndex(tiCurr);
 
   wRelStart = wProfile38;
   wRelEnd = wRelStart + 5;
@@ -241,6 +243,12 @@ bool    ReadData38(void)
     }
   }
 
+
+  ulong dwHouNow = DateToHouIndex(tiCurr);
+  uchar d = dwHouNow - dwHouStart;
+  MonitorString("\n delta="); MonitorCharDec(d);
+
+
   uchar h;
   for (h=0; h<6; h++) {
 
@@ -254,7 +262,7 @@ bool    ReadData38(void)
 #endif
 
     ulong dw = DateToHouIndex(tiStart38);
-    dw -= (wProfile38 + h);
+    dw -= (wProfile38 + h - d);
     time tiVirtual = HouIndexToDate(dw);
 
     bool difference = DifferentDateTime(tiVirtual, mpPrf38[h].tiTime);

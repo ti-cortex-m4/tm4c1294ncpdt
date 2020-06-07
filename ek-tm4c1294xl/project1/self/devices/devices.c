@@ -6913,22 +6913,22 @@ void    RunDevices(void)
 
     case DEV_PAUSE_38P:
       {
-        MonitorString(" \n tiCurr="); MonitorTime(tiCurr);
-
-        ulong dwSecondsNow = DateToSecIndex(tiCurr);
+//        MonitorString(" \n tiCurr="); MonitorTime(tiCurr);
+        ulong dwSecNow = DateToSecIndex(tiCurr);
         ulong dwHou = DateToHouIndex(tiCurr);
         ulong dwSecondsPrev = DateToSecIndex(HouIndexToDate(dwHou));
         ulong dwSecondsNext = DateToSecIndex(HouIndexToDate(dwHou+1));
-        bool f1 = (dwSecondsNext - dwSecondsNow < 20);
-        bool f2 = (dwSecondsNow - dwSecondsPrev < 20);
+        const char bGap = 20;
+        bool f1 = (dwSecondsNext - dwSecNow < bGap);
+        bool f2 = (dwSecNow - dwSecondsPrev < bGap);
 
-        MonitorString(" \n tiPrev="); MonitorTime(HouIndexToDate(dwHou));
-        MonitorString(" \n tiNext="); MonitorTime(HouIndexToDate(dwHou+1));
+//        MonitorString(" \n tiPrev="); MonitorTime(HouIndexToDate(dwHou));
+//        MonitorString(" \n tiNext="); MonitorTime(HouIndexToDate(dwHou+1));
         MonitorBool(f1); MonitorBool(f2);
         if (f1 || f2)
         {
           Clear();
-          uchar bDelta = f1 ? 20 + (dwSecondsNext - dwSecondsNow) : (dwSecondsNow - dwSecondsPrev);
+          uchar bDelta = f1 ? bGap + (dwSecondsNext - dwSecNow) : bGap - (dwSecNow - dwSecondsPrev);
           MonitorString(" \n Delta="); MonitorLongDec(bDelta);
           sprintf(szLo+3, "пауза: %u", bDelta);
           MakeLongPause(DEV_PAUSE_38P, 1);
