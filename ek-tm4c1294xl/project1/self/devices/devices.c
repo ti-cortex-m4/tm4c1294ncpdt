@@ -6928,7 +6928,7 @@ void    RunDevices(void)
         if (f1 || f2)
         {
           Clear();
-          uchar bDelta = (dwSecondsNext > dwSecondsNow) ? 20 + (dwSecondsNext > dwSecondsNow) : (dwSecondsNow - dwSecondsPrev);
+          uchar bDelta = f1 ? 20 + (dwSecondsNext - dwSecondsNow) : (dwSecondsNow - dwSecondsPrev);
           MonitorString(" \n Delta="); MonitorLongDec(bDelta);
           sprintf(szLo+3, "пауза: %u", bDelta);
           MakeLongPause(DEV_PAUSE_38P, 1);
