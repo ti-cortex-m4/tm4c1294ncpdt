@@ -292,8 +292,8 @@
         ulong dwSecNow = DateToSecIndex(tiCurr);
         ulong dwHou = DateToHouIndex(tiCurr);
         ulong dwSecPrev = DateToSecIndex(HouIndexToDate(dwHou));
-        ulong dwSecNext = DateToSecIndex(HouIndexToDate(dwHou+1));
-        const char bGap = 20;
+        ulong dwSecNext = DateToSecIndex(HouIndexToDate(dwHou + 1));
+        const char bGap = 30;
         bool f1 = (dwSecNext - dwSecNow < bGap);
         bool f2 = (dwSecNow - dwSecPrev < bGap);
         if (f1 || f2)
