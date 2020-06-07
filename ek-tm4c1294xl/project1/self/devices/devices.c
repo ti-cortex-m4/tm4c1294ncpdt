@@ -6916,20 +6916,19 @@ void    RunDevices(void)
 //        MonitorString(" \n tiCurr="); MonitorTime(tiCurr);
         ulong dwSecNow = DateToSecIndex(tiCurr);
         ulong dwHou = DateToHouIndex(tiCurr);
-        ulong dwSecondsPrev = DateToSecIndex(HouIndexToDate(dwHou));
+        ulong dwSecPrev = DateToSecIndex(HouIndexToDate(dwHou));
         ulong dwSecondsNext = DateToSecIndex(HouIndexToDate(dwHou+1));
         const char bGap = 20;
         bool f1 = (dwSecondsNext - dwSecNow < bGap);
-        bool f2 = (dwSecNow - dwSecondsPrev < bGap);
-
+        bool f2 = (dwSecNow - dwSecPrev < bGap);
 //        MonitorString(" \n tiPrev="); MonitorTime(HouIndexToDate(dwHou));
 //        MonitorString(" \n tiNext="); MonitorTime(HouIndexToDate(dwHou+1));
-        MonitorBool(f1); MonitorBool(f2);
+//        MonitorBool(f1); MonitorBool(f2);
         if (f1 || f2)
         {
           Clear();
-          uchar bDelta = f1 ? bGap + (dwSecondsNext - dwSecNow) : bGap - (dwSecNow - dwSecondsPrev);
-          MonitorString(" \n Delta="); MonitorLongDec(bDelta);
+          uchar bDelta = f1 ? bGap + (dwSecondsNext - dwSecNow) : bGap - (dwSecNow - dwSecPrev);
+//          MonitorString(" \n Delta="); MonitorLongDec(bDelta);
           sprintf(szLo+3, "пауза: %u", bDelta);
           MakeLongPause(DEV_PAUSE_38P, 1);
         }
