@@ -246,7 +246,10 @@ bool    ReadData38(void)
 
   ulong dwHouNow = DateToHouIndex(tiCurr);
   uchar d = dwHouNow - dwHouStart;
+
+#ifdef MONITOR_38
   MonitorString("\n delta="); MonitorCharDec(d);
+#endif
 
 
   uchar h;
