@@ -24,11 +24,11 @@ fragment_profile_38.c
 
 
 
-schar   FragmentProfile38(runner38  runner, time  ti1, time  ti2)
+schar   FragmentProfile38(runner38  *runner, time  ti1, time  ti2)
 {
-  runner.bNS++;
-  runner.bInvokeId++;
-  QueryProfile38(runner.bNS, runner.bNR, runner.bInvokeId, ti1, ti2);
+  (*runner).bNS++;
+  (*runner).bInvokeId++;
+  QueryProfile38((*runner).bNS, (*runner).bNR, (*runner).bInvokeId, ti1, ti2);
   if (Input38() != SER_GOODCHECK) return -19;
   DelayOff();
 
@@ -41,15 +41,15 @@ schar   FragmentProfile38(runner38  runner, time  ti1, time  ti2)
     AddBufferY(15, IndexInBuff()-15-3);
 
   while (!LastSegmentDMLS()) {
-    runner.bNR++;
-    Query38_RR(runner.bNR);
+    (*runner).bNR++;
+    Query38_RR((*runner).bNR);
     if (Input38() != SER_GOODCHECK) return -20;
     AddBufferY(8, IndexInBuff()-8-3);
     DelayOff();
   }
 
-  runner.bNR++;
-  Query38_RR(runner.bNR);
+  (*runner).bNR++;
+  Query38_RR((*runner).bNR);
   if (Input38() != SER_GOODCHECK) return -21;
   DelayOff();
 
@@ -60,9 +60,9 @@ schar   FragmentProfile38(runner38  runner, time  ti1, time  ti2)
   while (fUseBlocks1 && (!fLastBlock1)) {
     bBlockNumber++;
 
-    runner.bNS++;
+    (*runner).bNS++;
 //  uchar bBlockNumber = 1;
-    QueryNextBlock36(runner.bNS, runner.bNR, runner.bInvokeId, bBlockNumber);
+    QueryNextBlock36((*runner).bNS, (*runner).bNR, (*runner).bInvokeId, bBlockNumber);
     if (Input38() != SER_GOODCHECK) return -22;
 
     fUseBlocks1 = UseBlocksDMLS();
@@ -72,15 +72,15 @@ schar   FragmentProfile38(runner38  runner, time  ti1, time  ti2)
     DelayOff();
 
     while (!LastSegmentDMLS()) {
-      runner.bNR++;
-      Query38_RR(runner.bNR);
+      (*runner).bNR++;
+      Query38_RR((*runner).bNR);
       if (Input38() != SER_GOODCHECK) return -23;
       AddBufferY(8, IndexInBuff()-8-3);
       DelayOff();
     }
 
-    runner.bNR++;
-    Query38_RR(runner.bNR);
+    (*runner).bNR++;
+    Query38_RR((*runner).bNR);
     if (Input38() != SER_GOODCHECK) return -24;
     DelayOff();
   }

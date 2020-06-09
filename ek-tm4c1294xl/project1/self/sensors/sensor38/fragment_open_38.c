@@ -24,7 +24,7 @@ fragment_open_38.c
 
 
 
-schar   FragmentOpen38(runner38  runner)
+schar   FragmentOpen38(runner38  *runner)
 {
   Query38_DISC();
   if (Input38() != SER_GOODCHECK) return 1;
@@ -34,15 +34,15 @@ schar   FragmentOpen38(runner38  runner)
   if (Input38() != SER_GOODCHECK) return 2;
   DelayOff();
 
-  Query38_Open2(runner.bNS, runner.bNS);
+  Query38_Open2((*runner).bNS, (*runner).bNS);
   if (Input38() != SER_GOODCHECK) return 3;
-  if (!ValidateIframe(runner.bNS, runner.bNS)) return 4;
+  if (!ValidateIframe((*runner).bNS, (*runner).bNS)) return 4;
   DelayOff();
 
-  runner.bNS++;
-  Query38_RR(runner.bNS);
+  (*runner).bNS++;
+  Query38_RR((*runner).bNS);
   if (Input38() != SER_GOODCHECK) return 5;
-  if (!ValidateSframe(runner.bNS)) return 6;
+  if (!ValidateSframe((*runner).bNS)) return 6;
   DelayOff();
 
   return 0;
