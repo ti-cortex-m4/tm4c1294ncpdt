@@ -16,13 +16,14 @@ profile39*c
 // #include "../../memory/mem_profile.h"
 // #include "../../memory/mem_limits.h"
 // #include "../../display/display.h"
+ #include "../../keyboard/keyboard.h"
 // #include "../../keyboard/time/key_timedate.h"
 // #include "../../time/timedate.h"
-// #include "../../time/calendar.h"
+ #include "../../time/calendar.h"
 // #include "../../time/delay.h"
 // #include "../../serial/ports.h"
 // #include "../../serial/ports_devices.h"
-// #include "../../serial/monitor.h"
+ #include "../../serial/monitor.h"
 // #include "../../devices/devices.h"
 // #include "../../devices/devices_time.h"
 // #include "../../digitals/current/current_run.h"
@@ -30,6 +31,8 @@ profile39*c
 // #include "../../special/special.h"
 // #include "../../hardware/watchdog.h"
 // #include "automatic_s.h"
+#include "device38.h"
+#include "io38.h"
 #include "profile39.h"
 
 
@@ -38,9 +41,10 @@ time                    tiValue38;
 ulong                   dwValue38;
 
 
-/*
-void    InitHeader39(void)
+
+void    InitHeader38(void)
 {
+/*
   if (!UseBound39())
     wBaseCurr = 0;
   else
@@ -57,11 +61,14 @@ void    InitHeader39(void)
 
   tiDigPrev.bHour = i / 2;
   tiDigPrev.bMinute = (i % 2)*30;
+*/
 }
 
 
-void    QueryHeader39(void)
+
+void    QueryHeader38(void)
 {
+/*
   HideCurrTime(1);
 
 
@@ -88,9 +95,10 @@ void    QueryHeader39(void)
   PushChar(4);
 
   Query39(100+23, 20);
+*/
 }
 
-
+/*
 static bool ReadData39(uchar  i)
 {
   sprintf(szLo," %02u    %02u.%02u.%02u", tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
@@ -131,10 +139,11 @@ static bool ReadData39(uchar  i)
     return(MakeStopHou(0));
   }
 }
+*/
 
-
-bool    ReadHeader39(void)
+bool    ReadHeader38(void)
 {
+/*
   uchar i;
   for (i=0; i<4; i++)
   {
@@ -151,8 +160,8 @@ bool    ReadHeader39(void)
 
   wBaseCurr += 4;
   if (wBaseCurr > wHOURS) return(0);
-
-  return(1);
+*/
+  return true;
 }
 
 
@@ -161,22 +170,22 @@ bool    ReadHeader39(void)
 
 void    RunProfile39(void)
 {  
-  QueryTime39();
-  if (Input39() != SER_GOODCHECK) { MonitorString("\n error 1"); return; }
+  QueryTime38(0,0,0);
+  if (Input38() != SER_GOODCHECK) { MonitorString("\n error 1"); return; }
 
-  tiValue38 = ReadTime39();
+  tiValue38 = ReadTime38();
   dwValue38 = DateToHouIndex(tiValue38);
 
-  InitHeader39();
+  InitHeader38();
 
   while (true) {
-    QueryHeader39();
-    if (Input39() != SER_GOODCHECK) { MonitorString("\n error 2"); return; }
+    QueryHeader38();
+    if (Input38() != SER_GOODCHECK) { MonitorString("\n error 2"); return; }
 
-    if (ReadData39() == false) { MonitorString("\n finish "); return; }
+    if (ReadHeader38() == false) { MonitorString("\n finish "); return; }
     if (fKey == true) return;
   }  
 }
 
 #endif 
-*/
+
