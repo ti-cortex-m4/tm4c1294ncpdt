@@ -12,14 +12,8 @@ buffer_y*c
 #include "../../time/timedate.h"
 #include "include38.h"
 #include "buffer_x.h"
+#include "buffer_z.h"
 #include "buffer_y.h"
-
-
-
-const uchar     PROFILE38_SIZE = 1;
-
-
-profile38       mpPrf38[PROFILE38_SIZE];
 
 
 
@@ -92,6 +86,8 @@ buff_y  FinishBufferY(void) {
   MonitorString("\n Count="); MonitorCharDec(bCount); MonitorString("\n");
 #endif
 
+  InitBufferZ();
+
   uchar i;
   for (i=0; i<bCount; i++)
   {
@@ -130,6 +126,8 @@ buff_y  FinishBufferY(void) {
     MonitorLongDec(ddw / 1000000);
     MonitorLongDec(ddw % 1000000);
 #endif
+
+    AddBufferZ(ti, ddw);
   }
 
   return by;
