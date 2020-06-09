@@ -35,6 +35,7 @@ profile39*c
 #include "io38.h"
 #include "monitor38.h"
 #include "fragment_open_38.h"
+#include "fragment_profile_38.h"
 #include "profile39.h"
 
 
@@ -71,35 +72,18 @@ void    InitHeader38(void)
 
 
 
-void    QueryHeader38(void)
+schar   QueryHeader38(runner38  runner)
 {
   HideCurrTime(1);
 
 
   ulong dw = DateToHouIndex(tiStart38);
   dw -= wProfile38;
-  time ti = HouIndexToDate(dw);
+  time ti1 = HouIndexToDate(dw);
+  time ti2 = HouIndexToDate(dw + 6 - 1);
 
-/*
-  InitPush(0);
 
-  PushChar(0xC0);
-  PushChar(0x48);
-
-  PushAddress39();
-
-  PushChar(0xD5);
-  PushChar(0x01);
-  PushChar(0x34);
-
-  PushChar(ToBCD(tiDig.bDay));
-  PushChar(ToBCD(tiDig.bMonth));
-  PushChar(ToBCD(tiDig.bYear));
-  PushChar(tiDig.bHour*2 + tiDig.bMinute/30);
-  PushChar(4);
-
-  Query39(100+23, 20);
-*/
+  return FragmentProfile38(runner, ti1, ti2);
 }
 
 /*
@@ -161,10 +145,10 @@ bool    ReadHeader38(void)
     if (dw < dwValueS)
       if (ReadData39(4-1-i) == 0) return(0);
   }
-
-  wProfile38 += 4;
-  if (wProfile38 > wHOURS) return(0);
 */
+  wProfile38 += 6;
+  if (wProfile38 > wHOURS) return false;
+
   return true;
 }
 
@@ -197,8 +181,7 @@ uchar   RunProfile39_Internal(runner38  runner)
 
 
   while (true) {
-    QueryHeader38();
-    if (Input38() != SER_GOODCHECK) return 11;
+    if (QueryHeader38(runner) != 0) return 11;
 
     if (ReadHeader38() == false) return 0;
     if (fKey == true) return 255;
