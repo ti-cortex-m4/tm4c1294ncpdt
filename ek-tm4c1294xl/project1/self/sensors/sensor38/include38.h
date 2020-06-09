@@ -9,6 +9,15 @@ include38*h
 
 
 
+typedef struct
+{
+  uchar         bNS;
+  uchar         bNR;
+  uchar         bInvokeId;
+} runner38;
+
+
+
 #define MONITOR_38  1
 
 
