@@ -33,6 +33,7 @@ profile39*c
 // #include "automatic_s.h"
 #include "device38.h"
 #include "io38.h"
+#include "monitor38.h"
 #include "profile39.h"
 
 
@@ -214,10 +215,10 @@ uchar   RunProfile39_Internal(void)
 
   while (true) {
     QueryHeader38();
-    if (Input38() != SER_GOODCHECK) { MonitorString("\n error 2"); return; }
+    if (Input38() != SER_GOODCHECK) return 11;
 
-    if (ReadHeader38() == false) { MonitorString("\n finish "); return; }
-    if (fKey == true) return;
+    if (ReadHeader38() == false) return 0;
+    if (fKey == true) return 255;
   }  
 }
 
