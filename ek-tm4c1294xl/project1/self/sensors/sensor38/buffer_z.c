@@ -36,7 +36,7 @@ void    AddBufferZ(time  ti, uint64_t  ddw)
 {
   if (cbPrf38 < PROFILE38_SIZE)
   {
-    mpPrf38[cbPrf38].fPresents = true;
+    mpPrf38[cbPrf38].fExists = true;
     mpPrf38[cbPrf38].tiTime = ti;
     mpPrf38[cbPrf38].ddwValue = ddw;
 
