@@ -4,4 +4,4 @@ fragment_profile_38.h
 
 ------------------------------------------------------------------------------*/
 
-schar   FragmentProfile38(runner38  *runner, time  ti1, time  ti2);
+uchar   FragmentProfile38(runner38  *runner, time  ti1, time  ti2);
