@@ -168,14 +168,14 @@ bool    ReadHeader38(void)
 
 #ifdef  MONITOR_38
 
-void    RunProfile39(void)
+uchar   RunProfile39_Internal(void)
 {  
   Query38_DISC();
-  if (Input38() != SER_GOODCHECK) return GetTime2Error();
+  if (Input38() != SER_GOODCHECK) return 1;
   DelayOff();
 
   Query38_SNRM();
-  if (Input38() != SER_GOODCHECK) return GetTime2Error();
+  if (Input38() != SER_GOODCHECK) return 2;
   DelayOff();
 
   uchar bNS = 0;
@@ -183,33 +183,31 @@ void    RunProfile39(void)
   uchar bInvokeId = 0;
 
   Query38_Open2(bNS, bNR);
-  if (Input38() != SER_GOODCHECK) return GetTime2Error();
-  if (!ValidateIframe(bNS, bNR)) return GetTime2Error();
+  if (Input38() != SER_GOODCHECK) return 3;
+  if (!ValidateIframe(bNS, bNR)) return 4;
   DelayOff();
 
   bNR++;
   Query38_RR(bNR);
-  if (Input38() != SER_GOODCHECK) return GetTime2Error();
-  if (!ValidateSframe(bNR)) return GetTime2Error();
+  if (Input38() != SER_GOODCHECK) return 5;
+  if (!ValidateSframe(bNR)) return 6;
   DelayOff();
 
 
   bNS++;
   bInvokeId++;
   QueryTime38(bNS, bNR, bInvokeId);
-  if (Input38() != SER_GOODCHECK) return GetTime2Error();
-  if (!ValidateIframe(bNS, bNR)) return GetTime2Error();
-  time ti = ReadTime38();
+  if (Input38() != SER_GOODCHECK) return 7;
+  if (!ValidateIframe(bNS, bNR)) return 8;
+  tiValue38 = ReadTime38();
+  dwValue38 = DateToHouIndex(tiValue38);
   DelayOff();
 
   bNR++;
   Query38_RR(bNR);
-  if (Input38() != SER_GOODCHECK) return GetTime2Error();
-  if (!ValidateSframe(bNR)) return GetTime2Error();
+  if (Input38() != SER_GOODCHECK) return 9;
+  if (!ValidateSframe(bNR)) return 10;
   DelayOff();
-
-  tiValue38 = ReadTime38();
-  dwValue38 = DateToHouIndex(tiValue38);
 
 
   InitHeader38();
@@ -221,6 +219,18 @@ void    RunProfile39(void)
     if (ReadHeader38() == false) { MonitorString("\n finish "); return; }
     if (fKey == true) return;
   }  
+}
+
+
+
+void    RunProfile39(void)
+{
+  uchar b = RunProfile39_Internal();
+  if (b == 0){
+    MonitorString("\n error ");
+  } else {
+    MonitorString("\n finish "); MonitorCharDec(b);
+  }
 }
 
 #endif 
