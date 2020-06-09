@@ -4,9 +4,9 @@ buffer_profile_38.h
 
 ------------------------------------------------------------------------------*/
 
-void    InitPrfBuff38(void);
-void    AddPrfBuff38(time  ti, uint64_t  ddw);
+void    InitBuffPrf38(void);
+void    AddBuffPrf38(time  tiTime, uint64_t  ddwValue);
 
-profile38 GetPrf38(uchar i);
-uchar   GetPrfSize38(void);
-bool    GetPrfOveflow38(void);
+profile38 GetBuffPrf38(uchar  i);
+uchar   GetBuffPrfSize38(void);
+bool    GetBuffPrfOveflow38(void);

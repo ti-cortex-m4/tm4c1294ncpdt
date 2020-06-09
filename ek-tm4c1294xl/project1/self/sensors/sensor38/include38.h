@@ -26,7 +26,9 @@ typedef struct
 
 
 
-#define MONITOR_38  1
+#define PROFILE38_SIZE  6
+
+#define MONITOR_38      1
 
 
 

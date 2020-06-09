@@ -86,7 +86,7 @@ buff_y  FinishBufferY(void) {
   MonitorString("\n Count="); MonitorCharDec(bCount); MonitorString("\n");
 #endif
 
-  InitPrfBuff38();
+  InitBuffPrf38();
 
   uchar i;
   for (i=0; i<bCount; i++)
@@ -127,7 +127,7 @@ buff_y  FinishBufferY(void) {
     MonitorLongDec(ddw % 1000000);
 #endif
 
-    AddPrfBuff38(ti, ddw);
+    AddBuffPrf38(ti, ddw);
   }
 
   return by;
