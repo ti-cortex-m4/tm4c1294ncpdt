@@ -115,7 +115,7 @@ bool    ReadHeader38(void)
   for (i=0; i<6; i++)
   {
     profile38 prf = GetPrf38(i);
-    if (prf.fPresents)
+    if (prf.fExists)
     {
       if (ReadData38(prf.tiTime, prf.ddwValue) == false) return false;
     }

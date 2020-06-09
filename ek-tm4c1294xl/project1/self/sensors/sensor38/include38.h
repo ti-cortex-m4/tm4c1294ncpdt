@@ -19,7 +19,7 @@ typedef struct
 
 typedef struct
 {
-  bool          fPresents;
+  bool          fExists;
   time          tiTime;
   uint64_t      ddwValue;
 } profile38;
