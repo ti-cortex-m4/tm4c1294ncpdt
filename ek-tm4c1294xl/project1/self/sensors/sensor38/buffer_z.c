@@ -53,7 +53,7 @@ void    AddBufferZ(time  ti, uint64_t  ddw)
 profile38 GetPrf38(uchar i)
 {
   ASSERT(i < PROFILE38_SIZE);
-  return mpPrf38(i);
+  return mpPrf38[i];
 }
 
 

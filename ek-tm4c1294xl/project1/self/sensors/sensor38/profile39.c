@@ -10,12 +10,12 @@ profile39*c
 // #include "../../memory/mem_digitals.h"
 // #include "../../memory/mem_ports.h"
 // #include "../../memory/mem_current.h"
-// #include "../../memory/mem_factors.h"
+ #include "../../memory/mem_factors.h"
 // #include "../../memory/mem_realtime.h"
-// #include "../../memory/mem_energy_spec.h"
+ #include "../../memory/mem_energy_spec.h"
 // #include "../../memory/mem_profile.h"
 // #include "../../memory/mem_limits.h"
-// #include "../../display/display.h"
+ #include "../../display/display.h"
  #include "../../keyboard/keyboard.h"
  #include "../../keyboard/time/key_timedate.h"
 // #include "../../time/timedate.h"
@@ -24,11 +24,11 @@ profile39*c
 // #include "../../serial/ports.h"
 // #include "../../serial/ports_devices.h"
  #include "../../serial/monitor.h"
-// #include "../../devices/devices.h"
-// #include "../../devices/devices_time.h"
+ #include "../../devices/devices.h"
+ #include "../../devices/devices_time.h"
 // #include "../../digitals/current/current_run.h"
-// #include "../../digitals/limits.h"
-// #include "../../special/special.h"
+ #include "../../digitals/limits.h"
+ #include "../../special/special.h"
 // #include "../../hardware/watchdog.h"
 // #include "automatic_s.h"
 #include "device38.h"
@@ -36,6 +36,7 @@ profile39*c
 #include "monitor38.h"
 #include "fragment_open_38.h"
 #include "fragment_profile_38.h"
+#include "buffer_z.h"
 #include "profile39.h"
 
 
@@ -99,9 +100,9 @@ static bool ReadData38(time  tiTime, uint64_t  ddwValue)
 
   double dbPulse = mpdbPulseHou[ibDig];
 
-  ulong dw = mpPrf38[h].mpdwValue[i];
+  ulong dw = ddwValue; // TODO
   uint w = (uint)(dw*dbPulse/10000);
-  mpwChannels[i] = w;
+  mpwChannels[0] = w;
 
   if (IsDefect(ibDig)) MakeSpecial(tiDig);
   return MakeStopHou(0);
