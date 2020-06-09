@@ -3,3 +3,5 @@ fragment_profile_38.h
 
 
 ------------------------------------------------------------------------------*/
+
+schar   FragmentProfile38(time  ti1, time  ti2);
