@@ -17,7 +17,7 @@ profile39*c
 // #include "../../memory/mem_limits.h"
 // #include "../../display/display.h"
  #include "../../keyboard/keyboard.h"
-// #include "../../keyboard/time/key_timedate.h"
+ #include "../../keyboard/time/key_timedate.h"
 // #include "../../time/timedate.h"
  #include "../../time/calendar.h"
 // #include "../../time/delay.h"
@@ -34,6 +34,7 @@ profile39*c
 #include "device38.h"
 #include "io38.h"
 #include "monitor38.h"
+#include "fragment_open_38.h"
 #include "profile39.h"
 
 
@@ -72,15 +73,14 @@ void    InitHeader38(void)
 
 void    QueryHeader38(void)
 {
-/*
   HideCurrTime(1);
 
 
-  ulong dw = DateToHouIndex(tiDigPrev);
+  ulong dw = DateToHouIndex(tiStart38);
   dw -= wProfile38;
-  tiDig = HouIndexToDate(dw);
+  time ti = HouIndexToDate(dw);
 
-
+/*
   InitPush(0);
 
   PushChar(0xC0);
@@ -172,45 +172,24 @@ bool    ReadHeader38(void)
 
 #ifdef  MONITOR_38
 
-uchar   RunProfile39_Internal(void)
+uchar   RunProfile39_Internal(runner38  runner)
 {  
-  Query38_DISC();
-  if (Input38() != SER_GOODCHECK) return 1;
-  DelayOff();
-
-  Query38_SNRM();
-  if (Input38() != SER_GOODCHECK) return 2;
-  DelayOff();
-
-  uchar bNS = 0;
-  uchar bNR = 0;
-  uchar bInvokeId = 0;
-
-  Query38_Open2(bNS, bNR);
-  if (Input38() != SER_GOODCHECK) return 3;
-  if (!ValidateIframe(bNS, bNR)) return 4;
-  DelayOff();
-
-  bNR++;
-  Query38_RR(bNR);
-  if (Input38() != SER_GOODCHECK) return 5;
-  if (!ValidateSframe(bNR)) return 6;
-  DelayOff();
+  FragmentOpen38(runner);
 
 
-  bNS++;
-  bInvokeId++;
-  QueryTime38(bNS, bNR, bInvokeId);
+  runner.bNS++;
+  runner.bInvokeId++;
+  QueryTime38(runner.bNS, runner.bNR, runner.bInvokeId);
   if (Input38() != SER_GOODCHECK) return 7;
-  if (!ValidateIframe(bNS, bNR)) return 8;
+  if (!ValidateIframe(runner.bNS, runner.bNR)) return 8;
   tiValue38 = ReadTime38();
   dwValue38 = DateToHouIndex(tiValue38);
   DelayOff();
 
-  bNR++;
-  Query38_RR(bNR);
+  runner.bNR++;
+  Query38_RR(runner.bNR);
   if (Input38() != SER_GOODCHECK) return 9;
-  if (!ValidateSframe(bNR)) return 10;
+  if (!ValidateSframe(runner.bNR)) return 10;
   DelayOff();
 
 
@@ -228,9 +207,9 @@ uchar   RunProfile39_Internal(void)
 
 
 
-void    RunProfile39(void)
+void    RunProfile39(runner38  runner)
 {
-  uchar b = RunProfile39_Internal();
+  uchar b = RunProfile39_Internal(runner);
   if (b == 0){
     MonitorString("\n error ");
   } else {
