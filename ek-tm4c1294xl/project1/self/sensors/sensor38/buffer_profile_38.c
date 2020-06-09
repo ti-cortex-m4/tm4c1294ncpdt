@@ -24,13 +24,15 @@ void    InitBuffPrf38(void)
 }
 
 
-void    AddBuffPrf38(time  ti, uint64_t  ddw)
+void    AddBuffPrf38(time  tiTime, uint64_t  ddwValue)
 {
   if (cbBuffPrfSize38 < PROFILE38_SIZE)
   {
-    mpBuffPrf38[cbBuffPrfSize38].fExists = true;
-    mpBuffPrf38[cbBuffPrfSize38].tiTime = ti;
-    mpBuffPrf38[cbBuffPrfSize38].ddwValue = ddw;
+    uchar i = cbBuffPrfSize38;
+    ASSERT(i < PROFILE38_SIZE);
+    mpBuffPrf38[i].fExists = true;
+    mpBuffPrf38[i].tiTime = tiTime;
+    mpBuffPrf38[i].ddwValue = ddwValue;
 
     cbBuffPrfSize38++;
   }
