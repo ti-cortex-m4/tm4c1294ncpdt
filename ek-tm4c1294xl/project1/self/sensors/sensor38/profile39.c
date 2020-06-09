@@ -35,9 +35,9 @@ profile39*c
 
 
 /*
-void    InitHeaderS(void)
+void    InitHeader39(void)
 {
-  if (!UseBounds())
+  if (!UseBound39())
     wBaseCurr = 0;
   else
   {
@@ -56,7 +56,7 @@ void    InitHeaderS(void)
 }
 
 
-void    QueryHeaderS(void)
+void    QueryHeader39(void)
 {
   HideCurrTime(1);
 
@@ -71,7 +71,7 @@ void    QueryHeaderS(void)
   PushChar(0xC0);
   PushChar(0x48);
 
-  PushAddressS();
+  PushAddress39();
 
   PushChar(0xD5);
   PushChar(0x01);
@@ -83,11 +83,11 @@ void    QueryHeaderS(void)
   PushChar(tiDig.bHour*2 + tiDig.bMinute/30);
   PushChar(4);
 
-  QueryS(100+23, 20);
+  Query39(100+23, 20);
 }
 
 
-static bool ReadDataS(uchar  i)
+static bool ReadData39(uchar  i)
 {
   sprintf(szLo," %02u    %02u.%02u.%02u", tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
 
@@ -129,7 +129,7 @@ static bool ReadDataS(uchar  i)
 }
 
 
-bool    ReadHeaderS(void)
+bool    ReadHeader39(void)
 {
   uchar i;
   for (i=0; i<4; i++)
@@ -142,7 +142,7 @@ bool    ReadHeaderS(void)
     tiDig = HouIndexToDate(dw);
 
     if (dw < dwValueS)
-      if (ReadDataS(4-1-i) == 0) return(0);
+      if (ReadData39(4-1-i) == 0) return(0);
   }
 
   wBaseCurr += 4;
