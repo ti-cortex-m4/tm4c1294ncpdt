@@ -106,7 +106,7 @@ ulong64_ QueryCntMon38_Full(uchar  ibMon)
 
     bNS++;
     bInvokeId++;
-    QueryEngCurrDay36(bNS, bNR, bInvokeId, ti1, ti2);
+    QueryProfile38(bNS, bNR, bInvokeId, ti1, ti2);
     if (Input38() != SER_GOODCHECK) return GetLong64Error(1);
     DelayOff();
 

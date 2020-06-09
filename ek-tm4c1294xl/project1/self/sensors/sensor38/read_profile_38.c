@@ -76,7 +76,7 @@ schar   y(void)
 
   bNS++;
   bInvokeId++;
-  QueryEngCurrDay36(bNS, bNR, bInvokeId, ti1, ti2);
+  QueryProfile38(bNS, bNR, bInvokeId, ti1, ti2);
   if (Input38() != SER_GOODCHECK) return -19;
   DelayOff();
 
