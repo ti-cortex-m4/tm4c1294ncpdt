@@ -12,7 +12,7 @@ buffer_y*c
 #include "../../time/timedate.h"
 #include "include38.h"
 #include "buffer_x.h"
-#include "buffer_z.h"
+#include "buffer_profile_38.h"
 #include "buffer_y.h"
 
 
@@ -86,7 +86,7 @@ buff_y  FinishBufferY(void) {
   MonitorString("\n Count="); MonitorCharDec(bCount); MonitorString("\n");
 #endif
 
-  InitBufferZ();
+  InitPrfBuff38();
 
   uchar i;
   for (i=0; i<bCount; i++)
@@ -127,7 +127,7 @@ buff_y  FinishBufferY(void) {
     MonitorLongDec(ddw % 1000000);
 #endif
 
-    AddBufferZ(ti, ddw);
+    AddPrfBuff38(ti, ddw);
   }
 
   return by;

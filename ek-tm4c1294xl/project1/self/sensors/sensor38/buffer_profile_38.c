@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-buffer_z*c
+buffer_profile_38.c
 
 
 ------------------------------------------------------------------------------*/
@@ -11,7 +11,7 @@ buffer_z*c
 #include "../../serial/monitor.h"
 #include "../../time/timedate.h"
 #include "include38.h"
-#include "buffer_z.h"
+#include "buffer_profile_38.h"
 
 
 
@@ -19,32 +19,32 @@ buffer_z*c
 
 
 profile38       mpPrf38[PROFILE38_SIZE];
-uchar           cbPrf38;
-bool            fOveflow38;
+uchar           cbPrfSize38;
+bool            fPrfOveflow38;
 
 
 
-void    InitBufferZ(void)
+void    InitPrfBuff38(void)
 {
   memset(&mpPrf38, 0, sizeof(mpPrf38));
-  cbPrf38 = 0;
-  fOveflow38 = false;
+  cbPrfSize38 = 0;
+  fPrfOveflow38 = false;
 }
 
 
-void    AddBufferZ(time  ti, uint64_t  ddw)
+void    AddPrfBuff38(time  ti, uint64_t  ddw)
 {
-  if (cbPrf38 < PROFILE38_SIZE)
+  if (cbPrfSize38 < PROFILE38_SIZE)
   {
-    mpPrf38[cbPrf38].fExists = true;
-    mpPrf38[cbPrf38].tiTime = ti;
-    mpPrf38[cbPrf38].ddwValue = ddw;
+    mpPrf38[cbPrfSize38].fExists = true;
+    mpPrf38[cbPrfSize38].tiTime = ti;
+    mpPrf38[cbPrfSize38].ddwValue = ddw;
 
-    cbPrf38++;
+    cbPrfSize38++;
   }
   else
   {
-    fOveflow38 = true;
+    fPrfOveflow38 = true;
   }
 }
 
@@ -59,11 +59,11 @@ profile38 GetPrf38(uchar i)
 
 uchar   GetPrfSize38(void)
 {
-  return cbPrf38;
+  return cbPrfSize38;
 }
 
 
-uchar   GetPrfOveflow38(void)
+bool    GetPrfOveflow38(void)
 {
-  return fOveflow38;
+  return fPrfOveflow38;
 }
