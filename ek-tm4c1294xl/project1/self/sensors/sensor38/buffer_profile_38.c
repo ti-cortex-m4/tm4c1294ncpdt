@@ -5,65 +5,57 @@ buffer_profile_38.c
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-#include "../../memory/mem_ports.h"
-#include "../../serial/ports.h"
-#include "../../serial/ports2.h"
-#include "../../serial/monitor.h"
-#include "../../time/timedate.h"
 #include "include38.h"
 #include "buffer_profile_38.h"
 
 
 
-#define         PROFILE38_SIZE 6
-
-
-profile38       mpPrf38[PROFILE38_SIZE];
-uchar           cbPrfSize38;
-bool            fPrfOveflow38;
+static profile38    mpBuffPrf38[PROFILE38_SIZE];
+static uchar        cbBuffPrfSize38;
+static bool         fBuffPrfOveflow38;
 
 
 
-void    InitPrfBuff38(void)
+void    InitBuffPrf38(void)
 {
-  memset(&mpPrf38, 0, sizeof(mpPrf38));
-  cbPrfSize38 = 0;
-  fPrfOveflow38 = false;
+  memset(&mpBuffPrf38, 0, sizeof(mpBuffPrf38));
+  cbBuffPrfSize38 = 0;
+  fBuffPrfOveflow38 = false;
 }
 
 
-void    AddPrfBuff38(time  ti, uint64_t  ddw)
+void    AddBuffPrf38(time  ti, uint64_t  ddw)
 {
-  if (cbPrfSize38 < PROFILE38_SIZE)
+  if (cbBuffPrfSize38 < PROFILE38_SIZE)
   {
-    mpPrf38[cbPrfSize38].fExists = true;
-    mpPrf38[cbPrfSize38].tiTime = ti;
-    mpPrf38[cbPrfSize38].ddwValue = ddw;
+    mpBuffPrf38[cbBuffPrfSize38].fExists = true;
+    mpBuffPrf38[cbBuffPrfSize38].tiTime = ti;
+    mpBuffPrf38[cbBuffPrfSize38].ddwValue = ddw;
 
-    cbPrfSize38++;
+    cbBuffPrfSize38++;
   }
   else
   {
-    fPrfOveflow38 = true;
+    fBuffPrfOveflow38 = true;
   }
 }
 
 
 
-profile38 GetPrf38(uchar i)
+profile38 GetBuffPrf38(uchar  i)
 {
   ASSERT(i < PROFILE38_SIZE);
-  return mpPrf38[i];
+  return mpBuffPrf38[i];
 }
 
 
-uchar   GetPrfSize38(void)
+uchar   GetBuffPrfSize38(void)
 {
-  return cbPrfSize38;
+  return cbBuffPrfSize38;
 }
 
 
-bool    GetPrfOveflow38(void)
+bool    GetBuffPrfOveflow38(void)
 {
-  return fPrfOveflow38;
+  return fBuffPrfOveflow38;
 }
