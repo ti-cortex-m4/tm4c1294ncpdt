@@ -34,6 +34,10 @@ profile39*c
 
 
 
+time                    tiValue38;
+ulong                   dwValue38;
+
+
 /*
 void    InitHeader39(void)
 {
@@ -150,4 +154,29 @@ bool    ReadHeader39(void)
 
   return(1);
 }
+
+
+
+#ifdef  MONITOR_38
+
+void    RunProfile39(void)
+{  
+  QueryTime39();
+  if (Input39() != SER_GOODCHECK) { MonitorString("\n error 1"); return; }
+
+  tiValue38 = ReadTime39();
+  dwValue38 = DateToHouIndex(tiValue38);
+
+  InitHeader39();
+
+  while (true) {
+    QueryHeader39();
+    if (Input39() != SER_GOODCHECK) { MonitorString("\n error 2"); return; }
+
+    if (ReadData39() == false) { MonitorString("\n finish "); return; }
+    if (fKey == true) return;
+  }  
+}
+
+#endif 
 */
