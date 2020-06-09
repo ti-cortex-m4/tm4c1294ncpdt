@@ -170,11 +170,47 @@ bool    ReadHeader38(void)
 
 void    RunProfile39(void)
 {  
-  QueryTime38(0,0,0);
-  if (Input38() != SER_GOODCHECK) { MonitorString("\n error 1"); return; }
+  Query38_DISC();
+  if (Input38() != SER_GOODCHECK) return GetTime2Error();
+  DelayOff();
+
+  Query38_SNRM();
+  if (Input38() != SER_GOODCHECK) return GetTime2Error();
+  DelayOff();
+
+  uchar bNS = 0;
+  uchar bNR = 0;
+  uchar bInvokeId = 0;
+
+  Query38_Open2(bNS, bNR);
+  if (Input38() != SER_GOODCHECK) return GetTime2Error();
+  if (!ValidateIframe(bNS, bNR)) return GetTime2Error();
+  DelayOff();
+
+  bNR++;
+  Query38_RR(bNR);
+  if (Input38() != SER_GOODCHECK) return GetTime2Error();
+  if (!ValidateSframe(bNR)) return GetTime2Error();
+  DelayOff();
+
+
+  bNS++;
+  bInvokeId++;
+  QueryTime38(bNS, bNR, bInvokeId);
+  if (Input38() != SER_GOODCHECK) return GetTime2Error();
+  if (!ValidateIframe(bNS, bNR)) return GetTime2Error();
+  time ti = ReadTime38();
+  DelayOff();
+
+  bNR++;
+  Query38_RR(bNR);
+  if (Input38() != SER_GOODCHECK) return GetTime2Error();
+  if (!ValidateSframe(bNR)) return GetTime2Error();
+  DelayOff();
 
   tiValue38 = ReadTime38();
   dwValue38 = DateToHouIndex(tiValue38);
+
 
   InitHeader38();
 
