@@ -86,9 +86,41 @@ schar   QueryHeader38(runner38  runner)
   return FragmentProfile38(runner, ti1, ti2);
 }
 
-/*
-static bool ReadData39(uchar  i)
+
+
+void    MakeData38(uchar  h)
 {
+  ShowProgressDigHou();
+
+  double dbPulse = mpdbPulseHou[ibDig];
+/*
+  uchar i;
+  for (i=0; i<4; i++)
+  {
+    double db = mpPrf38[h].mpdwValue[i];
+    mpdbEngFracDigCan[ibDig][i] += db;
+
+    uint w = (uint)(mpdbEngFracDigCan[ibDig][i]*dbPulse/10000);
+    mpwChannels[i] = w;
+
+    mpdbEngFracDigCan[ibDig][i] -= (double)w*10000/dbPulse;
+  }
+*/
+  uchar i;
+  for (i=0; i<4; i++)
+  {
+    ulong dw = mpPrf38[h].mpdwValue[i];
+    uint w = (uint)(dw*dbPulse/10000);
+    mpwChannels[i] = w;
+  }
+
+}
+
+
+static bool ReadData38(time  tiTime, uint64_t  ddwValue)
+{
+  tiDig = tiTime; // TODO
+
   sprintf(szLo," %02u    %02u.%02u.%02u", tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
 
   if (SearchDefHouIndex(tiDig) == 0) return(1);
@@ -118,7 +150,7 @@ static bool ReadData39(uchar  i)
     mpwChannels[0] = w;
     mpdbEngFrac[ibDig] -= (double)w/dbPulse;
 
-    MakeSpecial(tiDig);
+    if (IsDefect(ibDig)) MakeSpecial(tiDig);
     return(MakeStopHou(0));
   }
   else
@@ -127,25 +159,20 @@ static bool ReadData39(uchar  i)
     return(MakeStopHou(0));
   }
 }
-*/
+
 
 bool    ReadHeader38(void)
 {
-/*
   uchar i;
-  for (i=0; i<4; i++)
+  for (i=0; i<6; i++)
   {
-    ulong dw = DateToHouIndex(tiDigPrev);
-
-    dw += 4-1;
-    dw -= (wProfile38 + i);
-
-    tiDig = HouIndexToDate(dw);
-
-    if (dw < dwValueS)
-      if (ReadData39(4-1-i) == 0) return(0);
+    profile38 prf = GetPrf38(i);
+    if (prf.fPresents)
+    {
+      if (ReadData38(prf.tiTime, prf.ddwValue) == false) return false;
+    }
   }
-*/
+
   wProfile38 += 6;
   if (wProfile38 > wHOURS) return false;
 
