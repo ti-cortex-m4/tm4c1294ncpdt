@@ -17,6 +17,14 @@ typedef struct
 } runner38;
 
 
+typedef struct
+{
+  bool          fPresents;
+  time          tiTime;
+  uint64_t      ddwValue;
+} profile38;
+
+
 
 #define MONITOR_38  1
 
