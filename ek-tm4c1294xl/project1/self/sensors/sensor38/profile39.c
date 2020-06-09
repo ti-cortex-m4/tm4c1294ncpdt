@@ -87,36 +87,6 @@ schar   QueryHeader38(runner38  runner)
 }
 
 
-
-void    MakeData38(uchar  h)
-{
-  ShowProgressDigHou();
-
-  double dbPulse = mpdbPulseHou[ibDig];
-/*
-  uchar i;
-  for (i=0; i<4; i++)
-  {
-    double db = mpPrf38[h].mpdwValue[i];
-    mpdbEngFracDigCan[ibDig][i] += db;
-
-    uint w = (uint)(mpdbEngFracDigCan[ibDig][i]*dbPulse/10000);
-    mpwChannels[i] = w;
-
-    mpdbEngFracDigCan[ibDig][i] -= (double)w*10000/dbPulse;
-  }
-*/
-  uchar i;
-  for (i=0; i<4; i++)
-  {
-    ulong dw = mpPrf38[h].mpdwValue[i];
-    uint w = (uint)(dw*dbPulse/10000);
-    mpwChannels[i] = w;
-  }
-
-}
-
-
 static bool ReadData38(time  tiTime, uint64_t  ddwValue)
 {
   tiDig = tiTime; // TODO
@@ -125,39 +95,16 @@ static bool ReadData38(time  tiTime, uint64_t  ddwValue)
 
   if (SearchDefHouIndex(tiDig) == 0) return(1);
 
-
   ShowProgressDigHou();
 
-  InitPop(9+i*3);
+  double dbPulse = mpdbPulseHou[ibDig];
 
-  ulong dw = PopChar();
-  dw += PopChar()*0x100;
-  dw += PopChar()*0x10000;
+  ulong dw = mpPrf38[h].mpdwValue[i];
+  uint w = (uint)(dw*dbPulse/10000);
+  mpwChannels[i] = w;
 
-  if (dw != 0xFFFFFF)
-  {
-    double dbPulse = mpdbPulseHou[ibDig];
-
-    double db = (double)dw/wDividerS;
-    mpdbEngFrac[ibDig] += db;
-
-    uint w;
-    if ((ulong)(mpdbEngFrac[ibDig]*dbPulse) < 0xFFFF)
-    { w = (uint)(mpdbEngFrac[ibDig]*dbPulse); }
-    else
-    { w = 0xFFFF; mpcwOverflowHhr[ibDig]++; }
-
-    mpwChannels[0] = w;
-    mpdbEngFrac[ibDig] -= (double)w/dbPulse;
-
-    if (IsDefect(ibDig)) MakeSpecial(tiDig);
-    return(MakeStopHou(0));
-  }
-  else
-  {
-    szLo[15] = '*';
-    return(MakeStopHou(0));
-  }
+  if (IsDefect(ibDig)) MakeSpecial(tiDig);
+  return MakeStopHou(0);
 }
 
 
