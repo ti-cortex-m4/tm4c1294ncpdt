@@ -38,6 +38,9 @@ profile39*c
 
 
 
+uint                    wProfile38;
+time                    tiStart38;
+
 time                    tiValue38;
 ulong                   dwValue38;
 
@@ -47,22 +50,22 @@ void    InitHeader38(void)
 {
 /*
   if (!UseBound39())
-    wBaseCurr = 0;
+    wProfile38 = 0;
   else
   {
-    wBaseCurr = (mpcwStartRelCan[ibDig] / 6) * 6;
-    Clear(); sprintf(szLo+1,"начало %04u:%02u",wBaseCurr,(uchar)(wBaseCurr/48 + 1));
+    wProfile38 = (mpcwStartRelCan[ibDig] / 6) * 6;
+    Clear(); sprintf(szLo+1,"начало %04u:%02u",wProfile38,(uchar)(wProfile38/48 + 1));
     if (boShowMessages == true) DelayMsg();
   }
-
-  tiDigPrev = tiCurr;
-
-  uchar i = tiDigPrev.bHour*2 + tiDigPrev.bMinute/30;
-  i = (i / 4) * 4;
-
-  tiDigPrev.bHour = i / 2;
-  tiDigPrev.bMinute = (i % 2)*30;
 */
+  wProfile38 = 0;
+  tiStart38 = tiValue38;
+
+  uchar i = tiStart38.bHour*2 + tiStart38.bMinute/30;
+  i = (i / 6) * 6;
+
+  tiStart38.bHour = i / 2;
+  tiStart38.bMinute = (i % 2)*30;
 }
 
 
@@ -74,7 +77,7 @@ void    QueryHeader38(void)
 
 
   ulong dw = DateToHouIndex(tiDigPrev);
-  dw -= wBaseCurr;
+  dw -= wProfile38;
   tiDig = HouIndexToDate(dw);
 
 
@@ -151,7 +154,7 @@ bool    ReadHeader38(void)
     ulong dw = DateToHouIndex(tiDigPrev);
 
     dw += 4-1;
-    dw -= (wBaseCurr + i);
+    dw -= (wProfile38 + i);
 
     tiDig = HouIndexToDate(dw);
 
@@ -159,8 +162,8 @@ bool    ReadHeader38(void)
       if (ReadData39(4-1-i) == 0) return(0);
   }
 
-  wBaseCurr += 4;
-  if (wBaseCurr > wHOURS) return(0);
+  wProfile38 += 4;
+  if (wProfile38 > wHOURS) return(0);
 */
   return true;
 }
@@ -212,6 +215,7 @@ uchar   RunProfile39_Internal(void)
 
 
   InitHeader38();
+
 
   while (true) {
     QueryHeader38();
