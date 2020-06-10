@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
-automatic_get_cntcurr_38*h
+automatic_get_cntmon_39.h
 
 
 ------------------------------------------------------------------------------*/
 
-double2 ReadCntCurr38(void);
+double2 ReadCntMonCan39(uchar  ibMon);

@@ -1,8 +1,8 @@
 /*------------------------------------------------------------------------------
-automatic_get_time_38*h
+automatic_get_time_39.h
 
 
 ------------------------------------------------------------------------------*/
 
-time2   ReadTimeCan38(void);
-time2   ReadTimeCan38_Short(void);
+time2   ReadTimeCan39(void);
+time2   ReadTimeCan39_Short(void);

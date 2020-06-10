@@ -67,7 +67,7 @@ time2   QueryTime38_Full(void)
 
 
 
-time2   ReadTimeCan38(void)
+time2   ReadTimeCan39(void)
 {
   Clear();
 
@@ -97,7 +97,7 @@ time2   ReadTimeCan38(void)
 
 
 
-time2   ReadTimeCan38_Short(void)
+time2   ReadTimeCan39_Short(void)
 {
   Clear();
 
