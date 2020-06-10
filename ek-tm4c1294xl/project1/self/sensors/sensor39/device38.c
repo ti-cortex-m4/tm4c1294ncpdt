@@ -108,6 +108,8 @@ void    Query38_SNRM(void)
 void    Query38_Open2(uchar  bNS, uchar  bNR)
 {
   MonitorString("\n\n Open 2 ");
+  MonitorString(" N(S)="); MonitorCharDec(bNS);
+  MonitorString(" N(R)="); MonitorCharDec(bNR);
 
   uint wSize = 66 + GetHdlcAddressesSize(); // 0x44 68
 
@@ -213,7 +215,8 @@ void    Query38_Open2(uchar  bNS, uchar  bNR)
 
 void    Query38_RR(uchar  bNR)
 {
-  MonitorString("\n\n RR");
+  MonitorString("\n\n RR ");
+  MonitorString(" N(R)="); MonitorCharDec(bNR);
 
   uint wSize = 5 + GetHdlcAddressesSize();
 
@@ -235,6 +238,8 @@ void    Query38_RR(uchar  bNR)
 void    QueryTime38(uchar  bNS, uchar  bNR, uchar  bInvokeId)
 {
   MonitorString("\n\n GetTime");
+  MonitorString(" N(S)="); MonitorCharDec(bNS);
+  MonitorString(" N(R)="); MonitorCharDec(bNR);
 
   uint wSize = 23 + GetHdlcAddressesSize(); // 0x19 25
 
@@ -306,8 +311,8 @@ runner38 InitRunner(void)
   runner38 runner;
 
   runner.bNS = 0;
-  runner.bNR;
-  runner.bInvokeId;
+  runner.bNR = 0;
+  runner.bInvokeId = 0;
 
   return runner;
 }

@@ -133,12 +133,12 @@ bool    ValidateIframe(uchar  bNS_client, uchar  bNR_client)
   uchar bNR_server = (bControl & 0xE0) >> 5;
 
   if (bNS_client != bNS_server) {
-    MonitorString("I-frame N(S) client/server error"); MonitorCharHex(bNS_client); MonitorCharHex(bNS_server);
+    MonitorString(" I-frame N(S) client/server error "); MonitorCharHex(bNS_client); MonitorCharHex(bNS_server);
     return false;
   }
 
   if ((bNR_client + 1) != bNR_server) {
-    MonitorString("I-frame N(R) client/server error"); MonitorCharHex(bNR_client); MonitorCharHex(bNR_server);
+    MonitorString(" I-frame N(R) client/server error "); MonitorCharHex(bNR_client); MonitorCharHex(bNR_server);
     return false;
   }
 
