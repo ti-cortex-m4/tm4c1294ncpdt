@@ -68,7 +68,7 @@ void    MonitorOutput39(void)
   uint wSize = wFormat & 0x0FFF;
   MonitorString(" wSize="); MonitorIntHex(wSize);
 
-  uint wCRCexpected = MakeCRC16_X25OutBuff(1, wSize-2);
+  uint wCRCexpected = MakeCRC16X25OutBuff(1, wSize-2);
   MonitorString(" CRC="); MonitorIntHex(wCRCexpected);
   int i = wSize-1;
   uint wCRCactual = OutBuff(i) + OutBuff(i+1)*0x100; //MonitorIntHex(wCRCactual);
@@ -89,7 +89,7 @@ bool    ValidInput39(void)
   uint wSize = wFormat & 0x07FF;
   MonitorString(" wSize="); MonitorIntHex(wSize);
 
-  uint wCRCexpected = MakeCRC16_X25InBuff(1, wSize-2);
+  uint wCRCexpected = MakeCRC16X25InBuff(1, wSize-2);
   MonitorString(" CRC="); MonitorIntHex(wCRCexpected);
   int i = wSize-1;
   uint wCRCactual = InBuff(i) + InBuff(i+1)*0x100; //MonitorIntHex(wCRCactual);

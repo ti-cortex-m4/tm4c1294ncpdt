@@ -35,7 +35,7 @@ void    Query38_DISC(void)
 //  PushChar(0x03);
   PushChar(0x53); // DISC
 
-  PushIntLtl(MakeCRC16_X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
+  PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
 //  PushChar(0x80);
 //  PushChar(0xD7);
 
@@ -62,7 +62,7 @@ void    Query38_SNRM(void)
 //  PushChar(0x03);
   PushChar(0x93); // SNRM
   
-  PushIntLtl(MakeCRC16_X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
+  PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
 //  PushChar(0xFE); // CRC ?
 //  PushChar(0xC9);
   
@@ -94,7 +94,7 @@ void    Query38_SNRM(void)
   PushChar(0x00);
   PushChar(0x01);
 
-  PushIntLtl(MakeCRC16_X25OutBuff(1, wSize-2)); // 30
+  PushIntLtl(MakeCRC16X25OutBuff(1, wSize-2)); // 30
 //  PushChar(0xCE);
 //  PushChar(0x6A);
 
@@ -128,7 +128,7 @@ void    Query38_Open2(uchar  bNS, uchar  bNR)
   MonitorString("Control{N(R)=0,N(S)=0} 10 ? "); MonitorCharHex((bNR << 5) | 0x10 | (bNS << 1) | 0x00);
   PushChar(0x10); // I-frame
   
-  PushIntLtl(MakeCRC16_X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
+  PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
 //  PushChar(0x65); // CRC ?
 //  PushChar(0x94);
 
@@ -202,7 +202,7 @@ void    Query38_Open2(uchar  bNS, uchar  bNR)
   
   // DLMS finish
   
-  PushIntLtl(MakeCRC16_X25OutBuff(1, wSize-2));
+  PushIntLtl(MakeCRC16X25OutBuff(1, wSize-2));
 //  PushChar(0xAF); // CRC ?
 //  PushChar(0xDF);
   
@@ -227,7 +227,7 @@ void    Query38_RR(uchar  bNR)
 
   PushChar((bNR << 5) | 0x10 | 0x01);
   
-  PushIntLtl(MakeCRC16_X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
+  PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
   PushChar(0x7E);
 
   Query39(1000, wSize+2); // 9
@@ -251,7 +251,7 @@ void    QueryTime38(uchar  bNS, uchar  bNR, uchar  bInvokeId)
 
   PushChar(((bNR << 5) | 0x10 | (bNS << 1) | 0x00));
   
-  PushIntLtl(MakeCRC16_X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
+  PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
 
   // DLMS start
   
@@ -278,7 +278,7 @@ void    QueryTime38(uchar  bNS, uchar  bNR, uchar  bInvokeId)
 
   // DLMS finish
 
-  PushIntLtl(MakeCRC16_X25OutBuff(1, wSize-2));
+  PushIntLtl(MakeCRC16X25OutBuff(1, wSize-2));
   
   PushChar(0x7E);
 

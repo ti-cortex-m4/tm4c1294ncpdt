@@ -1,19 +1,12 @@
 /*------------------------------------------------------------------------------
-fragment_profile_38.c
+fragment_profile_39.c
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-//#include "../../memory/mem_factors.h"
-//#include "../../display/display.h"
-//#include "../../keyboard/keyboard.h"
 #include "../../time/delay.h"
-//#include "../../time/timedate.h"
 #include "../../serial/ports.h"
-//#include "../../devices/devices.h"
-//#include "../../serial/monitor.h" // TODO
-//#include "../../digitals/digitals.h"
 #include "device38.h"
 #include "query_profile_38.h"
 #include "query_next_block_38.h"
@@ -24,8 +17,11 @@ fragment_profile_38.c
 
 
 
-uchar   FragmentProfile38(runner39  *runner, time  ti1, time  ti2)
+uchar   FragmentProfile39(runner39  *runner, time  ti1, time  ti2)
 {
+  StartBufferY();
+
+
   (*runner).bNS++;
   (*runner).bInvokeId++;
   QueryProfile38((*runner).bNS, (*runner).bNR, (*runner).bInvokeId, ti1, ti2);

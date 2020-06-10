@@ -32,7 +32,7 @@ void    QueryEngAbs38(uchar  bNS, uchar  bNR, uchar  bInvokeId)
 
   PushChar((bNR << 5) | 0x10 | (bNS << 1) | 0x00);
 
-  PushIntLtl(MakeCRC16_X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
+  PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
 
   // DLMS start
 
@@ -59,7 +59,7 @@ void    QueryEngAbs38(uchar  bNS, uchar  bNR, uchar  bInvokeId)
 
   // DLMS finish
 
-  PushIntLtl(MakeCRC16_X25OutBuff(1, wSize-2));
+  PushIntLtl(MakeCRC16X25OutBuff(1, wSize-2));
 
   PushChar(0x7E);
 
