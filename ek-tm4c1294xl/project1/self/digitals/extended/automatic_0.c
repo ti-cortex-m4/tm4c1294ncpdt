@@ -31,7 +31,7 @@ AUTOMATIC_0!C
 #include "../../sensors/sensor34/time34.h"
 #include "../../sensors/sensor35/automatic35.h"
 #include "../../sensors/sensor36/automatic36.h"
-#include "../../sensors/sensor39/automatic_get_time_38.h"
+#include "../../sensors/sensor39/automatic_get_time_39.h"
 #include "../../console.h"
 #include "../../time/timedate.h"
 #include "automatic_0.h"

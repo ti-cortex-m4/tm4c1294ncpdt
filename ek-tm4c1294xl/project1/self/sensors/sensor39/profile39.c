@@ -106,11 +106,11 @@ static bool ReadData38(time  tiTime, uint64_t  ddwValue)
 
 bool    ReadHeader38(void)
 {
+  DeltaBuffPrf38();
+
 #ifdef MONITOR_39
   MonitorString("\n ReadHeader38 ");
 #endif
-
-  DeltaBuffPrf38();
 
   uchar i;
   for (i=0; i<6; i++)
