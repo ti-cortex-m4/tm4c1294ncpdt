@@ -14,7 +14,7 @@ typedef struct
   uchar         bNS;
   uchar         bNR;
   uchar         bInvokeId;
-} runner38;
+} runner39;
 
 
 typedef struct
@@ -22,13 +22,13 @@ typedef struct
   bool          fExists;
   time          tiTime;
   uint64_t      ddwValue;
-} profile38;
+} profile39;
 
 
 
-#define PROFILE38_SIZE  6
+#define PROFILE39_SIZE  6
 
-#define MONITOR_38      1
+#define MONITOR_39      1
 
 
 

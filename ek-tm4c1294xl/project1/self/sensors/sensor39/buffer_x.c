@@ -18,7 +18,7 @@ uint                        iwPushX, iwPopX;
 
 
 void    MonitorX(void) {
-#ifdef MONITOR_38
+#ifdef MONITOR_39
   MonitorString("\n ReadFromBuffer");
   MonitorArrayHex(mpbBuffX, iwPushX);
 #endif

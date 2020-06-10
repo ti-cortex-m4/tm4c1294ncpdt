@@ -10,7 +10,7 @@ buffer_profile_38.c
 
 
 
-static profile38    mpBuffPrf38[PROFILE38_SIZE];
+static profile39    mpBuffPrf38[PROFILE39_SIZE];
 static uchar        cbBuffPrfSize38;
 static bool         fBuffPrfOveflow38;
 
@@ -26,10 +26,10 @@ void    InitBuffPrf38(void)
 
 void    AddBuffPrf38(time  tiTime, uint64_t  ddwValue)
 {
-  if (cbBuffPrfSize38 < PROFILE38_SIZE)
+  if (cbBuffPrfSize38 < PROFILE39_SIZE)
   {
     uchar i = cbBuffPrfSize38;
-    ASSERT(i < PROFILE38_SIZE);
+    ASSERT(i < PROFILE39_SIZE);
     mpBuffPrf38[i].fExists = true;
     mpBuffPrf38[i].tiTime = tiTime;
     mpBuffPrf38[i].ddwValue = ddwValue;
@@ -44,9 +44,9 @@ void    AddBuffPrf38(time  tiTime, uint64_t  ddwValue)
 
 
 
-profile38 GetBuffPrf38(uchar  i)
+profile39 GetBuffPrf38(uchar  i)
 {
-  ASSERT(i < PROFILE38_SIZE);
+  ASSERT(i < PROFILE39_SIZE);
   return mpBuffPrf38[i];
 }
 

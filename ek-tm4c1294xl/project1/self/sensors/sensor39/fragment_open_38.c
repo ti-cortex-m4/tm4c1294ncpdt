@@ -13,7 +13,7 @@ fragment_open_38.c
 
 
 
-uchar   FragmentOpen38(runner38  *runner)
+uchar   FragmentOpen38(runner39  *runner)
 {
   Query38_DISC();
   if (Input39() != SER_GOODCHECK) return 1;

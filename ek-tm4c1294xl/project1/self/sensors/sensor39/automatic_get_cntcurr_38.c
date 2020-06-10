@@ -88,7 +88,7 @@ double2 ReadCntCurr38(void)
 
       return GetDouble2(mpdbChannelsC[0], true);
     } else {
-#ifdef MONITOR_38
+#ifdef MONITOR_39
       MonitorString("\n Error="); MonitorCharDec(ddw2.bError);
 #endif
     }
