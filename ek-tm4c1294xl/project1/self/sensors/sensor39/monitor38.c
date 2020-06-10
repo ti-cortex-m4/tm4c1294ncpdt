@@ -7,7 +7,7 @@ monitor36*c
 #include "../../main.h"
 #include "../../serial/ports.h"
 #include "../../serial/monitor.h"
-#include "include38.h"
+#include "include39.h"
 #include "hdlc.h"
 #include "crc16x25.h"
 #include "monitor38.h"
@@ -59,7 +59,7 @@ static void MonitorControl(uchar  bControl) {
 
 
 
-void    MonitorOutput38(void)
+void    MonitorOutput39(void)
 {
   MonitorString("\n Output HDLC:");
 
@@ -79,7 +79,7 @@ void    MonitorOutput38(void)
 
 
 
-bool    ValidInput38(void)
+bool    ValidInput39(void)
 {
   MonitorString("\n Input HDLC:");
   InitPop(1);

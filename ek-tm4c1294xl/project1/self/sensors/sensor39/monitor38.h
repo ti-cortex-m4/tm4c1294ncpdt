@@ -4,8 +4,8 @@ monitor36*h
 
 ------------------------------------------------------------------------------*/
 
-void    MonitorOutput38(void);
-bool    ValidInput38(void);
+void    MonitorOutput39(void);
+bool    ValidInput39(void);
 
 bool    ValidateIframe(uchar  bNS_client, uchar  bNR_client);
 bool    ValidateSframe(uchar  bNR_client);

@@ -9,9 +9,9 @@ query_next_block_36*c
 #include "../../serial/ports2.h"
 #include "../../serial/ports_devices.h"
 #include "../../serial/monitor.h"
-#include "include38.h"
+#include "include39.h"
 #include "crc16x25.h"
-#include "io38.h"
+#include "io39.h"
 #include "hdlc.h"
 #include "push_dlms.h"
 #include "device38.h" //
@@ -271,6 +271,6 @@ void    QueryProfile38(uchar  bNS, uchar  bNR, uchar  bInvokeId, time  ti1, time
 
   PushChar(0x7E);
 
-  Query38(1000, wSize+2);
+  Query39(1000, wSize+2);
 }
 

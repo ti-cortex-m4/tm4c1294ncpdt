@@ -13,7 +13,7 @@ automatic_get_cntcurr_38*c
 #include "../../digitals/digitals.h"
 #include "device38.h"
 #include "query_engabs_38.h"
-#include "io38.h"
+#include "io39.h"
 #include "monitor38.h"
 #include "automatic_get_cntcurr_38.h"
 
@@ -22,11 +22,11 @@ automatic_get_cntcurr_38*c
 ulong64_ QueryCntCurr38_Full(void)
 {
   Query38_DISC();
-  if (Input38() != SER_GOODCHECK) return GetLong64Error(1);
+  if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
   DelayOff();
 
   Query38_SNRM();
-  if (Input38() != SER_GOODCHECK) return GetLong64Error(2);
+  if (Input39() != SER_GOODCHECK) return GetLong64Error(2);
   DelayOff();
 
   uchar bNS = 0;
@@ -34,13 +34,13 @@ ulong64_ QueryCntCurr38_Full(void)
   uchar bInvokeId = 0;
 
   Query38_Open2(bNS, bNR);
-  if (Input38() != SER_GOODCHECK) return GetLong64Error(3);
+  if (Input39() != SER_GOODCHECK) return GetLong64Error(3);
   if (!ValidateIframe(bNS, bNR)) return GetLong64Error(4);
   DelayOff();
 
   bNR++;
   Query38_RR(bNR);
-  if (Input38() != SER_GOODCHECK) return GetLong64Error(5);
+  if (Input39() != SER_GOODCHECK) return GetLong64Error(5);
   if (!ValidateSframe(bNR)) return GetLong64Error(6);
   DelayOff();
 
@@ -48,20 +48,20 @@ ulong64_ QueryCntCurr38_Full(void)
   bNS++;
   bInvokeId++;
   QueryEngAbs38(bNS, bNR, bInvokeId);
-  if (Input38() != SER_GOODCHECK) return GetLong64Error(7);
+  if (Input39() != SER_GOODCHECK) return GetLong64Error(7);
   if (!ValidateIframe(bNS, bNR)) return GetLong64Error(8);
   uint64_t ddw = ReadEngAbs38();
   DelayOff();
 
   bNR++;
   Query38_RR(bNR);
-  if (Input38() != SER_GOODCHECK) return GetLong64Error(9);
+  if (Input39() != SER_GOODCHECK) return GetLong64Error(9);
   if (!ValidateSframe(bNR)) return GetLong64Error(10);
   DelayOff();
 
 
   Query38_DISC();
-  if (Input38() != SER_GOODCHECK) return GetLong64Error(11);
+  if (Input39() != SER_GOODCHECK) return GetLong64Error(11);
   DelayOff();
 
   return GetLong64(ddw, true, 0);
@@ -95,7 +95,7 @@ double2 ReadCntCurr38(void)
   }
 
   Query38_DISC();
-  if (Input38() != SER_GOODCHECK) return GetDouble2Error();
+  if (Input39() != SER_GOODCHECK) return GetDouble2Error();
   DelayOff();
 
   return GetDouble2Error();

@@ -17,20 +17,20 @@ IO36*C
 #include "../../digitals/wait_answer.h"
 #include "unpack38.h"
 #include "monitor38.h"
-#include "io38.h"
+#include "io39.h"
 
 
 
-void    Query38(uint  cwIn, uchar  cbOut)
+void    Query39(uint  cwIn, uchar  cbOut)
 {
-  MonitorOutput38();
+  MonitorOutput39();
   Query(cwIn, cbOut, true);
 }
 
 
 
 
-serial  Input38(void)
+serial  Input39(void)
 {
   InputStart();
   InitWaitAnswer();
@@ -44,11 +44,11 @@ serial  Input38(void)
     if (GetWaitAnswer()) { mpSerial[ibPort] = SER_BADLINK; break; }
 
     if (mpSerial[ibPort] == SER_INPUT_MASTER)
-      Decompress38();
+      Decompress39();
 
     if (mpSerial[ibPort] == SER_POSTINPUT_MASTER)
     {
-      if (ValidInput38())
+      if (ValidInput39())
       {
         InputGoodCheck();
         mpSerial[ibPort] = SER_GOODCHECK;

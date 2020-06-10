@@ -11,7 +11,7 @@ automatic_get_time_38*c
 #include "../../serial/ports.h"
 #include "../../digitals/digitals.h"
 #include "device38.h"
-#include "io38.h"
+#include "io39.h"
 #include "monitor38.h"
 #include "automatic_get_time_38.h"
 
@@ -20,11 +20,11 @@ automatic_get_time_38*c
 time2   QueryTime38_Full(void)
 {
   Query38_DISC();
-  if (Input38() != SER_GOODCHECK) return GetTime2Error();
+  if (Input39() != SER_GOODCHECK) return GetTime2Error();
   DelayOff();
 
   Query38_SNRM();
-  if (Input38() != SER_GOODCHECK) return GetTime2Error();
+  if (Input39() != SER_GOODCHECK) return GetTime2Error();
   DelayOff();
 
   uchar bNS = 0;
@@ -32,13 +32,13 @@ time2   QueryTime38_Full(void)
   uchar bInvokeId = 0;
 
   Query38_Open2(bNS, bNR);
-  if (Input38() != SER_GOODCHECK) return GetTime2Error();
+  if (Input39() != SER_GOODCHECK) return GetTime2Error();
   if (!ValidateIframe(bNS, bNR)) return GetTime2Error();
   DelayOff();
 
   bNR++;
   Query38_RR(bNR);
-  if (Input38() != SER_GOODCHECK) return GetTime2Error();
+  if (Input39() != SER_GOODCHECK) return GetTime2Error();
   if (!ValidateSframe(bNR)) return GetTime2Error();
   DelayOff();
 
@@ -46,20 +46,20 @@ time2   QueryTime38_Full(void)
   bNS++;
   bInvokeId++;
   QueryTime38(bNS, bNR, bInvokeId);
-  if (Input38() != SER_GOODCHECK) return GetTime2Error();
+  if (Input39() != SER_GOODCHECK) return GetTime2Error();
   if (!ValidateIframe(bNS, bNR)) return GetTime2Error();
   time ti = ReadTime38();
   DelayOff();
 
   bNR++;
   Query38_RR(bNR);
-  if (Input38() != SER_GOODCHECK) return GetTime2Error();
+  if (Input39() != SER_GOODCHECK) return GetTime2Error();
   if (!ValidateSframe(bNR)) return GetTime2Error();
   DelayOff();
 
 
   Query38_DISC();
-  if (Input38() != SER_GOODCHECK) return GetTime2Error();
+  if (Input39() != SER_GOODCHECK) return GetTime2Error();
   DelayOff();
 
   return GetTime2(ti, true);
@@ -89,7 +89,7 @@ time2   ReadTimeCan38(void)
   }
 
   Query38_DISC();
-  if (Input38() != SER_GOODCHECK) return GetTime2Error();
+  if (Input39() != SER_GOODCHECK) return GetTime2Error();
   DelayOff();
 
   return GetTime2Error();
@@ -111,7 +111,7 @@ time2   ReadTimeCan38_Short(void)
   }
 
   Query38_DISC();
-  if (Input38() != SER_GOODCHECK) return GetTime2Error();
+  if (Input39() != SER_GOODCHECK) return GetTime2Error();
   DelayOff();
 
   return GetTime2Error();

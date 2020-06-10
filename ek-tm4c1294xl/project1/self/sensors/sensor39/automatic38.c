@@ -15,7 +15,7 @@ AUTOMATIC36*C
 #include "../../digitals/digitals.h"
 #include "device38.h"
 #include "query_engmon_38.h"
-#include "io38.h"
+#include "io39.h"
 #include "monitor38.h"
 #include "automatic38.h"
 
@@ -83,11 +83,11 @@ bool    QueryEngMon36_Full(uchar  bTime, uchar  bPercent)
 double2 ReadCntMonCan36_(uchar  ibMon)
 {
   Query38_DISC();
-  if (Input38() != SER_GOODCHECK) return GetDouble2Error();
+  if (Input39() != SER_GOODCHECK) return GetDouble2Error();
   DelayOff();
 
   Query38_SNRM();
-  if (Input38() != SER_GOODCHECK) return GetDouble2Error();
+  if (Input39() != SER_GOODCHECK) return GetDouble2Error();
   DelayOff();
 
   uchar bNS = 0;
@@ -95,19 +95,19 @@ double2 ReadCntMonCan36_(uchar  ibMon)
   uchar bInvokeId = 0;
 
   Query38_Open2(bNS, bNR);
-  if (Input38() != SER_GOODCHECK) return GetDouble2Error();
+  if (Input39() != SER_GOODCHECK) return GetDouble2Error();
   if (!ValidateIframe(bNS, bNR)) return GetDouble2Error();
   DelayOff();
 
   bNR++;
   Query38_RR(bNR);
-  if (Input38() != SER_GOODCHECK) return GetDouble2Error();
+  if (Input39() != SER_GOODCHECK) return GetDouble2Error();
   if (!ValidateSframe(bNR)) return GetDouble2Error();
   DelayOff();
 
   bNS++;
   QueryEngMon38(bNS, bNR, bInvokeId++, 4, 20);
-  if (Input38() != SER_GOODCHECK) return GetDouble2Error();
+  if (Input39() != SER_GOODCHECK) return GetDouble2Error();
   if (!ValidateIframe(bNS, bNR)) return GetDouble2Error();
 
   uint64_t ddw = ReadEngMon38();
@@ -119,12 +119,12 @@ double2 ReadCntMonCan36_(uchar  ibMon)
 
   bNR++;
   Query38_RR(bNR);
-  if (Input38() != SER_GOODCHECK) return GetDouble2Error();
+  if (Input39() != SER_GOODCHECK) return GetDouble2Error();
   if (!ValidateSframe(bNR)) return GetDouble2Error();
   DelayOff();
 
   Query38_DISC(); // TODO always close
-  if (Input38() != SER_GOODCHECK) return GetDouble2Error();
+  if (Input39() != SER_GOODCHECK) return GetDouble2Error();
   DelayOff();
 
   return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);

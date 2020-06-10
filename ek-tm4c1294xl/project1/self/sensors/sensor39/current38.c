@@ -12,7 +12,7 @@ current38*c
 #include "../../devices/devices.h"
 #include "../../digitals/digitals.h"
 #include "../../digitals/current/current_run.h"
-#include "io38.h"
+#include "io39.h"
 #include "monitor38.h"
 #include "device38.h"
 #include "query_engabs_38.h"
