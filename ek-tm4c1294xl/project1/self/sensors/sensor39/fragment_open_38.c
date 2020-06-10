@@ -23,15 +23,15 @@ uchar   FragmentOpen38(runner38  *runner)
   if (Input38() != SER_GOODCHECK) return 2;
   DelayOff();
 
-  Query38_Open2((*runner).bNS, (*runner).bNS);
+  Query38_Open2((*runner).bNS, (*runner).bNR);
   if (Input38() != SER_GOODCHECK) return 3;
-  if (!ValidateIframe((*runner).bNS, (*runner).bNS)) return 4;
+  if (!ValidateIframe((*runner).bNS, (*runner).bNR)) return 4;
   DelayOff();
 
-  (*runner).bNS++;
-  Query38_RR((*runner).bNS);
+  (*runner).bNR++;
+  Query38_RR((*runner).bNR);
   if (Input38() != SER_GOODCHECK) return 5;
-  if (!ValidateSframe((*runner).bNS)) return 6;
+  if (!ValidateSframe((*runner).bNR)) return 6;
   DelayOff();
 
   return 0;
