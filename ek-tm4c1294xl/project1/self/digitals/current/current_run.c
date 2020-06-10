@@ -24,7 +24,7 @@ CURRENT_RUN!C
 #include "../../sensors/sensor26/device_u.h"
 #include "../../sensors/device_w.h"
 #include "../../sensors/sensor36/device36.h"
-#include "../../sensors/sensor38/device38.h"
+#include "../../sensors/sensor39/device38.h"
 #include "../../digitals/digitals.h"
 #include "../../digitals/digitals_status.h"
 #include "../../digitals/digitals_pause.h"
