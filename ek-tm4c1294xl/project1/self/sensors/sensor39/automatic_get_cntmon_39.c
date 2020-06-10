@@ -189,7 +189,7 @@ ulong64_ QueryCntMon38_Full(uchar  ibMon)
 
 
 
-double2 ReadCntMonCan38(uchar  ibMon)
+double2 ReadCntMonCan39(uchar  ibMon)
 {
   Clear();
 

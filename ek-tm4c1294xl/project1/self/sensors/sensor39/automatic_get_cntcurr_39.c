@@ -69,7 +69,7 @@ ulong64_ QueryCntCurr38_Full(void)
 
 
 
-double2 ReadCntCurr38(void)
+double2 ReadCntCurr39(void)
 {
   Clear();
 

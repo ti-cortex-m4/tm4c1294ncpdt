@@ -5,7 +5,6 @@ buffer_profile_38.c
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-#include "../../hardware/watchdog.h"
 #include "../../serial/monitor.h"
 #include "../../time/timedate.h"
 #include "include39.h"
@@ -59,7 +58,6 @@ void    DeltaBuffPrf38(void)
   uchar i;
   for (i=0; i<PROFILE39_SIZE; i++)
   {
-    ResetWatchdog();
     profile39 prf = GetBuffPrf38(i);
 
     MonitorString("\n "); MonitorTime(prf.tiTime);
@@ -68,14 +66,23 @@ void    DeltaBuffPrf38(void)
   }
 #endif
 
-  for (i=0; i<PROFILE39_SIZE; i++)
+  for (i=0; i<PROFILE39_SIZE-1; i++)
   {
     profile39 prf1 = GetBuffPrf38(i);
     profile39 prf2 = GetBuffPrf38(i + 1);
 
-    mpBuffPrf39[i].tiTime = prf2.tiTime;
-    mpBuffPrf39[i].ddwValue = prf2.ddwValue - prf1.ddwValue;
-    mpBuffPrf39[i].fExists = true; // TODO
+    if (prf1.fExists & prf2.fExists)
+    {
+      mpBuffPrf39[i].tiTime = prf2.tiTime;
+      mpBuffPrf39[i].ddwValue = prf2.ddwValue - prf1.ddwValue;
+      mpBuffPrf39[i].fExists = true;
+    }
+    else
+    {
+      mpBuffPrf39[i].tiTime = tiZero;
+      mpBuffPrf39[i].ddwValue = 0;
+      mpBuffPrf39[i].fExists = false;
+    }
   }
 
   cbBuffPrfSize39--;
@@ -90,7 +97,6 @@ void    DeltaBuffPrf38(void)
 
   for (i=0; i<PROFILE39_SIZE-1; i++)
   {
-    ResetWatchdog();
     profile39 prf = GetBuffPrf38(i);
 
     MonitorString("\n "); MonitorTime(prf.tiTime);

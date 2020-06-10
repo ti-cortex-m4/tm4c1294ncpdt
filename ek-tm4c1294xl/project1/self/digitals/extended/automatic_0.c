@@ -648,7 +648,7 @@ time2   ReadTimeCan_Short(uchar  ibCan)
 #endif
 
 #ifndef SKIP_38
-    case 38: return ReadTimeCan38_Short();
+    case 38: return ReadTimeCan39_Short();
 #endif
 
     default: return GetTime2Error();
