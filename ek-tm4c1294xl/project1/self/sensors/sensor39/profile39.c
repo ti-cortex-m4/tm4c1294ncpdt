@@ -20,17 +20,11 @@ profile39*c
  #include "../../keyboard/time/key_timedate.h"
 // #include "../../time/timedate.h"
  #include "../../time/calendar.h"
-// #include "../../time/delay.h"
-// #include "../../serial/ports.h"
-// #include "../../serial/ports_devices.h"
  #include "../../serial/monitor.h"
  #include "../../devices/devices.h"
  #include "../../devices/devices_time.h"
-// #include "../../digitals/current/current_run.h"
  #include "../../digitals/limits.h"
  #include "../../special/special.h"
-// #include "../../hardware/watchdog.h"
-// #include "automatic_s.h"
 #include "device38.h"
 #include "io38.h"
 #include "monitor38.h"
@@ -83,6 +77,10 @@ schar   QueryHeader38(runner38*  runner)
   time ti1 = HouIndexToDate(dw);
   time ti2 = HouIndexToDate(dw + 6 - 1);
 
+#ifdef MONITOR_38
+  MonitorString("\n QueryHeader38 "); MonitorTime(ti1);
+  MonitorString(" "); MonitorTime(ti2);
+#endif
 
   return FragmentProfile38(runner, ti1, ti2);
 }
@@ -115,6 +113,13 @@ bool    ReadHeader38(void)
   for (i=0; i<6; i++)
   {
     profile38 prf = GetBuffPrf38(i);
+
+#ifdef MONITOR_38
+      MonitorString("\n "); MonitorTime(prf.tiTime);
+      MonitorString(" "); MonitorLongDec(prf.ddwValue % 0x100000000);
+      MonitorString(" "); MonitorCharDec(prf.fExists);
+#endif
+
     if (prf.fExists)
     {
       if (ReadData38(prf.tiTime, prf.ddwValue) == false) return false;
@@ -122,7 +127,7 @@ bool    ReadHeader38(void)
   }
 
   wProfile38 += 6;
-  if (wProfile38 > wHOURS) return false;
+  if (wProfile38 > 50/*wHOURS*/) return false;
 
   return true;
 }
@@ -165,14 +170,19 @@ uchar   RunProfile39_Internal(runner38*  runner)
 
 
 
-void    RunProfile39(runner38*  runner)
+time2   RunProfile39(void)
 {
-  uchar b = RunProfile39_Internal(runner);
+  MonitorOpen(0);
+
+  runner38 runner = InitRunner();
+  uchar b = RunProfile39_Internal(&runner);
   if (b == 0){
     MonitorString("\n error ");
   } else {
     MonitorString("\n finish "); MonitorCharDec(b);
   }
+
+  return GetTime2Error();
 }
 
 #endif 
