@@ -68,7 +68,7 @@ schar   y(void)
   ti2.bYear = 20;
   ti2.bMonth = 4;
   ti2.bDay = 14;
-  ti2.bHour = 11;
+  ti2.bHour = 23; //11;
   ti2.bMinute = 0;
   ti2.bSecond = 0;
 
