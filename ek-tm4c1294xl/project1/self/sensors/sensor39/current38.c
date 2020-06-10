@@ -15,7 +15,7 @@ current38*c
 #include "io39.h"
 #include "monitor38.h"
 #include "device38.h"
-#include "query_engabs_38.h"
+#include "query_engabs_39.h"
 #include "current38.h"
 
 
@@ -55,7 +55,7 @@ void    QueryEngAbs38_Current(void)
 {
   bNS++;
   bInvokeId++;
-  QueryEngAbs38(bNS, bNR, bInvokeId);
+  QueryEngAbs39(bNS, bNR, bInvokeId);
 }
 
 
@@ -75,7 +75,7 @@ bool    ValidateIframe_Current(void)
 
 void    SaveCurrent38(void)
 {
-  dwCurrent = ReadEngAbs38()  % 0x100000000;
+  dwCurrent = ReadEngAbs39()  % 0x100000000;
 }
 
 

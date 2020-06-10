@@ -12,7 +12,7 @@ automatic_get_cntcurr_38*c
 #include "../../serial/monitor.h"
 #include "../../digitals/digitals.h"
 #include "device38.h"
-#include "query_engabs_38.h"
+#include "query_engabs_39.h"
 #include "io39.h"
 #include "monitor38.h"
 #include "automatic_get_cntcurr_39.h"
@@ -47,10 +47,10 @@ ulong64_ QueryCntCurr38_Full(void)
 
   bNS++;
   bInvokeId++;
-  QueryEngAbs38(bNS, bNR, bInvokeId);
+  QueryEngAbs39(bNS, bNR, bInvokeId);
   if (Input39() != SER_GOODCHECK) return GetLong64Error(7);
   if (!ValidateIframe(bNS, bNR)) return GetLong64Error(8);
-  uint64_t ddw = ReadEngAbs38();
+  uint64_t ddw = ReadEngAbs39();
   DelayOff();
 
   bNR++;
