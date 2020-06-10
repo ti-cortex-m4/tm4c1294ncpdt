@@ -70,7 +70,7 @@ schar   QueryHeader38(runner39*  runner)
 
   ulong dw = DateToHouIndex(tiStart38);
   dw -= wProfile38;
-  time ti1 = HouIndexToDate(dw - 1); // для нахождения приращения энергии за получас
+  time ti1 = HouIndexToDate(dw - 1); // для нахождения ПРИРАЩЕНИЯ энергии за получас
   time ti2 = HouIndexToDate(dw + 6 - 1);
 
 #ifdef MONITOR_39
@@ -179,7 +179,7 @@ double2 RunProfile39(void)
 
   runner39 runner = InitRunner();
   uchar b = RunProfile39_Internal(&runner);
-  if (b == 0){
+  if (b !== 0) {
     MonitorString("\n error "); MonitorCharDec(b);
   } else {
     MonitorString("\n finish ");
