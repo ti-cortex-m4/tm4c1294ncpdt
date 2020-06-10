@@ -24,7 +24,7 @@ fragment_profile_38.c
 
 
 
-uchar   FragmentProfile38(runner38  *runner, time  ti1, time  ti2)
+uchar   FragmentProfile38(runner39  *runner, time  ti1, time  ti2)
 {
   (*runner).bNS++;
   (*runner).bInvokeId++;

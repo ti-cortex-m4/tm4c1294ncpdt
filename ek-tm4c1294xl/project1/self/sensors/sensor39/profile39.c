@@ -4,21 +4,11 @@ profile39*c
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-// #include "../../serial/ports_stack.h"
-// #include "../../serial/ports_devices.h"
-// #include "../../memory/mem_settings.h"
-// #include "../../memory/mem_digitals.h"
-// #include "../../memory/mem_ports.h"
-// #include "../../memory/mem_current.h"
  #include "../../memory/mem_factors.h"
-// #include "../../memory/mem_realtime.h"
  #include "../../memory/mem_energy_spec.h"
-// #include "../../memory/mem_profile.h"
-// #include "../../memory/mem_limits.h"
  #include "../../display/display.h"
  #include "../../keyboard/keyboard.h"
  #include "../../keyboard/time/key_timedate.h"
-// #include "../../time/timedate.h"
  #include "../../time/calendar.h"
  #include "../../serial/monitor.h"
  #include "../../devices/devices.h"
@@ -63,11 +53,17 @@ void    InitHeader38(void)
 
   tiStart38.bHour = i / 2;
   tiStart38.bMinute = (i % 2)*30;
+
+#ifdef MONITOR_39
+  MonitorString("\n InitHeader38 ");
+  MonitorString(" wProfile38="); MonitorIntDec(wProfile38);
+  MonitorString(" tiStart38="); MonitorTime(tiStart38);
+#endif
 }
 
 
 
-schar   QueryHeader38(runner38*  runner)
+schar   QueryHeader38(runner39*  runner)
 {
   HideCurrTime(1);
 
@@ -77,9 +73,10 @@ schar   QueryHeader38(runner38*  runner)
   time ti1 = HouIndexToDate(dw);
   time ti2 = HouIndexToDate(dw + 6 - 1);
 
-#ifdef MONITOR_38
-  MonitorString("\n QueryHeader38 "); MonitorTime(ti1);
-  MonitorString(" "); MonitorTime(ti2);
+#ifdef MONITOR_39
+  MonitorString("\n QueryHeader38 ");
+  MonitorString(" ti1="); MonitorTime(ti1);
+  MonitorString(" ti2="); MonitorTime(ti2);
 #endif
 
   return FragmentProfile38(runner, ti1, ti2);
@@ -112,12 +109,13 @@ bool    ReadHeader38(void)
   uchar i;
   for (i=0; i<6; i++)
   {
-    profile38 prf = GetBuffPrf38(i);
+    profile39 prf = GetBuffPrf38(i);
 
-#ifdef MONITOR_38
-      MonitorString("\n "); MonitorTime(prf.tiTime);
-      MonitorString(" "); MonitorLongDec(prf.ddwValue % 0x100000000);
-      MonitorString(" "); MonitorCharDec(prf.fExists);
+#ifdef MONITOR_39
+    MonitorString("\n ReadHeader38 ");
+    MonitorString(" "); MonitorTime(prf.tiTime);
+    MonitorString(" "); MonitorLongDec(prf.ddwValue % 0x100000000);
+    MonitorString(" "); MonitorCharDec(prf.fExists);
 #endif
 
     if (prf.fExists)
@@ -127,16 +125,16 @@ bool    ReadHeader38(void)
   }
 
   wProfile38 += 6;
-  if (wProfile38 > 6/*wHOURS*/) return false;
+  if (wProfile38 > 12/*wHOURS*/) return false;
 
   return true;
 }
 
 
 
-#ifdef  MONITOR_38
+#ifdef  MONITOR_39
 
-uchar   RunProfile39_Internal(runner38*  runner)
+uchar   RunProfile39_Internal(runner39*  runner)
 {  
   FragmentOpen38(runner);
 
@@ -174,15 +172,15 @@ double2 RunProfile39(void)
 {
   MonitorOpen(0);
 
-  runner38 runner = InitRunner();
+  runner39 runner = InitRunner();
   uchar b = RunProfile39_Internal(&runner);
   if (b == 0){
-    MonitorString("\n error ");
+    MonitorString("\n error "); MonitorCharDec(b);
   } else {
-    MonitorString("\n finish "); MonitorCharDec(b);
+    MonitorString("\n finish ");
   }
 
-  return GetDouble2Error();
+  return GetDouble2(0, false);
 }
 
 #endif 

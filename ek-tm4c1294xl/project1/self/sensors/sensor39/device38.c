@@ -306,9 +306,9 @@ time    ReadTime38(void)
 
 
 
-runner38 InitRunner(void)
+runner39 InitRunner(void)
 {
-  runner38 runner;
+  runner39 runner;
 
   runner.bNS = 0;
   runner.bNR = 0;

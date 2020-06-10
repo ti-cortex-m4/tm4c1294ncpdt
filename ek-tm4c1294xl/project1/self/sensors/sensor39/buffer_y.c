@@ -23,7 +23,7 @@ void    StartBufferY(void) {
 
 
 void    AddBufferY(uint  iwStart, uint  cwSize) {
-#ifdef MONITOR_38
+#ifdef MONITOR_39
   MonitorX();
 
   MonitorString("\n AddToBuffer: Start="); MonitorIntDec(iwStart);
@@ -36,7 +36,7 @@ void    AddBufferY(uint  iwStart, uint  cwSize) {
   for (i=0; i<cwSize; i++) {
     uchar b = PopChar();
 
-#ifdef MONITOR_38
+#ifdef MONITOR_39
     MonitorCharHex(b);
     if (i % 16 == 16-1) MonitorString("\n");
 #endif
@@ -44,7 +44,7 @@ void    AddBufferY(uint  iwStart, uint  cwSize) {
     PushCharX(b);
   }
 
-#ifdef MONITOR_38
+#ifdef MONITOR_39
   MonitorString("\n");
 #endif
 }
@@ -82,7 +82,7 @@ buff_y  FinishBufferY(void) {
 
   uchar bCount = PopCharX();
 
-#ifdef MONITOR_38
+#ifdef MONITOR_39
   MonitorString("\n Count="); MonitorCharDec(bCount); MonitorString("\n");
 #endif
 
@@ -120,7 +120,7 @@ buff_y  FinishBufferY(void) {
       by.fFirst = true;
     }
 
-#ifdef MONITOR_38
+#ifdef MONITOR_39
     MonitorString("\n");
     MonitorTime(ti);
     MonitorLongDec(ddw / 1000000);
