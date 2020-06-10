@@ -18,7 +18,7 @@ automatic_get_cntmon_38*c
 #include "buffer_y.h"
 #include "io39.h"
 #include "monitor38.h"
-#include "automatic_get_cntmon_38.h"
+#include "automatic_get_cntmon_39.h"
 
 
 
