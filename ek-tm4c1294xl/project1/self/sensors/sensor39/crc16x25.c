@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-crc16x25*c
+crc16x25.c
 
 
 ------------------------------------------------------------------------------*/
@@ -18,7 +18,7 @@ crc16x25*c
 
 
 
-uint    MakeCRC16_X25(uchar  *pbData, uint  wSize)
+uint    MakeCRC16X25(uchar  *pbData, uint  wSize)
 {
  uint w = 0xFFFF;
  uchar i;
@@ -39,27 +39,27 @@ uint    MakeCRC16_X25(uchar  *pbData, uint  wSize)
 
 
 
-uint    MakeCRC16_X25OutBuff(uchar  bOffset, uint  wSize)
+uint    MakeCRC16X25OutBuff(uchar  bOffset, uint  wSize)
 {
   switch (ibPort)
   {
-    case 0:  return MakeCRC16_X25(mpbOutBuff0 + bOffset, wSize);
-    case 1:  return MakeCRC16_X25(mpbOutBuff1 + bOffset, wSize);
-    case 2:  return MakeCRC16_X25(mpbOutBuff2 + bOffset, wSize);
-    case 3:  return MakeCRC16_X25(mpbOutBuff3 + bOffset, wSize);
+    case 0:  return MakeCRC16X25(mpbOutBuff0 + bOffset, wSize);
+    case 1:  return MakeCRC16X25(mpbOutBuff1 + bOffset, wSize);
+    case 2:  return MakeCRC16X25(mpbOutBuff2 + bOffset, wSize);
+    case 3:  return MakeCRC16X25(mpbOutBuff3 + bOffset, wSize);
     default: ASSERT(false); return 0;
   }
 }
 
 
-uint    MakeCRC16_X25InBuff(uchar  bOffset, uint  wSize)
+uint    MakeCRC16X25InBuff(uchar  bOffset, uint  wSize)
 {
   switch (ibPort)
   {
-    case 0:  return MakeCRC16_X25(mpbInBuff0 + bOffset, wSize);
-    case 1:  return MakeCRC16_X25(mpbInBuff1 + bOffset, wSize);
-    case 2:  return MakeCRC16_X25(mpbInBuff2 + bOffset, wSize);
-    case 3:  return MakeCRC16_X25(mpbInBuff3 + bOffset, wSize);
+    case 0:  return MakeCRC16X25(mpbInBuff0 + bOffset, wSize);
+    case 1:  return MakeCRC16X25(mpbInBuff1 + bOffset, wSize);
+    case 2:  return MakeCRC16X25(mpbInBuff2 + bOffset, wSize);
+    case 3:  return MakeCRC16X25(mpbInBuff3 + bOffset, wSize);
     default: ASSERT(false); return 0;
   }
 }

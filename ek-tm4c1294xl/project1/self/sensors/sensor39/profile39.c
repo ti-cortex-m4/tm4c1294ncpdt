@@ -70,7 +70,7 @@ schar   QueryHeader38(runner39*  runner)
 
   ulong dw = DateToHouIndex(tiStart38);
   dw -= wProfile38;
-  time ti1 = HouIndexToDate(dw);
+  time ti1 = HouIndexToDate(dw - 1); // дл€ нахождени€ приращени€ энергии за получас
   time ti2 = HouIndexToDate(dw + 6 - 1);
 
 #ifdef MONITOR_39
@@ -79,7 +79,7 @@ schar   QueryHeader38(runner39*  runner)
   MonitorString(" ti2="); MonitorTime(ti2);
 #endif
 
-  return FragmentProfile38(runner, ti1, ti2);
+  return FragmentProfile39(runner, ti1, ti2);
 }
 
 
@@ -106,16 +106,21 @@ static bool ReadData38(time  tiTime, uint64_t  ddwValue)
 
 bool    ReadHeader38(void)
 {
+#ifdef MONITOR_39
+  MonitorString("\n ReadHeader38 ");
+#endif
+
+  DeltaBuffPrf38();
+
   uchar i;
   for (i=0; i<6; i++)
   {
     profile39 prf = GetBuffPrf38(i);
 
 #ifdef MONITOR_39
-    MonitorString("\n ReadHeader38 ");
-    MonitorString(" "); MonitorTime(prf.tiTime);
+    MonitorString("\n "); MonitorTime(prf.tiTime);
     MonitorString(" "); MonitorLongDec(prf.ddwValue % 0x100000000);
-    MonitorString(" "); MonitorCharDec(prf.fExists);
+    MonitorString(" "); MonitorBool(prf.fExists);
 #endif
 
     if (prf.fExists)
@@ -136,7 +141,7 @@ bool    ReadHeader38(void)
 
 uchar   RunProfile39_Internal(runner39*  runner)
 {  
-  FragmentOpen38(runner);
+  FragmentOpen39(runner);
 
 
   (*runner).bNS++;
