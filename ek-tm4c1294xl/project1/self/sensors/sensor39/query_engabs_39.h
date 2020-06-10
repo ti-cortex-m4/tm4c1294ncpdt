@@ -1,8 +1,8 @@
 /*------------------------------------------------------------------------------
-query_engabs_38*h
+query_engabs_39.h
 
 
 ------------------------------------------------------------------------------*/
 
-void    QueryEngAbs38(uchar  bNS, uchar  bNR, uchar  bInvokeId);
-uint64_t ReadEngAbs38(void);
+void    QueryEngAbs39(uchar  bNS, uchar  bNR, uchar  bInvokeId);
+uint64_t ReadEngAbs39(void);
