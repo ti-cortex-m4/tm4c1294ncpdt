@@ -56,7 +56,8 @@ AUTOMATIC2!C
 #include "sensor39/automatic_get_time_38.h"
 #include "sensor39/automatic_get_cntcurr_38.h"
 #include "sensor39/automatic_get_cntmon_38.h"
-#include "sensor39/read_profile_38.h"
+ #include "sensor39/read_profile_38.h"
+ #include "sensor39/profile39.h"
 #include "automatic2.h"
 
 
@@ -2058,7 +2059,7 @@ time2   ReadTimeCan(uchar  ibCan)
 #endif
 
 #ifndef SKIP_36
-    case 38: return ReadProfile36(); //ReadTimeCan38();
+    case 38: return RunProfile39(); //ReadProfile36(); //ReadTimeCan38();
 #endif
 
     default: return GetTime2Error();

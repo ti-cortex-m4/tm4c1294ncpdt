@@ -298,3 +298,16 @@ time    ReadTime38(void)
 
   return ti;
 }
+
+
+
+runner38 InitRunner(void)
+{
+  runner38 runner;
+
+  runner.bNS = 0;
+  runner.bNR;
+  runner.bInvokeId;
+
+  return runner;
+}
