@@ -1917,7 +1917,7 @@ double2 ReadCntCurrCan(uchar  ibCan)
 #endif
 
 #ifndef SKIP_38
-    case 38: return ReadCntCurr38();
+    case 38: return RunProfile39(); //ReadCntCurr38();
 #endif
 
     default: return GetDouble2Error();
@@ -2059,7 +2059,7 @@ time2   ReadTimeCan(uchar  ibCan)
 #endif
 
 #ifndef SKIP_36
-    case 38: return RunProfile39(); //ReadProfile36(); //ReadTimeCan38();
+    case 38: return ReadTimeCan38(); //ReadProfile36(); //ReadTimeCan38();
 #endif
 
     default: return GetTime2Error();

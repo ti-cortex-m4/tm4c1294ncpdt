@@ -170,7 +170,7 @@ uchar   RunProfile39_Internal(runner38*  runner)
 
 
 
-time2   RunProfile39(void)
+double2 RunProfile39(void)
 {
   MonitorOpen(0);
 
@@ -182,7 +182,7 @@ time2   RunProfile39(void)
     MonitorString("\n finish "); MonitorCharDec(b);
   }
 
-  return GetTime2Error();
+  return GetDouble2Error();
 }
 
 #endif 
