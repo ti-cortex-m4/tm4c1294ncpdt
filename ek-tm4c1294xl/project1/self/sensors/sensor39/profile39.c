@@ -26,7 +26,7 @@ profile39*c
  #include "../../digitals/limits.h"
  #include "../../special/special.h"
 #include "device38.h"
-#include "io38.h"
+#include "io39.h"
 #include "monitor38.h"
 #include "fragment_open_38.h"
 #include "fragment_profile_38.h"
@@ -144,7 +144,7 @@ uchar   RunProfile39_Internal(runner38*  runner)
   (*runner).bNS++;
   (*runner).bInvokeId++;
   QueryTime38((*runner).bNS, (*runner).bNR, (*runner).bInvokeId);
-  if (Input38() != SER_GOODCHECK) return 7;
+  if (Input39() != SER_GOODCHECK) return 7;
   if (!ValidateIframe((*runner).bNS, (*runner).bNR)) return 8;
   tiValue38 = ReadTime38();
   dwValue38 = DateToHouIndex(tiValue38);
@@ -152,7 +152,7 @@ uchar   RunProfile39_Internal(runner38*  runner)
 
   (*runner).bNR++;
   Query38_RR((*runner).bNR);
-  if (Input38() != SER_GOODCHECK) return 9;
+  if (Input39() != SER_GOODCHECK) return 9;
   if (!ValidateSframe((*runner).bNR)) return 10;
   DelayOff();
 

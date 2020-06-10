@@ -13,7 +13,7 @@ unpack36*c
 
 
 
-void    Decompress38(void)
+void    Decompress39(void)
 {
   uchar i,j;
 

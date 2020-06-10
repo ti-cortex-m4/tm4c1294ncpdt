@@ -1,12 +1,12 @@
 /*------------------------------------------------------------------------------
-io38*h
+io39.h
 
 
 ------------------------------------------------------------------------------*/
 
-#include "include38.h"
+#include "include39.h"
 
 
 
-void    Query38(uint  cwIn, uchar  cbOut);
-serial  Input38(void);
+void    Query39(uint  cwIn, uchar  cbOut);
+serial  Input39(void);

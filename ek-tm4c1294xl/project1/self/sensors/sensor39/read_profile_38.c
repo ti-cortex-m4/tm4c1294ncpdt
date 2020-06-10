@@ -17,7 +17,7 @@ read_profile_36*c
 #include "device38.h"
 #include "query_profile_38.h"
 #include "query_next_block_38.h"
-#include "io38.h"
+#include "io39.h"
 #include "monitor38.h"
 #include "buffer_y.h"
 #include "read_profile_38.h"
@@ -32,11 +32,11 @@ schar   y(void)
 
 
   Query38_DISC();
-  if (Input38() != SER_GOODCHECK) return -15;//GetDouble2Error();
+  if (Input39() != SER_GOODCHECK) return -15;//GetDouble2Error();
   DelayOff();
 
   Query38_SNRM();
-  if (Input38() != SER_GOODCHECK) return -16;//GetDouble2Error();
+  if (Input39() != SER_GOODCHECK) return -16;//GetDouble2Error();
   DelayOff();
 
   uchar bNS = 0;
@@ -44,13 +44,13 @@ schar   y(void)
   uchar bInvokeId = 0;
 
   Query38_Open2(bNS, bNR);
-  if (Input38() != SER_GOODCHECK) return -17;//GetDouble2Error();
+  if (Input39() != SER_GOODCHECK) return -17;//GetDouble2Error();
 //  if (!ValidateIframe(bNS, bNR)) return GetDouble2Error();
   DelayOff();
 
   bNR++;
   Query38_RR(bNR);
-  if (Input38() != SER_GOODCHECK) return -18;//GetDouble2Error();
+  if (Input39() != SER_GOODCHECK) return -18;//GetDouble2Error();
 //  if (!ValidateSframe(bNR)) return GetDouble2Error();
   DelayOff();
 
@@ -77,7 +77,7 @@ schar   y(void)
   bNS++;
   bInvokeId++;
   QueryProfile38(bNS, bNR, bInvokeId, ti1, ti2);
-  if (Input38() != SER_GOODCHECK) return -19;
+  if (Input39() != SER_GOODCHECK) return -19;
   DelayOff();
 
   bool fUseBlocks1 = UseBlocksDMLS();
@@ -91,14 +91,14 @@ schar   y(void)
   while (!LastSegmentDMLS()) {
     bNR++;
     Query38_RR(bNR);
-    if (Input38() != SER_GOODCHECK) return -20;
+    if (Input39() != SER_GOODCHECK) return -20;
     AddBufferY(8, IndexInBuff()-8-3);
     DelayOff();
   }
 
   bNR++;
   Query38_RR(bNR);
-  if (Input38() != SER_GOODCHECK) return -21;
+  if (Input39() != SER_GOODCHECK) return -21;
   DelayOff();
 
 
@@ -111,7 +111,7 @@ schar   y(void)
     bNS++;
 //  uchar bBlockNumber = 1;
     QueryNextBlock36(bNS, bNR, bInvokeId, bBlockNumber);
-    if (Input38() != SER_GOODCHECK) return -22;
+    if (Input39() != SER_GOODCHECK) return -22;
 
     fUseBlocks1 = UseBlocksDMLS();
     fLastBlock1 = LastBlockDMLS();
@@ -122,14 +122,14 @@ schar   y(void)
     while (!LastSegmentDMLS()) {
       bNR++;
       Query38_RR(bNR);
-      if (Input38() != SER_GOODCHECK) return -23;
+      if (Input39() != SER_GOODCHECK) return -23;
       AddBufferY(8, IndexInBuff()-8-3);
       DelayOff();
     }
 
     bNR++;
     Query38_RR(bNR);
-    if (Input38() != SER_GOODCHECK) return -24;
+    if (Input39() != SER_GOODCHECK) return -24;
     DelayOff();
   }
 

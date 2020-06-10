@@ -9,9 +9,9 @@ DEVICE36*C
 #include "../../serial/ports2.h"
 #include "../../serial/ports_devices.h"
 #include "../../serial/monitor.h"
-#include "include38.h"
+#include "include39.h"
 #include "crc16x25.h"
-#include "io38.h"
+#include "io39.h"
 #include "hdlc.h"
 #include "push_dlms.h"
 #include "device38.h"
@@ -41,7 +41,7 @@ void    Query38_DISC(void)
 
   PushChar(0x7E);
 
-  Query38(1000, wSize+2); // 9
+  Query39(1000, wSize+2); // 9
 }
 
 
@@ -100,7 +100,7 @@ void    Query38_SNRM(void)
 
   PushChar(0x7E);
 
-  Query38(1000, wSize+2); // 34
+  Query39(1000, wSize+2); // 34
 }
 
 
@@ -208,7 +208,7 @@ void    Query38_Open2(uchar  bNS, uchar  bNR)
   
   PushChar(0x7E);
 
-  Query38(1000, wSize+2); // 70
+  Query39(1000, wSize+2); // 70
 }
 
 
@@ -230,7 +230,7 @@ void    Query38_RR(uchar  bNR)
   PushIntLtl(MakeCRC16_X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
   PushChar(0x7E);
 
-  Query38(1000, wSize+2); // 9
+  Query39(1000, wSize+2); // 9
 }
 
 
@@ -282,7 +282,7 @@ void    QueryTime38(uchar  bNS, uchar  bNR, uchar  bInvokeId)
   
   PushChar(0x7E);
 
-  Query38(1000, wSize+2); // 27
+  Query39(1000, wSize+2); // 27
 }
 
 

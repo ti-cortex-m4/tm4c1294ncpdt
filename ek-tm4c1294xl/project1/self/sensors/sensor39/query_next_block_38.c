@@ -9,12 +9,10 @@ query_next_block_38*c
 //#include "../../serial/ports2.h"
 //#include "../../serial/ports_devices.h"
 #include "../../serial/monitor.h"
-//#include "include38.h"
 #include "crc16x25.h"
-#include "io38.h"
+#include "io39.h"
 #include "hdlc.h"
 #include "push_dlms.h"
-//#include "device36.h" //
 #include "query_next_block_38.h"
 
 
@@ -62,5 +60,5 @@ void    QueryNextBlock36(uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  bBlock
 
   PushChar(0x7E);
 
-  Query38(1000, wSize+2); // 0x13
+  Query39(1000, wSize+2); // 0x13
 }
