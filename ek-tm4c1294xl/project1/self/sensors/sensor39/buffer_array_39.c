@@ -7,7 +7,7 @@ buffers_x*c
 #include "../../main.h"
 #include "../../serial/monitor.h"
 #include "include39.h"
-#include "buffer_byte_39.h"
+#include "buffer_array_39.h"
 
 
 
