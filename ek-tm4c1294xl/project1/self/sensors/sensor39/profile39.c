@@ -178,7 +178,7 @@ double2 RunProfile39(void)
 
   runner39 runner = InitRunner();
   uchar b = RunProfile39_Internal(&runner);
-  if (b !== 0) {
+  if (b != 0) {
     MonitorString("\n error "); MonitorCharDec(b);
   } else {
     MonitorString("\n finish ");
