@@ -11,6 +11,10 @@ buffers_x*c
 
 
 
+//#define BUFF_ARRAY_39  1
+
+
+
 uchar                       mpbBuffX[3000]; // TODO check overflow
 
 uint                        iwPushX, iwPopX;
@@ -18,7 +22,7 @@ uint                        iwPushX, iwPopX;
 
 
 void    MonitorX(void) {
-#ifdef MONITOR_39
+#ifdef BUFF_ARRAY_39
   MonitorString("\n ReadFromBuffer");
   MonitorArrayHex(mpbBuffX, iwPushX);
 #endif

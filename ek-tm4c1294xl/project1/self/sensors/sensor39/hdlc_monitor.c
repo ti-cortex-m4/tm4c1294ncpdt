@@ -14,7 +14,7 @@ hdlc_monitor.c
 
 
 
-#define MONITOR_HDLC  1
+//#define MONITOR_HDLC  1
 
 
 
