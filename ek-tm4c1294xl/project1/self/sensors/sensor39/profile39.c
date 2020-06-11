@@ -69,7 +69,7 @@ schar   QueryHeader38(runner39*  pr)
 
   ulong dw = DateToHouIndex(tiStart38);
   dw -= wProfile38;
-  time ti1 = HouIndexToDate(dw - 1); // для нахождения ПРИРАЩЕНИЯ энергии за получас
+  time ti1 = HouIndexToDate(dw - 1);
   time ti2 = HouIndexToDate(dw + 6 - 1);
 
 #ifdef MONITOR_39

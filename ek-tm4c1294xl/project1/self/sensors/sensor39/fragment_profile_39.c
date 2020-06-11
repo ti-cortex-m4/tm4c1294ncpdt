@@ -16,14 +16,14 @@ fragment_profile_39.c
 
 
 
-uchar   FragmentProfile39(runner39  *runner, time  ti1, time  ti2)
+uchar   FragmentProfile39(runner39  *pr, time  ti1, time  ti2)
 {
   InitBuffRecord39();
 
 
-  (*runner).bNS++;
-  (*runner).bInvokeId++;
-  QueryProfile38((*runner).bNS, (*runner).bNR, (*runner).bInvokeId, ti1, ti2);
+  (*pr).bNS++;
+  (*pr).bInvokeId++;
+  QueryProfile38((*pr).bNS, (*pr).bNR, (*pr).bInvokeId, ti1, ti2);
   if (Input39() != SER_GOODCHECK) return 1;
   DelayOff();
 
@@ -36,15 +36,15 @@ uchar   FragmentProfile39(runner39  *runner, time  ti1, time  ti2)
     AddBuffRecord39(15, IndexInBuff()-15-3);
 
   while (!LastSegmentDMLS()) {
-    (*runner).bNR++;
-    Query38_RR((*runner).bNR);
+    (*pr).bNR++;
+    Query38_RR((*pr).bNR);
     if (Input39() != SER_GOODCHECK) return 2;
     AddBuffRecord39(8, IndexInBuff()-8-3);
     DelayOff();
   }
 
-  (*runner).bNR++;
-  Query38_RR((*runner).bNR);
+  (*pr).bNR++;
+  Query38_RR((*pr).bNR);
   if (Input39() != SER_GOODCHECK) return 3;
   DelayOff();
 
@@ -55,9 +55,9 @@ uchar   FragmentProfile39(runner39  *runner, time  ti1, time  ti2)
   while (fUseBlocks1 && (!fLastBlock1)) {
     bBlockNumber++;
 
-    (*runner).bNS++;
+    (*pr).bNS++;
 //  uchar bBlockNumber = 1;
-    QueryNextBlock39((*runner).bNS, (*runner).bNR, (*runner).bInvokeId, bBlockNumber);
+    QueryNextBlock39((*pr).bNS, (*pr).bNR, (*pr).bInvokeId, bBlockNumber);
     if (Input39() != SER_GOODCHECK) return 4;
 
     fUseBlocks1 = UseBlocksDMLS();
@@ -67,15 +67,15 @@ uchar   FragmentProfile39(runner39  *runner, time  ti1, time  ti2)
     DelayOff();
 
     while (!LastSegmentDMLS()) {
-      (*runner).bNR++;
-      Query38_RR((*runner).bNR);
+      (*pr).bNR++;
+      Query38_RR((*pr).bNR);
       if (Input39() != SER_GOODCHECK) return 5;
       AddBuffRecord39(8, IndexInBuff()-8-3);
       DelayOff();
     }
 
-    (*runner).bNR++;
-    Query38_RR((*runner).bNR);
+    (*pr).bNR++;
+    Query38_RR((*pr).bNR);
     if (Input39() != SER_GOODCHECK) return 6;
     DelayOff();
   }
