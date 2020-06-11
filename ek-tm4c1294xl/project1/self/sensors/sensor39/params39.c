@@ -19,8 +19,8 @@ params34.c
 
 
 
-static const obis_t obisU1 = {1, 0, 72, 7, 0, 255};
-static const obis_t obisU2 = {1, 0, 72, 7, 0, 255};
+static const obis_t obisU1 = {1, 0, 32, 7, 0, 255};
+static const obis_t obisU2 = {1, 0, 52, 7, 0, 255};
 static const obis_t obisU3 = {1, 0, 72, 7, 0, 255};
 
 
@@ -38,7 +38,7 @@ float2  ReadValue39(const obis_t  obis, runner39*  pr)
   QueryParam39_(obis, (*pr).bNS, (*pr).bNR, (*pr).bInvokeId);
   if (Input39() != SER_GOODCHECK) return GetFloat2Error();
   if (!ValidateIframe((*pr).bNS, (*pr).bNR)) return GetFloat2Error();
-  float fl = ReadParam39_() / 10;
+  float fl = ReadType18ULong16() / 10;
   DelayOff();
 
   (*pr).bNR++;
