@@ -69,10 +69,10 @@ ulong64_ QueryCntMon38_Full(uchar  ibMon)
     uchar bYear = (bMonth > ti.bMonth) ? ti.bYear-1 : ti.bYear;
 
     bNS++;
-    QueryEngMon38(bNS, bNR, bInvokeId++, bMonth, bYear);
+    QueryEngMon39(bNS, bNR, bInvokeId++, bMonth, bYear);
     if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
     if (!ValidateIframe(bNS, bNR)) return GetLong64Error(1);
-    ddw = ReadEngMon38();
+    ddw = ReadEngMon39();
     DelayOff();
 
     bNR++;

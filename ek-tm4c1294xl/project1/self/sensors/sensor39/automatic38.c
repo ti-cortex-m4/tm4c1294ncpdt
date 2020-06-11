@@ -105,11 +105,11 @@ double2 ReadCntMonCan36_(uchar  ibMon)
   DelayOff();
 
   bNS++;
-  QueryEngMon38(bNS, bNR, bInvokeId++, 4, 20);
+  QueryEngMon39(bNS, bNR, bInvokeId++, 4, 20);
   if (Input39() != SER_GOODCHECK) return GetDouble2Error();
   if (!ValidateIframe(bNS, bNR)) return GetDouble2Error();
 
-  uint64_t ddw = ReadEngMon38();
+  uint64_t ddw = ReadEngMon39();
   mpdwChannelsA[0] = ddw % 0x100000000;
   mpdbChannelsC[0] = (double)mpdwChannelsA[0] / 1000;
   mpboChannelsA[0] = true;
