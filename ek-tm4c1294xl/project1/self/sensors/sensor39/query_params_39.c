@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-query_engabs_39.c
+query_params_39.c
 
 
 ------------------------------------------------------------------------------*/
@@ -14,14 +14,14 @@ query_engabs_39.c
 #include "io39.h"
 #include "hdlc.h"
 #include "dlms_push.h"
-#include "query_engabs_39.h"
+#include "query_params_39.h"
 
 
 
-void    QueryEngAbs39(uchar  bNS, uchar  bNR, uchar  bInvokeId)
+void    QueryParam39(uchar  bNS, uchar  bNR, uchar  bInvokeId)
 {
 #ifdef MONITOR_39  
-  MonitorString("\n\n QueryEngAbs39 ");
+  MonitorString("\n\n QueryParam39 ");
 #endif
 
   uint wSize = 23 + GetHdlcAddressesSize(); // 0x19 25
@@ -70,7 +70,7 @@ void    QueryEngAbs39(uchar  bNS, uchar  bNR, uchar  bInvokeId)
 
 
 
-uint64_t ReadEngAbs39(void)
+uint64_t ReadParam39(void)
 {
   InitPop(14 + GetHdlcAddressesSize());
   return PopLongBig()*0x100000000 + PopLongBig();
