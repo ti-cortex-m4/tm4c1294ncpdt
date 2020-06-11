@@ -14,7 +14,7 @@ automatic_get_cntmon_38*c
 #include "device38.h"
 #include "query_engmon_38.h"
 #include "query_profile_38.h"
-#include "query_next_block_38.h"
+#include "query_next_block_39.h"
 #include "buffer_y.h"
 #include "io39.h"
 #include "monitor38.h"
