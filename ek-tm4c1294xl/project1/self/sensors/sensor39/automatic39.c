@@ -14,7 +14,7 @@ AUTOMATIC36*C
 //#include "../../sensors/automatic1.h"
 #include "../../digitals/digitals.h"
 #include "device39.h"
-#include "query_engmon_38.h"
+#include "query_engmon_39.h"
 #include "io39.h"
 #include "automatic38.h"
 
