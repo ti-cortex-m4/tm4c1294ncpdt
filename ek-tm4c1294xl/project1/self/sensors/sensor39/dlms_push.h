@@ -1,9 +1,9 @@
 /*------------------------------------------------------------------------------
-push_dlms*h
+dlms_push.h
 
 
 ------------------------------------------------------------------------------*/
 
 void    PushFormatDLMS(uint  wSize);
-void    PushTimeMonthDLMS(uchar  bMonth, uchar  bYear);
+void    PushTimeMonthYearDLMS(uchar  bMonth, uchar  bYear);
 void    PushTimeDLMS(time  ti);
