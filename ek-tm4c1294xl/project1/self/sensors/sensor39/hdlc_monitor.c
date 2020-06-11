@@ -68,20 +68,21 @@ void    MonitorOutputHDLC(void)
 #ifdef MONITOR_39
 #ifdef MONITOR_HDLC
 
-  MonitorString("\n Output HDLC: ");
-
   uint wFormat = OutBuff(1)*0x100 + OutBuff(2);
-  MonitorString(" Format="); MonitorIntHex(wFormat); 
   uint wSize = wFormat & 0x0FFF;
-  MonitorString(" wSize="); MonitorIntHex(wSize);
 
   uint wCRCexpected = MakeCRC16X25OutBuff(1, wSize-2);
-  MonitorString(" wCRCexpected="); MonitorIntHex(wCRCexpected);
-
+  
   int i = wSize-1;
   uint wCRCactual = OutBuff(i) + OutBuff(i+1)*0x100;
-  MonitorString(" wCRCactual="); MonitorIntHex(wCRCactual);
 
+  MonitorString("\n Output HDLC: ");
+
+  MonitorString(" Format="); MonitorIntHex(wFormat); 
+  MonitorString(" wSize="); MonitorIntHex(wSize);
+
+  MonitorString(" wCRCexpected="); MonitorIntHex(wCRCexpected);
+  MonitorString(" wCRCactual="); MonitorIntHex(wCRCactual);
   (wCRCexpected == wCRCactual) ? MonitorString(" CRC_ok") : MonitorString(" CRC_error");
 
   MonitorControl(OutBuff(3 + GetHdlcAddressesSize()));
