@@ -27,7 +27,7 @@ ulong                   dwCurrent;
 
 
 
-void    Query38_DISC_Current(void)
+void    Query39_DISC_Current(void)
 {
   bNS = 0;
   bNR = 0;
@@ -37,20 +37,20 @@ void    Query38_DISC_Current(void)
 }
 
 
-void    Query38_Open2_Current(void)
+void    Query39_Open2_Current(void)
 {
   Query38_Open2(bNS, bNR);
 }
 
 
-void    Query38_RR_Current(void)
+void    Query39_RR_Current(void)
 {
   bNR++;
   Query38_RR(bNR);
 }
 
 
-void    QueryEngAbs38_Current(void)
+void    QueryEngAbs39_Current(void)
 {
   bNS++;
   bInvokeId++;
@@ -78,7 +78,7 @@ void    SaveCurrent39(void)
 }
 
 
-void    ReadCurrent38(void)
+void    ReadCurrent39(void)
 {
   mpdwBaseDig[0] = dwCurrent * mpdbPulseMnt[ibDig];
 

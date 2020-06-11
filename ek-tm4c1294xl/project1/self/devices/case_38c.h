@@ -1,11 +1,11 @@
 
-#ifndef SKIP_38
+#ifndef SKIP_39
 
     case DEV_START_38C:
       Clear(); ShowPercent(50);
 
       cbRepeat = MaxRepeats();
-      Query38_DISC_Current();
+      Query39_DISC_Current();
       SetCurr(DEV_DISC_38C);
       break;
 
@@ -19,7 +19,7 @@
           ErrorLink();
           cbRepeat--;
 
-          Query38_DISC_Current();
+          Query39_DISC_Current();
           SetCurr(DEV_DISC_38C);
         }
       }
@@ -30,7 +30,7 @@
       Clear(); ShowPercent(51);
 
       cbRepeat = MaxRepeats();
-      Query38_SNRM();
+      Query39_SNRM();
       SetCurr(DEV_SNRM_38C);
       break;
 
@@ -44,7 +44,7 @@
           ErrorLink();
           cbRepeat--;
 
-          Query38_SNRM();
+          Query39_SNRM();
           SetCurr(DEV_SNRM_38C);
         }
       }
@@ -55,7 +55,7 @@
       Clear(); ShowPercent(52);
 
       cbRepeat = MaxRepeats();
-      Query38_Open2_Current();
+      Query39_Open2_Current();
       SetCurr(DEV_OPEN2_38C);
       break;
 
@@ -72,7 +72,7 @@
           ErrorLink();
           cbRepeat--;
 
-          Query38_Open2_Current();
+          Query39_Open2_Current();
           SetCurr(DEV_OPEN2_38C);
         }
       }
@@ -83,7 +83,7 @@
       Clear(); ShowPercent(53);
 
       cbRepeat = MaxRepeats();
-      Query38_RR_Current();
+      Query39_RR_Current();
       SetCurr(DEV_RR1_38C);
       break;
 
@@ -100,7 +100,7 @@
           ErrorLink();
           cbRepeat--;
 
-          Query38_RR_Current();
+          Query39_RR_Current();
           SetCurr(DEV_RR1_38C);
         }
       }
@@ -111,7 +111,7 @@
       Clear(); ShowPercent(54);
 
       cbRepeat = MaxRepeats();
-      QueryEngAbs38_Current();
+      QueryEngAbs39_Current();
       SetCurr(DEV_ENGABS_38C);
       break;
 
@@ -121,7 +121,7 @@
         if (!ValidateIframe_Current())
           ErrorCurrent();
         else {
-          SaveCurrent38();
+          SaveCurrent39();
           MakePause(DEV_POSTENGABS_38C);
         }
       }
@@ -131,7 +131,7 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryEngAbs38_Current();
+          QueryEngAbs39_Current();
           SetCurr(DEV_ENGABS_38C);
         }
       }
@@ -142,7 +142,7 @@
       Clear(); ShowPercent(55);
 
       cbRepeat = MaxRepeats();
-      Query38_RR_Current();
+      Query39_RR_Current();
       SetCurr(DEV_RR2_38C);
       break;
 
@@ -152,7 +152,7 @@
         if (!ValidateSframe_Current())
           ErrorCurrent();
         else {
-          ReadCurrent38();
+          ReadCurrent39();
         }
       }
       else {
@@ -161,7 +161,7 @@
           ErrorLink();
           cbRepeat--;
 
-          Query38_RR_Current();
+          Query39_RR_Current();
           SetCurr(DEV_RR2_38C);
         }
       }

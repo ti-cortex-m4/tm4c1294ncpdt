@@ -6598,7 +6598,7 @@ void    RunDevices(void)
       Clear(); ShowPercent(50);
 
       cbRepeat = MaxRepeats();
-      Query38_DISC_Current();
+      Query39_DISC_Current();
       SetCurr(DEV_DISC_38C);
       break;
 
@@ -6612,7 +6612,7 @@ void    RunDevices(void)
           ErrorLink();
           cbRepeat--;
 
-          Query38_DISC_Current();
+          Query39_DISC_Current();
           SetCurr(DEV_DISC_38C);
         }
       }
@@ -6648,7 +6648,7 @@ void    RunDevices(void)
       Clear(); ShowPercent(52);
 
       cbRepeat = MaxRepeats();
-      Query38_Open2_Current();
+      Query39_Open2_Current();
       SetCurr(DEV_OPEN2_38C);
       break;
 
@@ -6665,7 +6665,7 @@ void    RunDevices(void)
           ErrorLink();
           cbRepeat--;
 
-          Query38_Open2_Current();
+          Query39_Open2_Current();
           SetCurr(DEV_OPEN2_38C);
         }
       }
@@ -6676,7 +6676,7 @@ void    RunDevices(void)
       Clear(); ShowPercent(53);
 
       cbRepeat = MaxRepeats();
-      Query38_RR_Current();
+      Query39_RR_Current();
       SetCurr(DEV_RR1_38C);
       break;
 
@@ -6693,7 +6693,7 @@ void    RunDevices(void)
           ErrorLink();
           cbRepeat--;
 
-          Query38_RR_Current();
+          Query39_RR_Current();
           SetCurr(DEV_RR1_38C);
         }
       }
@@ -6704,7 +6704,7 @@ void    RunDevices(void)
       Clear(); ShowPercent(54);
 
       cbRepeat = MaxRepeats();
-      QueryEngAbs38_Current();
+      QueryEngAbs39_Current();
       SetCurr(DEV_ENGABS_38C);
       break;
 
@@ -6724,7 +6724,7 @@ void    RunDevices(void)
           ErrorLink();
           cbRepeat--;
 
-          QueryEngAbs38_Current();
+          QueryEngAbs39_Current();
           SetCurr(DEV_ENGABS_38C);
         }
       }
@@ -6735,7 +6735,7 @@ void    RunDevices(void)
       Clear(); ShowPercent(55);
 
       cbRepeat = MaxRepeats();
-      Query38_RR_Current();
+      Query39_RR_Current();
       SetCurr(DEV_RR2_38C);
       break;
 
@@ -6745,7 +6745,7 @@ void    RunDevices(void)
         if (!ValidateSframe_Current())
           ErrorCurrent();
         else {
-          ReadCurrent38();
+          ReadCurrent39();
         }
       }
       else {
@@ -6754,7 +6754,7 @@ void    RunDevices(void)
           ErrorLink();
           cbRepeat--;
 
-          Query38_RR_Current();
+          Query39_RR_Current();
           SetCurr(DEV_RR2_38C);
         }
       }
