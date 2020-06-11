@@ -58,7 +58,7 @@ uchar   FragmentProfile39(runner39  *runner, time  ti1, time  ti2)
 
     (*runner).bNS++;
 //  uchar bBlockNumber = 1;
-    QueryNextBlock36((*runner).bNS, (*runner).bNR, (*runner).bInvokeId, bBlockNumber);
+    QueryNextBlock39((*runner).bNS, (*runner).bNR, (*runner).bInvokeId, bBlockNumber);
     if (Input39() != SER_GOODCHECK) return 4;
 
     fUseBlocks1 = UseBlocksDMLS();
