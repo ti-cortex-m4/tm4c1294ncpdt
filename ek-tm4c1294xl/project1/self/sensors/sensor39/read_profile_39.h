@@ -4,4 +4,4 @@ read_profile_36*h
 
 ------------------------------------------------------------------------------*/
 
-time2   ReadProfile36(void);
+time2   ReadProfile39(void);

@@ -164,7 +164,7 @@ schar   y(void)
 }
 
 
-time2   ReadProfile36(void)
+time2   ReadProfile39(void)
 {
   y();
   return GetTime2(tiZero, true);
