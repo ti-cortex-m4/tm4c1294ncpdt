@@ -51,7 +51,7 @@ void    QueryParam39_(const obis_t  obis, uchar  bNS, uchar  bNR, uchar  bInvoke
 
   PushOBIS_DLMS(obis);
 
-  PushChar(0x02);
+  PushChar(0x02); // attribute
   PushChar(0x00);
 
   // DLMS finish
@@ -65,7 +65,7 @@ void    QueryParam39_(const obis_t  obis, uchar  bNS, uchar  bNR, uchar  bInvoke
 
 
 
-uint    ReadParam39_(void)
+uint    ReadType18ULong16(void)
 {
   InitPop(14 + GetHdlcAddressesSize());
   return PopIntBig();
@@ -103,3 +103,4 @@ uint    ReadParam39_(void)
 
 
 // check return type
+// 00 0x12 success ?, ulong 16
