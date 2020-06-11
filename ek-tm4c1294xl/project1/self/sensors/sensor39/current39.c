@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-current38*c
+current39*c
 
 
 ------------------------------------------------------------------------------*/
@@ -15,7 +15,7 @@ current38*c
 #include "io39.h"
 #include "device38.h"
 #include "query_engabs_39.h"
-#include "current38.h"
+#include "current39.h"
 
 
 
@@ -72,7 +72,7 @@ bool    ValidateIframe_Current(void)
 
 
 
-void    SaveCurrent38(void)
+void    SaveCurrent39(void)
 {
   dwCurrent = ReadEngAbs39()  % 0x100000000;
 }
