@@ -60,9 +60,9 @@ query_engmon_38*c
   </GetRequestNormal>
 </GetRequest>
 */
-void    QueryEngMon38(uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  bMonth, uchar  bYear)
+void    QueryEngMon39(uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  bMonth, uchar  bYear)
 {
-  MonitorString("\n\n GetEngMon "); MonitorCharDec(bMonth); MonitorString(" "); MonitorCharDec(bYear);
+  MonitorString("\n\n QueryEngMon39 "); MonitorCharDec(bMonth); MonitorString(" "); MonitorCharDec(bYear);
 
   uint wSize = 92 + GetHdlcAddressesSize(); // 0x5E 94
 
@@ -192,7 +192,7 @@ void    QueryEngMon38(uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  bMonth, u
 </GetResponse>
 </PDU>
 */
-uint64_t ReadEngMon38(void)
+uint64_t ReadEngMon39(void)
 {
   InitPop(18 + GetHdlcAddressesSize());
   return PopLongBig()*0x100000000 + PopLongBig();

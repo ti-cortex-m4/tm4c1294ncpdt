@@ -1,8 +1,8 @@
 /*------------------------------------------------------------------------------
-query_engmon_38*h
+query_engmon_39.h
 
 
 ------------------------------------------------------------------------------*/
 
-void    QueryEngMon38(uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  bMonth, uchar  bYear);
-uint64_t ReadEngMon38(void);
+void    QueryEngMon39(uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  bMonth, uchar  bYear);
+uint64_t ReadEngMon39(void);
