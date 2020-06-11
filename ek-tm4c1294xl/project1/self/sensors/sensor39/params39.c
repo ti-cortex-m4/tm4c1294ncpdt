@@ -19,11 +19,15 @@ params34.c
 
 
 
-static const obis_t U3 = {1, 0, 72, 7, 0, 255};
+static const obis_t obisU1 = {1, 0, 72, 7, 0, 255};
+static const obis_t obisU2 = {1, 0, 72, 7, 0, 255};
+static const obis_t obisU3 = {1, 0, 72, 7, 0, 255};
 
 
 
-static float        reU3;
+static float        flU1;
+static float        flU2;
+static float        flU3;
 
 
 
@@ -78,9 +82,17 @@ float2  ReadParam39(void)
     DelayOff();
 
 
-    float2 fl2 = ReadValue39(U3, &r);
+    float2 fl2 = ReadValue39(obisU1, &r);
     if (!fl2.fValid) return GetFloat2Error();
-    reU3 = fl2.flValue;
+    flU1 = fl2.flValue;
+
+    fl2 = ReadValue39(obisU2, &r);
+    if (!fl2.fValid) return GetFloat2Error();
+    flU2 = fl2.flValue;
+
+    fl2 = ReadValue39(obisU3, &r);
+    if (!fl2.fValid) return GetFloat2Error();
+    flU3 = fl2.flValue;
 
 
     Query38_DISC();
@@ -93,9 +105,9 @@ float2  ReadParam39(void)
 
   switch (diCurr.ibLine)
   {
-//    case PAR_U1 : return GetFloat2(mpeValues[0]/100, true);
-//    case PAR_U2 : return GetFloat2(mpeValues[1]/100, true);
-    case PAR_U3 : return GetFloat2(reU3, true);
+    case PAR_U1 : return GetFloat2(flU1, true);
+    case PAR_U2 : return GetFloat2(flU2, true);
+    case PAR_U3 : return GetFloat2(flU3, true);
 
 //    case PAR_I1 : return GetFloat2(mpeValues[3], true);
 //    case PAR_I2 : return GetFloat2(mpeValues[4], true);
