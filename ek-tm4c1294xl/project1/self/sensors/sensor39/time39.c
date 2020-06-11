@@ -18,11 +18,11 @@ time39.c
 
 
 
-void    QueryTime38(uchar  bNS, uchar  bNR, uchar  bInvokeId)
+void    QueryTime39(uchar  bNS, uchar  bNR, uchar  bInvokeId)
 {
-  MonitorString("\n\n GetTime");
-  MonitorString(" N(S)="); MonitorCharDec(bNS);
-  MonitorString(" N(R)="); MonitorCharDec(bNR);
+#ifdef MONITOR_39  
+  MonitorString("\n\n QueryTime39 ");
+#endif
 
   uint wSize = 23 + GetHdlcAddressesSize(); // 0x19 25
 

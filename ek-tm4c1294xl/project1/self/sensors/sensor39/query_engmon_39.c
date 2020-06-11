@@ -62,7 +62,9 @@ query_engmon_39*c
 */
 void    QueryEngMon39(uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  bMonth, uchar  bYear)
 {
+#ifdef MONITOR_39  
   MonitorString("\n\n QueryEngMon39 "); MonitorCharDec(bMonth); MonitorString(" "); MonitorCharDec(bYear);
+#endif
 
   uint wSize = 92 + GetHdlcAddressesSize(); // 0x5E 94
 
