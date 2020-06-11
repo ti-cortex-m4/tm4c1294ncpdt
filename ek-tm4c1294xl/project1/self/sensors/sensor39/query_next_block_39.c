@@ -27,7 +27,9 @@ query_next_block_39.c
 */
 void    QueryNextBlock39(uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  bBlockNumber)
 {
+#ifdef MONITOR_39  
   MonitorString("\n\n QueryNextBlock39 "); MonitorCharDec(bBlockNumber);
+#endif  
 
   uint wSize = 17 + GetHdlcAddressesSize();
 

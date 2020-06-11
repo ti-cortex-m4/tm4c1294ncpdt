@@ -20,7 +20,9 @@ query_engabs_39.c
 
 void    QueryEngAbs39(uchar  bNS, uchar  bNR, uchar  bInvokeId)
 {
+#ifdef MONITOR_39  
   MonitorString("\n\n QueryEngAbs39 ");
+#endif
 
   uint wSize = 23 + GetHdlcAddressesSize(); // 0x19 25
 

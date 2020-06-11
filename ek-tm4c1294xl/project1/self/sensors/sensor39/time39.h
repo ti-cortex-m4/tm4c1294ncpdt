@@ -4,5 +4,5 @@ time39.h
 
 ------------------------------------------------------------------------------*/
 
-void    QueryTime38(uchar  bNS, uchar  bNR, uchar  bInvokeId);
+void    QueryTime39(uchar  bNS, uchar  bNR, uchar  bInvokeId);
 time    ReadTime38(void);
