@@ -16,6 +16,7 @@ profile39*c
  #include "../../digitals/limits.h"
  #include "../../special/special.h"
 #include "device39.h"
+#include "time39.h"
 #include "io39.h"
 #include "fragment_open_39.h"
 #include "fragment_profile_39.h"
@@ -145,10 +146,10 @@ uchar   RunProfile39_Internal(runner39*  pr)
 
   (*pr).bNS++;
   (*pr).bInvokeId++;
-  QueryTime38((*pr).bNS, (*pr).bNR, (*pr).bInvokeId);
+  QueryTime39((*pr).bNS, (*pr).bNR, (*pr).bInvokeId);
   if (Input39() != SER_GOODCHECK) return 7;
   if (!ValidateIframe((*pr).bNS, (*pr).bNR)) return 8;
-  tiValue38 = ReadTime38();
+  tiValue38 = ReadTime39();
   dwValue38 = DateToHouIndex(tiValue38);
   DelayOff();
 

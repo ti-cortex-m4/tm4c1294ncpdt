@@ -11,6 +11,7 @@ automatic_get_time_38*c
 #include "../../serial/ports.h"
 #include "../../digitals/digitals.h"
 #include "device39.h"
+#include "time39.h"
 #include "io39.h"
 #include "automatic_get_time_39.h"
 
@@ -44,10 +45,10 @@ time2   QueryTime38_Full(void)
 
   bNS++;
   bInvokeId++;
-  QueryTime38(bNS, bNR, bInvokeId);
+  QueryTime39(bNS, bNR, bInvokeId);
   if (Input39() != SER_GOODCHECK) return GetTime2Error();
   if (!ValidateIframe(bNS, bNR)) return GetTime2Error();
-  time ti = ReadTime38();
+  time ti = ReadTime39();
   DelayOff();
 
   bNR++;
