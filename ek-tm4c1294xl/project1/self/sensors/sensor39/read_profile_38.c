@@ -110,7 +110,7 @@ schar   y(void)
 
     bNS++;
 //  uchar bBlockNumber = 1;
-    QueryNextBlock36(bNS, bNR, bInvokeId, bBlockNumber);
+    QueryNextBlock39(bNS, bNR, bInvokeId, bBlockNumber);
     if (Input39() != SER_GOODCHECK) return -22;
 
     fUseBlocks1 = UseBlocksDMLS();

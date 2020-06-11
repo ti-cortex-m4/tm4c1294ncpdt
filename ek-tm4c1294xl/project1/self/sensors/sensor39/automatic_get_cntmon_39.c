@@ -140,7 +140,7 @@ ulong64_ QueryCntMon38_Full(uchar  ibMon)
 
       bNS++;
   //  uchar bBlockNumber = 1;
-      QueryNextBlock36(bNS, bNR, bInvokeId, bBlockNumber);
+      QueryNextBlock39(bNS, bNR, bInvokeId, bBlockNumber);
       if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
 
       fUseBlocks1 = UseBlocksDMLS();

@@ -1,13 +1,11 @@
 /*------------------------------------------------------------------------------
-query_next_block_38*c
+query_next_block_39.c
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
 #include "../../serial/ports.h"
-//#include "../../serial/ports2.h"
-//#include "../../serial/ports_devices.h"
 #include "../../serial/monitor.h"
 #include "crc16x25.h"
 #include "io39.h"
@@ -27,9 +25,9 @@ query_next_block_38*c
   </GetRequestForNextDataBlock>
 </GetRequest>
 */
-void    QueryNextBlock36(uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  bBlockNumber)
+void    QueryNextBlock39(uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  bBlockNumber)
 {
-  MonitorString("\n\n GetNextBlock "); MonitorCharDec(bBlockNumber);
+  MonitorString("\n\n QueryNextBlock39 "); MonitorCharDec(bBlockNumber);
 
   uint wSize = 17 + GetHdlcAddressesSize();
 
@@ -49,7 +47,7 @@ void    QueryNextBlock36(uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  bBlock
   PushChar(0x00);
 
   PushChar(0xC0); // Get-Request
-  PushChar(0x02); // Get-Request-Normal /// TODO ???
+  PushChar(0x02); // Get-Request-Next
   PushChar(0x80 | (bInvokeId % 16)); // Invoke-Id-And-Priority
 
   PushLongBig(bBlockNumber); // <BlockNumber Value="00000001" />
