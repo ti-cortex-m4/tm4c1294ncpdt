@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-current38*h
+current39*h
 
 
 ------------------------------------------------------------------------------*/
@@ -12,5 +12,5 @@ void    QueryEngAbs38_Current(void);
 bool    ValidateSframe_Current(void);
 bool    ValidateIframe_Current(void);
 
-void    SaveCurrent38(void);
+void    SaveCurrent39(void);
 void    ReadCurrent38(void);
