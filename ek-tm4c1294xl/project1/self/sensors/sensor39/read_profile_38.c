@@ -26,7 +26,7 @@ read_profile_36*c
 
 schar   y(void)
 {
-  StartBufferY();
+  InitBuffRecord39();
 
 
 
@@ -83,15 +83,15 @@ schar   y(void)
   bool fLastBlock1 = LastBlockDMLS();
 
   if (fUseBlocks1)
-    AddBufferY(22, IndexInBuff()-22-3); // TODO GetHdlcAddressesSize
+    AddBuffRecord39(22, IndexInBuff()-22-3); // TODO GetHdlcAddressesSize
   else
-    AddBufferY(15, IndexInBuff()-15-3);
+    AddBuffRecord39(15, IndexInBuff()-15-3);
 
   while (!LastSegmentDMLS()) {
     bNR++;
     Query38_RR(bNR);
     if (Input39() != SER_GOODCHECK) return -20;
-    AddBufferY(8, IndexInBuff()-8-3);
+    AddBuffRecord39(8, IndexInBuff()-8-3);
     DelayOff();
   }
 
@@ -115,14 +115,14 @@ schar   y(void)
     fUseBlocks1 = UseBlocksDMLS();
     fLastBlock1 = LastBlockDMLS();
 
-    AddBufferY(22, IndexInBuff()-22-3);
+    AddBuffRecord39(22, IndexInBuff()-22-3);
     DelayOff();
 
     while (!LastSegmentDMLS()) {
       bNR++;
       Query38_RR(bNR);
       if (Input39() != SER_GOODCHECK) return -23;
-      AddBufferY(8, IndexInBuff()-8-3);
+      AddBuffRecord39(8, IndexInBuff()-8-3);
       DelayOff();
     }
 
@@ -159,7 +159,7 @@ schar   y(void)
 */
 
 
-  FinishBufferY();
+  FinishBuffRecord39();
   return 0;
 }
 

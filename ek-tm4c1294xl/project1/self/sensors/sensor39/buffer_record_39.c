@@ -17,17 +17,17 @@ buffer_record_39*c
 
 
 
-// #define RECORDS_39  1
+//#define BUFF_RECORD_39  1
 
 
 
-void    StartBufferY(void) {
+void    InitBuffRecord39(void) {
   InitPushX();
 }
 
 
-void    AddBufferY(uint  iwStart, uint  cwSize) {
-#ifdef RECORDS_39
+void    AddBuffRecord39(uint  iwStart, uint  cwSize) {
+#ifdef BUFF_RECORD_39
   MonitorX();
 
   MonitorString("\n AddToBuffer: Start="); MonitorIntDec(iwStart);
@@ -40,7 +40,7 @@ void    AddBufferY(uint  iwStart, uint  cwSize) {
   for (i=0; i<cwSize; i++) {
     uchar b = PopChar();
 
-#ifdef RECORDS_39
+#ifdef BUFF_RECORD_39
     MonitorCharHex(b);
     if (i % 16 == 16-1) MonitorString("\n");
 #endif
@@ -48,32 +48,32 @@ void    AddBufferY(uint  iwStart, uint  cwSize) {
     PushCharX(b);
   }
 
-#ifdef RECORDS_39
+#ifdef BUFF_RECORD_39
   MonitorString("\n");
 #endif
 }
 
 
 
-buff_y  GetBufferYError(char  bError)
+record39 GetBufferYError(char  bError)
 {
-  buff_y by;
+  record39 r;
 
-  by.bError = bError;
-  by.ddwValue = 0;
-  by.tiValue = tiZero;
-  by.fFirst = false;
+  r.bError = bError;
+  r.ddwValue = 0;
+  r.tiValue = tiZero;
+  r.fFirst = false;
 
-  return by;
+  return r;
 }
 
 
-buff_y  FinishBufferY(void) {
-  buff_y by;
-  by.bError = 0;
-  by.ddwValue = 0;
-  by.tiValue = tiZero;
-  by.fFirst = false;
+record39 FinishBuffRecord39(void) {
+  record39 r;
+  r.bError = 0;
+  r.ddwValue = 0;
+  r.tiValue = tiZero;
+  r.fFirst = false;
 
 
   InitPopX();
@@ -86,7 +86,7 @@ buff_y  FinishBufferY(void) {
 
   uchar bCount = PopCharX();
 
-#ifdef RECORDS_39
+#ifdef BUFF_RECORD_39
   MonitorString("\n Count="); MonitorCharDec(bCount); MonitorString("\n");
 #endif
 
@@ -117,14 +117,14 @@ buff_y  FinishBufferY(void) {
 
     uint64_t ddw = PopLong64X();
 
-    if (by.fFirst == false) {
-      by.bError = 0;
-      by.ddwValue = ddw;
-      by.tiValue = ti;
-      by.fFirst = true;
+    if (r.fFirst == false) {
+      r.bError = 0;
+      r.ddwValue = ddw;
+      r.tiValue = ti;
+      r.fFirst = true;
     }
 
-#ifdef RECORDS_39
+#ifdef BUFF_RECORD_39
     MonitorString("\n");
     MonitorTime(ti);
     MonitorLongDec(ddw / 1000000);
@@ -134,5 +134,5 @@ buff_y  FinishBufferY(void) {
     AddBuffPrf38(ti, ddw);
   }
 
-  return by;
+  return r;
 }

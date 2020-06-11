@@ -14,13 +14,13 @@ typedef struct
   uint64_t      ddwValue;
   time          tiValue;
   bool          fFirst;
-} buff_y;
+} record39;
 
 
 #endif
 
 
 
-void    StartBufferY(void);
-void    AddBufferY(uint  iwStart, uint  cwSize);
-buff_y  FinishBufferY(void);
+void    InitBuffRecord39(void);
+void    AddBuffRecord39(uint  iwStart, uint  cwSize);
+record39 FinishBuffRecord39(void);
