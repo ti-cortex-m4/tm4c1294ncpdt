@@ -10,7 +10,7 @@ automatic_get_time_38*c
 #include "../../time/delay.h"
 #include "../../serial/ports.h"
 #include "../../digitals/digitals.h"
-#include "device38.h"
+#include "device39.h"
 #include "io39.h"
 #include "automatic_get_time_39.h"
 

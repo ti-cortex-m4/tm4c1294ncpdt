@@ -14,7 +14,7 @@ DEVICE36*C
 #include "io39.h"
 #include "hdlc.h"
 #include "dlms_push.h"
-#include "device38.h"
+#include "device39.h"
 
 
 
@@ -231,77 +231,6 @@ void    Query38_RR(uchar  bNR)
   PushChar(0x7E);
 
   Query39(1000, wSize+2); // 9
-}
-
-
-
-void    QueryTime38(uchar  bNS, uchar  bNR, uchar  bInvokeId)
-{
-  MonitorString("\n\n GetTime");
-  MonitorString(" N(S)="); MonitorCharDec(bNS);
-  MonitorString(" N(R)="); MonitorCharDec(bNR);
-
-  uint wSize = 23 + GetHdlcAddressesSize(); // 0x19 25
-
-  InitPush(0);
-  PushChar(0x7E);
-  
-  PushFormatDLMS(wSize);
-  PushHdlcAddresses();
-
-  PushChar(((bNR << 5) | 0x10 | (bNS << 1) | 0x00));
-  
-  PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
-
-  // DLMS start
-  
-  PushChar(0xE6); // LLC
-  PushChar(0xE6);
-  PushChar(0x00);
-  
-  PushChar(0xC0); // Get-Request
-  PushChar(0x01); // Get-Request-Normal
-  PushChar(0x80 | (bInvokeId % 16)); // Invoke-Id-And-Priority
-  
-  PushChar(0x00);
-  PushChar(0x08); // class
-  
-  PushChar(0x00); // 0-0:1.0.0*255
-  PushChar(0x00);
-  PushChar(0x01);
-  PushChar(0x00);
-  PushChar(0x00);
-  PushChar(0xFF);
-  
-  PushChar(0x02); // index  
-  PushChar(0x00);
-
-  // DLMS finish
-
-  PushIntLtl(MakeCRC16X25OutBuff(1, wSize-2));
-  
-  PushChar(0x7E);
-
-  Query39(1000, wSize+2); // 27
-}
-
-
-time    ReadTime38(void)
-{
-  InitPop(15 + GetHdlcAddressesSize());
-
-  time ti;
-  ti.bYear   = PopIntBig() - 2000;
-  ti.bMonth  = PopChar();
-  ti.bDay    = PopChar();
-
-  PopChar();
-
-  ti.bHour   = PopChar();
-  ti.bMinute = PopChar();
-  ti.bSecond = PopChar();
-
-  return ti;
 }
 
 

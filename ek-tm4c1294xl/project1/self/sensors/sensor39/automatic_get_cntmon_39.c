@@ -11,7 +11,7 @@ automatic_get_cntmon_38*c
 #include "../../serial/ports.h"
 #include "../../serial/monitor.h"
 #include "../../digitals/digitals.h"
-#include "device38.h"
+#include "device39.h"
 #include "query_engmon_38.h"
 #include "query_profile_38.h"
 #include "query_next_block_39.h"
