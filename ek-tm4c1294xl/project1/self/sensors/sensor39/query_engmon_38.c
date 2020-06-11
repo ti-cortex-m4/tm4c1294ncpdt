@@ -13,7 +13,7 @@ query_engmon_38*c
 #include "crc16x25.h"
 #include "io39.h"
 #include "hdlc.h"
-#include "push_dlms.h"
+#include "dlms_push.h"
 #include "query_engmon_38.h"
 
 
@@ -130,11 +130,11 @@ void    QueryEngMon38(uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  bMonth, u
 
   PushChar(0x09); // <OctetString Value="?" />
   PushChar(0x0C);
-  PushTimeMonthDLMS(bMonth, bYear);
+  PushTimeMonthYearDLMS(bMonth, bYear);
 
   PushChar(0x09); // <OctetString Value="?" />
   PushChar(0x0C);
-  PushTimeMonthDLMS(bMonth, bYear);
+  PushTimeMonthYearDLMS(bMonth, bYear);
 
   PushChar(0x01); // array
   PushChar(0x01);

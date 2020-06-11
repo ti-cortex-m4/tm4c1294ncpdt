@@ -1,12 +1,12 @@
 /*------------------------------------------------------------------------------
-push_dlms*c
+dlms_push.c
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
 #include "../../serial/ports.h"
-#include "push_dlms.h"
+#include "dlms_push.h"
 
 
 
@@ -17,7 +17,7 @@ void    PushFormatDLMS(uint  wSize)
 
 
 
-void    PushTimeMonthDLMS(uchar  bMonth, uchar  bYear)
+void    PushTimeMonthYearDLMS(uchar  bMonth, uchar  bYear)
 {
   uint wYear = 2000 + bYear;
   PushChar(wYear / 0x100);
