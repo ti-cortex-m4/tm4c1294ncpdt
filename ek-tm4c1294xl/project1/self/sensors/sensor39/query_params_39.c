@@ -18,7 +18,7 @@ query_params_39.c
 
 
 
-void    QueryParam39(uchar  bNS, uchar  bNR, uchar  bInvokeId)
+void    QueryParam39_(uchar  bNS, uchar  bNR, uchar  bInvokeId)
 {
 #ifdef MONITOR_39  
   MonitorString("\n\n QueryParam39 ");
@@ -49,12 +49,12 @@ void    QueryParam39(uchar  bNS, uchar  bNR, uchar  bInvokeId)
   PushChar(0x00);
   PushChar(0x03); // class
 
-  PushChar(0x01); // <!--1.0.15.8.0.255-->
-  PushChar(0x00);
-  PushChar(0x0F);
-  PushChar(0x08);
-  PushChar(0x00);
-  PushChar(0xFF);
+  PushChar(1); // <!--1.0.72.7.0.255-->
+  PushChar(0);
+  PushChar(72);
+  PushChar(7);
+  PushChar(0);
+  PushChar(255);
 
   PushChar(0x02);
   PushChar(0x00);
@@ -70,8 +70,8 @@ void    QueryParam39(uchar  bNS, uchar  bNR, uchar  bInvokeId)
 
 
 
-uint64_t ReadParam39(void)
+uint    ReadParam39_(void)
 {
   InitPop(14 + GetHdlcAddressesSize());
-  return PopLongBig()*0x100000000 + PopLongBig();
+  return PopIntBig();
 }

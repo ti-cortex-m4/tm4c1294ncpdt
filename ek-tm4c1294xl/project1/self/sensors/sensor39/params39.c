@@ -4,7 +4,6 @@ params34.c
 
 ------------------------------------------------------------------------------*/
 
-//#include <math.h>
 #include "../../main.h"
 #include "../../memory/mem_digitals.h"
 #include "../../serial/ports.h"
@@ -15,72 +14,63 @@ params34.c
 #include "../../time/delay.h"
 #include "device39.h"
 #include "io39.h"
+#include "query_params_39.h"
 #include "params39.h"
 
 
-/*
-#define M_PI        3.14159265358979323846
+
+static float        reU3;
 
 
 
-static float        mpeValues[3*7];
-
-
-
-void    QueryParams38(void)
-{
-  InitPush(0);
-
-  PushChar(0xC0);
-  PushChar(0x06);
-
-  PushAddress38();
-
-  PushChar(0x00);
-  PushChar(0x06);
-
-  PushChar(0x0A);
-  PushChar(0x00);
-
-  PushChar(0x18); // U
-  PushChar(0x1C);
-
-  PushChar(0x16); // I
-  PushChar(0x1C);
-
-  PushChar(0x0E); // P
-  PushChar(0x1C);
-
-  PushChar(0x10); // Q
-  PushChar(0x1C);
-
-  PushChar(0x0D); // S
-  PushChar(0x1C);
-
-  PushChar(0x1A); // f
-  PushChar(0x1C);
-
-  PushChar(0x52); // Ô
-  PushChar(0x1C);
-
-  Query38(250, 30);
-}
-
-
-
-float   cosinusDegrees(double  degrees)
-{
-  return cos(M_PI*degrees/180);
-}
-*/
-
-
-float2  ReadParam38(void)
+float2  ReadParam39(void)
 {
   Clear();
 
   if (fBeginParam == false)
   {
+    Query38_DISC();
+    if (Input39() != SER_GOODCHECK) return GetFloat2Error();
+    DelayOff();
+
+    Query38_SNRM();
+    if (Input39() != SER_GOODCHECK) return GetFloat2Error();
+    DelayOff();
+
+    uchar bNS = 0;
+    uchar bNR = 0;
+    uchar bInvokeId = 0;
+
+    Query38_Open2(bNS, bNR);
+    if (Input39() != SER_GOODCHECK) return GetFloat2Error();
+    if (!ValidateIframe(bNS, bNR)) return GetFloat2Error();
+    DelayOff();
+
+    bNR++;
+    Query38_RR(bNR);
+    if (Input39() != SER_GOODCHECK) return GetFloat2Error();
+    if (!ValidateSframe(bNR)) return GetFloat2Error();
+    DelayOff();
+
+
+    bNS++;
+    bInvokeId++;
+    QueryParam39_(bNS, bNR, bInvokeId);
+    if (Input39() != SER_GOODCHECK) return GetFloat2Error();
+    if (!ValidateIframe(bNS, bNR)) return GetFloat2Error();
+    reU3 = ReadParam39_() / 10;
+    DelayOff();
+
+    bNR++;
+    Query38_RR(bNR);
+    if (Input39() != SER_GOODCHECK) return GetFloat2Error();
+    if (!ValidateSframe(bNR)) return GetFloat2Error();
+    DelayOff();
+
+
+    Query38_DISC();
+    if (Input39() != SER_GOODCHECK) return GetFloat2Error();
+    DelayOff();
 
     fBeginParam = true;
   }
@@ -89,8 +79,8 @@ float2  ReadParam38(void)
   {
 //    case PAR_U1 : return GetFloat2(mpeValues[0]/100, true);
 //    case PAR_U2 : return GetFloat2(mpeValues[1]/100, true);
-//    case PAR_U3 : return GetFloat2(mpeValues[2]/100, true);
-//
+    case PAR_U3 : return GetFloat2(reU3, true);
+
 //    case PAR_I1 : return GetFloat2(mpeValues[3], true);
 //    case PAR_I2 : return GetFloat2(mpeValues[4], true);
 //    case PAR_I3 : return GetFloat2(mpeValues[5], true);
