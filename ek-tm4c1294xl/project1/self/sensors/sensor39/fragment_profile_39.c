@@ -23,7 +23,7 @@ uchar   FragmentProfile39(runner39  *pr, time  ti1, time  ti2)
 
   (*pr).bNS++;
   (*pr).bInvokeId++;
-  QueryProfile38((*pr).bNS, (*pr).bNR, (*pr).bInvokeId, ti1, ti2);
+  QueryProfile39((*pr).bNS, (*pr).bNR, (*pr).bInvokeId, ti1, ti2);
   if (Input39() != SER_GOODCHECK) return 1;
   DelayOff();
 
