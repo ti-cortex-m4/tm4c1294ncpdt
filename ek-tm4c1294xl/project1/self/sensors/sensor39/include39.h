@@ -9,6 +9,9 @@ include39.h
 
 
 
+typedef uchar           obis_t[6];
+
+
 typedef struct
 {
   uchar         bNS;

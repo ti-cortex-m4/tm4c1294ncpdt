@@ -4,5 +4,5 @@ query_params_39.h
 
 ------------------------------------------------------------------------------*/
 
-void    QueryParam39_(uchar  bNS, uchar  bNR, uchar  bInvokeId);
+void    QueryParam39_(const obis_t  obis, uchar  bNS, uchar  bNR, uchar  bInvokeId);
 uint    ReadParam39_(void);
