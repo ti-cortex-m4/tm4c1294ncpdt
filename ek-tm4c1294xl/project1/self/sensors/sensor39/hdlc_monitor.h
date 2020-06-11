@@ -1,11 +1,11 @@
 /*------------------------------------------------------------------------------
-monitor36*h
+hdlc_monitor.h
 
 
 ------------------------------------------------------------------------------*/
 
-void    MonitorOutput39(void);
-bool    ValidInput39(void);
+void    MonitorOutputHDLC(void);
+bool    ValidateInputHDLC(void);
 
 bool    ValidateIframe(uchar  bNS_client, uchar  bNR_client);
 bool    ValidateSframe(uchar  bNR_client);

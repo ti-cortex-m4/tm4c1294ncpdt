@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-monitor36*c
+hdlc_monitor.c
 
 
 ------------------------------------------------------------------------------*/
@@ -59,9 +59,9 @@ static void MonitorControl(uchar  bControl) {
 
 
 
-void    MonitorOutput39(void)
+void    MonitorOutputHDLC(void)
 {
-  MonitorString("\n Output HDLC:");
+  MonitorString("\n Output HDLC: ");
 
   uint wFormat = OutBuff(1)*0x100 + OutBuff(2);
   MonitorString(" Format="); MonitorIntHex(wFormat); //MonitorCharHex(OutBuff(1)); MonitorCharHex(OutBuff(2));
@@ -79,9 +79,9 @@ void    MonitorOutput39(void)
 
 
 
-bool    ValidInput39(void)
+bool    ValidateInputHDLC(void)
 {
-  MonitorString("\n Input HDLC:");
+  MonitorString("\n Input HDLC: ");
   InitPop(1);
 
   uint wFormat = PopIntBig();
@@ -105,26 +105,8 @@ bool    ValidInput39(void)
 
   return true;
 }
-/*
-void    MonitorInput36(void)
-{
-  MonitorString("\n Input HDLC:");
-  InitPop(1);
 
-  uint wFormat = PopIntBig();
-  MonitorString(" Format="); MonitorIntHex(wFormat);
-  uint wSize = wFormat & 0x0FFF;
-  MonitorString(" wSize="); MonitorIntHex(wSize);
 
-  uint wCRCexpected = MakeCRC16_X25InBuff(1, wSize-2);
-  MonitorString(" CRC="); MonitorIntHex(wCRCexpected);
-  int i = wSize-1;
-  uint wCRCactual = InBuff(i) + InBuff(i+1)*0x100; //MonitorIntHex(wCRCactual);
-  (wCRCexpected == wCRCactual) ? MonitorString(" CRC_ok") : MonitorString(" CRC_error");
-
-  MonitorControl(InBuff(3 + GetDlmsAddressesSize()));
-}
-*/
 
 bool    ValidateIframe(uchar  bNS_client, uchar  bNR_client)
 {
@@ -152,7 +134,7 @@ bool    ValidateSframe(uchar  bNR_client)
   uchar bNR_server = (bControl & 0xE0) >> 5;
 
   if (bNR_client != bNR_server) {
-    MonitorString("S-frame N(R) client/server error"); MonitorCharHex(bNR_client); MonitorCharHex(bNR_server);
+    MonitorString("S-frame N(R) client/server error "); MonitorCharHex(bNR_client); MonitorCharHex(bNR_server);
     return false;
   }
 
