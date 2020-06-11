@@ -27,6 +27,27 @@ static float        reU3;
 
 
 
+float2  ReadValue39(const obis_t  obis, runner39*  pr)
+{
+  (*pr).bNS++;
+  (*pr).bInvokeId++;
+  QueryParam39_(obis, (*pr).bNS, (*pr).bNR, (*pr).bInvokeId);
+  if (Input39() != SER_GOODCHECK) return GetFloat2Error();
+  if (!ValidateIframe((*pr).bNS, (*pr).bNR)) return GetFloat2Error();
+  float fl = ReadParam39_() / 10;
+  DelayOff();
+
+  (*pr).bNR++;
+  Query38_RR((*pr).bNR);
+  if (Input39() != SER_GOODCHECK) return GetFloat2Error();
+  if (!ValidateSframe((*pr).bNR)) return GetFloat2Error();
+  DelayOff();
+
+  return GetFloat2(fl, true);
+}
+
+
+
 float2  ReadParam39(void)
 {
   Clear();
@@ -41,40 +62,31 @@ float2  ReadParam39(void)
     if (Input39() != SER_GOODCHECK) return GetFloat2Error();
     DelayOff();
 
-    uchar bNS = 0;
-    uchar bNR = 0;
-    uchar bInvokeId = 0;
 
-    Query38_Open2(bNS, bNR);
+    runner39 r = InitRunner();
+
+
+    Query38_Open2(r.bNS, r.bNR);
     if (Input39() != SER_GOODCHECK) return GetFloat2Error();
-    if (!ValidateIframe(bNS, bNR)) return GetFloat2Error();
+    if (!ValidateIframe(r.bNS, r.bNR)) return GetFloat2Error();
     DelayOff();
 
-    bNR++;
-    Query38_RR(bNR);
+    r.bNR++;
+    Query38_RR(r.bNR);
     if (Input39() != SER_GOODCHECK) return GetFloat2Error();
-    if (!ValidateSframe(bNR)) return GetFloat2Error();
+    if (!ValidateSframe(r.bNR)) return GetFloat2Error();
     DelayOff();
 
 
-    bNS++;
-    bInvokeId++;
-    QueryParam39_(U3, bNS, bNR, bInvokeId);
-    if (Input39() != SER_GOODCHECK) return GetFloat2Error();
-    if (!ValidateIframe(bNS, bNR)) return GetFloat2Error();
-    reU3 = ReadParam39_() / 10;
-    DelayOff();
-
-    bNR++;
-    Query38_RR(bNR);
-    if (Input39() != SER_GOODCHECK) return GetFloat2Error();
-    if (!ValidateSframe(bNR)) return GetFloat2Error();
-    DelayOff();
+    float2 fl2 = ReadValue39(U3, &r);
+    if (!fl2.fValid) return GetFloat2Error();
+    reU3 = fl2.flValue;
 
 
     Query38_DISC();
     if (Input39() != SER_GOODCHECK) return GetFloat2Error();
     DelayOff();
+
 
     fBeginParam = true;
   }

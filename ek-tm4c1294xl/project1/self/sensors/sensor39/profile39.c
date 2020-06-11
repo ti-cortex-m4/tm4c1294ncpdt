@@ -189,7 +189,7 @@ double2 RunProfile39(void)
     MonitorString("\n finish ");
   }
 
-  return GetDouble2(0, false);
+  return GetDouble2(0, true);
 }
 
 #endif 
