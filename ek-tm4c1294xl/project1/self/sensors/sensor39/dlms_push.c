@@ -6,6 +6,7 @@ dlms_push.c
 
 #include "../../main.h"
 #include "../../serial/ports.h"
+   #include "include39.h"
 #include "dlms_push.h"
 
 
@@ -15,6 +16,16 @@ void    PushFormatDLMS(uint  wSize)
   PushIntBig(wSize | 0xA000);
 }
 
+
+
+void    PushOBIS_DLMS(const obis_t  obis)
+{
+  uchar i;
+  for (i=0; i<6; i++)
+  {
+    PushChar(obis[i]);
+  }
+}
 
 
 void    PushTimeMonthYearDLMS(uchar  bMonth, uchar  bYear)

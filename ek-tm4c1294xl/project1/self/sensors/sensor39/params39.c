@@ -19,6 +19,10 @@ params34.c
 
 
 
+static const obis_t U3 = {1, 0, 72, 7, 0, 255};
+
+
+
 static float        reU3;
 
 
@@ -55,7 +59,7 @@ float2  ReadParam39(void)
 
     bNS++;
     bInvokeId++;
-    QueryParam39_(bNS, bNR, bInvokeId);
+    QueryParam39_(U3, bNS, bNR, bInvokeId);
     if (Input39() != SER_GOODCHECK) return GetFloat2Error();
     if (!ValidateIframe(bNS, bNR)) return GetFloat2Error();
     reU3 = ReadParam39_() / 10;
