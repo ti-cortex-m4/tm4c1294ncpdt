@@ -23,7 +23,7 @@ io39.c
 
 void    Query39(uint  cwIn, uchar  cbOut)
 {
-  MonitorOutput39();
+  MonitorOutputHDLC();
   Query(cwIn, cbOut, true);
 }
 
@@ -48,7 +48,7 @@ serial  Input39(void)
 
     if (mpSerial[ibPort] == SER_POSTINPUT_MASTER)
     {
-      if (ValidInput39())
+      if (ValidateInputHDLC())
       {
         InputGoodCheck();
         mpSerial[ibPort] = SER_GOODCHECK;

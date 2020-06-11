@@ -286,7 +286,7 @@ void    DevicesPostInput(void)
 #ifndef SKIP_38
     else if (diCurr.bDevice == 38)
     {
-      if (ValidInput39())
+      if (ValidateInputHDLC())
       {
         InputGoodCheck();
         mpSerial[ibPort] = SER_GOODCHECK;
