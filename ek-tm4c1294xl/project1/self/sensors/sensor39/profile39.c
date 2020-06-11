@@ -11,6 +11,7 @@ profile39*c
  #include "../../keyboard/time/key_timedate.h"
  #include "../../time/calendar.h"
  #include "../../serial/monitor.h"
+ #include "../../serial/monitor_settings.h"
  #include "../../devices/devices.h"
  #include "../../devices/devices_time.h"
  #include "../../digitals/limits.h"
@@ -175,6 +176,9 @@ uchar   RunProfile39_Internal(runner39*  pr)
 
 double2 RunProfile39(void)
 {
+  fMonitorLogBasic = false;
+  fMonitorLogHex = false;
+
   MonitorOpen(0);
 
   runner39 runner = InitRunner();

@@ -216,7 +216,6 @@ void    Query38_Open2(uchar  bNS, uchar  bNR)
 void    Query38_RR(uchar  bNR)
 {
   MonitorString("\n\n RR ");
-  MonitorString(" N(R)="); MonitorCharDec(bNR);
 
   uint wSize = 5 + GetHdlcAddressesSize();
 
