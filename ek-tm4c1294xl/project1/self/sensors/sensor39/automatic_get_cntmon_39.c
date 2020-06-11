@@ -83,7 +83,7 @@ ulong64_ QueryCntMon38_Full(uchar  ibMon)
   }
   else
   {
-    StartBufferY();
+    InitBuffRecord39();
 
     time ti1;
     ti1.bYear = ti.bYear;
@@ -113,15 +113,15 @@ ulong64_ QueryCntMon38_Full(uchar  ibMon)
     bool fLastBlock1 = LastBlockDMLS();
 
     if (fUseBlocks1)
-      AddBufferY(22, IndexInBuff()-22-3); // TODO GetHdlcAddressesSize
+      AddBuffRecord39(22, IndexInBuff()-22-3); // TODO GetHdlcAddressesSize
     else
-      AddBufferY(15, IndexInBuff()-15-3);
+      AddBuffRecord39(15, IndexInBuff()-15-3);
 
     while (!LastSegmentDMLS()) {
       bNR++;
       Query38_RR(bNR);
       if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
-      AddBufferY(8, IndexInBuff()-8-3);
+      AddBuffRecord39(8, IndexInBuff()-8-3);
       DelayOff();
     }
 
@@ -145,14 +145,14 @@ ulong64_ QueryCntMon38_Full(uchar  ibMon)
       fUseBlocks1 = UseBlocksDMLS();
       fLastBlock1 = LastBlockDMLS();
 
-      AddBufferY(22, IndexInBuff()-22-3);
+      AddBuffRecord39(22, IndexInBuff()-22-3);
       DelayOff();
 
       while (!LastSegmentDMLS()) {
         bNR++;
         Query38_RR(bNR);
         if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
-        AddBufferY(8, IndexInBuff()-8-3);
+        AddBuffRecord39(8, IndexInBuff()-8-3);
         DelayOff();
       }
 
@@ -163,7 +163,7 @@ ulong64_ QueryCntMon38_Full(uchar  ibMon)
     }
 
 
-    buff_y by = FinishBufferY();
+    buff_y by = FinishBuffRecord39();
     if (by.bError != 0)
     {
       MonitorString("\n Error="); MonitorCharDec(by.bError);
