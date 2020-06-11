@@ -14,6 +14,10 @@ hdlc_monitor.c
 
 
 
+#define MONITOR_HDLC  1
+
+
+
 void    MonitorControl(uchar  bControl) {
   MonitorString(" Control="); MonitorCharHex(bControl);
 
@@ -61,7 +65,9 @@ void    MonitorControl(uchar  bControl) {
 
 void    MonitorOutputHDLC(void)
 {
-#ifdef MONITOR_39  
+#ifdef MONITOR_39
+#ifdef MONITOR_HDLC
+
   MonitorString("\n Output HDLC: ");
 
   uint wFormat = OutBuff(1)*0x100 + OutBuff(2);
@@ -76,6 +82,8 @@ void    MonitorOutputHDLC(void)
   (wCRCexpected == wCRCactual) ? MonitorString(" CRC_ok") : MonitorString(" CRC_error");
 
   MonitorControl(OutBuff(3 + GetHdlcAddressesSize()));
+  
+#endif  
 #endif  
 }
 
