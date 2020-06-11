@@ -14,7 +14,7 @@ hdlc_monitor.c
 
 
 
-static void MonitorControl(uchar  bControl) {
+void    MonitorControl(uchar  bControl) {
   MonitorString(" Control="); MonitorCharHex(bControl);
 
   if ((bControl & 0x01) == 0x00) {
@@ -115,12 +115,16 @@ bool    ValidateIframe(uchar  bNS_client, uchar  bNR_client)
   uchar bNR_server = (bControl & 0xE0) >> 5;
 
   if (bNS_client != bNS_server) {
+#ifdef MONITOR_39    
     MonitorString(" I-frame N(S) client/server error "); MonitorCharHex(bNS_client); MonitorCharHex(bNS_server);
+#endif    
     return false;
   }
 
   if ((bNR_client + 1) != bNR_server) {
+#ifdef MONITOR_39    
     MonitorString(" I-frame N(R) client/server error "); MonitorCharHex(bNR_client); MonitorCharHex(bNR_server);
+#endif    
     return false;
   }
 
@@ -134,7 +138,9 @@ bool    ValidateSframe(uchar  bNR_client)
   uchar bNR_server = (bControl & 0xE0) >> 5;
 
   if (bNR_client != bNR_server) {
+#ifdef MONITOR_39    
     MonitorString("S-frame N(R) client/server error "); MonitorCharHex(bNR_client); MonitorCharHex(bNR_server);
+#endif
     return false;
   }
 
@@ -148,7 +154,11 @@ bool    LastSegmentDMLS(void)
   InitPop(1);
   uint wFormat = PopIntBig();
   bool fLastSegment = (wFormat & 0x0800) == 0;
+
+#ifdef MONITOR_39  
   MonitorString(" Last_Segment="); MonitorBool(fLastSegment);
+#endif
+
   return fLastSegment;
 }
 
@@ -159,7 +169,11 @@ bool    UseBlocksDMLS(void)
   InitPop(9 + GetHdlcAddressesSize());
   uint w = PopIntBig();
   bool fUseBlocks = (w == 0xC402);
+
+#ifdef MONITOR_39
   MonitorString(" Use_Blocks="); MonitorIntHex(w); MonitorBool(fUseBlocks);
+#endif  
+
   return fUseBlocks;
 }
 
@@ -170,6 +184,10 @@ bool    LastBlockDMLS(void)
   InitPop(12 + GetHdlcAddressesSize());
   uchar b = PopChar();
   bool fLastBlock = (b != 0);
+
+#ifdef MONITOR_39  
   MonitorString(" Last_Block="); MonitorCharHex(b); MonitorBool(fLastBlock);
+#endif  
+
   return fLastBlock;
 }
