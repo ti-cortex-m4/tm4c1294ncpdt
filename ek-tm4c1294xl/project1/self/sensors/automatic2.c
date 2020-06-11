@@ -56,7 +56,7 @@ AUTOMATIC2!C
 #include "sensor39/automatic_get_time_39.h"
 #include "sensor39/automatic_get_cntcurr_39.h"
 #include "sensor39/automatic_get_cntmon_39.h"
- #include "sensor39/read_profile_38.h"
+ #include "sensor39/read_profile_39.h"
  #include "sensor39/profile39.h"
 #include "automatic2.h"
 

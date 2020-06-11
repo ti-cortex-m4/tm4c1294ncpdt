@@ -16,7 +16,7 @@ query_next_block_36*c
 #include "dlms_push.h"
 #include "device39.h" //
 #include "query_next_block_39.h"
-#include "query_profile_38.h"
+#include "query_profile_39.h"
 
 
 
