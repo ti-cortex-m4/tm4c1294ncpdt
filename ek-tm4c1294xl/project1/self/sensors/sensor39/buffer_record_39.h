@@ -4,8 +4,8 @@ buffer_record_39*h
 
 ------------------------------------------------------------------------------*/
 
-#ifndef __buffer_record_39
-#define __buffer_record_39
+#ifndef __BUFFER_RECORD_39
+#define __BUFFER_RECORD_39
 
 
 typedef struct
