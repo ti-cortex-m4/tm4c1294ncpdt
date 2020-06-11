@@ -62,7 +62,7 @@ void    InitHeader38(void)
 
 
 
-schar   QueryHeader38(runner39*  runner)
+schar   QueryHeader38(runner39*  pr)
 {
   HideCurrTime(1);
 
@@ -78,7 +78,7 @@ schar   QueryHeader38(runner39*  runner)
   MonitorString(" ti2="); MonitorTime(ti2);
 #endif
 
-  return FragmentProfile39(runner, ti1, ti2);
+  return FragmentProfile39(pr, ti1, ti2);
 }
 
 
@@ -138,24 +138,24 @@ bool    ReadHeader38(void)
 
 #ifdef  MONITOR_39
 
-uchar   RunProfile39_Internal(runner39*  runner)
+uchar   RunProfile39_Internal(runner39*  pr)
 {  
-  FragmentOpen39(runner);
+  FragmentOpen39(pr);
 
 
-  (*runner).bNS++;
-  (*runner).bInvokeId++;
-  QueryTime38((*runner).bNS, (*runner).bNR, (*runner).bInvokeId);
+  (*pr).bNS++;
+  (*pr).bInvokeId++;
+  QueryTime38((*pr).bNS, (*pr).bNR, (*pr).bInvokeId);
   if (Input39() != SER_GOODCHECK) return 7;
-  if (!ValidateIframe((*runner).bNS, (*runner).bNR)) return 8;
+  if (!ValidateIframe((*pr).bNS, (*pr).bNR)) return 8;
   tiValue38 = ReadTime38();
   dwValue38 = DateToHouIndex(tiValue38);
   DelayOff();
 
-  (*runner).bNR++;
-  Query38_RR((*runner).bNR);
+  (*pr).bNR++;
+  Query38_RR((*pr).bNR);
   if (Input39() != SER_GOODCHECK) return 9;
-  if (!ValidateSframe((*runner).bNR)) return 10;
+  if (!ValidateSframe((*pr).bNR)) return 10;
   DelayOff();
 
 
@@ -163,7 +163,7 @@ uchar   RunProfile39_Internal(runner39*  runner)
 
 
   while (true) {
-    if (QueryHeader38(runner) != 0) return 11;
+    if (QueryHeader38(pr) != 0) return 11;
 
     if (ReadHeader38() == false) return 0;
     if (fKey == true) return 255;
