@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-buffer_y*c
+buffer_record_39*c
 
 
 ------------------------------------------------------------------------------*/
@@ -13,7 +13,7 @@ buffer_y*c
 #include "include39.h"
 #include "buffer_x.h"
 #include "buffer_profile_38.h"
-#include "buffer_y.h"
+#include "buffer_record_39.h"
 
 
 

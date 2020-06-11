@@ -1,11 +1,11 @@
 /*------------------------------------------------------------------------------
-buffer_y*h
+buffer_record_39*h
 
 
 ------------------------------------------------------------------------------*/
 
-#ifndef __BUFFER_Y
-#define __BUFFER_Y
+#ifndef __buffer_record_39
+#define __buffer_record_39
 
 
 typedef struct
