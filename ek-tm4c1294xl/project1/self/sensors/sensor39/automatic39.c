@@ -16,7 +16,7 @@ AUTOMATIC36*C
 #include "device39.h"
 #include "query_engmon_39.h"
 #include "io39.h"
-#include "automatic38.h"
+#include "automatic39.h"
 
 
 /*

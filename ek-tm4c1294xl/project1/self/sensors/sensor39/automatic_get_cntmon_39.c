@@ -12,6 +12,7 @@ automatic_get_cntmon_38*c
 #include "../../serial/monitor.h"
 #include "../../digitals/digitals.h"
 #include "device39.h"
+#include "time39.h"
 #include "query_engmon_39.h"
 #include "query_profile_39.h"
 #include "query_next_block_39.h"
@@ -49,10 +50,10 @@ ulong64_ QueryCntMon38_Full(uchar  ibMon)
 
   bNS++;
   bInvokeId++;
-  QueryTime38(bNS, bNR, bInvokeId);
+  QueryTime39(bNS, bNR, bInvokeId);
   if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
   if (!ValidateIframe(bNS, bNR)) return GetLong64Error(1);
-  time ti = ReadTime38();
+  time ti = ReadTime39();
   DelayOff();
 
   bNR++;
@@ -163,19 +164,19 @@ ulong64_ QueryCntMon38_Full(uchar  ibMon)
     }
 
 
-    buff_y by = FinishBuffRecord39();
-    if (by.bError != 0)
+    record39 r = FinishBuffRecord39();
+    if (r.bError != 0)
     {
-      MonitorString("\n Error="); MonitorCharDec(by.bError);
+      MonitorString("\n Error="); MonitorCharDec(r.bError);
       return GetLong64Error(1);
     }
-    if (by.fFirst == false)
+    if (r.fFirst == false)
     {
       MonitorString("\n No Data");
       return GetLong64Error(1);
     }
 
-    ddw = by.ddwValue;
+    ddw = r.ddwValue;
   }
 
 
