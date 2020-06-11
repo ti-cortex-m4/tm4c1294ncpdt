@@ -91,18 +91,26 @@ void    MonitorOutputHDLC(void)
 
 bool    ValidateInputHDLC(void)
 {
-  MonitorString("\n Input HDLC: ");
   InitPop(1);
 
   uint wFormat = PopIntBig();
-  MonitorString(" Format="); MonitorIntHex(wFormat);
   uint wSize = wFormat & 0x07FF;
-  MonitorString(" wSize="); MonitorIntHex(wSize);
 
   uint wCRCexpected = MakeCRC16X25InBuff(1, wSize-2);
-  MonitorString(" CRC="); MonitorIntHex(wCRCexpected);
+  
   int i = wSize-1;
   uint wCRCactual = InBuff(i) + InBuff(i+1)*0x100; 
+
+#ifdef MONITOR_39
+#ifdef MONITOR_HDLC
+
+  MonitorString("\n Input HDLC: ");
+  MonitorString(" Format="); MonitorIntHex(wFormat);
+  MonitorString(" wSize="); MonitorIntHex(wSize);
+
+  MonitorString(" CRC="); MonitorIntHex(wCRCexpected);
+#endif  
+#endif 
 
   if (wCRCexpected != wCRCactual) { 
     MonitorString(" CRC_error");
