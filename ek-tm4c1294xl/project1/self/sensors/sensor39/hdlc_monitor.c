@@ -61,20 +61,22 @@ void    MonitorControl(uchar  bControl) {
 
 void    MonitorOutputHDLC(void)
 {
+#ifdef MONITOR_39  
   MonitorString("\n Output HDLC: ");
 
   uint wFormat = OutBuff(1)*0x100 + OutBuff(2);
-  MonitorString(" Format="); MonitorIntHex(wFormat); //MonitorCharHex(OutBuff(1)); MonitorCharHex(OutBuff(2));
+  MonitorString(" Format="); MonitorIntHex(wFormat); 
   uint wSize = wFormat & 0x0FFF;
   MonitorString(" wSize="); MonitorIntHex(wSize);
 
   uint wCRCexpected = MakeCRC16X25OutBuff(1, wSize-2);
   MonitorString(" CRC="); MonitorIntHex(wCRCexpected);
   int i = wSize-1;
-  uint wCRCactual = OutBuff(i) + OutBuff(i+1)*0x100; //MonitorIntHex(wCRCactual);
+  uint wCRCactual = OutBuff(i) + OutBuff(i+1)*0x100;
   (wCRCexpected == wCRCactual) ? MonitorString(" CRC_ok") : MonitorString(" CRC_error");
 
   MonitorControl(OutBuff(3 + GetHdlcAddressesSize()));
+#endif  
 }
 
 
@@ -92,9 +94,9 @@ bool    ValidateInputHDLC(void)
   uint wCRCexpected = MakeCRC16X25InBuff(1, wSize-2);
   MonitorString(" CRC="); MonitorIntHex(wCRCexpected);
   int i = wSize-1;
-  uint wCRCactual = InBuff(i) + InBuff(i+1)*0x100; //MonitorIntHex(wCRCactual);
+  uint wCRCactual = InBuff(i) + InBuff(i+1)*0x100; 
 
-  if (wCRCexpected != wCRCactual) { //? MonitorString(" CRC_ok") : MonitorString(" CRC_error");
+  if (wCRCexpected != wCRCactual) { 
     MonitorString(" CRC_error");
     return false;
   } else {
