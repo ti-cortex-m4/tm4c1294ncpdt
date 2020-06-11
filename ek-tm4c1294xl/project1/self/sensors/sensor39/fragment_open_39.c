@@ -8,7 +8,6 @@ fragment_open_39.c
 #include "../../time/delay.h"
 #include "device38.h"
 #include "io39.h"
-#include "monitor38.h"
 #include "fragment_open_39.h"
 
 

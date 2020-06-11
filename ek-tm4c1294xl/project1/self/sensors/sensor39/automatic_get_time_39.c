@@ -12,7 +12,6 @@ automatic_get_time_38*c
 #include "../../digitals/digitals.h"
 #include "device38.h"
 #include "io39.h"
-#include "monitor38.h"
 #include "automatic_get_time_39.h"
 
 
