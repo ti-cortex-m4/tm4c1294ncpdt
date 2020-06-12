@@ -379,9 +379,6 @@ void    MakeParamDiv(uint  iwPrm)
       case PAR_U  :
 
       case PAR_I  :
-      case PAR_I1 :
-      case PAR_I2 :
-      case PAR_I3 :
 
       case PAR_C  :
       case PAR_C1 :
