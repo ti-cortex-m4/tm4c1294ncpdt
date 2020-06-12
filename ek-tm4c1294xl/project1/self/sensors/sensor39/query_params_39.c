@@ -80,7 +80,7 @@ uint    ReadType18ULong16(void)
 }
 
 
-/*
+
 // The Blue Book: 4.1.5 Common data types
 ulong64_ ReadValueX(void)
 {
@@ -91,7 +91,7 @@ ulong64_ ReadValueX(void)
   MonitorString("\n bDataAccessResult="); MonitorCharDec(bDataAccessResult);
 #endif  
   if (bDataAccessResult != 0) {
-    // TODO error(no_success, bDataAccessResult)
+    // error(no_success, bDataAccessResult)
     return GetLong64Error(0);
   }
 
@@ -99,16 +99,16 @@ ulong64_ ReadValueX(void)
 #ifdef MONITOR_39  
   MonitorString("\n bDataType="); MonitorCharDec(bDataType);
 #endif  
-  if (bDataType == 18) // long-unsigned [18] Unsigned16 0…65 535
+  if (bDataType == 18) // long-unsigned [18] Unsigned16 0…65535
   {
     uint value = PopIntBig();
     return GetLong64(value, true, 0);
   }
 
-  // TODO error(unknown_data_type, bDataType)
+  // error(unknown_data_type, bDataType)
   return GetLong64Error(1);
 }
-*/
+
 
 schar2  ReadRegisterScaler(void)
 {
