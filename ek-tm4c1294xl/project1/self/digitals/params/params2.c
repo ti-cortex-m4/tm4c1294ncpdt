@@ -78,8 +78,8 @@ uchar   ReadArrayA(void)
 
   uchar b = PopChar();
 
-  ulong dw = (b & 0x3F)*0x1000000;
-  dw += PopChar()*0x10000;
+  ulong dw = (b & 0x3F)*0x10000;
+  dw += PopChar()*0x100;
   dw += PopChar();
 
   reValue = (float)dw / reParamDiv;
