@@ -21,3 +21,4 @@ bool    ValidTimeDate(time  ti);
 ulong   GetSecondIndex(time  ti);
 
 bool    DifferentDay(time  ti1, time  ti2);
+bool    DifferentDateTime(time  ti1, time  ti2);
