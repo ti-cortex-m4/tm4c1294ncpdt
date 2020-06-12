@@ -41,7 +41,7 @@ float2  ReadValue39(const obis_t  obis, runner39*  pr)
   QueryParam39_(obis, (*pr).bNS, (*pr).bNR, (*pr).bInvokeId);
   if (Input39() != SER_GOODCHECK) return GetFloat2Error();
   if (!ValidateIframe((*pr).bNS, (*pr).bNR)) return GetFloat2Error();
-  float fl = ReadType18ULong16() / 10;
+  float fl = ReadType18ULong16(); // TODO определять тип автоматически
   DelayOff();
 
   (*pr).bNR++;
@@ -87,28 +87,28 @@ float2  ReadParam39(void)
 
     float2 fl2 = ReadValue39(obisU1, &r);
     if (!fl2.fValid) return GetFloat2Error();
-    flU1 = fl2.flValue;
+    flU1 = fl2.flValue / 10;
 
     fl2 = ReadValue39(obisU2, &r);
     if (!fl2.fValid) return GetFloat2Error();
-    flU2 = fl2.flValue;
+    flU2 = fl2.flValue / 10;
 
     fl2 = ReadValue39(obisU3, &r);
     if (!fl2.fValid) return GetFloat2Error();
-    flU3 = fl2.flValue;
+    flU3 = fl2.flValue / 10;
 
 
     fl2 = ReadValue39(obisI1, &r);
     if (!fl2.fValid) return GetFloat2Error();
-    flI1 = fl2.flValue;
+    flI1 = fl2.flValue * 10; // TODO читать коэффициенты автоматически
 
     fl2 = ReadValue39(obisI2, &r);
     if (!fl2.fValid) return GetFloat2Error();
-    flI2 = fl2.flValue;
+    flI2 = fl2.flValue * 10;
 
     fl2 = ReadValue39(obisI3, &r);
     if (!fl2.fValid) return GetFloat2Error();
-    flI3 = fl2.flValue;
+    flI3 = fl2.flValue * 10;
 
 
     Query38_DISC();
