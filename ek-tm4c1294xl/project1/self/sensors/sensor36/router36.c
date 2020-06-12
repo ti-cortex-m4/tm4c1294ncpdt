@@ -5,6 +5,7 @@ router36.c
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
+#include "../../main_devices.h"
 #include "../../memory/mem_settings.h"
 #include "../../memory/mem_ports.h"
 #include "../../memory/mem_digitals.h"

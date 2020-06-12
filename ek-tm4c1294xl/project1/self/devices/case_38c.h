@@ -30,7 +30,7 @@
       Clear(); ShowPercent(51);
 
       cbRepeat = MaxRepeats();
-      Query39_SNRM();
+      Query38_SNRM();
       SetCurr(DEV_SNRM_38C);
       break;
 
@@ -44,7 +44,7 @@
           ErrorLink();
           cbRepeat--;
 
-          Query39_SNRM();
+          Query38_SNRM();
           SetCurr(DEV_SNRM_38C);
         }
       }

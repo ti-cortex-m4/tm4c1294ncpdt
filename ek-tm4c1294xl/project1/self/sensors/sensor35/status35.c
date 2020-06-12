@@ -5,6 +5,7 @@ STATUS35!C
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
+#include "../../main_devices.h"
 #include "../../serial/ports.h"
 #include "../../serial/monitor.h"
 #include "../../digitals/digitals_status.h"

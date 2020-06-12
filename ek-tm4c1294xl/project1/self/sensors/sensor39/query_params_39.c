@@ -64,62 +64,13 @@ void    QueryGetRequestDLMS(const obis_t  obis, uchar  bClass, uchar  bAttribute
 
 void    QueryGetRegisterValueDLMS(const obis_t  obis, runner39  r)
 {
-  MonitorString("\n\n QueryGetRegisterValueDLMS ");
   QueryGetRequestDLMS(obis, 3, 2, r);
 }
 
 void    QueryGetRegisterScalerDLMS(const obis_t  obis, runner39  r)
 {
-  MonitorString("\n\n QueryGetRegisterScalerDLMS ");
   QueryGetRequestDLMS(obis, 3, 3, r);
 }
-
-/*
-void    QueryGetScalerDLMS(const obis_t  obis, uchar  bNS, uchar  bNR, uchar  bInvokeId)
-{
-#ifdef MONITOR_39
-  MonitorString("\n\n QueryGetScalerDLMS ");
-#endif
-
-  uint wSize = 23 + GetHdlcAddressesSize(); // 0x19 25
-
-  InitPush(0);
-  PushChar(0x7E);
-
-  PushFormatDLMS(wSize);
-  PushHdlcAddresses();
-
-  PushChar((bNR << 5) | 0x10 | (bNS << 1) | 0x00);
-
-  PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
-
-  // DLMS start
-
-  PushChar(0xE6); // LLC
-  PushChar(0xE6);
-  PushChar(0x00);
-
-  PushChar(0xC0); // Get-Request
-  PushChar(0x01); // Get-Request-Normal
-  PushChar(0x80 | (bInvokeId % 16)); // Invoke-Id-And-Priority
-
-  PushChar(0x00);
-  PushChar(0x03); // class
-
-  PushOBIS_DLMS(obis);
-
-  PushChar(3); // attribute
-  PushChar(0x00);
-
-  // DLMS finish
-
-  PushIntLtl(MakeCRC16X25OutBuff(1, wSize-2));
-
-  PushChar(0x7E);
-
-  Query39(1000, wSize+2); // 27
-}
-*/
 
 
 uint    ReadType18ULong16(void)

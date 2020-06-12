@@ -4,6 +4,10 @@ DIGITALS_STATUS!H
 
 ------------------------------------------------------------------------------*/
 
+#include "../main_devices.h"
+
+
+
 void    SetCurr(device  de);
 device  GetCurr(void);
 

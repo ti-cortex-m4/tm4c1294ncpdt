@@ -4,6 +4,10 @@ DIGITALS_PAUSE!H
 
 ------------------------------------------------------------------------------*/
 
+#include "../main_devices.h"
+
+
+
 extern  uint                    mpcwPause[bPORTS];
 
 
