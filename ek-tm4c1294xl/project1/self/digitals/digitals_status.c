@@ -5,6 +5,7 @@ DIGITALS_STATUS!C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "digitals_status.h"
 
 
 

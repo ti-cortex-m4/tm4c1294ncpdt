@@ -7,6 +7,7 @@ DIGITALS_PAUSE!C
 #include "../main.h"
 #include "../serial/ports.h"
 #include "digitals_status.h"
+#include "digitals_pause.h"
 
 
 

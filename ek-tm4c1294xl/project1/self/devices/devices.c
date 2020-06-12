@@ -5,6 +5,7 @@ DEVICES.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "../main_devices.h"
 #include "../memory/mem_realtime.h"
 #include "../memory/mem_digitals.h"
 #include "../memory/mem_params.h"
@@ -6592,7 +6593,7 @@ void    RunDevices(void)
 
 #endif
 
-#ifndef SKIP_38
+#ifndef SKIP_39
 
     case DEV_START_38C:
       Clear(); ShowPercent(50);
