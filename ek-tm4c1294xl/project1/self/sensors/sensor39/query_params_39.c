@@ -72,6 +72,29 @@ uint    ReadType18ULong16(void)
 }
 
 
+
+// The Blue Book: 4.1.5 Common data types
+long64_ ReadValueX(void)
+{
+  InitPop(12 + GetHdlcAddressesSize());
+
+  uchar bDataAccessResult = PopChar();
+  if (bDataAccessResult != 0) {
+    // processError(1);
+    return GetLong64Error();
+  }
+
+  uchar bDataType = PopChar();
+  if (bDataType == 18) // Unsigned16
+  {
+    uint value = PopIntBig();
+    return GetLong64(value, true);  
+  }
+
+  // processError(2);
+  return GetLong64Error();
+}
+
 /*
 <GetRequest>
   <GetRequestNormal>
