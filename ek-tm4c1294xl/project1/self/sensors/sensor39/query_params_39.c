@@ -79,12 +79,18 @@ long64_ ReadValueX(void)
   InitPop(12 + GetHdlcAddressesSize());
 
   uchar bDataAccessResult = PopChar();
+#ifdef MONITOR_39  
+  MonitorString("\n bDataAccessResult="); MonitorCharDec(bDataAccessResult);
+#endif  
   if (bDataAccessResult != 0) {
     // TODO error38(request failure, bDataAccessResult)
     return GetLong64Error();
   }
 
   uchar bDataType = PopChar();
+#ifdef MONITOR_39  
+  MonitorString("\n bDataType="); MonitorCharDec(bDataType);
+#endif  
   if (bDataType == 18) // Unsigned16
   {
     uint value = PopIntBig();
