@@ -74,20 +74,16 @@ void    QueryArrayA(uchar  bT)
 
 uchar   ReadArrayA(void)
 {
-uchar   i;
-
   InitPop(1);
 
-  coEnergy.mpbBuff[0] = 0;
+  uchar b = PopChar();
 
-  i = PopChar();
-  coEnergy.mpbBuff[1] = i & 0x3F;
+  ulong dw = (b & 0x3F)*0x1000000;
+  dw += PopChar()*0x10000;
+  dw += PopChar();
 
-  coEnergy.mpbBuff[2] = PopChar();
-  coEnergy.mpbBuff[3] = PopChar();
-
-  reValue = (float)coEnergy.dwBuff / reParamDiv;
-  return(i);
+  reValue = (float)dw / reParamDiv;
+  return b;
 }
 
 
