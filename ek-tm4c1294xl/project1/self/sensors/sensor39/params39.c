@@ -23,11 +23,14 @@ static const obis_t obisU1 = {1, 0, 32, 7, 0, 255};
 static const obis_t obisU2 = {1, 0, 52, 7, 0, 255};
 static const obis_t obisU3 = {1, 0, 72, 7, 0, 255};
 
+static const obis_t obisI1 = {1, 0, 31, 7, 0, 255};
+static const obis_t obisI2 = {1, 0, 51, 7, 0, 255};
+static const obis_t obisI3 = {1, 0, 71, 7, 0, 255};
 
 
-static float        flU1;
-static float        flU2;
-static float        flU3;
+
+static float        flU1, flU2, flU3;
+static float        flI1, flI2, flI3;
 
 
 
@@ -95,6 +98,19 @@ float2  ReadParam39(void)
     flU3 = fl2.flValue;
 
 
+    fl2 = ReadValue39(obisI1, &r);
+    if (!fl2.fValid) return GetFloat2Error();
+    flI1 = fl2.flValue;
+
+    fl2 = ReadValue39(obisI2, &r);
+    if (!fl2.fValid) return GetFloat2Error();
+    flI2 = fl2.flValue;
+
+    fl2 = ReadValue39(obisI3, &r);
+    if (!fl2.fValid) return GetFloat2Error();
+    flI3 = fl2.flValue;
+
+
     Query38_DISC();
     if (Input39() != SER_GOODCHECK) return GetFloat2Error();
     DelayOff();
@@ -109,29 +125,9 @@ float2  ReadParam39(void)
     case PAR_U2 : return GetFloat2(flU2, true);
     case PAR_U3 : return GetFloat2(flU3, true);
 
-//    case PAR_I1 : return GetFloat2(mpeValues[3], true);
-//    case PAR_I2 : return GetFloat2(mpeValues[4], true);
-//    case PAR_I3 : return GetFloat2(mpeValues[5], true);
-//
-//    case PAR_P1 : return GetFloat2(mpeValues[6], true);
-//    case PAR_P2 : return GetFloat2(mpeValues[7], true);
-//    case PAR_P3 : return GetFloat2(mpeValues[8], true);
-//
-//    case PAR_Q1 : return GetFloat2(mpeValues[9], true);
-//    case PAR_Q2 : return GetFloat2(mpeValues[10], true);
-//    case PAR_Q3 : return GetFloat2(mpeValues[11], true);
-//
-//    case PAR_S1 : return GetFloat2(mpeValues[12], true);
-//    case PAR_S2 : return GetFloat2(mpeValues[13], true);
-//    case PAR_S3 : return GetFloat2(mpeValues[14], true);
-//
-//    case PAR_F1 : return GetFloat2(mpeValues[15]/100, true);
-//    case PAR_F2 : return GetFloat2(mpeValues[16]/100, true);
-//    case PAR_F3 : return GetFloat2(mpeValues[17]/100, true);
-//
-//    case PAR_C1 : return GetFloat2(cosinusDegrees(mpeValues[18]/10), true);
-//    case PAR_C2 : return GetFloat2(cosinusDegrees(mpeValues[19]/10), true);
-//    case PAR_C3 : return GetFloat2(cosinusDegrees(mpeValues[20]/10), true);
+    case PAR_I1 : return GetFloat2(flI1, true);
+    case PAR_I2 : return GetFloat2(flI2, true);
+    case PAR_I3 : return GetFloat2(flI3, true);
 
     default: return GetFloat2Error();
   }
