@@ -80,7 +80,7 @@ long64_ ReadValueX(void)
 
   uchar bDataAccessResult = PopChar();
   if (bDataAccessResult != 0) {
-    // processError(1);
+    // TODO error38(request failure, bDataAccessResult)
     return GetLong64Error();
   }
 
@@ -91,7 +91,7 @@ long64_ ReadValueX(void)
     return GetLong64(value, true);  
   }
 
-  // processError(2);
+  // TODO error38(unknown data type, bDataType)
   return GetLong64Error();
 }
 
