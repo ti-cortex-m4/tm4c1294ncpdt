@@ -38,7 +38,7 @@ float2  ReadValue39(const obis_t  obis, runner39*  pr)
 {
   (*pr).bNS++;
   (*pr).bInvokeId++;
-  QueryParam39_(obis, (*pr).bNS, (*pr).bNR, (*pr).bInvokeId);
+  QueryGetRequestDLMS(obis, (*pr).bNS, (*pr).bNR, (*pr).bInvokeId);
   if (Input39() != SER_GOODCHECK) return GetFloat2Error();
   if (!ValidateIframe((*pr).bNS, (*pr).bNR)) return GetFloat2Error();
   float fl = ReadType18ULong16(); // TODO определять тип автоматически

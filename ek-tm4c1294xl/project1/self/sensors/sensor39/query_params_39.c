@@ -18,10 +18,10 @@ query_params_39.c
 
 
 
-void    QueryParam39_(const obis_t  obis, uchar  bNS, uchar  bNR, uchar  bInvokeId)
+void    QueryGetRequestDLMS(const obis_t  obis, uchar  bNS, uchar  bNR, uchar  bInvokeId)
 {
 #ifdef MONITOR_39  
-  MonitorString("\n\n QueryParam39 ");
+  MonitorString("\n\n QueryGetRequestDLMS ");
 #endif
 
   uint wSize = 23 + GetHdlcAddressesSize(); // 0x19 25
