@@ -101,6 +101,36 @@ long64_ ReadValueX(void)
   return GetLong64Error();
 }
 
+
+
+// The Blue Book: 4.3.2 Register (class_id = 3, version = 0)
+schar   ReadScalerUnitDLMS(bool*  pfValid) {
+
+  InitPop(12 + GetHdlcAddressesSize());
+
+  uchar bDataAccessResult = PopChar();
+#ifdef MONITOR_39  
+  MonitorString("\n bDataAccessResult="); MonitorCharDec(bDataAccessResult);
+#endif  
+  if (bDataAccessResult != 0) {
+    // TODO error(no_success, bDataAccessResult)
+    (*pfValid) = false;
+    return 0;
+  }
+
+  schar bScaler = PopChar();
+  uchar bUnit = PopChar();
+#ifdef MONITOR_39  
+  MonitorString("\n bScaler="); MonitorCharHex(bScaler);
+  MonitorString("\n bUnit="); MonitorCharDec(bUnit);
+#endif    
+  (*pfValid) = true;
+  return bScaler;
+}
+
+
+
+
 /*
 <GetRequest>
   <GetRequestNormal>
