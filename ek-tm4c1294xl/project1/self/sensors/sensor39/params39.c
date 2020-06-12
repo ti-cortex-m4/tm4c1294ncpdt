@@ -16,6 +16,7 @@ params34.c
 #include "device39.h"
 #include "io39.h"
 #include "query_params_39.h"
+#include "fragment_open_39.h"
 #include "params39.h"
 
 
@@ -42,7 +43,8 @@ double2 ReadValue39(const obis_t  obis, runner39*  pr)
   QueryGetRegisterValueDLMS(obis, (*pr));
   if (Input39() != SER_GOODCHECK) return GetDouble2Error();
   if (!ValidateIframe((*pr).bNS, (*pr).bNR)) return GetDouble2Error();
-  double value = ReadType18ULong16();
+  ulong64_ ddw2 = ReadValueX();
+  if (!ddw2.fValid) return GetDouble2Error();
 //  DelayOff();
 
   (*pr).bNR++;
@@ -51,7 +53,7 @@ double2 ReadValue39(const obis_t  obis, runner39*  pr)
   if (!ValidateSframe((*pr).bNR)) return GetDouble2Error();
 //  DelayOff();
 
-  return GetDouble2(value, true);
+  return GetDouble2(ddw2.ddwValue, true);
 }
 
 
@@ -81,7 +83,7 @@ double2 ReadScaler39(const obis_t  obis, runner39*  pr)
 
 float2  ReadRegisterWithScaler39(const obis_t  obis, runner39*  pr)
 {
-    double2 value = ReadValue39(obis, pr);
+  double2 value = ReadValue39(obis, pr);
   if (!value.fValid) return GetFloat2Error();
 
   double2 scaler = ReadScaler39(obis, pr);
