@@ -39,7 +39,7 @@ float2  ReadValue39(const obis_t  obis, runner39*  pr)
 {
   (*pr).bNS++;
   (*pr).bInvokeId++;
-  QueryGetRequestDLMS(obis, (*pr).bNS, (*pr).bNR, (*pr).bInvokeId);
+  QueryGetRegisterValueDLMS(obis, (*pr));
   if (Input39() != SER_GOODCHECK) return GetFloat2Error();
   if (!ValidateIframe((*pr).bNS, (*pr).bNR)) return GetFloat2Error();
   float fl = ReadType18ULong16(); // TODO определять тип автоматически
@@ -55,7 +55,7 @@ float2  ReadValue39(const obis_t  obis, runner39*  pr)
 }
 
 
-
+/*
 double2 ReadScalerX(const obis_t  obis, runner39*  pr)
 {
   (*pr).bNS++;
@@ -76,7 +76,7 @@ double2 ReadScalerX(const obis_t  obis, runner39*  pr)
   double db = pow(10, sc2.bValue);
   return GetDouble2(db, true);
 }
-
+*/
 
 
 float2  ReadParam39(void)
@@ -121,11 +121,11 @@ float2  ReadParam39(void)
     fl2 = ReadValue39(obisU3, &r);
     if (!fl2.fValid) return GetFloat2Error();
     flU3 = fl2.flValue / 10;
-
+/*
     double2 db2 = ReadScalerX(obisU3, &r);
     if (!db2.fValid) return GetFloat2Error();
     flU3 = fl2.flValue * db2.dbValue;
-
+*/
 
 
     fl2 = ReadValue39(obisI1, &r);
