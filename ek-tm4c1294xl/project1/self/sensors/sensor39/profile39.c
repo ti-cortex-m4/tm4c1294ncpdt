@@ -85,7 +85,7 @@ schar   QueryHeader38(runner39*  pr)
 }
 
 
-static bool ReadData38(time  tiTime, uint64_t  ddwValue)
+static bool ReadData38(time  tiTime, ulong  dwValue)
 {
   tiDig = tiTime; // TODO
 
@@ -97,7 +97,7 @@ static bool ReadData38(time  tiTime, uint64_t  ddwValue)
 
   double dbPulse = mpdbPulseHou[ibDig];
 
-  ulong dw = ddwValue; // TODO
+  ulong dw = dwValue; // TODO
   uint w = (uint)(dw*dbPulse/10000);
   mpwChannels[0] = w;
 
@@ -117,32 +117,43 @@ bool    ReadHeader38(void)
   uchar h;
   for (h=0; h<6; h++)
   {
-    profile39 prf = GetBuffPrf38(h);
-
-#ifdef MONITOR_39
-    MonitorString("\n "); MonitorTime(prf.tiTime);
-    MonitorString(" "); MonitorLongDec(prf.ddwValue % 0x100000000);
-    MonitorString(" "); MonitorBool(prf.fExists);
-#endif
-
-
     ulong dw = DateToHouIndex(tiStart38);
     dw -= (wProfile38 - h);
     time tiVirtual = HouIndexToDate(dw);
 
-    bool difference = DifferentDateTime(tiVirtual, prf.tiTime);
-
 #ifdef MONITOR_39
-    MonitorString(" vrt.="); MonitorTime(tiVirtual);
-    MonitorString(" act.="); MonitorTime(prf.tiTime);
-    MonitorBool(difference);
+    MonitorString("\n "); MonitorTime(tiVirtual);
 #endif
 
+    ulong dwValue = 0;
 
-    if (prf.fExists)
+    uchar bSize = GetBuffPrfSize38();
+    for (i=0; i<bSize; i++)
     {
-      if (ReadData38(prf.tiTime, prf.ddwValue) == false) return false;
-    }
+      profile39 prf = GetBuffPrf38(h);
+      if (prf.fExists) {
+        bool difference = DifferentDateTime(tiVirtual, prf.tiTime);
+
+#ifdef MONITOR_39
+        MonitorString("\n ");
+        MonitorString(" vrt.="); MonitorTime(tiVirtual);
+        MonitorString(" act.="); MonitorTime(prf.tiTime);
+        MonitorBool(difference);
+#endif
+
+        if (!difference) {
+          dwValue = prf.ddwValue;
+          break;
+        }
+      }
+    }  
+
+#ifdef MONITOR_39
+    MonitorString("\n Time="); MonitorTime(tiVirtual);
+    MonitorString(" Value="); MonitorLongDec(dwValue);
+#endif
+
+    if (ReadData38(tiVirtual, dwValue) == false) return false;
   }
 
   wProfile38 += 6;
