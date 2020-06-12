@@ -19,12 +19,8 @@ query_params_39.c
 
 
 
-void    QueryGetRequestDLMS(const obis_t  obis, uchar  bNS, uchar  bNR, uchar  bInvokeId)
+void    QueryGetRequestDLMS(const obis_t  obis, uchar  bClass, uchar  bAttribute, runner39  r)
 {
-#ifdef MONITOR_39  
-  MonitorString("\n\n QueryGetRequestDLMS ");
-#endif
-
   uint wSize = 23 + GetHdlcAddressesSize(); // 0x19 25
 
   InitPush(0);
@@ -33,7 +29,7 @@ void    QueryGetRequestDLMS(const obis_t  obis, uchar  bNS, uchar  bNR, uchar  b
   PushFormatDLMS(wSize);
   PushHdlcAddresses();
 
-  PushChar((bNR << 5) | 0x10 | (bNS << 1) | 0x00);
+  PushChar((r.bNR << 5) | 0x10 | (r.bNS << 1) | 0x00);
 
   PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
 
@@ -45,14 +41,14 @@ void    QueryGetRequestDLMS(const obis_t  obis, uchar  bNS, uchar  bNR, uchar  b
 
   PushChar(0xC0); // Get-Request
   PushChar(0x01); // Get-Request-Normal
-  PushChar(0x80 | (bInvokeId % 16)); // Invoke-Id-And-Priority
+  PushChar(0x80 | (r.bInvokeId % 16)); // Invoke-Id-And-Priority
 
   PushChar(0x00);
-  PushChar(0x03); // class
+  PushChar(bClass); // class
 
   PushOBIS_DLMS(obis);
 
-  PushChar(0x02); // attribute
+  PushChar(bClass); // attribute
   PushChar(0x00);
 
   // DLMS finish
@@ -66,6 +62,13 @@ void    QueryGetRequestDLMS(const obis_t  obis, uchar  bNS, uchar  bNR, uchar  b
 
 
 
+void    QueryGetRegisterValueDLMS(const obis_t  obis, runner39  r)
+{
+  QueryGetRequestDLMS(obis, 3, 2, r);
+}
+
+
+/*
 void    QueryGetScalerDLMS(const obis_t  obis, uchar  bNS, uchar  bNR, uchar  bInvokeId)
 {
 #ifdef MONITOR_39
@@ -110,7 +113,7 @@ void    QueryGetScalerDLMS(const obis_t  obis, uchar  bNS, uchar  bNR, uchar  bI
 
   Query39(1000, wSize+2); // 27
 }
-
+*/
 
 
 uint    ReadType18ULong16(void)
@@ -120,7 +123,7 @@ uint    ReadType18ULong16(void)
 }
 
 
-
+/*
 // The Blue Book: 4.1.5 Common data types
 ulong64_ ReadValueX(void)
 {
@@ -172,7 +175,7 @@ schar2  ReadScaler(void)
 
   return GetSChar2(bScaler, true);
 }
-
+*/
 /*
 <GetRequest>
   <GetRequestNormal>
