@@ -83,7 +83,7 @@ long64_ ReadValueX(void)
   MonitorString("\n bDataAccessResult="); MonitorCharDec(bDataAccessResult);
 #endif  
   if (bDataAccessResult != 0) {
-    // TODO error38(request failure, bDataAccessResult)
+    // TODO error(no_success, bDataAccessResult)
     return GetLong64Error();
   }
 
@@ -91,13 +91,13 @@ long64_ ReadValueX(void)
 #ifdef MONITOR_39  
   MonitorString("\n bDataType="); MonitorCharDec(bDataType);
 #endif  
-  if (bDataType == 18) // Unsigned16
+  if (bDataType == 18) // long-unsigned [18] Unsigned16 0…65 535
   {
     uint value = PopIntBig();
     return GetLong64(value, true);  
   }
 
-  // TODO error38(unknown data type, bDataType)
+  // TODO error(unknown_data_type, bDataType)
   return GetLong64Error();
 }
 
