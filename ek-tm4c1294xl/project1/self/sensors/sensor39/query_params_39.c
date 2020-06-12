@@ -17,7 +17,8 @@ query_params_39.c
 #include "query_params_39.h"
 
 
-
+// class 3, attribute 2: value
+// class 3, attribute 3: scaler_unit
 void    QueryGetRequestDLMS(const obis_t  obis, uchar  bNS, uchar  bNR, uchar  bInvokeId)
 {
 #ifdef MONITOR_39  
