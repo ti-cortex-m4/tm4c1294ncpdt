@@ -55,15 +55,15 @@ float2  ReadValue39(const obis_t  obis, runner39*  pr)
 }
 
 
-/*
+
 double2 ReadScalerX(const obis_t  obis, runner39*  pr)
 {
   (*pr).bNS++;
   (*pr).bInvokeId++;
-  QueryGetScalerDLMS(obis, (*pr).bNS, (*pr).bNR, (*pr).bInvokeId);
+  QueryGetRegisterScalerDLMS(obis, (*pr));
   if (Input39() != SER_GOODCHECK) return GetDouble2Error();
   if (!ValidateIframe((*pr).bNS, (*pr).bNR)) return GetDouble2Error();
-  schar2 sc2 = ReadScaler();
+  schar2 sc2 = ReadRegisterScaler();
   if (!sc2.fValid) return GetDouble2Error();
   DelayOff();
 
@@ -76,7 +76,7 @@ double2 ReadScalerX(const obis_t  obis, runner39*  pr)
   double db = pow(10, sc2.bValue);
   return GetDouble2(db, true);
 }
-*/
+
 
 
 float2  ReadParam39(void)

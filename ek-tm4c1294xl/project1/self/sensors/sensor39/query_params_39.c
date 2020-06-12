@@ -48,7 +48,7 @@ void    QueryGetRequestDLMS(const obis_t  obis, uchar  bClass, uchar  bAttribute
 
   PushOBIS_DLMS(obis);
 
-  PushChar(bClass); // attribute
+  PushChar(bAttribute); // attribute
   PushChar(0x00);
 
   // DLMS finish
@@ -67,6 +67,10 @@ void    QueryGetRegisterValueDLMS(const obis_t  obis, runner39  r)
   QueryGetRequestDLMS(obis, 3, 2, r);
 }
 
+void    QueryGetRegisterScalerDLMS(const obis_t  obis, runner39  r)
+{
+  QueryGetRequestDLMS(obis, 3, 3, r);
+}
 
 /*
 void    QueryGetScalerDLMS(const obis_t  obis, uchar  bNS, uchar  bNR, uchar  bInvokeId)
@@ -151,9 +155,9 @@ ulong64_ ReadValueX(void)
   // TODO error(unknown_data_type, bDataType)
   return GetLong64Error(1);
 }
+*/
 
-
-schar2  ReadScaler(void)
+schar2  ReadRegisterScaler(void)
 {
   InitPop(16 + GetHdlcAddressesSize());
 
@@ -175,7 +179,7 @@ schar2  ReadScaler(void)
 
   return GetSChar2(bScaler, true);
 }
-*/
+
 /*
 <GetRequest>
   <GetRequestNormal>
