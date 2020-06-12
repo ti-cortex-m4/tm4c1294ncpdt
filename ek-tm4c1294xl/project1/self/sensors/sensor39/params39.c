@@ -79,6 +79,20 @@ double2 ReadScalerX(const obis_t  obis, runner39*  pr)
 
 
 
+float2  ReadRegisterWithScaler(const obis_t  obis, runner39*  pr)
+{
+  float2 fl2 = ReadValue39(obisU3, pr);
+  if (!fl2.fValid) return GetFloat2Error();
+  flU3 = fl2.flValue / 10;
+
+  double2 db2 = ReadScalerX(obisU3, pr);
+  if (!db2.fValid) return GetFloat2Error();
+  flU3 = fl2.flValue * db2.dbValue;
+
+  return GetFloat2Error();
+}
+
+
 float2  ReadParam39(void)
 {
   Clear();
@@ -117,15 +131,9 @@ float2  ReadParam39(void)
     if (!fl2.fValid) return GetFloat2Error();
     flU2 = fl2.flValue / 10;
 
-
     fl2 = ReadValue39(obisU3, &r);
     if (!fl2.fValid) return GetFloat2Error();
     flU3 = fl2.flValue / 10;
-/*
-    double2 db2 = ReadScalerX(obisU3, &r);
-    if (!db2.fValid) return GetFloat2Error();
-    flU3 = fl2.flValue * db2.dbValue;
-*/
 
 
     fl2 = ReadValue39(obisI1, &r);
