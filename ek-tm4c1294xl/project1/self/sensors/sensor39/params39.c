@@ -4,6 +4,7 @@ params34.c
 
 ------------------------------------------------------------------------------*/
 
+#include <math.h>
 #include "../../main.h"
 #include "../../memory/mem_digitals.h"
 #include "../../serial/ports.h"
@@ -55,6 +56,29 @@ float2  ReadValue39(const obis_t  obis, runner39*  pr)
 
 
 
+double2 ReadScalerX(const obis_t  obis, runner39*  pr)
+{
+  (*pr).bNS++;
+  (*pr).bInvokeId++;
+  QueryGetScalerDLMS(obis, (*pr).bNS, (*pr).bNR, (*pr).bInvokeId);
+  if (Input39() != SER_GOODCHECK) return GetDouble2Error();
+  if (!ValidateIframe((*pr).bNS, (*pr).bNR)) return GetDouble2Error();
+  schar2 sc2 = ReadScaler();
+  if (!sc2.fValid) return GetDouble2Error();
+  DelayOff();
+
+  (*pr).bNR++;
+  Query38_RR((*pr).bNR);
+  if (Input39() != SER_GOODCHECK) return GetDouble2Error();
+  if (!ValidateSframe((*pr).bNR)) return GetDouble2Error();
+  DelayOff();
+
+  double db = pow(10, sc2.bValue);
+  return GetDouble2(db, true);
+}
+
+
+
 float2  ReadParam39(void)
 {
   Clear();
@@ -93,9 +117,15 @@ float2  ReadParam39(void)
     if (!fl2.fValid) return GetFloat2Error();
     flU2 = fl2.flValue / 10;
 
+
     fl2 = ReadValue39(obisU3, &r);
     if (!fl2.fValid) return GetFloat2Error();
     flU3 = fl2.flValue / 10;
+
+    double2 db2 = ReadScalerX(obisU3, &r);
+    if (!db2.fValid) return GetFloat2Error();
+    flU3 = fl2.flValue * db2.dbValue;
+
 
 
     fl2 = ReadValue39(obisI1, &r);

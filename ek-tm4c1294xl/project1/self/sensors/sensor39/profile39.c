@@ -128,6 +128,7 @@ bool    ReadHeader38(void)
     ulong dwValue = 0;
 
     uchar bSize = GetBuffPrfSize38();
+    uchar i;
     for (i=0; i<bSize; i++)
     {
       profile39 prf = GetBuffPrf38(h);
