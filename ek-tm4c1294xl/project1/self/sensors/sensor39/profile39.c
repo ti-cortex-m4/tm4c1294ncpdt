@@ -10,6 +10,7 @@ profile39*c
  #include "../../keyboard/keyboard.h"
  #include "../../keyboard/time/key_timedate.h"
  #include "../../time/calendar.h"
+ #include "../../time/timedate.h"
  #include "../../serial/monitor.h"
  #include "../../serial/monitor_settings.h"
  #include "../../devices/devices.h"
@@ -113,16 +114,30 @@ bool    ReadHeader38(void)
   MonitorString("\n ReadHeader38 ");
 #endif
 
-  uchar i;
-  for (i=0; i<6; i++)
+  uchar h;
+  for (h=0; h<6; h++)
   {
-    profile39 prf = GetBuffPrf38(i);
+    profile39 prf = GetBuffPrf38(h);
 
 #ifdef MONITOR_39
     MonitorString("\n "); MonitorTime(prf.tiTime);
     MonitorString(" "); MonitorLongDec(prf.ddwValue % 0x100000000);
     MonitorString(" "); MonitorBool(prf.fExists);
 #endif
+
+
+    ulong dw = DateToHouIndex(tiStart38);
+    dw -= (wProfile38 - h);
+    time tiVirtual = HouIndexToDate(dw);
+
+    bool difference = DifferentDateTime(tiVirtual, prf.tiTime);
+
+#ifdef MONITOR_39
+    MonitorString(" vrt.="); MonitorTime(tiVirtual);
+    MonitorString(" act.="); MonitorTime(prf.tiTime);
+    MonitorBool(difference);
+#endif
+
 
     if (prf.fExists)
     {
@@ -131,7 +146,7 @@ bool    ReadHeader38(void)
   }
 
   wProfile38 += 6;
-  if (wProfile38 > 12/*wHOURS*/) return false;
+  if (wProfile38 > 6*3/*wHOURS*/) return false;
 
   return true;
 }
