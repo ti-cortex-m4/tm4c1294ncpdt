@@ -82,7 +82,7 @@ uint    ReadType18ULong16(void)
 
 
 // Blue Book: 4.1.5 Common data types
-ulong2  ReadValueX(void)
+ulong64_ ReadUnsignedValueDLSM(void)
 {
   InitPop(12 + GetHdlcAddressesSize());
 
@@ -92,7 +92,7 @@ ulong2  ReadValueX(void)
 #endif  
   if (bDataAccessResult != 0) {
     // error(no_success, bDataAccessResult)
-    return GetLong2Error();
+    return GetLong64Error(0);
   }
 
   uchar bDataType = PopChar();
@@ -103,21 +103,26 @@ ulong2  ReadValueX(void)
   if (bDataType == 17) // unsigned [17] Unsigned8 0…255
   {
     uchar value = PopIntBig();
-    return GetLong2(value, true);
+    return GetLong64(value, true, 0);
   }
-  if (bDataType == 18) // long-unsigned [18] Unsigned16 0…65 535
+  if (bDataType == 18) // long-unsigned [18] Unsigned16 0…65_535
   {
     uint value = PopIntBig();
-    return GetLong2(value, true);
+    return GetLong64(value, true, 0);
   }
-  if (bDataType == 6) // double-long-unsigned [6] Unsigned32 0…4 294 967 295
+  if (bDataType == 6) // double-long-unsigned [6] Unsigned32 0…4_294_967_295
   {
     ulong value = PopLongBig();
-    return GetLong2(value, true);
+    return GetLong64(value, true, 0);
+  }
+  if (bDataType == 21) // long64-unsigned [21] Unsigned64 0…2^64-1
+  {
+    uint64_t value = PopLongBig()*0x100000000 + PopLongBig();
+    return GetLong64(value, true, 0);
   }
 
   // error(unknown_data_type, bDataType)
-  return GetLong2Error();
+  return GetLong64Error(1);
 }
 
 
