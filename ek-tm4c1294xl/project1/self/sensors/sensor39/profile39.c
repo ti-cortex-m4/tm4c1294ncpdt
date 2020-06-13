@@ -65,7 +65,7 @@ void    InitHeader38(void)
 
 
 
-schar   QueryHeader38(runner39*  pr)
+uchar   QueryHeader38(runner39*  pr)
 {
   HideCurrTime(1);
 
@@ -81,7 +81,9 @@ schar   QueryHeader38(runner39*  pr)
   MonitorString(" ti2="); MonitorTime(ti2);
 #endif
 
-  return FragmentProfile39(pr, ti1, ti2);
+  uchar b = FragmentProfile39(pr, ti1, ti2);
+  MonitorString(" error1="); MonitorCharDec(b);
+  return b;
 }
 
 
@@ -100,6 +102,11 @@ static bool ReadData38(time  tiTime, ulong  dwValue)
   ulong dw = dwValue; // TODO
   uint w = (uint)(dw*dbPulse/10000);
   mpwChannels[0] = w;
+
+#ifdef MONITOR_39
+    MonitorString(" A="); MonitorTime(tiDig);
+    MonitorString(" B="); MonitorIntDec(mpwChannels[0]);
+#endif
 
   if (IsDefect(ibDig)) MakeSpecial(tiDig);
   return MakeStopHou(0);
@@ -122,7 +129,7 @@ bool    ReadHeader38(void)
     time tiVirtual = HouIndexToDate(dw);
 
 #ifdef MONITOR_39
-    MonitorString("\n "); MonitorTime(tiVirtual);
+    MonitorString("\n tiVirtual="); MonitorTime(tiVirtual);
 #endif
 
     ulong dwValue = 0;
@@ -150,7 +157,7 @@ bool    ReadHeader38(void)
     }  
 
 #ifdef MONITOR_39
-    MonitorString("\n Time="); MonitorTime(tiVirtual);
+    MonitorString(" Time="); MonitorTime(tiVirtual);
     MonitorString(" Value="); MonitorLongDec(dwValue);
 #endif
 
@@ -158,7 +165,7 @@ bool    ReadHeader38(void)
   }
 
   wProfile38 += 6;
-  if (wProfile38 > 6*3/*wHOURS*/) return false;
+  if (wProfile38 > 50/*wHOURS*/) return false;
 
   return true;
 }
@@ -203,8 +210,8 @@ uchar   RunProfile39_Internal(runner39*  pr)
 
 double2 RunProfile39(void)
 {
-  fMonitorLogBasic = false;
-  fMonitorLogHex = false;
+//  fMonitorLogBasic = false;
+//  fMonitorLogHex = false;
 
   MonitorOpen(0);
 
