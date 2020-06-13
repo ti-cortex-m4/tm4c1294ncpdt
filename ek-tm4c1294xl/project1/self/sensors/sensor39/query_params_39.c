@@ -99,9 +99,14 @@ ulong2  ReadValueX(void)
 #ifdef MONITOR_39  
   MonitorString("\n bDataType="); MonitorCharDec(bDataType);
 #endif  
-  if (bDataType == 18) // long-unsigned [18] Unsigned16 0…65535
+  if (bDataType == 18) // long-unsigned [18] Unsigned16 0…65 535
   {
     uint value = PopIntBig();
+    return GetLong2(value, true);
+  }
+  if (bDataType == 6) // double-long-unsigned [6] Unsigned32 0…4 294 967 295
+  {
+    ulong value = PopLongBig();
     return GetLong2(value, true);
   }
 
