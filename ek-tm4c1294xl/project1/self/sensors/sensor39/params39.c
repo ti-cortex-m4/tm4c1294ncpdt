@@ -11,6 +11,7 @@ params34.c
 #include "../../serial/ports_devices.h"
 #include "../../serial/ports2.h"
 #include "../../serial/monitor.h"
+#include "../../digitals/params/params.h"
 #include "../../digitals/params/params2.h"
 #include "../../display/display.h"
 #include "../../time/delay.h"
@@ -189,6 +190,8 @@ float2  ReadParam39(void)
     case PAR_P  : return GetFloat2(flPplus-flPminus, true);
 
     case PAR_Q  : return GetFloat2(flQplus-flQminus, true);
+
+    case PAR_S  : return GetFloat2(CalcS(flPplus-flPminus, flQplus-flQminus), true);
 
     default: return GetFloat2Error();
   }
