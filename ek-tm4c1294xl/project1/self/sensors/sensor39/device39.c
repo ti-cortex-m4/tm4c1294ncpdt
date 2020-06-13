@@ -125,8 +125,8 @@ void    Query38_AARQ(uchar  bNS, uchar  bNR)
 
   bNS = 0;
   bNR = 0;
-//  MonitorString("Control{N(R)=0,N(S)=0} 10 ? "); MonitorCharHex((bNR << 5) | 0x10 | (bNS << 1) | 0x00);
-  PushChar(0x10); // I-frame
+  MonitorString("Control{N(R)=0,N(S)=0} 10 ? "); MonitorCharHex((bNR << 5) | 0x10 | (bNS << 1) | 0x00);
+  PushChar(0x10); // I-frame TODO
   
   PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
 //  PushChar(0x65); // CRC ?

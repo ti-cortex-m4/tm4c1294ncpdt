@@ -56,8 +56,9 @@ AUTOMATIC2!C
 #include "sensor39/automatic_get_time_39.h"
 #include "sensor39/automatic_get_cntcurr_39.h"
 #include "sensor39/automatic_get_cntmon_39.h"
- #include "sensor39/read_profile_39.h"
- #include "sensor39/profile39.h"
+  #include "sensor39/read_profile_39.h"
+  #include "sensor39/profile39.h"
+  #include "sensor39/params39.h"
 #include "automatic2.h"
 
 
@@ -1917,7 +1918,7 @@ double2 ReadCntCurrCan(uchar  ibCan)
 #endif
 
 #ifndef SKIP_38
-    case 38: return RunProfile39(); //ReadCntCurr38();
+    case 38: return RunParam39(); //RunProfile39(); //ReadCntCurr38();
 #endif
 
     default: return GetDouble2Error();
