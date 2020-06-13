@@ -55,15 +55,15 @@ double2 ReadValue39(const obis_t  obis, runner39*  pr)
   QueryGetRegisterValueDLMS(obis, (*pr));
   if (Input39() != SER_GOODCHECK) return GetDouble2Error();
   if (!ValidateIframe((*pr).bNS, (*pr).bNR)) return GetDouble2Error();
-  ulong2 dw2 = ReadValueX();
-  if (!dw2.fValid) return GetDouble2Error();
+  ulong64_ ddw2 = ReadUnsignedValueDLSM();
+  if (!ddw2.fValid) return GetDouble2Error();
 
   (*pr).bNR++;
   Query38_RR((*pr).bNR);
   if (Input39() != SER_GOODCHECK) return GetDouble2Error();
   if (!ValidateSframe((*pr).bNR)) return GetDouble2Error();
 
-  return GetDouble2(dw2.dwValue, true);
+  return GetDouble2(ddw2.ddwValue, true);
 }
 
 
