@@ -104,8 +104,8 @@ static bool ReadData38(time  tiTime, ulong  dwValue)
   mpwChannels[0] = w;
 
 #ifdef MONITOR_39
-    MonitorString(" A="); MonitorTime(tiDig);
-    MonitorString(" B="); MonitorIntDec(mpwChannels[0]);
+    MonitorString("   time="); MonitorTime(tiDig);
+    MonitorString(" value="); MonitorIntDec(mpwChannels[0]);
 #endif
 
   if (IsDefect(ibDig)) MakeSpecial(tiDig);
@@ -143,8 +143,8 @@ bool    ReadHeader38(void)
         bool difference = DifferentDateTime(tiVirtual, prf.tiTime);
 
 #ifdef MONITOR_39
-        MonitorString("\n ");
-        MonitorString(" vrt.="); MonitorTime(tiVirtual);
+//        MonitorString("\n ");
+        MonitorString("   vrt.="); MonitorTime(tiVirtual);
         MonitorString(" act.="); MonitorTime(prf.tiTime);
         MonitorBool(difference);
 #endif
@@ -157,7 +157,7 @@ bool    ReadHeader38(void)
     }  
 
 #ifdef MONITOR_39
-    MonitorString(" Time="); MonitorTime(tiVirtual);
+    MonitorString("   Time="); MonitorTime(tiVirtual);
     MonitorString(" Value="); MonitorLongDec(dwValue);
 #endif
 
@@ -218,6 +218,7 @@ double2 RunProfile39(void)
   runner39 runner = InitRunner();
   uchar b = RunProfile39_Internal(&runner);
   if (b != 0) {
+    MonitorIn();
     MonitorString("\n error "); MonitorCharDec(b);
   } else {
     MonitorString("\n finish ");
