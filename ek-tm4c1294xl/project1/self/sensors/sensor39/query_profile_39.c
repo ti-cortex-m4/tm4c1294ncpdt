@@ -73,7 +73,7 @@ query_next_block_36*c
 void    QueryProfile39(uchar  bNS, uchar  bNR, uchar  bInvokeId, time  ti1, time  ti2)
 {
 #ifdef MONITOR_39  
-  MonitorString("\n\n Get EngCurrDay "); MonitorTime(ti1); MonitorTime(ti2);
+  MonitorString("\n\n QueryProfile39 "); MonitorTime(ti1); MonitorTime(ti2);
 #endif  
 
   uint wSize = 110 + GetHdlcAddressesSize(); // 0x70 112

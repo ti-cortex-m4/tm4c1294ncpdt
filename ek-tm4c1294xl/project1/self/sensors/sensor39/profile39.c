@@ -81,9 +81,7 @@ uchar   QueryHeader38(runner39*  pr)
   MonitorString(" ti2="); MonitorTime(ti2);
 #endif
 
-  uchar b = FragmentProfile39(pr, ti1, ti2);
-  MonitorString(" error1="); MonitorCharDec(b);
-  return b;
+  return FragmentProfile39(pr, ti1, ti2);
 }
 
 
