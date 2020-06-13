@@ -100,12 +100,12 @@ static bool ReadData38(time  tiTime, ulong  dwValue)
   double dbPulse = mpdbPulseHou[ibDig];
 
   ulong dw = dwValue; // TODO
-  uint w = (uint)(dw*dbPulse);
+  uint w = (uint)(dw*dbPulse/500);
   mpwChannels[0] = w;
 
 #ifdef MONITOR_39
-//    MonitorString("   time="); MonitorTime(tiDig);
-//    MonitorString(" value="); MonitorIntDec(mpwChannels[0]);
+    MonitorString("   result "); MonitorTime(tiDig);
+    MonitorString(" "); MonitorIntDec(mpwChannels[0]);
 #endif
 
   if (IsDefect(ibDig)) MakeSpecial(tiDig);
@@ -118,7 +118,7 @@ bool    ReadHeader38(void)
   DeltaBuffPrf38();
 
 #ifdef MONITOR_39
-  MonitorString("\n ReadHeader38 ");
+//  MonitorString("\n ReadHeader38 ");
 #endif
 
   uchar h;
@@ -129,7 +129,7 @@ bool    ReadHeader38(void)
     time tiVirtual = HouIndexToDate(dw);
 
 #ifdef MONITOR_39
-//    MonitorString("\n tiVirtual="); MonitorTime(tiVirtual);
+    MonitorString("\n "); MonitorTime(tiVirtual);
 #endif
 
     ulong dwValue = 0;
