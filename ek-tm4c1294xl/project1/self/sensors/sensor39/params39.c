@@ -21,6 +21,7 @@ params34.c
 
 
 
+// The Blue Book: 7.5.1 Value group C codes – Electricity
 static const obis_t obisU1 = {1, 0, 32, 7, 0, 255},
                     obisU2 = {1, 0, 52, 7, 0, 255},
                     obisU3 = {1, 0, 72, 7, 0, 255},
