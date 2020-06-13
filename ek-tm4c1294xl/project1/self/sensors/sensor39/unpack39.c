@@ -70,11 +70,11 @@ void    Decompress39(void)
 */
   uint wSize = (InBuff(1) & 0x07)*0x100 + InBuff(2) + 2;
   if (wSize != IndexInBuff()) {
-      Hi(0, wSize / 0x100);
-      Hi(2, wSize % 0x100);
-
-      Hi(5, IndexInBuff() / 0x100);
-      Hi(6, IndexInBuff() % 0x100);
+//      Hi(0, wSize / 0x100);
+//      Hi(2, wSize % 0x100);
+//
+//      Hi(5, IndexInBuff() / 0x100);
+//      Hi(6, IndexInBuff() % 0x100);
     return;
   }
 
