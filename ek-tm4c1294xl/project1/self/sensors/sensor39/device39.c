@@ -105,11 +105,11 @@ void    Query38_SNRM(void)
 
 
 // Green Book, 11.5 Encoding of the AARQ APDU
-void    Query38_Open2(uchar  bNS, uchar  bNR)
+void    Query38_AARQ(uchar  bNS, uchar  bNR)
 {
-  MonitorString("\n\n Open 2 ");
-  MonitorString(" N(S)="); MonitorCharDec(bNS);
-  MonitorString(" N(R)="); MonitorCharDec(bNR);
+  MonitorString("\n\n AARQ ");
+//  MonitorString(" N(S)="); MonitorCharDec(bNS);
+//  MonitorString(" N(R)="); MonitorCharDec(bNR);
 
   uint wSize = 66 + GetHdlcAddressesSize(); // 0x44 68
 
@@ -125,7 +125,7 @@ void    Query38_Open2(uchar  bNS, uchar  bNR)
 
   bNS = 0;
   bNR = 0;
-  MonitorString("Control{N(R)=0,N(S)=0} 10 ? "); MonitorCharHex((bNR << 5) | 0x10 | (bNS << 1) | 0x00);
+//  MonitorString("Control{N(R)=0,N(S)=0} 10 ? "); MonitorCharHex((bNR << 5) | 0x10 | (bNS << 1) | 0x00);
   PushChar(0x10); // I-frame
   
   PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5

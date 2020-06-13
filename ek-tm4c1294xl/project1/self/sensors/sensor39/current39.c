@@ -37,9 +37,9 @@ void    Query39_DISC_Current(void)
 }
 
 
-void    Query39_Open2_Current(void)
+void    Query39_AARQ_Current(void)
 {
-  Query38_Open2(bNS, bNR);
+  Query38_AARQ(bNS, bNR);
 }
 
 

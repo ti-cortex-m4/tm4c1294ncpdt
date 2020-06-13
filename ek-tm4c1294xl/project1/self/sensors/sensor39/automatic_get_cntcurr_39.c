@@ -32,7 +32,7 @@ ulong64_ QueryCntCurr38_Full(void)
   uchar bNR = 0;
   uchar bInvokeId = 0;
 
-  Query38_Open2(bNS, bNR);
+  Query38_AARQ(bNS, bNR);
   if (Input39() != SER_GOODCHECK) return GetLong64Error(3);
   if (!ValidateIframe(bNS, bNR)) return GetLong64Error(4);
   DelayOff();
