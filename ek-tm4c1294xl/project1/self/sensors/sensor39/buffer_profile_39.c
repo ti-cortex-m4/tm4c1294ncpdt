@@ -52,7 +52,7 @@ void    AddBuffPrf38(time  tiTime, uint64_t  ddwValue)
 
 void    DeltaBuffPrf38(void)
 {
-#ifdef MONITOR_39
+#ifdef MONITOR_39_
   MonitorString("\n Before DeltaBuffPrf38 ");
 
   uchar i;
@@ -66,6 +66,7 @@ void    DeltaBuffPrf38(void)
   }
 #endif
 
+  uchar i;
   for (i=0; i<PROFILE39_SIZE-1; i++)
   {
     profile39 prf1 = GetBuffPrf38(i);
@@ -92,7 +93,7 @@ void    DeltaBuffPrf38(void)
   mpBuffPrf39[i].ddwValue = 0;
   mpBuffPrf39[i].fExists = false;
 
-#ifdef MONITOR_39
+#ifdef MONITOR_39_
   MonitorString("\n After DeltaBuffPrf38 ");
 
   for (i=0; i<PROFILE39_SIZE-1; i++)

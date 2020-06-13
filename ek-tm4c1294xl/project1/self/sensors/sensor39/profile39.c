@@ -100,12 +100,12 @@ static bool ReadData38(time  tiTime, ulong  dwValue)
   double dbPulse = mpdbPulseHou[ibDig];
 
   ulong dw = dwValue; // TODO
-  uint w = (uint)(dw*dbPulse/10000);
+  uint w = (uint)(dw*dbPulse);
   mpwChannels[0] = w;
 
 #ifdef MONITOR_39
-    MonitorString("   time="); MonitorTime(tiDig);
-    MonitorString(" value="); MonitorIntDec(mpwChannels[0]);
+//    MonitorString("   time="); MonitorTime(tiDig);
+//    MonitorString(" value="); MonitorIntDec(mpwChannels[0]);
 #endif
 
   if (IsDefect(ibDig)) MakeSpecial(tiDig);
@@ -129,7 +129,7 @@ bool    ReadHeader38(void)
     time tiVirtual = HouIndexToDate(dw);
 
 #ifdef MONITOR_39
-    MonitorString("\n tiVirtual="); MonitorTime(tiVirtual);
+//    MonitorString("\n tiVirtual="); MonitorTime(tiVirtual);
 #endif
 
     ulong dwValue = 0;
@@ -144,9 +144,9 @@ bool    ReadHeader38(void)
 
 #ifdef MONITOR_39
 //        MonitorString("\n ");
-        MonitorString("   vrt.="); MonitorTime(tiVirtual);
-        MonitorString(" act.="); MonitorTime(prf.tiTime);
-        MonitorBool(difference);
+//        MonitorString("   vrt.="); MonitorTime(tiVirtual);
+//        MonitorString(" act.="); MonitorTime(prf.tiTime);
+//        MonitorBool(difference);
 #endif
 
         if (!difference) {
@@ -157,8 +157,8 @@ bool    ReadHeader38(void)
     }  
 
 #ifdef MONITOR_39
-    MonitorString("   Time="); MonitorTime(tiVirtual);
-    MonitorString(" Value="); MonitorLongDec(dwValue);
+//    MonitorString("   Time="); MonitorTime(tiVirtual);
+//    MonitorString(" Value="); MonitorLongDec(dwValue);
 #endif
 
     if (ReadData38(tiVirtual, dwValue) == false) return false;
@@ -210,14 +210,16 @@ uchar   RunProfile39_Internal(runner39*  pr)
 
 double2 RunProfile39(void)
 {
-//  fMonitorLogBasic = false;
-//  fMonitorLogHex = false;
+  fMonitorLogBasic = false;
+  fMonitorLogHex = false;
 
   MonitorOpen(0);
 
   runner39 runner = InitRunner();
   uchar b = RunProfile39_Internal(&runner);
   if (b != 0) {
+    fMonitorLogBasic = true;
+    fMonitorLogHex = true;
     MonitorIn();
     MonitorString("\n error "); MonitorCharDec(b);
   } else {
