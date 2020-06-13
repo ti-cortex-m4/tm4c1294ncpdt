@@ -57,13 +57,11 @@ double2 ReadValue39(const obis_t  obis, runner39*  pr)
   if (!ValidateIframe((*pr).bNS, (*pr).bNR)) return GetDouble2Error();
   ulong2 dw2 = ReadValueX();
   if (!dw2.fValid) return GetDouble2Error();
-//  DelayOff();
 
   (*pr).bNR++;
   Query38_RR((*pr).bNR);
   if (Input39() != SER_GOODCHECK) return GetDouble2Error();
   if (!ValidateSframe((*pr).bNR)) return GetDouble2Error();
-//  DelayOff();
 
   return GetDouble2(dw2.dwValue, true);
 }
@@ -79,13 +77,11 @@ double2 ReadScaler39(const obis_t  obis, runner39*  pr)
   if (!ValidateIframe((*pr).bNS, (*pr).bNR)) return GetDouble2Error();
   schar2 sc2 = ReadRegisterScaler();
   if (!sc2.fValid) return GetDouble2Error();
-//  DelayOff();
 
   (*pr).bNR++;
   Query38_RR((*pr).bNR);
   if (Input39() != SER_GOODCHECK) return GetDouble2Error();
   if (!ValidateSframe((*pr).bNR)) return GetDouble2Error();
-//  DelayOff();
 
   double db = pow(10, sc2.bValue);
   return GetDouble2(db, true);

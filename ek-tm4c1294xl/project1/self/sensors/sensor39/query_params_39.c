@@ -81,7 +81,7 @@ uint    ReadType18ULong16(void)
 
 
 
-// The Blue Book: 4.1.5 Common data types
+// Blue Book: 4.1.5 Common data types
 ulong2  ReadValueX(void)
 {
   InitPop(12 + GetHdlcAddressesSize());
@@ -99,6 +99,12 @@ ulong2  ReadValueX(void)
 #ifdef MONITOR_39  
   MonitorString("\n bDataType="); MonitorCharDec(bDataType);
 #endif  
+
+  if (bDataType == 17) // unsigned [17] Unsigned8 0…255
+  {
+    uchar value = PopIntBig();
+    return GetLong2(value, true);
+  }
   if (bDataType == 18) // long-unsigned [18] Unsigned16 0…65 535
   {
     uint value = PopIntBig();
