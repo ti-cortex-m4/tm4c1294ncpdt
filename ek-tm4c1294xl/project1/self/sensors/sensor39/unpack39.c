@@ -12,18 +12,19 @@ unpack36*c
 #include "unpack39.h"
 
 
-void    Unpack35(void)
+
+void    Unpack39(void)
 {
   uchar i = 1;
   uchar j = 1;
 
   while (i < IndexInBuff()) {
-    if ((InBuff(i) == 0xDB) && (InBuff(i+1) == 0xDD)) {
-      SetInBuff(j, 0xDB);
+    if ((InBuff(i) == 0x7D) && (InBuff(i+1) == 0x5E)) {
+      SetInBuff(j, 0x7E);
       i += 2;
       j++;
-    } else if ((InBuff(i) == 0xDB) && (InBuff(i+1) == 0xDC)) {
-      SetInBuff(j, 0xC0);
+    } else if ((InBuff(i) == 0x7D) && (InBuff(i+1) == 0x5D)) {
+      SetInBuff(j, 0x7D);
       i += 2;
       j++;
     } else {
@@ -51,6 +52,18 @@ void    Decompress39(void)
   if ((InBuff(0) != 0x7E) || (InBuff(IndexInBuff()-1) != 0x7E))
     return;
 
+//#ifdef MONITOR_39
+      MonitorString("\n unpack start "); MonitorIntDec(IndexInBuff());
+      MonitorIn();
+//#endif
+
+      Unpack39();
+
+//#ifdef MONITOR_39
+      MonitorString("\n unpack finish "); MonitorIntDec(IndexInBuff());
+      MonitorIn();
+//#endif
+
   uint wSize = (InBuff(1) & 0x07)*0x100 + InBuff(2) + 2;
   if (wSize != IndexInBuff()) {
       Hi(0, wSize / 0x100);
@@ -61,7 +74,7 @@ void    Decompress39(void)
     return;
   }
 
-  MonitorIn();
+//  MonitorIn();
 
   mpSerial[ibPort] = SER_POSTINPUT_MASTER;
 }
