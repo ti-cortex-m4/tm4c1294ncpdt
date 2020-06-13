@@ -20,10 +20,12 @@ void    Unpack39(void)
 
   while (i < IndexInBuff()) {
     if ((InBuff(i) == 0x7D) && (InBuff(i+1) == 0x5E)) {
+      MonitorString("\n j1="); MonitorIntDec(i); MonitorIntDec(j);
       SetInBuff(j, 0x7E);
       i += 2;
       j++;
     } else if ((InBuff(i) == 0x7D) && (InBuff(i+1) == 0x5D)) {
+      MonitorString("\n j2="); MonitorIntDec(i); MonitorIntDec(j);
       SetInBuff(j, 0x7D);
       i += 2;
       j++;
@@ -46,12 +48,14 @@ void    Decompress39(void)
   if (mpSerial[ibPort] != SER_INPUT_MASTER) return;
 
   c = 0;
-  for (i=0; i<IndexInBuff(); i++) if (InBuff(i) == 0x7E) c++;
-  if (c != 2) return;
+  for (i=0; i<IndexInBuff(); i++) {
+    if (InBuff(i) == 0x7E) c++;
+  }
+  if (c < 2) return;
 
   if ((InBuff(0) != 0x7E) || (InBuff(IndexInBuff()-1) != 0x7E))
     return;
-
+/*
 //#ifdef MONITOR_39
       MonitorString("\n unpack start "); MonitorIntDec(IndexInBuff());
       MonitorIn();
@@ -63,7 +67,7 @@ void    Decompress39(void)
       MonitorString("\n unpack finish "); MonitorIntDec(IndexInBuff());
       MonitorIn();
 //#endif
-
+*/
   uint wSize = (InBuff(1) & 0x07)*0x100 + InBuff(2) + 2;
   if (wSize != IndexInBuff()) {
       Hi(0, wSize / 0x100);
