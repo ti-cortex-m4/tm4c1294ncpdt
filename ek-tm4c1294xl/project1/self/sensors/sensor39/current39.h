@@ -5,7 +5,7 @@ current39*h
 ------------------------------------------------------------------------------*/
 
 void    Query39_DISC_Current(void);
-void    Query39_Open2_Current(void);
+void    Query39_AARQ_Current(void);
 void    Query39_RR_Current(void);
 void    QueryEngAbs39_Current(void);
 

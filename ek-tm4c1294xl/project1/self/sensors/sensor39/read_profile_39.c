@@ -42,7 +42,7 @@ schar   y(void)
   uchar bNR = 0;
   uchar bInvokeId = 0;
 
-  Query38_Open2(bNS, bNR);
+  Query38_AARQ(bNS, bNR);
   if (Input39() != SER_GOODCHECK) return -17;//GetDouble2Error();
 //  if (!ValidateIframe(bNS, bNR)) return GetDouble2Error();
   DelayOff();

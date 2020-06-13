@@ -6649,7 +6649,7 @@ void    RunDevices(void)
       Clear(); ShowPercent(52);
 
       cbRepeat = MaxRepeats();
-      Query39_Open2_Current();
+      Query39_AARQ_Current();
       SetCurr(DEV_OPEN2_38C);
       break;
 
@@ -6666,7 +6666,7 @@ void    RunDevices(void)
           ErrorLink();
           cbRepeat--;
 
-          Query39_Open2_Current();
+          Query39_AARQ_Current();
           SetCurr(DEV_OPEN2_38C);
         }
       }

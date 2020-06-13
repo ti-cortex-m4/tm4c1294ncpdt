@@ -102,6 +102,7 @@ void    DeltaBuffPrf38(void)
 #ifdef MONITOR_39
   MonitorString("\n after");
   MonitorBuffPrf38();
+  MonitorString("\n finish");
 #endif
 }
 

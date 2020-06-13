@@ -22,7 +22,7 @@ uchar   FragmentOpen39(runner39  *pr)
   if (Input39() != SER_GOODCHECK) return 2;
 //  DelayOff();
 
-  Query38_Open2((*pr).bNS, (*pr).bNR);
+  Query38_AARQ((*pr).bNS, (*pr).bNR);
   if (Input39() != SER_GOODCHECK) return 3;
   if (!ValidateIframe((*pr).bNS, (*pr).bNR)) return 4;
 //  DelayOff();
