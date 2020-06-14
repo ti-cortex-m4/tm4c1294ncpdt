@@ -172,7 +172,7 @@ bool    ReadHeader38(void)
 
 #ifdef  MONITOR_39
 
-uchar   RunProfile39_Internal(runner39*  pr)
+uchar   TestProfile39_Internal(runner39*  pr)
 {  
   FragmentOpen39(pr);
 
@@ -206,7 +206,7 @@ uchar   RunProfile39_Internal(runner39*  pr)
 
 
 
-double2 RunProfile39(void)
+double2 TestProfile39(void)
 {
   fMonitorLogBasic = false;
   fMonitorLogHex = false;
@@ -214,11 +214,8 @@ double2 RunProfile39(void)
   MonitorOpen(0);
 
   runner39 runner = InitRunner();
-  uchar b = RunProfile39_Internal(&runner);
+  uchar b = TestProfile39_Internal(&runner);
   if (b != 0) {
-    fMonitorLogBasic = true;
-    fMonitorLogHex = true;
-    MonitorIn();
     MonitorString("\n error "); MonitorCharDec(b);
   } else {
     MonitorString("\n finish ");

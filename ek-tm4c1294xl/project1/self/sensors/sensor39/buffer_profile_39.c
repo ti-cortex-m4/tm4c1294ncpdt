@@ -80,7 +80,7 @@ void    DeltaBuffPrf38(void)
 
     if (prf1.fExists & prf2.fExists)
     {
-      mpBuffPrf39[i].tiTime = prf2.tiTime;
+      mpBuffPrf39[i].tiTime = prf1.tiTime;
       mpBuffPrf39[i].ddwValue = prf2.ddwValue - prf1.ddwValue;
       mpBuffPrf39[i].fExists = true;
     }
