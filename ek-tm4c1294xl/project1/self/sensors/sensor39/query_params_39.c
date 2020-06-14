@@ -82,10 +82,8 @@ uint    ReadType18ULong16(void)
 
 
 // Blue Book: 4.1.5 Common data types
-ulong64_ ReadUnsignedValueDLSM(void)
+ulong64_ PopUnsignedValueDLSM(void)
 {
-  InitPop(12 + GetHdlcAddressesSize());
-
   uchar bDataAccessResult = PopChar();
 #ifdef MONITOR_39  
   MonitorString("\n bDataAccessResult="); MonitorCharDec(bDataAccessResult);
@@ -124,6 +122,14 @@ ulong64_ ReadUnsignedValueDLSM(void)
   // error(unknown_data_type, bDataType)
   return GetLong64Error(1);
 }
+
+
+ulong64_ ReadUnsignedValueDLSM(void)
+{
+  InitPop(12 + GetHdlcAddressesSize());
+  return PopUnsignedValueDLSM();
+}
+
 
 
 schar2  ReadRegisterScaler(void)
