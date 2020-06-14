@@ -37,6 +37,15 @@ static const obis_t obisEngTariff[4] = {
 
 
 
+const obis_t *GetOBIS(uchar  ibTariff)
+{
+  ASSERT(sizeof(obisEngTariff)/sizeof(obisEngTariff[0]) == 4);
+  ASSERT(ibTariff < 4);
+  return &obisEngTariff[ibTariff];
+}
+
+
+
 // TODO scale
 status  CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
 {
@@ -83,9 +92,7 @@ status  CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
   uchar bYear = (bMonth > ti.bMonth) ? ti.bYear-1 : ti.bYear;
 
   bNS++;
-  ASSERT(sizeof(obisEngTariff)/sizeof(obisEngTariff[0]) == 4);
-  ASSERT(ibTariff < 4);
-  QueryEngMon39(obisEngTariff[ibTariff], bNS, bNR, bInvokeId++, bMonth, bYear);
+  QueryEngMon39(*GetOBIS(ibTariff), bNS, bNR, bInvokeId++, bMonth, bYear);
   if (Input39() != SER_GOODCHECK) return ST_BADDIGITAL;
   if (!ValidateIframe(bNS, bNR)) return ST_BADDIGITAL;
 
@@ -137,7 +144,9 @@ status  ReadCntMonCanTariff39(uchar  ibMonAbs, uchar  ibTariff) // на начало мес
   {
     status s = CntMonCanTariff39_Internal(ibMonAbs, ibTariff);
     if (fKey == true) break;
-    if (s == ST_OK) return ST_OK;
+
+    if (s == ST_OK) return s;
+    if (s == ST_NOTPRESENTED) return s;
   }
 
   Query39_DISC();
@@ -153,8 +162,8 @@ status  ReadCntMonCanTariff39(uchar  ibMonAbs, uchar  ibTariff) // на начало мес
 
 double2 TestCntMonCanTariff39(void)
 {
-//  fMonitorLogBasic = false;
-//  fMonitorLogHex = false;
+  fMonitorLogBasic = false;
+  fMonitorLogHex = false;
 
   MonitorOpen(0);
 
@@ -162,7 +171,7 @@ double2 TestCntMonCanTariff39(void)
   uchar i;
   for (i=0; i<10; i++) {
     uchar ibMonAbs = (12 + bMonth - 1 - i) % 12;
-    MonitorString("\n ibMonAbs="); MonitorCharDec(ibMonAbs);
+    MonitorString("\n\n ibMonAbs="); MonitorCharDec(ibMonAbs);
     status s = ReadCntMonCanTariff39(ibMonAbs, 0);
     MonitorString("\n status="); MonitorCharDec(s);
   }
