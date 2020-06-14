@@ -108,8 +108,6 @@ void    Query38_SNRM(void)
 void    Query38_AARQ(uchar  bNS, uchar  bNR)
 {
   MonitorString("\n\n AARQ ");
-//  MonitorString(" N(S)="); MonitorCharDec(bNS);
-//  MonitorString(" N(R)="); MonitorCharDec(bNR);
 
   uint wSize = 66 + GetHdlcAddressesSize(); // 0x44 68
 
@@ -117,20 +115,14 @@ void    Query38_AARQ(uchar  bNS, uchar  bNR)
   PushChar(0x7E);
   
   PushFormatDLMS(wSize);
-//  PushChar(0xA0);
-//  PushChar(0x44);
   PushHdlcAddresses();
-//  PushChar(0x03);
-//  PushChar(0x03);
 
   bNS = 0;
   bNR = 0;
-  MonitorString("Control{N(R)=0,N(S)=0} 10 ? "); MonitorCharHex((bNR << 5) | 0x10 | (bNS << 1) | 0x00);
-  PushChar(0x10); // I-frame TODO
+//  MonitorString("Control{N(R)=0,N(S)=0} 10 ? ");
+  PushChar((bNR << 5) | 0x10 | (bNS << 1) | 0x00);
   
   PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
-//  PushChar(0x65); // CRC ?
-//  PushChar(0x94);
 
   // DLMS start
 
@@ -203,8 +195,6 @@ void    Query38_AARQ(uchar  bNS, uchar  bNR)
   // DLMS finish
   
   PushIntLtl(MakeCRC16X25OutBuff(1, wSize-2));
-//  PushChar(0xAF); // CRC ?
-//  PushChar(0xDF);
   
   PushChar(0x7E);
 
