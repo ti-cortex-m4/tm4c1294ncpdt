@@ -84,15 +84,6 @@ uint    ReadType18ULong16(void)
 // Blue Book: 4.1.5 Common data types
 ulong64_ PopUnsignedValueDLSM(void)
 {
-  uchar bDataAccessResult = PopChar();
-#ifdef MONITOR_39  
-  MonitorString("\n bDataAccessResult="); MonitorCharDec(bDataAccessResult);
-#endif  
-  if (bDataAccessResult != 0) {
-    // error(no_success, bDataAccessResult)
-    return GetLong64Error(0);
-  }
-
   uchar bDataType = PopChar();
 #ifdef MONITOR_39  
   MonitorString("\n bDataType="); MonitorCharDec(bDataType);
@@ -127,6 +118,16 @@ ulong64_ PopUnsignedValueDLSM(void)
 ulong64_ ReadUnsignedValueDLSM(void)
 {
   InitPop(12 + GetHdlcAddressesSize());
+
+  uchar bDataAccessResult = PopChar();
+#ifdef MONITOR_39
+  MonitorString("\n bDataAccessResult="); MonitorCharDec(bDataAccessResult);
+#endif
+  if (bDataAccessResult != 0) {
+    // error(no_success, bDataAccessResult)
+    return GetLong64Error(0);
+  }
+
   return PopUnsignedValueDLSM();
 }
 
