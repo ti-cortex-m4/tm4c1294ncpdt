@@ -18,7 +18,7 @@ DEVICE36*C
 
 
 
-void    Query38_DISC(void)
+void    Query39_DISC(void)
 {
   MonitorString("\n\n DISC");
 
@@ -45,7 +45,7 @@ void    Query38_DISC(void)
 }
 
 
-void    Query38_SNRM(void)
+void    Query39_SNRM(void)
 {
   MonitorString("\n\n SNRM");
 
@@ -105,7 +105,7 @@ void    Query38_SNRM(void)
 
 
 // Green Book, 11.5 Encoding of the AARQ APDU
-void    Query38_AARQ(uchar  bNS, uchar  bNR)
+void    Query39_AARQ(uchar  bNS, uchar  bNR)
 {
   MonitorString("\n\n AARQ ");
 
@@ -203,7 +203,7 @@ void    Query38_AARQ(uchar  bNS, uchar  bNR)
 
 
 
-void    Query38_RR(uchar  bNR)
+void    Query39_RR(uchar  bNR)
 {
   MonitorString("\n\n RR ");
 

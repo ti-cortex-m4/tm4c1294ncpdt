@@ -4,10 +4,10 @@ buffer_profile_39.h
 
 ------------------------------------------------------------------------------*/
 
-void    InitBuffPrf38(void);
-void    AddBuffPrf38(time  tiTime, uint64_t  ddwValue);
+void    InitBuffPrf39(void);
+void    AddBuffPrf39(time  tiTime, uint64_t  ddwValue);
 
-void    DeltaBuffPrf38(void);
-profile39 GetBuffPrf38(uchar  i);
-uchar   GetBuffPrfSize38(void);
-bool    GetBuffPrfOveflow38(void);
+void    DeltaBuffPrf39(void);
+profile39 GetBuffPrf39(uchar  i);
+uchar   GetBuffPrfSize39(void);
+bool    GetBuffPrfOveflow39(void);

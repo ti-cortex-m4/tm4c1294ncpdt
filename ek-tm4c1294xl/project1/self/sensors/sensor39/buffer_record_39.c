@@ -90,7 +90,7 @@ record39 FinishBuffRecord39(void) {
   MonitorString("\n Count="); MonitorCharDec(bCount); MonitorString("\n");
 #endif
 
-  InitBuffPrf38();
+  InitBuffPrf39();
 
   uchar i;
   for (i=0; i<bCount; i++)
@@ -131,7 +131,7 @@ record39 FinishBuffRecord39(void) {
     MonitorLongDec(ddw % 1000000);
 #endif
 
-    AddBuffPrf38(ti, ddw);
+    AddBuffPrf39(ti, ddw);
   }
 
   return r;

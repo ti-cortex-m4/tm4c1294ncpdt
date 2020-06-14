@@ -82,7 +82,6 @@ float2  ReadParam38(void)
 
   if (fBeginParam == false)
   {
-
     QueryParams38();
     if (Input38() != SER_GOODCHECK) return GetFloat2Error();
 

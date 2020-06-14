@@ -295,7 +295,7 @@ void    NextCurrent(void)
 #endif
 
 #ifndef SKIP_39
-    case 39: Query38_DISC();  break;
+    case 39: Query39_DISC();  break;
 #endif
   }
 

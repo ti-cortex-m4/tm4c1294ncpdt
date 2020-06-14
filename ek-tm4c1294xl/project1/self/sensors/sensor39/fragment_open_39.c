@@ -14,21 +14,21 @@ fragment_open_39.c
 
 uchar   FragmentOpen39(runner39  *pr)
 {
-  Query38_DISC();
+  Query39_DISC();
   if (Input39() != SER_GOODCHECK) return 1;
 //  DelayOff();
 
-  Query38_SNRM();
+  Query39_SNRM();
   if (Input39() != SER_GOODCHECK) return 2;
 //  DelayOff();
 
-  Query38_AARQ((*pr).bNS, (*pr).bNR);
+  Query39_AARQ((*pr).bNS, (*pr).bNR);
   if (Input39() != SER_GOODCHECK) return 3;
   if (!ValidateIframe((*pr).bNS, (*pr).bNR)) return 4;
 //  DelayOff();
 
   (*pr).bNR++;
-  Query38_RR((*pr).bNR);
+  Query39_RR((*pr).bNR);
   if (Input39() != SER_GOODCHECK) return 5;
   if (!ValidateSframe((*pr).bNR)) return 6;
 //  DelayOff();

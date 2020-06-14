@@ -81,11 +81,11 @@ bool    QueryEngMon36_Full(uchar  bTime, uchar  bPercent)
 
 double2 ReadCntMonCan36_(uchar  ibMon)
 {
-  Query38_DISC();
+  Query39_DISC();
   if (Input39() != SER_GOODCHECK) return GetDouble2Error();
   DelayOff();
 
-  Query38_SNRM();
+  Query39_SNRM();
   if (Input39() != SER_GOODCHECK) return GetDouble2Error();
   DelayOff();
 
@@ -93,13 +93,13 @@ double2 ReadCntMonCan36_(uchar  ibMon)
   uchar bNR = 0;
   uchar bInvokeId = 0;
 
-  Query38_AARQ(bNS, bNR);
+  Query39_AARQ(bNS, bNR);
   if (Input39() != SER_GOODCHECK) return GetDouble2Error();
   if (!ValidateIframe(bNS, bNR)) return GetDouble2Error();
   DelayOff();
 
   bNR++;
-  Query38_RR(bNR);
+  Query39_RR(bNR);
   if (Input39() != SER_GOODCHECK) return GetDouble2Error();
   if (!ValidateSframe(bNR)) return GetDouble2Error();
   DelayOff();
@@ -117,12 +117,12 @@ double2 ReadCntMonCan36_(uchar  ibMon)
   DelayOff();
 
   bNR++;
-  Query38_RR(bNR);
+  Query39_RR(bNR);
   if (Input39() != SER_GOODCHECK) return GetDouble2Error();
   if (!ValidateSframe(bNR)) return GetDouble2Error();
   DelayOff();
 
-  Query38_DISC(); // TODO always close
+  Query39_DISC(); // TODO always close
   if (Input39() != SER_GOODCHECK) return GetDouble2Error();
   DelayOff();
 

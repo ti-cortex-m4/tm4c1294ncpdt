@@ -20,11 +20,11 @@ automatic_get_cntcurr_38*c
 
 ulong64_ QueryCntCurr38_Full(void)
 {
-  Query38_DISC();
+  Query39_DISC();
   if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
   DelayOff();
 
-  Query38_SNRM();
+  Query39_SNRM();
   if (Input39() != SER_GOODCHECK) return GetLong64Error(2);
   DelayOff();
 
@@ -32,13 +32,13 @@ ulong64_ QueryCntCurr38_Full(void)
   uchar bNR = 0;
   uchar bInvokeId = 0;
 
-  Query38_AARQ(bNS, bNR);
+  Query39_AARQ(bNS, bNR);
   if (Input39() != SER_GOODCHECK) return GetLong64Error(3);
   if (!ValidateIframe(bNS, bNR)) return GetLong64Error(4);
   DelayOff();
 
   bNR++;
-  Query38_RR(bNR);
+  Query39_RR(bNR);
   if (Input39() != SER_GOODCHECK) return GetLong64Error(5);
   if (!ValidateSframe(bNR)) return GetLong64Error(6);
   DelayOff();
@@ -53,13 +53,13 @@ ulong64_ QueryCntCurr38_Full(void)
   DelayOff();
 
   bNR++;
-  Query38_RR(bNR);
+  Query39_RR(bNR);
   if (Input39() != SER_GOODCHECK) return GetLong64Error(9);
   if (!ValidateSframe(bNR)) return GetLong64Error(10);
   DelayOff();
 
 
-  Query38_DISC();
+  Query39_DISC();
   if (Input39() != SER_GOODCHECK) return GetLong64Error(11);
   DelayOff();
 
@@ -93,7 +93,7 @@ double2 ReadCntCurr39(void)
     }
   }
 
-  Query38_DISC();
+  Query39_DISC();
   if (Input39() != SER_GOODCHECK) return GetDouble2Error();
   DelayOff();
 
