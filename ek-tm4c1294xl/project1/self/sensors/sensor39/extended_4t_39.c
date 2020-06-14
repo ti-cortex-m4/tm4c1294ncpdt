@@ -16,131 +16,91 @@ extended_4t_39.c
 #include "../../serial/ports2.h"
 #include "../../devices/devices.h"
 #include "../../digitals/digitals.h"
-#include "device38.h"
-#include "io38.h"
-#include "dff.h"
-#include "automatic_get_time_38.h"
+#include "device39.h"
+#include "time39.h"
+#include "query_engmon_39.h"
+#include "io39.h"
 #include "extended_4t_39.h"
 
 
 
-// значени€ счетчиков на начало мес€цев
-void    QueryEngMonTariff38(uchar  ibMonRel)
+ulong64_ CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
 {
-//  MonitorString("\n QueryEngMonTariff38 "); MonitorCharDec(ibMonRel);
+  Query39_DISC();
+  if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
+  DelayOff();
 
-  InitPush(0);
+  Query39_SNRM();
+  if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
+  DelayOff();
 
-  PushChar(0xC0);
-  PushChar(0x06);
+  uchar bNS = 0;
+  uchar bNR = 0;
+  uchar bInvokeId = 0;
 
-  PushAddress38();
+  Query39_AARQ(bNS, bNR);
+  if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
+  if (!ValidateIframe(bNS, bNR)) return GetLong64Error(1);
+  DelayOff();
 
-  PushChar(0x00);
-  PushChar(0x06);
-
-  PushChar(0x0B); // GET_DATA_MULTIPLE_EX
-  PushChar(0x00);
-
-  PushChar(0x09); // A+
-  PushChar(0x02);
-  PushChar(0x1E); // энерги€ по 4 тарифам
-  PushChar(ibMonRel);
-  PushChar(ibMonRel);
-
-  PushChar(0x0A); // A-
-  PushChar(0x02);
-  PushChar(0x1E);
-  PushChar(ibMonRel);
-  PushChar(ibMonRel);
-
-  PushChar(0x0B); // R+
-  PushChar(0x02);
-  PushChar(0x1E);
-  PushChar(ibMonRel);
-  PushChar(ibMonRel);
-
-  PushChar(0x0C); // R-
-  PushChar(0x02);
-  PushChar(0x1E);
-  PushChar(ibMonRel);
-  PushChar(ibMonRel);
-
-  Query38(250, 33);
-}
+  bNR++;
+  Query39_RR(bNR);
+  if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
+  if (!ValidateSframe(bNR)) return GetLong64Error(1);
+  DelayOff();
 
 
+  uchar bMonth = (ibMon+1) % 12 + 1; // TODO check all months
+  uchar bYear = (bMonth > ti.bMonth) ? ti.bYear-1 : ti.bYear;
 
-status   ReadEngMonTariff38_Full(uchar  ibMonRel, uchar  ibTariff)
-{
-  uchar r;
-  for (r=0; r<MaxRepeats(); r++)
-  {
-    QueryEngMonTariff38(ibMonRel);
+  bNS++;
+  QueryEngMon39(bNS, bNR, bInvokeId++, bMonth, bYear);
+  if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
+  if (!ValidateIframe(bNS, bNR)) return GetLong64Error(1);
+  uint64_t ddw = ReadEngMon39();
+  DelayOff();
 
-    if (Input38() == SER_GOODCHECK) break;
-    if (fKey == true) return ST_BADDIGITAL;
-  }
+  bNR++;
+  Query39_RR(bNR);
+  if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
+  if (!ValidateSframe(bNR)) return GetLong64Error(1);
+  DelayOff();
 
-  if (r == MaxRepeats()) return ST_BADDIGITAL;
-  ShowPercent(70+ibTariff);
 
+  Query39_DISC();
+  if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
+  DelayOff();
 
-  uchar* pbIn = InBuffPtr(10);
-
-  uchar i;
-  for (i=0; i<4; i++)
-  {
-    *(pbIn++);
-
-    uchar t;
-    for (t=0; t<4; t++)
-    {
-      int64_t ddw = 0;
-      pbIn = DffDecodePositive(pbIn, &ddw);
-
-      uchar bStatus = (ddw % 0x100) & 0x03;
-      ulong dw = (ddw >> 3) % 0x100000000;
-
-      if (bStatus != 0) {
-        Clear();
-        sprintf(szLo+1, "мес€ц -%u (%u) ?", ibMonRel, bStatus);
-        Delay(1000);
-        return ST_NOTPRESENTED;
-      }
-
-      if (t == ibTariff)
-      {
-        mpdwChannelsA[i] = dw;
-        mpdbChannelsC[i] = (double)mpdwChannelsA[i] / 10000;
-      }  
-    }  
-  }
-
-  return ST_OK;
+  return GetLong64(ddw, true, 0);
 }
 
 
 
 status  ReadCntMonCanTariff39(uchar  ibMonAbs, uchar  ibTariff) // на начало мес€ца
 {
-  time2 ti2 = ReadTimeCan38();
-  if (ti2.fValid == 0) return ST_BADDIGITAL;
-  time ti = ti2.tiValue;
+  Clear();
 
-
-  uchar ibMonRel = (bMONTHS+ti.bMonth-1-ibMonAbs) % bMONTHS;
-  status st = ReadEngMonTariff38_Full(ibMonRel, ibTariff);
-  if (st != ST_OK) return st;
-
-
-  uchar i;
-  for (i=0; i<4; i++)
+  uchar r;
+  for (r=0; r<MaxRepeats(); r++)
   {
-    mpdbChannelsC[i] *= mpdbTransCnt[ibDig];
-    mpboChannelsA[i] = true;
+    ulong64_ ddw2 = CntMonCanTariff39_Internal(ibMonAbs,ibTariff);
+    if (fKey == true) break;
+    if (ddw2.fValid)
+    {
+//      ShowPercent(50);
+
+      mpdwChannelsA[0] = ddw2.ddwValue % 0x100000000;
+      mpdbChannelsC[0] = ((double)mpdwChannelsA[0] / 1000) * mpdbTransCnt[ibDig];
+      mpboChannelsA[0] = true;
+
+      return ST_OK;
+    }
   }
 
-  return ST_OK;
+  Query39_DISC();
+  if (Input39() != SER_GOODCHECK) return ST_BADDIGITAL;
+  DelayOff();
+
+  return ST_BADDIGITAL;
 }
 
