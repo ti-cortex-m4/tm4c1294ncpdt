@@ -20,7 +20,9 @@ DEVICE36*C
 
 void    Query39_DISC(void)
 {
+#ifdef MONITOR_39_NAMES
   MonitorString("\n\n DISC");
+#endif
 
   InitPush(0);
 
@@ -47,7 +49,9 @@ void    Query39_DISC(void)
 
 void    Query39_SNRM(void)
 {
+#ifdef MONITOR_39_NAMES
   MonitorString("\n\n SNRM");
+#endif
 
   uint wSize = 30 + GetHdlcAddressesSize(); // 32
 
@@ -107,7 +111,9 @@ void    Query39_SNRM(void)
 // Green Book, 11.5 Encoding of the AARQ APDU
 void    Query39_AARQ(uchar  bNS, uchar  bNR)
 {
+#ifdef MONITOR_39_NAMES
   MonitorString("\n\n AARQ ");
+#endif
 
   uint wSize = 66 + GetHdlcAddressesSize(); // 0x44 68
 
@@ -205,7 +211,9 @@ void    Query39_AARQ(uchar  bNS, uchar  bNR)
 
 void    Query39_RR(uchar  bNR)
 {
+#ifdef MONITOR_39_NAMES
   MonitorString("\n\n RR ");
+#endif
 
   uint wSize = 5 + GetHdlcAddressesSize();
 
