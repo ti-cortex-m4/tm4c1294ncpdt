@@ -48,6 +48,17 @@ void    InitPush(uint  iwPush)
 }
 
 
+uint    GetPush(void) {
+  switch (ibPort) {
+    case 0: return iwPush0;
+    case 1: return iwPush1;
+    case 2: return iwPush2;
+    case 3: return iwPush3;
+    default: ASSERT(false); return 0;
+  }
+}
+
+
 void    InitPushCRC(void) {
 	InitPush(5);
 }

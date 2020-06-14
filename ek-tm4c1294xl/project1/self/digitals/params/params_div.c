@@ -357,6 +357,22 @@ void    MakeParamDiv(uint  iwPrm)
       default: fl = 1; break;
     }
   }
+  else if (GetParamDevice(iwPrm) == 38)
+  {
+    switch (GetParamLine(iwPrm))
+    {
+      case PAR_U  :
+      case PAR_I  :
+      case PAR_P  :
+      case PAR_Q  :
+      case PAR_S  :
+      case PAR_F  :
+      case PAR_C  :
+        mpboEnblParams[iwPrm] = false; break;
+
+      default: fl = 1; break;
+    }
+  }
   else if (GetParamDevice(iwPrm) == 39)
   {
     switch (GetParamLine(iwPrm))
@@ -388,8 +404,6 @@ void    MakeParamDiv(uint  iwPrm)
       case PAR_F3 :
           mpboEnblParams[iwPrm] = false;
           break;
-
-      default: fl = 1; break;
     }
   }
 

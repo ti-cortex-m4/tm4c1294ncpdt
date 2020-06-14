@@ -23,6 +23,7 @@ KEY_SEARCH!C
 #include "../../sensors/device_b.h"
 #include "../../sensors/sensor3/device_c.h"
 #include "../../sensors/sensor34/device34.h"
+#include "../../sensors/sensor38/automatic38.h"
 
 
 
@@ -359,6 +360,10 @@ void    key_SearchBySpeed(void)
 
 #ifndef SKIP_34
             case 34:  if (ChangeSpeed34() == 1) bRes = 0xEE;  break;
+#endif
+
+#ifndef SKIP_38
+            case 38:  if (ChangeSpeed38() == 1) bRes = 0xEE;  break;
 #endif
             default:  Error();  return;
           }
