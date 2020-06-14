@@ -9,8 +9,8 @@ extended_4t_39.c
 #include "../../memory/mem_factors.h"
 #include "../../display/display.h"
 #include "../../keyboard/keyboard.h"
-//#include "../../time/delay.h"
 #include "../../time/timedate.h"
+#include "../../time/rtc.h"
 #include "../../serial/monitor.h"
 #include "../../serial/monitor_settings.h"
 #include "../../serial/ports.h"
@@ -21,7 +21,9 @@ extended_4t_39.c
 #include "device39.h"
 #include "time39.h"
 #include "query_engmon_39.h"
+#include "query_params_39.h"
 #include "io39.h"
+#include "hdlc.h"
 #include "extended_4t_39.h"
 
 
@@ -32,6 +34,7 @@ static const obis_t obisEngTariff[4] = {
   {1, 0, 15, 8, 3, 255},
   {1, 0, 15, 8, 4, 255},
 };
+
 
 
 // TODO scale
@@ -86,13 +89,17 @@ status  CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
   if (Input39() != SER_GOODCHECK) return ST_BADDIGITAL;
   if (!ValidateIframe(bNS, bNR)) return ST_BADDIGITAL;
 
-  bool present = IsEngMonPresent39();
-  bool absent = IsEngMonAbsent39();
+  bool present = (IsEngMonPresent39() == 0);
+  bool absent = (IsEngMonAbsent39() == 0);
+  InitPop(17 + GetHdlcAddressesSize());
   ulong64_ ddw2 = ReadUnsignedValueDLSM();
+
+#ifdef  MONITOR_39
   MonitorString("\n present="); MonitorBool(present);
   MonitorString("\n absent="); MonitorBool(absent);
   MonitorString("\n value.valid="); MonitorBool(ddw2.fValid);
   MonitorString("\n value.value="); MonitorLongDec(ddw2.ddwValue);
+#endif
   //DelayOff();
 
   bNR++;
@@ -151,17 +158,14 @@ double2 TestCntMonCanTariff39(void)
 
   MonitorOpen(0);
 
-  ReadCntMonCanTariff39(5, 0);
-  ReadCntMonCanTariff39(4, 0);
-  ReadCntMonCanTariff39(3, 0);
-  ReadCntMonCanTariff39(2, 0);
-  ReadCntMonCanTariff39(1, 0);
-  ReadCntMonCanTariff39(0, 0);
-  ReadCntMonCanTariff39(11, 0);
-  ReadCntMonCanTariff39(10, 0);
-  ReadCntMonCanTariff39(9, 0);
-  ReadCntMonCanTariff39(8, 0);
-  ReadCntMonCanTariff39(7, 0);
+  uchar bMonth = (*GetCurrTimeDate()).bMonth;
+  uchar i;
+  for (i=0; i<10; i++) {
+    uchar ibMonAbs = (12 + bMonth - 1 - i) % 12;
+    MonitorString("\n ibMonAbs="); MonitorCharDec(ibMonAbs);
+    status s = ReadCntMonCanTariff39(ibMonAbs, 0);
+    MonitorString("\n status="); MonitorCharDec(s);
+  }
 
   return GetDouble2(0, true);
 }
