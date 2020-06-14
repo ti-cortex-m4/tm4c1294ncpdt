@@ -7,7 +7,7 @@ automatic_get_time_38*c
 #include "../../main.h"
 #include "../../display/display.h"
 #include "../../keyboard/keyboard.h"
-#include "../../time/delay.h"
+//#include "../../time/delay.h"
 #include "../../serial/ports.h"
 #include "../../digitals/digitals.h"
 #include "device39.h"
@@ -21,11 +21,11 @@ time2   QueryTime38_Full(void)
 {
   Query38_DISC();
   if (Input39() != SER_GOODCHECK) return GetTime2Error();
-  DelayOff();
+//  DelayOff();
 
   Query38_SNRM();
   if (Input39() != SER_GOODCHECK) return GetTime2Error();
-  DelayOff();
+//  DelayOff();
 
   uchar bNS = 0;
   uchar bNR = 0;
@@ -34,13 +34,13 @@ time2   QueryTime38_Full(void)
   Query38_AARQ(bNS, bNR);
   if (Input39() != SER_GOODCHECK) return GetTime2Error();
   if (!ValidateIframe(bNS, bNR)) return GetTime2Error();
-  DelayOff();
+//  DelayOff();
 
   bNR++;
   Query38_RR(bNR);
   if (Input39() != SER_GOODCHECK) return GetTime2Error();
   if (!ValidateSframe(bNR)) return GetTime2Error();
-  DelayOff();
+//  DelayOff();
 
 
   bNS++;
@@ -49,18 +49,18 @@ time2   QueryTime38_Full(void)
   if (Input39() != SER_GOODCHECK) return GetTime2Error();
   if (!ValidateIframe(bNS, bNR)) return GetTime2Error();
   time ti = ReadTime39();
-  DelayOff();
+//  DelayOff();
 
   bNR++;
   Query38_RR(bNR);
   if (Input39() != SER_GOODCHECK) return GetTime2Error();
   if (!ValidateSframe(bNR)) return GetTime2Error();
-  DelayOff();
+//  DelayOff();
 
 
   Query38_DISC();
   if (Input39() != SER_GOODCHECK) return GetTime2Error();
-  DelayOff();
+//  DelayOff();
 
   return GetTime2(ti, true);
 }
@@ -90,7 +90,7 @@ time2   ReadTimeCan39(void)
 
   Query38_DISC();
   if (Input39() != SER_GOODCHECK) return GetTime2Error();
-  DelayOff();
+//  DelayOff();
 
   return GetTime2Error();
 }
@@ -112,7 +112,7 @@ time2   ReadTimeCan39_Short(void)
 
   Query38_DISC();
   if (Input39() != SER_GOODCHECK) return GetTime2Error();
-  DelayOff();
+//  DelayOff();
 
   return GetTime2Error();
 }
