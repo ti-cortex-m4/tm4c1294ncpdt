@@ -283,8 +283,8 @@ void    DevicesPostInput(void)
     }
 #endif
 
-#ifndef SKIP_38
-    else if (diCurr.bDevice == 38)
+#ifndef SKIP_39
+    else if (diCurr.bDevice == 39)
     {
       if (ValidateInputHDLC())
       {
