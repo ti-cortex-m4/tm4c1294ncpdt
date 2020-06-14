@@ -34,15 +34,15 @@ static const obis_t obisEngTariff[4] = {
 };
 
 
-// TODO not present
-ulong64_ CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
+// TODO scale
+status  CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
 {
   Query39_DISC();
-  if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
+  if (Input39() != SER_GOODCHECK) return ST_BADDIGITAL;
   //DelayOff();
 
   Query39_SNRM();
-  if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
+  if (Input39() != SER_GOODCHECK) return ST_BADDIGITAL;
   //DelayOff();
 
   uchar bNS = 0;
@@ -50,29 +50,29 @@ ulong64_ CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
   uchar bInvokeId = 0;
 
   Query39_AARQ(bNS, bNR);
-  if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
-  if (!ValidateIframe(bNS, bNR)) return GetLong64Error(1);
+  if (Input39() != SER_GOODCHECK) return ST_BADDIGITAL;
+  if (!ValidateIframe(bNS, bNR)) return ST_BADDIGITAL;
   //DelayOff();
 
   bNR++;
   Query39_RR(bNR);
-  if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
-  if (!ValidateSframe(bNR)) return GetLong64Error(1);
+  if (Input39() != SER_GOODCHECK) return ST_BADDIGITAL;
+  if (!ValidateSframe(bNR)) return ST_BADDIGITAL;
   //DelayOff();
 
 
   bNS++;
   bInvokeId++;
   QueryTime39(bNS, bNR, bInvokeId);
-  if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
-  if (!ValidateIframe(bNS, bNR)) return GetLong64Error(1);
+  if (Input39() != SER_GOODCHECK) return ST_BADDIGITAL;
+  if (!ValidateIframe(bNS, bNR)) return ST_BADDIGITAL;
   time ti = ReadTime39();
   //DelayOff();
 
   bNR++;
   Query39_RR(bNR);
-  if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
-  if (!ValidateSframe(bNR)) return GetLong64Error(1);
+  if (Input39() != SER_GOODCHECK) return ST_BADDIGITAL;
+  if (!ValidateSframe(bNR)) return ST_BADDIGITAL;
   //DelayOff();
 
 
@@ -83,24 +83,40 @@ ulong64_ CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
   ASSERT(sizeof(obisEngTariff)/sizeof(obisEngTariff[0]) == 4);
   ASSERT(ibTariff < 4);
   QueryEngMon39(obisEngTariff[ibTariff], bNS, bNR, bInvokeId++, bMonth, bYear);
-  if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
-  if (!ValidateIframe(bNS, bNR)) return GetLong64Error(1);
-  uint64_t ddw = ReadEngMon39();
-  MonitorString("\n value="); MonitorLongDec(ddw % 0x100000000);
+  if (Input39() != SER_GOODCHECK) return ST_BADDIGITAL;
+  if (!ValidateIframe(bNS, bNR)) return ST_BADDIGITAL;
+
+  bool present = IsEngMonPresent39();
+  bool absent = IsEngMonAbsent39();
+  ulong64_ ddw2 = ReadUnsignedValueDLSM();
+  MonitorString("\n present="); MonitorBool(present);
+  MonitorString("\n absent="); MonitorBool(absent);
+  MonitorString("\n value.valid="); MonitorBool(ddw2.fValid);
+  MonitorString("\n value.value="); MonitorLongDec(ddw2.ddwValue);
   //DelayOff();
 
   bNR++;
   Query39_RR(bNR);
-  if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
-  if (!ValidateSframe(bNR)) return GetLong64Error(1);
+  if (Input39() != SER_GOODCHECK) return ST_BADDIGITAL;
+  if (!ValidateSframe(bNR)) return ST_BADDIGITAL;
   //DelayOff();
 
 
   Query39_DISC();
-  if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
+  if (Input39() != SER_GOODCHECK) return ST_BADDIGITAL;
   //DelayOff();
 
-  return GetLong64(ddw, true, 0);
+  if (present) {
+    mpdbChannelsC[0] = ((double)mpdwChannelsA[0] / 1000) * mpdbTransCnt[ibDig];
+    mpboChannelsA[0] = true;
+    return ST_OK;
+  }
+
+  if (absent) {
+    return ST_NOTPRESENTED;
+  }
+
+  return ST_BADDIGITAL;
 }
 
 
@@ -112,18 +128,9 @@ status  ReadCntMonCanTariff39(uchar  ibMonAbs, uchar  ibTariff) // на начало мес
   uchar r;
   for (r=0; r<MaxRepeats(); r++)
   {
-    ulong64_ ddw2 = CntMonCanTariff39_Internal(ibMonAbs, ibTariff);
+    status s = CntMonCanTariff39_Internal(ibMonAbs, ibTariff);
     if (fKey == true) break;
-    if (ddw2.fValid)
-    {
-//      ShowPercent(50);
-
-      mpdwChannelsA[0] = ddw2.ddwValue % 0x100000000;
-      mpdbChannelsC[0] = ((double)mpdwChannelsA[0] / 1000) * mpdbTransCnt[ibDig];
-      mpboChannelsA[0] = true;
-
-      return ST_OK;
-    }
+    if (s == ST_OK) return ST_OK;
   }
 
   Query39_DISC();
