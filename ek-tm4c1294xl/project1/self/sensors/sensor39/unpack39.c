@@ -78,7 +78,7 @@ void    Decompress39(void)
     return;
   }
 
-//  MonitorIn();
+  MonitorIn();
 
   mpSerial[ibPort] = SER_POSTINPUT_MASTER;
 }
