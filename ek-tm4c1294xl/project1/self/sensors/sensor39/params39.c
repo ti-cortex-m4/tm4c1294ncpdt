@@ -59,7 +59,7 @@ double2 ReadValue39(const obis_t  obis, runner39*  pr)
   if (!ddw2.fValid) return GetDouble2Error();
 
   (*pr).bNR++;
-  Query38_RR((*pr).bNR);
+  Query39_RR((*pr).bNR);
   if (Input39() != SER_GOODCHECK) return GetDouble2Error();
   if (!ValidateSframe((*pr).bNR)) return GetDouble2Error();
 
@@ -79,7 +79,7 @@ double2 ReadScaler39(const obis_t  obis, runner39*  pr)
   if (!sc2.fValid) return GetDouble2Error();
 
   (*pr).bNR++;
-  Query38_RR((*pr).bNR);
+  Query39_RR((*pr).bNR);
   if (Input39() != SER_GOODCHECK) return GetDouble2Error();
   if (!ValidateSframe((*pr).bNR)) return GetDouble2Error();
 
@@ -154,7 +154,7 @@ float2  ReadParam39_(void)
   flQminus = fl2.flValue;
 
 
-  Query38_DISC();
+  Query39_DISC();
   if (Input39() != SER_GOODCHECK) return GetFloat2Error();
 
   return GetFloat2(-1, true);

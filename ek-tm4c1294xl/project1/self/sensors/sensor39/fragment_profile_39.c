@@ -37,14 +37,14 @@ uchar   FragmentProfile39(runner39  *pr, time  ti1, time  ti2)
 
   while (!LastSegmentDMLS()) {
     (*pr).bNR++;
-    Query38_RR((*pr).bNR);
+    Query39_RR((*pr).bNR);
     if (Input39() != SER_GOODCHECK) return 2;
     AddBuffRecord39(8, IndexInBuff()-8-3);
     DelayOff();
   }
 
   (*pr).bNR++;
-  Query38_RR((*pr).bNR);
+  Query39_RR((*pr).bNR);
   if (Input39() != SER_GOODCHECK) return 3;
   DelayOff();
 
@@ -68,14 +68,14 @@ uchar   FragmentProfile39(runner39  *pr, time  ti1, time  ti2)
 
     while (!LastSegmentDMLS()) {
       (*pr).bNR++;
-      Query38_RR((*pr).bNR);
+      Query39_RR((*pr).bNR);
       if (Input39() != SER_GOODCHECK) return 5;
       AddBuffRecord39(8, IndexInBuff()-8-3);
       DelayOff();
     }
 
     (*pr).bNR++;
-    Query38_RR((*pr).bNR);
+    Query39_RR((*pr).bNR);
     if (Input39() != SER_GOODCHECK) return 6;
     DelayOff();
   }

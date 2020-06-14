@@ -30,11 +30,11 @@ schar   y(void)
 
 
 
-  Query38_DISC();
+  Query39_DISC();
   if (Input39() != SER_GOODCHECK) return -15;//GetDouble2Error();
   DelayOff();
 
-  Query38_SNRM();
+  Query39_SNRM();
   if (Input39() != SER_GOODCHECK) return -16;//GetDouble2Error();
   DelayOff();
 
@@ -42,13 +42,13 @@ schar   y(void)
   uchar bNR = 0;
   uchar bInvokeId = 0;
 
-  Query38_AARQ(bNS, bNR);
+  Query39_AARQ(bNS, bNR);
   if (Input39() != SER_GOODCHECK) return -17;//GetDouble2Error();
 //  if (!ValidateIframe(bNS, bNR)) return GetDouble2Error();
   DelayOff();
 
   bNR++;
-  Query38_RR(bNR);
+  Query39_RR(bNR);
   if (Input39() != SER_GOODCHECK) return -18;//GetDouble2Error();
 //  if (!ValidateSframe(bNR)) return GetDouble2Error();
   DelayOff();
@@ -89,14 +89,14 @@ schar   y(void)
 
   while (!LastSegmentDMLS()) {
     bNR++;
-    Query38_RR(bNR);
+    Query39_RR(bNR);
     if (Input39() != SER_GOODCHECK) return -20;
     AddBuffRecord39(8, IndexInBuff()-8-3);
     DelayOff();
   }
 
   bNR++;
-  Query38_RR(bNR);
+  Query39_RR(bNR);
   if (Input39() != SER_GOODCHECK) return -21;
   DelayOff();
 
@@ -120,14 +120,14 @@ schar   y(void)
 
     while (!LastSegmentDMLS()) {
       bNR++;
-      Query38_RR(bNR);
+      Query39_RR(bNR);
       if (Input39() != SER_GOODCHECK) return -23;
       AddBuffRecord39(8, IndexInBuff()-8-3);
       DelayOff();
     }
 
     bNR++;
-    Query38_RR(bNR);
+    Query39_RR(bNR);
     if (Input39() != SER_GOODCHECK) return -24;
     DelayOff();
   }
