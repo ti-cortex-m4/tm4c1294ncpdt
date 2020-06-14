@@ -60,7 +60,7 @@ query_engmon_39*c
   </GetRequestNormal>
 </GetRequest>
 */
-void    QueryEngMon39(uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  bMonth, uchar  bYear)
+void    QueryEngMon39(const obis_t  obis, uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  bMonth, uchar  bYear)
 {
 #ifdef MONITOR_39  
   MonitorString("\n\n QueryEngMon39 "); MonitorCharDec(bMonth); MonitorString(" "); MonitorCharDec(bYear);
@@ -150,12 +150,7 @@ void    QueryEngMon39(uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  bMonth, u
 
   PushChar(0x09); // <OctetString Value="01000F0800FF" />
   PushChar(0x06);
-  PushChar(0x01); // <!--1.0.15.8.0.255-->
-  PushChar(0x00);
-  PushChar(0x0F);
-  PushChar(0x08);
-  PushChar(0x00);
-  PushChar(0xFF);
+  PushOBIS_DLMS(obis); // <!--1.0.15.8.0.255-->
 
   PushChar(0x0F); // <Int8 Value="02" />
   PushChar(0x02);

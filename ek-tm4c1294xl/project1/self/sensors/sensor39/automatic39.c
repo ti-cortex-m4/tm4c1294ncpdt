@@ -78,7 +78,7 @@ bool    QueryEngMon36_Full(uchar  bTime, uchar  bPercent)
 */
 
 
-
+/*
 double2 ReadCntMonCan36_(uchar  ibMon)
 {
   Query39_DISC();
@@ -127,7 +127,7 @@ double2 ReadCntMonCan36_(uchar  ibMon)
   DelayOff();
 
   return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
-/*
+/ *
   Clear();
 
   if (QueryConfig36_Full(25) == 0) return GetDouble2Error();
@@ -149,6 +149,6 @@ double2 ReadCntMonCan36_(uchar  ibMon)
   mpboChannelsA[0] = true;
 
   return GetDouble2(mpdbChannelsC[0], true);
-*/
+* /
 }
-
+*/

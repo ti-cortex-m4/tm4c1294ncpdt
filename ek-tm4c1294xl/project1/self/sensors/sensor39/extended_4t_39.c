@@ -24,7 +24,7 @@ extended_4t_39.c
 
 
 
-static const obis_t obisEngAbs  = {1, 0, 32, 7, 0, 255};
+static const obis_t obisEngAbs_  = {1, 0, 15, 8, 0, 255};
 
 
 
@@ -73,7 +73,7 @@ ulong64_ CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
   uchar bYear = (bMonth > ti.bMonth) ? ti.bYear-1 : ti.bYear;
 
   bNS++;
-  QueryEngMon39(bNS, bNR, bInvokeId++, bMonth, bYear);
+  QueryEngMon39(obisEngAbs_, bNS, bNR, bInvokeId++, bMonth, bYear);
   if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
   if (!ValidateIframe(bNS, bNR)) return GetLong64Error(1);
   uint64_t ddw = ReadEngMon39();
