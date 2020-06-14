@@ -66,7 +66,7 @@ ulong64_ QueryCntMon38_Full(uchar  ibMon)
   uint64_t ddw;
   if (ti.bMonth != ibMon+1)
   {
-    uchar bMonth = (ibMon+1) % 12 + 1; // TODO check all months
+    uchar bMonth = (ibMon+1) % 12 + 1;
     uchar bYear = (bMonth > ti.bMonth) ? ti.bYear-1 : ti.bYear;
 
     bNS++;

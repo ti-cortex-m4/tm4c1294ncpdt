@@ -24,6 +24,10 @@ extended_4t_39.c
 
 
 
+static const obis_t obisEngAbs  = {1, 0, 32, 7, 0, 255};
+
+
+
 ulong64_ CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
 {
   Query39_DISC();
@@ -50,7 +54,22 @@ ulong64_ CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
   DelayOff();
 
 
-  uchar bMonth = (ibMon+1) % 12 + 1; // TODO check all months
+  bNS++;
+  bInvokeId++;
+  QueryTime39(bNS, bNR, bInvokeId);
+  if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
+  if (!ValidateIframe(bNS, bNR)) return GetLong64Error(1);
+  time ti = ReadTime39();
+  DelayOff();
+
+  bNR++;
+  Query39_RR(bNR);
+  if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
+  if (!ValidateSframe(bNR)) return GetLong64Error(1);
+  DelayOff();
+
+
+  uchar bMonth = ibMon + 1;
   uchar bYear = (bMonth > ti.bMonth) ? ti.bYear-1 : ti.bYear;
 
   bNS++;
@@ -83,7 +102,7 @@ status  ReadCntMonCanTariff39(uchar  ibMonAbs, uchar  ibTariff) // на начало мес
   uchar r;
   for (r=0; r<MaxRepeats(); r++)
   {
-    ulong64_ ddw2 = CntMonCanTariff39_Internal(ibMonAbs,ibTariff);
+    ulong64_ ddw2 = CntMonCanTariff39_Internal(ibMonAbs, ibTariff);
     if (fKey == true) break;
     if (ddw2.fValid)
     {
