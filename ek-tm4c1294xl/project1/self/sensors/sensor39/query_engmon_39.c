@@ -194,3 +194,20 @@ uint64_t ReadEngMon39(void)
   InitPop(18 + GetHdlcAddressesSize());
   return PopLongBig()*0x100000000 + PopLongBig();
 }
+
+/*
+7e a0 1d 03 03 74 32 9d e6 e7 00 c4 01 81  00 01 01 02 01 15  00 00 00 00 00 00 0f 31  1d 75 7e
+00 ok
+01 array
+01 array size
+02 structure
+01 structure size
+15 [21] Unsigned64
+value=3889
+
+7e a0 12 03 03 74 cb 2f e6 e7 00 c4 01 81  00 01 00  3d ce 7e
+00 ok
+01 array
+00 array size
+no value
+*/
