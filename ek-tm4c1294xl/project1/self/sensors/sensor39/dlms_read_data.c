@@ -13,7 +13,7 @@ Blue Book: 4.1.5 Common data types
 #include "include39.h"
 // #include "crc16x25.h"
 // #include "io39.h"
-// #include "hdlc_address.h"
+ #include "hdlc_address.h"
 // #include "dlms_push.h"
 #include "dlms_read_data.h"
 
@@ -57,7 +57,7 @@ ulong64_ PopUnsignedValueDLSM(void)
 }
 
 
-long64_  PopSignedValueDLSM(void)
+slong64_ PopSignedValueDLSM(void)
 {
   uchar bDataType = PopChar();
 #ifdef MONITOR_39  
@@ -86,7 +86,7 @@ long64_  PopSignedValueDLSM(void)
   }
 
   // error(unknown_data_type, bDataType)
-  return GetULong64Error(1);
+  return GetSLong64Error(1);
 }
 
 

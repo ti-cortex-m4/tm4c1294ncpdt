@@ -25,6 +25,7 @@ extended_4t_39.c
 #include "fragment_open_39.h"
 #include "io39.h"
 #include "hdlc_address.h"
+#include "dlms_read_data.h"
 #include "dlms_read_register.h"
 #include "extended_4t_39.h"
 
@@ -80,7 +81,7 @@ status  CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
   bool present = (IsEngMonPresent39() == 0);
   bool absent = (IsEngMonAbsent39() == 0);
 
-  ulong64_ ddw2 = GetULong64Error(-1, false, 0);
+  ulong64_ ddw2 = GetULong64Error(0);
   if (present) {
     InitPop(17 + GetHdlcAddressesSize());
     ulong64_ ddw2 = PopUnsignedValueDLSM();
