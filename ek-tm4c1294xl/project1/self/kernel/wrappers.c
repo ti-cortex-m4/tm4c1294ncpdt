@@ -45,7 +45,7 @@ ulong2  GetLong2Error(void)
 
 
 
-ulong64_ GetLong64(uint64_t  ddwValue, bool  fValid, uchar  bError)
+ulong64_ GetULong64(uint64_t  ddwValue, bool  fValid, uchar  bError)
 {
   ulong64_ ddw2;
 
@@ -57,14 +57,14 @@ ulong64_ GetLong64(uint64_t  ddwValue, bool  fValid, uchar  bError)
 }
 
 
-ulong64_ GetLong64Error(uchar  bError)
+ulong64_ GetULong64Error(uchar  bError)
 {
-  return GetLong64(MAX_LONGLONG, false, bError);
+  return GetULong64(MAX_LONGLONG, false, bError);
 }
 
 
 
-slong64_ GetSignedLong64(int64_t  ddwValue, bool  fValid, uchar  bError)
+slong64_ GetSLong64(int64_t  ddwValue, bool  fValid, uchar  bError)
 {
   slong64_ ddw2;
 
@@ -76,9 +76,9 @@ slong64_ GetSignedLong64(int64_t  ddwValue, bool  fValid, uchar  bError)
 }
 
 
-slong64_ GetSignedLong64Error(uchar  bError)
+slong64_ GetSLong64Error(uchar  bError)
 {
-  return GetSignedLong64(-1, false, bError);
+  return GetSLong64(-1, false, bError);
 }
 
 

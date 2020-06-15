@@ -30,24 +30,24 @@ slong64_ ReadRegisterScalerDLMS(void)
 #endif
  if (bDataAccessResult != 0) {
    // TODO error(no_success, bDataAccessResult)
-   return GetLong64Error(1);
+   return GetULong64Error(1);
  }
 
-  if (PopChar() != 2) return GetLong64Error(2); // !structure
-  if (PopChar() != 2) return GetLong64Error(3); // structure size != 1
+  if (PopChar() != 2) return GetULong64Error(2); // !structure
+  if (PopChar() != 2) return GetULong64Error(3); // structure size != 1
 
   slong64_ scaler = PopSignedValueDLSM();
-  if (!scaler.fValid) return GetLong64Error(4);
+  if (!scaler.fValid) return GetULong64Error(4);
 
   ulong64_ unit = PopUnsignedValueDLSM();
-  if (!unit.fValid) return GetLong64Error(5);
+  if (!unit.fValid) return GetULong64Error(5);
 
 #ifdef MONITOR_39
   MonitorString("\n Scaler="); MonitorCharHex(scaler.ddwValue % 0x100);
   MonitorString("\n Unit="); MonitorCharDec(unit.ddwValue % 0x100);
 #endif
 
-  return GetSignedLong64(scaler, true, 0);
+  return GetSLong64(scaler, true, 0);
 }
 
 
