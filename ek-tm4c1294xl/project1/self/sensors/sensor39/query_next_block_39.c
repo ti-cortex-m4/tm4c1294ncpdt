@@ -9,7 +9,7 @@ query_next_block_39.c
 #include "../../serial/monitor.h"
 #include "crc16x25.h"
 #include "io39.h"
-#include "hdlc.h"
+#include "hdlc_address.h"
 #include "dlms_push.h"
 #include "query_next_block_39.h"
 

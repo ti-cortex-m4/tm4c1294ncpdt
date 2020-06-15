@@ -8,7 +8,7 @@ hdlc_monitor.c
 #include "../../serial/ports.h"
 #include "../../serial/monitor.h"
 #include "include39.h"
-#include "hdlc.h"
+#include "hdlc_address.h"
 #include "crc16x25.h"
 #include "hdlc_monitor.h"
 

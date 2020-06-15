@@ -24,7 +24,7 @@ extended_4t_39.c
 #include "query_params_39.h"
 #include "fragment_open_39.h"
 #include "io39.h"
-#include "hdlc.h"
+#include "hdlc_address.h"
 #include "hdlc_read_register.h"
 #include "extended_4t_39.h"
 
@@ -89,8 +89,8 @@ status  CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
 #ifdef MONITOR_39
   MonitorString("\n present="); MonitorBool(present);
   MonitorString("\n absent="); MonitorBool(absent);
-  MonitorString("\n value.valid="); MonitorBool(ddw2.fValid);
-  MonitorString("\n value.value="); MonitorLongDec(ddw2.ddwValue);
+  MonitorString("\n valid="); MonitorBool(ddw2.fValid);
+  MonitorString("\n value="); MonitorLongDec(ddw2.ddwValue);
 #endif
   //DelayOff();
 
@@ -159,12 +159,18 @@ double2 TestCntMonCanTariff39(void)
   MonitorOpen(0);
 
   uchar bMonth = (*GetCurrTimeDate()).bMonth;
-  uchar i;
-  for (i=0; i<1/*0*/; i++) {
-    uchar ibMonthAbs = (12 + bMonth - 1 - i) % 12;
-    MonitorString("\n\n ibMonthAbs="); MonitorCharDec(ibMonthAbs);
-    status s = ReadCntMonCanTariff39(ibMonthAbs, 0);
-    MonitorString("\n Status="); MonitorCharDec(s);
+
+  uchar m;
+  for (m=0; m<1/*0*/; m++) {
+    uchar ibMonthAbs = (12 + bMonth - 1 - m) % 12;
+    
+    uchar t;
+    for (t=0; t<1/*4*/; t++) {
+      MonitorString("\n Month="); MonitorCharDec(ibMonthAbs);
+      MonitorString(" Tariff="); MonitorCharDec(t);
+      status s = ReadCntMonCanTariff39(ibMonthAbs, t);
+      MonitorString("\n Status="); MonitorCharDec(s);
+    }
   }
 
   return GetDouble2(0, true);

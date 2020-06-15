@@ -7,7 +7,7 @@ hdlc*c
 #include "../../main.h"
 #include "../../memory/mem_settings.h"
 #include "../../serial/ports.h"
-#include "hdlc.h"
+#include "hdlc_address.h"
 
 
 
