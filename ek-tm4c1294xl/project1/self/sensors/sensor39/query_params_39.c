@@ -132,7 +132,7 @@ ulong64_ ReadUnsignedValueDLSM(void)
 }
 
 
-
+// 7e a0 16 03 03 96 3b 99 e6 e7 00 c4 01 83  00 02 02 0f 00 16 1e  ff ba 7e
 schar2  ReadRegisterScaler(void)
 {
   InitPop(16 + GetHdlcAddressesSize());
