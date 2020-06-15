@@ -877,6 +877,8 @@ typedef enum
   DEV_POSTENGABS_39C    =  0x2410,
   DEV_RR2_39C           =  0x2411,
 
+  DEV_START_39P         =  0x2420,
+
 #endif
 
   DEV_PAUSE             =  1
