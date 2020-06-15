@@ -7,7 +7,7 @@ automatic_get_cntcurr_38*c
 #include "../../main.h"
 #include "../../display/display.h"
 #include "../../keyboard/keyboard.h"
-#include "../../time/delay.h"
+// #include "../../time/delay.h"
 #include "../../serial/ports.h"
 #include "../../serial/monitor.h"
 #include "../../digitals/digitals.h"
@@ -22,11 +22,11 @@ ulong64_ QueryCntCurr38_Full(void)
 {
   Query39_DISC();
   if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
-  DelayOff();
+//  DelayOff();
 
   Query39_SNRM();
   if (Input39() != SER_GOODCHECK) return GetLong64Error(2);
-  DelayOff();
+//  DelayOff();
 
   uchar bNS = 0;
   uchar bNR = 0;
@@ -35,13 +35,13 @@ ulong64_ QueryCntCurr38_Full(void)
   Query39_AARQ(bNS, bNR);
   if (Input39() != SER_GOODCHECK) return GetLong64Error(3);
   if (!ValidateIframe(bNS, bNR)) return GetLong64Error(4);
-  DelayOff();
+//  DelayOff();
 
   bNR++;
   Query39_RR(bNR);
   if (Input39() != SER_GOODCHECK) return GetLong64Error(5);
   if (!ValidateSframe(bNR)) return GetLong64Error(6);
-  DelayOff();
+//  DelayOff();
 
 
   bNS++;
@@ -50,18 +50,18 @@ ulong64_ QueryCntCurr38_Full(void)
   if (Input39() != SER_GOODCHECK) return GetLong64Error(7);
   if (!ValidateIframe(bNS, bNR)) return GetLong64Error(8);
   uint64_t ddw = ReadEngAbs39();
-  DelayOff();
+//  DelayOff();
 
   bNR++;
   Query39_RR(bNR);
   if (Input39() != SER_GOODCHECK) return GetLong64Error(9);
   if (!ValidateSframe(bNR)) return GetLong64Error(10);
-  DelayOff();
+//  DelayOff();
 
 
   Query39_DISC();
   if (Input39() != SER_GOODCHECK) return GetLong64Error(11);
-  DelayOff();
+//  DelayOff();
 
   return GetLong64(ddw, true, 0);
 }
@@ -95,7 +95,7 @@ double2 ReadCntCurr39(void)
 
   Query39_DISC();
   if (Input39() != SER_GOODCHECK) return GetDouble2Error();
-  DelayOff();
+//  DelayOff();
 
   return GetDouble2Error();
 }

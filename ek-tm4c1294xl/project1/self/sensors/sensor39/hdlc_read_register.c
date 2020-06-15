@@ -20,7 +20,7 @@ Blue Book: 4.3.2 Register (class_id = 3, version = 0)
 
 
 
-long64_ ReadRegisterScalerDLMS(void)
+slong64_ ReadRegisterScalerDLMS(void)
 {
   InitPop(12 + GetHdlcAddressesSize());
 
@@ -36,7 +36,7 @@ long64_ ReadRegisterScalerDLMS(void)
   if (PopChar() != 2) return GetLong64Error(2); // !structure
   if (PopChar() != 2) return GetLong64Error(3); // structure size != 1
 
-  long64_ scaler = PopSignedValueDLSM();
+  slong64_ scaler = PopSignedValueDLSM();
   if (!scaler.fValid) return GetLong64Error(4);
 
   ulong64_ unit = PopUnsignedValueDLSM();
@@ -78,7 +78,7 @@ double2 ReadRegisterScaler39(const obis_t  obis, runner39*  pr)
   QueryGetRegisterScalerDLMS(obis, (*pr));
   if (Input39() != SER_GOODCHECK) return GetDouble2Error();
   if (!ValidateIframe((*pr).bNS, (*pr).bNR)) return GetDouble2Error();
-  long64_ scaler = ReadRegisterScalerDLMS();
+  slong64_ scaler = ReadRegisterScalerDLMS();
   if (!scaler.fValid) return GetDouble2Error();
 
   (*pr).bNR++;
