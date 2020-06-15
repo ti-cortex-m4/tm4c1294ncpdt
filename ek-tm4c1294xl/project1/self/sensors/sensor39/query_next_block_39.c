@@ -27,7 +27,7 @@ query_next_block_39.c
 */
 void    QueryNextBlock39(uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  bBlockNumber)
 {
-#ifdef MONITOR_39  
+#ifdef MONITOR_39_NAMES
   MonitorString("\n\n QueryNextBlock39 "); MonitorCharDec(bBlockNumber);
 #endif  
 
