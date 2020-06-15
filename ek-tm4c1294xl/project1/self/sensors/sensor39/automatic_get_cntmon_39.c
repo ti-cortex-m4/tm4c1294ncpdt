@@ -7,7 +7,7 @@ automatic_get_cntmon_38*c
 #include "../../main.h"
 #include "../../display/display.h"
 #include "../../keyboard/keyboard.h"
-#include "../../time/delay.h"
+// #include "../../time/delay.h"
 #include "../../serial/ports.h"
 #include "../../serial/monitor.h"
 #include "../../digitals/digitals.h"
@@ -30,11 +30,11 @@ ulong64_ QueryCntMon38_Full(uchar  ibMon)
 {
   Query39_DISC();
   if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
-  DelayOff();
+//  DelayOff();
 
   Query39_SNRM();
   if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
-  DelayOff();
+//  DelayOff();
 
   uchar bNS = 0;
   uchar bNR = 0;
@@ -43,13 +43,13 @@ ulong64_ QueryCntMon38_Full(uchar  ibMon)
   Query39_AARQ(bNS, bNR);
   if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
   if (!ValidateIframe(bNS, bNR)) return GetLong64Error(1);
-  DelayOff();
+//  DelayOff();
 
   bNR++;
   Query39_RR(bNR);
   if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
   if (!ValidateSframe(bNR)) return GetLong64Error(1);
-  DelayOff();
+//  DelayOff();
 
 
   bNS++;
@@ -58,13 +58,13 @@ ulong64_ QueryCntMon38_Full(uchar  ibMon)
   if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
   if (!ValidateIframe(bNS, bNR)) return GetLong64Error(1);
   time ti = ReadTime39();
-  DelayOff();
+//  DelayOff();
 
   bNR++;
   Query39_RR(bNR);
   if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
   if (!ValidateSframe(bNR)) return GetLong64Error(1);
-  DelayOff();
+//  DelayOff();
 
 
   uint64_t ddw;
@@ -78,13 +78,13 @@ ulong64_ QueryCntMon38_Full(uchar  ibMon)
     if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
     if (!ValidateIframe(bNS, bNR)) return GetLong64Error(1);
     ddw = ReadEngMon39();
-    DelayOff();
+  //  DelayOff();
 
     bNR++;
     Query39_RR(bNR);
     if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
     if (!ValidateSframe(bNR)) return GetLong64Error(1);
-    DelayOff();
+  //  DelayOff();
   }
   else
   {
@@ -112,7 +112,7 @@ ulong64_ QueryCntMon38_Full(uchar  ibMon)
     bInvokeId++;
     QueryProfile39(bNS, bNR, bInvokeId, ti1, ti2);
     if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
-    DelayOff();
+  //  DelayOff();
 
     bool fUseBlocks1 = UseBlocksDMLS();
     bool fLastBlock1 = LastBlockDMLS();
@@ -127,13 +127,13 @@ ulong64_ QueryCntMon38_Full(uchar  ibMon)
       Query39_RR(bNR);
       if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
       AddBuffRecord39(8, IndexInBuff()-8-3);
-      DelayOff();
+    //  DelayOff();
     }
 
     bNR++;
     Query39_RR(bNR);
     if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
-    DelayOff();
+  //  DelayOff();
 
 
 
@@ -151,20 +151,20 @@ ulong64_ QueryCntMon38_Full(uchar  ibMon)
       fLastBlock1 = LastBlockDMLS();
 
       AddBuffRecord39(22, IndexInBuff()-22-3);
-      DelayOff();
+    //  DelayOff();
 
       while (!LastSegmentDMLS()) {
         bNR++;
         Query39_RR(bNR);
         if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
         AddBuffRecord39(8, IndexInBuff()-8-3);
-        DelayOff();
+      //  DelayOff();
       }
 
       bNR++;
       Query39_RR(bNR);
       if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
-      DelayOff();
+    //  DelayOff();
     }
 
 
@@ -186,7 +186,7 @@ ulong64_ QueryCntMon38_Full(uchar  ibMon)
 
   Query39_DISC();
   if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
-  DelayOff();
+//  DelayOff();
 
   return GetLong64(ddw, true, 0);
 }
@@ -216,7 +216,7 @@ double2 ReadCntMonCan39(uchar  ibMon)
 
   Query39_DISC();
   if (Input39() != SER_GOODCHECK) return GetDouble2Error();
-  DelayOff();
+//  DelayOff();
 
   return GetDouble2Error();
 }
