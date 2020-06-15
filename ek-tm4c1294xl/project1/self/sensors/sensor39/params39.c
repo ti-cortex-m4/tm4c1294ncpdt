@@ -48,7 +48,7 @@ static float        flU1, flU2, flU3,
 
 
 
-float2  ReadParam39_(void)
+float2  ReadParam39_Internal(void)
 {
   runner39 r = InitRunner();
   FragmentOpen39(&r);
@@ -114,7 +114,7 @@ float2  ReadParam39(void)
 
   if (fBeginParam == false)
   {
-    if (!ReadParam39_().fValid) return GetFloat2Error();
+    if (!ReadParam39_Internal().fValid) return GetFloat2Error();
 
     fBeginParam = true;
   }
@@ -147,7 +147,7 @@ double2 TestParam39(void)
 {
   MonitorOpen(0);
 
-  ReadParam39_();
+  ReadParam39_Internal();
 
   return GetDouble2(0, true);
 }
