@@ -14,4 +14,4 @@ long64_ PopSignedValueDLSM(void);
 
 ulong64_ ReadUnsignedValueDLSM(void);
 
-schar2  ReadRegisterScaler(void);
+long64_ ReadRegisterScaler(void);

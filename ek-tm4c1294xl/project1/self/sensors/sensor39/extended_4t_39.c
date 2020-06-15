@@ -103,6 +103,7 @@ status  CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
   double2 scaler = ReadScaler39(*GetOBIS(ibTariff), &r);
   if (!scaler.fValid) return ST_BADDIGITAL;
   double k = scaler.dbValue;
+  MonitorString("\n scaler="); MonitorDouble6(k);
 
 
   Query39_DISC();
