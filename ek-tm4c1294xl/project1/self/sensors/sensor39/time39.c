@@ -12,7 +12,7 @@ time39.c
 #include "include39.h"
 #include "crc16x25.h"
 #include "io39.h"
-#include "hdlc.h"
+#include "hdlc_address.h"
 #include "dlms_push.h"
 #include "time39.h"
 

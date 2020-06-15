@@ -13,14 +13,12 @@ query_params_39.c
 #include "include39.h"
 #include "crc16x25.h"
 #include "io39.h"
-#include "hdlc.h"
+#include "hdlc_address.h"
 #include "dlms_push.h"
 #include "query_params_39.h"
 
 
 
-// class 3, attribute 2: value
-// class 3, attribute 3: scaler_unit
 void    QueryGetRequestDLMS(const obis_t  obis, uchar  bClass, uchar  bAttribute, runner39  r)
 {
   uint wSize = 23 + GetHdlcAddressesSize(); // 0x19 25
@@ -66,10 +64,10 @@ void    QueryGetRequestDLMS(const obis_t  obis, uchar  bClass, uchar  bAttribute
 
 void    QueryGetRegisterValueDLMS(const obis_t  obis, runner39  r)
 {
-  QueryGetRequestDLMS(obis, 3, 2, r);
+  QueryGetRequestDLMS(obis, 3, 2, r); // class 3, attribute 2: value
 }
 
 void    QueryGetRegisterScalerDLMS(const obis_t  obis, runner39  r)
 {
-  QueryGetRequestDLMS(obis, 3, 3, r);
+  QueryGetRequestDLMS(obis, 3, 3, r); // class 3, attribute 3: scaler_unit
 }
