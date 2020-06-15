@@ -19,11 +19,11 @@ current39*c
 
 
 
-uchar                   bNS;
-uchar                   bNR;
-uchar                   bInvokeId;
+static uchar            bNS;
+static uchar            bNR;
+static uchar            bInvokeId;
 
-ulong                   dwCurrent;
+static ulong            dwCurrent;
 
 
 
