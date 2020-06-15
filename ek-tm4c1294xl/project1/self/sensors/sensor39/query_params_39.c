@@ -87,7 +87,7 @@ uint    ReadType18ULong16(void)
 
 
 
-// The Blue Book: 4.3.2 Register (class_id = 3, version = 0)
+// The 
 /*
 schar   ReadScalerUnitDLMS(bool*  pfValid) {
 
