@@ -84,7 +84,7 @@ status  CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
   ulong64_ ddw2 = GetULong64Error(0);
   if (present) {
     InitPop(17 + GetHdlcAddressesSize());
-    ulong64_ ddw2 = PopUnsignedValueDLSM();
+    ddw2 = PopUnsignedValueDLSM();
   }
 
 #ifdef MONITOR_39
@@ -105,7 +105,7 @@ status  CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
   double2 scaler = ReadRegisterScaler39(*GetOBIS(ibTariff), &r);
   if (!scaler.fValid) return ST_BADDIGITAL;
   double dbScaler = scaler.dbValue;
-  MonitorString("\n scaler="); MonitorDouble6(dbScaler);
+//  MonitorString("\n scaler="); MonitorDouble6(dbScaler);
 
 
   Query39_DISC();
@@ -113,8 +113,11 @@ status  CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
   //DelayOff();
 
   if (present) {
-    mpdbChannelsC[0] = ((double)ddw2.ddwValue / 1000) * mpdbTransCnt[ibDig];
+    mpdbChannelsC[0] = (dbScaler * ddw2.ddwValue / 1000) * mpdbTransCnt[ibDig];
     mpboChannelsA[0] = true;
+#ifdef MONITOR_39
+    MonitorString("\n result="); MonitorDouble6(mpdbChannelsC[0]);
+#endif
     return ST_OK;
   }
 
@@ -154,23 +157,23 @@ status  ReadCntMonCanTariff39(uchar  ibMonAbs, uchar  ibTariff) // на начало мес
 
 double2 TestCntMonCanTariff39(void)
 {
-//  fMonitorLogBasic = false;
-//  fMonitorLogHex = false;
+  fMonitorLogBasic = false;
+  fMonitorLogHex = false;
 
   MonitorOpen(0);
 
   uchar bMonth = (*GetCurrTimeDate()).bMonth;
 
   uchar m;
-  for (m=0; m<1/*0*/; m++) {
+  for (m=0; m<10; m++) {
     uchar ibMonthAbs = (12 + bMonth - 1 - m) % 12;
     
     uchar t;
     for (t=0; t<1/*4*/; t++) {
-      MonitorString("\n Month="); MonitorCharDec(ibMonthAbs);
-      MonitorString(" Tariff="); MonitorCharDec(t);
+      MonitorString("\n\n month="); MonitorCharDec(ibMonthAbs);
+      MonitorString(" tariff="); MonitorCharDec(t);
       status s = ReadCntMonCanTariff39(ibMonthAbs, t);
-      MonitorString("\n Status="); MonitorCharDec(s);
+      MonitorString("\n status="); MonitorCharDec(s);
     }
   }
 
