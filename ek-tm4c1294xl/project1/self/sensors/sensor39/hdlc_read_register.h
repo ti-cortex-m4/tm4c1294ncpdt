@@ -1,11 +1,8 @@
 
 /*------------------------------------------------------------------------------
-hdlc_read_data.h
+hdlc_read_register.h
 
 
 ------------------------------------------------------------------------------*/
 
-ulong64_ PopUnsignedValueDLSM(void);
-long64_  PopSignedValueDLSM(void);
-
-ulong64_ ReadUnsignedValueDLSM(void);
+long64_ ReadRegisterScaler(void);

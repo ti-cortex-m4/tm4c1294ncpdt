@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
 hdlc_read_data.c
 
-
+Blue Book: 4.1.5 Common data types
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
@@ -9,8 +9,8 @@ hdlc_read_data.c
 #include "../../serial/ports.h"
 #include "../../serial/ports2.h"
 #include "../../serial/ports_devices.h"
-// #include "../../serial/monitor.h"
-// #include "include39.h"
+#include "../../serial/monitor.h"
+#include "include39.h"
 // #include "crc16x25.h"
 // #include "io39.h"
 // #include "hdlc.h"
@@ -19,7 +19,6 @@ hdlc_read_data.c
 
 
 
-// Blue Book: 4.1.5 Common data types
 ulong64_ PopUnsignedValueDLSM(void)
 {
   uchar bDataType = PopChar();
@@ -88,4 +87,22 @@ long64_  PopSignedValueDLSM(void)
 
   // error(unknown_data_type, bDataType)
   return GetLong64Error(1);
+}
+
+
+
+ulong64_ ReadUnsignedValueDLSM(void)
+{
+  InitPop(12 + GetHdlcAddressesSize());
+
+  uchar bDataAccessResult = PopChar();
+#ifdef MONITOR_39
+  MonitorString("\n bDataAccessResult="); MonitorCharDec(bDataAccessResult);
+#endif
+  if (bDataAccessResult != 0) {
+    // error(no_success, bDataAccessResult)
+    return GetLong64Error(0);
+  }
+
+  return PopUnsignedValueDLSM();
 }
