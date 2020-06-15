@@ -64,6 +64,25 @@ ulong64_ GetLong64Error(uchar  bError)
 
 
 
+ulong64_ GetSignedLong64(int64_t  ddwValue, bool  fValid, uchar  bError)
+{
+  ulong64_ ddw2;
+
+  ddw2.ddwValue = ddwValue;
+  ddw2.fValid = fValid;
+  ddw2.bError = bError;
+
+  return ddw2;
+}
+
+
+ulong64_ GetSignedLong64Error(uchar  bError)
+{
+  return GetSignedLong64(MAX_LONGLONG, false, bError);
+}
+
+
+
 float2  GetFloat2(float  flValue, bool  fValid)
 {
   float2 fl2;
