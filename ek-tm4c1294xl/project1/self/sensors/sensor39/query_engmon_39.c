@@ -60,9 +60,9 @@ query_engmon_39*c
   </GetRequestNormal>
 </GetRequest>
 */
-void    QueryEngMon39(uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  bMonth, uchar  bYear)
+void    QueryEngMon39(const obis_t  obis, uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  bMonth, uchar  bYear)
 {
-#ifdef MONITOR_39  
+#ifdef MONITOR_39_NAMES
   MonitorString("\n\n QueryEngMon39 "); MonitorCharDec(bMonth); MonitorString(" "); MonitorCharDec(bYear);
 #endif
 
@@ -150,12 +150,7 @@ void    QueryEngMon39(uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  bMonth, u
 
   PushChar(0x09); // <OctetString Value="01000F0800FF" />
   PushChar(0x06);
-  PushChar(0x01); // <!--1.0.15.8.0.255-->
-  PushChar(0x00);
-  PushChar(0x0F);
-  PushChar(0x08);
-  PushChar(0x00);
-  PushChar(0xFF);
+  PushOBIS_DLMS(obis); // <!--1.0.15.8.0.255-->
 
   PushChar(0x0F); // <Int8 Value="02" />
   PushChar(0x02);
@@ -199,3 +194,48 @@ uint64_t ReadEngMon39(void)
   InitPop(18 + GetHdlcAddressesSize());
   return PopLongBig()*0x100000000 + PopLongBig();
 }
+
+
+
+uchar   IsEngMonPresent39(void)
+{
+  InitPop(12 + GetHdlcAddressesSize());
+
+  if (PopChar() != 0) return 1; // !OK
+  if (PopChar() != 1) return 2; // !array
+  if (PopChar() != 1) return 3; // array size != 1
+  if (PopChar() != 2) return 4; // !structure
+  if (PopChar() != 1) return 5; // structure size != 1
+
+  return 0;
+}
+
+
+uchar   IsEngMonAbsent39(void)
+{
+  InitPop(12 + GetHdlcAddressesSize());
+
+  if (PopChar() != 0) return 1; // !OK
+  if (PopChar() != 1) return 2; // !array
+  if (PopChar() != 0) return 3; // array size != 0
+
+  return 0;
+}
+
+
+/*
+7e a0 1d 03 03 74 32 9d e6 e7 00 c4 01 81  00 01 01 02 01 15  00 00 00 00 00 00 0f 31  1d 75 7e
+00 ok
+01 array
+01 array size
+02 structure
+01 structure size
+15 [21] Unsigned64
+value=3889
+
+7e a0 12 03 03 74 cb 2f e6 e7 00 c4 01 81  00 01 00  3d ce 7e
+00 ok
+01 array
+00 array size
+no value
+*/

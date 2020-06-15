@@ -39,6 +39,7 @@ PARAMS2!C
 #include    "../../sensors/sensor35/params35.h"
 #include    "../../sensors/sensor36/params36.h"
 #include    "../../sensors/sensor36/params37.h"
+#include    "../../sensors/sensor38/params38.h"
 #include    "../../sensors/sensor39/params39.h"
 #include    "../../time/delay.h"
 #include    "../../console.h"
@@ -74,20 +75,16 @@ void    QueryArrayA(uchar  bT)
 
 uchar   ReadArrayA(void)
 {
-uchar   i;
-
   InitPop(1);
 
-  coEnergy.mpbBuff[0] = 0;
+  uchar b = PopChar();
 
-  i = PopChar();
-  coEnergy.mpbBuff[1] = i & 0x3F;
+  ulong dw = (b & 0x3F)*0x10000;
+  dw += PopChar()*0x100;
+  dw += PopChar();
 
-  coEnergy.mpbBuff[2] = PopChar();
-  coEnergy.mpbBuff[3] = PopChar();
-
-  reValue = (float)coEnergy.dwBuff / reParamDiv;
-  return(i);
+  reValue = (float)dw / reParamDiv;
+  return b;
 }
 
 
@@ -1117,7 +1114,11 @@ float2  ReadParam(uint  iwPrm)
 #endif
 
 #ifndef SKIP_38
-    case 38: return ReadParam39();
+    case 38: return ReadParam38();
+#endif
+
+#ifndef SKIP_39
+    case 39: return ReadParam39();
 #endif
 
     default: return GetFloat2Error();

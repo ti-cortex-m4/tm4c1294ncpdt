@@ -9,6 +9,24 @@ WRAPPERS,C
 
 
 
+schar2  GetSChar2(schar  bValue, bool  fValid)
+{
+  schar2 b2;
+
+  b2.bValue = bValue;
+  b2.fValid = fValid;
+
+  return b2;
+}
+
+
+schar2  GetSChar2Error(void)
+{
+  return GetSChar2(-1, false);
+}
+
+
+
 ulong2  GetLong2(ulong  dwValue, bool  fValid)
 {
   ulong2 dw2;

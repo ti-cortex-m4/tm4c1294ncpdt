@@ -18,9 +18,11 @@ DEVICE36*C
 
 
 
-void    Query38_DISC(void)
+void    Query39_DISC(void)
 {
+#ifdef MONITOR_39_NAMES
   MonitorString("\n\n DISC");
+#endif
 
   InitPush(0);
 
@@ -45,9 +47,11 @@ void    Query38_DISC(void)
 }
 
 
-void    Query38_SNRM(void)
+void    Query39_SNRM(void)
 {
+#ifdef MONITOR_39_NAMES
   MonitorString("\n\n SNRM");
+#endif
 
   uint wSize = 30 + GetHdlcAddressesSize(); // 32
 
@@ -105,11 +109,11 @@ void    Query38_SNRM(void)
 
 
 // Green Book, 11.5 Encoding of the AARQ APDU
-void    Query38_Open2(uchar  bNS, uchar  bNR)
+void    Query39_AARQ(uchar  bNS, uchar  bNR)
 {
-  MonitorString("\n\n Open 2 ");
-  MonitorString(" N(S)="); MonitorCharDec(bNS);
-  MonitorString(" N(R)="); MonitorCharDec(bNR);
+#ifdef MONITOR_39_NAMES
+  MonitorString("\n\n AARQ ");
+#endif
 
   uint wSize = 66 + GetHdlcAddressesSize(); // 0x44 68
 
@@ -117,20 +121,14 @@ void    Query38_Open2(uchar  bNS, uchar  bNR)
   PushChar(0x7E);
   
   PushFormatDLMS(wSize);
-//  PushChar(0xA0);
-//  PushChar(0x44);
   PushHdlcAddresses();
-//  PushChar(0x03);
-//  PushChar(0x03);
 
   bNS = 0;
   bNR = 0;
-  MonitorString("Control{N(R)=0,N(S)=0} 10 ? "); MonitorCharHex((bNR << 5) | 0x10 | (bNS << 1) | 0x00);
-  PushChar(0x10); // I-frame
+//  MonitorString("Control{N(R)=0,N(S)=0} 10 ? ");
+  PushChar((bNR << 5) | 0x10 | (bNS << 1) | 0x00);
   
   PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
-//  PushChar(0x65); // CRC ?
-//  PushChar(0x94);
 
   // DLMS start
 
@@ -203,8 +201,6 @@ void    Query38_Open2(uchar  bNS, uchar  bNR)
   // DLMS finish
   
   PushIntLtl(MakeCRC16X25OutBuff(1, wSize-2));
-//  PushChar(0xAF); // CRC ?
-//  PushChar(0xDF);
   
   PushChar(0x7E);
 
@@ -213,9 +209,11 @@ void    Query38_Open2(uchar  bNS, uchar  bNR)
 
 
 
-void    Query38_RR(uchar  bNR)
+void    Query39_RR(uchar  bNR)
 {
+#ifdef MONITOR_39_NAMES
   MonitorString("\n\n RR ");
+#endif
 
   uint wSize = 5 + GetHdlcAddressesSize();
 

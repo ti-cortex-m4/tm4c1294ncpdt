@@ -8,9 +8,9 @@ DEVICE36*H
 
 
 
-void    Query38_DISC(void);
-void    Query38_SNRM(void);
-void    Query38_Open2(uchar  bNS, uchar  bNR);
-void    Query38_RR(uchar  bNR);
+void    Query39_DISC(void);
+void    Query39_SNRM(void);
+void    Query39_AARQ(uchar  bNS, uchar  bNR);
+void    Query39_RR(uchar  bNR);
 
 runner39 InitRunner(void);

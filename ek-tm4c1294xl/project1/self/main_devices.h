@@ -828,20 +828,54 @@ typedef enum
 
 #endif
 
-#ifndef SKIP_36
+#ifndef SKIP_38
 
   DEV_START_38C         =  0x2300,
-  DEV_DISC_38C          =  0x2301,
-  DEV_POSTDISC_38C      =  0x2302,
-  DEV_SNRM_38C          =  0x2303,
-  DEV_POSTSNRM_38C      =  0x2304,
-  DEV_OPEN2_38C         =  0x2305,
-  DEV_POSTOPEN2_38C     =  0x2306,
-  DEV_RR1_38C           =  0x2307,
-  DEV_POSTRR1_38C       =  0x2308,
-  DEV_ENGABS_38C        =  0x2309,
-  DEV_POSTENGABS_38C    =  0x2310,
-  DEV_RR2_38C           =  0x2311,
+  DEV_ENERGY_38C        =  0x2301,
+
+  DEV_START_38P         =  0x2310,
+
+  DEV_PREVTIME1_38P     =  0x2311,
+  DEV_TIME1_38P         =  0x2312,
+  DEV_POSTTIME1_38P     =  0x2313,  
+
+  DEV_PREVAUTHKEY1_38P  =  0x2314,
+  DEV_AUTHKEY1_38P      =  0x2315,
+  DEV_POSTAUTHKEY1_38P  =  0x2316,
+  DEV_AUTHREQ1_38P      =  0x2317,
+  DEV_PREVCORRECT_38P   =  0x2318,
+  DEV_CORRECT_38P       =  0x2319,
+
+  DEV_PREVAUTHKEY2_38P  =  0x2320,
+  DEV_AUTHKEY2_38P      =  0x2321,
+  DEV_POSTAUTHKEY2_38P  =  0x2322,
+  DEV_AUTHREQ2_38P      =  0x2323,
+  DEV_PREVMANAGE_38P    =  0x2324,
+  DEV_MANAGE_38P        =  0x2325,
+
+  DEV_PREVTIME2_38P     =  0x2326,
+  DEV_TIME2_38P         =  0x2327,
+
+  DEV_INITHEADER_38P    =  0x2328,
+  DEV_PAUSE_38P         =  0x2329,
+  DEV_HEADER_38P        =  0x232A,
+
+#endif
+
+#ifndef SKIP_39
+
+  DEV_START_39C         =  0x2400,
+  DEV_DISC_39C          =  0x2401,
+  DEV_POSTDISC_39C      =  0x2402,
+  DEV_SNRM_39C          =  0x2403,
+  DEV_POSTSNRM_39C      =  0x2404,
+  DEV_OPEN2_39C         =  0x2405,
+  DEV_POSTOPEN2_39C     =  0x2406,
+  DEV_RR1_39C           =  0x2407,
+  DEV_POSTRR1_39C       =  0x2408,
+  DEV_ENGABS_39C        =  0x2409,
+  DEV_POSTENGABS_39C    =  0x2410,
+  DEV_RR2_39C           =  0x2411,
 
 #endif
 
