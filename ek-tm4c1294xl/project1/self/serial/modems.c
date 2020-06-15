@@ -5,6 +5,7 @@ MODEMS!C
 ------------------------------------------------------------------------------*/
 
 #include    "../main.h"
+#include    "../main_devices.h"
 #include    "../memory/mem_ports.h"
 #include    "../memory/mem_digitals.h"
 #include    "../memory/mem_phones.h"

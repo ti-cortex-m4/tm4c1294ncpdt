@@ -4,53 +4,160 @@ params34.c
 
 ------------------------------------------------------------------------------*/
 
+#include <math.h>
 #include "../../main.h"
 #include "../../memory/mem_digitals.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports_devices.h"
 #include "../../serial/ports2.h"
+#include "../../serial/monitor.h"
+#include "../../digitals/params/params.h"
 #include "../../digitals/params/params2.h"
 #include "../../display/display.h"
 #include "../../time/delay.h"
 #include "device39.h"
 #include "io39.h"
 #include "query_params_39.h"
+#include "fragment_open_39.h"
 #include "params39.h"
 
 
 
-static const obis_t obisU1 = {1, 0, 32, 7, 0, 255};
-static const obis_t obisU2 = {1, 0, 52, 7, 0, 255};
-static const obis_t obisU3 = {1, 0, 72, 7, 0, 255};
+// Blue Book: 7.5.1 Value group C codes Ц Electricity
+static const obis_t obisU1      = {1, 0, 32, 7, 0, 255},
+                    obisU2      = {1, 0, 52, 7, 0, 255},
+                    obisU3      = {1, 0, 72, 7, 0, 255},
 
-static const obis_t obisI1 = {1, 0, 31, 7, 0, 255};
-static const obis_t obisI2 = {1, 0, 51, 7, 0, 255};
-static const obis_t obisI3 = {1, 0, 71, 7, 0, 255};
+                    obisI1      = {1, 0, 31, 7, 0, 255},
+                    obisI2      = {1, 0, 51, 7, 0, 255},
+                    obisI3      = {1, 0, 71, 7, 0, 255},
+
+                    obisPplus   = {1, 0,  1, 7, 0, 255},
+                    obisPminus  = {1, 0,  2, 7, 0, 255},
+
+                    obisQplus   = {1, 0,  3, 7, 0, 255},
+                    obisQminus  = {1, 0,  4, 7, 0, 255};
 
 
 
-static float        flU1, flU2, flU3;
-static float        flI1, flI2, flI3;
+
+static float        flU1, flU2, flU3,
+                    flI1, flI2, flI3,
+                    flPplus, flPminus,
+                    flQplus, flQminus;
 
 
 
-float2  ReadValue39(const obis_t  obis, runner39*  pr)
+double2 ReadValue39(const obis_t  obis, runner39*  pr)
 {
   (*pr).bNS++;
   (*pr).bInvokeId++;
-  QueryGetRequestDLMS(obis, (*pr).bNS, (*pr).bNR, (*pr).bInvokeId);
-  if (Input39() != SER_GOODCHECK) return GetFloat2Error();
-  if (!ValidateIframe((*pr).bNS, (*pr).bNR)) return GetFloat2Error();
-  float fl = ReadType18ULong16(); // TODO определ€ть тип автоматически
-  DelayOff();
+  QueryGetRegisterValueDLMS(obis, (*pr));
+  if (Input39() != SER_GOODCHECK) return GetDouble2Error();
+  if (!ValidateIframe((*pr).bNS, (*pr).bNR)) return GetDouble2Error();
+  ulong64_ ddw2 = ReadUnsignedValueDLSM();
+  if (!ddw2.fValid) return GetDouble2Error();
 
   (*pr).bNR++;
-  Query38_RR((*pr).bNR);
-  if (Input39() != SER_GOODCHECK) return GetFloat2Error();
-  if (!ValidateSframe((*pr).bNR)) return GetFloat2Error();
-  DelayOff();
+  Query39_RR((*pr).bNR);
+  if (Input39() != SER_GOODCHECK) return GetDouble2Error();
+  if (!ValidateSframe((*pr).bNR)) return GetDouble2Error();
 
-  return GetFloat2(fl, true);
+  return GetDouble2(ddw2.ddwValue, true);
+}
+
+
+
+double2 ReadScaler39(const obis_t  obis, runner39*  pr)
+{
+  (*pr).bNS++;
+  (*pr).bInvokeId++;
+  QueryGetRegisterScalerDLMS(obis, (*pr));
+  if (Input39() != SER_GOODCHECK) return GetDouble2Error();
+  if (!ValidateIframe((*pr).bNS, (*pr).bNR)) return GetDouble2Error();
+  schar2 sc2 = ReadRegisterScaler();
+  if (!sc2.fValid) return GetDouble2Error();
+
+  (*pr).bNR++;
+  Query39_RR((*pr).bNR);
+  if (Input39() != SER_GOODCHECK) return GetDouble2Error();
+  if (!ValidateSframe((*pr).bNR)) return GetDouble2Error();
+
+  double db = pow(10, sc2.bValue);
+  return GetDouble2(db, true);
+}
+
+
+
+float2  ReadRegisterWithScaler39(const obis_t  obis, runner39*  pr)
+{
+  double2 value = ReadValue39(obis, pr);
+  if (!value.fValid) return GetFloat2Error();
+
+  double2 scaler = ReadScaler39(obis, pr);
+  if (!scaler.fValid) return GetFloat2Error();
+
+  return GetFloat2(value.dbValue * scaler.dbValue, true);
+}
+
+
+
+float2  ReadParam39_(void)
+{
+  runner39 r = InitRunner();
+  FragmentOpen39(&r);
+
+
+  float2 fl2;
+
+  fl2 = ReadRegisterWithScaler39(obisU1, &r);
+  if (!fl2.fValid) return GetFloat2Error();
+  flU1 = fl2.flValue;
+
+  fl2 = ReadRegisterWithScaler39(obisU2, &r);
+  if (!fl2.fValid) return GetFloat2Error();
+  flU2 = fl2.flValue;
+
+  fl2 = ReadRegisterWithScaler39(obisU3, &r);
+  if (!fl2.fValid) return GetFloat2Error();
+  flU3 = fl2.flValue;
+
+
+  fl2 = ReadRegisterWithScaler39(obisI1, &r);
+  if (!fl2.fValid) return GetFloat2Error();
+  flI1 = fl2.flValue*1000;
+
+  fl2 = ReadRegisterWithScaler39(obisI2, &r);
+  if (!fl2.fValid) return GetFloat2Error();
+  flI2 = fl2.flValue*1000;
+
+  fl2 = ReadRegisterWithScaler39(obisI3, &r);
+  if (!fl2.fValid) return GetFloat2Error();
+  flI3 = fl2.flValue*1000;
+
+
+  fl2 = ReadRegisterWithScaler39(obisPplus, &r);
+  if (!fl2.fValid) return GetFloat2Error();
+  flPplus = fl2.flValue;
+
+  fl2 = ReadRegisterWithScaler39(obisPminus, &r);
+  if (!fl2.fValid) return GetFloat2Error();
+  flPminus = fl2.flValue;
+
+
+  fl2 = ReadRegisterWithScaler39(obisQplus, &r);
+  if (!fl2.fValid) return GetFloat2Error();
+  flQplus = fl2.flValue;
+
+  fl2 = ReadRegisterWithScaler39(obisQminus, &r);
+  if (!fl2.fValid) return GetFloat2Error();
+  flQminus = fl2.flValue;
+
+
+  Query39_DISC();
+  if (Input39() != SER_GOODCHECK) return GetFloat2Error();
+
+  return GetFloat2(-1, true);
 }
 
 
@@ -61,60 +168,7 @@ float2  ReadParam39(void)
 
   if (fBeginParam == false)
   {
-    Query38_DISC();
-    if (Input39() != SER_GOODCHECK) return GetFloat2Error();
-    DelayOff();
-
-    Query38_SNRM();
-    if (Input39() != SER_GOODCHECK) return GetFloat2Error();
-    DelayOff();
-
-
-    runner39 r = InitRunner();
-
-
-    Query38_Open2(r.bNS, r.bNR);
-    if (Input39() != SER_GOODCHECK) return GetFloat2Error();
-    if (!ValidateIframe(r.bNS, r.bNR)) return GetFloat2Error();
-    DelayOff();
-
-    r.bNR++;
-    Query38_RR(r.bNR);
-    if (Input39() != SER_GOODCHECK) return GetFloat2Error();
-    if (!ValidateSframe(r.bNR)) return GetFloat2Error();
-    DelayOff();
-
-
-    float2 fl2 = ReadValue39(obisU1, &r);
-    if (!fl2.fValid) return GetFloat2Error();
-    flU1 = fl2.flValue / 10;
-
-    fl2 = ReadValue39(obisU2, &r);
-    if (!fl2.fValid) return GetFloat2Error();
-    flU2 = fl2.flValue / 10;
-
-    fl2 = ReadValue39(obisU3, &r);
-    if (!fl2.fValid) return GetFloat2Error();
-    flU3 = fl2.flValue / 10;
-
-
-    fl2 = ReadValue39(obisI1, &r);
-    if (!fl2.fValid) return GetFloat2Error();
-    flI1 = fl2.flValue * 10; // TODO читать коэффициенты автоматически
-
-    fl2 = ReadValue39(obisI2, &r);
-    if (!fl2.fValid) return GetFloat2Error();
-    flI2 = fl2.flValue * 10;
-
-    fl2 = ReadValue39(obisI3, &r);
-    if (!fl2.fValid) return GetFloat2Error();
-    flI3 = fl2.flValue * 10;
-
-
-    Query38_DISC();
-    if (Input39() != SER_GOODCHECK) return GetFloat2Error();
-    DelayOff();
-
+    if (!ReadParam39_().fValid) return GetFloat2Error();
 
     fBeginParam = true;
   }
@@ -129,6 +183,27 @@ float2  ReadParam39(void)
     case PAR_I2 : return GetFloat2(flI2, true);
     case PAR_I3 : return GetFloat2(flI3, true);
 
+    case PAR_P  : return GetFloat2(flPplus-flPminus, true);
+
+    case PAR_Q  : return GetFloat2(flQplus-flQminus, true);
+
+    case PAR_S  : return GetFloat2(CalcS(flPplus-flPminus, flQplus-flQminus), true);
+
     default: return GetFloat2Error();
   }
 }
+
+
+
+#ifdef MONITOR_39
+
+double2 TestParam39(void)
+{
+  MonitorOpen(0);
+
+  ReadParam39_();
+
+  return GetDouble2(0, true);
+}
+
+#endif

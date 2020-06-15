@@ -10,6 +10,13 @@ WRAPPERS,H
 
 typedef struct
 {
+  schar         bValue;
+  bool          fValid;
+} schar2;
+
+
+typedef struct
+{
   ulong         dwValue;
   bool          fValid;
 } ulong2;
@@ -51,6 +58,9 @@ typedef struct
 } factors2;
 
 
+
+schar2  GetSChar2(schar  bValue, bool  fValid);
+schar2  GetSChar2Error(void);
 
 ulong2  GetLong2(ulong  dwValue, bool  fValid);
 ulong2  GetLong2Error(void);

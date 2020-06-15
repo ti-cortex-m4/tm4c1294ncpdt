@@ -20,7 +20,7 @@ time39.c
 
 void    QueryTime39(uchar  bNS, uchar  bNR, uchar  bInvokeId)
 {
-#ifdef MONITOR_39  
+#ifdef MONITOR_39_NAMES
   MonitorString("\n\n QueryTime39 ");
 #endif
 

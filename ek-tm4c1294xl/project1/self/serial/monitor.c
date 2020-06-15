@@ -107,6 +107,31 @@ void    MonitorLongDec(ulong  dw)
 }
 
 
+void    MonitorLongHex(ulong  dw)
+{
+  MonitorLong("%8X", dw);
+}
+
+
+void    MonitorLongDec4(ulong  dw)
+{
+  if (UseMonitor())
+  {
+    MonitorLong("%u", (uint)(dw / 10000));
+    MonitorString(".");
+    MonitorLong("%04u", (uint)(dw % 10000));
+  }
+}
+
+
+void    MonitorLong64Hex(uint64_t  ddw)
+{
+  MonitorLong("%08X", ddw / 0x100000000);
+  MonitorString("_");
+  MonitorLong("%08X", ddw % 0x100000000);
+}
+
+
 void    MonitorTime(time  ti)
 {
   if (UseMonitor())

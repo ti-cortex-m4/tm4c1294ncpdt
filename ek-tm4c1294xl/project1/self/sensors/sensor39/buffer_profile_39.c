@@ -22,7 +22,7 @@ static bool         fBuffPrfOveflow39;
 
 
 
-void    InitBuffPrf38(void)
+void    InitBuffPrf39(void)
 {
   memset(&mpBuffPrf39, 0, sizeof(mpBuffPrf39));
   cbBuffPrfSize39 = 0;
@@ -30,7 +30,7 @@ void    InitBuffPrf38(void)
 }
 
 
-void    AddBuffPrf38(time  tiTime, uint64_t  ddwValue)
+void    AddBuffPrf39(time  tiTime, uint64_t  ddwValue)
 {
   if (cbBuffPrfSize39 < PROFILE39_SIZE)
   {
@@ -50,30 +50,37 @@ void    AddBuffPrf38(time  tiTime, uint64_t  ddwValue)
 
 
 
-void    DeltaBuffPrf38(void)
+void    MonitorBuffPrf38(void)
 {
 #ifdef MONITOR_39
-  MonitorString("\n Before DeltaBuffPrf38 ");
-
   uchar i;
   for (i=0; i<PROFILE39_SIZE; i++)
   {
-    profile39 prf = GetBuffPrf38(i);
+    profile39 prf = GetBuffPrf39(i);
 
     MonitorString("\n "); MonitorTime(prf.tiTime);
     MonitorString(" "); MonitorLongDec(prf.ddwValue % 0x100000000);
     MonitorString(" "); MonitorBool(prf.fExists);
   }
 #endif
+}
 
+void    DeltaBuffPrf39(void)
+{
+#ifdef MONITOR_39
+  MonitorString("\n before");
+  MonitorBuffPrf38();
+#endif
+
+  uchar i;
   for (i=0; i<PROFILE39_SIZE-1; i++)
   {
-    profile39 prf1 = GetBuffPrf38(i);
-    profile39 prf2 = GetBuffPrf38(i + 1);
+    profile39 prf1 = GetBuffPrf39(i);
+    profile39 prf2 = GetBuffPrf39(i + 1);
 
     if (prf1.fExists & prf2.fExists)
     {
-      mpBuffPrf39[i].tiTime = prf2.tiTime;
+      mpBuffPrf39[i].tiTime = prf1.tiTime;
       mpBuffPrf39[i].ddwValue = prf2.ddwValue - prf1.ddwValue;
       mpBuffPrf39[i].fExists = true;
     }
@@ -93,36 +100,27 @@ void    DeltaBuffPrf38(void)
   mpBuffPrf39[i].fExists = false;
 
 #ifdef MONITOR_39
-  MonitorString("\n After DeltaBuffPrf38 ");
-
-  for (i=0; i<PROFILE39_SIZE-1; i++)
-  {
-    profile39 prf = GetBuffPrf38(i);
-
-    MonitorString("\n "); MonitorTime(prf.tiTime);
-    MonitorString(" "); MonitorLongDec(prf.ddwValue % 0x100000000);
-    MonitorString(" "); MonitorBool(prf.fExists);
-  }
-
-  MonitorString("\n");
+  MonitorString("\n after");
+  MonitorBuffPrf38();
+  MonitorString("\n finish");
 #endif
 }
 
 
-profile39 GetBuffPrf38(uchar  i)
+profile39 GetBuffPrf39(uchar  i)
 {
   ASSERT(i < PROFILE39_SIZE);
   return mpBuffPrf39[i];
 }
 
 
-uchar   GetBuffPrfSize38(void)
+uchar   GetBuffPrfSize39(void)
 {
   return cbBuffPrfSize39;
 }
 
 
-bool    GetBuffPrfOveflow38(void)
+bool    GetBuffPrfOveflow39(void)
 {
   return fBuffPrfOveflow39;
 }

@@ -33,20 +33,20 @@ void    Query39_DISC_Current(void)
   bNR = 0;
   bInvokeId = 0;
 
-  Query38_DISC();
+  Query39_DISC();
 }
 
 
-void    Query39_Open2_Current(void)
+void    Query39_AARQ_Current(void)
 {
-  Query38_Open2(bNS, bNR);
+  Query39_AARQ(bNS, bNR);
 }
 
 
 void    Query39_RR_Current(void)
 {
   bNR++;
-  Query38_RR(bNR);
+  Query39_RR(bNR);
 }
 
 
@@ -74,7 +74,7 @@ bool    ValidateIframe_Current(void)
 
 void    SaveCurrent39(void)
 {
-  dwCurrent = ReadEngAbs39()  % 0x100000000;
+  dwCurrent = ReadEngAbs39() % 0x100000000;
 }
 
 

@@ -22,7 +22,6 @@ MAIN,H
 #include "main_events.h"
 #include "main_storage.h"
 #include "main_defines.h"
-#include "main_devices.h"
 #include "main_params.h"
 #include "main_extended.h"
 #include "main_correct.h"

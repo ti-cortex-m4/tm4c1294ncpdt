@@ -1,5 +1,5 @@
 
-#ifndef SKIP_38
+#ifndef SKIP_39
 
     case DEV_START_39P:
       MakePause(DEV_PREVTIME2_39P);

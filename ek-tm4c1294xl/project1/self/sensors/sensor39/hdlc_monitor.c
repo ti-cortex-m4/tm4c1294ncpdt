@@ -140,14 +140,14 @@ bool    ValidateIframe(uchar  bNS_client, uchar  bNR_client)
   uchar bNS_server = (bControl & 0x0E) >> 1;
   uchar bNR_server = (bControl & 0xE0) >> 5;
 
-  if (bNS_client != bNS_server) {
+  if (bNS_client % 8 != bNS_server % 8) {
 #ifdef MONITOR_39    
     MonitorString(" I-frame N(S) client/server error "); MonitorCharHex(bNS_client); MonitorCharHex(bNS_server);
 #endif    
     return false;
   }
 
-  if ((bNR_client + 1) != bNR_server) {
+  if ((bNR_client + 1) % 8 != bNR_server % 8) {
 #ifdef MONITOR_39    
     MonitorString(" I-frame N(R) client/server error "); MonitorCharHex(bNR_client); MonitorCharHex(bNR_server);
 #endif    
@@ -163,7 +163,7 @@ bool    ValidateSframe(uchar  bNR_client)
   uchar bControl = InBuff(3 + GetHdlcAddressesSize());
   uchar bNR_server = (bControl & 0xE0) >> 5;
 
-  if (bNR_client != bNR_server) {
+  if (bNR_client % 8 != bNR_server % 8) {
 #ifdef MONITOR_39    
     MonitorString("S-frame N(R) client/server error "); MonitorCharHex(bNR_client); MonitorCharHex(bNR_server);
 #endif
