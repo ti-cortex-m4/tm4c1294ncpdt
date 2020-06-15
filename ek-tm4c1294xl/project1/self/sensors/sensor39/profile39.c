@@ -174,7 +174,7 @@ bool    ReadHeader39(void)
 
 uchar   TestProfile39_Internal(runner39*  pr)
 {  
-  FragmentOpen39(pr);
+  if (FragmentOpen39(pr) != 0) return 6;
 
 
   (*pr).bNS++;

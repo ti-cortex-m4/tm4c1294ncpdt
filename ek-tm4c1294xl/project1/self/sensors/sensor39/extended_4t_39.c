@@ -52,7 +52,7 @@ const obis_t *GetOBIS(uchar  ibTariff)
 status  CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
 {
   runner39 r = InitRunner();
-  FragmentOpen39(&r);
+  if (FragmentOpen39(&r) != 0) return ST_BADDIGITAL;
 
 
   r.bNS++;
