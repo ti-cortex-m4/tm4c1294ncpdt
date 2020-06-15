@@ -22,10 +22,14 @@ extended_4t_39.c
 #include "time39.h"
 #include "query_engmon_39.h"
 #include "query_params_39.h"
+#include "fragment_open_39.h"
 #include "io39.h"
 #include "hdlc.h"
 #include "extended_4t_39.h"
 
+
+
+double2 ReadScaler39(const obis_t  obis, runner39*  pr);
 
 
 static const obis_t obisEngTariff[4] = {
@@ -49,52 +53,32 @@ const obis_t *GetOBIS(uchar  ibTariff)
 // TODO scale
 status  CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
 {
-  Query39_DISC();
+  runner39 r = InitRunner();
+  FragmentOpen39(&r);
+
+
+  r.bNS++;
+  r.bInvokeId++;
+  QueryTime39(r.bNS, r.bNR, r.bInvokeId);
   if (Input39() != SER_GOODCHECK) return ST_BADDIGITAL;
-  //DelayOff();
-
-  Query39_SNRM();
-  if (Input39() != SER_GOODCHECK) return ST_BADDIGITAL;
-  //DelayOff();
-
-  uchar bNS = 0;
-  uchar bNR = 0;
-  uchar bInvokeId = 0;
-
-  Query39_AARQ(bNS, bNR);
-  if (Input39() != SER_GOODCHECK) return ST_BADDIGITAL;
-  if (!ValidateIframe(bNS, bNR)) return ST_BADDIGITAL;
-  //DelayOff();
-
-  bNR++;
-  Query39_RR(bNR);
-  if (Input39() != SER_GOODCHECK) return ST_BADDIGITAL;
-  if (!ValidateSframe(bNR)) return ST_BADDIGITAL;
-  //DelayOff();
-
-
-  bNS++;
-  bInvokeId++;
-  QueryTime39(bNS, bNR, bInvokeId);
-  if (Input39() != SER_GOODCHECK) return ST_BADDIGITAL;
-  if (!ValidateIframe(bNS, bNR)) return ST_BADDIGITAL;
+  if (!ValidateIframe(r.bNS, r.bNR)) return ST_BADDIGITAL;
   time ti = ReadTime39();
   //DelayOff();
 
-  bNR++;
-  Query39_RR(bNR);
+  r.bNR++;
+  Query39_RR(r.bNR);
   if (Input39() != SER_GOODCHECK) return ST_BADDIGITAL;
-  if (!ValidateSframe(bNR)) return ST_BADDIGITAL;
+  if (!ValidateSframe(r.bNR)) return ST_BADDIGITAL;
   //DelayOff();
 
 
   uchar bMonth = ibMon + 1;
   uchar bYear = (bMonth > ti.bMonth) ? ti.bYear-1 : ti.bYear;
 
-  bNS++;
-  QueryEngMon39(*GetOBIS(ibTariff), bNS, bNR, bInvokeId++, bMonth, bYear);
+  r.bNS++;
+  QueryEngMon39(*GetOBIS(ibTariff), r.bNS, r.bNR, r.bInvokeId++, bMonth, bYear);
   if (Input39() != SER_GOODCHECK) return ST_BADDIGITAL;
-  if (!ValidateIframe(bNS, bNR)) return ST_BADDIGITAL;
+  if (!ValidateIframe(r.bNS, r.bNR)) return ST_BADDIGITAL;
 
   bool present = (IsEngMonPresent39() == 0);
   bool absent = (IsEngMonAbsent39() == 0);
@@ -109,11 +93,16 @@ status  CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
 #endif
   //DelayOff();
 
-  bNR++;
-  Query39_RR(bNR);
+  r.bNR++;
+  Query39_RR(r.bNR);
   if (Input39() != SER_GOODCHECK) return ST_BADDIGITAL;
-  if (!ValidateSframe(bNR)) return ST_BADDIGITAL;
+  if (!ValidateSframe(r.bNR)) return ST_BADDIGITAL;
   //DelayOff();
+
+
+  double2 scaler = ReadScaler39(*GetOBIS(ibTariff), &r);
+  if (!scaler.fValid) return ST_BADDIGITAL;
+  double k = scaler.dbValue;
 
 
   Query39_DISC();
@@ -162,18 +151,18 @@ status  ReadCntMonCanTariff39(uchar  ibMonAbs, uchar  ibTariff) // на начало мес
 
 double2 TestCntMonCanTariff39(void)
 {
-  fMonitorLogBasic = false;
-  fMonitorLogHex = false;
+//  fMonitorLogBasic = false;
+//  fMonitorLogHex = false;
 
   MonitorOpen(0);
 
   uchar bMonth = (*GetCurrTimeDate()).bMonth;
   uchar i;
-  for (i=0; i<10; i++) {
+  for (i=0; i<1/*0*/; i++) {
     uchar ibMonAbs = (12 + bMonth - 1 - i) % 12;
     MonitorString("\n\n ibMonAbs="); MonitorCharDec(ibMonAbs);
     status s = ReadCntMonCanTariff39(ibMonAbs, 0);
-    MonitorString("\n status="); MonitorCharDec(s);
+    MonitorString("\n Status="); MonitorCharDec(s);
   }
 
   return GetDouble2(0, true);
