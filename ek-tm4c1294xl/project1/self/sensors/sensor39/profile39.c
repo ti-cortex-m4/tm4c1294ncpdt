@@ -72,8 +72,8 @@ uchar   QueryHeader39(runner39*  pr)
 
   ulong dw = DateToHouIndex(tiStart39);
   dw -= wProfile39;
-  time ti1 = HouIndexToDate(dw - 1);
-  time ti2 = HouIndexToDate(dw + 6 - 1);
+  time ti1 = HouIndexToDate(dw /*- 1*/);
+  time ti2 = HouIndexToDate(dw + 6/* - 1*/);
 
 #ifdef MONITOR_39
   MonitorString("\n QueryHeader39 ");
@@ -95,14 +95,14 @@ static bool ReadData39(time  tiTime, ulong  dwValue)
 
   ShowProgressDigHou();
 
-  double dbPulse = mpdbPulseHou[ibDig];
+//  double dbPulse = mpdbPulseHou[ibDig];
 
   ulong dw = dwValue; // TODO
-  uint w = (uint)(dw*dbPulse/500);
+  uint w = (uint)(dw/**dbPulse/500*/);
   mpwChannels[0] = w;
 
 #ifdef MONITOR_39
-    MonitorString("   result "); MonitorTime(tiDig);
+    MonitorString(" "); MonitorTime(tiDig);
     MonitorString(" "); MonitorIntDec(mpwChannels[0]);
 #endif
 
@@ -136,7 +136,7 @@ bool    ReadHeader39(void)
     uchar i;
     for (i=0; i<bSize; i++)
     {
-      profile39 prf = GetBuffPrf39(h);
+      profile39 prf = GetBuffPrf39(i);
       if (prf.fExists) {
         bool difference = DifferentDateTime(tiVirtual, prf.tiTime);
 
@@ -148,6 +148,7 @@ bool    ReadHeader39(void)
 #endif
 
         if (!difference) {
+//          MonitorString(" set_value ");
           dwValue = prf.ddwValue;
           break;
         }
@@ -163,7 +164,7 @@ bool    ReadHeader39(void)
   }
 
   wProfile39 += 6;
-  if (wProfile39 > 100/*wHOURS*/) return false;
+  if (wProfile39 > 200/*wHOURS*/) return false;
 
   return true;
 }
