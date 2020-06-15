@@ -102,8 +102,8 @@ status  CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
 
   double2 scaler = ReadScaler39(*GetOBIS(ibTariff), &r);
   if (!scaler.fValid) return ST_BADDIGITAL;
-  double k = scaler.dbValue;
-  MonitorString("\n scaler="); MonitorDouble6(k);
+  double dbScaler = scaler.dbValue;
+  MonitorString("\n scaler="); MonitorDouble6(dbScaler);
 
 
   Query39_DISC();
@@ -111,7 +111,7 @@ status  CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
   //DelayOff();
 
   if (present) {
-    mpdbChannelsC[0] = ((double)mpdwChannelsA[0] / 1000) * mpdbTransCnt[ibDig];
+    mpdbChannelsC[0] = ((double)ddw2.ddwValue / 1000) * mpdbTransCnt[ibDig];
     mpboChannelsA[0] = true;
     return ST_OK;
   }
