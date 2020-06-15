@@ -12,14 +12,15 @@ Blue Book: 4.3.2 Register (class_id = 3, version = 0)
 #include "../../serial/monitor.h"
 #include "include39.h"
 // #include "crc16x25.h"
-// #include "io39.h"
+#include "io39.h"
 // #include "hdlc.h"
 // #include "dlms_push.h"
+#include "hdlc_read_data.h"
 #include "hdlc_read_register.h"
 
 
 
-long64_ ReadRegisterScaler(void)
+long64_ ReadRegisterScalerDLMS(void)
 {
   InitPop(12 + GetHdlcAddressesSize());
 
@@ -36,10 +37,14 @@ long64_ ReadRegisterScaler(void)
   if (PopChar() != 2) return GetLong64Error(3); // structure size != 1
 
   long64_ scaler = PopSignedValueDLSM();
+  if (!scaler.fValid) return GetLong64Error(4);
+
   ulong64_ unit = PopUnsignedValueDLSM();
+  if (!unit.fValid) return GetLong64Error(5);
+
 #ifdef MONITOR_39
-  MonitorString("\n Scaler="); MonitorCharHex(scaler % 0x100);
-  MonitorString("\n Unit="); MonitorCharDec(unit % 0x100);
+  MonitorString("\n Scaler="); MonitorCharHex(scaler.ddwValue % 0x100);
+  MonitorString("\n Unit="); MonitorCharDec(unit.ddwValue % 0x100);
 #endif
 
   return GetSignedLong64(scaler, true, 0);
@@ -47,7 +52,7 @@ long64_ ReadRegisterScaler(void)
 
 
 
-double2 ReadRegister39(const obis_t  obis, runner39*  pr)
+double2 ReadRegisterValue39(const obis_t  obis, runner39*  pr)
 {
   (*pr).bNS++;
   (*pr).bInvokeId++;
@@ -66,14 +71,14 @@ double2 ReadRegister39(const obis_t  obis, runner39*  pr)
 }
 
 
-double2 ReadScaler39(const obis_t  obis, runner39*  pr)
+double2 ReadRegisterScaler39(const obis_t  obis, runner39*  pr)
 {
   (*pr).bNS++;
   (*pr).bInvokeId++;
   QueryGetRegisterScalerDLMS(obis, (*pr));
   if (Input39() != SER_GOODCHECK) return GetDouble2Error();
   if (!ValidateIframe((*pr).bNS, (*pr).bNR)) return GetDouble2Error();
-  long64_ scaler = ReadRegisterScaler();
+  long64_ scaler = ReadRegisterScalerDLMS();
   if (!scaler.fValid) return GetDouble2Error();
 
   (*pr).bNR++;
@@ -90,12 +95,12 @@ double2 ReadScaler39(const obis_t  obis, runner39*  pr)
 
 
 
-double2 ReadRegisterWithScaler39(const obis_t  obis, runner39*  pr)
+double2 ReadRegisterValueWithScaler39(const obis_t  obis, runner39*  pr)
 {
-  double2 value = ReadRegister39(obis, pr);
+  double2 value = ReadRegisterValue39(obis, pr);
   if (!value.fValid) return GetDouble2Error();
 
-  double2 scaler = ReadScaler39(obis, pr);
+  double2 scaler = ReadRegisterScaler39(obis, pr);
   if (!scaler.fValid) return GetDouble2Error();
 
   return GetDouble2(value.dbValue * scaler.dbValue, true);

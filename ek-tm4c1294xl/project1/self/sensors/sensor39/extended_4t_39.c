@@ -25,11 +25,9 @@ extended_4t_39.c
 #include "fragment_open_39.h"
 #include "io39.h"
 #include "hdlc.h"
+#include "hdlc_read_register.h"
 #include "extended_4t_39.h"
 
-
-
-double2 ReadScaler39(const obis_t  obis, runner39*  pr);
 
 
 static const obis_t obisEngTariff[4] = {
@@ -100,7 +98,7 @@ status  CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
   //DelayOff();
 
 
-  double2 scaler = ReadScaler39(*GetOBIS(ibTariff), &r);
+  double2 scaler = ReadRegisterScaler39(*GetOBIS(ibTariff), &r);
   if (!scaler.fValid) return ST_BADDIGITAL;
   double dbScaler = scaler.dbValue;
   MonitorString("\n scaler="); MonitorDouble6(dbScaler);

@@ -19,6 +19,7 @@ params34.c
 #include "io39.h"
 #include "query_params_39.h"
 #include "fragment_open_39.h"
+#include "hdlc_read_register.h"
 #include "params39.h"
 
 
@@ -37,7 +38,6 @@ static const obis_t obisU1      = {1, 0, 32, 7, 0, 255},
 
                     obisQplus   = {1, 0,  3, 7, 0, 255},
                     obisQminus  = {1, 0,  4, 7, 0, 255};
-
 
 
 
