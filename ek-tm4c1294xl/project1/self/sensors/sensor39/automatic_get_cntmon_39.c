@@ -29,11 +29,11 @@ static const obis_t obisEngAbs  = {1, 0, 15, 8, 0, 255};
 ulong64_ QueryCntMon38_Full(uchar  ibMon)
 {
   Query39_DISC();
-  if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
+  if (Input39() != SER_GOODCHECK) return GetULong64Error(1);
 //  DelayOff();
 
   Query39_SNRM();
-  if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
+  if (Input39() != SER_GOODCHECK) return GetULong64Error(1);
 //  DelayOff();
 
   uchar bNS = 0;
@@ -41,29 +41,29 @@ ulong64_ QueryCntMon38_Full(uchar  ibMon)
   uchar bInvokeId = 0;
 
   Query39_AARQ(bNS, bNR);
-  if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
-  if (!ValidateIframe(bNS, bNR)) return GetLong64Error(1);
+  if (Input39() != SER_GOODCHECK) return GetULong64Error(1);
+  if (!ValidateIframe(bNS, bNR)) return GetULong64Error(1);
 //  DelayOff();
 
   bNR++;
   Query39_RR(bNR);
-  if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
-  if (!ValidateSframe(bNR)) return GetLong64Error(1);
+  if (Input39() != SER_GOODCHECK) return GetULong64Error(1);
+  if (!ValidateSframe(bNR)) return GetULong64Error(1);
 //  DelayOff();
 
 
   bNS++;
   bInvokeId++;
   QueryTime39(bNS, bNR, bInvokeId);
-  if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
-  if (!ValidateIframe(bNS, bNR)) return GetLong64Error(1);
+  if (Input39() != SER_GOODCHECK) return GetULong64Error(1);
+  if (!ValidateIframe(bNS, bNR)) return GetULong64Error(1);
   time ti = ReadTime39();
 //  DelayOff();
 
   bNR++;
   Query39_RR(bNR);
-  if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
-  if (!ValidateSframe(bNR)) return GetLong64Error(1);
+  if (Input39() != SER_GOODCHECK) return GetULong64Error(1);
+  if (!ValidateSframe(bNR)) return GetULong64Error(1);
 //  DelayOff();
 
 
@@ -75,15 +75,15 @@ ulong64_ QueryCntMon38_Full(uchar  ibMon)
 
     bNS++;
     QueryEngMon39(obisEngAbs, bNS, bNR, bInvokeId++, bMonth, bYear);
-    if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
-    if (!ValidateIframe(bNS, bNR)) return GetLong64Error(1);
+    if (Input39() != SER_GOODCHECK) return GetULong64Error(1);
+    if (!ValidateIframe(bNS, bNR)) return GetULong64Error(1);
     ddw = ReadEngMon39();
   //  DelayOff();
 
     bNR++;
     Query39_RR(bNR);
-    if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
-    if (!ValidateSframe(bNR)) return GetLong64Error(1);
+    if (Input39() != SER_GOODCHECK) return GetULong64Error(1);
+    if (!ValidateSframe(bNR)) return GetULong64Error(1);
   //  DelayOff();
   }
   else
@@ -111,7 +111,7 @@ ulong64_ QueryCntMon38_Full(uchar  ibMon)
     bNS++;
     bInvokeId++;
     QueryProfile39(bNS, bNR, bInvokeId, ti1, ti2);
-    if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
+    if (Input39() != SER_GOODCHECK) return GetULong64Error(1);
   //  DelayOff();
 
     bool fUseBlocks1 = UseBlocksDMLS();
@@ -125,14 +125,14 @@ ulong64_ QueryCntMon38_Full(uchar  ibMon)
     while (!LastSegmentDMLS()) {
       bNR++;
       Query39_RR(bNR);
-      if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
+      if (Input39() != SER_GOODCHECK) return GetULong64Error(1);
       AddBuffRecord39(8, IndexInBuff()-8-3);
     //  DelayOff();
     }
 
     bNR++;
     Query39_RR(bNR);
-    if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
+    if (Input39() != SER_GOODCHECK) return GetULong64Error(1);
   //  DelayOff();
 
 
@@ -145,7 +145,7 @@ ulong64_ QueryCntMon38_Full(uchar  ibMon)
       bNS++;
   //  uchar bBlockNumber = 1;
       QueryNextBlock39(bNS, bNR, bInvokeId, bBlockNumber);
-      if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
+      if (Input39() != SER_GOODCHECK) return GetULong64Error(1);
 
       fUseBlocks1 = UseBlocksDMLS();
       fLastBlock1 = LastBlockDMLS();
@@ -156,14 +156,14 @@ ulong64_ QueryCntMon38_Full(uchar  ibMon)
       while (!LastSegmentDMLS()) {
         bNR++;
         Query39_RR(bNR);
-        if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
+        if (Input39() != SER_GOODCHECK) return GetULong64Error(1);
         AddBuffRecord39(8, IndexInBuff()-8-3);
       //  DelayOff();
       }
 
       bNR++;
       Query39_RR(bNR);
-      if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
+      if (Input39() != SER_GOODCHECK) return GetULong64Error(1);
     //  DelayOff();
     }
 
@@ -172,12 +172,12 @@ ulong64_ QueryCntMon38_Full(uchar  ibMon)
     if (r.bError != 0)
     {
       MonitorString("\n Error="); MonitorCharDec(r.bError);
-      return GetLong64Error(1);
+      return GetULong64Error(1);
     }
     if (r.fFirst == false)
     {
       MonitorString("\n No Data");
-      return GetLong64Error(1);
+      return GetULong64Error(1);
     }
 
     ddw = r.ddwValue;
@@ -185,10 +185,10 @@ ulong64_ QueryCntMon38_Full(uchar  ibMon)
 
 
   Query39_DISC();
-  if (Input39() != SER_GOODCHECK) return GetLong64Error(1);
+  if (Input39() != SER_GOODCHECK) return GetULong64Error(1);
 //  DelayOff();
 
-  return GetLong64(ddw, true, 0);
+  return GetULong64(ddw, true, 0);
 }
 
 
