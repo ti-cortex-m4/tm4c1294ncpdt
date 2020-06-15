@@ -19,7 +19,7 @@ params34.c
 #include "io39.h"
 #include "query_params_39.h"
 #include "fragment_open_39.h"
-#include "hdlc_read_register.h"
+#include "dlms_read_register.h"
 #include "params39.h"
 
 

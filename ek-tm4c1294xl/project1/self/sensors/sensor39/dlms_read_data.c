@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-hdlc_read_data.c
+dlms_read_data.c
 
 Blue Book: 4.1.5 Common data types
 ------------------------------------------------------------------------------*/
@@ -15,7 +15,7 @@ Blue Book: 4.1.5 Common data types
 // #include "io39.h"
 // #include "hdlc_address.h"
 // #include "dlms_push.h"
-#include "hdlc_read_data.h"
+#include "dlms_read_data.h"
 
 
 

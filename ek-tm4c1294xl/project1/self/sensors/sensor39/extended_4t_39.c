@@ -25,7 +25,7 @@ extended_4t_39.c
 #include "fragment_open_39.h"
 #include "io39.h"
 #include "hdlc_address.h"
-#include "hdlc_read_register.h"
+#include "dlms_read_register.h"
 #include "extended_4t_39.h"
 
 
