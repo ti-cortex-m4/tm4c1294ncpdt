@@ -48,7 +48,6 @@ const obis_t *GetOBIS(uchar  ibTariff)
 
 
 
-// TODO scale
 status  CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
 {
   runner39 r = InitRunner();
@@ -80,10 +79,14 @@ status  CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
 
   bool present = (IsEngMonPresent39() == 0);
   bool absent = (IsEngMonAbsent39() == 0);
-  InitPop(17 + GetHdlcAddressesSize());
-  ulong64_ ddw2 = PopUnsignedValueDLSM(); // TODO
 
-#ifdef  MONITOR_39
+  ulong64_ ddw2 = GetLong64Error(-1, false, 0);
+  if (present) {
+    InitPop(17 + GetHdlcAddressesSize());
+    ulong64_ ddw2 = PopUnsignedValueDLSM();
+  }
+
+#ifdef MONITOR_39
   MonitorString("\n present="); MonitorBool(present);
   MonitorString("\n absent="); MonitorBool(absent);
   MonitorString("\n value.valid="); MonitorBool(ddw2.fValid);
@@ -158,9 +161,9 @@ double2 TestCntMonCanTariff39(void)
   uchar bMonth = (*GetCurrTimeDate()).bMonth;
   uchar i;
   for (i=0; i<1/*0*/; i++) {
-    uchar ibMonAbs = (12 + bMonth - 1 - i) % 12;
-    MonitorString("\n\n ibMonAbs="); MonitorCharDec(ibMonAbs);
-    status s = ReadCntMonCanTariff39(ibMonAbs, 0);
+    uchar ibMonthAbs = (12 + bMonth - 1 - i) % 12;
+    MonitorString("\n\n ibMonthAbs="); MonitorCharDec(ibMonthAbs);
+    status s = ReadCntMonCanTariff39(ibMonthAbs, 0);
     MonitorString("\n Status="); MonitorCharDec(s);
   }
 

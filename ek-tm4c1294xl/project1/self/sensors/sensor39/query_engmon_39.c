@@ -201,7 +201,7 @@ uchar   IsEngMonPresent39(void)
 {
   InitPop(12 + GetHdlcAddressesSize());
 
-  if (PopChar() != 0) return 1; // !OK
+  if (PopChar() != 0) return 1; // !success
   if (PopChar() != 1) return 2; // !array
   if (PopChar() != 1) return 3; // array size != 1
   if (PopChar() != 2) return 4; // !structure
@@ -215,7 +215,7 @@ uchar   IsEngMonAbsent39(void)
 {
   InitPop(12 + GetHdlcAddressesSize());
 
-  if (PopChar() != 0) return 1; // !OK
+  if (PopChar() != 0) return 1; // !success
   if (PopChar() != 1) return 2; // !array
   if (PopChar() != 0) return 3; // array size != 0
 
@@ -223,9 +223,10 @@ uchar   IsEngMonAbsent39(void)
 }
 
 
+
 /*
 7e a0 1d 03 03 74 32 9d e6 e7 00 c4 01 81  00 01 01 02 01 15  00 00 00 00 00 00 0f 31  1d 75 7e
-00 ok
+00 success
 01 array
 01 array size
 02 structure
@@ -234,7 +235,7 @@ uchar   IsEngMonAbsent39(void)
 value=3889
 
 7e a0 12 03 03 74 cb 2f e6 e7 00 c4 01 81  00 01 00  3d ce 7e
-00 ok
+00 success
 01 array
 00 array size
 no value
