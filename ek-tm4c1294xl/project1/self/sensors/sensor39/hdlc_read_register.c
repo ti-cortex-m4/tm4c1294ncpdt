@@ -47,7 +47,7 @@ long64_ ReadRegisterScaler(void)
 
 
 
-double2 ReadValue39(const obis_t  obis, runner39*  pr)
+double2 ReadRegister39(const obis_t  obis, runner39*  pr)
 {
   (*pr).bNS++;
   (*pr).bInvokeId++;
@@ -90,13 +90,13 @@ double2 ReadScaler39(const obis_t  obis, runner39*  pr)
 
 
 
-float2  ReadRegisterWithScaler39(const obis_t  obis, runner39*  pr)
+double2 ReadRegisterWithScaler39(const obis_t  obis, runner39*  pr)
 {
-  double2 value = ReadValue39(obis, pr);
-  if (!value.fValid) return GetFloat2Error();
+  double2 value = ReadRegister39(obis, pr);
+  if (!value.fValid) return GetDouble2Error();
 
   double2 scaler = ReadScaler39(obis, pr);
-  if (!scaler.fValid) return GetFloat2Error();
+  if (!scaler.fValid) return GetDouble2Error();
 
-  return GetFloat2(value.dbValue * scaler.dbValue, true);
+  return GetDouble2(value.dbValue * scaler.dbValue, true);
 }
