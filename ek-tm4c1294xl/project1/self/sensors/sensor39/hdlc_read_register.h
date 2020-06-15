@@ -5,9 +5,9 @@ hdlc_read_register.h
 
 ------------------------------------------------------------------------------*/
 
-long64_ ReadRegisterScaler(void);
+long64_ ReadRegisterScalerDLMS(void);
 
-double2 ReadRegister39(const obis_t  obis, runner39*  pr);
-double2 ReadScaler39(const obis_t  obis, runner39*  pr);
+double2 ReadRegisterValue39(const obis_t  obis, runner39*  pr);
+double2 ReadRegisterScaler39(const obis_t  obis, runner39*  pr);
 
-double2 ReadRegisterWithScaler39(const obis_t  obis, runner39*  pr);
+double2 ReadRegisterValueWithScaler39(const obis_t  obis, runner39*  pr);
