@@ -83,52 +83,7 @@ uint    ReadType18ULong16(void)
 
 
 
-
-
-
-ulong64_ ReadUnsignedValueDLSM(void)
-{
-  InitPop(12 + GetHdlcAddressesSize());
-
-  uchar bDataAccessResult = PopChar();
-#ifdef MONITOR_39
-  MonitorString("\n bDataAccessResult="); MonitorCharDec(bDataAccessResult);
-#endif
-  if (bDataAccessResult != 0) {
-    // error(no_success, bDataAccessResult)
-    return GetLong64Error(0);
-  }
-
-  return PopUnsignedValueDLSM();
-}
-
-
 // 7e a0 16 03 03 96 3b 99 e6 e7 00 c4 01 83  00 02 02 0f 00 16 1e  ff ba 7e
-long64_ ReadRegisterScaler(void)
-{
-  InitPop(12 + GetHdlcAddressesSize());
-
- uchar bDataAccessResult = PopChar();
-#ifdef MONITOR_39
- MonitorString("\n bDataAccessResult="); MonitorCharDec(bDataAccessResult);
-#endif
- if (bDataAccessResult != 0) {
-   // TODO error(no_success, bDataAccessResult)
-   return GetLong64Error(1);
- }
-
-  if (PopChar() != 2) return GetLong64Error(2); // !structure
-  if (PopChar() != 2) return GetLong64Error(3); // structure size != 1
-
-  long64_ scaler = PopSignedValueDLSM();
-  ulong64_ unit = PopUnsignedValueDLSM();
-#ifdef MONITOR_39
-  MonitorString("\n Scaler="); MonitorIntHex(scaler % 0x10000);
-  MonitorString("\n Unit="); MonitorIntDec(unit % 0x10000);
-#endif
-
-  return GetSignedLong64(scaler, true, 0);
-}
 
 
 
