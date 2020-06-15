@@ -96,6 +96,11 @@ ulong64_ PopUnsignedValueDLSM(void)
     uchar value = PopChar();
     return GetLong64(value, true, 0);
   }
+  if (bDataType == 22) // enum [22] 0…255
+  {
+    uchar value = PopChar();
+    return GetLong64(value, true, 0);
+  }
   if (bDataType == 18) // long-unsigned [18] Unsigned16 0…65_535
   {
     uint value = PopIntBig();
