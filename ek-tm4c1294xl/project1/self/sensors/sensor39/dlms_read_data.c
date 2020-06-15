@@ -11,10 +11,7 @@ Blue Book: 4.1.5 Common data types
 #include "../../serial/ports_devices.h"
 #include "../../serial/monitor.h"
 #include "include39.h"
-// #include "crc16x25.h"
-// #include "io39.h"
- #include "hdlc_address.h"
-// #include "dlms_push.h"
+#include "hdlc_address.h"
 #include "dlms_read_data.h"
 
 
@@ -23,7 +20,7 @@ ulong64_ PopUnsignedValueDLSM(void)
 {
   uchar bDataType = PopChar();
 #ifdef MONITOR_39  
-  MonitorString("\n bDataType="); MonitorCharDec(bDataType);
+  MonitorString("\n DataType="); MonitorCharDec(bDataType);
 #endif  
 
   if (bDataType == 17) // unsigned [17] Unsigned8 0…255
@@ -61,7 +58,7 @@ slong64_ PopSignedValueDLSM(void)
 {
   uchar bDataType = PopChar();
 #ifdef MONITOR_39  
-  MonitorString("\n bDataType="); MonitorCharDec(bDataType);
+  MonitorString("\n DataType="); MonitorCharDec(bDataType);
 #endif  
 
   if (bDataType == 15) // integer [15] Integer8 -128…127
@@ -97,7 +94,7 @@ ulong64_ ReadUnsignedValueDLSM(void)
 
   uchar bDataAccessResult = PopChar();
 #ifdef MONITOR_39
-  MonitorString("\n bDataAccessResult="); MonitorCharDec(bDataAccessResult);
+  MonitorString("\n DataAccessResult="); MonitorCharDec(bDataAccessResult);
 #endif
   if (bDataAccessResult != 0) {
     // error(no_success, bDataAccessResult)

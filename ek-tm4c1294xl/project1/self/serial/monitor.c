@@ -4,6 +4,7 @@ MONITOR.C
 
 ------------------------------------------------------------------------------*/
 
+#include <math.h>
 #include "../main.h"
 #include "utils/uartstdio.h"
 #include "../time/rtc.h"
@@ -138,7 +139,8 @@ void    MonitorDouble6(double  db)
   {
     MonitorLong("%u", (ulong)db);
     MonitorString(".");
-    MonitorLong("%06u", (ulong)(db * 1000000));
+    double integral = 0;
+    MonitorLong("%06u", (ulong)(modf(db, &integral) * 1000000));
   }
 }
 
