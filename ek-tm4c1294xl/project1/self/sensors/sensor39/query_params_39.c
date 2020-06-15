@@ -126,23 +126,23 @@ long64_ PopSignedValueDLSM(void)
 
   if (bDataType == 17) // unsigned [17] Unsigned8 0…255
   {
-    uchar value = PopIntBig();
-    return GetLong64(value, true, 0);
+    schar value = PopIntBig();
+    return GetSignedLong64(value, true, 0);
   }
   if (bDataType == 18) // long-unsigned [18] Unsigned16 0…65_535
   {
-    uint value = PopIntBig();
-    return GetLong64(value, true, 0);
+    sint value = PopIntBig();
+    return GetSignedLong64(value, true, 0);
   }
   if (bDataType == 6) // double-long-unsigned [6] Unsigned32 0…4_294_967_295
   {
-    ulong value = PopLongBig();
-    return GetLong64(value, true, 0);
+    slong value = PopLongBig();
+    return GetSignedLong64(value, true, 0);
   }
   if (bDataType == 21) // long64-unsigned [21] Unsigned64 0…2^64-1
   {
-    uint64_t value = PopLongBig()*0x100000000 + PopLongBig();
-    return GetLong64(value, true, 0);
+    int64_t value = PopLongBig()*0x100000000 + PopLongBig();
+    return GetSignedLong64(value, true, 0);
   }
 
   // error(unknown_data_type, bDataType)
