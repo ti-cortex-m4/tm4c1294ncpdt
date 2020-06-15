@@ -93,7 +93,7 @@ ulong64_ PopUnsignedValueDLSM(void)
 
   if (bDataType == 17) // unsigned [17] Unsigned8 0…255
   {
-    uchar value = PopIntBig();
+    uchar value = PopChar();
     return GetLong64(value, true, 0);
   }
   if (bDataType == 18) // long-unsigned [18] Unsigned16 0…65_535
@@ -124,22 +124,22 @@ long64_ PopSignedValueDLSM(void)
   MonitorString("\n bDataType="); MonitorCharDec(bDataType);
 #endif  
 
-  if (bDataType == 17) // unsigned [17] Unsigned8 0…255
+  if (bDataType == 15) // integer [15] Integer8 -128…127
   {
-    schar value = PopIntBig();
+    schar value = PopChar();
     return GetSignedLong64(value, true, 0);
   }
-  if (bDataType == 18) // long-unsigned [18] Unsigned16 0…65_535
+  if (bDataType == 16) // long [16] Integer16 -32_768…32_767
   {
     sint value = PopIntBig();
     return GetSignedLong64(value, true, 0);
   }
-  if (bDataType == 6) // double-long-unsigned [6] Unsigned32 0…4_294_967_295
+  if (bDataType == 5) // double-long [5] Integer32 -2_147_483_648…2_147_483_647
   {
     slong value = PopLongBig();
     return GetSignedLong64(value, true, 0);
   }
-  if (bDataType == 21) // long64-unsigned [21] Unsigned64 0…2^64-1
+  if (bDataType == 20) // long64 [20] Integer64 - 2^63…2^63-1
   {
     int64_t value = PopLongBig()*0x100000000 + PopLongBig();
     return GetSignedLong64(value, true, 0);
