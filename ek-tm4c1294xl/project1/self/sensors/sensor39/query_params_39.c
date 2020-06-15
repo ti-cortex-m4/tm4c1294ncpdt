@@ -117,6 +117,40 @@ ulong64_ PopUnsignedValueDLSM(void)
 }
 
 
+long64_ PopSignedValueDLSM(void)
+{
+  uchar bDataType = PopChar();
+#ifdef MONITOR_39  
+  MonitorString("\n bDataType="); MonitorCharDec(bDataType);
+#endif  
+
+  if (bDataType == 17) // unsigned [17] Unsigned8 0…255
+  {
+    uchar value = PopIntBig();
+    return GetLong64(value, true, 0);
+  }
+  if (bDataType == 18) // long-unsigned [18] Unsigned16 0…65_535
+  {
+    uint value = PopIntBig();
+    return GetLong64(value, true, 0);
+  }
+  if (bDataType == 6) // double-long-unsigned [6] Unsigned32 0…4_294_967_295
+  {
+    ulong value = PopLongBig();
+    return GetLong64(value, true, 0);
+  }
+  if (bDataType == 21) // long64-unsigned [21] Unsigned64 0…2^64-1
+  {
+    uint64_t value = PopLongBig()*0x100000000 + PopLongBig();
+    return GetLong64(value, true, 0);
+  }
+
+  // error(unknown_data_type, bDataType)
+  return GetLong64Error(1);
+}
+
+
+
 ulong64_ ReadUnsignedValueDLSM(void)
 {
   InitPop(12 + GetHdlcAddressesSize());

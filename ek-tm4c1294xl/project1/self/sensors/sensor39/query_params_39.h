@@ -10,6 +10,8 @@ void    QueryGetRegisterScalerDLMS(const obis_t  obis, runner39  r);
 uint    ReadType18ULong16(void);
 
 ulong64_ PopUnsignedValueDLSM(void);
+long64_ PopSignedValueDLSM(void);
+
 ulong64_ ReadUnsignedValueDLSM(void);
 
 schar2  ReadRegisterScaler(void);
