@@ -28,7 +28,7 @@ slong64_ ReadRegisterScalerDLMS(void)
 
  uchar bDataAccessResult = PopChar();
 #ifdef MONITOR_39
- MonitorString("\n bDataAccessResult="); MonitorCharDec(bDataAccessResult);
+ MonitorString("\n DataAccessResult="); MonitorCharDec(bDataAccessResult);
 #endif
  if (bDataAccessResult != 0) {
    // TODO error(no_success, bDataAccessResult)
@@ -45,8 +45,8 @@ slong64_ ReadRegisterScalerDLMS(void)
   if (!unit.fValid) return GetSLong64Error(5);
 
 #ifdef MONITOR_39
-  MonitorString("\n Scaler="); MonitorCharHex(scaler.ddwValue % 0x100);
-  MonitorString("\n Unit="); MonitorCharDec(unit.ddwValue % 0x100);
+  MonitorString("\n scaler="); MonitorCharHex(scaler.ddwValue % 0x100);
+  MonitorString("\n unit="); MonitorCharDec(unit.ddwValue % 0x100);
 #endif
 
   return GetSLong64(scaler.ddwValue, true, 0);
@@ -90,7 +90,7 @@ double2 ReadRegisterScaler39(const obis_t  obis, runner39*  pr)
 
   double dbScaler = pow(10, scaler.ddwValue);
 #ifdef MONITOR_39  
-  MonitorString("\n Scaler="); MonitorDouble6(dbScaler);
+  MonitorString("\n scaler="); MonitorDouble6(dbScaler);
 #endif  
   return GetDouble2(dbScaler, true);
 }
