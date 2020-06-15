@@ -54,50 +54,50 @@ float2  ReadParam39_Internal(void)
   FragmentOpen39(&r);
 
 
-  float2 fl2;
+  double2 db2;
 
-  fl2 = ReadRegisterWithScaler39(obisU1, &r);
-  if (!fl2.fValid) return GetFloat2Error();
-  flU1 = fl2.flValue;
+  db2 = ReadRegisterValueWithScaler39(obisU1, &r);
+  if (!db2.fValid) return GetFloat2Error();
+  flU1 = db2.dbValue;
 
-  fl2 = ReadRegisterWithScaler39(obisU2, &r);
-  if (!fl2.fValid) return GetFloat2Error();
-  flU2 = fl2.flValue;
+  db2 = ReadRegisterValueWithScaler39(obisU2, &r);
+  if (!db2.fValid) return GetFloat2Error();
+  flU2 = db2.dbValue;
 
-  fl2 = ReadRegisterWithScaler39(obisU3, &r);
-  if (!fl2.fValid) return GetFloat2Error();
-  flU3 = fl2.flValue;
-
-
-  fl2 = ReadRegisterWithScaler39(obisI1, &r);
-  if (!fl2.fValid) return GetFloat2Error();
-  flI1 = fl2.flValue*1000;
-
-  fl2 = ReadRegisterWithScaler39(obisI2, &r);
-  if (!fl2.fValid) return GetFloat2Error();
-  flI2 = fl2.flValue*1000;
-
-  fl2 = ReadRegisterWithScaler39(obisI3, &r);
-  if (!fl2.fValid) return GetFloat2Error();
-  flI3 = fl2.flValue*1000;
+  db2 = ReadRegisterValueWithScaler39(obisU3, &r);
+  if (!db2.fValid) return GetFloat2Error();
+  flU3 = db2.dbValue;
 
 
-  fl2 = ReadRegisterWithScaler39(obisPplus, &r);
-  if (!fl2.fValid) return GetFloat2Error();
-  flPplus = fl2.flValue;
+  db2 = ReadRegisterValueWithScaler39(obisI1, &r);
+  if (!db2.fValid) return GetFloat2Error();
+  flI1 = db2.dbValue*1000;
 
-  fl2 = ReadRegisterWithScaler39(obisPminus, &r);
-  if (!fl2.fValid) return GetFloat2Error();
-  flPminus = fl2.flValue;
+  db2 = ReadRegisterValueWithScaler39(obisI2, &r);
+  if (!db2.fValid) return GetFloat2Error();
+  flI2 = db2.dbValue*1000;
+
+  db2 = ReadRegisterValueWithScaler39(obisI3, &r);
+  if (!db2.fValid) return GetFloat2Error();
+  flI3 = db2.dbValue*1000;
 
 
-  fl2 = ReadRegisterWithScaler39(obisQplus, &r);
-  if (!fl2.fValid) return GetFloat2Error();
-  flQplus = fl2.flValue;
+  db2 = ReadRegisterValueWithScaler39(obisPplus, &r);
+  if (!db2.fValid) return GetFloat2Error();
+  flPplus = db2.dbValue;
 
-  fl2 = ReadRegisterWithScaler39(obisQminus, &r);
-  if (!fl2.fValid) return GetFloat2Error();
-  flQminus = fl2.flValue;
+  db2 = ReadRegisterValueWithScaler39(obisPminus, &r);
+  if (!db2.fValid) return GetFloat2Error();
+  flPminus = db2.dbValue;
+
+
+  db2 = ReadRegisterValueWithScaler39(obisQplus, &r);
+  if (!db2.fValid) return GetFloat2Error();
+  flQplus = db2.dbValue;
+
+  db2 = ReadRegisterValueWithScaler39(obisQminus, &r);
+  if (!db2.fValid) return GetFloat2Error();
+  flQminus = db2.dbValue;
 
 
   Query39_DISC();

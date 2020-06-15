@@ -4,6 +4,7 @@ dlms_read_register.c
 Blue Book: 4.3.2 Register (class_id = 3, version = 0)
 ------------------------------------------------------------------------------*/
 
+#include <math.h>
 #include "../../main.h"
 #include "../../kernel/wrappers.h"
 #include "../../serial/ports.h"
@@ -11,10 +12,11 @@ Blue Book: 4.3.2 Register (class_id = 3, version = 0)
 #include "../../serial/ports_devices.h"
 #include "../../serial/monitor.h"
 #include "include39.h"
-// #include "crc16x25.h"
+#include "device39.h"
 #include "io39.h"
-// #include "hdlc_address.h"
-// #include "dlms_push.h"
+ #include "hdlc_address.h"
+ #include "dlms_push.h"
+#include "query_params_39.h"
 #include "dlms_read_data.h"
 #include "dlms_read_register.h"
 
@@ -30,24 +32,24 @@ slong64_ ReadRegisterScalerDLMS(void)
 #endif
  if (bDataAccessResult != 0) {
    // TODO error(no_success, bDataAccessResult)
-   return GetULong64Error(1);
+   return GetSLong64Error(1);
  }
 
-  if (PopChar() != 2) return GetULong64Error(2); // !structure
-  if (PopChar() != 2) return GetULong64Error(3); // structure size != 1
+  if (PopChar() != 2) return GetSLong64Error(2); // !structure
+  if (PopChar() != 2) return GetSLong64Error(3); // structure size != 1
 
   slong64_ scaler = PopSignedValueDLSM();
-  if (!scaler.fValid) return GetULong64Error(4);
+  if (!scaler.fValid) return GetSLong64Error(4);
 
   ulong64_ unit = PopUnsignedValueDLSM();
-  if (!unit.fValid) return GetULong64Error(5);
+  if (!unit.fValid) return GetSLong64Error(5);
 
 #ifdef MONITOR_39
   MonitorString("\n Scaler="); MonitorCharHex(scaler.ddwValue % 0x100);
   MonitorString("\n Unit="); MonitorCharDec(unit.ddwValue % 0x100);
 #endif
 
-  return GetSLong64(scaler, true, 0);
+  return GetSLong64(scaler.ddwValue, true, 0);
 }
 
 
