@@ -21,6 +21,7 @@ void    MonitorLongDec(ulong  dw);
 void    MonitorLongHex(ulong  dw);
 void    MonitorLongDec4(ulong  dw);
 void    MonitorLong64Hex(uint64_t  ddw);
+void    MonitorDouble6(double  db);
 void    MonitorTime(time  ti);
 
 void    MonitorOut(uint  cwIn, uint  cwOut);

@@ -132,6 +132,18 @@ void    MonitorLong64Hex(uint64_t  ddw)
 }
 
 
+void    MonitorDouble6(double  db)
+{
+  if (UseMonitor())
+  {
+    MonitorLong("%u", (ulong)db);
+    MonitorString(".");
+    MonitorLong("%06u", (ulong)(db * 1000000));
+  }
+}
+
+
+
 void    MonitorTime(time  ti)
 {
   if (UseMonitor())
