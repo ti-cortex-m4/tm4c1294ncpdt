@@ -45,7 +45,7 @@ uchar   FragmentProfile39(runner39  *pr, time  ti1, time  ti2)
     (*pr).bNR++;
     Query39_RR((*pr).bNR);
     if (Input39() != SER_GOODCHECK) return 2;
-    AddBuffRecord39(8/*, IndexInBuff()-8-3*/);
+    AddBuffRecord39(6 + GetHdlcAddressesSize()/*, IndexInBuff()-8-3*/);
     DelayOff();
   }
 
@@ -69,14 +69,14 @@ uchar   FragmentProfile39(runner39  *pr, time  ti1, time  ti2)
     fUseBlocks1 = UseBlocksDMLS();
     fLastBlock1 = LastBlockDMLS();
 
-    AddBuffRecord39(22/*, IndexInBuff()-22-3*/);
+    AddBuffRecord39(20 + GetHdlcAddressesSize()/*, IndexInBuff()-22-3*/);
     DelayOff();
 
     while (!LastSegmentDMLS()) {
       (*pr).bNR++;
       Query39_RR((*pr).bNR);
       if (Input39() != SER_GOODCHECK) return 5;
-      AddBuffRecord39(8/*, IndexInBuff()-8-3*/);
+      AddBuffRecord39(6 + GetHdlcAddressesSize()/*, IndexInBuff()-8-3*/);
       DelayOff();
     }
 
@@ -97,8 +97,8 @@ uchar   FragmentProfile39(runner39  *pr, time  ti1, time  ti2)
 
 double2 TestFragmentProfile39(void)
 {
-  fMonitorLogBasic = false;
-  fMonitorLogHex = false;
+//  fMonitorLogBasic = false;
+//  fMonitorLogHex = false;
 
   MonitorOpen(0);
 
