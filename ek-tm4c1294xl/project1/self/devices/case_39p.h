@@ -152,7 +152,7 @@
         if (!ValidateSframe_Profile()) {
           ErrorProfile();
         } else {
-          Read1_Profile();
+          Read2_Profile();
           MakePause(DEV_16_39P);
         }
       } else {
@@ -172,12 +172,35 @@
         if (!ValidateSframe_Profile()) {
           ErrorProfile();
         } else {
-          MakePause(DEV_11_39P);
+          Read3_Profile();
+          if (UseBlocks_Profile()) {
+            QueryNextBlock39_Profile();
+          } else {
+            MakePause(DEV_A_39P);            
+          }
         }
       } else {
         ErrorProfile();
       }
       break;
+
+
+    case DEV_A_39P:
+      cbRepeat = MaxRepeats();
+      Query39_RR_Profile();
+      SetCurr(DEV_B_39P);
+      break;
+
+    case DEV_B_39P:
+      if (mpSerial[ibPort] == SER_GOODCHECK) {
+        if (!ValidateSframe_Profile()) {
+        } else {
+        }
+      } else {
+        ErrorProfile();
+      }
+      break;
+
 
     case DEV_XX_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK)  {
