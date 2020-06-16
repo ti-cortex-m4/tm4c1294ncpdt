@@ -68,6 +68,7 @@ AUTOMATIC2!C
 #include "sensor39/params39.h"
 
 double2 TestCntMonCanTariff39(void);
+double2 TestFragmentProfile39(void);
 
 
 
@@ -1930,7 +1931,7 @@ double2 ReadCntCurrCan(uchar  ibCan)
 #endif
 
 #ifndef SKIP_39
-    case 39: return TestProfile39(); //ReadCntCurr39();
+    case 39: return TestFragmentProfile39(); //TestProfile39(); //ReadCntCurr39();
 #endif
 
     default: return GetDouble2Error();
