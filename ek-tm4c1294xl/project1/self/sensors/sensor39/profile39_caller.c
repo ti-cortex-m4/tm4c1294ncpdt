@@ -20,6 +20,8 @@ profile39_caller.c
 
 
 static caller39         c;
+static bool             fUseBlocks;
+static bool             fLastBlock;
 
 
 
@@ -78,4 +80,17 @@ void    QueryProfile39_Profile(void) {
   c.bNS++;
   c.bInvokeId++;
   QueryProfile39(c.bNS, c.bNR, c.bInvokeId, t2.ti1, t2.ti2);
+}
+
+
+void    Read1_Profile(void) {
+  fUseBlocks = UseBlocksDMLS();
+  fLastBlock = LastBlockDMLS();
+
+  AddBuffRecord39(fUseBlocks1 ? 20 + GetHdlcAddressesSize() : 13 + GetHdlcAddressesSize());
+}
+
+
+void    Read2_Profile(void) {
+   AddBuffRecord39(6 + GetHdlcAddressesSize();
 }
