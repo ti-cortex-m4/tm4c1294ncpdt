@@ -5,7 +5,7 @@ fragment_profile_39.c
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-#include "../../time/delay.h"
+// #include "../../time/delay.h"
 #include "../../serial/ports.h"
 #include "../../serial/monitor.h"
 #include "../../serial/monitor_settings.h"
@@ -29,7 +29,7 @@ record39 FragmentProfile39(caller39  *pc, time  ti1, time  ti2)
   (*pc).bInvokeId++;
   QueryProfile39((*pc).bNS, (*pc).bNR, (*pc).bInvokeId, ti1, ti2);
   if (Input39() != SER_GOODCHECK) return GetBuffRecordError(1);
-  DelayOff();
+  //DelayOff();
 
   bool fUseBlocks1 = UseBlocksDMLS();
   bool fLastBlock1 = LastBlockDMLS();
@@ -47,13 +47,13 @@ record39 FragmentProfile39(caller39  *pc, time  ti1, time  ti2)
     if (Input39() != SER_GOODCHECK) return GetBuffRecordError(2);
 
     AddBuffRecord39(6 + GetHdlcAddressesSize()/*, IndexInBuff()-8-3*/);
-    DelayOff();
+    //DelayOff();
   }
 
   (*pc).bNR++;
   Query39_RR((*pc).bNR);
   if (Input39() != SER_GOODCHECK) return GetBuffRecordError(3);
-  DelayOff();
+  //DelayOff();
 
 
 
@@ -71,7 +71,7 @@ record39 FragmentProfile39(caller39  *pc, time  ti1, time  ti2)
     fLastBlock1 = LastBlockDMLS();
 
     AddBuffRecord39(20 + GetHdlcAddressesSize()/*, IndexInBuff()-22-3*/);
-    DelayOff();
+    //DelayOff();
 
     while (!LastSegmentDMLS()) {
       (*pc).bNR++;
@@ -79,13 +79,13 @@ record39 FragmentProfile39(caller39  *pc, time  ti1, time  ti2)
       if (Input39() != SER_GOODCHECK) return GetBuffRecordError(5);
       
       AddBuffRecord39(6 + GetHdlcAddressesSize()/*, IndexInBuff()-8-3*/);
-      DelayOff();
+      //DelayOff();
     }
 
     (*pc).bNR++;
     Query39_RR((*pc).bNR);
     if (Input39() != SER_GOODCHECK) return GetBuffRecordError(6);
-    DelayOff();
+    //DelayOff();
   }
 
 

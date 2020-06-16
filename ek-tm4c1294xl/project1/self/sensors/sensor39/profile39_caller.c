@@ -69,3 +69,15 @@ bool    ValidateIframe_Profile(void)
 {
   return ValidateIframe(c.bNS, c.bNR);
 };
+
+
+
+void    InitProfile39(void) {
+  InitHeader39();
+  InitBuffRecord39();
+}
+
+
+void    QueryProfile39_(void) {
+  QueryHeader39(&c);
+}
