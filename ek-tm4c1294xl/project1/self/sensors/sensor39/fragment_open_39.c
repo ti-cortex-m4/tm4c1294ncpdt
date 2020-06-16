@@ -12,7 +12,7 @@ fragment_open_39.c
 
 
 
-uchar   FragmentOpen39(caller39  *pr)
+uchar   FragmentOpen39(caller39  *pc)
 {
   Query39_DISC();
   if (Input39() != SER_GOODCHECK) return 1;
@@ -22,15 +22,15 @@ uchar   FragmentOpen39(caller39  *pr)
   if (Input39() != SER_GOODCHECK) return 2;
 //  DelayOff();
 
-  Query39_AARQ((*pr).bNS, (*pr).bNR);
+  Query39_AARQ((*pc).bNS, (*pc).bNR);
   if (Input39() != SER_GOODCHECK) return 3;
-  if (!ValidateIframe((*pr).bNS, (*pr).bNR)) return 4;
+  if (!ValidateIframe((*pc).bNS, (*pc).bNR)) return 4;
 //  DelayOff();
 
-  (*pr).bNR++;
-  Query39_RR((*pr).bNR);
+  (*pc).bNR++;
+  Query39_RR((*pc).bNR);
   if (Input39() != SER_GOODCHECK) return 5;
-  if (!ValidateSframe((*pr).bNR)) return 6;
+  if (!ValidateSframe((*pc).bNR)) return 6;
 //  DelayOff();
 
   return 0;

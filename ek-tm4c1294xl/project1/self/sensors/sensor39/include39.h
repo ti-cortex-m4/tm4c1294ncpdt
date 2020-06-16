@@ -17,7 +17,7 @@ typedef struct
   uchar         bNS;
   uchar         bNR;
   uchar         bInvokeId;
-} runner39;
+} caller39;
 
 
 typedef struct
