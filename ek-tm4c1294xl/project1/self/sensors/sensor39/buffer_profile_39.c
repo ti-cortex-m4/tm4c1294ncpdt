@@ -72,6 +72,8 @@ void    DeltaBuffPrf39(void)
   MonitorBuffPrf38();
 #endif
 
+  bool f = false;
+
   uchar i;
   for (i=0; i<PROFILE39_SIZE-1; i++)
   {
@@ -84,7 +86,7 @@ void    DeltaBuffPrf39(void)
       mpBuffPrf39[i].ddwValue = prf2.ddwValue - prf1.ddwValue;
       mpBuffPrf39[i].fExists = true;
 
-      cbBuffPrfSize39--;
+      f = true;
     }
     else
     {
@@ -93,6 +95,8 @@ void    DeltaBuffPrf39(void)
       mpBuffPrf39[i].fExists = false;
     }
   }
+
+  if (f) cbBuffPrfSize39--;
 
   i = PROFILE39_SIZE-1;
   mpBuffPrf39[i].tiTime = tiZero;
