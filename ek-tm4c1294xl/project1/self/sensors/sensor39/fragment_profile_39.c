@@ -7,11 +7,14 @@ fragment_profile_39.c
 #include "../../main.h"
 #include "../../time/delay.h"
 #include "../../serial/ports.h"
+#include "../../serial/monitor.h"
+#include "../../serial/monitor_settings.h"
 #include "device39.h"
 #include "query_profile_39.h"
 #include "query_next_block_39.h"
 #include "io39.h"
 #include "buffer_record_39.h"
+#include "fragment_open_39.h"
 #include "fragment_profile_39.h"
 
 
@@ -84,3 +87,41 @@ uchar   FragmentProfile39(runner39  *pr, time  ti1, time  ti2)
   FinishBuffRecord39();
   return 0;
 }
+
+
+
+#ifdef  MONITOR_39
+
+double2 TestFragmentProfile39(void)
+{
+  fMonitorLogBasic = false;
+  fMonitorLogHex = false;
+
+  MonitorOpen(0);
+
+  runner39 r = InitRunner();
+
+  if (FragmentOpen39(&r) != 0) return GetDouble2Error();
+
+  time ti1;
+  ti1.bYear = 20;
+  ti1.bMonth = 4;
+  ti1.bDay = 1;
+  ti1.bHour = 0;
+  ti1.bMinute = 0;
+  ti1.bSecond = 0;
+
+  time ti2;
+  ti2.bYear = 20;
+  ti2.bMonth = 4;
+  ti2.bDay = 15;
+  ti2.bHour = 0;
+  ti2.bMinute = 0;
+  ti2.bSecond = 0;
+
+  if (FragmentProfile39(&r, ti1, ti2) != 0) return GetDouble2Error();
+
+  return GetDouble2(0, true);
+}
+
+#endif
