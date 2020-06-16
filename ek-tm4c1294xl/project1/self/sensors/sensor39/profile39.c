@@ -17,10 +17,11 @@ profile39*c
  #include "../../devices/devices_time.h"
  #include "../../digitals/limits.h"
  #include "../../special/special.h"
-##include "../../kernel/tuples.h"
+#include "../../kernel/tuples.h"
 #include "device39.h"
 #include "time39.h"
 #include "io39.h"
+#include "buffer_record_39.h"
 #include "fragment_open_39.h"
 #include "fragment_profile_39.h"
 #include "buffer_profile_39.h"
@@ -66,7 +67,7 @@ void    InitHeader39(void)
 
 
 
-t2time  QueryHeader39(caller39*  pr)
+t2time  QueryHeader39(void)
 {
   HideCurrTime(1);
 
@@ -199,8 +200,8 @@ uchar   TestProfile39_Internal(caller39*  pc)
 
 
   while (true) {
-    t2time t2 = QueryHeader39(pc);
-    record39 d = FragmentProfile39(pr, t2.ti1, t2.ti2);
+    t2time t2 = QueryHeader39();
+    record39 d = FragmentProfile39(pc, t2.ti1, t2.ti2);
     if (d.bError != 0) return 11;
 
     if (ReadHeader39() == false) return 0;

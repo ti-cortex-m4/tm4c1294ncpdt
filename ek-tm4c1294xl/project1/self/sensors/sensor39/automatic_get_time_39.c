@@ -21,11 +21,9 @@ time2   QueryTime38_Full(void)
 {
   Query39_DISC();
   if (Input39() != SER_GOODCHECK) return GetTime2Error();
-//  DelayOff();
 
   Query39_SNRM();
   if (Input39() != SER_GOODCHECK) return GetTime2Error();
-//  DelayOff();
 
   uchar bNS = 0;
   uchar bNR = 0;
@@ -34,13 +32,11 @@ time2   QueryTime38_Full(void)
   Query39_AARQ(bNS, bNR);
   if (Input39() != SER_GOODCHECK) return GetTime2Error();
   if (!ValidateIframe(bNS, bNR)) return GetTime2Error();
-//  DelayOff();
 
   bNR++;
   Query39_RR(bNR);
   if (Input39() != SER_GOODCHECK) return GetTime2Error();
   if (!ValidateSframe(bNR)) return GetTime2Error();
-//  DelayOff();
 
 
   bNS++;
@@ -49,18 +45,15 @@ time2   QueryTime38_Full(void)
   if (Input39() != SER_GOODCHECK) return GetTime2Error();
   if (!ValidateIframe(bNS, bNR)) return GetTime2Error();
   time ti = ReadTime39();
-//  DelayOff();
 
   bNR++;
   Query39_RR(bNR);
   if (Input39() != SER_GOODCHECK) return GetTime2Error();
   if (!ValidateSframe(bNR)) return GetTime2Error();
-//  DelayOff();
 
 
   Query39_DISC();
   if (Input39() != SER_GOODCHECK) return GetTime2Error();
-//  DelayOff();
 
   return GetTime2(ti, true);
 }

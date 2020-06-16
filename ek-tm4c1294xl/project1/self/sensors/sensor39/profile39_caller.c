@@ -5,16 +5,16 @@ profile39_caller.c
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-// #include "../../memory/mem_digitals.h"
-// #include "../../memory/mem_Profile.h"
-// #include "../../memory/mem_factors.h"
-// #include "../../serial/ports.h"
-// #include "../../devices/devices.h"
-// #include "../../digitals/digitals.h"
 #include "../../kernel/tuples.h"
 // #include "io39.h"
 #include "device39.h"
+#include "time39.h"
+#include "hdlc_address.h"
 #include "hdlc_monitor.h"
+#include "buffer_record_39.h"
+#include "query_profile_39.h"
+#include "query_next_block_39.h"
+#include "profile39.h"
 #include "profile39_caller.h"
 
 
@@ -25,6 +25,7 @@ static bool             fUseBlocks;
 static bool             fLastBlock;
 
 static uchar            bBlockNumber;
+
 
 
 void    InitRunner39_Profile(void) { 
@@ -77,7 +78,7 @@ void    InitProfile39_Profile(void) {
 
 
 void    QueryProfile39_Profile(void) {
-  t2time t2 = QueryHeader39(&c);
+  t2time t2 = QueryHeader39();
 
   c.bNS++;
   c.bInvokeId++;
@@ -89,17 +90,17 @@ void    Read1_Profile(void) {
   fUseBlocks = UseBlocksDMLS();
   fLastBlock = LastBlockDMLS();
 
-  AddBuffRecord39(fUseBlocks1 ? 20 + GetHdlcAddressesSize() : 13 + GetHdlcAddressesSize());
+  AddBuffRecord39(fUseBlocks ? 20 + GetHdlcAddressesSize() : 13 + GetHdlcAddressesSize());
 }
 
 
 void    Read2_Profile(void) {
-   AddBuffRecord39(6 + GetHdlcAddressesSize();
+   AddBuffRecord39(6 + GetHdlcAddressesSize());
 }
 
 
 void    Read3_Profile(void) {
-  uchar bBlockNumber = 0;
+  bBlockNumber = 0;
 }
 
 
