@@ -160,6 +160,7 @@
         if (!ValidateSframe_Profile()) {
           ErrorProfile();
         } else {
+          ReadNotLastSegment(); // AddBuffRecord39(6 + GetHdlcAddressesSize()
           MakePause(DEV_11_39P);
         }
       } else {
