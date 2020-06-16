@@ -174,24 +174,24 @@ bool    ReadHeader39(void)
 
 #ifdef  MONITOR_39
 
-uchar   TestProfile39_Internal(caller39*  pr)
+uchar   TestProfile39_Internal(caller39*  pc)
 {  
-  if (FragmentOpen39(pr) != 0) return 6;
+  if (FragmentOpen39(pc) != 0) return 6;
 
 
-  (*pr).bNS++;
-  (*pr).bInvokeId++;
-  QueryTime39((*pr).bNS, (*pr).bNR, (*pr).bInvokeId);
+  (*pc).bNS++;
+  (*pc).bInvokeId++;
+  QueryTime39((*pc).bNS, (*pc).bNR, (*pc).bInvokeId);
   if (Input39() != SER_GOODCHECK) return 7;
-  if (!ValidateIframe((*pr).bNS, (*pr).bNR)) return 8;
+  if (!ValidateIframe((*pc).bNS, (*pc).bNR)) return 8;
   tiValue39 = ReadTime39();
   dwValue39 = DateToHouIndex(tiValue39);
   DelayOff();
 
-  (*pr).bNR++;
-  Query39_RR((*pr).bNR);
+  (*pc).bNR++;
+  Query39_RR((*pc).bNR);
   if (Input39() != SER_GOODCHECK) return 9;
-  if (!ValidateSframe((*pr).bNR)) return 10;
+  if (!ValidateSframe((*pc).bNR)) return 10;
   DelayOff();
 
 
@@ -199,7 +199,7 @@ uchar   TestProfile39_Internal(caller39*  pr)
 
 
   while (true) {
-    if (QueryHeader39(pr) != 0) return 11;
+    if (QueryHeader39(pc) != 0) return 11;
 
     if (ReadHeader39() == false) return 0;
     if (fKey == true) return 255;
