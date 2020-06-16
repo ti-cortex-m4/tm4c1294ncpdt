@@ -14,3 +14,6 @@ bool    ValidateIframe_Profile(void);
 
 void    InitProfile39_Profile(void);
 void    QueryProfile39_Profile(void);
+
+void    Read1_Profile(void);
+void    Read2_Profile(void);

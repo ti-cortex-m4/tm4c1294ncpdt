@@ -130,13 +130,7 @@
 
     case DEV_13_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK)  {
-        ReadProfile39();
-/*
-  bool fUseBlocks1 = UseBlocksDMLS();
-  bool fLastBlock1 = LastBlockDMLS();
-
-  AddBuffRecord39(fUseBlocks1 ? 20 + GetHdlcAddressesSize() : 13 + GetHdlcAddressesSize());
-*/
+        Read1_Profile();
         if (!LastSegmentDMLS()) {
           MakePause(DEV_14_39P);
         } else {          
@@ -158,8 +152,8 @@
         if (!ValidateSframe_Profile()) {
           ErrorProfile();
         } else {
-          ReadNotLastSegment(); // AddBuffRecord39(6 + GetHdlcAddressesSize()
-          MakePause(DEV_11_39P);
+          Read1_Profile();
+          MakePause(DEV_16_39P);
         }
       } else {
         ErrorProfile();
