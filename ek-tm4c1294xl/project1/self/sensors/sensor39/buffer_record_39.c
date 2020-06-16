@@ -26,7 +26,9 @@ void    InitBuffRecord39(void) {
 }
 
 
-void    AddBuffRecord39(uint  iwStart, uint  cwSize) {
+void    AddBuffRecord39(uint  iwStart/*, uint  cwSize*/) {
+  uint cwSize = IndexInBuff()-iwStart-3;
+
 #ifdef BUFF_RECORD_39
   MonitorX();
 
