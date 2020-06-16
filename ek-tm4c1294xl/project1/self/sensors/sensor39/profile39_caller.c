@@ -11,30 +11,27 @@ profile39_caller.c
 // #include "../../serial/ports.h"
 // #include "../../devices/devices.h"
 // #include "../../digitals/digitals.h"
-#include "io39.h"
+// #include "io39.h"
 #include "device39.h"
+#include "hdlc_monitor.h"
 #include "profile39_caller.h"
 
 
 
-static uchar            bNS;
-static uchar            bNR;
-static uchar            bInvokeId;
+static caller39         c;
 
 
 
 void    InitRunner39_Profile(void)
-{
-
+{ 
+  caller39 c = InitCaller();
 }
 
 
 
 void    Query39_DISC_Profile(void)
 {
-  bNS = 0;
-  bNR = 0;
-  bInvokeId = 0;
+  InitRunner39_Profile();
 
   Query39_DISC();
 }
@@ -42,48 +39,33 @@ void    Query39_DISC_Profile(void)
 
 void    Query39_AARQ_Profile(void)
 {
-  Query39_AARQ(bNS, bNR);
+  Query39_AARQ(c.bNS, c.bNR);
 }
 
 
 void    Query39_RR_Profile(void)
 {
-  bNR++;
-  Query39_RR(bNR);
+  c.bNR++;
+  Query39_RR(c.bNR);
 }
 
 
 void    QueryEngAbs39_Profile(void)
 {
-  bNS++;
-  bInvokeId++;
-  QueryEngAbs39(bNS, bNR, bInvokeId);
+  c.bNS++;
+  c.bInvokeId++;
+  QueryEngAbs39(c.bNS, c.bNR, c.bInvokeId);
 }
 
 
 
 bool    ValidateSframe_Profile(void)
 {
-  return ValidateSframe(bNR);
+  return ValidateSframe(c.bNR);
 }
 
 
 bool    ValidateIframe_Profile(void)
 {
-  return ValidateIframe(bNS, bNR);
+  return ValidateIframe(c.bNS, c.bNR);
 };
-
-
-
-void    SaveProfile39(void)
-{
-  dwProfile = ReadEngAbs39() % 0x100000000;
-}
-
-
-void    ReadProfile39(void)
-{
-  mpdwBaseDig[0] = dwProfile * mpdbPulseMnt[ibDig];
-
-  MakeProfile();
-}
