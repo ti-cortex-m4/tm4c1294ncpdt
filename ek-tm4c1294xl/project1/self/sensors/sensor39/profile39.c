@@ -79,8 +79,8 @@ t2time  QueryHeader39(void)
 
 #ifdef MONITOR_39
   MonitorString("\n QueryHeader39 ");
-  MonitorString(" ti1="); MonitorTime(ti1);
-  MonitorString(" ti2="); MonitorTime(ti2);
+  MonitorString(" from="); MonitorTime(ti1);
+  MonitorString(" to="); MonitorTime(ti2);
 #endif
 
   return GetTuple2Time(ti1,ti2);
@@ -89,11 +89,9 @@ t2time  QueryHeader39(void)
 
 static bool ReadData39(time  tiTime, ulong  dwValue)
 {
-  tiDig = tiTime; // TODO
+  sprintf(szLo," %02u    %02u.%02u.%02u", tiTime.bHour, tiTime.bDay,tiTime.bMonth,tiTime.bYear);
 
-  sprintf(szLo," %02u    %02u.%02u.%02u", tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
-
-  if (SearchDefHouIndex(tiDig) == 0) return(1);
+  if (SearchDefHouIndex(tiTime) == 0) return(1);
 
   ShowProgressDigHou();
 
@@ -104,11 +102,11 @@ static bool ReadData39(time  tiTime, ulong  dwValue)
   mpwChannels[0] = w;
 
 #ifdef MONITOR_39
-    MonitorString(" "); MonitorTime(tiDig);
-    MonitorString(" "); MonitorIntDec(mpwChannels[0]);
+    MonitorString(" out="); MonitorTime(tiTime);
+    MonitorString(" / "); MonitorIntDec(mpwChannels[0]);
 #endif
 
-  if (IsDefect(ibDig)) MakeSpecial(tiDig);
+  if (IsDefect(ibDig)) MakeSpecial(tiTime);
   return MakeStopHou(0);
 }
 
@@ -118,7 +116,7 @@ bool    ReadHeader39(void)
   DeltaBuffPrf39();
 
 #ifdef MONITOR_39
-//  MonitorString("\n ReadHeader39 ");
+  MonitorString("\n ReadHeader39 ");
 #endif
 
   uchar h;
@@ -129,7 +127,7 @@ bool    ReadHeader39(void)
     time tiVirtual = HouIndexToDate(dw);
 
 #ifdef MONITOR_39
-    MonitorString("\n "); MonitorTime(tiVirtual);
+    MonitorString("\n time="); MonitorTime(tiVirtual);
 #endif
 
     ulong dwValue = 0;
@@ -150,7 +148,6 @@ bool    ReadHeader39(void)
 #endif
 
         if (!difference) {
-//          MonitorString(" set_value ");
           dwValue = prf.ddwValue;
           break;
         }
@@ -158,8 +155,8 @@ bool    ReadHeader39(void)
     }  
 
 #ifdef MONITOR_39
-//    MonitorString("   Time="); MonitorTime(tiVirtual);
-//    MonitorString(" Value="); MonitorLongDec(dwValue);
+    MonitorString(" in="); MonitorTime(tiVirtual);
+    MonitorString(" / "); MonitorLongDec(dwValue);
 #endif
 
     if (ReadData39(tiVirtual, dwValue) == false) return false;
@@ -187,13 +184,11 @@ uchar   TestProfile39_Internal(caller39*  pc)
   if (!ValidateIframe((*pc).bNS, (*pc).bNR)) return 8;
   tiValue39 = ReadTime39();
   dwValue39 = DateToHouIndex(tiValue39);
-  // DelayOff();
 
   (*pc).bNR++;
   Query39_RR((*pc).bNR);
   if (Input39() != SER_GOODCHECK) return 9;
   if (!ValidateSframe((*pc).bNR)) return 10;
-  // DelayOff();
 
 
   InitHeader39();
