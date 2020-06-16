@@ -117,10 +117,12 @@ ulong64_ QueryCntMon38_Full(uchar  ibMon)
     bool fUseBlocks1 = UseBlocksDMLS();
     bool fLastBlock1 = LastBlockDMLS();
 
-    if (fUseBlocks1)
-      AddBuffRecord39(22/*, IndexInBuff()-22-3*/); // TODO GetHdlcAddressesSize
-    else
-      AddBuffRecord39(15/*, IndexInBuff()-15-3*/);
+    AddBuffRecord39(fUseBlocks1 ? 20 + GetHdlcAddressesSize() : 13 + GetHdlcAddressesSize());
+
+//    if (fUseBlocks1)
+//      AddBuffRecord39(22/*, IndexInBuff()-22-3*/); // TODO GetHdlcAddressesSize
+//    else
+//      AddBuffRecord39(15/*, IndexInBuff()-15-3*/);
 
     while (!LastSegmentDMLS()) {
       bNR++;
