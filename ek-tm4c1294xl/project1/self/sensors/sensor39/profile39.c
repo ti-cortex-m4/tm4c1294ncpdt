@@ -17,6 +17,7 @@ profile39*c
  #include "../../devices/devices_time.h"
  #include "../../digitals/limits.h"
  #include "../../special/special.h"
+##include "../../kernel/tuples.h"
 #include "device39.h"
 #include "time39.h"
 #include "io39.h"
@@ -65,7 +66,7 @@ void    InitHeader39(void)
 
 
 
-uchar   QueryHeader39(caller39*  pr)
+t2time  QueryHeader39(caller39*  pr)
 {
   HideCurrTime(1);
 
@@ -81,8 +82,7 @@ uchar   QueryHeader39(caller39*  pr)
   MonitorString(" ti2="); MonitorTime(ti2);
 #endif
 
-  record39 d = FragmentProfile39(pr, ti1, ti2);
-  return d.bError;
+  return GetTuple2Time(ti1,ti2);
 }
 
 
@@ -199,7 +199,9 @@ uchar   TestProfile39_Internal(caller39*  pc)
 
 
   while (true) {
-    if (QueryHeader39(pc) != 0) return 11;
+    t2time t2 = QueryHeader39(pc);
+    record39 d = FragmentProfile39(pr, t2.ti1, t2.ti2);
+    if (d.bError != 0) return 11;
 
     if (ReadHeader39() == false) return 0;
     if (fKey == true) return 255;
