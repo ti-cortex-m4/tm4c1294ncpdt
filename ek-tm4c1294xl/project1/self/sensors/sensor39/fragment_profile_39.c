@@ -45,7 +45,7 @@ record39 FragmentProfile39(caller39  *pc, time  ti1, time  ti2)
     (*pc).bNR++;
     Query39_RR((*pc).bNR);
     if (Input39() != SER_GOODCHECK) return GetBuffRecordError(2);
-    
+
     AddBuffRecord39(6 + GetHdlcAddressesSize()/*, IndexInBuff()-8-3*/);
     DelayOff();
   }
@@ -77,6 +77,7 @@ record39 FragmentProfile39(caller39  *pc, time  ti1, time  ti2)
       (*pc).bNR++;
       Query39_RR((*pc).bNR);
       if (Input39() != SER_GOODCHECK) return GetBuffRecordError(5);
+      
       AddBuffRecord39(6 + GetHdlcAddressesSize()/*, IndexInBuff()-8-3*/);
       DelayOff();
     }
