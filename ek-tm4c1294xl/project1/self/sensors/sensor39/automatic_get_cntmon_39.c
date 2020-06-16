@@ -18,6 +18,7 @@ automatic_get_cntmon_38*c
 #include "query_next_block_39.h"
 #include "buffer_record_39.h"
 #include "io39.h"
+#include "hdlc_address.h"
 #include "automatic_get_cntmon_39.h"
 
 
