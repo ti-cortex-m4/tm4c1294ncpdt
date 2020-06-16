@@ -121,10 +121,10 @@
       break;
 
     case DEV_11_39P:
-      InitProfile39();
+      InitProfile39_Profile();
 
       cbRepeat = MaxRepeat39();
-      QueryProfile39(); // QueryHeader39();
+      QueryProfile39_Profile();
       SetCurr(DEV_13_39P);
       break;
 

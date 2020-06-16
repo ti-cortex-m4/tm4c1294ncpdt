@@ -50,11 +50,11 @@ void    Query39_RR_Profile(void)
 }
 
 
-void    QueryEngAbs39_Profile(void)
+void    QueryTime39_Profile(void)
 {
   c.bNS++;
   c.bInvokeId++;
-  QueryEngAbs39(c.bNS, c.bNR, c.bInvokeId);
+  QueryTime39(c.bNS, c.bNR, c.bInvokeId);
 }
 
 
@@ -72,12 +72,12 @@ bool    ValidateIframe_Profile(void)
 
 
 
-void    InitProfile39(void) {
+void    InitProfile39_Profile(void) {
   InitHeader39();
   InitBuffRecord39();
 }
 
 
-void    QueryProfile39_(void) {
-  QueryHeader39(&c);
+void    QueryProfile39_Profile(void) {
+  // QueryHeader39(&c);
 }
