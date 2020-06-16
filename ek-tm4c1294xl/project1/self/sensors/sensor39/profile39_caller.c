@@ -20,9 +20,11 @@ profile39_caller.c
 
 
 static caller39         c;
+
 static bool             fUseBlocks;
 static bool             fLastBlock;
 
+static uchar            bBlockNumber;
 
 
 void    InitRunner39_Profile(void) { 
@@ -93,4 +95,22 @@ void    Read1_Profile(void) {
 
 void    Read2_Profile(void) {
    AddBuffRecord39(6 + GetHdlcAddressesSize();
+}
+
+
+void    Read3_Profile(void) {
+  uchar bBlockNumber = 0;
+}
+
+
+bool    UseBlocks_Profile(void) {
+  return fUseBlocks && (!fLastBlock);
+}
+
+
+void    QueryNextBlock39_Profile(void) {  
+  bBlockNumber++;
+
+  c.bNS++;
+  QueryNextBlock39(c.bNS, c.bNR, c.bInvokeId, bBlockNumber);  
 }
