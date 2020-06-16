@@ -23,4 +23,5 @@ typedef struct
 
 void    InitBuffRecord39(void);
 void    AddBuffRecord39(uint  iwStart/*, uint  cwSize*/);
+record39 GetBuffRecordError(char  bError);
 record39 FinishBuffRecord39(void);

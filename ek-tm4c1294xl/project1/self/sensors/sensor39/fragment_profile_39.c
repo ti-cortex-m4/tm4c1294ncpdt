@@ -20,7 +20,7 @@ fragment_profile_39.c
 
 
 
-uchar   FragmentProfile39(runner39  *pr, time  ti1, time  ti2)
+record39 FragmentProfile39(runner39  *pr, time  ti1, time  ti2)
 {
   InitBuffRecord39();
 
@@ -28,7 +28,7 @@ uchar   FragmentProfile39(runner39  *pr, time  ti1, time  ti2)
   (*pr).bNS++;
   (*pr).bInvokeId++;
   QueryProfile39((*pr).bNS, (*pr).bNR, (*pr).bInvokeId, ti1, ti2);
-  if (Input39() != SER_GOODCHECK) return 1;
+  if (Input39() != SER_GOODCHECK) return GetBuffRecordError(1);
   DelayOff();
 
   bool fUseBlocks1 = UseBlocksDMLS();
@@ -44,14 +44,14 @@ uchar   FragmentProfile39(runner39  *pr, time  ti1, time  ti2)
   while (!LastSegmentDMLS()) {
     (*pr).bNR++;
     Query39_RR((*pr).bNR);
-    if (Input39() != SER_GOODCHECK) return 2;
+    if (Input39() != SER_GOODCHECK) return GetBuffRecordError(2);
     AddBuffRecord39(6 + GetHdlcAddressesSize()/*, IndexInBuff()-8-3*/);
     DelayOff();
   }
 
   (*pr).bNR++;
   Query39_RR((*pr).bNR);
-  if (Input39() != SER_GOODCHECK) return 3;
+  if (Input39() != SER_GOODCHECK) return GetBuffRecordError(3);
   DelayOff();
 
 
@@ -64,7 +64,7 @@ uchar   FragmentProfile39(runner39  *pr, time  ti1, time  ti2)
     (*pr).bNS++;
 //  uchar bBlockNumber = 1;
     QueryNextBlock39((*pr).bNS, (*pr).bNR, (*pr).bInvokeId, bBlockNumber);
-    if (Input39() != SER_GOODCHECK) return 4;
+    if (Input39() != SER_GOODCHECK) return GetBuffRecordError(4);
 
     fUseBlocks1 = UseBlocksDMLS();
     fLastBlock1 = LastBlockDMLS();
@@ -75,20 +75,19 @@ uchar   FragmentProfile39(runner39  *pr, time  ti1, time  ti2)
     while (!LastSegmentDMLS()) {
       (*pr).bNR++;
       Query39_RR((*pr).bNR);
-      if (Input39() != SER_GOODCHECK) return 5;
+      if (Input39() != SER_GOODCHECK) return GetBuffRecordError(5);
       AddBuffRecord39(6 + GetHdlcAddressesSize()/*, IndexInBuff()-8-3*/);
       DelayOff();
     }
 
     (*pr).bNR++;
     Query39_RR((*pr).bNR);
-    if (Input39() != SER_GOODCHECK) return 6;
+    if (Input39() != SER_GOODCHECK) return GetBuffRecordError(6);
     DelayOff();
   }
 
 
-  FinishBuffRecord39();
-  return 0;
+  return FinishBuffRecord39();
 }
 
 
@@ -122,7 +121,7 @@ double2 TestFragmentProfile39(void)
   ti2.bMinute = 0;
   ti2.bSecond = 0;
 
-  if (FragmentProfile39(&r, ti1, ti2) != 0) return GetDouble2Error();
+  if (FragmentProfile39(&r, ti1, ti2).bError != 0) return GetDouble2Error();
 
   return GetDouble2(0, true);
 }

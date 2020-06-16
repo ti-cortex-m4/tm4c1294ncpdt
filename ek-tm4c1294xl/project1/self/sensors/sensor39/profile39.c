@@ -81,7 +81,8 @@ uchar   QueryHeader39(runner39*  pr)
   MonitorString(" ti2="); MonitorTime(ti2);
 #endif
 
-  return FragmentProfile39(pr, ti1, ti2);
+  record39 d = FragmentProfile39(pr, ti1, ti2);
+  return d.bError;
 }
 
 
