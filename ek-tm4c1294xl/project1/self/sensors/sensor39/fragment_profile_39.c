@@ -29,63 +29,50 @@ record39 FragmentProfile39(caller39  *pc, time  ti1, time  ti2)
   (*pc).bInvokeId++;
   QueryProfile39((*pc).bNS, (*pc).bNR, (*pc).bInvokeId, ti1, ti2);
   if (Input39() != SER_GOODCHECK) return GetBuffRecordError(1);
-  //DelayOff();
 
-  bool fUseBlocks1 = UseBlocksDMLS();
-  bool fLastBlock1 = LastBlockDMLS();
+  bool fUseBlocks = UseBlocksDMLS();
+  bool fLastBlock = LastBlockDMLS();
 
-  AddBuffRecord39(fUseBlocks1 ? 20 + GetHdlcAddressesSize() : 13 + GetHdlcAddressesSize());
-
-//  if (fUseBlocks1)
-//    AddBuffRecord39(22/*, IndexInBuff()-22-3*/); // TODO GetHdlcAddressesSize
-//  else
-//    AddBuffRecord39(15/*, IndexInBuff()-15-3*/);
+  AddBuffRecord39(fUseBlocks ? 20 + GetHdlcAddressesSize() : 13 + GetHdlcAddressesSize());
 
   while (!LastSegmentDMLS()) {
     (*pc).bNR++;
     Query39_RR((*pc).bNR);
     if (Input39() != SER_GOODCHECK) return GetBuffRecordError(2);
 
-    AddBuffRecord39(6 + GetHdlcAddressesSize()/*, IndexInBuff()-8-3*/);
-    //DelayOff();
+    AddBuffRecord39(6 + GetHdlcAddressesSize());
   }
 
   (*pc).bNR++;
   Query39_RR((*pc).bNR);
   if (Input39() != SER_GOODCHECK) return GetBuffRecordError(3);
-  //DelayOff();
-
 
 
   uchar bBlockNumber = 0;
 
-  while (fUseBlocks1 && (!fLastBlock1)) {
+  while (fUseBlocks && (!fLastBlock)) {
     bBlockNumber++;
 
     (*pc).bNS++;
-//  uchar bBlockNumber = 1;
     QueryNextBlock39((*pc).bNS, (*pc).bNR, (*pc).bInvokeId, bBlockNumber);
     if (Input39() != SER_GOODCHECK) return GetBuffRecordError(4);
 
-    fUseBlocks1 = UseBlocksDMLS();
-    fLastBlock1 = LastBlockDMLS();
+    fUseBlocks = UseBlocksDMLS();
+    fLastBlock = LastBlockDMLS();
 
-    AddBuffRecord39(20 + GetHdlcAddressesSize()/*, IndexInBuff()-22-3*/);
-    //DelayOff();
+    AddBuffRecord39(20 + GetHdlcAddressesSize());
 
     while (!LastSegmentDMLS()) {
       (*pc).bNR++;
       Query39_RR((*pc).bNR);
       if (Input39() != SER_GOODCHECK) return GetBuffRecordError(5);
       
-      AddBuffRecord39(6 + GetHdlcAddressesSize()/*, IndexInBuff()-8-3*/);
-      //DelayOff();
+      AddBuffRecord39(6 + GetHdlcAddressesSize());
     }
 
     (*pc).bNR++;
     Query39_RR((*pc).bNR);
     if (Input39() != SER_GOODCHECK) return GetBuffRecordError(6);
-    //DelayOff();
   }
 
 
@@ -109,7 +96,7 @@ double2 TestFragmentProfile39(void)
 
   time ti1;
   ti1.bYear = 20;
-  ti1.bMonth = 4;
+  ti1.bMonth = 5;
   ti1.bDay = 1;
   ti1.bHour = 0;
   ti1.bMinute = 0;
@@ -117,7 +104,7 @@ double2 TestFragmentProfile39(void)
 
   time ti2;
   ti2.bYear = 20;
-  ti2.bMonth = 4;
+  ti2.bMonth = 5;
   ti2.bDay = 15;
   ti2.bHour = 0;
   ti2.bMinute = 0;
