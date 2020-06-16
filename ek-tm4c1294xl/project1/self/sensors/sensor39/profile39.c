@@ -95,15 +95,15 @@ static bool ReadData39(time  tiTime, ulong  dwValue)
 
   ShowProgressDigHou();
 
-//  double dbPulse = mpdbPulseHou[ibDig];
+  double dbPulse = mpdbPulseHou[ibDig];
 
-  ulong dw = dwValue; // TODO
-  uint w = (uint)(dw/**dbPulse/500*/);
+  ulong dw = dwValue;
+  uint w = (uint)(dw*dbPulse/1000);
   mpwChannels[0] = w;
 
 #ifdef MONITOR_39
     MonitorString(" out="); MonitorTime(tiTime);
-    MonitorString(" / "); MonitorIntDec(mpwChannels[0]);
+    MonitorString(" "); MonitorIntDec(mpwChannels[0]);
 #endif
 
   if (IsDefect(ibDig)) MakeSpecial(tiTime);
@@ -133,6 +133,7 @@ bool    ReadHeader39(void)
     ulong dwValue = 0;
 
     uchar bSize = GetBuffPrfSize39();
+    MonitorString(" size="); MonitorCharDec(bSize);
     uchar i;
     for (i=0; i<bSize; i++)
     {
@@ -156,7 +157,7 @@ bool    ReadHeader39(void)
 
 #ifdef MONITOR_39
     MonitorString(" in="); MonitorTime(tiVirtual);
-    MonitorString(" / "); MonitorLongDec(dwValue);
+    MonitorString(" "); MonitorLongDec(dwValue);
 #endif
 
     if (ReadData39(tiVirtual, dwValue) == false) return false;
