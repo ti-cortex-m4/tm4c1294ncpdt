@@ -34,15 +34,15 @@ uchar   FragmentProfile39(runner39  *pr, time  ti1, time  ti2)
   bool fLastBlock1 = LastBlockDMLS();
 
   if (fUseBlocks1)
-    AddBuffRecord39(22, IndexInBuff()-22-3); // TODO GetHdlcAddressesSize
+    AddBuffRecord39(22/*, IndexInBuff()-22-3*/); // TODO GetHdlcAddressesSize
   else
-    AddBuffRecord39(15, IndexInBuff()-15-3);
+    AddBuffRecord39(15/*, IndexInBuff()-15-3*/);
 
   while (!LastSegmentDMLS()) {
     (*pr).bNR++;
     Query39_RR((*pr).bNR);
     if (Input39() != SER_GOODCHECK) return 2;
-    AddBuffRecord39(8, IndexInBuff()-8-3);
+    AddBuffRecord39(8/*, IndexInBuff()-8-3*/);
     DelayOff();
   }
 
@@ -66,14 +66,14 @@ uchar   FragmentProfile39(runner39  *pr, time  ti1, time  ti2)
     fUseBlocks1 = UseBlocksDMLS();
     fLastBlock1 = LastBlockDMLS();
 
-    AddBuffRecord39(22, IndexInBuff()-22-3);
+    AddBuffRecord39(22/*, IndexInBuff()-22-3*/);
     DelayOff();
 
     while (!LastSegmentDMLS()) {
       (*pr).bNR++;
       Query39_RR((*pr).bNR);
       if (Input39() != SER_GOODCHECK) return 5;
-      AddBuffRecord39(8, IndexInBuff()-8-3);
+      AddBuffRecord39(8/*, IndexInBuff()-8-3*/);
       DelayOff();
     }
 
