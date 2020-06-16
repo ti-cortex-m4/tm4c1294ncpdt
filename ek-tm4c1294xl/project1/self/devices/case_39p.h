@@ -83,16 +83,16 @@
       Clear(); ShowPercent(54);
 
       cbRepeat = MaxRepeats();
-      QueryEngAbs39_Profile();
+      QueryTime39_Profile();
       SetCurr(DEV_9_39P);
       break;
 
     case DEV_9_39P:
-      if (mpSerial[ibPort] == SER_GOODCHECK)
-      {
+      if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateIframe_Profile())
           ErrorProfile();
         else {
+          ReadTime39_Profile();
           MakePause(DEV_10_39P);
         }
       } else {
@@ -110,60 +110,84 @@
       break;
 
     case DEV_11_39P:
-      if (mpSerial[ibPort] == SER_GOODCHECK)
-      {
+      if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateSframe_Profile())
           ErrorProfile();
         else {
-          ReadProfile39();
+          MakePause(DEV_11_39P);
         }
       } else {
         ErrorProfile();
       }
       break;
 
-    case DEV_PREVTIME2_39P:
-      ShowPercent(50);
-
-      cbRepeat = MaxRepeat39();
-      QueryTime39();
-      SetCurr(DEV_TIME2_39P);
-      break;
-
-    case DEV_TIME2_39P:
-      if (mpSerial[ibPort] == SER_GOODCHECK)
-      {
-        tiValue39 = ReadTime39();
-        dwValue39 = DateToHouIndex(tiValue39);
-        MakePause(DEV_INITHEADER_39P);
-      }
-      else
-      {
-        if (cbRepeat == 0)
-          ErrorProfile();
-        else
-        {
-          ErrorLink();
-          cbRepeat--;
-
-          QueryTime39();
-          SetCurr(DEV_TIME2_39P);
-        }
-      }
-      break;
-
-    case DEV_INITHEADER_39P:
+    case DEV_11_39P:
       ShowPercent(75);
-      InitHeader39();
+      InitHeader39(); // InitBuffRecord39();
 
       cbRepeat = MaxRepeat39();
-      QueryHeader39();
-      SetCurr(DEV_HEADER_39P);
+      QueryProfile39(); // QueryHeader39();
+      SetCurr(DEV_13_39P);
       break;
 
-    case DEV_HEADER_39P:
-      if (mpSerial[ibPort] == SER_GOODCHECK)
-      {
+    case DEV_13_39P:
+      if (mpSerial[ibPort] == SER_GOODCHECK)  {
+        ReadProfile39();
+/*
+  bool fUseBlocks1 = UseBlocksDMLS();
+  bool fLastBlock1 = LastBlockDMLS();
+
+  AddBuffRecord39(fUseBlocks1 ? 20 + GetHdlcAddressesSize() : 13 + GetHdlcAddressesSize());
+*/
+        if (!LastSegmentDMLS()) {
+          MakePause(DEV_14_39P);
+        } else {          
+          MakePause(DEV_16_39P);
+        }
+      } else {
+        ErrorProfile();
+      } 
+      break;
+
+    case DEV_14_39P:
+      cbRepeat = MaxRepeats();
+      Query39_RR_Profile();
+      SetCurr(DEV_15_39P);
+      break;
+
+    case DEV_15_39P:
+      if (mpSerial[ibPort] == SER_GOODCHECK) {
+        if (!ValidateSframe_Profile()) {
+          ErrorProfile();
+        } else {
+          MakePause(DEV_11_39P);
+        }
+      } else {
+        ErrorProfile();
+      }
+      break;
+
+
+    case DEV_16_39P:
+      cbRepeat = MaxRepeats();
+      Query39_RR_Profile();
+      SetCurr(DEV_15_39P);
+      break;
+
+    case DEV_17_39P:
+      if (mpSerial[ibPort] == SER_GOODCHECK) {
+        if (!ValidateSframe_Profile()) {
+          ErrorProfile();
+        } else {
+          MakePause(DEV_11_39P);
+        }
+      } else {
+        ErrorProfile();
+      }
+      break;
+
+    case DEV_XX_39P:
+      if (mpSerial[ibPort] == SER_GOODCHECK)  {
         if (ReadHeader39() == false)
           DoneProfile();
         else 
@@ -172,19 +196,9 @@
           QueryHeader39();
           SetCurr(DEV_HEADER_39P);          
         }
-      }  
-      else
-      {
-        if (cbRepeat == 0) ErrorProfile();
-        else
-        {
-          ErrorLink();
-          cbRepeat--;
-
-          QueryHeader39();
-          SetCurr(DEV_HEADER_39P);
-        }
-      }
+      } else {
+        ErrorProfile();
+      } 
       break;
 
 #endif
