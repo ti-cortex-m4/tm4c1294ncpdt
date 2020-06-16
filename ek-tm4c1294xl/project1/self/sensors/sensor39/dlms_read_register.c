@@ -54,7 +54,7 @@ slong64_ ReadRegisterScalerDLMS(void)
 
 
 
-double2 ReadRegisterValue39(const obis_t  obis, runner39*  pr)
+double2 ReadRegisterValue39(const obis_t  obis, caller39*  pr)
 {
   (*pr).bNS++;
   (*pr).bInvokeId++;
@@ -73,7 +73,7 @@ double2 ReadRegisterValue39(const obis_t  obis, runner39*  pr)
 }
 
 
-double2 ReadRegisterScaler39(const obis_t  obis, runner39*  pr)
+double2 ReadRegisterScaler39(const obis_t  obis, caller39*  pr)
 {
   (*pr).bNS++;
   (*pr).bInvokeId++;
@@ -97,7 +97,7 @@ double2 ReadRegisterScaler39(const obis_t  obis, runner39*  pr)
 
 
 
-double2 ReadRegisterValueWithScaler39(const obis_t  obis, runner39*  pr)
+double2 ReadRegisterValueWithScaler39(const obis_t  obis, caller39*  pr)
 {
   double2 value = ReadRegisterValue39(obis, pr);
   if (!value.fValid) return GetDouble2Error();

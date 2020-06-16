@@ -65,7 +65,7 @@ void    InitHeader39(void)
 
 
 
-uchar   QueryHeader39(runner39*  pr)
+uchar   QueryHeader39(caller39*  pr)
 {
   HideCurrTime(1);
 
@@ -174,7 +174,7 @@ bool    ReadHeader39(void)
 
 #ifdef  MONITOR_39
 
-uchar   TestProfile39_Internal(runner39*  pr)
+uchar   TestProfile39_Internal(caller39*  pr)
 {  
   if (FragmentOpen39(pr) != 0) return 6;
 
@@ -215,7 +215,7 @@ double2 TestProfile39(void)
 
   MonitorOpen(0);
 
-  runner39 runner = InitRunner();
+  caller39 runner = InitCaller();
   uchar b = TestProfile39_Internal(&runner);
   if (b != 0) {
     MonitorString("\n error "); MonitorCharDec(b);
