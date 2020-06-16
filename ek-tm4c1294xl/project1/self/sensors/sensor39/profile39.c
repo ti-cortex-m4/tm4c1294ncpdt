@@ -186,13 +186,13 @@ uchar   TestProfile39_Internal(caller39*  pc)
   if (!ValidateIframe((*pc).bNS, (*pc).bNR)) return 8;
   tiValue39 = ReadTime39();
   dwValue39 = DateToHouIndex(tiValue39);
-  DelayOff();
+  // DelayOff();
 
   (*pc).bNR++;
   Query39_RR((*pc).bNR);
   if (Input39() != SER_GOODCHECK) return 9;
   if (!ValidateSframe((*pc).bNR)) return 10;
-  DelayOff();
+  // DelayOff();
 
 
   InitHeader39();

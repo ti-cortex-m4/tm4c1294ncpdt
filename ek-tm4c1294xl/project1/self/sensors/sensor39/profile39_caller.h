@@ -11,3 +11,5 @@ void    QueryEngAbs39_Profile(void);
 
 bool    ValidateSframe_Profile(void);
 bool    ValidateIframe_Profile(void);
+
+void    InitProfile39(void);

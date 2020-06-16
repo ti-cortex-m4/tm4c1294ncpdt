@@ -121,8 +121,7 @@
       break;
 
     case DEV_11_39P:
-      ShowPercent(75);
-      InitHeader39(); // InitBuffRecord39();
+      InitProfile39();
 
       cbRepeat = MaxRepeat39();
       QueryProfile39(); // QueryHeader39();
