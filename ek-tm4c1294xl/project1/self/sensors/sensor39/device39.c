@@ -232,9 +232,9 @@ void    Query39_RR(uchar  bNR)
 
 
 
-runner39 InitRunner(void)
+caller39 InitCaller(void)
 {
-  runner39 runner;
+  caller39 runner;
 
   runner.bNS = 0;
   runner.bNR = 0;

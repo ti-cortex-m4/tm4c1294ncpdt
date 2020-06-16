@@ -12,7 +12,7 @@ fragment_open_39.c
 
 
 
-uchar   FragmentOpen39(runner39  *pr)
+uchar   FragmentOpen39(caller39  *pr)
 {
   Query39_DISC();
   if (Input39() != SER_GOODCHECK) return 1;

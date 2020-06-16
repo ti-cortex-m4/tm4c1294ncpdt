@@ -4,4 +4,4 @@ fragment_open_39.h
 
 ------------------------------------------------------------------------------*/
 
-uchar   FragmentOpen39(runner39  *runner);
+uchar   FragmentOpen39(caller39  *runner);

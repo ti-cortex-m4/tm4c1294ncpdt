@@ -20,14 +20,14 @@ fragment_profile_39.c
 
 
 
-record39 FragmentProfile39(runner39  *pr, time  ti1, time  ti2)
+record39 FragmentProfile39(caller39  *pc, time  ti1, time  ti2)
 {
   InitBuffRecord39();
 
 
-  (*pr).bNS++;
-  (*pr).bInvokeId++;
-  QueryProfile39((*pr).bNS, (*pr).bNR, (*pr).bInvokeId, ti1, ti2);
+  (*pc).bNS++;
+  (*pc).bInvokeId++;
+  QueryProfile39((*pc).bNS, (*pc).bNR, (*pc).bInvokeId, ti1, ti2);
   if (Input39() != SER_GOODCHECK) return GetBuffRecordError(1);
   DelayOff();
 
@@ -42,15 +42,15 @@ record39 FragmentProfile39(runner39  *pr, time  ti1, time  ti2)
 //    AddBuffRecord39(15/*, IndexInBuff()-15-3*/);
 
   while (!LastSegmentDMLS()) {
-    (*pr).bNR++;
-    Query39_RR((*pr).bNR);
+    (*pc).bNR++;
+    Query39_RR((*pc).bNR);
     if (Input39() != SER_GOODCHECK) return GetBuffRecordError(2);
     AddBuffRecord39(6 + GetHdlcAddressesSize()/*, IndexInBuff()-8-3*/);
     DelayOff();
   }
 
-  (*pr).bNR++;
-  Query39_RR((*pr).bNR);
+  (*pc).bNR++;
+  Query39_RR((*pc).bNR);
   if (Input39() != SER_GOODCHECK) return GetBuffRecordError(3);
   DelayOff();
 
@@ -61,9 +61,9 @@ record39 FragmentProfile39(runner39  *pr, time  ti1, time  ti2)
   while (fUseBlocks1 && (!fLastBlock1)) {
     bBlockNumber++;
 
-    (*pr).bNS++;
+    (*pc).bNS++;
 //  uchar bBlockNumber = 1;
-    QueryNextBlock39((*pr).bNS, (*pr).bNR, (*pr).bInvokeId, bBlockNumber);
+    QueryNextBlock39((*pc).bNS, (*pc).bNR, (*pc).bInvokeId, bBlockNumber);
     if (Input39() != SER_GOODCHECK) return GetBuffRecordError(4);
 
     fUseBlocks1 = UseBlocksDMLS();
@@ -73,15 +73,15 @@ record39 FragmentProfile39(runner39  *pr, time  ti1, time  ti2)
     DelayOff();
 
     while (!LastSegmentDMLS()) {
-      (*pr).bNR++;
-      Query39_RR((*pr).bNR);
+      (*pc).bNR++;
+      Query39_RR((*pc).bNR);
       if (Input39() != SER_GOODCHECK) return GetBuffRecordError(5);
       AddBuffRecord39(6 + GetHdlcAddressesSize()/*, IndexInBuff()-8-3*/);
       DelayOff();
     }
 
-    (*pr).bNR++;
-    Query39_RR((*pr).bNR);
+    (*pc).bNR++;
+    Query39_RR((*pc).bNR);
     if (Input39() != SER_GOODCHECK) return GetBuffRecordError(6);
     DelayOff();
   }
@@ -101,9 +101,9 @@ double2 TestFragmentProfile39(void)
 
   MonitorOpen(0);
 
-  runner39 r = InitRunner();
+  caller39 c = InitCaller();
 
-  if (FragmentOpen39(&r) != 0) return GetDouble2Error();
+  if (FragmentOpen39(&c) != 0) return GetDouble2Error();
 
   time ti1;
   ti1.bYear = 20;
@@ -121,7 +121,7 @@ double2 TestFragmentProfile39(void)
   ti2.bMinute = 0;
   ti2.bSecond = 0;
 
-  if (FragmentProfile39(&r, ti1, ti2).bError != 0) return GetDouble2Error();
+  if (FragmentProfile39(&c, ti1, ti2).bError != 0) return GetDouble2Error();
 
   return GetDouble2(0, true);
 }

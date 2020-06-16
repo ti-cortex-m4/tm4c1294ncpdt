@@ -19,7 +19,7 @@ query_params_39.c
 
 
 
-void    QueryGetRequestDLMS(const obis_t  obis, uchar  bClass, uchar  bAttribute, runner39  r)
+void    QueryGetRequestDLMS(const obis_t  obis, uchar  bClass, uchar  bAttribute, caller39  r)
 {
   uint wSize = 23 + GetHdlcAddressesSize(); // 0x19 25
 
@@ -62,12 +62,12 @@ void    QueryGetRequestDLMS(const obis_t  obis, uchar  bClass, uchar  bAttribute
 
 
 
-void    QueryGetRegisterValueDLMS(const obis_t  obis, runner39  r)
+void    QueryGetRegisterValueDLMS(const obis_t  obis, caller39  r)
 {
   QueryGetRequestDLMS(obis, 3, 2, r); // class 3, attribute 2: value
 }
 
-void    QueryGetRegisterScalerDLMS(const obis_t  obis, runner39  r)
+void    QueryGetRegisterScalerDLMS(const obis_t  obis, caller39  r)
 {
   QueryGetRequestDLMS(obis, 3, 3, r); // class 3, attribute 3: scaler_unit
 }
