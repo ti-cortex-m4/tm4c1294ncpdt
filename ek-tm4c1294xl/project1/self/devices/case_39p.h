@@ -2,7 +2,7 @@
 #ifndef SKIP_39
 
     case DEV_START_39P:
-      MakePause(DEV_PREVTIME2_39P);
+      MakePause(DEV_1_39P);
       break;
 
     case DEV_1_39P:
@@ -113,9 +113,8 @@
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateSframe_Profile())
           ErrorProfile();
-        else {
+        else
           MakePause(DEV_11_39P);
-        }
       } else {
         ErrorProfile();
       }
