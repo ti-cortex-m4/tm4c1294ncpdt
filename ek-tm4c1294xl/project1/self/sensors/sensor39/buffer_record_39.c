@@ -132,24 +132,13 @@ record39 FinishBuffRecord39(void) {
 
       PrfFirstPrev = PrfFirstCurr;
 
-      if (PrfFirstPrev.fExists == true) {
-#if false//ifdef BUFF_RECORD_39
-        MonitorString("\n *** ");
-        MonitorTime(PrfFirstPrev.tiTime);
-        MonitorLongDec(PrfFirstPrev.ddwValue / 1000000);
-        MonitorLongDec(PrfFirstPrev.ddwValue % 1000000);
-        MonitorString(" previous");
-#endif        
-        //AddBuffPrf39(tiTime, PrfFirstPrev.ddwValue);
-      }
-
       PrfFirstCurr.fExists = true;
       PrfFirstCurr.tiTime = ti;
       PrfFirstCurr.ddwValue = ddw;
     }
 
-#if false//ifdef BUFF_RECORD_39
-    MonitorString("\n *** ");
+#if BUFF_RECORD_39
+    MonitorString("\n");
     MonitorTime(ti);
     MonitorLongDec(ddw / 1000000);
     MonitorLongDec(ddw % 1000000);
@@ -159,12 +148,12 @@ record39 FinishBuffRecord39(void) {
   }
 
   if (PrfFirstPrev.fExists == true) {
-#if false//ifdef BUFF_RECORD_39
-        MonitorString("\n *** ");
-        MonitorTime(PrfFirstPrev.tiTime);
-        MonitorLongDec(PrfFirstPrev.ddwValue / 1000000);
-        MonitorLongDec(PrfFirstPrev.ddwValue % 1000000);
-        MonitorString(" previous");
+#if BUFF_RECORD_39
+    MonitorString("\n");
+    MonitorTime(PrfFirstPrev.tiTime);
+    MonitorLongDec(PrfFirstPrev.ddwValue / 1000000);
+    MonitorLongDec(PrfFirstPrev.ddwValue % 1000000);
+    MonitorString(" previous");
 #endif
     AddBuffPrf39(PrfFirstPrev.tiTime, PrfFirstPrev.ddwValue);
   }
