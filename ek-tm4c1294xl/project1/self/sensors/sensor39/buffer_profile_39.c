@@ -12,7 +12,7 @@ buffer_profile_39.c
 
 
 
-#define PROFILE39_SIZE  (6+1)
+#define PROFILE39_SIZE  (6+2)
 
 
 
