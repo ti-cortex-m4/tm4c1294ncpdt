@@ -21,8 +21,15 @@ buffer_record_39*c
 
 
 
+static profile39    PrfFirstPrev, PrfFirstCurr;
+
+
+
 void    InitBuffRecord39(void) {
   InitPushX();
+
+  memset(&PrfFirstPrev, 0, sizeof(PrfFirstPrev));
+  memset(&PrfFirstCurr, 0, sizeof(PrfFirstCurr));
 }
 
 
@@ -120,9 +127,26 @@ record39 FinishBuffRecord39(void) {
       r.ddwValue = ddw;
       r.tiValue = ti;
       r.fFirst = true;
+
+      PrfFirstPrev = PrfFirstCurr;
+
+      if (PrfFirstPrev.fExists == true) {
+#if true//ifdef BUFF_RECORD_39
+        MonitorString("\n");
+        MonitorTime(PrfFirstPrev.tiTime);
+        MonitorLongDec(PrfFirstPrev.ddwValue / 1000000);
+        MonitorLongDec(PrfFirstPrev.ddwValue % 1000000);
+        MonitorString(" previous");
+#endif        
+        //AddBuffPrf39(tiTime, PrfFirstPrev.ddwValue);
+      }
+
+      PrfFirstCurr.fExists = true;
+      PrfFirstCurr.tiTime = ti
+      PrfFirstCurr.ddwValue = ddw;
     }
 
-#ifdef BUFF_RECORD_39
+#if true//ifdef BUFF_RECORD_39
     MonitorString("\n");
     MonitorTime(ti);
     MonitorLongDec(ddw / 1000000);
