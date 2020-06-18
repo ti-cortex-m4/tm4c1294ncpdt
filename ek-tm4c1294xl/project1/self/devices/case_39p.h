@@ -5,6 +5,7 @@
       MakePause(DEV_1_39P);
       break;
 
+
     case DEV_1_39P:
       Clear(); ShowPercent(50);
 
@@ -52,48 +53,48 @@
         if (!ValidateIframe_Profile())
           ErrorProfile();
         else
-          MakePause(DEV_6_39P);
+          MakePause(DEV_7_39P);
       } else {
         ErrorProfile();
       }
       break;
 
 
-    case DEV_6_39P:
+    case DEV_7_39P:
       Clear(); ShowPercent(53);
 
       cbRepeat = MaxRepeats();
       Query39_RR_Profile();
-      SetCurr(DEV_7_39P);
+      SetCurr(DEV_8_39P);
       break;
 
-    case DEV_7_39P:
+    case DEV_8_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateSframe_Profile())
           ErrorProfile();
         else
-          MakePause(DEV_8_39P);
+          MakePause(DEV_9_39P);
       } else {
         ErrorProfile();
       }
       break;
 
 
-    case DEV_8_39P:
+    case DEV_9_39P:
       Clear(); ShowPercent(54);
 
       cbRepeat = MaxRepeats();
       QueryTime39_Profile();
-      SetCurr(DEV_9_39P);
+      SetCurr(DEV_10_39P);
       break;
 
-    case DEV_9_39P:
+    case DEV_10_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateIframe_Profile())
           ErrorProfile();
         else {
           ReadTime39_Profile();
-          MakePause(DEV_10_39P);
+          MakePause(DEV_11_39P);
         }
       } else {
         ErrorProfile();
@@ -101,34 +102,35 @@
       break;
 
 
-    case DEV_10_39P:
+    case DEV_11_39P:
       Clear(); ShowPercent(55);
 
       cbRepeat = MaxRepeats();
       Query39_RR_Profile();
-      SetCurr(DEV_11_39P);
+      SetCurr(DEV_12_39P);
       break;
 
-    case DEV_11_39P:
+    case DEV_12_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateSframe_Profile())
           ErrorProfile();
         else
-          MakePause(DEV_11_39P);
+          MakePause(DEV_13_39P);
       } else {
         ErrorProfile();
       }
       break;
 
-    case DEV_11_39P:
+
+    case DEV_13_39P:
       InitProfile39_Profile();
 
       cbRepeat = MaxRepeat39();
       QueryProfile39_Profile();
-      SetCurr(DEV_13_39P);
+      SetCurr(DEV_14_39P);
       break;
 
-    case DEV_13_39P:
+    case DEV_14_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK)  {
         Read1_Profile();
         if (!LastSegmentDMLS()) {
@@ -141,7 +143,8 @@
       } 
       break;
 
-    case DEV_14_39P:
+
+    case DEV_15_39P:
       cbRepeat = MaxRepeats();
       Query39_RR_Profile();
       SetCurr(DEV_15_39P);

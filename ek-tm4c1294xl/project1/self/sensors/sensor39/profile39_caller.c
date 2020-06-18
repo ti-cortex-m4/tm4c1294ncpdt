@@ -59,6 +59,10 @@ void    QueryTime39_Profile(void) {
 }
 
 
+void    ReadTime39_Profile(void) {
+}
+
+
 
 bool    ValidateSframe_Profile(void) {
   return ValidateSframe(c.bNR);
