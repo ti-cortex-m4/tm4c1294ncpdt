@@ -164,7 +164,7 @@ bool    ReadHeader39(void)
   }
 
   wProfile39 += 6;
-  if (wProfile39 > 200/*wHOURS*/) return false;
+  if (wProfile39 > wHOURS) return false;
 
   return true;
 }
