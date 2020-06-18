@@ -129,3 +129,16 @@ void    Read4_Profile(void) {
 
   AddBuffRecord39(20 + GetHdlcAddressesSize());
 }
+
+
+void    Read5_Profile(void) {
+  AddBuffRecord39(6 + GetHdlcAddressesSize());
+}
+
+
+
+bool    FinishProfile39_Profile(void) {
+  FinishBuffRecord39(); // TODO check result
+  
+  return ReadHeader39();
+}
