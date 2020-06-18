@@ -878,6 +878,12 @@ typedef enum
   DEV_RR2_39C           =  0x2411,
 
   DEV_START_39P         =  0x2420,
+  DEV_DISC1_39P         =  0x2421,
+  DEV_DISC2_39P         =  0x2422,
+  DEV_SNRM1_39P         =  0x2423,
+  DEV_SNRM2_39P         =  0x2424,
+  DEV_AARQ1_39P         =  0x2425,
+  DEV_AARQ2_39P         =  0x2426,  
 
 #endif
 
