@@ -29,6 +29,7 @@ record39 FragmentProfile39(caller39  *pc, time  ti1, time  ti2)
   (*pc).bInvokeId++;
   QueryProfile39((*pc).bNS, (*pc).bNR, (*pc).bInvokeId, ti1, ti2);
   if (Input39() != SER_GOODCHECK) return GetBuffRecordError(1);
+  // validate frame
 
   bool fUseBlocks = UseBlocksDMLS();
   bool fLastBlock = LastBlockDMLS();
@@ -39,6 +40,7 @@ record39 FragmentProfile39(caller39  *pc, time  ti1, time  ti2)
     (*pc).bNR++;
     Query39_RR((*pc).bNR);
     if (Input39() != SER_GOODCHECK) return GetBuffRecordError(2);
+    //if (!ValidateSframe((*pc).bNR)) return 6;
 
     AddBuffRecord39(6 + GetHdlcAddressesSize());
   }
@@ -46,6 +48,7 @@ record39 FragmentProfile39(caller39  *pc, time  ti1, time  ti2)
   (*pc).bNR++;
   Query39_RR((*pc).bNR);
   if (Input39() != SER_GOODCHECK) return GetBuffRecordError(3);
+  //if (!ValidateSframe((*pc).bNR)) return 6;
 
 
   uchar bBlockNumber = 0;
@@ -56,6 +59,7 @@ record39 FragmentProfile39(caller39  *pc, time  ti1, time  ti2)
     (*pc).bNS++;
     QueryNextBlock39((*pc).bNS, (*pc).bNR, (*pc).bInvokeId, bBlockNumber);
     if (Input39() != SER_GOODCHECK) return GetBuffRecordError(4);
+    // validate frame
 
     fUseBlocks = UseBlocksDMLS();
     fLastBlock = LastBlockDMLS();
@@ -66,13 +70,15 @@ record39 FragmentProfile39(caller39  *pc, time  ti1, time  ti2)
       (*pc).bNR++;
       Query39_RR((*pc).bNR);
       if (Input39() != SER_GOODCHECK) return GetBuffRecordError(5);
-      
+      //if (!ValidateSframe((*pc).bNR)) return 6;
+
       AddBuffRecord39(6 + GetHdlcAddressesSize());
     }
 
     (*pc).bNR++;
     Query39_RR((*pc).bNR);
     if (Input39() != SER_GOODCHECK) return GetBuffRecordError(6);
+    //if (!ValidateSframe((*pc).bNR)) return 6;
   }
 
 

@@ -131,12 +131,17 @@
       break;
 
     case DEV_14_39P:
+      Read1_Profile();
+      MakePause(DEV_15_39P);
+      break;
+
+    case DEV_15_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK)  {
         Read1_Profile();
         if (!LastSegmentDMLS()) {
-          MakePause(DEV_15_39P);
+          MakePause(DEV_16_39P);
         } else {          
-          MakePause(DEV_17_39P);
+          MakePause(DEV_18_39P);
         }
       } else {
         ErrorProfile();
@@ -144,19 +149,19 @@
       break;
 
 
-    case DEV_15_39P:
+    case DEV_16_39P:
       cbRepeat = MaxRepeats();
       Query39_RR_Profile();
-      SetCurr(DEV_16_39P);
+      SetCurr(DEV_17_39P);
       break;
 
-    case DEV_16_39P:
+    case DEV_17_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
-        if (!ValidateSframe_Profile()) {
+        if (false/*!ValidateSframe_Profile()*/) {
           ErrorProfile();
         } else {
           Read2_Profile();
-          MakePause(DEV_16_39P);
+          MakePause(DEV_15_39P);
         }
       } else {
         ErrorProfile();
