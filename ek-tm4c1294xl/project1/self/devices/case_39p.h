@@ -169,15 +169,15 @@
       break;
 
 
-    case DEV_17_39P:
+    case DEV_18_39P:
       cbRepeat = MaxRepeats();
       Query39_RR_Profile();
-      SetCurr(DEV_18_39P);
+      SetCurr(DEV_19_39P);
       break;
 
-    case DEV_18_39P:
+    case DEV_19_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
-        if (!ValidateSframe_Profile()) {
+        if (false/*!ValidateSframe_Profile()*/) {
           ErrorProfile();
         } else {
           Read3_Profile();
