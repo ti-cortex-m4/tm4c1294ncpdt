@@ -77,6 +77,7 @@ bool    ValidateIframe_Profile(void) {
 
 void    InitProfile39_Profile(void) {
   InitHeader39();
+  InitBuffRecord39_All();
   InitBuffRecord39();
 }
 

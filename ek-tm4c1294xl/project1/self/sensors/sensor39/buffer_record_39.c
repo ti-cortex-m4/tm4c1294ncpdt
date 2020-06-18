@@ -25,14 +25,16 @@ static profile39    PrfFirstPrev, PrfFirstCurr;
 
 
 
-void    Init1(void) {
+void    InitBuffRecord39_All(void) {
   memset(&PrfFirstPrev, 0, sizeof(PrfFirstPrev));
   memset(&PrfFirstCurr, 0, sizeof(PrfFirstCurr));
 }
 
+
 void    InitBuffRecord39(void) {
   InitPushX();
 }
+
 
 
 void    AddBuffRecord39(uint  iwStart/*, uint  cwSize*/) {
