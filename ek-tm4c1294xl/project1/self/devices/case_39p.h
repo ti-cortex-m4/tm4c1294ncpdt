@@ -183,6 +183,7 @@
           Read3_Profile();
           if (UseBlocks_Profile()) {
             QueryNextBlock39_Profile();
+            MakePause(DEV_20_39P);
           } else {
             MakePause(DEV_A_39P);            
           }
@@ -190,6 +191,20 @@
       } else {
         ErrorProfile();
       }
+      break;
+
+
+    case DEV_20_39P:
+      if (mpSerial[ibPort] == SER_GOODCHECK)  {
+        Read4_Profile();
+        if (!LastSegmentDMLS()) {
+          MakePause(DEV_16_39P);
+        } else {          
+          MakePause(DEV_18_39P);
+        }
+      } else {
+        ErrorProfile();
+      } 
       break;
 
 

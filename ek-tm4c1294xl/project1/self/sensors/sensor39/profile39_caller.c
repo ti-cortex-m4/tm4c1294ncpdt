@@ -120,3 +120,12 @@ void    QueryNextBlock39_Profile(void) {
   c.bNS++;
   QueryNextBlock39(c.bNS, c.bNR, c.bInvokeId, bBlockNumber);  
 }
+
+
+
+void    Read4_Profile(void) {
+  fUseBlocks = UseBlocksDMLS();
+  fLastBlock = LastBlockDMLS();
+
+  AddBuffRecord39(20 + GetHdlcAddressesSize());
+}

@@ -20,5 +20,6 @@ void    QueryProfile39_Profile(void);
 void    Read1_Profile(void);
 void    Read2_Profile(void);
 void    Read3_Profile(void);
+void    Read4_Profile(void);
 
 void    QueryNextBlock39_Profile(void);
