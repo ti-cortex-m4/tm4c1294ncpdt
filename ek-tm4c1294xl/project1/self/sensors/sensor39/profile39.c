@@ -193,7 +193,7 @@ uchar   TestProfile39_Internal(caller39*  pc)
 
 
   InitHeader39();
-  Init1();
+  InitBuffRecord39_All();
 
 
   while (true) {
