@@ -139,7 +139,7 @@ void    Query39_AARQ(uchar  bNS, uchar  bNR)
   PushChar(0x60); // AARQ
   PushChar(0x36); // length
   
-  PushChar(0xA1); // имя контекста приложения (тэг имени, длина имени, тэг типа данных, длина, содержимое)
+  PushChar(0xA1); // application-context-name
   PushChar(0x09); // length
   PushChar(0x06);
   PushChar(0x07);
@@ -151,12 +151,12 @@ void    Query39_AARQ(uchar  bNS, uchar  bNR)
   PushChar(0x01);
   PushChar(0x01);
   
-  PushChar(0x8A); // требования к посылкам (ACSE-requirements)
+  PushChar(0x8A); // acse-requirements
   PushChar(0x02); // length
   PushChar(0x07);
   PushChar(0x80);
   
-  PushChar(0x8B); // механизм безопасности (длина, содержимое)
+  PushChar(0x8B); // mechanism-name
   PushChar(0x07); // length
   PushChar(0x60);
   PushChar(0x85);
@@ -166,7 +166,7 @@ void    Query39_AARQ(uchar  bNS, uchar  bNR)
   PushChar(0x02);
   PushChar(0x01);
   
-  PushChar(0xAC); // значение паролей или ключей шифрования (тэг данных, длина, значение пароля или ключа)
+  PushChar(0xAC); // calling-authentication-value
   PushChar(0x0A); // length
   PushChar(0x80);
   PushChar(0x08); // length
@@ -179,7 +179,7 @@ void    Query39_AARQ(uchar  bNS, uchar  bNR)
   PushChar(0x78);
   PushChar(0x46);
   
-  PushChar(0xBE); // информация о клиенте
+  PushChar(0xBE); // user-information
   PushChar(0x10); // length
   PushChar(0x04);
   PushChar(0x0E);
