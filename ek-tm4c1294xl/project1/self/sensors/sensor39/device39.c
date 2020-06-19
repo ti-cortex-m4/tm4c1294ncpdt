@@ -169,7 +169,7 @@ void    Query39_AARQ(uchar  bNS, uchar  bNR)
   PushChar(0xAC); // значение паролей или ключей шифрования (тэг данных, длина, значение пароля или ключа)
   PushChar(0x0A); // length
   PushChar(0x80);
-  PushChar(0x08);
+  PushChar(0x08); // length
   PushChar(0x78);
   PushChar(0x52);
   PushChar(0x77);
