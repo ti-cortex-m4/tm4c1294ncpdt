@@ -18,7 +18,7 @@ time39.c
 
 
 
-static const obis_t obisTime    = {0, 0, 1, 0, 0, 255},
+static const obis_t obisTime    = {0, 0, 1, 0, 0, 255};
 
 
 
