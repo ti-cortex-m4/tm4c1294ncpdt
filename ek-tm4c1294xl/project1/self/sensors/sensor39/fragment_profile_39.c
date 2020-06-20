@@ -40,7 +40,7 @@ record39 FragmentProfile39(caller39  *pc, time  ti1, time  ti2)
     (*pc).bNR++;
     Query39_RR((*pc).bNR);
     if (Input39() != SER_GOODCHECK) return GetBuffRecordError(2);
-    ShowSframe((*pc).bNR); //if (!ValidateSframe((*pc).bNR)) return 6;
+    MonitorString(" step 1 "); ShowSframe((*pc).bNR); //if (!ValidateSframe((*pc).bNR)) return 6;
 
     AddBuffRecord39(6 + GetHdlcAddressesSize());
   }
@@ -48,7 +48,7 @@ record39 FragmentProfile39(caller39  *pc, time  ti1, time  ti2)
   (*pc).bNR++;
   Query39_RR((*pc).bNR);
   if (Input39() != SER_GOODCHECK) return GetBuffRecordError(3);
-  ShowSframe((*pc).bNR); //if (!ValidateSframe((*pc).bNR)) return 6;
+  MonitorString(" step 2 "); ShowSframe((*pc).bNR); //if (!ValidateSframe((*pc).bNR)) return 6;
 
 
   uchar bBlockNumber = 0;
@@ -70,7 +70,7 @@ record39 FragmentProfile39(caller39  *pc, time  ti1, time  ti2)
       (*pc).bNR++;
       Query39_RR((*pc).bNR);
       if (Input39() != SER_GOODCHECK) return GetBuffRecordError(5);
-      ShowSframe((*pc).bNR); //if (!ValidateSframe((*pc).bNR)) return 6;
+      MonitorString(" step 3 "); ShowSframe((*pc).bNR); //if (!ValidateSframe((*pc).bNR)) return 6;
 
       AddBuffRecord39(6 + GetHdlcAddressesSize());
     }
@@ -78,7 +78,7 @@ record39 FragmentProfile39(caller39  *pc, time  ti1, time  ti2)
     (*pc).bNR++;
     Query39_RR((*pc).bNR);
     if (Input39() != SER_GOODCHECK) return GetBuffRecordError(6);
-    ShowSframe((*pc).bNR); //if (!ValidateSframe((*pc).bNR)) return 6;
+    MonitorString(" step 4 "); ShowSframe((*pc).bNR); //if (!ValidateSframe((*pc).bNR)) return 6;
   }
 
 
@@ -91,8 +91,8 @@ record39 FragmentProfile39(caller39  *pc, time  ti1, time  ti2)
 
 double2 TestFragmentProfile39(void)
 {
-//  fMonitorLogBasic = false;
-//  fMonitorLogHex = false;
+  fMonitorLogBasic = false;
+  fMonitorLogHex = false;
 
   MonitorOpen(0);
 
@@ -115,6 +115,8 @@ double2 TestFragmentProfile39(void)
   ti2.bHour = 0;
   ti2.bMinute = 0;
   ti2.bSecond = 0;
+
+  InitBuffRecord39_All();
 
   if (FragmentProfile39(&c, ti1, ti2).bError != 0) return GetDouble2Error();
 
