@@ -7267,7 +7267,7 @@ void    RunDevices(void)
 
 
     case DEV_13a_39P:
-      cbRepeat = MaxRepeat39();
+      cbRepeat = MaxRepeats();
       QueryProfile39_Profile();
       SetCurr(DEV_14_39P);
       break;
@@ -7279,7 +7279,6 @@ void    RunDevices(void)
 
     case DEV_15_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK)  {
-        Read1_Profile();
         if (!LastSegmentDMLS()) {
           MakePause(DEV_16_39P);
         } else {          
@@ -7325,7 +7324,7 @@ void    RunDevices(void)
           Read3_Profile();
           if (UseBlocks_Profile()) {
             QueryNextBlock39_Profile();
-            MakePause(DEV_20_39P);
+            MakePause(DEV_19a_39P);
           } else {
             MakePause(DEV_25_39P);
           }
@@ -7336,9 +7335,13 @@ void    RunDevices(void)
       break;
 
 
+    case DEV_19a_39P:
+      Read4_Profile();
+      MakePause(DEV_20_39P);
+      break;
+
     case DEV_20_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK)  {
-        Read4_Profile();
         if (!LastSegmentDMLS()) {
           MakePause(DEV_21_39P);
         } else {          
