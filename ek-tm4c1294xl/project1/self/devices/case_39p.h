@@ -129,7 +129,7 @@
 
 
     case DEV_13a_39P:
-      cbRepeat = MaxRepeat39();
+      cbRepeat = MaxRepeat();
       QueryProfile39_Profile();
       SetCurr(DEV_14_39P);
       break;
@@ -189,7 +189,7 @@
             QueryNextBlock39_Profile();
             MakePause(DEV_20_39P);
           } else {
-            MakePause(DEV_A_39P);            
+            MakePause(DEV_25_39P);
           }
         }
       } else {
@@ -243,14 +243,19 @@
         if (false/*!ValidateSframe_Profile()*/) {
           ErrorProfile();
         } else {
-          if (FinishProfile39_Profile())
-            MakePause(DEV_13a_39P);
-          else
-            DoneProfile();          
+          MakePause(DEV_25_39P);
         }
       } else {
         ErrorProfile();
       }
+      break;
+
+
+    case DEV_25_39P:
+      if (FinishProfile39_Profile())
+        MakePause(DEV_13a_39P);
+      else
+        DoneProfile();
       break;
 
 #endif
