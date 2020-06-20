@@ -18,6 +18,10 @@ time39.c
 
 
 
+static const obis_t obisTime    = {0, 0, 1, 0, 0, 255},
+
+
+
 void    QueryTime39(uchar  bNS, uchar  bNR, uchar  bInvokeId)
 {
 #ifdef MONITOR_39_NAMES
@@ -89,13 +93,13 @@ time    ReadTime39(void)
 
 
 
-void    QueryCorrectTime39(uchar  bNS, uchar  bNR, uchar  bInvokeId)
+void    QueryCorrectTime39(uchar  bNS, uchar  bNR, uchar  bInvokeId, sint  wSeconds)
 {
 #ifdef MONITOR_39_NAMES
   MonitorString("\n\n QueryCorrectTime39 "); MonitorCharDec(bBlockNumber);
 #endif
 
-  uint wSize = 17 + GetHdlcAddressesSize();
+  uint wSize = 23 + GetHdlcAddressesSize();
 
   InitPush(0);
   PushChar(0x7E);
@@ -112,11 +116,23 @@ void    QueryCorrectTime39(uchar  bNS, uchar  bNR, uchar  bInvokeId)
   PushChar(0xE6);
   PushChar(0x00);
 
-  PushChar(0xC0); // Get-Request
-  PushChar(0x02); // Get-Request-Next
+  PushChar(0xC3); // Action-Request
+  PushChar(0x01); // Action-Request-Normal
   PushChar(0x80 | (bInvokeId % 16)); // Invoke-Id-And-Priority
 
-  PushLongBig(bBlockNumber); // <BlockNumber Value="00000001" />
+  PushChar(0x00);
+  PushChar(0x08); // class
+
+  PushOBIS_DLMS(obisTime);
+
+  PushChar(0x06); // index
+  PushChar(0x01);
+
+  PushChar(0x10);
+
+  if (wSeconds < -900) wSeconds = -900;
+  else if (wSeconds > 900) wSeconds = 900;
+  PushIntBig(wSeconds);
 
   // DLMS finish
 
@@ -124,5 +140,5 @@ void    QueryCorrectTime39(uchar  bNS, uchar  bNR, uchar  bInvokeId)
 
   PushChar(0x7E);
 
-  Query39(1000, wSize+2); // 0x13
+  Query39(1000, wSize+2);
 }
