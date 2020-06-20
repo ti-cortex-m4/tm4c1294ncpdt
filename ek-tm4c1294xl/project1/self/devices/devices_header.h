@@ -83,6 +83,8 @@ DEVICES.C
 #include "../sensors/sensor39/device39.h"
 #include "../sensors/sensor39/query_engabs_39.h"
 #include "../sensors/sensor39/current39.h"
+#include "../sensors/sensor39/profile39_caller.h"
+#include "../sensors/sensor39/hdlc_monitor.h"
 #include "../serial/ports.h"
 #include "../serial/ports_modems.h"
 #include "../serial/modems.h"
