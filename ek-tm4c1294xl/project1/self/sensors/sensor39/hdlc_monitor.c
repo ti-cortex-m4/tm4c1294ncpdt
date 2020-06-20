@@ -175,7 +175,7 @@ bool    ValidateSframe(uchar  bNR_client)
 
 
 
-void    ValidateFrame(uchar  bNS_client, uchar  bNR_client)
+void    ValidateFrame(uchar  bNS_client, uchar  bNR_client) // TODO bool
 {
   uchar bControl = InBuff(3 + GetHdlcAddressesSize());
 

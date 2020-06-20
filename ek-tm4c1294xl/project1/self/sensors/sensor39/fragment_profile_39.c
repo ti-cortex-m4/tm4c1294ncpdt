@@ -90,8 +90,8 @@ record39 FragmentProfile39(caller39  *pc, time  ti1, time  ti2)
 
 double2 TestFragmentProfile39(void)
 {
-  fMonitorLogBasic = false;
-  fMonitorLogHex = false;
+//  fMonitorLogBasic = false;
+//  fMonitorLogHex = false;
 
   MonitorOpen(0);
 
@@ -117,7 +117,11 @@ double2 TestFragmentProfile39(void)
 
   InitBuffRecord39_All();
 
-  if (FragmentProfile39(&c, ti1, ti2).bError != 0) return GetDouble2Error();
+  uchar bError = FragmentProfile39(&c, ti1, ti2).bError;
+  if (bError != 0)  {
+    MonitorString("\n error "); MonitorCharDec(bError);
+    return GetDouble2Error();
+  }
 
   return GetDouble2(0, true);
 }

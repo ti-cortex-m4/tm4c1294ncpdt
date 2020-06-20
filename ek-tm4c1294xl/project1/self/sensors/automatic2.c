@@ -1929,7 +1929,7 @@ double2 ReadCntCurrCan(uchar  ibCan)
 #endif
 
 #ifndef SKIP_39
-    case 39: return TestProfile39(); //ReadCntCurr39();
+    case 39: return TestFragmentProfile39(); //TestProfile39(); //ReadCntCurr39();
 #endif
 
     default: return GetDouble2Error();
