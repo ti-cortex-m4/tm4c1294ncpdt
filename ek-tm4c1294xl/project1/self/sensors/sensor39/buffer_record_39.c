@@ -88,10 +88,10 @@ record39 FinishBuffRecord39(void) {
   InitPopX();
 
   if (GetPopCapacity() < 2)
-    return GetBuffRecordError(1);
+    return GetBuffRecordError(21);
 
   if (PopCharX() != 1) // array
-    return GetBuffRecordError(2);
+    return GetBuffRecordError(22);
 
   uchar bCount = PopCharX();
 
@@ -105,24 +105,24 @@ record39 FinishBuffRecord39(void) {
   for (i=0; i<bCount; i++)
   {
     if (GetPopCapacity() < 2 + 2+12 + 1+8)
-      return GetBuffRecordError(3);
+      return GetBuffRecordError(23);
 
     if (PopCharX() != 0x02) // structure
-      return GetBuffRecordError(4);
+      return GetBuffRecordError(24);
 
     if (PopCharX() != 2) // structure size
-      return GetBuffRecordError(5);
+      return GetBuffRecordError(25);
 
     if (PopCharX() != 0x09) // string
-      return GetBuffRecordError(6);
+      return GetBuffRecordError(26);
 
     if (PopCharX() != 12) // string size
-      return GetBuffRecordError(7);
+      return GetBuffRecordError(27);
 
     time ti = PopTimeDateX();
 
     if (PopCharX() != 0x15) // unsigned long 64
-      return GetBuffRecordError(8);
+      return GetBuffRecordError(28);
 
     uint64_t ddw = PopLong64X();
 
