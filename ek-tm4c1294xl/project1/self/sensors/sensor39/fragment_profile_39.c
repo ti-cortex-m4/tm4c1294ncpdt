@@ -40,7 +40,7 @@ record39 FragmentProfile39(caller39  *pc, time  ti1, time  ti2)
     (*pc).bNR++;
     Query39_RR((*pc).bNR);
     if (Input39() != SER_GOODCHECK) return GetBuffRecordError(2);
-    //if (!ValidateSframe((*pc).bNR)) return 6;
+    ShowSframe((*pc).bNR); //if (!ValidateSframe((*pc).bNR)) return 6;
 
     AddBuffRecord39(6 + GetHdlcAddressesSize());
   }
@@ -48,7 +48,7 @@ record39 FragmentProfile39(caller39  *pc, time  ti1, time  ti2)
   (*pc).bNR++;
   Query39_RR((*pc).bNR);
   if (Input39() != SER_GOODCHECK) return GetBuffRecordError(3);
-  //if (!ValidateSframe((*pc).bNR)) return 6;
+  ShowSframe((*pc).bNR); //if (!ValidateSframe((*pc).bNR)) return 6;
 
 
   uchar bBlockNumber = 0;
@@ -70,7 +70,7 @@ record39 FragmentProfile39(caller39  *pc, time  ti1, time  ti2)
       (*pc).bNR++;
       Query39_RR((*pc).bNR);
       if (Input39() != SER_GOODCHECK) return GetBuffRecordError(5);
-      //if (!ValidateSframe((*pc).bNR)) return 6;
+      ShowSframe((*pc).bNR); //if (!ValidateSframe((*pc).bNR)) return 6;
 
       AddBuffRecord39(6 + GetHdlcAddressesSize());
     }
@@ -78,7 +78,7 @@ record39 FragmentProfile39(caller39  *pc, time  ti1, time  ti2)
     (*pc).bNR++;
     Query39_RR((*pc).bNR);
     if (Input39() != SER_GOODCHECK) return GetBuffRecordError(6);
-    //if (!ValidateSframe((*pc).bNR)) return 6;
+    ShowSframe((*pc).bNR); //if (!ValidateSframe((*pc).bNR)) return 6;
   }
 
 

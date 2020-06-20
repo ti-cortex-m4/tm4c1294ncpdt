@@ -174,6 +174,19 @@ bool    ValidateSframe(uchar  bNR_client)
 }
 
 
+void    ShowSframe(uchar  bNR_client)
+{
+  uchar bControl = InBuff(3 + GetHdlcAddressesSize());
+  uchar bNR_server = (bControl & 0xE0) >> 5;
+
+  if (bNR_client % 8 != bNR_server % 8) {
+#ifdef MONITOR_39
+    MonitorString("S-frame N(R) client/server "); MonitorCharHex(bNR_client); MonitorCharHex(bNR_server);
+#endif
+  }
+}
+
+
 
 bool    LastSegmentDMLS(void)
 {
