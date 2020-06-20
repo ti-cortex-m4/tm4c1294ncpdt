@@ -102,7 +102,7 @@ double2 TestFragmentProfile39(void)
 
   time ti1;
   ti1.bYear = 20;
-  ti1.bMonth = 5;
+  ti1.bMonth = 6;
   ti1.bDay = 1;
   ti1.bHour = 0;
   ti1.bMinute = 0;
@@ -110,8 +110,8 @@ double2 TestFragmentProfile39(void)
 
   time ti2;
   ti2.bYear = 20;
-  ti2.bMonth = 5;
-  ti2.bDay = 15;
+  ti2.bMonth = 6;
+  ti2.bDay = 14;
   ti2.bHour = 0;
   ti2.bMinute = 0;
   ti2.bSecond = 0;
