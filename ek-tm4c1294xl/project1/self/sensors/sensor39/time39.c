@@ -86,3 +86,43 @@ time    ReadTime39(void)
 
   return ti;
 }
+
+
+
+void    QueryCorrectTime39(uchar  bNS, uchar  bNR, uchar  bInvokeId)
+{
+#ifdef MONITOR_39_NAMES
+  MonitorString("\n\n QueryCorrectTime39 "); MonitorCharDec(bBlockNumber);
+#endif
+
+  uint wSize = 17 + GetHdlcAddressesSize();
+
+  InitPush(0);
+  PushChar(0x7E);
+  PushFormatDLMS(wSize);
+  PushHdlcAddresses();
+
+  PushChar((bNR << 5) | 0x10 | (bNS << 1) | 0x00);
+
+  PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize()));
+
+  // DLMS start
+
+  PushChar(0xE6); // LLC
+  PushChar(0xE6);
+  PushChar(0x00);
+
+  PushChar(0xC0); // Get-Request
+  PushChar(0x02); // Get-Request-Next
+  PushChar(0x80 | (bInvokeId % 16)); // Invoke-Id-And-Priority
+
+  PushLongBig(bBlockNumber); // <BlockNumber Value="00000001" />
+
+  // DLMS finish
+
+  PushIntLtl(MakeCRC16X25OutBuff(1, wSize-2));
+
+  PushChar(0x7E);
+
+  Query39(1000, wSize+2); // 0x13
+}
