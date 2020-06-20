@@ -7368,10 +7368,10 @@ void    RunDevices(void)
     case DEV_23_39P:
       cbRepeat = MaxRepeats();
       Query39_RR_Profile();
-      SetCurr(DEV_24_39P);
+      SetCurr(DEV_26_39P);
       break;
 
-    case DEV_24_39P:
+    case DEV_26_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (false/*!ValidateSframe_Profile()*/) {
           ErrorProfile();

@@ -7,6 +7,7 @@ profile39_caller.c
 #include "../../main.h"
 #include "../../kernel/tuples.h"
 #include "../../serial/monitor.h"
+#include "../../serial/monitor_settings.h"
 // #include "io39.h"
 #include "device39.h"
 #include "time39.h"
@@ -46,6 +47,9 @@ bool    ValidateIframe_Profile(void) {
 
 
 void    Query39_DISC_Profile(void) {
+  fMonitorLogBasic = false;
+  fMonitorLogHex = false;
+
 #ifdef MONITOR_39_NAMES
   MonitorString("\n\n Query39_DISC_Profile");
 #endif
