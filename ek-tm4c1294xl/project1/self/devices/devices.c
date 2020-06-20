@@ -7278,15 +7278,11 @@ void    RunDevices(void)
       break;
 
     case DEV_15_39P:
-      if (mpSerial[ibPort] == SER_GOODCHECK)  {
         if (!LastSegmentDMLS()) {
           MakePause(DEV_16_39P);
         } else {          
           MakePause(DEV_18_39P);
         }
-      } else {
-        ErrorProfile();
-      } 
       break;
 
 
@@ -7341,15 +7337,11 @@ void    RunDevices(void)
       break;
 
     case DEV_20_39P:
-      if (mpSerial[ibPort] == SER_GOODCHECK)  {
         if (!LastSegmentDMLS()) {
           MakePause(DEV_21_39P);
         } else {          
           MakePause(DEV_23_39P);
         }
-      } else {
-        ErrorProfile();
-      } 
       break;
 
 
