@@ -96,10 +96,10 @@ time    ReadTime39(void)
 void    QueryCorrectTime39(uchar  bNS, uchar  bNR, uchar  bInvokeId, sint  wSeconds)
 {
 #ifdef MONITOR_39_NAMES
-  MonitorString("\n\n QueryCorrectTime39 "); MonitorCharDec(bBlockNumber);
+  MonitorString("\n\n QueryCorrectTime39 "); MonitorIntDec(wSeconds);
 #endif
 
-  uint wSize = 23 + GetHdlcAddressesSize();
+  uint wSize = 26 + GetHdlcAddressesSize();
 
   InitPush(0);
   PushChar(0x7E);
@@ -121,11 +121,11 @@ void    QueryCorrectTime39(uchar  bNS, uchar  bNR, uchar  bInvokeId, sint  wSeco
   PushChar(0x80 | (bInvokeId % 16)); // Invoke-Id-And-Priority
 
   PushChar(0x00);
-  PushChar(0x08); // class
+  PushChar(8); // clock (class_id = 8)
 
   PushOBIS_DLMS(obisTime);
 
-  PushChar(0x06); // index
+  PushChar(6); // method 6 (shift_time)
   PushChar(0x01);
 
   PushChar(0x10);
