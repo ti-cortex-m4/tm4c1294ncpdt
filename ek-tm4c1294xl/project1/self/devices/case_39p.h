@@ -127,6 +127,7 @@
       MakePause(DEV_13a_39P);
       break;
 
+
     case DEV_13a_39P:
       cbRepeat = MaxRepeat39();
       QueryProfile39_Profile();
