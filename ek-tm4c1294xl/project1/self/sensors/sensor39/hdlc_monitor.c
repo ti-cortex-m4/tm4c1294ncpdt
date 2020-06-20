@@ -174,6 +174,23 @@ bool    ValidateSframe(uchar  bNR_client)
 }
 
 
+
+bool    ValidateFrame(uchar  bNS_client, uchar  bNR_client)
+{
+  if ((bControl & 0x01) == 0x00) {
+    MonitorString("I-frame");
+    MonitorString(" N(R)=");  MonitorCharDec((bControl & 0xE0) >> 5);
+    MonitorString(" N(S)=");  MonitorCharDec((bControl & 0x0E) >> 1);
+  } else if ((bControl & 0x03) == 0x01) {
+    MonitorString("S-frame");
+    MonitorString(" N(R)=");  MonitorCharDec((bControl & 0xE0) >> 5);
+  } else if ((bControl & 0x03) == 0x03) {
+    MonitorString("U-frame");
+  }
+}
+
+
+
 void    ShowSframe(uchar  bNR_client)
 {
   uchar bControl = InBuff(3 + GetHdlcAddressesSize());
