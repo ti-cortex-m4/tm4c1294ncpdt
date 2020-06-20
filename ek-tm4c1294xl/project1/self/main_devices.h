@@ -903,7 +903,7 @@ typedef enum
   DEV_21_39P            =  0x2435,
   DEV_22_39P            =  0x2436,
   DEV_23_39P            =  0x2437,
-  DEV_24_39P            =  0x2438,
+  DEV_26_39P            =  0x2438,
   DEV_27_39P            =  0x243B,
 
 #endif
