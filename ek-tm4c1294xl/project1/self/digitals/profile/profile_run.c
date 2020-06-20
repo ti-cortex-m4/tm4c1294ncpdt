@@ -22,6 +22,7 @@ PROFILE_RUN!C
 #include "../../sensors/sensor21/device_p.h"
 #include "../../sensors/sensor26/device_u.h"
 #include "../../sensors/sensor36/device36.h"
+#include "../../sensors/sensor39/device39.h"
 #include "../../sensors/device_q.h"
 #include "../../sensors/device_w.h"
 #include "../../digitals/digitals.h"
@@ -363,6 +364,10 @@ void    NextProfile(void)
 #ifndef SKIP_36
     case 36:
     case 37: QueryClose36();  break;
+#endif
+
+#ifndef SKIP_39
+    case 39: Query39_DISC();  break;
 #endif
   }
 

@@ -7326,7 +7326,7 @@ void    RunDevices(void)
             QueryNextBlock39_Profile();
             MakePause(DEV_19a_39P);
           } else {
-            MakePause(DEV_25_39P);
+            MakePause(DEV_27_39P);
           }
         }
       } else {
@@ -7384,7 +7384,7 @@ void    RunDevices(void)
         if (false/*!ValidateSframe_Profile()*/) {
           ErrorProfile();
         } else {
-          MakePause(DEV_25_39P);
+          MakePause(DEV_27_39P);
         }
       } else {
         ErrorProfile();
@@ -7392,7 +7392,7 @@ void    RunDevices(void)
       break;
 
 
-    case DEV_25_39P:
+    case DEV_27_39P:
       if (FinishProfile39_Profile())
         MakePause(DEV_13a_39P);
       else
