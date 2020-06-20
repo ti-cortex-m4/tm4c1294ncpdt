@@ -180,32 +180,32 @@ void    ValidateFrame(uchar  bNS_client, uchar  bNR_client)
   uchar bControl = InBuff(3 + GetHdlcAddressesSize());
 
   if ((bControl & 0x01) == 0x00) {
-    MonitorString("I-frame");
+    MonitorString(" I-frame validation ");
     uchar bNS_server = (bControl & 0x0E) >> 1;
     uchar bNR_server = (bControl & 0xE0) >> 5;
 
     if ((bNS_client + 1) % 8 != bNR_server % 8) {
   #ifdef MONITOR_39
-      MonitorString(" I-frame N(S) client / N(R) server error "); MonitorCharHex((bNS_client + 1) % 8); MonitorCharHex(bNR_server % 8);
+      MonitorString(" I-frame validation error: N(S) client / N(R) server "); MonitorCharHex((bNS_client + 1) % 8); MonitorCharHex(bNR_server % 8);
   #endif
     }
 
     if (bNR_client % 8 != bNS_server % 8) {
   #ifdef MONITOR_39
-      MonitorString(" I-frame N(R) client / N(S) server error "); MonitorCharHex(bNR_client % 8); MonitorCharHex(bNS_server % 8);
+      MonitorString(" I-frame validation error: N(R) client / N(S) server "); MonitorCharHex(bNR_client % 8); MonitorCharHex(bNS_server % 8);
   #endif
     }
   } else if ((bControl & 0x03) == 0x01) {
-    MonitorString("S-frame");
+    MonitorString(" S-frame validation ");
     uchar bNR_server = (bControl & 0xE0) >> 5;
 
     if ((bNS_client + 1) % 8 != bNR_server % 8) {
   #ifdef MONITOR_39
-      MonitorString(" S-frame N(S) client / N(R) server error "); MonitorCharHex((bNS_client + 1) % 8); MonitorCharHex(bNR_server % 8);
+      MonitorString(" S-frame validation error: N(S) client / N(R) server "); MonitorCharHex((bNS_client + 1) % 8); MonitorCharHex(bNR_server % 8);
   #endif
     }
   } else if ((bControl & 0x03) == 0x03) {
-    MonitorString("U-frame");
+    MonitorString("U-frame validation ");
   }
 }
 
