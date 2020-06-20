@@ -30,7 +30,7 @@ typedef struct
 
 
 #define MONITOR_39          1
-//#define MONITOR_39_NAMES    1
+#define MONITOR_39_NAMES    1
 
 
 #ifndef MONITOR_39
