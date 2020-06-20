@@ -28,14 +28,19 @@ static uchar            bBlockNumber;
 
 
 
-void    InitRunner39_Profile(void) { 
-  caller39 c = InitCaller();
+wbool    ValidateSframe_Profile(void) {
+  return ValidateSframe(c.bNR);
 }
+
+
+bool    ValidateIframe_Profile(void) {
+  return ValidateIframe(c.bNS, c.bNR);
+};
 
 
 
 void    Query39_DISC_Profile(void) {
-  InitRunner39_Profile();
+  caller39 c = InitCaller();
 
   Query39_DISC();
 }
@@ -64,25 +69,15 @@ void    ReadTime39_Profile(void) {
 
 
 
-bool    ValidateSframe_Profile(void) {
-  return ValidateSframe(c.bNR);
-}
-
-
-bool    ValidateIframe_Profile(void) {
-  return ValidateIframe(c.bNS, c.bNR);
-};
-
-
-
 void    InitProfile39_Profile(void) {
   InitHeader39();
   InitBuffRecord39_All();
-  InitBuffRecord39();
 }
 
 
 void    QueryProfile39_Profile(void) {
+  InitBuffRecord39();
+
   t2time t2 = QueryHeader39();
 
   c.bNS++;
