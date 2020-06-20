@@ -182,7 +182,7 @@ bool    LastSegmentDMLS(void)
   bool fLastSegment = (wFormat & 0x0800) == 0;
 
 #ifdef MONITOR_39  
-  MonitorString(" Last_Segment="); MonitorBool(fLastSegment);
+  MonitorString("\n Last_Segment="); MonitorBool(fLastSegment);
 #endif
 
   return fLastSegment;
@@ -197,7 +197,7 @@ bool    UseBlocksDMLS(void)
   bool fUseBlocks = (w == 0xC402);
 
 #ifdef MONITOR_39
-  MonitorString(" Use_Blocks="); MonitorIntHex(w); MonitorBool(fUseBlocks);
+  MonitorString("\n Use_Blocks="); MonitorIntHex(w); MonitorBool(fUseBlocks);
 #endif  
 
   return fUseBlocks;
@@ -212,7 +212,7 @@ bool    LastBlockDMLS(void)
   bool fLastBlock = (b != 0);
 
 #ifdef MONITOR_39  
-  MonitorString(" Last_Block="); MonitorCharHex(b); MonitorBool(fLastBlock);
+  MonitorString("\n Last_Block="); MonitorCharHex(b); MonitorBool(fLastBlock);
 #endif  
 
   return fLastBlock;

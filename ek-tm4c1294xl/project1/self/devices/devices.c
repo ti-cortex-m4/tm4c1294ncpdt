@@ -7340,7 +7340,7 @@ void    RunDevices(void)
         if (!LastSegmentDMLS()) {
           MakePause(DEV_21_39P);
         } else {          
-          MakePause(DEV_23_39P);
+          MakePause(DEV_25_39P);
         }
       break;
 
@@ -7365,7 +7365,7 @@ void    RunDevices(void)
       break;
 
 
-    case DEV_23_39P:
+    case DEV_25_39P:
       cbRepeat = MaxRepeats();
       Query39_RR_Profile();
       SetCurr(DEV_26_39P);
