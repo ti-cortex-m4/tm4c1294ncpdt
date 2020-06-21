@@ -7,14 +7,12 @@ automatic_get_cntcurr_39.c
 #include "../../main.h"
 #include "../../display/display.h"
 #include "../../keyboard/keyboard.h"
-// #include "../../time/delay.h"
-//#include "../../serial/ports.h"
-//#include "../../serial/monitor.h"
+#include "../../serial/ports.h"
 #include "../../digitals/digitals.h"
 #include "device39.h"
-//#include "query_engabs_39.h"
 #include "io39.h"
 #include "fragment_open_39.h"
+#include "dlms_read_register.h"
 #include "automatic_get_cntcurr_39.h"
 
 
@@ -27,7 +25,7 @@ double2 ReadCntCurr39_Internal(void)
 {
   caller39 c = InitCaller();
 
-  uchar bError = FragmentOpen39(pc);
+  uchar bError = FragmentOpen39(&c);
   if (bError != 0) return GetDouble2Error1(bError);
 
   double2 db2 = ReadRegisterValueWithScaler39(obisEngAbs, &c);
@@ -48,12 +46,11 @@ double2 ReadCntCurr39(void)
   uchar r;
   for (r=0; r<MaxRepeats(); r++)
   {
-    double2 ddw2 = ReadCntCurr39_Internal();
+    double2 db2 = ReadCntCurr39_Internal();
     if (fKey == true) break;
-    if (ddw2.fValid)
+    if (db2.fValid)
     {
-      mpdwChannelsA[0] = ddw2.ddwValue % 0x100000000;
-      mpdbChannelsC[0] = (double)mpdwChannelsA[0] / 1000;
+      mpdbChannelsC[0] = db2.dbValue / 1000;
       mpboChannelsA[0] = true;
 
       return GetDouble0(mpdbChannelsC[0]);

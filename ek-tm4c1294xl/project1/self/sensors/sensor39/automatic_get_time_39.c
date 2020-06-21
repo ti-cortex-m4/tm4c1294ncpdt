@@ -7,7 +7,7 @@ automatic_get_time_39.c
 #include "../../main.h"
 #include "../../display/display.h"
 #include "../../keyboard/keyboard.h"
-//#include "../../serial/ports.h"
+#include "../../serial/ports.h"
 #include "../../digitals/digitals.h"
 #include "device39.h"
 #include "time39.h"
