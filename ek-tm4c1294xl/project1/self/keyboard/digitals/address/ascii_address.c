@@ -23,7 +23,7 @@ void    AsciiAddress_Show(line  *pl) {
 
 void    AsciiAddress_Init(line  *pl) {
   memset((char *)pl, 0, sizeof(line));
-  (*pl).szLine[bLINE_SIZE-1] = '0';
+  (*pl).szLine[0] = '0';
 }
 
 
@@ -56,10 +56,10 @@ void    AsciiAddress_Enter(line  *pl, uchar  idx) {
 }
 
 
-void    AsciiAddress_Delete(line  *pl) {
+void    AsciiAddress_Delete(line  *pl, uchar  idx) {
   uchar i;
-  for (i=0; i<bLINE_SIZE-2; i++) {
-    (*pl).szLine[bLINE_SIZE-1-i] = (*pl).szLine[bLINE_SIZE-2-i];
+  for (i=0; i<idx; i++) {
+    (*pl).szLine[i] = (*pl).szLine[i+1];
   } 
-  (*pl).szLine[0] = 0;
+  (*pl).szLine[idx] = 0;
 }
