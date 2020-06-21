@@ -17,7 +17,7 @@ automatic_get_time_39.c
 
 
 
-time2   ReadTime38_Internal(void)
+time2   ReadTimeCan38_Internal(void)
 {
   caller39 c = InitCaller();
 
@@ -39,11 +39,11 @@ time2   ReadTimeCan39(void)
   uchar r;
   for (r=0; r<MaxRepeats(); r++)
   {
-    time2 tm2 = ReadTime38_Internal();
+    time2 tm2 = ReadTimeCan38_Internal();
     if (fKey == true) break;
     if (tm2.fValid)
     {
-      ShowPercent(50);
+//      ShowPercent(50);
 
       tiChannelC = tm2.tiValue;
       mpboChannelsA[0] = true;
@@ -64,7 +64,7 @@ time2   ReadTimeCan39_Short(void)
 {
   Clear();
 
-  time2 tm2 = ReadTime38_Internal();
+  time2 tm2 = ReadTimeCan38_Internal();
   if (tm2.fValid)
   {
     tiChannelC = tm2.tiValue;
