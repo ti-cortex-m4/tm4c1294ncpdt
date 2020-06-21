@@ -22,7 +22,7 @@ void    AsciiAddress_Show(line  *pl) {
 
 
 void    AsciiAddress_Init(line  *pl) {
-  memset((char *)address, 0, sizeof(line));
+  memset((char *)pl, 0, sizeof(line));
   (*pl).szLine[bLINE_SIZE-1] = '0';
 }
 
