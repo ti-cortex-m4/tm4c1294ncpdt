@@ -17,15 +17,15 @@ automatic_get_time_39.c
 
 
 
-time2   ReadTimeCan38_Internal(void)
+time2   ReadTimeCan39_Internal(void)
 {
   caller39 c = InitCaller();
 
   time2 tm2 = FragmentOpenTime39(&c);
-  if (!tm2.fValid) return GetTime2Error();
+  if (!tm2.fValid) return GetTime2Error1(91);
 
   Query39_DISC();
-  if (Input39() != SER_GOODCHECK) return GetTime2Error();
+  if (Input39() != SER_GOODCHECK) return GetTime2Error1(92);
 
   return GetTime0(tm2.tiValue);
 }
@@ -39,12 +39,10 @@ time2   ReadTimeCan39(void)
   uchar r;
   for (r=0; r<MaxRepeats(); r++)
   {
-    time2 tm2 = ReadTimeCan38_Internal();
+    time2 tm2 = ReadTimeCan39_Internal();
     if (fKey == true) break;
     if (tm2.fValid)
     {
-//      ShowPercent(50);
-
       tiChannelC = tm2.tiValue;
       mpboChannelsA[0] = true;
 
@@ -53,9 +51,9 @@ time2   ReadTimeCan39(void)
   }
 
   Query39_DISC();
-  if (Input39() != SER_GOODCHECK) return GetTime2Error();
+  if (Input39() != SER_GOODCHECK) return GetTime2Error1(93);
 
-  return GetTime2Error();
+  return GetTime2Error1(94);
 }
 
 
@@ -64,7 +62,7 @@ time2   ReadTimeCan39_Short(void)
 {
   Clear();
 
-  time2 tm2 = ReadTimeCan38_Internal();
+  time2 tm2 = ReadTimeCan39_Internal();
   if (tm2.fValid)
   {
     tiChannelC = tm2.tiValue;
@@ -74,7 +72,7 @@ time2   ReadTimeCan39_Short(void)
   }
 
   Query39_DISC();
-  if (Input39() != SER_GOODCHECK) return GetTime2Error();
+  if (Input39() != SER_GOODCHECK) return GetTime2Error1(95);
 
-  return GetTime2Error();
+  return GetTime2Error1(96);
 }

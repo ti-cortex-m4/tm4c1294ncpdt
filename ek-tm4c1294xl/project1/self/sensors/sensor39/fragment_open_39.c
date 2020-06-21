@@ -22,12 +22,12 @@ uchar   FragmentOpen39(caller39  *pc)
 
   Query39_AARQ((*pc).bNS, (*pc).bNR);
   if (Input39() != SER_GOODCHECK) return 183;
-  if (!ValidateFrame((*pc).bNS, (*pc).bNR)) return 184;
+  if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return 184;
 
   (*pc).bNR++;
   Query39_RR((*pc).bNR);
   if (Input39() != SER_GOODCHECK) return 185;
-  if (!ValidateFrame((*pc).bNS, (*pc).bNR)) return 186;
+  if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return 186;
 
   return 0;
 }
