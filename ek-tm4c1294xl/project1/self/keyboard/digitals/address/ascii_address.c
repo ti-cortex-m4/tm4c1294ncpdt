@@ -11,6 +11,8 @@ ascii_address.c
 
 
 void    AsciiAddress_Show(line  address) {
+  Clear();
+
   uchar i;
   for (i=0; i<bLINE_SIZE-1; i++) {
     szLo[i] = address.szLine[i];

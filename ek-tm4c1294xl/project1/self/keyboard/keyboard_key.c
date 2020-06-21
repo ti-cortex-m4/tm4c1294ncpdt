@@ -184,12 +184,20 @@ KEYBOARD_KEY!C
 
 
 
+#include "devices/address/key_ascii_address.h"
+
+
+
 void    Keyboard_Key(void)
 {
   if (enGlobal == GLB_PROGRAM)
   {
     switch (wProgram)
     {
+      case 777:                 key_SetAsciiAddresses(); break;
+
+
+
       case bSET_SPEED:          key_SetSpeeds();        break;
 
       case bSET_CURRTIME:       key_SetCurrTime();      break;
