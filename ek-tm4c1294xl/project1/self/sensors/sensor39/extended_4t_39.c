@@ -81,7 +81,7 @@ status  CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
   bool present = (IsEngMonPresent39() == 0);
   bool absent = (IsEngMonAbsent39() == 0);
 
-  ulong64_ ddw2 = GetULong64Error(0);
+  ulong64_ ddw2 = GetULong64Error1(0);
   if (present) {
     InitPop(17 + GetHdlcAddressesSize());
     ddw2 = PopUnsignedValueDLSM();

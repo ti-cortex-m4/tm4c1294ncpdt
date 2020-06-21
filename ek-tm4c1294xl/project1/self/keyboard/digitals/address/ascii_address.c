@@ -10,54 +10,54 @@ ascii_address.c
 
 
 
-void    AsciiAddress_Show(line  address) {
+void    AsciiAddress_Show(line  *pl) {
   Clear();
 
   uchar i;
   for (i=0; i<bLINE_SIZE-1; i++) {
-    szLo[i] = address.szLine[i];
+    szLo[i] = (*pl).szLine[i];
   }
 }
 
 
 
-void    AsciiAddress_Init(line  address) {
-  memset((char *)&address, 0, sizeof(address));
-  address.szLine[bLINE_SIZE-1] = '0';
+void    AsciiAddress_Init(line  *pl) {
+  memset((char *)address, 0, sizeof(line));
+  (*pl).szLine[bLINE_SIZE-1] = '0';
 }
 
 
 
-void    AsciiAddress_Increment(line  address, uchar  i) {
-  if ((address.szLine[i] >= '0') && (address.szLine[i] < '9'))
-    address.szLine[i]++;
+void    AsciiAddress_Increment(line  *pl, uchar  i) {
+  if (((*pl).szLine[i] >= '0') && ((*pl).szLine[i] < '9'))
+    (*pl).szLine[i]++;
   else   
-    address.szLine[i] = '0';
+    (*pl).szLine[i] = '0';
 }
 
 
-void    AsciiAddress_Decrement(line  address, uchar  i) {
-  if ((address.szLine[i] > '0') && (address.szLine[i] <= '9'))    
-    address.szLine[i]--;
+void    AsciiAddress_Decrement(line  *pl, uchar  i) {
+  if (((*pl).szLine[i] > '0') && ((*pl).szLine[i] <= '9'))
+    (*pl).szLine[i]--;
   else   
-    address.szLine[i] = '9';
+    (*pl).szLine[i] = '9';
 }
 
 
 
-void    AsciiAddress_Enter(line  address) {
+void    AsciiAddress_Enter(line  *pl) {
   uchar i;
   for (i=0; i<bLINE_SIZE-2; i++) {
-    address.szLine[i] = address.szLine[i+1];  
+    (*pl).szLine[i] = (*pl).szLine[i+1];
   } 
-  address.szLine[bLINE_SIZE-1] = '0';
+  (*pl).szLine[bLINE_SIZE-1] = '0';
 }
 
 
-void    AsciiAddress_Delete(line  address) {
+void    AsciiAddress_Delete(line  *pl) {
   uchar i;
   for (i=0; i<bLINE_SIZE-2; i++) {
-    address.szLine[bLINE_SIZE-1-i] = address.szLine[bLINE_SIZE-2-i];  
+    (*pl).szLine[bLINE_SIZE-1-i] = (*pl).szLine[bLINE_SIZE-2-i];
   } 
-  address.szLine[0] = 0;
+  (*pl).szLine[0] = 0;
 }

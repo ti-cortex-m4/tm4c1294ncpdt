@@ -50,7 +50,7 @@ ulong64_ PopUnsignedValueDLSM(void)
   }
 
   // error(unknown_data_type, bDataType)
-  return GetULong64Error(1);
+  return GetULong64Error1(1);
 }
 
 
@@ -98,7 +98,7 @@ ulong64_ ReadUnsignedValueDLSM(void)
 #endif
   if (bDataAccessResult != 0) {
     // error(no_success, bDataAccessResult)
-    return GetULong64Error(0);
+    return GetULong64Error1(0);
   }
 
   return PopUnsignedValueDLSM();

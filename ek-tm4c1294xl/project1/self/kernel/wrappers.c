@@ -57,7 +57,7 @@ ulong64_ GetULong64(uint64_t  ddwValue, bool  fValid, uchar  bError)
 }
 
 
-ulong64_ GetULong64Error(uchar  bError)
+ulong64_ GetULong64Error1(uchar  bError)
 {
   return GetULong64(MAX_LONGLONG, false, bError);
 }
@@ -107,14 +107,33 @@ double2 GetDouble2(double  dbValue, bool  fValid)
 
   db2.dbValue = dbValue;
   db2.fValid = fValid;
+  db2.bError = 0;
 
   return db2;
+}
+
+
+double2 GetDouble0(double  dbValue)
+{
+  return GetDouble2(dbValue, true);
 }
 
 
 double2 GetDouble2Error(void)
 {
   return GetDouble2(-1, false);
+}
+
+
+double2 GetDouble2Error1(uchar  bError)
+{
+  double2 db2;
+
+  db2.dbValue = -1;
+  db2.fValid = false;
+  db2.bError = bError;
+
+  return db2;
 }
 
 
