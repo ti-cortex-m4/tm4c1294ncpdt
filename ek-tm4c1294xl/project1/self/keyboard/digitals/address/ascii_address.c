@@ -30,7 +30,13 @@ void    AsciiAddress_Init(line  *pl) {
 
 void    AsciiAddress_Increment(line  *pl) {
   uchar i = 0;
-  if (((*pl).szLine[i] >= '0') && ((*pl).szLine[i] < '9'))
+  if ((*pl).szLine[i] > 'z')
+    (*pl).szLine[i] = '0';
+  else if ((*pl).szLine[i] >= 'a')
+    (*pl).szLine[i]++;
+  else if ((*pl).szLine[i] == '9')
+    (*pl).szLine[i] = 'a';
+  else if ((*pl).szLine[i] >= '0')
     (*pl).szLine[i]++;
   else   
     (*pl).szLine[i] = '0';
