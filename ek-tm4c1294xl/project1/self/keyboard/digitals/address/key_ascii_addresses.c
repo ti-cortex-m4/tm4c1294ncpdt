@@ -14,13 +14,12 @@ key_ascii_&address.c
 //                                           0123456789ABCDEF
 static char const       szAddresses[]     = "Адреса          ";
 
-static line             address;
-
 
 
 void    key_SetAsciiAddresses(void)
 {
-static uchar i;
+static line  address;
+static uchar idx;
 
   if (bKey == bKEY_ENTER)
   {
@@ -31,7 +30,7 @@ static uchar i;
       ShowHi(szAddresses);
 
       AsciiAddress_Init(&address);
-      i = 0;
+      idx = 0;
 
       AsciiAddress_Show(&address);
     }
@@ -51,14 +50,13 @@ static uchar i;
 
   else if (bKey == bKEY_MINUS)
   {
-    i--;
-    AsciiAddress_Delete(&address);
+    if (idx > 0) AsciiAddress_Delete(&address, idx--);
     AsciiAddress_Show(&address);
   }
 
   else if (bKey == bKEY_POINT)
   {
-    AsciiAddress_Enter(&address, ++i);
+    if (idx < 13) AsciiAddress_Enter(&address, ++idx);
     AsciiAddress_Show(&address);
   }
   else Beep();
