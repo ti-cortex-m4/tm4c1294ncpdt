@@ -125,8 +125,15 @@ time2   GetTime2(time  tiValue, bool  fValid)
 
   ti2.tiValue = tiValue;
   ti2.fValid = fValid;
+  ti2.bError = 0;
 
   return ti2;
+}
+
+
+time2   GetTime0(time  tiValue)
+{
+  return GetTime2(tiValue, true);
 }
 
 
@@ -134,6 +141,20 @@ time2   GetTime2Error(void)
 {
   static const time tiZero = { 0, 0, 0, 0, 0, 0 };
   return GetTime2(tiZero, false);
+}
+
+
+time2   GetTime2Error1(uchar  bError)
+{
+  static const time tiZero = { 0, 0, 0, 0, 0, 0 };
+
+  time2 ti2;
+
+  ti2.tiValue = tiZero;
+  ti2.fValid = false;
+  ti2.bError = bError;
+
+  return ti2;
 }
 
 

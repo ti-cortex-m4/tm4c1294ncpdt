@@ -4,4 +4,4 @@ fragment_open_39.h
 
 ------------------------------------------------------------------------------*/
 
-uchar   FragmentOpenTime39(caller39  *pc);
+time2   FragmentOpenTime39(caller39  *pc);
