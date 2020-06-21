@@ -56,6 +56,7 @@ typedef struct
 {
   time          tiValue;
   bool          fValid;
+  uchar         bError;
 } time2;
 
 
@@ -86,7 +87,9 @@ double2 GetDouble2(double  dbValue, bool  fValid);
 double2 GetDouble2Error(void);
 
 time2   GetTime2(time  tiValue, bool  fValid);
+time2   GetTime0(time  tiValue);
 time2   GetTime2Error(void);
+time2   GetTime2Error1(uchar  bError);
 
 factors2 GetFactors2(factors  fcValue, bool  fValid);
 factors2 GetFactors2Error(void);
