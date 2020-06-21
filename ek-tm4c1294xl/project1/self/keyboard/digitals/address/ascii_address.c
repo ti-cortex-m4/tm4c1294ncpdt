@@ -1,39 +1,26 @@
 /*------------------------------------------------------------------------------
-ascii_address.h
-
-
-------------------------------------------------------------------------------*/
-
-void    AsciiAddress_Show(line  address);
-void    AsciiAddress_Init(line  address);
-void    AsciiAddress_Increment(line  address, uchar  i);
-void    AsciiAddress_Decrement(line  address, uchar  i);
-void    AsciiAddress_Enter(line  address);
-void    AsciiAddress_Delete(line  address);
-
-/*------------------------------------------------------------------------------
 ascii_address.c
 
 
 ------------------------------------------------------------------------------*/
 
-#include "../main.h"
+#include "../../../main.h"
+#include "../../../display/display.h"
 #include "ascii_address.h"
 
 
 
 void    AsciiAddress_Show(line  address) {
-{
   uchar i;
   for (i=0; i<bLINE_SIZE-1; i++) {
-    Lo[i] = address.szLine[i];  
+    szLo[i] = address.szLine[i];
   }
 }
 
 
 
 void    AsciiAddress_Init(line  address) {
-  memset((char *)address, 0, sizeof(address));
+  memset((char *)&address, 0, sizeof(address));
   address.szLine[bLINE_SIZE-1] = '0';
 }
 
