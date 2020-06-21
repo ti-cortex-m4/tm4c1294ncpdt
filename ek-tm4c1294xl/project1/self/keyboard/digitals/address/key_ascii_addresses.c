@@ -39,13 +39,13 @@ static uchar i;
 
   else if (bKey == 2)
   {
-    AsciiAddress_Increment(&address, i);
+    AsciiAddress_Increment(&address);
     AsciiAddress_Show(&address);
   }
 
   else if (bKey == 8)
   {
-    AsciiAddress_Decrement(&address, i);
+    AsciiAddress_Decrement(&address);
     AsciiAddress_Show(&address);
   }
 
@@ -58,8 +58,7 @@ static uchar i;
 
   else if (bKey == bKEY_POINT)
   {
-    i++;
-    AsciiAddress_Enter(&address);
+    AsciiAddress_Enter(&address, ++i);
     AsciiAddress_Show(&address);
   }
   else Beep();
