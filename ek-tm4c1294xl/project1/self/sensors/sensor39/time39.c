@@ -142,3 +142,6 @@ void    QueryCorrectTime39(uchar  bNS, uchar  bNR, uchar  bInvokeId, sint  wSeco
 
   Query39(1000, wSize+2);
 }
+
+// Output: out=30 in=1000
+// 7e a0 1c 03 03 54 8b a0 e6 e6 00 c3 01 82 00 08 00 00 01 00 00 ff 06 01 10 00 4b f9 b9 7e
