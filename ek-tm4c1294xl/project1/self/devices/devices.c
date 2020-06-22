@@ -7029,7 +7029,7 @@ void    RunDevices(void)
 
     case DEV_OPEN2_39C:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
-        if (!ValidateIframe_Current())
+        if (!ValidateFrame_Current())
           ErrorCurrent();
         else
           MakePause(DEV_POSTOPEN2_39C);
@@ -7086,7 +7086,7 @@ void    RunDevices(void)
     case DEV_ENGABS_39C:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        if (!ValidateIframe_Current())
+        if (!ValidateFrame_Current())
           ErrorCurrent();
         else {
           SaveCurrent39();
