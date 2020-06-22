@@ -4,6 +4,7 @@ current39*c
 
 ------------------------------------------------------------------------------*/
 
+#include <math.h>
 #include "../../main.h"
 #include "../../memory/mem_digitals.h"
 #include "../../memory/mem_current.h"
@@ -14,7 +15,9 @@ current39*c
 #include "../../digitals/current/current_run.h"
 #include "io39.h"
 #include "device39.h"
+#include "dlms_read_register.h"
 #include "query_engabs_39.h"
+#include "query_params_39.h"
 #include "current39.h"
 
 
@@ -58,7 +61,7 @@ void    QueryValue_Current(void)
 {
   c.bNS++;
   c.bInvokeId++;
-  QueryGetRegisterValueDLMS(obisEngAbs, &c);
+  QueryGetRegisterValueDLMS(obisEngAbs, c);
 }
 
 
@@ -74,7 +77,7 @@ void    QueryScaler_Current(void)
 {
   c.bNS++;
   c.bInvokeId++;
-  QueryGetRegisterScalerDLMS(obisEngAbs, &c);
+  QueryGetRegisterScalerDLMS(obisEngAbs, c);
 }
 
 

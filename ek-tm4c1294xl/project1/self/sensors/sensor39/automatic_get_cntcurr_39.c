@@ -10,14 +10,11 @@ automatic_get_cntcurr_39.c
 #include "../../serial/ports.h"
 #include "../../digitals/digitals.h"
 #include "device39.h"
+#include "device39_obis.h"
 #include "io39.h"
 #include "fragment_open_39.h"
 #include "dlms_read_register.h"
 #include "automatic_get_cntcurr_39.h"
-
-
-
-static const obis_t obisEngAbs  = {1, 0, 15, 8, 0, 255};
 
 
 
