@@ -21,7 +21,8 @@ current39*c
 
 static caller39         c;
 
-static ulong64_         ddwCurrent;
+static ulong64_         value;
+static slong64_         scaler;
 
 
 
@@ -63,30 +64,33 @@ void    QueryValue_Current(void)
 
 bool    ReadValue_Current(void)
 {
-  ulong64_ ddwCurrent = ReadUnsignedValueDLSM();
-  return ddwCurrent.fValid;
+  ulong64_ value = ReadUnsignedValueDLSM();
+  return value.fValid;
 }
 
 
 
 void    QueryScaler_Current(void)
 {
-  bNS++;
-  bInvokeId++;
-  QueryEngAbs39(bNS, bNR, bInvokeId);
+  c.bNS++;
+  c.bInvokeId++;
+  QueryGetRegisterScalerDLMS(obisEngAbs, &c);
 }
 
 
-void    ReadScaler_Current(void)
+bool    ReadScaler_Current(void)
 {
-  dwCurrent = ReadEngAbs39() % 0x100000000;
+  slong64_ scaler = ReadRegisterScalerDLMS();  
+  return value.fValid;
 }
 
 
 
 void    ReadCurrent39(void)
 {
-  mpdwBaseDig[0] = dwCurrent * mpdbPulseMnt[ibDig];
+  uint64_t ddwValue = value.ddwValue;
+  double dbScaler = pow(10, scaler.ddwValue);
+  mpdwBaseDig[0] = ((double)ddwValue * dbScaler / 1000) * mpdbPulseMnt[ibDig];
 
   MakeCurrent();
 }

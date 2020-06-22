@@ -14,4 +14,4 @@ void    QueryValue_Current(void);
 bool    ReadValue_Current(void);
 
 void    QueryScaler_Current(void);
-void    ReadScaler_Current(void);
+bool    ReadScaler_Current(void);

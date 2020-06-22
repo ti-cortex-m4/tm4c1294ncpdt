@@ -183,8 +183,10 @@
         if (!ValidateFrame_Current())
           ErrorCurrent();
         else {
-          ReadScaler_Current();
-          MakePause(DEV_RR_SCALER_O_39C);
+          if (ReadScaler_Current())
+            MakePause(DEV_RR_SCALER_O_39C);
+          else  
+            ErrorCurrent();
         }
       } else {
         if (cbRepeat == 0) ErrorCurrent();
