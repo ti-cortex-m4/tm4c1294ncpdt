@@ -18,7 +18,6 @@ current39*c
 #include "device39_obis.h"
 #include "dlms_read_data.h"
 #include "dlms_read_register.h"
-#include "query_engabs_39.h"
 #include "query_params_39.h"
 #include "current39.h"
 
@@ -86,7 +85,7 @@ void    QueryScaler_Current(void)
 bool    ReadScaler_Current(void)
 {
   slong64_ scaler = ReadRegisterScalerDLMS();  
-  return value2.fValid;
+  return scaler.fValid;
 }
 
 

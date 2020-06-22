@@ -81,7 +81,6 @@ DEVICES.C
 #include "../sensors/sensor38/auth38.h"
 #include "../sensors/sensor38/time38.h"
 #include "../sensors/sensor39/device39.h"
-#include "../sensors/sensor39/query_engabs_39.h"
 #include "../sensors/sensor39/current39.h"
 #include "../sensors/sensor39/profile39_caller.h"
 #include "../sensors/sensor39/hdlc_monitor.h"
