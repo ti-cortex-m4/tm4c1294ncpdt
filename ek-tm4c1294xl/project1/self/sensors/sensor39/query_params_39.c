@@ -19,7 +19,7 @@ query_params_39.c
 
 
 
-void    QueryGetRequestDLMS(const obis_t  obis, uchar  bClass, uchar  bAttribute, caller39  r)
+void    QueryGetRequestDLMS(const obis_t  obis, uchar  bClass, uchar  bAttribute, caller39  c)
 {
   uint wSize = 23 + GetHdlcAddressesSize(); // 0x19 25
 
@@ -29,7 +29,7 @@ void    QueryGetRequestDLMS(const obis_t  obis, uchar  bClass, uchar  bAttribute
   PushFormatDLMS(wSize);
   PushHdlcAddresses();
 
-  PushChar((r.bNR << 5) | 0x10 | (r.bNS << 1) | 0x00);
+  PushChar((c.bNR << 5) | 0x10 | (c.bNS << 1) | 0x00);
 
   PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
 
@@ -41,7 +41,7 @@ void    QueryGetRequestDLMS(const obis_t  obis, uchar  bClass, uchar  bAttribute
 
   PushChar(0xC0); // Get-Request
   PushChar(0x01); // Get-Request-Normal
-  PushChar(0x80 | (r.bInvokeId % 16)); // Invoke-Id-And-Priority
+  PushChar(0x80 | (c.bInvokeId % 16)); // Invoke-Id-And-Priority
 
   PushChar(0x00);
   PushChar(bClass); // class
