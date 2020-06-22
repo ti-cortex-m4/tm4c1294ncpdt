@@ -19,56 +19,52 @@ current39*c
 
 
 
-static uchar            bNS;
-static uchar            bNR;
-static uchar            bInvokeId;
+static caller39         c;
 
-static ulong            dwCurrent;
+static ulong64_         ddwCurrent;
 
 
 
 void    Query39_DISC_Current(void)
 {
-  bNS = 0;
-  bNR = 0;
-  bInvokeId = 0;
-
+  c = InitCaller();
   Query39_DISC();
 }
 
 
 void    Query39_AARQ_Current(void)
 {
-  Query39_AARQ(bNS, bNR);
+  Query39_AARQ(c.bNS, c.bNR);
 }
 
 
 void    Query39_RR_Current(void)
 {
-  bNR++;
-  Query39_RR(bNR);
+  c.bNR++;
+  Query39_RR(c.bNR);
 }
 
 
 
 bool    ValidateFrame_Current(void)
 {
-  return ValidateFrame(bNS, bNR) != 0;
+  return ValidateFrame(c.bNS, c.bNR) != 0;
 };
 
 
 
 void    QueryValue_Current(void)
 {
-  bNS++;
-  bInvokeId++;
-  QueryEngAbs39(bNS, bNR, bInvokeId);
+  c.bNS++;
+  c.bInvokeId++;
+  QueryGetRegisterValueDLMS(obisEngAbs, &c);
 }
 
 
-void    ReadValue_Current(void)
+bool    ReadValue_Current(void)
 {
-  dwCurrent = ReadEngAbs39() % 0x100000000;
+  ulong64_ ddwCurrent = ReadUnsignedValueDLSM();
+  return ddwCurrent.fValid;
 }
 
 
