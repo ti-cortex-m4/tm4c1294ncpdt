@@ -4,4 +4,4 @@ device39_obis.h
 
 ------------------------------------------------------------------------------*/
 
-extern  static const obis_t obisEngAbs;
+extern  const obis_t    obisEngAbs;

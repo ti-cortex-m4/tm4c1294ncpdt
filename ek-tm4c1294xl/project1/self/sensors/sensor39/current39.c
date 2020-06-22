@@ -15,6 +15,8 @@ current39*c
 #include "../../digitals/current/current_run.h"
 #include "io39.h"
 #include "device39.h"
+#include "device39_obis.h"
+#include "dlms_read_data.h"
 #include "dlms_read_register.h"
 #include "query_engabs_39.h"
 #include "query_params_39.h"
@@ -24,7 +26,7 @@ current39*c
 
 static caller39         c;
 
-static ulong64_         value;
+static ulong64_         value2;
 static slong64_         scaler;
 
 
@@ -67,8 +69,8 @@ void    QueryValue_Current(void)
 
 bool    ReadValue_Current(void)
 {
-  ulong64_ value = ReadUnsignedValueDLSM();
-  return value.fValid;
+  ulong64_ value2 = ReadUnsignedValueDLSM();
+  return value2.fValid;
 }
 
 
@@ -84,14 +86,14 @@ void    QueryScaler_Current(void)
 bool    ReadScaler_Current(void)
 {
   slong64_ scaler = ReadRegisterScalerDLMS();  
-  return value.fValid;
+  return value2.fValid;
 }
 
 
 
 void    ReadCurrent39(void)
 {
-  uint64_t ddwValue = value.ddwValue;
+  uint64_t ddwValue = value2.ddwValue;
   double dbScaler = pow(10, scaler.ddwValue);
   mpdwBaseDig[0] = ((double)ddwValue * dbScaler / 1000) * mpdbPulseMnt[ibDig];
 
