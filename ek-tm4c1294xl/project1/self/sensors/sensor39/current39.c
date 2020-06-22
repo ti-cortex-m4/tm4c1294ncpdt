@@ -54,7 +54,7 @@ void    Query39_RR_Current(void)
 
 bool    ValidateFrame_Current(void)
 {
-  return ValidateFrame(c.bNS, c.bNR) != 0;
+  return ValidateFrame(c.bNS, c.bNR) == 0;
 };
 
 
