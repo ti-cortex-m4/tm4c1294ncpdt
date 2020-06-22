@@ -4,28 +4,15 @@ time39_test.c
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-// #include "../../memory/mem_factors.h"
-// #include "../../memory/mem_energy_spec.h"
-// #include "../../display/display.h"
-// #include "../../keyboard/keyboard.h"
-// #include "../../keyboard/time/key_timedate.h"
- #include "../../time/timedate.h"
- #include "../../time/calendar.h"
- #include "../../time/rtc.h"
- #include "../../serial/monitor.h"
- #include "../../serial/monitor_settings.h"
-// #include "../../devices/devices.h"
-// #include "../../devices/devices_time.h"
-// #include "../../digitals/limits.h"
-// #include "../../special/special.h"
-//#include "../../kernel/tuples.h"
+#include "../../time/timedate.h"
+#include "../../time/calendar.h"
+#include "../../time/rtc.h"
+#include "../../serial/monitor.h"
+#include "../../serial/monitor_settings.h"
 #include "device39.h"
 #include "time39.h"
 #include "io39.h"
-//#include "buffer_record_39.h"
 #include "fragment_open_time_39.h"
-//#include "fragment_profile_39.h"
-//#include "buffer_profile_39.h"
 #include "time39.h"
 #include "time39_test.h"
 
@@ -35,8 +22,8 @@ time39_test.c
 
 double2 TestTimeCorrect39(void)
 {
-  fMonitorLogBasic = false;
-  fMonitorLogHex = false;
+//  fMonitorLogBasic = false;
+//  fMonitorLogHex = false;
 
   MonitorOpen(0);
 
@@ -55,20 +42,24 @@ double2 TestTimeCorrect39(void)
   MonitorString("\n delta:  "); MonitorLongDec(wDeltaSeconds1);
 
 
+  c.bNS++;
+  c.bInvokeId++;
   QueryCorrectTime39(c.bNS, c.bNR, c.bInvokeId, wDeltaSeconds1);
+  if (Input39() != SER_GOODCHECK) return GetDouble2Error1(2);
+  if (!ValidateFrame(c.bNS, c.bNR)) return GetDouble2Error1(3);
 
 
   c.bNS++;
   c.bInvokeId++;
   QueryTime39(c.bNS, c.bNR, c.bInvokeId);
-  if (Input39() != SER_GOODCHECK) return GetDouble2Error1(2);
-  if (!ValidateFrame(c.bNS, c.bNR)) return GetDouble2Error1(3);
+  if (Input39() != SER_GOODCHECK) return GetDouble2Error1(4);
+  if (!ValidateFrame(c.bNS, c.bNR)) return GetDouble2Error1(5);
   time tmSensor2 = ReadTime39();
 
   c.bNR++;
   Query39_RR(c.bNR);
-  if (Input39() != SER_GOODCHECK) return GetDouble2Error1(4);
-  if (ValidateFrame(c.bNS, c.bNR) != 0) return GetDouble2Error1(5);
+  if (Input39() != SER_GOODCHECK) return GetDouble2Error1(6);
+  if (ValidateFrame(c.bNS, c.bNR) != 0) return GetDouble2Error1(7);
 
 
   time tmMaster2 = *GetCurrTimeDate();
