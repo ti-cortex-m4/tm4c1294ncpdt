@@ -68,7 +68,7 @@ void    QueryValue_Current(void)
 
 bool    ReadValue_Current(void)
 {
-  ulong64_ value2 = ReadUnsignedValueDLSM();
+  value2 = ReadUnsignedValueDLSM();
   return value2.fValid;
 }
 
@@ -84,7 +84,7 @@ void    QueryScaler_Current(void)
 
 bool    ReadScaler_Current(void)
 {
-  slong64_ scaler = ReadRegisterScalerDLMS();  
+  scaler = ReadRegisterScalerDLMS();
   return scaler.fValid;
 }
 
