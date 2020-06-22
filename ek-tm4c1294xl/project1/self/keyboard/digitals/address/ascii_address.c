@@ -32,11 +32,11 @@ void    AsciiAddress_Increment(line  *pl) {
   uchar i = 0;
   if ((*pl).szLine[i] == 'Z')
     (*pl).szLine[i] = '0';
-  else if ((*pl).szLine[i] >= 'A')
-    (*pl).szLine[i]++;
   else if ((*pl).szLine[i] == 'z')
     (*pl).szLine[i] = 'A';
   else if ((*pl).szLine[i] >= 'a')
+    (*pl).szLine[i]++;
+  else if ((*pl).szLine[i] >= 'A')
     (*pl).szLine[i]++;
   else if ((*pl).szLine[i] == '9')
     (*pl).szLine[i] = 'a';
@@ -53,13 +53,13 @@ void    AsciiAddress_Decrement(line  *pl) {
     (*pl).szLine[i] = 'Z';
   else if ((*pl).szLine[i] <= '9')
     (*pl).szLine[i]--;
-  else if ((*pl).szLine[i] == 'a')
-    (*pl).szLine[i] = '9';
-  else if ((*pl).szLine[i] <= 'z')
-    (*pl).szLine[i]--;
   else if ((*pl).szLine[i] == 'A')
     (*pl).szLine[i] = 'z';
   else if ((*pl).szLine[i] <= 'Z')
+    (*pl).szLine[i]--;
+  else if ((*pl).szLine[i] == 'a')
+    (*pl).szLine[i] = '9';
+  else if ((*pl).szLine[i] <= 'z')
     (*pl).szLine[i]--;
   else
     (*pl).szLine[i] = '?';
