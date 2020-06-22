@@ -50,7 +50,15 @@ void    Query39_RR_Current(void)
 }
 
 
-void    QueryEngAbs39_Current(void)
+
+bool    ValidateFrame_Current(void)
+{
+  return ValidateFrame(bNS, bNR) != 0;
+};
+
+
+
+void    QueryValue_Current(void)
 {
   bNS++;
   bInvokeId++;
@@ -58,24 +66,26 @@ void    QueryEngAbs39_Current(void)
 }
 
 
-
-bool    ValidateSframe_Current(void)
-{
-  return ValidateSframe(bNR);
-}
-
-
-bool    ValidateIframe_Current(void)
-{
-  return ValidateIframe(bNS, bNR);
-};
-
-
-
-void    SaveCurrent39(void)
+void    ReadValue_Current(void)
 {
   dwCurrent = ReadEngAbs39() % 0x100000000;
 }
+
+
+
+void    QueryScaler_Current(void)
+{
+  bNS++;
+  bInvokeId++;
+  QueryEngAbs39(bNS, bNR, bInvokeId);
+}
+
+
+void    ReadScaler_Current(void)
+{
+  dwCurrent = ReadEngAbs39() % 0x100000000;
+}
+
 
 
 void    ReadCurrent39(void)
