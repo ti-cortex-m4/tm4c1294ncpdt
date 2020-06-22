@@ -40,7 +40,7 @@
 
     case DEV_SNRM_I_39C:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
-        MakePause(DEV_POSTSNRM_39C);
+        MakePause(DEV_AARQ_O_39C);
       } else {
         if (cbRepeat == 0) ErrorCurrent();
         else {
@@ -122,8 +122,10 @@
         if (!ValidateFrame_Current())
           ErrorCurrent();
         else {
-          ReadValue_Current();
-          MakePause(DEV_RR_VALUE_O_39C);
+          if (ReadValue_Current())
+            MakePause(DEV_RR_VALUE_O_39C);
+          else
+            ErrorCurrent();
         }
       } else {
         if (cbRepeat == 0) ErrorCurrent();
@@ -151,9 +153,8 @@
       {
         if (!ValidateFrame_Current())
           ErrorCurrent();
-        else {
-          ReadCurrent39();
-        }
+        else
+          MakePause(DEV_SCALER_O_39C);
       }
       else {
         if (cbRepeat == 0) ErrorCurrent();
@@ -169,7 +170,7 @@
 
 
     case DEV_SCALER_O_39C:
-      Clear(); ShowPercent(54);
+      Clear(); ShowPercent(56);
 
       cbRepeat = MaxRepeats();
       QueryScaler_Current();
@@ -199,7 +200,7 @@
 
 
     case DEV_RR_SCALER_O_39C:
-      Clear(); ShowPercent(55);
+      Clear(); ShowPercent(57);
 
       cbRepeat = MaxRepeats();
       Query39_RR_Current();
