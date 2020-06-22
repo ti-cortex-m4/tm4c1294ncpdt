@@ -10,4 +10,4 @@ device39_obis.c
 
 
 
-static const obis_t obisEngAbs  = {1, 0, 15, 8, 0, 255};
+const obis_t    obisEngAbs  = {1, 0, 15, 8, 0, 255};
