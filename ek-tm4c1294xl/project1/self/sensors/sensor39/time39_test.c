@@ -35,7 +35,7 @@ double2 TestTimeCorrect39(void)
 
   time tmSensor1 = tmA.tiValue;
   time tmMaster1 = *GetCurrTimeDate();
-  ulong wDeltaSeconds1 = AbsLong(GetSecondIndex(tmSensor1) - GetSecondIndex(tmMaster1));
+  slong wDeltaSeconds1 = GetSecondIndex(tmSensor1) - GetSecondIndex(tmMaster1);
   MonitorString("\n before correction ");
   MonitorString("\n sensor: "); MonitorTime(tmSensor1);
   MonitorString("\n master: "); MonitorTime(tmMaster1);
@@ -63,7 +63,7 @@ double2 TestTimeCorrect39(void)
 
 
   time tmMaster2 = *GetCurrTimeDate();
-  ulong wDeltaSeconds2 = AbsLong(GetSecondIndex(tmSensor2) - GetSecondIndex(tmMaster2));
+  slong wDeltaSeconds2 = GetSecondIndex(tmSensor2) - GetSecondIndex(tmMaster2);
   MonitorString("\n after correction ");
   MonitorString("\n sensor: "); MonitorTime(tmSensor2);
   MonitorString("\n master: "); MonitorTime(tmMaster2);
