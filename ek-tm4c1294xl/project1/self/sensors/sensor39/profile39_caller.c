@@ -83,7 +83,7 @@ void    Query39_RR_Profile(void) {
 
 
 
-bool    ValidateFrame_Current(void)
+bool    ValidateFrame_Profile(void)
 {
   return ValidateFrame(c.bNS, c.bNR) == 0;
 };
