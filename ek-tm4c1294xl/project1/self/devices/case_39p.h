@@ -2,55 +2,55 @@
 #ifndef SKIP_39
 
     case DEV_START_39P:
-      MakePause(DEV_1_39P);
+      MakePause(DEV_DISC_O_39P);
       break;
 
 
-    case DEV_1_39P:
+    case DEV_DISC_O_39P:
       Clear(); ShowPercent(50);
 
       cbRepeat = MaxRepeats();
       Query39_DISC_Profile();
-      SetCurr(DEV_2_39P);
+      SetCurr(DEV_DISC_I_39P);
       break;
 
-    case DEV_2_39P:
+    case DEV_DISC_I_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
-        MakePause(DEV_3_39P);
+        MakePause(DEV_SNRM_O_39P);
       } else {
         ErrorProfile();
       }
       break;
 
 
-    case DEV_3_39P:
+    case DEV_SNRM_O_39P:
       Clear(); ShowPercent(51);
 
       cbRepeat = MaxRepeats();
       Query39_SNRM();
-      SetCurr(DEV_4_39P);
+      SetCurr(DEV_SNRM_I_39P);
       break;
 
-    case DEV_4_39P:
+    case DEV_SNRM_I_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
-        MakePause(DEV_5_39P);
+        MakePause(DEV_AARQ_O_39P);
       } else {
         ErrorProfile();
       }
       break;
 
 
-    case DEV_5_39P:
+    case DEV_AARQ_O_39P:
       Clear(); ShowPercent(52);
 
       cbRepeat = MaxRepeats();
       Query39_AARQ_Profile();
-      SetCurr(DEV_6_39P);
+      SetCurr(DEV_AARQ_I_39P);
       break;
 
-    case DEV_6_39P:
+    case DEV_AARQ_I_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
-        if (!ValidateIframe_Profile())
+        if (!ValidateFrame_Profile())
           ErrorProfile();
         else
           MakePause(DEV_7_39P);
