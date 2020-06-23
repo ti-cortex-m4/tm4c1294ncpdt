@@ -96,7 +96,7 @@ void    QueryProfile39(uchar  bNS, uchar  bNR, uchar  bInvokeId, time  ti1, time
 
   PushChar(0xC0); // Get-Request
   PushChar(0x01); // Get-Request-Normal
-  PushChar(0x80 | (bInvokeId % 16)); // Invoke-Id-And-Priority
+  PushChar(0xC0 | (bInvokeId % 16)); // Invoke-Id-And-Priority
 
   PushChar(0x00); // TODO ???
 

@@ -108,6 +108,12 @@ void    MonitorLongDec(ulong  dw)
 }
 
 
+void    MonitorSignedLongDec(slong  dw)
+{
+  MonitorLong("%d", dw);
+}
+
+
 void    MonitorLongHex(ulong  dw)
 {
   MonitorLong("%8X", dw);
