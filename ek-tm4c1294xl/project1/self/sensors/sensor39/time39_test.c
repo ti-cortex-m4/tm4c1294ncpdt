@@ -29,17 +29,16 @@ double2 TestTimeCorrect39(void)
 
   caller39 c = InitCaller();
 
-  time2 tmA = FragmentOpenTime39(&c);
-  if (!tmA.fValid) return GetDouble2Error1(1);
+  time2 tmThat1 = FragmentOpenTime39(&c);
+  if (!tmThat1.fValid) return GetDouble2Error1(1);
 
 
-  time tmSensor1 = tmA.tiValue;
-  time tmMaster1 = *GetCurrTimeDate();
-  slong wDeltaSeconds1 = GetSecondIndex(tmMaster1) - GetSecondIndex(tmSensor1);
+  time tmThis1 = *GetCurrTimeDate();
+  slong wDeltaSeconds1 = GetSecondIndex(tmThis1) - GetSecondIndex(tmThat1.tiValue);
   MonitorString("\n before correction ");
-  MonitorString("\n sensor: "); MonitorTime(tmSensor1);
-  MonitorString("\n master: "); MonitorTime(tmMaster1);
-  MonitorString("\n delta:  "); MonitorSignedLongDec(wDeltaSeconds1);
+  MonitorString("\n this:  "); MonitorTime(tmThis1);
+  MonitorString("\n that:  "); MonitorTime(tmThat1.tiValue);
+  MonitorString("\n delta: "); MonitorSignedLongDec(wDeltaSeconds1);
 
 
 //  c.bNS++;
@@ -54,7 +53,7 @@ double2 TestTimeCorrect39(void)
   QueryTime39(c.bNS, c.bNR, c.bInvokeId);
   if (Input39() != SER_GOODCHECK) return GetDouble2Error1(4);
   if (ValidateFrame(c.bNS, c.bNR) != 0) return GetDouble2Error1(5);
-  time tmSensor2 = ReadTime39();
+  time tmThat2 = ReadTime39();
 
   c.bNR++;
   Query39_RR(c.bNR);
@@ -62,12 +61,12 @@ double2 TestTimeCorrect39(void)
   if (ValidateFrame(c.bNS, c.bNR) != 0) return GetDouble2Error1(7);
 
 
-  time tmMaster2 = *GetCurrTimeDate();
-  slong wDeltaSeconds2 = GetSecondIndex(tmMaster2) - GetSecondIndex(tmSensor2);
+  time tmThis2 = *GetCurrTimeDate();
+  slong wDeltaSeconds2 = GetSecondIndex(tmThis2) - GetSecondIndex(tmThat2);
   MonitorString("\n after correction ");
-  MonitorString("\n sensor: "); MonitorTime(tmSensor2);
-  MonitorString("\n master: "); MonitorTime(tmMaster2);
-  MonitorString("\n delta:  "); MonitorSignedLongDec(wDeltaSeconds2);
+  MonitorString("\n this:  "); MonitorTime(tmThis2);
+  MonitorString("\n that:  "); MonitorTime(tmThat2);
+  MonitorString("\n delta: "); MonitorSignedLongDec(wDeltaSeconds2);
 
 
   return GetDouble2(0, true);
