@@ -50,7 +50,7 @@ void    QueryNextBlock39(uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  bBlock
 
   PushChar(0xC0); // Get-Request
   PushChar(0x02); // Get-Request-Next
-  PushChar(0x80 | (bInvokeId % 16)); // Invoke-Id-And-Priority
+  PushChar(0xC0 | (bInvokeId % 16)); // Invoke-Id-And-Priority
 
   PushLongBig(bBlockNumber); // <BlockNumber Value="00000001" />
 

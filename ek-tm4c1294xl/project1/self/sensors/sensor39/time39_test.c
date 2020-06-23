@@ -39,7 +39,7 @@ double2 TestTimeCorrect39(void)
   MonitorString("\n before correction ");
   MonitorString("\n sensor: "); MonitorTime(tmSensor1);
   MonitorString("\n master: "); MonitorTime(tmMaster1);
-  MonitorString("\n delta:  "); MonitorLongDec(wDeltaSeconds1);
+  MonitorString("\n delta:  "); MonitorSignedLongDec(wDeltaSeconds1);
 
 
   c.bNS++;
@@ -67,7 +67,7 @@ double2 TestTimeCorrect39(void)
   MonitorString("\n after correction ");
   MonitorString("\n sensor: "); MonitorTime(tmSensor2);
   MonitorString("\n master: "); MonitorTime(tmMaster2);
-  MonitorString("\n delta:  "); MonitorLongDec(wDeltaSeconds2);
+  MonitorString("\n delta:  "); MonitorSignedLongDec(wDeltaSeconds2);
 
 
   return GetDouble2(0, true);

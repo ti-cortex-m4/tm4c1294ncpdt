@@ -86,7 +86,7 @@ void    QueryEngMon39(const obis_t  obis, uchar  bNS, uchar  bNR, uchar  bInvoke
 
   PushChar(0xC0); // Get-Request
   PushChar(0x01); // Get-Request-Normal
-  PushChar(0x80 | (bInvokeId % 16)); // Invoke-Id-And-Priority
+  PushChar(0xC0 | (bInvokeId % 16)); // Invoke-Id-And-Priority
 
   PushChar(0x00); // TODO ???
 
