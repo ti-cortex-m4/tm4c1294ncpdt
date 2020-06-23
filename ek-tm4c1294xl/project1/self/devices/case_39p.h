@@ -53,22 +53,22 @@
         if (!ValidateFrame_Profile())
           ErrorProfile();
         else
-          MakePause(DEV_7_39P);
+          MakePause(DEV_RR_AARQ_O_39P);
       } else {
         ErrorProfile();
       }
       break;
 
 
-    case DEV_7_39P:
+    case DEV_RR_AARQ_O_39P:
       Clear(); ShowPercent(53);
 
       cbRepeat = MaxRepeats();
       Query39_RR_Profile();
-      SetCurr(DEV_8_39P);
+      SetCurr(DEV_RR_AARQ_I_39P);
       break;
 
-    case DEV_8_39P:
+    case DEV_RR_AARQ_I_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateSframe_Profile())
           ErrorProfile();

@@ -82,6 +82,14 @@ void    Query39_RR_Profile(void) {
 }
 
 
+
+bool    ValidateFrame_Current(void)
+{
+  return ValidateFrame(c.bNS, c.bNR) == 0;
+};
+
+
+
 void    QueryTime39_Profile(void) {
 #ifdef PROFILE_39_NAMES
   MonitorString("\n\n QueryTime39_Profile");

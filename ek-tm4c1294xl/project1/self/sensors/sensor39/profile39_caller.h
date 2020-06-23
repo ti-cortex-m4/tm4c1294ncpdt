@@ -11,6 +11,8 @@ void    Query39_DISC_Profile(void);
 void    Query39_AARQ_Profile(void);
 void    Query39_RR_Profile(void);
 
+bool    ValidateFrame_Current(void);
+
 void    QueryTime39_Profile(void);
 void    ReadTime39_Profile(void);
 
