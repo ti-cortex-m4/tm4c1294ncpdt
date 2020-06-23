@@ -147,3 +147,5 @@ void    QueryCorrectTime39(uchar  bNS, uchar  bNR, uchar  bInvokeId, sint  wSeco
 // 7e a0 1c 03 03 54 8b a0    e6 e6 00 c3 01 c2 00 08  00 00 01 00 00 ff  06 01 10 00 00 41 06 7e
 // 7E A01C 0221 61 34 2DC7    E6 E6 00 C3 01 C1 00 46  00 00 60 03 01 FF  01 01 0F 00    EF B4 7E
 // 7E A0 28 02 21 61 54 41 45 E6 E6 00 C1 01 81 00 08  00 00 01 00 00 FF  02 00 09 0C 07 E0 0A 1F FF 08 2E 26 01 00 00 00 F6 6D 7E
+
+//service-class
