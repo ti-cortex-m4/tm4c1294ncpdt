@@ -36,13 +36,13 @@ static uchar idx;
     }
   }
 
-  else if (bKey == 2)
+  else if (bKey == 8)
   {
     AsciiAddress_Increment(&address);
     AsciiAddress_Show(&address);
   }
 
-  else if (bKey == 8)
+  else if (bKey == 0)
   {
     AsciiAddress_Decrement(&address);
     AsciiAddress_Show(&address);
@@ -50,13 +50,19 @@ static uchar idx;
 
   else if (bKey == bKEY_MINUS)
   {
-    if (idx > 0) AsciiAddress_Delete(&address, idx--);
+    if (idx > 1)
+      AsciiAddress_Delete(&address, idx--);
+    else
+      { AsciiAddress_Init(&address); Beep(); }
     AsciiAddress_Show(&address);
   }
 
   else if (bKey == bKEY_POINT)
   {
-    if (idx < 13) AsciiAddress_Enter(&address, ++idx);
+    if (idx < 12)
+      AsciiAddress_Enter(&address, ++idx);
+    else
+      Beep();
     AsciiAddress_Show(&address);
   }
   else Beep();

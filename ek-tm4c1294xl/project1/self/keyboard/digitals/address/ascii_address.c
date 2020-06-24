@@ -23,7 +23,6 @@ void    AsciiAddress_Show(line  *pl) {
 
 void    AsciiAddress_Init(line  *pl) {
   memset((char *)pl, 0, sizeof(line));
-  (*pl).szLine[0] = '0';
 }
 
 
@@ -43,7 +42,7 @@ void    AsciiAddress_Increment(line  *pl) {
   else if ((*pl).szLine[i] >= '0')
     (*pl).szLine[i]++;
   else   
-    (*pl).szLine[i] = '?';
+    (*pl).szLine[i] = '0';
 }
 
 
@@ -62,7 +61,7 @@ void    AsciiAddress_Decrement(line  *pl) {
   else if ((*pl).szLine[i] <= 'z')
     (*pl).szLine[i]--;
   else
-    (*pl).szLine[i] = '?';
+    (*pl).szLine[i] = 'Z';
 }
 
 
