@@ -1,57 +1,33 @@
 /*------------------------------------------------------------------------------
-PHONES,C
+address2.h
 
 
 ------------------------------------------------------------------------------*/
 
-#include "../main.h"
-#include "../memory/mem_phones.h"
-#include "../nvram/cache.h"
-#include "../nvram/cache2.h"
-#include "phones.h"
+#include "../../main.h"
+#include "../../memory/mem_phones.h"
+#include "../../nvram/cache.h"
+#include "../../nvram/cache2.h"
+#include "address2.h"
 
 
 
-cache const             chPhones = {PHONES, &mpphPhones, sizeof(mpphPhones)};
-cache const             chMaxConnect = {MAX_CONNECT, &bMaxConnect, sizeof(uchar)};
-cache const             chCustomModem = {CUSTOM_MODEM, &boCustomModem, sizeof(bool)};
+line                    mpphAsciiAddress[bCANALS];
+
+cache const             chAddress2 = {ASCII_ADDRESS, &mpphAsciiAddress, sizeof(mpphAsciiAddress)};
 
 
 
-void    InitPhones(void)
+void    InitAddress2(void)
 {
-  LoadCache(&chPhones);
-
-  LoadCacheChar(&chMaxConnect, 1, 180, 60);
-  LoadCacheBool(&chCustomModem, false);
+  LoadCache(&chAddress2);
 }
 
 
 
-void    ResetPhones(void)
+void    ResetAddress2(void)
 {
-  memset(&mpphPhones, 0, sizeof(mpphPhones));
-
-  uchar c;
-  for (c=0; c<bCANALS; c++)
-  {
-    mpphPhones[c].szLine[0] = '0';
-  }
-
-  SaveCache(&chPhones);
-
-
-  bMaxConnect = 60;
-  SaveCache(&chMaxConnect);
-
-  boCustomModem = false;
-  SaveCache(&chCustomModem);
-}
-
-
-
-bool    ValidPhone(line  *pph)
-{
-  return true;
+  memset(&mpphAsciiAddress, 0, sizeof(mpphAsciiAddress));
+  SaveCache(&chAddress2);
 }
 
