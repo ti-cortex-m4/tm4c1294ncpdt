@@ -41,24 +41,24 @@ double2 TestTimeCorrect39(void)
   MonitorString("\n delta: "); MonitorSignedLongDec(wDeltaSeconds1);
 
 
-//  c.bNS++;
+  c.bNS++;
   c.bInvokeId++;
   QueryCorrectTime39(c.bNS, c.bNR, c.bInvokeId, wDeltaSeconds1);
   if (Input39() != SER_GOODCHECK) return GetDouble2Error1(2);
-  if (ValidateFrame(c.bNS, c.bNR) != 0) return GetDouble2Error1(3);
+  if (ValidateFrame(c.bNS, c.bNR) == 100/*!= 0*/) return GetDouble2Error1(3);
 
 
   c.bNS++;
   c.bInvokeId++;
   QueryTime39(c.bNS, c.bNR, c.bInvokeId);
   if (Input39() != SER_GOODCHECK) return GetDouble2Error1(4);
-  if (ValidateFrame(c.bNS, c.bNR) != 0) return GetDouble2Error1(5);
+  if (ValidateFrame(c.bNS, c.bNR) == 100/*!= 0*/) return GetDouble2Error1(5);
   time tmThat2 = ReadTime39();
 
   c.bNR++;
   Query39_RR(c.bNR);
   if (Input39() != SER_GOODCHECK) return GetDouble2Error1(6);
-  if (ValidateFrame(c.bNS, c.bNR) != 0) return GetDouble2Error1(7);
+  if (ValidateFrame(c.bNS, c.bNR) == 100/*!= 0*/) return GetDouble2Error1(7);
 
 
   time tmThis2 = *GetCurrTimeDate();
