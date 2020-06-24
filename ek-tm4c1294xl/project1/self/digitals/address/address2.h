@@ -1,16 +1,13 @@
 /*------------------------------------------------------------------------------
-PHONES,H
-
+address2.h
 
 ------------------------------------------------------------------------------*/
 
-extern  cache const             chPhones;
-extern  cache const             chMaxConnect;
-extern  cache const             chCustomModem;
+extern  line                    mpphAsciiAddress[bCANALS];
+
+extern  cache const             chAddress2;
 
 
 
-void    InitPhones(void);
-void    ResetPhones(void);
-
-bool    ValidPhone(line  *pph);
+void    InitAddress2(void);
+void    ResetAddress2(void);

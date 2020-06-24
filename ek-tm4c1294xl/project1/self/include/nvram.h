@@ -38,6 +38,7 @@ NVRAM!H
 #include "../memory/mem_correct1.h"
 #include "../memory/mem_correct2.h"
 #include "../memory/mem_correct3.h"
+#include "../digitals/address/address2.h"
 
 
 // количество байтов
