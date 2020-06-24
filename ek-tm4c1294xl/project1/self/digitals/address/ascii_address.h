@@ -1,13 +1,13 @@
 /*------------------------------------------------------------------------------
-address2.h
+ascii_address.h
 
 ------------------------------------------------------------------------------*/
 
 extern  line                    mpphAsciiAddress[bCANALS];
 
-extern  cache const             chAddress2;
+extern  cache const             chAsciiAddress;
 
 
 
-void    InitAddress2(void);
-void    ResetAddress2(void);
+void    InitAsciiAddress(void);
+void    ResetAsciiAddress(void);

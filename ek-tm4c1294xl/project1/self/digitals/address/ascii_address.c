@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-address2.h
+ascii_address.h
 
 
 ------------------------------------------------------------------------------*/
@@ -8,26 +8,26 @@ address2.h
 #include "../../memory/mem_phones.h"
 #include "../../nvram/cache.h"
 #include "../../nvram/cache2.h"
-#include "address2.h"
+#include "ascii_address.h"
 
 
 
 line                    mpphAsciiAddress[bCANALS];
 
-cache const             chAddress2 = {ASCII_ADDRESS, &mpphAsciiAddress, sizeof(mpphAsciiAddress)};
+cache const             chAsciiAddress = {ASCII_ADDRESS, &mpphAsciiAddress, sizeof(mpphAsciiAddress)};
 
 
 
-void    InitAddress2(void)
+void    InitAsciiAddress(void)
 {
-  LoadCache(&chAddress2);
+  LoadCache(&chAsciiAddress);
 }
 
 
 
-void    ResetAddress2(void)
+void    ResetAsciiAddress(void)
 {
   memset(&mpphAsciiAddress, 0, sizeof(mpphAsciiAddress));
-  SaveCache(&chAddress2);
+  SaveCache(&chAsciiAddress);
 }
 
