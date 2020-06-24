@@ -123,7 +123,7 @@ bool    ReadHeader39(void)
   for (h=0; h<6; h++)
   {
     ulong dw = DateToHouIndex(tiStart39);
-    dw -= (wProfile39 - h);
+    dw -= (wProfile39 - (6-1-h));
     time tiVirtual = HouIndexToDate(dw);
 
 #ifdef MONITOR_39
@@ -134,20 +134,13 @@ bool    ReadHeader39(void)
 
     uchar bSize = GetBuffPrfSize39();
     MonitorString(" size="); MonitorCharDec(bSize);
+
     uchar i;
     for (i=0; i<bSize; i++)
     {
       profile39 prf = GetBuffPrf39(i);
       if (prf.fExists) {
         bool difference = DifferentDateTime(tiVirtual, prf.tiTime);
-
-#ifdef MONITOR_39
-//        MonitorString("\n ");
-//        MonitorString("   vrt.="); MonitorTime(tiVirtual);
-//        MonitorString(" act.="); MonitorTime(prf.tiTime);
-//        MonitorBool(difference);
-#endif
-
         if (!difference) {
           dwValue = prf.ddwValue;
           break;
