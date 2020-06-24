@@ -15,7 +15,7 @@ out_ascii_address.c
 
 
 
-void    OutGetPhone(void)
+void    OutGetAsciiAddress(void)
 {
   if (bInBuff6 < bCANALS)
     Common(&mpphAsciiAddress[ bInBuff6 ], sizeof(line));
@@ -24,7 +24,7 @@ void    OutGetPhone(void)
 }
 
 
-void    OutSetPhone(void)
+void    OutSetAsciiAddress(void)
 {
   if (enGlobal == GLB_PROGRAM)
   {
@@ -56,7 +56,7 @@ void    OutSetPhone(void)
 
 
 
-void    OutPhonesExt(void)
+void    OutAsciiAddressExt(void)
 {
   InitPushPtr();
   uchar wSize = 0;

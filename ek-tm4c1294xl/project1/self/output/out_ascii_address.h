@@ -4,7 +4,7 @@ out_ascii_address.h
 
 ------------------------------------------------------------------------------*/
 
-void    OutGetPhone(void);
-void    OutSetPhone(void);
+void    OutGetAsciiAddress(void);
+void    OutSetAsciiAddress(void);
 
-void    OutPhonesExt(void);
+void    OutAsciiAddressExt(void);
