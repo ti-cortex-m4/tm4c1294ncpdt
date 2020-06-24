@@ -194,10 +194,6 @@ void    Keyboard_Key(void)
   {
     switch (wProgram)
     {
-      case 777:                 key_SetAsciiAddresses(); break;
-
-
-
       case bSET_SPEED:          key_SetSpeeds();        break;
 
       case bSET_CURRTIME:       key_SetCurrTime();      break;
@@ -310,6 +306,7 @@ void    Keyboard_Key(void)
       case bSET_EXTENDED_ESC_U: key_SetExtendedEscU();  break;
 
       case bSET_ADDRESSES:      key_SetAddresses();     break;
+      case bSET_ASCII_ADDRESSES:key_SetAsciiAddresses();break;
       case bSET_ENBL_KEYS:      key_SetEnblKeys();      break;
       case bSET_KEYS:           key_SetKeys();          break;
       case wSET_KEYS_LEVEL_B:   key_SetKeysLevelB();    break;
@@ -551,6 +548,7 @@ void    Keyboard_Key(void)
       case bSET_EXTENDED_ESC_U: key_SetExtendedEscU();  break;
 
       case bSET_ADDRESSES:      key_SetAddresses();     break;
+      case bSET_ASCII_ADDRESSES:key_SetAsciiAddresses();break;
       case bSET_ENBL_KEYS:      key_SetEnblKeys();      break;
       case bSET_KEYS:           key_SetKeys();          break;
       case wSET_KEYS_LEVEL_B:   key_SetKeysLevelB();    break;
@@ -873,6 +871,7 @@ void    Keyboard_Key(void)
       case bSET_EXTENDED_ESC_U: key_SetExtendedEscU();  break;
 
       case bSET_ADDRESSES:      key_SetAddresses();     break;
+      case bSET_ASCII_ADDRESSES:key_SetAsciiAddresses();break;
       case bSET_ENBL_KEYS:      key_SetEnblKeys();      break;
       case bSET_KEYS:           key_SetKeys();          break;
       case wSET_KEYS_LEVEL_B:   key_SetKeysLevelB();    break;
