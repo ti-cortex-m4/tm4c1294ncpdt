@@ -19,6 +19,7 @@ KEY_RESET!C
 #include "../digitals/profile/profile_core.h"
 #include "../digitals/phones.h"
 #include "../digitals/phones2/phones2.h"
+#include "../digitals/address/ascii_address.h"
 #include "../digitals/extended/diagram.h"
 #include "../devices/devices_init.h"
 #include "../serial/speeds.h"
@@ -160,6 +161,7 @@ void    key_SetReset(void)
           ResetParams();
           ResetPhones();
           ResetPhones2();
+          ResetAsciiAddress();
           ResetProfile();
           ResetSpeeds();
           ResetInputModeReset();

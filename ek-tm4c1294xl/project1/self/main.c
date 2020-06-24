@@ -70,6 +70,7 @@ MAIN,C
 #include "devices/devices.h"
 #include "digitals/phones.h"
 #include "digitals/phones2/phones2.h"
+#include "digitals/address/ascii_address.h"
 #include "special/defects.h"
 #include "serial/speeds.h"
 #include "serial/input_mode_reset.h"
@@ -144,6 +145,7 @@ int     main(void)
   InitParams();
   InitPhones();
   InitPhones2();
+  InitAsciiAddress();
   InitProfile();
   InitSpeeds();
   InitInputModeReset();
