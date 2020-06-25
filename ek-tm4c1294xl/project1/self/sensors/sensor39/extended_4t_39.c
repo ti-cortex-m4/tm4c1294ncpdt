@@ -21,7 +21,7 @@ extended_4t_39.c
 #include "device39.h"
 #include "time39.h"
 #include "query_engmon_39.h"
-#include "query_params_39.h"
+#include "query_register_39.h"
 #include "fragment_open_39.h"
 #include "io39.h"
 #include "hdlc_address.h"

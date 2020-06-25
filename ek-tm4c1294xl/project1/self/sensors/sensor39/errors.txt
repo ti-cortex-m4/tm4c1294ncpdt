@@ -6,7 +6,7 @@ dlms_read_register.c		30
 query_engabs_39.c			40
 query_engmon_39.c			50
 query_next_block_39.c		60
-query_params_39.c			70
+query_register_39.c			70
 query_profile_39.c			80
 
 automatic_get_time_39.c		90

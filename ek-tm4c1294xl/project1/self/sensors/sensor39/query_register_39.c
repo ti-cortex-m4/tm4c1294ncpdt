@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-query_params_39.c
+query_register_39.c
 
 
 ------------------------------------------------------------------------------*/
@@ -15,7 +15,7 @@ query_params_39.c
 #include "io39.h"
 #include "hdlc_address.h"
 #include "dlms_push.h"
-#include "query_params_39.h"
+#include "query_register_39.h"
 
 
 
