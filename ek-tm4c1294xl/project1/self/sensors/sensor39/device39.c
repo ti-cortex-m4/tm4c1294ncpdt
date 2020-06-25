@@ -10,9 +10,9 @@ DEVICE36*C
 #include "../../serial/ports_devices.h"
 #include "../../serial/monitor.h"
 //#include "include39.h"
-//#include "crc16x25.h"
+#include "crc16x25.h"
 #include "io39.h"
-//#include "hdlc_address.h"
+#include "hdlc_address.h"
 //#include "dlms_push.h"
 #include "device39.h"
 

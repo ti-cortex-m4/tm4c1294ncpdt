@@ -27,7 +27,7 @@ double2 TestTimeCorrect39(void)
 
   MonitorOpen(0);
 
-  caller39 c = InitCaller();
+  caller39 c = InitCaller39();
 
   time2 tmThat1 = FragmentOpenTime39(&c);
   if (!tmThat1.fValid) return GetDouble2Error1(1);

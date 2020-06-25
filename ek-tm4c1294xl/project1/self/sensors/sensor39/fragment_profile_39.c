@@ -96,7 +96,7 @@ double2 TestFragmentProfile39(void)
 
   MonitorOpen(0);
 
-  caller39 c = InitCaller();
+  caller39 c = InitCaller39();
 
   if (FragmentOpen39(&c) != 0) return GetDouble2Error();
 

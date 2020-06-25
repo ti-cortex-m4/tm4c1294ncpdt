@@ -22,7 +22,7 @@ automatic_get_cntcurr_39*c
 
 double2 ReadCntCurr39_Internal(void)
 {
-  caller39 c = InitCaller();
+  caller39 c = InitCaller39();
 
   uchar bError = FragmentOpen39(&c);
   if (bError != 0) return GetDouble2Error1(bError);
