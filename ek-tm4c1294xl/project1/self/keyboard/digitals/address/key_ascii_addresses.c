@@ -17,8 +17,10 @@ key_ascii_addresses.c
 
 //                                           0123456789ABCDEF
 static char const       szAddresses[]     = "Адреса          ",
-                        szMask[]          = "_________",
-                        szSpace[]         = "         ";
+                        szMask9[]         = "_________",
+                        szSpace9[]        = "         ",
+                        szMask12[]        = "____________",
+                        szSpace12[]       = "            ";
 
 
 
@@ -105,7 +107,7 @@ static uchar idx;
       if (dw < 1000000000)
       {
         enKeyboard = KBD_INPUT3;
-        sprintf(szLo+7,szMask);
+        sprintf(szLo+7,szMask9);
 
         ibRecordCan = c;
         AddSysRecordReprogram(EVE_EDIT_ADDRESS10);
@@ -150,8 +152,8 @@ static uchar idx;
       if ((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_REPROGRAM))
       {
         enKeyboard = KBD_INPUT2;
-        sprintf(szHi+7,szMask);
-        sprintf(szLo+7,szSpace);
+        sprintf(szHi+7,szMask9);
+        sprintf(szLo+7,szSpace9);
       }
       else Beep();
     }
