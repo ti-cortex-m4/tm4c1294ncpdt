@@ -84,6 +84,7 @@ DEVICES.C
 #include "../sensors/sensor39/current39_wrapper.h"
 #include "../sensors/sensor39/profile39_wrapper.h"
 #include "../sensors/sensor39/hdlc_monitor.h"
+#include "../sensors/sensor39/error39.h"
 #include "../serial/ports.h"
 #include "../serial/ports_modems.h"
 #include "../serial/modems.h"
