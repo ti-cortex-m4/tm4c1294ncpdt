@@ -98,7 +98,7 @@ static bool ReadData39(time  tiTime, ulong  dwValue)
   double dbPulse = mpdbPulseHou[ibDig];
 
   ulong dw = dwValue;
-  uint w = (uint)(dw*dbPulse/1000);
+  uint w = (uint)(dw*dbPulse/1000); // TODO float part
   mpwChannels[0] = w;
 
 #ifdef MONITOR_39
