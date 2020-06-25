@@ -21,7 +21,7 @@ automatic_get_time_39*c
 
 time2   ReadTimeCan39_Internal(void)
 {
-  caller39 c = InitCaller();
+  caller39 c = InitCaller39();
 
   time2 tm2 = FragmentOpenTime39(&c);
   if (!tm2.fValid) return GetTime2Error1(Error39(90));

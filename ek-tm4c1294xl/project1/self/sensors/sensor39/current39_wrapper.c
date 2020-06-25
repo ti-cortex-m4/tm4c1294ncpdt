@@ -33,7 +33,7 @@ static slong64_         scaler;
 
 void    Query39_DISC_Current(void)
 {
-  c = InitCaller();
+  c = InitCaller39();
   Query39_DISC();
 }
 

@@ -208,7 +208,7 @@ double2 TestProfile39(void)
 
   MonitorOpen(0);
 
-  caller39 c = InitCaller();
+  caller39 c = InitCaller39();
   uchar b = TestProfile39_Internal(&c);
   if (b != 0) {
     MonitorString("\n error "); MonitorCharDec(b);

@@ -58,7 +58,7 @@ void    Query39_DISC_Profile(void) {
   MonitorString("\n\n Query39_DISC_Profile");
 #endif
 
-  c = InitCaller();
+  c = InitCaller39();
   Query39_DISC();
 }
 

@@ -1,15 +1,14 @@
 /*------------------------------------------------------------------------------
-device39_obis*c
+device39_obis.c
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-#include "include39.h"
 #include "device39_obis.h"
 
 
 
-const obis_t    obisTime    = {0, 0, 1, 0, 0, 255};
+const obis_t        obisTime    = {0, 0, 1, 0, 0, 255};
 
-const obis_t    obisEngAbs  = {1, 0, 15, 8, 0, 255};
+const obis_t        obisEngAbs  = {1, 0, 15, 8, 0, 255};

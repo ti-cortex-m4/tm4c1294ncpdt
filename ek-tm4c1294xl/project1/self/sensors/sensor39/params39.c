@@ -50,7 +50,7 @@ static float        flU1, flU2, flU3,
 
 float2  ReadParam39_Internal(void)
 {
-  caller39 r = InitCaller();
+  caller39 r = InitCaller39();
   if (FragmentOpen39(&r) != 0) return GetFloat2Error();
 
 
