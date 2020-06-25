@@ -1,12 +1,11 @@
 /*------------------------------------------------------------------------------
-dlms_push*c
+dlms_push.c
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
 #include "../../serial/ports.h"
-   #include "include39.h"
 #include "device39_obis.h"
 #include "dlms_push.h"
 
@@ -51,19 +50,19 @@ void    PushTimeMonthYearDLMS(uchar  bMonth, uchar  bYear)
 
 
 
-void    PushTimeDLMS(time  ti)
+void    PushTimeDLMS(time  tm)
 {
-  uint wYear = 2000 + ti.bYear;
+  uint wYear = 2000 + tm.bYear;
   PushChar(wYear / 0x100);
   PushChar(wYear % 0x100);
-  PushChar(ti.bMonth);
-  PushChar(ti.bDay);
+  PushChar(tm.bMonth);
+  PushChar(tm.bDay);
 
   PushChar(0xFF);
 
-  PushChar(ti.bHour);
-  PushChar(ti.bMinute);
-  PushChar(ti.bSecond);
+  PushChar(tm.bHour);
+  PushChar(tm.bMinute);
+  PushChar(tm.bSecond);
 
   PushChar(0xFF);
   PushChar(0x80);
