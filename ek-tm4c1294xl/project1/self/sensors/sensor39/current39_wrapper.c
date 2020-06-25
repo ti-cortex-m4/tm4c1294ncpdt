@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-current39*c
+current39.c
 
 
 ------------------------------------------------------------------------------*/
@@ -26,7 +26,7 @@ current39*c
 
 static caller39         c;
 
-static ulong64_         value2;
+static ulong64_         value1;
 static slong64_         scaler;
 
 
@@ -35,6 +35,12 @@ void    DISC_Current39(void)
 {
   c = InitCaller39();
   Query39_DISC();
+}
+
+
+void    SNRM_Current39(void)
+{
+  Query39_SNRM();
 }
 
 
@@ -69,8 +75,8 @@ void    QueryValue_Current39(void)
 
 bool    ReadValue_Current39(void)
 {
-  value2 = ReadUnsignedValueDLSM();
-  return value2.fValid;
+  value1 = ReadUnsignedValueDLSM();
+  return value1.fValid;
 }
 
 
@@ -93,7 +99,7 @@ bool    ReadScaler_Current39(void)
 
 void    ReadCurrent39(void)
 {
-  uint64_t ddwValue = value2.ddwValue;
+  uint64_t ddwValue = value1.ddwValue;
   double dbScaler = pow(10, scaler.ddwValue);
   mpdwBaseDig[0] = ((double)ddwValue * dbScaler / 1000) * mpdbPulseMnt[ibDig];
 

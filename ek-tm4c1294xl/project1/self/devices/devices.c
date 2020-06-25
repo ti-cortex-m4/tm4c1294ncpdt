@@ -6996,7 +6996,7 @@ void    RunDevices(void)
       Clear(); ShowPercent(51);
 
       cbRepeat = MaxRepeats();
-      Query39_SNRM();
+      SNRM_Current39();
       SetCurr(DEV_SNRM_I_39C);
       break;
 
@@ -7155,8 +7155,7 @@ void    RunDevices(void)
         } else {
           ReadCurrent39();
         }
-      }
-      else {
+      } else {
         Error39(224);
         ErrorCurrent();
       }
