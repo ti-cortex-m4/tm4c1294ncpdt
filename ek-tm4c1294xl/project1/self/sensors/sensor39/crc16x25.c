@@ -20,21 +20,27 @@ crc16x25.c
 
 uint    MakeCRC16X25(uchar  *pbData, uint  wSize)
 {
- uint w = 0xFFFF;
- uchar i;
+  uint w = 0xFFFF;
+  uchar i;
 
- while (wSize--)
- {
-  w = w ^ (*pbData++);
-  for (i = 0; i < 8; i++)
+  while (wSize--)
   {
-   if (w & 1) { w = (w >> 1) ^ 0x8408; }
-   else { w = w >> 1; }
+    w = w ^ (*pbData++);
+    for (i = 0; i < 8; i++)
+    {
+      if (w & 1)
+      {
+        w = (w >> 1) ^ 0x8408;
+      }
+      else
+      {
+        w = w >> 1;
+      }
+    }
   }
- }
 
- w ^= 0xFFFF;
- return w;
+  w ^= 0xFFFF;
+  return w;
 }
 
 
