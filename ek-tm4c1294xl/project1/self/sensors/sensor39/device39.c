@@ -13,7 +13,7 @@ DEVICE36*C
 #include "crc16x25.h"
 #include "io39.h"
 #include "hdlc_address.h"
-//#include "dlms_push.h"
+#include "dlms_push.h"
 #include "device39.h"
 
 
