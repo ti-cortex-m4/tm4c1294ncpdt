@@ -31,20 +31,20 @@ static slong64_         scaler;
 
 
 
-void    Query39_DISC_Current(void)
+void    DISC_Current39(void)
 {
   c = InitCaller39();
   Query39_DISC();
 }
 
 
-void    Query39_AARQ_Current(void)
+void    AARQ_Current39(void)
 {
   Query39_AARQ(c.bNS, c.bNR);
 }
 
 
-void    Query39_RR_Current(void)
+void    RR_Current39(void)
 {
   c.bNR++;
   Query39_RR(c.bNR);
@@ -52,14 +52,14 @@ void    Query39_RR_Current(void)
 
 
 
-bool    ValidateFrame_Current(void)
+bool    ValidateFrame_Current39(void)
 {
   return ValidateFrame(c.bNS, c.bNR) == 0;
 };
 
 
 
-void    QueryValue_Current(void)
+void    QueryValue_Current39(void)
 {
   c.bNS++;
   c.bInvokeId++;
@@ -67,7 +67,7 @@ void    QueryValue_Current(void)
 }
 
 
-bool    ReadValue_Current(void)
+bool    ReadValue_Current39(void)
 {
   value2 = ReadUnsignedValueDLSM();
   return value2.fValid;
@@ -75,7 +75,7 @@ bool    ReadValue_Current(void)
 
 
 
-void    QueryScaler_Current(void)
+void    QueryScaler_Current39(void)
 {
   c.bNS++;
   c.bInvokeId++;
@@ -83,7 +83,7 @@ void    QueryScaler_Current(void)
 }
 
 
-bool    ReadScaler_Current(void)
+bool    ReadScaler_Current39(void)
 {
   scaler = ReadRegisterScalerDLMS();
   return scaler.fValid;
