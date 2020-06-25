@@ -15,6 +15,7 @@ current39*c
 #include "../../digitals/current/current_run.h"
 #include "io39.h"
 #include "device39.h"
+#include "caller39.h"
 #include "device39_obis.h"
 #include "dlms_read_data.h"
 #include "dlms_read_register.h"

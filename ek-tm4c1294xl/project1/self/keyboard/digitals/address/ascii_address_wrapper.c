@@ -11,10 +11,11 @@ ascii_address_wrapper.c
 
 
 void    AsciiAddress_Show(line  *pl) {
-  Clear();
+//  Clear();
 
   uchar i;
   for (i=0; i<bLINE_SIZE-1; i++) {
+    szLo[15-i] = ' ';
     szLo[15-i] = (*pl).szLine[i];
   }
 }

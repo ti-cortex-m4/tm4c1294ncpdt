@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-fragment_open_39.c
+fragment_open_39*c
 
 
 ------------------------------------------------------------------------------*/
@@ -7,6 +7,7 @@ fragment_open_39.c
 #include "../../main.h"
 #include "../../time/delay.h"
 #include "device39.h"
+#include "caller39.h"
 #include "io39.h"
 #include "error39.h"
 #include "fragment_open_39.h"

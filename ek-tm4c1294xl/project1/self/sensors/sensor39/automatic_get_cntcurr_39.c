@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-automatic_get_cntcurr_39.c
+automatic_get_cntcurr_39*c
 
 
 ------------------------------------------------------------------------------*/
@@ -12,6 +12,7 @@ automatic_get_cntcurr_39.c
 #include "device39.h"
 #include "device39_obis.h"
 #include "io39.h"
+#include "caller39.h"
 #include "error39.h"
 #include "fragment_open_39.h"
 #include "dlms_read_register.h"

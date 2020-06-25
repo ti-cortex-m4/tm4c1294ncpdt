@@ -1,20 +1,23 @@
 /*------------------------------------------------------------------------------
-device39_obis.h
+DEVICE36*H
 
 
 ------------------------------------------------------------------------------*/
 
-#ifndef __DEVICE39_OBIS
-#define __DEVICE39_OBIS
+#ifndef __CALLER_39
+#define __CALLER_39
 
 
-typedef uchar           obis_t[6];
+typedef struct
+{
+  uchar         bNS;
+  uchar         bNR;
+  uchar         bInvokeId;
+} caller39;
 
 
 #endif
 
 
 
-extern  const obis_t    obisTime;
-
-extern  const obis_t    obisEngAbs;
+caller39 InitCaller(void);

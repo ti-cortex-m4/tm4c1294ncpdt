@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-hdlc_monitor.c
+hdlc_monitor*c
 
 
 ------------------------------------------------------------------------------*/
@@ -11,10 +11,6 @@ hdlc_monitor.c
 #include "hdlc_address.h"
 #include "crc16x25.h"
 #include "hdlc_monitor.h"
-
-
-
-//#define MONITOR_HDLC  1
 
 
 
@@ -65,8 +61,7 @@ void    MonitorControl(uchar  bControl) {
 
 void    MonitorOutputHDLC(void)
 {
-#ifdef MONITOR_39
-#ifdef MONITOR_HDLC
+#ifdef MONITOR_39_MONITOR
 
   uint wFormat = OutBuff(1)*0x100 + OutBuff(2);
   uint wSize = wFormat & 0x0FFF;
@@ -88,7 +83,6 @@ void    MonitorOutputHDLC(void)
   MonitorControl(OutBuff(3 + GetHdlcAddressesSize()));
   
 #endif  
-#endif  
 }
 
 
@@ -105,8 +99,7 @@ bool    ValidateInputHDLC(void)
   int i = wSize-1;
   uint wCRCactual = InBuff(i) + InBuff(i+1)*0x100; 
 
-#ifdef MONITOR_39
-#ifdef MONITOR_HDLC
+#ifdef MONITOR_39_MONITOR
 
   MonitorString("\n Input HDLC: ");
   MonitorString(" Format="); MonitorIntHex(wFormat);
@@ -116,17 +109,14 @@ bool    ValidateInputHDLC(void)
   MonitorString(" wCRCactual="); MonitorIntHex(wCRCactual);
   (wCRCexpected == wCRCactual) ? MonitorString(" CRC_ok") : MonitorString(" CRC_error");
 
-#endif  
 #endif 
 
   if (wCRCexpected != wCRCactual) { 
     return false;
   }
 
-#ifdef MONITOR_39
-#ifdef MONITOR_HDLC
+#ifdef MONITOR_39_MONITOR
   MonitorControl(InBuff(3 + GetHdlcAddressesSize()));  
-#endif  
 #endif 
 
   return true;
@@ -141,14 +131,14 @@ bool    ValidateIframe(uchar  bNS_client, uchar  bNR_client)
   uchar bNR_server = (bControl & 0xE0) >> 5;
 
   if (bNS_client % 8 != bNS_server % 8) {
-#ifdef MONITOR_39    
+#ifdef MONITOR_39_MONITOR
     MonitorString(" I-frame N(S) client/server error "); MonitorCharHex(bNS_client); MonitorCharHex(bNS_server);
 #endif    
     return false;
   }
 
   if ((bNR_client + 1) % 8 != bNR_server % 8) {
-#ifdef MONITOR_39    
+#ifdef MONITOR_39_MONITOR
     MonitorString(" I-frame N(R) client/server error "); MonitorCharHex(bNR_client); MonitorCharHex(bNR_server);
 #endif    
     return false;
@@ -164,7 +154,7 @@ bool    ValidateSframe(uchar  bNR_client)
   uchar bNR_server = (bControl & 0xE0) >> 5;
 
   if (bNR_client % 8 != bNR_server % 8) {
-#ifdef MONITOR_39    
+#ifdef MONITOR_39_MONITOR
     MonitorString("S-frame N(R) client/server error "); MonitorCharHex(bNR_client); MonitorCharHex(bNR_server);
 #endif
     return false;
@@ -185,14 +175,14 @@ uchar   ValidateFrame(uchar  bNS_client, uchar  bNR_client)
     uchar bNR_server = (bControl & 0xE0) >> 5;
 
     if ((bNS_client + 1) % 8 != bNR_server % 8) {
-  #ifdef MONITOR_39
+  #ifdef MONITOR_39_MONITOR
       MonitorString(" I-frame validation error: N(S) client / N(R) server "); MonitorCharHex((bNS_client + 1) % 8); MonitorCharHex(bNR_server % 8);
   #endif
       return 10;
     }
 
     if (bNR_client % 8 != bNS_server % 8) {
-  #ifdef MONITOR_39
+  #ifdef MONITOR_39_MONITOR
       MonitorString(" I-frame validation error: N(R) client / N(S) server "); MonitorCharHex(bNR_client % 8); MonitorCharHex(bNS_server % 8);
   #endif
       return 11;
@@ -202,7 +192,7 @@ uchar   ValidateFrame(uchar  bNS_client, uchar  bNR_client)
     uchar bNR_server = (bControl & 0xE0) >> 5;
 
     if ((bNS_client + 1) % 8 != bNR_server % 8) {
-  #ifdef MONITOR_39
+  #ifdef MONITOR_39_MONITOR
       MonitorString(" S-frame validation error: N(S) client / N(R) server "); MonitorCharHex((bNS_client + 1) % 8); MonitorCharHex(bNR_server % 8);
   #endif
       return 12;
@@ -223,7 +213,7 @@ void    ShowSframe(uchar  bNR_client)
   uchar bNR_server = (bControl & 0xE0) >> 5;
 
   if (bNR_client % 8 != bNR_server % 8) {
-#ifdef MONITOR_39
+#ifdef MONITOR_39_MONITOR
     MonitorString("S-frame N(R) client/server "); MonitorCharHex(bNR_client); MonitorCharHex(bNR_server);
 #endif
   }
@@ -237,7 +227,7 @@ bool    LastSegmentDMLS(void)
   uint wFormat = PopIntBig();
   bool fLastSegment = (wFormat & 0x0800) == 0;
 
-#ifdef MONITOR_39  
+#ifdef MONITOR_39_MONITOR
   MonitorString("\n Last_Segment="); MonitorBool(fLastSegment);
 #endif
 
@@ -252,7 +242,7 @@ bool    UseBlocksDMLS(void)
   uint w = PopIntBig();
   bool fUseBlocks = (w == 0xC402);
 
-#ifdef MONITOR_39
+#ifdef MONITOR_39_MONITOR
   MonitorString("\n Use_Blocks="); MonitorIntHex(w); MonitorBool(fUseBlocks);
 #endif  
 
@@ -267,7 +257,7 @@ bool    LastBlockDMLS(void)
   uchar b = PopChar();
   bool fLastBlock = (b != 0);
 
-#ifdef MONITOR_39  
+#ifdef MONITOR_39_MONITOR
   MonitorString("\n Last_Block="); MonitorCharHex(b); MonitorBool(fLastBlock);
 #endif  
 
