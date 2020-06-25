@@ -5,4 +5,6 @@ errors39.h
 ------------------------------------------------------------------------------*/
 
 uchar   Error39(uchar  bError);
+uchar   Error39_(uchar  bError, uint  wCode);
+
 uchar   Log39(uchar  bLog);

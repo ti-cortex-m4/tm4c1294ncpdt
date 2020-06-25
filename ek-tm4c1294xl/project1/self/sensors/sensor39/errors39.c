@@ -14,6 +14,11 @@ uchar   Error39(uchar  bError) {
 }
 
 
+uchar   Error39_(uchar  bError, uint  wCode) {
+  return bError;        
+}
+
+
 uchar   Log39(uchar  bLog) {
   return bLog;        
 }
