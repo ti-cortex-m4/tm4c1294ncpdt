@@ -18,14 +18,8 @@
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         MakePause(DEV_SNRM_O_39C);
       } else {
-        if (cbRepeat == 0) ErrorCurrent();
-        else {
-          ErrorLink();
-          cbRepeat--;
-
-          Query39_DISC_Current();
-          SetCurr(DEV_DISC_I_39C);
-        }
+        Error39(210);
+        ErrorCurrent();
       }
       break;
 
@@ -42,14 +36,8 @@
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         MakePause(DEV_AARQ_O_39C);
       } else {
-        if (cbRepeat == 0) ErrorCurrent();
-        else {
-          ErrorLink();
-          cbRepeat--;
-
-          Query39_SNRM();
-          SetCurr(DEV_SNRM_I_39C);
-        }
+        Error39(211);
+        ErrorCurrent();
       }
       break;
 
@@ -64,19 +52,15 @@
 
     case DEV_AARQ_I_39C:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
-        if (!ValidateFrame_Current())
+        if (!ValidateFrame_Current()) {
+          Error39(210);
           ErrorCurrent();
-        else
+        } else {
           MakePause(DEV_RR_AARQ_O_39C);
-      } else {
-        if (cbRepeat == 0) ErrorCurrent();
-        else {
-          ErrorLink();
-          cbRepeat--;
-
-          Query39_AARQ_Current();
-          SetCurr(DEV_AARQ_I_39C);
         }
+      } else {
+        Error39(210);
+        ErrorCurrent();
       }
       break;
 
@@ -91,19 +75,15 @@
 
     case DEV_RR_AARQ_I_39C:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
-        if (!ValidateFrame_Current())
+        if (!ValidateFrame_Current()) {
+          Error39(210);
           ErrorCurrent();
-        else
+        } else {
           MakePause(DEV_VALUE_O_39C);
-      } else {
-        if (cbRepeat == 0) ErrorCurrent();
-        else {
-          ErrorLink();
-          cbRepeat--;
-
-          Query39_RR_Current();
-          SetCurr(DEV_RR_AARQ_I_39C);
         }
+      } else {
+        Error39(210);
+        ErrorCurrent();
       }
       break;
 
@@ -119,23 +99,20 @@
     case DEV_VALUE_I_39C:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        if (!ValidateFrame_Current())
+        if (!ValidateFrame_Current()) {
+          Error39(210);
           ErrorCurrent();
-        else {
-          if (ReadValue_Current())
+        } else {
+          if (ReadValue_Current()) {
             MakePause(DEV_RR_VALUE_O_39C);
-          else
+          } else {
+            Error39(210);
             ErrorCurrent();
+          }
         }
       } else {
-        if (cbRepeat == 0) ErrorCurrent();
-        else {
-          ErrorLink();
-          cbRepeat--;
-
-          QueryValue_Current();
-          SetCurr(DEV_VALUE_I_39C);
-        }
+        Error39(210);
+        ErrorCurrent();
       }
       break;
 
@@ -151,20 +128,15 @@
     case DEV_RR_VALUE_I_39C:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        if (!ValidateFrame_Current())
+        if (!ValidateFrame_Current()) {
+          Error39(210);
           ErrorCurrent();
-        else
+        } else {
           MakePause(DEV_SCALER_O_39C);
-      }
-      else {
-        if (cbRepeat == 0) ErrorCurrent();
-        else {
-          ErrorLink();
-          cbRepeat--;
-
-          Query39_RR_Current();
-          SetCurr(DEV_RR_VALUE_I_39C);
         }
+      } else {
+        Error39(210);
+        ErrorCurrent();
       }
       break;
 
@@ -180,23 +152,20 @@
     case DEV_SCALER_I_39C:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        if (!ValidateFrame_Current())
+        if (!ValidateFrame_Current()) {
+          Error39(210);
           ErrorCurrent();
-        else {
+        } else {
           if (ReadScaler_Current())
             MakePause(DEV_RR_SCALER_O_39C);
-          else  
+          else {
+            Error39(210);
             ErrorCurrent();
+          }
         }
       } else {
-        if (cbRepeat == 0) ErrorCurrent();
-        else {
-          ErrorLink();
-          cbRepeat--;
-
-          QueryValue_Current();
-          SetCurr(DEV_SCALER_I_39C);
-        }
+        Error39(210);
+        ErrorCurrent();
       }
       break;
 
@@ -212,20 +181,16 @@
     case DEV_RR_SCALER_I_39C:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        if (!ValidateFrame_Current())
+        if (!ValidateFrame_Current()) {
+          Error39(210);
           ErrorCurrent();
-        else 
+        } else {
           ReadCurrent39();
+        }
       }
       else {
-        if (cbRepeat == 0) ErrorCurrent();
-        else {
-          ErrorLink();
-          cbRepeat--;
-
-          Query39_RR_Current();
-          SetCurr(DEV_RR_SCALER_I_39C);
-        }
+        Error39(210);
+        ErrorCurrent();
       }
       break;
 

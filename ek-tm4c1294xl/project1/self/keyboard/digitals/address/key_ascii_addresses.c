@@ -4,13 +4,13 @@ key_ascii_addresses.c
 
 ------------------------------------------------------------------------------*/
 
-#include "../../main.h"
-#include "../../console.h"
-#include "../../memory/mem_digitals.h"
-#include "../../memory/mem_records.h"
-#include "../../digitals/digitals.h"
-#include "../../flash/records.h"
-#include "api_ascii_addresses.h"
+#include "../../../main.h"
+#include "../../../console.h"
+#include "../../../memory/mem_digitals.h"
+#include "../../../memory/mem_records.h"
+#include "../../../digitals/digitals.h"
+#include "../../../flash/records.h"
+#include "ascii_address_wrapper.h"
 #include "key_ascii_addresses.h"
 
 
@@ -18,7 +18,7 @@ key_ascii_addresses.c
 //                                           0123456789ABCDEF
 static char const       szAddresses[]     = "Адреса          ",
                         szMask9[]         = "_________",
-                        szSpace9[]        = "         ",
+//                        szSpace9[]        = "         ",
                         szMask12[]        = "____________",
                         szSpace12[]       = "            ";
 
@@ -84,7 +84,7 @@ static uchar idx;
     {
       enKeyboard = KBD_POSTENTER;
 
-      mpphAsciiAddress2[c] = address;
+      mpphAsciiAddress[c] = address;
       SaveCache(&chAsciiAddress);
 
       if (++c >= bCANALS) c = 0;
