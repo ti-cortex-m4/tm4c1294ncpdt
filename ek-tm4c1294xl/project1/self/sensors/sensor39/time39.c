@@ -49,16 +49,11 @@ void    QueryTime39(uchar  bNS, uchar  bNR, uchar  bInvokeId)
   PushChar(0xC0 | (bInvokeId % 16)); // Invoke-Id-And-Priority
   
   PushChar(0x00);
-  PushChar(0x08); // class
+  PushChar(8); // clock (class_id = 8)
   
-  PushChar(0x00); // 0-0:1.0.0*255
-  PushChar(0x00);
-  PushChar(0x01);
-  PushChar(0x00);
-  PushChar(0x00);
-  PushChar(0xFF);
+  PushOBIS_DLMS(obisTime);
   
-  PushChar(0x02); // index  
+  PushChar(2); // time (attribute = 2)
   PushChar(0x00);
 
   // DLMS finish
@@ -123,13 +118,14 @@ void    QueryCorrectTime39(uchar  bNS, uchar  bNR, uchar  bInvokeId, sint  wSeco
 
   PushOBIS_DLMS(obisTime);
 
-  PushChar(6); // shift_time (method 6)
+  PushChar(6); // shift_time (method = 6)
   PushChar(0x01);
 
   PushChar(0x10);
 
   if (wSeconds < -900) wSeconds = -900;
   else if (wSeconds > 900) wSeconds = 900;
+
   PushIntBig(wSeconds);
 
   // DLMS finish
