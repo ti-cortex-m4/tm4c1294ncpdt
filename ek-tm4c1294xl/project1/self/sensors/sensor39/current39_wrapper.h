@@ -5,6 +5,7 @@ current39_wrapper.h
 ------------------------------------------------------------------------------*/
 
 void    DISC_Current39(void);
+void    SNRM_Current39(void);
 void    AARQ_Current39(void);
 void    RR_Current39(void);
 
