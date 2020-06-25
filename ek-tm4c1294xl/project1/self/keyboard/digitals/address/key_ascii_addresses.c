@@ -9,7 +9,7 @@ key_ascii_addresses.c
 #include "../../memory/mem_digitals.h"
 #include "../../memory/mem_records.h"
 #include "../../digitals/digitals.h"
-// #include "../../flash/records.h"
+#include "../../flash/records.h"
 #include "api_ascii_addresses.h"
 #include "key_ascii_addresses.h"
 
@@ -24,19 +24,19 @@ static char const       szAddresses[]     = "Адреса          ",
 
 
 
-static void Show(uchar  c, line  *address)
+static void Show(uchar  c)
 {
   Clear();
 
   if ((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_REPROGRAM))
   {
     sprintf(szHi+7,"%9lu",mpdwAddress1[c]);
-    AsciiAddress_Show(&address);
+    AsciiAddress_Show(&mpphAsciiAddress[c]);
   }
   else
   {
     sprintf(szHi+7,"%9lu",mpdwAddress1[c]);
-    sprintf(szLo+7,"*********");
+    sprintf(szLo+4,"************");
   }
 
   sprintf(szLo,"%2u",c+1);
@@ -64,31 +64,31 @@ static uchar idx;
       enKeyboard = KBD_POSTENTER;
 
       c = 0;
-      Show(c, &address);
+      Show(c);
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
       if ((c = GetCharLo(10,11) - 1) < bCANALS)
       {
         enKeyboard = KBD_POSTENTER;
-        Show(c, &address);
+        Show(c);
       }
       else Beep();
     }
     else if (enKeyboard == KBD_POSTENTER)
     {
       if (++c >= bCANALS) c = 0;
-      Show(c, &address);
+      Show(c);
     }
     else if (enKeyboard == KBD_POSTINPUT3)
     {
-        enKeyboard = KBD_POSTENTER;
+      enKeyboard = KBD_POSTENTER;
 
-        mpphAsciiAddress2[c] = address;
-        SaveCache(&chAsciiAddress);
+      mpphAsciiAddress2[c] = address;
+      SaveCache(&chAsciiAddress);
 
-        if (++c >= bCANALS) c = 0;
-        Show(c);
+      if (++c >= bCANALS) c = 0;
+      Show(c);
     }
     else Beep();
   }
@@ -99,7 +99,7 @@ static uchar idx;
     if (enKeyboard == KBD_POSTENTER)
     {
       if (c > 0) c--; else c = bCANALS-1;
-      Show(c, &address);
+      Show(c);
     }
     else if (enKeyboard == KBD_POSTINPUT2)
     {
@@ -107,7 +107,7 @@ static uchar idx;
       if (dw < 1000000000)
       {
         enKeyboard = KBD_INPUT3;
-        sprintf(szLo+7,szMask9);
+        sprintf(szLo+4,szMask12);
 
         ibRecordCan = c;
         AddSysRecordReprogram(EVE_EDIT_ADDRESS10);
@@ -153,7 +153,7 @@ static uchar idx;
       {
         enKeyboard = KBD_INPUT2;
         sprintf(szHi+7,szMask9);
-        sprintf(szLo+7,szSpace9);
+        sprintf(szLo+4,szSpace12);
       }
       else Beep();
     }
