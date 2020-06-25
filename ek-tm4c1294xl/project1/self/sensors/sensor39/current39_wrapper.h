@@ -4,16 +4,16 @@ current39_wrapper.h
 
 ------------------------------------------------------------------------------*/
 
-void    Query39_DISC_Current(void);
-void    Query39_AARQ_Current(void);
-void    Query39_RR_Current(void);
+void    DISC_Current39(void);
+void    AARQ_Current39(void);
+void    RR_Current39(void);
 
-bool    ValidateFrame_Current(void);
+bool    ValidateFrame_Current39(void);
 
-void    QueryValue_Current(void);
-bool    ReadValue_Current(void);
+void    QueryValue_Current39(void);
+bool    ReadValue_Current39(void);
 
-void    QueryScaler_Current(void);
-bool    ReadScaler_Current(void);
+void    QueryScaler_Current39(void);
+bool    ReadScaler_Current39(void);
 
 void    ReadCurrent39(void);

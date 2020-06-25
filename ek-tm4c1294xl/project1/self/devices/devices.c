@@ -6978,7 +6978,7 @@ void    RunDevices(void)
       Clear(); ShowPercent(50);
 
       cbRepeat = MaxRepeats();
-      Query39_DISC_Current();
+      DISC_Current39();
       SetCurr(DEV_DISC_I_39C);
       break;
 
@@ -7014,13 +7014,13 @@ void    RunDevices(void)
       Clear(); ShowPercent(52);
 
       cbRepeat = MaxRepeats();
-      Query39_AARQ_Current();
+      AARQ_Current39();
       SetCurr(DEV_AARQ_I_39C);
       break;
 
     case DEV_AARQ_I_39C:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
-        if (!ValidateFrame_Current()) {
+        if (!ValidateFrame_Current39()) {
           Error39(212);
           ErrorCurrent();
         } else {
@@ -7037,13 +7037,13 @@ void    RunDevices(void)
       Clear(); ShowPercent(53);
 
       cbRepeat = MaxRepeats();
-      Query39_RR_Current();
+      RR_Current39();
       SetCurr(DEV_RR_AARQ_I_39C);
       break;
 
     case DEV_RR_AARQ_I_39C:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
-        if (!ValidateFrame_Current()) {
+        if (!ValidateFrame_Current39()) {
           Error39(214);
           ErrorCurrent();
         } else {
@@ -7060,18 +7060,18 @@ void    RunDevices(void)
       Clear(); ShowPercent(54);
 
       cbRepeat = MaxRepeats();
-      QueryValue_Current();
+      QueryValue_Current39();
       SetCurr(DEV_VALUE_I_39C);
       break;
 
     case DEV_VALUE_I_39C:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        if (!ValidateFrame_Current()) {
+        if (!ValidateFrame_Current39()) {
           Error39(216);
           ErrorCurrent();
         } else {
-          if (ReadValue_Current()) {
+          if (ReadValue_Current39()) {
             MakePause(DEV_RR_VALUE_O_39C);
           } else {
             Error39(217);
@@ -7089,14 +7089,14 @@ void    RunDevices(void)
       Clear(); ShowPercent(55);
 
       cbRepeat = MaxRepeats();
-      Query39_RR_Current();
+      RR_Current39();
       SetCurr(DEV_RR_VALUE_I_39C);
       break;
 
     case DEV_RR_VALUE_I_39C:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        if (!ValidateFrame_Current()) {
+        if (!ValidateFrame_Current39()) {
           Error39(219);
           ErrorCurrent();
         } else {
@@ -7113,18 +7113,18 @@ void    RunDevices(void)
       Clear(); ShowPercent(56);
 
       cbRepeat = MaxRepeats();
-      QueryScaler_Current();
+      QueryScaler_Current39();
       SetCurr(DEV_SCALER_I_39C);
       break;
 
     case DEV_SCALER_I_39C:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        if (!ValidateFrame_Current()) {
+        if (!ValidateFrame_Current39()) {
           Error39(221);
           ErrorCurrent();
         } else {
-          if (ReadScaler_Current()) {
+          if (ReadScaler_Current39()) {
             MakePause(DEV_RR_SCALER_O_39C);
           } else {
             Error39(222);
@@ -7142,14 +7142,14 @@ void    RunDevices(void)
       Clear(); ShowPercent(57);
 
       cbRepeat = MaxRepeats();
-      Query39_RR_Current();
+      RR_Current39();
       SetCurr(DEV_RR_SCALER_I_39C);
       break;
 
     case DEV_RR_SCALER_I_39C:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        if (!ValidateFrame_Current()) {
+        if (!ValidateFrame_Current39()) {
           Error39(223);
           ErrorCurrent();
         } else {
