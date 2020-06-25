@@ -12,7 +12,7 @@ unpack36*c
 #include "unpack39.h"
 
 
-
+/*
 void    Unpack39(void)
 {
   uchar i = 1;
@@ -38,7 +38,7 @@ void    Unpack39(void)
 
   SetIndexInBuff(j);
 }
-
+*/
 
 
 void    Decompress39(void)
