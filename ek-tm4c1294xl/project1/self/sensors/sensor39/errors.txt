@@ -25,7 +25,7 @@ fragment_open_39.c			180
 fragment_open_time39.c		190
 fragment_profile_39.c		200
 
-current39.c					210
+current39_wrapper.c					210
 
 profile39.c					220
-profile39_caller.c			230
+profile39_wrapper.c			230
