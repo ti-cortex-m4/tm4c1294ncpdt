@@ -10,7 +10,7 @@ query_register_39*c
 #include "../../serial/ports2.h"
 #include "../../serial/ports_devices.h"
 #include "../../serial/monitor.h"
-#include "include39.h"
+//#include "include39.h"
 #include "crc16x25.h"
 #include "io39.h"
 #include "hdlc_address.h"

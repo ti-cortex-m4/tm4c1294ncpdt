@@ -112,6 +112,9 @@ static uchar idx;
         enKeyboard = KBD_INPUT3;
         sprintf(szLo+4,szMask12);
 
+        AsciiAddress_Init(&address);
+
+
         ibRecordCan = c;
         AddSysRecordReprogram(EVE_EDIT_ADDRESS10);
 
