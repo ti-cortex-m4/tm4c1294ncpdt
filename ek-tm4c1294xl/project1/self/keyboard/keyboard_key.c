@@ -306,6 +306,7 @@ void    Keyboard_Key(void)
       case bSET_EXTENDED_ESC_U: key_SetExtendedEscU();  break;
 
       case bSET_ADDRESSES:      key_SetAddresses();     break;
+      case 770:                 key_SetAsciiAddresses0();break;
       case bSET_ASCII_ADDRESSES:key_SetAsciiAddresses();break;
       case bSET_ENBL_KEYS:      key_SetEnblKeys();      break;
       case bSET_KEYS:           key_SetKeys();          break;
@@ -548,6 +549,7 @@ void    Keyboard_Key(void)
       case bSET_EXTENDED_ESC_U: key_SetExtendedEscU();  break;
 
       case bSET_ADDRESSES:      key_SetAddresses();     break;
+      case 770:                 key_SetAsciiAddresses0();break;
       case bSET_ASCII_ADDRESSES:key_SetAsciiAddresses();break;
       case bSET_ENBL_KEYS:      key_SetEnblKeys();      break;
       case bSET_KEYS:           key_SetKeys();          break;
@@ -871,6 +873,7 @@ void    Keyboard_Key(void)
       case bSET_EXTENDED_ESC_U: key_SetExtendedEscU();  break;
 
       case bSET_ADDRESSES:      key_SetAddresses();     break;
+      case 770:                 key_SetAsciiAddresses0();break;
       case bSET_ASCII_ADDRESSES:key_SetAsciiAddresses();break;
       case bSET_ENBL_KEYS:      key_SetEnblKeys();      break;
       case bSET_KEYS:           key_SetKeys();          break;
