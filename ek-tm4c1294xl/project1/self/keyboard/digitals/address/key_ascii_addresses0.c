@@ -16,7 +16,7 @@ static char const       szAddresses[]     = "Адреса          ";
 
 
 
-void    key_SetAsciiAddresses(void)
+void    key_SetAsciiAddresses0(void)
 {
 static line  address;
 static uchar idx;
