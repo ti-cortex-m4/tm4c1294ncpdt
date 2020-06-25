@@ -16,7 +16,7 @@ Blue Book: 4.3.2 Register (class_id = 3, version = 0)
 #include "io39.h"
  #include "hdlc_address.h"
  #include "dlms_push.h"
-#include "query_params_39.h"
+#include "query_register_39.h"
 #include "dlms_read_data.h"
 #include "dlms_read_register.h"
 

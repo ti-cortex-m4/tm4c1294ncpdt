@@ -18,7 +18,7 @@ current39*c
 #include "device39_obis.h"
 #include "dlms_read_data.h"
 #include "dlms_read_register.h"
-#include "query_params_39.h"
+#include "query_register_39.h"
 #include "current39.h"
 
 
