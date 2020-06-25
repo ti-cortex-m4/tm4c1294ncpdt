@@ -4,4 +4,6 @@ key_ascii_addresses.h
 
 ------------------------------------------------------------------------------*/
 
+void    key_SetAsciiAddresses0(void);
+
 void    key_SetAsciiAddresses(void);
