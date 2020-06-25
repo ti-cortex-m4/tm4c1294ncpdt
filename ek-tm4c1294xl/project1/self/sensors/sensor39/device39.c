@@ -9,11 +9,11 @@ DEVICE36*C
 #include "../../serial/ports2.h"
 #include "../../serial/ports_devices.h"
 #include "../../serial/monitor.h"
-#include "include39.h"
-#include "crc16x25.h"
+//#include "include39.h"
+//#include "crc16x25.h"
 #include "io39.h"
-#include "hdlc_address.h"
-#include "dlms_push.h"
+//#include "hdlc_address.h"
+//#include "dlms_push.h"
 #include "device39.h"
 
 
@@ -228,17 +228,4 @@ void    Query39_RR(uchar  bNR)
   PushChar(0x7E);
 
   Query39(1000, wSize+2); // 9
-}
-
-
-
-caller39 InitCaller(void)
-{
-  caller39 runner;
-
-  runner.bNS = 0;
-  runner.bNR = 0;
-  runner.bInvokeId = 0;
-
-  return runner;
 }

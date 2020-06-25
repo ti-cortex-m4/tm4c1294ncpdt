@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-fragment_profile_39.c
+fragment_profile_39*c
 
 
 ------------------------------------------------------------------------------*/
@@ -9,6 +9,7 @@ fragment_profile_39.c
 #include "../../serial/monitor.h"
 #include "../../serial/monitor_settings.h"
 #include "device39.h"
+#include "caller39.h"
 #include "query_profile_39.h"
 #include "query_next_block_39.h"
 #include "io39.h"

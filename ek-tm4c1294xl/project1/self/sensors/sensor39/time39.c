@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-time39.c
+time39*c
 
 
 ------------------------------------------------------------------------------*/
@@ -11,14 +11,12 @@ time39.c
 #include "../../serial/monitor.h"
 #include "include39.h"
 #include "crc16x25.h"
+#include "device39_obis.h"
 #include "io39.h"
 #include "hdlc_address.h"
 #include "dlms_push.h"
 #include "time39.h"
 
-
-
-static const obis_t obisTime    = {0, 0, 1, 0, 0, 255};
 
 
 
@@ -125,7 +123,7 @@ void    QueryCorrectTime39(uchar  bNS, uchar  bNR, uchar  bInvokeId, sint  wSeco
 
   PushOBIS_DLMS(obisTime);
 
-  PushChar(6); // method 6 (shift_time)
+  PushChar(6); // shift_time (method 6)
   PushChar(0x01);
 
   PushChar(0x10);

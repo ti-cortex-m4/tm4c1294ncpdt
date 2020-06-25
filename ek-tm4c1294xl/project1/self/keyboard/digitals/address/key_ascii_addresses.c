@@ -32,6 +32,8 @@ static void Show(uchar  c)
   {
     sprintf(szHi+7,"%9lu",mpdwAddress1[c]);
     AsciiAddress_Show(&mpphAsciiAddress[c]);
+
+    uint i = strlen((char const *)mpphAsciiAddress[c].szLine);
   }
   else
   {
