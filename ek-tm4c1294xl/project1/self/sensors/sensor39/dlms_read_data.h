@@ -9,3 +9,4 @@ ulong64_ PopUnsignedValueDLSM(void);
 slong64_ PopSignedValueDLSM(void);
 
 ulong64_ ReadUnsignedValueDLSM(void);
+slong64_ ReadSignedValueDLSM(void);

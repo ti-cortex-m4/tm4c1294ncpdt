@@ -76,7 +76,7 @@ slong64_ GetSLong64(int64_t  ddwValue, bool  fValid, uchar  bError)
 }
 
 
-slong64_ GetSLong64Error(uchar  bError)
+slong64_ GetSLong64Error1(uchar  bError)
 {
   return GetSLong64(-1, false, bError);
 }

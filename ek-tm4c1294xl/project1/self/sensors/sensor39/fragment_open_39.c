@@ -17,19 +17,19 @@ fragment_open_39.c
 uchar   FragmentOpen39(caller39  *pc)
 {
   Query39_DISC();
-  if (Input39() != SER_GOODCHECK) return Error39(180);
+  if (Input39() != SER_GOODCHECK) return Error39(180+0);
 
   Query39_SNRM();
-  if (Input39() != SER_GOODCHECK) return Error39(181);
+  if (Input39() != SER_GOODCHECK) return Error39(180+1);
 
   Query39_AARQ((*pc).bNS, (*pc).bNR);
-  if (Input39() != SER_GOODCHECK) return Error39(182);
-  if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Error39(183);
+  if (Input39() != SER_GOODCHECK) return Error39(180+2);
+  if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Error39(180+3);
 
   (*pc).bNR++;
   Query39_RR((*pc).bNR);
-  if (Input39() != SER_GOODCHECK) return Error39(184);
-  if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Error39(185);
+  if (Input39() != SER_GOODCHECK) return Error39(180+4);
+  if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Error39(180+5);
 
   return 0;
 }

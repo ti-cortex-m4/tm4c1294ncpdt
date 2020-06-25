@@ -79,7 +79,7 @@ ulong64_ GetULong64(uint64_t  ddwValue, bool  fValid, uchar  bError);
 ulong64_ GetULong64Error1(uchar  bError);
 
 slong64_ GetSLong64(int64_t  ddwValue, bool  fValid, uchar  bError);
-slong64_ GetSLong64Error(uchar  bError);
+slong64_ GetSLong64Error1(uchar  bError);
 
 float2  GetFloat2(float  flValue, bool  fValid);
 float2  GetFloat2Error(void);

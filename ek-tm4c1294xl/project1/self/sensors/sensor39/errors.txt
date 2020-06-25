@@ -1,7 +1,7 @@
 hdlc_monitor.c				10
 
-dlms_read_data.c			20
-dlms_read_register.c		30
+dlms_read_data.c			20		20-23
+dlms_read_register.c		30		30-47 !
 
 query_engabs_39.c			40
 query_engmon_39.c			50

@@ -11,6 +11,7 @@ Blue Book: 4.1.5 Common data types
 #include "../../serial/ports_devices.h"
 #include "../../serial/monitor.h"
 #include "include39.h"
+#include "error39.h"
 #include "hdlc_address.h"
 #include "dlms_read_data.h"
 
@@ -49,8 +50,7 @@ ulong64_ PopUnsignedValueDLSM(void)
     return GetULong64(value, true, 0);
   }
 
-  // error(unknown_data_type, bDataType)
-  return GetULong64Error1(1);
+  return GetULong64Error1(Error39_(20+0, bDataType));
 }
 
 
@@ -82,8 +82,7 @@ slong64_ PopSignedValueDLSM(void)
     return GetSLong64(value, true, 0);
   }
 
-  // error(unknown_data_type, bDataType)
-  return GetSLong64Error(1);
+  return GetSLong64Error1(Error39_(20+1, bDataType));
 }
 
 
@@ -97,9 +96,24 @@ ulong64_ ReadUnsignedValueDLSM(void)
   MonitorString("\n DataAccessResult="); MonitorCharDec(bDataAccessResult);
 #endif
   if (bDataAccessResult != 0) {
-    // error(no_success, bDataAccessResult)
-    return GetULong64Error1(0);
+    return GetULong64Error1(Error39_(20+2, bDataAccessResult));
   }
 
   return PopUnsignedValueDLSM();
+}
+
+
+slong64_ ReadSignedValueDLSM(void)
+{
+  InitPop(12 + GetHdlcAddressesSize());
+
+  uchar bDataAccessResult = PopChar();
+#ifdef MONITOR_39
+  MonitorString("\n DataAccessResult="); MonitorCharDec(bDataAccessResult);
+#endif
+  if (bDataAccessResult != 0) {
+    return GetSLong64Error1(Error39_(20+3, bDataAccessResult));
+  }
+
+  return PopSignedValueDLSM();
 }
