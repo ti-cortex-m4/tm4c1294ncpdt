@@ -4,7 +4,7 @@ read_engmon_39.h
 
 ------------------------------------------------------------------------------*/
 
-uint64_t ReadEngMon39(void);
+ulong64_ ReadEngMon39(void);
 
 uchar   IsEngMonPresent39(void);
 uchar   IsEngMonAbsent39(void);

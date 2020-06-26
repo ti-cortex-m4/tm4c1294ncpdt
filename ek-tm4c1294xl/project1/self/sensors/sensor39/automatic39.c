@@ -79,6 +79,12 @@ bool    QueryEngMon36_Full(uchar  bTime, uchar  bPercent)
 
 
 /*
+uint64_t _ReadEngMon39(void)
+{
+  InitPop(18 + GetHdlcAddressesSize());
+  return PopLongBig()*0x100000000 + PopLongBig();
+}
+
 double2 ReadCntMonCan36_(uchar  ibMon)
 {
   Query39_DISC();
