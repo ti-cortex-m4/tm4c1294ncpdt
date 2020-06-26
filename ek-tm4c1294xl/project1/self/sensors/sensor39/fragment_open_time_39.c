@@ -16,6 +16,13 @@ fragment_open_time_39.c
 
 
 
+static time2 Fault(uchar  bError)
+{
+  return GetTime2Error1(Error39(bError));
+}
+
+
+
 time2   FragmentOpenTime39(caller39  *pc)
 {
   uchar bError = FragmentOpen39(pc);
@@ -24,14 +31,14 @@ time2   FragmentOpenTime39(caller39  *pc)
   (*pc).bNS++;
   (*pc).bInvokeId++;
   QueryTime39((*pc).bNS, (*pc).bNR, (*pc).bInvokeId);
-  if (Input39() != SER_GOODCHECK) return GetTime2Error1(Error39(190+0));
-  if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return GetTime2Error1(Error39(190+1));
+  if (Input39() != SER_GOODCHECK) return Fault(190+0);
+  if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(190+1);
   time tm = ReadTime39();
 
   (*pc).bNR++;
   Query39_RR((*pc).bNR);
-  if (Input39() != SER_GOODCHECK) return GetTime2Error1(Error39(190+2));
-  if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return GetTime2Error1(Error39(190+3));
+  if (Input39() != SER_GOODCHECK) return Fault(190+2);
+  if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(190+3);
 
   return GetTime0(tm);
 }
