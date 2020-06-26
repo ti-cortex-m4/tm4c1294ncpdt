@@ -61,7 +61,7 @@ status  CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
 
 
   if (db2.fValid) {
-    mpdbChannelsC[0] = db2.dbValue * mpdbTransCnt[ibDig];
+    mpdbChannelsC[0] = (db2.dbValue / 1000) * mpdbTransCnt[ibDig];
     mpboChannelsA[0] = true;
     return ST_OK;
   }

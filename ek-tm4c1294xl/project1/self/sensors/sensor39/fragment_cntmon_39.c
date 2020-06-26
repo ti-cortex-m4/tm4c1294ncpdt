@@ -54,7 +54,7 @@ double2 FragmentCntMonCan(const obis_t  obis, caller39  *pc, uchar  bMonth, ucha
 
 
   if (present) {
-    double db = (double)counter.ddwValue * scaler.dbValue / 1000;
+    double db = (double)counter.ddwValue * scaler.dbValue;
 #ifdef MONITOR_39
     MonitorString("\n result="); MonitorDouble6(db);
 #endif
