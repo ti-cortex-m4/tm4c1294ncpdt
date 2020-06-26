@@ -15,8 +15,7 @@ Blue Book: 4.3.2 Register (class_id = 3, version = 0)
 #include "error39.h"
 #include "io39.h"
 #include "caller39.h"
-  #include "hdlc_address.h"
-//  #include "dlms_push.h"
+#include "hdlc_address.h"
 #include "query_register_39.h"
 #include "dlms_read_data.h"
 #include "dlms_read_register.h"
@@ -27,13 +26,13 @@ slong64_ ReadRegisterScalerDLMS(void)
 {
   InitPop(12 + GetHdlcAddressesSize());
 
- uchar bDataAccessResult = PopChar();
+  uchar bDataAccessResult = PopChar();
 #ifdef MONITOR_39
- MonitorString("\n DataAccessResult="); MonitorCharDec(bDataAccessResult);
+  MonitorString("\n DataAccessResult="); MonitorCharDec(bDataAccessResult);
 #endif
- if (bDataAccessResult != 0) {
-   return GetSLong64Error1(Error39_(30+1, bDataAccessResult));
- }
+  if (bDataAccessResult != 0) {
+    return GetSLong64Error1(Error39_(30+1, bDataAccessResult));
+  }
 
   if (PopChar() != 2) return GetSLong64Error1(Error39(30+2)); // !structure
   if (PopChar() != 2) return GetSLong64Error1(Error39(30+3)); // structure size != 1
@@ -54,20 +53,20 @@ slong64_ ReadRegisterScalerDLMS(void)
 
 
 
-double2 ReadRegisterValue39(const obis_t  obis, caller39*  pr)
+double2 ReadRegisterValue39(const obis_t  obis, caller39*  pc)
 {
-  (*pr).bNS++;
-  (*pr).bInvokeId++;
-  QueryGetRegisterValueDLMS(obis, (*pr));
+  (*pc).bNS++;
+  (*pc).bInvokeId++;
+  QueryGetRegisterValueDLMS(obis, (*pc));
   if (Input39() != SER_GOODCHECK) return GetDouble2Error1(Error39(30+6));
-  if (!ValidateIframe((*pr).bNS, (*pr).bNR)) return GetDouble2Error1(Error39(30+7));
+  if (!ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return GetDouble2Error1(Error39(30+7));
   ulong64_ ddw2 = ReadUnsignedValueDLSM();
   if (!ddw2.fValid) return GetDouble2Error1(Error39(30+8));
 
-  (*pr).bNR++;
-  Query39_RR((*pr).bNR);
+  (*pc).bNR++;
+  Query39_RR((*pc).bNR);
   if (Input39() != SER_GOODCHECK) return GetDouble2Error1(Error39(30+9));
-  if (!ValidateSframe((*pr).bNR)) return GetDouble2Error1(Error39(30+10));
+  if (!ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return GetDouble2Error1(Error39(30+10));
 
   return GetDouble2(ddw2.ddwValue, true);
 }
@@ -79,14 +78,14 @@ double2 ReadRegisterScaler39(const obis_t  obis, caller39*  pc)
   (*pc).bInvokeId++;
   QueryGetRegisterScalerDLMS(obis, (*pc));
   if (Input39() != SER_GOODCHECK) return GetDouble2Error1(Error39(30+11));
-  if (!ValidateIframe((*pc).bNS, (*pc).bNR)) return GetDouble2Error1(Error39(30+12));
+  if (!ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return GetDouble2Error1(Error39(30+12));
   slong64_ scaler = ReadRegisterScalerDLMS();
   if (!scaler.fValid) return GetDouble2Error1(Error39(30+13));
 
   (*pc).bNR++;
   Query39_RR((*pc).bNR);
   if (Input39() != SER_GOODCHECK) return GetDouble2Error1(Error39(30+14));
-  if (!ValidateSframe((*pc).bNR)) return GetDouble2Error1(Error39(30+15));
+  if (!ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return GetDouble2Error1(Error39(30+15));
 
   double dbScaler = pow(10, scaler.ddwValue);
 #ifdef MONITOR_39  
