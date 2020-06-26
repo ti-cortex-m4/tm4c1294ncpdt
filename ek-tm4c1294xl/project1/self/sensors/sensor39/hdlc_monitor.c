@@ -76,9 +76,11 @@ void    MonitorOutputHDLC(void)
   MonitorString(" Format="); MonitorIntHex(wFormat); 
   MonitorString(" wSize="); MonitorIntHex(wSize);
 
+#ifdef MONITOR_39_CRC
   MonitorString(" wCRCexpected="); MonitorIntHex(wCRCexpected);
   MonitorString(" wCRCactual="); MonitorIntHex(wCRCactual);
   (wCRCexpected == wCRCactual) ? MonitorString(" CRC_ok") : MonitorString(" CRC_error");
+#endif
 
   MonitorControl(OutBuff(3 + GetHdlcAddressesSize()));
   
@@ -105,9 +107,11 @@ bool    ValidateInputHDLC(void)
   MonitorString(" Format="); MonitorIntHex(wFormat);
   MonitorString(" wSize="); MonitorIntHex(wSize);
 
+#ifdef MONITOR_39_CRC
   MonitorString(" wCRCexpected="); MonitorIntHex(wCRCexpected);
   MonitorString(" wCRCactual="); MonitorIntHex(wCRCactual);
   (wCRCexpected == wCRCactual) ? MonitorString(" CRC_ok") : MonitorString(" CRC_error");
+#endif
 
 #endif 
 
