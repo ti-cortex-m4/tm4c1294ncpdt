@@ -8,6 +8,9 @@ WRAPPERS,H
 #define __WRAPPERS
 
 
+#define ERROR_NOT_PRESENTED     3
+
+
 typedef struct
 {
   schar         bValue;

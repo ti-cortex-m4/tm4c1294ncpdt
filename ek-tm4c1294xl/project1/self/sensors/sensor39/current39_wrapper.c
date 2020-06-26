@@ -26,7 +26,7 @@ current39.c
 
 static caller39         c;
 
-static ulong64_         value1;
+static ulong64_         counter;
 static slong64_         scaler;
 
 
@@ -75,8 +75,8 @@ void    QueryValue_Current39(void)
 
 bool    ReadValue_Current39(void)
 {
-  value1 = ReadUnsignedValueDLSM();
-  return value1.fValid;
+  counter = ReadUnsignedValueDLSM();
+  return counter.fValid;
 }
 
 
@@ -99,9 +99,9 @@ bool    ReadScaler_Current39(void)
 
 void    ReadCurrent39(void)
 {
-  uint64_t ddwValue = value1.ddwValue;
+  uint64_t ddwCounter = counter.ddwValue;
   double dbScaler = pow(10, scaler.ddwValue);
-  mpdwBaseDig[0] = ((double)ddwValue * dbScaler / 1000) * mpdbPulseMnt[ibDig];
+  mpdwBaseDig[0] = ((double)ddwCounter * dbScaler / 1000) * mpdbPulseMnt[ibDig];
 
   MakeCurrent();
 }

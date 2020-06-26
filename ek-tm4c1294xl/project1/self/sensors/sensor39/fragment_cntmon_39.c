@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-fragment_cntmon_39*c
+fragment_cntmon_39.c
 
 
 ------------------------------------------------------------------------------*/
@@ -30,8 +30,8 @@ double2 FragmentCntMonCan(const obis_t  obis, caller39  *pc, uchar  bMonth, ucha
   if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return GetDouble2Error1(Error39(170+1));
 
 
-  bool present = (IsEngMonPresent39() == 0);
-  bool absent = (IsEngMonAbsent39() == 0);
+  bool present = (EngMonPresent39() == 0);
+  bool absent = (EngMonAbsent39() == 0);
 
   ulong64_ counter = present ? ReadEngMon39() : GetULong64Error1(0);
 
@@ -65,7 +65,7 @@ double2 FragmentCntMonCan(const obis_t  obis, caller39  *pc, uchar  bMonth, ucha
 #ifdef MONITOR_39
     MonitorString("\n result is absent");
 #endif
-    return GetDouble2Error1(1);
+    return GetDouble2Error1(ERROR_NOT_PRESENTED);
   }
 
   return GetDouble2Error1(Error39(170+5));
