@@ -14,6 +14,7 @@ automatic_get_cntmon_38*c
 #include "device39.h"
 #include "time39.h"
 #include "query_engmon_39.h"
+#include "read_engmon_39.h"
 #include "query_profile_39.h"
 #include "query_next_block_39.h"
 #include "buffer_record_39.h"
@@ -23,7 +24,7 @@ automatic_get_cntmon_38*c
 
 
 
-ulong64_ QueryCntMon38_Full(uchar  ibMon)
+ulong64_ ReadCntMonCan38_Internal(uchar  ibMon)
 {
   Query39_DISC();
   if (Input39() != SER_GOODCHECK) return GetULong64Error1(1);
@@ -199,7 +200,7 @@ double2 ReadCntMonCan39(uchar  ibMon)
   uchar r;
   for (r=0; r<MaxRepeats(); r++)
   {
-    ulong64_ ddw2 = QueryCntMon38_Full(ibMon);
+    ulong64_ ddw2 = ReadCntMonCan38_Internal(ibMon);
     if (fKey == true) break;
     if (ddw2.fValid)
     {
