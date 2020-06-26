@@ -3,10 +3,7 @@ hdlc_monitor.c				10
 dlms_read_data.c			20		20-23
 dlms_read_register.c		30		30-46 !
 
-query_engmon_39.c			50
-query_next_block_39.c		-
-query_register_39.c			-
-query_profile_39.c			-
+read_engmon_39.c			50
 
 automatic_get_time_39.c		90		90-95
 automatic_get_cntmon_39.c	100		

@@ -23,6 +23,7 @@ extended_4t_39.c
 #include "error39.h"
 #include "time39.h"
 #include "query_engmon_39.h"
+#include "read_engmon_39.h"
 #include "query_register_39.h"
 #include "fragment_open_time_39.h"
 #include "io39.h"
