@@ -41,13 +41,18 @@ const obis_t *GetOBIS(uchar  ibTariff)
 }
 
 
+static status BadDigital(uchar  bError) {  
+  Error39(bError);
+  return ST_BADDIGITAL;
+}
+
 
 status  CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
 {
   caller39 c = InitCaller39();
   
   time2 tm2 = FragmentOpenTime39(&c);
-  if (!tm2.fValid) { Error39(130+0); return ST_BADDIGITAL; }
+  if (!tm2.fValid) return BadDigital(130+0);
   time tm = tm2.tiValue;
 
 
@@ -57,14 +62,14 @@ status  CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
 
   c.bNS++;
   QueryEngMon39(*GetOBIS(ibTariff), c.bNS, c.bNR, c.bInvokeId++, bMonth, bYear);
-  if (Input39() != SER_GOODCHECK) { Error39(130+1); return ST_BADDIGITAL; }
-  if (ValidateFrame(c.bNS, c.bNR) != 0) { Error39(130+2); return ST_BADDIGITAL; }
+  if (Input39() != SER_GOODCHECK) return BadDigital(130+1);
+  if (ValidateFrame(c.bNS, c.bNR) != 0) return BadDigital(130+2);
 
 
   bool present = (IsEngMonPresent39() == 0);
   bool absent = (IsEngMonAbsent39() == 0);
 
-  ulong64_ ddwValue = GetULong64Error1(130+3);
+  ulong64_ ddwValue = GetULong64Error1(0);
   if (present) {
     InitPop(17 + GetHdlcAddressesSize());
     ddwValue = PopUnsignedValueDLSM();
@@ -80,17 +85,17 @@ status  CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
 
   c.bNR++;
   Query39_RR(c.bNR);
-  if (Input39() != SER_GOODCHECK) { Error39(130+4); return ST_BADDIGITAL; }
-  if (!ValidateSframe(c.bNR)) { Error39(130+5); return ST_BADDIGITAL; }
+  if (Input39() != SER_GOODCHECK) return BadDigital(130+3);
+  if (!ValidateSframe(c.bNR)) return BadDigital(130+4);
 
 
   double2 scaler = ReadRegisterScaler39(*GetOBIS(ibTariff), &c);
-  if (!scaler.fValid) { Error39(130+6); return ST_BADDIGITAL; }
+  if (!scaler.fValid) return BadDigital(130+5);
   double dbScaler = scaler.dbValue;
 
 
   Query39_DISC();
-  if (Input39() != SER_GOODCHECK) { Error39(130+7); return ST_BADDIGITAL; }
+  if (Input39() != SER_GOODCHECK) return BadDigital(130+6);
 
 
   if (present) {
@@ -109,8 +114,7 @@ status  CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
     return ST_NOTPRESENTED;
   }
 
-  Error39(130+8);
-  return ST_BADDIGITAL;
+  return BadDigital(130+7);
 }
 
 
@@ -130,10 +134,9 @@ status  ReadCntMonCanTariff39(uchar  ibMonAbs, uchar  ibTariff) // на начало мес
   }
 
   Query39_DISC();
-  if (Input39() != SER_GOODCHECK) { Error39(130+9); return ST_BADDIGITAL; }
+  if (Input39() != SER_GOODCHECK) return BadDigital(130+8);
 
-  Error39(130+10);
-  return ST_BADDIGITAL;
+  return BadDigital(130+9);
 }
 
 
