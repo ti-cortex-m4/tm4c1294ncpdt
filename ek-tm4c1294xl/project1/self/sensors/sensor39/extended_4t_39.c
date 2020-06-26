@@ -47,22 +47,24 @@ status  CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
   caller39 c = InitCaller39();
   
   time2 tm2 = FragmentOpenTime39(&c);
-  if (!tm2.fValid) return ST_BADDIGITAL;    
+  if (!tm2.fValid) { Error39(130+0); return ST_BADDIGITAL; }
   time tm = tm2.tiValue;
 
 
   uchar bMonth = ibMon + 1;
   uchar bYear = (bMonth > tm.bMonth) ? tm.bYear-1 : tm.bYear;
 
+
   c.bNS++;
   QueryEngMon39(*GetOBIS(ibTariff), c.bNS, c.bNR, c.bInvokeId++, bMonth, bYear);
-  if (Input39() != SER_GOODCHECK) return ST_BADDIGITAL;
-  if (!ValidateFrame(c.bNS, c.bNR)) return ST_BADDIGITAL;
+  if (Input39() != SER_GOODCHECK) { Error39(130+1); return ST_BADDIGITAL; }
+  if (ValidateFrame(c.bNS, c.bNR) != 0) { Error39(130+2); return ST_BADDIGITAL; }
+
 
   bool present = (IsEngMonPresent39() == 0);
   bool absent = (IsEngMonAbsent39() == 0);
 
-  ulong64_ ddwValue = GetULong64Error1(0);
+  ulong64_ ddwValue = GetULong64Error1(130+3);
   if (present) {
     InitPop(17 + GetHdlcAddressesSize());
     ddwValue = PopUnsignedValueDLSM();
@@ -75,19 +77,20 @@ status  CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
   MonitorString("\n value="); MonitorLongDec(ddwValue.ddwValue);
 #endif
 
+
   c.bNR++;
   Query39_RR(c.bNR);
-  if (Input39() != SER_GOODCHECK) return ST_BADDIGITAL;
-  if (!ValidateSframe(c.bNR)) return ST_BADDIGITAL;
+  if (Input39() != SER_GOODCHECK) { Error39(130+4); return ST_BADDIGITAL; }
+  if (!ValidateSframe(c.bNR)) { Error39(130+5); return ST_BADDIGITAL; }
 
 
   double2 scaler = ReadRegisterScaler39(*GetOBIS(ibTariff), &c);
-  if (!scaler.fValid) return ST_BADDIGITAL;
+  if (!scaler.fValid) { Error39(130+6); return ST_BADDIGITAL; }
   double dbScaler = scaler.dbValue;
 
 
   Query39_DISC();
-  if (Input39() != SER_GOODCHECK) return ST_BADDIGITAL;
+  if (Input39() != SER_GOODCHECK) { Error39(130+7); return ST_BADDIGITAL; }
 
 
   if (present) {
@@ -100,9 +103,13 @@ status  CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
   }
 
   if (absent) {
+#ifdef MONITOR_39
+    MonitorString("\n result absent");
+#endif
     return ST_NOTPRESENTED;
   }
 
+  Error39(130+8);
   return ST_BADDIGITAL;
 }
 
@@ -123,8 +130,9 @@ status  ReadCntMonCanTariff39(uchar  ibMonAbs, uchar  ibTariff) // на начало мес
   }
 
   Query39_DISC();
-  if (Input39() != SER_GOODCHECK) return ST_BADDIGITAL;
+  if (Input39() != SER_GOODCHECK) { Error39(130+9); return ST_BADDIGITAL; }
 
+  Error39(130+10);
   return ST_BADDIGITAL;
 }
 
@@ -147,7 +155,7 @@ double2 TestCntMonCanTariff39(void)
     
     uchar t;
     for (t=0; t<4; t++) {
-      MonitorString("\n\n month="); MonitorCharDec(ibMonthAbs);
+      MonitorString("\n\n month="); MonitorCharDec(ibMonthAbs+1);
       MonitorString(" tariff="); MonitorCharDec(t);
       status s = ReadCntMonCanTariff39(ibMonthAbs, t);
       MonitorString("\n status="); MonitorCharDec(s);
