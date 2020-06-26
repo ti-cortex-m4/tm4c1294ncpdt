@@ -3,7 +3,6 @@ hdlc_monitor.c				10
 dlms_read_data.c			20		20-23
 dlms_read_register.c		30		30-47 !
 
-query_engabs_39.c			40
 query_engmon_39.c			50
 query_next_block_39.c		-
 query_register_39.c			-
@@ -14,7 +13,7 @@ automatic_get_cntmon_39.c	100		100-103
 automatic_get_cntcurr_39.c	110
 automatic39.c				120
 
-extended_4t_39.c			130		130-139
+extended_4t_39.c			130		130-140
 params39.c					140
 
 buffer_array_39.c			150
