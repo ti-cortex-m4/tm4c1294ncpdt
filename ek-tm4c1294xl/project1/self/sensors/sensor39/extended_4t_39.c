@@ -64,7 +64,7 @@ status  CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
     return ST_OK;
   }
 
-  if (bError == 1) {
+  if (bError == ERROR_NOT_PRESENTED) {
     return ST_NOTPRESENTED;
   }
 

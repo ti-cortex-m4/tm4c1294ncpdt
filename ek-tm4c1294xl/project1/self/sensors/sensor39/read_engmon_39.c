@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-read_engmon_39*c
+read_engmon_39.c
 
 
 ------------------------------------------------------------------------------*/
@@ -45,7 +45,7 @@ ulong64_ ReadEngMon39(void)
 
 
 
-uchar   IsEngMonPresent39(void)
+uchar   EngMonPresent39(void)
 {
   InitPop(12 + GetHdlcAddressesSize());
 
@@ -59,13 +59,13 @@ uchar   IsEngMonPresent39(void)
 }
 
 
-uchar   IsEngMonAbsent39(void)
+uchar   EngMonAbsent39(void)
 {
   InitPop(12 + GetHdlcAddressesSize());
 
-  if (PopChar() != 0) return 1; // !success
-  if (PopChar() != 1) return 2; // !array
-  if (PopChar() != 0) return 3; // array size != 0
+  if (PopChar() != 0) return 6; // !success
+  if (PopChar() != 1) return 7; // !array
+  if (PopChar() != 0) return 8; // array size != 0
 
   return 0;
 }

@@ -44,7 +44,7 @@ double2 ReadCntMonCan38_Internal(uchar  ibMon)
 
     double2 db2 = FragmentCntMonCan(obisEngAbs, &c, bMonth, bYear);
     uchar bError = db2.bError;
-    if (bError == 1) { // TODO no month
+    if (bError == ERROR_NOT_PRESENTED) { // TODO no month
     }
 
     Query39_DISC();
