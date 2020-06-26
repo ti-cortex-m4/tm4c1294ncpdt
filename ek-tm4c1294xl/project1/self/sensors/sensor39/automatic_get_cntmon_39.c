@@ -12,6 +12,7 @@ automatic_get_cntmon_38*c
 #include "../../serial/monitor.h"
 #include "../../digitals/digitals.h"
 #include "device39.h"
+#include "error39.h"
 #include "time39.h"
 #include "query_engmon_39.h"
 #include "read_engmon_39.h"
@@ -19,6 +20,7 @@ automatic_get_cntmon_38*c
 #include "query_next_block_39.h"
 #include "buffer_record_39.h"
 #include "io39.h"
+#include "fragment_open_time_39.h"
 #include "hdlc_address.h"
 #include "automatic_get_cntmon_39.h"
 
