@@ -33,7 +33,8 @@ const obis_t *GetOBIS(uchar  ibTariff)
 
 
 
-static status BadDigital(uchar  bError) {  
+static status BadDigital(uchar  bError)
+{
   Error39(bError);
   return ST_BADDIGITAL;
 }
