@@ -13,7 +13,7 @@ fragment_cntmon_39.c
 //#include "../../time/rtc.h"
 #include "../../serial/monitor.h"
 //#include "../../serial/monitor_settings.h"
-//#include "../../serial/ports.h"
+#include "../../serial/ports_pop.h"
 //#include "../../serial/ports_devices.h"
 //#include "../../serial/ports2.h"
 //#include "../../devices/devices.h"
@@ -87,7 +87,7 @@ double2 FragmentCntMonCan(const obis_t  obis, caller39  *pc, uchar  bMonth, ucha
 #ifdef MONITOR_39
     MonitorString("\n result absent");
 #endif
-    return GetDouble2Error1(1);
+    return GetDouble2(-1, false);
   }
 
   return GetDouble2Error1(Error39(110+0));
