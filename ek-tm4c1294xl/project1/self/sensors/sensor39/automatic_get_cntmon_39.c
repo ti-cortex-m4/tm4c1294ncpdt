@@ -45,6 +45,12 @@ double2 ReadCntMonCan38_Internal(uchar  ibMon)
     double2 db2 = FragmentCntMonCan(obisEngAbs, &c, bMonth, bYear);
     uchar bError = db2.bError;
     if (bError == ERROR_NOT_PRESENTED) { // TODO no month
+/*
+        Clear();
+        sprintf(szLo+1, "мес€ц %02u.%02u ?",ti.bMonth,ti.bYear);
+        Delay(1000);
+        return GetDouble2Error();
+*/
     }
 
     Query39_DISC();
@@ -81,6 +87,12 @@ double2 ReadCntMonCan38_Internal(uchar  ibMon)
     }
     if (r.fFirst == false) // TODO no day
     {
+/*
+        Clear();
+        sprintf(szLo+0, "сутки %02u.%02u.%02u ?",ti.bDay,ti.bMonth,ti.bYear);
+        Delay(1000);
+        return GetDouble2Error();
+*/
 #ifdef MONITOR_39
       MonitorString("\n no data");
 #endif
