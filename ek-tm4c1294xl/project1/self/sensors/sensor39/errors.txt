@@ -10,7 +10,7 @@ automatic_get_cntmon_39.c	70
 automatic_get_cntcurr_39.c	80     110-113
 automatic39.c				90
 
-extended_4t_39.c			100		130-139
+extended_4t_39.c			100		100-104
 params39.c					110
 
 buffer_array_39.c			120
