@@ -20,7 +20,7 @@ typedef struct
 #endif
 
 
-void    InitBuffRecord39_All(void);
+void    InitBuffRecord39_FragmentProfile39(void);
 void    InitBuffRecord39(void);
 void    AddBuffRecord39(uint  iwStart/*, uint  cwSize*/);
 record39 GetBuffRecordError(char  bError);
