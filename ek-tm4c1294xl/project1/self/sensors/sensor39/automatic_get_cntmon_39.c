@@ -21,6 +21,7 @@ automatic_get_cntmon_38*c
 #include "buffer_record_39.h"
 #include "io39.h"
 #include "fragment_open_time_39.h"
+#include "fragment_profile_39.h"
 #include "hdlc_address.h"
 #include "automatic_get_cntmon_39.h"
 
@@ -42,7 +43,7 @@ double2 ReadCntMonCan38_Internal(uchar  ibMon)
     uchar bYear = (bMonth > tm.bMonth) ? tm.bYear-1 : tm.bYear;
 
     bNS++;
-    QueryEngMon39(obisEngAbs, bNS, bNR, bInvokeId++, bMonth, bYear);
+    QueryEngMon39(obisEngAbs, c.bNS, c.bNR, c.bInvokeId++, bMonth, bYear);
     if (Input39() != SER_GOODCHECK) return GetDouble2Error1(Error39(110+0));
     if (!ValidateIframe(bNS, bNR)) return GetDouble2Error1(Error39(110+0));
     ddw = ReadEngMon39();
@@ -117,7 +118,7 @@ double2 ReadCntMonCan39(uchar  ibMon)
   }
 
   Query39_DISC();
-  if (Input39() != SER_GOODCHECK) return GetDouble2Error(Error39(110+3));
+  if (Input39() != SER_GOODCHECK) return GetDouble2Error1(Error39(110+3));
 
   return GetDouble2Error1(Error39(110+3));
 }
