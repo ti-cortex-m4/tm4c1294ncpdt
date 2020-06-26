@@ -111,7 +111,7 @@ float2  GetFloat2Error1(uchar  bError)
 {
   float2 fl2;
 
-  fl2.dbValue = -1;
+  fl2.flValue = -1;
   fl2.fValid = false;
   fl2.bError = bError;
 
