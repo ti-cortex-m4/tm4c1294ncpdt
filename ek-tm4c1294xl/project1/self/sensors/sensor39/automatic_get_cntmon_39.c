@@ -24,160 +24,63 @@ automatic_get_cntmon_38*c
 
 
 
-ulong64_ ReadCntMonCan38_Internal(uchar  ibMon)
+double2 ReadCntMonCan38_Internal(uchar  ibMon)
 {
-  Query39_DISC();
-  if (Input39() != SER_GOODCHECK) return GetULong64Error1(1);
-//  DelayOff();
+  caller39 c = InitCaller39();
 
-  Query39_SNRM();
-  if (Input39() != SER_GOODCHECK) return GetULong64Error1(1);
-//  DelayOff();
-
-  uchar bNS = 0;
-  uchar bNR = 0;
-  uchar bInvokeId = 0;
-
-  Query39_AARQ(bNS, bNR);
-  if (Input39() != SER_GOODCHECK) return GetULong64Error1(1);
-  if (!ValidateIframe(bNS, bNR)) return GetULong64Error1(1);
-//  DelayOff();
-
-  bNR++;
-  Query39_RR(bNR);
-  if (Input39() != SER_GOODCHECK) return GetULong64Error1(1);
-  if (!ValidateSframe(bNR)) return GetULong64Error1(1);
-//  DelayOff();
-
-
-  bNS++;
-  bInvokeId++;
-  QueryTime39(bNS, bNR, bInvokeId);
-  if (Input39() != SER_GOODCHECK) return GetULong64Error1(1);
-  if (!ValidateIframe(bNS, bNR)) return GetULong64Error1(1);
-  time ti = ReadTime39();
-//  DelayOff();
-
-  bNR++;
-  Query39_RR(bNR);
-  if (Input39() != SER_GOODCHECK) return GetULong64Error1(1);
-  if (!ValidateSframe(bNR)) return GetULong64Error1(1);
-//  DelayOff();
+  time2 tm2 = FragmentOpenTime39(&c);
+  if (!tm2.fValid) return GetDouble2Error1(Error39(110+0));
+  time tm = tm2.tiValue;
 
 
   uint64_t ddw;
-  if (ti.bMonth != ibMon+1)
+  if (tm.bMonth != ibMon+1)
   {
     uchar bMonth = (ibMon+1) % 12 + 1;
-    uchar bYear = (bMonth > ti.bMonth) ? ti.bYear-1 : ti.bYear;
+    uchar bYear = (bMonth > tm.bMonth) ? tm.bYear-1 : tm.bYear;
 
     bNS++;
     QueryEngMon39(obisEngAbs, bNS, bNR, bInvokeId++, bMonth, bYear);
-    if (Input39() != SER_GOODCHECK) return GetULong64Error1(1);
-    if (!ValidateIframe(bNS, bNR)) return GetULong64Error1(1);
+    if (Input39() != SER_GOODCHECK) return GetDouble2Error1(Error39(110+0));
+    if (!ValidateIframe(bNS, bNR)) return GetDouble2Error1(Error39(110+0));
     ddw = ReadEngMon39();
-  //  DelayOff();
 
     bNR++;
     Query39_RR(bNR);
-    if (Input39() != SER_GOODCHECK) return GetULong64Error1(1);
-    if (!ValidateSframe(bNR)) return GetULong64Error1(1);
-  //  DelayOff();
+    if (Input39() != SER_GOODCHECK) return GetDouble2Error1(Error39(110+0));
+    if (!ValidateSframe(bNR)) return GetDouble2Error1(Error39(110+0));
   }
   else
   {
     InitBuffRecord39();
 
     time ti1;
-    ti1.bYear = ti.bYear;
-    ti1.bMonth = ti.bMonth;
-    ti1.bDay = ti.bDay;
+    ti1.bYear = tm.bYear;
+    ti1.bMonth = tm.bMonth;
+    ti1.bDay = tm.bDay;
     ti1.bHour = 0;
     ti1.bMinute = 0;
     ti1.bSecond = 0;
 
     time ti2;
-    ti2.bYear = ti.bYear;
-    ti2.bMonth = ti.bMonth;
-    ti2.bDay = ti.bDay;
+    ti2.bYear = tm.bYear;
+    ti2.bMonth = tm.bMonth;
+    ti2.bDay = tm.bDay;
     ti2.bHour = 23;
     ti2.bMinute = 59;
     ti2.bSecond = 59;
 
 
-
-    bNS++;
-    bInvokeId++;
-    QueryProfile39(bNS, bNR, bInvokeId, ti1, ti2);
-    if (Input39() != SER_GOODCHECK) return GetULong64Error1(1);
-  //  DelayOff();
-
-    bool fUseBlocks1 = UseBlocksDMLS();
-    bool fLastBlock1 = LastBlockDMLS();
-
-    AddBuffRecord39(fUseBlocks1 ? 20 + GetHdlcAddressesSize() : 13 + GetHdlcAddressesSize());
-
-//    if (fUseBlocks1)
-//      AddBuffRecord39(22/*, IndexInBuff()-22-3*/); // TODO GetHdlcAddressesSize
-//    else
-//      AddBuffRecord39(15/*, IndexInBuff()-15-3*/);
-
-    while (!LastSegmentDMLS()) {
-      bNR++;
-      Query39_RR(bNR);
-      if (Input39() != SER_GOODCHECK) return GetULong64Error1(1);
-      AddBuffRecord39(6 + GetHdlcAddressesSize()/*, IndexInBuff()-8-3*/);
-    //  DelayOff();
-    }
-
-    bNR++;
-    Query39_RR(bNR);
-    if (Input39() != SER_GOODCHECK) return GetULong64Error1(1);
-  //  DelayOff();
-
-
-
-    uchar bBlockNumber = 0;
-
-    while (fUseBlocks1 && (!fLastBlock1)) {
-      bBlockNumber++;
-
-      bNS++;
-  //  uchar bBlockNumber = 1;
-      QueryNextBlock39(bNS, bNR, bInvokeId, bBlockNumber);
-      if (Input39() != SER_GOODCHECK) return GetULong64Error1(1);
-
-      fUseBlocks1 = UseBlocksDMLS();
-      fLastBlock1 = LastBlockDMLS();
-
-      AddBuffRecord39(20 + GetHdlcAddressesSize()/*, IndexInBuff()-22-3*/);
-    //  DelayOff();
-
-      while (!LastSegmentDMLS()) {
-        bNR++;
-        Query39_RR(bNR);
-        if (Input39() != SER_GOODCHECK) return GetULong64Error1(1);
-        AddBuffRecord39(6 + GetHdlcAddressesSize()/*, IndexInBuff()-8-3*/);
-      //  DelayOff();
-      }
-
-      bNR++;
-      Query39_RR(bNR);
-      if (Input39() != SER_GOODCHECK) return GetULong64Error1(1);
-    //  DelayOff();
-    }
-
-
-    record39 r = FinishBuffRecord39();
+    record39 r = FragmentProfile39(&c, ti1, ti2);
     if (r.bError != 0)
     {
       MonitorString("\n Error="); MonitorCharDec(r.bError);
-      return GetULong64Error1(1);
+      return GetDouble2Error1(Error39(110+0));
     }
     if (r.fFirst == false)
     {
       MonitorString("\n No Data");
-      return GetULong64Error1(1);
+      return GetDouble2Error1(Error39(110+0));
     }
 
     ddw = r.ddwValue;
@@ -185,10 +88,10 @@ ulong64_ ReadCntMonCan38_Internal(uchar  ibMon)
 
 
   Query39_DISC();
-  if (Input39() != SER_GOODCHECK) return GetULong64Error1(1);
+  if (Input39() != SER_GOODCHECK) return GetDouble2Error1(Error39(110+0));
 //  DelayOff();
 
-  return GetULong64(ddw, true, 0);
+  return GetDouble0(0);
 }
 
 
@@ -200,14 +103,11 @@ double2 ReadCntMonCan39(uchar  ibMon)
   uchar r;
   for (r=0; r<MaxRepeats(); r++)
   {
-    ulong64_ ddw2 = ReadCntMonCan38_Internal(ibMon);
+    double2 db2 = ReadCntMonCan38_Internal(ibMon);
     if (fKey == true) break;
     if (ddw2.fValid)
     {
-      ShowPercent(50);
-
-      mpdwChannelsA[0] = ddw2.ddwValue % 0x100000000;
-      mpdbChannelsC[0] = (double)mpdwChannelsA[0] / 1000;
+      mpdbChannelsC[0] = db2.dbValue / 1000;
       mpboChannelsA[0] = true;
 
       return GetDouble2(mpdbChannelsC[0], true);
@@ -215,8 +115,7 @@ double2 ReadCntMonCan39(uchar  ibMon)
   }
 
   Query39_DISC();
-  if (Input39() != SER_GOODCHECK) return GetDouble2Error();
-//  DelayOff();
+  if (Input39() != SER_GOODCHECK) return GetDouble2Error(Error39(110+3));
 
-  return GetDouble2Error();
+  return GetDouble2Error1(Error39(110+3));
 }
