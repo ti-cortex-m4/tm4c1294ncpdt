@@ -89,14 +89,33 @@ float2  GetFloat2(float  flValue, bool  fValid)
 
   fl2.flValue = flValue;
   fl2.fValid = fValid;
+  fl2.bError = 0;
 
   return fl2;
+}
+
+
+float2  GetFloat0(float  flValue)
+{
+  return GetFloat2(flValue, true);
 }
 
 
 float2  GetFloat2Error(void)
 {
   return GetFloat2(-1, false);
+}
+
+
+float2  GetFloat2Error1(uchar  bError)
+{
+  float2 fl2;
+
+  fl2.dbValue = -1;
+  fl2.fValid = false;
+  fl2.bError = bError;
+
+  return fl2;
 }
 
 

@@ -16,6 +16,7 @@ params34*c
 #include "../../display/display.h"
 #include "../../time/delay.h"
 #include "device39.h"
+#include "error39.h"
 #include "io39.h"
 #include "query_register_39.h"
 #include "fragment_open_39.h"
@@ -48,62 +49,69 @@ static float        flU1, flU2, flU3,
 
 
 
+static float2 error(110+uchar  bError)
+{
+  return GetFloat2Error1(Error39(bError));
+}
+
+
+
 float2  ReadParam39_Internal(void)
 {
   caller39 r = InitCaller39();
-  if (FragmentOpen39(&r) != 0) return GetFloat2Error();
+  if (FragmentOpen39(&r) != 0) return error(110+0);
 
 
   double2 db2;
 
   db2 = ReadRegisterValueWithScaler39(obisU1, &r);
-  if (!db2.fValid) return GetFloat2Error();
+  if (!db2.fValid) return error(110+1);
   flU1 = db2.dbValue;
 
   db2 = ReadRegisterValueWithScaler39(obisU2, &r);
-  if (!db2.fValid) return GetFloat2Error();
+  if (!db2.fValid) return error(110+2);
   flU2 = db2.dbValue;
 
   db2 = ReadRegisterValueWithScaler39(obisU3, &r);
-  if (!db2.fValid) return GetFloat2Error();
+  if (!db2.fValid) return error(110+3);
   flU3 = db2.dbValue;
 
 
   db2 = ReadRegisterValueWithScaler39(obisI1, &r);
-  if (!db2.fValid) return GetFloat2Error();
+  if (!db2.fValid) return error(110+4);
   flI1 = db2.dbValue*1000;
 
   db2 = ReadRegisterValueWithScaler39(obisI2, &r);
-  if (!db2.fValid) return GetFloat2Error();
+  if (!db2.fValid) return error(110+5);
   flI2 = db2.dbValue*1000;
 
   db2 = ReadRegisterValueWithScaler39(obisI3, &r);
-  if (!db2.fValid) return GetFloat2Error();
+  if (!db2.fValid) return error(110+6);
   flI3 = db2.dbValue*1000;
 
 
   db2 = ReadRegisterValueWithScaler39(obisPplus, &r);
-  if (!db2.fValid) return GetFloat2Error();
+  if (!db2.fValid) return error(110+7);
   flPplus = db2.dbValue;
 
   db2 = ReadRegisterValueWithScaler39(obisPminus, &r);
-  if (!db2.fValid) return GetFloat2Error();
+  if (!db2.fValid) return error(110+8);
   flPminus = db2.dbValue;
 
 
   db2 = ReadRegisterValueWithScaler39(obisQplus, &r);
-  if (!db2.fValid) return GetFloat2Error();
+  if (!db2.fValid) return error(110+9);
   flQplus = db2.dbValue;
 
   db2 = ReadRegisterValueWithScaler39(obisQminus, &r);
-  if (!db2.fValid) return GetFloat2Error();
+  if (!db2.fValid) return error(110+10);
   flQminus = db2.dbValue;
 
 
   Query39_DISC();
-  if (Input39() != SER_GOODCHECK) return GetFloat2Error();
+  if (Input39() != SER_GOODCHECK) return error(110+11);
 
-  return GetFloat2(-1, true);
+  return GetFloat0(-1);
 }
 
 
@@ -114,26 +122,26 @@ float2  ReadParam39(void)
 
   if (fBeginParam == false)
   {
-    if (!ReadParam39_Internal().fValid) return GetFloat2Error();
+    if (!ReadParam39_Internal().fValid) return error(110+12);
 
     fBeginParam = true;
   }
 
   switch (diCurr.ibLine)
   {
-    case PAR_U1 : return GetFloat2(flU1, true);
-    case PAR_U2 : return GetFloat2(flU2, true);
-    case PAR_U3 : return GetFloat2(flU3, true);
+    case PAR_U1 : return GetFloat0(flU1);
+    case PAR_U2 : return GetFloat0(flU2);
+    case PAR_U3 : return GetFloat0(flU3);
 
-    case PAR_I1 : return GetFloat2(flI1, true);
-    case PAR_I2 : return GetFloat2(flI2, true);
-    case PAR_I3 : return GetFloat2(flI3, true);
+    case PAR_I1 : return GetFloat0(flI1);
+    case PAR_I2 : return GetFloat0(flI2);
+    case PAR_I3 : return GetFloat0(flI3);
 
-    case PAR_P  : return GetFloat2(flPplus-flPminus, true);
+    case PAR_P  : return GetFloat0(flPplus-flPminus);
 
-    case PAR_Q  : return GetFloat2(flQplus-flQminus, true);
+    case PAR_Q  : return GetFloat0(flQplus-flQminus);
 
-    case PAR_S  : return GetFloat2(CalcS(flPplus-flPminus, flQplus-flQminus), true);
+    case PAR_S  : return GetFloat0(CalcS(flPplus-flPminus, flQplus-flQminus));
 
     default: return GetFloat2Error();
   }

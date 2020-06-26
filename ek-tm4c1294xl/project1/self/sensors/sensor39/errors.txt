@@ -11,7 +11,7 @@ automatic_get_cntcurr_39.c	80     	80-83
 automatic39.c				90
 
 extended_4t_39.c			100		100-104
-params39.c					110
+params39.c					110		110-122
 
 buffer_array_39.c			120
 buffer_record_39.c			130
