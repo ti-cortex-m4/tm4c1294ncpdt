@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-fragment_cntmon_39.c
+fragment_cntmon_39*c
 
 
 ------------------------------------------------------------------------------*/
@@ -26,40 +26,39 @@ double2 FragmentCntMonCan(const obis_t  obis, caller39  *pc, uchar  bMonth, ucha
   (*pc).bNS++;
   (*pc).bInvokeId++;
   QueryEngMon39(obis, (*pc).bNS, (*pc).bNR, (*pc).bInvokeId, bMonth, bYear);
-  if (Input39() != SER_GOODCHECK) return GetDouble2Error1(Error39(110+0));
-  if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return GetDouble2Error1(Error39(110+1));
+  if (Input39() != SER_GOODCHECK) return GetDouble2Error1(Error39(170+0));
+  if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return GetDouble2Error1(Error39(170+1));
 
 
   bool present = (IsEngMonPresent39() == 0);
   bool absent = (IsEngMonAbsent39() == 0);
 
-  ulong64_ ddwValue = GetULong64Error1(0);
+  ulong64_ counter = GetULong64Error1(0);
   if (present) {
     InitPop(17 + GetHdlcAddressesSize());
-    ddwValue = PopUnsignedValueDLSM();
+    counter = PopUnsignedValueDLSM();
   }
 
 #ifdef MONITOR_39
   MonitorString("\n present="); MonitorBool(present);
   MonitorString("\n absent="); MonitorBool(absent);
-  MonitorString("\n valid="); MonitorBool(ddwValue.fValid);
-  MonitorString("\n value="); MonitorLongDec(ddwValue.ddwValue);
+  MonitorString("\n valid="); MonitorBool(counter.fValid);
+  MonitorString("\n value="); MonitorLongDec(counter.ddwValue);
 #endif
 
 
   (*pc).bNR++;
   Query39_RR((*pc).bNR);
-  if (Input39() != SER_GOODCHECK) return GetDouble2Error1(Error39(110+2));
-  if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return GetDouble2Error1(Error39(110+3));
+  if (Input39() != SER_GOODCHECK) return GetDouble2Error1(Error39(170+2));
+  if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return GetDouble2Error1(Error39(170+3));
 
 
   double2 scaler = ReadRegisterScaler39(obis, pc);
-  if (!scaler.fValid) return GetDouble2Error1(Error39(110+4));
-  double dbScaler = scaler.dbValue;
+  if (!scaler.fValid) return GetDouble2Error1(Error39(170+4));
 
 
   if (present) {
-    double db = (double)ddwValue.ddwValue * dbScaler / 1000;
+    double db = (double)counter.ddwValue * scaler.dbValue / 1000;
 #ifdef MONITOR_39
     MonitorString("\n result="); MonitorDouble6(db);
 #endif
@@ -73,5 +72,5 @@ double2 FragmentCntMonCan(const obis_t  obis, caller39  *pc, uchar  bMonth, ucha
     return GetDouble2Error1(1);
   }
 
-  return GetDouble2Error1(Error39(110+5));
+  return GetDouble2Error1(Error39(170+5));
 }

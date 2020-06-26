@@ -5,24 +5,23 @@ dlms_read_register.c		30		30-46 !
 
 read_engmon_39.c			50
 
-automatic_get_time_39.c		90		90-95
-automatic_get_cntmon_39.c	100		
-automatic_get_cntcurr_39.c	110     110-113
-automatic39.c				120
+automatic_get_time_39.c		60		90-95
+automatic_get_cntmon_39.c	70		
+automatic_get_cntcurr_39.c	80     110-113
+automatic39.c				90
 
-extended_4t_39.c			130		130-139
-params39.c					140
+extended_4t_39.c			100		130-139
+params39.c					110
 
-buffer_array_39.c			150
-buffer_record_39.c			160
-buffer_profile_39.c			170
+buffer_array_39.c			120
+buffer_record_39.c			130
+buffer_profile_39.c			140
 
-fragment_open_39.c			180		180-185
-fragment_open_time39.c		190		190-193
-fragment_cntmon_39			?
-fragment_profile_39.c		200
+fragment_open_39.c			150		180-185
+fragment_open_time39.c		160		190-193
+fragment_cntmon_39			170		170-175
+fragment_profile_39.c		180
 
-current39      			    210		210-224
+current39      			    190		210-224
 
-profile39.c					220
-profile39_wrapper.c			230
+profile39.c					210
