@@ -45,6 +45,7 @@ typedef struct
 {
   float         flValue;
   bool          fValid;
+  uchar         bError;
 } float2;
 
 
@@ -85,7 +86,9 @@ slong64_ GetSLong64(int64_t  ddwValue, bool  fValid, uchar  bError);
 slong64_ GetSLong64Error1(uchar  bError);
 
 float2  GetFloat2(float  flValue, bool  fValid);
+float2  GetFloat0(float  flValue);
 float2  GetFloat2Error(void);
+float2  GetFloat2Error1(uchar  bError);
 
 double2 GetDouble2(double  dbValue, bool  fValid);
 double2 GetDouble0(double  dbValue);
