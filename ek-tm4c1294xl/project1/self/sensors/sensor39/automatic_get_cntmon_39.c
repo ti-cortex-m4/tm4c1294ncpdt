@@ -21,6 +21,7 @@ automatic_get_cntmon_38*c
 #include "buffer_record_39.h"
 #include "io39.h"
 #include "fragment_open_time_39.h"
+#include "fragment_cntmon_39.h"
 #include "fragment_profile_39.h"
 #include "hdlc_address.h"
 #include "automatic_get_cntmon_39.h"
@@ -36,27 +37,23 @@ double2 ReadCntMonCan38_Internal(uchar  ibMon)
   time tm = tm2.tiValue;
 
 
-  uint64_t ddw;
   if (tm.bMonth != ibMon+1)
   {
     uchar bMonth = (ibMon+1) % 12 + 1;
     uchar bYear = (bMonth > tm.bMonth) ? tm.bYear-1 : tm.bYear;
 
-    c.bNS++;
-    QueryEngMon39(obisEngAbs, c.bNS, c.bNR, c.bInvokeId++, bMonth, bYear);
-    if (Input39() != SER_GOODCHECK) return GetDouble2Error1(Error39(110+0));
-    if (!ValidateIframe(c.bNS, c.bNR)) return GetDouble2Error1(Error39(110+0));
-    ddw = 0;//_ReadEngMon39();
+    double2 db2 = FragmentCntMonCan(obisEngAbs, &c, bMonth, bYear);
+    uchar bError = db2.bError;
+    if (bError == 1) { // TODO no month
+    }
 
-    c.bNR++;
-    Query39_RR(c.bNR);
+    Query39_DISC();
     if (Input39() != SER_GOODCHECK) return GetDouble2Error1(Error39(110+0));
-    if (!ValidateSframe(c.bNR)) return GetDouble2Error1(Error39(110+0));
+
+    return db2;
   }
   else
   {
-    InitBuffRecord39();
-
     time ti1;
     ti1.bYear = tm.bYear;
     ti1.bMonth = tm.bMonth;
@@ -77,24 +74,24 @@ double2 ReadCntMonCan38_Internal(uchar  ibMon)
     record39 r = FragmentProfile39(&c, ti1, ti2);
     if (r.bError != 0)
     {
-      MonitorString("\n Error="); MonitorCharDec(r.bError);
+#ifdef MONITOR_39
+      MonitorString("\n error="); MonitorCharDec(r.bError);
+#endif
       return GetDouble2Error1(Error39(110+0));
     }
-    if (r.fFirst == false)
+    if (r.fFirst == false) // TODO no day
     {
-      MonitorString("\n No Data");
+#ifdef MONITOR_39
+      MonitorString("\n no data");
+#endif
       return GetDouble2Error1(Error39(110+0));
     }
 
-    ddw = r.ddwValue;
+    Query39_DISC();
+    if (Input39() != SER_GOODCHECK) return GetDouble2Error1(Error39(110+0));
+
+    return GetDouble0(r.ddwValue);
   }
-
-
-  Query39_DISC();
-  if (Input39() != SER_GOODCHECK) return GetDouble2Error1(Error39(110+0));
-//  DelayOff();
-
-  return GetDouble0(0);
 }
 
 
