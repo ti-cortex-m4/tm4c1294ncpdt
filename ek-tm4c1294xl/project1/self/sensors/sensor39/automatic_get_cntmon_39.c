@@ -46,7 +46,7 @@ double2 ReadCntMonCan38_Internal(uchar  ibMon)
     QueryEngMon39(obisEngAbs, c.bNS, c.bNR, c.bInvokeId++, bMonth, bYear);
     if (Input39() != SER_GOODCHECK) return GetDouble2Error1(Error39(110+0));
     if (!ValidateIframe(c.bNS, c.bNR)) return GetDouble2Error1(Error39(110+0));
-    ddw = ReadEngMon39();
+    ddw = 0;//_ReadEngMon39();
 
     c.bNR++;
     Query39_RR(c.bNR);

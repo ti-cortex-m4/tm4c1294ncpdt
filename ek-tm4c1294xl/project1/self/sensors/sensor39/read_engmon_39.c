@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-read_engmon_39*c
+read_engmon_39.c
 
 
 ------------------------------------------------------------------------------*/
@@ -13,7 +13,7 @@ read_engmon_39*c
 #include "crc16x25.h"
 #include "io39.h"
 #include "hdlc_address.h"
-#include "dlms_push.h"
+#include "dlms_read_data.h"
 #include "read_engmon_39.h"
 
 
@@ -37,10 +37,10 @@ read_engmon_39*c
 </GetResponse>
 </PDU>
 */
-uint64_t ReadEngMon39(void)
+ulong64_ ReadEngMon39(void)
 {
-  InitPop(18 + GetHdlcAddressesSize());
-  return PopLongBig()*0x100000000 + PopLongBig();
+  InitPop(12 + 5 + GetHdlcAddressesSize());
+  return PopUnsignedValueDLSM();
 }
 
 
