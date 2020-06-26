@@ -76,7 +76,7 @@ double2 ReadCntMonCan38_Internal(uchar  ibMon)
     ti2.bMinute = 59;
     ti2.bSecond = 59;
 
-
+    InitBuffRecord39_All();
     record39 r = FragmentProfile39(&c, ti1, ti2);
     if (r.bError != 0)
     {

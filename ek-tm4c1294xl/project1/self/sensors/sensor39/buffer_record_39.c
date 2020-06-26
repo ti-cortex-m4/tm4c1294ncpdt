@@ -17,7 +17,7 @@ buffer_record_39*c
 
 
 
-#define BUFF_RECORD_39  1
+//#define BUFF_RECORD_39  1
 
 
 
