@@ -12,3 +12,10 @@ device39_obis.c
 const obis_t        obisTime    = {0, 0, 1, 0, 0, 255};
 
 const obis_t        obisEngAbs  = {1, 0, 15, 8, 0, 255};
+
+const obis_t        obisEngAbsTariff[4] = {
+  {1, 0, 15, 8, 1, 255},
+  {1, 0, 15, 8, 2, 255},
+  {1, 0, 15, 8, 3, 255},
+  {1, 0, 15, 8, 4, 255},
+};

@@ -63,11 +63,11 @@ void    QueryGetRequestDLMS(const obis_t  obis, uchar  bClass, uchar  bAttribute
 
 void    QueryGetRegisterValueDLMS(const obis_t  obis, caller39  c)
 {
-  QueryGetRequestDLMS(obis, 3, 2, c); // class 3, attribute 2: value
+  QueryGetRequestDLMS(obis, 3, 2, c); // class 3: register, attribute 2: value
 }
 
 
 void    QueryGetRegisterScalerDLMS(const obis_t  obis, caller39  c)
 {
-  QueryGetRequestDLMS(obis, 3, 3, c); // class 3, attribute 3: scaler_unit
+  QueryGetRequestDLMS(obis, 3, 3, c); // class 3: register, attribute 3: scaler_unit
 }

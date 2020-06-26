@@ -19,10 +19,12 @@ extended_4t_39*c
 #include "../../devices/devices.h"
 #include "../../digitals/digitals.h"
 #include "device39.h"
+#include "device39_obis.h"
+#include "error39.h"
 #include "time39.h"
 #include "query_engmon_39.h"
 #include "query_register_39.h"
-#include "fragment_open_39.h"
+#include "fragment_open_time_39.h"
 #include "io39.h"
 #include "hdlc_address.h"
 #include "dlms_read_data.h"
@@ -31,89 +33,65 @@ extended_4t_39*c
 
 
 
-static const obis_t obisEngTariff[4] = {
-  {1, 0, 15, 8, 1, 255},
-  {1, 0, 15, 8, 2, 255},
-  {1, 0, 15, 8, 3, 255},
-  {1, 0, 15, 8, 4, 255},
-};
-
-
-
 const obis_t *GetOBIS(uchar  ibTariff)
 {
-  ASSERT(sizeof(obisEngTariff)/sizeof(obisEngTariff[0]) == 4);
+  ASSERT(sizeof(obisEngAbsTariff)/sizeof(obisEngAbsTariff[0]) == 4);
   ASSERT(ibTariff < 4);
-  return &obisEngTariff[ibTariff];
+  return &obisEngAbsTariff[ibTariff];
 }
 
 
 
 status  CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
 {
-  caller39 r = InitCaller39();
-  if (FragmentOpen39(&r) != 0) return ST_BADDIGITAL;
-
-
-  r.bNS++;
-  r.bInvokeId++;
-  QueryTime39(r.bNS, r.bNR, r.bInvokeId);
-  if (Input39() != SER_GOODCHECK) return ST_BADDIGITAL;
-  if (!ValidateIframe(r.bNS, r.bNR)) return ST_BADDIGITAL;
-  time ti = ReadTime39();
-  //DelayOff();
-
-  r.bNR++;
-  Query39_RR(r.bNR);
-  if (Input39() != SER_GOODCHECK) return ST_BADDIGITAL;
-  if (!ValidateSframe(r.bNR)) return ST_BADDIGITAL;
-  //DelayOff();
+  caller39 c = InitCaller39();
+  
+  time2 tm2 = FragmentOpenTime39(&c);
+  if (!tm2.fValid) return ST_BADDIGITAL;    
+  time tm = tm2.tiValue;
 
 
   uchar bMonth = ibMon + 1;
-  uchar bYear = (bMonth > ti.bMonth) ? ti.bYear-1 : ti.bYear;
+  uchar bYear = (bMonth > tm.bMonth) ? tm.bYear-1 : tm.bYear;
 
-  r.bNS++;
-  QueryEngMon39(*GetOBIS(ibTariff), r.bNS, r.bNR, r.bInvokeId++, bMonth, bYear);
+  c.bNS++;
+  QueryEngMon39(*GetOBIS(ibTariff), c.bNS, c.bNR, c.bInvokeId++, bMonth, bYear);
   if (Input39() != SER_GOODCHECK) return ST_BADDIGITAL;
-  if (!ValidateIframe(r.bNS, r.bNR)) return ST_BADDIGITAL;
+  if (!ValidateFrame(c.bNS, c.bNR)) return ST_BADDIGITAL;
 
   bool present = (IsEngMonPresent39() == 0);
   bool absent = (IsEngMonAbsent39() == 0);
 
-  ulong64_ ddw2 = GetULong64Error1(0);
+  ulong64_ ddwValue = GetULong64Error1(0);
   if (present) {
     InitPop(17 + GetHdlcAddressesSize());
-    ddw2 = PopUnsignedValueDLSM();
+    ddwValue = PopUnsignedValueDLSM();
   }
 
 #ifdef MONITOR_39
   MonitorString("\n present="); MonitorBool(present);
   MonitorString("\n absent="); MonitorBool(absent);
-  MonitorString("\n valid="); MonitorBool(ddw2.fValid);
-  MonitorString("\n value="); MonitorLongDec(ddw2.ddwValue);
+  MonitorString("\n valid="); MonitorBool(ddwValue.fValid);
+  MonitorString("\n value="); MonitorLongDec(ddwValue.ddwValue);
 #endif
-  //DelayOff();
 
-  r.bNR++;
-  Query39_RR(r.bNR);
+  c.bNR++;
+  Query39_RR(c.bNR);
   if (Input39() != SER_GOODCHECK) return ST_BADDIGITAL;
-  if (!ValidateSframe(r.bNR)) return ST_BADDIGITAL;
-  //DelayOff();
+  if (!ValidateSframe(c.bNR)) return ST_BADDIGITAL;
 
 
-  double2 scaler = ReadRegisterScaler39(*GetOBIS(ibTariff), &r);
+  double2 scaler = ReadRegisterScaler39(*GetOBIS(ibTariff), &c);
   if (!scaler.fValid) return ST_BADDIGITAL;
   double dbScaler = scaler.dbValue;
-//  MonitorString("\n scaler="); MonitorDouble6(dbScaler);
 
 
   Query39_DISC();
   if (Input39() != SER_GOODCHECK) return ST_BADDIGITAL;
-  //DelayOff();
+
 
   if (present) {
-    mpdbChannelsC[0] = (dbScaler * ddw2.ddwValue / 1000) * mpdbTransCnt[ibDig];
+    mpdbChannelsC[0] = ((double)ddwValue.ddwValue * dbScaler / 1000) * mpdbTransCnt[ibDig];
     mpboChannelsA[0] = true;
 #ifdef MONITOR_39
     MonitorString("\n result="); MonitorDouble6(mpdbChannelsC[0]);
@@ -146,7 +124,6 @@ status  ReadCntMonCanTariff39(uchar  ibMonAbs, uchar  ibTariff) // на начало мес
 
   Query39_DISC();
   if (Input39() != SER_GOODCHECK) return ST_BADDIGITAL;
-  //DelayOff();
 
   return ST_BADDIGITAL;
 }
@@ -177,7 +154,7 @@ double2 TestCntMonCanTariff39(void)
     }
   }
 
-  return GetDouble2(0, true);
+  return GetDouble0(0);
 }
 
 #endif
