@@ -18,6 +18,7 @@
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         MakePause(DEV_SNRM_O_39P);
       } else {
+        Error39(220+);
         ErrorProfile();
       }
       break;
@@ -35,6 +36,7 @@
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         MakePause(DEV_AARQ_O_39P);
       } else {
+        Error39(220+);
         ErrorProfile();
       }
       break;
@@ -50,11 +52,14 @@
 
     case DEV_AARQ_I_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
-        if (!ValidateFrame_Profile())
+        if (!ValidateFrame_Profile()) {}
+          Error39(220+);
           ErrorProfile();
-        else
+        } else {
           MakePause(DEV_RR_AARQ_O_39P);
+        }  
       } else {
+        Error39(220+);
         ErrorProfile();
       }
       break;
@@ -70,11 +75,15 @@
 
     case DEV_RR_AARQ_I_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
-        if (!ValidateSframe_Profile())
+        if (!ValidateSframe_Profile()) {
+          Error39(220+);
           ErrorProfile();
-        else
+        } else {
+          Error39(220+);
           MakePause(DEV_9_39P);
+        }  
       } else {
+        Error39(220+);
         ErrorProfile();
       }
       break;
@@ -90,13 +99,15 @@
 
     case DEV_10_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
-        if (!ValidateIframe_Profile())
+        if (!ValidateIframe_Profile()) {
+          Error39(220+);
           ErrorProfile();
-        else {
+        } else {
           ReadTime39_Profile();
           MakePause(DEV_11_39P);
         }
       } else {
+        Error39(220+);
         ErrorProfile();
       }
       break;
@@ -112,11 +123,14 @@
 
     case DEV_12_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
-        if (!ValidateSframe_Profile())
+        if (!ValidateSframe_Profile()) {
+          Error39(220+);
           ErrorProfile();
-        else
+        } else {
           MakePause(DEV_13_39P);
+        }  
       } else {
+        Error39(220+);
         ErrorProfile();
       }
       break;
@@ -157,12 +171,14 @@
     case DEV_17_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (false/*!ValidateSframe_Profile()*/) {
+          Error39(220+);
           ErrorProfile();
         } else {
           Read2_Profile();
           MakePause(DEV_15_39P);
         }
       } else {
+        Error39(220+);
         ErrorProfile();
       }
       break;
@@ -177,6 +193,7 @@
     case DEV_19_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (false/*!ValidateSframe_Profile()*/) {
+          Error39(220+);
           ErrorProfile();
         } else {
           Read3_Profile();
@@ -188,6 +205,7 @@
           }
         }
       } else {
+        Error39(220+);
         ErrorProfile();
       }
       break;
@@ -216,12 +234,14 @@
     case DEV_22_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (false/*!ValidateSframe_Profile()*/) {
+          Error39(220+);
           ErrorProfile();
         } else {
           Read5_Profile();
           MakePause(DEV_20_39P);
         }
       } else {
+        Error39(220+);
         ErrorProfile();
       }
       break;
@@ -236,11 +256,13 @@
     case DEV_26_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (false/*!ValidateSframe_Profile()*/) {
+          Error39(220+);
           ErrorProfile();
         } else {
           MakePause(DEV_27_39P);
         }
       } else {
+        Error39(220+);
         ErrorProfile();
       }
       break;
