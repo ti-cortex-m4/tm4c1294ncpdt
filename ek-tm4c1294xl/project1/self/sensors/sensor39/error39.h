@@ -5,4 +5,4 @@ error39.h
 ------------------------------------------------------------------------------*/
 
 uchar   Error39(uchar  bError);
-uchar   Error39_(uchar  bError, uint  wCode);
+uchar   Error39_(uchar  bError, uint  wData);
