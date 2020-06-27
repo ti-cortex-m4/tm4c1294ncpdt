@@ -11,13 +11,7 @@ ascii_address_wrapper.c
 
 
 void    AsciiAddress_Show(line  *pl) {
-//  Clear();
-
-  uchar i;
-  for (i=0; i<bLINE_SIZE-1; i++) {
-    szLo[15-i] = ' ';
-    szLo[15-i] = (*pl).szLine[i];
-  }
+  sprintf(szLo+4,"%12s",(*pl).szLine);
 }
 
 
@@ -29,7 +23,9 @@ void    AsciiAddress_Init(line  *pl) {
 
 
 void    AsciiAddress_Increment(line  *pl) {
-  uchar i = 0;
+  uchar i = strlen((char const *)(*pl).szLine);
+  sprintf(szHi,"%u",i);
+  if (i > 0) i--;
   if ((*pl).szLine[i] == 'Z')
     (*pl).szLine[i] = '0';
   else if ((*pl).szLine[i] == 'z')
@@ -48,7 +44,9 @@ void    AsciiAddress_Increment(line  *pl) {
 
 
 void    AsciiAddress_Decrement(line  *pl) {
-  uchar i = 0;
+  uchar i = strlen((char const *)(*pl).szLine);
+  sprintf(szHi,"%u",i);
+  if (i > 0) i--;
   if ((*pl).szLine[i] == '0')
     (*pl).szLine[i] = 'Z';
   else if ((*pl).szLine[i] <= '9')
