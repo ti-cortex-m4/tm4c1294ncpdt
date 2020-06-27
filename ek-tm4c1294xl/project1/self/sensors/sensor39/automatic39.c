@@ -12,7 +12,7 @@ automatic39*c
 #include "../../serial/monitor.h"
 #include "../../sensors/automatic1.h"
 #include "device39.h"
-#include "caller39.h"
+#include "error39.h"
 #include "crc16x25.h"
 #include "io39.h"
 #include "hdlc_address.h"
@@ -118,11 +118,21 @@ void    QueryId39(uchar  bNS, uchar  bNR, uchar  bInvokeId)
 
 static void ShowId(uchar  bSize)
 {
+  bSize = bSize <= 16 ? bSize : 16;
+
   Clear();
 
   uchar i;
   for (i=0; i<bSize; i++)
     szLo[i] = PopChar();
+}
+
+
+
+static bool Fault(uchar  bError)
+{
+  Error39(20+bError);
+  return false;
 }
 
 
@@ -134,22 +144,22 @@ bool    Automatic39(void)
   caller39 c = InitCaller39();
 
   uchar bError = FragmentOpen39(&c);
-  if (bError != 0) return false;
+  if (bError != 0) return Fault(0);
 
   c.bNS++;
   c.bInvokeId++;
   QueryId39(c.bNS, c.bNR, c.bInvokeId);
-  if (Input39() != SER_GOODCHECK) return false;
-  if (ValidateFrame(c.bNS, c.bNR) != 0) return false;
+  if (Input39() != SER_GOODCHECK) return Fault(1);
+  if (ValidateFrame(c.bNS, c.bNR) != 0) return Fault(2);
 
 
   InitPop(12 + GetHdlcAddressesSize());
 
   uchar bResult = PopChar();
-  if (bResult != 0) return false;
+  if (bResult != 0) return Fault(3);
 
   uchar bType = PopChar();
-  if (bType != 9) return false;
+  if (bType != 9) return Fault(4);
 
   uchar bSize = PopChar();
   ShowId(bSize);
@@ -162,6 +172,9 @@ bool    Automatic39(void)
 
   Delay(1000);
 
+  Query39_DISC();
+  if (Input39() != SER_GOODCHECK) return Fault(5);
+
   return true;
 }
 
@@ -172,13 +185,13 @@ bool    ChangeSpeed39(void)
   caller39 c = InitCaller39();
 
   uchar bError = FragmentOpen39(&c);
-  if (bError != 0) return false;
+  if (bError != 0) return Fault(6);
 
   c.bNS++;
   c.bInvokeId++;
   QueryId39_Simple(c.bNS, c.bNR, c.bInvokeId);
-  if (Input39() != SER_GOODCHECK) return false;
-  if (ValidateFrame(c.bNS, c.bNR) != 0) return false;
+  if (Input39() != SER_GOODCHECK) return Fault(7);
+  if (ValidateFrame(c.bNS, c.bNR) != 0) return Fault(8);
 
 
   Beep();
@@ -187,13 +200,18 @@ bool    ChangeSpeed39(void)
   InitPop(12 + GetHdlcAddressesSize_Simple());
 
   uchar bResult = PopChar();
-  if (bResult != 0) return false;
+  if (bResult != 0) return Fault(9);
 
   uchar bType = PopChar();
-  if (bType != 9) return false;
+  if (bType != 9) return Fault(10);
 
   uchar bSize = PopChar();
   ShowId(bSize);
+
+
+  Query39_DISC();
+  if (Input39() != SER_GOODCHECK) return Fault(11);
+
 
   return true;
 }
