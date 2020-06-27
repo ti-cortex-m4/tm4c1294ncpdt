@@ -29,6 +29,7 @@ RESPONSE252_CRC,C
 #include "../digitals/review/review_buff.h"
 #include "../sensors/sensor35/timeout35.h"
 #include "../sensors/sensor35/log35.h"
+#include "../sensors/sensor39/log39.h"
 #include "../output/out_echo.h"
 
 
@@ -92,6 +93,9 @@ void    Response252_CRC(void)
 
     case 34: OutLog35(); break;
     case 35: OutCounter35(); break;
+
+    case 36: OutLog39(); break;
+    case 37: OutCounter39(); break;
 
     default:
       ShowResponseCRC(bSTA_BADCOMMAND);
