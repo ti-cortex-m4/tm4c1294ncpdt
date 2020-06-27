@@ -150,7 +150,7 @@ void    QueryEngMon38(uchar  ibMonRel)
 
 
 
-void    QuerynNumber38(void)
+void    QueryNumber38(void)
 {
   InitPush(0);
 

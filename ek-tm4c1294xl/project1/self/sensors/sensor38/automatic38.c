@@ -20,7 +20,7 @@ bool    Automatic38(void)
 {
   Clear();
 
-  QuerynNumber38();
+  QueryNumber38();
   if (Input38() != SER_GOODCHECK) return false;
 
   ShowLong(ReadNumber38());
