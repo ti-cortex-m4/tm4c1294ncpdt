@@ -51,7 +51,6 @@ void    key_SetAsciiAddresses(void)
 {
 static uchar c;
 static line  address;
-static uchar idx;
 
   if (bKey == bKEY_ENTER)
   {
@@ -127,8 +126,8 @@ static uchar idx;
     }
     else if ((enKeyboard == KBD_INPUT3) || (enKeyboard == KBD_POSTINPUT3))
     {
-      if (idx < 12)
-        AsciiAddress_Enter(&address, ++idx);
+      if (AsciiAddress_Size(&address) < 12)
+        AsciiAddress_Enter(&address);
       else
         Beep();
       AsciiAddress_Show(&address);            
@@ -141,10 +140,10 @@ static uchar idx;
   {
     if ((enKeyboard == KBD_INPUT3) || (enKeyboard == KBD_POSTINPUT3))
     {
-      if (idx > 1)
-        AsciiAddress_Delete(&address, idx--);
+      if (AsciiAddress_Size(&address) > 0)
+        AsciiAddress_Delete(&address);
       else
-        { AsciiAddress_Init(&address); Beep(); }
+        Beep();
       AsciiAddress_Show(&address);
     }
     else Beep();

@@ -15,9 +15,13 @@ void    AsciiAddress_Show(line  *pl) {
 }
 
 
-
 void    AsciiAddress_Init(line  *pl) {
   memset((char *)pl, 0, sizeof(line));
+}
+
+
+uchar   AsciiAddress_Size(line  *pl) {
+  return strlen((char const *)(*pl).szLine);
 }
 
 
@@ -65,19 +69,13 @@ void    AsciiAddress_Decrement(line  *pl) {
 
 
 
-void    AsciiAddress_Enter(line  *pl, uchar  idx) {
-  uchar i;
-  for (i=idx; i>0; i--) {
-    (*pl).szLine[i] = (*pl).szLine[i-1];
-  } 
-  (*pl).szLine[0] = '0';
+void    AsciiAddress_Enter(line  *pl) {
+  uchar l = strlen((char const *)(*pl).szLine);
+  (*pl).szLine[l] = '0';
 }
 
 
-void    AsciiAddress_Delete(line  *pl, uchar  idx) {
-  uchar i;
-  for (i=0; i<idx; i++) {
-    (*pl).szLine[i] = (*pl).szLine[i+1];
-  } 
-  (*pl).szLine[idx] = 0;
+void    AsciiAddress_Delete(line  *pl) {
+  uchar l = strlen((char const *)(*pl).szLine);
+  (*pl).szLine[l-1] = 0;
 }
