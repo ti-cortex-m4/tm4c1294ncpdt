@@ -50,3 +50,16 @@ void    PushHdlcAddresses(void)
   PushChar(0x03);
 #endif
 }
+
+
+
+uchar   GetHdlcAddressesSize_Simple(void)
+{
+  return 1+1;
+}
+
+void    PushHdlcAddresses_Simple(void)
+{
+  PushChar(0x03);
+  PushChar(0x03);
+}
