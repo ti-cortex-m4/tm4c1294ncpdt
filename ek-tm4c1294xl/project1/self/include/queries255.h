@@ -159,6 +159,10 @@ QUERIES2!H
 
 #define bEXT_GET_CNTCURR               135
 
+#define bEXT_GETASCIIADDRESS           136
+#define bEXT_SETASCIIADDRESS           137
+#define bEXT_GETASCIIADDRESSES         138
+
 #define bEXT_RESET_ENGFRAC             248
 #define bEXT_RESET_ENGFRACDIGCAN6      249
 #define bEXT_RESET_ENGFRACDIGCAN8      247
