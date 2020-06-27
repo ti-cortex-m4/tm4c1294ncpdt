@@ -1930,7 +1930,7 @@ double2 ReadCntCurrCan(uchar  ibCan)
 #endif
 
 #ifndef SKIP_39
-    case 39: return TestCntMonCanTariff39(); //TestTimeCorrect39(); //ReadCntCurr39();
+    case 39: return TestProfile39(); //TestTimeCorrect39(); //ReadCntCurr39();
 #endif
 
     default: return GetDouble2Error();
