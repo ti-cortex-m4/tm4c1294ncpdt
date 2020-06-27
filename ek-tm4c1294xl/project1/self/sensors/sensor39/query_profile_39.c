@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-query_next_block_36*c
+query_profile_39.c
 
 
 ------------------------------------------------------------------------------*/
@@ -9,15 +9,11 @@ query_next_block_36*c
 #include "../../serial/ports2.h"
 #include "../../serial/ports_devices.h"
 #include "../../serial/monitor.h"
-#include "include39.h"
 #include "crc16x25.h"
 #include "io39.h"
 #include "hdlc_address.h"
 #include "dlms_push.h"
-#include "device39.h" //
-#include "query_next_block_39.h"
 #include "query_profile_39.h"
-
 
 
 
@@ -70,10 +66,10 @@ query_next_block_36*c
   </GetRequestNormal>
 </GetRequest>
 */
-void    QueryProfile39(uchar  bNS, uchar  bNR, uchar  bInvokeId, time  ti1, time  ti2)
+void    QueryProfile39(uchar  bNS, uchar  bNR, uchar  bInvokeId, time  tm1, time  tm2)
 {
 #ifdef MONITOR_39  
-  MonitorString("\n\n QueryProfile39 "); MonitorTime(ti1); MonitorTime(ti2);
+  MonitorString("\n\n QueryProfile39 "); MonitorTime(tm1); MonitorTime(tm2);
 #endif  
 
   uint wSize = 110 + GetHdlcAddressesSize(); // 0x70 112
@@ -98,18 +94,13 @@ void    QueryProfile39(uchar  bNS, uchar  bNR, uchar  bInvokeId, time  ti1, time
   PushChar(0x01); // Get-Request-Normal
   PushChar(0xC0 | (bInvokeId % 16)); // Invoke-Id-And-Priority
 
-  PushChar(0x00); // TODO ???
+  PushChar(0x00); // ?
 
 //  <AttributeDescriptor>
 
   PushChar(0x07); // <ClassId Value="0007" /> <!--PROFILE_GENERIC-->
 
-  PushChar(0x01); // <InstanceId Value="0100630100FF" /> <!--1.0.99.1.0.255-->
-  PushChar(0x00);
-  PushChar(0x63);
-  PushChar(0x01);
-  PushChar(0x00);
-  PushChar(0xFF);
+  PushOBIS_DLMS(obisProfile); // <InstanceId Value="0100630100FF" /> <!--1.0.99.1.0.255-->
 
   PushChar(0x02); // <AttributeId Value="02" />
 
@@ -136,12 +127,7 @@ void    QueryProfile39(uchar  bNS, uchar  bNR, uchar  bInvokeId, time  ti1, time
 
   PushChar(0x09); // <OctetString Value="0000010000FF" />
   PushChar(0x06);
-  PushChar(0x00); // <!--0.0.1.0.0.255-->
-  PushChar(0x00);
-  PushChar(0x01);
-  PushChar(0x00);
-  PushChar(0x00);
-  PushChar(0xFF);
+  PushOBIS_DLMS(obisTime); // <!--0.0.1.0.0.255-->
 
   PushChar(0x0F); // <Int8 Value="02" />
   PushChar(0x02);
@@ -152,56 +138,14 @@ void    QueryProfile39(uchar  bNS, uchar  bNR, uchar  bInvokeId, time  ti1, time
 
 //        </Structure>
 
-  PushChar(0x09); //  <OctetString Value="07E4040EFF000000FF8000FF" />
+  PushChar(0x09); // <OctetString Value="07E4040EFF000000FF8000FF" />
   PushChar(0x0C);
+  PushTimeDLMS(tm1);
 
-//  time ti1;
-//  ti1.bYear = 20;
-//  ti1.bMonth = 4;
-//  ti1.bDay = 14;
-//  ti1.bHour = 0;
-//  ti1.bMinute = 0;
-//  ti1.bSecond = 0;
-  PushTimeDLMS(ti1);
-/*
-  PushChar(0x07); // <!--2020-04-14 00:00:00-->
-  PushChar(0xE4);
-  PushChar(0x04);
-  PushChar(0x0E);
-  PushChar(0xFF);
-  PushChar(0x00);
-  PushChar(0x00);
-  PushChar(0x00);
-  PushChar(0xFF);
-  PushChar(0x80);
-  PushChar(0x00);
-  PushChar(0xFF);
-*/
   PushChar(0x09); // <OctetString Value="07E4040EFF173B3BFF8000FF" />
   PushChar(0x0C);
+  PushTimeDLMS(tm2);
 
-//  time ti2;
-//  ti2.bYear = 20;
-//  ti2.bMonth = 4;
-//  ti2.bDay = 14;
-//  ti2.bHour = 23;
-//  ti2.bMinute = 59;
-//  ti2.bSecond = 59;
-  PushTimeDLMS(ti2);
-/*
-  PushChar(0x07); // <!--2020-04-14 23:59:59-->
-  PushChar(0xE4);
-  PushChar(0x04);
-  PushChar(0x0E);
-  PushChar(0xFF);
-  PushChar(0x17);
-  PushChar(0x3B);
-  PushChar(0x3B);
-  PushChar(0xFF);
-  PushChar(0x80);
-  PushChar(0x00);
-  PushChar(0xFF);
-*/
 //        <Array Qty="02" >
 
   PushChar(0x01);
@@ -218,13 +162,7 @@ void    QueryProfile39(uchar  bNS, uchar  bNR, uchar  bInvokeId, time  ti1, time
 
   PushChar(0x09); // <OctetString Value="0000010000FF" />
   PushChar(0x06);
-
-  PushChar(0x00); // <!--0.0.1.0.0.255-->
-  PushChar(0x00);
-  PushChar(0x01);
-  PushChar(0x00);
-  PushChar(0x00);
-  PushChar(0xFF);
+  PushOBIS_DLMS(obisTime); // <!--0.0.1.0.0.255-->
 
   PushChar(0x0F); // <Int8 Value="02" />
   PushChar(0x02);
@@ -246,13 +184,7 @@ void    QueryProfile39(uchar  bNS, uchar  bNR, uchar  bInvokeId, time  ti1, time
 
   PushChar(0x09); // <OctetString Value="01000F0800FF" />
   PushChar(0x06);
-
-  PushChar(0x01); // <!--1.0.15.8.0.255-->
-  PushChar(0x00);
-  PushChar(0x0F);
-  PushChar(0x08);
-  PushChar(0x00);
-  PushChar(0xFF);
+  PushOBIS_DLMS(obisEngAbs); // <!--1.0.15.8.0.255-->
 
   PushChar(0x0F); // <Int8 Value="02" />
   PushChar(0x02);
