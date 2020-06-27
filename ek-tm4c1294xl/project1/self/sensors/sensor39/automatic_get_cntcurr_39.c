@@ -22,7 +22,7 @@ automatic_get_cntcurr_39.c
 
 static double2 Fault(uchar  bError)
 {
-  return GetDouble2Error1(Error39(70+bError));
+  return GetDouble2Error1(Error39(bError));
 }
 
 
@@ -32,13 +32,13 @@ double2 ReadCntCurr39_Internal(void)
   caller39 c = InitCaller39();
 
   uchar bError = FragmentOpen39(&c);
-  if (bError != 0) return Fault(bError);
+  if (bError != 0) return Fault(70+0);
 
   double2 db2 = ReadRegisterValueWithScaler39(obisEngAbs, &c);
-  if (!db2.fValid) return Fault(0);
+  if (!db2.fValid) return Fault(70+1);
 
   Query39_DISC();
-  if (Input39() != SER_GOODCHECK) return Fault(1);
+  if (Input39() != SER_GOODCHECK) return Fault(70+2);
 
   return GetDouble0(db2.dbValue);
 }
@@ -64,7 +64,7 @@ double2 ReadCntCurr39(void)
   }
 
   Query39_DISC();
-  if (Input39() != SER_GOODCHECK) return Fault(2);
+  if (Input39() != SER_GOODCHECK) return Fault(70+3);
 
-  return Fault(3);
+  return Fault(70+4);
 }

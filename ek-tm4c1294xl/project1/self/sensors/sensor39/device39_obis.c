@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
 device39_obis.c
 
-
+Blue Book: 7.5.1 Value group C codes – Electricity
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
@@ -26,17 +26,16 @@ const obis_t        obisBillingPeriod = {0, 0, 98, 1, 0, 255}; // Ch. 0; Data of
 
 const obis_t        obisProfile  = {1, 0, 99, 1, 0, 255}; // Ch. 0; Load profile with recording period 1; #1
 
-// Blue Book: 7.5.1 Value group C codes – Electricity
-const obis_t        obisU1      = {1, 0, 32, 7, 0, 255},
-                    obisU2      = {1, 0, 52, 7, 0, 255},
-                    obisU3      = {1, 0, 72, 7, 0, 255},
+const obis_t        obisU1      = {1, 0, 32, 7, 0, 255};
+const obis_t        obisU2      = {1, 0, 52, 7, 0, 255};
+const obis_t        obisU3      = {1, 0, 72, 7, 0, 255};
 
-                    obisI1      = {1, 0, 31, 7, 0, 255},
-                    obisI2      = {1, 0, 51, 7, 0, 255},
-                    obisI3      = {1, 0, 71, 7, 0, 255},
+const obis_t        obisI1      = {1, 0, 31, 7, 0, 255};
+const obis_t        obisI2      = {1, 0, 51, 7, 0, 255};
+const obis_t        obisI3      = {1, 0, 71, 7, 0, 255};
 
-                    obisPplus   = {1, 0,  1, 7, 0, 255},
-                    obisPminus  = {1, 0,  2, 7, 0, 255},
+const obis_t        obisPplus   = {1, 0, 1, 7, 0, 255};
+const obis_t        obisPminus  = {1, 0, 2, 7, 0, 255};
 
-                    obisQplus   = {1, 0,  3, 7, 0, 255},
-                    obisQminus  = {1, 0,  4, 7, 0, 255};
+const obis_t        obisQplus   = {1, 0, 3, 7, 0, 255};
+const obis_t        obisQminus  = {1, 0, 4, 7, 0, 255};
