@@ -4,10 +4,26 @@ buffer_profile_39.h
 
 ------------------------------------------------------------------------------*/
 
-void    InitBuffPrf39(void);
-void    AddBuffPrf39(time  tiTime, uint64_t  ddwValue);
+#ifndef __BUFFER_PROFILE_39
+#define __BUFFER_PROFILE_39
 
-void    DeltaBuffPrf39(void);
-profile39 GetBuffPrf39(uchar  i);
-uchar   GetBuffPrfSize39(void);
-bool    GetBuffPrfOveflow39(void);
+
+typedef struct
+{
+  bool          fExists;
+  time          tiTime;
+  uint64_t      ddwValue;
+} profile39;
+
+
+#endif
+
+
+
+void    InitProfile39(void);
+void    AddProfile39(time  tmTime, uint64_t  ddwValue);
+
+void    DeltaProfile39(void);
+profile39 GetProfile39(uchar  i);
+uchar   GetProfileSize39(void);
+bool    IsProfileOveflow39(void);

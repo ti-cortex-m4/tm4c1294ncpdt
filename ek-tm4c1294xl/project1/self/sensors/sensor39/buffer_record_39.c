@@ -99,7 +99,7 @@ record39 FinishBuffRecord39(void) {
   MonitorString("\n Count="); MonitorCharDec(bCount); MonitorString("\n");
 #endif
 
-  InitBuffPrf39();
+  InitProfile39();
 
   uchar i;
   for (i=0; i<bCount; i++)
@@ -146,7 +146,7 @@ record39 FinishBuffRecord39(void) {
     MonitorLongDec(ddw % 1000000);
 #endif
 
-    AddBuffPrf39(ti, ddw);
+    AddProfile39(ti, ddw);
   }
 
   if (PrfFirstPrev.fExists == true) {
@@ -157,7 +157,7 @@ record39 FinishBuffRecord39(void) {
     MonitorLongDec(PrfFirstPrev.ddwValue % 1000000);
     MonitorString(" previous");
 #endif
-    AddBuffPrf39(PrfFirstPrev.tiTime, PrfFirstPrev.ddwValue);
+    AddProfile39(PrfFirstPrev.tiTime, PrfFirstPrev.ddwValue);
   }
 
   return r;
