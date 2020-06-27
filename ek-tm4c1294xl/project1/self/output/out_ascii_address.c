@@ -18,6 +18,7 @@ void    OutGetAsciiAddress(void)
 {
   if (bInBuff6 < bCANALS)
   {
+    InitPushCRC();
     PushLongBig(mpdwAddress1[bInBuff6]);
     Push(&mpphAsciiAddress[bInBuff6], sizeof(line));
     Output(sizeof(ulong) + sizeof(line));
