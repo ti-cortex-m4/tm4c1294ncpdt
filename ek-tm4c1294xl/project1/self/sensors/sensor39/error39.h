@@ -4,7 +4,5 @@ error39.h
 
 ------------------------------------------------------------------------------*/
 
-void    InitLog39(void);
-
 uchar   Error39(uchar  bError);
 uchar   Error39_(uchar  bError, uint  wCode);
