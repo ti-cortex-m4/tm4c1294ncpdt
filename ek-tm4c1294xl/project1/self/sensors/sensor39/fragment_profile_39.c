@@ -129,9 +129,9 @@ double2 TestFragmentProfile39(void)
   uchar bError = FragmentProfile39(&c, tm1, tm2).bError;
   if (bError != 0)  {
     return GetDouble2Error();
+  } else {
+    return GetDouble0(0);
   }
-
-  return GetDouble0(0);
 }
 
 #endif
