@@ -7,7 +7,6 @@ automatic_get_cntmon_38*c
 #include "../../main.h"
 #include "../../display/display.h"
 #include "../../keyboard/keyboard.h"
-// #include "../../time/delay.h"
 #include "../../serial/ports.h"
 #include "../../serial/monitor.h"
 #include "../../digitals/digitals.h"
@@ -28,12 +27,19 @@ automatic_get_cntmon_38*c
 
 
 
+static time2 Fault(uchar  bError)
+{
+  return GetDouble2Error1(Error39(bError));
+}
+
+
+
 double2 ReadCntMonCan38_Internal(uchar  ibMon)
 {
   caller39 c = InitCaller39();
 
   time2 tm2 = FragmentOpenTime39(&c);
-  if (!tm2.fValid) return GetDouble2Error1(Error39(110+0));
+  if (!tm2.fValid) return Fault(110+0);
   time tm = tm2.tiValue;
 
 
@@ -43,64 +49,60 @@ double2 ReadCntMonCan38_Internal(uchar  ibMon)
     uchar bYear = (bMonth > tm.bMonth) ? tm.bYear-1 : tm.bYear;
 
     double2 db2 = FragmentCntMonCan(obisEngAbs, &c, bMonth, bYear);
-    uchar bError = db2.bError;
-    if (bError == ERROR_NOT_PRESENTED) { // TODO no month
-/*
-        Clear();
-        sprintf(szLo+1, "мес€ц %02u.%02u ?",ti.bMonth,ti.bYear);
-        Delay(1000);
-        return GetDouble2Error();
-*/
+    if (db2.bError == ERROR_NOT_PRESENTED) {
+      Clear();
+      sprintf(szLo+1, "мес€ц %02u.%02u ?",bMonth,bYear);
+      Delay(1000);
+      return GetDouble2Error();
     }
 
     Query39_DISC();
-    if (Input39() != SER_GOODCHECK) return GetDouble2Error1(Error39(110+0));
+    if (Input39() != SER_GOODCHECK) return Fault(110+0);
 
     return db2;
   }
   else
   {
-    time ti1;
-    ti1.bYear = tm.bYear;
-    ti1.bMonth = tm.bMonth;
-    ti1.bDay = tm.bDay;
-    ti1.bHour = 0;
-    ti1.bMinute = 0;
-    ti1.bSecond = 0;
+    time tm1;
+    tm1.bYear = tm.bYear;
+    tm1.bMonth = tm.bMonth;
+    tm1.bDay = tm.bDay;
+    tm1.bHour = 0;
+    tm1.bMinute = 0;
+    tm1.bSecond = 0;
 
-    time ti2;
-    ti2.bYear = tm.bYear;
-    ti2.bMonth = tm.bMonth;
-    ti2.bDay = tm.bDay;
-    ti2.bHour = 23;
-    ti2.bMinute = 59;
-    ti2.bSecond = 59;
+    time tm2;
+    tm2.bYear = tm.bYear;
+    tm2.bMonth = tm.bMonth;
+    tm2.bDay = tm.bDay;
+    tm2.bHour = 23;
+    tm2.bMinute = 59;
+    tm2.bSecond = 59;
 
-    InitBuffRecord39_FragmentProfile39(); // TODO inside FragmentProfile39 by flag
-    record39 r = FragmentProfile39(&c, ti1, ti2);
+    InitBuffRecord39_FragmentProfile();
+    record39 r = FragmentProfile39(&c, tm1, tm2);
     if (r.bError != 0)
     {
 #ifdef MONITOR_39
       MonitorString("\n error="); MonitorCharDec(r.bError);
 #endif
-      return GetDouble2Error1(Error39(110+0));
+      return Fault(110+0));
     }
-    if (r.fFirst == false) // TODO no day
+    if (r.fFirst == false)
     {
-/*
-        Clear();
-        sprintf(szLo+0, "сутки %02u.%02u.%02u ?",ti.bDay,ti.bMonth,ti.bYear);
-        Delay(1000);
-        return GetDouble2Error();
-*/
+      Clear();
+      sprintf(szLo+0, "сутки %02u.%02u.%02u ?",tm.bDay,tm.bMonth,tm.bYear);
+      Delay(1000);
+      return GetDouble2Error();
+
 #ifdef MONITOR_39
       MonitorString("\n no data");
 #endif
-      return GetDouble2Error1(Error39(110+0));
+      return Fault(110+0);
     }
 
     Query39_DISC();
-    if (Input39() != SER_GOODCHECK) return GetDouble2Error1(Error39(110+0));
+    if (Input39() != SER_GOODCHECK) return Fault(110+0);
 
     return GetDouble0(r.ddwValue);
   }
@@ -127,7 +129,7 @@ double2 ReadCntMonCan39(uchar  ibMon)
   }
 
   Query39_DISC();
-  if (Input39() != SER_GOODCHECK) return GetDouble2Error1(Error39(110+3));
+  if (Input39() != SER_GOODCHECK) return Fault(110+3);
 
-  return GetDouble2Error1(Error39(110+3));
+  return Fault(110+3);
 }
