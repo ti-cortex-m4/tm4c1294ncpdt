@@ -7,6 +7,7 @@ out_ascii_address.c
 #include "../main.h"
 #include "../memory/mem_ports.h"
 #include "../serial/ports.h"
+#include "../digitals/digitals.h"
 #include "../digitals/address/ascii_address.h"
 #include "../nvram/cache.h"
 #include "out_ascii_address.h"
@@ -18,8 +19,8 @@ void    OutGetAsciiAddress(void)
   if (bInBuff6 < bCANALS)
   {
     PushLongBig(mpdwAddress1[bInBuff6]);
-    Push(&mpphAsciiAddress[ bInBuff6 ], sizeof(line));
-    Output(sizeof(ulong)+sizeof(line));
+    Push(&mpphAsciiAddress[bInBuff6], sizeof(line));
+    Output(sizeof(ulong) + sizeof(line));
   }
   else Result(bRES_BADADDRESS);
 }
@@ -31,13 +32,12 @@ void    OutSetAsciiAddress(void)
   {
     if (bInBuff6 < bCANALS)
     {
+      InitPop(7);
       mpdwAddress1[bInBuff6] = PopLongBig();
 
       uchar i;
       for (i=0; i<bLINE_SIZE; i++)
-      {
-        mpphAsciiAddress[ bInBuff6 ].szLine[i] = InBuff(7+i);
-      }
+        mpphAsciiAddress[bInBuff6].szLine[i] = PopChar();
 
       if (bInBuff6 == bCANALS - 1)
       {
