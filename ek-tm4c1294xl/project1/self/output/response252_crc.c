@@ -89,6 +89,7 @@ void    Response252_CRC(void)
     case 31: OutTimeoutHistogramAll35(); break;
     case 32: OutResetTimeoutHistogramAll35(); break;
     case 33: OutResetTimeoutHistogramDay35(); break;
+
     case 34: OutLog35(); break;
     case 35: OutCounter35(); break;
 

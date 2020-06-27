@@ -19,6 +19,7 @@ RESPONSE253_CRC,C
 #include "out_energy.h"
 #include "out_common.h"
 #include "out_cnt.h"
+#include "out_ascii_address.h"
 #include "response253_crc.h"
 
 
@@ -57,6 +58,10 @@ void    Response253_CRC(void)
     case bEXT_GETDIAGRAM: OutDiagram(true); break;
 
     case bEXT_GET_CNTCURR: OutCntCanCurr(true); break;
+
+    case bEXT_GETASCIIADDRESS: OutGetAsciiAddress(); break;
+    case bEXT_SETASCIIADDRESS: OutSetAsciiAddress(); break;
+    case bEXT_GETASCIIADDRESSES: OutGetAsciiAddressesExt(); break;
 
     default:
       ShowResponseCRC(bSTA_BADCOMMAND);

@@ -6,8 +6,6 @@ out_ascii_address.c
 
 #include "../main.h"
 #include "../memory/mem_ports.h"
-//#include "../memory/mem_settings.h"
-//#include "../memory/mem_phones.h"
 #include "../serial/ports.h"
 #include "../digitals/address/ascii_address.h"
 #include "../nvram/cache.h"
@@ -18,9 +16,12 @@ out_ascii_address.c
 void    OutGetAsciiAddress(void)
 {
   if (bInBuff6 < bCANALS)
-    Common(&mpphAsciiAddress[ bInBuff6 ], sizeof(line));
-  else
-    Result(bRES_BADADDRESS);
+  {
+    PushLongBig(mpdwAddress1[bInBuff6]);
+    Push(&mpphAsciiAddress[ bInBuff6 ], sizeof(line));
+    Output(sizeof(ulong)+sizeof(line));
+  }
+  else Result(bRES_BADADDRESS);
 }
 
 
@@ -30,24 +31,21 @@ void    OutSetAsciiAddress(void)
   {
     if (bInBuff6 < bCANALS)
     {
-      static line ph;
+      mpdwAddress1[bInBuff6] = PopLongBig();
 
       uchar i;
       for (i=0; i<bLINE_SIZE; i++)
       {
-        ph.szLine[i] = InBuff(7+i);
+        mpphAsciiAddress[ bInBuff6 ].szLine[i] = InBuff(7+i);
       }
 
-      if (true)
+      if (bInBuff6 == bCANALS - 1)
       {
-        mpphAsciiAddress[ bInBuff6 ] = ph;
-
-        if (bInBuff6 == bCANALS - 1)
-          SaveCache(&chAsciiAddress);
-
-        LongResult(bRES_OK);
+        SaveCache(&chAddress1);
+        SaveCache(&chAsciiAddress);
       }
-      else Result(bRES_BADDATA);
+
+      LongResult(bRES_OK);
     }
     else Result(bRES_BADADDRESS);
   }
@@ -56,7 +54,7 @@ void    OutSetAsciiAddress(void)
 
 
 
-void    OutAsciiAddressExt(void)
+void    OutGetAsciiAddressesExt(void)
 {
   InitPushPtr();
   uchar wSize = 0;
@@ -66,6 +64,9 @@ void    OutAsciiAddressExt(void)
   {
     if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
     {
+      PushLongBig(mpdwAddress1[c]);
+      wSize += sizeof(ulong);
+
       Push(&mpphAsciiAddress[c], sizeof(line));
       wSize += sizeof(line);
     }
