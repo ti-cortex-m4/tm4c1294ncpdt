@@ -70,12 +70,12 @@ void    AsciiAddress_Decrement(line  *pl) {
 
 
 void    AsciiAddress_Enter(line  *pl) {
-  uchar l = strlen((char const *)(*pl).szLine);
-  (*pl).szLine[l] = '0';
+  uchar s = strlen((char const *)(*pl).szLine);
+  (*pl).szLine[s] = '0';
 }
 
 
 void    AsciiAddress_Delete(line  *pl) {
-  uchar l = strlen((char const *)(*pl).szLine);
-  (*pl).szLine[l-1] = 0;
+  uchar s = strlen((char const *)(*pl).szLine);
+  (*pl).szLine[s-1] = 0;
 }
