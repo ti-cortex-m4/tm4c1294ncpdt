@@ -21,3 +21,5 @@ const obis_t        obisEngAbsTariff[4] = {
   {1, 0, 15, 8, 3, 255},
   {1, 0, 15, 8, 4, 255},
 };
+
+const obis_t        obisProfile  = {1, 0, 99, 1, 0, 255};
