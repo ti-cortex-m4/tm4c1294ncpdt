@@ -6,8 +6,8 @@ dlms_read_register.c		30		30-46 !
 read_engmon_39.c			50
 
 automatic_get_time_39.c		60		60-65
-automatic_get_cntmon_39.c	70		
-automatic_get_cntcurr_39.c	80     	80-83
+automatic_get_cntcurr_39.c	70     	80-83
+automatic_get_cntmon_39.c	80		80-86
 automatic39.c				90
 
 extended_4t_39.c			100		100-104

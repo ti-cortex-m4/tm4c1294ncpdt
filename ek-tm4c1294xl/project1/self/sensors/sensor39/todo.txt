@@ -1,5 +1,7 @@
 hdlc_monitor in/out журнал, счетчики
 
+profile scaler
+
 выяснить когда bNR++
 
 читать К профилей

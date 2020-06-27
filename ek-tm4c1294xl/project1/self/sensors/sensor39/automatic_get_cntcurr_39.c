@@ -20,7 +20,7 @@ automatic_get_cntcurr_39.c
 
 
 
-static time2 Fault(uchar  bError)
+static double2 Fault(uchar  bError)
 {
   return GetDouble2Error1(Error39(bError));
 }
