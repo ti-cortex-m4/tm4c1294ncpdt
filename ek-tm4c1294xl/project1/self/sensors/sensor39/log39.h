@@ -1,10 +1,9 @@
 /*------------------------------------------------------------------------------
-error39.h
+log39.h
 
 
 ------------------------------------------------------------------------------*/
 
 void    InitLog39(void);
 
-uchar   Error39(uchar  bError);
-uchar   Error39_(uchar  bError, uint  wCode);
+void    Log39(uchar  bError, uint  wData);

@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-error39*c
+log39*c
 
 
 ------------------------------------------------------------------------------*/
@@ -8,11 +8,9 @@ error39*c
 #include "../../serial/ports.h"
 #include "../../serial/ports2.h"
 #include "../../serial/ports_devices.h"
-#include "../../serial/monitor.h"
 #include "../../time/rtc.h"
-#include "include39.h"
-#include "error39_include.h"
-#include "error39.h"
+#include "log39_include.h"
+#include "log39.h"
 
 
 
@@ -64,24 +62,4 @@ void    OutCounter39(void)
   InitPushCRC();
   Push(&mCounter39, sizeof(mCounter39));
   Output(sizeof(mCounter39));
-}
-
-
-
-uchar   Error39(uchar  bError) {
-#ifdef  MONITOR_39  
-  MonitorString("\n error="); MonitorCharDec(bError);
-#endif  
-//  Log39(bError, 0);
-  return bError;        
-}
-
-
-uchar   Error39_(uchar  bError, uint  wCode) {
-#ifdef  MONITOR_39  
-  MonitorString("\n error="); MonitorCharDec(bError);
-  MonitorString("\n code="); MonitorIntDec(wCode);
-#endif  
-//  Log39(bError, wCode);
-  return bError;        
 }
