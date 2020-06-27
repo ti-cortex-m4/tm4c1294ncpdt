@@ -8,7 +8,7 @@ automatic_get_cntmon_38*c
 #include "../../display/display.h"
 #include "../../keyboard/keyboard.h"
 #include "../../serial/ports.h"
-#include "../../serial/monitor.h"
+//#include "../../serial/monitor.h"
 #include "../../digitals/digitals.h"
 #include "device39.h"
 #include "error39.h"
@@ -49,15 +49,16 @@ double2 ReadCntMonCan38_Internal(uchar  ibMon)
     uchar bYear = (bMonth > tm.bMonth) ? tm.bYear-1 : tm.bYear;
 
     double2 db2 = FragmentCntMonCan(obisEngAbs, &c, bMonth, bYear);
+
     if (db2.bError == ERROR_NOT_PRESENTED) {
       Clear();
       sprintf(szLo+1, "мес€ц %02u.%02u ?",bMonth,bYear);
       Delay(1000);
-      return GetDouble2Error();
+      return Fault(80+1);
     }
 
     Query39_DISC();
-    if (Input39() != SER_GOODCHECK) return Fault(80+1);
+    if (Input39() != SER_GOODCHECK) return Fault(80+2);
 
     return db2;
   }
@@ -80,28 +81,23 @@ double2 ReadCntMonCan38_Internal(uchar  ibMon)
     tm2.bSecond = 59;
 
     InitBuffRecord39_FragmentProfile();
+
     record39 r = FragmentProfile39(&c, tm1, tm2);
+
     if (r.bError != 0)
     {
-#ifdef MONITOR_39
-      MonitorString("\n error="); MonitorCharDec(r.bError);
-#endif
-      return Fault(80+2);
+      return Fault(80+3);
     }
     if (r.fFirst == false)
     {
       Clear();
       sprintf(szLo+0, "сутки %02u.%02u.%02u ?",tm.bDay,tm.bMonth,tm.bYear);
       Delay(1000);
-
-#ifdef MONITOR_39
-      MonitorString("\n no data");
-#endif
-      return Fault(80+3);
+      return Fault(80+4);
     }
 
     Query39_DISC();
-    if (Input39() != SER_GOODCHECK) return Fault(80+4);
+    if (Input39() != SER_GOODCHECK) return Fault(80+5);
 
     return GetDouble0(r.ddwValue);
   }
@@ -123,12 +119,12 @@ double2 ReadCntMonCan39(uchar  ibMon)
       mpdbChannelsC[0] = db2.dbValue / 1000;
       mpboChannelsA[0] = true;
 
-      return GetDouble2(mpdbChannelsC[0], true);
+      return GetDouble0(mpdbChannelsC[0]);
     }
   }
 
   Query39_DISC();
-  if (Input39() != SER_GOODCHECK) return Fault(80+5);
+  if (Input39() != SER_GOODCHECK) return Fault(80+6);
 
-  return Fault(80+6);
+  return Fault(80+7);
 }

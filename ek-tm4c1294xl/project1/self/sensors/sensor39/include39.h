@@ -21,12 +21,14 @@ typedef struct
 #define MONITOR_39_NAMES    1
 #define MONITOR_39_MONITOR  1
 //#define MONITOR_39_CRC      1
+//#define ARRAY_39            1
 
 
 #ifndef MONITOR_39
 #undef MONITOR_39_NAMES
 #undef MONITOR_39_MONITOR
 #undef MONITOR_39_CRC
+#undef ARRAY_39
 #endif
 
 

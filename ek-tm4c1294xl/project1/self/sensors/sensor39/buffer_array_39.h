@@ -1,18 +1,18 @@
 /*------------------------------------------------------------------------------
-buffers_x*h
+buffer_array_39.h
 
 
 ------------------------------------------------------------------------------*/
 
-void    MonitorX(void);
+void    MonitorArray39(void);
 
-void    InitPushX(void);
-void    PushCharX(uchar  b);
+void    InitPush39(void);
+void    PushChar39(uchar  b);
 
-void    InitPopX(void);
-uint    GetPopCapacity(void);
-uchar   PopCharX(void);
-uint    PopIntBigX(void);
-ulong   PopLongBigX(void);
-uint64_t PopLong64X(void);
-time    PopTimeDateX(void);
+void    InitPop39(void);
+uint    GetPopCapacity39(void);
+uchar   PopChar39(void);
+uint    PopIntBig39(void);
+ulong   PopLongBig39(void);
+uint64_t PopLong6439(void);
+time    PopTimeDate39(void);

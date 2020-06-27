@@ -35,10 +35,10 @@ double2 ReadCntCurr39_Internal(void)
   if (bError != 0) return Fault(bError);
 
   double2 db2 = ReadRegisterValueWithScaler39(obisEngAbs, &c);
-  if (!db2.fValid) return Fault(80+0);
+  if (!db2.fValid) return Fault(70+0);
 
   Query39_DISC();
-  if (Input39() != SER_GOODCHECK) return Fault(80+1);
+  if (Input39() != SER_GOODCHECK) return Fault(70+1);
 
   return GetDouble0(db2.dbValue);
 }
@@ -64,7 +64,7 @@ double2 ReadCntCurr39(void)
   }
 
   Query39_DISC();
-  if (Input39() != SER_GOODCHECK) return Fault(80+2);
+  if (Input39() != SER_GOODCHECK) return Fault(70+2);
 
-  return Fault(80+3);
+  return Fault(70+3);
 }

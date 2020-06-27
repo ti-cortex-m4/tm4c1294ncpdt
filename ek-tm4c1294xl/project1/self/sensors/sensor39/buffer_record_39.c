@@ -32,7 +32,7 @@ void    InitBuffRecord39_FragmentProfile(void) {
 
 
 void    InitBuffRecord39(void) {
-  InitPushX();
+  InitPush39();
 }
 
 
@@ -58,7 +58,7 @@ void    AddBuffRecord39(uint  iwStart/*, uint  cwSize*/) {
     if (i % 16 == 16-1) MonitorString("\n");
 #endif
 
-    PushCharX(b);
+    PushChar39(b);
   }
 
 #ifdef BUFF_RECORD_39
@@ -85,15 +85,15 @@ record39 FinishBuffRecord39(void) {
   record39 r = GetBuffRecordError(0);
 
 
-  InitPopX();
+  InitPop39();
 
-  if (GetPopCapacity() < 2)
+  if (GetPopCapacity39() < 2)
     return GetBuffRecordError(21);
 
-  if (PopCharX() != 1) // array
+  if (PopChar39() != 1) // array
     return GetBuffRecordError(22);
 
-  uchar bCount = PopCharX();
+  uchar bCount = PopChar39();
 
 #ifdef BUFF_RECORD_39
   MonitorString("\n Count="); MonitorCharDec(bCount); MonitorString("\n");
@@ -104,27 +104,27 @@ record39 FinishBuffRecord39(void) {
   uchar i;
   for (i=0; i<bCount; i++)
   {
-    if (GetPopCapacity() < 2 + 2+12 + 1+8)
+    if (GetPopCapacity39() < 2 + 2+12 + 1+8)
       return GetBuffRecordError(23);
 
-    if (PopCharX() != 0x02) // structure
+    if (PopChar39() != 0x02) // structure
       return GetBuffRecordError(24);
 
-    if (PopCharX() != 2) // structure size
+    if (PopChar39() != 2) // structure size
       return GetBuffRecordError(25);
 
-    if (PopCharX() != 0x09) // string
+    if (PopChar39() != 0x09) // string
       return GetBuffRecordError(26);
 
-    if (PopCharX() != 12) // string size
+    if (PopChar39() != 12) // string size
       return GetBuffRecordError(27);
 
-    time ti = PopTimeDateX();
+    time ti = PopTimeDate39();
 
-    if (PopCharX() != 0x15) // unsigned long 64
+    if (PopChar39() != 0x15) // unsigned long 64
       return GetBuffRecordError(28);
 
-    uint64_t ddw = PopLong64X();
+    uint64_t ddw = PopLong6439();
 
     if (r.fFirst == false) {
       r.bError = 0;
