@@ -123,7 +123,7 @@ static bool ReadData39(time  tiTime, ulong  dwValue)
 
 bool    ReadHeader39(void)
 {
-  DeltaBuffPrf39();
+  DeltaProfile39();
 
 #ifdef MONITOR_39
   MonitorString("\n ReadHeader39 ");
@@ -137,7 +137,7 @@ bool    ReadHeader39(void)
     time tiVirtual = HouIndexToDate(dw);
 
     ulong dwValue = 0;
-    uchar bSize = GetBuffPrfSize39();
+    uchar bSize = GetProfileSize39();
 
 #ifdef MONITOR_39
     MonitorString("\n time="); MonitorTime(tiVirtual);
@@ -147,7 +147,7 @@ bool    ReadHeader39(void)
     uchar i;
     for (i=0; i<bSize; i++)
     {
-      profile39 prf = GetBuffPrf39(i);
+      profile39 prf = GetProfile39(i);
       if (prf.fExists) {
         if (!DifferentDateTime(tiVirtual, prf.tiTime)) {
           dwValue = prf.ddwValue;

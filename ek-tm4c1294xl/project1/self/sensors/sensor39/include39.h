@@ -8,15 +8,6 @@ include39*h
 #define __INCLUDE39
 
 
-typedef struct
-{
-  bool          fExists;
-  time          tiTime;
-  uint64_t      ddwValue;
-} profile39;
-
-
-
 #define MONITOR_39          1
 #define MONITOR_39_NAMES    1
 #define MONITOR_39_MONITOR  1

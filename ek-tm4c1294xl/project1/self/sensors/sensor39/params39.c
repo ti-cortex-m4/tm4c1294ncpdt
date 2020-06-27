@@ -16,29 +16,13 @@ params34*c
 #include "../../display/display.h"
 #include "../../time/delay.h"
 #include "device39.h"
+#include "device39_obis.h"
 #include "error39.h"
 #include "io39.h"
 #include "query_register_39.h"
 #include "fragment_open_39.h"
 #include "dlms_read_register.h"
 #include "params39.h"
-
-
-
-// Blue Book: 7.5.1 Value group C codes – Electricity
-static const obis_t obisU1      = {1, 0, 32, 7, 0, 255},
-                    obisU2      = {1, 0, 52, 7, 0, 255},
-                    obisU3      = {1, 0, 72, 7, 0, 255},
-
-                    obisI1      = {1, 0, 31, 7, 0, 255},
-                    obisI2      = {1, 0, 51, 7, 0, 255},
-                    obisI3      = {1, 0, 71, 7, 0, 255},
-
-                    obisPplus   = {1, 0,  1, 7, 0, 255},
-                    obisPminus  = {1, 0,  2, 7, 0, 255},
-
-                    obisQplus   = {1, 0,  3, 7, 0, 255},
-                    obisQminus  = {1, 0,  4, 7, 0, 255};
 
 
 

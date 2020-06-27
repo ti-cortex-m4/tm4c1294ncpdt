@@ -22,7 +22,7 @@ static bool         fBuffPrfOveflow39;
 
 
 
-void    InitBuffPrf39(void)
+void    InitProfile39(void)
 {
   memset(&mpBuffPrf39, 0, sizeof(mpBuffPrf39));
   cbBuffPrfSize39 = 0;
@@ -30,14 +30,14 @@ void    InitBuffPrf39(void)
 }
 
 
-void    AddBuffPrf39(time  tiTime, uint64_t  ddwValue)
+void    AddProfile39(time  tmTime, uint64_t  ddwValue)
 {
   if (cbBuffPrfSize39 < PROFILE39_SIZE)
   {
     uchar i = cbBuffPrfSize39;
     ASSERT(i < PROFILE39_SIZE);
     mpBuffPrf39[i].fExists = true;
-    mpBuffPrf39[i].tiTime = tiTime;
+    mpBuffPrf39[i].tiTime = tmTime;
     mpBuffPrf39[i].ddwValue = ddwValue;
 
     cbBuffPrfSize39++;
@@ -56,7 +56,7 @@ void    MonitorBuffPrf38(void)
   uchar i;
   for (i=0; i<PROFILE39_SIZE; i++)
   {
-    profile39 prf = GetBuffPrf39(i);
+    profile39 prf = GetProfile39(i);
 
     MonitorString("\n "); MonitorTime(prf.tiTime);
     MonitorString(" "); MonitorLongDec(prf.ddwValue % 0x100000000);
@@ -65,7 +65,7 @@ void    MonitorBuffPrf38(void)
 #endif
 }
 
-void    DeltaBuffPrf39(void)
+void    DeltaProfile39(void)
 {
 #ifdef MONITOR_39
   MonitorString("\n before");
@@ -77,8 +77,8 @@ void    DeltaBuffPrf39(void)
   uchar i;
   for (i=0; i<PROFILE39_SIZE-1; i++)
   {
-    profile39 prf1 = GetBuffPrf39(i);
-    profile39 prf2 = GetBuffPrf39(i + 1);
+    profile39 prf1 = GetProfile39(i);
+    profile39 prf2 = GetProfile39(i + 1);
 
     if (prf1.fExists & prf2.fExists)
     {
@@ -111,20 +111,20 @@ void    DeltaBuffPrf39(void)
 }
 
 
-profile39 GetBuffPrf39(uchar  i)
+profile39 GetProfile39(uchar  i)
 {
   ASSERT(i < PROFILE39_SIZE);
   return mpBuffPrf39[i];
 }
 
 
-uchar   GetBuffPrfSize39(void)
+uchar   GetProfileSize39(void)
 {
   return cbBuffPrfSize39;
 }
 
 
-bool    GetBuffPrfOveflow39(void)
+bool    IsProfileOveflow39(void)
 {
   return fBuffPrfOveflow39;
 }
