@@ -10,11 +10,17 @@ automatic39.c
 #include "../../keyboard/keyboard.h"
 #include "../../time/delay.h"
 #include "../../serial/ports.h"
+#include "../../serial/monitor.h"
 #include "../../devices/devices.h"
 //#include "../../sensors/automatic1.h"
 #include "../../digitals/digitals.h"
 #include "device39.h"
+#include "caller39.h"
+#include "crc16x25.h"
 #include "io39.h"
+#include "hdlc_address.h"
+#include "dlms_push.h"
+#include "fragment_open_39.h"
 #include "automatic39.h"
 
 
@@ -25,17 +31,17 @@ void    QueryId39(uchar  bNS, uchar  bNR, uchar  bInvokeId)
   MonitorString("\n\n QueryId39 ");
 #endif
 
-  uint wSize = 23 + GetHdlcAddressesSize(); // 0x19 25
+  uint wSize = 23 + GetHdlcAddressesSize_Simple(); // 0x19 25
 
   InitPush(0);
   PushChar(0x7E);
 
   PushFormatDLMS(wSize);
-  PushHdlcAddresses();
+  PushHdlcAddresses_Simple();
 
   PushChar(((bNR << 5) | 0x10 | (bNS << 1) | 0x00));
 
-  PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
+  PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize_Simple())); // 5
 
   // DLMS start
 
@@ -47,13 +53,13 @@ void    QueryId39(uchar  bNS, uchar  bNR, uchar  bInvokeId)
   PushChar(0x01); // Get-Request-Normal
   PushChar(0xC0 | (bInvokeId % 16)); // Invoke-Id-And-Priority
 
-  PushChar(0x00);
-  PushChar(8); // clock (class_id = 8)
+  PushChar(0);
+  PushChar(1);
 
   PushOBIS_DLMS(obisId);
 
-  PushChar(2); // time (attribute = 2)
-  PushChar(0x00);
+  PushChar(2);
+  PushChar(0);
 
   // DLMS finish
 
@@ -66,28 +72,30 @@ void    QueryId39(uchar  bNS, uchar  bNR, uchar  bInvokeId)
 
 
 
-bool    ChangeSpeed38(void)
+bool    ChangeSpeed39(void)
 {
-  InitPush(0);
+  caller39 c = InitCaller39();
 
-  PushChar(0xC0);
-  PushChar(0x06);
+  uchar bError = FragmentOpen39(&c);
+  if (bError != 0) return false;
 
-  PushLongLtl(0);
-
-  PushChar(0x00);
-  PushChar(0x06);
-
-  PushChar(6);
-  PushChar(0);
-  PushChar(5);
-
-  Query38(250, 14);
+  QueryId39(c.bNS, c.bNR, c.bInvokeId);
+  if (Input39() != SER_GOODCHECK) return false;
 
 
-  if (Input38() != SER_GOODCHECK) return false;
   Beep();
 
-  ShowLong(ReadNumber38());
+
+  Clear();
+
+  InitPop(12 + GetHdlcAddressesSize_Simple());
+  uchar a = PopChar();
+  uchar b = PopChar();
+  uchar d = PopChar();
+
+  uchar i;
+  for (i=0; i<5; i++)
+    szLo[i] = PopChar();
+
   return true;
 }
