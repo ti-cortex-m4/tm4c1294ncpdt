@@ -23,7 +23,7 @@ fragment_profile_39.c
 
 static record39 Fault(uchar  bError)
 {
-  return GetBuffRecordError(Error39(180+bError));
+  return GetBuffRecordError(Error39(bError));
 }
 
 
@@ -36,8 +36,8 @@ record39 FragmentProfile39(caller39  *pc, time  tm1, time  tm2)
   (*pc).bNS++;
   (*pc).bInvokeId++;
   QueryProfile39((*pc).bNS, (*pc).bNR, (*pc).bInvokeId, tm1, tm2);
-  if (Input39() != SER_GOODCHECK) return Fault(0);
-  if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(1);
+  if (Input39() != SER_GOODCHECK) return Fault(180+0);
+  if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(180+1);
 
   bool fUseBlocks = UseBlocksDMLS();
   bool fLastBlock = LastBlockDMLS();
@@ -47,16 +47,16 @@ record39 FragmentProfile39(caller39  *pc, time  tm1, time  tm2)
   while (!LastSegmentDMLS()) {
     (*pc).bNR++;
     Query39_RR((*pc).bNR);
-    if (Input39() != SER_GOODCHECK) return Fault(2);
-    if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(3);
+    if (Input39() != SER_GOODCHECK) return Fault(180+2);
+    if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(180+3);
 
     AddBuffRecord39(6 + GetHdlcAddressesSize());
   }
 
   (*pc).bNR++;
   Query39_RR((*pc).bNR);
-  if (Input39() != SER_GOODCHECK) return Fault(4);
-  if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(5);
+  if (Input39() != SER_GOODCHECK) return Fault(180+4);
+  if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(180+5);
 
 
   uchar bBlockNumber = 0;
@@ -66,8 +66,8 @@ record39 FragmentProfile39(caller39  *pc, time  tm1, time  tm2)
 
     (*pc).bNS++;
     QueryNextBlock39((*pc).bNS, (*pc).bNR, (*pc).bInvokeId, bBlockNumber);
-    if (Input39() != SER_GOODCHECK) return Fault(6);
-    if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(7);
+    if (Input39() != SER_GOODCHECK) return Fault(180+6);
+    if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(180+7);
 
     fUseBlocks = UseBlocksDMLS();
     fLastBlock = LastBlockDMLS();
@@ -77,16 +77,16 @@ record39 FragmentProfile39(caller39  *pc, time  tm1, time  tm2)
     while (!LastSegmentDMLS()) {
       (*pc).bNR++;
       Query39_RR((*pc).bNR);
-      if (Input39() != SER_GOODCHECK) return Fault(8);
-      if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(9);
+      if (Input39() != SER_GOODCHECK) return Fault(180+8);
+      if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(180+9);
 
       AddBuffRecord39(6 + GetHdlcAddressesSize());
     }
 
     (*pc).bNR++;
     Query39_RR((*pc).bNR);
-    if (Input39() != SER_GOODCHECK) return Fault(10);
-    if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(11);
+    if (Input39() != SER_GOODCHECK) return Fault(180+10);
+    if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(180+11);
   }
 
 

@@ -23,7 +23,7 @@ fragment_cntmon_39.c
 
 static double2 Fault(uchar  bError)
 {
-  return GetDouble2Error1(Error39(170+bError));
+  return GetDouble2Error1(Error39(bError));
 }
 
 
@@ -33,8 +33,8 @@ double2 FragmentCntMonCan(const obis_t  obis, caller39  *pc, uchar  bMonth, ucha
   (*pc).bNS++;
   (*pc).bInvokeId++;
   QueryEngMon39(obis, (*pc).bNS, (*pc).bNR, (*pc).bInvokeId, bMonth, bYear);
-  if (Input39() != SER_GOODCHECK) return Fault(0);
-  if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(1);
+  if (Input39() != SER_GOODCHECK) return Fault(170+0);
+  if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(170+1);
 
 
   bool present = (EngMonPresent39() == 0);
@@ -52,12 +52,12 @@ double2 FragmentCntMonCan(const obis_t  obis, caller39  *pc, uchar  bMonth, ucha
 
   (*pc).bNR++;
   Query39_RR((*pc).bNR);
-  if (Input39() != SER_GOODCHECK) return Fault(2);
-  if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(3);
+  if (Input39() != SER_GOODCHECK) return Fault(170+2);
+  if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(170+3);
 
 
   double2 scaler = ReadRegisterScaler39(obis, pc);
-  if (!scaler.fValid) return Fault(4);
+  if (!scaler.fValid) return Fault(170+4);
 
 
   if (present) {
@@ -75,5 +75,5 @@ double2 FragmentCntMonCan(const obis_t  obis, caller39  *pc, uchar  bMonth, ucha
     return GetDouble2Error1(ERROR_NOT_PRESENTED);
   }
 
-  return Fault(5);
+  return Fault(170+5);
 }
