@@ -11,34 +11,14 @@ error39*c
 #include "../../serial/monitor.h"
 #include "../../time/rtc.h"
 #include "include39.h"
+#include "error39_include.h"
 #include "error39.h"
 
 
 
-typedef struct
-{
-  time          tiNow;
-  uchar         bError;
-  uint          wData;
-} log39;
-
-
-typedef struct
-{
-  time          tiNow;
-  uint          wCounter;
-} counter39;
-
-
-
-#define LOG39_SIZE      100
-
 static uint             cwLog39;
 static log39            mLog39[LOG39_SIZE];
 
-
-
-#define COUNTER39_SIZE  0x100
 
 static counter39        mCounter39[COUNTER39_SIZE];
 
@@ -92,6 +72,7 @@ uchar   Error39(uchar  bError) {
 #ifdef  MONITOR_39  
   MonitorString("\n error="); MonitorCharDec(bError);
 #endif  
+//  Log39(bError, 0);
   return bError;        
 }
 
@@ -101,5 +82,6 @@ uchar   Error39_(uchar  bError, uint  wCode) {
   MonitorString("\n error="); MonitorCharDec(bError);
   MonitorString("\n code="); MonitorIntDec(wCode);
 #endif  
+//  Log39(bError, wCode);
   return bError;        
 }
