@@ -6,8 +6,6 @@ query_profile_39.c
 
 #include "../../main.h"
 #include "../../serial/ports.h"
-#include "../../serial/ports2.h"
-#include "../../serial/ports_devices.h"
 #include "../../serial/monitor.h"
 #include "crc16x25.h"
 #include "io39.h"

@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-query_engmon_39*c
+query_engmon_39.c
 
 
 ------------------------------------------------------------------------------*/
@@ -88,14 +88,7 @@ void    QueryEngMon39(const obis_t  obis, uchar  bNS, uchar  bNR, uchar  bInvoke
   PushChar(0x00); // ?
 
   PushChar(0x07); // <ClassId Value="0007" /> <!--PROFILE_GENERIC-->
-
-  PushChar(0x00);
-  PushChar(0x00);
-  PushChar(0x62);
-  PushChar(0x01);
-  PushChar(0x00);
-  PushChar(0xFF);
-
+  PushOBIS_DLMS(obisBillingPeriod); // <!--0.0.98.1.0.255-->
   PushChar(0x02); // <AttributeId Value="02" />
 
   PushChar(0x01); // <AccessSelector Value="01" />
@@ -113,12 +106,7 @@ void    QueryEngMon39(const obis_t  obis, uchar  bNS, uchar  bNR, uchar  bInvoke
 
   PushChar(0x09); // <OctetString Value="0000010000FF" />
   PushChar(0x06);
-  PushChar(0x00); // <!--0.0.1.0.0.255-->
-  PushChar(0x00);
-  PushChar(0x01);
-  PushChar(0x00);
-  PushChar(0x00);
-  PushChar(0xFF);
+  PushOBIS_DLMS(obisTime); // <!--0.0.1.0.0.255-->
 
   PushChar(0x0F); // <Int8 Value="02" />
   PushChar(0x02);
