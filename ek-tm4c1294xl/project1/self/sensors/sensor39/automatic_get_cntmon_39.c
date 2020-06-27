@@ -80,7 +80,7 @@ double2 ReadCntMonCan38_Internal(uchar  ibMon)
     tm2.bMinute = 59;
     tm2.bSecond = 59;
 
-    InitBuffRecord39_FragmentProfile();
+    InitBuffRecord39_FragmentProfile39();
 
     record39 r = FragmentProfile39(&c, tm1, tm2);
 

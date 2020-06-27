@@ -25,7 +25,7 @@ static profile39    PrfFirstPrev, PrfFirstCurr;
 
 
 
-void    InitBuffRecord39_FragmentProfile(void) {
+void    InitBuffRecord39_FragmentProfile39(void) {
   memset(&PrfFirstPrev, 0, sizeof(PrfFirstPrev));
   memset(&PrfFirstCurr, 0, sizeof(PrfFirstCurr));
 }
@@ -37,7 +37,7 @@ void    InitBuffRecord39(void) {
 
 
 
-void    AddBuffRecord39(uint  iwStart/*, uint  cwSize*/) {
+void    AddBuffRecord39(uint  iwStart/*, uint  cwSize*/) { // TODO GetPushOverflow
   uint cwSize = IndexInBuff()-iwStart-3;
 
 #ifdef BUFF_RECORD_39
@@ -124,7 +124,7 @@ record39 FinishBuffRecord39(void) {
     if (PopChar39() != 0x15) // unsigned long 64
       return GetBuffRecordError(28);
 
-    uint64_t ddw = PopLong6439();
+    uint64_t ddw = PopLongLong39();
 
     if (r.fFirst == false) {
       r.bError = 0;
