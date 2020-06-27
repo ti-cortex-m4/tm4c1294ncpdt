@@ -28,8 +28,8 @@ uchar   AsciiAddress_Size(line  *pl) {
 
 void    AsciiAddress_Increment(line  *pl) {
   uchar i = strlen((char const *)(*pl).szLine);
-  sprintf(szHi,"%u",i);
   if (i > 0) i--;
+
   if ((*pl).szLine[i] == 'Z')
     (*pl).szLine[i] = '0';
   else if ((*pl).szLine[i] == 'z')
@@ -49,8 +49,8 @@ void    AsciiAddress_Increment(line  *pl) {
 
 void    AsciiAddress_Decrement(line  *pl) {
   uchar i = strlen((char const *)(*pl).szLine);
-  sprintf(szHi,"%u",i);
   if (i > 0) i--;
+
   if ((*pl).szLine[i] == '0')
     (*pl).szLine[i] = 'Z';
   else if ((*pl).szLine[i] <= '9')
