@@ -118,7 +118,7 @@ void    InitProfile39_Profile(void) {
 #endif
 
   InitHeader39();
-  InitBuffRecord39_FragmentProfile39();
+  InitBuffRecord39_FragmentProfile();
 }
 
 

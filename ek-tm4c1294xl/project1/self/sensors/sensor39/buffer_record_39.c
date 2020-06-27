@@ -25,7 +25,7 @@ static profile39    PrfFirstPrev, PrfFirstCurr;
 
 
 
-void    InitBuffRecord39_FragmentProfile39(void) {
+void    InitBuffRecord39_FragmentProfile(void) {
   memset(&PrfFirstPrev, 0, sizeof(PrfFirstPrev));
   memset(&PrfFirstCurr, 0, sizeof(PrfFirstCurr));
 }

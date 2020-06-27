@@ -116,7 +116,7 @@ double2 TestFragmentProfile39(void)
   ti2.bMinute = 0;
   ti2.bSecond = 0;
 
-  InitBuffRecord39_FragmentProfile39();
+  InitBuffRecord39_FragmentProfile();
 
   uchar bError = FragmentProfile39(&c, ti1, ti2).bError;
   if (bError != 0)  {
