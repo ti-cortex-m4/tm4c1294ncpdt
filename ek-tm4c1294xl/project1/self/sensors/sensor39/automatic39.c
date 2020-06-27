@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-AUTOMATIC36*C
+automatic39.c
 
 
 ------------------------------------------------------------------------------*/
@@ -14,147 +14,80 @@ AUTOMATIC36*C
 //#include "../../sensors/automatic1.h"
 #include "../../digitals/digitals.h"
 #include "device39.h"
-#include "query_engmon_39.h"
 #include "io39.h"
 #include "automatic39.h"
 
 
-/*
-bool    Automatic36(void)
+
+void    QueryId39(uchar  bNS, uchar  bNR, uchar  bInvokeId)
 {
-  Clear();
+#ifdef MONITOR_39_NAMES
+  MonitorString("\n\n QueryId39 ");
+#endif
 
-  if (QueryConfig36_Full(50) == 0) return(0);
+  uint wSize = 23 + GetHdlcAddressesSize(); // 0x19 25
 
-  dbKpulse = GetDivider36();            // K преобразования
-  dbKtrans = 1;                         // K трансформации
-  SetAllFactors(dbKpulse,dbKtrans);     // сохранение К преобразования и К трансформации
+  InitPush(0);
+  PushChar(0x7E);
 
-  return(1);
-}
-*/
+  PushFormatDLMS(wSize);
+  PushHdlcAddresses();
 
+  PushChar(((bNR << 5) | 0x10 | (bNS << 1) | 0x00));
 
+  PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
 
-/*
-bool    QueryEngDay36_Full(uchar  bTime, uchar  bPercent)
-{
-  uchar i;
-  for (i=0; i<MaxRepeats(); i++)
-  {
-    DelayOff();
-    QueryEngDay36(bTime);
+  // DLMS start
 
-    if (Input36() == SER_GOODCHECK) break;
-    if (fKey == true) return(0);
-  }
+  PushChar(0xE6); // LLC
+  PushChar(0xE6);
+  PushChar(0x00);
 
-  if (i == MaxRepeats()) return(0);
-  ShowPercent(bPercent);
+  PushChar(0xC0); // Get-Request
+  PushChar(0x01); // Get-Request-Normal
+  PushChar(0xC0 | (bInvokeId % 16)); // Invoke-Id-And-Priority
 
-  ReadEnergy36();
-  return(1);
-}
+  PushChar(0x00);
+  PushChar(8); // clock (class_id = 8)
 
+  PushOBIS_DLMS(obisId);
 
-bool    QueryEngMon36_Full(uchar  bTime, uchar  bPercent)
-{
-  uchar i;
-  for (i=0; i<MaxRepeats(); i++)
-  {
-    DelayOff();
-    QueryEngMon36(bTime);
+  PushChar(2); // time (attribute = 2)
+  PushChar(0x00);
 
-    if (Input36() == SER_GOODCHECK) break;
-    if (fKey == true) return(0);
-  }
+  // DLMS finish
 
-  if (i == MaxRepeats()) return(0);
-  ShowPercent(bPercent);
+  PushIntLtl(MakeCRC16X25OutBuff(1, wSize-2));
 
-  ReadEnergy36();
-  return(1);
-}
-*/
+  PushChar(0x7E);
 
-
-/*
-uint64_t _ReadEngMon39(void)
-{
-  InitPop(18 + GetHdlcAddressesSize());
-  return PopLongBig()*0x100000000 + PopLongBig();
+  Query39(1000, wSize+2); // 27
 }
 
-double2 ReadCntMonCan36_(uchar  ibMon)
+
+
+bool    ChangeSpeed38(void)
 {
-  Query39_DISC();
-  if (Input39() != SER_GOODCHECK) return GetDouble2Error();
-  DelayOff();
+  InitPush(0);
 
-  Query39_SNRM();
-  if (Input39() != SER_GOODCHECK) return GetDouble2Error();
-  DelayOff();
+  PushChar(0xC0);
+  PushChar(0x06);
 
-  uchar bNS = 0;
-  uchar bNR = 0;
-  uchar bInvokeId = 0;
+  PushLongLtl(0);
 
-  Query39_AARQ(bNS, bNR);
-  if (Input39() != SER_GOODCHECK) return GetDouble2Error();
-  if (!ValidateIframe(bNS, bNR)) return GetDouble2Error();
-  DelayOff();
+  PushChar(0x00);
+  PushChar(0x06);
 
-  bNR++;
-  Query39_RR(bNR);
-  if (Input39() != SER_GOODCHECK) return GetDouble2Error();
-  if (!ValidateSframe(bNR)) return GetDouble2Error();
-  DelayOff();
+  PushChar(6);
+  PushChar(0);
+  PushChar(5);
 
-  bNS++;
-  QueryEngMon39(bNS, bNR, bInvokeId++, 4, 20);
-  if (Input39() != SER_GOODCHECK) return GetDouble2Error();
-  if (!ValidateIframe(bNS, bNR)) return GetDouble2Error();
+  Query38(250, 14);
 
-  uint64_t ddw = ReadEngMon39();
-  mpdwChannelsA[0] = ddw % 0x100000000;
-  mpdbChannelsC[0] = (double)mpdwChannelsA[0] / 1000;
-  mpboChannelsA[0] = true;
 
-  DelayOff();
+  if (Input38() != SER_GOODCHECK) return false;
+  Beep();
 
-  bNR++;
-  Query39_RR(bNR);
-  if (Input39() != SER_GOODCHECK) return GetDouble2Error();
-  if (!ValidateSframe(bNR)) return GetDouble2Error();
-  DelayOff();
-
-  Query39_DISC(); // TODO always close
-  if (Input39() != SER_GOODCHECK) return GetDouble2Error();
-  DelayOff();
-
-  return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
-/ *
-  Clear();
-
-  if (QueryConfig36_Full(25) == 0) return GetDouble2Error();
-
-  time2 ti2 = QueryTime36_Full(50);
-  if (ti2.fValid == false) return GetDouble2Error();
-  time ti = ti2.tiValue;
-
-  if (ti.bMonth != ibMon+1)
-  {
-    if (QueryEngMon36_Full((bMONTHS+ti.bMonth-1-ibMon) % bMONTHS, 75) == 0) return GetDouble2Error();
-  }
-  else
-  {
-    if (QueryEngDay36_Full(1, 75) == 0) return GetDouble2Error();
-  }
-
-  mpdbChannelsC[0] = (double)mpdwChannelsA[0] / GetDivider36();
-  mpboChannelsA[0] = true;
-
-  return GetDouble2(mpdbChannelsC[0], true);
-* /
+  ShowLong(ReadNumber38());
+  return true;
 }
-*/

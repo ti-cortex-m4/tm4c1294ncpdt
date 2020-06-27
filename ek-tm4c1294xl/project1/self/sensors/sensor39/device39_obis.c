@@ -9,6 +9,8 @@ device39_obis.c
 
 
 
+const obis_t        obisId      = {0, 0, 96, 1, 4, 255};
+
 const obis_t        obisTime    = {0, 0, 1, 0, 0, 255};
 
 const obis_t        obisEngAbs  = {1, 0, 15, 8, 0, 255};
