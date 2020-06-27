@@ -100,25 +100,25 @@ double2 TestFragmentProfile39(void)
 
   if (FragmentOpen39(&c) != 0) return GetDouble2Error();
 
-  time ti1;
-  ti1.bYear = 20;
-  ti1.bMonth = 6;
-  ti1.bDay = 1;
-  ti1.bHour = 0;
-  ti1.bMinute = 0;
-  ti1.bSecond = 0;
+  time tm1;
+  tm1.bYear = 20;
+  tm1.bMonth = 6;
+  tm1.bDay = 1;
+  tm1.bHour = 0;
+  tm1.bMinute = 0;
+  tm1.bSecond = 0;
 
-  time ti2;
-  ti2.bYear = 20;
-  ti2.bMonth = 6;
-  ti2.bDay = 14;
-  ti2.bHour = 0;
-  ti2.bMinute = 0;
-  ti2.bSecond = 0;
+  time tm2;
+  tm2.bYear = 20;
+  tm2.bMonth = 6;
+  tm2.bDay = 14;
+  tm2.bHour = 0;
+  tm2.bMinute = 0;
+  tm2.bSecond = 0;
 
-  InitBuffRecord39_FragmentProfile();
+  InitBuffRecord39_FragmentProfile39();
 
-  uchar bError = FragmentProfile39(&c, ti1, ti2).bError;
+  uchar bError = FragmentProfile39(&c, tm1, tm2).bError;
   if (bError != 0)  {
     MonitorString("\n error "); MonitorCharDec(bError);
     return GetDouble2Error();

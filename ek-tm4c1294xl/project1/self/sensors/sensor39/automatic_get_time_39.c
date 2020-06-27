@@ -19,15 +19,22 @@ automatic_get_time_39.c
 
 
 
+static time2 Fault(uchar  bError)
+{
+  return GetTime2Error1(Error39(bError));
+}
+
+
+
 time2   ReadTimeCan39_Internal(void)
 {
   caller39 c = InitCaller39();
 
   time2 tm2 = FragmentOpenTime39(&c);
-  if (!tm2.fValid) return GetTime2Error1(Error39(60+0));
+  if (!tm2.fValid) return Fault(60+0);
 
   Query39_DISC();
-  if (Input39() != SER_GOODCHECK) return GetTime2Error1(Error39(60+1));
+  if (Input39() != SER_GOODCHECK) return Fault(60+1);
 
   return GetTime0(tm2.tiValue);
 }
@@ -53,9 +60,9 @@ time2   ReadTimeCan39(void)
   }
 
   Query39_DISC();
-  if (Input39() != SER_GOODCHECK) return GetTime2Error1(Error39(60+2));
+  if (Input39() != SER_GOODCHECK) return Fault(60+2);
 
-  return GetTime2Error1(Error39(60+3));
+  return Fault(60+3);
 }
 
 
@@ -74,7 +81,7 @@ time2   ReadTimeCan39_Short(void)
   }
 
   Query39_DISC();
-  if (Input39() != SER_GOODCHECK) return GetTime2Error1(Error39(60+4));
+  if (Input39() != SER_GOODCHECK) return Fault(60+4);
 
-  return GetTime2Error1(Error39(60+5));
+  return Fault(60+5);
 }

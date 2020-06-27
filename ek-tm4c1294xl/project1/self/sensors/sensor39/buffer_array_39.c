@@ -19,7 +19,7 @@ static uint                 iwPush, iwPop;
 
 void    MonitorArray39(void) {
 #ifdef ARRAY_39
-  MonitorString("\n ReadFromBuffer");
+  MonitorString("\n MonitorArray39");
   MonitorArrayHex(mpbBuff, iwPush);
 #endif
 }
@@ -33,9 +33,15 @@ void    InitPush39(void) {
 
 
 void    PushChar39(uchar  b) {
-  mpbBuff[iwPush++] = b;
+  if (iwPush < sizeof(mpbBuff)-1)
+    mpbBuff[iwPush++] = b;
 }
 
+
+bool    GetPushOverflow(void)
+{
+  return iwPush < sizeof(mpbBuff)-1;
+}
 
 
 void    InitPop39(void) {
@@ -55,39 +61,39 @@ uchar   PopChar39(void) {
 }
 
 
-uint    PopIntX(void) {
+uint    PopInt39(void) {
   return PopChar39()*0x100 + PopChar39();
 }
 
 
-ulong   PopLongX(void) {
-  return PopIntX()*0x10000 + PopIntX();
+ulong   PopLong39(void) {
+  return PopInt39()*0x10000 + PopInt39();
 }
 
 
-uint64_t PopLong6439(void) {
-  return PopLongX()*0x100000000 + PopLongX();
+uint64_t PopLongLong39(void) {
+  return PopLong39()*0x100000000 + PopLong39();
 }
 
 
 time    PopTimeDate39(void)
 {
-  time ti;
-  ti.bYear   = PopIntX() - 2000;
-  ti.bMonth  = PopChar39();
-  ti.bDay    = PopChar39();
+  time tm;
+  tm.bYear   = PopInt39() - 2000;
+  tm.bMonth  = PopChar39();
+  tm.bDay    = PopChar39();
 
   PopChar39();
 
-  ti.bHour   = PopChar39();
-  ti.bMinute = PopChar39();
-  ti.bSecond = PopChar39();
+  tm.bHour   = PopChar39();
+  tm.bMinute = PopChar39();
+  tm.bSecond = PopChar39();
 
   PopChar39();
   PopChar39();
   PopChar39();
   PopChar39();
 
-  return ti;
+  return tm;
 }
 
