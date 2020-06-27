@@ -11,6 +11,22 @@ error39*c
 
 
 
+typedef struct
+{
+  time          tiNow;
+  uchar         bError;
+  uint          wData;
+} log39;
+
+
+typedef struct
+{
+  time          tiNow;
+  uint          wCounter;
+} counter39;
+
+
+
 uchar   Error39(uchar  bError) {
 #ifdef  MONITOR_39  
   MonitorString("\n error="); MonitorCharDec(bError);
