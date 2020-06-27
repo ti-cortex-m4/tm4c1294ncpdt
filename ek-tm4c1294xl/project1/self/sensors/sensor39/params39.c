@@ -51,7 +51,7 @@ static float        flU1, flU2, flU3,
 
 static float2 Fault(uchar  bError)
 {
-  return GetFloat2Error1(Error39(bError));
+  return GetFloat2Error1(Error39(110+bError));
 }
 
 
@@ -59,57 +59,57 @@ static float2 Fault(uchar  bError)
 float2  ReadParam39_Internal(void)
 {
   caller39 r = InitCaller39();
-  if (FragmentOpen39(&r) != 0) return Fault(110+0);
+  if (FragmentOpen39(&r) != 0) return Fault(0);
 
 
   double2 db2;
 
   db2 = ReadRegisterValueWithScaler39(obisU1, &r);
-  if (!db2.fValid) return Fault(110+1);
+  if (!db2.fValid) return Fault(1);
   flU1 = db2.dbValue;
 
   db2 = ReadRegisterValueWithScaler39(obisU2, &r);
-  if (!db2.fValid) return Fault(110+2);
+  if (!db2.fValid) return Fault(2);
   flU2 = db2.dbValue;
 
   db2 = ReadRegisterValueWithScaler39(obisU3, &r);
-  if (!db2.fValid) return Fault(110+3);
+  if (!db2.fValid) return Fault(3);
   flU3 = db2.dbValue;
 
 
   db2 = ReadRegisterValueWithScaler39(obisI1, &r);
-  if (!db2.fValid) return Fault(110+4);
+  if (!db2.fValid) return Fault(4);
   flI1 = db2.dbValue*1000;
 
   db2 = ReadRegisterValueWithScaler39(obisI2, &r);
-  if (!db2.fValid) return Fault(110+5);
+  if (!db2.fValid) return Fault(5);
   flI2 = db2.dbValue*1000;
 
   db2 = ReadRegisterValueWithScaler39(obisI3, &r);
-  if (!db2.fValid) return Fault(110+6);
+  if (!db2.fValid) return Fault(6);
   flI3 = db2.dbValue*1000;
 
 
   db2 = ReadRegisterValueWithScaler39(obisPplus, &r);
-  if (!db2.fValid) return Fault(110+7);
+  if (!db2.fValid) return Fault(7);
   flPplus = db2.dbValue;
 
   db2 = ReadRegisterValueWithScaler39(obisPminus, &r);
-  if (!db2.fValid) return Fault(110+8);
+  if (!db2.fValid) return Fault(8);
   flPminus = db2.dbValue;
 
 
   db2 = ReadRegisterValueWithScaler39(obisQplus, &r);
-  if (!db2.fValid) return Fault(110+9);
+  if (!db2.fValid) return Fault(9);
   flQplus = db2.dbValue;
 
   db2 = ReadRegisterValueWithScaler39(obisQminus, &r);
-  if (!db2.fValid) return Fault(110+10);
+  if (!db2.fValid) return Fault(10);
   flQminus = db2.dbValue;
 
 
   Query39_DISC();
-  if (Input39() != SER_GOODCHECK) return Fault(110+11);
+  if (Input39() != SER_GOODCHECK) return Fault(11);
 
   return GetFloat0(-1);
 }
@@ -122,7 +122,7 @@ float2  ReadParam39(void)
 
   if (fBeginParam == false)
   {
-    if (!ReadParam39_Internal().fValid) return Fault(110+12);
+    if (!ReadParam39_Internal().fValid) return Fault(12);
 
     fBeginParam = true;
   }
