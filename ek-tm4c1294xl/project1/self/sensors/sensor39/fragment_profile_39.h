@@ -4,4 +4,4 @@ fragment_profile_39.h
 
 ------------------------------------------------------------------------------*/
 
-record39 FragmentProfile39(caller39  *pc, time  ti1, time  ti2);
+record39 FragmentProfile39(caller39  *pc, time  tm1, time  tm2);
