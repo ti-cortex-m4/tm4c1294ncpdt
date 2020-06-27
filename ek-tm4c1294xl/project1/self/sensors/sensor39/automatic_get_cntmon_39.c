@@ -27,7 +27,7 @@ automatic_get_cntmon_38*c
 
 
 
-static time2 Fault(uchar  bError)
+static double2 Fault(uchar  bError)
 {
   return GetDouble2Error1(Error39(bError));
 }
@@ -39,7 +39,7 @@ double2 ReadCntMonCan38_Internal(uchar  ibMon)
   caller39 c = InitCaller39();
 
   time2 tm2 = FragmentOpenTime39(&c);
-  if (!tm2.fValid) return Fault(110+0);
+  if (!tm2.fValid) return Fault(80+0);
   time tm = tm2.tiValue;
 
 
@@ -57,7 +57,7 @@ double2 ReadCntMonCan38_Internal(uchar  ibMon)
     }
 
     Query39_DISC();
-    if (Input39() != SER_GOODCHECK) return Fault(110+0);
+    if (Input39() != SER_GOODCHECK) return Fault(80+1);
 
     return db2;
   }
@@ -86,23 +86,22 @@ double2 ReadCntMonCan38_Internal(uchar  ibMon)
 #ifdef MONITOR_39
       MonitorString("\n error="); MonitorCharDec(r.bError);
 #endif
-      return Fault(110+0));
+      return Fault(80+2);
     }
     if (r.fFirst == false)
     {
       Clear();
       sprintf(szLo+0, "сутки %02u.%02u.%02u ?",tm.bDay,tm.bMonth,tm.bYear);
       Delay(1000);
-      return GetDouble2Error();
 
 #ifdef MONITOR_39
       MonitorString("\n no data");
 #endif
-      return Fault(110+0);
+      return Fault(80+3);
     }
 
     Query39_DISC();
-    if (Input39() != SER_GOODCHECK) return Fault(110+0);
+    if (Input39() != SER_GOODCHECK) return Fault(80+4);
 
     return GetDouble0(r.ddwValue);
   }
@@ -129,7 +128,7 @@ double2 ReadCntMonCan39(uchar  ibMon)
   }
 
   Query39_DISC();
-  if (Input39() != SER_GOODCHECK) return Fault(110+3);
+  if (Input39() != SER_GOODCHECK) return Fault(80+5);
 
-  return Fault(110+3);
+  return Fault(80+6);
 }
