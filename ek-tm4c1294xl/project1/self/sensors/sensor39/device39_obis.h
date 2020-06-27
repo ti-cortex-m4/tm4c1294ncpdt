@@ -26,16 +26,16 @@ extern  const obis_t        obisBillingPeriod;
 
 extern  const obis_t        obisProfile;
 
-extern  const obis_t        obisU1,
-                            obisU2,
-                            obisU3,
+extern  const obis_t        obisU1;
+extern  const obis_t        obisU2;
+extern  const obis_t        obisU3;
 
-                            obisI1,
-                            obisI2,
-                            obisI3,
+extern  const obis_t        obisI1;
+extern  const obis_t        obisI2;
+extern  const obis_t        obisI3;
 
-                            obisPplus,
-                            obisPminus,
+extern  const obis_t        obisPplus;
+extern  const obis_t        obisPminus;
 
-                            obisQplus,
-                            obisQminus;
+extern  const obis_t        obisQplus;
+extern  const obis_t        obisQminus;
