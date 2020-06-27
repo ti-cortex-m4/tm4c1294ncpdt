@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-fragment_profile_39*c
+fragment_profile_39.c
 
 
 ------------------------------------------------------------------------------*/
@@ -9,6 +9,7 @@ fragment_profile_39*c
 #include "../../serial/monitor.h"
 #include "../../serial/monitor_settings.h"
 #include "device39.h"
+#include "error39.h"
 #include "caller39.h"
 #include "query_profile_39.h"
 #include "query_next_block_39.h"
@@ -20,16 +21,23 @@ fragment_profile_39*c
 
 
 
-record39 FragmentProfile39(caller39  *pc, time  ti1, time  ti2)
+static record39 Fault(uchar  bError)
+{
+  return GetBuffRecordError(Error39(180+bError));
+}
+
+
+
+record39 FragmentProfile39(caller39  *pc, time  tm1, time  tm2)
 {
   InitBuffRecord39();
 
 
   (*pc).bNS++;
   (*pc).bInvokeId++;
-  QueryProfile39((*pc).bNS, (*pc).bNR, (*pc).bInvokeId, ti1, ti2);
-  if (Input39() != SER_GOODCHECK) return GetBuffRecordError(1);
-  ValidateFrame((*pc).bNS, (*pc).bNR);
+  QueryProfile39((*pc).bNS, (*pc).bNR, (*pc).bInvokeId, tm1, tm2);
+  if (Input39() != SER_GOODCHECK) return Fault(0);
+  if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(1);
 
   bool fUseBlocks = UseBlocksDMLS();
   bool fLastBlock = LastBlockDMLS();
@@ -39,16 +47,16 @@ record39 FragmentProfile39(caller39  *pc, time  ti1, time  ti2)
   while (!LastSegmentDMLS()) {
     (*pc).bNR++;
     Query39_RR((*pc).bNR);
-    if (Input39() != SER_GOODCHECK) return GetBuffRecordError(2);
-    ValidateFrame((*pc).bNS, (*pc).bNR);
+    if (Input39() != SER_GOODCHECK) return Fault(2);
+    if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(3);
 
     AddBuffRecord39(6 + GetHdlcAddressesSize());
   }
 
   (*pc).bNR++;
   Query39_RR((*pc).bNR);
-  if (Input39() != SER_GOODCHECK) return GetBuffRecordError(3);
-  ValidateFrame((*pc).bNS, (*pc).bNR);
+  if (Input39() != SER_GOODCHECK) return Fault(4);
+  if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(5);
 
 
   uchar bBlockNumber = 0;
@@ -58,8 +66,8 @@ record39 FragmentProfile39(caller39  *pc, time  ti1, time  ti2)
 
     (*pc).bNS++;
     QueryNextBlock39((*pc).bNS, (*pc).bNR, (*pc).bInvokeId, bBlockNumber);
-    if (Input39() != SER_GOODCHECK) return GetBuffRecordError(4);
-    ValidateFrame((*pc).bNS, (*pc).bNR);
+    if (Input39() != SER_GOODCHECK) return Fault(6);
+    if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(7);
 
     fUseBlocks = UseBlocksDMLS();
     fLastBlock = LastBlockDMLS();
@@ -69,16 +77,16 @@ record39 FragmentProfile39(caller39  *pc, time  ti1, time  ti2)
     while (!LastSegmentDMLS()) {
       (*pc).bNR++;
       Query39_RR((*pc).bNR);
-      if (Input39() != SER_GOODCHECK) return GetBuffRecordError(5);
-      ValidateFrame((*pc).bNS, (*pc).bNR);
+      if (Input39() != SER_GOODCHECK) return Fault(8);
+      if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(9);
 
       AddBuffRecord39(6 + GetHdlcAddressesSize());
     }
 
     (*pc).bNR++;
     Query39_RR((*pc).bNR);
-    if (Input39() != SER_GOODCHECK) return GetBuffRecordError(6);
-    ValidateFrame((*pc).bNS, (*pc).bNR);
+    if (Input39() != SER_GOODCHECK) return Fault(10);
+    if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(11);
   }
 
 
@@ -120,11 +128,10 @@ double2 TestFragmentProfile39(void)
 
   uchar bError = FragmentProfile39(&c, tm1, tm2).bError;
   if (bError != 0)  {
-    MonitorString("\n error "); MonitorCharDec(bError);
     return GetDouble2Error();
   }
 
-  return GetDouble2(0, true);
+  return GetDouble0(0);
 }
 
 #endif
