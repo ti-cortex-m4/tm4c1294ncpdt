@@ -31,7 +31,8 @@ static void Show(uchar  c)
   if ((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_REPROGRAM))
   {
     sprintf(szHi+7,"%9lu",mpdwAddress1[c]);
-    AsciiAddress_Show(&mpphAsciiAddress[c]);
+    sprintf(szLo+4,"%12s",mpphAsciiAddress[c].szLine);
+//    AsciiAddress_Show(&mpphAsciiAddress[c]);
 
     uint len = strlen((char const *)&mpphAsciiAddress[c].szLine);
     sprintf(szHi,"%u",len);
