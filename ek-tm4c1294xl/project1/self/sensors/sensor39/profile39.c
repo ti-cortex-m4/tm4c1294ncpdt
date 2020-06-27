@@ -201,8 +201,8 @@ uchar   TestProfile39_Internal(caller39*  pc)
 
   while (true) {
     t2time t2 = QueryHeader39();
-    record39 d = FragmentProfile39(pc, t2.ti1, t2.ti2);
-    if (d.bError != 0) return 11;
+    record39 r = FragmentProfile39(pc, t2.ti1, t2.ti2);
+    if (r.bError != 0) return 11;
 
     if (ReadHeader39() == false) return 0;
     if (fKey == true) return 255;
@@ -219,14 +219,13 @@ double2 TestProfile39(void)
   MonitorOpen(0);
 
   caller39 c = InitCaller39();
-  uchar b = TestProfile39_Internal(&c);
-  if (b != 0) {
-    MonitorString("\n error "); MonitorCharDec(b);
-  } else {
-    MonitorString("\n finish ");
-  }
 
-  return GetDouble2(0, true);
+  uchar bError = TestProfile39_Internal(&c);
+  if (bError != 0)  {
+    return GetDouble2Error();
+  } else {
+    return GetDouble0(0);
+  }
 }
 
 #endif 
