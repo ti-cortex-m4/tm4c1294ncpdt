@@ -18,7 +18,7 @@ static uint                 iwPush, iwPop;
 
 
 void    MonitorArray39(void) {
-#ifdef ARRAY_39
+#ifdef BUFFER_ARRAY_39
   MonitorString("\n MonitorArray39");
   MonitorArrayHex(mpbBuff, iwPush);
 #endif
