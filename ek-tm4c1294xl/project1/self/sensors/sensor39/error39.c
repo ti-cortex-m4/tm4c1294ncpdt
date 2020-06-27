@@ -21,11 +21,11 @@ uchar   Error39(uchar  bError) {
 }
 
 
-uchar   Error39_(uchar  bError, uint  wCode) {
+uchar   Error39_(uchar  bError, uint  wData) {
 #ifdef  MONITOR_39  
   MonitorString("\n error="); MonitorCharDec(bError);
-  MonitorString("\n code="); MonitorIntDec(wCode);
+  MonitorString("\n data="); MonitorIntDec(wData);
 #endif  
-//  Log39(bError, wCode);
+//  Log39(bError, wData);
   return bError;        
 }
