@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-buffers_x*c
+buffer_array_39.c
 
 
 ------------------------------------------------------------------------------*/
@@ -11,56 +11,52 @@ buffers_x*c
 
 
 
-//#define BUFF_ARRAY_39  1
+static uchar                mpbBuff[4096];
+
+static uint                 iwPush, iwPop;
 
 
 
-uchar                       mpbBuffX[3000]; // TODO check overflow
-
-uint                        iwPushX, iwPopX;
-
-
-
-void    MonitorX(void) {
-#ifdef BUFF_ARRAY_39
+void    MonitorArray39(void) {
+#ifdef ARRAY_39
   MonitorString("\n ReadFromBuffer");
-  MonitorArrayHex(mpbBuffX, iwPushX);
+  MonitorArrayHex(mpbBuff, iwPush);
 #endif
 }
 
 
 
-void    InitPushX(void) {
-  memset(&mpbBuffX, 0xFF, sizeof(mpbBuffX));
-  iwPushX = 0;
+void    InitPush39(void) {
+  memset(&mpbBuff, 0xFF, sizeof(mpbBuff));
+  iwPush = 0;
 }
 
 
-void    PushCharX(uchar  b) {
-  mpbBuffX[iwPushX++] = b;
+void    PushChar39(uchar  b) {
+  mpbBuff[iwPush++] = b;
 }
 
 
 
-void    InitPopX(void) {
-  MonitorX();
+void    InitPop39(void) {
+  MonitorArray39();
 
-  iwPopX = 0;
+  iwPop = 0;
 }
 
 
-uint    GetPopCapacity(void) {
-  return sizeof(mpbBuffX) - iwPopX;
+uint    GetPopCapacity39(void) {
+  return sizeof(mpbBuff) - iwPop;
 }
 
 
-uchar   PopCharX(void) {
-  return mpbBuffX[iwPopX++];
+uchar   PopChar39(void) {
+  return mpbBuff[iwPop++];
 }
 
 
 uint    PopIntX(void) {
-  return PopCharX()*0x100 + PopCharX();
+  return PopChar39()*0x100 + PopChar39();
 }
 
 
@@ -69,28 +65,28 @@ ulong   PopLongX(void) {
 }
 
 
-uint64_t PopLong64X(void) {
+uint64_t PopLong6439(void) {
   return PopLongX()*0x100000000 + PopLongX();
 }
 
 
-time    PopTimeDateX(void)
+time    PopTimeDate39(void)
 {
   time ti;
   ti.bYear   = PopIntX() - 2000;
-  ti.bMonth  = PopCharX();
-  ti.bDay    = PopCharX();
+  ti.bMonth  = PopChar39();
+  ti.bDay    = PopChar39();
 
-  PopCharX();
+  PopChar39();
 
-  ti.bHour   = PopCharX();
-  ti.bMinute = PopCharX();
-  ti.bSecond = PopCharX();
+  ti.bHour   = PopChar39();
+  ti.bMinute = PopChar39();
+  ti.bSecond = PopChar39();
 
-  PopCharX();
-  PopCharX();
-  PopCharX();
-  PopCharX();
+  PopChar39();
+  PopChar39();
+  PopChar39();
+  PopChar39();
 
   return ti;
 }
