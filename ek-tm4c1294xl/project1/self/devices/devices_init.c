@@ -50,6 +50,7 @@ DEVICES_INIT!C
 #include "../sensors/sensor35/action35.h"
 #include "../sensors/sensor35/timeout35.h"
 #include "../sensors/sensor35/log35.h"
+#include "../sensors/sensor39/error39.h"
 #include "devices_input.h"
 #include "devices_postinput.h"
 #include "devices_pause.h"
@@ -121,6 +122,7 @@ void    InitDevices1(void)
 
   InitTimeoutHistogram35();
   InitLog35();
+  InitLog39();
 }
 
 
