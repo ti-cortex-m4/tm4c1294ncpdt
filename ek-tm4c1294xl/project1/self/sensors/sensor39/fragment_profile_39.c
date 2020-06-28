@@ -23,14 +23,14 @@ fragment_profile_39.c
 
 static record39 Fault(uchar  bError)
 {
-  return GetBuffRecordError(Error39(bError));
+  return GetRecordError39(Error39(bError));
 }
 
 
 
 record39 FragmentProfile39(caller39  *pc, time  tm1, time  tm2)
 {
-  InitBuffRecord39();
+  InitRecord39();
 
 
   (*pc).bNS++;
@@ -42,7 +42,7 @@ record39 FragmentProfile39(caller39  *pc, time  tm1, time  tm2)
   bool fUseBlocks = UseBlocksDMLS();
   bool fLastBlock = LastBlockDMLS();
 
-  AddBuffRecord39(fUseBlocks ? 20 + GetHdlcAddressesSize() : 13 + GetHdlcAddressesSize());
+  AddRecord39(fUseBlocks ? 20 + GetHdlcAddressesSize() : 13 + GetHdlcAddressesSize());
 
   while (!LastSegmentDMLS()) {
     (*pc).bNR++;
@@ -50,7 +50,7 @@ record39 FragmentProfile39(caller39  *pc, time  tm1, time  tm2)
     if (Input39() != SER_GOODCHECK) return Fault(180+2);
     if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(180+3);
 
-    AddBuffRecord39(6 + GetHdlcAddressesSize());
+    AddRecord39(6 + GetHdlcAddressesSize());
   }
 
   (*pc).bNR++;
@@ -72,7 +72,7 @@ record39 FragmentProfile39(caller39  *pc, time  tm1, time  tm2)
     fUseBlocks = UseBlocksDMLS();
     fLastBlock = LastBlockDMLS();
 
-    AddBuffRecord39(20 + GetHdlcAddressesSize());
+    AddRecord39(20 + GetHdlcAddressesSize());
 
     while (!LastSegmentDMLS()) {
       (*pc).bNR++;
@@ -80,7 +80,7 @@ record39 FragmentProfile39(caller39  *pc, time  tm1, time  tm2)
       if (Input39() != SER_GOODCHECK) return Fault(180+8);
       if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(180+9);
 
-      AddBuffRecord39(6 + GetHdlcAddressesSize());
+      AddRecord39(6 + GetHdlcAddressesSize());
     }
 
     (*pc).bNR++;
@@ -90,7 +90,7 @@ record39 FragmentProfile39(caller39  *pc, time  tm1, time  tm2)
   }
 
 
-  return FinishBuffRecord39();
+  return FinishRecord39();
 }
 
 
@@ -124,7 +124,7 @@ double2 TestFragmentProfile39(void)
   tm2.bMinute = 0;
   tm2.bSecond = 0;
 
-  InitBuffRecord39_FragmentProfile39();
+  InitRecord39_FragmentProfile39();
 
   uchar bError = FragmentProfile39(&c, tm1, tm2).bError;
   if (bError != 0)  {

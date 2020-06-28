@@ -118,7 +118,7 @@ void    InitProfile39_Profile(void) {
 #endif
 
   InitHeader39();
-  InitBuffRecord39_FragmentProfile39();
+  InitRecord39_FragmentProfile39();
 }
 
 
@@ -127,7 +127,7 @@ void    QueryProfile39_Profile(void) {
   MonitorString("\n\n QueryProfile39_Profile");
 #endif
 
-  InitBuffRecord39();
+  InitRecord39();
 
   t2time t2 = QueryHeader39();
 
@@ -145,7 +145,7 @@ void    Read1_Profile(void) {
   fUseBlocks = UseBlocksDMLS();
   fLastBlock = LastBlockDMLS();
 
-  AddBuffRecord39(fUseBlocks ? 20 + GetHdlcAddressesSize() : 13 + GetHdlcAddressesSize());
+  AddRecord39(fUseBlocks ? 20 + GetHdlcAddressesSize() : 13 + GetHdlcAddressesSize());
 }
 
 
@@ -154,7 +154,7 @@ void    Read2_Profile(void) {
   MonitorString("\n\n Read2_Profile");
 #endif
 
-  AddBuffRecord39(6 + GetHdlcAddressesSize());
+  AddRecord39(6 + GetHdlcAddressesSize());
 }
 
 
@@ -197,7 +197,7 @@ void    Read4_Profile(void) {
   fUseBlocks = UseBlocksDMLS();
   fLastBlock = LastBlockDMLS();
 
-  AddBuffRecord39(20 + GetHdlcAddressesSize());
+  AddRecord39(20 + GetHdlcAddressesSize());
 }
 
 
@@ -206,7 +206,7 @@ void    Read5_Profile(void) {
   MonitorString("\n\n Read5_Profile");
 #endif
 
-  AddBuffRecord39(6 + GetHdlcAddressesSize());
+  AddRecord39(6 + GetHdlcAddressesSize());
 }
 
 
@@ -216,7 +216,7 @@ bool    FinishProfile39_Profile(void) {
   MonitorString("\n\n FinishProfile39_Profile");
 #endif
 
-  FinishBuffRecord39(); // TODO check result
+  FinishRecord39(); // TODO check result
   
   return ReadHeader39();
 }
