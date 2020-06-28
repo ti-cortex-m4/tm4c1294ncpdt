@@ -38,7 +38,7 @@ void    PushChar39(uchar  b) {
 }
 
 
-bool    IsPushOverflow(void)
+bool    IsPushOverflow39(void)
 {
   return iwPush < sizeof(mpbBuff)-1;
 }
