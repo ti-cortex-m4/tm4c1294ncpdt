@@ -30,8 +30,8 @@ static double2 Fault(uchar  bError)
 
 double2 TestTimeCorrect39(void)
 {
-//  fMonitorLogBasic = false;
-//  fMonitorLogHex = false;
+  fMonitorLogBasic = false;
+  fMonitorLogHex = false;
 
   MonitorOpen(0);
 
@@ -53,20 +53,25 @@ double2 TestTimeCorrect39(void)
   c.bInvokeId++;
   QueryCorrectTime39(c.bNS, c.bNR, c.bInvokeId, wDeltaSeconds1);
   if (Input39() != SER_GOODCHECK) return Fault(2);
-  if (ValidateFrame(c.bNS, c.bNR) == 100/*!= 0*/) return Fault(3);
+  if (ValidateFrame(c.bNS, c.bNR) != 0) return Fault(3);
+
+  c.bNR++;
+  Query39_RR(c.bNR);
+  if (Input39() != SER_GOODCHECK) return Fault(4);
+  if (ValidateFrame(c.bNS, c.bNR) != 0) return Fault(5);
 
 
   c.bNS++;
   c.bInvokeId++;
   QueryTime39(c.bNS, c.bNR, c.bInvokeId);
-  if (Input39() != SER_GOODCHECK) return Fault(4);
-  if (ValidateFrame(c.bNS, c.bNR) == 100/*!= 0*/) return Fault(5);
+  if (Input39() != SER_GOODCHECK) return Fault(6);
+  if (ValidateFrame(c.bNS, c.bNR) != 0) return Fault(7);
   time tmThat2 = ReadTime39();
 
   c.bNR++;
   Query39_RR(c.bNR);
-  if (Input39() != SER_GOODCHECK) return Fault(6);
-  if (ValidateFrame(c.bNS, c.bNR) == 100/*!= 0*/) return Fault(7);
+  if (Input39() != SER_GOODCHECK) return Fault(8);
+  if (ValidateFrame(c.bNS, c.bNR) != 0) return Fault(9);
 
 
   time tmThis2 = *GetCurrTimeDate();
