@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-key_ascii_addresses.c
+key_ascii_addresses*c
 
 
 ------------------------------------------------------------------------------*/
@@ -18,7 +18,6 @@ key_ascii_addresses.c
 //                                           0123456789ABCDEF
 static char const       szAddresses[]     = "Адреса          ",
                         szMask9[]         = "_________",
-//                        szSpace9[]        = "         ",
                         szMask12[]        = "____________",
                         szSpace12[]       = "            ";
 
@@ -32,9 +31,6 @@ static void Show(uchar  c)
   {
     sprintf(szHi+7,"%9lu",mpdwAddress1[c]);
     sprintf(szLo+4,"%12s",mpphAsciiAddress[c].szLine);
-
-    uint len = strlen((char const *)&mpphAsciiAddress[c].szLine);
-    sprintf(szHi,"%u",len);
   }
   else
   {
@@ -111,7 +107,8 @@ static line  address;
         enKeyboard = KBD_INPUT3;
         sprintf(szLo+4,szMask12);
 
-        AsciiAddress_Init(&address);
+        //AsciiAddress_Init(&address);
+        address = mpphAsciiAddress[c];
 
 
         ibRecordCan = c;

@@ -9,7 +9,6 @@ buffer_record_39*c
 #include "../../serial/ports.h"
 #include "../../serial/ports2.h"
 #include "../../serial/monitor.h"
-#include "../../time/timedate.h"
 #include "include39.h"
 #include "error39.h"
 #include "buffer_array_39.h"
@@ -18,13 +17,13 @@ buffer_record_39*c
 
 
 
-static profile39    PrfFirstPrev, PrfFirstCurr;
+static profile39    FirstPrev, FirstCurr;
 
 
 
 void    InitRecord39_FragmentProfile39(void) {
-  memset(&PrfFirstPrev, 0, sizeof(PrfFirstPrev));
-  memset(&PrfFirstCurr, 0, sizeof(PrfFirstCurr));
+  memset(&FirstPrev, 0, sizeof(FirstPrev));
+  memset(&FirstCurr, 0, sizeof(FirstCurr));
 }
 
 
@@ -72,6 +71,7 @@ void    AddRecord39(uint  iwStart) {
 
 record39 GetRecordError39(char  bError)
 {
+  static const time tiZero = { 0, 0, 0, 0, 0, 0 };
   record39 r;
 
   r.bError = bError;
@@ -142,11 +142,11 @@ record39 FinishRecord39(void) {
       r.tmValue = tm;
       r.fFirst = true;
 
-      PrfFirstPrev = PrfFirstCurr;
+      FirstPrev = FirstCurr;
 
-      PrfFirstCurr.fExists = true;
-      PrfFirstCurr.tmTime = tm;
-      PrfFirstCurr.ddwValue = ddw;
+      FirstCurr.fExists = true;
+      FirstCurr.tmTime = tm;
+      FirstCurr.ddwValue = ddw;
     }
 
 #if BUFFER_RECORD_39
@@ -159,15 +159,15 @@ record39 FinishRecord39(void) {
     AddProfile39(tm, ddw);
   }
 
-  if (PrfFirstPrev.fExists == true) {
+  if (FirstPrev.fExists == true) {
 #if BUFFER_RECORD_39
     MonitorString("\n");
-    MonitorTime(PrfFirstPrev.tmTime);
-    MonitorLongDec(PrfFirstPrev.ddwValue / 1000000);
-    MonitorLongDec(PrfFirstPrev.ddwValue % 1000000);
+    MonitorTime(FirstPrev.tmTime);
+    MonitorLongDec(FirstPrev.ddwValue / 1000000);
+    MonitorLongDec(FirstPrev.ddwValue % 1000000);
     MonitorString(" previous");
 #endif
-    AddProfile39(PrfFirstPrev.tmTime, PrfFirstPrev.ddwValue);
+    AddProfile39(FirstPrev.tmTime, FirstPrev.ddwValue);
   }
 
   return r;
