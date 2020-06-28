@@ -16,35 +16,35 @@ buffer_profile_39*c
 
 
 
-static profile39    mpBuffPrf39[PROFILE39_SIZE];
-static uchar        cbBuffPrfSize39;
-static bool         fBuffPrfOveflow39;
+static profile39    mpProfile39[PROFILE39_SIZE];
+static uchar        cbProfileSize39;
+static bool         fProfileOveflow39;
 
 
 
 void    InitProfile39(void)
 {
-  memset(&mpBuffPrf39, 0, sizeof(mpBuffPrf39));
-  cbBuffPrfSize39 = 0;
-  fBuffPrfOveflow39 = false;
+  memset(&mpProfile39, 0, sizeof(mpProfile39));
+  cbProfileSize39 = 0;
+  fProfileOveflow39 = false;
 }
 
 
 void    AddProfile39(time  tmTime, uint64_t  ddwValue)
 {
-  if (cbBuffPrfSize39 < PROFILE39_SIZE)
+  if (cbProfileSize39 < PROFILE39_SIZE)
   {
-    uchar i = cbBuffPrfSize39;
+    uchar i = cbProfileSize39;
     ASSERT(i < PROFILE39_SIZE);
-    mpBuffPrf39[i].fExists = true;
-    mpBuffPrf39[i].tmTime = tmTime;
-    mpBuffPrf39[i].ddwValue = ddwValue;
+    mpProfile39[i].fExists = true;
+    mpProfile39[i].tmTime = tmTime;
+    mpProfile39[i].ddwValue = ddwValue;
 
-    cbBuffPrfSize39++;
+    cbProfileSize39++;
   }
   else
   {
-    fBuffPrfOveflow39 = true;
+    fProfileOveflow39 = true;
   }
 }
 
@@ -82,26 +82,26 @@ void    DeltaProfile39(void)
 
     if (prf1.fExists & prf2.fExists)
     {
-      mpBuffPrf39[i].tmTime = prf1.tmTime;
-      mpBuffPrf39[i].ddwValue = prf2.ddwValue - prf1.ddwValue;
-      mpBuffPrf39[i].fExists = true;
+      mpProfile39[i].tmTime = prf1.tmTime;
+      mpProfile39[i].ddwValue = prf2.ddwValue - prf1.ddwValue;
+      mpProfile39[i].fExists = true;
 
       f = true;
     }
     else
     {
-      mpBuffPrf39[i].tmTime = tiZero;
-      mpBuffPrf39[i].ddwValue = 0;
-      mpBuffPrf39[i].fExists = false;
+      mpProfile39[i].tmTime = tiZero;
+      mpProfile39[i].ddwValue = 0;
+      mpProfile39[i].fExists = false;
     }
   }
 
-  if (f) cbBuffPrfSize39--;
+  if (f) cbProfileSize39--;
 
   i = PROFILE39_SIZE-1;
-  mpBuffPrf39[i].tmTime = tiZero;
-  mpBuffPrf39[i].ddwValue = 0;
-  mpBuffPrf39[i].fExists = false;
+  mpProfile39[i].tmTime = tiZero;
+  mpProfile39[i].ddwValue = 0;
+  mpProfile39[i].fExists = false;
 
 #ifdef MONITOR_39
   MonitorString("\n after");
@@ -114,17 +114,17 @@ void    DeltaProfile39(void)
 profile39 GetProfile39(uchar  i)
 {
   ASSERT(i < PROFILE39_SIZE);
-  return mpBuffPrf39[i];
+  return mpProfile39[i];
 }
 
 
 uchar   GetProfileSize39(void)
 {
-  return cbBuffPrfSize39;
+  return cbProfileSize39;
 }
 
 
-bool    IsProfileOveflow39(void)
+bool    IsProfileOveflow39(void) // TODO use IsProfileOveflow39
 {
-  return fBuffPrfOveflow39;
+  return fProfileOveflow39;
 }
