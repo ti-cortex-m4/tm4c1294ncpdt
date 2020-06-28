@@ -11,6 +11,7 @@ buffer_record_39.c
 #include "../../serial/monitor.h"
 #include "../../time/timedate.h"
 #include "include39.h"
+#include "error39.h"
 #include "buffer_array_39.h"
 #include "buffer_profile_39.h"
 #include "buffer_record_39.h"
@@ -77,6 +78,14 @@ record39 GetRecordError39(char  bError)
 }
 
 
+
+static record39 Fault(uchar  bError)
+{
+  return GetRecordError39(Error39(bError));
+}
+
+
+
 record39 FinishRecord39(void) {
   record39 r = GetRecordError39(0);
 
@@ -84,15 +93,15 @@ record39 FinishRecord39(void) {
   InitPop39();
 
   if (GetPopCapacity39() < 2)
-    return GetRecordError39(21);
+    return Fault(130+1);
 
   if (PopChar39() != 1) // array
-    return GetRecordError39(22);
+    return Fault(130+2);
 
   uchar bCount = PopChar39();
 
 #ifdef BUFFER_RECORD_39
-  MonitorString("\n Count="); MonitorCharDec(bCount); MonitorString("\n");
+  MonitorString("\n count="); MonitorCharDec(bCount); MonitorString("\n");
 #endif
 
   InitProfile39();
@@ -101,24 +110,24 @@ record39 FinishRecord39(void) {
   for (i=0; i<bCount; i++)
   {
     if (GetPopCapacity39() < 2 + 2+12 + 1+8)
-      return GetRecordError39(23);
+      return Fault(130+3);
 
     if (PopChar39() != 0x02) // structure
-      return GetRecordError39(24);
+      return Fault(130+4);
 
     if (PopChar39() != 2) // structure size
-      return GetRecordError39(25);
+      return Fault(130+5);
 
     if (PopChar39() != 0x09) // string
-      return GetRecordError39(26);
+      return Fault(130+6);
 
     if (PopChar39() != 12) // string size
-      return GetRecordError39(27);
+      return Fault(130+7);
 
     time ti = PopTimeDate39();
 
     if (PopChar39() != 0x15) // unsigned long 64
-      return GetRecordError39(28);
+      return Fault(130+8);
 
     uint64_t ddw = PopLongLong39();
 
