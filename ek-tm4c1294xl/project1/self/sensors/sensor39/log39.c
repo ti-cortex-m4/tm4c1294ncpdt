@@ -52,17 +52,36 @@ void    Log39(uchar  bError, uint  wData)
 void    OutLog39(void)
 {
   InitPushCRC();
-  PushIntLtl(cwLog39);
-  Push(&mLog39, sizeof(mLog39));
-  Output(2+sizeof(mLog39));
+
+  uint wSize = 0;
+  wSize += PushIntLtl(cwLog39);
+
+  uint i;
+  for (i=0; i<LOG39_SIZE; i++)
+  {
+    wSize += PushTime(mLog39[i].tiNow);
+    wSize += PushChar(mLog39[i].bError);
+    wSize += PushIntLtl(mLog39[i].wData);
+  }
+
+  Output(wSize);
 }
 
 
 void    OutCounter39(void)
 {
   InitPushCRC();
-  Push(&mCounter39, sizeof(mCounter39));
-  Output(sizeof(mCounter39));
+
+  uint wSize = 0;
+
+  uint i;
+  for (i=0; i<COUNTER39_SIZE; i++)
+  {
+    wSize += PushTime(mCounter39[i].tiNow);
+    wSize += PushIntLtl(mCounter39[i].wCounter);
+  }
+
+  Output(wSize);
 }
 
 
