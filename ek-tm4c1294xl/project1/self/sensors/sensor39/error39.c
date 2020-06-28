@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-error39*c
+error39.c
 
 
 ------------------------------------------------------------------------------*/
@@ -16,7 +16,8 @@ uchar   Error39(uchar  bError) {
 #ifdef  MONITOR_39  
   MonitorString("\n error="); MonitorCharDec(bError);
 #endif  
-//  Log39(bError, 0);
+
+  Log39(bError, 0);
   return bError;        
 }
 
@@ -24,8 +25,9 @@ uchar   Error39(uchar  bError) {
 uchar   Error39_(uchar  bError, uint  wData) {
 #ifdef  MONITOR_39  
   MonitorString("\n error="); MonitorCharDec(bError);
-  MonitorString("\n data="); MonitorIntDec(wData);
+  MonitorString(" data="); MonitorIntDec(wData);
 #endif  
-//  Log39(bError, wData);
+
+  Log39(bError, wData);
   return bError;        
 }
