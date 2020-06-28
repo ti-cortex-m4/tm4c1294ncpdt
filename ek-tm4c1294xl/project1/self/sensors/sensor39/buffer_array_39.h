@@ -8,7 +8,7 @@ void    MonitorArray39(void);
 
 void    InitPush39(void);
 void    PushChar39(uchar  b);
-bool    IsPushOverflow(void);
+bool    IsPushOverflow39(void);
 
 void    InitPop39(void);
 uint    GetPopCapacity39(void);
