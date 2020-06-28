@@ -205,6 +205,13 @@ void    ErrorLink(void)
 }
 
 
+void    ErrorLink_RepeatDecrement(void)
+{
+  ErrorLink();
+  cbRepeat--;
+}
+
+
 
 void    RunDevices(void)
 {
