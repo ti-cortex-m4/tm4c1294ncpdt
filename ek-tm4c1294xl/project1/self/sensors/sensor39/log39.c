@@ -5,6 +5,7 @@ log39*c
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
+#include "../../memory/mem_settings.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports2.h"
 #include "../../serial/ports_devices.h"
@@ -62,4 +63,16 @@ void    OutCounter39(void)
   InitPushCRC();
   Push(&mCounter39, sizeof(mCounter39));
   Output(sizeof(mCounter39));
+}
+
+
+void    OutResetLog39(void)
+{
+  if ((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_REPROGRAM))
+  {
+    InitLog39();
+    Result(bRES_OK);
+  }
+  else
+    Result(bRES_NEEDREPROGRAM);
 }
