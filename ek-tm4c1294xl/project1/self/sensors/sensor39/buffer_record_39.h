@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-buffer_record_39*h
+buffer_record_39.h
 
 
 ------------------------------------------------------------------------------*/
@@ -20,8 +20,8 @@ typedef struct
 #endif
 
 
-void    InitBuffRecord39_FragmentProfile39(void);
-void    InitBuffRecord39(void);
-void    AddBuffRecord39(uint  iwStart/*, uint  cwSize*/);
-record39 GetBuffRecordError(char  bError);
-record39 FinishBuffRecord39(void);
+void    InitRecord39_FragmentProfile39(void);
+void    InitRecord39(void);
+void    AddRecord39(uint  iwStart);
+record39 GetRecordError39(char  bError);
+record39 FinishRecord39(void);

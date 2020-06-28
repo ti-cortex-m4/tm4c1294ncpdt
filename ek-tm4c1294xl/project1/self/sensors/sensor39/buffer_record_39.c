@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-buffer_record_39*c
+buffer_record_39.c
 
 
 ------------------------------------------------------------------------------*/
@@ -17,30 +17,26 @@ buffer_record_39*c
 
 
 
-//#define BUFF_RECORD_39  1
-
-
-
 static profile39    PrfFirstPrev, PrfFirstCurr;
 
 
 
-void    InitBuffRecord39_FragmentProfile39(void) {
+void    InitRecord39_FragmentProfile39(void) {
   memset(&PrfFirstPrev, 0, sizeof(PrfFirstPrev));
   memset(&PrfFirstCurr, 0, sizeof(PrfFirstCurr));
 }
 
 
-void    InitBuffRecord39(void) {
+void    InitRecord39(void) {
   InitPush39();
 }
 
 
 
-void    AddBuffRecord39(uint  iwStart/*, uint  cwSize*/) { // TODO GetPushOverflow
+void    AddRecord39(uint  iwStart/*, uint  cwSize*/) { // TODO GetPushOverflow
   uint cwSize = IndexInBuff()-iwStart-3;
 
-#ifdef BUFF_RECORD_39
+#ifdef BUFFER_RECORD_39
   MonitorX();
 
   MonitorString("\n AddToBuffer: Start="); MonitorIntDec(iwStart);
@@ -53,7 +49,7 @@ void    AddBuffRecord39(uint  iwStart/*, uint  cwSize*/) { // TODO GetPushOverfl
   for (i=0; i<cwSize; i++) {
     uchar b = PopChar();
 
-#ifdef BUFF_RECORD_39
+#ifdef BUFFER_RECORD_39
     MonitorCharHex(b);
     if (i % 16 == 16-1) MonitorString("\n");
 #endif
@@ -61,14 +57,14 @@ void    AddBuffRecord39(uint  iwStart/*, uint  cwSize*/) { // TODO GetPushOverfl
     PushChar39(b);
   }
 
-#ifdef BUFF_RECORD_39
+#ifdef BUFFER_RECORD_39
   MonitorString("\n");
 #endif
 }
 
 
 
-record39 GetBuffRecordError(char  bError)
+record39 GetRecordError39(char  bError)
 {
   record39 r;
 
@@ -81,21 +77,21 @@ record39 GetBuffRecordError(char  bError)
 }
 
 
-record39 FinishBuffRecord39(void) {
-  record39 r = GetBuffRecordError(0);
+record39 FinishRecord39(void) {
+  record39 r = GetRecordError39(0);
 
 
   InitPop39();
 
   if (GetPopCapacity39() < 2)
-    return GetBuffRecordError(21);
+    return GetRecordError39(21);
 
   if (PopChar39() != 1) // array
-    return GetBuffRecordError(22);
+    return GetRecordError39(22);
 
   uchar bCount = PopChar39();
 
-#ifdef BUFF_RECORD_39
+#ifdef BUFFER_RECORD_39
   MonitorString("\n Count="); MonitorCharDec(bCount); MonitorString("\n");
 #endif
 
@@ -105,24 +101,24 @@ record39 FinishBuffRecord39(void) {
   for (i=0; i<bCount; i++)
   {
     if (GetPopCapacity39() < 2 + 2+12 + 1+8)
-      return GetBuffRecordError(23);
+      return GetRecordError39(23);
 
     if (PopChar39() != 0x02) // structure
-      return GetBuffRecordError(24);
+      return GetRecordError39(24);
 
     if (PopChar39() != 2) // structure size
-      return GetBuffRecordError(25);
+      return GetRecordError39(25);
 
     if (PopChar39() != 0x09) // string
-      return GetBuffRecordError(26);
+      return GetRecordError39(26);
 
     if (PopChar39() != 12) // string size
-      return GetBuffRecordError(27);
+      return GetRecordError39(27);
 
     time ti = PopTimeDate39();
 
     if (PopChar39() != 0x15) // unsigned long 64
-      return GetBuffRecordError(28);
+      return GetRecordError39(28);
 
     uint64_t ddw = PopLongLong39();
 
@@ -139,7 +135,7 @@ record39 FinishBuffRecord39(void) {
       PrfFirstCurr.ddwValue = ddw;
     }
 
-#if BUFF_RECORD_39
+#if BUFFER_RECORD_39
     MonitorString("\n");
     MonitorTime(ti);
     MonitorLongDec(ddw / 1000000);
@@ -150,7 +146,7 @@ record39 FinishBuffRecord39(void) {
   }
 
   if (PrfFirstPrev.fExists == true) {
-#if BUFF_RECORD_39
+#if BUFFER_RECORD_39
     MonitorString("\n");
     MonitorTime(PrfFirstPrev.tiTime);
     MonitorLongDec(PrfFirstPrev.ddwValue / 1000000);
