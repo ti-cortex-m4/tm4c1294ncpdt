@@ -1,24 +1,16 @@
 /*------------------------------------------------------------------------------
-automatic39*c
+query_id_39*c
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-#include "../../display/display.h"
-#include "../../keyboard/keyboard.h"
-#include "../../time/delay.h"
 #include "../../serial/ports.h"
-#include "../../serial/monitor.h"
-#include "../../sensors/automatic1.h"
-#include "device39.h"
-#include "error39.h"
 #include "crc16x25.h"
 #include "io39.h"
 #include "hdlc_address.h"
 #include "dlms_push.h"
-#include "fragment_open_39.h"
-#include "automatic39.h"
+#include "query_id_39.h"
 
 
 

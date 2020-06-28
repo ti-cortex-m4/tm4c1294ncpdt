@@ -1,8 +1,8 @@
 /*------------------------------------------------------------------------------
-automatic39.h
+query_id_39.h
 
 
 ------------------------------------------------------------------------------*/
 
-bool    Automatic39(void);
-bool    ChangeSpeed39(void);
+void    QueryId39_Simple(uchar  bNS, uchar  bNR, uchar  bInvokeId);
+void    QueryId39(uchar  bNS, uchar  bNR, uchar  bInvokeId);
