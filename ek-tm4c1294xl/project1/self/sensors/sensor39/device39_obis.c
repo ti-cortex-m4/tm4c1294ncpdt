@@ -24,18 +24,18 @@ const obis_t        obisEngAbsTariff[4] = {
 
 const obis_t        obisBillingPeriod = {0, 0, 98, 1, 0, 255}; // Ch. 0; Data of billing period; Scheme 1; #1; Unspecified number of most recent billing periods
 
-const obis_t        obisProfile  = {1, 0, 99, 1, 0, 255}; // Ch. 0; Load profile with recording period 1; #1
+const obis_t        obisProfile = {1, 0, 99, 1, 0, 255}; // Ch. 0; Load profile with recording period 1; #1
 
-const obis_t        obisU1       = {1, 0, 32, 7, 0, 255}; // Ch. 0; L1 Voltage; Inst. value
-const obis_t        obisU2       = {1, 0, 52, 7, 0, 255}; // Ch. 0; L2 Voltage; Inst. value
-const obis_t        obisU3       = {1, 0, 72, 7, 0, 255}; // Ch. 0; L3 Voltage; Inst. value
+const obis_t        obisU1      = {1, 0, 32, 7, 0, 255}; // Ch. 0; L1 Voltage; Inst. value
+const obis_t        obisU2      = {1, 0, 52, 7, 0, 255}; // Ch. 0; L2 Voltage; Inst. value
+const obis_t        obisU3      = {1, 0, 72, 7, 0, 255}; // Ch. 0; L3 Voltage; Inst. value
 
-const obis_t        obisI1       = {1, 0, 31, 7, 0, 255}; // Ch. 0; L1 Current ; Inst. value
-const obis_t        obisI2       = {1, 0, 51, 7, 0, 255}; // Ch. 0; L2 Current ; Inst. value
-const obis_t        obisI3       = {1, 0, 71, 7, 0, 255}; // Ch. 0; L3 Current ; Inst. value
+const obis_t        obisI1      = {1, 0, 31, 7, 0, 255}; // Ch. 0; L1 Current ; Inst. value
+const obis_t        obisI2      = {1, 0, 51, 7, 0, 255}; // Ch. 0; L2 Current ; Inst. value
+const obis_t        obisI3      = {1, 0, 71, 7, 0, 255}; // Ch. 0; L3 Current ; Inst. value
 
-const obis_t        obisPplus    = {1, 0, 1, 7, 0, 255};
-const obis_t        obisPminus   = {1, 0, 2, 7, 0, 255};
+const obis_t        obisPplus   = {1, 0, 1, 7, 0, 255};
+const obis_t        obisPminus  = {1, 0, 2, 7, 0, 255};
 
-const obis_t        obisQplus    = {1, 0, 3, 7, 0, 255};
-const obis_t        obisQminus   = {1, 0, 4, 7, 0, 255};
+const obis_t        obisQplus   = {1, 0, 3, 7, 0, 255};
+const obis_t        obisQminus  = {1, 0, 4, 7, 0, 255};
