@@ -1,5 +1,3 @@
-hdlc_monitor in/out журнал, счетчики
-
 profile scaler
 
 вы€снить когда bNR++
