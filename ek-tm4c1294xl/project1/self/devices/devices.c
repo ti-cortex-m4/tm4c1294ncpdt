@@ -205,6 +205,13 @@ void    ErrorLink(void)
 }
 
 
+void    ErrorLink_RepeatDecrement(void)
+{
+  ErrorLink();
+  cbRepeat--;
+}
+
+
 
 void    RunDevices(void)
 {
@@ -6987,7 +6994,12 @@ void    RunDevices(void)
         MakePause(DEV_SNRM_O_39C);
       } else {
         Error39(210+0);
-        ErrorCurrent();
+        if (cbRepeat == 0) ErrorCurrent();
+        else {
+          ErrorLink_RepeatDecrement();
+          DISC_Current39();
+          SetCurr(DEV_DISC_I_39C);
+        }
       }
       break;
 
@@ -7005,7 +7017,12 @@ void    RunDevices(void)
         MakePause(DEV_AARQ_O_39C);
       } else {
         Error39(210+1);
-        ErrorCurrent();
+        if (cbRepeat == 0) ErrorCurrent();
+        else {
+          ErrorLink_RepeatDecrement();
+          SNRM_Current39();
+          SetCurr(DEV_SNRM_I_39C);
+        }
       }
       break;
 
@@ -7028,7 +7045,12 @@ void    RunDevices(void)
         }
       } else {
         Error39(210+3);
-        ErrorCurrent();
+        if (cbRepeat == 0) ErrorCurrent();
+        else {
+          ErrorLink_RepeatDecrement();
+          AARQ_Current39();
+          SetCurr(DEV_AARQ_I_39C);
+        }
       }
       break;
 
@@ -7051,7 +7073,12 @@ void    RunDevices(void)
         }
       } else {
         Error39(210+5);
-        ErrorCurrent();
+        if (cbRepeat == 0) ErrorCurrent();
+        else {
+          ErrorLink_RepeatDecrement();
+          RR_Current39();
+          SetCurr(DEV_RR_AARQ_I_39C);
+        }
       }
       break;
 
@@ -7080,7 +7107,12 @@ void    RunDevices(void)
         }
       } else {
         Error39(210+8);
-        ErrorCurrent();
+        if (cbRepeat == 0) ErrorCurrent();
+        else {
+          ErrorLink_RepeatDecrement();
+          QueryValue_Current39();
+          SetCurr(DEV_VALUE_I_39C);
+        }
       }
       break;
 
@@ -7104,7 +7136,12 @@ void    RunDevices(void)
         }
       } else {
         Error39(210+10);
-        ErrorCurrent();
+        if (cbRepeat == 0) ErrorCurrent();
+        else {
+          ErrorLink_RepeatDecrement();
+          RR_Current39();
+          SetCurr(DEV_RR_VALUE_I_39C);
+        }
       }
       break;
 
@@ -7133,7 +7170,12 @@ void    RunDevices(void)
         }
       } else {
         Error39(210+13);
-        ErrorCurrent();
+        if (cbRepeat == 0) ErrorCurrent();
+        else {
+          ErrorLink_RepeatDecrement();
+          QueryScaler_Current39();
+          SetCurr(DEV_SCALER_I_39C);
+        }
       }
       break;
 
@@ -7157,7 +7199,12 @@ void    RunDevices(void)
         }
       } else {
         Error39(210+15);
-        ErrorCurrent();
+        if (cbRepeat == 0) ErrorCurrent();
+        else {
+          ErrorLink_RepeatDecrement();
+          RR_Current39();
+          SetCurr(DEV_RR_SCALER_I_39C);
+        }
       }
       break;
 
