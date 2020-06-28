@@ -32,13 +32,13 @@ double2 ReadCntCurr39_Internal(void)
   caller39 c = InitCaller39();
 
   uchar bError = FragmentOpen39(&c);
-  if (bError != 0) return Fault(70+0);
+  if (bError != 0) return Fault(80+0);
 
   double2 db2 = ReadRegisterValueWithScaler39(obisEngAbs, &c);
-  if (!db2.fValid) return Fault(70+1);
+  if (!db2.fValid) return Fault(80+1);
 
   Query39_DISC();
-  if (Input39() != SER_GOODCHECK) return Fault(70+2);
+  if (Input39() != SER_GOODCHECK) return Fault(80+2);
 
   return GetDouble0(db2.dbValue);
 }
@@ -64,7 +64,7 @@ double2 ReadCntCurr39(void)
   }
 
   Query39_DISC();
-  if (Input39() != SER_GOODCHECK) return Fault(70+3);
+  if (Input39() != SER_GOODCHECK) return Fault(80+3);
 
-  return Fault(70+4);
+  return Fault(80+4);
 }

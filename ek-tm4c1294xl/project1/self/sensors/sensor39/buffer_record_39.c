@@ -36,7 +36,7 @@ void    InitRecord39(void) {
 
 void    AddRecord39(uint  iwStart) {
   if (IsPushOverflow39()) {
-    Error39(130+0);
+    Error39(140+0);
     return;
   }
 
@@ -98,10 +98,10 @@ record39 FinishRecord39(void) {
   InitPop39();
 
   if (GetPopCapacity39() < 2)
-    return Fault(130+1);
+    return Fault(140+1);
 
   if (PopChar39() != 1) // array
-    return Fault(130+2);
+    return Fault(140+2);
 
   uchar bCount = PopChar39();
 
@@ -115,24 +115,24 @@ record39 FinishRecord39(void) {
   for (i=0; i<bCount; i++)
   {
     if (GetPopCapacity39() < 2 + 2+12 + 1+8)
-      return Fault(130+3);
+      return Fault(140+3);
 
     if (PopChar39() != 0x02) // structure
-      return Fault(130+4);
+      return Fault(140+4);
 
     if (PopChar39() != 2) // structure size
-      return Fault(130+5);
+      return Fault(140+5);
 
     if (PopChar39() != 0x09) // string
-      return Fault(130+6);
+      return Fault(140+6);
 
     if (PopChar39() != 12) // string size
-      return Fault(130+7);
+      return Fault(140+7);
 
     time tm = PopTimeDate39();
 
     if (PopChar39() != 0x15) // unsigned long 64
-      return Fault(130+8);
+      return Fault(140+8);
 
     uint64_t ddw = PopLongLong39();
 
