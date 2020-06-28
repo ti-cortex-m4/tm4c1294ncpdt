@@ -10,6 +10,7 @@ time39_test*c
 #include "../../serial/monitor.h"
 #include "../../serial/monitor_settings.h"
 #include "device39.h"
+#include "error39.h"
 #include "time39.h"
 #include "io39.h"
 #include "fragment_open_time_39.h"
@@ -19,6 +20,13 @@ time39_test*c
 
 
 #ifdef  MONITOR_39
+
+static double2 Fault(uchar  bError)
+{
+  return GetDouble2Error1(Error39(bError));
+}
+
+
 
 double2 TestTimeCorrect39(void)
 {
@@ -30,7 +38,7 @@ double2 TestTimeCorrect39(void)
   caller39 c = InitCaller39();
 
   time2 tmThat1 = FragmentOpenTime39(&c);
-  if (!tmThat1.fValid) return GetDouble2Error1(1);
+  if (!tmThat1.fValid) return Fault(1);
 
 
   time tmThis1 = *GetCurrTimeDate();
@@ -44,21 +52,21 @@ double2 TestTimeCorrect39(void)
   c.bNS++;
   c.bInvokeId++;
   QueryCorrectTime39(c.bNS, c.bNR, c.bInvokeId, wDeltaSeconds1);
-  if (Input39() != SER_GOODCHECK) return GetDouble2Error1(2);
-  if (ValidateFrame(c.bNS, c.bNR) == 100/*!= 0*/) return GetDouble2Error1(3);
+  if (Input39() != SER_GOODCHECK) return Fault(2);
+  if (ValidateFrame(c.bNS, c.bNR) == 100/*!= 0*/) return Fault(3);
 
 
   c.bNS++;
   c.bInvokeId++;
   QueryTime39(c.bNS, c.bNR, c.bInvokeId);
-  if (Input39() != SER_GOODCHECK) return GetDouble2Error1(4);
-  if (ValidateFrame(c.bNS, c.bNR) == 100/*!= 0*/) return GetDouble2Error1(5);
+  if (Input39() != SER_GOODCHECK) return Fault(4);
+  if (ValidateFrame(c.bNS, c.bNR) == 100/*!= 0*/) return Fault(5);
   time tmThat2 = ReadTime39();
 
   c.bNR++;
   Query39_RR(c.bNR);
-  if (Input39() != SER_GOODCHECK) return GetDouble2Error1(6);
-  if (ValidateFrame(c.bNS, c.bNR) == 100/*!= 0*/) return GetDouble2Error1(7);
+  if (Input39() != SER_GOODCHECK) return Fault(6);
+  if (ValidateFrame(c.bNS, c.bNR) == 100/*!= 0*/) return Fault(7);
 
 
   time tmThis2 = *GetCurrTimeDate();
@@ -69,7 +77,7 @@ double2 TestTimeCorrect39(void)
   MonitorString("\n delta: "); MonitorSignedLongDec(wDeltaSeconds2);
 
 
-  return GetDouble2(0, true);
+  return GetDouble0(0);
 }
 
 #endif
