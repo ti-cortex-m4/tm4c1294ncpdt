@@ -149,7 +149,7 @@ bool    ReadHeader39(void)
     {
       profile39 prf = GetProfile39(i);
       if (prf.fExists) {
-        if (!DifferentDateTime(tiVirtual, prf.tiTime)) {
+        if (!DifferentDateTime(tiVirtual, prf.tmTime)) {
           dwValue = prf.ddwValue;
           break;
         }

@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-buffer_record_39.c
+buffer_record_39*c
 
 
 ------------------------------------------------------------------------------*/
@@ -34,13 +34,18 @@ void    InitRecord39(void) {
 
 
 
-void    AddRecord39(uint  iwStart/*, uint  cwSize*/) { // TODO GetPushOverflow
+void    AddRecord39(uint  iwStart) {
+  if (IsPushOverflow39()) {
+    Error39(130+0);
+    return;
+  }
+
   uint cwSize = IndexInBuff()-iwStart-3;
 
 #ifdef BUFFER_RECORD_39
-  MonitorX();
+  MonitorArray39();
 
-  MonitorString("\n AddToBuffer: Start="); MonitorIntDec(iwStart);
+  MonitorString("\n AddToBuffer: start="); MonitorIntDec(iwStart);
   MonitorString("\n");
 #endif
 
@@ -71,7 +76,7 @@ record39 GetRecordError39(char  bError)
 
   r.bError = bError;
   r.ddwValue = 0;
-  r.tiValue = tiZero;
+  r.tmValue = tiZero;
   r.fFirst = false;
 
   return r;
@@ -124,7 +129,7 @@ record39 FinishRecord39(void) {
     if (PopChar39() != 12) // string size
       return Fault(130+7);
 
-    time ti = PopTimeDate39();
+    time tm = PopTimeDate39();
 
     if (PopChar39() != 0x15) // unsigned long 64
       return Fault(130+8);
@@ -134,35 +139,35 @@ record39 FinishRecord39(void) {
     if (r.fFirst == false) {
       r.bError = 0;
       r.ddwValue = ddw;
-      r.tiValue = ti;
+      r.tmValue = tm;
       r.fFirst = true;
 
       PrfFirstPrev = PrfFirstCurr;
 
       PrfFirstCurr.fExists = true;
-      PrfFirstCurr.tiTime = ti;
+      PrfFirstCurr.tmTime = tm;
       PrfFirstCurr.ddwValue = ddw;
     }
 
 #if BUFFER_RECORD_39
     MonitorString("\n");
-    MonitorTime(ti);
+    MonitorTime(tm);
     MonitorLongDec(ddw / 1000000);
     MonitorLongDec(ddw % 1000000);
 #endif
 
-    AddProfile39(ti, ddw);
+    AddProfile39(tm, ddw);
   }
 
   if (PrfFirstPrev.fExists == true) {
 #if BUFFER_RECORD_39
     MonitorString("\n");
-    MonitorTime(PrfFirstPrev.tiTime);
+    MonitorTime(PrfFirstPrev.tmTime);
     MonitorLongDec(PrfFirstPrev.ddwValue / 1000000);
     MonitorLongDec(PrfFirstPrev.ddwValue % 1000000);
     MonitorString(" previous");
 #endif
-    AddProfile39(PrfFirstPrev.tiTime, PrfFirstPrev.ddwValue);
+    AddProfile39(PrfFirstPrev.tmTime, PrfFirstPrev.ddwValue);
   }
 
   return r;
