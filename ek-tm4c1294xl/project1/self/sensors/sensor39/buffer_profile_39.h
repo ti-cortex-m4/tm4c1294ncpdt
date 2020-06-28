@@ -11,7 +11,7 @@ buffer_profile_39.h
 typedef struct
 {
   bool          fExists;
-  time          tiTime;
+  time          tmTime;
   uint64_t      ddwValue;
 } profile39;
 

@@ -12,7 +12,7 @@ typedef struct
 {
   uchar         bError;
   uint64_t      ddwValue;
-  time          tiValue;
+  time          tmValue;
   bool          fFirst;
 } record39;
 
