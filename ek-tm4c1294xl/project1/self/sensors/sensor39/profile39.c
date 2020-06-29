@@ -22,6 +22,7 @@ profile39*c
 #include "time39.h"
 #include "io39.h"
 #include "buffer_record_39.h"
+#include "dlms_read_register.h"
 #include "fragment_open_time_39.h"
 #include "fragment_profile_39.h"
 #include "buffer_profile_39.h"
@@ -180,6 +181,10 @@ uchar   TestProfile39_Internal(caller39*  pc)
   if (!tm2.fValid) return 1;
   tiValue39 = tm2.tiValue;
   dwValue39 = DateToHouIndex(tiValue39);
+
+
+  double2 scaler = ReadRegisterScaler39(obisEngAbs, pc);
+  if (!scaler.fValid) return 2;
 
 
   InitHeader39();
