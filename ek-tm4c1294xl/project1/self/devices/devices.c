@@ -7405,11 +7405,11 @@ void    RunDevices(void)
       break;
 
     case DEV_15_39P:
-        if (!LastSegmentDMLS()) {
-          MakePause(DEV_1_RR_O_39P);
-        } else {          
-          MakePause(DEV_2_RR_O_39P);
-        }
+      if (!LastSegmentDMLS()) {
+        MakePause(DEV_1_RR_O_39P);
+      } else {
+        MakePause(DEV_2_RR_O_39P);
+      }
       break;
 
 
@@ -7468,11 +7468,11 @@ void    RunDevices(void)
       break;
 
     case DEV_20_39P:
-        if (!LastSegmentDMLS()) {
-          MakePause(DEV_3_RR_O_39P);
-        } else {          
-          MakePause(DEV_4_RR_O_39P);
-        }
+      if (!LastSegmentDMLS()) {
+        MakePause(DEV_3_RR_O_39P);
+      } else {
+        MakePause(DEV_4_RR_O_39P);
+      }
       break;
 
 
