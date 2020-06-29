@@ -12,7 +12,7 @@ include39*h
 #define MONITOR_39_NAMES    1
 #define MONITOR_39_MONITOR  1
 //#define MONITOR_39_CRC      1
-#define BUFFER_ARRAY_39     1
+//#define BUFFER_ARRAY_39     1
 //#define BUFFER_RECORD_39    1
 
 
