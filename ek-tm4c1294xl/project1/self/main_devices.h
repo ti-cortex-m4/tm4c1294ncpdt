@@ -903,7 +903,7 @@ typedef enum
   DEV_1_RR_I_39P        =  0x2431,
   DEV_2_RR_O_39P        =  0x2432,
   DEV_2_RR_I_39P        =  0x2433,
-  DEV_19a_39P           =  0x243E,
+  DEV_READ_4_39P        =  0x243E,
   DEV_20_39P            =  0x2434,
   DEV_3_RR_O_39P        =  0x2435,
   DEV_3_RR_I_39P        =  0x2436,
