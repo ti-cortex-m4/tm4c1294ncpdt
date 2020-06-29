@@ -165,10 +165,10 @@
     case DEV_1_RR_O_39P:
       cbRepeat = MaxRepeats();
       Query39_RR_Profile();
-      SetCurr(DEV_17_39P);
+      SetCurr(DEV_1_RR_I_39P);
       break;
 
-    case DEV_17_39P:
+    case DEV_1_RR_I_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (false/*!ValidateSframe_Profile()*/) {
           Error39(220+0);
@@ -187,10 +187,10 @@
     case DEV_2_RR_O_39P:
       cbRepeat = MaxRepeats();
       Query39_RR_Profile();
-      SetCurr(DEV_19_39P);
+      SetCurr(DEV_2_RR_I_39P);
       break;
 
-    case DEV_19_39P:
+    case DEV_2_RR_I_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (false/*!ValidateSframe_Profile()*/) {
           Error39(220+0);
@@ -228,10 +228,10 @@
     case DEV_3_RR_O_39P:
       cbRepeat = MaxRepeats();
       Query39_RR_Profile();
-      SetCurr(DEV_22_39P);
+      SetCurr(DEV_3_RR_I_39P);
       break;
 
-    case DEV_22_39P:
+    case DEV_3_RR_I_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (false/*!ValidateSframe_Profile()*/) {
           Error39(220+0);
@@ -250,10 +250,10 @@
     case DEV_4_RR_O_39P:
       cbRepeat = MaxRepeats();
       Query39_RR_Profile();
-      SetCurr(DEV_26_39P);
+      SetCurr(DEV_4_RR_I_39P);
       break;
 
-    case DEV_26_39P:
+    case DEV_4_RR_I_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (false/*!ValidateSframe_Profile()*/) {
           Error39(220+0);
