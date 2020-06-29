@@ -22,7 +22,7 @@ profile39*c
 #include "time39.h"
 #include "io39.h"
 #include "buffer_record_39.h"
-#include "fragment_open_39.h"
+#include "fragment_open_time_39.h"
 #include "fragment_profile_39.h"
 #include "buffer_profile_39.h"
 #include "profile39.h"
@@ -176,21 +176,10 @@ bool    ReadHeader39(void)
 
 uchar   TestProfile39_Internal(caller39*  pc)
 {  
-  if (FragmentOpen39(pc) != 0) return 6;
-
-
-  (*pc).bNS++;
-  (*pc).bInvokeId++;
-  QueryTime39((*pc).bNS, (*pc).bNR, (*pc).bInvokeId);
-  if (Input39() != SER_GOODCHECK) return 7;
-  if (!ValidateIframe((*pc).bNS, (*pc).bNR)) return 8;
-  tiValue39 = ReadTime39();
+  time2 tm2 = FragmentOpenTime39(pc);
+  if (!tm2.fValid) return 1;
+  tiValue39 = tm2.tiValue;
   dwValue39 = DateToHouIndex(tiValue39);
-
-  (*pc).bNR++;
-  Query39_RR((*pc).bNR);
-  if (Input39() != SER_GOODCHECK) return 9;
-  if (!ValidateSframe((*pc).bNR)) return 10;
 
 
   InitHeader39();

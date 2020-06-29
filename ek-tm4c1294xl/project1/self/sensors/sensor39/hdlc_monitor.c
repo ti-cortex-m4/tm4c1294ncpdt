@@ -127,7 +127,7 @@ bool    ValidateInputHDLC(void)
 }
 
 
-
+/*
 bool    ValidateIframe(uchar  bNS_client, uchar  bNR_client)
 {
   uchar bControl = InBuff(3 + GetHdlcAddressesSize());
@@ -166,7 +166,7 @@ bool    ValidateSframe(uchar  bNR_client)
 
   return true;
 }
-
+*/
 
 
 uchar   ValidateFrame(uchar  bNS_client, uchar  bNR_client)
@@ -216,7 +216,7 @@ uchar   ValidateFrame(uchar  bNS_client, uchar  bNR_client)
 }
 
 
-
+/*
 void    ShowSframe(uchar  bNR_client)
 {
   uchar bControl = InBuff(3 + GetHdlcAddressesSize());
@@ -228,7 +228,7 @@ void    ShowSframe(uchar  bNR_client)
 #endif
   }
 }
-
+*/
 
 
 bool    LastSegmentDMLS(void)
