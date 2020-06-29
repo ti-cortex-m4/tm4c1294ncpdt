@@ -75,7 +75,7 @@
 
     case DEV_RR_AARQ_I_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
-        if (!ValidateSframe_Profile()) {
+        if (!ValidateFrame_Profile()) {
           Error39(220+0);
           ErrorProfile();
         } else {
