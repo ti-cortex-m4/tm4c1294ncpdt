@@ -35,14 +35,26 @@
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateFrame_Profile()) {
           Error39(220+0);
-          ErrorProfile();
+
+          if (cbRepeat == 0) ErrorProfile();
+          else {
+            ErrorLink_RepeatDecrement();
+            Query39_RR_Profile();
+            SetCurr(DEV_1_RR_I_39P);
+          }
         } else {
           Read2_Profile();
           MakePause(DEV_15_39P);
         }
       } else {
         Error39(220+0);
-        ErrorProfile();
+
+        if (cbRepeat == 0) ErrorProfile();
+        else {
+          ErrorLink_RepeatDecrement();
+          Query39_RR_Profile();
+          SetCurr(DEV_1_RR_I_39P);
+        }
       }
       break;
 
@@ -57,7 +69,13 @@
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateFrame_Profile()) {
           Error39(220+0);
-          ErrorProfile();
+
+          if (cbRepeat == 0) ErrorProfile();
+          else {
+            ErrorLink_RepeatDecrement();
+            Query39_RR_Profile();
+            SetCurr(DEV_2_RR_I_39P);
+          }
         } else {
           Read3_Profile();
           if (UseBlocks_Profile()) {
@@ -69,7 +87,13 @@
         }
       } else {
         Error39(220+0);
-        ErrorProfile();
+
+        if (cbRepeat == 0) ErrorProfile();
+        else {
+          ErrorLink_RepeatDecrement();
+          Query39_RR_Profile();
+          SetCurr(DEV_2_RR_I_39P);
+        }
       }
       break;
 
