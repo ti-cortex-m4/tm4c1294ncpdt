@@ -7386,7 +7386,7 @@ void    RunDevices(void)
     case DEV_TIME_I_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateFrame_Profile()) {
-          Error39(220+0);
+          Error39(220+6);
 
           if (cbRepeat == 0) ErrorProfile();
           else {
@@ -7399,7 +7399,7 @@ void    RunDevices(void)
           MakePause(DEV_RR_TIME_O_39P);
         }
       } else {
-        Error39(220+0);
+        Error39(220+7);
 
         if (cbRepeat == 0) ErrorProfile();
         else {
