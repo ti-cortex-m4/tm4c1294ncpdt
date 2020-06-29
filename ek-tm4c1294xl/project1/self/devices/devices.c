@@ -7340,6 +7340,7 @@ void    RunDevices(void)
       break;
 
 
+
     case DEV_TIME_O_39P:
       Clear(); ShowPercent(54);
 
