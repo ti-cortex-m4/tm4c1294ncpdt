@@ -100,7 +100,7 @@ static bool ReadData39(time  tiTime, ulong  dwValue)
   double dbPulse = mpdbPulseHou[ibDig];
 
 #if false
-  double db = dwValue; //
+  double db = dwValue; // scaler
   mpdbEngFracDigCan[ibDig][0] += db;
 
   uint w = (uint)(mpdbEngFracDigCan[ibDig][0]*dbPulse/1000);
