@@ -1,17 +1,18 @@
 /*------------------------------------------------------------------------------
-hdlc*c
+hdlc_address.c
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
 #include "../../memory/mem_settings.h"
+#include "../../memory/mem_digitals.h"
 #include "../../serial/ports.h"
 #include "hdlc_address.h"
 
 
 
-//#define HDLC_SERVER_ADDRESS_SIZE_4
+#define HDLC_SERVER_ADDRESS_SIZE_4
 
 
 
@@ -32,7 +33,7 @@ void    PushHdlcAddresses(void)
   PushChar(0x00);
   PushChar(0x02);
 
-  uint wAddr = 1230; // TODO add real server address
+  uint wAddr = mpdwAddress1[diCurr.bAddress-1];
 
   uchar bHi = wAddr / 0x100;
   uchar bLo = wAddr % 0x100;
