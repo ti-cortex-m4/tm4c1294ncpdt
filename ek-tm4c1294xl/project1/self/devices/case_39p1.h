@@ -100,7 +100,7 @@
     case DEV_RR_AARQ_I_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateFrame_Profile()) {
-          Error39(220+0);
+          Error39(220+4);
 
           if (cbRepeat == 0) ErrorProfile();
           else {
@@ -109,11 +109,10 @@
             SetCurr(DEV_RR_AARQ_I_39P);
           }
         } else {
-          Error39(220+0);
           MakePause(DEV_TIME_O_39P);
         }  
       } else {
-        Error39(220+0);
+        Error39(220+5);
 
         if (cbRepeat == 0) ErrorProfile();
         else {
