@@ -7378,7 +7378,7 @@ void    RunDevices(void)
           Error39(220+0);
           ErrorProfile();
         } else {
-          MakePause(DEV_13_39P);
+          MakePause(DEV_INIT_39P);
         }  
       } else {
         Error39(220+0);
@@ -7387,13 +7387,13 @@ void    RunDevices(void)
       break;
 
 
-    case DEV_13_39P:
+    case DEV_INIT_39P:
       InitProfile39_Profile();
-      MakePause(DEV_13a_39P);
+      MakePause(DEV_QUERY_39P);
       break;
 
 
-    case DEV_13a_39P:
+    case DEV_QUERY_39P:
       cbRepeat = MaxRepeats();
       QueryProfile39_Profile();
       SetCurr(DEV_14_39P);
@@ -7521,7 +7521,7 @@ void    RunDevices(void)
 
     case DEV_27_39P:
       if (FinishProfile39_Profile())
-        MakePause(DEV_13a_39P);
+        MakePause(DEV_QUERY_39P);
       else
         DoneProfile();
       break;
