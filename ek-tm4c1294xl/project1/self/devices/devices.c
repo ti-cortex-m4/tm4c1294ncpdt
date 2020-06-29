@@ -7406,14 +7406,14 @@ void    RunDevices(void)
 
     case DEV_15_39P:
         if (!LastSegmentDMLS()) {
-          MakePause(DEV_16_39P);
+          MakePause(DEV_1_RR_O_39P);
         } else {          
-          MakePause(DEV_18_39P);
+          MakePause(DEV_2_RR_O_39P);
         }
       break;
 
 
-    case DEV_16_39P:
+    case DEV_1_RR_O_39P:
       cbRepeat = MaxRepeats();
       Query39_RR_Profile();
       SetCurr(DEV_17_39P);
@@ -7435,7 +7435,7 @@ void    RunDevices(void)
       break;
 
 
-    case DEV_18_39P:
+    case DEV_2_RR_O_39P:
       cbRepeat = MaxRepeats();
       Query39_RR_Profile();
       SetCurr(DEV_19_39P);
@@ -7469,14 +7469,14 @@ void    RunDevices(void)
 
     case DEV_20_39P:
         if (!LastSegmentDMLS()) {
-          MakePause(DEV_21_39P);
+          MakePause(DEV_3_RR_O_39P);
         } else {          
-          MakePause(DEV_25_39P);
+          MakePause(DEV_4_RR_O_39P);
         }
       break;
 
 
-    case DEV_21_39P:
+    case DEV_3_RR_O_39P:
       cbRepeat = MaxRepeats();
       Query39_RR_Profile();
       SetCurr(DEV_22_39P);
@@ -7498,7 +7498,7 @@ void    RunDevices(void)
       break;
 
 
-    case DEV_25_39P:
+    case DEV_4_RR_O_39P:
       cbRepeat = MaxRepeats();
       Query39_RR_Profile();
       SetCurr(DEV_26_39P);
