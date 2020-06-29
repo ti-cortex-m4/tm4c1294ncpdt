@@ -1,5 +1,4 @@
 
-
     case DEV_INIT_39P:
       InitProfile39_Profile();
       MakePause(DEV_QUERY_39P);
