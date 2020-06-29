@@ -39,17 +39,6 @@ static uchar            bBlockNumber;
 
 
 
-bool    ValidateSframe_Profile(void) {
-  return ValidateSframe(c.bNR);
-}
-
-
-bool    ValidateIframe_Profile(void) {
-  return ValidateIframe(c.bNS, c.bNR);
-};
-
-
-
 void    Query39_DISC_Profile(void) {
   fMonitorLogBasic = false;
   fMonitorLogHex = false;
