@@ -7331,7 +7331,7 @@ void    RunDevices(void)
           ErrorProfile();
         } else {
           Error39(220+0);
-          MakePause(DEV_9_39P);
+          MakePause(DEV_TIME_O_39P);
         }  
       } else {
         Error39(220+0);
@@ -7340,22 +7340,22 @@ void    RunDevices(void)
       break;
 
 
-    case DEV_9_39P:
+    case DEV_TIME_O_39P:
       Clear(); ShowPercent(54);
 
       cbRepeat = MaxRepeats();
       QueryTime39_Profile();
-      SetCurr(DEV_10_39P);
+      SetCurr(DEV_TIME_I_39P);
       break;
 
-    case DEV_10_39P:
+    case DEV_TIME_I_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateIframe_Profile()) {
           Error39(220+0);
           ErrorProfile();
         } else {
           ReadTime39_Profile();
-          MakePause(DEV_11_39P);
+          MakePause(DEV_RR_TIME_O_39P);
         }
       } else {
         Error39(220+0);
@@ -7364,15 +7364,15 @@ void    RunDevices(void)
       break;
 
 
-    case DEV_11_39P:
+    case DEV_RR_TIME_O_39P:
       Clear(); ShowPercent(55);
 
       cbRepeat = MaxRepeats();
       Query39_RR_Profile();
-      SetCurr(DEV_12_39P);
+      SetCurr(DEV_RR_TIME_I_39P);
       break;
 
-    case DEV_12_39P:
+    case DEV_RR_TIME_I_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateSframe_Profile()) {
           Error39(220+0);
