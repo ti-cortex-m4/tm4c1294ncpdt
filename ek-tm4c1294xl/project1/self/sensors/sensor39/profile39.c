@@ -4,22 +4,23 @@ profile39*c
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
- #include "../../memory/mem_factors.h"
- #include "../../memory/mem_energy_spec.h"
- #include "../../display/display.h"
- #include "../../keyboard/keyboard.h"
- #include "../../keyboard/time/key_timedate.h"
- #include "../../time/calendar.h"
- #include "../../time/timedate.h"
- #include "../../serial/monitor.h"
- #include "../../serial/monitor_settings.h"
- #include "../../devices/devices.h"
- #include "../../devices/devices_time.h"
- #include "../../digitals/limits.h"
- #include "../../special/special.h"
-#include "../../kernel/tuples.h"
-#include "device39.h"
-#include "time39.h"
+#include "../../memory/mem_factors.h"
+#include "../../memory/mem_profile.h"
+#include "../../memory/mem_energy_spec.h"
+#include "../../display/display.h"
+#include "../../keyboard/keyboard.h"
+#include "../../keyboard/time/key_timedate.h"
+#include "../../time/calendar.h"
+#include "../../time/timedate.h"
+#include "../../serial/monitor.h"
+#include "../../serial/monitor_settings.h"
+#include "../../devices/devices.h"
+#include "../../devices/devices_time.h"
+#include "../../digitals/limits.h"
+#include "../../special/special.h"
+//#include "../../kernel/tuples.h"
+//#include "device39.h"
+//#include "time39.h"
 #include "io39.h"
 #include "buffer_record_39.h"
 #include "dlms_read_register.h"
@@ -98,19 +99,19 @@ static bool ReadData39(time  tiTime, ulong  dwValue)
 
   double dbPulse = mpdbPulseHou[ibDig];
 
-/*
-  double db = dwValue;
+#if false
+  double db = dwValue; //
   mpdbEngFracDigCan[ibDig][0] += db;
 
   uint w = (uint)(mpdbEngFracDigCan[ibDig][0]*dbPulse/1000);
   mpwChannels[0] = w;
 
   mpdbEngFracDigCan[ibDig][0] -= (double)w*1000/dbPulse;
-*/
-
+#else
   ulong dw = dwValue;
   uint w = (uint)(dw*dbPulse/1000);
   mpwChannels[0] = w;
+#endif
 
 #ifdef MONITOR_39
     MonitorString(" out="); MonitorTime(tiTime);
