@@ -34,10 +34,24 @@ profile39*c
 uint                    wProfile39;
 time                    tiStart39;
 
-slong64_                scaler;
+double                  dbScaler;
 
 time                    tiValue39;
 ulong                   dwValue39;
+
+
+
+void    SetTime_Profile39(time  tm)
+{
+  tiValue39 = tm;
+  dwValue39 = DateToHouIndex(tiValue39);
+}
+
+
+void    SetScaler_Profile39(double  db)
+{
+  dbScaler = db;
+}
 
 
 

@@ -14,6 +14,7 @@ include39*h
 //#define MONITOR_39_CRC      1
 //#define BUFFER_ARRAY_39     1
 //#define BUFFER_RECORD_39    1
+#define PROFILE_39_NAMES    1
 
 
 #ifndef MONITOR_39
@@ -22,6 +23,7 @@ include39*h
 #undef MONITOR_39_CRC
 #undef BUFFER_ARRAY_39
 #undef BUFFER_RECORD_39
+#undef PROFILE_39_NAMES
 #endif
 
 
