@@ -109,7 +109,7 @@
             SetCurr(DEV_RR_AARQ_I_39P);
           }
         } else {
-          MakePause(DEV_TIME_O_39P);
+          MakePause(DEV_TIME1_O_39P);
         }  
       } else {
         Error39(220+5);
