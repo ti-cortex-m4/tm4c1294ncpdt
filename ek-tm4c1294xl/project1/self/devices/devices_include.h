@@ -8,7 +8,7 @@ devices_include.h
 #define __DEVICES_INCLUDE
 
 
-#define PROFILE_REPEAT_OR_ERROR(method, action) { if (cbRepeat == 0) ErrorProfile(); else { ErrorLink(); cbRepeat--; QueryTime38(); SetCurr(DEV_TIME1_38P); } }
+#define PROFILE_REPEAT_OR_ERROR(method, action) { if (cbRepeat == 0) ErrorProfile(); else { ErrorLink(); cbRepeat--; method(); SetCurr(action); } }
 
 
 #endif
