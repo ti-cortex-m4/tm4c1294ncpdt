@@ -4,6 +4,17 @@ profile39_wrapper.h
 
 ------------------------------------------------------------------------------*/
 
+#ifndef __PROFILE39_WRAPPER
+#define __PROFILE39_WRAPPER
+
+
+#define PROFILE39_REPEAT_OR_ERROR(method, action) { if (cbRepeat == 0) ErrorProfile(); else { ErrorLink(); cbRepeat--; method; SetCurr(action); } }
+
+
+#endif
+
+
+
 void    DISC_Profile39(void);
 void    AARQ_Profile39(void);
 void    RR_Profile39(void);

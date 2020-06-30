@@ -7390,11 +7390,12 @@ void    RunDevices(void)
 
     case DEV_CORRECT_39P:
       {
-        if (DifferentDay(GetTime_Profile39(), tiCurr))
+        time tmThat = GetTime_Profile39();
+        if (DifferentDay(tmThat, tiCurr))
         { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); } // даты не совпадают, коррекция невозможна
         else
         {
-          ulong dwSecondThat = GetSecondIndex(GetTime_Profile39());
+          ulong dwSecondThat = GetSecondIndex(tmThat);
           ulong dwSecondThis = GetSecondIndex(tiCurr);
           
           ShowDigitalDeltaTime(ibDig, dwSecondThat, dwSecondThis);
@@ -7404,7 +7405,7 @@ void    RunDevices(void)
             ShowLo(szCorrectNo); DelayInf();
             MakePause(DEV_TIME2_O_39P); // без коррекции
           }
-          else if (GetCurrHouIndex() == (GetTime_Profile39().bHour*2 + GetTime_Profile39().bMinute/30))
+          else if (GetCurrHouIndex() == (tmThat.bHour*2 + tmThat.bMinute/30))
           {
             SetCorrectSecond39(dwSecondThis - dwSecondThat);
             ShowLo(szCorrectYes); DelayInf();

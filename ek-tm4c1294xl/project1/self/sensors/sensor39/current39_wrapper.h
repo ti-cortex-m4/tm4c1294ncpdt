@@ -4,6 +4,17 @@ current39_wrapper.h
 
 ------------------------------------------------------------------------------*/
 
+#ifndef __CURRENT39_WRAPPER
+#define __CURRENT39_WRAPPER
+
+
+#define CURRENT39_REPEAT_OR_ERROR(method, action) { if (cbRepeat == 0) ErrorCurrent(); else { ErrorLink(); cbRepeat--; method; SetCurr(action); } }
+
+
+#endif
+
+
+
 void    DISC_Current39(void);
 void    SNRM_Current39(void);
 void    AARQ_Current39(void);
