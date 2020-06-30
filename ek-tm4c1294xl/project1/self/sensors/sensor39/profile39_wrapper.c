@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-profile39_wrapper*c
+profile39_wrapper.c
 
 
 ------------------------------------------------------------------------------*/
@@ -185,9 +185,9 @@ bool    UseBlocks_Profile(void) {
 }
 
 
-void    QueryNextBlock39_Profile(void) {  
+void    QueryNextBlock_Profile39(void) {  
 #ifdef PROFILE_39_NAMES
-  MonitorString("\n\n QueryNextBlock39_Profile");
+  MonitorString("\n\n QueryNextBlock_Profile39");
 #endif
 
   bBlockNumber++;
@@ -226,6 +226,7 @@ bool2   FinishProfile_Profile39(void) {
 #endif
 
   record39 r = FinishRecord39();
+
   if (r.bError == 0)
     return GetBool2(ReadHeader39(), true);
   else
