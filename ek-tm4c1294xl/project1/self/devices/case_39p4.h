@@ -180,7 +180,10 @@
 
 
     case DEV_FINISH_39P:
-      if (FinishProfile39_Profile())
+      bool2 b2 = FinishProfile_Profile39();
+      if (b2.fError)
+        ErrorProfile();
+      else if (b2.fValue)
         MakePause(DEV_QUERY_39P);
       else
         DoneProfile();
