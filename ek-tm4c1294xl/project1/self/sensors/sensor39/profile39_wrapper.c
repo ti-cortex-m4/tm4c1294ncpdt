@@ -121,9 +121,9 @@ bool    ReadScaler_Profile39(void)
 
 
 
-void    InitProfile39_Profile(void) {
+void    InitProfile_Profile39(void) {
 #ifdef PROFILE_39_NAMES
-  MonitorString("\n\n InitProfile39_Profile");
+  MonitorString("\n\n InitProfile_Profile39");
 #endif
 
   InitHeader39();
@@ -131,9 +131,9 @@ void    InitProfile39_Profile(void) {
 }
 
 
-void    QueryProfile39_Profile(void) {
+void    QueryProfile_Profile39(void) {
 #ifdef PROFILE_39_NAMES
-  MonitorString("\n\n QueryProfile39_Profile");
+  MonitorString("\n\n QueryProfile_Profile39");
 #endif
 
   InitRecord39();

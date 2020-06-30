@@ -16,8 +16,8 @@ void    ReadTime_Profile39(void);
 void    QueryScaler_Profile39(void);
 bool    ReadScaler_Profile39(void);
 
-void    InitProfile39_Profile(void);
-void    QueryProfile39_Profile(void);
+void    InitProfile_Profile39(void);
+void    QueryProfile_Profile39(void);
 
 void    Read1_Profile(void);
 void    Read2_Profile(void);
