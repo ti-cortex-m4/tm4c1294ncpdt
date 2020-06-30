@@ -891,10 +891,17 @@ typedef enum
   DEV_AARQ_I_39P        =  0x2426,
   DEV_RR_AARQ_O_39P     =  0x2427,
   DEV_RR_AARQ_I_39P     =  0x2428,
+
   DEV_TIME_O_39P        =  0x2429,
   DEV_TIME_I_39P        =  0x242A,
   DEV_RR_TIME_O_39P     =  0x242B,
   DEV_RR_TIME_I_39P     =  0x242C,
+
+  DEV_SCALER_O_39P      =  0x2529,
+  DEV_SCALER_I_39P      =  0x252A,
+  DEV_RR_SCALER_O_39P   =  0x252B,
+  DEV_RR_SCALER_I_39P   =  0x252C,
+
   DEV_INIT_39P          =  0x242D,
   DEV_QUERY_39P         =  0x243D,
   DEV_14_39P            =  0x242E,
