@@ -18,14 +18,7 @@
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         MakePause(DEV_SNRM_O_39C);
       } else {
-        Error39(210+0);
-
-        if (cbRepeat == 0) ErrorCurrent();
-        else {
-          ErrorLink_RepeatDecrement();
-          DISC_Current39();
-          SetCurr(DEV_DISC_I_39C);
-        }
+        CURRENT39_REPEAT_OR_ERROR(210+0, DISC_Current39(), DEV_DISC_I_39C)
       }
       break;
 
@@ -42,14 +35,7 @@
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         MakePause(DEV_AARQ_O_39C);
       } else {
-        Error39(210+1);
-
-        if (cbRepeat == 0) ErrorCurrent();
-        else {
-          ErrorLink_RepeatDecrement();
-          SNRM_Current39();
-          SetCurr(DEV_SNRM_I_39C);
-        }
+        CURRENT39_REPEAT_OR_ERROR(210+1, SNRM_Current39(), DEV_SNRM_I_39C)
       }
       break;
 
@@ -65,26 +51,12 @@
     case DEV_AARQ_I_39C:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateFrame_Current39()) {
-          Error39(210+2);
-
-          if (cbRepeat == 0) ErrorCurrent();
-          else {
-            ErrorLink_RepeatDecrement();
-            AARQ_Current39();
-            SetCurr(DEV_AARQ_I_39C);
-          }
+          CURRENT39_REPEAT_OR_ERROR(210+2, AARQ_Current39(), DEV_AARQ_I_39C)
         } else {
           MakePause(DEV_RR_AARQ_O_39C);
         }
       } else {
-        Error39(210+3);
-
-        if (cbRepeat == 0) ErrorCurrent();
-        else {
-          ErrorLink_RepeatDecrement();
-          AARQ_Current39();
-          SetCurr(DEV_AARQ_I_39C);
-        }
+        CURRENT39_REPEAT_OR_ERROR(210+3, AARQ_Current39(), DEV_AARQ_I_39C)
       }
       break;
 
@@ -100,26 +72,12 @@
     case DEV_RR_AARQ_I_39C:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateFrame_Current39()) {
-          Error39(210+4);
-
-          if (cbRepeat == 0) ErrorCurrent();
-          else {
-            ErrorLink_RepeatDecrement();
-            RR_Current39();
-            SetCurr(DEV_RR_AARQ_I_39C);
-          }
+          CURRENT39_REPEAT_OR_ERROR(210+4, RR_Current39(), DEV_RR_AARQ_I_39C)
         } else {
           MakePause(DEV_VALUE_O_39C);
         }
       } else {
-        Error39(210+5);
-
-        if (cbRepeat == 0) ErrorCurrent();
-        else {
-          ErrorLink_RepeatDecrement();
-          RR_Current39();
-          SetCurr(DEV_RR_AARQ_I_39C);
-        }
+        CURRENT39_REPEAT_OR_ERROR(210+5, RR_Current39(), DEV_RR_AARQ_I_39C)
       }
       break;
 
@@ -135,14 +93,7 @@
     case DEV_VALUE_I_39C:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateFrame_Current39()) {
-          Error39(210+6);
-
-          if (cbRepeat == 0) ErrorCurrent();
-          else {
-            ErrorLink_RepeatDecrement();
-            QueryValue_Current39();
-            SetCurr(DEV_VALUE_I_39C);
-          }
+          CURRENT39_REPEAT_OR_ERROR(210+6, QueryValue_Current39(), DEV_VALUE_I_39C)
         } else {
           if (ReadValue_Current39()) {
             MakePause(DEV_RR_VALUE_O_39C);
@@ -152,14 +103,7 @@
           }
         }
       } else {
-        Error39(210+8);
-
-        if (cbRepeat == 0) ErrorCurrent();
-        else {
-          ErrorLink_RepeatDecrement();
-          QueryValue_Current39();
-          SetCurr(DEV_VALUE_I_39C);
-        }
+        CURRENT39_REPEAT_OR_ERROR(210+8, QueryValue_Current39(), DEV_VALUE_I_39C)
       }
       break;
 
@@ -175,26 +119,12 @@
     case DEV_RR_VALUE_I_39C:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateFrame_Current39()) {
-          Error39(210+9);
-
-          if (cbRepeat == 0) ErrorCurrent();
-          else {
-            ErrorLink_RepeatDecrement();
-            RR_Current39();
-            SetCurr(DEV_RR_VALUE_I_39C);
-          }
+          CURRENT39_REPEAT_OR_ERROR(210+9, RR_Current39(), DEV_RR_VALUE_I_39C)
         } else {
           MakePause(DEV_SCALER_O_39C);
         }
       } else {
-        Error39(210+10);
-
-        if (cbRepeat == 0) ErrorCurrent();
-        else {
-          ErrorLink_RepeatDecrement();
-          RR_Current39();
-          SetCurr(DEV_RR_VALUE_I_39C);
-        }
+        CURRENT39_REPEAT_OR_ERROR(210+10, RR_Current39(), DEV_RR_VALUE_I_39C)
       }
       break;
 
@@ -210,14 +140,7 @@
     case DEV_SCALER_I_39C:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateFrame_Current39()) {
-          Error39(210+11);
-
-          if (cbRepeat == 0) ErrorCurrent();
-          else {
-            ErrorLink_RepeatDecrement();
-            QueryScaler_Current39();
-            SetCurr(DEV_SCALER_I_39C);
-          }
+          CURRENT39_REPEAT_OR_ERROR(211+10, QueryScaler_Current39(), DEV_SCALER_I_39C)
         } else {
           if (ReadScaler_Current39()) {
             MakePause(DEV_RR_SCALER_O_39C);
@@ -227,14 +150,7 @@
           }
         }
       } else {
-        Error39(210+13);
-
-        if (cbRepeat == 0) ErrorCurrent();
-        else {
-          ErrorLink_RepeatDecrement();
-          QueryScaler_Current39();
-          SetCurr(DEV_SCALER_I_39C);
-        }
+        CURRENT39_REPEAT_OR_ERROR(211+13, QueryScaler_Current39(), DEV_SCALER_I_39C)
       }
       break;
 
@@ -250,26 +166,12 @@
     case DEV_RR_SCALER_I_39C:
       if (mpSerial[ibPort] == SER_GOODCHECK)  {
         if (!ValidateFrame_Current39()) {
-          Error39(210+14);
-
-          if (cbRepeat == 0) ErrorCurrent();
-          else {
-            ErrorLink_RepeatDecrement();
-            RR_Current39();
-            SetCurr(DEV_RR_SCALER_I_39C);
-          }
+          CURRENT39_REPEAT_OR_ERROR(211+14, RR_Current39(), DEV_RR_SCALER_I_39C)
         } else {
           ReadCurrent39();
         }
       } else {
-        Error39(210+15);
-
-        if (cbRepeat == 0) ErrorCurrent();
-        else {
-          ErrorLink_RepeatDecrement();
-          RR_Current39();
-          SetCurr(DEV_RR_SCALER_I_39C);
-        }
+        CURRENT39_REPEAT_OR_ERROR(211+15, RR_Current39(), DEV_RR_SCALER_I_39C)
       }
       break;
 
