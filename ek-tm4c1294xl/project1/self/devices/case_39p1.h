@@ -7,7 +7,7 @@
 
 
     case DEV_DISC_O_39P:
-      Clear(); ShowPercent(50);
+      Clear(); ShowPercent(60);
 
       cbRepeat = MaxRepeats();
       DISC_Profile39();
@@ -31,7 +31,7 @@
 
 
     case DEV_SNRM_O_39P:
-      Clear(); ShowPercent(51);
+      Clear(); ShowPercent(61);
 
       cbRepeat = MaxRepeats();
       Query39_SNRM();
@@ -55,7 +55,7 @@
 
 
     case DEV_AARQ_O_39P:
-      Clear(); ShowPercent(52);
+      Clear(); ShowPercent(62);
 
       cbRepeat = MaxRepeats();
       AARQ_Profile39();
@@ -90,7 +90,7 @@
 
 
     case DEV_RR_AARQ_O_39P:
-      Clear(); ShowPercent(53);
+      Clear(); ShowPercent(63);
 
       cbRepeat = MaxRepeats();
       RR_Profile39();
