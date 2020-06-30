@@ -13,6 +13,9 @@ bool    ValidateFrame_Profile(void);
 void    QueryTime39_Profile(void);
 void    ReadTime39_Profile(void);
 
+void    QueryScaler_Profile(void);
+bool    ReadScaler_Profile(void);
+
 void    InitProfile39_Profile(void);
 void    QueryProfile39_Profile(void);
 

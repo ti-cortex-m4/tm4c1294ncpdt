@@ -9,6 +9,7 @@ profile39_wrapper*c
 #include "../../serial/monitor.h"
 #include "../../serial/monitor_settings.h"
 #include "device39.h"
+#include "device39_obis.h"
 #include "caller39.h"
 #include "time39.h"
 #include "hdlc_address.h"
@@ -16,6 +17,9 @@ profile39_wrapper*c
 #include "buffer_record_39.h"
 #include "query_profile_39.h"
 #include "query_next_block_39.h"
+#include "dlms_read_data.h"
+#include "dlms_read_register.h"
+#include "query_register_39.h"
 #include "profile39.h"
 #include "profile39_wrapper.h"
 
@@ -28,6 +32,9 @@ profile39_wrapper*c
 #include "../../time/calendar.h"
 extern  time                    tiValue39;
 extern  ulong                   dwValue39;
+
+static slong64_         scaler;
+
 
 
 static caller39         c;
@@ -97,6 +104,22 @@ void    ReadTime39_Profile(void) {
 
   tiValue39 = ReadTime39();
   dwValue39 = DateToHouIndex(tiValue39);
+}
+
+
+
+void    QueryScaler_Profile(void)
+{
+  c.bNS++;
+  c.bInvokeId++;
+  QueryGetRegisterScalerDLMS(obisEngAbs, c);
+}
+
+
+bool    ReadScaler_Profile(void)
+{
+  scaler = ReadRegisterScalerDLMS();
+  return scaler.fValid;
 }
 
 

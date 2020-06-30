@@ -4,7 +4,7 @@
       Clear(); ShowPercent(54);
 
       cbRepeat = MaxRepeats();
-      QueryScaler39_Profile();
+      QueryScaler_Profile();
       SetCurr(DEV_SCALER_I_39P);
       break;
 
@@ -16,12 +16,16 @@
           if (cbRepeat == 0) ErrorProfile();
           else {
             ErrorLink_RepeatDecrement();
-            QueryScaler39_Profile();
+            QueryScaler_Profile();
             SetCurr(DEV_SCALER_I_39P);
           }
         } else {
-          ReadScaler39_Profile();
-          MakePause(DEV_RR_SCALER_O_39P);
+          if (ReadScaler_Profile()) {
+            MakePause(DEV_RR_SCALER_O_39P);
+          } else {
+            Error39(220+0);
+            ErrorProfile();
+          }
         }
       } else {
         Error39(220+7);
@@ -29,7 +33,7 @@
         if (cbRepeat == 0) ErrorProfile();
         else {
           ErrorLink_RepeatDecrement();
-          QueryScaler39_Profile();
+          QueryScaler_Profile();
           SetCurr(DEV_SCALER_I_39P);
         }
       }
