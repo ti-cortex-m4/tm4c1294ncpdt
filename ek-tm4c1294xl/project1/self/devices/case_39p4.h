@@ -27,7 +27,7 @@
 
     case DEV_1_RR_O_39P:
       cbRepeat = MaxRepeats();
-      Query39_RR_Profile();
+      RR_Profile39();
       SetCurr(DEV_1_RR_I_39P);
       break;
 
@@ -39,7 +39,7 @@
           if (cbRepeat == 0) ErrorProfile();
           else {
             ErrorLink_RepeatDecrement();
-            Query39_RR_Profile();
+            RR_Profile39();
             SetCurr(DEV_1_RR_I_39P);
           }
         } else {
@@ -52,7 +52,7 @@
         if (cbRepeat == 0) ErrorProfile();
         else {
           ErrorLink_RepeatDecrement();
-          Query39_RR_Profile();
+          RR_Profile39();
           SetCurr(DEV_1_RR_I_39P);
         }
       }
@@ -61,7 +61,7 @@
 
     case DEV_2_RR_O_39P:
       cbRepeat = MaxRepeats();
-      Query39_RR_Profile();
+      RR_Profile39();
       SetCurr(DEV_2_RR_I_39P);
       break;
 
@@ -73,7 +73,7 @@
           if (cbRepeat == 0) ErrorProfile();
           else {
             ErrorLink_RepeatDecrement();
-            Query39_RR_Profile();
+            RR_Profile39();
             SetCurr(DEV_2_RR_I_39P);
           }
         } else {
@@ -91,7 +91,7 @@
         if (cbRepeat == 0) ErrorProfile();
         else {
           ErrorLink_RepeatDecrement();
-          Query39_RR_Profile();
+          RR_Profile39();
           SetCurr(DEV_2_RR_I_39P);
         }
       }
@@ -114,7 +114,7 @@
 
     case DEV_3_RR_O_39P:
       cbRepeat = MaxRepeats();
-      Query39_RR_Profile();
+      RR_Profile39();
       SetCurr(DEV_3_RR_I_39P);
       break;
 
@@ -126,7 +126,7 @@
           if (cbRepeat == 0) ErrorProfile();
           else {
             ErrorLink_RepeatDecrement();
-            Query39_RR_Profile();
+            RR_Profile39();
             SetCurr(DEV_3_RR_I_39P);
           }
         } else {
@@ -139,7 +139,7 @@
         if (cbRepeat == 0) ErrorProfile();
         else {
           ErrorLink_RepeatDecrement();
-          Query39_RR_Profile();
+          RR_Profile39();
           SetCurr(DEV_3_RR_I_39P);
         }
       }
@@ -148,7 +148,7 @@
 
     case DEV_4_RR_O_39P:
       cbRepeat = MaxRepeats();
-      Query39_RR_Profile();
+      RR_Profile39();
       SetCurr(DEV_4_RR_I_39P);
       break;
 
@@ -160,7 +160,7 @@
           if (cbRepeat == 0) ErrorProfile();
           else {
             ErrorLink_RepeatDecrement();
-            Query39_RR_Profile();
+            RR_Profile39();
             SetCurr(DEV_4_RR_I_39P);
           }
         } else {
@@ -172,7 +172,7 @@
         if (cbRepeat == 0) ErrorProfile();
         else {
           ErrorLink_RepeatDecrement();
-          Query39_RR_Profile();
+          RR_Profile39();
           SetCurr(DEV_4_RR_I_39P);
         }
       }

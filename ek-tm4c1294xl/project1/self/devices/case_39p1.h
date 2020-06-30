@@ -10,7 +10,7 @@
       Clear(); ShowPercent(50);
 
       cbRepeat = MaxRepeats();
-      Query39_DISC_Profile();
+      DISC_Profile39();
       SetCurr(DEV_DISC_I_39P);
       break;
 
@@ -23,7 +23,7 @@
         if (cbRepeat == 0) ErrorProfile();
         else {
           ErrorLink_RepeatDecrement();
-          Query39_DISC_Profile();
+          DISC_Profile39();
           SetCurr(DEV_DISC_I_39P);
         }
       }
@@ -58,7 +58,7 @@
       Clear(); ShowPercent(52);
 
       cbRepeat = MaxRepeats();
-      Query39_AARQ_Profile();
+      AARQ_Profile39();
       SetCurr(DEV_AARQ_I_39P);
       break;
 
@@ -70,7 +70,7 @@
           if (cbRepeat == 0) ErrorProfile();
           else {
             ErrorLink_RepeatDecrement();
-            Query39_AARQ_Profile();
+            AARQ_Profile39();
             SetCurr(DEV_AARQ_I_39P);
           }
         } else {
@@ -82,7 +82,7 @@
         if (cbRepeat == 0) ErrorProfile();
         else {
           ErrorLink_RepeatDecrement();
-          Query39_AARQ_Profile();
+          AARQ_Profile39();
           SetCurr(DEV_AARQ_I_39P);
         }
       }
@@ -93,7 +93,7 @@
       Clear(); ShowPercent(53);
 
       cbRepeat = MaxRepeats();
-      Query39_RR_Profile();
+      RR_Profile39();
       SetCurr(DEV_RR_AARQ_I_39P);
       break;
 
@@ -105,7 +105,7 @@
           if (cbRepeat == 0) ErrorProfile();
           else {
             ErrorLink_RepeatDecrement();
-            Query39_RR_Profile();
+            RR_Profile39();
             SetCurr(DEV_RR_AARQ_I_39P);
           }
         } else {
@@ -117,7 +117,7 @@
         if (cbRepeat == 0) ErrorProfile();
         else {
           ErrorLink_RepeatDecrement();
-          Query39_RR_Profile();
+          RR_Profile39();
           SetCurr(DEV_RR_AARQ_I_39P);
         }
       }

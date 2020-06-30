@@ -7261,7 +7261,7 @@ void    RunDevices(void)
       Clear(); ShowPercent(50);
 
       cbRepeat = MaxRepeats();
-      Query39_DISC_Profile();
+      DISC_Profile39();
       SetCurr(DEV_DISC_I_39P);
       break;
 
@@ -7274,7 +7274,7 @@ void    RunDevices(void)
         if (cbRepeat == 0) ErrorProfile();
         else {
           ErrorLink_RepeatDecrement();
-          Query39_DISC_Profile();
+          DISC_Profile39();
           SetCurr(DEV_DISC_I_39P);
         }
       }
@@ -7309,7 +7309,7 @@ void    RunDevices(void)
       Clear(); ShowPercent(52);
 
       cbRepeat = MaxRepeats();
-      Query39_AARQ_Profile();
+      AARQ_Profile39();
       SetCurr(DEV_AARQ_I_39P);
       break;
 
@@ -7321,7 +7321,7 @@ void    RunDevices(void)
           if (cbRepeat == 0) ErrorProfile();
           else {
             ErrorLink_RepeatDecrement();
-            Query39_AARQ_Profile();
+            AARQ_Profile39();
             SetCurr(DEV_AARQ_I_39P);
           }
         } else {
@@ -7333,7 +7333,7 @@ void    RunDevices(void)
         if (cbRepeat == 0) ErrorProfile();
         else {
           ErrorLink_RepeatDecrement();
-          Query39_AARQ_Profile();
+          AARQ_Profile39();
           SetCurr(DEV_AARQ_I_39P);
         }
       }
@@ -7344,7 +7344,7 @@ void    RunDevices(void)
       Clear(); ShowPercent(53);
 
       cbRepeat = MaxRepeats();
-      Query39_RR_Profile();
+      RR_Profile39();
       SetCurr(DEV_RR_AARQ_I_39P);
       break;
 
@@ -7356,7 +7356,7 @@ void    RunDevices(void)
           if (cbRepeat == 0) ErrorProfile();
           else {
             ErrorLink_RepeatDecrement();
-            Query39_RR_Profile();
+            RR_Profile39();
             SetCurr(DEV_RR_AARQ_I_39P);
           }
         } else {
@@ -7368,7 +7368,7 @@ void    RunDevices(void)
         if (cbRepeat == 0) ErrorProfile();
         else {
           ErrorLink_RepeatDecrement();
-          Query39_RR_Profile();
+          RR_Profile39();
           SetCurr(DEV_RR_AARQ_I_39P);
         }
       }
@@ -7415,7 +7415,7 @@ void    RunDevices(void)
       Clear(); ShowPercent(55);
 
       cbRepeat = MaxRepeats();
-      Query39_RR_Profile();
+      RR_Profile39();
       SetCurr(DEV_RR_TIME_I_39P);
       break;
 
@@ -7427,7 +7427,7 @@ void    RunDevices(void)
           if (cbRepeat == 0) ErrorProfile();
           else {
             ErrorLink_RepeatDecrement();
-            Query39_RR_Profile();
+            RR_Profile39();
             SetCurr(DEV_RR_TIME_I_39P);
           }
         } else {
@@ -7439,7 +7439,7 @@ void    RunDevices(void)
         if (cbRepeat == 0) ErrorProfile();
         else {
           ErrorLink_RepeatDecrement();
-          Query39_RR_Profile();
+          RR_Profile39();
           SetCurr(DEV_RR_TIME_I_39P);
         }
       }
@@ -7491,7 +7491,7 @@ void    RunDevices(void)
       Clear(); ShowPercent(55);
 
       cbRepeat = MaxRepeats();
-      Query39_RR_Profile();
+      RR_Profile39();
       SetCurr(DEV_RR_SCALER_I_39P);
       break;
 
@@ -7503,7 +7503,7 @@ void    RunDevices(void)
           if (cbRepeat == 0) ErrorProfile();
           else {
             ErrorLink_RepeatDecrement();
-            Query39_RR_Profile();
+            RR_Profile39();
             SetCurr(DEV_RR_SCALER_I_39P);
           }
         } else {
@@ -7515,7 +7515,7 @@ void    RunDevices(void)
         if (cbRepeat == 0) ErrorProfile();
         else {
           ErrorLink_RepeatDecrement();
-          Query39_RR_Profile();
+          RR_Profile39();
           SetCurr(DEV_RR_SCALER_I_39P);
         }
       }
@@ -7550,7 +7550,7 @@ void    RunDevices(void)
 
     case DEV_1_RR_O_39P:
       cbRepeat = MaxRepeats();
-      Query39_RR_Profile();
+      RR_Profile39();
       SetCurr(DEV_1_RR_I_39P);
       break;
 
@@ -7562,7 +7562,7 @@ void    RunDevices(void)
           if (cbRepeat == 0) ErrorProfile();
           else {
             ErrorLink_RepeatDecrement();
-            Query39_RR_Profile();
+            RR_Profile39();
             SetCurr(DEV_1_RR_I_39P);
           }
         } else {
@@ -7575,7 +7575,7 @@ void    RunDevices(void)
         if (cbRepeat == 0) ErrorProfile();
         else {
           ErrorLink_RepeatDecrement();
-          Query39_RR_Profile();
+          RR_Profile39();
           SetCurr(DEV_1_RR_I_39P);
         }
       }
@@ -7584,7 +7584,7 @@ void    RunDevices(void)
 
     case DEV_2_RR_O_39P:
       cbRepeat = MaxRepeats();
-      Query39_RR_Profile();
+      RR_Profile39();
       SetCurr(DEV_2_RR_I_39P);
       break;
 
@@ -7596,7 +7596,7 @@ void    RunDevices(void)
           if (cbRepeat == 0) ErrorProfile();
           else {
             ErrorLink_RepeatDecrement();
-            Query39_RR_Profile();
+            RR_Profile39();
             SetCurr(DEV_2_RR_I_39P);
           }
         } else {
@@ -7614,7 +7614,7 @@ void    RunDevices(void)
         if (cbRepeat == 0) ErrorProfile();
         else {
           ErrorLink_RepeatDecrement();
-          Query39_RR_Profile();
+          RR_Profile39();
           SetCurr(DEV_2_RR_I_39P);
         }
       }
@@ -7637,7 +7637,7 @@ void    RunDevices(void)
 
     case DEV_3_RR_O_39P:
       cbRepeat = MaxRepeats();
-      Query39_RR_Profile();
+      RR_Profile39();
       SetCurr(DEV_3_RR_I_39P);
       break;
 
@@ -7649,7 +7649,7 @@ void    RunDevices(void)
           if (cbRepeat == 0) ErrorProfile();
           else {
             ErrorLink_RepeatDecrement();
-            Query39_RR_Profile();
+            RR_Profile39();
             SetCurr(DEV_3_RR_I_39P);
           }
         } else {
@@ -7662,7 +7662,7 @@ void    RunDevices(void)
         if (cbRepeat == 0) ErrorProfile();
         else {
           ErrorLink_RepeatDecrement();
-          Query39_RR_Profile();
+          RR_Profile39();
           SetCurr(DEV_3_RR_I_39P);
         }
       }
@@ -7671,7 +7671,7 @@ void    RunDevices(void)
 
     case DEV_4_RR_O_39P:
       cbRepeat = MaxRepeats();
-      Query39_RR_Profile();
+      RR_Profile39();
       SetCurr(DEV_4_RR_I_39P);
       break;
 
@@ -7683,7 +7683,7 @@ void    RunDevices(void)
           if (cbRepeat == 0) ErrorProfile();
           else {
             ErrorLink_RepeatDecrement();
-            Query39_RR_Profile();
+            RR_Profile39();
             SetCurr(DEV_4_RR_I_39P);
           }
         } else {
@@ -7695,7 +7695,7 @@ void    RunDevices(void)
         if (cbRepeat == 0) ErrorProfile();
         else {
           ErrorLink_RepeatDecrement();
-          Query39_RR_Profile();
+          RR_Profile39();
           SetCurr(DEV_4_RR_I_39P);
         }
       }
