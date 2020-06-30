@@ -56,7 +56,7 @@
             SetCurr(DEV_RR_TIME1_I_39P);
           }
         } else {
-          MakePause(DEV_TIME2_O_39P);
+          MakePause(DEV_CORRECT_39P);
         }  
       } else {
         Error39(220+0);
@@ -71,7 +71,7 @@
       break;
 
 
-    case DEV_CORRECT1_39P:
+    case DEV_CORRECT_39P:
       {
         if (DifferentDay(tiValue39, tiCurr))
         { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); } // даты не совпадают, коррекция невозможна
@@ -91,7 +91,7 @@
           {
             SetCorrectSecond39(dwSecondThis - dwSecondThat);
             ShowLo(szCorrectYes); DelayInf();
-            MakePause(DEV_CORRECT2_39P); // коррекция времени
+            MakePause(DEV_CORRECT_O_39P); // коррекция времени
           }
           else
           { ShowLo(szCorrectBig); DelayMsg(); ErrorProfile(); } // разница времени слишком велика, коррекция невозможна
