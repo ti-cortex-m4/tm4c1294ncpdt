@@ -105,10 +105,9 @@ static line  address;
       if (dw < 1000000000)
       {
         enKeyboard = KBD_INPUT3;
-        sprintf(szLo+4,szMask12);
 
-        //AsciiAddress_Init(&address);
         address = mpphAsciiAddress[c];
+        AsciiAddress_Show(&address);
 
 
         ibRecordCan = c;
