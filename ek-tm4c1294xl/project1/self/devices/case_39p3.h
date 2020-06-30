@@ -44,7 +44,7 @@
       Clear(); ShowPercent(55);
 
       cbRepeat = MaxRepeats();
-      Query39_RR_Profile();
+      RR_Profile39();
       SetCurr(DEV_RR_SCALER_I_39P);
       break;
 
@@ -56,7 +56,7 @@
           if (cbRepeat == 0) ErrorProfile();
           else {
             ErrorLink_RepeatDecrement();
-            Query39_RR_Profile();
+            RR_Profile39();
             SetCurr(DEV_RR_SCALER_I_39P);
           }
         } else {
@@ -68,7 +68,7 @@
         if (cbRepeat == 0) ErrorProfile();
         else {
           ErrorLink_RepeatDecrement();
-          Query39_RR_Profile();
+          RR_Profile39();
           SetCurr(DEV_RR_SCALER_I_39P);
         }
       }

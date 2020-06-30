@@ -8,6 +8,7 @@ profile39_wrapper*c
 #include "../../kernel/tuples.h"
 #include "../../serial/monitor.h"
 #include "../../serial/monitor_settings.h"
+#include "include39.h"
 #include "device39.h"
 #include "device39_obis.h"
 #include "caller39.h"
@@ -25,10 +26,6 @@ profile39_wrapper*c
 
 
 
-//#define PROFILE_39_NAMES    1
-
-
-
 static caller39         c;
 
 static bool             fUseBlocks;
@@ -38,12 +35,12 @@ static uchar            bBlockNumber;
 
 
 
-void    Query39_DISC_Profile(void) {
+void    DISC_Profile39(void) {
 #ifdef PROFILE_39_NAMES
   fMonitorLogBasic = false;
   fMonitorLogHex = false;
 
-  MonitorString("\n\n Query39_DISC_Profile");
+  MonitorString("\n\n DISC_Profile39");
 #endif
 
   c = InitCaller39();
@@ -51,18 +48,18 @@ void    Query39_DISC_Profile(void) {
 }
 
 
-void    Query39_AARQ_Profile(void) {
+void    AARQ_Profile39(void) {
 #ifdef PROFILE_39_NAMES
-  MonitorString("\n\n Query39_AARQ_Profile");
+  MonitorString("\n\n AARQ_Profile39");
 #endif
 
   Query39_AARQ(c.bNS, c.bNR);
 }
 
 
-void    Query39_RR_Profile(void) {
+void    RR_Profile39(void) {
 #ifdef PROFILE_39_NAMES
-  MonitorString("\n\n Query39_RR_Profile");
+  MonitorString("\n\n RR_Profile39");
 #endif
 
   c.bNR++;

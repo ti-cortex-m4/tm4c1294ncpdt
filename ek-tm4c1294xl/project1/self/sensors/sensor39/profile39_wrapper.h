@@ -4,9 +4,9 @@ profile39_wrapper.h
 
 ------------------------------------------------------------------------------*/
 
-void    Query39_DISC_Profile(void);
-void    Query39_AARQ_Profile(void);
-void    Query39_RR_Profile(void);
+void    DISC_Profile39(void);
+void    AARQ_Profile39(void);
+void    RR_Profile39(void);
 
 bool    ValidateFrame_Profile(void);
 
