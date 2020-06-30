@@ -109,6 +109,7 @@ DEVICES.C
 #include "devices_postinput.h"
 #include "devices_pause.h"
 #include "devices_init.h"
+#include "devices_include.h"
 #include "devices.h"
 
 
