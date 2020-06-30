@@ -1,7 +1,7 @@
 
 
     case DEV_TIME_O_39P:
-      Clear(); ShowPercent(54);
+      Clear(); ShowPercent(64);
 
       cbRepeat = MaxRepeats();
       QueryTime_Profile39();
@@ -37,7 +37,7 @@
 
 
     case DEV_RR_TIME_O_39P:
-      Clear(); ShowPercent(55);
+      Clear(); ShowPercent(65);
 
       cbRepeat = MaxRepeats();
       RR_Profile39();
