@@ -7523,14 +7523,14 @@ void    RunDevices(void)
 
 
     case DEV_INIT_39P:
-      InitProfile39_Profile();
+      InitProfile_Profile39();
       MakePause(DEV_QUERY_39P);
       break;
 
 
     case DEV_QUERY_39P:
       cbRepeat = MaxRepeats();
-      QueryProfile39_Profile();
+      QueryProfile_Profile39();
       SetCurr(DEV_14_39P);
       break;
 
