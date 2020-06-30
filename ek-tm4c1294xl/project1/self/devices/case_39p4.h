@@ -33,7 +33,7 @@
 
     case DEV_1_RR_I_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
-        if (!ValidateFrame_Profile()) {
+        if (!ValidateFrame_Profile39()) {
           Error39(220+0);
 
           if (cbRepeat == 0) ErrorProfile();
@@ -67,7 +67,7 @@
 
     case DEV_2_RR_I_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
-        if (!ValidateFrame_Profile()) {
+        if (!ValidateFrame_Profile39()) {
           Error39(220+0);
 
           if (cbRepeat == 0) ErrorProfile();
@@ -120,7 +120,7 @@
 
     case DEV_3_RR_I_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
-        if (!ValidateFrame_Profile()) {
+        if (!ValidateFrame_Profile39()) {
           Error39(220+0);
 
           if (cbRepeat == 0) ErrorProfile();
@@ -154,7 +154,7 @@
 
     case DEV_4_RR_I_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
-        if (!ValidateFrame_Profile()) {
+        if (!ValidateFrame_Profile39()) {
           Error39(220+0);
 
           if (cbRepeat == 0) ErrorProfile();

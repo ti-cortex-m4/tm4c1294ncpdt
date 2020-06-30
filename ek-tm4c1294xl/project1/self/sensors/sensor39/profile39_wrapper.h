@@ -8,13 +8,13 @@ void    DISC_Profile39(void);
 void    AARQ_Profile39(void);
 void    RR_Profile39(void);
 
-bool    ValidateFrame_Profile(void);
+bool    ValidateFrame_Profile39(void);
 
-void    QueryTime39_Profile(void);
-void    ReadTime39_Profile(void);
+void    QueryTime_Profile39(void);
+void    ReadTime_Profile39(void);
 
-void    QueryScaler_Profile(void);
-bool    ReadScaler_Profile(void);
+void    QueryScaler_Profile39(void);
+bool    ReadScaler_Profile39(void);
 
 void    InitProfile39_Profile(void);
 void    QueryProfile39_Profile(void);

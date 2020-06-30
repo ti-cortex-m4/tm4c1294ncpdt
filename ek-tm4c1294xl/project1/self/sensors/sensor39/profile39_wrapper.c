@@ -68,16 +68,16 @@ void    RR_Profile39(void) {
 
 
 
-bool    ValidateFrame_Profile(void)
+bool    ValidateFrame_Profile39(void)
 {
   return ValidateFrame(c.bNS, c.bNR) == 0;
 };
 
 
 
-void    QueryTime39_Profile(void) {
+void    QueryTime_Profile39(void) {
 #ifdef PROFILE_39_NAMES
-  MonitorString("\n\n QueryTime39_Profile");
+  MonitorString("\n\n QueryTime_Profile39");
 #endif
 
   c.bNS++;
@@ -86,9 +86,9 @@ void    QueryTime39_Profile(void) {
 }
 
 
-void    ReadTime39_Profile(void) {
+void    ReadTime_Profile39(void) {
 #ifdef PROFILE_39_NAMES
-  MonitorString("\n\n ReadTime39_Profile");
+  MonitorString("\n\n ReadTime_Profile39");
 #endif
 
   SetTime_Profile39(ReadTime39());
@@ -96,10 +96,10 @@ void    ReadTime39_Profile(void) {
 
 
 
-void    QueryScaler_Profile(void)
+void    QueryScaler_Profile39(void)
 {
 #ifdef PROFILE_39_NAMES
-  MonitorString("\n\n QueryScaler_Profile");
+  MonitorString("\n\n QueryScaler_Profile39");
 #endif
 
   c.bNS++;
@@ -108,10 +108,10 @@ void    QueryScaler_Profile(void)
 }
 
 
-bool    ReadScaler_Profile(void)
+bool    ReadScaler_Profile39(void)
 {
 #ifdef PROFILE_39_NAMES
-  MonitorString("\n\n ReadScaler_Profile");
+  MonitorString("\n\n ReadScaler_Profile39");
 #endif
 
   double2 scaler = ReadRegisterScalerDLMS();
