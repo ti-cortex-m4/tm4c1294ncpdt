@@ -13,6 +13,13 @@ WRAPPERS,H
 
 typedef struct
 {
+  bool          fValue;
+  bool          fValid;
+} bool2;
+
+
+typedef struct
+{
   schar         bValue;
   bool          fValid;
 } schar2;
@@ -72,6 +79,8 @@ typedef struct
 } factors2;
 
 
+bool2   GetBool2Error(bool  fValue, bool  fValid);
+bool2   GetBool2Error(void);
 
 schar2  GetSChar2(schar  bValue, bool  fValid);
 schar2  GetSChar2Error(void);

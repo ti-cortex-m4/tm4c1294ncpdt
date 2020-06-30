@@ -7703,7 +7703,7 @@ void    RunDevices(void)
 
 
     case DEV_FINISH_39P:
-      if (FinishProfile39_Profile())
+      if (FinishProfile_Profile39())
         MakePause(DEV_QUERY_39P);
       else
         DoneProfile();

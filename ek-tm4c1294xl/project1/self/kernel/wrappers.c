@@ -9,6 +9,24 @@ WRAPPERS,C
 
 
 
+bool2   GetBool2(bool  fValue, bool  fValid)
+{
+  bool2 b2;
+
+  b2.fValue = fValue;
+  b2.fValid = fValid;
+
+  return b2;
+}
+
+
+bool2   GetBool2Error(void)
+{
+  return GetBool2(false, false);
+}
+
+
+
 schar2  GetSChar2(schar  bValue, bool  fValid)
 {
   schar2 b2;

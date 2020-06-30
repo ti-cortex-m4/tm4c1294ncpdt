@@ -220,12 +220,14 @@ void    Read5_Profile(void) {
 
 
 
-bool    FinishProfile39_Profile(void) {
+bool2   FinishProfile_Profile39(void) {
 #ifdef PROFILE_39_NAMES
-  MonitorString("\n\n FinishProfile39_Profile");
+  MonitorString("\n\n FinishProfile_Profile39");
 #endif
 
-  FinishRecord39(); // TODO check result
-  
-  return ReadHeader39();
+  record39 r = FinishRecord39();
+  if (r.bError == 0)
+    return GetBool2(ReadHeader39(), true);
+  else
+    return GetBool2Error(); 
 }
