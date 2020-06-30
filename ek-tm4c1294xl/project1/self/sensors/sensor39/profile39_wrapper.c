@@ -33,7 +33,7 @@ profile39_wrapper*c
 extern  time                    tiValue39;
 extern  ulong                   dwValue39;
 
-static slong64_         scaler;
+static double2          scaler;
 
 
 
@@ -47,10 +47,10 @@ static uchar            bBlockNumber;
 
 
 void    Query39_DISC_Profile(void) {
+#ifdef PROFILE_39_NAMES
   fMonitorLogBasic = false;
   fMonitorLogHex = false;
 
-#ifdef PROFILE_39_NAMES
   MonitorString("\n\n Query39_DISC_Profile");
 #endif
 

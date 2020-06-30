@@ -22,7 +22,7 @@ Blue Book: 4.3.2 Register (class_id = 3, version = 0)
 
 
 
-slong64_ ReadRegisterScalerDLMS(void)
+double2 ReadRegisterScalerDLMS(void)
 {
   InitPop(12 + GetHdlcAddressesSize());
 
@@ -31,24 +31,26 @@ slong64_ ReadRegisterScalerDLMS(void)
   MonitorString("\n DataAccessResult="); MonitorCharDec(bDataAccessResult);
 #endif
   if (bDataAccessResult != 0) {
-    return GetSLong64Error1(Error39_(40+0, bDataAccessResult));
+    return GetDouble2Error1(Error39_(40+0, bDataAccessResult));
   }
 
-  if (PopChar() != 2) return GetSLong64Error1(Error39(40+1)); // !structure
-  if (PopChar() != 2) return GetSLong64Error1(Error39(40+2)); // structure size != 1
+  if (PopChar() != 2) return GetDouble2Error1(Error39(40+1)); // !structure
+  if (PopChar() != 2) return GetDouble2Error1(Error39(40+2)); // structure size != 1
 
   slong64_ scaler = PopSignedValueDLSM();
-  if (!scaler.fValid) return GetSLong64Error1(Error39(40+3));
+  if (!scaler.fValid) return GetDouble2Error1(Error39(40+3));
 
   ulong64_ unit = PopUnsignedValueDLSM();
-  if (!unit.fValid) return GetSLong64Error1(Error39(40+4));
+  if (!unit.fValid) return GetDouble2Error1(Error39(40+4));
 
+  double dbScaler = pow(10, scaler.ddwValue);
 #ifdef MONITOR_39
   MonitorString("\n scaler="); MonitorCharHex(scaler.ddwValue % 0x100);
   MonitorString("\n unit="); MonitorCharDec(unit.ddwValue % 0x100);
+  MonitorString("\n scaler="); MonitorDouble6(dbScaler);
 #endif
 
-  return GetSLong64(scaler.ddwValue, true, 0);
+  return GetDouble0(dbScaler);
 }
 
 
@@ -79,7 +81,7 @@ double2 ReadRegisterScaler39(const obis_t  obis, caller39*  pc)
   QueryGetRegisterScalerDLMS(obis, (*pc));
   if (Input39() != SER_GOODCHECK) return GetDouble2Error1(Error39(40+10));
   if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return GetDouble2Error1(Error39(40+11));
-  slong64_ scaler = ReadRegisterScalerDLMS();
+  double2 scaler = ReadRegisterScalerDLMS();
   if (!scaler.fValid) return GetDouble2Error1(Error39(40+12));
 
   (*pc).bNR++;
@@ -87,11 +89,7 @@ double2 ReadRegisterScaler39(const obis_t  obis, caller39*  pc)
   if (Input39() != SER_GOODCHECK) return GetDouble2Error1(Error39(40+13));
   if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return GetDouble2Error1(Error39(40+14));
 
-  double dbScaler = pow(10, scaler.ddwValue);
-#ifdef MONITOR_39  
-  MonitorString("\n scaler="); MonitorDouble6(dbScaler);
-#endif  
-  return GetDouble2(dbScaler, true);
+  return GetDouble0(scaler.dbValue);
 }
 
 
