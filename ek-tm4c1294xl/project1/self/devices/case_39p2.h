@@ -56,7 +56,7 @@
             SetCurr(DEV_RR_TIME_I_39P);
           }
         } else {
-          MakePause(DEV_SCALER_O_39P);
+          MakePause(DEV_2_TIME_O_39P);
         }  
       } else {
         Error39(220+0);
@@ -71,6 +71,35 @@
       break;
 
 
+    case DEV_CORRECT1_38P:
+      {
+        if (DifferentDay(tiValue39, tiCurr))
+        { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); } // даты не совпадают, коррекция невозможна
+        else
+        {
+          ulong dwSecond1 = GetSecondIndex(tiValue39);
+          ulong dwSecond2 = GetSecondIndex(tiCurr);
+          
+          ShowDigitalDeltaTime(ibDig, dwSecond1, dwSecond2);
+
+          ulong dwDelta = AbsLong(dwSecond1 - dwSecond2);
+          if (dwDelta < GetCorrectLimit()) {
+            ShowLo(szCorrectNo); DelayInf();
+            MakePause(DEV_2_TIME_O_39P); // без коррекции
+          }
+          else if (GetCurrHouIndex() == (tiValue39.bHour*2 + tiValue39.bMinute/30))
+          {
+            SetCorrectSecond38(dwSecond2 - dwSecond1);
+            ShowLo(szCorrectYes); DelayInf();
+            MakePause(DEV_CORRECT2_38P); // коррекция времени
+          }
+          else
+          { ShowLo(szCorrectBig); DelayMsg(); ErrorProfile(); } // разница времени слишком велика, коррекция невозможна
+        }
+      }
+      break;
+
+    case DEV_CORRECT2_38P:
 
 
     case DEV_2_TIME_O_39P:

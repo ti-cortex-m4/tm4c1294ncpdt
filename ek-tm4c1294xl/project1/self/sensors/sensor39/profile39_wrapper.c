@@ -28,6 +28,8 @@ profile39_wrapper.c
 
 static caller39         c;
 
+static sint             dwCorrectSecond39;
+
 static bool             fUseBlocks;
 static bool             fLastBlock;
 
@@ -92,6 +94,13 @@ void    ReadTime_Profile39(void) {
 #endif
 
   SetTime_Profile39(ReadTime39());
+}
+
+
+
+void    SetCorrectSecond39(sint  ddw)
+{
+  dwCorrectSecond39 = ddw;
 }
 
 
