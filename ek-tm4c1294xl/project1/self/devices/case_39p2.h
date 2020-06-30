@@ -49,11 +49,11 @@
 
     case DEV_CORRECT_39P:
       {
-        if (DifferentDay(tiValue39, tiCurr))
+        if (DifferentDay(GetTime_Profile39(), tiCurr))
         { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); } // даты не совпадают, коррекция невозможна
         else
         {
-          ulong dwSecondThat = GetSecondIndex(tiValue39);
+          ulong dwSecondThat = GetSecondIndex(GetTime_Profile39());
           ulong dwSecondThis = GetSecondIndex(tiCurr);
           
           ShowDigitalDeltaTime(ibDig, dwSecondThat, dwSecondThis);
@@ -63,7 +63,7 @@
             ShowLo(szCorrectNo); DelayInf();
             MakePause(DEV_TIME2_O_39P); // без коррекции
           }
-          else if (GetCurrHouIndex() == (tiValue39.bHour*2 + tiValue39.bMinute/30))
+          else if (GetCurrHouIndex() == (GetTime_Profile39().bHour*2 + GetTime_Profile39().bMinute/30))
           {
             SetCorrectSecond39(dwSecondThis - dwSecondThat);
             ShowLo(szCorrectYes); DelayInf();
@@ -153,7 +153,7 @@
           Error39(220+0);
           PROFILE_REPEAT_OR_ERROR(RR_Profile39(), DEV_RR_TIME2_I_39P)
         } else {
-          MakePause(DEV_2_SCALER_O_39P);
+          MakePause(DEV_SCALER_O_39P);
         }  
       } else {
         Error39(220+0);

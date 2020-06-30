@@ -82,6 +82,7 @@ DEVICES.C
 #include "../sensors/sensor38/time38.h"
 #include "../sensors/sensor39/device39.h"
 #include "../sensors/sensor39/current39_wrapper.h"
+#include "../sensors/sensor39/profile39.h"
 #include "../sensors/sensor39/profile39_wrapper.h"
 #include "../sensors/sensor39/hdlc_monitor.h"
 #include "../sensors/sensor39/error39.h"

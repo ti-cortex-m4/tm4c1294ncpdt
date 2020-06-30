@@ -79,7 +79,7 @@ typedef struct
 } factors2;
 
 
-bool2   GetBool2Error(bool  fValue, bool  fValid);
+bool2   GetBool2(bool  fValue, bool  fValid);
 bool2   GetBool2Error(void);
 
 schar2  GetSChar2(schar  bValue, bool  fValid);

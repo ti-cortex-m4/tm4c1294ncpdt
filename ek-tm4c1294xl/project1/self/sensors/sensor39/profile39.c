@@ -48,6 +48,12 @@ void    SetTime_Profile39(time  tm)
 }
 
 
+time    GetTime_Profile39(void)
+{
+  return tiValue39;
+}
+
+
 void    SetScaler_Profile39(double  db)
 {
   dbScaler = db;
