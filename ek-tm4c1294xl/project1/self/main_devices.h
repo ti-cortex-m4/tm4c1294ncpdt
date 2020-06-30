@@ -897,6 +897,11 @@ typedef enum
   DEV_RR_TIME_O_39P     =  0x242B,
   DEV_RR_TIME_I_39P     =  0x242C,
 
+  DEV_2_TIME_O_39P      =  0x2429,
+  DEV_2_TIME_I_39P      =  0x242A,
+  DEV_2_RR_TIME_O_39P   =  0x242B,
+  DEV_2_RR_TIME_I_39P   =  0x242C,
+
   DEV_SCALER_O_39P      =  0x2529,
   DEV_SCALER_I_39P      =  0x252A,
   DEV_RR_SCALER_O_39P   =  0x252B,
