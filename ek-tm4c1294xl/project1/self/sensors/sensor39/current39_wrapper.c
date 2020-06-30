@@ -27,7 +27,7 @@ current39.c
 static caller39         c;
 
 static ulong64_         counter;
-static slong64_         scaler;
+static double2          scaler;
 
 
 
@@ -100,7 +100,7 @@ bool    ReadScaler_Current39(void)
 void    ReadCurrent39(void)
 {
   uint64_t ddwCounter = counter.ddwValue;
-  double dbScaler = pow(10, scaler.ddwValue);
+  double dbScaler = scaler.dbValue;
   mpdwBaseDig[0] = ((double)ddwCounter * dbScaler / 1000) * mpdbPulseMnt[ibDig];
 
   MakeCurrent();

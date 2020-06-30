@@ -34,6 +34,8 @@ profile39*c
 uint                    wProfile39;
 time                    tiStart39;
 
+slong64_                scaler;
+
 time                    tiValue39;
 ulong                   dwValue39;
 
