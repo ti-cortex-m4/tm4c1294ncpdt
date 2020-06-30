@@ -28,7 +28,7 @@ profile39_wrapper.c
 
 static caller39         c;
 
-static sint             dwCorrectSecond39;
+static sint             wDeltaSeconds;
 
 static bool             fUseBlocks;
 static bool             fLastBlock;
@@ -100,7 +100,19 @@ void    ReadTime_Profile39(void) {
 
 void    SetCorrectSecond39(sint  ddw)
 {
-  dwCorrectSecond39 = ddw;
+  wDeltaSeconds = ddw;
+}
+
+
+void    QueryCorrect_Profile39(void)
+{
+#ifdef PROFILE_39_NAMES
+  MonitorString("\n\n QueryCorrect_Profile39 "); MonitorSignedLongDec(wDeltaSeconds);
+#endif
+
+  c.bNS++;
+  c.bInvokeId++;
+  QueryCorrectTime39(c.bNS, c.bNR, c.bInvokeId, wDeltaSeconds);  
 }
 
 
