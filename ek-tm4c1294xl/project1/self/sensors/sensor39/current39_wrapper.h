@@ -8,7 +8,7 @@ current39_wrapper.h
 #define __CURRENT39_WRAPPER
 
 
-#define CURRENT39_REPEAT_OR_ERROR(method, action) { if (cbRepeat == 0) ErrorCurrent(); else { ErrorLink(); cbRepeat--; method; SetCurr(action); } }
+#define CURRENT39_REPEAT_OR_ERROR(error, method, action) { Error39(error); if (cbRepeat == 0) ErrorCurrent(); else { ErrorLink(); cbRepeat--; method; SetCurr(action); } }
 
 
 #endif
