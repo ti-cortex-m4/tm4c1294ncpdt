@@ -7602,7 +7602,7 @@ void    RunDevices(void)
         } else {
           Read3_Profile();
           if (UseBlocks_Profile()) {
-            QueryNextBlock39_Profile();
+            QueryNextBlock_Profile39();
             MakePause(DEV_READ_4_39P);
           } else {
             MakePause(DEV_FINISH_39P);
