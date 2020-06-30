@@ -29,14 +29,6 @@ profile39_wrapper*c
 
 
 
-#include "../../time/calendar.h"
-extern  time                    tiValue39;
-extern  ulong                   dwValue39;
-
-static double2          scaler;
-
-
-
 static caller39         c;
 
 static bool             fUseBlocks;
@@ -102,14 +94,17 @@ void    ReadTime39_Profile(void) {
   MonitorString("\n\n ReadTime39_Profile");
 #endif
 
-  tiValue39 = ReadTime39();
-  dwValue39 = DateToHouIndex(tiValue39);
+  SetTime_Profile39(ReadTime39());
 }
 
 
 
 void    QueryScaler_Profile(void)
 {
+#ifdef PROFILE_39_NAMES
+  MonitorString("\n\n QueryScaler_Profile");
+#endif
+
   c.bNS++;
   c.bInvokeId++;
   QueryGetRegisterScalerDLMS(obisEngAbs, c);
@@ -118,7 +113,12 @@ void    QueryScaler_Profile(void)
 
 bool    ReadScaler_Profile(void)
 {
-  scaler = ReadRegisterScalerDLMS();
+#ifdef PROFILE_39_NAMES
+  MonitorString("\n\n ReadScaler_Profile");
+#endif
+
+  double2 scaler = ReadRegisterScalerDLMS();
+  SetScaler_Profile39(scaler.fValid ? scaler.dbValue : -1);
   return scaler.fValid;
 }
 
