@@ -56,7 +56,7 @@
             SetCurr(DEV_RR_TIME_I_39P);
           }
         } else {
-          MakePause(DEV_INIT_39P);
+          MakePause(DEV_SCALER_O_39P);
         }  
       } else {
         Error39(220+0);

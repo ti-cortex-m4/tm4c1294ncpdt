@@ -7431,7 +7431,7 @@ void    RunDevices(void)
             SetCurr(DEV_RR_TIME_I_39P);
           }
         } else {
-          MakePause(DEV_INIT_39P);
+          MakePause(DEV_SCALER_O_39P);
         }  
       } else {
         Error39(220+0);
@@ -7451,7 +7451,7 @@ void    RunDevices(void)
       Clear(); ShowPercent(54);
 
       cbRepeat = MaxRepeats();
-      QueryScaler39_Profile();
+      QueryScaler_Profile();
       SetCurr(DEV_SCALER_I_39P);
       break;
 
@@ -7463,12 +7463,16 @@ void    RunDevices(void)
           if (cbRepeat == 0) ErrorProfile();
           else {
             ErrorLink_RepeatDecrement();
-            QueryScaler39_Profile();
+            QueryScaler_Profile();
             SetCurr(DEV_SCALER_I_39P);
           }
         } else {
-          ReadScaler39_Profile();
-          MakePause(DEV_RR_SCALER_O_39P);
+          if (ReadScaler_Profile()) {
+            MakePause(DEV_RR_SCALER_O_39P);
+          } else {
+            Error39(220+0);
+            ErrorProfile();
+          }
         }
       } else {
         Error39(220+7);
@@ -7476,7 +7480,7 @@ void    RunDevices(void)
         if (cbRepeat == 0) ErrorProfile();
         else {
           ErrorLink_RepeatDecrement();
-          QueryScaler39_Profile();
+          QueryScaler_Profile();
           SetCurr(DEV_SCALER_I_39P);
         }
       }
