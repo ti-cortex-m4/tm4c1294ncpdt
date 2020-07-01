@@ -34,15 +34,13 @@
     case DEV_1_RR_I_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateFrame_Profile39()) {
-          Error39(220+0);
-          PROFILE_REPEAT_OR_ERROR(RR_Profile39(), DEV_1_RR_I_39P)
+          PROFILE39_REPEAT_OR_ERROR(220+23, RR_Profile39(), DEV_1_RR_I_39P)
         } else {
           Read2_Profile();
           MakePause(DEV_15_39P);
         }
       } else {
-        Error39(220+0);
-        PROFILE_REPEAT_OR_ERROR(RR_Profile39(), DEV_1_RR_I_39P)
+        PROFILE39_REPEAT_OR_ERROR(220+24, RR_Profile39(), DEV_1_RR_I_39P)
       }
       break;
 
@@ -56,8 +54,7 @@
     case DEV_2_RR_I_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateFrame_Profile39()) {
-          Error39(220+0);
-          PROFILE_REPEAT_OR_ERROR(RR_Profile39(), DEV_2_RR_I_39P)
+          PROFILE39_REPEAT_OR_ERROR(220+25, RR_Profile39(), DEV_2_RR_I_39P)
         } else {
           Read3_Profile();
           if (UseBlocks_Profile()) {
@@ -68,8 +65,7 @@
           }
         }
       } else {
-        Error39(220+0);
-        PROFILE_REPEAT_OR_ERROR(RR_Profile39(), DEV_2_RR_I_39P)
+        PROFILE39_REPEAT_OR_ERROR(220+26, RR_Profile39(), DEV_2_RR_I_39P)
       }
       break;
 
@@ -97,15 +93,13 @@
     case DEV_3_RR_I_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateFrame_Profile39()) {
-          Error39(220+0);
-          PROFILE_REPEAT_OR_ERROR(RR_Profile39(), DEV_3_RR_I_39P)
+          PROFILE39_REPEAT_OR_ERROR(220+27, RR_Profile39(), DEV_3_RR_I_39P)
         } else {
           Read5_Profile();
           MakePause(DEV_20_39P);
         }
       } else {
-        Error39(220+0);
-        PROFILE_REPEAT_OR_ERROR(RR_Profile39(), DEV_3_RR_I_39P)
+        PROFILE39_REPEAT_OR_ERROR(220+28, RR_Profile39(), DEV_3_RR_I_39P)
       }
       break;
 
@@ -119,14 +113,12 @@
     case DEV_4_RR_I_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateFrame_Profile39()) {
-          Error39(220+0);
-          PROFILE_REPEAT_OR_ERROR(RR_Profile39(), DEV_4_RR_I_39P)
+          PROFILE39_REPEAT_OR_ERROR(220+29, RR_Profile39(), DEV_4_RR_I_39P)
         } else {
           MakePause(DEV_FINISH_39P);
         }
       } else {
-        Error39(220+0);
-        PROFILE_REPEAT_OR_ERROR(RR_Profile39(), DEV_4_RR_I_39P)
+        PROFILE39_REPEAT_OR_ERROR(220+30, RR_Profile39(), DEV_4_RR_I_39P)
       }
       break;
 
