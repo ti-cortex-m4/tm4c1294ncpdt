@@ -8,6 +8,7 @@ buffer_profile_39*c
 #include "../../serial/monitor.h"
 #include "../../time/timedate.h"
 #include "include39.h"
+#include "error39.h"
 #include "buffer_profile_39.h"
 
 
@@ -44,6 +45,7 @@ void    AddProfile39(time  tmTime, uint64_t  ddwValue)
   }
   else
   {
+    Error39(150+0);
     fProfileOveflow39 = true;
   }
 }
@@ -124,7 +126,7 @@ uchar   GetProfileSize39(void)
 }
 
 
-bool    IsProfileOveflow39(void) // TODO use IsProfileOveflow39
+bool    IsProfileOveflow39(void)
 {
   return fProfileOveflow39;
 }

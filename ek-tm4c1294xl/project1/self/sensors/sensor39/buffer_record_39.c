@@ -155,7 +155,6 @@ record39 FinishRecord39(void) {
     MonitorLongDec(ddw / 1000000);
     MonitorLongDec(ddw % 1000000);
 #endif
-
     AddProfile39(tm, ddw);
   }
 
@@ -166,9 +165,12 @@ record39 FinishRecord39(void) {
     MonitorLongDec(FirstPrev.ddwValue / 1000000);
     MonitorLongDec(FirstPrev.ddwValue % 1000000);
     MonitorString(" previous");
-#endif
+#endif    
     AddProfile39(FirstPrev.tmTime, FirstPrev.ddwValue);
   }
 
-  return r;
+  if (IsProfileOveflow39()) 
+    return Fault(140+9);
+  else  
+    return r;
 }
