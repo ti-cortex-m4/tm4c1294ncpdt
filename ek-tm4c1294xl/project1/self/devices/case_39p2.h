@@ -74,6 +74,8 @@
 
 
     case DEV_CORRECT_O_39P:
+      Clear(); ShowPercent(66);
+
       cbRepeat = MaxRepeats();
       QueryTime_Profile39();
       SetCurr(DEV_CORRECT_I_39P);
@@ -94,6 +96,8 @@
 
 
     case DEV_RR_CORRECT_O_39P:
+      Clear(); ShowPercent(67);
+
       cbRepeat = MaxRepeats();
       RR_Profile39();
       SetCurr(DEV_RR_CORRECT_I_39P);
@@ -113,6 +117,8 @@
 
 
     case DEV_TIME2_O_39P:
+      Clear(); ShowPercent(68);
+
       cbRepeat = MaxRepeats();
       QueryTime_Profile39();
       SetCurr(DEV_TIME2_I_39P);
@@ -133,6 +139,8 @@
 
 
     case DEV_RR_TIME2_O_39P:
+      Clear(); ShowPercent(69);
+
       cbRepeat = MaxRepeats();
       RR_Profile39();
       SetCurr(DEV_RR_TIME2_I_39P);

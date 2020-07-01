@@ -1,7 +1,7 @@
 
 
     case DEV_SCALER_O_39P:
-      Clear(); ShowPercent(66);
+      Clear(); ShowPercent(70);
 
       cbRepeat = MaxRepeats();
       QueryScaler_Profile39();
@@ -27,7 +27,7 @@
 
 
     case DEV_RR_SCALER_O_39P:
-      Clear(); ShowPercent(67);
+      Clear(); ShowPercent(71);
 
       cbRepeat = MaxRepeats();
       RR_Profile39();
