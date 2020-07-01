@@ -7,7 +7,6 @@ buffer_profile_39.c
 buffer_record_39.c
 current39_wrapper.c
 device39.c
-dlms_read_register.c
 extended_4t_39.c
 fragment_cntmon_39.c
 fragment_open_39.c
