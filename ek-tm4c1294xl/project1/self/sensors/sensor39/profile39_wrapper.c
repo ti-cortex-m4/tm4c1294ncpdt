@@ -50,6 +50,16 @@ void    DISC_Profile39(void) {
 }
 
 
+void    SNRM_Profile39(void)
+{
+#ifdef PROFILE_39_NAMES
+  MonitorString("\n\n SNRM_Profile39");
+#endif
+
+  Query39_SNRM();
+}
+
+
 void    AARQ_Profile39(void) {
 #ifdef PROFILE_39_NAMES
   MonitorString("\n\n AARQ_Profile39");
