@@ -1,3 +1,6 @@
+dlms_read_data.c
+dlms_read_register.c
+
 automatic39.c
 automatic_get_cntcurr_39.c
 automatic_get_cntmon_39.c
