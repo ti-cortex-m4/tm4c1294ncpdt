@@ -1,7 +1,7 @@
 hdlc_monitor.c               10         10-13
 
-dlms_read_data.c             15         30-33
-dlms_read_register.c         30         40-56 !
+dlms_read_data.c             15         15-18
+dlms_read_register.c         20         40-56 !
 
 read_engmon_39.c             50         60-67
 
