@@ -14,6 +14,7 @@ typedef uchar           obis_t[6];
 #endif
 
 
+
 extern  const obis_t        obisId;
 
 extern  const obis_t        obisTime;
