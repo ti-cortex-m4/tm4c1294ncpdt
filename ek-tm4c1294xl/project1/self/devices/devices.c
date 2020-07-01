@@ -7110,7 +7110,7 @@ void    RunDevices(void)
     case DEV_SCALER_I_39C:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateFrame_Current39()) {
-          CURRENT39_REPEAT_OR_ERROR(211+10, QueryScaler_Current39(), DEV_SCALER_I_39C)
+          CURRENT39_REPEAT_OR_ERROR(211+11, QueryScaler_Current39(), DEV_SCALER_I_39C)
         } else {
           if (ReadScaler_Current39()) {
             MakePause(DEV_RR_SCALER_O_39C);
@@ -7175,7 +7175,7 @@ void    RunDevices(void)
       Clear(); ShowPercent(61);
 
       cbRepeat = MaxRepeats();
-      Query39_SNRM();
+      SNRM_Profile39();
       SetCurr(DEV_SNRM_I_39P);
       break;
 
@@ -7183,7 +7183,7 @@ void    RunDevices(void)
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         MakePause(DEV_AARQ_O_39P);
       } else {
-        PROFILE39_REPEAT_OR_ERROR(220+1, Query39_SNRM(), DEV_SNRM_I_39P)
+        PROFILE39_REPEAT_OR_ERROR(220+1, SNRM_Profile39(), DEV_SNRM_I_39P)
       }
       break;
 
@@ -7241,15 +7241,13 @@ void    RunDevices(void)
     case DEV_TIME1_I_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateFrame_Profile39()) {
-          Error39(220+6);
-          PROFILE_REPEAT_OR_ERROR(QueryTime_Profile39(), DEV_TIME1_I_39P)
+          PROFILE39_REPEAT_OR_ERROR(220+6, QueryTime_Profile39(), DEV_TIME1_I_39P)
         } else {
           ReadTime_Profile39();
           MakePause(DEV_RR_TIME1_O_39P);
         }
       } else {
-        Error39(220+7);
-        PROFILE_REPEAT_OR_ERROR(QueryTime_Profile39(), DEV_TIME1_I_39P)
+        PROFILE39_REPEAT_OR_ERROR(220+7, QueryTime_Profile39(), DEV_TIME1_I_39P)
       }
       break;
 
@@ -7265,14 +7263,12 @@ void    RunDevices(void)
     case DEV_RR_TIME1_I_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateFrame_Profile39()) {
-          Error39(220+0);
-          PROFILE_REPEAT_OR_ERROR(RR_Profile39(), DEV_RR_TIME1_I_39P)
+          PROFILE39_REPEAT_OR_ERROR(220+8, RR_Profile39(), DEV_RR_TIME1_I_39P)
         } else {
           MakePause(DEV_CORRECT_39P);
         }  
       } else {
-        Error39(220+0);
-        PROFILE_REPEAT_OR_ERROR(RR_Profile39(), DEV_RR_TIME1_I_39P)
+        PROFILE39_REPEAT_OR_ERROR(220+9, RR_Profile39(), DEV_RR_TIME1_I_39P)
       }
       break;
 
@@ -7308,6 +7304,8 @@ void    RunDevices(void)
 
 
     case DEV_CORRECT_O_39P:
+      Clear(); ShowPercent(66);
+
       cbRepeat = MaxRepeats();
       QueryTime_Profile39();
       SetCurr(DEV_CORRECT_I_39P);
@@ -7316,20 +7314,20 @@ void    RunDevices(void)
     case DEV_CORRECT_I_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateFrame_Profile39()) {
-          Error39(220+6);
-          PROFILE_REPEAT_OR_ERROR(QueryTime_Profile39(), DEV_CORRECT_I_39P)
+          PROFILE39_REPEAT_OR_ERROR(220+10, QueryTime_Profile39(), DEV_CORRECT_I_39P)
         } else {
           ReadTime_Profile39();
           MakePause(DEV_RR_TIME1_O_39P);
         }
       } else {
-        Error39(220+7);
-        PROFILE_REPEAT_OR_ERROR(QueryTime_Profile39(), DEV_CORRECT_I_39P)
+        PROFILE39_REPEAT_OR_ERROR(220+11, QueryTime_Profile39(), DEV_CORRECT_I_39P)
       }
       break;
 
 
     case DEV_RR_CORRECT_O_39P:
+      Clear(); ShowPercent(67);
+
       cbRepeat = MaxRepeats();
       RR_Profile39();
       SetCurr(DEV_RR_CORRECT_I_39P);
@@ -7338,19 +7336,19 @@ void    RunDevices(void)
     case DEV_RR_CORRECT_I_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateFrame_Profile39()) {
-          Error39(220+0);
-          PROFILE_REPEAT_OR_ERROR(RR_Profile39(), DEV_RR_CORRECT_I_39P)
+          PROFILE39_REPEAT_OR_ERROR(220+12, RR_Profile39(), DEV_RR_CORRECT_I_39P)
         } else {
           MakePause(DEV_TIME2_O_39P);
         }  
       } else {
-        Error39(220+0);
-        PROFILE_REPEAT_OR_ERROR(RR_Profile39(), DEV_RR_CORRECT_I_39P)
+        PROFILE39_REPEAT_OR_ERROR(220+13, RR_Profile39(), DEV_RR_CORRECT_I_39P)
       }
       break;
 
 
     case DEV_TIME2_O_39P:
+      Clear(); ShowPercent(68);
+
       cbRepeat = MaxRepeats();
       QueryTime_Profile39();
       SetCurr(DEV_TIME2_I_39P);
@@ -7359,20 +7357,20 @@ void    RunDevices(void)
     case DEV_TIME2_I_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateFrame_Profile39()) {
-          Error39(220+6);
-          PROFILE_REPEAT_OR_ERROR(QueryTime_Profile39(), DEV_TIME2_I_39P)
+          PROFILE39_REPEAT_OR_ERROR(220+14, QueryTime_Profile39(), DEV_TIME2_I_39P)
         } else {
           ReadTime_Profile39();
           MakePause(DEV_RR_TIME2_O_39P);
         }
       } else {
-        Error39(220+7);
-        PROFILE_REPEAT_OR_ERROR(QueryTime_Profile39(), DEV_TIME2_I_39P)
+        PROFILE39_REPEAT_OR_ERROR(220+15, QueryTime_Profile39(), DEV_TIME2_I_39P)
       }
       break;
 
 
     case DEV_RR_TIME2_O_39P:
+      Clear(); ShowPercent(69);
+
       cbRepeat = MaxRepeats();
       RR_Profile39();
       SetCurr(DEV_RR_TIME2_I_39P);
@@ -7381,20 +7379,18 @@ void    RunDevices(void)
     case DEV_RR_TIME2_I_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateFrame_Profile39()) {
-          Error39(220+0);
-          PROFILE_REPEAT_OR_ERROR(RR_Profile39(), DEV_RR_TIME2_I_39P)
+          PROFILE39_REPEAT_OR_ERROR(220+16, RR_Profile39(), DEV_RR_TIME2_I_39P)
         } else {
           MakePause(DEV_SCALER_O_39P);
         }  
       } else {
-        Error39(220+0);
-        PROFILE_REPEAT_OR_ERROR(RR_Profile39(), DEV_RR_TIME2_I_39P)
+        PROFILE39_REPEAT_OR_ERROR(220+17, RR_Profile39(), DEV_RR_TIME2_I_39P)
       }
       break;
 
 
     case DEV_SCALER_O_39P:
-      Clear(); ShowPercent(66);
+      Clear(); ShowPercent(70);
 
       cbRepeat = MaxRepeats();
       QueryScaler_Profile39();
@@ -7404,25 +7400,23 @@ void    RunDevices(void)
     case DEV_SCALER_I_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateFrame_Profile39()) {
-          Error39(220+6);
-          PROFILE_REPEAT_OR_ERROR(QueryScaler_Profile39(), DEV_SCALER_I_39P)
+          PROFILE39_REPEAT_OR_ERROR(220+18, QueryScaler_Profile39(), DEV_SCALER_I_39P)
         } else {
           if (ReadScaler_Profile39()) {
             MakePause(DEV_RR_SCALER_O_39P);
           } else {
-            Error39(220+0);
+            Error39(220+19);
             ErrorProfile();
           }
         }
       } else {
-        Error39(220+7);
-        PROFILE_REPEAT_OR_ERROR(QueryScaler_Profile39(), DEV_SCALER_I_39P)
+        PROFILE39_REPEAT_OR_ERROR(220+20, QueryScaler_Profile39(), DEV_SCALER_I_39P)
       }
       break;
 
 
     case DEV_RR_SCALER_O_39P:
-      Clear(); ShowPercent(67);
+      Clear(); ShowPercent(71);
 
       cbRepeat = MaxRepeats();
       RR_Profile39();
@@ -7432,14 +7426,12 @@ void    RunDevices(void)
     case DEV_RR_SCALER_I_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateFrame_Profile39()) {
-          Error39(220+0);
-          PROFILE_REPEAT_OR_ERROR(RR_Profile39(), DEV_RR_SCALER_I_39P)
+          PROFILE39_REPEAT_OR_ERROR(220+21, RR_Profile39(), DEV_RR_SCALER_I_39P)
         } else {
           MakePause(DEV_INIT_39P);
         }  
       } else {
-        Error39(220+0);
-        PROFILE_REPEAT_OR_ERROR(RR_Profile39(), DEV_RR_SCALER_I_39P)
+        PROFILE39_REPEAT_OR_ERROR(220+22, RR_Profile39(), DEV_RR_SCALER_I_39P)
       }
       break;
 
@@ -7479,15 +7471,13 @@ void    RunDevices(void)
     case DEV_1_RR_I_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateFrame_Profile39()) {
-          Error39(220+0);
-          PROFILE_REPEAT_OR_ERROR(RR_Profile39(), DEV_1_RR_I_39P)
+          PROFILE39_REPEAT_OR_ERROR(220+23, RR_Profile39(), DEV_1_RR_I_39P)
         } else {
           Read2_Profile();
           MakePause(DEV_15_39P);
         }
       } else {
-        Error39(220+0);
-        PROFILE_REPEAT_OR_ERROR(RR_Profile39(), DEV_1_RR_I_39P)
+        PROFILE39_REPEAT_OR_ERROR(220+24, RR_Profile39(), DEV_1_RR_I_39P)
       }
       break;
 
@@ -7501,8 +7491,7 @@ void    RunDevices(void)
     case DEV_2_RR_I_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateFrame_Profile39()) {
-          Error39(220+0);
-          PROFILE_REPEAT_OR_ERROR(RR_Profile39(), DEV_2_RR_I_39P)
+          PROFILE39_REPEAT_OR_ERROR(220+25, RR_Profile39(), DEV_2_RR_I_39P)
         } else {
           Read3_Profile();
           if (UseBlocks_Profile()) {
@@ -7513,8 +7502,7 @@ void    RunDevices(void)
           }
         }
       } else {
-        Error39(220+0);
-        PROFILE_REPEAT_OR_ERROR(RR_Profile39(), DEV_2_RR_I_39P)
+        PROFILE39_REPEAT_OR_ERROR(220+26, RR_Profile39(), DEV_2_RR_I_39P)
       }
       break;
 
@@ -7542,15 +7530,13 @@ void    RunDevices(void)
     case DEV_3_RR_I_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateFrame_Profile39()) {
-          Error39(220+0);
-          PROFILE_REPEAT_OR_ERROR(RR_Profile39(), DEV_3_RR_I_39P)
+          PROFILE39_REPEAT_OR_ERROR(220+27, RR_Profile39(), DEV_3_RR_I_39P)
         } else {
           Read5_Profile();
           MakePause(DEV_20_39P);
         }
       } else {
-        Error39(220+0);
-        PROFILE_REPEAT_OR_ERROR(RR_Profile39(), DEV_3_RR_I_39P)
+        PROFILE39_REPEAT_OR_ERROR(220+28, RR_Profile39(), DEV_3_RR_I_39P)
       }
       break;
 
@@ -7564,14 +7550,12 @@ void    RunDevices(void)
     case DEV_4_RR_I_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateFrame_Profile39()) {
-          Error39(220+0);
-          PROFILE_REPEAT_OR_ERROR(RR_Profile39(), DEV_4_RR_I_39P)
+          PROFILE39_REPEAT_OR_ERROR(220+29, RR_Profile39(), DEV_4_RR_I_39P)
         } else {
           MakePause(DEV_FINISH_39P);
         }
       } else {
-        Error39(220+0);
-        PROFILE_REPEAT_OR_ERROR(RR_Profile39(), DEV_4_RR_I_39P)
+        PROFILE39_REPEAT_OR_ERROR(220+30, RR_Profile39(), DEV_4_RR_I_39P)
       }
       break;
 
