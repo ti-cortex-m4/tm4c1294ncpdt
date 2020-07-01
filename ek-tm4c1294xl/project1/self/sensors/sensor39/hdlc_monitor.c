@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-hdlc_monitor*c
+hdlc_monitor.c
 
 
 ------------------------------------------------------------------------------*/
@@ -8,11 +8,13 @@ hdlc_monitor*c
 #include "../../serial/ports.h"
 #include "../../serial/monitor.h"
 #include "include39.h"
-#include "hdlc_address.h"
 #include "crc16x25.h"
+#include "hdlc_address.h"
 #include "hdlc_monitor.h"
 
 
+
+#ifdef MONITOR_39_MONITOR
 
 void    MonitorControl(uchar  bControl) {
   MonitorString(" Control="); MonitorCharHex(bControl);
@@ -56,6 +58,8 @@ void    MonitorControl(uchar  bControl) {
     MonitorString(" ?");
   }
 }
+
+#endif
 
 
 
@@ -127,47 +131,6 @@ bool    ValidateInputHDLC(void)
 }
 
 
-/*
-bool    ValidateIframe(uchar  bNS_client, uchar  bNR_client)
-{
-  uchar bControl = InBuff(3 + GetHdlcAddressesSize());
-  uchar bNS_server = (bControl & 0x0E) >> 1;
-  uchar bNR_server = (bControl & 0xE0) >> 5;
-
-  if (bNS_client % 8 != bNS_server % 8) {
-#ifdef MONITOR_39_MONITOR
-    MonitorString(" I-frame N(S) client/server error "); MonitorCharHex(bNS_client); MonitorCharHex(bNS_server);
-#endif    
-    return false;
-  }
-
-  if ((bNR_client + 1) % 8 != bNR_server % 8) {
-#ifdef MONITOR_39_MONITOR
-    MonitorString(" I-frame N(R) client/server error "); MonitorCharHex(bNR_client); MonitorCharHex(bNR_server);
-#endif    
-    return false;
-  }
-
-  return true;
-}
-
-
-bool    ValidateSframe(uchar  bNR_client)
-{
-  uchar bControl = InBuff(3 + GetHdlcAddressesSize());
-  uchar bNR_server = (bControl & 0xE0) >> 5;
-
-  if (bNR_client % 8 != bNR_server % 8) {
-#ifdef MONITOR_39_MONITOR
-    MonitorString("S-frame N(R) client/server error "); MonitorCharHex(bNR_client); MonitorCharHex(bNR_server);
-#endif
-    return false;
-  }
-
-  return true;
-}
-*/
-
 
 uchar   ValidateFrame(uchar  bNS_client, uchar  bNR_client)
 {
@@ -215,20 +178,6 @@ uchar   ValidateFrame(uchar  bNS_client, uchar  bNR_client)
   return 0;
 }
 
-
-/*
-void    ShowSframe(uchar  bNR_client)
-{
-  uchar bControl = InBuff(3 + GetHdlcAddressesSize());
-  uchar bNR_server = (bControl & 0xE0) >> 5;
-
-  if (bNR_client % 8 != bNR_server % 8) {
-#ifdef MONITOR_39_MONITOR
-    MonitorString("S-frame N(R) client/server "); MonitorCharHex(bNR_client); MonitorCharHex(bNR_server);
-#endif
-  }
-}
-*/
 
 
 bool    LastSegmentDMLS(void)

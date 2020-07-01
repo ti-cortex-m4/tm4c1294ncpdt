@@ -15,7 +15,6 @@ fragment_open_39.c
 fragment_open_time_39.c
 fragment_profile_39.c
 hdlc_address.c
-hdlc_monitor.c
 log39.c
 params39.c
 profile39.c
