@@ -16,7 +16,7 @@ profile39_wrapper.h
 
 
 void    DISC_Profile39(void);
-void    SNRM_Profile39(void)
+void    SNRM_Profile39(void);
 void    AARQ_Profile39(void);
 void    RR_Profile39(void);
 
