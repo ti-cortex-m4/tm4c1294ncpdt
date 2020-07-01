@@ -5,8 +5,6 @@ automatic_get_time_39.c
 buffer_array_39.c
 buffer_profile_39.c
 buffer_record_39.c
-caller39.c
-crc16x25.c
 current39_wrapper.c
 device39.c
 device39_obis.c
@@ -21,7 +19,6 @@ fragment_open_time_39.c
 fragment_profile_39.c
 hdlc_address.c
 hdlc_monitor.c
-io39.c
 log39.c
 params39.c
 profile39.c

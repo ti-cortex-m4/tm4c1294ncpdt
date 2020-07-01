@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-unpack36.c
+unpack39.c
 
 
 ------------------------------------------------------------------------------*/
@@ -15,7 +15,8 @@ unpack36.c
 
 void    Decompress39(void)
 {
-  if (mpSerial[ibPort] != SER_INPUT_MASTER) return;
+  if (mpSerial[ibPort] != SER_INPUT_MASTER)
+    return;
 
 
   uchar c = 0;
@@ -24,14 +25,17 @@ void    Decompress39(void)
   for (i=0; i<IndexInBuff(); i++) {
     if (InBuff(i) == 0x7E) c++;
   }
-  if (c < 2) return;
+  if (c < 2)
+    return;
 
 
-  if ((InBuff(0) != 0x7E) || (InBuff(IndexInBuff()-1) != 0x7E)) return;
+  if ((InBuff(0) != 0x7E) || (InBuff(IndexInBuff()-1) != 0x7E))
+    return;
 
 
   uint wSize = (InBuff(1) & 0x07)*0x100 + InBuff(2) + 2;
-  if (wSize != IndexInBuff()) return;
+  if (wSize != IndexInBuff())
+    return;
 
 
   MonitorIn();
