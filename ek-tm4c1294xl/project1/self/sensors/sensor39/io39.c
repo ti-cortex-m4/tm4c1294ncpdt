@@ -29,7 +29,6 @@ void    Query39(uint  cwIn, uchar  cbOut)
 
 
 
-
 serial  Input39(void)
 {
   InputStart();
