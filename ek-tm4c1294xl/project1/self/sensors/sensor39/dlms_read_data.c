@@ -27,27 +27,27 @@ ulong64_ PopUnsignedValueDLSM(void)
   if (bDataType == 17) // unsigned [17] Unsigned8 0…255
   {
     uchar value = PopChar();
-    return GetULong64(value, true, 0);
+    return GetULong64Ok(value);
   }
   if (bDataType == 22) // enum [22] 0…255
   {
     uchar value = PopChar();
-    return GetULong64(value, true, 0);
+    return GetULong64Ok(value);
   }
   if (bDataType == 18) // long-unsigned [18] Unsigned16 0…65_535
   {
     uint value = PopIntBig();
-    return GetULong64(value, true, 0);
+    return GetULong64Ok(value);
   }
   if (bDataType == 6) // double-long-unsigned [6] Unsigned32 0…4_294_967_295
   {
     ulong value = PopLongBig();
-    return GetULong64(value, true, 0);
+    return GetULong64Ok(value);
   }
   if (bDataType == 21) // long64-unsigned [21] Unsigned64 0…2^64-1
   {
     uint64_t value = PopLongBig()*0x100000000 + PopLongBig();
-    return GetULong64(value, true, 0);
+    return GetULong64Ok(value);
   }
 
   return GetULong64Error(Error39_(15+0, bDataType));
@@ -64,22 +64,22 @@ slong64_ PopSignedValueDLSM(void)
   if (bDataType == 15) // integer [15] Integer8 -128…127
   {
     schar value = PopChar();
-    return GetSLong64(value, true, 0);
+    return GetSLong64Ok(value);
   }
   if (bDataType == 16) // long [16] Integer16 -32_768…32_767
   {
     sint value = PopIntBig();
-    return GetSLong64(value, true, 0);
+    return GetSLong64Ok(value);
   }
   if (bDataType == 5) // double-long [5] Integer32 -2_147_483_648…2_147_483_647
   {
     slong value = PopLongBig();
-    return GetSLong64(value, true, 0);
+    return GetSLong64Ok(value);
   }
   if (bDataType == 20) // long64 [20] Integer64 - 2^63…2^63-1
   {
     int64_t value = PopLongBig()*0x100000000 + PopLongBig();
-    return GetSLong64(value, true, 0);
+    return GetSLong64Ok(value);
   }
 
   return GetSLong64Error(Error39_(15+1, bDataType));

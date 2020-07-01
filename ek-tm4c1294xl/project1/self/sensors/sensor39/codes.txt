@@ -1,9 +1,9 @@
 hdlc_monitor.c               10         10-13
 
 dlms_read_data.c             15         15-18
-dlms_read_register.c         20         40-56 !
+dlms_read_register.c         20         20-36 !
 
-read_engmon_39.c             50         60-67
+read_engmon_39.c             30         60-67
 
 automatic_get_time_39.c      60         70-75
 automatic_get_cntcurr_39.c   70         80-84
