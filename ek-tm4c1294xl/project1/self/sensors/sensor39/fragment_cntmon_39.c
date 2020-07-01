@@ -40,7 +40,7 @@ double2 FragmentCntMonCan(const obis_t  obis, caller39  *pc, uchar  bMonth, ucha
   bool present = (EngMonPresent39() == 0);
   bool absent = (EngMonAbsent39() == 0);
 
-  ulong64_ counter = present ? ReadEngMon39() : GetULong64Error1(0);
+  ulong64_ counter = present ? ReadEngMon39() : GetULong64Error(0);
 
 #ifdef MONITOR_39
   MonitorString("\n present="); MonitorBool(present);

@@ -75,7 +75,13 @@ ulong64_ GetULong64(uint64_t  ddwValue, bool  fValid, uchar  bError)
 }
 
 
-ulong64_ GetULong64Error1(uchar  bError)
+ulong64_ GetULong64Ok(uint64_t  ddwValue)
+{
+  return GetULong64(ddwValue, true, 0);
+}
+
+
+ulong64_ GetULong64Error(uchar  bError)
 {
   return GetULong64(MAX_LONGLONG, false, bError);
 }
@@ -94,7 +100,13 @@ slong64_ GetSLong64(int64_t  ddwValue, bool  fValid, uchar  bError)
 }
 
 
-slong64_ GetSLong64Error1(uchar  bError)
+slong64_ GetSLong64Ok(int64_t  ddwValue)
+{
+  return GetSLong64(ddwValue, true, 0);
+}
+
+
+slong64_ GetSLong64Error(uchar  bError)
 {
   return GetSLong64(-1, false, bError);
 }
