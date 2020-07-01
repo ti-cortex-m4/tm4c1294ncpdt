@@ -89,10 +89,12 @@ ulong2  GetLong2(ulong  dwValue, bool  fValid);
 ulong2  GetLong2Error(void);
 
 ulong64_ GetULong64(uint64_t  ddwValue, bool  fValid, uchar  bError);
-ulong64_ GetULong64Error1(uchar  bError);
+ulong64_ GetULong64Ok(uint64_t  ddwValue);
+ulong64_ GetULong64Error(uchar  bError);
 
 slong64_ GetSLong64(int64_t  ddwValue, bool  fValid, uchar  bError);
-slong64_ GetSLong64Error1(uchar  bError);
+slong64_ GetSLong64Ok(int64_t  ddwValue);
+slong64_ GetSLong64Error(uchar  bError);
 
 float2  GetFloat2(float  flValue, bool  fValid);
 float2  GetFloat0(float  flValue);
