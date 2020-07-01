@@ -27,7 +27,7 @@
       Clear(); ShowPercent(61);
 
       cbRepeat = MaxRepeats();
-      Query39_SNRM();
+      SNRM_Profile39();
       SetCurr(DEV_SNRM_I_39P);
       break;
 
@@ -35,7 +35,7 @@
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         MakePause(DEV_AARQ_O_39P);
       } else {
-        PROFILE39_REPEAT_OR_ERROR(220+1, Query39_SNRM(), DEV_SNRM_I_39P)
+        PROFILE39_REPEAT_OR_ERROR(220+1, SNRM_Profile39(), DEV_SNRM_I_39P)
       }
       break;
 
