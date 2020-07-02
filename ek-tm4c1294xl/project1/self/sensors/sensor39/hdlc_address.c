@@ -54,12 +54,12 @@ void    PushHdlcAddresses(void)
 
 
 
-uchar   GetHdlcAddressesSize_Simple(void)
+uchar   GetHdlcAddressesSize_Single(void)
 {
   return 1+1;
 }
 
-void    PushHdlcAddresses_Simple(void)
+void    PushHdlcAddresses_Single(void)
 {
   PushChar(0x03);
   PushChar(0x03);

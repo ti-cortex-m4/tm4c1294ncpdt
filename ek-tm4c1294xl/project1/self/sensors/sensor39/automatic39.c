@@ -94,7 +94,7 @@ bool    ChangeSpeed39(void)
 
   c.bNS++;
   c.bInvokeId++;
-  QueryId39_Simple(c.bNS, c.bNR, c.bInvokeId);
+  QueryId39_Single(c.bNS, c.bNR, c.bInvokeId);
   if (Input39() != SER_GOODCHECK) return Fault(100+7);
   if (ValidateFrame(c.bNS, c.bNR) != 0) return Fault(100+8);
 
@@ -102,7 +102,7 @@ bool    ChangeSpeed39(void)
   Beep();
 
 
-  InitPop(12 + GetHdlcAddressesSize_Simple());
+  InitPop(12 + GetHdlcAddressesSize_Single());
 
   uchar bResult = PopChar();
   if (bResult != 0) return Fault(100+9);
