@@ -36,8 +36,9 @@ double2 ReadRegisterScalerDLMS(void)
 #ifdef MONITOR_39
   MonitorString("\n DataAccessResult="); MonitorCharDec(bDataAccessResult);
 #endif
+
   if (bDataAccessResult != 0) {
-    return GetDouble2Error1(Error39(20+0, bDataAccessResult));
+    return GetDouble2Error1(Error39_(20+0, bDataAccessResult));
   }
 
   if (PopChar() != 2) return Fault(20+1); // !structure
@@ -50,6 +51,7 @@ double2 ReadRegisterScalerDLMS(void)
   if (!unit.fValid) return Fault(20+4);
 
   double dbScaler = pow(10, scaler.ddwValue);
+
 #ifdef MONITOR_39
   MonitorString("\n scaler="); MonitorCharHex(scaler.ddwValue % 0x100);
   MonitorString("\n unit="); MonitorCharDec(unit.ddwValue % 0x100);
@@ -68,15 +70,15 @@ double2 ReadRegisterValue39(const obis_t  obis, caller39*  pc)
   QueryGetRegisterValueDLMS(obis, (*pc));
   if (Input39() != SER_GOODCHECK) return Fault(20+5);
   if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(20+6);
-  ulong64_ ddw2 = ReadUnsignedValueDLSM();
-  if (!ddw2.fValid) return Fault(20+7);
+  ulong64_ value = ReadUnsignedValueDLSM();
+  if (!value.fValid) return Fault(20+7);
 
   (*pc).bNR++;
   Query39_RR((*pc).bNR);
   if (Input39() != SER_GOODCHECK) return Fault(20+8);
   if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(20+9);
 
-  return GetDouble0(ddw2.ddwValue);
+  return GetDouble0(value.ddwValue);
 }
 
 
