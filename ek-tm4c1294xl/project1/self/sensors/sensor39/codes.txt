@@ -11,7 +11,7 @@ automatic_get_cntmon_39.c    70         70-78
 automatic39.c                80         80-91 !
 
 extended_4t_39.c             95         95-99
-params39.c                   120        130-142 !
+params39.c                   100        100-112 !
 
 buffer_array_39.c            130        130-130
 buffer_record_39.c           140        140-148
