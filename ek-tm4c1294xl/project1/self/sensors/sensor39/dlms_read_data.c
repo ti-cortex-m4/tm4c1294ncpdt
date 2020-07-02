@@ -111,6 +111,7 @@ slong64_ ReadSignedValueDLSM(void)
 #ifdef MONITOR_39
   MonitorString("\n DataAccessResult="); MonitorCharDec(bDataAccessResult);
 #endif
+
   if (bDataAccessResult != 0) {
     return GetSLong64Error(Error39_(15+3, bDataAccessResult));
   }
