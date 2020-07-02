@@ -25,3 +25,4 @@ void    InitRecord39(void);
 void    AddRecord39(uint  iwStart);
 record39 GetRecordError39(char  bError);
 record39 FinishRecord39(void);
+record39 FinishRecordProfile39(void);
