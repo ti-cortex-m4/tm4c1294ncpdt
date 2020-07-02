@@ -74,8 +74,8 @@ bool    Automatic39(void)
   dbKtrans = 1;
   SetAllFactors(dbKpulse, dbKtrans);
 
-
   Delay(1000);
+
 
   Query39_DISC();
   if (Input39() != SER_GOODCHECK) return Fault(80+5);
