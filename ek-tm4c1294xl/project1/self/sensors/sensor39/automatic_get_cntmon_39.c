@@ -51,7 +51,7 @@ double2 ReadCntMonCan38_Internal(uchar  ibMon)
 
     if (db2.bError == ERROR_NOT_PRESENTED) {
       Clear();
-      sprintf(szLo+1, "мес€ц %02u.%02u ?",bMonth,bYear);
+      sprintf(szLo+1, "мес€ц %02u.%02u ?", bMonth, bYear);
       Delay(1000);
       return Fault(70+1);
     }
@@ -90,7 +90,7 @@ double2 ReadCntMonCan38_Internal(uchar  ibMon)
     if (r.fFirst == false)
     {
       Clear();
-      sprintf(szLo+0, "сутки %02u.%02u.%02u ?",tm.bDay,tm.bMonth,tm.bYear);
+      sprintf(szLo+0, "сутки %02u.%02u.%02u ?", tm.bDay, tm.bMonth, tm.bYear);
       Delay(1000);
       return Fault(70+4);
     }
