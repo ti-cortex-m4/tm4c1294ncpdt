@@ -216,7 +216,7 @@ uchar   TestProfile39_Internal(caller39*  pc)
 
   while (true) {
     t2time t2 = QueryHeader39();
-    record39 r = FragmentProfile39(pc, t2.ti1, t2.ti2);
+    record39 r = FragmentProfile39(pc, t2.ti1, t2.ti2, true);
     if (r.bError != 0) return 11;
 
     if (ReadHeader39() == false) return 0;
