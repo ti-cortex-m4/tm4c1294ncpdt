@@ -95,6 +95,7 @@ ulong64_ ReadUnsignedValueDLSM(void)
 #ifdef MONITOR_39
   MonitorString("\n DataAccessResult="); MonitorCharDec(bDataAccessResult);
 #endif
+
   if (bDataAccessResult != 0) {
     return GetULong64Error(Error39_(15+2, bDataAccessResult));
   }

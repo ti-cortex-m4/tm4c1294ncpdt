@@ -15,23 +15,23 @@ query_id_39.c
 
 
 
-void    QueryId39_Simple(uchar  bNS, uchar  bNR, uchar  bInvokeId)
+void    QueryId39_Single(uchar  bNS, uchar  bNR, uchar  bInvokeId)
 {
 #ifdef MONITOR_39_NAMES
-  MonitorString("\n\n QueryId39_Simple ");
+  MonitorString("\n\n QueryId39_Single ");
 #endif
 
-  uint wSize = 23 + GetHdlcAddressesSize_Simple(); // 0x19 25
+  uint wSize = 23 + GetHdlcAddressesSize_Single(); // 0x19 25
 
   InitPush(0);
   PushChar(0x7E);
 
   PushFormatDLMS(wSize);
-  PushHdlcAddresses_Simple();
+  PushHdlcAddresses_Single();
 
   PushChar(((bNR << 5) | 0x10 | (bNS << 1) | 0x00));
 
-  PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize_Simple())); // 5
+  PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize_Single())); // 5
 
   // DLMS start
 
