@@ -49,11 +49,11 @@ uchar   EngMonPresent39(void)
 {
   InitPop(12 + GetHdlcAddressesSize());
 
-  if (PopChar() != 0) return 60+0; // !success
-  if (PopChar() != 1) return 60+1; // !array
-  if (PopChar() != 1) return 60+2; // array size != 1
-  if (PopChar() != 2) return 60+3; // !structure
-  if (PopChar() != 1) return 60+4; // structure size != 1
+  if (PopChar() != 0) return 40+0; // !success
+  if (PopChar() != 1) return 40+1; // !array
+  if (PopChar() != 1) return 40+2; // array size != 1
+  if (PopChar() != 2) return 40+3; // !structure
+  if (PopChar() != 1) return 40+4; // structure size != 1
 
   return 0;
 }
@@ -63,9 +63,9 @@ uchar   EngMonAbsent39(void)
 {
   InitPop(12 + GetHdlcAddressesSize());
 
-  if (PopChar() != 0) return 60+5; // !success
-  if (PopChar() != 1) return 60+6; // !array
-  if (PopChar() != 0) return 60+7; // array size != 0
+  if (PopChar() != 0) return 40+5; // !success
+  if (PopChar() != 1) return 40+6; // !array
+  if (PopChar() != 0) return 40+7; // array size != 0
 
   return 0;
 }

@@ -15,7 +15,6 @@ query_next_block_39.c
 
 
 
-
 /*
 <GetRequest>
   <GetRequestForNextDataBlock>
