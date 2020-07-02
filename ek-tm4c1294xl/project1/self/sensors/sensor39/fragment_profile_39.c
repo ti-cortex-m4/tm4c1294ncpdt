@@ -28,7 +28,7 @@ static record39 Fault(uchar  bError)
 
 
 
-record39 FragmentProfile39(caller39  *pc, time  tm1, time  tm2)
+record39 FragmentProfile39(caller39  *pc, time  tm1, time  tm2, bool  fProfile)
 {
   InitRecord39();
 
@@ -90,7 +90,10 @@ record39 FragmentProfile39(caller39  *pc, time  tm1, time  tm2)
   }
 
 
-  return FinishRecord39();
+  if (fProfile)
+    return FinishRecordProfile39();
+  else
+    return FinishRecord39();
 }
 
 
@@ -126,7 +129,7 @@ double2 TestFragmentProfile39(void)
 
   InitRecord39_FragmentProfile39();
 
-  uchar bError = FragmentProfile39(&c, tm1, tm2).bError;
+  uchar bError = FragmentProfile39(&c, tm1, tm2, false).bError;
   if (bError != 0)  {
     return GetDouble2Error();
   } else {
