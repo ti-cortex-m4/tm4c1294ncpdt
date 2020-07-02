@@ -5,7 +5,6 @@ log35.c
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-#include "../../memory/mem_settings.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports2.h"
 #include "../../serial/ports_devices.h"
@@ -74,11 +73,6 @@ void    OutCounter35(void)
 
 void    OutResetLog35(void)
 {
-  if ((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_REPROGRAM))
-  {
-    InitLog35();
-    Result(bRES_OK);
-  }
-  else
-    Result(bRES_NEEDREPROGRAM);
+  InitLog35();
+  Result(bRES_OK);
 }
