@@ -82,7 +82,7 @@ double2 ReadCntMonCan38_Internal(uchar  ibMon)
 
     InitRecord39_FragmentProfile39();
 
-    record39 r = FragmentProfile39(&c, tm1, tm2);
+    record39 r = FragmentProfile39(&c, tm1, tm2, false);
 
     if (r.bError != 0)
     {
@@ -96,7 +96,7 @@ double2 ReadCntMonCan38_Internal(uchar  ibMon)
       return Fault(70+4);
     }
 
-    double2 scaler = ReadRegisterScaler39(obisProfile, &c);
+    double2 scaler = ReadRegisterScaler39(obisEngAbs, &c);
     if (!scaler.fValid) return Fault(70+5);
 
     Query39_DISC();
