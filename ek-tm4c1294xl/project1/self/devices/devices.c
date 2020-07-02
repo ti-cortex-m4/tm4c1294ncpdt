@@ -7494,7 +7494,7 @@ void    RunDevices(void)
           PROFILE39_REPEAT_OR_ERROR(220+25, RR_Profile39(), DEV_2_RR_I_39P)
         } else {
           Read3_Profile();
-          if (UseBlocks_Profile()) {
+          if (UseBlocks_Profile39()) {
             QueryNextBlock_Profile39();
             MakePause(DEV_READ_4_39P);
           } else {

@@ -207,9 +207,9 @@ void    Read3_Profile(void) {
 }
 
 
-bool    UseBlocks_Profile(void) {
+bool    UseBlocks_Profile39(void) {
 #ifdef PROFILE_39_NAMES
-  MonitorString("\n\n UseBlocks_Profile");
+  MonitorString("\n\n UseBlocks_Profile39");
 #endif
 
   return fUseBlocks && (!fLastBlock);
