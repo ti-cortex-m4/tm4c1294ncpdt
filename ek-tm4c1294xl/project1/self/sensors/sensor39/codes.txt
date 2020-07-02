@@ -7,8 +7,8 @@ read_engmon_39.c             40         40-47
 
 automatic_get_time_39.c      50         50-55
 automatic_get_cntcurr_39.c   60         60-64
-automatic_get_cntmon_39.c    70         70-77
-automatic39.c                90         100-111 !
+automatic_get_cntmon_39.c    70         70-78
+automatic39.c                80         80-91 !
 
 extended_4t_39.c             110        120-124
 params39.c                   120        130-142 !
