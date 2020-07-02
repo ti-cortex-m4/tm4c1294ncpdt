@@ -18,6 +18,7 @@ automatic_get_cntmon_38.c
 #include "query_profile_39.h"
 #include "query_next_block_39.h"
 #include "read_engmon_39.h"
+#include "dlms_read_register.h"
 #include "buffer_record_39.h"
 #include "fragment_open_time_39.h"
 #include "fragment_cntmon_39.h"
