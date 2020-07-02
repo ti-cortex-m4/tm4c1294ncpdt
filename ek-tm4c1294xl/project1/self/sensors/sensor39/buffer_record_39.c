@@ -120,8 +120,6 @@ record39 FinishRecord39(void) {
   uchar i;
   for (i=0; i<bCount; i++)
   {
-    MonitorString("\n idx "); MonitorCharDec(i); MonitorString("\n");
-
     uint wCapacity2 = GetPopCapacity39();
     if (wCapacity2 < 2 + 2+12 + 1+8)
       return Fault_(140+3, wCapacity2);
@@ -143,14 +141,12 @@ record39 FinishRecord39(void) {
       return Fault_(140+7, bSizeString);
 
     time tm = PopTimeDate39();
-    MonitorString("\n date "); MonitorTime(tm); MonitorString("\n");
 
     uchar bTypeLong64 = PopChar39();
     if (bTypeLong64 != 0x15) // unsigned long 64
       return Fault_(140+8, bTypeLong64); // ???
 
     uint64_t ddwValue = PopLongLong39();
-    MonitorString("\n value "); MonitorLong64Hex(ddwValue); MonitorString("\n");
 
     if (r.fFirst == false) {
       r.bError = 0;
