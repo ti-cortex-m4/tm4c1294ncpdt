@@ -49,22 +49,22 @@ bool    Automatic39(void)
   caller39 c = InitCaller39();
 
   uchar bError = FragmentOpen39(&c);
-  if (bError != 0) return Fault(100+0);
+  if (bError != 0) return Fault(80+0);
 
   c.bNS++;
   c.bInvokeId++;
   QueryId39(c.bNS, c.bNR, c.bInvokeId);
-  if (Input39() != SER_GOODCHECK) return Fault(100+1);
-  if (ValidateFrame(c.bNS, c.bNR) != 0) return Fault(100+2);
+  if (Input39() != SER_GOODCHECK) return Fault(80+1);
+  if (ValidateFrame(c.bNS, c.bNR) != 0) return Fault(80+2);
 
 
   InitPop(12 + GetHdlcAddressesSize());
 
   uchar bResult = PopChar();
-  if (bResult != 0) return Fault(100+3);
+  if (bResult != 0) return Fault(80+3);
 
   uchar bType = PopChar();
-  if (bType != 9) return Fault(100+4);
+  if (bType != 9) return Fault(80+4);
 
   uchar bSize = PopChar();
   Show(bSize);
@@ -78,7 +78,7 @@ bool    Automatic39(void)
   Delay(1000);
 
   Query39_DISC();
-  if (Input39() != SER_GOODCHECK) return Fault(100+5);
+  if (Input39() != SER_GOODCHECK) return Fault(80+5);
 
   return true;
 }
@@ -90,13 +90,13 @@ bool    ChangeSpeed39(void)
   caller39 c = InitCaller39();
 
   uchar bError = FragmentOpen39(&c);
-  if (bError != 0) return Fault(100+6);
+  if (bError != 0) return Fault(80+6);
 
   c.bNS++;
   c.bInvokeId++;
   QueryId39_Single(c.bNS, c.bNR, c.bInvokeId);
-  if (Input39() != SER_GOODCHECK) return Fault(100+7);
-  if (ValidateFrame(c.bNS, c.bNR) != 0) return Fault(100+8);
+  if (Input39() != SER_GOODCHECK) return Fault(80+7);
+  if (ValidateFrame(c.bNS, c.bNR) != 0) return Fault(80+8);
 
 
   Beep();
@@ -105,17 +105,17 @@ bool    ChangeSpeed39(void)
   InitPop(12 + GetHdlcAddressesSize_Single());
 
   uchar bResult = PopChar();
-  if (bResult != 0) return Fault(100+9);
+  if (bResult != 0) return Fault(80+9);
 
   uchar bType = PopChar();
-  if (bType != 9) return Fault(100+10);
+  if (bType != 9) return Fault(80+10);
 
   uchar bSize = PopChar();
   Show(bSize);
 
 
   Query39_DISC();
-  if (Input39() != SER_GOODCHECK) return Fault(100+11);
+  if (Input39() != SER_GOODCHECK) return Fault(80+11);
 
 
   return true;

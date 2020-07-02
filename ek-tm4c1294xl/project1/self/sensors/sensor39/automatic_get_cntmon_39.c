@@ -95,10 +95,13 @@ double2 ReadCntMonCan38_Internal(uchar  ibMon)
       return Fault(70+4);
     }
 
-    Query39_DISC();
-    if (Input39() != SER_GOODCHECK) return Fault(70+5);
+    double2 scaler = ReadRegisterScaler39(obisProfile, &c);
+    if (!scaler.fValid) return Fault(70+5);
 
-    return GetDouble0(r.ddwValue);
+    Query39_DISC();
+    if (Input39() != SER_GOODCHECK) return Fault(70+6);
+
+    return GetDouble0((double)r.ddwValue * scaler.dbValue);
   }
 }
 
@@ -123,7 +126,7 @@ double2 ReadCntMonCan39(uchar  ibMon)
   }
 
   Query39_DISC();
-  if (Input39() != SER_GOODCHECK) return Fault(70+6);
+  if (Input39() != SER_GOODCHECK) return Fault(70+7);
 
-  return Fault(70+7);
+  return Fault(70+8);
 }
