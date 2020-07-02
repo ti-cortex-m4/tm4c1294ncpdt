@@ -1,11 +1,10 @@
 /*------------------------------------------------------------------------------
-log39*c
+log39.c
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-#include "../../memory/mem_settings.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports2.h"
 #include "../../serial/ports_devices.h"
@@ -59,9 +58,10 @@ void    OutLog39(void)
   uint i;
   for (i=0; i<LOG39_SIZE; i++)
   {
-    wSize += PushTime(mLog39[i].tiNow);
-    wSize += PushChar(mLog39[i].bError);
-    wSize += PushIntLtl(mLog39[i].wData);
+    log39 log = mLog39[i];
+    wSize += PushTime(log.tiNow);
+    wSize += PushChar(log.bError);
+    wSize += PushIntLtl(log.wData);
   }
 
   Output(wSize);
@@ -77,8 +77,9 @@ void    OutCounter39(void)
   uint i;
   for (i=0; i<COUNTER39_SIZE; i++)
   {
-    wSize += PushTime(mCounter39[i].tiNow);
-    wSize += PushIntLtl(mCounter39[i].wCounter);
+    counter39 cnt = mCounter39[i];
+    wSize += PushTime(cnt.tiNow);
+    wSize += PushIntLtl(cnt.wCounter);
   }
 
   Output(wSize);
@@ -87,11 +88,6 @@ void    OutCounter39(void)
 
 void    OutResetLog39(void)
 {
-  if ((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_REPROGRAM))
-  {
-    InitLog39();
-    Result(bRES_OK);
-  }
-  else
-    Result(bRES_NEEDREPROGRAM);
+  InitLog39();
+  Result(bRES_OK);
 }
