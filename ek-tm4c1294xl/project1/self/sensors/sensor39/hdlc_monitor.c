@@ -1,7 +1,8 @@
 /*------------------------------------------------------------------------------
 hdlc_monitor.c
 
-
+8.4.3.2 Information transfer command and response
+8.4.3.3 Receive ready (RR) command and response
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
@@ -222,20 +223,3 @@ bool    LastBlockDMLS(void)
 
   return fLastBlock;
 }
-
-
-
-/*
-8.4.3.2 Information transfer command and response
-The function of the information command and response frame – the I frame – is to perform an
-information transfer. The I frame control field shall contain two sequence numbers:
-a) N(S), which shall indicate the sequence number associated with the I frame; and
-b) N(R), which shall indicate the sequence number (as of the time of transmission) of the next
-expected I frame to be received, and consequently shall indicate that the I frames
-numbered up to N(R) – 1 inclusive have been received correctly
-
-8.4.3.3 Receive ready (RR) command and response
-The Receive ready, RR, frame shall be used by a data station to:
-a) indicate that it is ready to receive an I frame(s); and
-b) acknowledge previously received I frames numbered up to N(R) - 1 inclusive
-*/
