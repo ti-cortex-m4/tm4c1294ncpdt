@@ -18,7 +18,5 @@ profile39.c
 profile39_wrapper.c
 query_billing_period_39.c
 query_profile_39.c
-query_register_39.c
-read_engmon_39.c
 time39.c
 time39_test.c
