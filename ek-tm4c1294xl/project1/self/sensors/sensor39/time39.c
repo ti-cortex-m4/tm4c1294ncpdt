@@ -19,7 +19,6 @@ time39.c
 
 
 
-
 void    QueryTime39(uchar  bNS, uchar  bNR, uchar  bInvokeId)
 {
 #ifdef MONITOR_39_NAMES

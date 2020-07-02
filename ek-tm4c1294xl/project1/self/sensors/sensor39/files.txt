@@ -1,5 +1,4 @@
 automatic39.c
-automatic_get_cntmon_39.c   scaler
 buffer_array_39.c
 buffer_profile_39.c
 buffer_record_39.c
@@ -9,12 +8,10 @@ fragment_cntmon_39.c
 fragment_open_39.c
 fragment_open_time_39.c
 fragment_profile_39.c
-hdlc_address.c
 log39.c
 params39.c
 profile39.c
 profile39_wrapper.c
 query_billing_period_39.c
 query_profile_39.c
-time39.c
 time39_test.c

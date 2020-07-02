@@ -12,13 +12,13 @@ hdlc_address.c
 
 
 
-#define HDLC_SERVER_ADDRESS_SIZE_4
+#define HDLC_ADDRESS_SIZE_4
 
 
 
 uchar   GetHdlcAddressesSize(void)
 {
-#ifdef HDLC_SERVER_ADDRESS_SIZE_4
+#ifdef HDLC_ADDRESS_SIZE_4
   return 4+1;
 #else
   return 1+1;
@@ -29,7 +29,7 @@ uchar   GetHdlcAddressesSize(void)
 
 void    PushHdlcAddresses(void)
 {
-#ifdef HDLC_SERVER_ADDRESS_SIZE_4
+#ifdef HDLC_ADDRESS_SIZE_4
   PushChar(0x00);
   PushChar(0x02);
 
