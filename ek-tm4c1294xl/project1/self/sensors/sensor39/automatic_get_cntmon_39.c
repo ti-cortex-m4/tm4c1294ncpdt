@@ -13,6 +13,7 @@ automatic_get_cntmon_38.c
 #include "error39.h"
 #include "time39.h"
 #include "io39.h"
+#include "hdlc_address.h"
 #include "query_billing_period_39.h"
 #include "query_profile_39.h"
 #include "query_next_block_39.h"
@@ -21,7 +22,6 @@ automatic_get_cntmon_38.c
 #include "fragment_open_time_39.h"
 #include "fragment_cntmon_39.h"
 #include "fragment_profile_39.h"
-#include "hdlc_address.h"
 #include "automatic_get_cntmon_39.h"
 
 

@@ -1,4 +1,3 @@
-automatic39.c
 buffer_array_39.c
 buffer_profile_39.c
 buffer_record_39.c
