@@ -1,7 +1,5 @@
 automatic39.c
-automatic_get_cntcurr_39.c
 automatic_get_cntmon_39.c
-automatic_get_time_39.c
 buffer_array_39.c
 buffer_profile_39.c
 buffer_record_39.c
