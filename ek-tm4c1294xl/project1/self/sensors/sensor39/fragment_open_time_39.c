@@ -36,7 +36,7 @@ time2   FragmentOpenTime39(caller39  *pc)
   time tm = ReadTime39();
 
   (*pc).bNR++;
-  Query39_RR((*pc).bNR);
+  RR((*pc).bNR);
   if (Input39() != SER_GOODCHECK) return Fault(120+3);
   if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(120+4);
 

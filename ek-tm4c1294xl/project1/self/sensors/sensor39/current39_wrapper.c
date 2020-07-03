@@ -34,26 +34,26 @@ static double2          scaler;
 void    DISC_Current39(void)
 {
   c = InitCaller39();
-  Query39_DISC();
+  DISC();
 }
 
 
 void    SNRM_Current39(void)
 {
-  Query39_SNRM();
+  SNRM();
 }
 
 
 void    AARQ_Current39(void)
 {
-  Query39_AARQ(c.bNS, c.bNR);
+  AARQ(c.bNS, c.bNR);
 }
 
 
 void    RR_Current39(void)
 {
   c.bNR++;
-  Query39_RR(c.bNR);
+  RR(c.bNR);
 }
 
 

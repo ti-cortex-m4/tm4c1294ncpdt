@@ -51,7 +51,7 @@ double2 FragmentCntMonCan(const obis_t  obis, caller39  *pc, uchar  bMonth, ucha
 
 
   (*pc).bNR++;
-  Query39_RR((*pc).bNR);
+  RR((*pc).bNR);
   if (Input39() != SER_GOODCHECK) return Fault(125+2);
   if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(125+3);
 

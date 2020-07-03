@@ -46,7 +46,7 @@ void    DISC_Profile39(void) {
 #endif
 
   c = InitCaller39();
-  Query39_DISC();
+  DISC();
 }
 
 
@@ -56,7 +56,7 @@ void    SNRM_Profile39(void)
   MonitorString("\n\n SNRM_Profile39");
 #endif
 
-  Query39_SNRM();
+  SNRM();
 }
 
 
@@ -65,7 +65,7 @@ void    AARQ_Profile39(void) {
   MonitorString("\n\n AARQ_Profile39");
 #endif
 
-  Query39_AARQ(c.bNS, c.bNR);
+  AARQ(c.bNS, c.bNR);
 }
 
 
@@ -75,7 +75,7 @@ void    RR_Profile39(void) {
 #endif
 
   c.bNR++;
-  Query39_RR(c.bNR);
+  RR(c.bNR);
 }
 
 

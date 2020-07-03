@@ -92,7 +92,7 @@ float2  ReadParam39_Internal(void)
   flQminus = db2.dbValue;
 
 
-  Query39_DISC();
+  DISC();
   if (Input39() != SER_GOODCHECK) return Fault(100+11);
 
   return GetFloat0(-1);
