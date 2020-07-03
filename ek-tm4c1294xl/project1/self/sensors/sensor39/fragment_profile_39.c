@@ -8,7 +8,7 @@ fragment_profile_39.c
 #include "../../serial/ports.h"
 #include "../../serial/monitor.h"
 #include "../../serial/monitor_settings.h"
-#include "device39.h"
+#include "dlms.h"
 #include "error39.h"
 #include "caller39.h"
 #include "query_profile_39.h"

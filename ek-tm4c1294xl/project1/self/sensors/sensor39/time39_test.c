@@ -9,7 +9,7 @@ time39_test.c
 #include "../../time/rtc.h"
 #include "../../serial/monitor.h"
 #include "../../serial/monitor_settings.h"
-#include "device39.h"
+#include "dlms.h"
 #include "error39.h"
 #include "time39.h"
 #include "io39.h"

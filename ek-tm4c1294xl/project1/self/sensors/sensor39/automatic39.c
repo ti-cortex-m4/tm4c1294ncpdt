@@ -10,7 +10,7 @@ automatic39.c
 #include "../../time/delay.h"
 #include "../../serial/ports.h"
 #include "../../sensors/automatic1.h"
-#include "device39.h"
+#include "dlms.h"
 #include "error39.h"
 #include "io39.h"
 #include "hdlc_address.h"

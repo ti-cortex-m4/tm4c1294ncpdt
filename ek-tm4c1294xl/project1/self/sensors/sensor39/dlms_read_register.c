@@ -11,7 +11,7 @@ Blue Book: 4.3.2 Register (class_id = 3, version = 0)
 #include "../../serial/ports2.h"
 #include "../../serial/ports_devices.h"
 #include "../../serial/monitor.h"
-#include "device39.h"
+#include "dlms.h"
 #include "error39.h"
 #include "io39.h"
 #include "hdlc_address.h"
