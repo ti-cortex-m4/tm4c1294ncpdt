@@ -4,8 +4,8 @@ dlms_obis.h
 
 ------------------------------------------------------------------------------*/
 
-#ifndef __DEVICE39_OBIS
-#define __DEVICE39_OBIS
+#ifndef __DLMS_OBIS
+#define __DLMS_OBIS
 
 
 typedef uchar           obis_t[6];

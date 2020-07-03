@@ -157,7 +157,7 @@ void    AARQ(uchar  bNS, uchar  bNR)
   PushChar(0x62);
   PushChar(0x45);
   PushChar(0x78);
-  PushChar(0x46);
+  PushChar(0x46+1);
   
   PushChar(0xBE); // user-information
   PushChar(0x10); // length
@@ -185,6 +185,11 @@ void    AARQ(uchar  bNS, uchar  bNR)
 
   Query39(1000, wSize+2); // 70
 }
+
+/*
+7e a0 47 00 02 12 9d 03 10 cf 5e e6 e6 00 60 36 a1 09 06 07 60 85 74 05 08 01 01 8a 02 07 80 8b 07 60 85 74 05 08 02 01 ac 0a 80 08 78 52 77 50 62 45 78 46 be 10 04 0e 01 00 00 00 06 5f 1f 04 00 00 7e 1f 01 00 af df 7e
+7e a0 3a 03 00 02 12 9d 30 fc 5c e6 e7 00 61 29 a1 09 06 07 60 85 74 05 08 01 01 a2 03 02 01 00 a3 05 a1 03 02 01 00 be 10 04 0e 08 00 06 5f 1f 04 00 00 18 1d 01 80 00 07 a1 dc
+*/
 
 
 
