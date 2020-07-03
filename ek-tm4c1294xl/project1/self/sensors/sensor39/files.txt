@@ -3,9 +3,6 @@ buffer_profile_39.c
 buffer_record_39.c
 device39.c
 extended_4t_39.c
-fragment_cntmon_39.c
-fragment_open_39.c
-fragment_open_time_39.c
 fragment_profile_39.c
 params39.c
 profile39.c
