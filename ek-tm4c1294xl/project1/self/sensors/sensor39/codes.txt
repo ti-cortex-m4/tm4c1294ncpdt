@@ -13,14 +13,14 @@ automatic39.c                80         80-91 !
 extended_4t_39.c             95         95-99
 params39.c                   100        100-112 !
 
+fragment_open_39.c           115        115-120
+fragment_open_time39.c       120        120-123
+fragment_cntmon_39           125        125-130
+fragment_profile_39.c        190        180-191 !
+
 buffer_array_39.c            130        130-130
 buffer_record_39.c           140        140-148
 buffer_profile_39.c          150        150-150
-
-fragment_open_39.c           160        180-185
-fragment_open_time39.c       170        190-193
-fragment_cntmon_39           180        170-175
-fragment_profile_39.c        190        180-191 !
 
 current39                    200        210-224
 
