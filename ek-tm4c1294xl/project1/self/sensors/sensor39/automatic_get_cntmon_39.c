@@ -9,7 +9,7 @@ automatic_get_cntmon_38.c
 #include "../../keyboard/keyboard.h"
 #include "../../serial/ports.h"
 #include "../../digitals/digitals.h"
-#include "device39.h"
+#include "dlms.h"
 #include "error39.h"
 #include "time39.h"
 #include "io39.h"
