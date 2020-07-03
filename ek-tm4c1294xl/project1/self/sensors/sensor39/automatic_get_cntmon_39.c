@@ -57,7 +57,7 @@ double2 ReadCntMonCan38_Internal(uchar  ibMon)
       return Fault(70+1);
     }
 
-    Query39_DISC();
+    DISC();
     if (Input39() != SER_GOODCHECK) return Fault(70+2);
 
     return db2;
@@ -99,7 +99,7 @@ double2 ReadCntMonCan38_Internal(uchar  ibMon)
     double2 scaler = ReadRegisterScaler39(obisEngAbs, &c);
     if (!scaler.fValid) return Fault(70+5);
 
-    Query39_DISC();
+    DISC();
     if (Input39() != SER_GOODCHECK) return Fault(70+6);
 
     return GetDouble0((double)r.ddwValue * scaler.dbValue);
@@ -126,7 +126,7 @@ double2 ReadCntMonCan39(uchar  ibMon)
     }
   }
 
-  Query39_DISC();
+  DISC();
   if (Input39() != SER_GOODCHECK) return Fault(70+7);
 
   return Fault(70+8);

@@ -74,7 +74,7 @@ double2 ReadRegisterValue39(const obis_t  obis, caller39*  pc)
   if (!value.fValid) return Fault(20+7);
 
   (*pc).bNR++;
-  Query39_RR((*pc).bNR);
+  RR((*pc).bNR);
   if (Input39() != SER_GOODCHECK) return Fault(20+8);
   if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(20+9);
 
@@ -93,7 +93,7 @@ double2 ReadRegisterScaler39(const obis_t  obis, caller39*  pc)
   if (!scaler.fValid) return Fault(20+12);
 
   (*pc).bNR++;
-  Query39_RR((*pc).bNR);
+  RR((*pc).bNR);
   if (Input39() != SER_GOODCHECK) return Fault(20+13);
   if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(20+14);
 

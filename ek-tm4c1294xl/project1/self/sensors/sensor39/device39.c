@@ -9,7 +9,6 @@ DEVICE36*C
 #include "../../serial/ports2.h"
 #include "../../serial/ports_devices.h"
 #include "../../serial/monitor.h"
-//#include "include39.h"
 #include "crc16x25.h"
 #include "io39.h"
 #include "hdlc_address.h"
@@ -18,7 +17,7 @@ DEVICE36*C
 
 
 
-void    Query39_DISC(void)
+void    DISC(void)
 {
 #ifdef MONITOR_39_NAMES
   MonitorString("\n\n DISC");
@@ -47,10 +46,10 @@ void    Query39_DISC(void)
 }
 
 
-void    Query39_SNRM(void)
+void    SNRM(void)
 {
 #ifdef MONITOR_39_NAMES
-  MonitorString("\n\n SNRM");
+  MonitorString("\n\n SNRM ");
 #endif
 
   uint wSize = 30 + GetHdlcAddressesSize(); // 32
@@ -109,7 +108,7 @@ void    Query39_SNRM(void)
 
 
 // Green Book, 11.5 Encoding of the AARQ APDU
-void    Query39_AARQ(uchar  bNS, uchar  bNR)
+void    AARQ(uchar  bNS, uchar  bNR)
 {
 #ifdef MONITOR_39_NAMES
   MonitorString("\n\n AARQ ");
@@ -209,7 +208,7 @@ void    Query39_AARQ(uchar  bNS, uchar  bNR)
 
 
 
-void    Query39_RR(uchar  bNR)
+void    RR(uchar  bNR)
 {
 #ifdef MONITOR_39_NAMES
   MonitorString("\n\n RR ");

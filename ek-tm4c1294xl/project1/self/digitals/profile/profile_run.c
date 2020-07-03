@@ -367,7 +367,7 @@ void    NextProfile(void)
 #endif
 
 #ifndef SKIP_39
-    case 39: Query39_DISC();  break;
+    case 39: DISC();  break;
 #endif
   }
 

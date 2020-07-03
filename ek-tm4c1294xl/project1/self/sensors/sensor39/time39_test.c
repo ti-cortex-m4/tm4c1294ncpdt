@@ -56,7 +56,7 @@ double2 TestTimeCorrect39(void)
   if (ValidateFrame(c.bNS, c.bNR) != 0) return Fault(3);
 
   c.bNR++;
-  Query39_RR(c.bNR);
+  RR(c.bNR);
   if (Input39() != SER_GOODCHECK) return Fault(4);
   if (ValidateFrame(c.bNS, c.bNR) != 0) return Fault(5);
 
@@ -69,7 +69,7 @@ double2 TestTimeCorrect39(void)
   time tmThat2 = ReadTime39();
 
   c.bNR++;
-  Query39_RR(c.bNR);
+  RR(c.bNR);
   if (Input39() != SER_GOODCHECK) return Fault(8);
   if (ValidateFrame(c.bNS, c.bNR) != 0) return Fault(9);
 

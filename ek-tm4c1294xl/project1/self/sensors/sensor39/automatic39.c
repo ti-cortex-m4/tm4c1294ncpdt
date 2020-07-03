@@ -77,7 +77,7 @@ bool    Automatic39(void)
   Delay(1000);
 
 
-  Query39_DISC();
+  DISC();
   if (Input39() != SER_GOODCHECK) return Fault(80+5);
 
   return true;
@@ -114,7 +114,7 @@ bool    ChangeSpeed39(void)
   Show(bSize);
 
 
-  Query39_DISC();
+  DISC();
   if (Input39() != SER_GOODCHECK) return Fault(80+11);
 
 

@@ -4,7 +4,7 @@ device39.h
 
 ------------------------------------------------------------------------------*/
 
-void    Query39_DISC(void);
-void    Query39_SNRM(void);
-void    Query39_AARQ(uchar  bNS, uchar  bNR);
-void    Query39_RR(uchar  bNR);
+void    DISC(void);
+void    SNRM(void);
+void    AARQ(uchar  bNS, uchar  bNR);
+void    RR(uchar  bNR);

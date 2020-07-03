@@ -56,7 +56,7 @@ status  CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
 
   double2 db2 = FragmentCntMonCan(*GetOBIS(ibTariff), &c, bMonth, bYear);
 
-  Query39_DISC();
+  DISC();
   if (Input39() != SER_GOODCHECK) return BadDigital(95+1);
 
 
@@ -89,7 +89,7 @@ status  ReadCntMonCanTariff39(uchar  ibMonAbs, uchar  ibTariff) // на начало мес
     if (s == ST_NOTPRESENTED) return s;
   }
 
-  Query39_DISC();
+  DISC();
   if (Input39() != SER_GOODCHECK) return BadDigital(95+3);
 
   return BadDigital(95+4);

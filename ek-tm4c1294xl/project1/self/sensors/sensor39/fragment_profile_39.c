@@ -46,7 +46,7 @@ record39 FragmentProfile39(caller39  *pc, time  tm1, time  tm2, bool  fProfile)
 
   while (!LastSegmentDMLS()) {
     (*pc).bNR++;
-    Query39_RR((*pc).bNR);
+    RR((*pc).bNR);
     if (Input39() != SER_GOODCHECK) return Fault(180+2);
     if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(180+3);
 
@@ -54,7 +54,7 @@ record39 FragmentProfile39(caller39  *pc, time  tm1, time  tm2, bool  fProfile)
   }
 
   (*pc).bNR++;
-  Query39_RR((*pc).bNR);
+  RR((*pc).bNR);
   if (Input39() != SER_GOODCHECK) return Fault(180+4);
   if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(180+5);
 
@@ -76,7 +76,7 @@ record39 FragmentProfile39(caller39  *pc, time  tm1, time  tm2, bool  fProfile)
 
     while (!LastSegmentDMLS()) {
       (*pc).bNR++;
-      Query39_RR((*pc).bNR);
+      RR((*pc).bNR);
       if (Input39() != SER_GOODCHECK) return Fault(180+8);
       if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(180+9);
 
@@ -84,7 +84,7 @@ record39 FragmentProfile39(caller39  *pc, time  tm1, time  tm2, bool  fProfile)
     }
 
     (*pc).bNR++;
-    Query39_RR((*pc).bNR);
+    RR((*pc).bNR);
     if (Input39() != SER_GOODCHECK) return Fault(180+10);
     if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(180+11);
   }
