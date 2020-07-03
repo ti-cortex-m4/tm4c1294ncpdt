@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-DEVICE36*C
+device39.c
 
 
 ------------------------------------------------------------------------------*/
@@ -20,7 +20,7 @@ DEVICE36*C
 void    DISC(void)
 {
 #ifdef MONITOR_39_NAMES
-  MonitorString("\n\n DISC");
+  MonitorString("\n\n DISC ");
 #endif
 
   InitPush(0);
@@ -29,17 +29,10 @@ void    DISC(void)
 
   PushChar(0x7E);
   PushFormatDLMS(wSize);
-//  PushChar(0xA0);
-//  PushChar(0x07);
   PushHdlcAddresses();
-//  PushChar(0x03);
-//  PushChar(0x03);
   PushChar(0x53); // DISC
 
   PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
-//  PushChar(0x80);
-//  PushChar(0xD7);
-
   PushChar(0x7E);
 
   Query39(1000, wSize+2); // 9
@@ -58,49 +51,40 @@ void    SNRM(void)
   PushChar(0x7E);
   
   PushFormatDLMS(wSize);
-//  PushChar(0xA0);
-//  PushChar(0x20);
   PushHdlcAddresses();
-//  PushChar(0x03);
-//  PushChar(0x03);
   PushChar(0x93); // SNRM
   
   PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
-//  PushChar(0xFE); // CRC ?
-//  PushChar(0xC9);
   
-  PushChar(0x81);
-  PushChar(0x80);
-  PushChar(0x14); // length
+  PushChar(0x81); // format identifier
+  PushChar(0x80); // group identifier
+  PushChar(0x14); // group length
   
-  PushChar(0x05);
-  PushChar(0x02); // length
+  PushChar(0x05); // parameter identifier (maximum information field length – transmit)
+  PushChar(0x02); // parameter length
   PushChar(0x00);
   PushChar(0x80);
   
-  PushChar(0x06);
-  PushChar(0x02); // length
+  PushChar(0x06); // parameter identifier (maximum information field length – receive)
+  PushChar(0x02); // parameter length
   PushChar(0x00);
   PushChar(0x80);
   
-  PushChar(0x07);
-  PushChar(0x04); // length
+  PushChar(0x07); // parameter identifier (window size, transmit)
+  PushChar(0x04); // parameter length
   PushChar(0x00);
   PushChar(0x00);
   PushChar(0x00);
   PushChar(0x01);
   
-  PushChar(0x08);
-  PushChar(0x04); // length
+  PushChar(0x08); // parameter identifier (window size, receive)
+  PushChar(0x04); // parameter length
   PushChar(0x00);
   PushChar(0x00);
   PushChar(0x00);
   PushChar(0x01);
 
   PushIntLtl(MakeCRC16X25OutBuff(1, wSize-2)); // 30
-//  PushChar(0xCE);
-//  PushChar(0x6A);
-
   PushChar(0x7E);
 
   Query39(1000, wSize+2); // 34
@@ -122,9 +106,6 @@ void    AARQ(uchar  bNS, uchar  bNR)
   PushFormatDLMS(wSize);
   PushHdlcAddresses();
 
-  bNS = 0;
-  bNR = 0;
-//  MonitorString("Control{N(R)=0,N(S)=0} 10 ? ");
   PushChar((bNR << 5) | 0x10 | (bNS << 1) | 0x00);
   
   PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
@@ -200,7 +181,6 @@ void    AARQ(uchar  bNS, uchar  bNR)
   // DLMS finish
   
   PushIntLtl(MakeCRC16X25OutBuff(1, wSize-2));
-  
   PushChar(0x7E);
 
   Query39(1000, wSize+2); // 70
