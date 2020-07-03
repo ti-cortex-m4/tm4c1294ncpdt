@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-device39.c
+dlms.c
 
 
 ------------------------------------------------------------------------------*/
@@ -13,7 +13,7 @@ device39.c
 #include "io39.h"
 #include "hdlc_address.h"
 #include "dlms_push.h"
-#include "device39.h"
+#include "dlms.h"
 
 
 
@@ -60,12 +60,12 @@ void    SNRM(void)
   PushChar(0x80); // group identifier
   PushChar(0x14); // group length
   
-  PushChar(0x05); // parameter identifier (maximum information field length – transmit)
+  PushChar(0x05); // parameter identifier (maximum information field length ï¿½ transmit)
   PushChar(0x02); // parameter length
   PushChar(0x00);
   PushChar(0x80);
   
-  PushChar(0x06); // parameter identifier (maximum information field length – receive)
+  PushChar(0x06); // parameter identifier (maximum information field length ï¿½ receive)
   PushChar(0x02); // parameter length
   PushChar(0x00);
   PushChar(0x80);

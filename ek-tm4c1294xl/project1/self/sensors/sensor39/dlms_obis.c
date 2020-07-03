@@ -1,11 +1,11 @@
 /*------------------------------------------------------------------------------
-device39_obis.c
+dlms_obis.c
 
 Blue Book: 7.5.1 Value group C codes – Electricity
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-#include "device39_obis.h"
+#include "dlms_obis.h"
 
 
 

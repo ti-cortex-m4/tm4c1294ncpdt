@@ -6,7 +6,7 @@ fragment_open_time_39.c
 
 #include "../../main.h"
 #include "../../time/delay.h"
-#include "device39.h"
+#include "dlms.h"
 #include "caller39.h"
 #include "time39.h"
 #include "io39.h"

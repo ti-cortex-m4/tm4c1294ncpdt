@@ -9,7 +9,7 @@ automatic_get_time_39.c
 #include "../../keyboard/keyboard.h"
 #include "../../serial/ports.h"
 #include "../../digitals/digitals.h"
-#include "device39.h"
+#include "dlms.h"
 #include "time39.h"
 #include "io39.h"
 #include "caller39.h"

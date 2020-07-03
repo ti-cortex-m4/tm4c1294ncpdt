@@ -11,7 +11,7 @@ time39.c
 #include "../../serial/monitor.h"
 #include "include39.h"
 #include "crc16x25.h"
-#include "device39_obis.h"
+#include "dlms_obis.h"
 #include "io39.h"
 #include "hdlc_address.h"
 #include "dlms_push.h"

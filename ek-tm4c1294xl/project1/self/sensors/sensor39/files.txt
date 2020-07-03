@@ -1,7 +1,7 @@
 buffer_array_39.c
 buffer_profile_39.c
 buffer_record_39.c
-device39.c
+dlms.c
 extended_4t_39.c
 fragment_profile_39.c
 params39.c
