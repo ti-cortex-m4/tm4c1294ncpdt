@@ -104,7 +104,7 @@ void    AARQ(uchar  bNS, uchar  bNR)
   line Pass = mpphAsciiAddress[diCurr.bAddress-1];
   uchar bPassSize = strlen((char const *)Pass.szLine);
 
-  uint wSize = 66-8+bPassSize + GetHdlcAddressesSize(); // 0x44 68
+  uint wSize = 66 - 8 + bPassSize + GetHdlcAddressesSize(); // 0x44 68
 
   InitPush(0);
   PushChar(0x7E);
@@ -155,11 +155,12 @@ void    AARQ(uchar  bNS, uchar  bNR)
   PushChar(0xAC); // calling-authentication-value
   PushChar(0x0A); // length
   PushChar(0x80);
+#if true
   PushChar(bPassSize);
   Push(Pass.szLine, bPassSize);
-/*
+#else
   PushChar(0x08); // length
-  PushChar(0x78);
+  PushChar(0x78); // xRwPbExF
   PushChar(0x52);
   PushChar(0x77);
   PushChar(0x50);
@@ -167,7 +168,8 @@ void    AARQ(uchar  bNS, uchar  bNR)
   PushChar(0x45);
   PushChar(0x78);
   PushChar(0x46);
-*/
+#endif
+
   PushChar(0xBE); // user-information
   PushChar(0x10); // length
   PushChar(0x04);
