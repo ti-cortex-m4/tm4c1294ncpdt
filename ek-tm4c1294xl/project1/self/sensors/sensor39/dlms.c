@@ -5,10 +5,12 @@ dlms.c
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
+#include "../../memory/mem_digitals.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports2.h"
 #include "../../serial/ports_devices.h"
 #include "../../serial/monitor.h"
+#include "../../digitals/address/ascii_address.h"
 #include "crc16x25.h"
 #include "io39.h"
 #include "error39.h"
@@ -99,7 +101,10 @@ void    AARQ(uchar  bNS, uchar  bNR)
   MonitorString("\n\n AARQ ");
 #endif
 
-  uint wSize = 66 + GetHdlcAddressesSize(); // 0x44 68
+  line Pass = mpphAsciiAddress[diCurr.bAddress-1];
+  uchar bPassSize = strlen((char const *)Pass.szLine);
+
+  uint wSize = 66-8+bPassSize + GetHdlcAddressesSize(); // 0x44 68
 
   InitPush(0);
   PushChar(0x7E);
@@ -150,6 +155,9 @@ void    AARQ(uchar  bNS, uchar  bNR)
   PushChar(0xAC); // calling-authentication-value
   PushChar(0x0A); // length
   PushChar(0x80);
+  PushChar(bPassSize);
+  Push(Pass.szLine, bPassSize);
+/*
   PushChar(0x08); // length
   PushChar(0x78);
   PushChar(0x52);
@@ -159,7 +167,7 @@ void    AARQ(uchar  bNS, uchar  bNR)
   PushChar(0x45);
   PushChar(0x78);
   PushChar(0x46);
-  
+*/
   PushChar(0xBE); // user-information
   PushChar(0x10); // length
   PushChar(0x04);
@@ -204,14 +212,13 @@ bool    AARE_CheckPass(void)
   uint i;
   for (i=6+GetHdlcAddressesSize(); i<wSize-4; i++)
   {
-    //MonitorString("\n "); MonitorCharDec(i); MonitorString(" = "); MonitorCharHex(InBuff(i+0));
     if ((InBuff(i+0) == 0xA2) &&
         (InBuff(i+1) == 0x03) &&
         (InBuff(i+2) == 0x02) &&
         (InBuff(i+3) == 0x01))
     {
       uchar bResult = InBuff(i+4);
-      //MonitorString("\n result = "); MonitorCharHex(bResult);
+
       if (bResult == 0)
         return true;
       else if (bResult == 1) {
