@@ -168,6 +168,8 @@ bool    ReadHeader39(void)
     MonitorString(" size="); MonitorCharDec(bSize);
 #endif
 
+    bool fFound = false;
+
     uchar i;
     for (i=0; i<bSize; i++)
     {
@@ -175,10 +177,13 @@ bool    ReadHeader39(void)
       if (prf.fExists) {
         if (!DifferentDateTime(tiVirtual, prf.tmTime)) {
           dwValue = prf.ddwValue;
+          fFound = true;
           break;
         }
       }
     }  
+
+    if (!fFound) szLo[15] = '*';
 
 #ifdef MONITOR_39
     MonitorString(" in="); MonitorTime(tiVirtual);
