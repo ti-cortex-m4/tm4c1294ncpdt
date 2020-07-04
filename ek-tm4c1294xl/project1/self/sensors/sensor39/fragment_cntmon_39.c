@@ -32,7 +32,7 @@ double2 FragmentCntMonCan(const obis_t  obis, caller39  *pc, uchar  bMonth, ucha
 {
   (*pc).bNS++;
   (*pc).bInvokeId++;
-  QueryEngMon39(obis, (*pc).bNS, (*pc).bNR, (*pc).bInvokeId, bMonth, bYear);
+  QueryBillingPeriod39(obis, (*pc).bNS, (*pc).bNR, (*pc).bInvokeId, bMonth, bYear);
   if (Input39() != SER_GOODCHECK) return Fault(125+0);
   if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(125+1);
 

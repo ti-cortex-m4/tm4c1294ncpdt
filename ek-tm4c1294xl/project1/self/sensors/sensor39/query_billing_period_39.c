@@ -57,7 +57,7 @@ query_billing_period_39.c
   </GetRequestNormal>
 </GetRequest>
 */
-void    QueryEngMon39(const obis_t  obis, uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  bMonth, uchar  bYear)
+void    QueryBillingPeriod39(const obis_t  obis, uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  bMonth, uchar  bYear)
 {
 #ifdef MONITOR_39_NAMES
   MonitorString("\n\n QueryEngMon39 "); MonitorCharDec(bMonth); MonitorString(" "); MonitorCharDec(bYear);
