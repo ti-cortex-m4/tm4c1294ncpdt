@@ -25,6 +25,8 @@ static bool         fProfileOveflow39;
 
 void    InitProfile39(void)
 {
+  MonitorString("\n init profile ");
+
   memset(&mpProfile39, 0, sizeof(mpProfile39));
   cbProfileSize39 = 0;
   fProfileOveflow39 = false;
@@ -33,6 +35,8 @@ void    InitProfile39(void)
 
 void    AddProfile39(time  tmTime, uint64_t  ddwValue)
 {
+  MonitorString("\n add profile "); MonitorIntDec(cbProfileSize39); MonitorString(" "); MonitorTime(tmTime); MonitorLong64Hex(ddwValue);
+
   if (cbProfileSize39 < PROFILE39_SIZE)
   {
     uchar i = cbProfileSize39;
@@ -45,8 +49,9 @@ void    AddProfile39(time  tmTime, uint64_t  ddwValue)
   }
   else
   {
+    MonitorString("\n add profile overflow ");
     Error39(150+0);
-    fProfileOveflow39 = true;
+//    fProfileOveflow39 = true;
   }
 }
 
