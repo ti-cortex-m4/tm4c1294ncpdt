@@ -7,4 +7,3 @@ fragment_profile_39.c
 profile39.c
 profile39_wrapper.c
 query_billing_period_39.c
-query_profile_39.c
