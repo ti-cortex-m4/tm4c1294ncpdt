@@ -23,6 +23,6 @@ buffer_array_39.c            130        130-130
 buffer_record_39.c           140        140-148
 buffer_profile_39.c          150        150-150
 
-current39                    200        210-224
+current39                    200        210-226
 
 profile39.c                  220        220-230
