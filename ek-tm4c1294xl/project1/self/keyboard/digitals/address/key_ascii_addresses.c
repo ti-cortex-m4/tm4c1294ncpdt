@@ -18,7 +18,6 @@ key_ascii_addresses*c
 //                                           0123456789ABCDEF
 static char const       szAddresses[]     = "Адреса          ",
                         szMask9[]         = "_________",
-//                        szMask12[]        = "____________",
                         szSpace12[]       = "            ";
 
 
