@@ -4,7 +4,6 @@ buffer_record_39.c
 dlms.c
 extended_4t_39.c
 fragment_profile_39.c
-params39.c
 profile39.c
 profile39_wrapper.c
 query_billing_period_39.c
