@@ -204,14 +204,14 @@ bool    AARE_CheckPass(void)
   uint i;
   for (i=6+GetHdlcAddressesSize(); i<wSize-4; i++)
   {
-    MonitorString("\n "); MonitorCharDec(i); MonitorString(" = "); MonitorCharHex(InBuff(i+0));
+    //MonitorString("\n "); MonitorCharDec(i); MonitorString(" = "); MonitorCharHex(InBuff(i+0));
     if ((InBuff(i+0) == 0xA2) &&
         (InBuff(i+1) == 0x03) &&
         (InBuff(i+2) == 0x02) &&
         (InBuff(i+3) == 0x01))
     {
       uchar bResult = InBuff(i+4);
-      MonitorString("\n result = "); MonitorCharHex(bResult);
+      //MonitorString("\n result = "); MonitorCharHex(bResult);
       if (bResult == 0)
         return true;
       else if (bResult == 1) {
