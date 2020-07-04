@@ -220,7 +220,7 @@ record39 FinishRecordProfile39(void) {
     }
 
 #if BUFFER_RECORD_39
-    MonitorString("\n");
+    MonitorString("\n add record ");
     MonitorTime(tm);
     MonitorLongDec(ddw / 1000000);
     MonitorLongDec(ddw % 1000000);
@@ -230,11 +230,10 @@ record39 FinishRecordProfile39(void) {
 
   if (FirstPrev.fExists == true) {
 #if BUFFER_RECORD_39
-    MonitorString("\n");
+    MonitorString("\n add previous record ");
     MonitorTime(FirstPrev.tmTime);
     MonitorLongDec(FirstPrev.ddwValue / 1000000);
     MonitorLongDec(FirstPrev.ddwValue % 1000000);
-    MonitorString(" previous");
 #endif
     AddProfile39(FirstPrev.tmTime, FirstPrev.ddwValue);
   }
