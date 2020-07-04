@@ -1,5 +1,2 @@
-пароль
-
-проверить ответ от пароля
-
+profile pass
 profile scaler

@@ -4,4 +4,4 @@ query_profile_39.h
 
 ------------------------------------------------------------------------------*/
 
-void    QueryProfile39(uchar  bNS, uchar  bNR, uchar  bInvokeId, time  ti1, time  ti2);
+void    QueryProfile39(uchar  bNS, uchar  bNR, uchar  bInvokeId, time  tm1, time  tm2);
