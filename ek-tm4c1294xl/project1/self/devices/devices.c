@@ -7206,10 +7206,15 @@ void    RunDevices(void)
         if (!ValidateFrame_Profile39()) {
           PROFILE39_REPEAT_OR_ERROR(220+2, AARQ_Profile39(), DEV_AARQ_I_39P)
         } else {
-          MakePause(DEV_RR_AARQ_O_39P);
+          if (AARE_CheckPass()) {
+            MakePause(DEV_RR_AARQ_O_39P);
+          } else {
+            Error39(220+3);
+            ErrorProfile();
+          }
         }  
       } else {
-        PROFILE39_REPEAT_OR_ERROR(220+3, AARQ_Profile39(), DEV_AARQ_I_39P)
+        PROFILE39_REPEAT_OR_ERROR(220+4, AARQ_Profile39(), DEV_AARQ_I_39P)
       }
       break;
 
@@ -7225,12 +7230,12 @@ void    RunDevices(void)
     case DEV_RR_AARQ_I_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateFrame_Profile39()) {
-          PROFILE39_REPEAT_OR_ERROR(220+4, RR_Profile39(), DEV_RR_AARQ_I_39P)
+          PROFILE39_REPEAT_OR_ERROR(220+5, RR_Profile39(), DEV_RR_AARQ_I_39P)
         } else {
           MakePause(DEV_TIME1_O_39P);
         }  
       } else {
-        PROFILE39_REPEAT_OR_ERROR(220+5, RR_Profile39(), DEV_RR_AARQ_I_39P)
+        PROFILE39_REPEAT_OR_ERROR(220+6, RR_Profile39(), DEV_RR_AARQ_I_39P)
       }
       break;
 
@@ -7246,13 +7251,13 @@ void    RunDevices(void)
     case DEV_TIME1_I_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateFrame_Profile39()) {
-          PROFILE39_REPEAT_OR_ERROR(220+6, QueryTime_Profile39(), DEV_TIME1_I_39P)
+          PROFILE39_REPEAT_OR_ERROR(220+7, QueryTime_Profile39(), DEV_TIME1_I_39P)
         } else {
           ReadTime_Profile39();
           MakePause(DEV_RR_TIME1_O_39P);
         }
       } else {
-        PROFILE39_REPEAT_OR_ERROR(220+7, QueryTime_Profile39(), DEV_TIME1_I_39P)
+        PROFILE39_REPEAT_OR_ERROR(220+8, QueryTime_Profile39(), DEV_TIME1_I_39P)
       }
       break;
 
@@ -7268,12 +7273,12 @@ void    RunDevices(void)
     case DEV_RR_TIME1_I_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateFrame_Profile39()) {
-          PROFILE39_REPEAT_OR_ERROR(220+8, RR_Profile39(), DEV_RR_TIME1_I_39P)
+          PROFILE39_REPEAT_OR_ERROR(220+9, RR_Profile39(), DEV_RR_TIME1_I_39P)
         } else {
           MakePause(DEV_CORRECT_39P);
         }  
       } else {
-        PROFILE39_REPEAT_OR_ERROR(220+9, RR_Profile39(), DEV_RR_TIME1_I_39P)
+        PROFILE39_REPEAT_OR_ERROR(220+10, RR_Profile39(), DEV_RR_TIME1_I_39P)
       }
       break;
 
@@ -7319,12 +7324,12 @@ void    RunDevices(void)
     case DEV_CORRECT_I_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateFrame_Profile39()) {
-          PROFILE39_REPEAT_OR_ERROR(220+10, QueryCorrect_Profile39(), DEV_CORRECT_I_39P)
+          PROFILE39_REPEAT_OR_ERROR(220+11, QueryCorrect_Profile39(), DEV_CORRECT_I_39P)
         } else {
           MakePause(DEV_RR_CORRECT_O_39P);
         }
       } else {
-        PROFILE39_REPEAT_OR_ERROR(220+11, QueryCorrect_Profile39(), DEV_CORRECT_I_39P)
+        PROFILE39_REPEAT_OR_ERROR(220+12, QueryCorrect_Profile39(), DEV_CORRECT_I_39P)
       }
       break;
 
@@ -7340,12 +7345,12 @@ void    RunDevices(void)
     case DEV_RR_CORRECT_I_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateFrame_Profile39()) {
-          PROFILE39_REPEAT_OR_ERROR(220+12, RR_Profile39(), DEV_RR_CORRECT_I_39P)
+          PROFILE39_REPEAT_OR_ERROR(220+13, RR_Profile39(), DEV_RR_CORRECT_I_39P)
         } else {
           MakePause(DEV_TIME2_O_39P);
         }  
       } else {
-        PROFILE39_REPEAT_OR_ERROR(220+13, RR_Profile39(), DEV_RR_CORRECT_I_39P)
+        PROFILE39_REPEAT_OR_ERROR(220+14, RR_Profile39(), DEV_RR_CORRECT_I_39P)
       }
       break;
 
@@ -7361,13 +7366,13 @@ void    RunDevices(void)
     case DEV_TIME2_I_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateFrame_Profile39()) {
-          PROFILE39_REPEAT_OR_ERROR(220+14, QueryTime_Profile39(), DEV_TIME2_I_39P)
+          PROFILE39_REPEAT_OR_ERROR(220+15, QueryTime_Profile39(), DEV_TIME2_I_39P)
         } else {
           ReadTime_Profile39();
           MakePause(DEV_RR_TIME2_O_39P);
         }
       } else {
-        PROFILE39_REPEAT_OR_ERROR(220+15, QueryTime_Profile39(), DEV_TIME2_I_39P)
+        PROFILE39_REPEAT_OR_ERROR(220+16, QueryTime_Profile39(), DEV_TIME2_I_39P)
       }
       break;
 
@@ -7383,12 +7388,12 @@ void    RunDevices(void)
     case DEV_RR_TIME2_I_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateFrame_Profile39()) {
-          PROFILE39_REPEAT_OR_ERROR(220+16, RR_Profile39(), DEV_RR_TIME2_I_39P)
+          PROFILE39_REPEAT_OR_ERROR(220+17, RR_Profile39(), DEV_RR_TIME2_I_39P)
         } else {
           MakePause(DEV_SCALER_O_39P);
         }  
       } else {
-        PROFILE39_REPEAT_OR_ERROR(220+17, RR_Profile39(), DEV_RR_TIME2_I_39P)
+        PROFILE39_REPEAT_OR_ERROR(220+18, RR_Profile39(), DEV_RR_TIME2_I_39P)
       }
       break;
 
@@ -7404,17 +7409,17 @@ void    RunDevices(void)
     case DEV_SCALER_I_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateFrame_Profile39()) {
-          PROFILE39_REPEAT_OR_ERROR(220+18, QueryScaler_Profile39(), DEV_SCALER_I_39P)
+          PROFILE39_REPEAT_OR_ERROR(220+19, QueryScaler_Profile39(), DEV_SCALER_I_39P)
         } else {
           if (ReadScaler_Profile39()) {
             MakePause(DEV_RR_SCALER_O_39P);
           } else {
-            Error39(220+19);
+            Error39(220+20);
             ErrorProfile();
           }
         }
       } else {
-        PROFILE39_REPEAT_OR_ERROR(220+20, QueryScaler_Profile39(), DEV_SCALER_I_39P)
+        PROFILE39_REPEAT_OR_ERROR(220+21, QueryScaler_Profile39(), DEV_SCALER_I_39P)
       }
       break;
 
@@ -7430,12 +7435,12 @@ void    RunDevices(void)
     case DEV_RR_SCALER_I_39P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateFrame_Profile39()) {
-          PROFILE39_REPEAT_OR_ERROR(220+21, RR_Profile39(), DEV_RR_SCALER_I_39P)
+          PROFILE39_REPEAT_OR_ERROR(220+22, RR_Profile39(), DEV_RR_SCALER_I_39P)
         } else {
           MakePause(DEV_INIT_39P);
         }  
       } else {
-        PROFILE39_REPEAT_OR_ERROR(220+22, RR_Profile39(), DEV_RR_SCALER_I_39P)
+        PROFILE39_REPEAT_OR_ERROR(220+23, RR_Profile39(), DEV_RR_SCALER_I_39P)
       }
       break;
 
