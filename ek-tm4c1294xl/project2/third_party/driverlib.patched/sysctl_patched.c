@@ -2123,7 +2123,7 @@ SysCtlResetBehaviorGet(void)
 //
 //*****************************************************************************
 uint32_t
-SysCtlClockFreqSet(uint32_t ui32Config, uint32_t ui32SysClock)
+SysCtlClockFreqSet_patched(uint32_t ui32Config, uint32_t ui32SysClock)
 {
     int32_t i32Timeout, i32VCOIdx, i32XtalIdx;
     uint32_t ui32MOSCCTL;
