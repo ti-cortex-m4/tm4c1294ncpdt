@@ -57,8 +57,7 @@ extern "C"
 //
 //*****************************************************************************
 
-extern uint32_t SysCtlClockFreqSet_patched(uint32_t ui32Config,
-                                           uint32_t ui32SysClock);
+extern uint32_t SysCtlClockFreqSet_patched(uint32_t ui32Config, uint32_t ui32SysClock);
 
 //*****************************************************************************
 //
