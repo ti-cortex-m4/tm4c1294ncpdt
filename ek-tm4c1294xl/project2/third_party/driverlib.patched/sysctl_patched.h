@@ -631,7 +631,7 @@ extern void SysCtlGPIOAHBEnable(uint32_t ui32GPIOPeripheral);
 extern void SysCtlGPIOAHBDisable(uint32_t ui32GPIOPeripheral);
 extern void SysCtlUSBPLLEnable(void);
 extern void SysCtlUSBPLLDisable(void);
-extern uint32_t SysCtlClockFreqSet(uint32_t ui32Config,
+extern uint32_t SysCtlClockFreqSet_patched(uint32_t ui32Config,
                                    uint32_t ui32SysClock);
 extern void SysCtlResetBehaviorSet(uint32_t ui32Behavior);
 extern uint32_t SysCtlResetBehaviorGet(void);
