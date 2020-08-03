@@ -2196,9 +2196,12 @@ SysCtlClockFreqSet_patched(uint32_t ui32Config, uint32_t ui32SysClock)
         //
         // Set the PLL source select to MOSC.
         //
+#if true
+        ui32OscSelect = SYSCTL_RSCLKCFG_PLLSRC_MOSC;
+#else
         ui32OscSelect = SYSCTL_RSCLKCFG_OSCSRC_MOSC;
         ui32OscSelect |= SYSCTL_RSCLKCFG_PLLSRC_MOSC;
-
+#endif
         //
         // Clear MOSC power down, high oscillator range setting, and no crystal
         // present setting.
