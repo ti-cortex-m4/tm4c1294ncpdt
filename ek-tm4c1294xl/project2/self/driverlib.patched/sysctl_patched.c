@@ -56,6 +56,7 @@
 #include "driverlib/interrupt.h"
 #include "driverlib/sysctl.h"
 
+#if false
 //*****************************************************************************
 //
 // The flash shift used in the math to calculate the flash sector size.
@@ -64,7 +65,7 @@
 #ifndef FLASH_PP_MAINSS_S
 #define FLASH_PP_MAINSS_S       16
 #endif
-
+#endif
 //*****************************************************************************
 //
 // This macro converts the XTAL value provided in the ui32Config parameter to
@@ -334,7 +335,7 @@ static const uint32_t g_pui32VCOFrequencies[MAX_VCO_ENTRIES] =
     160000000,                              // VCO 320
     240000000,                              // VCO 480
 };
-
+#if false
 //*****************************************************************************
 //
 // The base addresses of the various peripheral control registers.
@@ -2056,7 +2057,7 @@ SysCtlResetBehaviorGet(void)
 {
     return(HWREG(SYSCTL_RESBEHAVCTL));
 }
-
+#endif
 //*****************************************************************************
 //
 //! Configures the system clock.
@@ -2480,7 +2481,7 @@ SysCtlClockFreqSet_patched(uint32_t ui32Config, uint32_t ui32SysClock)
 
     return(ui32SysClock);
 }
-
+#if false
 //*****************************************************************************
 //
 //! Sets the clocking of the device.
@@ -3523,7 +3524,7 @@ SysCtlVoltageEventClear(uint32_t ui32Status)
 //! Gets the effective VCO frequency.
 //!
 //! \param ui32Crystal holds the crystal value used for the PLL.
-//! \param pui32VCOFrequency is a pointer to the storage location which holds 
+//! \param pui32VCOFrequency is a pointer to the storage location which holds
 //! value of the VCO computed.
 //!
 //! This function calculates the VCO of the PLL before the system divider is
@@ -3566,9 +3567,9 @@ SysCtlVCOGet(uint32_t ui32Crystal, uint32_t *pui32VCOFrequency)
         // Return error if PLL is not used.
         //
         *pui32VCOFrequency = 0;
-        return(false);  
+        return(false);
     }
-    
+
     //
     // Get the index of the crystal from the ui32Config parameter.
     //
@@ -3586,13 +3587,13 @@ SysCtlVCOGet(uint32_t ui32Crystal, uint32_t *pui32VCOFrequency)
     ui32PLLFreq0 = HWREG(SYSCTL_PLLFREQ0);
     ui32PLLFreq1 = HWREG(SYSCTL_PLLFREQ1);
 
-    ui32MInt = (ui32PLLFreq0 & SYSCTL_PLLFREQ0_MINT_M) >> 
+    ui32MInt = (ui32PLLFreq0 & SYSCTL_PLLFREQ0_MINT_M) >>
                SYSCTL_PLLFREQ0_MINT_S;
-    ui32MFrac = (ui32PLLFreq0 & SYSCTL_PLLFREQ0_MFRAC_M) >> 
+    ui32MFrac = (ui32PLLFreq0 & SYSCTL_PLLFREQ0_MFRAC_M) >>
                 SYSCTL_PLLFREQ0_MFRAC_S;
-    ui32NDiv = (ui32PLLFreq1 & SYSCTL_PLLFREQ1_N_M) >> 
+    ui32NDiv = (ui32PLLFreq1 & SYSCTL_PLLFREQ1_N_M) >>
                SYSCTL_PLLFREQ1_N_S;
-    ui32QDiv = (ui32PLLFreq1 & SYSCTL_PLLFREQ1_Q_M) >> 
+    ui32QDiv = (ui32PLLFreq1 & SYSCTL_PLLFREQ1_Q_M) >>
                SYSCTL_PLLFREQ1_Q_S;
 
     //
@@ -3600,7 +3601,7 @@ SysCtlVCOGet(uint32_t ui32Crystal, uint32_t *pui32VCOFrequency)
     //
     ui32TempVCO = (ui32Osc * ui32MInt) + ((ui32Osc * ui32MFrac) / 1024);
     ui32TempVCO /= ((ui32NDiv + 1) * (ui32QDiv + 1));
-    
+
     *pui32VCOFrequency = ui32TempVCO;
     return(true);
 }
@@ -3788,7 +3789,7 @@ SysCtlAltClkConfig(uint32_t ui32Config)
     //
     HWREG(SYSCTL_ALTCLKCFG) = ui32Config;
 }
-
+#endif
 //*****************************************************************************
 //
 // Close the Doxygen group.
