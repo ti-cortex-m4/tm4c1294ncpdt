@@ -1,6 +1,6 @@
 //*****************************************************************************
 //
-// sysctl.c - Driver for the system controller.
+// sysctl_patched.c - Driver for the system controller.
 //
 // Copyright (c) 2005-2017 Texas Instruments Incorporated.  All rights reserved.
 // Software License Agreement
