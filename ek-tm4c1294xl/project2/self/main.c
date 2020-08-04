@@ -10,7 +10,7 @@ MAIN,C
 #include "driverlib/interrupt.h"
 #include "driverlib/gpio.h"
 #include "driverlib/sysctl.h"
-#include "driverlib.patched/sysctl_patched.h"
+#include "driverlib_patched/sysctl_patched.h"
 #include "driverlib/flash.h"
 #include "driverlib/pin_map.h"
 #include "utils/lwiplib_patched.h"
