@@ -6,21 +6,20 @@ key_ignore_status38.c
 
 #include "../../console.h"
 #include "../../devices/devices_init.h"
-#include "../common/key_flag.h"
+#include "../common/key_bool.h"
 
 
 
 //                                         0123456789ABCDEF
-static char const       szMessage1[]    = "Контроль времени",
-                        szMessage2[]    = "    для CE3xx   ",
-                        szTrue[]        = " установка      ",
-                        szFalse[]       = " коррекция      ";
+static char const       szMessage1[]    = "  Игнорировать  ",
+                        szMessage2[]    = " статус ответа  ",
+                        szMessage3[]    = "   для СЕ318    ";
 
-static char const       *pszMessages[]  = { szMessage1, szMessage2, "" };
+static char const       *pszMessages[]  = { szMessage1, szMessage2, szMessage3, "" };
 
 
 
 void    key_SetIgnoreStatus38(void)
 {
-  key_SetFlag(&chIgnoreStatus38, pszMessages, szTrue, szFalse);
+  key_SetBool(&chIgnoreStatus38, pszMessages);
 }
