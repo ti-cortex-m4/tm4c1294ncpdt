@@ -77,6 +77,9 @@ cache const             chTimeZone34 = {TIME_ZONE_34, &bTimeZone34, sizeof(uchar
 uchar                   bMaxTimer35;
 cache const             chMaxTimer35 = {MAX_TIMER_35, &bMaxTimer35, sizeof(uchar)};
 
+bool                    boIgnoreStatus38;
+cache const             chIgnoreStatus38 = {IGNORE_STATUS_38, &boIgnoreStatus38, sizeof(bool)};
+
 
 
 void    InitDevices1(void)
@@ -97,6 +100,7 @@ void    InitDevices1(void)
   LoadCacheBool(&chControlW, false);
   LoadCacheChar(&chTimeZone34, 0, 13, 3);
   LoadCacheChar(&chMaxTimer35, 60, 250, 120);
+  LoadCacheBool(&chIgnoreStatus38, false);
 
   LoadProfileFrac6_All();
   LoadProfileFrac8_All();
@@ -186,6 +190,8 @@ void    ResetDevices(bool  fFull)
 
   SaveCacheChar(&chTimeZone34, 3);
   SaveCacheChar(&chMaxTimer35, 120);
+
+  SaveCacheBool(&chIgnoreStatus38, false);
 
   memset(&mpdbEngFracDigCan, 0, sizeof(mpdbEngFracDigCan));
   SaveProfileFrac6_All();
