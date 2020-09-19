@@ -23,6 +23,9 @@ extern  cache const             chTimeZone34;
 extern  uchar                   bMaxTimer35;
 extern  cache const             chMaxTimer35;
 
+extern  bool                    boIgnoreStatus38;
+extern  cache const             chIgnoreStatus38;
+
 
 
 void    InitDevices1(void);

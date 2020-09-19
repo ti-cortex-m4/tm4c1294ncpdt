@@ -291,5 +291,7 @@ typedef enum
   AUTO_FLOW_ENBL        = MAX_TIMER_35 + sizeof(uchar) + bNVRAM_MARGIN,
   AUTO_FLOW_HOU         = AUTO_FLOW_ENBL + sizeof(bool) + bNVRAM_MARGIN,
 
-  NVRAM_END             = AUTO_FLOW_HOU + sizeof(mpibAutoFlowHou) + bNVRAM_MARGIN
+  IGNORE_STATUS_38      = AUTO_FLOW_HOU + sizeof(mpibAutoFlowHou) + bNVRAM_MARGIN,
+
+  NVRAM_END             = IGNORE_STATUS_38 + sizeof(bool) + bNVRAM_MARGIN
 } nvram;
