@@ -49,7 +49,7 @@ bool    ReadEngDay38_Full(uchar  ibDayRel)
     uchar bStatus = (ddw % 0x100) & 0x03;
     ulong dw = (ddw >> 3) % 0x100000000;
 
-    if (bStatus != 0) {
+    if (!GoodStatus38(bStatus)) {
       Clear();
       sprintf(szLo+1, "сутки -%u (%u) ?", ibDayRel, bStatus);
       Delay(1000);
@@ -99,7 +99,7 @@ bool    ReadEngMon38_Full(uchar  ibMonRel)
     uchar bStatus = (ddw % 0x100) & 0x03;
     ulong dw = (ddw >> 3) % 0x100000000;
 
-    if (bStatus != 0) {
+    if (!GoodStatus38(bStatus)) {
       Clear();
       sprintf(szLo+1, "мес€ц -%u (%u) ?", ibMonRel, bStatus);
       Delay(1000);
