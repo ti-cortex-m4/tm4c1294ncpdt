@@ -12,7 +12,7 @@ key_ignore_status38.c
 
 //                                         0123456789ABCDEF
 static char const       szMessage1[]    = "  Игнорировать  ",
-                        szMessage2[]    = " статус ответа  ",
+                        szMessage2[]    = " достоверность  ",
                         szMessage3[]    = "  для СЕ318 ?   ";
 
 static char const       *pszMessages[]  = { szMessage1, szMessage2, szMessage3, "" };
