@@ -292,6 +292,7 @@ typedef enum
   AUTO_FLOW_HOU         = AUTO_FLOW_ENBL + sizeof(bool) + bNVRAM_MARGIN,
 
   IGNORE_STATUS_38      = AUTO_FLOW_HOU + sizeof(mpibAutoFlowHou) + bNVRAM_MARGIN,
+  SHORT_PROFILE_B       = IGNORE_STATUS_38 + sizeof(bool) + bNVRAM_MARGIN,
 
-  NVRAM_END             = IGNORE_STATUS_38 + sizeof(bool) + bNVRAM_MARGIN
+  NVRAM_END             = SHORT_PROFILE_B + sizeof(uchar) + bNVRAM_MARGIN
 } nvram;

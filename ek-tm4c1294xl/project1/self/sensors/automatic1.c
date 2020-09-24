@@ -22,7 +22,7 @@ AUTOMATIC1!C
 #include "sensor21/device_p.h"
 #include "device_v.h"
 #include "automatic_a.h"
-#include "automatic_b.h"
+#include "sensor2/automatic2.h"
 #include "sensor3/automatic_c.h"
 #include "automatic_k.h"
 #include "sensor21/input_p.h"

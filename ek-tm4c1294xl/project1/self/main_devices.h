@@ -107,6 +107,9 @@ typedef enum
   DEV_HEADER_B2NEXT     =  0x212,
   DEV_POSTHEADER_B2NEXT =  0x213,
 
+  DEV_HEADER_B2x16      =  0x216,
+  DEV_POSTHEADER_B2x16  =  0x217,
+
   DEV_ERROR_B2          =  0x214,
   DEV_POSTERROR_B2      =  0x215,
 
