@@ -87,7 +87,7 @@ void    QueryHeaderBNew(void)
 
 bool    ReadHeaderBNew(uchar  ibBlock, bool  fDelay)
 {
-	HideCurrTime(1);
+  HideCurrTime(1);
 
   InitPop((uint)(1+(16-ibBlock)*15));
 
