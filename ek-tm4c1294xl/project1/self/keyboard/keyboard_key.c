@@ -113,6 +113,7 @@ KEYBOARD_KEY!C
 #include "sensors/key_time_zone34.h"
 #include "sensors/key_max_timer35.h"
 #include "sensors/key_ignore_status38.h"
+#include "sensors/key_short_profile_b.h"
 #include "digitals/review/key_review_flag.h"
 #include "digitals/review/key_review_can.h"
 #include "digitals/review/key_review_read_id.h"
@@ -375,6 +376,7 @@ void    Keyboard_Key(void)
       case wSET_TIME_ZONE_34:   key_SetTimeZone34();    break;
       case wSET_MAX_TIMER_35:   key_SetMaxTimer35();    break;
       case wSET_IGNORE_STATUS_38: key_SetIgnoreStatus38(); break;
+      case wSET_SHORT_PROFILE_B:key_SetShortProfileB(); break;
 
       case wSET_REVIEW_FLAG:    key_SetReviewFlag();    break;
       case wSET_REVIEW_CAN:     key_SetReviewCan();     break;
@@ -700,6 +702,7 @@ void    Keyboard_Key(void)
       case wSET_TIME_ZONE_34:   key_SetTimeZone34();    break;
       case wSET_MAX_TIMER_35:   key_SetMaxTimer35();    break;
       case wSET_IGNORE_STATUS_38: key_SetIgnoreStatus38(); break;
+      case wSET_SHORT_PROFILE_B:key_SetShortProfileB(); break;
 
       case wSET_REVIEW_FLAG:    key_SetReviewFlag();    break;
       case wSET_REVIEW_CAN:     key_SetReviewCan();     break;
@@ -945,6 +948,7 @@ void    Keyboard_Key(void)
       case wSET_TIME_ZONE_34:   key_SetTimeZone34();    break;
       case wSET_MAX_TIMER_35:   key_SetMaxTimer35();    break;
       case wSET_IGNORE_STATUS_38: key_SetIgnoreStatus38(); break;
+      case wSET_SHORT_PROFILE_B:key_SetShortProfileB(); break;
 
       case wSET_REVIEW_FLAG:    key_SetReviewFlag();    break;
       case wSET_REVIEW_CAN:     key_SetReviewCan();     break;

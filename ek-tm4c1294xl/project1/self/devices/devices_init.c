@@ -80,6 +80,9 @@ cache const             chMaxTimer35 = {MAX_TIMER_35, &bMaxTimer35, sizeof(uchar
 bool                    boIgnoreStatus38;
 cache const             chIgnoreStatus38 = {IGNORE_STATUS_38, &boIgnoreStatus38, sizeof(bool)};
 
+uchar                   bShortProfileB;
+cache const             chShortProfileB = {SHORT_PROFILE_B, &bShortProfileB, sizeof(uchar)};
+
 
 
 void    InitDevices1(void)
@@ -101,6 +104,7 @@ void    InitDevices1(void)
   LoadCacheChar(&chTimeZone34, 0, 13, 3);
   LoadCacheChar(&chMaxTimer35, 60, 250, 120);
   LoadCacheBool(&chIgnoreStatus38, false);
+  LoadCacheChar(&bShortProfileB, 0, 2, 0);
 
   LoadProfileFrac6_All();
   LoadProfileFrac8_All();
@@ -192,6 +196,7 @@ void    ResetDevices(bool  fFull)
   SaveCacheChar(&chMaxTimer35, 120);
 
   SaveCacheBool(&chIgnoreStatus38, false);
+  SaveCacheChar(&bShortProfileB, 0);
 
   memset(&mpdbEngFracDigCan, 0, sizeof(mpdbEngFracDigCan));
   SaveProfileFrac6_All();

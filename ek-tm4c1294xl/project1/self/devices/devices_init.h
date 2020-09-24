@@ -26,6 +26,9 @@ extern  cache const             chMaxTimer35;
 extern  bool                    boIgnoreStatus38;
 extern  cache const             chIgnoreStatus38;
 
+extern  uchar                   bShortProfileB;
+extern  cache const             chShortProfileB;
+
 
 
 void    InitDevices1(void);

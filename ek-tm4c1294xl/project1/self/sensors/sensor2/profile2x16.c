@@ -1,36 +1,36 @@
 /*------------------------------------------------------------------------------
-DEVICE_B2!C
+PROFILE2X16!C
 
 
 ------------------------------------------------------------------------------*/
 
-#include "../main.h"
-#include "../memory/mem_settings.h"
-#include "../memory/mem_digitals.h"
-#include "../memory/mem_current.h"
-#include "../memory/mem_factors.h"
-#include "../memory/mem_realtime.h"
-#include "../memory/mem_energy_spec.h"
-#include "../memory/mem_profile.h"
-#include "../memory/mem_limits.h"
-#include "../display/display.h"
-#include "../keyboard/time/key_timedate.h"
-#include "../time/timedate.h"
-#include "../time/calendar.h"
-#include "../time/decret.h"
-#include "../time/delay.h"
-#include "../serial/ports_stack.h"
-#include "../serial/ports_devices.h"
-#include "../serial/ports_common.h"
-#include "../devices/devices.h"
-#include "../devices/devices_time.h"
-#include "../digitals/digitals_messages.h"
-#include "../digitals/limits.h"
-#include "../digitals/max_shutdown.h"
-#include "../special/special.h"
-#include "../flash/records.h"
-#include "../energy.h"
-#include "device_b2.h"
+#include "../../main.h"
+#include "../../memory/mem_settings.h"
+#include "../../memory/mem_digitals.h"
+#include "../../memory/mem_current.h"
+#include "../../memory/mem_factors.h"
+#include "../../memory/mem_realtime.h"
+#include "../../memory/mem_energy_spec.h"
+#include "../../memory/mem_profile.h"
+#include "../../memory/mem_limits.h"
+#include "../../display/display.h"
+#include "../../keyboard/time/key_timedate.h"
+#include "../../time/timedate.h"
+#include "../../time/calendar.h"
+#include "../../time/decret.h"
+#include "../../time/delay.h"
+#include "../../serial/ports_stack.h"
+#include "../../serial/ports_devices.h"
+#include "../../serial/ports_common.h"
+#include "../../devices/devices.h"
+#include "../../devices/devices_time.h"
+#include "../../digitals/digitals_messages.h"
+#include "../../digitals/limits.h"
+#include "../../digitals/max_shutdown.h"
+#include "../../special/special.h"
+#include "../../flash/records.h"
+#include "../../energy.h"
+#include "profile2x16.h"
 
 
 
@@ -39,22 +39,22 @@ void    ReadTopBx16(void)
   // адрес обрабатываемого блока
   if (!UseBounds())
   {
-    dwBaseCurr = InBuff(1); dwBaseCurr <<= 12; dwBaseCurr += InBuff(2) << 4;
+    wBaseCurr = InBuff(1)*0x100 + InBuff(2);
     ResetLimitsAux(ibDig);
   }
   else
   {
     if (mpboStartCan[ibDig] == false)
     {
-      dwBaseCurr = InBuff(1); dwBaseCurr <<= 12; dwBaseCurr += InBuff(2) << 4;
-      if (boShowMessages == true) sprintf(szLo," начало %05lX * ",dwBaseCurr);
+      wBaseCurr = InBuff(1)*0x100 + InBuff(2);
+      if (boShowMessages == true) sprintf(szLo,"  начало %04X * ",wBaseCurr);
       ResetLimitsAux(ibDig);
     }
     else
     {
-      dwBaseCurr = mpcdwStartAbs32Can[ibDig];
-      if (boShowMessages == true) sprintf(szLo," начало %05lX   ",dwBaseCurr);
-      iwMajor = dwBaseCurr % 0x10000; AddDigRecord(EVE_PREVIOUS_TOP);
+      wBaseCurr = mpcwStartAbs16Can[ibDig];
+      if (boShowMessages == true) sprintf(szLo,"  начало %04X   ",wBaseCurr);
+      iwMajor = wBaseCurr; AddDigRecord(EVE_PREVIOUS_TOP);
     }
 
     if (boShowMessages == true) DelayMsg();
@@ -65,6 +65,8 @@ void    ReadTopBx16(void)
 
   // счётчик получасов в выключенном состоянии
   iwMajor = 0;
+
+//  StartRefill(); ???
 }
 
 
@@ -74,14 +76,14 @@ void    QueryHeaderBx16(void)
 
   PushChar(diCurr.bAddress);
   PushChar(6);
-  (dwBaseCurr > 0xFFFF) ? PushChar(0x83) : PushChar(0x03);
+  PushChar(3);
 
-  PushChar((dwBaseCurr % 0x10000) / 0x100);
-  PushChar(dwBaseCurr % 0x100);
+  PushChar(wBaseCurr / 0x100);
+  PushChar(wBaseCurr % 0x100);
 
-  PushChar(0xFF);
+  PushChar(0xF0);
 
-  QueryIO((uint)(1+15*17+2), 3+3+2);
+  QueryIO((uint)(1+15*16+2), 3+3+2);
 }
 
 
@@ -89,7 +91,7 @@ bool    ReadHeaderBx16(uchar  ibBlock, bool  fDelay)
 {
   HideCurrTime(1);
 
-  InitPop((uint)(1+(16-ibBlock)*15));
+  InitPop((uint)(1+(16-1-ibBlock)*15));
 
   PopChar();
   tiDig.bHour   = FromBCD(PopChar());                   // время/дата часового блока
@@ -170,4 +172,3 @@ bool    ReadHeaderBx16(uchar  ibBlock, bool  fDelay)
   MakeSpecial(ti);
   return(MakeStopHou(0));
 }
-
