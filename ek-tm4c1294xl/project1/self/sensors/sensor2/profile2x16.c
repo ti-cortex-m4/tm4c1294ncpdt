@@ -95,9 +95,9 @@ void    QueryHeaderBx16(void)
   PushChar(wBaseCurr / 0x100);
   PushChar(wBaseCurr % 0x100);
 
-  PushChar(0xF0);
+  PushChar(15*PROFILE2X16_SIZE); // 15*16=240 0xF0
 
-  QueryIO((uint)(1+15*16+2), 3+3+2);
+  QueryIO((uint)(1+15*PROFILE2X16_SIZE+2), 3+3+2);
 }
 
 
@@ -105,7 +105,7 @@ bool    ReadHeaderBx16(uchar  ibBlock, bool  fDelay)
 {
   HideCurrTime(1);
 
-  InitPop((uint)(1+(16-1-ibBlock)*15));
+  InitPop((uint)(1+(PROFILE2X16_SIZE-1-ibBlock)*15));
 
   PopChar();
   tiDig.bHour   = FromBCD(PopChar());                   // время/дата часового блока

@@ -40,7 +40,7 @@ DEVICES.C
 #include "../sensors/device_a.h"
 #include "../sensors/sensor2/device2.h"
 #include "../sensors/sensor2/profile2.h"
-#include "../sensors/sensor2/device_b12.h"
+#include "../sensors/sensor2/device12.h"
 #include "../sensors/sensor2/profile2x17.h"
 #include "../sensors/sensor2/profile2x16.h"
 #include "../sensors/sensor3/device_c.h"

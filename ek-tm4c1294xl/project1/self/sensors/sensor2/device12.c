@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-DEVICE_B12!C
+DEVICE12!C
 
 
 ------------------------------------------------------------------------------*/
@@ -12,7 +12,7 @@ DEVICE_B12!C
 #include "../../devices/devices.h"
 #include "../../digitals/current/current2.h"
 #include "device2.h"
-#include "device_b12.h"
+#include "device12.h"
 
 
 
