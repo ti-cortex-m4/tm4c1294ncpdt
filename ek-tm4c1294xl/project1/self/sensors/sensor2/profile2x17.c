@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-DEVICE_B2!C
+PROFILE2X17!C
 
 
 ------------------------------------------------------------------------------*/
@@ -30,7 +30,7 @@ DEVICE_B2!C
 #include "../../special/special.h"
 #include "../../flash/records.h"
 #include "../../energy.h"
-#include "device_b2.h"
+#include "profile2x17.h"
 
 
 
