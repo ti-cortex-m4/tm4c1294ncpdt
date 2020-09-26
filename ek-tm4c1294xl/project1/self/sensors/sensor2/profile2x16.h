@@ -19,6 +19,11 @@ PROFILE2X16!H
 
 
 
+extern  static char const       szProfile2x1[],
+                                szProfile2x16[];
+
+
+
 void    QueryTopBx16(void);
 void    ReadTopBx16(void);
 
