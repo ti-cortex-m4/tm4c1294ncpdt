@@ -1350,9 +1350,18 @@ void    RunDevices(void)
     case DEV_POSTVERSION_B2:
       Clear();
 
-      cbRepeat = MaxRepeats();
-      QueryTopB();
-      SetCurr(DEV_TOP_B2);
+      if (bShortProfileB == PROFILE2X16_16)
+      {
+        cbRepeat = MaxRepeats();
+        QueryTopBx16();
+        SetCurr(DEV_TOP_B2x16);
+      }
+      else
+      {
+        cbRepeat = MaxRepeats();
+        QueryTopB();
+        SetCurr(DEV_TOP_B2);
+      }
       break;
 
     case DEV_TOP_B2:
@@ -1568,6 +1577,33 @@ void    RunDevices(void)
           SetCurr(DEV_HEADER_B2NEXT);
         }
       }
+      break;
+
+
+    case DEV_TOP_B2x16:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+      {
+        ReadTopBx16();
+        MakePause(DEV_POSTTOP_B2x16);
+      }
+      else
+      {
+        if (cbRepeat == 0) ErrorProfile();
+        else
+        {
+          ErrorLink();
+          cbRepeat--;
+
+          QueryTopBx16();
+          SetCurr(DEV_TOP_B2x16);
+        }
+      }
+      break;
+
+    case DEV_POSTTOP_B2x16:
+      cbRepeat = MaxRepeats();
+      QueryHeaderBx16();
+      SetCurr(DEV_HEADER_B2x16);
       break;
 
     case DEV_HEADER_B2x16:
