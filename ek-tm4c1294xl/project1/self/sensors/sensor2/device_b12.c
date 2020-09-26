@@ -11,7 +11,7 @@ DEVICE_B12!C
 #include "../../memory/mem_factors.h"
 #include "../../devices/devices.h"
 #include "../../digitals/current/current2.h"
-#include "../device_b.h"
+#include "device2.h"
 #include "device_b12.h"
 
 
