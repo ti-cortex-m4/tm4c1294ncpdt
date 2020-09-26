@@ -230,7 +230,7 @@
         }
         else
         {
-          if (boShortProfileB == false)
+          if (boShortProfileB)
           {
             cbRepeat = MaxRepeats();
             QueryHeaderB();
