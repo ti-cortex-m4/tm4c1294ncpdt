@@ -9,7 +9,7 @@ SERIALS_READ.C
 #include "../serial/ports.h"
 #include "../serial/ports_devices.h"
 #include "../sensors/automatic1.h"
-#include "../sensors/device_b.h"
+#include "../sensors/sensor2/device2.h"
 #include "../sensors/sensor2/automatic2.h"
 #include "../sensors/sensor3/device_c.h"
 #include "../sensors/sensor3/automatic_c.h"
