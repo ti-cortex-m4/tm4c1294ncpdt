@@ -34,6 +34,18 @@ PROFILE2X16!C
 
 
 
+void    QueryTopBx16(void)
+{
+  InitPush(0);
+
+  PushChar(diCurr.bAddress);
+  PushChar(8);
+  PushChar(0x13);
+
+  QueryIO(1+9+2, 2+1+2);
+}
+
+
 void    ReadTopBx16(void)
 {
   // адрес обрабатываемого блока
@@ -68,6 +80,7 @@ void    ReadTopBx16(void)
 
 //  StartRefill(); ???
 }
+
 
 
 void    QueryHeaderBx16(void)

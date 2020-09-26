@@ -1580,6 +1580,7 @@ void    RunDevices(void)
       break;
 
 
+    // Меркурий-230 блоками по 16 получасов
     case DEV_TOP_B2x16:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
