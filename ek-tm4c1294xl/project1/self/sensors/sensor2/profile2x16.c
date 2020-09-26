@@ -35,55 +35,6 @@ PROFILE2X16!C
 
 
 
-void    QueryTopBx16(void)
-{
-  InitPush(0);
-
-  PushChar(diCurr.bAddress);
-  PushChar(8);
-  PushChar(0x13);
-
-  QueryIO(1+9+2, 2+1+2);
-}
-
-
-void    ReadTopBx16(void)
-{
-  // адрес обрабатываемого блока
-  if (!UseBounds())
-  {
-    wBaseCurr = InBuff(1)*0x100 + InBuff(2);
-    ResetLimitsAux(ibDig);
-  }
-  else
-  {
-    if (mpboStartCan[ibDig] == false)
-    {
-      wBaseCurr = InBuff(1)*0x100 + InBuff(2);
-      if (boShowMessages == true) sprintf(szLo,"  начало %04X * ",wBaseCurr);
-      ResetLimitsAux(ibDig);
-    }
-    else
-    {
-      wBaseCurr = mpcwStartAbs16Can[ibDig];
-      if (boShowMessages == true) sprintf(szLo,"  начало %04X   ",wBaseCurr);
-      iwMajor = wBaseCurr; AddDigRecord(EVE_PREVIOUS_TOP);
-    }
-
-    if (boShowMessages == true) DelayMsg();
-  }
-
-  // индекс по получасовому массиву
-  iwDigHou = 0;
-
-  // счётчик получасов в выключенном состоянии
-  iwMajor = 0;
-
-  StartRefill();
-}
-
-
-
 void    QueryHeaderBx16(void)
 {
   InitPush(0);
