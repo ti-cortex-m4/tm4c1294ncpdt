@@ -26,7 +26,7 @@ AUTOMATIC2!C
 #include "../energy2.h"
 #include "automatic1.h"
 #include "device_a.h"
-#include "device_b.h"
+#include "sensor2/device2.h"
 #include "sensor3/device_c.h"
 #include "device_k.h"
 #include "sensor21/device_p.h"

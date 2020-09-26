@@ -17,7 +17,7 @@ AUTOMATIC_B!C
 #include "../../digitals/serials.h"
 #include "../../digitals/max_repeats.h"
 #include "../automatic1.h"
-#include "device_b.h"
+#include "device2.h"
 #include "automatic2.h"
 
 
