@@ -26,7 +26,7 @@ extern  cache const             chMaxTimer35;
 extern  bool                    boIgnoreStatus38;
 extern  cache const             chIgnoreStatus38;
 
-extern  uchar                   bShortProfileB;
+extern  bool                    boShortProfileB;
 extern  cache const             chShortProfileB;
 
 
