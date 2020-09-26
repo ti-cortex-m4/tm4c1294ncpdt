@@ -1543,7 +1543,7 @@ void    RunDevices(void)
 
     case DEV_HEADER_B2NEXT:
       if (mpSerial[ibPort] == SER_GOODCHECK)
-        MakePause(DEV_POSTHEADER_B2NEXT);
+        MakePause(DEV_POSTHEADER_B2x17);
       else
       {
         if (cbRepeat == 0) ErrorProfile();
@@ -1558,7 +1558,7 @@ void    RunDevices(void)
       }
       break;
 
-    case DEV_POSTHEADER_B2NEXT:
+    case DEV_POSTHEADER_B2x17:
       {
         NewBoundsAbs32(dwBaseCurr);
 
