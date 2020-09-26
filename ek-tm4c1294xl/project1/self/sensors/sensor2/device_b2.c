@@ -34,7 +34,7 @@ DEVICE_B2!C
 
 
 
-void    ReadTopBNew(void)
+void    ReadTopBx17(void)
 {
   // адрес обрабатываемого блока
   if (!UseBounds())
@@ -68,7 +68,7 @@ void    ReadTopBNew(void)
 }
 
 
-void    QueryHeaderBNew(void)
+void    QueryHeaderBx17(void)
 {
   InitPush(0);
 
@@ -85,7 +85,7 @@ void    QueryHeaderBNew(void)
 }
 
 
-bool    ReadHeaderBNew(uchar  ibBlock, bool  fDelay)
+bool    ReadHeaderBx17(uchar  ibBlock, bool  fDelay)
 {
   HideCurrTime(1);
 
