@@ -40,7 +40,7 @@ DEVICES.C
 #include "../sensors/device_a.h"
 #include "../sensors/sensor2/device2.h"
 #include "../sensors/sensor2/profile2.h"
-#include "../sensors/sensor2/device_b12.h"
+#include "../sensors/sensor2/device12.h"
 #include "../sensors/sensor2/profile2x17.h"
 #include "../sensors/sensor2/profile2x16.h"
 #include "../sensors/sensor3/device_c.h"
@@ -1393,7 +1393,7 @@ void    RunDevices(void)
         {
           cbRepeat = MaxRepeats();
           QueryHeaderBx17();
-          SetCurr(DEV_HEADER_B2NEXT);
+          SetCurr(DEV_HEADER_B2x17);
         }
         else
         {
@@ -1485,6 +1485,8 @@ void    RunDevices(void)
       }
       break;
 
+
+    // ПРТ-М230
     case DEV_HEADER_B2PLUS:
       if (mpSerial[ibPort] == SER_GOODCHECK)
         MakePause(DEV_POSTHEADER_B2PLUS);
@@ -1541,7 +1543,9 @@ void    RunDevices(void)
     }
       break;
 
-    case DEV_HEADER_B2NEXT:
+
+    // Меркурий-233 блоками по 17 получасов
+    case DEV_HEADER_B2x17:
       if (mpSerial[ibPort] == SER_GOODCHECK)
         MakePause(DEV_POSTHEADER_B2x17);
       else
@@ -1553,7 +1557,7 @@ void    RunDevices(void)
           cbRepeat--;
 
           QueryHeaderBx17();
-          SetCurr(DEV_HEADER_B2NEXT);
+          SetCurr(DEV_HEADER_B2x17);
         }
       }
       break;
@@ -1575,7 +1579,7 @@ void    RunDevices(void)
         {
           cbRepeat = MaxRepeats();
           QueryHeaderBx17();
-          SetCurr(DEV_HEADER_B2NEXT);
+          SetCurr(DEV_HEADER_B2x17);
         }
       }
       break;
