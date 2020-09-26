@@ -26,6 +26,7 @@ PROFILE2X16!C
 #include "../../devices/devices_time.h"
 #include "../../digitals/digitals_messages.h"
 #include "../../digitals/limits.h"
+#include "../../digitals/profile/refill.h"
 #include "../../digitals/max_shutdown.h"
 #include "../../special/special.h"
 #include "../../flash/records.h"
@@ -78,7 +79,7 @@ void    ReadTopBx16(void)
   // счётчик получасов в выключенном состоянии
   iwMajor = 0;
 
-//  StartRefill(); ???
+  StartRefill();
 }
 
 
@@ -182,6 +183,8 @@ bool    ReadHeaderBx16(uchar  ibBlock, bool  fDelay)
     mpwChannels[i] = w;
   }
 
+  MakeRefillWinter(ti);
   MakeSpecial(ti);
+  if (boDsblRefill == false) MakeRefill(ti);
   return(MakeStopHou(0));
 }
