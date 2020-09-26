@@ -19,6 +19,8 @@ PROFILE2X16!H
 
 
 
+void    QueryTopBx16(void);
 void    ReadTopBx16(void);
+
 void    QueryHeaderBx16(void);
 bool    ReadHeaderBx16(uchar  ibBlock, bool  fDelay);
