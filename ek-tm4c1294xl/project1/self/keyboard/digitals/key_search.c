@@ -20,7 +20,7 @@ KEY_SEARCH!C
 #include "../../digitals/digitals.h"
 #include "../../digitals/digitals_display.h"
 #include "../../sensors/device_a.h"
-#include "../../sensors/device_b.h"
+#include "../../sensors/sensor2/device2.h"
 #include "../../sensors/sensor3/device_c.h"
 #include "../../sensors/sensor34/device34.h"
 #include "../../sensors/sensor38/automatic38.h"
