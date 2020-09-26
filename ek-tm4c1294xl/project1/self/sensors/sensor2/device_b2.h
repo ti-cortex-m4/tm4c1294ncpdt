@@ -4,6 +4,6 @@ DEVICE_B2!H
 
 ------------------------------------------------------------------------------*/
 
-void    ReadTopBNew(void);
-void    QueryHeaderBNew(void);
-bool    ReadHeaderBNew(uchar  ibBlock, bool  fDelay);
+void    ReadTopBx17(void);
+void    QueryHeaderBx17(void);
+bool    ReadHeaderBx17(uchar  ibBlock, bool  fDelay);

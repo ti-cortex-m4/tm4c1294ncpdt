@@ -210,7 +210,7 @@
     case DEV_TOP_B2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        if (TestVersionB710()) ReadTopBNew(); else ReadTopBOld();
+        if (TestVersionB710()) ReadTopBx17(); else ReadTopBOld();
         MakePause(DEV_POSTTOP_B2);
       }
       else
@@ -234,7 +234,7 @@
         if (TestVersionB710())
         {
           cbRepeat = MaxRepeats();
-          QueryHeaderBNew();
+          QueryHeaderBx17();
           SetCurr(DEV_HEADER_B2NEXT);
         }
         else
@@ -394,7 +394,7 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryHeaderBNew();
+          QueryHeaderBx17();
           SetCurr(DEV_HEADER_B2NEXT);
         }
       }
@@ -407,7 +407,7 @@
         uchar i;
         for (i=0; i<17; i++)
         {
-          if (ReadHeaderBNew(i,1) == 0) break;
+          if (ReadHeaderBx17(i,1) == 0) break;
           (dwBaseCurr == 0) ? (dwBaseCurr = 0x1FFF0) : (dwBaseCurr -= 0x0010);
         }
 
@@ -416,7 +416,7 @@
         else
         {
           cbRepeat = MaxRepeats();
-          QueryHeaderBNew();
+          QueryHeaderBx17();
           SetCurr(DEV_HEADER_B2NEXT);
         }
       }

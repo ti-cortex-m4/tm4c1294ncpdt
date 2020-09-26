@@ -41,7 +41,7 @@ DEVICES.C
 #include "../sensors/device_b.h"
 #include "../sensors/sensor2/device_b2.h"
 #include "../sensors/sensor2/profile2x16.h"
-#include "../sensors/device_b12.h"
+#include "../sensors/sensor2/device_b12.h"
 #include "../sensors/sensor3/device_c.h"
 #include "../sensors/sensor3/profile_c.h"
 #include "../sensors/device_e.h"
@@ -1367,7 +1367,7 @@ void    RunDevices(void)
     case DEV_TOP_B2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        if (TestVersionB710()) ReadTopBNew(); else ReadTopBOld();
+        if (TestVersionB710()) ReadTopBx17(); else ReadTopBOld();
         MakePause(DEV_POSTTOP_B2);
       }
       else
@@ -1391,7 +1391,7 @@ void    RunDevices(void)
         if (TestVersionB710())
         {
           cbRepeat = MaxRepeats();
-          QueryHeaderBNew();
+          QueryHeaderBx17();
           SetCurr(DEV_HEADER_B2NEXT);
         }
         else
@@ -1551,7 +1551,7 @@ void    RunDevices(void)
           ErrorLink();
           cbRepeat--;
 
-          QueryHeaderBNew();
+          QueryHeaderBx17();
           SetCurr(DEV_HEADER_B2NEXT);
         }
       }
@@ -1564,7 +1564,7 @@ void    RunDevices(void)
         uchar i;
         for (i=0; i<17; i++)
         {
-          if (ReadHeaderBNew(i,1) == 0) break;
+          if (ReadHeaderBx17(i,1) == 0) break;
           (dwBaseCurr == 0) ? (dwBaseCurr = 0x1FFF0) : (dwBaseCurr -= 0x0010);
         }
 
@@ -1573,7 +1573,7 @@ void    RunDevices(void)
         else
         {
           cbRepeat = MaxRepeats();
-          QueryHeaderBNew();
+          QueryHeaderBx17();
           SetCurr(DEV_HEADER_B2NEXT);
         }
       }
