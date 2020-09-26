@@ -1353,9 +1353,14 @@ void    RunDevices(void)
 
       if (bShortProfileB == PROFILE2X16_16)
       {
-        cbRepeat = MaxRepeats();
-        QueryTopBx16();
-        SetCurr(DEV_TOP_B2x16);
+        MakePause(DEV_PREVTOP_B2x16);
+      }
+      else if (bShortProfileB == PROFILE2X16_AUTO)
+      {
+        wBaseCurr = 0;
+
+        QueryHeaderBx16();
+        SetCurr(DEV_AUTOMATIC_B2x16);
       }
       else
       {
@@ -1586,6 +1591,29 @@ void    RunDevices(void)
 
 
     // Меркурий-230 блоками по 16 получасов
+    case DEV_AUTOMATIC_B2x16:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+      {
+        ShowLo(szProfile2x16); DelayMsg(); // DelayInf
+
+        MakePause(DEV_PREVTOP_B2x16);
+      }
+      else
+      {
+        ShowLo(szProfile2x1); DelayMsg(); // DelayInf
+
+        cbRepeat = MaxRepeats();
+        QueryTopB();
+        SetCurr(DEV_TOP_B2);
+      }
+      break;
+
+    case DEV_PREVTOP_B2x16:
+      cbRepeat = MaxRepeats();
+      QueryTopBx16();
+      SetCurr(DEV_TOP_B2x16);
+      break;
+
     case DEV_TOP_B2x16:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
@@ -1634,13 +1662,13 @@ void    RunDevices(void)
         NewBoundsAbs16(dwBaseCurr);
 
         uchar i;
-        for (i=0; i<16; i++)
+        for (i=0; i<PROFILE2X16_SIZE; i++)
         {
           if (ReadHeaderBx16(i,1) == 0) break;
           (wBaseCurr == 0) ? (wBaseCurr = 0xFFF0) : (wBaseCurr -= 0x0010);
         }
 
-        if (i != 16)
+        if (i != PROFILE2X16_SIZE)
           DoneProfile();
         else
         {

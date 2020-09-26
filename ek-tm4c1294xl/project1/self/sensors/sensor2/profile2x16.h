@@ -19,7 +19,7 @@ PROFILE2X16!H
 
 
 
-extern  static char const       szProfile2x1[],
+extern  char const              szProfile2x1[],
                                 szProfile2x16[];
 
 
