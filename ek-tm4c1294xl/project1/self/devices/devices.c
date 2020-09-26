@@ -1388,7 +1388,7 @@ void    RunDevices(void)
         }
         else
         {
-          if (bShortProfileB == PROFILE2X16_1)
+          if (boShortProfileB)
           {
             cbRepeat = MaxRepeats();
             QueryHeaderB();
