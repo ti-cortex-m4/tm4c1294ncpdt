@@ -15,5 +15,10 @@ PROFILE2X16!H
 
 
 
+extern  char const              szProfile2x1[],
+                                szProfile2x16[];
+
+
+
 void    QueryHeaderBx16(void);
 bool    ReadHeaderBx16(uchar  ibBlock, bool  fDelay);

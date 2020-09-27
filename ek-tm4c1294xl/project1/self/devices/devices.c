@@ -1390,12 +1390,16 @@ void    RunDevices(void)
         {
           if (boShortProfileB)
           {
+            ShowLo(szProfile2x1);
+
             cbRepeat = MaxRepeats();
             QueryHeaderB();
             SetCurr(DEV_HEADER_B2);
           }
           else
           {
+            ShowLo(szProfile2x16);
+
             cbRepeat = MaxRepeats();
             QueryHeaderBx16();
             SetCurr(DEV_HEADER_B2x16);
