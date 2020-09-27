@@ -35,6 +35,12 @@ PROFILE2X16!C
 
 
 
+//                                         0123456789ABCDEF
+char const              szProfile2x1[]  = " 1 получас      ",
+                        szProfile2x16[] = " 16 получасов   ";
+
+
+
 void    QueryHeaderBx16(void)
 {
   InitPush(0);
