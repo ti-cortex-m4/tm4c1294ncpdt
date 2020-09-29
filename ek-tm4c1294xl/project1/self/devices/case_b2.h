@@ -232,7 +232,7 @@
         {
           if (boShortProfileB)
           {
-            ShowLo(szProfile2x1);
+            ShowLo(szProfile2x1); DelayInf();
 
             cbRepeat = MaxRepeats();
             QueryHeaderB();
@@ -240,7 +240,7 @@
           }
           else
           {
-            ShowLo(szProfile2x16);
+            ShowLo(szProfile2x16); DelayInf();
 
             cbRepeat = MaxRepeats();
             QueryHeaderBx16();

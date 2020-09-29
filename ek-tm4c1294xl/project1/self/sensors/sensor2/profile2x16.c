@@ -36,8 +36,8 @@ PROFILE2X16!C
 
 
 //                                         0123456789ABCDEF
-char const              szProfile2x1[]  = " 1 получас      ",
-                        szProfile2x16[] = " 16 получасов   ";
+char const              szProfile2x1[]  = " по 1 получасу  ",
+                        szProfile2x16[] = "по 16 получасов ";
 
 
 

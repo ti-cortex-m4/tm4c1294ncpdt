@@ -1390,7 +1390,7 @@ void    RunDevices(void)
         {
           if (boShortProfileB)
           {
-            ShowLo(szProfile2x1);
+            ShowLo(szProfile2x1); DelayInf();
 
             cbRepeat = MaxRepeats();
             QueryHeaderB();
@@ -1398,7 +1398,7 @@ void    RunDevices(void)
           }
           else
           {
-            ShowLo(szProfile2x16);
+            ShowLo(szProfile2x16); DelayInf();
 
             cbRepeat = MaxRepeats();
             QueryHeaderBx16();
