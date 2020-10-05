@@ -634,7 +634,22 @@ void    SaveConnect(void)
 
 uchar   GetNextDigitalIdx()
 {
-  return 0; // ?
+  uchar c;
+  for (c=ibDig; c<bCANALS; c++)
+  {
+    MonitorString("\n c="); MonitorIntDec(c);
+    if (CompareLines(ibDig,c) == true)
+    {
+      MonitorString("\n the same digital, skip");
+      continue;
+    } else {
+      MonitorString("\n the next digital");
+      return c;
+    }
+  }
+
+  MonitorString("\n no next digital");
+  return 0xFF;
 }
 
 
@@ -644,20 +659,24 @@ bool    IsModemDisconnect(void)
 
   if (!fConnected)
   {
+    MonitorString("\n no connection - disconnect");
     return false; // нет соединения - не разъединять
   }
   else
   {
-    if (ibDig == bCANALS-1)
+    uchar c = GetNextDigitalIdx();
+    if (c == 0xFF) {
+      MonitorString("\n connection, no next digital - disconnect");
       return true; // есть соединение и последний канал - разъединять
-    else
-    {
-      uchar c = GetNextDigitalIdx();
-      if( (GetDigitalPort(ibDig)  == GetDigitalPort(c))    &&
-          (GetDigitalPhone(ibDig) == GetDigitalPhone(c)) )
-        return false; // есть соединение и следующий счетчик на том же самом порту и телефоне - не разъединять
-      else
-        return true; // есть соединение и следующий счетчик не на том же самом порту или телефоне - разъединять
+    }
+
+    if( (GetDigitalPort(ibDig)  == GetDigitalPort(c))    &&
+        (GetDigitalPhone(ibDig) == GetDigitalPhone(c)) ) {
+      MonitorString("\n connection, the same port/phone - no disconnect");
+      return false; // есть соединение и следующий счетчик на том же самом порту и телефоне - не разъединять
+    } else {
+      MonitorString("\n connection, another port/phone - disconnect");
+      return true; // есть соединение и следующий счетчик не на том же самом порту или телефоне - разъединять
     }
   }
 }
