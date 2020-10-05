@@ -33,3 +33,5 @@ void    InitConnectKey(void);
 
 bool    LoadConnect(uchar  ibCanal);
 void    SaveConnect(void);
+
+bool    IsModemDisconnect(void);

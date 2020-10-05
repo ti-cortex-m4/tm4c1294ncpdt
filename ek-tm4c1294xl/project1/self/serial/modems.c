@@ -630,3 +630,35 @@ void    SaveConnect(void)
   diLast = diCurr;
 }
 
+
+
+uchar   GetNextDigitalIdx()
+{
+  return 0; // ?
+}
+
+
+bool    IsModemDisconnect(void)
+{
+  bool fConnected = (diCurr.ibPhone != 0) && (fConnect == 1); // есть соединение ?
+
+  if (!fConnected)
+  {
+    return false; // нет соединения - не разъединять
+  }
+  else
+  {
+    if (ibDig == bCANALS-1)
+      return true; // есть соединение и последний канал - разъединять
+    else
+    {
+      uchar c = GetNextDigitalIdx();
+      if( (GetDigitalPort(ibDig)  == GetDigitalPort(c))    &&
+          (GetDigitalPhone(ibDig) == GetDigitalPhone(c)) )
+        return false; // есть соединение и следующий счетчик на том же самом порту и телефоне - не разъединять
+      else
+        return true; // есть соединение и следующий счетчик не на том же самом порту или телефоне - разъединять
+    }
+  }
+}
+
