@@ -24,6 +24,8 @@ MODEMS!C
 #include    "ports_modems.h"
 #include    "speeds_display.h"
 #include    "flow.h"
+#include    "monitor.h"
+#include    "modems.h"
 
 
 
