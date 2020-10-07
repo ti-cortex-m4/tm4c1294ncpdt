@@ -108,7 +108,7 @@ void    InitDevices1(void)
   LoadCacheChar(&chMaxTimer35, 60, 250, 120);
   LoadCacheBool(&chIgnoreStatus38, false);
   LoadCacheBool(&chShortProfileB, true);
-  LoadCacheBool(&chDisconnectModemBetweenDigitals, true);
+  LoadCacheBool(&chModemDisconnectBetweenDigitals, true);
 
   LoadProfileFrac6_All();
   LoadProfileFrac8_All();
@@ -201,7 +201,7 @@ void    ResetDevices(bool  fFull)
 
   SaveCacheBool(&chIgnoreStatus38, false);
   SaveCacheBool(&chShortProfileB, true);
-  SaveCacheBool(&chDisconnectModemBetweenDigitals, true);
+  SaveCacheBool(&chModemDisconnectBetweenDigitals, true);
 
   memset(&mpdbEngFracDigCan, 0, sizeof(mpdbEngFracDigCan));
   SaveProfileFrac6_All();

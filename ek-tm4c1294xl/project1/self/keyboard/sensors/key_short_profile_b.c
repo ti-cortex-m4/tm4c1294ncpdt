@@ -6,7 +6,6 @@ KEY_SHORT_PROFILE_B!C
 
 #include "../../console.h"
 #include "../../devices/devices_init.h"
-#include "../../sensors/sensor2/profile2x16.h"
 #include "../common/key_flag.h"
 
 
