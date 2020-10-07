@@ -83,6 +83,9 @@ cache const             chIgnoreStatus38 = {IGNORE_STATUS_38, &boIgnoreStatus38,
 bool                    boShortProfileB;
 cache const             chShortProfileB = {SHORT_PROFILE_B, &boShortProfileB, sizeof(bool)};
 
+bool                    boModemDisconnectBetweenDigitals;
+cache const             chModemDisconnectBetweenDigitals = {MODEM_DISCONNECT_BETWEEN_DIGITALS, &boModemDisconnectBetweenDigitals, sizeof(bool)};
+
 
 
 void    InitDevices1(void)
@@ -105,6 +108,7 @@ void    InitDevices1(void)
   LoadCacheChar(&chMaxTimer35, 60, 250, 120);
   LoadCacheBool(&chIgnoreStatus38, false);
   LoadCacheBool(&chShortProfileB, true);
+  LoadCacheBool(&chDisconnectModemBetweenDigitals, true);
 
   LoadProfileFrac6_All();
   LoadProfileFrac8_All();
@@ -197,6 +201,7 @@ void    ResetDevices(bool  fFull)
 
   SaveCacheBool(&chIgnoreStatus38, false);
   SaveCacheBool(&chShortProfileB, true);
+  SaveCacheBool(&chDisconnectModemBetweenDigitals, true);
 
   memset(&mpdbEngFracDigCan, 0, sizeof(mpdbEngFracDigCan));
   SaveProfileFrac6_All();
