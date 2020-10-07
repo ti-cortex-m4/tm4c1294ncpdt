@@ -114,6 +114,7 @@ KEYBOARD_KEY!C
 #include "sensors/key_max_timer35.h"
 #include "sensors/key_ignore_status38.h"
 #include "sensors/key_short_profile_b.h"
+#include "sensors/key_modem_disconnet_bd.h"
 #include "digitals/review/key_review_flag.h"
 #include "digitals/review/key_review_can.h"
 #include "digitals/review/key_review_read_id.h"
