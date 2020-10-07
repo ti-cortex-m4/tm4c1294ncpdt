@@ -377,6 +377,7 @@ void    Keyboard_Key(void)
       case wSET_MAX_TIMER_35:   key_SetMaxTimer35();    break;
       case wSET_IGNORE_STATUS_38: key_SetIgnoreStatus38(); break;
       case wSET_SHORT_PROFILE_B:key_SetShortProfileB(); break;
+      case wSET_MODEM_DISCONNECT_BD:key_SetModemDisconnectBD(); break;
 
       case wSET_REVIEW_FLAG:    key_SetReviewFlag();    break;
       case wSET_REVIEW_CAN:     key_SetReviewCan();     break;
@@ -703,6 +704,7 @@ void    Keyboard_Key(void)
       case wSET_MAX_TIMER_35:   key_SetMaxTimer35();    break;
       case wSET_IGNORE_STATUS_38: key_SetIgnoreStatus38(); break;
       case wSET_SHORT_PROFILE_B:key_SetShortProfileB(); break;
+      case wSET_MODEM_DISCONNECT_BD:key_SetModemDisconnectBD(); break;
 
       case wSET_REVIEW_FLAG:    key_SetReviewFlag();    break;
       case wSET_REVIEW_CAN:     key_SetReviewCan();     break;
@@ -949,6 +951,7 @@ void    Keyboard_Key(void)
       case wSET_MAX_TIMER_35:   key_SetMaxTimer35();    break;
       case wSET_IGNORE_STATUS_38: key_SetIgnoreStatus38(); break;
       case wSET_SHORT_PROFILE_B:key_SetShortProfileB(); break;
+      case wSET_MODEM_DISCONNECT_BD:key_SetModemDisconnectBD(); break;
 
       case wSET_REVIEW_FLAG:    key_SetReviewFlag();    break;
       case wSET_REVIEW_CAN:     key_SetReviewCan();     break;

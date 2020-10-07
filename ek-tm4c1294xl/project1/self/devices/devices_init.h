@@ -29,6 +29,9 @@ extern  cache const             chIgnoreStatus38;
 extern  bool                    boShortProfileB;
 extern  cache const             chShortProfileB;
 
+extern  bool                    boModemDisconnectBetweenDigitals;
+extern  cache const             chModemDisconnectBetweenDigitals;
+
 
 
 void    InitDevices1(void);
