@@ -13,6 +13,7 @@ MODEMS!C
 #include    "../keyboard/time/key_timedate.h"
 #include    "../time/delay.h"
 #include    "../flash/records.h"
+#include    "../devices/devices_init.h"
 #include    "../digitals/digitals.h"
 #include    "../digitals/digitals_pause.h"
 #include    "../devices/devices.h"
@@ -661,24 +662,30 @@ bool    IsModemDisconnect(void)
 
   if (!fConnected)
   {
-    MonitorString("\n no connection - disconnect");
-    return false; // нет соединения - не разъединять
+    MonitorString("\n no connection - no disconnect");
+    return false;
   }
   else
   {
-    uchar c = GetNextDigitalIdx();
-    if (c == 0xFF) {
-      MonitorString("\n connection, no next digital - disconnect");
-      return true; // есть соединение и последний канал - разъединять
+    if (boModemDisconnectBetweenDigitals)
+    {
+      return true;
     }
+    else {
+      uchar c = GetNextDigitalIdx();
+      if (c == 0xFF) {
+        MonitorString("\n connection, the last digital - disconnect");
+        return true;
+      }
 
-    if( (GetDigitalPort(ibDig)  == GetDigitalPort(c))    &&
-        (GetDigitalPhone(ibDig) == GetDigitalPhone(c)) ) {
-      MonitorString("\n connection, the same port/phone - no disconnect");
-      return false; // есть соединение и следующий счетчик на том же самом порту и телефоне - не разъединять
-    } else {
-      MonitorString("\n connection, another port/phone - disconnect");
-      return true; // есть соединение и следующий счетчик не на том же самом порту или телефоне - разъединять
+      if( (GetDigitalPort(ibDig)  == GetDigitalPort(c))    &&
+              (GetDigitalPhone(ibDig) == GetDigitalPhone(c)) ) {
+        MonitorString("\n connection, the same port/phone - no disconnect");
+        return false;
+      } else {
+        MonitorString("\n connection, another port/phone - disconnect");
+        return true;
+      }
     }
   }
 }
