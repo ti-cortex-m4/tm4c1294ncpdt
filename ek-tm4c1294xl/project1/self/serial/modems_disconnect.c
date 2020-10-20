@@ -82,7 +82,7 @@ bool    IsModemConnect(void)
   else
   {
     bool boConnect = ((fConnect == 0) && (diCurr.ibPhone != 0));
-    MonitorString("\n connection: "); MonitorBool(fConnect); MonitorBool(diCurr.ibPhone != 0); MonitorBool(boConnect);
+    MonitorString("\n connection: "); MonitorBool(fConnect == 0); MonitorBool(diCurr.ibPhone != 0); MonitorBool(boConnect);
     return boConnect;
   }
 }
