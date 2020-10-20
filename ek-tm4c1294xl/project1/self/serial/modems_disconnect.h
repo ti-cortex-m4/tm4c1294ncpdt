@@ -5,3 +5,5 @@ modems_disconnect.h
 ------------------------------------------------------------------------------*/
 
 bool    IsModemDisconnect(void);
+
+bool    IsModemConnect(void);

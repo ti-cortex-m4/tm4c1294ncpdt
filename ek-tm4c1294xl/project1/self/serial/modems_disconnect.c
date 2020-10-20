@@ -4,29 +4,12 @@ modems_disconnect.c
 
 ------------------------------------------------------------------------------*/
 
-#include    "../main.h"
-//#include    "../memory/mem_ports.h"
-//#include    "../memory/mem_digitals.h"
-//#include    "../memory/mem_phones.h"
-//#include    "../display/display.h"
-//#include    "../keyboard/keyboard.h"
-//#include    "../keyboard/time/key_timedate.h"
-//#include    "../time/delay.h"
-//#include    "../flash/records.h"
-//#include    "../devices/devices_init.h"
-#include    "../digitals/digitals.h"
-//#include    "../digitals/digitals_pause.h"
-#include    "../devices/devices.h"
-//#include    "../digitals/digitals_messages.h"
-//#include    "../digitals/digitals_display.h"
-//#include    "ports.h"
-//#include    "ports_common.h"
-//#include    "ports_devices.h"
-//#include    "ports_modems.h"
-//#include    "speeds_display.h"
-//#include    "flow.h"
-#include    "monitor.h"
-#include    "modems_disconnect.h"
+#include "../main.h"
+#include "../digitals/digitals.h"
+#include "../devices/devices.h"
+#include "../devices/devices_init.h"
+#include "monitor.h"
+#include "modems_disconnect.h"
 
 
 
@@ -57,31 +40,49 @@ bool    IsModemDisconnect(void)
 
   if (!fConnected)
   {
-    MonitorString("\n no connection - no disconnect");
+    MonitorString("\n disconnect: no connection - no disconnect");
     return false;
   }
   else
   {
     if (boModemDisconnectBetweenDigitals)
     {
+      MonitorString("\n disconnect: by default - disconnect");
       return true;
     }
     else {
       uchar c = GetNextDigitalIdx();
       if (c == 0xFF) {
-        MonitorString("\n connection, the last digital - disconnect");
+        MonitorString("\n disconnect: connection, the last digital - disconnect");
         return true;
       }
 
       if( (GetDigitalPort(ibDig)  == GetDigitalPort(c))    &&
-              (GetDigitalPhone(ibDig) == GetDigitalPhone(c)) ) {
-        MonitorString("\n connection, the same port/phone - no disconnect");
+          (GetDigitalPhone(ibDig) == GetDigitalPhone(c)) ) {
+        MonitorString("\n disconnect: connection, the same port/phone - no disconnect");
         return false;
       } else {
-        MonitorString("\n connection, another port/phone - disconnect");
+        MonitorString("\n disconnect: connection, another port/phone - disconnect");
         return true;
       }
     }
   }
 }
 
+
+
+bool    IsModemConnect(void)
+{
+  if (boModemDisconnectBetweenDigitals)
+  {
+    bool boConnect = (diCurr.ibPhone != 0);
+    MonitorString("\n connection: by default "); MonitorBool(boConnect);
+    return boConnect;
+  }
+  else
+  {
+    bool boConnect = ((fConnect == 0) && (diCurr.ibPhone != 0));
+    MonitorString("\n connection: "); MonitorBool(fConnect); MonitorBool(diCurr.ibPhone != 0); MonitorBool(boConnect);
+    return boConnect;
+  }
+}
