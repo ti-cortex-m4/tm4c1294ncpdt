@@ -84,6 +84,7 @@ DEVICES.C
 #include "../serial/ports.h"
 #include "../serial/ports_modems.h"
 #include "../serial/modems.h"
+#include "../serial/modems_disconnect.h"
 #include "../serial/speeds_display.h"
 #include "../serial/monitor.h"
 #include "../digitals/dsbl_answer.h"
