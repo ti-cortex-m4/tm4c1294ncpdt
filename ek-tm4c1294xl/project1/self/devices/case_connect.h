@@ -16,7 +16,7 @@
 
           AddModRecord(EVE_MODEM_ERROR);
         }
-        else if (diCurr.ibPhone != 0)
+        else if (IsModemConnect())
           MakePause(DEV_MODEM_POSTSTART);
         else
           MakePause(DEV_MODEM_POSTCONNECT);
@@ -280,7 +280,7 @@
       else
         ShowHi(szManual);
 
-      if ((diCurr.ibPhone != 0) && (fConnect == 1))
+      if (IsModemDisconnect())
         MakePause(DEV_MODEM_POSTSTOP);
       else
         MakePause(DEV_MODEM_POSTBREAK);

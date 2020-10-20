@@ -84,6 +84,7 @@ DEVICES.C
 #include "../serial/ports.h"
 #include "../serial/ports_modems.h"
 #include "../serial/modems.h"
+#include "../serial/modems_disconnect.h"
 #include "../serial/speeds_display.h"
 #include "../serial/monitor.h"
 #include "../digitals/dsbl_answer.h"
@@ -298,7 +299,7 @@ void    RunDevices(void)
 
           AddModRecord(EVE_MODEM_ERROR);
         }
-        else if (diCurr.ibPhone != 0)
+        else if (IsModemConnect())
           MakePause(DEV_MODEM_POSTSTART);
         else
           MakePause(DEV_MODEM_POSTCONNECT);
@@ -562,7 +563,7 @@ void    RunDevices(void)
       else
         ShowHi(szManual);
 
-      if ((diCurr.ibPhone != 0) && (fConnect == 1))
+      if (IsModemDisconnect())
         MakePause(DEV_MODEM_POSTSTOP);
       else
         MakePause(DEV_MODEM_POSTBREAK);
