@@ -13,6 +13,10 @@ modems_disconnect.c
 
 
 
+static bool             boSamePhone;
+
+
+
 uchar   GetNextDigitalIdx()
 {
   uchar c;
@@ -36,6 +40,8 @@ uchar   GetNextDigitalIdx()
 
 bool    IsModemDisconnect(void)
 {
+  boSamePhone = false;
+
   bool fConnected = (diCurr.ibPhone != 0) && (fConnect == 1); // есть соединение ?
 
   if (!fConnected)
@@ -60,6 +66,7 @@ bool    IsModemDisconnect(void)
       if( (GetDigitalPort(ibDig)  == GetDigitalPort(c))    &&
           (GetDigitalPhone(ibDig) == GetDigitalPhone(c)) ) {
         MonitorString("\n disconnect: connection, the same port/phone - no disconnect");
+        boSamePhone = true;
         return false;
       } else {
         MonitorString("\n disconnect: connection, another port/phone - disconnect");
@@ -81,8 +88,8 @@ bool    IsModemConnect(void)
   }
   else
   {
-    bool boConnect = ((fConnect == 0) && (diCurr.ibPhone != 0));
-    MonitorString("\n connection: "); MonitorBool(fConnect == 0); MonitorBool(diCurr.ibPhone != 0); MonitorBool(boConnect);
+    bool boConnect = !boSamePhone;
+    MonitorString("\n connection: "); MonitorBool(boConnect);
     return boConnect;
   }
 }
