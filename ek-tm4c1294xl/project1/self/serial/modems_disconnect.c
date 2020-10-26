@@ -42,6 +42,7 @@ bool    IsModemDisconnect(void)
 {
   boSamePhone = false;
 
+  MonitorString("\n "); MonitorBool(diCurr.ibPhone != 0); MonitorBool(fConnect == 1);
   bool fConnected = (diCurr.ibPhone != 0) && (fConnect == 1); // есть соединение ?
 
   if (!fConnected)
@@ -88,6 +89,9 @@ bool    IsModemConnect(void)
   }
   else
   {
+    if (boSamePhone)
+      fConnect = 1;
+
     bool boConnect = !boSamePhone;
     MonitorString("\n connection: "); MonitorBool(boConnect);
     return boConnect;

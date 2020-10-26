@@ -8,6 +8,7 @@
       }
       else
       {
+        MonitorString("\n DEV_MODEM_START fConnect = 0");
         fConnect = 0;
         if (StreamPortCan(diCurr.ibPort,ibDig) == 0)
         {
@@ -202,6 +203,8 @@
 
       cbRepeat = MaxRepeatsFixed();
 
+      MonitorString("\n DEV_MODEM_POSTCUSTOM fConnect = 1");
+
       fConnect = 1;
       QueryModemConnect();
       MakeLongPause(DEV_MODEM_CONNECT,bMaxConnect);
@@ -231,6 +234,8 @@
           ShowRepeat();
 
           InitWaitAnswer();
+
+          MonitorString("\n DEV_MODEM_CONNECT fConnect = 1");
 
           fConnect = 1;
           QueryModemConnect();
@@ -398,6 +403,8 @@
       break;
 
     case DEV_MODEM_POSTBREAK:
+      MonitorString("\n DEV_MODEM_POSTBREAK fConnect = 0");
+
       fConnect = 0;
       mpSerial[diCurr.ibPort] = SER_BEGIN;
       if (fKeyOn == 1)
