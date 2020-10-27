@@ -485,8 +485,6 @@ void    RunDevices(void)
 
       cbRepeat = MaxRepeatsFixed();
 
-      MonitorString("\n DEV_MODEM_POSTCUSTOM fConnect = 1");
-
       fConnect = 1;
       QueryModemConnect();
       MakeLongPause(DEV_MODEM_CONNECT,bMaxConnect);

@@ -22,18 +22,26 @@ uchar   GetNextDigitalIdx()
   uchar c;
   for (c=ibDig; c<bCANALS; c++)
   {
+#ifdef MONITOR_MODEM_DISCONNECT
     MonitorString("\n c="); MonitorIntDec(c);
+#endif
     if (CompareLines(ibDig,c) == true)
     {
+#ifdef MONITOR_MODEM_DISCONNECT
       MonitorString("\n the same digital, skip");
+#endif
       continue;
     } else {
+#ifdef MONITOR_MODEM_DISCONNECT
       MonitorString("\n the next digital");
+#endif
       return c;
     }
   }
 
+#ifdef MONITOR_MODEM_DISCONNECT
   MonitorString("\n no next digital");
+#endif
   return 0xFF;
 }
 
@@ -42,35 +50,44 @@ bool    IsModemDisconnect(void)
 {
   boSamePhone = false;
 
-  MonitorString("\n "); MonitorBool(diCurr.ibPhone != 0); MonitorBool(fConnect == 1);
   bool fConnected = (diCurr.ibPhone != 0) && (fConnect == 1); // есть соединение ?
 
   if (!fConnected)
   {
+#ifdef MONITOR_MODEM_DISCONNECT
     MonitorString("\n disconnect: no connection - no disconnect");
+#endif
     return false;
   }
   else
   {
     if (boModemDisconnectBetweenDigitals)
     {
+#ifdef MONITOR_MODEM_DISCONNECT
       MonitorString("\n disconnect: by default - disconnect");
+#endif
       return true;
     }
     else {
       uchar c = GetNextDigitalIdx();
       if (c == 0xFF) {
+#ifdef MONITOR_MODEM_DISCONNECT
         MonitorString("\n disconnect: connection, the last digital - disconnect");
+#endif
         return true;
       }
 
       if( (GetDigitalPort(ibDig)  == GetDigitalPort(c))    &&
           (GetDigitalPhone(ibDig) == GetDigitalPhone(c)) ) {
+#ifdef MONITOR_MODEM_DISCONNECT
         MonitorString("\n disconnect: connection, the same port/phone - no disconnect");
+#endif
         boSamePhone = true;
         return false;
       } else {
+#ifdef MONITOR_MODEM_DISCONNECT
         MonitorString("\n disconnect: connection, another port/phone - disconnect");
+#endif
         return true;
       }
     }
