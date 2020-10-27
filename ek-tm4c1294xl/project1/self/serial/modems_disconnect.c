@@ -84,7 +84,9 @@ bool    IsModemConnect(void)
   if (boModemDisconnectBetweenDigitals)
   {
     bool boConnect = (diCurr.ibPhone != 0);
+#ifdef MONITOR_MODEM_DISCONNECT
     MonitorString("\n connection: by default "); MonitorBool(boConnect);
+#endif
     return boConnect;
   }
   else
@@ -93,7 +95,9 @@ bool    IsModemConnect(void)
       fConnect = 1;
 
     bool boConnect = !boSamePhone;
+#ifdef MONITOR_MODEM_DISCONNECT
     MonitorString("\n connection: "); MonitorBool(boConnect);
+#endif
     return boConnect;
   }
 }

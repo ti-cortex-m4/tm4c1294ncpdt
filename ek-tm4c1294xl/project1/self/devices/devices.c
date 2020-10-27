@@ -291,7 +291,6 @@ void    RunDevices(void)
       }
       else
       {
-        MonitorString("\n DEV_MODEM_START fConnect = 0");
         fConnect = 0;
         if (StreamPortCan(diCurr.ibPort,ibDig) == 0)
         {
@@ -686,8 +685,6 @@ void    RunDevices(void)
       break;
 
     case DEV_MODEM_POSTBREAK:
-      MonitorString("\n DEV_MODEM_POSTBREAK fConnect = 0");
-
       fConnect = 0;
       mpSerial[diCurr.ibPort] = SER_BEGIN;
       if (fKeyOn == 1)
