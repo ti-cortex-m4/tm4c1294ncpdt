@@ -8,7 +8,7 @@ modems_disconnect.h
 #define __MODEM_DISCONNECT
 
 
-#define MONITOR_MODEM_DISCONNECT 1
+//#define MONITOR_MODEM_DISCONNECT 1
 
 
 #endif
