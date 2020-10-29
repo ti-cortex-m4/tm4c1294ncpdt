@@ -232,8 +232,6 @@
 
           InitWaitAnswer();
 
-          MonitorString("\n DEV_MODEM_CONNECT fConnect = 1");
-
           fConnect = 1;
           QueryModemConnect();
           MakeLongPause(DEV_MODEM_CONNECT, bMaxConnect);
