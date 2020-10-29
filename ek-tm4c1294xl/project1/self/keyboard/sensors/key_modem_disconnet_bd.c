@@ -16,7 +16,7 @@ static char const       szMessage1[]    = "  Разъединять   ",
                         szMessage3[]    = "    опросом     ",
                         szMessage4[]    = "   счетчиков    ",
                         szMessage5[]    = "на том же самом ",
-                        szMessage6[]    = "    номере ?    ";
+                        szMessage6[]    = "   телефоне ?   ";
 
 static char const       *pszMessages[]  = { szMessage1, szMessage2, szMessage3, szMessage4, szMessage5, szMessage6, "" };
 
