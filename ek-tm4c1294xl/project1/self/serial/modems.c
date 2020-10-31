@@ -67,7 +67,7 @@ void    KeyBreakConnect(void)
   wProgram = 0;
 
   fKeyOn = 1;
-  MakePause(DEV_MODEM_STOP_MANUAL);
+  MakePause(DEV_MODEM_STOP);
 
   if (diCurr.ibPhone != 0) AddModRecord(EVE_MODEM_KEYBREAK);
 }
