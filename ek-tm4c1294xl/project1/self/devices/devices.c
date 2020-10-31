@@ -557,18 +557,6 @@ void    RunDevices(void)
 
 
 
-    case DEV_MODEM_STOP_MANUAL:
-      if (fKeyOn == 0)
-        ShowCanalNumber(ibDig);
-      else
-        ShowHi(szManual);
-
-      if ((diCurr.ibPhone != 0) && (fConnect == 1))
-        MakePause(DEV_MODEM_POSTSTOP);
-      else
-        MakePause(DEV_MODEM_POSTBREAK);
-      break;
-
     case DEV_MODEM_STOP:
       if (fKeyOn == 0)
         ShowCanalNumber(ibDig);
