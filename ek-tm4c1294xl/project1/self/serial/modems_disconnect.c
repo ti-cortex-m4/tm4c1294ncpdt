@@ -113,6 +113,7 @@ bool    IsModemConnect(void)
 
     bool boConnect = !boSamePhone;
 #ifdef MONITOR_MODEM_DISCONNECT
+    MonitorString("\n same phone: "); MonitorBool(boSamePhone);
     MonitorString("\n connection: "); MonitorBool(boConnect);
 #endif
     return boConnect;
