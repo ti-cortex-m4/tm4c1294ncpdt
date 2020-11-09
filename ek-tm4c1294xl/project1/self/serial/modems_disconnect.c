@@ -108,14 +108,24 @@ bool    IsModemConnect(void)
   }
   else
   {
-    if (boSamePhone)
-      fConnect = 1;
-
-    bool boConnect = !boSamePhone;
+    if (diCurr.ibPhone == 0)
+    {
 #ifdef MONITOR_MODEM_DISCONNECT
-    MonitorString("\n same phone: "); MonitorBool(boSamePhone);
-    MonitorString("\n connection: "); MonitorBool(boConnect);
+      MonitorString("\n connection: direct, no connect ");
 #endif
-    return boConnect;
+      return false;
+    }
+    else
+    {
+      if (boSamePhone)
+        fConnect = 1;
+
+      bool boConnect = !boSamePhone;
+#ifdef MONITOR_MODEM_DISCONNECT
+      MonitorString("\n same phone: "); MonitorBool(boSamePhone);
+      MonitorString("\n connection: "); MonitorBool(boConnect);
+#endif
+      return boConnect;
+    }
   }
 }
