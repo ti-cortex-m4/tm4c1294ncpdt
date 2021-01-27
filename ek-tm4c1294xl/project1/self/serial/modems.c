@@ -187,7 +187,7 @@ void    QueryModemConnect(void)
   PushChar('A');
   PushChar('T');
   PushChar('D');
-  PushChar('P');
+//  PushChar('P');
 
   line ph = mpphPhones[diCurr.ibPhone - 1];
 
@@ -204,7 +204,7 @@ void    QueryModemConnect(void)
   PushChar('\r');
   PushChar('\n');
 
-  Query(SERIAL_MODEM, 4+i+2, 1);
+  Query(SERIAL_MODEM, 3+i+2, 1);
 }
 
 
