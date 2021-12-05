@@ -54,6 +54,7 @@ KEYBOARD_KEY!C
 #include "phones/key_phones.h"
 #include "phones/key_max_connect.h"
 #include "phones/key_custom_modem.h"
+#include "phones/key_modem_atdp.h"
 #include "phones2/key_phones20.h"
 #include "phones2/key_phones21.h"
 #include "phones2/key_phones22.h"
@@ -115,7 +116,6 @@ KEYBOARD_KEY!C
 #include "sensors/key_ignore_status38.h"
 #include "sensors/key_short_profile_b.h"
 #include "sensors/key_modem_disconnet_bd.h"
-#include "sensors/key_modem_atdp.h"
 #include "digitals/review/key_review_flag.h"
 #include "digitals/review/key_review_can.h"
 #include "digitals/review/key_review_read_id.h"
@@ -317,6 +317,7 @@ void    Keyboard_Key(void)
       case bSET_PHONES:         key_SetPhones();        break;
       case bSET_MAX_CONNECT:    key_SetMaxConnect();    break;
       case bSET_CUSTOM_MODEM:   key_SetCustomModem();   break;
+      case wSET_MODEM_ATDP:     key_SetModemATDP();     break;
 
       case bSET_SHOW_MESSAGES:  key_SetShowMessages();  break;
 
@@ -380,7 +381,6 @@ void    Keyboard_Key(void)
       case wSET_IGNORE_STATUS_38: key_SetIgnoreStatus38(); break;
       case wSET_SHORT_PROFILE_B:key_SetShortProfileB(); break;
       case wSET_MODEM_DISCONNECT_BD:key_SetModemDisconnectBD(); break;
-      case wSET_MODEM_ATDP:     key_SetModemATDP();     break;
 
       case wSET_REVIEW_FLAG:    key_SetReviewFlag();    break;
       case wSET_REVIEW_CAN:     key_SetReviewCan();     break;
@@ -562,6 +562,7 @@ void    Keyboard_Key(void)
       case bSET_PHONES:         key_SetPhones();        break;
       case bSET_MAX_CONNECT:    key_SetMaxConnect();    break;
       case bSET_CUSTOM_MODEM:   key_SetCustomModem();   break;
+      case wSET_MODEM_ATDP:     key_SetModemATDP();     break;
 
       case bSET_SHOW_MESSAGES:  key_SetShowMessages();  break;
 
@@ -708,7 +709,6 @@ void    Keyboard_Key(void)
       case wSET_IGNORE_STATUS_38: key_SetIgnoreStatus38(); break;
       case wSET_SHORT_PROFILE_B:key_SetShortProfileB(); break;
       case wSET_MODEM_DISCONNECT_BD:key_SetModemDisconnectBD(); break;
-      case wSET_MODEM_ATDP:     key_SetModemATDP();     break;
 
       case wSET_REVIEW_FLAG:    key_SetReviewFlag();    break;
       case wSET_REVIEW_CAN:     key_SetReviewCan();     break;
@@ -888,6 +888,7 @@ void    Keyboard_Key(void)
       case bSET_PHONES:         key_SetPhones();        break;
       case bSET_MAX_CONNECT:    key_SetMaxConnect();    break;
       case bSET_CUSTOM_MODEM:   key_SetCustomModem();   break;
+      case wSET_MODEM_ATDP:     key_SetModemATDP();     break;
 
       case bSET_SHOW_MESSAGES:  key_SetShowMessages();  break;
 
@@ -956,7 +957,6 @@ void    Keyboard_Key(void)
       case wSET_IGNORE_STATUS_38: key_SetIgnoreStatus38(); break;
       case wSET_SHORT_PROFILE_B:key_SetShortProfileB(); break;
       case wSET_MODEM_DISCONNECT_BD:key_SetModemDisconnectBD(); break;
-      case wSET_MODEM_ATDP:     key_SetModemATDP();     break;
 
       case wSET_REVIEW_FLAG:    key_SetReviewFlag();    break;
       case wSET_REVIEW_CAN:     key_SetReviewCan();     break;
