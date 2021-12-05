@@ -16,6 +16,9 @@ cache const             chPhones = {PHONES, &mpphPhones, sizeof(mpphPhones)};
 cache const             chMaxConnect = {MAX_CONNECT, &bMaxConnect, sizeof(uchar)};
 cache const             chCustomModem = {CUSTOM_MODEM, &boCustomModem, sizeof(bool)};
 
+bool                    boModemATDP;
+cache const             chModemATDP = {MODEM_ATDP, &boModemATDP, sizeof(bool)};
+
 
 
 void    InitPhones(void)
@@ -24,6 +27,8 @@ void    InitPhones(void)
 
   LoadCacheChar(&chMaxConnect, 1, 180, 60);
   LoadCacheBool(&chCustomModem, false);
+
+  LoadCacheBool(&chModemATDP, true);
 }
 
 
@@ -46,6 +51,8 @@ void    ResetPhones(void)
 
   boCustomModem = false;
   SaveCache(&chCustomModem);
+
+  SaveCacheBool(&chModemATDP, true);
 }
 
 

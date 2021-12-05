@@ -87,10 +87,6 @@ bool                    boModemDisconnectBetweenDigitals;
 cache const             chModemDisconnectBetweenDigitals = {MODEM_DISCONNECT_BETWEEN_DIGITALS, &boModemDisconnectBetweenDigitals, sizeof(bool)};
 
 
-bool                    boModemATDP;
-cache const             chModemATDP = {MODEM_ATDP, &boModemATDP, sizeof(bool)};
-
-
 
 void    InitDevices1(void)
 {
@@ -113,7 +109,6 @@ void    InitDevices1(void)
   LoadCacheBool(&chIgnoreStatus38, false);
   LoadCacheBool(&chShortProfileB, false);
   LoadCacheBool(&chModemDisconnectBetweenDigitals, true);
-  SaveCacheBool(&chModemATDP, true);
 
   LoadProfileFrac6_All();
   LoadProfileFrac8_All();
@@ -207,7 +202,6 @@ void    ResetDevices(bool  fFull)
   SaveCacheBool(&chIgnoreStatus38, false);
   SaveCacheBool(&chShortProfileB, false);
   SaveCacheBool(&chModemDisconnectBetweenDigitals, true);
-  SaveCacheBool(&chModemATDP, true);
 
   memset(&mpdbEngFracDigCan, 0, sizeof(mpdbEngFracDigCan));
   SaveProfileFrac6_All();
