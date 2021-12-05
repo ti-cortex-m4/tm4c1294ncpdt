@@ -317,7 +317,7 @@ void    Keyboard_Key(void)
       case bSET_PHONES:         key_SetPhones();        break;
       case bSET_MAX_CONNECT:    key_SetMaxConnect();    break;
       case bSET_CUSTOM_MODEM:   key_SetCustomModem();   break;
-      case wSET_MODEM_ATDP:     key_SetModemATDP();     break;
+      case bSET_MODEM_ATDP:     key_SetModemATDP();     break;
 
       case bSET_SHOW_MESSAGES:  key_SetShowMessages();  break;
 
@@ -562,7 +562,7 @@ void    Keyboard_Key(void)
       case bSET_PHONES:         key_SetPhones();        break;
       case bSET_MAX_CONNECT:    key_SetMaxConnect();    break;
       case bSET_CUSTOM_MODEM:   key_SetCustomModem();   break;
-      case wSET_MODEM_ATDP:     key_SetModemATDP();     break;
+      case bSET_MODEM_ATDP:     key_SetModemATDP();     break;
 
       case bSET_SHOW_MESSAGES:  key_SetShowMessages();  break;
 
@@ -888,7 +888,7 @@ void    Keyboard_Key(void)
       case bSET_PHONES:         key_SetPhones();        break;
       case bSET_MAX_CONNECT:    key_SetMaxConnect();    break;
       case bSET_CUSTOM_MODEM:   key_SetCustomModem();   break;
-      case wSET_MODEM_ATDP:     key_SetModemATDP();     break;
+      case bSET_MODEM_ATDP:     key_SetModemATDP();     break;
 
       case bSET_SHOW_MESSAGES:  key_SetShowMessages();  break;
 
