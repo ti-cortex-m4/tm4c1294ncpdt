@@ -1,36 +1,33 @@
 /*------------------------------------------------------------------------------
-KEY_BLOCK_ESC,C
+KEY_MODEM_ATDP,C
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-#include "../../memory/mem_esc.h"
-#include "../../output/esc/esc.h"
+#include "../../devices/devices_init.h"
 #include "../../console.h"
 
 
 
 //                                         0123456789ABCDEF
-static char const       szMessage1[]    = "     Запрет     ",
-                        szMessage2[]    = "протокола Esc ? ",
-                        szNo_[]         = " нет            ",
-                        szPartial_[]    = " частичный      ",
-                        szFull_[]       = " полный         ";
+static char const       szMessage1[]    = "    Команда     ",
+                        szMessage2[]    = "   соединения   ",
+                        szMessage3[]    = "    модема ?    ",
+                        szATDP[]        = " ATDP           ",
+                        szATD[]         = " ATD            ";
 
 
-static char const       *pszMessages[] = { szMessage1, szMessage2, "" };
+static char const       *pszMessages[] = { szMessage1, szMessage2, szMessage3, "" };
 
 
 
 static void Show(void)
 {
-  if (boBlockEsc == false)
-    ShowLo(szNo_);
-  else if (boBlockEsc == true)
-    ShowLo(szPartial_);
+  if (boModemATDP == false)
+    ShowLo(szATD);
   else
-    ShowLo(szFull_);
+    ShowLo(szATDP);
 
   if (enGlobal != GLB_WORK)
     szLo[0] = '.';
@@ -38,7 +35,7 @@ static void Show(void)
 
 
 
-void    key_SetBlockEsc(void)
+void    key_SetModemATDP(void)
 {
   if (bKey == bKEY_ENTER)
   {
@@ -60,14 +57,12 @@ void    key_SetBlockEsc(void)
     {
       if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
       {
-        if (boBlockEsc == false)
-          boBlockEsc = true;
-        else if (boBlockEsc == true)
-          boBlockEsc = (bool)0x55;
+        if (boModemATDP == false)
+          boModemATDP = true;
         else
-          boBlockEsc = false;
+          boModemATDP = false;
 
-        SaveCache(&chBlockEsc);
+        SaveCache(&chModemATDP);
         Show();
       }
       else Beep();
