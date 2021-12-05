@@ -5,7 +5,7 @@ KEY_MODEM_ATDP,C
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-#include "../../phones/phones.h"
+#include "../../digitals/phones.h"
 #include "../../console.h"
 
 
