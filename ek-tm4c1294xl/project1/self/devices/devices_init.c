@@ -87,6 +87,10 @@ bool                    boModemDisconnectBetweenDigitals;
 cache const             chModemDisconnectBetweenDigitals = {MODEM_DISCONNECT_BETWEEN_DIGITALS, &boModemDisconnectBetweenDigitals, sizeof(bool)};
 
 
+bool                    boModemATDP;
+cache const             chModemATDP = {MODEM_ATDPS, &boModemATDP, sizeof(bool)};
+
+
 
 void    InitDevices1(void)
 {
