@@ -13,6 +13,7 @@ MODEMS!C
 #include    "../keyboard/time/key_timedate.h"
 #include    "../time/delay.h"
 #include    "../flash/records.h"
+#include    "../digitals/phones.h"
 #include    "../digitals/digitals.h"
 #include    "../digitals/digitals_pause.h"
 #include    "../devices/devices.h"
