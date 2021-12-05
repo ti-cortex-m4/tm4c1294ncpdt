@@ -261,6 +261,7 @@ PROGRAMS!H
 #define bSET_PHONES                 180
 #define bSET_MAX_CONNECT            181
 #define bSET_CUSTOM_MODEM           203
+#define bSET_MODEM_ATDP             204
 
 #define bSET_SHOW_MESSAGES          199
 
