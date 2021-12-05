@@ -6700,9 +6700,9 @@ void    RunDevices(void)
 #ifndef SKIP_38
 
     case DEV_START_38P:
-       if (fCurrCtrl == true)
-         MakePause(DEV_PREVTIME1_38P);
-       else
+//       if (fCurrCtrl == true)
+//         MakePause(DEV_PREVTIME1_38P);
+//       else
         MakePause(DEV_PREVTIME2_38P);    
       break;
 
@@ -7014,6 +7014,8 @@ void    RunDevices(void)
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
         if (ReadData38() == false)
+          DoneProfile();
+        else if (cwShutdown38 >= GetMaxShutdown())
           DoneProfile();
         else
           MakePause(DEV_PAUSE_38P);
