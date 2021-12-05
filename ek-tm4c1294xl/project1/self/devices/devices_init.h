@@ -32,9 +32,6 @@ extern  cache const             chShortProfileB;
 extern  bool                    boModemDisconnectBetweenDigitals;
 extern  cache const             chModemDisconnectBetweenDigitals;
 
-extern  bool                    boModemATDP;
-extern  cache const             chModemATDP;
-
 
 
 void    InitDevices1(void);

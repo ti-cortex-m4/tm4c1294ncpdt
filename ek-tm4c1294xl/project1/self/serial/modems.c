@@ -184,10 +184,19 @@ void    QueryModemConnect(void)
 
   InitPush(0);
 
-  PushChar('A');
-  PushChar('T');
-  PushChar('D');
-  PushChar('P');
+  uchar bSize;
+  if (boModemATDP == false) {
+    PushChar('A');
+    PushChar('T');
+    PushChar('D');
+    bSize = 3;
+  } else {
+    PushChar('A');
+    PushChar('T');
+    PushChar('D');
+    PushChar('P');
+    bSize = 4;
+  }
 
   line ph = mpphPhones[diCurr.ibPhone - 1];
 
@@ -204,7 +213,7 @@ void    QueryModemConnect(void)
   PushChar('\r');
   PushChar('\n');
 
-  Query(SERIAL_MODEM, 4+i+2, 1);
+  Query(SERIAL_MODEM, bSize+i+2, 1);
 }
 
 
