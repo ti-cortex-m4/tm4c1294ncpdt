@@ -7,6 +7,8 @@ profile38.h
 extern  time                    tiValue38;
 extern  ulong                   dwValue38;
 
+extern  uint                    cwShutdown38;
+
 
 
 void    InitHeader38(void);
