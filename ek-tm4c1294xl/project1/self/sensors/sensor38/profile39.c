@@ -44,6 +44,8 @@ extern profile38        mpPrf38[6];
 extern time             tiStart38;
 extern ulong            dwHouStart38;
 
+static uchar const      mbCodes[4] = {0x19, 0x1A, 0x1B, 0x1C};
+
 
 
 void    QueryProfile39(uint  iw30MinRelStart, uint  iw30MinRelEnd)
@@ -70,23 +72,23 @@ void    QueryProfile39(uint  iw30MinRelStart, uint  iw30MinRelEnd)
 
   bSize += PushChar(0x19);
   bSize += PushChar(3);
-  bSize += PushIndex(iw30MinRelStart);
-  bSize += PushIndex(iw30MinRelEnd);
+  bSize += PushIndex38(iw30MinRelStart);
+  bSize += PushIndex38(iw30MinRelEnd);
 
   bSize += PushChar(0x1A);
   bSize += PushChar(3);
-  bSize += PushIndex(iw30MinRelStart);
-  bSize += PushIndex(iw30MinRelEnd);
+  bSize += PushIndex38(iw30MinRelStart);
+  bSize += PushIndex38(iw30MinRelEnd);
 
   bSize += PushChar(0x1B);
   bSize += PushChar(3);
-  bSize += PushIndex(iw30MinRelStart);
-  bSize += PushIndex(iw30MinRelEnd);
+  bSize += PushIndex38(iw30MinRelStart);
+  bSize += PushIndex38(iw30MinRelEnd);
 
   bSize += PushChar(0x1C);
   bSize += PushChar(3);
-  bSize += PushIndex(iw30MinRelStart);
-  bSize += PushIndex(iw30MinRelEnd);
+  bSize += PushIndex38(iw30MinRelStart);
+  bSize += PushIndex38(iw30MinRelEnd);
 
   Query38(250, bSize+3);
 }
@@ -211,7 +213,7 @@ bool    ReadData39(void)
 
 
   ulong dwHouNow = DateToHouIndex(tiCurr);
-  uchar d = dwHouNow - dwHouStart;
+  uchar d = dwHouNow - dwHouStart38;
 
 #ifdef MONITOR_38
   MonitorString("\n delta="); MonitorCharDec(d);

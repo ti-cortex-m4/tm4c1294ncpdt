@@ -37,15 +37,6 @@ profile38.c
 
 
 
-typedef struct
-{
-  time          tiTime;
-  uchar         bStatus;
-  ulong         mpdwValue[4];
-} profile38;
-
-
-
 uint                    wProfile38;
 uint                    wRelStart38, wRelEnd38;
 profile38               mpPrf38[6];
@@ -88,7 +79,7 @@ void    InitHeader38(void)
 
 
 
-uchar   PushIndex(uint  iw30MinRel)
+uchar   PushIndex38(uint  iw30MinRel)
 {
   int64_t ddw = iw30MinRel;
   uchar n = Encode38(ddw, OutBuffPtr(GetPush()));
@@ -121,23 +112,23 @@ void    QueryProfile38(uint  iw30MinRelStart, uint  iw30MinRelEnd)
 
   bSize += PushChar(0x19);
   bSize += PushChar(3);
-  bSize += PushIndex(iw30MinRelStart);
-  bSize += PushIndex(iw30MinRelEnd);
+  bSize += PushIndex38(iw30MinRelStart);
+  bSize += PushIndex38(iw30MinRelEnd);
 
   bSize += PushChar(0x1A);
   bSize += PushChar(3);
-  bSize += PushIndex(iw30MinRelStart);
-  bSize += PushIndex(iw30MinRelEnd);
+  bSize += PushIndex38(iw30MinRelStart);
+  bSize += PushIndex38(iw30MinRelEnd);
 
   bSize += PushChar(0x1B);
   bSize += PushChar(3);
-  bSize += PushIndex(iw30MinRelStart);
-  bSize += PushIndex(iw30MinRelEnd);
+  bSize += PushIndex38(iw30MinRelStart);
+  bSize += PushIndex38(iw30MinRelEnd);
 
   bSize += PushChar(0x1C);
   bSize += PushChar(3);
-  bSize += PushIndex(iw30MinRelStart);
-  bSize += PushIndex(iw30MinRelEnd);
+  bSize += PushIndex38(iw30MinRelStart);
+  bSize += PushIndex38(iw30MinRelEnd);
 
   Query38(250, bSize+3);
 }
