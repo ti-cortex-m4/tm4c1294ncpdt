@@ -863,6 +863,7 @@ typedef enum
   DEV_INITHEADER_38P    =  0x2328,
   DEV_PAUSE_38P         =  0x2329,
   DEV_HEADER_38P        =  0x232A,
+  DEV_HEADER_39P        =  0x232B,
 
 #endif
 

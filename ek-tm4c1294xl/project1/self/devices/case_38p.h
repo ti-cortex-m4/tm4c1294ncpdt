@@ -337,4 +337,29 @@
       }
       break;
 
+    case DEV_HEADER_39P:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+      {
+        if (ReadData39() == false)
+          DoneProfile();
+        else if (cwShutdown39 >= GetMaxShutdown())
+          DoneProfile();
+        else
+          MakePause(DEV_PAUSE_39P);
+      }
+      else
+      {
+        if (cbRepeat == 0)
+          ErrorProfile();
+        else
+        {
+          ErrorLink();
+          cbRepeat--;
+
+          QueryHeader39();
+          SetCurr(DEV_HEADER_39P);
+        }
+      }
+      break;
+
 #endif
