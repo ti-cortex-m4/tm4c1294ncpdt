@@ -79,6 +79,7 @@ DEVICES.C
 #include "../sensors/sensor38/device38.h"
 #include "../sensors/sensor38/current38.h"
 #include "../sensors/sensor38/profile38.h"
+#include "../sensors/sensor38/profile39.h"
 #include "../sensors/sensor38/auth38.h"
 #include "../sensors/sensor38/time38.h"
 #include "../serial/ports.h"
@@ -7003,9 +7004,18 @@ void    RunDevices(void)
         }
         else
         {
-          cbRepeat = MaxRepeats();
-          QueryHeader38();
-          SetCurr(DEV_HEADER_38P);
+          if (diCurr.bDevice == 38)
+          {
+            cbRepeat = MaxRepeats();
+            QueryHeader38();
+            SetCurr(DEV_HEADER_38P);
+          }
+          else
+          {
+            cbRepeat = MaxRepeats();
+            QueryHeader39();
+            SetCurr(DEV_HEADER_39P);
+          }
         }
       }
       break;
@@ -7031,6 +7041,31 @@ void    RunDevices(void)
 
           QueryHeader38();
           SetCurr(DEV_HEADER_38P);
+        }
+      }
+      break;
+
+    case DEV_HEADER_39P:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+      {
+        if (ReadData39() == false)
+          DoneProfile();
+        else if (cwShutdown39 >= GetMaxShutdown())
+          DoneProfile();
+        else
+          MakePause(DEV_PAUSE_39P);
+      }
+      else
+      {
+        if (cbRepeat == 0)
+          ErrorProfile();
+        else
+        {
+          ErrorLink();
+          cbRepeat--;
+
+          QueryHeader39();
+          SetCurr(DEV_HEADER_39P);
         }
       }
       break;
