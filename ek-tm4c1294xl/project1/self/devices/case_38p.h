@@ -305,9 +305,18 @@
         }
         else
         {
-          cbRepeat = MaxRepeats();
-          QueryHeader38();
-          SetCurr(DEV_HEADER_38P);
+          if (diCurr.bDevice == 38)
+          {
+            cbRepeat = MaxRepeats();
+            QueryHeader38();
+            SetCurr(DEV_HEADER_38P);
+          }
+          else
+          {
+            cbRepeat = MaxRepeats();
+            QueryHeader39();
+            SetCurr(DEV_HEADER_39P);
+          }
         }
       }
       break;
