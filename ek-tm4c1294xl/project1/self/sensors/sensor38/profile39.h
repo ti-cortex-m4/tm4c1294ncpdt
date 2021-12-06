@@ -1,19 +1,12 @@
 /*------------------------------------------------------------------------------
-profile38.h
+profile39.h
 
 
 ------------------------------------------------------------------------------*/
 
-extern  time                    tiValue38;
-extern  ulong                   dwValue38;
 
-extern  uint                    cwShutdown38;
+void    QueryHeader39(void);
+void    QueryProfile39(uint  iw30MinRelStart, uint  iw30MinRelEnd);
+bool    ReadData39(void);
 
-
-
-void    InitHeader38(void);
-void    QueryHeader38(void);
-void    QueryProfile38(uint  iw30MinRelStart, uint  iw30MinRelEnd);
-bool    ReadData38(void);
-
-void    RunProfile38(void);
+void    RunProfile39(void);
