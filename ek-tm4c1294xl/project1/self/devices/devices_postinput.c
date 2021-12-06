@@ -283,7 +283,7 @@ void    DevicesPostInput(void)
 #endif
 
 #ifndef SKIP_38
-    else if (diCurr.bDevice == 38)
+    else if ((diCurr.bDevice == 38) || (diCurr.bDevice == 39))
     {
       MonitorIn();
       if (MakeCrc35InBuff(1, IndexInBuff()-2) == 0) {
