@@ -37,17 +37,23 @@ profile38.c
 
 
 
-uint                    wProfile38;
-uint                    wRelStart38, wRelEnd38;
-profile38               mpPrf38[6];
-time                    tiStart38;
-ulong                   dwHouStart38;
-static uchar const      mbCodes[4] = {0x19, 0x1A, 0x1B, 0x1C};
+typedef struct
+{
+  time          tiTime;
+  uchar         bStatus;
+  ulong         mpdwValue[4];
+} profile38;
+
+
+
+static uint             wProfile38;
+static uint             wRelStart, wRelEnd;
+static profile38        mpPrf38[6];
+static time             tiStart38;
+static ulong            dwHouStart;
 
 time                    tiValue38;
 ulong                   dwValue38;
-
-uint                    cwShutdown38;
 
 
 
@@ -57,29 +63,29 @@ void    InitHeader38(void)
     wProfile38 = 0;
   else
   {
-    wProfile38 = 0;//(mpcwStartRelCan[ibDig] / 6) * 6;
+    wProfile38 = (mpcwStartRelCan[ibDig] / 6) * 6;
     sprintf(szLo," начало %04u:%02u ",wProfile38,(uchar)(wProfile38/48 + 1));
     if (boShowMessages == true) DelayMsg();
   }
 
   tiStart38 = tiValue38;
-  dwHouStart38 = DateToHouIndex(tiCurr);
+  dwHouStart = DateToHouIndex(tiCurr);
 
-  wRelStart38 = wProfile38;
-  wRelEnd38 = wRelStart38 + 5;
+  wRelStart = wProfile38;
+  wRelEnd = wRelStart + 5;
 
 #ifdef MONITOR_38
   MonitorString("\n QueryProfile38 ");
   MonitorString(" wProfile38="); MonitorIntDec(wProfile38);
   MonitorString(" tiStart38="); MonitorTime(tiStart38);
-  MonitorString(" wRelStart38="); MonitorIntDec(wRelStart38);
-  MonitorString(" wRelEnd38="); MonitorIntDec(wRelEnd38);
+  MonitorString(" wRelStart="); MonitorIntDec(wRelStart);
+  MonitorString(" wRelEnd="); MonitorIntDec(wRelEnd);
 #endif
 }
 
 
 
-uchar   PushIndex38(uint  iw30MinRel)
+uchar   PushIndex(uint  iw30MinRel)
 {
   int64_t ddw = iw30MinRel;
   uchar n = Encode38(ddw, OutBuffPtr(GetPush()));
@@ -110,25 +116,29 @@ void    QueryProfile38(uint  iw30MinRelStart, uint  iw30MinRelEnd)
   bSize += PushChar(0x0B); // GET_DATA_MULTIPLE_EX
   bSize += PushChar(0x80);
 
-  bSize += PushChar(0x19);
-  bSize += PushChar(3);
-  bSize += PushIndex38(iw30MinRelStart);
-  bSize += PushIndex38(iw30MinRelEnd);
+  bSize += PushChar(0xD5); // 213
+  bSize += PushChar(0x01);
+  bSize += PushChar(0x03);
+  bSize += PushIndex(iw30MinRelStart);
+  bSize += PushIndex(iw30MinRelEnd);
 
-  bSize += PushChar(0x1A);
-  bSize += PushChar(3);
-  bSize += PushIndex38(iw30MinRelStart);
-  bSize += PushIndex38(iw30MinRelEnd);
+  bSize += PushChar(0xD6); // 214
+  bSize += PushChar(0x01);
+  bSize += PushChar(0x03);
+  bSize += PushIndex(iw30MinRelStart);
+  bSize += PushIndex(iw30MinRelEnd);
 
-  bSize += PushChar(0x1B);
-  bSize += PushChar(3);
-  bSize += PushIndex38(iw30MinRelStart);
-  bSize += PushIndex38(iw30MinRelEnd);
+  bSize += PushChar(0xD7); // 215
+  bSize += PushChar(0x01);
+  bSize += PushChar(0x03);
+  bSize += PushIndex(iw30MinRelStart);
+  bSize += PushIndex(iw30MinRelEnd);
 
-  bSize += PushChar(0x1C);
-  bSize += PushChar(3);
-  bSize += PushIndex38(iw30MinRelStart);
-  bSize += PushIndex38(iw30MinRelEnd);
+  bSize += PushChar(0xD8); // 216
+  bSize += PushChar(0x01);
+  bSize += PushChar(0x03);
+  bSize += PushIndex(iw30MinRelStart);
+  bSize += PushIndex(iw30MinRelEnd);
 
   Query38(250, bSize+3);
 }
@@ -141,11 +151,11 @@ void    QueryHeader38(void)
 #ifdef MONITOR_38
   MonitorString("\n QueryHeader38 ");
   MonitorString(" wProfile38="); MonitorIntDec(wProfile38);
-  MonitorString(" wRelStart38="); MonitorIntDec(wRelStart38);
-  MonitorString(" wRelEnd38="); MonitorIntDec(wRelEnd38);
+  MonitorString(" wRelStart="); MonitorIntDec(wRelStart);
+  MonitorString(" wRelEnd="); MonitorIntDec(wRelEnd);
 #endif
 
-  QueryProfile38(wRelStart38, wRelEnd38);
+  QueryProfile38(wRelStart, wRelEnd);
 }
 
 
@@ -155,7 +165,7 @@ void    MakeData38(uchar  h)
   ShowProgressDigHou();
 
   double dbPulse = mpdbPulseHou[ibDig];
-/*
+
   uchar i;
   for (i=0; i<4; i++)
   {
@@ -167,7 +177,7 @@ void    MakeData38(uchar  h)
 
     mpdbEngFracDigCan[ibDig][i] -= (double)w*10000/dbPulse;
   }
-*/
+/*
   uchar i;
   for (i=0; i<4; i++)
   {
@@ -176,16 +186,14 @@ void    MakeData38(uchar  h)
 
     mpwChannels[i] = w;
   }
+*/
 }
 
 
 
 bool    ReadBlock38(uchar  ibBlock)
 {
-  if (tiDig.bYear == 0)
-    sprintf(szLo," выключено: %-4u   ",cwShutdown38);
-  else
-    sprintf(szLo," %02u    %02u.%02u.%02u", tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
+  sprintf(szLo," %02u    %02u.%02u.%02u", tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
 
 #ifdef MONITOR_38
   if (tiDig.bMinute % 30 != 0) MonitorString(" ??? ");
@@ -211,17 +219,7 @@ bool    ReadData38(void)
   uchar c;
   for (c=0; c<4; c++)
   {
-    uchar bCode = *pbIn;
     *(pbIn++);
-
-    MonitorString("\n code="); MonitorCharHex(bCode);
-    if (mbCodes[c] != bCode) {
-      MonitorString("\n ***************************************** ");
-    }
-#ifdef MONITOR_38
-    MonitorString(" pointer="); MonitorIntDec(pbIn - InBuffPtr(0));
-    MonitorString(" size="); MonitorIntDec(IndexInBuff());
-#endif
 
     uchar h;
     for (h=0; h<6; h++)
@@ -229,13 +227,7 @@ bool    ReadData38(void)
       int64_t ddw = 0;
       pbIn = DffDecodePositive(pbIn, &ddw);
 
-      if (ddw == 2) {
-         mpPrf38[h].tiTime = tiZero;
-         cwShutdown38++;
-      } else {
-         mpPrf38[h].tiTime = SecondsToTime38(ddw % 0x100000000);
-         cwShutdown38 = 0;
-      }
+      mpPrf38[h].tiTime = SecondsToTime38(ddw % 0x100000000);
 
       ddw = 0;
       pbIn = DffDecodePositive(pbIn, &ddw);
@@ -253,7 +245,7 @@ bool    ReadData38(void)
 
 
   ulong dwHouNow = DateToHouIndex(tiCurr);
-  uchar d = dwHouNow - dwHouStart38;
+  uchar d = dwHouNow - dwHouStart;
 
 #ifdef MONITOR_38
   MonitorString("\n delta="); MonitorCharDec(d);
@@ -298,8 +290,8 @@ bool    ReadData38(void)
   wProfile38 += 6;
   if (wProfile38 > wHOURS) return false;
 
-  wRelStart38 += 6;
-  wRelEnd38 = wRelStart38 + 5;
+  wRelStart += 6;
+  wRelEnd = wRelStart + 5;
 
   return true;
 }

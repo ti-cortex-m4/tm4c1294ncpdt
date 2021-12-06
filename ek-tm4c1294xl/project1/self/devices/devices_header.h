@@ -79,6 +79,7 @@ DEVICES.C
 #include "../sensors/sensor38/device38.h"
 #include "../sensors/sensor38/current38.h"
 #include "../sensors/sensor38/profile38.h"
+#include "../sensors/sensor38/profile39.h"
 #include "../sensors/sensor38/auth38.h"
 #include "../sensors/sensor38/time38.h"
 #include "../serial/ports.h"
