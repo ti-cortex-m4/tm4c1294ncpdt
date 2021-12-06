@@ -8,33 +8,41 @@ profile39.c
 //#include "../../memory/mem_settings.h"
 //#include "../../memory/mem_digitals.h"
 //#include "../../memory/mem_ports.h"
-//#include "../../memory/mem_factors.h"
-//#include "../../memory/mem_realtime.h"
-//#include "../../memory/mem_energy_spec.h"
+#include "../../memory/mem_factors.h"
+#include "../../memory/mem_realtime.h"
+#include "../../memory/mem_energy_spec.h"
 //#include "../../memory/mem_profile.h"
 //#include "../../memory/mem_limits.h"
-//#include "../../display/display.h"
-//#include "../../keyboard/keyboard.h"
-//#include "../../keyboard/time/key_timedate.h"
-//#include "../../time/timedate.h"
-//#include "../../time/calendar.h"
+#include "../../display/display.h"
+#include "../../keyboard/keyboard.h"
+#include "../../keyboard/time/key_timedate.h"
+#include "../../time/timedate.h"
+#include "../../time/calendar.h"
 //#include "../../time/delay.h"
-//#include "../../serial/ports_stack.h"
-//#include "../../serial/ports_devices.h"
-//#include "../../serial/ports_common.h"
-//#include "../../serial/ports2.h"
-//#include "../../serial/monitor.h"
-//#include "../../devices/devices.h"
-//#include "../../devices/devices_time.h"
+#include "../../serial/ports_stack.h"
+#include "../../serial/ports_devices.h"
+#include "../../serial/ports_common.h"
+#include "../../serial/ports2.h"
+#include "../../serial/monitor.h"
+#include "../../devices/devices.h"
+#include "../../devices/devices_time.h"
 //#include "../../digitals/digitals.h"
 //#include "../../digitals/limits.h"
-//#include "../../special/special.h"
+#include "../../special/special.h"
 #include "device38.h"
-//#include "time38.h"
-//#include "io38.h"
-//#include "dff.h"
+#include "time38.h"
+#include "io38.h"
+#include "dff.h"
 #include "profile38.h"
 #include "profile39.h"
+
+
+
+extern uint             wProfile38;
+extern uint             wRelStart38, wRelEnd38;
+extern profile38        mpPrf38[6];
+extern time             tiStart38;
+extern ulong            dwHouStart38;
 
 
 
@@ -91,11 +99,11 @@ void    QueryHeader39(void)
 #ifdef MONITOR_38
   MonitorString("\n QueryHeader39 ");
   MonitorString(" wProfile38="); MonitorIntDec(wProfile38);
-  MonitorString(" wRelStart="); MonitorIntDec(wRelStart);
-  MonitorString(" wRelEnd="); MonitorIntDec(wRelEnd);
+  MonitorString(" wRelStart38="); MonitorIntDec(wRelStart38);
+  MonitorString(" wRelEnd38="); MonitorIntDec(wRelEnd38);
 #endif
 
-  QueryProfile38(wRelStart, wRelEnd);
+  QueryProfile38(wRelStart38, wRelEnd38);
 }
 
 
@@ -144,7 +152,7 @@ bool    ReadBlock39(uchar  ibBlock)
 
   if (SearchDefHouIndex(tiDig) == 0) return(1);
 
-  MakeData38(ibBlock);
+  MakeData39(ibBlock);
 
   if (IsDefect(ibDig)) MakeSpecial(tiDig);
   return(MakeStopHou(0));
@@ -242,14 +250,14 @@ bool    ReadData39(void)
     else
       tiDig = mpPrf38[h].tiTime;
 
-    if (ReadBlock38(h) == false) return false;
+    if (ReadBlock39(h) == false) return false;
   }
 
   wProfile38 += 6;
   if (wProfile38 > wHOURS) return false;
 
-  wRelStart += 6;
-  wRelEnd = wRelStart + 5;
+  wRelStart38 += 6;
+  wRelEnd38 = wRelStart38 + 5;
 
   return true;
 }
