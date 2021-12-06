@@ -340,6 +340,7 @@
       }
       break;
 
+
     case DEV_PAUSE_39P:
       {
         ulong dwSecNow = DateToSecIndex(tiCurr);

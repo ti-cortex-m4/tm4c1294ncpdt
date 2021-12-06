@@ -37,15 +37,6 @@ profile38.c
 
 
 
-typedef struct
-{
-  time          tiTime;
-  uchar         bStatus;
-  ulong         mpdwValue[4];
-} profile38;
-
-
-
 uint                    wProfile38;
 uint                    wRelStart38, wRelEnd38;
 profile38               mpPrf38[6];
@@ -54,6 +45,8 @@ ulong                   dwHouStart38;
 
 time                    tiValue38;
 ulong                   dwValue38;
+
+uint                    cwShutdown38;
 
 
 
