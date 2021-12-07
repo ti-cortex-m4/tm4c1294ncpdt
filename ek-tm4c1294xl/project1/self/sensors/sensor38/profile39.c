@@ -165,7 +165,9 @@ bool    ReadData39(void)
   uchar c;
   for (c=0; c<4; c++)
   {
+#ifdef MONITOR_38
     uchar bCode = *pbIn;
+#endif
     *(pbIn++);
 
     MonitorString("\n code="); MonitorCharHex(bCode);
@@ -185,10 +187,10 @@ bool    ReadData39(void)
 
       if (ddw == 2) {
          mpPrf38[h].tiTime = tiZero;
-         cwShutdown38++;
+         if (c == 0) cwShutdown38++;
       } else {
          mpPrf38[h].tiTime = SecondsToTime38(ddw % 0x100000000);
-         cwShutdown38 = 0;
+         if (c == 0) cwShutdown38 = 0;
       }
 
       ddw = 0;
@@ -239,12 +241,12 @@ bool    ReadData39(void)
     MonitorString(" #"); MonitorCharDec(mpPrf38[h].bStatus); MonitorString(" ");
 #endif
 
-    if ((difference == true) && (mpPrf38[h].bStatus == 2))
+//    if ((difference == true) && (mpPrf38[h].bStatus == 2))
       tiDig = tiVirtual;
-    else if ((mpPrf38[h].tiTime.bMinute % 30 != 0) && (mpPrf38[h].bStatus == 0))
-      tiDig = tiVirtual;
-    else
-      tiDig = mpPrf38[h].tiTime;
+//    else if ((mpPrf38[h].tiTime.bMinute % 30 != 0) && (mpPrf38[h].bStatus == 0))
+//      tiDig = tiVirtual;
+//    else
+//      tiDig = mpPrf38[h].tiTime;
 
     if (ReadBlock39(h) == false) return false;
   }
