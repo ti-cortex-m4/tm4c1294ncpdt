@@ -26,6 +26,7 @@ profile39.c
 #include "time38.h"
 #include "io38.h"
 #include "dff.h"
+#include "profile38_include.h"
 #include "profile38.h"
 #include "profile39.h"
 
