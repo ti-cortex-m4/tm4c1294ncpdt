@@ -24,7 +24,7 @@ static char const       *pszMessages[] = { szMessage1, szMessage2, szMessage3, "
 
 static void Show(void)
 {
-  if (boModemATDP == false)
+  if (fModemATDP == false)
     ShowLo(szATD);
   else
     ShowLo(szATDP);
@@ -57,10 +57,10 @@ void    key_SetModemATDP(void)
     {
       if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
       {
-        if (boModemATDP == false)
-          boModemATDP = true;
+        if (fModemATDP == false)
+          fModemATDP = true;
         else
-          boModemATDP = false;
+          fModemATDP = false;
 
         SaveCache(&chModemATDP);
         Show();

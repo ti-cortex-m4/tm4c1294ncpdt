@@ -8,7 +8,7 @@ extern  cache const             chPhones;
 extern  cache const             chMaxConnect;
 extern  cache const             chCustomModem;
 
-extern  bool                    boModemATDP;
+extern  bool                    fModemATDP;
 extern  cache const             chModemATDP;
 
 
