@@ -209,8 +209,8 @@ uchar   i;
 #endif
 
 #ifndef SKIP_38
-          case 38: 
-          case 39: if (Automatic38() != 1) bRes = 0xEE; break;
+          case 38: if (Automatic38() != 1) bRes = 0xEE; break;
+          case 39: if (Automatic39() != 1) bRes = 0xEE; break;
 #endif
         }
 
