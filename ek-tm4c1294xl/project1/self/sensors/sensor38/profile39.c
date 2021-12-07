@@ -8,6 +8,7 @@ profile39.c
 #include "../../memory/mem_factors.h"
 #include "../../memory/mem_realtime.h"
 #include "../../memory/mem_energy_spec.h"
+#include "../../memory/mem_profile.h"
 #include "../../display/display.h"
 #include "../../keyboard/keyboard.h"
 #include "../../keyboard/time/key_timedate.h"
@@ -97,7 +98,7 @@ void    QueryHeader39(void)
   MonitorString(" wRelEnd38="); MonitorIntDec(wRelEnd38);
 #endif
 
-  QueryProfile38(wRelStart38, wRelEnd38);
+  QueryProfile39(wRelStart38, wRelEnd38);
 }
 
 
@@ -107,7 +108,7 @@ void    MakeData39(uchar  h)
   ShowProgressDigHou();
 
   double dbPulse = mpdbPulseHou[ibDig];
-/*
+
   uchar i;
   for (i=0; i<4; i++)
   {
@@ -119,7 +120,7 @@ void    MakeData39(uchar  h)
 
     mpdbEngFracDigCan[ibDig][i] -= (double)w*10000/dbPulse;
   }
-*/
+/*
   uchar i;
   for (i=0; i<4; i++)
   {
@@ -128,6 +129,7 @@ void    MakeData39(uchar  h)
 
     mpwChannels[i] = w;
   }
+*/
 }
 
 
