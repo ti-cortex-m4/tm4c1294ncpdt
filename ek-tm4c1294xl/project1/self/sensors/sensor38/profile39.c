@@ -241,12 +241,7 @@ bool    ReadData39(void)
     MonitorString(" #"); MonitorCharDec(mpPrf38[h].bStatus); MonitorString(" ");
 #endif
 
-//    if ((difference == true) && (mpPrf38[h].bStatus == 2))
-      tiDig = tiVirtual;
-//    else if ((mpPrf38[h].tiTime.bMinute % 30 != 0) && (mpPrf38[h].bStatus == 0))
-//      tiDig = tiVirtual;
-//    else
-//      tiDig = mpPrf38[h].tiTime;
+    tiDig = tiVirtual;
 
     if (ReadBlock39(h) == false) return false;
   }
