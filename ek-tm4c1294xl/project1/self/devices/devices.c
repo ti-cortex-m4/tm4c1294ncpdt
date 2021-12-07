@@ -6701,9 +6701,9 @@ void    RunDevices(void)
 #ifndef SKIP_38
 
     case DEV_START_38P:
-//       if (fCurrCtrl == true)
-//         MakePause(DEV_PREVTIME1_38P);
-//       else
+       if (fCurrCtrl == true)
+         MakePause(DEV_PREVTIME1_38P);
+       else
         MakePause(DEV_PREVTIME2_38P);    
       break;
 
@@ -7038,6 +7038,7 @@ void    RunDevices(void)
         }
       }
       break;
+
 
     case DEV_PAUSE_39P:
       {

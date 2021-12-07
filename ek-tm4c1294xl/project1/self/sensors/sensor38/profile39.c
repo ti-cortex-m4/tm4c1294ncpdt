@@ -37,8 +37,6 @@ extern profile38        mpPrf38[6];
 extern time             tiStart38;
 extern ulong            dwHouStart38;
 
-static uchar const      mbCodes[4] = {0x19, 0x1A, 0x1B, 0x1C};
-
 
 
 void    QueryProfile39(uint  iw30MinRelStart, uint  iw30MinRelEnd)
@@ -165,19 +163,7 @@ bool    ReadData39(void)
   uchar c;
   for (c=0; c<4; c++)
   {
-#ifdef MONITOR_38
-    uchar bCode = *pbIn;
-#endif
     *(pbIn++);
-
-    MonitorString("\n code="); MonitorCharHex(bCode);
-    if (mbCodes[c] != bCode) {
-      MonitorString("\n ***************************************** ");
-    }
-#ifdef MONITOR_38
-    MonitorString(" pointer="); MonitorIntDec(pbIn - InBuffPtr(0));
-    MonitorString(" size="); MonitorIntDec(IndexInBuff());
-#endif
 
     uchar h;
     for (h=0; h<6; h++)
