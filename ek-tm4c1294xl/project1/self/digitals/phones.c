@@ -16,8 +16,8 @@ cache const             chPhones = {PHONES, &mpphPhones, sizeof(mpphPhones)};
 cache const             chMaxConnect = {MAX_CONNECT, &bMaxConnect, sizeof(uchar)};
 cache const             chCustomModem = {CUSTOM_MODEM, &boCustomModem, sizeof(bool)};
 
-bool                    boModemATDP;
-cache const             chModemATDP = {MODEM_ATDP, &boModemATDP, sizeof(bool)};
+bool                    fModemATDP;
+cache const             chModemATDP = {MODEM_ATDP, &fModemATDP, sizeof(bool)};
 
 
 

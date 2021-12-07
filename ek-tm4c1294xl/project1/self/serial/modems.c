@@ -186,7 +186,7 @@ void    QueryModemConnect(void)
   InitPush(0);
 
   uchar bSize;
-  if (boModemATDP == false) {
+  if (fModemATDP == false) {
     PushChar('A');
     PushChar('T');
     PushChar('D');
