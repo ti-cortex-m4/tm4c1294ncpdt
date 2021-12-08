@@ -1,5 +1,0 @@
-lwip 1.3.2 -> 1.4.1
-FLASH_PB_START, FLASH_PB_END, FLASH_PB_SIZE vs FLASH (RX) : origin = APP_BASE, length = 0x00016800
-.err
-убрать упоминание ser2enet
-проверить приоритеты прерываний
