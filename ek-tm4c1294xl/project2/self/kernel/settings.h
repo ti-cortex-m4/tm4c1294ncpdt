@@ -60,6 +60,9 @@ extern bool                    fIOModeDebugFlag;
 extern ledMode                 bLED0Mode;
 extern ledMode                 bLED1Mode;
 
+extern bool                    fPeriodicResetFlag;
+extern uchar                   bPeriodicResetPeriod;
+
 extern uchar                   mbCustomerSettings[UART_COUNT];
 extern uchar                   mbCustomerSetting1_Delay[UART_COUNT];
 extern uint                    mwCustomerSetting1_Timeout[UART_COUNT];
