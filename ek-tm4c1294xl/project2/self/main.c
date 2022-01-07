@@ -19,6 +19,7 @@ MAIN,C
 #include "kernel/settings.h"
 #include "kernel/console_version.h"
 #include "kernel/console_pins.h"
+#include "kernel/periodic_reset.h"
 #include "hardware/gpio.h"
 #include "hardware/led.h"
 #include "hardware/sys_tick.h"
@@ -170,6 +171,7 @@ int     main(void)
 
     RunConnections();
     RunLwipDebug();
+    RunPeriodicReset();
 
     ResetWatchdog();
   }

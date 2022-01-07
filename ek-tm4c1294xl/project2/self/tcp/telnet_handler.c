@@ -13,6 +13,7 @@ telnet_handler.c
 #include "../uart/customer_settings_1.h"
 #include "../kernel/settings.h"
 #include "../kernel/log.h"
+#include "../kernel/periodic_reset.h"
 #include "telnet.h"
 #include "telnet_handler.h"
 
@@ -175,6 +176,7 @@ void TelnetHandler(void)
         // Flush the TCP output buffer, in the event that data was
         // queued up by processing the incoming packet.
         tcp_output(pState->pConnectPCB);
+        PeriodicReset_TCPReceive();
 
         // If RFC2217 is enabled, and flow control has been set to suspended,
         // skip processing of this port.
@@ -231,7 +233,7 @@ void TelnetHandler(void)
             // Flush the data that has been written into the TCP output buffer.
             tcp_output(pState->pConnectPCB);
             pState->ulLastTCPSendTime = g_ulSystemTimeMS;
-
+            PeriodicReset_TCPSend();
         }
     }
 }
