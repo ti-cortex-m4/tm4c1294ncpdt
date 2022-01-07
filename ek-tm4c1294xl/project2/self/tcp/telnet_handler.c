@@ -231,6 +231,7 @@ void TelnetHandler(void)
             // Flush the data that has been written into the TCP output buffer.
             tcp_output(pState->pConnectPCB);
             pState->ulLastTCPSendTime = g_ulSystemTimeMS;
+
         }
     }
 }
