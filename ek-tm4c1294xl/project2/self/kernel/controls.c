@@ -137,6 +137,8 @@ const message * const mppcszControls[] =
   &enIOModeDebugFlag.szName,
   &enLED0Mode.szName,
   &enLED1Mode.szName,
+  &enPeriodicResetFlag.szName,
+  &enPeriodicResetPeriod.szName
 };
 
 

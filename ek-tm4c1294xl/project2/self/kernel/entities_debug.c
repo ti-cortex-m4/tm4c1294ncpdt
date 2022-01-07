@@ -101,3 +101,10 @@ const entity enPeriodicResetFlag = {
   "PERIODIC_RESET_FLAG",
   "AI=PERIODIC_RESET_FLAG;D=Periodic reset;T=INT;C=STATIC;O=0-No/0/1-Yes/1",
 };
+
+const entity enPeriodicResetPeriod = {
+  EEPROM_PERIODIC_RESET_PERIOD, &bPeriodicResetPeriod, sizeof(uchar), CHAR, 0,
+  1, 24, 24,
+  "PERIODIC_RESET_PERIOD",
+  "AI=PERIODIC_RESET_PERIOD;E=1;D=Periodic reset period (hours);T=INT;C=EDIT;V=PERIODIC_RESET_PERIOD>24?\"Maximum period is 24 hours\":\"\";S=PERIODIC_RESET_FLAG!=0?\"e\":\"i\"",
+};
