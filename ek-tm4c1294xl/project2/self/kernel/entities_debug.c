@@ -106,5 +106,5 @@ const entity enPeriodicResetPeriod = {
   EEPROM_PERIODIC_RESET_PERIOD, &bPeriodicResetPeriod, sizeof(uchar), CHAR, 0,
   1, 24, 24,
   "PERIODIC_RESET_PERIOD",
-  "AI=PERIODIC_RESET_PERIOD;E=1;D=Periodic reset period (hours);T=INT;C=STATIC;O=24-24/24/12-12/12/6-6/6/1-1/1",
+  "AI=PERIODIC_RESET_PERIOD;E=1;D=Periodic reset period (hours);T=INT;C=STATIC;O=24/24/12/12/6/6/3/3/2/2/1/1;S=PERIODIC_RESET_FLAG==1?\"e\":\"i\"",
 };
