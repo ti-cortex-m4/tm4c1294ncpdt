@@ -148,6 +148,7 @@ void TelnetHandler(void)
 
             // Process the next character in the buffer.
             TelnetProcessCharacter(pucData[pState->ulBufIndex], pState);
+            PeriodicReset_TCPReceiveSerialSend();
 
             // Increment to next data byte.
             pState->ulBufIndex++;
@@ -176,7 +177,6 @@ void TelnetHandler(void)
         // Flush the TCP output buffer, in the event that data was
         // queued up by processing the incoming packet.
         tcp_output(pState->pConnectPCB);
-        PeriodicReset_TCPReceive();
 
         // If RFC2217 is enabled, and flow control has been set to suspended,
         // skip processing of this port.
@@ -215,6 +215,7 @@ void TelnetHandler(void)
                 {
                     uint8_t ucChar = SerialReceive(pState->ucSerialPort);
 
+                    PeriodicReset_SerialReceiveTCPSend();
                     if (fDataDebugFlag)
                       CONSOLE("%u: to TCP %02X\n", u, ucChar);
 
@@ -233,7 +234,6 @@ void TelnetHandler(void)
             // Flush the data that has been written into the TCP output buffer.
             tcp_output(pState->pConnectPCB);
             pState->ulLastTCPSendTime = g_ulSystemTimeMS;
-            PeriodicReset_TCPSend();
         }
     }
 }

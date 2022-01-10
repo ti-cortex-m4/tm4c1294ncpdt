@@ -14,12 +14,12 @@ void PeriodicReset_1Hz(void)
 }
 
 
-void PeriodicReset_TCPSend(void)
+void PeriodicReset_SerialReceiveTCPSend(void)
 {
 }
 
 
-void PeriodicReset_TCPReceive(void)
+void PeriodicReset_TCPReceiveSerialSend(void)
 {
 }
 
