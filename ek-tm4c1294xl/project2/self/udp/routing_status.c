@@ -30,7 +30,7 @@ static message szIOMode = "RS-485 Direction (0 - unknown, 1 - input, 2 - output)
 static message szUptime = "Working time (since last restart)";
 static message szVersion = "Version";
 static message szWatchdogReset = "Last restart type (0 - power-up, 1 - watchdog)";
-static message szResetCounts = "Restarts (power-up / watchdog)";
+static message szResetCounts = "Number of restarts (power-up / watchdog)";
 
 static message szHead = "<head><style type='text/css'>table{border-collapse:collapse;font:11px arial;background-color:#C0C0C0}td.head{color:white;background-color:#648CC8}</style></head>";
 static message szBodyStart = "<body><table width=100% bgcolor=#C0C0C0 border='1'>";
