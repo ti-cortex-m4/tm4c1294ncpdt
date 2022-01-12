@@ -144,6 +144,8 @@ const entity * const mpenEntities[] =
 
   &enPeriodicResetFlag,
   &enPeriodicResetPeriod,
+  &enPowerUpRestartCount,
+  &enWatchdogRestartCount,
 
   &enCustomerSettings0,
 #ifndef SINGLE_UART

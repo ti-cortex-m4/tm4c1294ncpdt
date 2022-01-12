@@ -108,3 +108,18 @@ const entity enPeriodicResetPeriod = {
   "PERIODIC_RESET_PERIOD",
   "AI=PERIODIC_RESET_PERIOD;E=1;D=Periodic reset period (hours);T=INT;C=STATIC;O=24/24/12/12/6/6/3/3/2/2/1/1;S=PERIODIC_RESET_FLAG==1?\"e\":\"i\"",
 };
+
+
+const entity enPowerUpRestartCount = {
+  EEPROM_POWER_UP_RESTART_COUNT, &cwPowerUpRestartCount, sizeof(uint), INT, 0,
+  0, 0x10000, 0,
+  "",
+  "",
+};
+
+const entity enWatchdogRestartCount = {
+  EEPROM_WATCHDOG_RESTART_COUNT, &cwWatchdogRestartCount, sizeof(uint), INT, 0,
+  0, 0x10000, 0,
+  "",
+  "",
+};

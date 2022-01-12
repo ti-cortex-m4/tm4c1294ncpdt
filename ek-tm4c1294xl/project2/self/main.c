@@ -109,6 +109,8 @@ int     main(void)
   // Run from the PLL at 120 MHz.
   ulong dwClockFreq = SysCtlClockFreqSet_patched((SYSCTL_XTAL_25MHZ | SYSCTL_OSC_MAIN | SYSCTL_USE_PLL | SYSCTL_CFG_VCO_480), 120000000);
 
+  EnableWatchdog();
+
   InitGPIO();
 //  InitLEDs();
   InitROM();

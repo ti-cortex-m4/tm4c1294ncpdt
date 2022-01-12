@@ -62,10 +62,10 @@ void ResetWatchdog(void)
 
 void InitWatchdog(void)
 {
-  DisableWatchdog();
-
   if (fWatchdogFlag != false)
     EnableWatchdog();
+  else
+    DisableWatchdog();
 
   fWatchdogReset = IsWatchdogReset();
   if (fWatchdogReset)
