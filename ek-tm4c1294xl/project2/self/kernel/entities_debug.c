@@ -110,15 +110,15 @@ const entity enPeriodicResetPeriod = {
 };
 
 
-const entity enPowerUpRestartCount = {
-  EEPROM_POWER_UP_RESTART_COUNT, &cwPowerUpRestartCount, sizeof(uint), INT, 0,
+const entity enPowerUpResetCount = {
+  EEPROM_POWER_UP_RESET_COUNT, &cwPowerUpResetCount, sizeof(uint), INT, 0,
   0, 0x10000, 0,
   "",
   "",
 };
 
-const entity enWatchdogRestartCount = {
-  EEPROM_WATCHDOG_RESTART_COUNT, &cwWatchdogRestartCount, sizeof(uint), INT, 0,
+const entity enWatchdogResetCount = {
+  EEPROM_WATCHDOG_RESET_COUNT, &cwWatchdogResetCount, sizeof(uint), INT, 0,
   0, 0x10000, 0,
   "",
   "",

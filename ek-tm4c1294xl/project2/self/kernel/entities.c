@@ -142,11 +142,6 @@ const entity * const mpenEntities[] =
   &enLED0Mode,
   &enLED1Mode,
 
-  &enPeriodicResetFlag,
-  &enPeriodicResetPeriod,
-  &enPowerUpRestartCount,
-  &enWatchdogRestartCount,
-
   &enCustomerSettings0,
 #ifndef SINGLE_UART
   &enCustomerSettings1,
@@ -170,6 +165,11 @@ const entity * const mpenEntities[] =
   &enCustomerSetting1Timeout3,
   &enCustomerSetting1Timeout4,
 #endif
+
+  &enPeriodicResetFlag,
+  &enPeriodicResetPeriod,
+  &enPowerUpResetCount,
+  &enWatchdogResetCount,
 };
 
 

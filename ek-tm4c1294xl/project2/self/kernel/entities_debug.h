@@ -23,6 +23,6 @@ extern const entity enLED1Mode;
 
 extern const entity enPeriodicResetFlag;
 extern const entity enPeriodicResetPeriod;
-extern const entity enPowerUpRestartCount;
-extern const entity enWatchdogRestartCount;
+extern const entity enPowerUpResetCount;
+extern const entity enWatchdogResetCount;
 
