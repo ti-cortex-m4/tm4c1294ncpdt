@@ -60,8 +60,6 @@ extern bool                    fIOModeDebugFlag;
 extern ledMode                 bLED0Mode;
 extern ledMode                 bLED1Mode;
 
-extern bool                    fPeriodicResetFlag;
-extern uchar                   bPeriodicResetPeriod;
 extern uint                    cwPowerUpResetCount;
 extern uint                    cwWatchdogResetCount;
 
