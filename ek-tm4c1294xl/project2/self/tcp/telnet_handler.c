@@ -13,7 +13,6 @@ telnet_handler.c
 #include "../uart/customer_settings_1.h"
 #include "../kernel/settings.h"
 #include "../kernel/log.h"
-#include "../kernel/periodic_reset.h"
 #include "telnet.h"
 #include "telnet_handler.h"
 
@@ -148,7 +147,6 @@ void TelnetHandler(void)
 
             // Process the next character in the buffer.
             TelnetProcessCharacter(pucData[pState->ulBufIndex], pState);
-            PeriodicReset_TCPReceiveSerialSend();
 
             // Increment to next data byte.
             pState->ulBufIndex++;
@@ -215,7 +213,6 @@ void TelnetHandler(void)
                 {
                     uint8_t ucChar = SerialReceive(pState->ucSerialPort);
 
-                    PeriodicReset_SerialReceiveTCPSend();
                     if (fDataDebugFlag)
                       CONSOLE("%u: to TCP %02X\n", u, ucChar);
 

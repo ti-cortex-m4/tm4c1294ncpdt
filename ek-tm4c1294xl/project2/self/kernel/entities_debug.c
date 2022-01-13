@@ -95,21 +95,6 @@ const entity enLED1Mode = {
 };
 
 
-const entity enPeriodicResetFlag = {
-  EEPROM_PERIODIC_RESET_FLAG, &fPeriodicResetFlag, sizeof(uchar), CHAR, 0,
-  0, 1, 0,
-  "PERIODIC_RESET_FLAG",
-  "AI=PERIODIC_RESET_FLAG;D=Periodic reset;T=INT;C=STATIC;O=0-No/0/1-Yes/1",
-};
-
-const entity enPeriodicResetPeriod = {
-  EEPROM_PERIODIC_RESET_PERIOD, &bPeriodicResetPeriod, sizeof(uchar), CHAR, 0,
-  1, 24, 24,
-  "PERIODIC_RESET_PERIOD",
-  "AI=PERIODIC_RESET_PERIOD;E=1;D=Periodic reset period (hours);T=INT;C=STATIC;O=24/24/12/12/6/6/3/3/2/2/1/1;S=PERIODIC_RESET_FLAG==1?\"e\":\"i\"",
-};
-
-
 const entity enPowerUpResetCount = {
   EEPROM_POWER_UP_RESET_COUNT, &cwPowerUpResetCount, sizeof(uint), INT, 0,
   0, 0x10000, 0,

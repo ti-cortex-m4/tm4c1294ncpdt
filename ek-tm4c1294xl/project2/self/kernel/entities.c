@@ -166,8 +166,6 @@ const entity * const mpenEntities[] =
   &enCustomerSetting1Timeout4,
 #endif
 
-  &enPeriodicResetFlag,
-  &enPeriodicResetPeriod,
   &enPowerUpResetCount,
   &enWatchdogResetCount,
 };

@@ -21,8 +21,5 @@ extern const entity enIOModeDebugFlag;
 extern const entity enLED0Mode;
 extern const entity enLED1Mode;
 
-extern const entity enPeriodicResetFlag;
-extern const entity enPeriodicResetPeriod;
 extern const entity enPowerUpResetCount;
 extern const entity enWatchdogResetCount;
-
