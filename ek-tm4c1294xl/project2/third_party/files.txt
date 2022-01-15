@@ -1,4 +1,4 @@
-lwiplib.c
+lwiplib.c	include headers and methods, exclude .c files
 
 apps	delete folder
 doc
@@ -58,7 +58,7 @@ src\core\pbuf.c
 src\core\raw.c
 src\core\stats.c
 src\core\sys.c
-src\core\tcp.c
+src\core\tcp.c		https://github.com/ti-cortex-m4/tm4c1294ncpdt/blob/master/ek-tm4c1294xl/project2/third_party/lwip-1.4.1.patched/src/core/tcp.c#L539
 src\core\tcp_in.c
 src\core\tcp_out.c
 src\core\timers.c
