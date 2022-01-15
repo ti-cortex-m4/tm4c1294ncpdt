@@ -23,7 +23,11 @@ ports\tiva-tm4c129\sys_arch.c
 ports\tiva-tm4c129\include\arch
 ports\tiva-tm4c129\include\netif
 ports\tiva-tm4c129\include\arch\bpstruct.h
+
 ports\tiva-tm4c129\include\arch\cc.h
+DebugPrintF		https://github.com/ti-cortex-m4/tm4c1294ncpdt/blob/master/ek-tm4c1294xl/project2/third_party/lwip-1.4.1.patched/ports/tiva-tm4c129/include/arch/cc.h#L93
+LWIP_PLATFORM_DIAG	https://github.com/ti-cortex-m4/tm4c1294ncpdt/blob/master/ek-tm4c1294xl/project2/third_party/lwip-1.4.1.patched/ports/tiva-tm4c129/include/arch/cc.h#L110 
+
 ports\tiva-tm4c129\include\arch\epstruct.h
 ports\tiva-tm4c129\include\arch\FILES
 ports\tiva-tm4c129\include\arch\perf.h
