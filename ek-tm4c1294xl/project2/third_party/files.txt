@@ -1,3 +1,5 @@
+lwipopts.h	OutOfMemory
+
 lwiplib.c	include headers and methods, exclude .c files
 
 apps	delete folder
@@ -56,7 +58,7 @@ src\core\dhcp.c
 src\core\dns.c
 src\core\init.c
 src\core\mem.c
-src\core\memp.c
+src\core\memp.c		OutOfMemory	https://github.com/ti-cortex-m4/tm4c1294ncpdt/blob/master/ek-tm4c1294xl/project2/third_party/lwip-1.4.1.patched/src/core/memp.c#L421
 src\core\netif.c
 src\core\pbuf.c
 src\core\raw.c
