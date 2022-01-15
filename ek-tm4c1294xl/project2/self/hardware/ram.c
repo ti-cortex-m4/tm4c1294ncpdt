@@ -17,6 +17,6 @@ void OutOfMemory(void)
 {
   if (++i > 3)
   {
-    ASSERT(false);
+    //ASSERT(false);
   }
 }

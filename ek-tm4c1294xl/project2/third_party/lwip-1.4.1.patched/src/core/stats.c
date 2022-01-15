@@ -113,10 +113,10 @@ void
 stats_display_mem(struct stats_mem *mem, const char *name)
 {
   LWIP_PLATFORM_DIAG(("\nMEM %s\n\t", name));
-  LWIP_PLATFORM_DIAG(("avail: %"U32_F"\n\t", (u32_t)mem->avail)); 
-  LWIP_PLATFORM_DIAG(("used: %"U32_F"\n\t", (u32_t)mem->used)); 
-  LWIP_PLATFORM_DIAG(("max: %"U32_F"\n\t", (u32_t)mem->max)); 
-  LWIP_PLATFORM_DIAG(("err: %"U32_F"\n", (u32_t)mem->err));
+  LWIP_PLATFORM_DIAG(("avail: %"U32_F" ", (u32_t)mem->avail));
+  LWIP_PLATFORM_DIAG(("used: %"U32_F" ", (u32_t)mem->used));
+  LWIP_PLATFORM_DIAG(("max: %"U32_F" ", (u32_t)mem->max));
+  LWIP_PLATFORM_DIAG(("err: %"U32_F" ", (u32_t)mem->err));
 }
 
 #if MEMP_STATS
@@ -156,14 +156,14 @@ stats_display(void)
 {
   s16_t i;
 
-  LINK_STATS_DISPLAY();
-  ETHARP_STATS_DISPLAY();
-  IPFRAG_STATS_DISPLAY();
-  IP_STATS_DISPLAY();
-  IGMP_STATS_DISPLAY();
-  ICMP_STATS_DISPLAY();
-  UDP_STATS_DISPLAY();
-  TCP_STATS_DISPLAY();
+//  LINK_STATS_DISPLAY();
+//  ETHARP_STATS_DISPLAY();
+//  IPFRAG_STATS_DISPLAY();
+//  IP_STATS_DISPLAY();
+//  IGMP_STATS_DISPLAY();
+//  ICMP_STATS_DISPLAY();
+//  UDP_STATS_DISPLAY();
+//  TCP_STATS_DISPLAY();
   MEM_STATS_DISPLAY();
   for (i = 0; i < MEMP_MAX; i++) {
     MEMP_STATS_DISPLAY(i);

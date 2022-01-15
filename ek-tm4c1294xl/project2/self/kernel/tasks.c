@@ -140,6 +140,6 @@ static uint wTimeout;
     tcp_debug_print_pcbs();
 #endif
 
-    ConsoleVersion();
+//    ConsoleVersion();
   }
 }
