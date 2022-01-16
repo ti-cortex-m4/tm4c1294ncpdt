@@ -12,6 +12,7 @@ main.h
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
+#include "lwip/ip4_addr.h"
 #include "lwip/udp.h"
 #include "lwip/tcp.h"
 #include "driverlib/debug.h"

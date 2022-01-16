@@ -49,7 +49,7 @@ err_t TelnetPoll(void *arg, struct tcp_pcb *pcb)
                 // callback in the last 3 seconds so we try connecting again.
                 pState->ucReconnectCount++;
 
-                struct ip_addr sIPAddr;
+                struct ip4_addr sIPAddr;
                 sIPAddr.addr = htonl(pState->ulTelnetRemoteIP);
 
                 err_t err = tcp_connect(pcb, &sIPAddr, pState->usTelnetRemotePort, TelnetConnected);
