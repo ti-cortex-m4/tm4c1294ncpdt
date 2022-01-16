@@ -709,9 +709,9 @@ lwIPPrivateLinkTimer(void *pvArg)
 static void
 lwIPPrivateInit(void *pvArg)
 {
-    struct ip_addr ip_addr;
-    struct ip_addr net_mask;
-    struct ip_addr gw_addr;
+    struct ip4_addr ip_addr;
+    struct ip4_addr net_mask;
+    struct ip4_addr gw_addr;
 
     //
     // If not using a RTOS, initialize the lwIP stack.
@@ -1190,9 +1190,9 @@ static void
 lwIPPrivateNetworkConfigChange(void *pvArg)
 {
     uint32_t ui32IPMode;
-    struct ip_addr ip_addr;
-    struct ip_addr net_mask;
-    struct ip_addr gw_addr;
+    struct ip4_addr ip_addr;
+    struct ip4_addr net_mask;
+    struct ip4_addr gw_addr;
 
     //
     // Get the new address mode.
