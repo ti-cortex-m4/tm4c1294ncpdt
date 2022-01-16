@@ -11,7 +11,7 @@ test_watchdog.c
 
 
 
-void TestWatchdog(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
+void TestWatchdog(struct udp_pcb *pcb, struct pbuf *p, struct ip4_addr *addr, uint port, uchar broadcast)
 {
   if (broadcast == 0)
   {

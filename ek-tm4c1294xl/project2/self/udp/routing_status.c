@@ -62,7 +62,7 @@ bool IsRoutingStatusSize(struct pbuf *p) {
 }
 
 
-err_t GetRoutingStatusSize(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast) {
+err_t GetRoutingStatusSize(struct udp_pcb *pcb, struct pbuf *p, struct ip4_addr *addr, uint port, uchar broadcast) {
   uchar bSize;
   switch (ibRoutingStatus) {
     case 0: bSize = 15; break;
@@ -82,7 +82,7 @@ bool IsRoutingStatusSize(struct pbuf *p) {
 }
 
 
-err_t GetRoutingStatusSize(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast) {
+err_t GetRoutingStatusSize(struct udp_pcb *pcb, struct pbuf *p, struct ip4_addr *addr, uint port, uchar broadcast) {
   uchar bSize;
   switch (ibRoutingStatus) {
     case 0: bSize = 15; break;
@@ -104,12 +104,12 @@ bool IsRoutingStatusContent(struct pbuf *p) {
 
 
 
-static err_t OutUptime(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast) {
+static err_t OutUptime(struct udp_pcb *pcb, struct pbuf *p, struct ip4_addr *addr, uint port, uchar broadcast) {
   date_t days = SecondsToDate(GetClockSeconds());
   return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowClock, szUptime, days.wDays, days.bHours, days.bMinutes, days.bSeconds));
 }
 
-static err_t OutVersion(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast) {
+static err_t OutVersion(struct udp_pcb *pcb, struct pbuf *p, struct ip4_addr *addr, uint port, uchar broadcast) {
   timedate_t td = GetROMBuildTimeDate();
   return OutBuff(pcb,p,addr,port,broadcast,
       BuffPrintF(szRowVersion, szVersion,
@@ -121,7 +121,7 @@ static err_t OutVersion(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *add
   );
 }
 
-static err_t OutRemoteIP(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const char *pcszName, const ulong dw) {
+static err_t OutRemoteIP(struct udp_pcb *pcb, struct pbuf *p, struct ip4_addr *addr, uint port, uchar broadcast, const char *pcszName, const ulong dw) {
   return OutBuff(pcb,p,addr,port,broadcast,
       BuffPrintF(szRowSIP, pcszName,
         (dw >> 24), (dw >> 16) & 0xFF, (dw >> 8) & 0xFF, dw & 0xFF
@@ -129,7 +129,7 @@ static err_t OutRemoteIP(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *ad
   );
 }
 
-static err_t OutTCPError(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const char *pcszName, const uchar op, const uchar u) {
+static err_t OutTCPError(struct udp_pcb *pcb, struct pbuf *p, struct ip4_addr *addr, uint port, uchar broadcast, const char *pcszName, const uchar op, const uchar u) {
   ASSERT(op < TCP_OPERATIONS);
   ASSERT(u < UART_COUNT);
 
@@ -145,7 +145,7 @@ static err_t OutTCPError(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *ad
 
 
 
-static err_t GetRoutingStatusContent0(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const uint wIdx, const uchar u) {
+static err_t GetRoutingStatusContent0(struct udp_pcb *pcb, struct pbuf *p, struct ip4_addr *addr, uint port, uchar broadcast, const uint wIdx, const uchar u) {
   switch (wIdx) {
     case 0: return OutStringZ(pcb,p,addr,port,broadcast,szHead);
     case 1: return OutStringZ(pcb,p,addr,port,broadcast,szBodyStart);
@@ -171,7 +171,7 @@ static err_t GetRoutingStatusContent0(struct udp_pcb *pcb, struct pbuf *p, struc
 }
 
 
-static err_t GetRoutingStatusContent1(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const uint wIdx, const uchar u) {
+static err_t GetRoutingStatusContent1(struct udp_pcb *pcb, struct pbuf *p, struct ip4_addr *addr, uint port, uchar broadcast, const uint wIdx, const uchar u) {
   switch (wIdx) {
     case 0: return OutStringZ(pcb,p,addr,port,broadcast,szHead);
     case 1: return OutStringZ(pcb,p,addr,port,broadcast,szBodyStart);
@@ -192,7 +192,7 @@ static err_t GetRoutingStatusContent1(struct udp_pcb *pcb, struct pbuf *p, struc
 }
 
 
-static err_t GetRoutingStatusContent2(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const uint wIdx, const uchar u) {
+static err_t GetRoutingStatusContent2(struct udp_pcb *pcb, struct pbuf *p, struct ip4_addr *addr, uint port, uchar broadcast, const uint wIdx, const uchar u) {
   switch (wIdx) {
     case 0: return OutStringZ(pcb,p,addr,port,broadcast,szHead);
     case 1: return OutStringZ(pcb,p,addr,port,broadcast,szBodyStart);
@@ -215,7 +215,7 @@ static err_t GetRoutingStatusContent2(struct udp_pcb *pcb, struct pbuf *p, struc
 }
 
 
-static err_t GetRoutingStatusContent3(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const uint wIdx, const uchar u) {
+static err_t GetRoutingStatusContent3(struct udp_pcb *pcb, struct pbuf *p, struct ip4_addr *addr, uint port, uchar broadcast, const uint wIdx, const uchar u) {
   if (u == 0) {
     switch (wIdx) {
       case 0: return OutStringZ(pcb,p,addr,port,broadcast,szHead);
@@ -249,7 +249,7 @@ static err_t GetRoutingStatusContent3(struct udp_pcb *pcb, struct pbuf *p, struc
 
 #ifndef SINGLE_UART
 
-err_t GetRoutingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast) {
+err_t GetRoutingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip4_addr *addr, uint port, uchar broadcast) {
   uchar2 ibStart = GetCmdEndIndex(p, "FU");
   if (InvalidChar2(ibStart)) {
     WARNING("routing status: not found 'FU'\n");
@@ -294,7 +294,7 @@ err_t GetRoutingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_add
 
 #else
 
-err_t GetRoutingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast) {
+err_t GetRoutingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip4_addr *addr, uint port, uchar broadcast) {
   uchar2 ibStart = GetCmdEndIndex(p, "FU");
   if (InvalidChar2(ibStart)) {
     WARNING("routing status: not found 'FU'\n");

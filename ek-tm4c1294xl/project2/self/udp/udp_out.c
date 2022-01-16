@@ -17,7 +17,7 @@ uint                    cwErrUPDOutSendBroadcast = 0;
 
 
 
-err_t Out(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast) {
+err_t Out(struct udp_pcb *pcb, struct pbuf *p, struct ip4_addr *addr, uint port, uchar broadcast) {
   pbuf_free(p);
 
   p = pbuf_alloc(PBUF_TRANSPORT, iwUDPPush, PBUF_RAM);
