@@ -13,7 +13,7 @@ MAIN,C
 #include "driverlib_patched/sysctl_patched.h"
 #include "driverlib/flash.h"
 #include "driverlib/pin_map.h"
-#include "utils/lwiplib_patched.h"
+#include "utils/lwiplib.h"
 #include "kernel/log.h"
 #include "kernel/tasks.h"
 #include "kernel/settings.h"

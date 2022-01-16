@@ -6,7 +6,7 @@ sys_tick.c
 
 #include "../main.h"
 #include "driverlib/systick.h"
-#include "utils/lwiplib_patched.h"
+#include "utils/lwiplib.h"
 #include "sys_tick.h"
 
 
