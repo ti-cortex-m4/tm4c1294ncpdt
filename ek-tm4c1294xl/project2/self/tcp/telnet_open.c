@@ -77,7 +77,7 @@ void TelnetOpen(uint32_t ulIPAddr, uint16_t usTelnetRemotePort, uint8_t ucSerial
     // reattempt the connection if we do not receive a response.
     tcp_poll(pcb, TelnetPoll, (3000 / TCP_SLOW_INTERVAL));
 
-    struct ip_addr sIPAddr;
+    struct ip4_addr sIPAddr;
     sIPAddr.addr = htonl(ulIPAddr);
 
     // Attempt to connect to the server.
