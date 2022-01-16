@@ -183,3 +183,5 @@ tcp.c	return NULL; -> return (struct tcp_pcb *)lpcb;
 udp.c	broadcast
 udp.h	broadcast
 pbuf.h	#if LWIP_PTPD time_s time_ns
+
+lwiplib_patched.h
