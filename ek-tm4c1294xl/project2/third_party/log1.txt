@@ -1,0 +1,438 @@
+Terminal log file
+Date: 20.01.2022 - 19:44:33
+-----------------------------------------------
+0: listen as server on port 1001
+0: listen on port 1001
+**** before +
+MEM TCP_PCB	avail: 4 used: 0 max: 0 err: 0 
+MEM TCP_PCB	avail: 4 used: 1 max: 1 err: 0 
+**** after +
+tcp_bind: bind to port 1001
+**** before -
+MEM TCP_PCB	avail: 4 used: 1 max: 1 err: 0 
+MEM TCP_PCB	avail: 4 used: 0 max: 1 err: 0 
+**** after -
+1: listen as server on port 1002
+1: listen on port 1002
+**** before +
+MEM TCP_PCB	avail: 4 used: 0 max: 1 err: 0 
+MEM TCP_PCB	avail: 4 used: 1 max: 1 err: 0 
+**** after +
+tcp_bind: bind to port 1002
+**** before -
+MEM TCP_PCB	avail: 4 used: 1 max: 1 err: 0 
+MEM TCP_PCB	avail: 4 used: 0 max: 1 err: 0 
+**** after -
+2: listen as server on port 1003
+2: listen on port 1003
+**** before +
+MEM TCP_PCB	avail: 4 used: 0 max: 1 err: 0 
+MEM TCP_PCB	avail: 4 used: 1 max: 1 err: 0 
+**** after +
+tcp_bind: bind to port 1003
+**** before -
+MEM TCP_PCB	avail: 4 used: 1 max: 1 err: 0 
+MEM TCP_PCB	avail: 4 used: 0 max: 1 err: 0 
+**** after -
+3: listen as server on port 1004
+3: listen on port 1004
+**** before +
+MEM TCP_PCB	avail: 4 used: 0 max: 1 err: 0 
+MEM TCP_PCB	avail: 4 used: 1 max: 1 err: 0 
+**** after +
+tcp_bind: bind to port 1004
+**** before -
+MEM TCP_PCB	avail: 4 used: 1 max: 1 err: 0 
+MEM TCP_PCB	avail: 4 used: 0 max: 1 err: 0 
+**** after -
+4: listen as server on port 1005
+4: listen on port 1005
+**** before +
+MEM TCP_PCB	avail: 4 used: 0 max: 1 err: 0 
+MEM TCP_PCB	avail: 4 used: 1 max: 1 err: 0 
+**** after +
+tcp_bind: bind to port 1005
+**** before -
+MEM TCP_PCB	avail: 4 used: 1 max: 1 err: 0 
+MEM TCP_PCB	avail: 4 used: 0 max: 1 err: 0 
+**** after -
+version 0.19.0.0000 00.00.00 00:00:00
+link status: up, ignore
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+link status: down
+tcp_slowtmr: no active pcbs
+link status: up, ignore
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+
+MEM HEAP	avail: 65536 used: 0 max: 72 err: 0 
+MEM UDP_PCB	avail: 4 used: 1 max: 1 err: 0 
+MEM TCP_PCB	avail: 4 used: 0 max: 1 err: 0 
+MEM TCP_PCB_LISTEN	avail: 8 used: 5 max: 5 err: 0 
+MEM TCP_SEG	avail: 16 used: 0 max: 0 err: 0 
+MEM SYS_TIMEOUT	avail: 8 used: 1 max: 1 err: 0 
+MEM PBUF_REF/ROM	avail: 48 used: 0 max: 0 err: 0 
+MEM PBUF_POOL	avail: 48 used: 8 max: 8 err: 0 Active PCB states:
+Listen PCB states:
+Local port 1005 State: LISTEN
+Local port 1004 State: LISTEN
+Local port 1003 State: LISTEN
+Local port 1002 State: LISTEN
+Local port 1001 State: LISTEN
+TIME-WAIT PCB states:
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+TCP connection request 49235 -> 1001.
+**** before +
+MEM TCP_PCB	avail: 4 used: 0 max: 1 err: 0 
+MEM TCP_PCB	avail: 4 used: 1 max: 1 err: 0 
+**** after +
+TCP connection established 49235 -> 1001.
+0: accept 0x2002a320, 0x2002b444, 0
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: polling application
+0: poll 0x2002a320, 0x2002b444 0/60
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: polling application
+0: poll 0x2002a320, 0x2002b444 1/60
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: polling application
+0: poll 0x2002a320, 0x2002b444 2/60
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: polling application
+0: poll 0x2002a320, 0x2002b444 3/60
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: polling application
+0: poll 0x2002a320, 0x2002b444 4/60
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: polling application
+0: poll 0x2002a320, 0x2002b444 5/60
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: polling application
+0: poll 0x2002a320, 0x2002b444 6/60
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: polling application
+0: poll 0x2002a320, 0x2002b444 7/60
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: polling application
+0: poll 0x2002a320, 0x2002b444 8/60
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: polling application
+0: poll 0x2002a320, 0x2002b444 9/60
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: polling application
+0: poll 0x2002a320, 0x2002b444 10/60
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: polling application
+0: poll 0x2002a320, 0x2002b444 11/60
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: polling application
+0: poll 0x2002a320, 0x2002b444 12/60
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: polling application
+0: poll 0x2002a320, 0x2002b444 13/60
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: polling application
+0: poll 0x2002a320, 0x2002b444 14/60
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: polling application
+0: poll 0x2002a320, 0x2002b444 15/60
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: polling application
+0: poll 0x2002a320, 0x2002b444 16/60
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: polling application
+0: poll 0x2002a320, 0x2002b444 17/60
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: polling application
+0: poll 0x2002a320, 0x2002b444 18/60
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: polling application
+0: poll 0x2002a320, 0x2002b444 19/60
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: polling application
+0: poll 0x2002a320, 0x2002b444 20/60
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: polling application
+0: poll 0x2002a320, 0x2002b444 21/60
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: polling application
+0: poll 0x2002a320, 0x2002b444 22/60
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: polling application
+0: poll 0x2002a320, 0x2002b444 23/60
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: polling application
+0: poll 0x2002a320, 0x2002b444 24/60
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: polling application
+0: poll 0x2002a320, 0x2002b444 25/60
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: polling application
+0: poll 0x2002a320, 0x2002b444 26/60
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: polling application
+0: poll 0x2002a320, 0x2002b444 27/60
+tcp_slowtmr: processing active pcb
+
+MEM HEAP	avail: 65536 used: 0 max: 88 err: 0 
+MEM UDP_PCB	avail: 4 used: 1 max: 1 err: 0 
+MEM TCP_PCB	avail: 4 used: 1 max: 1 err: 0 
+MEM TCP_PCB_LISTEN	avail: 8 used: 5 max: 5 err: 0 
+MEM TCP_SEG	avail: 16 used: 0 max: 1 err: 0 
+MEM SYS_TIMEOUT	avail: 8 used: 2 max: 2 err: 0 
+MEM PBUF_REF/ROM	avail: 48 used: 0 max: 0 err: 0 
+MEM PBUF_POOL	avail: 48 used: 8 max: 8 err: 0 Active PCB states:
+Local port 1001, foreign port 49235 snd_nxt 6598 rcv_nxt 3857072135 State: ESTABLISHED
+Listen PCB states:
+Local port 1001 State: LISTEN
+Local port 1005 State: LISTEN
+Local port 1004 State: LISTEN
+Local port 1003 State: LISTEN
+Local port 1002 State: LISTEN
+TIME-WAIT PCB states:
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: polling application
+0: poll 0x2002a320, 0x2002b444 28/60
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: polling application
+0: poll 0x2002a320, 0x2002b444 29/60
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: polling application
+0: poll 0x2002a320, 0x2002b444 30/60
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: polling application
+0: poll 0x2002a320, 0x2002b444 31/60
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: polling application
+0: poll 0x2002a320, 0x2002b444 32/60
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: polling application
+0: poll 0x2002a320, 0x2002b444 33/60
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: processing active pcb
+tcp_slowtmr: polling application
+0: poll 0x2002a320, 0x2002b444 34/60
+0: receive error=0
+0: received NULL packet - close connection
+tcp_close: closing in State: CLOSE_WAIT
+0: listen as server on port 1001
+0: listen on port 1001
+**** before +
+MEM TCP_PCB	avail: 4 used: 1 max: 1 err: 0 
+MEM TCP_PCB	avail: 4 used: 2 max: 2 err: 0 
+**** after +
+tcp_bind: bind to port 1001
+TCP connection closed: LAST_ACK 49235 -> 1001.
+tcp_pcb_purge
+**** before -
+MEM TCP_PCB	avail: 4 used: 2 max: 2 err: 0 
+MEM TCP_PCB	avail: 4 used: 1 max: 2 err: 0 
+**** after -
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+
+MEM HEAP	avail: 65536 used: 0 max: 88 err: 0 
+MEM UDP_PCB	avail: 4 used: 1 max: 1 err: 0 
+MEM TCP_PCB	avail: 4 used: 1 max: 2 err: 0 
+MEM TCP_PCB_LISTEN	avail: 8 used: 5 max: 5 err: 0 
+MEM TCP_SEG	avail: 16 used: 0 max: 1 err: 0 
+MEM SYS_TIMEOUT	avail: 8 used: 2 max: 2 err: 0 
+MEM PBUF_REF/ROM	avail: 48 used: 0 max: 0 err: 0 
+MEM PBUF_POOL	avail: 48 used: 8 max: 8 err: 0 Active PCB states:
+Listen PCB states:
+Local port 1001 State: LISTEN
+Local port 1005 State: LISTEN
+Local port 1004 State: LISTEN
+Local port 1003 State: LISTEN
+Local port 1002 State: LISTEN
+TIME-WAIT PCB states:
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+tcp_slowtmr: no active pcbs
+
+-----------------------------------------------
+Date: 20.01.2022 - 19:46:38
+End log file
