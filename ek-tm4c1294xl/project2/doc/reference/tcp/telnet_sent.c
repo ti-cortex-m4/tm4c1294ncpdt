@@ -1,3 +1,4 @@
+#if 1
 /*------------------------------------------------------------------------------
 telnet_sent.c
 
@@ -24,14 +25,18 @@ telnet_sent.c
 //!
 //! \return This function will return an lwIP defined error code.
 //*****************************************************************************
-err_t TelnetSent(void *arg, struct tcp_pcb *pcb, u16_t len)
+static err_t
+TelnetSent(void *arg, struct tcp_pcb *pcb, u16_t len)
 {
-    tState *pState = arg;
+    tTelnetSessionData *pState = arg;
 
-    CONSOLE("%u: sent 0x%08x, 0x%08x, %d\n", pState->ucSerialPort, arg, pcb, len);
+    DEBUG_MSG("TelnetSent 0x%08x, 0x%08x, %d\n", arg, pcb, len);
 
     // Reset the connection timeout.
     pState->ulConnectionTimeout = 0;
 
+    // Return OK.
     return(ERR_OK);
 }
+
+#endif
