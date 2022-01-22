@@ -38,7 +38,8 @@ ulong getTelnetTimeout(uchar u)
 //!
 //! \return None.
 //*****************************************************************************
-void TelnetFreePbufs(tState *pState)
+static void
+TelnetFreePbufs(tTelnetSessionData *pState)
 {
     SYS_ARCH_DECL_PROTECT(lev);
 
@@ -65,6 +66,8 @@ void TelnetFreePbufs(tState *pState)
     SYS_ARCH_UNPROTECT(lev);
 }
 
+
+
 //*****************************************************************************
 //! Initializes the telnet session(s) for the Serial to Ethernet Module.
 //!
@@ -72,30 +75,48 @@ void TelnetFreePbufs(tState *pState)
 //!
 //! \return None.
 //*****************************************************************************
-void TelnetInit(void)
+void
+TelnetInit(void)
 {
-    uint8_t u;
-    for(u = 0; u < UART_COUNT; u++)
+    int iPort;
+
+    // Initialize the session data for each supported port.
+    for(iPort = 0; iPort < MAX_S2E_PORTS; iPort++)
     {
-        g_sState[u].pConnectPCB = NULL;
-        g_sState[u].pListenPCB = NULL;
-        g_sState[u].eTCPState = STATE_TCP_IDLE;
-        g_sState[u].ulConnectionTimeout = 0;
-        g_sState[u].ulMaxTimeout = 0;
-        g_sState[u].ucSerialPort = u;
-        g_sState[u].usTelnetRemotePort = 0;
-        g_sState[u].usTelnetLocalPort = 0;
-        g_sState[u].ulTelnetRemoteIP = 0;
-        g_sState[u].iBufQRead = 0;
-        g_sState[u].iBufQWrite = 0;
-        g_sState[u].pBufHead = NULL;
-        g_sState[u].pBufCurrent = NULL;
-        g_sState[u].ulBufIndex = 0;
-        g_sState[u].ulLastTCPSendTime = 0;
-        g_sState[u].bLinkLost = false;
-        g_sState[u].ucConnectCount = 0;
-        g_sState[u].ucReconnectCount = 0;
-        g_sState[u].ucErrorCount = 0;
+        g_sTelnetSession[iPort].pConnectPCB = NULL;
+        g_sTelnetSession[iPort].pListenPCB = NULL;
+        g_sTelnetSession[iPort].eTCPState = STATE_TCP_IDLE;
+        g_sTelnetSession[iPort].eTelnetState = STATE_NORMAL;
+        g_sTelnetSession[iPort].ucFlags = 0;
+        g_sTelnetSession[iPort].ulConnectionTimeout = 0;
+        g_sTelnetSession[iPort].ulMaxTimeout = 0;
+        g_sTelnetSession[iPort].ulSerialPort = MAX_S2E_PORTS;
+        g_sTelnetSession[iPort].usTelnetRemotePort = 0;
+        g_sTelnetSession[iPort].usTelnetLocalPort = 0;
+        g_sTelnetSession[iPort].ulTelnetRemoteIP = 0;
+        g_sTelnetSession[iPort].iBufQRead = 0;
+        g_sTelnetSession[iPort].iBufQWrite = 0;
+        g_sTelnetSession[iPort].pBufHead = NULL;
+        g_sTelnetSession[iPort].pBufCurrent = NULL;
+        g_sTelnetSession[iPort].ulBufIndex = 0;
+        g_sTelnetSession[iPort].ulLastTCPSendTime = 0;
+#if CONFIG_RFC2217_ENABLED
+        g_sTelnetSession[iPort].eRFC2217State = STATE_2217_GET_DATA;
+        g_sTelnetSession[iPort].ucRFC2217Command = 0;
+        g_sTelnetSession[iPort].ulRFC2217Value = 0;
+        g_sTelnetSession[iPort].ucRFC2217Index = 0;
+        g_sTelnetSession[iPort].ucRFC2217IndexMax = 0;
+        g_sTelnetSession[iPort].ucRFC2217FlowControl = 0;
+        g_sTelnetSession[iPort].ucRFC2217ModemMask = 0;
+        g_sTelnetSession[iPort].ucRFC2217LineMask = 0;
+        g_sTelnetSession[iPort].ucLastModemState = 0;
+        g_sTelnetSession[iPort].ucModemState = 0;
+#endif
+        g_sTelnetSession[iPort].bLinkLost = false;
+        g_sTelnetSession[iPort].ucConnectCount = 0;
+        g_sTelnetSession[iPort].ucReconnectCount = 0;
+        g_sTelnetSession[iPort].ucErrorCount = 0;
+        g_sTelnetSession[iPort].eLastErr = ERR_OK;
     }
 }
 
