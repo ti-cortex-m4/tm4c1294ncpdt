@@ -1,3 +1,4 @@
+#if 1
 /*------------------------------------------------------------------------------
 telnet_connected.c
 
@@ -31,11 +32,12 @@ telnet_connected.c
 //!
 //! \return This function will return an lwIP defined error code.
 //*****************************************************************************
-err_t TelnetConnected(void *arg, struct tcp_pcb *pcb, err_t err)
+static err_t
+TelnetConnected(void *arg, struct tcp_pcb *pcb, err_t err)
 {
-    tState *pState = arg;
+    tTelnetSessionData *pState = arg;
 
-    CONSOLE("%u: connected 0x%08x, 0x%08x, %d\n", pState->ucSerialPort, arg, pcb, err);
+    DEBUG_MSG("TelnetConnected 0x%08x, 0x%08x, %d\n", arg, pcb, err);
 
     // Increment our connection counter.
     pState->ucConnectCount++;
@@ -44,14 +46,13 @@ err_t TelnetConnected(void *arg, struct tcp_pcb *pcb, err_t err)
     if(pState->eTCPState != STATE_TCP_CONNECTING)
     {
         // If we already have a connection, kill it and start over.
-        CONSOLE("%u: connected - already connected, start over\n", pState->ucSerialPort);
         return(ERR_CONN);
     }
 
     if(err != ERR_OK)
     {
-        ERROR("%u: connected error=%d\n", pState->ucSerialPort, err);
-        ErrorTCPOperation(pState->ucSerialPort, err, HANDLER_CONNECTED);
+        // Remember the error that is being reported.
+        pState->eLastErr = err;
 
         // Clear out all of the TCP callbacks.
         tcp_arg(pcb, NULL);
@@ -61,19 +62,16 @@ err_t TelnetConnected(void *arg, struct tcp_pcb *pcb, err_t err)
         tcp_poll(pcb, NULL, 1);
 
         // Close the TCP connection.
-        err_t err = tcp_close(pcb);
-        if (err != ERR_OK)
-        {
-           WARNING("%u: connected.tcp_close failed, error=%d\n", pState->ucSerialPort, err);
-           ErrorTCPOperation(pState->ucSerialPort, err, TCP_CLOSE_CONNECTED);
-        }
+        tcp_close(pcb);
 
         // Clear out any pbufs associated with this session.
         TelnetFreePbufs(pState);
 
         // Re-open the connection.
-        TelnetOpen(pState->ulTelnetRemoteIP, pState->usTelnetRemotePort, pState->ucSerialPort);
+        TelnetOpen(pState->ulTelnetRemoteIP, pState->usTelnetRemotePort,
+                   pState->usTelnetLocalPort, pState->ulSerialPort);
 
+        // And return.
         return(ERR_OK);
     }
 
@@ -82,6 +80,10 @@ err_t TelnetConnected(void *arg, struct tcp_pcb *pcb, err_t err)
 
     // Change TCP state to connected.
     pState->eTCPState = STATE_TCP_CONNECTED;
+
+    // Reset the serial port associated with this session to its default
+    // parameters.
+    SerialSetDefault(pState->ulSerialPort);
 
     // Set the connection timeout to 0.
     pState->ulConnectionTimeout = 0;
@@ -101,16 +103,16 @@ err_t TelnetConnected(void *arg, struct tcp_pcb *pcb, err_t err)
     // Setup the TCP sent callback function.
     tcp_sent(pcb, TelnetSent);
 
-#ifdef PROTOCOL_TELNET
     // Send the telnet initialization string.
-    if((g_sParameters.sPort[pState->ucSerialPort].ucFlags & PORT_FLAG_PROTOCOL) == PORT_PROTOCOL_TELNET)
+    if((g_sParameters.sPort[pState->ulSerialPort].ucFlags &
+                PORT_FLAG_PROTOCOL) == PORT_PROTOCOL_TELNET)
     {
         tcp_write(pcb, g_pucTelnetInit, sizeof(g_pucTelnetInit), 1);
         tcp_output(pcb);
     }
-#endif
 
-    ModemConnected(pState->ucSerialPort);
-
+    // Return a success code.
     return(ERR_OK);
 }
+
+#endif
