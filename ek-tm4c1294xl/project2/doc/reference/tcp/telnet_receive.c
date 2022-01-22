@@ -1,3 +1,4 @@
+#if 1
 /*------------------------------------------------------------------------------
 telnet_receive,c
 
@@ -30,16 +31,14 @@ telnet_receive,c
 //!
 //! \return This function will return an lwIP defined error code.
 //*****************************************************************************
-err_t TelnetReceive(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
+static err_t
+TelnetReceive(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
 {
-    tState *pState = arg;
+    tTelnetSessionData *pState = arg;
+    int iNextWrite;
     SYS_ARCH_DECL_PROTECT(lev);
 
-#if 0
-    CONSOLE("%u: receive 0x%08x, 0x%08x, 0x%08x, %d\n", pState->ucSerialPort, arg, pcb, p, err);
-#else
-    CONSOLE("%u: receive error=%d\n", pState->ucSerialPort, err);
-#endif
+    DEBUG_MSG("TelnetReceive 0x%08x, 0x%08x, 0x%08x, %d\n", arg, pcb, p, err);
 
     // Place the incoming packet onto the queue if there is space.
     if((err == ERR_OK) && (p != NULL))
@@ -48,11 +47,11 @@ err_t TelnetReceive(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
         SYS_ARCH_PROTECT(lev);
 
         // Do we have space in the queue?
-        int iNextWrite = ((pState->iBufQWrite + 1) % PBUF_POOL_SIZE);
+        iNextWrite = ((pState->iBufQWrite + 1) % PBUF_POOL_SIZE);
         if(iNextWrite == pState->iBufQRead)
         {
-            // The queue is full - discard the pbuf and return since we can't handle it just now.
-            CONSOLE("%u: WARNING queue is full - discard data\n", pState->ucSerialPort);
+            // The queue is full - discard the pbuf and return since we can't
+            // handle it just now.
 
             // Restore previous level of protection.
             SYS_ARCH_UNPROTECT(lev);
@@ -77,8 +76,6 @@ err_t TelnetReceive(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
     // If a null packet is passed in, close the connection.
     else if((err == ERR_OK) && (p == NULL))
     {
-        CONSOLE("%u: received NULL packet - close connection\n", pState->ucSerialPort);
-
         // Clear out all of the TCP callbacks.
         tcp_arg(pcb, NULL);
         tcp_sent(pcb, NULL);
@@ -87,12 +84,7 @@ err_t TelnetReceive(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
         tcp_poll(pcb, NULL, 1);
 
         // Close the TCP connection.
-        err = tcp_close(pcb);
-        if (err != ERR_OK)
-        {
-           WARNING("%u: TelnetReceive.tcp_close failed, error=%d\n", pState->ucSerialPort, err);
-           ErrorTCPOperation(pState->ucSerialPort, err, TCP_CLOSE_RECEIVE);
-        }
+        tcp_close(pcb);
 
         // Clear out any pbufs associated with this session.
         TelnetFreePbufs(pState);
@@ -100,10 +92,23 @@ err_t TelnetReceive(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
         // Clear out the telnet session PCB.
         pState->pConnectPCB = NULL;
 
-        StartConnection(pState->ucSerialPort);
+        // If we don't have a listen PCB, then we are in client mode, and
+        // should try to reconnect.
+        if(pState->pListenPCB == NULL)
+        {
+            // Re-open the connection.
+            TelnetOpen(pState->ulTelnetRemoteIP, pState->usTelnetRemotePort,
+                       pState->usTelnetLocalPort, pState->ulSerialPort);
+        }
+        else
+        {
+            // Revert to listening state.
+            pState->eTCPState = STATE_TCP_LISTEN;
+        }
     }
 
-    CustomerSettings1_TelnetReceive(pState->ucSerialPort);
-
+    // Return okay.
     return(ERR_OK);
 }
+
+#endif
