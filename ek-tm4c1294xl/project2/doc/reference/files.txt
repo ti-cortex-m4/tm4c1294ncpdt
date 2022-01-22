@@ -21,10 +21,17 @@ telnet_open.c
 OK
 
 telnet_poll.c
+???
+
 telnet_receive.c
+???
+
 telnet_sent.c
+OK
 
 serial.c
+OK
+
 serial_handler.c
 serial_receive.c
 serial_send.c
