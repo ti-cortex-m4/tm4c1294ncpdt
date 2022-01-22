@@ -1,3 +1,4 @@
+#if 1
 /*------------------------------------------------------------------------------
 serial_receive.c
 
@@ -21,10 +22,13 @@ serial_receive.c
 //! \return Returns -1 if no data is available or the oldest character held in
 //! the receive ring buffer.
 //*****************************************************************************
-long SerialReceive(uint32_t ulPort)
+long
+SerialReceive(uint32_t ulPort)
 {
+    uint32_t ulData;
+
     // Check the arguments.
-    ASSERT(ulPort < UART_COUNT);
+    ASSERT(ulPort < MAX_S2E_PORTS);
 
     // See if the receive buffer is empty and there is space in the FIFO.
     if(RingBufEmpty(&g_sRxBuf[ulPort]))
@@ -34,9 +38,8 @@ long SerialReceive(uint32_t ulPort)
     }
 
     // Read a single character.
-    uint32_t ulData = (long)RingBufReadOne(&g_sRxBuf[ulPort]);
+    ulData = (long)RingBufReadOne(&g_sRxBuf[ulPort]);
 
-#ifdef SERIAL_FLOW_CONTROL
     // If flow control is enabled, check the status of the RX buffer to
     // determine if flow control GPIO needs to be de-asserted.
     if(g_sParameters.sPort[ulPort].ucFlowControl == SERIAL_FLOW_CONTROL_HW)
@@ -50,13 +53,10 @@ long SerialReceive(uint32_t ulPort)
             GPIOPinWrite(g_ulFlowOutBase[ulPort], g_ulFlowOutPin[ulPort], 0);
         }
     }
-#endif
 
     // Return the data that was read.
     return(ulData);
 }
-
-
 
 //*****************************************************************************
 //! Returns number of characters available in the serial ring buffer.
@@ -66,13 +66,16 @@ long SerialReceive(uint32_t ulPort)
 //! This function will return the number of characters available in the
 //! serial ring buffer.
 //!
-//! \return The number of characters available in the ring buffer.
+//! \return The number of characters available in the ring buffer..
 //*****************************************************************************
-uint32_t SerialReceiveAvailable(uint32_t ulPort)
+uint32_t
+SerialReceiveAvailable(uint32_t ulPort)
 {
     // Check the arguments.
-    ASSERT(ulPort < UART_COUNT);
+    ASSERT(ulPort < MAX_S2E_PORTS);
 
     // Return the value.
     return(RingBufUsed(&g_sRxBuf[ulPort]));
 }
+
+#endif
