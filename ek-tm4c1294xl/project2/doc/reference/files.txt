@@ -15,7 +15,11 @@ OK
 
 telnet_handler.c
 telnet_listen.c
+OK
+
 telnet_open.c
+OK
+
 telnet_poll.c
 telnet_receive.c
 telnet_sent.c
