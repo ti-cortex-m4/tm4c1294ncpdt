@@ -870,7 +870,7 @@ void
 SerialPurgeData(uint32_t ulPort, uint8_t ucPurgeCommand)
 {
     // Check the arguments.
-    ASSERT(ulPort < UART_COUNT);
+    ASSERT(ulPort < MAX_S2E_PORTS);
     ASSERT((ucPurgeCommand >= 1) && (ucPurgeCommand <= 3));
 
     // Disable the UART.
