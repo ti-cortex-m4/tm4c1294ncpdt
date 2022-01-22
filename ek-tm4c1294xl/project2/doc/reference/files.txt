@@ -24,7 +24,14 @@ telnet_open.c
 OK
 
 telnet_poll.c
+client
 ???
+server
+previous
+            tcp_abort(pcb);
+current
+            TelnetCloseServer(pcb, pState->ucSerialPort);
+            StartServerConnection(pState->ucSerialPort);
 
 telnet_receive.c
 previous
