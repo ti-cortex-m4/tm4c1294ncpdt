@@ -1,4 +1,5 @@
 telnet.c
+OK
 
 telnet_accept.c
 ??? // TODO tcp_accepted(pcb);
@@ -14,6 +15,8 @@ telnet_error.c
 OK
 
 telnet_handler.c
+OK
+
 telnet_listen.c
 OK
 
@@ -33,5 +36,8 @@ serial.c
 OK
 
 serial_handler.c
+
 serial_receive.c
+OK
+
 serial_send.c
