@@ -1,3 +1,4 @@
+#if 1
 /*------------------------------------------------------------------------------
 telnet_handler.c
 
@@ -52,16 +53,21 @@ static void TelnetProcessCharacter(uint8_t ucChar, tState *pState)
 //!
 //! \return None.
 //*****************************************************************************
-void TelnetHandler(void)
+void
+TelnetHandler(void)
 {
+    long lCount, lIndex;
     static uint8_t pucTemp[PBUF_POOL_BUFSIZE];
+    int iLoop;
     SYS_ARCH_DECL_PROTECT(lev);
+    uint8_t *pucData;
+    tTelnetSessionData *pState;
 
-    uint8_t u;
-    for(u = 0; u < UART_COUNT; u++)
+    // Loop through the possible telnet sessions.
+    for(iLoop = 0; iLoop < MAX_S2E_PORTS; iLoop++)
     {
         // Initialize the state pointer.
-        tState *pState = &g_sState[u];
+        pState = &g_sTelnetSession[iLoop];
 
         // If the telnet session is not connected, skip this port.
         if(pState->eTCPState != STATE_TCP_CONNECTED)
@@ -115,9 +121,9 @@ void TelnetHandler(void)
 
         // While space is available in the serial output queue, process the
         // pbufs received on the telnet interface.
-        while(!SerialSendFull(u))
+        while(!SerialSendFull(iLoop))
         {
-            // Pop a pbuf off of the RX queue, if one is available, and we are
+            // Pop a pbuf off of the rx queue, if one is available, and we are
             // not already processing a pbuf.
             if(pState->pBufHead == NULL)
             {
@@ -125,11 +131,10 @@ void TelnetHandler(void)
                 {
                     SYS_ARCH_PROTECT(lev);
                     pState->pBufHead = pState->pBufQ[pState->iBufQRead];
-                    pState->iBufQRead = ((pState->iBufQRead + 1) % PBUF_POOL_SIZE);
+                    pState->iBufQRead =
+                        ((pState->iBufQRead + 1) % PBUF_POOL_SIZE);
                     pState->pBufCurrent = pState->pBufHead;
                     pState->ulBufIndex = 0;
-
-                    mcwUARTTxOut[u] += pState->pBufCurrent->len;
                     SYS_ARCH_UNPROTECT(lev);
                 }
             }
@@ -140,10 +145,8 @@ void TelnetHandler(void)
                 break;
             }
 
-            CustomerSettings1_TelnetProcessCharacter(u);
-
             // Setup the data pointer for the current buffer.
-            uint8_t *pucData = pState->pBufCurrent->payload;
+            pucData = pState->pBufCurrent->payload;
 
             // Process the next character in the buffer.
             TelnetProcessCharacter(pucData[pState->ulBufIndex], pState);
@@ -187,36 +190,32 @@ void TelnetHandler(void)
 
         // Process the RX ring buffer data if space is available in the
         // TCP output buffer.
-        if(SerialReceiveAvailable(pState->ucSerialPort) &&
+        if(SerialReceiveAvailable(pState->ulSerialPort) &&
            tcp_sndbuf(pState->pConnectPCB) &&
            (pState->pConnectPCB->snd_queuelen < TCP_SND_QUEUELEN))
         {
             // Here, we have data, and we have space.  Set the total amount
             // of data we will process to the lesser of data available or
             // space available.
-            long lCount = (long)SerialReceiveAvailable(pState->ucSerialPort);
+            lCount = (long)SerialReceiveAvailable(pState->ulSerialPort);
             if(tcp_sndbuf(pState->pConnectPCB) < lCount)
             {
                 lCount = tcp_sndbuf(pState->pConnectPCB);
             }
 
-            // While we have data remaining to process, continue in this loop.
+            // While we have data remaining to process, continue in this
+            // loop.
             while((lCount) &&
                   (pState->pConnectPCB->snd_queuelen < TCP_SND_QUEUELEN))
             {
                 // First, reset the index into the local buffer.
-                long lIndex = 0;
+                lIndex = 0;
 
                 // Fill the local buffer with data while there is data
                 // and/or space remaining.
                 while(lCount && (lIndex < sizeof(pucTemp)))
                 {
-                    uint8_t ucChar = SerialReceive(pState->ucSerialPort);
-
-                    if (fDataDebugFlag)
-                      CONSOLE("%u: to TCP %02X\n", u, ucChar);
-
-                    pucTemp[lIndex] = ucChar;
+                    pucTemp[lIndex] = SerialReceive(pState->ulSerialPort);
                     lIndex++;
                     lCount--;
                 }
@@ -225,12 +224,12 @@ void TelnetHandler(void)
                 tcp_write(pState->pConnectPCB, pucTemp, lIndex, 1);
             }
 
-            // https://en.wikipedia.org/wiki/Nagle%27s_algorithm#Interactions_with_real-time_systems
-            tcp_nagle_disable(pState->pConnectPCB);
-
-            // Flush the data that has been written into the TCP output buffer.
+            // Flush the data that has been written into the TCP output
+            // buffer.
             tcp_output(pState->pConnectPCB);
             pState->ulLastTCPSendTime = g_ulSystemTimeMS;
         }
     }
 }
+
+#endif
