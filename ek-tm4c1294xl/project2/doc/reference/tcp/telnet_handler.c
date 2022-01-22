@@ -20,7 +20,6 @@ telnet_handler.c
 
 
 //*****************************************************************************
-//
 //! Processes a character received from the telnet port.
 //!
 //! \param ucChar is the character in question.
@@ -31,15 +30,300 @@ telnet_handler.c
 //! as command (IAC) byte).
 //!
 //! \return None.
-//
 //*****************************************************************************
-static void TelnetProcessCharacter(uint8_t ucChar, tState *pState)
+static void
+TelnetProcessCharacter(uint8_t ucChar, tTelnetSessionData *pState)
 {
-    pState->ulConnectionTimeout = 0;
+    uint8_t pucBuf[9];
 
-    OutMode(pState->ucSerialPort);
-    SerialSend(pState->ucSerialPort, ucChar);
+    if((g_sParameters.sPort[pState->ulSerialPort].ucFlags &
+                PORT_FLAG_PROTOCOL) == PORT_PROTOCOL_RAW)
+    {
+        // Write this character to the UART with no telnet processing.
+        SerialSend(pState->ulSerialPort, ucChar);
+
+        // And return.
+        return;
+    }
+
+    // Determine the current state of the telnet command parser.
+    switch(pState->eTelnetState)
+    {
+        // The normal state of the parser, were each character is either sent
+        // to the UART or is a telnet IAC character.
+        case STATE_NORMAL:
+        {
+            // See if this character is the IAC character.
+            if(ucChar == TELNET_IAC)
+            {
+                // Skip this character and go to the IAC state.
+                pState->eTelnetState = STATE_IAC;
+            }
+            else
+            {
+                // Write this character to the UART.
+                SerialSend(pState->ulSerialPort, ucChar);
+            }
+
+            // This state has been handled.
+            break;
+        }
+
+        // The previous character was the IAC character.
+        case STATE_IAC:
+        {
+            // Determine how to interpret this character.
+            switch(ucChar)
+            {
+                // See if this character is also an IAC character.
+                case TELNET_IAC:
+                {
+                    // Send 0xff to the UART.
+                    SerialSend(pState->ulSerialPort, ucChar);
+
+                    // Switch back to normal mode.
+                    pState->eTelnetState = STATE_NORMAL;
+
+                    // This character has been handled.
+                    break;
+                }
+
+                // See if this character is the WILL request.
+                case TELNET_WILL:
+                {
+                    // Switch to the WILL mode; the next character will have
+                    // the option in question.
+                    pState->eTelnetState = STATE_WILL;
+
+                    // This character has been handled.
+                    break;
+                }
+
+                // See if this character is the WONT request.
+                case TELNET_WONT:
+                {
+                    // Switch to the WONT mode; the next character will have
+                    // the option in question.
+                    pState->eTelnetState = STATE_WONT;
+
+                    // This character has been handled.
+                    break;
+                }
+
+                // See if this character is the DO request.
+                case TELNET_DO:
+                {
+                    // Switch to the DO mode; the next character will have the
+                    // option in question.
+                    pState->eTelnetState = STATE_DO;
+
+                    // This character has been handled.
+                    break;
+                }
+
+                // See if this character is the DONT request.
+                case TELNET_DONT:
+                {
+                    // Switch to the DONT mode; the next character will have
+                    // the option in question.
+                    pState->eTelnetState = STATE_DONT;
+
+                    // This character has been handled.
+                    break;
+                }
+
+                // See if this character is the AYT request.
+                case TELNET_AYT:
+                {
+                    // Send a short string back to the client so that it knows
+                    // that we're still alive.
+                    pucBuf[0] = '\r';
+                    pucBuf[1] = '\n';
+                    pucBuf[2] = '[';
+                    pucBuf[3] = 'Y';
+                    pucBuf[4] = 'e';
+                    pucBuf[5] = 's';
+                    pucBuf[6] = ']';
+                    pucBuf[7] = '\r';
+                    pucBuf[8] = '\n';
+                    tcp_write(pState->pConnectPCB, pucBuf, 9, 1);
+
+                    // Switch back to normal mode.
+                    pState->eTelnetState = STATE_NORMAL;
+
+                    // This character has been handled.
+                    break;
+                }
+
+                // See if this is the SB request.
+#if CONFIG_RFC2217_ENABLED
+                case TELNET_SB:
+                {
+                    // Switch to SB processing mode.
+                    pState->eTelnetState = STATE_SB;
+
+                    // This character has been handled.
+                    break;
+                }
+#endif
+
+                // Explicitly ignore the GA and NOP request, plus provide a
+                // catch-all ignore for unrecognized requests.
+                case TELNET_GA:
+                case TELNET_NOP:
+                default:
+                {
+                    // Switch back to normal mode.
+                    pState->eTelnetState = STATE_NORMAL;
+
+                    // This character has been handled.
+                    break;
+                }
+            }
+
+            // This state has been handled.
+            break;
+        }
+
+        // The previous character sequence was IAC WILL.
+        case STATE_WILL:
+        {
+            // Process the WILL request on this option.
+            TelnetProcessWill(ucChar, pState);
+
+            // Switch back to normal mode.
+            pState->eTelnetState = STATE_NORMAL;
+
+            // This state has been handled.
+            break;
+        }
+
+        // The previous character sequence was IAC WONT.
+        case STATE_WONT:
+        {
+            // Process the WONT request on this option.
+            TelnetProcessWont(ucChar, pState);
+
+            // Switch back to normal mode.
+            pState->eTelnetState = STATE_NORMAL;
+
+            // This state has been handled.
+            break;
+        }
+
+        // The previous character sequence was IAC DO.
+        case STATE_DO:
+        {
+            // Process the DO request on this option.
+            TelnetProcessDo(ucChar, pState);
+
+            // Switch back to normal mode.
+            pState->eTelnetState = STATE_NORMAL;
+
+            // This state has been handled.
+            break;
+        }
+
+        // The previous character sequence was IAC DONT.
+        case STATE_DONT:
+        {
+            // Process the DONT request on this option.
+            TelnetProcessDont(ucChar, pState);
+
+            // Switch back to normal mode.
+            pState->eTelnetState = STATE_NORMAL;
+
+            // This state has been handled.
+            break;
+        }
+
+        // The previous character sequence was IAC SB.
+        case STATE_SB:
+        {
+            // If the SB request is COM_PORT request (in other words, RFC
+            // 2217).
+#if CONFIG_RFC2217_ENABLED
+            if((ucChar == TELNET_OPT_RFC2217) &&
+               (HWREGBITB(&pState->ucFlags, OPT_FLAG_WILL_RFC2217) == 1) &&
+               (HWREGBITB(&pState->ucFlags, OPT_FLAG_DO_RFC2217) == 1))
+            {
+                // Initialize the COM PORT option state machine.
+                pState->eRFC2217State = STATE_2217_GET_COMMAND;
+
+                // Change state to COM PORT option processing state.
+                pState->eTelnetState = STATE_SB_RFC2217;
+            }
+            else
+#endif
+            {
+                // Ignore this SB option.
+                pState->eTelnetState = STATE_SB_IGNORE;
+            }
+
+            // This state has been handled.
+            break;
+        }
+
+        // In the middle of an unsupported IAC SB sequence.
+        case STATE_SB_IGNORE:
+        {
+            // Check for the IAC character.
+            if(ucChar == TELNET_IAC)
+            {
+                // Change state to look for Telnet SE character.
+                pState->eTelnetState = STATE_SB_IGNORE_IAC;
+            }
+
+            // This state has been handled.
+            break;
+        }
+
+        // In the middle of a an RFC 2217 sequence.
+#if CONFIG_RFC2217_ENABLED
+        case STATE_SB_RFC2217:
+        {
+            // Allow the 2217 processor to handle this character.
+            TelnetProcessRFC2217Character(ucChar, pState);
+
+            // This state has been handled.
+            break;
+        }
+#endif
+
+        // Checking for the terminating IAC SE in unsupported IAC SB sequence.
+        case STATE_SB_IGNORE_IAC:
+        {
+            // Check for the IAC character.
+            if(ucChar == TELNET_SE)
+            {
+                // IAC SB sequence is terminated.  Revert to normal telnet
+                // character processing.
+                pState->eTelnetState = STATE_NORMAL;
+            }
+            else
+            {
+                // Go back to looking for the IAC SE sequence.
+                pState->eTelnetState = STATE_SB_IGNORE;
+            }
+
+            // This state has been handled.
+            break;
+        }
+
+        // A catch-all for unknown states.  This should never be reached, but
+        // is provided just in case it is ever needed.
+        default:
+        {
+            // Switch back to normal mode.
+            pState->eTelnetState = STATE_NORMAL;
+
+            // This state has been handled.
+            break;
+        }
+    }
 }
+
+
 
 
 
