@@ -1,0 +1,16 @@
+telnet.c
+telnet_accept.c
+telnet_close.c
+telnet_connected.c
+telnet_error.c
+telnet_handler.c
+telnet_listen.c
+telnet_open.c
+telnet_poll.c
+telnet_receive.c
+telnet_sent.c
+
+serial.c
+serial_handler.c
+serial_receive.c
+serial_send.c
