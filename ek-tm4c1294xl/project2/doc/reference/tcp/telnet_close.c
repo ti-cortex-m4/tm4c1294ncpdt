@@ -110,24 +110,28 @@ void TelnetCloseServer(struct tcp_pcb *pcb, uint8_t ucSerialPort)
 //*****************************************************************************
 //! Closes an existing Ethernet connection.
 //!
-//! \param ucSerialPort is the serial port associated with this telnet session.
+//! \param ulSerialPort is the serial port associated with this telnet session.
 //!
 //! This function is called when the the Telnet/TCP session associated with
 //! the specified serial port is to be closed.
 //!
 //! \return None.
 //*****************************************************************************
-void TelnetClose(uint8_t ucSerialPort)
+void
+TelnetClose(uint32_t ulSerialPort)
 {
-    ASSERT(ucSerialPort < UART_COUNT);
-    tState *pState = &g_sState[ucSerialPort];
+    tTelnetSessionData *pState;
 
-    CONSOLE("%u: close\n", pState->ucSerialPort);
+    DEBUG_MSG("TelnetClose UART %d\n", ulSerialPort);
+
+    // Check the arguments.
+    ASSERT(ulSerialPort < MAX_S2E_PORTS);
+    pState = &g_sTelnetSession[ulSerialPort];
 
     // If we have a connect PCB, close it down.
     if(pState->pConnectPCB != NULL)
     {
-        CONSOLE("%u: closing client data 0x%08x\n", pState->ucSerialPort, pState->pConnectPCB);
+        DEBUG_MSG("Closing connect pcb 0x%08x\n", pState->pConnectPCB);
 
         // Clear out all of the TCP callbacks.
         tcp_arg(pState->pConnectPCB, NULL);
@@ -146,7 +150,7 @@ void TelnetClose(uint8_t ucSerialPort)
     // If we have a listen PCB, close it down as well.
     if(pState->pListenPCB != NULL)
     {
-        CONSOLE("%u: closing server data 0x%08x\n", pState->ucSerialPort, pState->pListenPCB);
+        DEBUG_MSG("Closing listen pcb 0x%08x\n", pState->pListenPCB);
 
         // Close the TCP connection.
         tcp_close(pState->pListenPCB);
@@ -159,15 +163,29 @@ void TelnetClose(uint8_t ucSerialPort)
     pState->pConnectPCB = NULL;
     pState->pListenPCB = NULL;
     pState->eTCPState = STATE_TCP_IDLE;
+    pState->eTelnetState = STATE_NORMAL;
+    pState->ucFlags = 0;
     pState->ulConnectionTimeout = 0;
     pState->ulMaxTimeout = 0;
-    pState->ucSerialPort = ucSerialPort;
+    pState->ulSerialPort = MAX_S2E_PORTS;
     pState->iBufQRead = 0;
     pState->iBufQWrite = 0;
     pState->pBufHead = NULL;
     pState->pBufCurrent = NULL;
     pState->ulBufIndex = 0;
     pState->ulLastTCPSendTime = 0;
+#if CONFIG_RFC2217_ENABLED
+    pState->eRFC2217State = STATE_2217_GET_DATA;
+    pState->ucRFC2217Command = 0;
+    pState->ulRFC2217Value = 0;
+    pState->ucRFC2217Index = 0;
+    pState->ucRFC2217IndexMax = 0;
+    pState->ucRFC2217FlowControl = 0;
+    pState->ucRFC2217ModemMask = 0;
+    pState->ucRFC2217LineMask = 0;
+    pState->ucLastModemState = 0;
+    pState->ucModemState = 0;
+#endif
     pState->bLinkLost = false;
 }
 
