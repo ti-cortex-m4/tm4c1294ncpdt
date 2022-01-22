@@ -1,3 +1,4 @@
+#if 1
 /*------------------------------------------------------------------------------
 telnet_accept.c
 
@@ -28,11 +29,12 @@ telnet_accept.c
 //!
 //! \return This function will return an lwIP defined error code.
 //*****************************************************************************
-err_t TelnetAccept(void *arg, struct tcp_pcb *pcb, err_t err)
+static err_t
+TelnetAccept(void *arg, struct tcp_pcb *pcb, err_t err)
 {
-    tState *pState = arg;
+    tTelnetSessionData *pState = arg;
 
-    CONSOLE("%u: accept 0x%08x, 0x%08x, %d\n", pState->ucSerialPort, arg, pcb, err);
+    DEBUG_MSG("TelnetAccept 0x%08x, 0x%08x, 0x%08x\n", arg, pcb, err);
 
     // If we are not in the listening state, refuse this connection.
     if(pState->eTCPState != STATE_TCP_LISTEN)
@@ -41,7 +43,6 @@ err_t TelnetAccept(void *arg, struct tcp_pcb *pcb, err_t err)
         if(!pState->bLinkLost)
         {
             // If we already have a connection, kill it and start over.
-            CONSOLE("%u: accept - already connected, start over\n", pState->ucSerialPort);
             return(ERR_CONN);
         }
 
@@ -56,6 +57,7 @@ err_t TelnetAccept(void *arg, struct tcp_pcb *pcb, err_t err)
 
         // Clear out the telnet session PCB.
         pState->pConnectPCB = NULL;
+
     }
 
     // Save the PCB for future reference.
@@ -65,7 +67,11 @@ err_t TelnetAccept(void *arg, struct tcp_pcb *pcb, err_t err)
     pState->eTCPState = STATE_TCP_CONNECTED;
 
     // Acknowledge that we have accepted this connection.
-    // TODO tcp_accepted(pcb);
+    tcp_accepted(pcb);
+
+    // Reset the serial port associated with this session to its default
+    // parameters.
+    SerialSetDefault(pState->ulSerialPort);
 
     // Set the connection timeout to 0.
     pState->ulConnectionTimeout = 0;
@@ -85,14 +91,16 @@ err_t TelnetAccept(void *arg, struct tcp_pcb *pcb, err_t err)
     // Setup the TCP sent callback function.
     tcp_sent(pcb, TelnetSent);
 
-#ifdef PROTOCOL_TELNET
     // Send the telnet initialization string.
-    if((g_sParameters.sPort[pState->ucSerialPort].ucFlags & PORT_FLAG_PROTOCOL) == PORT_PROTOCOL_TELNET)
+    if((g_sParameters.sPort[pState->ulSerialPort].ucFlags &
+                PORT_FLAG_PROTOCOL) == PORT_PROTOCOL_TELNET)
     {
         tcp_write(pcb, g_pucTelnetInit, sizeof(g_pucTelnetInit), 1);
         tcp_output(pcb);
     }
-#endif
 
+    // Return a success code.
     return(ERR_OK);
 }
+
+#endif
