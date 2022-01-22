@@ -1,3 +1,4 @@
+#if 1
 /*------------------------------------------------------------------------------
 serial_handler.c
 
@@ -21,7 +22,7 @@ serial_handler.c
 //*****************************************************************************
 //! Handles the UART interrupt.
 //!
-//! \param ucPort is the serial port number to be accessed.
+//! \param ulPort is the serial port number to be accessed.
 //!
 //! This function is called when either of the UARTs generate an interrupt.
 //! An interrupt will be generated when data is received and when the transmit
@@ -30,111 +31,81 @@ serial_handler.c
 //!
 //! \return None.
 //*****************************************************************************
-static void SerialUARTIntHandler(uint8_t ucPort)
+static void
+SerialUARTIntHandler(uint32_t ulPort)
 {
+    uint32_t ulStatus;
+    uint8_t ucChar;
+
     // Get the cause of the interrupt.
-    uint32_t ulStatus = UARTIntStatus(g_ulUARTBase[ucPort], true);
+    ulStatus = UARTIntStatus(g_ulUARTBase[ulPort], true);
 
     // Clear the cause of the interrupt.
-    UARTIntClear(g_ulUARTBase[ucPort], ulStatus);
+    UARTIntClear(g_ulUARTBase[ulPort], ulStatus);
 
     // See if there is data to be processed in the receive FIFO.
     if(ulStatus & (UART_INT_RT | UART_INT_RX))
     {
         // Loop while there are characters available in the receive FIFO.
-        while(UARTCharsAvail(g_ulUARTBase[ucPort]))
+        while(UARTCharsAvail(g_ulUARTBase[ulPort]))
         {
             // Get the next character from the receive FIFO.
-            uint8_t ucChar = UARTCharGet(g_ulUARTBase[ucPort]);
+            ucChar = UARTCharGet(g_ulUARTBase[ulPort]);
 
-#ifdef PROTOCOL_TELNET
             // If Telnet protocol enabled, check for incoming IAC character,
             // and escape it.
-            if((g_sParameters.sPort[ucPort].ucFlags &
+            if((g_sParameters.sPort[ulPort].ucFlags &
                         PORT_FLAG_PROTOCOL) == PORT_PROTOCOL_TELNET)
             {
                 // If this is a Telnet IAC character, write it twice.
                 if((ucChar == TELNET_IAC) &&
-                   (RingBufFree(&g_sRxBuf[ucPort]) >= 2))
+                   (RingBufFree(&g_sRxBuf[ulPort]) >= 2))
                 {
-                    RingBufWriteOne(&g_sRxBuf[ucPort], ucChar);
-                    RingBufWriteOne(&g_sRxBuf[ucPort], ucChar);
+                    RingBufWriteOne(&g_sRxBuf[ulPort], ucChar);
+                    RingBufWriteOne(&g_sRxBuf[ulPort], ucChar);
                 }
 
                 // If not a Telnet IAC character, only write it once.
                 else if((ucChar != TELNET_IAC) &&
-                        (RingBufFree(&g_sRxBuf[ucPort]) >= 1))
+                        (RingBufFree(&g_sRxBuf[ulPort]) >= 1))
                 {
-                    RingBufWriteOne(&g_sRxBuf[ucPort], ucChar);
+                    RingBufWriteOne(&g_sRxBuf[ulPort], ucChar);
                 }
             }
 
             // if not Telnet, then only write the data once.
             else
-#endif
-
             {
-                if (fDataDebugFlag)
-                  CONSOLE("%u: from UART %02X\n", ucPort, ucChar);
-
-                if (IsModemModeCommand(ucPort))
-                  ProcessModemModeCommand(ucPort, ucChar);
-                else
-                {
-                  ProcessModemModeData(ucPort, ucChar);
-                  RingBufWriteOne(&g_sRxBuf[ucPort], ucChar);
-                }
-
-                ProcessModemToServerData(ucPort);
-                ProcessServerToModemData(ucPort, ucChar);
+                RingBufWriteOne(&g_sRxBuf[ulPort], ucChar);
             }
         }
     }
 
-#ifdef SERIAL_FLOW_CONTROL
     // If flow control is enabled, check the status of the RX buffer to
     // determine if flow control GPIO needs to be asserted.
-    if(g_sParameters.sPort[ucPort].ucFlowControl == SERIAL_FLOW_CONTROL_HW)
+    if(g_sParameters.sPort[ulPort].ucFlowControl == SERIAL_FLOW_CONTROL_HW)
     {
         // If the ring buffer is down to less than 25% free, assert the
         // outbound flow control pin.
-        if(RingBufFree(&g_sRxBuf[ucPort]) <
-           (RingBufSize(&g_sRxBuf[ucPort]) / 4))
+        if(RingBufFree(&g_sRxBuf[ulPort]) <
+           (RingBufSize(&g_sRxBuf[ulPort]) / 4))
         {
-            GPIOPinWrite(g_ulFlowOutBase[ucPort], g_ulFlowOutPin[ucPort],
-                         g_ulFlowOutPin[ucPort]);
+            GPIOPinWrite(g_ulFlowOutBase[ulPort], g_ulFlowOutPin[ulPort],
+                         g_ulFlowOutPin[ulPort]);
         }
     }
-#endif
 
     // See if there is space to be filled in the transmit FIFO.
-    if(((ulStatus & UART_INT_TX) != 0) || (ulStatus == 0))
+    if(ulStatus & UART_INT_TX)
     {
-        bool fInMode = true;
-
-        // Loop while there is space in the transmit FIFO and characters to be sent.
-        while(!RingBufEmpty(&g_sTxBuf[ucPort]) && UARTSpaceAvail(g_ulUARTBase[ucPort]))
+        // Loop while there is space in the transmit FIFO and characters to be
+        // sent.
+        while(!RingBufEmpty(&g_sTxBuf[ulPort]) &&
+                UARTSpaceAvail(g_ulUARTBase[ulPort]))
         {
-            uint8_t ucChar = RingBufReadOne(&g_sTxBuf[ucPort]);
-
-            if (fDataDebugFlag)
-              CONSOLE("%u: to UART %02X\n", ucPort, ucChar);
-
             // Write the next character into the transmit FIFO.
-            UARTCharPut(g_ulUARTBase[ucPort], ucChar);
-
-            CustomerSettings1_SerialProcessCharacter(ucPort, ucChar);
-
-            mcwUARTTxOut[ucPort]--;
-
-            fInMode = false;
-        }
-
-        if((ulStatus & UART_INT_TX) != 0)
-        {
-          if ((mcwUARTTxOut[ucPort] == 0) && (fInMode)) {
-              InMode(ucPort);
-          }
+            UARTCharPut(g_ulUARTBase[ulPort],
+                        RingBufReadOne(&g_sTxBuf[ulPort]));
         }
     }
 }
@@ -173,3 +144,5 @@ void UART1IntHandler(void)
   SerialUARTIntHandler(4);
 #endif
 }
+
+#endif
