@@ -27,7 +27,21 @@ telnet_poll.c
 ???
 
 telnet_receive.c
-???
+previous
+        // If we don't have a listen PCB, then we are in client mode, and should try to reconnect.
+        if(pState->pListenPCB == NULL)
+        {
+            // Re-open the connection.
+            TelnetOpen(pState->ulTelnetRemoteIP, pState->usTelnetRemotePort,
+                       pState->usTelnetLocalPort, pState->ulSerialPort);
+        }
+        else
+        {
+            // Revert to listening state.
+            pState->eTCPState = STATE_TCP_LISTEN;
+        }
+current
+        StartConnection(pState->ucSerialPort);
 
 telnet_sent.c
 OK
