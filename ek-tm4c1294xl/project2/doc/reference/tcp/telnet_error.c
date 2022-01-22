@@ -1,3 +1,4 @@
+#if 1
 /*------------------------------------------------------------------------------
 telnet_error.c
 
@@ -26,15 +27,16 @@ telnet_error.c
 //!
 //! \return None.
 //*****************************************************************************
-void TelnetError(void *arg, err_t err)
+static void
+TelnetError(void *arg, err_t err)
 {
-    tState *pState = arg;
+    tTelnetSessionData *pState = arg;
 
-    CONSOLE("%u: error 0x%08x, %d\n", pState->ucSerialPort, arg, err);
+    DEBUG_MSG("TelnetError 0x%08x, %d\n", arg, err);
 
     // Increment our error counter.
     pState->ucErrorCount++;
-    ErrorTCPOperation(pState->ucSerialPort, err, HANDLER_ERROR);
+    pState->eLastErr = err;
 
     // Free the pbufs associated with this session.
     TelnetFreePbufs(pState);
@@ -42,23 +44,18 @@ void TelnetError(void *arg, err_t err)
     // Reset the session data for this port.
     if(pState->pListenPCB == NULL)
     {
-        if (IsModem(pState->ucSerialPort))
-        {
-            ModemConnectFailed(pState->ucSerialPort, err);
-        }
-        else
-        {
-            CONSOLE("%u: try to connect again\n", pState->ucSerialPort);
-
-            // Attempt to reestablish the telnet connection to the server.
-            TelnetOpen(pState->ulTelnetRemoteIP, pState->usTelnetRemotePort, pState->ucSerialPort);
-        }
+        // Attempt to reestablish the telnet connection to the server.
+        TelnetOpen(pState->ulTelnetRemoteIP, pState->usTelnetRemotePort,
+                   pState->usTelnetLocalPort, pState->ulSerialPort);
     }
     else
     {
         // Reinitialize the server state to wait for incoming connections.
         pState->pConnectPCB = NULL;
         pState->eTCPState = STATE_TCP_LISTEN;
+        pState->eTelnetState = STATE_NORMAL;
+        pState->ucFlags = ((1 << OPT_FLAG_WILL_SUPPRESS_GA) |
+                           (1 << OPT_FLAG_SERVER));
         pState->ulConnectionTimeout = 0;
         pState->iBufQRead = 0;
         pState->iBufQWrite = 0;
@@ -66,7 +63,18 @@ void TelnetError(void *arg, err_t err)
         pState->pBufCurrent = NULL;
         pState->ulBufIndex = 0;
         pState->ulLastTCPSendTime = 0;
+#if CONFIG_RFC2217_ENABLED
+        pState->ucFlags |= (1 << OPT_FLAG_WILL_RFC2217);
+        pState->ucRFC2217FlowControl =
+            TELNET_C2S_FLOWCONTROL_RESUME;
+        pState->ucRFC2217ModemMask = 0;
+        pState->ucRFC2217LineMask = 0xff;
+        pState->ucLastModemState = 0;
+        pState->ucModemState = 0;
+#endif
         pState->bLinkLost = false;
     }
 }
+
+#endif
 
