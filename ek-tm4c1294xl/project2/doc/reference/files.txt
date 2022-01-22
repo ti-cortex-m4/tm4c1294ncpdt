@@ -1,8 +1,18 @@
 telnet.c
+
 telnet_accept.c
+??? // TODO tcp_accepted(pcb);
+
 telnet_close.c
+//    pState->pListenPCB = NULL; TODO ???
+//    pState->eTCPState = STATE_TCP_IDLE; TODO ???
+
 telnet_connected.c
+OK
+
 telnet_error.c
+OK
+
 telnet_handler.c
 telnet_listen.c
 telnet_open.c
