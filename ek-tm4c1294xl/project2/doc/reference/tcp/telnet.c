@@ -1,3 +1,4 @@
+#if 0
 /*------------------------------------------------------------------------------
 TELNET.C
 
@@ -146,3 +147,4 @@ void TelnetNotifyLinkStatus(bool bLinkStatusUp)
         }
     }
 }
+#endif
