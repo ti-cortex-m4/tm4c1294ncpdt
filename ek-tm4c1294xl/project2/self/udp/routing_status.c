@@ -68,7 +68,7 @@ bool IsRoutingStatusSize(struct pbuf *p) {
 err_t GetRoutingStatusSize(struct udp_pcb *pcb, struct pbuf *p, struct ip4_addr *addr, uint port, uchar broadcast) {
   uchar bSize;
   switch (ibRoutingStatus) {
-    case 0: bSize = 7; break;
+    case 0: bSize = IsCmd(p,"CU@1") ? 7 : 3; break;
     case 1: bSize = 11; break;
     case 2: bSize = 14; break;
     case 3: bSize = 16; break;
@@ -90,7 +90,7 @@ bool IsRoutingStatusSize(struct pbuf *p) {
 err_t GetRoutingStatusSize(struct udp_pcb *pcb, struct pbuf *p, struct ip4_addr *addr, uint port, uchar broadcast) {
   uchar bSize;
   switch (ibRoutingStatus) {
-    case 0: bSize = 7; break;
+    case 0: bSize = IsCmd(p,"CU@1") ? 7 : 3; break;
     case 1: bSize = 11; break;
     case 2: bSize = 14; break;
     case 3: bSize = 16; break;
