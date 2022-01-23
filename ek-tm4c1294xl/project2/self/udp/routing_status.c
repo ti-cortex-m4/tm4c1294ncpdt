@@ -41,7 +41,7 @@ static message szRowSIP = "<tr><td>%s</td><td>%u.%u.%u.%u</td></tr>";
 static message szRowClock = "<tr><td>%s</td><td>%u %02u:%02u:%02u</td></tr>";
 static message szRowVersion = "<tr><td>%s</td><td>%u.%u.%u.%04X %02u.%02u.%02u %02u:%02u:%02u</td></tr>";
 static message szRowTCPError = "<tr><td>%s</td><td>%d, %u, %u %02u:%02u:%02u</td></tr>";
-static message szMemStatsHeader = "<tr><td>Memory statistics</td><td>available</td><td>used</td><td>maximum</td><td>errors</td></tr>";
+static message szMemStatsHeader = "<tr><td class='head'>Memory statistics</td><td>available</td><td>used</td><td>maximum</td><td>errors</td></tr>";
 static message szMemStatsRow = "<tr><td>MEM %s</td><td>%u</td><td>%u</td><td>%u</td><td>%u</td></tr>";
 static message szBodyEnd = "</table></body>";
 
