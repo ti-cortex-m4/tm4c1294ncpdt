@@ -69,9 +69,10 @@ err_t GetRoutingStatusSize(struct udp_pcb *pcb, struct pbuf *p, struct ip4_addr 
   uchar bSize;
   switch (ibRoutingStatus) {
     case 0: bSize = 15; break;
-    case 1: bSize = 14; break;
-    case 2: bSize = 16; break;
-    case 3: bSize = IsCmd(p,"CU@1") ? 15 : 3; break;
+    case 1: bSize = 15; break;
+    case 2: bSize = 14; break;
+    case 3: bSize = 16; break;
+    case 4: bSize = IsCmd(p,"CU@1") ? 15 : 3; break;
     default: bSize = IsCmd(p,"CU@1") ? 12 : 3; break;
   }
 
@@ -90,9 +91,10 @@ err_t GetRoutingStatusSize(struct udp_pcb *pcb, struct pbuf *p, struct ip4_addr 
   uchar bSize;
   switch (ibRoutingStatus) {
     case 0: bSize = 15; break;
-    case 1: bSize = 14; break;
-    case 2: bSize = 16; break;
-    case 3: bSize = IsCmd(p,"CU") ? 15 : 3; break;
+    case 1: bSize = 15; break;
+    case 2: bSize = 14; break;
+    case 3: bSize = 16; break;
+    case 4: bSize = IsCmd(p,"CU") ? 15 : 3; break;
     default: bSize = IsCmd(p,"CU") ? 12 : 3; break;
   }
 
@@ -176,7 +178,7 @@ static err_t GetRoutingStatusContent0(struct udp_pcb *pcb, struct pbuf *p, struc
 }
 
 
-static err_t GetRoutingStatusContent1(struct udp_pcb *pcb, struct pbuf *p, struct ip4_addr *addr, uint port, uchar broadcast, const uint wIdx, const uchar u) {
+static err_t GetRoutingStatusContent2(struct udp_pcb *pcb, struct pbuf *p, struct ip4_addr *addr, uint port, uchar broadcast, const uint wIdx, const uchar u) {
   switch (wIdx) {
     case 0: return OutStringZ(pcb,p,addr,port,broadcast,szHead);
     case 1: return OutStringZ(pcb,p,addr,port,broadcast,szBodyStart);
@@ -197,7 +199,7 @@ static err_t GetRoutingStatusContent1(struct udp_pcb *pcb, struct pbuf *p, struc
 }
 
 
-static err_t GetRoutingStatusContent2(struct udp_pcb *pcb, struct pbuf *p, struct ip4_addr *addr, uint port, uchar broadcast, const uint wIdx, const uchar u) {
+static err_t GetRoutingStatusContent3(struct udp_pcb *pcb, struct pbuf *p, struct ip4_addr *addr, uint port, uchar broadcast, const uint wIdx, const uchar u) {
   switch (wIdx) {
     case 0: return OutStringZ(pcb,p,addr,port,broadcast,szHead);
     case 1: return OutStringZ(pcb,p,addr,port,broadcast,szBodyStart);
@@ -220,7 +222,7 @@ static err_t GetRoutingStatusContent2(struct udp_pcb *pcb, struct pbuf *p, struc
 }
 
 
-static err_t GetRoutingStatusContent3(struct udp_pcb *pcb, struct pbuf *p, struct ip4_addr *addr, uint port, uchar broadcast, const uint wIdx, const uchar u) {
+static err_t GetRoutingStatusContent4(struct udp_pcb *pcb, struct pbuf *p, struct ip4_addr *addr, uint port, uchar broadcast, const uint wIdx, const uchar u) {
   if (u == 0) {
     switch (wIdx) {
       case 0: return OutStringZ(pcb,p,addr,port,broadcast,szHead);
@@ -261,7 +263,7 @@ static err_t OutStatsMemp(struct udp_pcb *pcb, struct pbuf *p, struct ip4_addr *
   return OutStatsMem(pcb,p,addr,port,broadcast, mem, mem->name);
 }
 
-static err_t GetRoutingStatusContent4(struct udp_pcb *pcb, struct pbuf *p, struct ip4_addr *addr, uint port, uchar broadcast, const uint wIdx, const uchar u) {
+static err_t GetRoutingStatusContent5(struct udp_pcb *pcb, struct pbuf *p, struct ip4_addr *addr, uint port, uchar broadcast, const uint wIdx, const uchar u) {
   if (u == 0) {
     switch (wIdx) {
       case 0: return OutStringZ(pcb,p,addr,port,broadcast,szHead);
@@ -331,7 +333,8 @@ err_t GetRoutingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip4_ad
     case 1: return GetRoutingStatusContent1(pcb,p,addr,port,broadcast,wIdx,u);
     case 2: return GetRoutingStatusContent2(pcb,p,addr,port,broadcast,wIdx,u);
     case 3: return GetRoutingStatusContent3(pcb,p,addr,port,broadcast,wIdx,u);
-    default: return GetRoutingStatusContent4(pcb,p,addr,port,broadcast,wIdx,u);
+    case 4: return GetRoutingStatusContent4(pcb,p,addr,port,broadcast,wIdx,u);
+    default: return GetRoutingStatusContent5(pcb,p,addr,port,broadcast,wIdx,u);
   }
 }
 
@@ -377,7 +380,8 @@ err_t GetRoutingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip4_ad
     case 1: return GetRoutingStatusContent1(pcb,p,addr,port,broadcast,wIdx,u);
     case 2: return GetRoutingStatusContent2(pcb,p,addr,port,broadcast,wIdx,u);
     case 3: return GetRoutingStatusContent3(pcb,p,addr,port,broadcast,wIdx,u);
-    default: return GetRoutingStatusContent4(pcb,p,addr,port,broadcast,wIdx,u);
+    case 4: return GetRoutingStatusContent4(pcb,p,addr,port,broadcast,wIdx,u);
+    default: return GetRoutingStatusContent5(pcb,p,addr,port,broadcast,wIdx,u);
   }
 }
 
