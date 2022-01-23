@@ -41,6 +41,8 @@ static message szRowSIP = "<tr><td>%s</td><td>%u.%u.%u.%u</td></tr>";
 static message szRowClock = "<tr><td>%s</td><td>%u %02u:%02u:%02u</td></tr>";
 static message szRowVersion = "<tr><td>%s</td><td>%u.%u.%u.%04X %02u.%02u.%02u %02u:%02u:%02u</td></tr>";
 static message szRowTCPError = "<tr><td>%s</td><td>%d, %u, %u %02u:%02u:%02u</td></tr>";
+static message szMemStatsHeader = "<tr><td>Memory stats</td><td>avail</td><td>used</td><td>max</td><td>err</td></tr>";
+static message szMemStatsRow = "<tr><td>MEM %s</td><td>%u</td><td>%u</td><td>%u</td><td>%u</td></tr>";
 static message szBodyEnd = "</table></body>";
 
 
@@ -251,7 +253,7 @@ static err_t GetRoutingStatusContent3(struct udp_pcb *pcb, struct pbuf *p, struc
 
 static err_t OutStatsMem(struct udp_pcb *pcb, struct pbuf *p, struct ip4_addr *addr, uint port, uchar broadcast, struct stats_mem *mem, const char *name) {
   return OutBuff(pcb,p,addr,port,broadcast,
-      BuffPrintF("<tr><td>MEM %s</td><td>%"MEM_SIZE_F"</td><td>%"MEM_SIZE_F"</td><td>%"MEM_SIZE_F"</td><td>%"STAT_COUNTER_F"</td></tr>",
+            BuffPrintF(szMemStatsRow,
                  name, mem->avail, mem->used, mem->max, mem->err)
   );
 }
@@ -260,19 +262,14 @@ static err_t OutStatsMemp(struct udp_pcb *pcb, struct pbuf *p, struct ip4_addr *
   struct stats_mem *mem = lwip_stats.memp[idx];
   return OutStatsMem(pcb,p,addr,port,broadcast, mem, mem->name);
 }
-//stats_display_mem(mem, mem->name);
-//
-//stats_display_memp(lwip_stats.memp[i], i)
-//
-//for (i = 0; i < MEMP_MAX; i++) {
-//  MEMP_STATS_DISPLAY(i);
 
 static err_t GetRoutingStatusContent4(struct udp_pcb *pcb, struct pbuf *p, struct ip4_addr *addr, uint port, uchar broadcast, const uint wIdx, const uchar u) {
   if (u == 0) {
     switch (wIdx) {
       case 0: return OutStringZ(pcb,p,addr,port,broadcast,szHead);
       case 1: return OutStringZ(pcb,p,addr,port,broadcast,szBodyStart);
-      case 2: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF("<tr><td>Memory stats</td><td>avail</td><td>used</td><td>max</td><td>err</td></tr>"));
+        case 2:
+            return OutBuff(pcb, p, addr, port, broadcast, BuffPrintF(szMemStatsHeader));
       case 3: return OutStatsMem(pcb,p,addr,port,broadcast, &lwip_stats.mem, "HEAP");
       case 4: return OutStatsMemp(pcb,p,addr,port,broadcast, 0);
       case 5: return OutStatsMemp(pcb,p,addr,port,broadcast, 1);
