@@ -65,7 +65,7 @@ err_t TelnetAccept(void *arg, struct tcp_pcb *pcb, err_t err)
     pState->eTCPState = STATE_TCP_CONNECTED;
 
     // Acknowledge that we have accepted this connection.
-    // TODO tcp_accepted(pcb);
+    tcp_accepted(pcb);
 
     // Set the connection timeout to 0.
     pState->ulConnectionTimeout = 0;
