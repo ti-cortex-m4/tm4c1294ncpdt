@@ -41,7 +41,7 @@ static message szRowSIP = "<tr><td>%s</td><td>%u.%u.%u.%u</td></tr>";
 static message szRowClock = "<tr><td>%s</td><td>%u %02u:%02u:%02u</td></tr>";
 static message szRowVersion = "<tr><td>%s</td><td>%u.%u.%u.%04X %02u.%02u.%02u %02u:%02u:%02u</td></tr>";
 static message szRowTCPError = "<tr><td>%s</td><td>%d, %u, %u %02u:%02u:%02u</td></tr>";
-static message szMemStatsHeader = "<tr><td class='head'>Memory statistics</td><td>available</td><td>used</td><td>maximum</td><td>errors</td></tr>";
+static message szMemStatsHeader = "<tr><td class='head'>Memory statistics</td><td class='head'>available</td><td class='head'>used</td><td class='head'>maximum</td><td class='head'>errors</td></tr>";
 static message szMemStatsRow = "<tr><td>MEM %s</td><td>%u</td><td>%u</td><td>%u</td><td>%u</td></tr>";
 static message szBodyEnd = "</table></body>";
 
@@ -92,7 +92,8 @@ err_t GetRoutingStatusSize(struct udp_pcb *pcb, struct pbuf *p, struct ip4_addr 
     case 0: bSize = 15; break;
     case 1: bSize = 14; break;
     case 2: bSize = 16; break;
-    default: bSize = IsCmd(p,"CU") ? 15 : 3; break;
+    case 3: bSize = IsCmd(p,"CU") ? 15 : 3; break;
+    default: bSize = IsCmd(p,"CU") ? 12 : 3; break;
   }
 
   return OutCharDec(pcb,p,addr,port,broadcast,bSize);
@@ -265,8 +266,7 @@ static err_t GetRoutingStatusContent4(struct udp_pcb *pcb, struct pbuf *p, struc
     switch (wIdx) {
       case 0: return OutStringZ(pcb,p,addr,port,broadcast,szHead);
       case 1: return OutStringZ(pcb,p,addr,port,broadcast,szBodyStart);
-        case 2:
-            return OutBuff(pcb, p, addr, port, broadcast, BuffPrintF(szMemStatsHeader));
+      case 2: return OutBuff(pcb, p, addr, port, broadcast, BuffPrintF(szMemStatsHeader));
       case 3: return OutStatsMem(pcb,p,addr,port,broadcast, &lwip_stats.mem, "HEAP");
       case 4: return OutStatsMemp(pcb,p,addr,port,broadcast, 0);
       case 5: return OutStatsMemp(pcb,p,addr,port,broadcast, 1);
@@ -376,7 +376,8 @@ err_t GetRoutingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip4_ad
     case 0: return GetRoutingStatusContent0(pcb,p,addr,port,broadcast,wIdx,u);
     case 1: return GetRoutingStatusContent1(pcb,p,addr,port,broadcast,wIdx,u);
     case 2: return GetRoutingStatusContent2(pcb,p,addr,port,broadcast,wIdx,u);
-    default: return GetRoutingStatusContent3(pcb,p,addr,port,broadcast,wIdx,u);
+    case 3: return GetRoutingStatusContent3(pcb,p,addr,port,broadcast,wIdx,u);
+    default: return GetRoutingStatusContent4(pcb,p,addr,port,broadcast,wIdx,u);
   }
 }
 
