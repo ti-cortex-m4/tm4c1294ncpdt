@@ -45,7 +45,7 @@ static message szBodyEnd = "</table></body>";
 
 
 void NextRoutingStatus(void) {
-  ibRoutingStatus = ++ibRoutingStatus % 4;
+  ibRoutingStatus = ++ibRoutingStatus % 5;
 }
 
 
@@ -68,7 +68,8 @@ err_t GetRoutingStatusSize(struct udp_pcb *pcb, struct pbuf *p, struct ip4_addr 
     case 0: bSize = 15; break;
     case 1: bSize = 14; break;
     case 2: bSize = 16; break;
-    default: bSize = IsCmd(p,"CU@1") ? 15 : 3; break;
+    case 3: bSize = IsCmd(p,"CU@1") ? 15 : 3; break;
+    default: bSize = IsCmd(p,"CU@1") ? 5 : 3; break;
   }
 
   return OutCharDec(pcb,p,addr,port,broadcast,bSize);
@@ -247,6 +248,34 @@ static err_t GetRoutingStatusContent3(struct udp_pcb *pcb, struct pbuf *p, struc
 
 
 
+static err_t OutStatsMem(struct udp_pcb *pcb, struct pbuf *p, struct ip4_addr *addr, uint port, uchar broadcast, struct stats_mem *mem, const char *name) {
+  return OutBuff(pcb,p,addr,port,broadcast,
+      BuffPrintF("<tr><td>MEM %s</td><td>avail: %"MEM_SIZE_F" used: %"MEM_SIZE_F" max: %"MEM_SIZE_F" err: %"STAT_COUNTER_F"</td></tr>",
+                 name, mem->avail, mem->used, mem->max, mem->err)
+  );
+}
+
+static err_t GetRoutingStatusContent4(struct udp_pcb *pcb, struct pbuf *p, struct ip4_addr *addr, uint port, uchar broadcast, const uint wIdx, const uchar u) {
+  if (u == 0) {
+    switch (wIdx) {
+      case 0: return OutStringZ(pcb,p,addr,port,broadcast,szHead);
+      case 1: return OutStringZ(pcb,p,addr,port,broadcast,szBodyStart);
+      case 2: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, "Memory stats"));
+      case 3: return OutStatsMem(pcb,p,addr,port,broadcast, &lwip_stats.mem, "HEAP");
+      case 4: return OutStringZ(pcb,p,addr,port,broadcast,szBodyEnd);
+      default: WARNING("routing status 4: wrong index %u\n", wIdx); return GetError();
+    }
+  } else {
+    switch (wIdx) {
+      case 0: return OutStringZ(pcb,p,addr,port,broadcast,szHead);
+      case 1: return OutStringZ(pcb,p,addr,port,broadcast,szBodyStart);
+      case 2: return OutStringZ(pcb,p,addr,port,broadcast,szBodyEnd);
+      default: WARNING("routing status 4: wrong index %u\n", wIdx); return GetError();
+    }
+  }
+}
+
+
 #ifndef SINGLE_UART
 
 err_t GetRoutingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip4_addr *addr, uint port, uchar broadcast) {
@@ -288,7 +317,8 @@ err_t GetRoutingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip4_ad
     case 0: return GetRoutingStatusContent0(pcb,p,addr,port,broadcast,wIdx,u);
     case 1: return GetRoutingStatusContent1(pcb,p,addr,port,broadcast,wIdx,u);
     case 2: return GetRoutingStatusContent2(pcb,p,addr,port,broadcast,wIdx,u);
-    default: return GetRoutingStatusContent3(pcb,p,addr,port,broadcast,wIdx,u);
+    case 3: return GetRoutingStatusContent3(pcb,p,addr,port,broadcast,wIdx,u);
+    default: return GetRoutingStatusContent4(pcb,p,addr,port,broadcast,wIdx,u);
   }
 }
 
