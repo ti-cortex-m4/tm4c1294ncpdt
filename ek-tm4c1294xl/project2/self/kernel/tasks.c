@@ -5,7 +5,7 @@ tasks.c
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-#include "utils/lwiplib_patched.h"
+#include "utils/lwiplib.h"
 #include "../kernel/log.h"
 #include "settings.h"
 #include "../tcp/telnet.h"
