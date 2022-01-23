@@ -91,8 +91,8 @@ void TelnetCloseServer(struct tcp_pcb *pcb, uint8_t ucSerialPort)
 
     // Reset the session data for this port.
     pState->pConnectPCB = NULL;
-//    pState->pListenPCB = NULL; TODO ???
-//    pState->eTCPState = STATE_TCP_IDLE; TODO ???
+    pState->pListenPCB = NULL;
+    pState->eTCPState = STATE_TCP_IDLE;
     pState->ulConnectionTimeout = 0;
     pState->ulMaxTimeout = 0;
     pState->ucSerialPort = ucSerialPort;
