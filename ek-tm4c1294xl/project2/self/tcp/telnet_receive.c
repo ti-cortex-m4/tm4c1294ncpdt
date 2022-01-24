@@ -104,11 +104,15 @@ err_t TelnetReceive(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
         // If we don't have a listen PCB, then we are in client mode, and should try to reconnect.
         if(pState->pListenPCB == NULL)
         {
+            CONSOLE("%u: reopen client connection\n", pState->ucSerialPort);
+
             // Re-open the connection.
             TelnetOpen(pState->ulTelnetRemoteIP, pState->usTelnetRemotePort, pState->ucSerialPort);
         }
         else
         {
+            CONSOLE("%u: re-listen server connection\n", pState->ucSerialPort);
+
             // Revert to listening state.
             pState->eTCPState = STATE_TCP_LISTEN;
         }
