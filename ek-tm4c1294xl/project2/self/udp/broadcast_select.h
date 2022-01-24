@@ -8,4 +8,4 @@ extern bool                    fBroadcastSelect;
 
 
 
-void OutBroadcastSelect(struct udp_pcb *pcb, struct pbuf *p, struct ip4_addr *addr, uint port, uchar broadcast);
+void OutBroadcastSelect(struct udp_pcb *pcb, struct pbuf *p, const ip_addr_t *addr, uint port, uchar broadcast);

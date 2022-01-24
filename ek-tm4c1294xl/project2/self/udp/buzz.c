@@ -35,7 +35,7 @@ static void Buzz(void)
 }
 
 
-err_t OutBuzz(struct udp_pcb *pcb, struct pbuf *p, struct ip4_addr *addr, uint port, uchar broadcast)
+err_t OutBuzz(struct udp_pcb *pcb, struct pbuf *p, const ip_addr_t *addr, uint port, uchar broadcast)
 {
   uint2 wSfx = PopSfx(p);
   if (InvalidInt2(wSfx)) return wSfx.err;
