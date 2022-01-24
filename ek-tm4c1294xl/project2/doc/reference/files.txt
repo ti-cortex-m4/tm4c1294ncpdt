@@ -33,7 +33,7 @@ current
             TelnetCloseServer(pcb, pState->ucSerialPort);
             StartServerConnection(pState->ucSerialPort);
 
-telnet_receive.c
+telnet_receive.c	OK
 previous
         // If we don't have a listen PCB, then we are in client mode, and should try to reconnect.
         if(pState->pListenPCB == NULL)
