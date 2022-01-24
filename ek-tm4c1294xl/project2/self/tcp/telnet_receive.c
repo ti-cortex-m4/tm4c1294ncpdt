@@ -100,7 +100,19 @@ err_t TelnetReceive(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
         // Clear out the telnet session PCB.
         pState->pConnectPCB = NULL;
 
-        StartConnection(pState->ucSerialPort);
+        // If we don't have a listen PCB, then we are in client mode, and
+        // should try to reconnect.
+        if(pState->pListenPCB == NULL)
+        {
+            // Re-open the connection.
+            TelnetOpen(pState->ulTelnetRemoteIP, pState->usTelnetRemotePort,
+                       pState->usTelnetLocalPort, pState->ulSerialPort);
+        }
+        else
+        {
+            // Revert to listening state.
+            pState->eTCPState = STATE_TCP_LISTEN;
+        }
     }
 
     CustomerSettings1_TelnetReceive(pState->ucSerialPort);
