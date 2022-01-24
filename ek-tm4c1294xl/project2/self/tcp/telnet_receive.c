@@ -12,6 +12,7 @@ telnet_receive,c
 #include "../uart/customer_settings_1.h"
 #include "tcp_errors.h"
 #include "telnet.h"
+#include "telnet_open.h"
 #include "telnet_receive.h"
 
 
@@ -104,7 +105,7 @@ err_t TelnetReceive(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
         if(pState->pListenPCB == NULL)
         {
             // Re-open the connection.
-            TelnetOpen(pState->ulTelnetRemoteIP, pState->usTelnetRemotePort, pState->usTelnetLocalPort, pState->ucSerialPort);
+            TelnetOpen(pState->ulTelnetRemoteIP, pState->usTelnetRemotePort, pState->ucSerialPort);
         }
         else
         {
