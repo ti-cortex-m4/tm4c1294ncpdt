@@ -97,14 +97,14 @@ const entity enLED1Mode = {
 
 const entity enPowerUpResetCount = {
   EEPROM_POWER_UP_RESET_COUNT, &cwPowerUpResetCount, sizeof(uint), INT, 0,
-  0, 0xFFFF, 0,
+  0, 0xFFFE, 0,
   "",
   "",
 };
 
 const entity enWatchdogResetCount = {
   EEPROM_WATCHDOG_RESET_COUNT, &cwWatchdogResetCount, sizeof(uint), INT, 0,
-  0, 0xFFFF, 0,
+  0, 0xFFFE, 0,
   "",
   "",
 };
