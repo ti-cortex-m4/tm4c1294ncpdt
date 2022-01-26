@@ -31,6 +31,8 @@ static message szIOMode = "RS-485 Direction (0 - unknown, 1 - input, 2 - output)
 static message szUptime = "Working time (since last restart)";
 static message szVersion = "Version";
 static message szWatchdogReset = "Last restart type (0 - power-up, 1 - watchdog)";
+static message szPowerUpResets = "Power-up restarts";
+static message szWatchdogResets = "Watchdog restarts";
 
 static message szHead = "<head><style type='text/css'>table{border-collapse:collapse;font:11px arial;background-color:#C0C0C0}td.head{color:white;background-color:#648CC8}</style></head>";
 static message szBodyStart = "<body><table width=100% bgcolor=#C0C0C0 border='1'>";
@@ -68,7 +70,7 @@ bool IsRoutingStatusSize(struct pbuf *p) {
 err_t GetRoutingStatusSize(struct udp_pcb *pcb, struct pbuf *p, const ip_addr_t *addr, uint port, uchar broadcast) {
   uchar bSize;
   switch (ibRoutingStatus) {
-    case 0: bSize = IsCmd(p,"CU@1") ? 7 : 3; break;
+    case 0: bSize = IsCmd(p,"CU@1") ? 9 : 3; break;
     case 1: bSize = 10; break;
     case 2: bSize = 14; break;
     case 3: bSize = 16; break;
@@ -90,7 +92,7 @@ bool IsRoutingStatusSize(struct pbuf *p) {
 err_t GetRoutingStatusSize(struct udp_pcb *pcb, struct pbuf *p, const ip_addr_t *addr, uint port, uchar broadcast) {
   uchar bSize;
   switch (ibRoutingStatus) {
-    case 0: bSize = IsCmd(p,"CU") ? 7 : 3; break;
+    case 0: bSize = IsCmd(p,"CU") ? 9 : 3; break;
     case 1: bSize = 10; break;
     case 2: bSize = 14; break;
     case 3: bSize = 16; break;
@@ -161,7 +163,9 @@ static err_t GetRoutingStatusContent0(struct udp_pcb *pcb, struct pbuf *p, const
       case 3: return OutUptime(pcb,p,addr,port,broadcast);
       case 4: return OutVersion(pcb,p,addr,port,broadcast);
       case 5: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, szWatchdogReset, fWatchdogReset));
-      case 6: return OutStringZ(pcb,p,addr,port,broadcast,szBodyEnd);
+      case 6: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, szPowerUpResets, cwPowerUpResetCount));
+      case 7: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, szWatchdogResets, cwWatchdogResetCount));
+      case 8: return OutStringZ(pcb,p,addr,port,broadcast,szBodyEnd);
       default: WARNING("routing status 0: wrong index %u\n", wIdx); return GetError();
     }
   } else {
