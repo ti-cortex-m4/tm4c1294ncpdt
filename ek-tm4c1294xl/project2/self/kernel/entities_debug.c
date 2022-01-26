@@ -93,3 +93,18 @@ const entity enLED1Mode = {
   "LED1MD",
   "AI=LED1MD;D=Ethernet LED1 mode;T=INT;C=STATIC;O=0-Link OK/0/1-RX\\TX activity/1/2-TX activity/2/3-RX activity/3/4-Collision/4/5-100-Base TX speed/5/6-10-Base TX speed/6/7-Full duplex/7/8-Link OK, blink on TX\\RX activity/8",
 };
+
+
+const entity enPowerUpResetCount = {
+  EEPROM_POWER_UP_RESET_COUNT, &cwPowerUpResetCount, sizeof(uint), INT, 0,
+  0, 0x10000, 0,
+  "",
+  "",
+};
+
+const entity enWatchdogResetCount = {
+  EEPROM_WATCHDOG_RESET_COUNT, &cwWatchdogResetCount, sizeof(uint), INT, 0,
+  0, 0x10000, 0,
+  "",
+  "",
+};
