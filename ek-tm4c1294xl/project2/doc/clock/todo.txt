@@ -1,0 +1,30 @@
+        //
+        // Set the PLL source select to MOSC.
+        //
+#if true
+        ui32OscSelect = SYSCTL_RSCLKCFG_PLLSRC_MOSC;
+#else
+        ui32OscSelect = SYSCTL_RSCLKCFG_OSCSRC_MOSC;
+        ui32OscSelect |= SYSCTL_RSCLKCFG_PLLSRC_MOSC;
+#endif
+
+
+        //-ƒл€ синхронизации УSystem ClockФ выбираетс€ внешний резонатор УMain OSCФ по обоим лини€м
+        //-RSCLKCFG: OSCSRC  =3 (источник частоты foscclk   = MOSC)
+        //           PLLSRC  =3 (источник частоты PLL       = MOSC)
+        // Set the PLL source select to MOSC.
+        //ui32OscSelect = SYSCTL_RSCLKCFG_OSCSRC_MOSC;
+        //ui32OscSelect |= SYSCTL_RSCLKCFG_PLLSRC_MOSC;
+
+        // »—ѕ–ј¬Ћ≈Ќќ:
+
+        // Set the PLL source select to MOSC.
+        ui32OscSelect = SYSCTL_RSCLKCFG_PLLSRC_MOSC;   // (источник частоты PLL = MOSC, источник частоты foscclk = PIOSC)
+        //ui32OscSelect |= SYSCTL_RSCLKCFG_OSCSRC_MOSC;
+
+
+#define SYSCTL_RSCLKCFG_PLLSRC_MOSC                                           \
+                                0x03000000  // MOSC is the PLL input clock
+                                            // source
+#define SYSCTL_RSCLKCFG_OSCSRC_MOSC                                           \
+                                0x00300000  // MOSC is oscillator source
