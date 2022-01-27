@@ -28,3 +28,5 @@
                                             // source
 #define SYSCTL_RSCLKCFG_OSCSRC_MOSC                                           \
                                 0x00300000  // MOSC is oscillator source
+
+HWREG(SYSCTL_RSCLKCFG) |= ui32OscSelect;
