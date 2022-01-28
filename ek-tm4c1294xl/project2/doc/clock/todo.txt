@@ -30,3 +30,12 @@
                                 0x00300000  // MOSC is oscillator source
 
 HWREG(SYSCTL_RSCLKCFG) |= ui32OscSelect;
+
+
+  ulong dwClockFreq = 
+  SysCtlClockFreqSet_patched((SYSCTL_XTAL_25MHZ | SYSCTL_OSC_MAIN | SYSCTL_USE_PLL | SYSCTL_CFG_VCO_480), 120000000);
+
+SysCtlClockFreqSet((SYSCTL_XTAL_25MHZ |
+                                   SYSCTL_OSC_MAIN |
+                                   SYSCTL_USE_PLL |
+                                   SYSCTL_CFG_VCO_480), 120000000);
