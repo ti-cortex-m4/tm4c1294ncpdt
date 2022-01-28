@@ -1,3 +1,4 @@
+#if 0
 //*****************************************************************************
 //
 //! Configures the system clock.
@@ -424,3 +425,4 @@ SysCtlClockFreqSet_patched(uint32_t ui32Config, uint32_t ui32SysClock)
 
     return(ui32SysClock);
 }
+#endif
