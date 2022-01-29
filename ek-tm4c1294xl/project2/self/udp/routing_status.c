@@ -31,6 +31,7 @@ static uchar            ibRoutingStatus = 0;
 static message szIOMode = "RS-485 Direction (0 - unknown, 1 - input, 2 - output)";
 static message szUptime = "Working time (since last restart)";
 static message szVersion = "Version";
+static message szTemperature = "Temperature, C";
 static message szWatchdogReset = "Last restart type (0 - power-up, 1 - watchdog)";
 static message szPowerUpResets = "Power-up restarts";
 static message szWatchdogResets = "Watchdog restarts";
@@ -164,7 +165,7 @@ static err_t GetRoutingStatusContent0(struct udp_pcb *pcb, struct pbuf *p, const
       case 2: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, "1) Dashboard"));
       case 3: return OutUptime(pcb,p,addr,port,broadcast);
       case 4: return OutVersion(pcb,p,addr,port,broadcast);
-      case 5: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSD, "Temperature, C", GetInternalTemperature()));
+      case 5: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSD, szTemperature, GetInternalTemperature()));
       case 6: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, szWatchdogReset, fWatchdogReset));
       case 7: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, szPowerUpResets, cwPowerUpResetCount));
       case 8: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, szWatchdogResets, cwWatchdogResetCount));
