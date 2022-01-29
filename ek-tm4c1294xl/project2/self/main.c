@@ -29,6 +29,7 @@ MAIN,C
 #include "hardware/rom.h"
 #include "hardware/uart_loader.h"
 #include "hardware/watchdog.h"
+#include "hardware/internal_temperature.h"
 #include "uart/uart.h"
 #include "uart/serial.h"
 #include "uart/uart_log.h"
@@ -167,7 +168,7 @@ int     main(void)
   IntMasterEnable();
 
   ConsoleVersion();
-  CONSOLE("temperature: %d\n", GetInternalTemperature());
+  CONSOLE("temperature: %d C\n", GetInternalTemperature());
   ConsolePins();
   InitWatchdog();
   InitLEDs_After();
