@@ -7,10 +7,11 @@ MAIN,C
 #include "main.h"
 #include "inc/hw_ints.h"
 #include "inc/hw_memmap.h"
+#include "inc/hw_types.h"
+#include "inc/hw_flash.h"
 #include "driverlib/interrupt.h"
 #include "driverlib/gpio.h"
 #include "driverlib/sysctl.h"
-#include "driverlib_patched/sysctl_patched.h"
 #include "driverlib/flash.h"
 #include "driverlib/pin_map.h"
 #include "utils/lwiplib.h"
@@ -105,8 +106,12 @@ int     main(void)
   // frequency is 10MHz or higher.
   SysCtlMOSCConfigSet(SYSCTL_MOSC_HIGHFREQ);
 
+  // ETH#02: Before Ethernet Initialization the Flash Prefetch must be turned OFF by writing 1 to FLASHCONF.FPFOFF.
+  HWREG(FLASH_CONF) |= FLASH_CONF_FPFOFF;
+
   // Run from the PLL at 120 MHz.
-  ulong dwClockFreq = SysCtlClockFreqSet_patched((SYSCTL_XTAL_25MHZ | SYSCTL_OSC_MAIN | SYSCTL_USE_PLL | SYSCTL_CFG_VCO_480), 120000000);
+  ulong dwClockFreq = SysCtlClockFreqSet((SYSCTL_XTAL_25MHZ | SYSCTL_OSC_MAIN | SYSCTL_USE_PLL | SYSCTL_CFG_VCO_480), 120000000);
+  ASSERT(dwClockFreq != 0);
 
   EnableWatchdog();
 
@@ -162,9 +167,13 @@ int     main(void)
   IntMasterEnable();
 
   ConsoleVersion();
+  CONSOLE("temperature: %d\n", GetInternalTemperature());
   ConsolePins();
   InitWatchdog();
   InitLEDs_After();
+
+  // ETH#02: After completing Ethernet Initialization, the user code must turn ON the Flash Prefetch by clearing the FLASHCONF.FPFOFF bit to restore system performance.
+  HWREG(FLASH_CONF) &= ~(FLASH_CONF_FPFOFF);
 
   while (true)
   {
