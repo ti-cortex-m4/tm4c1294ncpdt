@@ -67,33 +67,33 @@ int32_t GetInternalTemperature(void)
     //
     ADCIntClear(ADC0_BASE, 3);
 
-        //
-        // Trigger the ADC conversion.
-        //
-        ADCProcessorTrigger(ADC0_BASE, 3);
+    //
+    // Trigger the ADC conversion.
+    //
+    ADCProcessorTrigger(ADC0_BASE, 3);
 
-        //
-        // Wait for conversion to be completed.
-        //
-        while(!ADCIntStatus(ADC0_BASE, 3, false))
-        {
-        }
+    //
+    // Wait for conversion to be completed.
+    //
+    while(!ADCIntStatus(ADC0_BASE, 3, false))
+    {
+    }
 
-        //
-        // Clear the ADC interrupt flag.
-        //
-        ADCIntClear(ADC0_BASE, 3);
+    //
+    // Clear the ADC interrupt flag.
+    //
+    ADCIntClear(ADC0_BASE, 3);
 
-        //
-        // Read ADC Value.
-        //
-        ADCSequenceDataGet(ADC0_BASE, 3, pui32ADC0Value);
+    //
+    // Read ADC Value.
+    //
+    ADCSequenceDataGet(ADC0_BASE, 3, pui32ADC0Value);
 
-        //
-        // Use non-calibrated conversion provided in the data sheet.  Make
-        // sure you divide last to avoid dropout.
-        //
-        ui32TempValueC = 147.5 - ((75 * 3.3 * pui32ADC0Value[0]) / 4096);
+    //
+    // Use non-calibrated conversion provided in the data sheet.  Make
+    // sure you divide last to avoid dropout.
+    //
+    ui32TempValueC = 147.5 - ((75 * 3.3 * pui32ADC0Value[0]) / 4096);
 
-        return ui32TempValueC;
+    return ui32TempValueC;
 }
