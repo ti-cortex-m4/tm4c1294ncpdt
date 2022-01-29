@@ -6,6 +6,7 @@ routing_status.c
 
 #include "../main.h"
 #include "../hardware/rom.h"
+#include "../hardware/internal_temperature.h"
 #include "../kernel/log.h"
 #include "../kernel/printf.h"
 #include "../kernel/clock.h"
@@ -39,6 +40,7 @@ static message szBodyStart = "<body><table width=100% bgcolor=#C0C0C0 border='1'
 static message szHeaderS = "<tr><td colspan=2 class='head'>%s</td></tr>";
 static message szRowS08X = "<tr><td>%s</td><td>0x%08x</td></tr>";
 static message szRowSU = "<tr><td>%s</td><td>%u</td></tr>";
+static message szRowSD = "<tr><td>%s</td><td>%d</td></tr>";
 static message szRowSIP = "<tr><td>%s</td><td>%u.%u.%u.%u</td></tr>";
 static message szRowClock = "<tr><td>%s</td><td>%u %02u:%02u:%02u</td></tr>";
 static message szRowVersion = "<tr><td>%s</td><td>%u.%u.%u.%04X %02u.%02u.%02u %02u:%02u:%02u</td></tr>";
@@ -70,7 +72,7 @@ bool IsRoutingStatusSize(struct pbuf *p) {
 err_t GetRoutingStatusSize(struct udp_pcb *pcb, struct pbuf *p, const ip_addr_t *addr, uint port, uchar broadcast) {
   uchar bSize;
   switch (ibRoutingStatus) {
-    case 0: bSize = IsCmd(p,"CU@1") ? 9 : 3; break;
+    case 0: bSize = IsCmd(p,"CU@1") ? 10 : 3; break;
     case 1: bSize = 10; break;
     case 2: bSize = 14; break;
     case 3: bSize = 16; break;
@@ -92,7 +94,7 @@ bool IsRoutingStatusSize(struct pbuf *p) {
 err_t GetRoutingStatusSize(struct udp_pcb *pcb, struct pbuf *p, const ip_addr_t *addr, uint port, uchar broadcast) {
   uchar bSize;
   switch (ibRoutingStatus) {
-    case 0: bSize = IsCmd(p,"CU") ? 9 : 3; break;
+    case 0: bSize = IsCmd(p,"CU") ? 10 : 3; break;
     case 1: bSize = 10; break;
     case 2: bSize = 14; break;
     case 3: bSize = 16; break;
@@ -162,10 +164,11 @@ static err_t GetRoutingStatusContent0(struct udp_pcb *pcb, struct pbuf *p, const
       case 2: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, "1) Dashboard"));
       case 3: return OutUptime(pcb,p,addr,port,broadcast);
       case 4: return OutVersion(pcb,p,addr,port,broadcast);
-      case 5: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, szWatchdogReset, fWatchdogReset));
-      case 6: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, szPowerUpResets, cwPowerUpResetCount));
-      case 7: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, szWatchdogResets, cwWatchdogResetCount));
-      case 8: return OutStringZ(pcb,p,addr,port,broadcast,szBodyEnd);
+      case 5: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSD, "Temperature, C", GetInternalTemperature()));
+      case 6: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, szWatchdogReset, fWatchdogReset));
+      case 7: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, szPowerUpResets, cwPowerUpResetCount));
+      case 8: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, szWatchdogResets, cwWatchdogResetCount));
+      case 9: return OutStringZ(pcb,p,addr,port,broadcast,szBodyEnd);
       default: WARNING("routing status 0: wrong index %u\n", wIdx); return GetError();
     }
   } else {
