@@ -69,6 +69,11 @@ void TelnetHandler(void)
             continue;
         }
 
+        if (pState->pConnectPCB == NULL)
+        {
+            continue;
+        }
+
 #if defined(CONFIG_RFC2217_ENABLED)
         // Check to see if modem state options have changed.
         if(pState->ucLastModemState != pState->ucModemState)
