@@ -1991,7 +1991,7 @@ time2   ReadTimeCan(uchar  ibCan)
 #endif
 
 #ifndef SKIP_N
-    case 19: tiAlt = tiCurr; return(1);  break;
+    case 19: return GetTime2(tiCurr, true);
 #endif
 
 #ifndef SKIP_O
