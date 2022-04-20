@@ -5,8 +5,14 @@ DEVICE19.C
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
+//#include "../../memory/mem_settings.h"
+#include "../../memory/mem_digitals.h"
+#include "../../memory/mem_current.h"
+//#include "../../memory/mem_factors.h"
+//#include "../../memory/mem_realtime.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports_devices.h"
+#include "../../digitals/current/current_run.h"
 #include "device19.h"
 
 
@@ -15,7 +21,7 @@ DEVICE19.C
 
 void    QueryEnergyAbsN(void)
 {
-  InitPush();
+  InitPush(0);
   PushChar(0);   
   PushChar(diCurr.bAddress);
 
@@ -44,10 +50,8 @@ void    ReadEnergyN(void)
   coEnergy.mpbBuff[2] = PopChar();
   coEnergy.mpbBuff[3] = PopChar();
 
-  dwBuffC = coEnergy.dwBuff;
-  SetCanLong(mpdwChannelsA, 0);
-
-  mpboChannelsA[0] = boTrue;
+  mpdwChannelsA[0] = coEnergy.dwBuff;
+  mpboChannelsA[0] = true;
 }
 
 
@@ -55,9 +59,7 @@ void    ReadEnergyN(void)
 void    ReadCurrentN(void)
 {
   ReadEnergyN();
-
-  dwBuffC = *PGetCanLong(mpdwChannelsA, 0);
-  SetCanLong(mpdwBaseDig, 0);
+  mpdwBaseDig[0] = mpdwChannelsA[0];
 
   MakeCurrent();
 }
