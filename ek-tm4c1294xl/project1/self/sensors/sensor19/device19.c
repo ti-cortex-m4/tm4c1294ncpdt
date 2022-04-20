@@ -5,6 +5,8 @@ DEVICE19.C
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
+#include "../../serial/ports.h"
+#include "../../serial/ports_devices.h"
 #include "device19.h"
 
 
