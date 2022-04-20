@@ -2147,9 +2147,10 @@ double2 ReadCntMonCan(uchar  ibMon, uchar  ibCan)
 #endif
 
 #ifndef SKIP_N
-    case 19: if (LoadCntMon(ibMon) == 0) return(0);
-             reBuffA = GetCanReal(mpreCntMonCan[ PrevSoftMon() ], ibCan);
-             return(1); break;
+    case 19: if (LoadCntMon(ibMon) == false)
+               return GetDouble2Error();
+             else
+               return GetDouble2(mpdbCntMonCan[ PrevSoftMon() ][ibCan], true);
 #endif
 
 #ifndef SKIP_O
