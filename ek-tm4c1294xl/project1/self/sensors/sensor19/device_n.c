@@ -4,12 +4,8 @@ DEVICE_N.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "main.h"
-#include        "xdata.h"
-#include        "ports.h"
-#include        "engine.h"
-#include        "energy.h"
-#include        "digitals.h"
+#include "../../main.h"
+#include "device19.h"
 
 
 
