@@ -1846,9 +1846,7 @@ double2 ReadCntCurrCan(uchar  ibCan)
 #endif
 
 #ifndef SKIP_N
-    case 19: reBuffA = mpdwBase[ibCanal] * *PGetCanReal(mpreValueCntHou,ibCanal);
-             reBuffA += *PGetCanReal(mpreCount,ibCanal);
-             return(1);                break;
+    case 19: return GetDouble2((mpdwBase[ibCan] * mpdbValueCntHou[ibCan]) + mpdbCount[ibCan], true);
 #endif
 
 #ifndef SKIP_O
