@@ -47,6 +47,7 @@ DEVICES.C
 #include "../sensors/sensor3/profile_c.h"
 #include "../sensors/device_e.h"
 #include "../sensors/device_k.h"
+#include "../sensors/sensor19/device19.h"
 #include "../sensors/sensor21/device_p.h"
 #include "../sensors/device_q.h"
 #include "../sensors/sensor24/device_s.h"

@@ -47,6 +47,7 @@ DEVICES.C
 #include "../sensors/sensor3/profile_c.h"
 #include "../sensors/device_e.h"
 #include "../sensors/device_k.h"
+#include "../sensors/sensor19/device19.h"
 #include "../sensors/sensor21/device_p.h"
 #include "../sensors/device_q.h"
 #include "../sensors/sensor24/device_s.h"
@@ -2697,6 +2698,34 @@ void    RunDevices(void)
           MakePause(DEV_POSTOPTION_K3);
         else
           ReadCurrentK(4);
+      }
+      break;
+
+#endif
+
+#ifndef SKIP_N
+
+    case DEV_START_N3:
+      cbRepeat = MaxRepeats();
+      QueryEnergyAbsN();
+      SetCurr(DEV_ENERGY_N3);
+      break;
+
+    case DEV_ENERGY_N3:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+        ReadCurrentN();
+      else
+      {
+        if (cbRepeat == 0)
+          ErrorCurrent();
+        else
+        {
+          ErrorLink();
+          cbRepeat--; mpwRepeat[ibDig]++;
+
+          QueryEnergyAbsN();
+          SetCurr(DEV_ENERGY_N3);
+        }
       }
       break;
 
