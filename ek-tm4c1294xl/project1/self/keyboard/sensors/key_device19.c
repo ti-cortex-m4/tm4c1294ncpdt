@@ -16,16 +16,16 @@ KEY_DEVICE19.C
 
 
 //                                         0123456789ABCDEF
-static char const       szImpulses[]    = "Импульсы ПИ-1   ",
-                        szCounters[]    = "Счетчики ПИ-1   ",
-                        szNoDevices[]   = "      нет       ";
+static char const       szImpulses19[]  = "Импульсы ПИ-1   ",
+                        szCounters19[]  = "Счетчики ПИ-1   ",
+                        szNoDevices19[] = "      нет       ";
 
 
 
 static void ShowDevice19Long(uchar c)
 {
   if (GetDigitalDevice(c) != 19)
-    ShowLo(szNoDevices); 
+    ShowLo(szNoDevices19); 
   else
   {
     LoadCurrDigital(c);
@@ -55,7 +55,7 @@ static uchar c;
       enKeyboard = KBD_INPUT1;
       Canal();
 
-      ShowHi(szImpulses);
+      ShowHi(szImpulses19);
     } 
     else if (enKeyboard == KBD_INPUT1)
     {
@@ -120,7 +120,7 @@ static uchar c;
 static void ShowDevice19Double(uchar c)
 {
   if (GetDigitalDevice(c) != 19)
-    ShowLo(szNoDevices); 
+    ShowLo(szNoDevices19); 
   else
   {
     LoadCurrDigital(c);
@@ -150,7 +150,7 @@ static uchar c;
       enKeyboard = KBD_INPUT1;
       Canal();
 
-      ShowHi(szCounters);
+      ShowHi(szCounters19);
     } 
     else if (enKeyboard == KBD_INPUT1)
     {

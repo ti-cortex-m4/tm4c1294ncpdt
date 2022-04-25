@@ -403,8 +403,8 @@ void    Keyboard_Key(void)
       case wSET_PLC_U_SIZE:     key_SetPlcUSize();      break;
       case wSET_PLC_U_SHUTDOWN: key_SetPlcUShutdown();  break;
 
-      case bGET_DEVICESINT:     key_GetDevice19Long();    break;
-      case bGET_DEVICESREAL:    key_GetDevice19Double();   break;
+      case bGET_DEVICE19_LONG:  key_GetDevice19Long();  break;
+      case bGET_DEVICE19_DOUBLE:key_GetDevice19Double();break;
 
       case wSET_INPUT_MODE_RESET: key_SetInputModeReset(); break;
       case bSET_SLAVE_MODEM: key_SetSlaveModem(); break;
@@ -734,8 +734,8 @@ void    Keyboard_Key(void)
       case wSET_PLC_U_SIZE:     key_SetPlcUSize();      break;
       case wSET_PLC_U_SHUTDOWN: key_SetPlcUShutdown();  break;
 
-      case bGET_DEVICESINT:     key_GetDevice19Long();    break;
-      case bGET_DEVICESREAL:    key_GetDevice19Double();   break;
+      case bGET_DEVICE19_LONG:  key_GetDevice19Long();  break;
+      case bGET_DEVICE19_DOUBLE:key_GetDevice19Double();break;
 
       case wSET_INPUT_MODE_RESET: key_SetInputModeReset(); break;
       case bSET_SLAVE_MODEM: key_SetSlaveModem(); break;
@@ -985,8 +985,8 @@ void    Keyboard_Key(void)
       case wSET_PLC_U_SIZE:     key_SetPlcUSize();      break;
       case wSET_PLC_U_SHUTDOWN: key_SetPlcUShutdown();  break;
 
-      case bGET_DEVICESINT:     key_GetDevice19Long();    break;
-      case bGET_DEVICESREAL:    key_GetDevice19Double();   break;
+      case bGET_DEVICE19_LONG:  key_GetDevice19Long();  break;
+      case bGET_DEVICE19_DOUBLE:key_GetDevice19Double();break;
 
       case wSET_INPUT_MODE_RESET: key_SetInputModeReset(); break;
       case bSET_SLAVE_MODEM: key_SetSlaveModem(); break;
