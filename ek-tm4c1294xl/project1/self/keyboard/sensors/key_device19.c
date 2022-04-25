@@ -7,6 +7,7 @@ KEY_DEVICE19.C
 #include "../../main.h"
 #include "../../memory/mem_factors.h"
 #include "../../console.h"
+#include "../../serial/ports.h"
 #include "../../sensors/sensor19/automatic19.h"
 #include "../../digitals/digitals.h"
 #include "../../digitals/digitals_messages.h"
@@ -15,8 +16,8 @@ KEY_DEVICE19.C
 
 
 //                                         0123456789ABCDEF
-static char const       szDevicesInt[]  = "Импульсы ПИ-1   ",
-                        szDevicesReal[] = "Счетчики ПИ-1   ",
+static char const       szImpulses[]    = "Импульсы ПИ-1   ",
+                        szCounters[]    = "Счетчики ПИ-1   ",
                         szNoDevices[]   = "      нет       ";
 
 
@@ -27,8 +28,6 @@ static void ShowDevice19Long(uchar c)
     ShowLo(szNoDevices); 
   else
   {
-    ibDig = c;
-
     LoadCurrDigital(c);
     ibPort = diCurr.ibPort;
 
@@ -56,7 +55,7 @@ static uchar c;
       enKeyboard = KBD_INPUT1;
       Canal();
 
-      ShowHi(szDevicesInt);
+      ShowHi(szImpulses);
     } 
     else if (enKeyboard == KBD_INPUT1)
     {
@@ -124,8 +123,6 @@ static void ShowDevice19Double(uchar c)
     ShowLo(szNoDevices); 
   else
   {
-    ibDig = c;
-
     LoadCurrDigital(c);
     ibPort = diCurr.ibPort;
 
@@ -134,7 +131,7 @@ static void ShowDevice19Double(uchar c)
     else 
     {
       ulong2 dw2 = ReadSensorN();
-      (dw2.fValid) ? ShowDevice19Double(c(dw2.dwValue * mpdbValueCntHou[c]) + mpdbCount[c]) : Error();
+      (dw2.fValid) ? ShowDevice19Double((dw2.dwValue * mpdbValueCntHou[c]) + mpdbCount[c]) : Error();
     }
   }
 
@@ -153,7 +150,7 @@ static uchar c;
       enKeyboard = KBD_INPUT1;
       Canal();
 
-      ShowHi(szDevicesReal);
+      ShowHi(szCounters);
     } 
     else if (enKeyboard == KBD_INPUT1)
     {

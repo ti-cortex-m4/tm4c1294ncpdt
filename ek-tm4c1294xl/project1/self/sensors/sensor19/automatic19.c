@@ -18,9 +18,8 @@ AUTOMATIC19.C
 
 bool    AutomaticN(void)
 {
-uchar   i;
-
-  for (i=0; i<MaxRepeats(); i++)
+  uchar r;
+  for (r=0; r<MaxRepeats(); r++)
   {
     InitPush(0);
     PushChar(0);
@@ -43,7 +42,7 @@ uchar   i;
     if (fKey == true) return(0);
   }
 
-  if (i == MaxRepeats()) return(0);
+  if (r == MaxRepeats()) return(0);
 
   sprintf(szLo+1,"версия:");
   szLo[ 9] = InBuff(3);
@@ -55,7 +54,7 @@ uchar   i;
   DelayInf(); Clear();
 
 
-  for (i=0; i<MaxRepeats(); i++)
+  for (r=0; r<MaxRepeats(); r++)
   {
     QueryEnergyAbsN();
 
@@ -63,7 +62,7 @@ uchar   i;
     if (fKey == true) return(0);
   }
 
-  if (i == MaxRepeats()) return(0);
+  if (r == MaxRepeats()) return(0);
   ShowPercent(50);
 
   ReadEnergyN();
@@ -79,31 +78,21 @@ ulong2  ReadSensorN(void)
 {
   Clear();
 
-  uchar i;
-  for (i=0; i<MaxRepeats(); i++)
+  uchar r;
+  for (r=0; r<MaxRepeats(); r++)
   {
     QueryEnergyAbsN();
 
     if (Input() == SER_GOODCHECK) break;
-    if (fKey == 1) return false;
+    if (fKey == 1) return GetLong2Error();
   }
 
-  if (i == MaxRepeats()) return false;
+  if (r == MaxRepeats()) return GetLong2Error();
   ShowPercent(50);
 
   ReadEnergyN();
 
-
-  reBuffA = *PGetCanLong(mpdwChannelsA, 0) * *PGetCanReal(mpreValueCntHou,ibDig);
-  reBuffA += *PGetCanReal(mpreCount,ibDig);
-  SetCanReal(mpreChannelsB, 0);
-
-  mpboChannelsA[0] = boTrue;
-
-
-  reBuffA = *PGetCanReal(mpreChannelsB, 0);
-
-  return true;
+  return GetLong2(mpdwChannelsA[0], true);
 }
 
 #endif
