@@ -5,3 +5,4 @@ AUTOMATIC19.H
 ------------------------------------------------------------------------------*/
 
 bool    AutomaticN(void);
+bit     ReadSensorN(void);

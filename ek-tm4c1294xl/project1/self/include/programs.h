@@ -344,6 +344,9 @@ PROGRAMS!H
 #define wSET_PLC_U_SIZE             420
 #define wSET_PLC_U_SHUTDOWN         421
 
+#define bGET_DEVICESINT             144
+#define bGET_DEVICESREAL            145
+
 #define wSET_INPUT_MODE_RESET       416
 #define bSET_SLAVE_MODEM            198
 

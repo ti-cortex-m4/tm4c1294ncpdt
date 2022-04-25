@@ -178,6 +178,7 @@ KEYBOARD_KEY!C
 #include "sensors/key_plc_u_flag.h"
 #include "sensors/key_plc_u_size.h"
 #include "sensors/key_plc_u_shutdown.h"
+#include "sensors/key_device19.h"
 #include "gps/key_gps_config.h"
 #include "gps/key_gps_data.h"
 #include "gps/key_gps_gmt.h"
@@ -401,6 +402,9 @@ void    Keyboard_Key(void)
       case wSET_PLC_U_FLAG:     key_SetPlcUFlag();      break;
       case wSET_PLC_U_SIZE:     key_SetPlcUSize();      break;
       case wSET_PLC_U_SHUTDOWN: key_SetPlcUShutdown();  break;
+
+      case bGET_DEVICESINT:     key_GetDevicesInt();    break;
+      case bGET_DEVICESREAL:    key_GetDevicesReal();   break;
 
       case wSET_INPUT_MODE_RESET: key_SetInputModeReset(); break;
       case bSET_SLAVE_MODEM: key_SetSlaveModem(); break;
@@ -730,6 +734,9 @@ void    Keyboard_Key(void)
       case wSET_PLC_U_SIZE:     key_SetPlcUSize();      break;
       case wSET_PLC_U_SHUTDOWN: key_SetPlcUShutdown();  break;
 
+      case bGET_DEVICESINT:     key_GetDevicesInt();    break;
+      case bGET_DEVICESREAL:    key_GetDevicesReal();   break;
+
       case wSET_INPUT_MODE_RESET: key_SetInputModeReset(); break;
       case bSET_SLAVE_MODEM: key_SetSlaveModem(); break;
 
@@ -977,6 +984,9 @@ void    Keyboard_Key(void)
       case wSET_PLC_U_FLAG:     key_SetPlcUFlag();      break;
       case wSET_PLC_U_SIZE:     key_SetPlcUSize();      break;
       case wSET_PLC_U_SHUTDOWN: key_SetPlcUShutdown();  break;
+
+      case bGET_DEVICESINT:     key_GetDevicesInt();    break;
+      case bGET_DEVICESREAL:    key_GetDevicesReal();   break;
 
       case wSET_INPUT_MODE_RESET: key_SetInputModeReset(); break;
       case bSET_SLAVE_MODEM: key_SetSlaveModem(); break;
