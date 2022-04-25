@@ -230,8 +230,11 @@ uchar  ibMonth, ibMode;
   if (!ValidTimeDateRTC(ti))
   {
     DelayInf();
+
+#ifndef NO_DISPLAY
     ShowHiDirect(szAlarm);
     ShowLoDirect(szBadTimeRTC);
+#endif
   }
   ASSERT(ValidTimeDateRTC(ti));
 
