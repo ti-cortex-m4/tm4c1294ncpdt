@@ -5,4 +5,4 @@ AUTOMATIC19.H
 ------------------------------------------------------------------------------*/
 
 bool    AutomaticN(void);
-bool    ReadSensorN(void);
+ulong2  ReadSensorN(void);

@@ -4,6 +4,6 @@ KEY_DEVICE19.H
 
 ------------------------------------------------------------------------------*/
 
-void    key_GetDevicesInt(void);
-void    key_GetDevicesReal(void);
+void    key_GetDevice19Long(void);
+void    key_GetDevice19Double(void);
 
