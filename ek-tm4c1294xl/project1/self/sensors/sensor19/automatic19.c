@@ -75,21 +75,20 @@ uchar   i;
 
 
 // чтение реальных показаний счётчиков для преобразователей ПИ-1.4
-bool    ReadSensorN(void)
+ulong2  ReadSensorN(void)
 {
-uchar   i;
-
   Clear();
 
-  for (i=0; i<bMINORREPEATS; i++)
+  uchar i;
+  for (i=0; i<MaxRepeats(); i++)
   {
     QueryEnergyAbsN();
 
     if (Input() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == 1) return false;
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return false;
   ShowPercent(50);
 
   ReadEnergyN();
@@ -104,7 +103,7 @@ uchar   i;
 
   reBuffA = *PGetCanReal(mpreChannelsB, 0);
 
-  return(1);
+  return true;
 }
 
 #endif

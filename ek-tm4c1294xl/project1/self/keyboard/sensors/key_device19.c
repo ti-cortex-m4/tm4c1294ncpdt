@@ -17,7 +17,7 @@ static char const       szDevicesInt[]  = "Импульсы спец.  ",
 
 
 
-void    ShowDevicesInt(void)
+static void ShowLong(void)
 {
   if (GetDigitalDevice(c) != 19)
     ShowLo(szNoDevices); 
@@ -31,14 +31,17 @@ void    ShowDevicesInt(void)
     if (mpboEnblCan[c] == boFalse)
       ShowLo(szBlocking); 
     else 
-      (ReadSensorN() == 1) ? ShowLong(PGetCanLong(mpdwChannelsA,0)) : Error();   
+    {
+      long2 dw2 = ReadSensorN();
+      (dw2.fValid) ? ShowLong(dw2.dbValue) : Error();
+    }
   }
 
   sprintf(szLo+14,"%2bu",c+1);
 }
 
 
-void    key_GetDevicesInt(void)
+void    key_GetDevice19Long(void)
 {
 static uchar c;
 
@@ -56,21 +59,21 @@ static uchar c;
       enKeyboard = KBD_POSTENTER;
 
       c = 0;
-      ShowDevicesInt();
+      ShowLong();
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
       if ((c = GetCharLo(10,11) - 1) < bCANALS)
       {
         enKeyboard = KBD_POSTENTER;
-        ShowDevicesInt();
+        ShowLong();
       }
       else Beep();
     }
     else if (enKeyboard == KBD_POSTENTER)
     {
       if (++c >= bCANALS) c = 0;
-      ShowDevicesInt();
+      ShowLong();
     }
     else Beep();
   }
@@ -81,7 +84,7 @@ static uchar c;
     if (enKeyboard == KBD_POSTENTER)
     {
       if (c > 0) c--; else c = bCANALS-1;
-      ShowDevicesInt();
+      ShowLong();
     }
     else Beep();
   }
@@ -91,7 +94,7 @@ static uchar c;
   {
     if (enKeyboard == KBD_POSTENTER)
     {
-      ShowDevicesInt();
+      ShowLong();
     }
     else Beep();
   }
@@ -111,7 +114,7 @@ static uchar c;
 
 
 
-void    ShowDevicesReal(void)
+static void ShowDouble(void)
 {
   if (GetDigitalDevice(c) != 19)
     ShowLo(szNoDevices); 
@@ -125,14 +128,17 @@ void    ShowDevicesReal(void)
     if (mpboEnblCan[c] == boFalse)
       ShowLo(szBlocking); 
     else 
-      (ReadSensorN() == 1) ? ShowReal(&reBuffA) : Error();   
+    {
+      long2 dw2 = ReadSensorN();
+      (dw2.fValid) ? ShowDouble((dw2.dwValue * mpdbValueCntHou[c]) + mpdbCount[c]) : Error();
+    }
   }
 
   sprintf(szLo+14,"%2bu",c+1);
 }
 
 
-void    key_GetDevicesReal(void)
+void    key_GetDevice19Double(void)
 {
 static uchar c;
 
@@ -150,21 +156,21 @@ static uchar c;
       enKeyboard = KBD_POSTENTER;
 
       c = 0;
-      ShowDevicesReal();
+      ShowDouble();
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
       if ((c = GetCharLo(10,11) - 1) < bCANALS)
       {
         enKeyboard = KBD_POSTENTER;
-        ShowDevicesReal();
+        ShowDouble();
       }
       else Beep();
     }
     else if (enKeyboard == KBD_POSTENTER)
     {
       if (++c >= bCANALS) c = 0;
-      ShowDevicesReal();
+      ShowDouble();
     }
     else Beep();
   }
@@ -175,7 +181,7 @@ static uchar c;
     if (enKeyboard == KBD_POSTENTER)
     {
       if (c > 0) c--; else c = bCANALS-1;
-      ShowDevicesReal();
+      ShowDouble();
     }
     else Beep();
   }
@@ -185,7 +191,7 @@ static uchar c;
   {
     if (enKeyboard == KBD_POSTENTER)
     {
-      ShowDevicesReal();
+      ShowDouble();
     }
     else Beep();
   }
