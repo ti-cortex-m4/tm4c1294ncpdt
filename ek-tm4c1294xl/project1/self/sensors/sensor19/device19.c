@@ -5,11 +5,8 @@ DEVICE19.C
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-//#include "../../memory/mem_settings.h"
 #include "../../memory/mem_digitals.h"
 #include "../../memory/mem_current.h"
-//#include "../../memory/mem_factors.h"
-//#include "../../memory/mem_realtime.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports_devices.h"
 #include "../../digitals/current/current_run.h"
@@ -65,5 +62,3 @@ void    ReadCurrentN(void)
 }
 
 #endif
-
-
