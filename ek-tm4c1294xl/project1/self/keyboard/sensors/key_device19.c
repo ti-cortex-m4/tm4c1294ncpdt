@@ -1,9 +1,10 @@
 /*------------------------------------------------------------------------------
-_DEVICE19.C
+KEY_DEVICE19.C
 
 
 ------------------------------------------------------------------------------*/
 
+#include "../../main.h"
 #include "../../console.h"
 #include "../../sensors/sensor19/automatic19.h"
 
@@ -18,27 +19,29 @@ static char const       szDevicesInt[]  = "Импульсы спец.  ",
 
 void    ShowDevicesInt(void)
 {
-  if (GetDigitalDevice(ibX) != 19)
+  if (GetDigitalDevice(c) != 19)
     ShowLo(szNoDevices); 
   else
   {
-    ibDig = ibX;
+    ibDig = c;
 
-    LoadCurrDigital(ibX);
+    LoadCurrDigital(c);
     ibPort = diCurr.ibPort;
 
-    if (mpboEnblCan[ibX] == boFalse)
+    if (mpboEnblCan[c] == boFalse)
       ShowLo(szBlocking); 
     else 
       (ReadSensorN() == 1) ? ShowLong(PGetCanLong(mpdwChannelsA,0)) : Error();   
   }
 
-  sprintf(szLo+14,"%2bu",ibX+1);
+  sprintf(szLo+14,"%2bu",c+1);
 }
 
 
 void    key_GetDevicesInt(void)
 {
+static uchar c;
+
   if (bKey == bKEY_ENTER)
   {                                           
     if (enKeyboard == KBD_ENTER)
@@ -52,12 +55,12 @@ void    key_GetDevicesInt(void)
     {
       enKeyboard = KBD_POSTENTER;
 
-      ibX = 0;
+      c = 0;
       ShowDevicesInt();
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      if ((ibX = GetChar(10,11) - 1) < bCANALS)
+      if ((c = GetCharLo(10,11) - 1) < bCANALS)
       {
         enKeyboard = KBD_POSTENTER;
         ShowDevicesInt();
@@ -66,7 +69,7 @@ void    key_GetDevicesInt(void)
     }
     else if (enKeyboard == KBD_POSTENTER)
     {
-      if (++ibX >= bCANALS) ibX = 0;
+      if (++c >= bCANALS) c = 0;
       ShowDevicesInt();
     }
     else Beep();
@@ -77,7 +80,7 @@ void    key_GetDevicesInt(void)
   {
     if (enKeyboard == KBD_POSTENTER)
     {
-      if (ibX > 0) ibX--; else ibX = bCANALS-1;
+      if (c > 0) c--; else c = bCANALS-1;
       ShowDevicesInt();
     }
     else Beep();
@@ -110,27 +113,29 @@ void    key_GetDevicesInt(void)
 
 void    ShowDevicesReal(void)
 {
-  if (GetDigitalDevice(ibX) != 19)
+  if (GetDigitalDevice(c) != 19)
     ShowLo(szNoDevices); 
   else
   {
-    ibDig = ibX;
+    ibDig = c;
 
-    LoadCurrDigital(ibX);
+    LoadCurrDigital(c);
     ibPort = diCurr.ibPort;
 
-    if (mpboEnblCan[ibX] == boFalse)
+    if (mpboEnblCan[c] == boFalse)
       ShowLo(szBlocking); 
     else 
       (ReadSensorN() == 1) ? ShowReal(&reBuffA) : Error();   
   }
 
-  sprintf(szLo+14,"%2bu",ibX+1);
+  sprintf(szLo+14,"%2bu",c+1);
 }
 
 
 void    key_GetDevicesReal(void)
 {
+static uchar c;
+
   if (bKey == bKEY_ENTER)
   {                                           
     if (enKeyboard == KBD_ENTER)
@@ -144,12 +149,12 @@ void    key_GetDevicesReal(void)
     {
       enKeyboard = KBD_POSTENTER;
 
-      ibX = 0;
+      c = 0;
       ShowDevicesReal();
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      if ((ibX = GetChar(10,11) - 1) < bCANALS)
+      if ((c = GetCharLo(10,11) - 1) < bCANALS)
       {
         enKeyboard = KBD_POSTENTER;
         ShowDevicesReal();
@@ -158,7 +163,7 @@ void    key_GetDevicesReal(void)
     }
     else if (enKeyboard == KBD_POSTENTER)
     {
-      if (++ibX >= bCANALS) ibX = 0;
+      if (++c >= bCANALS) c = 0;
       ShowDevicesReal();
     }
     else Beep();
@@ -169,7 +174,7 @@ void    key_GetDevicesReal(void)
   {
     if (enKeyboard == KBD_POSTENTER)
     {
-      if (ibX > 0) ibX--; else ibX = bCANALS-1;
+      if (c > 0) c--; else c = bCANALS-1;
       ShowDevicesReal();
     }
     else Beep();
