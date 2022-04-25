@@ -36,7 +36,7 @@ static void ShowDevice19Long(uchar c)
     else 
     {
       ulong2 dw2 = ReadSensorN();
-      (dw2.fValid) ? ShowDevice19Long(dw2.dwValue) : Error();
+      (dw2.fValid) ? ShowLong(dw2.dwValue) : Error();
     }
   }
 
@@ -131,7 +131,7 @@ static void ShowDevice19Double(uchar c)
     else 
     {
       ulong2 dw2 = ReadSensorN();
-      (dw2.fValid) ? ShowDevice19Double((dw2.dwValue * mpdbValueCntHou[c]) + mpdbCount[c]) : Error();
+      (dw2.fValid) ? ShowDouble((dw2.dwValue * mpdbValueCntHou[c]) + mpdbCount[c]) : Error();
     }
   }
 
