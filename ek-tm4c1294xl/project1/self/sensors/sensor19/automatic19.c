@@ -80,4 +80,38 @@ uchar   i;
   return(1);
 }
 
+
+// чтение реальных показаний счётчиков для преобразователей ПИ-1.4
+bit     ReadSensorN(void)
+{
+uchar   i;
+
+  Clear();
+
+  for (i=0; i<bMINORREPEATS; i++)
+  {
+    QueryEnergyAbsN();
+
+    if (Input() == SER_GOODCHECK) break;
+    if (fKey == 1) return(0);
+  }
+
+  if (i == bMINORREPEATS) return(0);
+  ShowPercent(50);
+
+  ReadEnergyN();
+
+
+  reBuffA = *PGetCanLong(mpdwChannelsA, 0) * *PGetCanReal(mpreValueCntHou,ibDig);
+  reBuffA += *PGetCanReal(mpreCount,ibDig);
+  SetCanReal(mpreChannelsB, 0);
+
+  mpboChannelsA[0] = boTrue;
+
+
+  reBuffA = *PGetCanReal(mpreChannelsB, 0);
+
+  return(1);
+}
+
 #endif

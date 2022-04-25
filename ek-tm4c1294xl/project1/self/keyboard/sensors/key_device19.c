@@ -4,23 +4,13 @@ _DEVICE19.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "main.h"
-#include        "xdata.h"
-#include        "beep.h"
-#include        "timer0.h"
-#include        "display.h"
-#include        "keyboard.h"
-#include        "programs.h"
-#include        "energy.h"
-#include        "engine.h"
-#include        "ports.h"
-#include        "sensors.h"
-#include        "_automatic1.h"
+#include "../../console.h"
+#include "../../sensors/sensor19/automatic19.h"
 
 
 
 //                                         0123456789ABCDEF
-uchar           code    szDevicesInt[]  = "Импульсы спец.  ",
+static char const       szDevicesInt[]  = "Импульсы спец.  ",
                         szDevicesReal[] = "Счетчики спец.  ",
                         szNoDevices[]   = "      нет       ";
 
