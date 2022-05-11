@@ -110,13 +110,6 @@ const entity enWatchdogResetCount = {
 };
 
 
-const entity enPeriodicResetCount = {
-  EEPROM_PERIODIC_RESET_COUNT, &cwPeriodicResetCount, sizeof(uint), INT, 0,
-  0, 0xFFFE, 0,
-  "",
-  "",
-};
-
 const entity enPeriodicResetFlag = {
   EEPROM_PERIODIC_RESET_FLAG, &fPeriodicResetFlag, sizeof(uchar), CHAR, 0,
   0, 1, 0,
@@ -125,8 +118,8 @@ const entity enPeriodicResetFlag = {
 };
 
 const entity enPeriodicResetPeriod = {
-  EEPROM_PERIODIC_RESET_PERIOD, &bPeriodicResetPeriod, sizeof(uchar), CHAR, 0,
+  EEPROM_PERIODIC_RESET_PERIOD, &wPeriodicResetPeriod, sizeof(uchar), INT, 0,
   1, 24, 24,
   "PERIODIC_RESET_PERIOD",
-  "AI=PERIODIC_RESET_PERIOD;E=1;D=Periodic reset period;T=INT;C=STATIC;O=24 hours/24/12 hours/12/6 hours/6/3 hours/3/2 hours/2/1 hour/1;S=PERIODIC_RESET_FLAG==1?\"e\":\"i\"",
+  "AI=PERIODIC_RESET_PERIOD;E=1;D=Periodic reset period;T=INT;C=STATIC;O=24 hours/1440/12 hours/720/6 hours/360/3 hours/180/2 hours/120/1 hour/60/1 minute/1;S=PERIODIC_RESET_FLAG==1?\"e\":\"i\"",
 };

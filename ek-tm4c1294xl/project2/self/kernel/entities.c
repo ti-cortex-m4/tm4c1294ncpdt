@@ -172,7 +172,6 @@ const entity * const mpenEntities[] =
   // должны быть последними в списке
   &enPowerUpResetCount,
   &enWatchdogResetCount,
-  &enPeriodicResetCount,
 };
 
 
