@@ -166,12 +166,13 @@ const entity * const mpenEntities[] =
   &enCustomerSetting1Timeout4,
 #endif
 
-  &enPowerUpResetCount,
-  &enWatchdogResetCount,
-
-  &enPeriodicResetCount,
   &enPeriodicResetFlag,
   &enPeriodicResetPeriod,
+
+  // должны быть последними в списке
+  &enPowerUpResetCount,
+  &enWatchdogResetCount,
+  &enPeriodicResetCount,
 };
 
 
