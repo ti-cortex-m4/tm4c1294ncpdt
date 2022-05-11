@@ -63,6 +63,7 @@ extern ledMode                 bLED1Mode;
 extern uint                    cwPowerUpResetCount;
 extern uint                    cwWatchdogResetCount;
 
+extern uint                    cwPeriodicResetCount;
 extern bool                    fPeriodicResetFlag;
 extern uchar                   bPeriodicResetPeriod;
 
