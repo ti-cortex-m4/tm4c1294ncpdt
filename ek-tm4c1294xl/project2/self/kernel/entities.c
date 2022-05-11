@@ -169,7 +169,7 @@ const entity * const mpenEntities[] =
   &enPeriodicResetFlag,
   &enPeriodicResetPeriod,
 
-  // должны быть последними в списке
+  // must be last in the list
   &enPowerUpResetCount,
   &enWatchdogResetCount,
 };
