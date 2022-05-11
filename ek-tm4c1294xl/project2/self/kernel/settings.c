@@ -71,6 +71,7 @@ ledMode                 bLED1Mode;
 uint                    cwPowerUpResetCount;
 uint                    cwWatchdogResetCount;
 
+uint                    cwPeriodicResetCount;
 bool                    fPeriodicResetFlag;
 uchar                   bPeriodicResetPeriod;
 

@@ -110,6 +110,13 @@ const entity enWatchdogResetCount = {
 };
 
 
+const entity enPeriodicResetCount = {
+  EEPROM_PERIODIC_RESET_COUNT, &cwPeriodicResetCount, sizeof(uint), INT, 0,
+  0, 0xFFFE, 0,
+  "",
+  "",
+};
+
 const entity enPeriodicResetFlag = {
   EEPROM_PERIODIC_RESET_FLAG, &fPeriodicResetFlag, sizeof(uchar), CHAR, 0,
   0, 1, 0,
