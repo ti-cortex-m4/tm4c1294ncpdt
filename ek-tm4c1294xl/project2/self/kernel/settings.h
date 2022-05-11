@@ -64,7 +64,7 @@ extern uint                    cwPowerUpResetCount;
 extern uint                    cwWatchdogResetCount;
 
 extern bool                    fPeriodicResetFlag;
-extern uchar                   wPeriodicResetPeriod;
+extern uint                    wPeriodicResetPeriod;
 
 extern uchar                   mbCustomerSettings[UART_COUNT];
 extern uchar                   mbCustomerSetting1_Delay[UART_COUNT];

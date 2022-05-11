@@ -5,6 +5,7 @@ periodic_reset.c
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "../hardware/restart.h"
 #include "../kernel/settings.h"
 #include "clock.h"
 #include "periodic_reset.h"
@@ -12,10 +13,12 @@ periodic_reset.c
 
 
 void RunPeriodicReset(void) {
-  if ((fPeriodicResetFlag == 1) && (wPeriodicResetFlag <= 1440))
+  if ((fPeriodicResetFlag == 1) && (wPeriodicResetPeriod <= 1440))
   {
-    if (GetClockSeconds() / 60)
+    uint minutes = GetClockSeconds() / 60;
+    if (minutes >= wPeriodicResetPeriod)
     {
+      Restart();
     }
   }
 }
