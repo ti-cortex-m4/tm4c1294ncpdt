@@ -37,7 +37,7 @@ void UDPLog(uchar *pb, uint wSize) {
 
     memcpy(p->payload, pb, wSize);
 
-    if (fUDPDebugBroadcast == 0)
+    if (fUDPDebugBroadcast != 1)
     {
       const ip_addr_t ip = IPADDR4_INIT(dwUDPDebugIP);
       err_t err = udp_sendto(pcb, p, &ip, wUDPDebugPort);
