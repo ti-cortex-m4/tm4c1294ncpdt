@@ -356,15 +356,15 @@ void DebugPrintF(const char *pcsz, ...)
 {
   if (ibDebugMode == DEBUG_MODE_UDP)
   {
-    date_t date2 = SecondsToDate(GetClockSeconds());
+    date_t days = SecondsToDate(GetClockSeconds());
 
     memset(&mbPrintf, 0, sizeof(mbPrintf));
     iwPrintf = 0;
 
     uint n = usprintf(mbPrintf,
-                       "<%d>%d(v%d) %4d-%02d-%02d %02d:%02d:%02d [%02d][%03d] ",
+                       "<%d>%d(v%d) %4d-%02d-%02d %02d:%02d:%02d [%02d][%03d]: ",
                  5/*level*/, wSerialNumber, 2/*str_VersPrg*/,
-                 0, 0, date2.wDays, date2.bHours, date2.bMinutes, date2.bSeconds,
+                 0, 0, days.wDays, days.bHours, days.bMinutes, days.bSeconds,
                  3/*portId*/, 4/*devId*/
     );
 
