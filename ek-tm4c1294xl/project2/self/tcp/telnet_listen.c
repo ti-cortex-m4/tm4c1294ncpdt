@@ -30,7 +30,7 @@ void TelnetListen(uint16_t usTelnetPort, uint8_t ucSerialPort)
 
     tState *pState = &g_sState[ucSerialPort];
 
-    CONSOLE("%u: listen on port %d\n", pState->ucSerialPort, usTelnetPort);
+    CONSOLE("[%u] listen on port %d\n", pState->ucSerialPort, usTelnetPort);
 
     // Fill in the telnet state data structure for this session in listen (server) mode.
     pState->pConnectPCB = NULL;

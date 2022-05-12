@@ -75,7 +75,7 @@ static void SerialUARTIntHandler(uint8_t ucPort)
 
             {
                 if (fDataDebugFlag)
-                  CONSOLE("%u: from UART %02X\n", ucPort, ucChar);
+                  CONSOLE("[%u] from UART %02X\n", ucPort, ucChar);
 
                 if (IsModemModeCommand(ucPort))
                   ProcessModemModeCommand(ucPort, ucChar);
@@ -118,7 +118,7 @@ static void SerialUARTIntHandler(uint8_t ucPort)
             uint8_t ucChar = RingBufReadOne(&g_sTxBuf[ucPort]);
 
             if (fDataDebugFlag)
-              CONSOLE("%u: to UART %02X\n", ucPort, ucChar);
+              CONSOLE("[%u] to UART %02X\n", ucPort, ucChar);
 
             // Write the next character into the transmit FIFO.
             UARTCharPut(g_ulUARTBase[ucPort], ucChar);

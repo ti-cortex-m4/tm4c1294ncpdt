@@ -31,7 +31,7 @@ err_t TelnetPoll(void *arg, struct tcp_pcb *pcb)
 {
     tState *pState = arg;
 
-    CONSOLE("%u: poll 0x%08x, 0x%08x %u/%u\n", pState->ucSerialPort, arg, pcb, pState->ulConnectionTimeout, pState->ulMaxTimeout);
+    CONSOLE("[%u] poll 0x%08x, 0x%08x %u/%u\n", pState->ucSerialPort, arg, pcb, pState->ulConnectionTimeout, pState->ulMaxTimeout);
 
     // Are we operating as a server or a client?
     if(!pState->pListenPCB)
@@ -41,7 +41,7 @@ err_t TelnetPoll(void *arg, struct tcp_pcb *pcb)
         {
             if (pcb->state != CLOSED)
             {
-              CONSOLE("%u: poll state=%d\n", pState->ucSerialPort, pcb->state);
+              CONSOLE("[%u] poll state=%d\n", pState->ucSerialPort, pcb->state);
             }
             else
             {
@@ -67,7 +67,7 @@ err_t TelnetPoll(void *arg, struct tcp_pcb *pcb)
             {
                ModemDisconnectedByTimeout(pState->ucSerialPort);
 
-               CONSOLE("%u: poll - close client connection by timeout\n", pState->ucSerialPort);
+               CONSOLE("[%u] poll - close client connection by timeout\n", pState->ucSerialPort);
                return TelnetCloseClient(pState->ucSerialPort);
             }
         }
@@ -78,7 +78,7 @@ err_t TelnetPoll(void *arg, struct tcp_pcb *pcb)
         pState->ulConnectionTimeout++;
         if ((pState->ulMaxTimeout != 0) && (pState->ulConnectionTimeout > pState->ulMaxTimeout))
         {
-            CONSOLE("%u: poll - close server connection by timeout\n", pState->ucSerialPort);
+            CONSOLE("[%u] poll - close server connection by timeout\n", pState->ucSerialPort);
 
             // Close the telnet connection.
             tcp_abort(pcb);

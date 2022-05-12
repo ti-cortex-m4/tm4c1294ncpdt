@@ -36,7 +36,7 @@ void TelnetOpen(uint32_t ulIPAddr, uint16_t usTelnetRemotePort, uint8_t ucSerial
 
     tState *pState = &g_sState[ucSerialPort];
 
-    CONSOLE("%u: open %d.%d.%d.%d port %d\n",
+    CONSOLE("[%u] open %d.%d.%d.%d port %d\n",
             pState->ucSerialPort,
             (ulIPAddr >> 24), (ulIPAddr >> 16) & 0xFF, (ulIPAddr >> 8) & 0xFF, ulIPAddr & 0xFF,
             usTelnetRemotePort);

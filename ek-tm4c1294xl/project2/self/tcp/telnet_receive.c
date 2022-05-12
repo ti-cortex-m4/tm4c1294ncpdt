@@ -37,9 +37,9 @@ err_t TelnetReceive(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
     SYS_ARCH_DECL_PROTECT(lev);
 
 #if 0
-    CONSOLE("%u: receive 0x%08x, 0x%08x, 0x%08x, %d\n", pState->ucSerialPort, arg, pcb, p, err);
+    CONSOLE("[%u] receive 0x%08x, 0x%08x, 0x%08x, %d\n", pState->ucSerialPort, arg, pcb, p, err);
 #else
-    CONSOLE("%u: receive error=%d\n", pState->ucSerialPort, err);
+    CONSOLE("[%u] receive error=%d\n", pState->ucSerialPort, err);
 #endif
 
     // Place the incoming packet onto the queue if there is space.
@@ -53,7 +53,7 @@ err_t TelnetReceive(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
         if(iNextWrite == pState->iBufQRead)
         {
             // The queue is full - discard the pbuf and return since we can't handle it just now.
-            CONSOLE("%u: WARNING queue is full - discard data\n", pState->ucSerialPort);
+            CONSOLE("[%u] WARNING queue is full - discard data\n", pState->ucSerialPort);
 
             // Restore previous level of protection.
             SYS_ARCH_UNPROTECT(lev);
@@ -78,7 +78,7 @@ err_t TelnetReceive(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
     // If a null packet is passed in, close the connection.
     else if((err == ERR_OK) && (p == NULL))
     {
-        CONSOLE("%u: received NULL packet - close connection\n", pState->ucSerialPort);
+        CONSOLE("[%u] received NULL packet - close connection\n", pState->ucSerialPort);
 
         // Clear out all of the TCP callbacks.
         tcp_arg(pcb, NULL);
@@ -104,14 +104,14 @@ err_t TelnetReceive(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
         // If we don't have a listen PCB, then we are in client mode, and should try to reconnect.
         if(pState->pListenPCB == NULL)
         {
-            CONSOLE("%u: reopen client connection\n", pState->ucSerialPort);
+            CONSOLE("[%u] reopen client connection\n", pState->ucSerialPort);
 
             // Re-open the connection.
             TelnetOpen(pState->ulTelnetRemoteIP, pState->usTelnetRemotePort, pState->ucSerialPort);
         }
         else
         {
-            CONSOLE("%u: re-listen server connection\n", pState->ucSerialPort);
+            CONSOLE("[%u] re-listen server connection\n", pState->ucSerialPort);
 
             // Revert to listening state.
             pState->eTCPState = STATE_TCP_LISTEN;

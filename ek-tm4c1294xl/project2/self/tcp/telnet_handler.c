@@ -219,7 +219,7 @@ void TelnetHandler(void)
                     uint8_t ucChar = SerialReceive(pState->ucSerialPort);
 
                     if (fDataDebugFlag)
-                      CONSOLE("%u: to TCP %02X\n", u, ucChar);
+                      CONSOLE("[%u] to TCP %02X\n", u, ucChar);
 
                     pucTemp[lIndex] = ucChar;
                     lIndex++;
