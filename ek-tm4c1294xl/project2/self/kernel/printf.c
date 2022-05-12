@@ -354,6 +354,14 @@ void DebugPrintF(const char *pcsz, ...)
 {
   if (ibDebugMode == DEBUG_MODE_UDP)
   {
+    if (true)
+    {
+      UDPPrintF( "<%d>%d(v%s) %4d-%02d-%02d %02d:%02d:%02d [%02d][%03d]: "
+        0/*level*/, 1/*InfoPrivateDev.FactoryNumber*/, 2/*str_VersPrg*/,
+        lttTime.year, lttTime.month, lttTime.day, lttTime.hour, lttTime.minute, lttTime.sec,
+        3/*portId*/, 4/*devId*/);
+    }
+
     memset(&mbPrintf, 0, sizeof(mbPrintf));
     iwPrintf = 0;
 
