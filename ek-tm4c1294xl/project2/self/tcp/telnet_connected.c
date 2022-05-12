@@ -35,7 +35,7 @@ err_t TelnetConnected(void *arg, struct tcp_pcb *pcb, err_t err)
 {
     tState *pState = arg;
 
-    CONSOLE("%u: connected 0x%08x, 0x%08x, %d\n", pState->ucSerialPort, arg, pcb, err);
+    CONSOLE("[%u] connected 0x%08x, 0x%08x, %d\n", pState->ucSerialPort, arg, pcb, err);
 
     // Increment our connection counter.
     pState->ucConnectCount++;
@@ -44,7 +44,7 @@ err_t TelnetConnected(void *arg, struct tcp_pcb *pcb, err_t err)
     if(pState->eTCPState != STATE_TCP_CONNECTING)
     {
         // If we already have a connection, kill it and start over.
-        CONSOLE("%u: connected - already connected, start over\n", pState->ucSerialPort);
+        CONSOLE("[%u] connected - already connected, start over\n", pState->ucSerialPort);
         return(ERR_CONN);
     }
 

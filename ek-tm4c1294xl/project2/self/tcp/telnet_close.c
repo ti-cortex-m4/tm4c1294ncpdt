@@ -18,12 +18,12 @@ err_t TelnetCloseClient(uint8_t ucSerialPort)
     ASSERT(ucSerialPort < UART_COUNT);
     tState *pState = &g_sState[ucSerialPort];
 
-    CONSOLE("%u: close client\n", pState->ucSerialPort);
+    CONSOLE("[%u] close client\n", pState->ucSerialPort);
 
     // If we have a connect PCB, close it down.
     if(pState->pConnectPCB != NULL)
     {
-        CONSOLE("%u: closing client data 0x%08x\n", pState->ucSerialPort, pState->pConnectPCB);
+        CONSOLE("[%u] closing client data 0x%08x\n", pState->ucSerialPort, pState->pConnectPCB);
 
         // Clear out all of the TCP callbacks.
         tcp_arg(pState->pConnectPCB, NULL);
@@ -63,12 +63,12 @@ void TelnetCloseServer(struct tcp_pcb *pcb, uint8_t ucSerialPort)
     ASSERT(ucSerialPort < UART_COUNT);
     tState *pState = &g_sState[ucSerialPort];
 
-    CONSOLE("%u: close server\n", pState->ucSerialPort);
+    CONSOLE("[%u] close server\n", pState->ucSerialPort);
 
     // If we have a listen PCB, close it down as well.
     if(pState->pListenPCB != NULL)
     {
-        CONSOLE("%u: closing server data 0x%08x\n", pState->ucSerialPort, pState->pListenPCB);
+        CONSOLE("[%u] closing server data 0x%08x\n", pState->ucSerialPort, pState->pListenPCB);
 
         // Clear out all of the TCP callbacks.
         tcp_arg(pcb, NULL);
@@ -122,12 +122,12 @@ void TelnetClose(uint8_t ucSerialPort)
     ASSERT(ucSerialPort < UART_COUNT);
     tState *pState = &g_sState[ucSerialPort];
 
-    CONSOLE("%u: close\n", pState->ucSerialPort);
+    CONSOLE("[%u] close\n", pState->ucSerialPort);
 
     // If we have a connect PCB, close it down.
     if(pState->pConnectPCB != NULL)
     {
-        CONSOLE("%u: closing client data 0x%08x\n", pState->ucSerialPort, pState->pConnectPCB);
+        CONSOLE("[%u] closing client data 0x%08x\n", pState->ucSerialPort, pState->pConnectPCB);
 
         // Clear out all of the TCP callbacks.
         tcp_arg(pState->pConnectPCB, NULL);
@@ -146,7 +146,7 @@ void TelnetClose(uint8_t ucSerialPort)
     // If we have a listen PCB, close it down as well.
     if(pState->pListenPCB != NULL)
     {
-        CONSOLE("%u: closing server data 0x%08x\n", pState->ucSerialPort, pState->pListenPCB);
+        CONSOLE("[%u] closing server data 0x%08x\n", pState->ucSerialPort, pState->pListenPCB);
 
         // Close the TCP connection.
         tcp_close(pState->pListenPCB);

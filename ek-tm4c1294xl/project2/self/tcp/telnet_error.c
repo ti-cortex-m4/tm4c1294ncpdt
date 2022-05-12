@@ -30,7 +30,7 @@ void TelnetError(void *arg, err_t err)
 {
     tState *pState = arg;
 
-    CONSOLE("%u: error 0x%08x, %d\n", pState->ucSerialPort, arg, err);
+    CONSOLE("[%u] error 0x%08x, %d\n", pState->ucSerialPort, arg, err);
 
     // Increment our error counter.
     pState->ucErrorCount++;
@@ -48,7 +48,7 @@ void TelnetError(void *arg, err_t err)
         }
         else
         {
-            CONSOLE("%u: try to connect again\n", pState->ucSerialPort);
+            CONSOLE("[%u] try to connect again\n", pState->ucSerialPort);
 
             // Attempt to reestablish the telnet connection to the server.
             TelnetOpen(pState->ulTelnetRemoteIP, pState->usTelnetRemotePort, pState->ucSerialPort);

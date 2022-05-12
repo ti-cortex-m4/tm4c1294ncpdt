@@ -114,7 +114,7 @@ void InMode(uchar u)
   ASSERT(u < UART_COUNT);
 
   if (fIOModeDebugFlag)
-    CONSOLE("%u: in mode\n",u);
+    CONSOLE("[%u] in mode\n",u);
 
   (*mfnInModes[u])();
 }
@@ -125,7 +125,7 @@ void OutMode(uchar u)
   ASSERT(u < UART_COUNT);
 
   if (fIOModeDebugFlag)
-    CONSOLE("%u: out mode\n",u);
+    CONSOLE("[%u] out mode\n",u);
 
   (*mfnOutModes[u])();
 }

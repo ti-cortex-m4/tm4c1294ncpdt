@@ -28,7 +28,7 @@ err_t TelnetSent(void *arg, struct tcp_pcb *pcb, u16_t len)
 {
     tState *pState = arg;
 
-    CONSOLE("%u: sent 0x%08x, 0x%08x, %d\n", pState->ucSerialPort, arg, pcb, len);
+    CONSOLE("[%u] sent 0x%08x, 0x%08x, %d\n", pState->ucSerialPort, arg, pcb, len);
 
     // Reset the connection timeout.
     pState->ulConnectionTimeout = 0;
