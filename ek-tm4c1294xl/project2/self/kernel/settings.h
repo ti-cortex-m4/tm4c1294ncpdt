@@ -45,6 +45,7 @@ extern bool                    fWatchdogReset;
 
 extern bool                    ibDebugMode;
 
+extern bool                    fUDPDebugBroadcast;
 extern ulong                   dwUDPDebugIP;
 extern uint                    wUDPDebugPort;
 

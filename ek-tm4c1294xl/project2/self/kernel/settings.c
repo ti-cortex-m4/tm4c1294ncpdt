@@ -53,6 +53,7 @@ bool                    fWatchdogReset;
 
 bool                    ibDebugMode;
 
+bool                    fUDPDebugBroadcast;
 ulong                   dwUDPDebugIP;
 uint                    wUDPDebugPort;
 

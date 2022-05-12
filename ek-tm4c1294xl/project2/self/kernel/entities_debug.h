@@ -6,6 +6,7 @@ entities_debug.h
 
 extern const entity enDebugMode;
 
+extern const entity enUDPDebugBroadcast;
 extern const entity enUDPDebugIP;
 extern const entity enUDPDebugPort;
 

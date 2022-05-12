@@ -127,6 +127,7 @@ const entity * const mpenEntities[] =
   &enWatchdogFlag,
   &enDebugMode,
 
+  &enUDPDebugBroadcast,
   &enUDPDebugIP,
   &enUDPDebugPort,
 
