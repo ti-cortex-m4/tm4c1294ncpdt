@@ -67,7 +67,7 @@ void StartConnection(uchar u)
   }
   else
   {
-    ERROR("%u: wrong routing mode %u\n", u, mbRoutingMode[u]);
+    ERROR("[%u] wrong routing mode %u\n", u, mbRoutingMode[u]);
   }
 }
 
@@ -114,7 +114,7 @@ void RunConnections(void)
       }
       else
       {
-        ERROR("%u: wrong connection mode %u", u, mbConnectionMode[u]);
+        ERROR("[%u] wrong connection mode %u", u, mbConnectionMode[u]);
       }
     }
     else if (IsModem(u))
