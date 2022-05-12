@@ -9,6 +9,7 @@ printf.c
 #include "utils/uartstdio.h"
 #include "settings.h"
 #include "../udp/udp_log.h"
+#include "clock.h"
 #include "printf.h"
 
 
@@ -356,9 +357,11 @@ void DebugPrintF(const char *pcsz, ...)
   {
     if (true)
     {
-      UDPPrintF( "<%d>%d(v%s) %4d-%02d-%02d %02d:%02d:%02d [%02d][%03d]: "
-        0/*level*/, 1/*InfoPrivateDev.FactoryNumber*/, 2/*str_VersPrg*/,
-        lttTime.year, lttTime.month, lttTime.day, lttTime.hour, lttTime.minute, lttTime.sec,
+      date_t date = SecondsToDate(GetClockSeconds());
+
+      UDPPrintF( "<%d>%d(v%d) %4d-%02d-%02d %02d:%02d:%02d [%02d][%03d]: ",
+        5/*level*/, 1/*InfoPrivateDev.FactoryNumber*/, 2/*str_VersPrg*/,
+        0, 0, date.wDays, date.bHours, date.bMinutes, date.bSeconds,
         3/*portId*/, 4/*devId*/);
     }
 
