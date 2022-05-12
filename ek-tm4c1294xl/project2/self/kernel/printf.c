@@ -387,7 +387,6 @@ void DebugPrintF(const char *pcsz, ...)
   }
 }
 
-
 void DebugPrintF_Warning(const char *pcsz, ...)
 {
   if (ibDebugMode == DEBUG_MODE_UDP)
@@ -421,7 +420,6 @@ void DebugPrintF_Warning(const char *pcsz, ...)
     va_end(va);
   }
 }
-
 
 void DebugPrintF_Error(const char *pcsz, ...)
 {
