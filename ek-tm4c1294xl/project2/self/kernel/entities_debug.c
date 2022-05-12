@@ -23,7 +23,7 @@ const entity enUDPDebugBroadcast = {
   EEPROM_UDP_DEBUG_BROADCAST, &fUDPDebugBroadcast, sizeof(uchar), CHAR, 0,
   0, 1, 0,
   "UDP_DEBUG_BROADCAST",
-  "AI=UDP_DEBUG_BROADCAST;D=UDP debug broadcast;T=INT;C=STATIC;O=0-No/0/1-Yes/1",
+  "AI=UDP_DEBUG_BROADCAST;E=1;D=UDP debug broadcast;T=INT;C=STATIC;O=0-No/0/1-Yes/1",
 };
 
 const entity enUDPDebugIP = {
