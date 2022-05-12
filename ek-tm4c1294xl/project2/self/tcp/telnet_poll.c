@@ -55,7 +55,7 @@ err_t TelnetPoll(void *arg, struct tcp_pcb *pcb)
                 err_t err = tcp_connect(pcb, &sIPAddr, pState->usTelnetRemotePort, TelnetConnected);
                 if(err != ERR_OK)
                 {
-                    ERROR("%u: poll.tcp_connect failed, error=%d\n", pState->ucSerialPort, err);
+                    ERROR("[%u] poll.tcp_connect failed, error=%d\n", pState->ucSerialPort, err);
                     ErrorTCPOperation(pState->ucSerialPort, err, TCP_CONNECT_POLL);
                 }
             }

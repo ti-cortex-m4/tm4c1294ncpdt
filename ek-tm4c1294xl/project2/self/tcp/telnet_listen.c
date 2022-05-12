@@ -53,7 +53,7 @@ void TelnetListen(uint16_t usTelnetPort, uint8_t ucSerialPort)
     struct tcp_pcb *pcb = tcp_new();
     if (pcb == NULL)
     {
-        ERROR("%u: listen.tcp_new failed, NULL\n", pState->ucSerialPort);
+        ERROR("[%u] listen.tcp_new failed, NULL\n", pState->ucSerialPort);
         ErrorTCPOperation(pState->ucSerialPort, ERR_MEM, TCP_NEW_LISTEN);
         return;
     }
@@ -63,7 +63,7 @@ void TelnetListen(uint16_t usTelnetPort, uint8_t ucSerialPort)
     err_t err = tcp_bind(pcb, IP_ADDR_ANY, usTelnetPort);
     if (err != ERR_OK)
     {
-        ERROR("%u: listen.tcp_bind to port %u failed, error=%d\n", pState->ucSerialPort, usTelnetPort, err);
+        ERROR("[%u] listen.tcp_bind to port %u failed, error=%d\n", pState->ucSerialPort, usTelnetPort, err);
         ErrorTCPOperation(pState->ucSerialPort, err, TCP_BIND_LISTEN);
         return;
     }
