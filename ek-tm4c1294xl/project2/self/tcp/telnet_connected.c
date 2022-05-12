@@ -50,7 +50,7 @@ err_t TelnetConnected(void *arg, struct tcp_pcb *pcb, err_t err)
 
     if(err != ERR_OK)
     {
-        ERROR("%u: connected error=%d\n", pState->ucSerialPort, err);
+        ERROR("[%u] connected error=%d\n", pState->ucSerialPort, err);
         ErrorTCPOperation(pState->ucSerialPort, err, HANDLER_CONNECTED);
 
         // Clear out all of the TCP callbacks.
@@ -64,7 +64,7 @@ err_t TelnetConnected(void *arg, struct tcp_pcb *pcb, err_t err)
         err_t err = tcp_close(pcb);
         if (err != ERR_OK)
         {
-           WARNING("%u: connected.tcp_close failed, error=%d\n", pState->ucSerialPort, err);
+           WARNING("[%u] connected.tcp_close failed, error=%d\n", pState->ucSerialPort, err);
            ErrorTCPOperation(pState->ucSerialPort, err, TCP_CLOSE_CONNECTED);
         }
 

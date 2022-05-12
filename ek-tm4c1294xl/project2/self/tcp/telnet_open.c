@@ -62,7 +62,7 @@ void TelnetOpen(uint32_t ulIPAddr, uint16_t usTelnetRemotePort, uint8_t ucSerial
     void *pcb = tcp_new();
     if (pcb == NULL)
     {
-        ERROR("%u: open.tcp_new failed, NULL\n", pState->ucSerialPort);
+        ERROR("[%u] open.tcp_new failed, NULL\n", pState->ucSerialPort);
         ErrorTCPOperation(pState->ucSerialPort, ERR_MEM, TCP_NEW_OPEN);
         return;
     }
@@ -84,7 +84,7 @@ void TelnetOpen(uint32_t ulIPAddr, uint16_t usTelnetRemotePort, uint8_t ucSerial
     err_t err = tcp_connect(pcb, &sIPAddr, usTelnetRemotePort, TelnetConnected);
     if(err != ERR_OK)
     {
-        ERROR("%u: open.tcp_connect failed, error=%d\n", pState->ucSerialPort, err);
+        ERROR("[%u] open.tcp_connect failed, error=%d\n", pState->ucSerialPort, err);
         ErrorTCPOperation(pState->ucSerialPort, err, TCP_CONNECT_OPEN);
         return;
     }
