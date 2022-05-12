@@ -164,6 +164,8 @@ int     main(void)
   IntPrioritySet(INT_EMAC0, ETHERNET_INT_PRIORITY);
   IntPrioritySet(FAULT_SYSTICK, SYSTICK_INT_PRIORITY);
 
+  DelayMilliSecond(500);
+  CONSOLE("start\n");
   StartConnections();
 
   IntMasterEnable();
