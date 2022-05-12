@@ -37,9 +37,20 @@ void UDPLog(uchar *pb, uint wSize) {
 
     memcpy(p->payload, pb, wSize);
 
-    err_t err = udp_sendto(pcb, p, IP_ADDR_BROADCAST, wUDPDebugPort);
-    if (err != 0) {
-      cwErrUDPLogSend++;
+    if (false)
+    {
+      const ip_addr_t ip = IPADDR4_INIT(dwUDPDebugIP);
+      err_t err = udp_sendto(pcb, p, &ip, wUDPDebugPort);
+      if (err != 0) {
+        cwErrUDPLogSend++;
+      }
+    }
+    else
+    {
+      err_t err = udp_sendto(pcb, p, IP_ADDR_BROADCAST, wUDPDebugPort);
+      if (err != 0) {
+        cwErrUDPLogSend++;
+      }
     }
 
     pbuf_free(p);

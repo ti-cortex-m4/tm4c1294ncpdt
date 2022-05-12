@@ -19,18 +19,25 @@ const entity enDebugMode = {
 };
 
 
+const entity enUDPDebugBroadcast = {
+  EEPROM_UDP_DEBUG_BROADCAST, &fUDPDebugBroadcast, sizeof(uchar), CHAR, 0,
+  0, 1, 0,
+  "UDP_DEBUG_BROADCAST",
+  "AI=UDP_DEBUG_BROADCAST;D=UDP debug broadcast;T=INT;C=STATIC;O=0-No/0/1-Yes/1",
+};
+
 const entity enUDPDebugIP = {
   EEPROM_UDP_DEBUG_IP, &dwUDPDebugIP, sizeof(ulong), IP, 0,
   0, MAX_LONG, 0xFFFFFFFF,
-  "UDPDI",
-  "AI=UDPDI;E=1;D=UDP debug IP-address;T=STRING;C=IPCTRL;S=DBMD==1?\"e\":\"i\"",
+  "UDP_DEBUG_IP",
+  "AI=UDP_DEBUG_IP;E=1;D=UDP debug IP-address;T=STRING;C=IPCTRL;S=DBMD==1?\"e\":\"i\"",
 };
 
 const entity enUDPDebugPort = {
   EEPROM_UDP_DEBUG_PORT, &wUDPDebugPort, sizeof(uint), INT, 0,
   0, MAX_INT, 50000,
-  "UDPDP",
-  "AI=UDPDP;E=1;D=UDP debug port;T=INT;C=EDIT;S=DBMD==1?\"e\":\"i\"",
+  "UDP_DEBUG_PORT",
+  "AI=UDP_DEBUG_PORT;E=1;D=UDP debug port;T=INT;C=EDIT;S=DBMD==1?\"e\":\"i\"",
 };
 
 

@@ -127,6 +127,7 @@ const message * const mppcszControls[] =
   &enSerialNumber.szName,
   &enWatchdogFlag.szName,
   &enDebugMode.szName,
+  &enUDPDebugBroadcast.szName,
   &enUDPDebugIP.szName,
   &enUDPDebugPort.szName,
   &enLWIPDebugFlag.szName,
