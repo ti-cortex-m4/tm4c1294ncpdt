@@ -19,7 +19,14 @@ hdlc_address.c
 uchar   GetHdlcAddressesSize(void)
 {
 #ifdef HDLC_ADDRESS_SIZE_4
-  return 4+1;
+  uint wAddr = mpdwAddress1[diCurr.bAddress-1];
+  if (wAddr == 0) {
+    return 2+1;
+  } else if (wAddr <= 0x7F) {
+    return 2+1;
+  } else {
+    return 4+1;
+  }
 #else
   return 1+1;
 #endif
@@ -30,10 +37,17 @@ uchar   GetHdlcAddressesSize(void)
 void    PushHdlcAddresses(void)
 {
 #ifdef HDLC_ADDRESS_SIZE_4
-  PushChar(0x00);
-  PushChar(0x02);
 
   uint wAddr = mpdwAddress1[diCurr.bAddress-1];
+
+  if (wAddr == 0) {
+    PushChar(0x03);
+  } else if (wAddr <= 0x7F) {
+    PushChar(0x02);
+  } else {
+    PushChar(0x00);
+    PushChar(0x02);
+  }
 
   uchar bHi = wAddr / 0x100;
   uchar bLo = wAddr % 0x100;
@@ -42,8 +56,14 @@ void    PushHdlcAddresses(void)
   if (bLo & 0x80) bHi |= 0x02;
   bLo = (bLo << 1) | 0x01;
 
-  PushChar(bHi);
-  PushChar(bLo);
+  if (wAddr == 0) {
+    PushChar(0);
+  } else if (wAddr <= 0x7F) {
+    PushChar(bLo);
+  } else {
+    PushChar(bHi);
+    PushChar(bLo);
+  }
 
   PushChar((bLogical << 1) + 0x01);
 #else
