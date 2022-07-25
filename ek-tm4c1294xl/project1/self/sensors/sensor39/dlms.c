@@ -155,7 +155,7 @@ void    AARQ(uchar  bNS, uchar  bNR)
   PushChar(0x01);
   
   PushChar(0xAC); // calling-authentication-value
-  PushChar(0x0A); // length
+  PushChar(bPassSize+2); // length
   PushChar(0x80);
 #if true
   PushChar(bPassSize);
