@@ -125,7 +125,7 @@ void    AARQ(uchar  bNS, uchar  bNR)
   PushChar(0x00);
 
   PushChar(0x60); // AARQ
-  PushChar(0x36); // length
+  PushChar(0x36-0x0A+bPassSize+2); // length
   
   PushChar(0xA1); // application-context-name
   PushChar(0x09); // length
