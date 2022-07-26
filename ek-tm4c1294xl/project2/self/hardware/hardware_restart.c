@@ -20,27 +20,25 @@ hardware_restart.c
 
 static void SetPL6To0(void)
 {
-  mbIOModes[1] = IO_MODE_INPUT;
-  HWREG(GPIO_PORTF_AHB_BASE + GPIO_O_DATA + 0x0020) = ~0x0008;
+  HWREG(GPIO_PORTL_BASE + GPIO_O_DATA + 0x0020) = ~0x0008;
 }
 
 static void SetPL6To1(void)
 {
-  mbIOModes[1] = IO_MODE_OUTPUT;
-  HWREG(GPIO_PORTF_AHB_BASE + GPIO_O_DATA + 0x0020) = 0x0008;
+  HWREG(GPIO_PORTL_BASE + GPIO_O_DATA + 0x0020) = 0x0008;
 }
 
 
-static void InitPL6(void) // PF3
+
+static void InitPL6(void)
 {
-  HWREG(SYSCTL_RCGCGPIO) |= SYSCTL_RCGCGPIO_R5; // GPIO Port F Run Mode Clock Gating Control
+  HWREG(SYSCTL_RCGCGPIO) |= SYSCTL_RCGCGPIO_R10; // GPIO Port L Run Mode Clock Gating Control
   DelayGPIO();
   HWREG(GPIO_PORTF_AHB_BASE + GPIO_O_DIR) |= 0x0008; // GPIO Direction
   HWREG(GPIO_PORTF_AHB_BASE + GPIO_O_DEN) |= 0x0008; // GPIO Digital Enable
   GPIOPadConfigSet(GPIO_PORTF_BASE, GPIO_PIN_3, GPIO_STRENGTH_8MA, GPIO_PIN_TYPE_STD_WPU);
-
-  InMode(1);
 }
+
 
 
 void InitHardwareRestart(void)
