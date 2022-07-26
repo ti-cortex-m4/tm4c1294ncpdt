@@ -18,12 +18,12 @@ hardware_restart.c
 
 static void SetPL6To0(void)
 {
-  HWREG(GPIO_PORTL_BASE + GPIO_O_DATA + 0x0020) = ~0x0040;
+  HWREG(GPIO_PORTL_BASE + GPIO_O_DATA + (GPIO_PIN_6 << 2)) = ~0x0040;
 }
 
 static void SetPL6To1(void)
 {
-  HWREG(GPIO_PORTL_BASE + GPIO_O_DATA + 0x0020) = 0x0040;
+  HWREG(GPIO_PORTL_BASE + GPIO_O_DATA + (GPIO_PIN_6 << 2)) = 0x0040;
 }
 
 
