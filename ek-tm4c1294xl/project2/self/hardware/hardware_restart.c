@@ -45,7 +45,7 @@ void InitHardwareRestart(void)
   SetPL6To0();
 }
 
-void RunHardwareRestart(void)
+void HardwareRestart(void)
 {
   SetPL6To1();
   DelaySecond(1);
