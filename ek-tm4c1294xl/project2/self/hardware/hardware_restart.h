@@ -5,4 +5,4 @@ hardware_restart.h
 ------------------------------------------------------------------------------*/
 
 void InitHardwareRestart(void);
-void RunHardwareRestart(void);
+void HardwareRestart(void);

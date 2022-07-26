@@ -31,6 +31,7 @@ MAIN,C
 #include "hardware/uart_loader.h"
 #include "hardware/watchdog.h"
 #include "hardware/internal_temperature.h"
+#include "hardware/hardware_restart.h"
 #include "uart/uart.h"
 #include "uart/serial.h"
 #include "uart/uart_log.h"
@@ -122,6 +123,7 @@ int     main(void)
   InitROM();
   InitUARTLoader();
 
+  InitHardwareRestart();
   InitSettings();
   InitUARTLog(dwClockFreq);
 
