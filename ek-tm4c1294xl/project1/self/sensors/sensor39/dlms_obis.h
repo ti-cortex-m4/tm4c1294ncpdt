@@ -19,7 +19,7 @@ extern  const obis_t        obisId;
 
 extern  const obis_t        obisTime;
 
-extern  const obis_t        obisEngAbs;
+extern  const obis_t        obisEngAbs[4];
 
 extern  const obis_t        obisEngAbsTariff[4];
 

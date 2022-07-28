@@ -53,7 +53,10 @@ time2   ReadTimeCan39(void)
     if (tm2.fValid)
     {
       tiChannelC = tm2.tiValue;
-      mpboChannelsA[0] = true;
+
+      uchar i;
+      for (i=0; i<4; i++)
+        mpboChannelsA[i] = true;
 
       return GetTime0(tm2.tiValue);
     }
