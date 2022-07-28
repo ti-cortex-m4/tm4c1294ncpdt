@@ -34,13 +34,19 @@ double2 ReadCntCurr39_Internal(void)
   uchar bError = FragmentOpen39(&c);
   if (bError != 0) return Fault(60+0);
 
-  double2 db2 = ReadRegisterValueWithScaler39(obisEngAbs, &c);
-  if (!db2.fValid) return Fault(60+1);
+  uchar i;
+  for (i=0; i<4; i++)
+  {
+    double2 db2 = ReadRegisterValueWithScaler39(obisEngAbs[i], &c);
+    if (!db2.fValid) return Fault(60+1+i);
+
+    mpdbChannelsC[i] = db2.dbValue / 1000;
+  }
 
   DISC();
-  if (Input39() != SER_GOODCHECK) return Fault(60+2);
+  if (Input39() != SER_GOODCHECK) return Fault(60+5);
 
-  return GetDouble0(db2.dbValue);
+  return GetDouble0(-1);
 }
 
 
@@ -56,15 +62,16 @@ double2 ReadCntCurr39(void)
     if (fKey == true) break;
     if (db2.fValid)
     {
-      mpdbChannelsC[0] = db2.dbValue / 1000;
-      mpboChannelsA[0] = true;
+      uchar i;
+      for (i=0; i<4; i++)
+        mpboChannelsA[i] = true;
 
-      return GetDouble0(mpdbChannelsC[0]);
+      return GetDouble0(mpdbChannelsC[diCurr.ibLine]);
     }
   }
 
   DISC();
-  if (Input39() != SER_GOODCHECK) return Fault(60+3);
+  if (Input39() != SER_GOODCHECK) return Fault(60+6);
 
-  return Fault(60+4);
+  return Fault(60+7);
 }
