@@ -171,7 +171,7 @@ uchar   ValidateFrame(uchar  bNS_client, uchar  bNR_client)
     }
   } else if ((bControl & 0x03) == 0x03) {
 #ifdef MONITOR_39_MONITOR
-    MonitorString("U-frame validation ");
+    MonitorString(" U-frame validation ");
 #endif
     return 10+3;
   }
