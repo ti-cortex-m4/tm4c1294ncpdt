@@ -37,7 +37,7 @@ void    QueryNextBlock39(uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  bBlock
   PushFormatDLMS(wSize);
   PushHdlcAddresses();
 
-  PushChar((bNR << 5) | 0x10 | (bNS << 1) | 0x00);
+  PushChar(((bNR & 0x07) << 5) | 0x10 | ((bNS & 0x07) << 1) | 0x00);
 
   PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize()));
 
