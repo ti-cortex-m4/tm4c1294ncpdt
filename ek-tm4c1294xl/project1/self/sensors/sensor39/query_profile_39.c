@@ -70,7 +70,7 @@ void    QueryProfile39(uchar  bNS, uchar  bNR, uchar  bInvokeId, time  tm1, time
   MonitorString("\n\n QueryProfile39 "); MonitorTime(tm1); MonitorTime(tm2);
 #endif  
 
-  uint wSize = 110 + GetHdlcAddressesSize(); // 0x70 112
+  uint wSize = 74 + GetHdlcAddressesSize();
 
   InitPush(0);
   PushChar(0x7E);
@@ -78,9 +78,9 @@ void    QueryProfile39(uchar  bNS, uchar  bNR, uchar  bInvokeId, time  tm1, time
   PushFormatDLMS(wSize);
   PushHdlcAddresses();
 
-  PushChar((bNR << 5) | 0x10 | (bNS << 1) | 0x00);
+  PushChar(((bNR & 0x07) << 5) | 0x10 | ((bNS & 0x07) << 1) | 0x00);
 
-  PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
+  PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize()));
 
   // DLMS start
 
@@ -144,11 +144,11 @@ void    QueryProfile39(uchar  bNS, uchar  bNR, uchar  bInvokeId, time  tm1, time
   PushChar(0x0C);
   PushTimeDLMS(tm2);
 
-//        <Array Qty="02" >
+//        <Array Qty="00" >
 
   PushChar(0x01);
-  PushChar(0x02);
-
+  PushChar(0x00);
+/*
 //          <Structure Qty="04" >
 
   PushChar(0x02);
@@ -192,6 +192,7 @@ void    QueryProfile39(uchar  bNS, uchar  bNR, uchar  bInvokeId, time  tm1, time
   PushChar(0x00);
 
 //          </Structure>
+*/
 //        </Array>
 //      </Structure>
 //    </AccessParameters>
