@@ -108,7 +108,7 @@ t2time  QueryHeader39(void)
 }
 
 
-static bool ReadData39(time  tiTime, ulong  dwValue)
+static bool ReadData39(time  tiTime, ulong  mdwValue[4])
 {
   sprintf(szLo," %02u    %02u.%02u.%02u", tiTime.bHour, tiTime.bDay,tiTime.bMonth,tiTime.bYear);
 
@@ -118,19 +118,23 @@ static bool ReadData39(time  tiTime, ulong  dwValue)
 
   double dbPulse = mpdbPulseHou[ibDig];
 
+  uchar c;
+  for (c=0; c<4; c++)
+  {
 #if true
-  double db = (double)dwValue*dbScaler;
-  mpdbEngFracDigCan[ibDig][0] += db;
+    double db = (double)mdwValue[c]*dbScaler;
+    mpdbEngFracDigCan[ibDig][c] += db;
 
-  uint w = (uint)(mpdbEngFracDigCan[ibDig][0]*dbPulse/1000);
-  mpwChannels[0] = w;
+    uint w = (uint)(mpdbEngFracDigCan[ibDig][c]*dbPulse/1000);
+    mpwChannels[c] = w;
 
-  mpdbEngFracDigCan[ibDig][0] -= (double)w*1000/dbPulse;
+    mpdbEngFracDigCan[ibDig][c] -= (double)w*1000/dbPulse;
 #else
-  ulong dw = dwValue;
-  uint w = (uint)(dw*dbPulse/1000);
-  mpwChannels[0] = w;
+    ulong dw = dwValue[c];
+    uint w = (uint)(dw*dbPulse/1000);
+    mpwChannels[c] = w;
 #endif
+  }
 
 #ifdef MONITOR_39
     MonitorString(" out="); MonitorTime(tiTime);
@@ -157,7 +161,11 @@ bool    ReadHeader39(void)
     dw -= (wProfile39 - (6-1-h));
     time tiVirtual = HouIndexToDate(dw);
 
-    ulong dwValue = 0;
+    ulong mdwValue[4];
+    uchar c;
+    for (c=0; c<4; c++)
+      mdwValue[c] = 0;
+
     uchar bSize = GetProfileSize39();
 
 #ifdef MONITOR_39
@@ -173,7 +181,11 @@ bool    ReadHeader39(void)
       profile39 prf = GetProfile39(i);
       if (prf.fExists) {
         if (!DifferentDateTime(tiVirtual, prf.tmTime)) {
-          dwValue = prf.ddwValue;
+
+          uchar c;
+          for (c=0; c<4; c++)
+            mdwValue[c] = prf.mdwValue[c];
+
           fFound = true;
           break;
         }
@@ -184,10 +196,13 @@ bool    ReadHeader39(void)
 
 #ifdef MONITOR_39
     MonitorString(" in="); MonitorTime(tiVirtual);
-    MonitorString(" "); MonitorLongDec(dwValue);
+    MonitorString(" "); MonitorLongDec(mdwValue[0]);
+    MonitorString(" "); MonitorLongDec(mdwValue[1]);
+    MonitorString(" "); MonitorLongDec(mdwValue[2]);
+    MonitorString(" "); MonitorLongDec(mdwValue[3]);
 #endif
 
-    if (ReadData39(tiVirtual, dwValue) == false) return false;
+    if (ReadData39(tiVirtual, mdwValue) == false) return false;
   }
 
   wProfile39 += 6;
@@ -208,7 +223,7 @@ uchar   TestProfile39_Internal(caller39*  pc)
   dwValue39 = DateToHouIndex(tiValue39);
 
 
-  double2 scaler = ReadRegisterScaler39(obisEngAbs, pc);
+  double2 scaler = ReadRegisterScaler39(obisEngAbs[0], pc);  // TODO
   if (!scaler.fValid) return 2;
   dbScaler = scaler.dbValue;
 
@@ -231,8 +246,8 @@ uchar   TestProfile39_Internal(caller39*  pc)
 
 double2 TestProfile39(void)
 {
-  fMonitorLogBasic = false;
-  fMonitorLogHex = false;
+  fMonitorLogBasic = true;
+  fMonitorLogHex = true;
 
   MonitorOpen(0);
 
