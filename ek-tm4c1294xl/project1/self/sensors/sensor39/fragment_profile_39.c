@@ -112,17 +112,17 @@ double2 TestFragmentProfile39(void)
   if (FragmentOpen39(&c) != 0) return GetDouble2Error();
 
   time tm1;
-  tm1.bYear = 20;
-  tm1.bMonth = 6;
-  tm1.bDay = 1;
+  tm1.bYear = 22;
+  tm1.bMonth = 7;
+  tm1.bDay = 25;
   tm1.bHour = 0;
   tm1.bMinute = 0;
   tm1.bSecond = 0;
 
   time tm2;
-  tm2.bYear = 20;
-  tm2.bMonth = 6;
-  tm2.bDay = 14;
+  tm2.bYear = 22;
+  tm2.bMonth = 7;
+  tm2.bDay = 26;
   tm2.bHour = 0;
   tm2.bMinute = 0;
   tm2.bSecond = 0;
