@@ -12,7 +12,7 @@ typedef struct
 {
   bool          fExists;
   time          tmTime;
-  uint64_t      ddwValue;
+  ulong         mdwValue[4];
 } profile39;
 
 
@@ -21,7 +21,7 @@ typedef struct
 
 
 void    InitProfile39(void);
-void    AddProfile39(time  tmTime, uint64_t  ddwValue);
+void    AddProfile39(time  tmTime, ulong  mdwValue[4]);
 
 void    DeltaProfile39(void);
 profile39 GetProfile39(uchar  i);
