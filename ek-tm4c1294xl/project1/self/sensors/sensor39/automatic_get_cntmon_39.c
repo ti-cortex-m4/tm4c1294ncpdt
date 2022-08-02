@@ -102,7 +102,8 @@ double2 ReadCntMonCan38_Internal(uchar  ibMon)
     DISC();
     if (Input39() != SER_GOODCHECK) return Fault(70+6);
 
-    return GetDouble0((double)r.ddwValue * scaler.dbValue);
+    //return GetDouble0((double)r.ddwValue * scaler.dbValue);
+    return GetDouble0(-1); // TODO
   }
 }
 
