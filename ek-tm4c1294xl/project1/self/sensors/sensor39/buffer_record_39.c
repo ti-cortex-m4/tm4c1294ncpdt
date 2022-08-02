@@ -71,11 +71,13 @@ void    AddRecord39(uint  iwStart) {
 
 record39 GetRecordError39(char  bError)
 {
-  static const time tiZero = { 0, 0, 0, 0, 0, 0 };
+  //static const ulong mdwZero[4] = {0, 0, 0, 0}; TODO
+  static const time tiZero = {0, 0, 0, 0, 0, 0};
   record39 r;
 
   r.bError = bError;
-  r.ddwValue = 0;
+  uchar c;
+  for (c=0; c<4; c++) r.mdwValue[c] = 0;
   r.tmValue = tiZero;
   r.fFirst = false;
 
@@ -103,9 +105,9 @@ record39 FinishRecord39(void) {
 
   InitPop39();
 
-  uint wCapacity1 = GetPopCapacity39();
-  if (wCapacity1 < 2)
-    return Fault_(140+1, wCapacity1);
+  uint wCapacity = GetPopCapacity39();
+  if (wCapacity < 2)
+    return Fault_(140+1, wCapacity);
 
   uchar bTypeArray = PopChar39();
   if (bTypeArray != 1) // array
@@ -120,16 +122,16 @@ record39 FinishRecord39(void) {
   uchar i;
   for (i=0; i<bCount; i++)
   {
-    uint wCapacity2 = GetPopCapacity39();
-    if (wCapacity2 < 2 + 2+12 + 1+8)
-      return Fault_(140+3, wCapacity2);
+    wCapacity = GetPopCapacity39();
+    if (wCapacity < 2 + 2+12 + 4*(1+4))
+      return Fault_(140+3, wCapacity);
 
     uchar bTypeStructure = PopChar39();
     if (bTypeStructure != 0x02) // structure
       return Fault_(140+4, bTypeStructure);
 
     uchar bSizeStructure = PopChar39();
-    if (bSizeStructure != 2) // structure size
+    if (bSizeStructure != 5) // structure size
       return Fault_(140+5, bSizeStructure);
 
     uchar bTypeString = PopChar39();
@@ -142,15 +144,30 @@ record39 FinishRecord39(void) {
 
     time tm = PopTimeDate39();
 
-    uchar bTypeLong64 = PopChar39();
-    if (bTypeLong64 != 0x15) // unsigned long 64
-      return Fault_(140+8, bTypeLong64); // ???
+    ulong mdwValue[4];
 
-    uint64_t ddwValue = PopLongLong39();
+    uchar c;
+    for (c=0; c<4; c++)
+    {
+      uchar bTypeLong32 = PopChar39();
+      if (bTypeLong32 != 0x06) // double-long-unsigned 32
+        return Fault_(140+8, bTypeLong32);
+
+       mdwValue[c] = PopLong39();
+    }
+
+#if BUFFER_RECORD_39
+    MonitorString("\n record ");
+    MonitorTime(tm);
+    MonitorString(" "); MonitorLongDec(mdwValue[0]);
+    MonitorString(" "); MonitorLongDec(mdwValue[1]);
+    MonitorString(" "); MonitorLongDec(mdwValue[2]);
+    MonitorString(" "); MonitorLongDec(mdwValue[3]);
+#endif
 
     if (r.fFirst == false) {
       r.bError = 0;
-      r.ddwValue = ddwValue;
+      for (c=0; c<4; c++) r.mdwValue[c] = mdwValue[c];
       r.tmValue = tm;
       r.fFirst = true;
     }
@@ -184,13 +201,13 @@ record39 FinishRecordProfile39(void) {
   uchar i;
   for (i=0; i<bCount; i++)
   {
-    if (GetPopCapacity39() < 2 + 2+12 + 1+8)
+    if (GetPopCapacity39() < 2 + 2+12 + 4*(1+4))
       return Fault(140+3);
 
     if (PopChar39() != 0x02) // structure
       return Fault(140+4);
 
-    if (PopChar39() != 2) // structure size
+    if (PopChar39() != 5) // structure size
       return Fault(140+5);
 
     if (PopChar39() != 0x09) // string
@@ -201,14 +218,20 @@ record39 FinishRecordProfile39(void) {
 
     time tm = PopTimeDate39();
 
-    if (PopChar39() != 0x15) // unsigned long 64
-      return Fault(140+8);
+    ulong mdwValue[4];
 
-    uint64_t ddw = PopLongLong39();
+    uchar c;
+    for (c=0; c<4; c++)
+    {
+      if (PopChar39() != 0x06) // double-long-unsigned 32
+        return Fault(140+8);
+
+      mdwValue[c] = PopLong39();
+    }
 
     if (r.fFirst == false) {
       r.bError = 0;
-      r.ddwValue = ddw;
+      for (c=0; c<4; c++) r.mdwValue[c] = mdwValue[c];
       r.tmValue = tm;
       r.fFirst = true;
 
@@ -216,26 +239,30 @@ record39 FinishRecordProfile39(void) {
 
       FirstCurr.fExists = true;
       FirstCurr.tmTime = tm;
-      FirstCurr.ddwValue = ddw;
+      for (c=0; c<4; c++) FirstCurr.mdwValue[c] = mdwValue[c];
     }
 
 #if BUFFER_RECORD_39
     MonitorString("\n add record ");
     MonitorTime(tm);
-    MonitorLongDec(ddw / 1000000);
-    MonitorLongDec(ddw % 1000000);
+    MonitorLongDec(mdwValue[0]);
+    MonitorLongDec(mdwValue[1]);
+    MonitorLongDec(mdwValue[2]);
+    MonitorLongDec(mdwValue[3]);
 #endif
-    AddProfile39(tm, ddw);
+    AddProfile39(tm, mdwValue);
   }
 
   if (FirstPrev.fExists == true) {
 #if BUFFER_RECORD_39
     MonitorString("\n add previous record ");
     MonitorTime(FirstPrev.tmTime);
-    MonitorLongDec(FirstPrev.ddwValue / 1000000);
-    MonitorLongDec(FirstPrev.ddwValue % 1000000);
+    MonitorString(" "); MonitorLongDec(FirstPrev.mdwValue[0]);
+    MonitorString(" "); MonitorLongDec(FirstPrev.mdwValue[1]);
+    MonitorString(" "); MonitorLongDec(FirstPrev.mdwValue[2]);
+    MonitorString(" "); MonitorLongDec(FirstPrev.mdwValue[3]);
 #endif
-    AddProfile39(FirstPrev.tmTime, FirstPrev.ddwValue);
+    AddProfile39(FirstPrev.tmTime, FirstPrev.mdwValue);
   }
 
   if (IsProfileOveflow39())
