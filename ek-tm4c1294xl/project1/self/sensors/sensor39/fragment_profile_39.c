@@ -42,7 +42,7 @@ record39 FragmentProfile39(caller39  *pc, time  tm1, time  tm2, bool  fProfile)
   bool fUseBlocks = UseBlocksDMLS();
   bool fLastBlock = LastBlockDMLS();
 
-  AddRecord39(fUseBlocks ? 19 + GetHdlcAddressesSize() : 12 + GetHdlcAddressesSize());
+  AddRecord39(fUseBlocks ? 19 + GetHdlcAddressesSize() : 13 + GetHdlcAddressesSize());
 
   while (!LastSegmentDMLS()) {
     (*pc).bNR++;

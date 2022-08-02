@@ -108,7 +108,7 @@ record39 FinishRecord39(void) {
     return FaultData(140+1, wCapacity);
 
   uchar bTypeArray = PopChar39();
-  if (bTypeArray != 1) // array
+  if (bTypeArray != 0x01) // array
     return FaultData(140+2, bTypeArray);
 
   uchar bCount = PopChar39();
@@ -185,7 +185,7 @@ record39 FinishRecordProfile39(void) {
   if (GetPopCapacity39() < 2)
     return Fault(140+1);
 
-  if (PopChar39() != 1) // array
+  if (PopChar39() != 0x01) // array
     return Fault(140+2);
 
   uchar bCount = PopChar39();
