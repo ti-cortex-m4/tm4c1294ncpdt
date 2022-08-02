@@ -37,7 +37,7 @@ void    PushChar39(uchar  b) {
   if (iwPush < sizeof(mpbBuff)-1)
     mpbBuff[iwPush++] = b;
   else  
-    Error39(130+0);
+    Error39(170+0);
 }
 
 
