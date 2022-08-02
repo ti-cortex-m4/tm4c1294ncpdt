@@ -22,7 +22,7 @@ uchar   Error39(uchar  bError) {
 }
 
 
-uchar   Error39_(uchar  bError, uint  wData) {
+uchar   ErrorData39(uchar  bError, uint  wData) {
 #ifdef  MONITOR_39  
   MonitorString("\n error="); MonitorCharDec(bError);
   MonitorString(" data="); MonitorIntDec(wData);

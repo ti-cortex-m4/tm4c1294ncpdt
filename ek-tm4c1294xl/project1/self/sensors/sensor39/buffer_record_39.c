@@ -41,7 +41,7 @@ void    AddRecord39(uint  iwStart) {
 
   uint cwSize = IndexInBuff()-iwStart-3;
 
-#ifdef BUFFER_RECORD_39
+#ifdef BUFFER_ARRAY_39
   MonitorArray39();
 
   MonitorString("\n AddToBuffer: start="); MonitorIntDec(iwStart);
@@ -54,7 +54,7 @@ void    AddRecord39(uint  iwStart) {
   for (i=0; i<cwSize; i++) {
     uchar b = PopChar();
 
-#ifdef BUFFER_RECORD_39
+#ifdef BUFFER_ARRAY_39
     MonitorCharHex(b);
     if (i % 16 == 16-1) MonitorString("\n");
 #endif
@@ -62,7 +62,7 @@ void    AddRecord39(uint  iwStart) {
     PushChar39(b);
   }
 
-#ifdef BUFFER_RECORD_39
+#ifdef BUFFER_ARRAY_39
   MonitorString("\n");
 #endif
 }
@@ -71,13 +71,11 @@ void    AddRecord39(uint  iwStart) {
 
 record39 GetRecordError39(char  bError)
 {
-  //static const ulong mdwZero[4] = {0, 0, 0, 0}; TODO
   static const time tiZero = {0, 0, 0, 0, 0, 0};
   record39 r;
 
   r.bError = bError;
-  uchar c;
-  for (c=0; c<4; c++) r.mdwValue[c] = 0;
+  uchar c; for (c=0; c<4; c++) r.mdwValue[c] = 0;
   r.tmValue = tiZero;
   r.fFirst = false;
 
@@ -92,9 +90,9 @@ static record39 Fault(uchar  bError)
 }
 
 
-static record39 Fault_(uchar  bError, uint  wData)
+static record39 FaultData(uchar  bError, uint  wData)
 {
-  return GetRecordError39(Error39_(bError, wData));
+  return GetRecordError39(ErrorData39(bError, wData));
 }
 
 
@@ -107,11 +105,11 @@ record39 FinishRecord39(void) {
 
   uint wCapacity = GetPopCapacity39();
   if (wCapacity < 2)
-    return Fault_(140+1, wCapacity);
+    return FaultData(140+1, wCapacity);
 
   uchar bTypeArray = PopChar39();
   if (bTypeArray != 1) // array
-    return Fault_(140+2, bTypeArray);
+    return FaultData(140+2, bTypeArray);
 
   uchar bCount = PopChar39();
 
@@ -124,23 +122,23 @@ record39 FinishRecord39(void) {
   {
     wCapacity = GetPopCapacity39();
     if (wCapacity < 2 + 2+12 + 4*(1+4))
-      return Fault_(140+3, wCapacity);
+      return FaultData(140+3, wCapacity);
 
     uchar bTypeStructure = PopChar39();
     if (bTypeStructure != 0x02) // structure
-      return Fault_(140+4, bTypeStructure);
+      return FaultData(140+4, bTypeStructure);
 
     uchar bSizeStructure = PopChar39();
     if (bSizeStructure != 5) // structure size
-      return Fault_(140+5, bSizeStructure);
+      return FaultData(140+5, bSizeStructure);
 
     uchar bTypeString = PopChar39();
     if (bTypeString != 0x09) // string
-      return Fault_(140+6, bTypeString);
+      return FaultData(140+6, bTypeString);
 
     uchar bSizeString = PopChar39();
     if (bSizeString != 12) // string size
-      return Fault_(140+7, bSizeString);
+      return FaultData(140+7, bSizeString);
 
     time tm = PopTimeDate39();
 
@@ -151,7 +149,7 @@ record39 FinishRecord39(void) {
     {
       uchar bTypeLong32 = PopChar39();
       if (bTypeLong32 != 0x06) // double-long-unsigned 32
-        return Fault_(140+8, bTypeLong32);
+        return FaultData(140+8, bTypeLong32);
 
        mdwValue[c] = PopLong39();
     }

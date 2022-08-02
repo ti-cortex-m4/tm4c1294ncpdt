@@ -226,10 +226,10 @@ bool    AARE_CheckPass_Internal(void)
       if (bResult == 0)
         return true;
       else if (bResult == 1) {
-        Error39_(1, bResult);
+        ErrorData39(1, bResult);
         return false;
       } else {
-        Error39_(2, bResult);
+        ErrorData39(2, bResult);
         return false;
       }
     }
