@@ -69,7 +69,7 @@ void    QueryValue_Current39(void)
 {
   c.bNS++;
   c.bInvokeId++;
-  QueryGetRegisterValueDLMS(obisEngAbs, c);
+  QueryGetRegisterValueDLMS(obisEngAbs[0], c);  // TODO
 }
 
 
@@ -85,7 +85,7 @@ void    QueryScaler_Current39(void)
 {
   c.bNS++;
   c.bInvokeId++;
-  QueryGetRegisterScalerDLMS(obisEngAbs, c);
+  QueryGetRegisterScalerDLMS(obisEngAbs[0], c); // TODO
 }
 
 
