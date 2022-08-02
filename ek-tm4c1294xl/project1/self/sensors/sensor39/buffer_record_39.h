@@ -11,7 +11,7 @@ buffer_record_39.h
 typedef struct
 {
   uchar         bError;
-  uint64_t      ddwValue;
+  ulong         mdwValue[4];
   time          tmValue;
   bool          fFirst;
 } record39;
