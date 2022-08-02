@@ -48,7 +48,7 @@ double2 ReadCntMonCan38_Internal(uchar  ibMon)
     uchar bMonth = (ibMon+1) % 12 + 1;
     uchar bYear = (bMonth > tm.bMonth) ? tm.bYear-1 : tm.bYear;
 
-    double2 db2 = FragmentCntMonCan(obisEngAbs, &c, bMonth, bYear);
+    double2 db2 = FragmentCntMonCan(obisEngAbs[0], &c, bMonth, bYear); // TODO
 
     if (db2.bError == ERROR_NOT_PRESENTED) {
       Clear();
@@ -96,7 +96,7 @@ double2 ReadCntMonCan38_Internal(uchar  ibMon)
       return Fault(70+4);
     }
 
-    double2 scaler = ReadRegisterScaler39(obisEngAbs, &c);
+    double2 scaler = ReadRegisterScaler39(obisEngAbs[0], &c);  // TODO
     if (!scaler.fValid) return Fault(70+5);
 
     DISC();
