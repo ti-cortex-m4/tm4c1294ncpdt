@@ -38,7 +38,7 @@ double2 ReadRegisterScalerDLMS(void)
 #endif
 
   if (bDataAccessResult != 0) {
-    return GetDouble2Error1(Error39_(20+0, bDataAccessResult));
+    return GetDouble2Error1(ErrorData39(20+0, bDataAccessResult));
   }
 
   if (PopChar() != 2) return Fault(20+1); // !structure
