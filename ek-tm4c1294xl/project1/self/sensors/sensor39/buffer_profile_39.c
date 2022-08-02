@@ -25,7 +25,9 @@ static bool         fProfileOveflow39;
 
 void    InitProfile39(void)
 {
+#ifdef MONITOR_39
   MonitorString("\n init profile ");
+#endif
 
   memset(&mpProfile39, 0, sizeof(mpProfile39));
   cbProfileSize39 = 0;
@@ -33,17 +35,28 @@ void    InitProfile39(void)
 }
 
 
-void    AddProfile39(time  tmTime, uint64_t  ddwValue)
+void    AddProfile39(time  tmTime, ulong  mdwValue[4])
 {
-  MonitorString("\n add profile "); MonitorIntDec(cbProfileSize39); MonitorString(" "); MonitorTime(tmTime); MonitorLong64Hex(ddwValue);
+#ifdef MONITOR_39
+  MonitorString("\n add profile "); MonitorIntDec(cbProfileSize39);
+  MonitorString(" "); MonitorTime(tmTime);
+  MonitorString(" "); MonitorLongDec(mdwValue[0]);
+  MonitorString(" "); MonitorLongDec(mdwValue[1]);
+  MonitorString(" "); MonitorLongDec(mdwValue[2]);
+  MonitorString(" "); MonitorLongDec(mdwValue[3]);
+#endif
 
   if (cbProfileSize39 < PROFILE39_SIZE)
   {
     uchar i = cbProfileSize39;
     ASSERT(i < PROFILE39_SIZE);
+
     mpProfile39[i].fExists = true;
     mpProfile39[i].tmTime = tmTime;
-    mpProfile39[i].ddwValue = ddwValue;
+
+    uchar c;
+    for (c=0; c<4; c++)
+      mpProfile39[i].mdwValue[c] = mdwValue[c];
 
     cbProfileSize39++;
   }
@@ -66,7 +79,10 @@ void    MonitorBuffPrf38(void)
     profile39 prf = GetProfile39(i);
 
     MonitorString("\n "); MonitorTime(prf.tmTime);
-    MonitorString(" "); MonitorLongDec(prf.ddwValue % 0x100000000);
+    MonitorString(" "); MonitorLongDec(prf.mdwValue[0]);
+    MonitorString(" "); MonitorLongDec(prf.mdwValue[1]);
+    MonitorString(" "); MonitorLongDec(prf.mdwValue[2]);
+    MonitorString(" "); MonitorLongDec(prf.mdwValue[3]);
     MonitorString(" "); MonitorBool(prf.fExists);
   }
 #endif
@@ -90,7 +106,11 @@ void    DeltaProfile39(void)
     if (prf1.fExists & prf2.fExists)
     {
       mpProfile39[i].tmTime = prf1.tmTime;
-      mpProfile39[i].ddwValue = prf2.ddwValue - prf1.ddwValue;
+
+      uchar c;
+      for (c=0; c<4; c++)
+        mpProfile39[i].mdwValue[c] = prf2.mdwValue[c] - prf1.mdwValue[c];
+
       mpProfile39[i].fExists = true;
 
       f = true;
@@ -98,7 +118,11 @@ void    DeltaProfile39(void)
     else
     {
       mpProfile39[i].tmTime = tiZero;
-      mpProfile39[i].ddwValue = 0;
+
+      uchar c;
+      for (c=0; c<4; c++)
+        mpProfile39[i].mdwValue[c] = 0;
+
       mpProfile39[i].fExists = false;
     }
   }
@@ -107,7 +131,11 @@ void    DeltaProfile39(void)
 
   i = PROFILE39_SIZE-1;
   mpProfile39[i].tmTime = tiZero;
-  mpProfile39[i].ddwValue = 0;
+
+  uchar c;
+  for (c=0; c<4; c++)
+    mpProfile39[i].mdwValue[c] = 0;
+
   mpProfile39[i].fExists = false;
 
 #ifdef MONITOR_39
