@@ -17,13 +17,13 @@ buffer_record_39*c
 
 
 
-static profile39    FirstPrev, FirstCurr;
+//static profile39    FirstPrev, FirstCurr; TODO
 
 
 
 void    InitRecord39_FragmentProfile39(void) {
-  memset(&FirstPrev, 0, sizeof(FirstPrev));
-  memset(&FirstCurr, 0, sizeof(FirstCurr));
+//  memset(&FirstPrev, 0, sizeof(FirstPrev));
+//  memset(&FirstCurr, 0, sizeof(FirstCurr));
 }
 
 
@@ -232,25 +232,27 @@ record39 FinishRecordProfile39(void) {
       for (c=0; c<4; c++) r.mdwValue[c] = mdwValue[c];
       r.tmValue = tm;
       r.fFirst = true;
-
+/*
       FirstPrev = FirstCurr;
 
       FirstCurr.fExists = true;
       FirstCurr.tmTime = tm;
       for (c=0; c<4; c++) FirstCurr.mdwValue[c] = mdwValue[c];
+*/
     }
-
+/*
 #if BUFFER_RECORD_39
     MonitorString("\n add record ");
     MonitorTime(tm);
-    MonitorLongDec(mdwValue[0]);
-    MonitorLongDec(mdwValue[1]);
-    MonitorLongDec(mdwValue[2]);
-    MonitorLongDec(mdwValue[3]);
+    MonitorString(" "); MonitorLongDec(mdwValue[0]);
+    MonitorString(" "); MonitorLongDec(mdwValue[1]);
+    MonitorString(" "); MonitorLongDec(mdwValue[2]);
+    MonitorString(" "); MonitorLongDec(mdwValue[3]);
 #endif
+*/
     AddProfile39(tm, mdwValue);
   }
-
+/*
   if (FirstPrev.fExists == true) {
 #if BUFFER_RECORD_39
     MonitorString("\n add previous record ");
@@ -262,7 +264,7 @@ record39 FinishRecordProfile39(void) {
 #endif
     AddProfile39(FirstPrev.tmTime, FirstPrev.mdwValue);
   }
-
+*/
   if (IsProfileOveflow39())
     return Fault(140+9);
   else
