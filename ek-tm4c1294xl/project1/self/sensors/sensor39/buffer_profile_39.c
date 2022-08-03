@@ -87,7 +87,7 @@ void    MonitorBuffPrf38(void)
   }
 #endif
 }
-
+/*
 void    DeltaProfile39(void)
 {
 #ifdef MONITOR_39
@@ -144,7 +144,7 @@ void    DeltaProfile39(void)
   MonitorString("\n finish");
 #endif
 }
-
+*/
 
 profile39 GetProfile39(uchar  i)
 {
