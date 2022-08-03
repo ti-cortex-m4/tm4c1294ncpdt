@@ -96,7 +96,7 @@ t2time  QueryHeader39(void)
   ulong dw = DateToHouIndex(tiStart39);
   dw -= wProfile39;
   time ti1 = HouIndexToDate(dw /*- 1*/);
-  time ti2 = HouIndexToDate(dw + 6/* - 1*/);
+  time ti2 = HouIndexToDate(dw + 6-1/* - 1*/); // TODO
 
 #ifdef MONITOR_39
   MonitorString("\n QueryHeader39 ");
@@ -121,7 +121,7 @@ static bool ReadData39(time  tiTime, ulong  mdwValue[4])
   uchar c;
   for (c=0; c<4; c++)
   {
-#if true
+#if false
     double db = (double)mdwValue[c]*dbScaler;
     mpdbEngFracDigCan[ibDig][c] += db;
 
@@ -130,7 +130,7 @@ static bool ReadData39(time  tiTime, ulong  mdwValue[4])
 
     mpdbEngFracDigCan[ibDig][c] -= (double)w*1000/dbPulse;
 #else
-    ulong dw = dwValue[c];
+    ulong dw = mdwValue[c];
     uint w = (uint)(dw*dbPulse/1000);
     mpwChannels[c] = w;
 #endif
@@ -139,6 +139,9 @@ static bool ReadData39(time  tiTime, ulong  mdwValue[4])
 #ifdef MONITOR_39
     MonitorString(" out="); MonitorTime(tiTime);
     MonitorString(" "); MonitorIntDec(mpwChannels[0]);
+    MonitorString(" "); MonitorIntDec(mpwChannels[1]);
+    MonitorString(" "); MonitorIntDec(mpwChannels[2]);
+    MonitorString(" "); MonitorIntDec(mpwChannels[3]);
 #endif
 
   if (IsDefect(ibDig)) MakeSpecial(tiTime);
@@ -148,7 +151,7 @@ static bool ReadData39(time  tiTime, ulong  mdwValue[4])
 
 bool    ReadHeader39(void)
 {
-  DeltaProfile39();
+  //DeltaProfile39();
 
 #ifdef MONITOR_39
   MonitorString("\n ReadHeader39 ");
@@ -206,7 +209,7 @@ bool    ReadHeader39(void)
   }
 
   wProfile39 += 6;
-  if (wProfile39 > wHOURS) return false;
+  if (wProfile39 > 60) return false; // TODO wHOURS
 
   return true;
 }
@@ -220,6 +223,14 @@ uchar   TestProfile39_Internal(caller39*  pc)
   time2 tm2 = FragmentOpenTime39(pc);
   if (!tm2.fValid) return 1;
   tiValue39 = tm2.tiValue;
+
+  tiValue39.bYear = 22; // TODO
+  tiValue39.bMonth = 8;
+  tiValue39.bDay = 3;
+  tiValue39.bHour = 1;
+  tiValue39.bMinute = 30;
+  tiValue39.bSecond = 0;
+
   dwValue39 = DateToHouIndex(tiValue39);
 
 
@@ -246,8 +257,8 @@ uchar   TestProfile39_Internal(caller39*  pc)
 
 double2 TestProfile39(void)
 {
-  fMonitorLogBasic = true;
-  fMonitorLogHex = true;
+  fMonitorLogBasic = false;
+  fMonitorLogHex = false;
 
   MonitorOpen(0);
 
