@@ -121,7 +121,7 @@ double2 ReadRegisterScaler39(const obis_t  obis, caller39*  pc)
 
 
 
-double2 ReadRegisterValueWithScaler39(const obis_t  obis, caller39*  pc)
+double2 ReadRegisterUnsignedValueWithScaler39(const obis_t  obis, caller39*  pc)
 {
   double2 value = ReadRegisterUnsignedValue39(obis, pc);
   if (!value.fValid) return Fault(20+15);
@@ -132,7 +132,8 @@ double2 ReadRegisterValueWithScaler39(const obis_t  obis, caller39*  pc)
   return GetDouble0(value.dbValue * scaler.dbValue);
 }
 
-double2 ReadRegisterValueWithScaler39_Signed(const obis_t  obis, caller39*  pc) // TODO
+
+double2 ReadRegisterSignedValueWithScaler39(const obis_t  obis, caller39*  pc)
 {
   double2 value = ReadRegisterSignedValue39(obis, pc);
   if (!value.fValid) return Fault(20+15);
