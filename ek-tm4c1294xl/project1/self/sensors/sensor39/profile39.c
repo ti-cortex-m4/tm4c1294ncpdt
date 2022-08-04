@@ -137,7 +137,7 @@ static bool ReadData39(time  tiTime, ulong  mdwValue[4])
   }
 
 #ifdef MONITOR_39
-    MonitorString(" out="); MonitorTime(tiTime);
+    MonitorString("\n profile "); MonitorTime(tiTime);
     MonitorString(" "); MonitorIntDec(mpwChannels[0]);
     MonitorString(" "); MonitorIntDec(mpwChannels[1]);
     MonitorString(" "); MonitorIntDec(mpwChannels[2]);
@@ -151,63 +151,6 @@ static bool ReadData39(time  tiTime, ulong  mdwValue[4])
 
 bool    ReadHeader39(void)
 {
-  //DeltaProfile39();
-/*
-#ifdef MONITOR_39
-  MonitorString("\n ReadHeader39 ");
-#endif
-
-  uchar h;
-  for (h=0; h<6; h++)
-  {
-    ulong dw = DateToHouIndex(tiStart39);
-    dw -= (wProfile39 - (6-1-h));
-    time tiVirtual = HouIndexToDate(dw);
-
-    ulong mdwValue[4];
-    uchar c;
-    for (c=0; c<4; c++)
-      mdwValue[c] = 0;
-
-    uchar bSize = GetProfileSize39();
-
-#ifdef MONITOR_39
-    MonitorString("\n time="); MonitorTime(tiVirtual);
-    MonitorString(" size="); MonitorCharDec(bSize);
-#endif
-
-    bool fFound = false;
-
-    uchar i;
-    for (i=0; i<bSize; i++)
-    {
-      profile39 prf = GetProfile39(i);
-      if (prf.fExists) {
-        if (!DifferentDateTime(tiVirtual, prf.tmTime)) {
-
-          uchar c;
-          for (c=0; c<4; c++)
-            mdwValue[c] = prf.mdwValue[c];
-
-          fFound = true;
-          break;
-        }
-      }
-    }  
-
-    if (!fFound) szLo[15] = '*';
-
-#ifdef MONITOR_39
-    MonitorString(" in="); MonitorTime(tiVirtual);
-    MonitorString(" "); MonitorLongDec(mdwValue[0]);
-    MonitorString(" "); MonitorLongDec(mdwValue[1]);
-    MonitorString(" "); MonitorLongDec(mdwValue[2]);
-    MonitorString(" "); MonitorLongDec(mdwValue[3]);
-#endif
-
-    if (ReadData39(tiVirtual, mdwValue) == false) return false;
-  }
-*/
   uchar bSize = GetProfileSize39();
 
   uchar i;
