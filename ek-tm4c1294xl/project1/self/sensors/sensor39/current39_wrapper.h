@@ -15,9 +15,9 @@ current39_wrapper.h
 
 
 
-extern  uchar                   ibLine39;
-
-
+void    ClearLine39(void);
+uchar   IncLine39(void);
+uchar   GetLine39(void);
 
 void    DISC_Current39(void);
 void    SNRM_Current39(void);
