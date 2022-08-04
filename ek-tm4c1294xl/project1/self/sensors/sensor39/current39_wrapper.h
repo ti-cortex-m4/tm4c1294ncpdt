@@ -15,6 +15,10 @@ current39_wrapper.h
 
 
 
+extern  uchar                   ibLine39;
+
+
+
 void    DISC_Current39(void);
 void    SNRM_Current39(void);
 void    AARQ_Current39(void);

@@ -10,6 +10,7 @@ current39.c
 #include "../../memory/mem_current.h"
 #include "../../memory/mem_factors.h"
 #include "../../serial/ports.h"
+#include "../../serial/monitor.h"
 #include "../../devices/devices.h"
 #include "../../digitals/digitals.h"
 #include "../../digitals/current/current_run.h"
@@ -24,9 +25,13 @@ current39.c
 
 
 
+uchar                   ibLine39;
+
+
+
 static caller39         c;
 
-static ulong64_         counter;
+static ulong64_         counter[4];
 static double2          scaler;
 
 
@@ -67,22 +72,30 @@ bool    ValidateFrame_Current39(void)
 
 void    QueryValue_Current39(void)
 {
+#ifdef MONITOR_39_NAMES
+  MonitorString("\n\n QueryValue_Current39 ");  MonitorCharDec(ibLine39);
+#endif
+
   c.bNS++;
   c.bInvokeId++;
-  QueryGetRegisterValueDLMS(obisEngAbs[0], c);  // TODO
+  QueryGetRegisterValueDLMS(obisEngAbs[ibLine39], c);
 }
 
 
 bool    ReadValue_Current39(void)
 {
-  counter = ReadUnsignedValueDLSM();
-  return counter.fValid;
+  counter[ibLine39] = ReadUnsignedValueDLSM();
+  return counter[ibLine39].fValid;
 }
 
 
 
 void    QueryScaler_Current39(void)
 {
+#ifdef MONITOR_39_NAMES
+  MonitorString("\n\n QueryScaler_Current39 ");
+#endif
+
   c.bNS++;
   c.bInvokeId++;
   QueryGetRegisterScalerDLMS(obisEngAbs[0], c); // TODO
@@ -99,9 +112,14 @@ bool    ReadScaler_Current39(void)
 
 void    ReadCurrent39(void)
 {
-  uint64_t ddwCounter = counter.ddwValue;
   double dbScaler = scaler.dbValue;
-  mpdwBaseDig[0] = ((double)ddwCounter * dbScaler / 1000) * mpdbPulseMnt[ibDig];
+
+  uchar i;
+  for (i=0; i<4; i++)
+  {
+    uint64_t ddwCounter = counter[i].ddwValue;
+    mpdwBaseDig[i] = ((double)ddwCounter * dbScaler / 1000) * mpdbPulseMnt[ibDig];
+  }
 
   MakeCurrent();
 }
