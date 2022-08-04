@@ -25,7 +25,7 @@ current39.c
 
 
 
-uchar                   ibLine39;
+static uchar            bLine39;
 
 
 
@@ -33,6 +33,25 @@ static caller39         c;
 
 static ulong64_         counter[4];
 static double2          scaler;
+
+
+
+void    ClearLine39(void)
+{
+  bLine39 = 0;
+}
+
+
+uchar   IncLine39(void)
+{
+  return ++bLine39;
+}
+
+
+uchar   GetLine39(void)
+{
+  return bLine39;
+}
 
 
 
@@ -98,7 +117,7 @@ void    QueryScaler_Current39(void)
 
   c.bNS++;
   c.bInvokeId++;
-  QueryGetRegisterScalerDLMS(obisEngAbs[0], c); // TODO
+  QueryGetRegisterScalerDLMS(obisEngAbs[0], c);
 }
 
 

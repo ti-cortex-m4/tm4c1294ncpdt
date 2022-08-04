@@ -7049,7 +7049,7 @@ void    RunDevices(void)
         if (!ValidateFrame_Current39()) {
           CURRENT39_REPEAT_OR_ERROR(210+5, RR_Current39(), DEV_RR_AARQ_I_39C)
         } else {
-          ibLine39 = 0;
+          ClearLine39();
           MakePause(DEV_VALUE_O_39C);
         }
       } else {
@@ -7059,7 +7059,7 @@ void    RunDevices(void)
 
 
     case DEV_VALUE_O_39C:
-      Clear(); ShowPercent(54+ibLine39*2);
+      Clear(); ShowPercent(54+GetLine39()*2);
 
       cbRepeat = MaxRepeats();
       QueryValue_Current39();
@@ -7085,7 +7085,7 @@ void    RunDevices(void)
 
 
     case DEV_RR_VALUE_O_39C:
-      Clear(); ShowPercent(55+ibLine39*2);
+      Clear(); ShowPercent(55+GetLine39()*2);
 
       cbRepeat = MaxRepeats();
       RR_Current39();
@@ -7097,7 +7097,7 @@ void    RunDevices(void)
         if (!ValidateFrame_Current39()) {
           CURRENT39_REPEAT_OR_ERROR(210+10, RR_Current39(), DEV_RR_VALUE_I_39C)
         } else {
-          if (++ibLine39 < 4)
+          if (IncLine39() < 4)
             MakePause(DEV_VALUE_O_39C);
           else
             MakePause(DEV_SCALER_O_39C);
