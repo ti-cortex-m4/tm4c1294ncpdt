@@ -81,6 +81,24 @@ double2 ReadRegisterValue39(const obis_t  obis, caller39*  pc)
   return GetDouble0(value.ddwValue);
 }
 
+double2 ReadRegisterValue39_Signed(const obis_t  obis, caller39*  pc) // TODO
+{
+  (*pc).bNS++;
+  (*pc).bInvokeId++;
+  QueryGetRegisterValueDLMS(obis, (*pc));
+  if (Input39() != SER_GOODCHECK) return Fault(20+5);
+  if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(20+6);
+  slong64_ value = ReadSignedValueDLSM();
+  if (!value.fValid) return Fault(20+7);
+
+  (*pc).bNR++;
+  RR((*pc).bNR);
+  if (Input39() != SER_GOODCHECK) return Fault(20+8);
+  if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(20+9);
+
+  return GetDouble0(value.ddwValue);
+}
+
 
 double2 ReadRegisterScaler39(const obis_t  obis, caller39*  pc)
 {
@@ -105,6 +123,17 @@ double2 ReadRegisterScaler39(const obis_t  obis, caller39*  pc)
 double2 ReadRegisterValueWithScaler39(const obis_t  obis, caller39*  pc)
 {
   double2 value = ReadRegisterValue39(obis, pc);
+  if (!value.fValid) return Fault(20+15);
+
+  double2 scaler = ReadRegisterScaler39(obis, pc);
+  if (!scaler.fValid) return Fault(20+16);
+
+  return GetDouble0(value.dbValue * scaler.dbValue);
+}
+
+double2 ReadRegisterValueWithScaler39_Signed(const obis_t  obis, caller39*  pc) // TODO
+{
+  double2 value = ReadRegisterValue39_Signed(obis, pc);
   if (!value.fValid) return Fault(20+15);
 
   double2 scaler = ReadRegisterScaler39(obis, pc);
