@@ -28,7 +28,7 @@ void    QueryGetRequestDLMS(const obis_t  obis, uchar  bClass, uchar  bAttribute
   PushFormatDLMS(wSize);
   PushHdlcAddresses();
 
-  PushChar((c.bNR << 5) | 0x10 | (c.bNS << 1) | 0x00);
+  PushChar(((c.bNR & 0x07) << 5) | 0x10 | ((c.bNS & 0x07) << 1) | 0x00);
 
   PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
 
