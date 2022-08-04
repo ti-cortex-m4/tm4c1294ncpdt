@@ -152,7 +152,7 @@ static bool ReadData39(time  tiTime, ulong  mdwValue[4])
 bool    ReadHeader39(void)
 {
   //DeltaProfile39();
-
+/*
 #ifdef MONITOR_39
   MonitorString("\n ReadHeader39 ");
 #endif
@@ -206,6 +206,19 @@ bool    ReadHeader39(void)
 #endif
 
     if (ReadData39(tiVirtual, mdwValue) == false) return false;
+  }
+*/
+  uchar bSize = GetProfileSize39();
+
+  uchar i;
+  for (i=0; i<bSize; i++)
+  {
+    profile39 prf = GetProfile39(bSize-i-1);
+    if (prf.fExists)
+    {
+      time tm = HouIndexToDate(DateToHouIndex(prf.tmTime) - 1);
+      if (ReadData39(tm, prf.mdwValue) == false) return false;
+    }
   }
 
   wProfile39 += 6;
