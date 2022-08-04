@@ -42,10 +42,10 @@ ulong64_ PopUnsignedValueDLSM(void)
   if (bDataType == 5) // double-long [5] Integer32 -2 147 483 648…2 147 483 647
   {
     slong value = 0;
-    value |= ((schar)PopChar()) << (8+8+8);
-    value |= ((schar)PopChar()) << (8+8);
-    value |= ((schar)PopChar()) << 8;
-    value |= ((schar)PopChar());
+    value |= PopChar() << (8+8+8);
+    value |= PopChar() << (8+8);
+    value |= PopChar() << 8;
+    value |= PopChar();
     return GetULong64Ok(value);
   }
   if (bDataType == 6) // double-long-unsigned [6] Unsigned32 0…4_294_967_295
