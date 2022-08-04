@@ -39,6 +39,11 @@ ulong64_ PopUnsignedValueDLSM(void)
     uint value = PopIntBig();
     return GetULong64Ok(value);
   }
+/*
+  if (bDataType == 5) // double-long [5] Integer32 -2 147 483 648…2 147 483 647
+  {
+  }
+*/
   if (bDataType == 6) // double-long-unsigned [6] Unsigned32 0…4_294_967_295
   {
     ulong value = PopLongBig();
