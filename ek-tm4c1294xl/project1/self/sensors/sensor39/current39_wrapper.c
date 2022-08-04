@@ -25,7 +25,7 @@ current39.c
 
 
 
-static uchar            bLine39;
+static uchar            ibLine39;
 
 
 
@@ -38,19 +38,19 @@ static double2          scaler;
 
 void    ClearLine39(void)
 {
-  bLine39 = 0;
+  ibLine39 = 0;
 }
 
 
 uchar   IncLine39(void)
 {
-  return ++bLine39;
+  return ++ibLine39;
 }
 
 
 uchar   GetLine39(void)
 {
-  return bLine39;
+  return ibLine39;
 }
 
 
