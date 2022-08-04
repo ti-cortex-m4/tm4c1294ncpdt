@@ -35,7 +35,7 @@ void    InitRecord39(void) {
 
 void    AddRecord39(uint  iwStart) {
   if (IsPushOverflow39()) {
-    Error39(140+0);
+    Error39(150+0);
     return;
   }
 
@@ -105,11 +105,11 @@ record39 FinishRecord39(void) {
 
   uint wCapacity = GetPopCapacity39();
   if (wCapacity < 2)
-    return FaultData(140+1, wCapacity);
+    return FaultData(150+1, wCapacity);
 
   uchar bTypeArray = PopChar39();
   if (bTypeArray != 0x01) // array
-    return FaultData(140+2, bTypeArray);
+    return FaultData(150+2, bTypeArray);
 
   uchar bCount = PopChar39();
 
@@ -122,23 +122,23 @@ record39 FinishRecord39(void) {
   {
     wCapacity = GetPopCapacity39();
     if (wCapacity < 2 + 2+12 + 4*(1+4))
-      return FaultData(140+3, wCapacity);
+      return FaultData(150+3, wCapacity);
 
     uchar bTypeStructure = PopChar39();
     if (bTypeStructure != 0x02) // structure
-      return FaultData(140+4, bTypeStructure);
+      return FaultData(150+4, bTypeStructure);
 
     uchar bSizeStructure = PopChar39();
     if (bSizeStructure != 5) // structure size
-      return FaultData(140+5, bSizeStructure);
+      return FaultData(150+5, bSizeStructure);
 
     uchar bTypeString = PopChar39();
     if (bTypeString != 0x09) // string
-      return FaultData(140+6, bTypeString);
+      return FaultData(150+6, bTypeString);
 
     uchar bSizeString = PopChar39();
     if (bSizeString != 12) // string size
-      return FaultData(140+7, bSizeString);
+      return FaultData(150+7, bSizeString);
 
     time tm = PopTimeDate39();
 
@@ -149,7 +149,7 @@ record39 FinishRecord39(void) {
     {
       uchar bTypeLong32 = PopChar39();
       if (bTypeLong32 != 0x06) // double-long-unsigned 32
-        return FaultData(140+8, bTypeLong32);
+        return FaultData(150+8, bTypeLong32);
 
        mdwValue[c] = PopLong39();
     }
@@ -183,10 +183,10 @@ record39 FinishRecordProfile39(void) {
   InitPop39();
 
   if (GetPopCapacity39() < 2)
-    return Fault(140+1);
+    return Fault(150+1);
 
   if (PopChar39() != 0x01) // array
-    return Fault(140+2);
+    return Fault(150+2);
 
   uchar bCount = PopChar39();
 
@@ -200,19 +200,19 @@ record39 FinishRecordProfile39(void) {
   for (i=0; i<bCount; i++)
   {
     if (GetPopCapacity39() < 2 + 2+12 + 4*(1+4))
-      return Fault(140+3);
+      return Fault(150+3);
 
     if (PopChar39() != 0x02) // structure
-      return Fault(140+4);
+      return Fault(150+4);
 
     if (PopChar39() != 5) // structure size
-      return Fault(140+5);
+      return Fault(150+5);
 
     if (PopChar39() != 0x09) // string
-      return Fault(140+6);
+      return Fault(150+6);
 
     if (PopChar39() != 12) // string size
-      return Fault(140+7);
+      return Fault(150+7);
 
     time tm = PopTimeDate39();
 
@@ -222,7 +222,7 @@ record39 FinishRecordProfile39(void) {
     for (c=0; c<4; c++)
     {
       if (PopChar39() != 0x06) // double-long-unsigned 32
-        return Fault(140+8);
+        return Fault(150+8);
 
       mdwValue[c] = PopLong39();
     }
@@ -266,7 +266,7 @@ record39 FinishRecordProfile39(void) {
   }
 */
   if (IsProfileOveflow39())
-    return Fault(140+9);
+    return Fault(150+9);
   else
     return r;
 }
