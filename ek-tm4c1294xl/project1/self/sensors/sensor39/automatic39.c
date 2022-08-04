@@ -64,7 +64,7 @@ bool    Automatic39(void)
   if (bResult != 0) return Fault(80+3);
 
   uchar bType = PopChar();
-  if (bType != 9) return Fault(80+4);
+  if (bType != 10) return Fault(80+4); // visible-string
 
   uchar bSize = PopChar();
   Show(bSize);
@@ -108,7 +108,7 @@ bool    ChangeSpeed39(void)
   if (bResult != 0) return Fault(80+9);
 
   uchar bType = PopChar();
-  if (bType != 9) return Fault(80+10);
+  if (bType != 10) return Fault(80+10); // visible-string
 
   uchar bSize = PopChar();
   Show(bSize);
