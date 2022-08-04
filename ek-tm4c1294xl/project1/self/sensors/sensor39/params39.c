@@ -77,9 +77,9 @@ float2  ReadParam39_Internal(void)
   flI3 = db2.dbValue*1000;
 
 
-//  db2 = ReadRegisterValueWithScaler39(obisP, &r);
-//  if (!db2.fValid) return Fault(100+4);
-//  flP = db2.dbValue;
+  db2 = ReadRegisterValueWithScaler39(obisP, &r);
+  if (!db2.fValid) return Fault(100+4);
+  flP = db2.dbValue;
 
   db2 = ReadRegisterValueWithScaler39(obisP1, &r);
   if (!db2.fValid) return Fault(100+4);
@@ -94,9 +94,9 @@ float2  ReadParam39_Internal(void)
   flP3 = db2.dbValue;
 
 
-//  db2 = ReadRegisterValueWithScaler39(obisQ, &r);
-//  if (!db2.fValid) return Fault(100+4);
-//  flQ = db2.dbValue;
+  db2 = ReadRegisterValueWithScaler39(obisQ, &r);
+  if (!db2.fValid) return Fault(100+4);
+  flQ = db2.dbValue;
 
   db2 = ReadRegisterValueWithScaler39(obisQ1, &r);
   if (!db2.fValid) return Fault(100+4);
@@ -111,9 +111,9 @@ float2  ReadParam39_Internal(void)
   flQ3 = db2.dbValue;
 
 
-//  db2 = ReadRegisterValueWithScaler39(obisS, &r);
-//  if (!db2.fValid) return Fault(100+4);
-//  flS = db2.dbValue;
+  db2 = ReadRegisterValueWithScaler39(obisS, &r);
+  if (!db2.fValid) return Fault(100+4);
+  flS = db2.dbValue;
 
   db2 = ReadRegisterValueWithScaler39(obisS1, &r);
   if (!db2.fValid) return Fault(100+4);
@@ -175,17 +175,17 @@ float2  ReadParam39(void)
     case PAR_I2 : return GetFloat0(flI2);
     case PAR_I3 : return GetFloat0(flI3);
 
-//    case PAR_P  : return GetFloat0(flP);
+    case PAR_P  : return GetFloat0(flP);
     case PAR_P1 : return GetFloat0(flP1);
     case PAR_P2 : return GetFloat0(flP2);
     case PAR_P3 : return GetFloat0(flP3);
 
-//    case PAR_Q  : return GetFloat0(flQ);
+    case PAR_Q  : return GetFloat0(flQ);
     case PAR_Q1 : return GetFloat0(flQ1);
     case PAR_Q2 : return GetFloat0(flQ2);
     case PAR_Q3 : return GetFloat0(flQ3);
 
-//    case PAR_S  : return GetFloat0(flS);
+    case PAR_S  : return GetFloat0(flS);
     case PAR_S1 : return GetFloat0(flS1);
     case PAR_S2 : return GetFloat0(flS2);
     case PAR_S3 : return GetFloat0(flS3);
