@@ -60,7 +60,7 @@ void    SetScaler_Profile39(double  db)
 
 void    InitHeader39(void)
 {
-/*
+/* TODO
   if (!UseBound39())
     wProfile39 = 0;
   else
