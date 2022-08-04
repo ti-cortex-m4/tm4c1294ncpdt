@@ -87,64 +87,7 @@ void    MonitorBuffPrf38(void)
   }
 #endif
 }
-/*
-void    DeltaProfile39(void)
-{
-#ifdef MONITOR_39
-  MonitorString("\n before");
-  MonitorBuffPrf38();
-#endif
 
-  bool f = false;
-
-  uchar i;
-  for (i=0; i<PROFILE39_SIZE-1; i++)
-  {
-    profile39 prf1 = GetProfile39(i);
-    profile39 prf2 = GetProfile39(i + 1);
-
-    if (prf1.fExists & prf2.fExists)
-    {
-      mpProfile39[i].tmTime = prf1.tmTime;
-
-      uchar c;
-      for (c=0; c<4; c++)
-        mpProfile39[i].mdwValue[c] = prf2.mdwValue[c] - prf1.mdwValue[c];
-
-      mpProfile39[i].fExists = true;
-
-      f = true;
-    }
-    else
-    {
-      mpProfile39[i].tmTime = tiZero;
-
-      uchar c;
-      for (c=0; c<4; c++)
-        mpProfile39[i].mdwValue[c] = 0;
-
-      mpProfile39[i].fExists = false;
-    }
-  }
-
-  if (f) cbProfileSize39--;
-
-  i = PROFILE39_SIZE-1;
-  mpProfile39[i].tmTime = tiZero;
-
-  uchar c;
-  for (c=0; c<4; c++)
-    mpProfile39[i].mdwValue[c] = 0;
-
-  mpProfile39[i].fExists = false;
-
-#ifdef MONITOR_39
-  MonitorString("\n after");
-  MonitorBuffPrf38();
-  MonitorString("\n finish");
-#endif
-}
-*/
 
 profile39 GetProfile39(uchar  i)
 {
