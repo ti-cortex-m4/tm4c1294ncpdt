@@ -156,7 +156,7 @@ bool    ReadHeader39(void)
   uchar i;
   for (i=0; i<bSize; i++)
   {
-    profile39 prf = GetProfile39(bSize-i-1);
+    profile39 prf = GetProfile39(bSize-i-1); // TODO
     if (prf.fExists)
     {
       time tm = HouIndexToDate(DateToHouIndex(prf.tmTime) - 1);
