@@ -102,7 +102,7 @@ ulong64_ ReadUnsignedValueDLSM(void)
 
   ulong64_ value = PopUnsignedValueDLSM();
 #ifdef MONITOR_39
-  MonitorString("\n value="); MonitorLong64Hex(value.ddwValue);
+  MonitorString("\n Value="); MonitorLong64Hex(value.ddwValue);
 #endif
 
   return value;

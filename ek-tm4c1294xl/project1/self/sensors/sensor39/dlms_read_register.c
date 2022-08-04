@@ -53,9 +53,9 @@ double2 ReadRegisterScalerDLMS(void)
   double dbScaler = pow(10, scaler.ddwValue);
 
 #ifdef MONITOR_39
-  MonitorString("\n scaler="); MonitorCharHex(scaler.ddwValue % 0x100);
-  MonitorString("\n unit="); MonitorCharDec(unit.ddwValue % 0x100);
-  MonitorString("\n scaler="); MonitorDouble6(dbScaler);
+  MonitorString("\n Scaler="); MonitorCharHex(scaler.ddwValue % 0x100);
+  MonitorString("\n Unit="); MonitorCharDec(unit.ddwValue % 0x100);
+  MonitorString("\n ScalerValue="); MonitorDouble6(dbScaler);
 #endif
 
   return GetDouble0(dbScaler);
