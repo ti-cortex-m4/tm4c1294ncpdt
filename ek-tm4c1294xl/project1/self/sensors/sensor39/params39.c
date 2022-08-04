@@ -73,7 +73,7 @@ float2  ReadParam39_Internal(void)
   if (!db2.fValid) return Fault(100+6);
   flI3 = db2.dbValue*1000;
 
-
+/*
   db2 = ReadRegisterValueWithScaler39(obisPplus, &r);
   if (!db2.fValid) return Fault(100+7);
   flPplus = db2.dbValue;
@@ -90,7 +90,7 @@ float2  ReadParam39_Internal(void)
   db2 = ReadRegisterValueWithScaler39(obisQminus, &r);
   if (!db2.fValid) return Fault(100+10);
   flQminus = db2.dbValue;
-
+*/
 
   DISC();
   if (Input39() != SER_GOODCHECK) return Fault(100+11);
