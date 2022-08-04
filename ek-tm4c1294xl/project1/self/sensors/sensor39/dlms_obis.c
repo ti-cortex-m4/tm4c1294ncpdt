@@ -39,13 +39,20 @@ const obis_t        obisI1      = {1, 0, 31, 7, 0, 255}; // Ch. 0; L1 Current ; 
 const obis_t        obisI2      = {1, 0, 51, 7, 0, 255}; // Ch. 0; L2 Current ; Inst. value
 const obis_t        obisI3      = {1, 0, 71, 7, 0, 255}; // Ch. 0; L3 Current ; Inst. value
 
+const obis_t        obisP       = {1, 0,  1, 7, 0, 255}; // Ch. 0; Sum Li Active power+ (QI+QIV); Inst. value
 const obis_t        obisP1      = {1, 0, 21, 7, 0, 255}; // Ch. 0; L1 Active power+ (QI+QIV); Inst. value
 const obis_t        obisP2      = {1, 0, 41, 7, 0, 255}; // Ch. 0; L2 Active power+ (QI+QIV); Inst. value
 const obis_t        obisP3      = {1, 0, 61, 7, 0, 255}; // Ch. 0; L3 Active power+ (QI+QIV); Inst. value
 
+const obis_t        obisQ       = {1, 0,  3, 7, 0, 255}; // Ch. 0; Sum Li Reactive power+ (QI+QII); Inst. value
 const obis_t        obisQ1      = {1, 0, 23, 7, 0, 255}; // Ch. 0; L1 Reactive power+ (QI+QII); Inst. value
 const obis_t        obisQ2      = {1, 0, 43, 7, 0, 255}; // Ch. 0; L2 Reactive power+ (QI+QII); Inst. value
 const obis_t        obisQ3      = {1, 0, 63, 7, 0, 255}; // Ch. 0; L3 Reactive power+ (QI+QII); Inst. value
+
+const obis_t        obisS       = {1, 0,  9, 7, 0, 255}; // Ch. 0; Sum Li Apparent power+ (QI+QIV); Inst. value
+const obis_t        obisS1      = {1, 0, 29, 7, 0, 255}; // Ch. 0; L1 Apparent power+ (QI+QIV); Inst. value
+const obis_t        obisS2      = {1, 0, 49, 7, 0, 255}; // Ch. 0; L2 Apparent power+ (QI+QIV); Inst. value
+const obis_t        obisS3      = {1, 0, 69, 7, 0, 255}; // Ch. 0; L3 Apparent power+ (QI+QIV); Inst. value
 
 const obis_t        obisPplus   = {1, 0, 1, 7, 0, 255}; // Ch. 0; Sum Li Active power+ (QI+QIV); Inst. value
 const obis_t        obisPminus  = {1, 0, 2, 7, 0, 255}; // Ch. 0; Sum Li Active power- (QII+QIII); Inst. value
