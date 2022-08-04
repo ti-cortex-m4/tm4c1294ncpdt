@@ -100,7 +100,12 @@ ulong64_ ReadUnsignedValueDLSM(void)
     return GetULong64Error(ErrorData39(15+2, bDataAccessResult));
   }
 
-  return PopUnsignedValueDLSM();
+  ulong64_ value = PopUnsignedValueDLSM();
+#ifdef MONITOR_39
+  MonitorString("\n value="); MonitorLong64Hex(value.ddwValue);
+#endif
+
+  return value;
 }
 
 
