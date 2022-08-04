@@ -50,7 +50,7 @@ message                 mpszDevices[bMAXDEVICES+1] = {
                                           ".СЕ301 NNCL2    ",
                                           ".СЕ303 NNCL2    ",
                                           ".СЕ318          ",
-                                          ".CC-301 DLMS    "
+                                          ".Меркурий-234   "
                                       };
 
 uchar const             mpbMaxLines[bMAXDEVICES+1] =
