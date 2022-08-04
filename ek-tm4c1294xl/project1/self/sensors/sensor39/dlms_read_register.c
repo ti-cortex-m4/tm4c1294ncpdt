@@ -63,7 +63,7 @@ double2 ReadRegisterScalerDLMS(void)
 
 
 
-double2 ReadRegisterValue39(const obis_t  obis, caller39*  pc)
+double2 ReadRegisterUnsignedValue39(const obis_t  obis, caller39*  pc)
 {
   (*pc).bNS++;
   (*pc).bInvokeId++;
@@ -81,7 +81,8 @@ double2 ReadRegisterValue39(const obis_t  obis, caller39*  pc)
   return GetDouble0(value.ddwValue);
 }
 
-double2 ReadRegisterValue39_Signed(const obis_t  obis, caller39*  pc) // TODO
+
+double2 ReadRegisterSignedValue39(const obis_t  obis, caller39*  pc)
 {
   (*pc).bNS++;
   (*pc).bInvokeId++;
@@ -122,7 +123,7 @@ double2 ReadRegisterScaler39(const obis_t  obis, caller39*  pc)
 
 double2 ReadRegisterValueWithScaler39(const obis_t  obis, caller39*  pc)
 {
-  double2 value = ReadRegisterValue39(obis, pc);
+  double2 value = ReadRegisterUnsignedValue39(obis, pc);
   if (!value.fValid) return Fault(20+15);
 
   double2 scaler = ReadRegisterScaler39(obis, pc);
@@ -133,7 +134,7 @@ double2 ReadRegisterValueWithScaler39(const obis_t  obis, caller39*  pc)
 
 double2 ReadRegisterValueWithScaler39_Signed(const obis_t  obis, caller39*  pc) // TODO
 {
-  double2 value = ReadRegisterValue39_Signed(obis, pc);
+  double2 value = ReadRegisterSignedValue39(obis, pc);
   if (!value.fValid) return Fault(20+15);
 
   double2 scaler = ReadRegisterScaler39(obis, pc);
