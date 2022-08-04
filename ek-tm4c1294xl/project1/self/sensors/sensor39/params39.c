@@ -51,79 +51,79 @@ float2  ReadParam39_Internal(void)
 
   double2 db2;
 
-  db2 = ReadRegisterValueWithScaler39(obisU1, &r);
+  db2 = ReadRegisterUnsignedValueWithScaler39(obisU1, &r);
   if (!db2.fValid) return Fault(100+1);
   flU1 = db2.dbValue;
 
-  db2 = ReadRegisterValueWithScaler39(obisU2, &r);
+  db2 = ReadRegisterUnsignedValueWithScaler39(obisU2, &r);
   if (!db2.fValid) return Fault(100+2);
   flU2 = db2.dbValue;
 
-  db2 = ReadRegisterValueWithScaler39(obisU3, &r);
+  db2 = ReadRegisterUnsignedValueWithScaler39(obisU3, &r);
   if (!db2.fValid) return Fault(100+3);
   flU3 = db2.dbValue;
 
 
-  db2 = ReadRegisterValueWithScaler39(obisI1, &r);
+  db2 = ReadRegisterUnsignedValueWithScaler39(obisI1, &r);
   if (!db2.fValid) return Fault(100+4);
   flI1 = db2.dbValue*1000;
 
-  db2 = ReadRegisterValueWithScaler39(obisI2, &r);
+  db2 = ReadRegisterUnsignedValueWithScaler39(obisI2, &r);
   if (!db2.fValid) return Fault(100+5);
   flI2 = db2.dbValue*1000;
 
-  db2 = ReadRegisterValueWithScaler39(obisI3, &r);
+  db2 = ReadRegisterUnsignedValueWithScaler39(obisI3, &r);
   if (!db2.fValid) return Fault(100+6);
   flI3 = db2.dbValue*1000;
 
 
-  db2 = ReadRegisterValueWithScaler39_Signed(obisP, &r);
+  db2 = ReadRegisterSignedValueWithScaler39(obisP, &r);
   if (!db2.fValid) return Fault(100+4);
   flP = db2.dbValue;
 
-  db2 = ReadRegisterValueWithScaler39_Signed(obisP1, &r);
+  db2 = ReadRegisterSignedValueWithScaler39(obisP1, &r);
   if (!db2.fValid) return Fault(100+4);
   flP1 = db2.dbValue;
 
-  db2 = ReadRegisterValueWithScaler39_Signed(obisP2, &r);
+  db2 = ReadRegisterSignedValueWithScaler39(obisP2, &r);
   if (!db2.fValid) return Fault(100+5);
   flP2 = db2.dbValue;
 
-  db2 = ReadRegisterValueWithScaler39_Signed(obisP3, &r);
+  db2 = ReadRegisterSignedValueWithScaler39(obisP3, &r);
   if (!db2.fValid) return Fault(100+6);
   flP3 = db2.dbValue;
 
 
-  db2 = ReadRegisterValueWithScaler39_Signed(obisQ, &r);
+  db2 = ReadRegisterSignedValueWithScaler39(obisQ, &r);
   if (!db2.fValid) return Fault(100+4);
   flQ = db2.dbValue;
 
-  db2 = ReadRegisterValueWithScaler39_Signed(obisQ1, &r);
+  db2 = ReadRegisterSignedValueWithScaler39(obisQ1, &r);
   if (!db2.fValid) return Fault(100+4);
   flQ1 = db2.dbValue;
 
-  db2 = ReadRegisterValueWithScaler39_Signed(obisQ2, &r);
+  db2 = ReadRegisterSignedValueWithScaler39(obisQ2, &r);
   if (!db2.fValid) return Fault(100+5);
   flQ2 = db2.dbValue;
 
-  db2 = ReadRegisterValueWithScaler39_Signed(obisQ3, &r);
+  db2 = ReadRegisterSignedValueWithScaler39(obisQ3, &r);
   if (!db2.fValid) return Fault(100+6);
   flQ3 = db2.dbValue;
 
 
-  db2 = ReadRegisterValueWithScaler39(obisS, &r);
+  db2 = ReadRegisterUnsignedValueWithScaler39(obisS, &r);
   if (!db2.fValid) return Fault(100+4);
   flS = db2.dbValue;
 
-  db2 = ReadRegisterValueWithScaler39(obisS1, &r);
+  db2 = ReadRegisterUnsignedValueWithScaler39(obisS1, &r);
   if (!db2.fValid) return Fault(100+4);
   flS1 = db2.dbValue;
 
-  db2 = ReadRegisterValueWithScaler39(obisS2, &r);
+  db2 = ReadRegisterUnsignedValueWithScaler39(obisS2, &r);
   if (!db2.fValid) return Fault(100+5);
   flS2 = db2.dbValue;
 
-  db2 = ReadRegisterValueWithScaler39(obisS3, &r);
+  db2 = ReadRegisterUnsignedValueWithScaler39(obisS3, &r);
   if (!db2.fValid) return Fault(100+6);
   flS3 = db2.dbValue;
 

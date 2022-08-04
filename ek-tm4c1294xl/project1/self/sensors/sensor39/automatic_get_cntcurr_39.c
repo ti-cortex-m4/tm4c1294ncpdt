@@ -37,7 +37,7 @@ double2 ReadCntCurr39_Internal(void)
   uchar i;
   for (i=0; i<4; i++)
   {
-    double2 db2 = ReadRegisterValueWithScaler39(obisEngAbs[i], &c);
+    double2 db2 = ReadRegisterUnsignedValueWithScaler39(obisEngAbs[i], &c);
     if (!db2.fValid) return Fault(60+1+i);
 
     mpdbChannelsC[i] = db2.dbValue / 1000;
