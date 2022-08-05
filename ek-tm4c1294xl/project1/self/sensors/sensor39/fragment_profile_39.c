@@ -127,8 +127,6 @@ double2 TestFragmentProfile39(void)
   tm2.bMinute = 0;
   tm2.bSecond = 0;
 
-  InitRecord39_FragmentProfile39();
-
   uchar bError = FragmentProfile39(&c, tm1, tm2, false).bError;
   if (bError != 0)  {
     return GetDouble2Error();

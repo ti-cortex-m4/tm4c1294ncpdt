@@ -196,7 +196,6 @@ uchar   TestProfile39_Internal(caller39*  pc)
 
 
   InitHeader39();
-  InitRecord39_FragmentProfile39();
 
 
   while (true) {
