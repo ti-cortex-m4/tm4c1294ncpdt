@@ -264,7 +264,7 @@ void    RR(uchar  bNR)
   PushFormatDLMS(wSize);
   PushHdlcAddresses();
 
-  PushChar((bNR << 5) | 0x10 | 0x01);
+  PushChar(((bNR & 0x07) << 5) | 0x10 | 0x01);
   
   PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
   PushChar(0x7E);
