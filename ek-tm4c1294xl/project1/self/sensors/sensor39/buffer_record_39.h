@@ -20,7 +20,6 @@ typedef struct
 #endif
 
 
-void    InitRecord39_FragmentProfile39(void);
 void    InitRecord39(void);
 void    AddRecord39(uint  iwStart);
 record39 GetRecordError39(char  bError);

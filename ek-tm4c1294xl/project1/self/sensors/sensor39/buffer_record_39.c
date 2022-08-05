@@ -17,16 +17,6 @@ buffer_record_39*c
 
 
 
-//static profile39    FirstPrev, FirstCurr; TODO
-
-
-
-void    InitRecord39_FragmentProfile39(void) {
-//  memset(&FirstPrev, 0, sizeof(FirstPrev));
-//  memset(&FirstCurr, 0, sizeof(FirstCurr));
-}
-
-
 void    InitRecord39(void) {
   InitPush39();
 }
