@@ -30,7 +30,8 @@ static float        flU1, flU2, flU3,
                     flI1, flI2, flI3,
                     flP, flP1, flP2, flP3,
                     flQ, flQ1, flQ2, flQ3,
-                    flS, flS1, flS2, flS3;
+                    flS, flS1, flS2, flS3,
+                    flF;
 
 
 
@@ -125,24 +126,11 @@ float2  ReadParam39_Internal(void)
   if (!db2.fValid) return Fault(100+6);
   flS3 = db2.dbValue;
 
-/*
-  db2 = ReadRegisterValueWithScaler39(obisPplus, &r);
+
+  db2 = ReadRegisterSignedValueWithScaler39(obisF, &r);
   if (!db2.fValid) return Fault(100+7);
-  flPplus = db2.dbValue;
+  flF = db2.dbValue;
 
-  db2 = ReadRegisterValueWithScaler39(obisPminus, &r);
-  if (!db2.fValid) return Fault(100+8);
-  flPminus = db2.dbValue;
-
-
-  db2 = ReadRegisterValueWithScaler39(obisQplus, &r);
-  if (!db2.fValid) return Fault(100+9);
-  flQplus = db2.dbValue;
-
-  db2 = ReadRegisterValueWithScaler39(obisQminus, &r);
-  if (!db2.fValid) return Fault(100+10);
-  flQminus = db2.dbValue;
-*/
 
   DISC();
   if (Input39() != SER_GOODCHECK) return Fault(100+11);
@@ -188,11 +176,7 @@ float2  ReadParam39(void)
     case PAR_S2 : return GetFloat0(flS2);
     case PAR_S3 : return GetFloat0(flS3);
 
-//    case PAR_P  : return GetFloat0(flPplus-flPminus);
-//
-//    case PAR_Q  : return GetFloat0(flQplus-flQminus);
-//
-//    case PAR_S  : return GetFloat0(CalcS(flPplus-flPminus, flQplus-flQminus));
+    case PAR_F  : return GetFloat0(flF);
 
     default: return GetFloat2Error();
   }

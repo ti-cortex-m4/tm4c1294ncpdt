@@ -53,3 +53,5 @@ const obis_t        obisS       = {1, 0,  9, 7, 0, 255}; // Ch. 0; Sum Li Appare
 const obis_t        obisS1      = {1, 0, 29, 7, 0, 255}; // Ch. 0; L1 Apparent power+ (QI+QIV); Inst. value
 const obis_t        obisS2      = {1, 0, 49, 7, 0, 255}; // Ch. 0; L2 Apparent power+ (QI+QIV); Inst. value
 const obis_t        obisS3      = {1, 0, 69, 7, 0, 255}; // Ch. 0; L3 Apparent power+ (QI+QIV); Inst. value
+
+const obis_t        obisF       = {1, 0, 14, 7, 0, 255}; // Ch. 0; Supply frequency; Inst. value
