@@ -55,3 +55,8 @@ const obis_t        obisS2      = {1, 0, 49, 7, 0, 255}; // Ch. 0; L2 Apparent p
 const obis_t        obisS3      = {1, 0, 69, 7, 0, 255}; // Ch. 0; L3 Apparent power+ (QI+QIV); Inst. value
 
 const obis_t        obisF       = {1, 0, 14, 7, 0, 255}; // Ch. 0; Supply frequency; Inst. value
+
+const obis_t        obisC       = {1, 0, 13, 7, 0, 255}; // Ch. 0; Sum Li Power factor; Inst. value
+const obis_t        obisC1      = {1, 0, 33, 7, 0, 255}; // Ch. 0; L1 Power factor; Inst. value
+const obis_t        obisC2      = {1, 0, 53, 7, 0, 255}; // Ch. 0; L2 Power factor; Inst. value
+const obis_t        obisC3      = {1, 0, 73, 7, 0, 255}; // Ch. 0; L3 Power factor; Inst. value
