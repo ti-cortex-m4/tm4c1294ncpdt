@@ -29,7 +29,7 @@ void    QueryId39_Single(uchar  bNS, uchar  bNR, uchar  bInvokeId)
   PushFormatDLMS(wSize);
   PushHdlcAddresses_Single();
 
-  PushChar(((bNR << 5) | 0x10 | (bNS << 1) | 0x00));
+  PushChar((((bNR & 0x07) << 5) | 0x10 | ((bNS & 0x07) << 1) | 0x00));
 
   PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize_Single())); // 5
 
@@ -44,11 +44,11 @@ void    QueryId39_Single(uchar  bNS, uchar  bNR, uchar  bInvokeId)
   PushChar(0xC0 | (bInvokeId % 16)); // Invoke-Id-And-Priority
 
   PushChar(0);
-  PushChar(1);
+  PushChar(1); // class
 
   PushOBIS_DLMS(obisId);
 
-  PushChar(2);
+  PushChar(2); // attribute
   PushChar(0);
 
   // DLMS finish
@@ -76,7 +76,7 @@ void    QueryId39(uchar  bNS, uchar  bNR, uchar  bInvokeId)
   PushFormatDLMS(wSize);
   PushHdlcAddresses();
 
-  PushChar(((bNR << 5) | 0x10 | (bNS << 1) | 0x00));
+  PushChar((((bNR & 0x07) << 5) | 0x10 | ((bNS & 0x07) << 1) | 0x00));
 
   PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
 
@@ -91,11 +91,11 @@ void    QueryId39(uchar  bNS, uchar  bNR, uchar  bInvokeId)
   PushChar(0xC0 | (bInvokeId % 16)); // Invoke-Id-And-Priority
 
   PushChar(0);
-  PushChar(1);
+  PushChar(1); // class
 
   PushOBIS_DLMS(obisId);
 
-  PushChar(2);
+  PushChar(2); // attribute
   PushChar(0);
 
   // DLMS finish
