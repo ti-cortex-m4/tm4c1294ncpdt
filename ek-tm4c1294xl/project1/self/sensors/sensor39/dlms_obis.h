@@ -49,3 +49,6 @@ extern  const obis_t        obisS;
 extern  const obis_t        obisS1;
 extern  const obis_t        obisS2;
 extern  const obis_t        obisS3;
+
+extern  const obis_t        obisF;
+
