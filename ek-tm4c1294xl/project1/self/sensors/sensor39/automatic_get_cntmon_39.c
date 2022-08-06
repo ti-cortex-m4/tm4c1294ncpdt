@@ -50,7 +50,7 @@ double2 ReadCntMonCan38_Internal(uchar  ibMon)
     uchar bMonth = (ibMon+1) % 12 + 1;
     uchar bYear = (bMonth > tm.bMonth) ? tm.bYear-1 : tm.bYear;
 
-    double2 db2 = FragmentCntMonCan(obisEngAbs[0], &c, bMonth, bYear); // TODO
+    double2 db2 = FragmentCntMonCan(obisCnt[0], &c, bMonth, bYear); // TODO
 
     if (db2.bError == ERROR_NOT_PRESENTED) {
       Clear();
@@ -143,7 +143,7 @@ double2 TestReadCntMonCan39(void)
   fMonitorLogHex = true;
 
   MonitorOpen(0);
-  double2 db2 = ReadCntMonCan39(8-1);
+  double2 db2 = ReadCntMonCan39(7-1);
   MonitorClose();
 
   return db2;
