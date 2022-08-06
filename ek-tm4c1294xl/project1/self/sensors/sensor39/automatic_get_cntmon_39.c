@@ -169,7 +169,10 @@ double2 TestReadCntMonCan39(void)
   fMonitorLogHex = true;
 
   MonitorOpen(0);
+
   double2 db2 = ReadCntMonCan39(7-1);
+  db2 = ReadCntMonCan39(8-1);
+
   MonitorClose();
 
   return db2;
