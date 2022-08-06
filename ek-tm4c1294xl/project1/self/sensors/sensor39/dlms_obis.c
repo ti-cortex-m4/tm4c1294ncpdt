@@ -35,6 +35,7 @@ const obis_t        obisEngAbsTariff[4] = {
 };
 
 const obis_t        obisBillingPeriodMon = {1, 0, 98, 1, 0, 255}; // Ch. 0; Data of billing period; Scheme 1; #1; Unspecified number of most recent billing periods
+const obis_t        obisBillingPeriodDay = {1, 0, 98, 2, 0, 255}; // Ch. 0; Data of billing period; Scheme 2; #1; Unspecified number of most recent billing periods
 
 const obis_t        obisProfile = {1, 0, 99, 1, 0, 255}; // Ch. 0; Load profile with recording period 1; #1
 

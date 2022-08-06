@@ -50,7 +50,7 @@ double2 ReadCntMonCan38_Internal(uchar  ibMon)
     uchar bMonth = (ibMon+1) % 12 + 1;
     uchar bYear = (bMonth > tm.bMonth) ? tm.bYear-1 : tm.bYear;
 
-    double2 db2 = FragmentCntMonCan(obisCnt[0], &c, bMonth, bYear); // TODO
+    double2 db2 = FragmentCntMonCan(obisBillingPeriodMon, obisCnt[0], &c, bMonth, bYear); // TODO
 
     if (db2.bError == ERROR_NOT_PRESENTED) {
       Clear();
@@ -66,6 +66,23 @@ double2 ReadCntMonCan38_Internal(uchar  ibMon)
   }
   else
   {
+    uchar bMonth = (ibMon+1) % 12 + 1;
+    uchar bYear = (bMonth > tm.bMonth) ? tm.bYear-1 : tm.bYear;
+
+    double2 db2 = FragmentCntMonCan(obisBillingPeriodMon, obisCnt[0], &c, bMonth, bYear); // TODO
+
+    if (db2.bError == ERROR_NOT_PRESENTED) {
+      Clear();
+      sprintf(szLo+1, "мес€ц %02u.%02u ?", bMonth, bYear);
+      Delay(1000);
+      return Fault(70+1);
+    }
+
+    DISC();
+    if (Input39() != SER_GOODCHECK) return Fault(70+2);
+
+    return db2;
+/*
     time tm1;
     tm1.bYear = tm.bYear;
     tm1.bMonth = tm.bMonth;
@@ -104,6 +121,7 @@ double2 ReadCntMonCan38_Internal(uchar  ibMon)
 
     //return GetDouble0((double)r.ddwValue * scaler.dbValue);
     return GetDouble0(-1); // TODO
+*/
   }
 }
 

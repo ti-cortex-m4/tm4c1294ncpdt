@@ -26,6 +26,7 @@ extern  const obis_t        obisCnt[4];
 extern  const obis_t        obisEngAbsTariff[4];
 
 extern  const obis_t        obisBillingPeriodMon;
+extern  const obis_t        obisBillingPeriodDay;
 
 extern  const obis_t        obisProfile;
 
