@@ -80,9 +80,9 @@ void    PushDateDLMS(date  dt)
 
   PushChar(0xFF);
 
-  PushChar(dt.bHour);
-  PushChar(dt.bMinute);
-  PushChar(dt.bSecond);
+  PushChar(0x00);
+  PushChar(0x00);
+  PushChar(0x00);
 
   PushChar(0xFF);
   PushChar(0x80);

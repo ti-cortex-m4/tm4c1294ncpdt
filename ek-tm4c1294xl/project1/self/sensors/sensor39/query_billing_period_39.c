@@ -75,11 +75,11 @@ void    QueryBillingPeriod39(const obis_t  obisBillingPeriod, const obis_t  obis
 
   PushChar(0x09); // <OctetString Value="07E40301FF000001FF8000FF" />
   PushChar(0x0C);
-  PushTimeMonthYearDLMS(bMonth, bYear);
+  PushDateDLMS(dt);
 
   PushChar(0x09); // <OctetString Value="07E40401FF000000FF8000FF" />
   PushChar(0x0C);
-  PushTimeMonthYearDLMS(bMonth, bYear);
+  PushDateDLMS(dt);
 
   PushChar(0x01); // array
   PushChar(0x00);
