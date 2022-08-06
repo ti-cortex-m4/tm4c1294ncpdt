@@ -15,55 +15,13 @@ query_billing_period_39.c
 
 
 
-/*
-<GetRequest>
-  <GetRequestNormal>
-    <!--Priority: HIGH ServiceClass: UN_CONFIRMED invokeID: 6-->
-    <InvokeIdAndPriority Value="86" />
-    <AttributeDescriptor>
-      <!--PROFILE_GENERIC-->
-      <ClassId Value="0007" />
-      <!--0.0.98.1.0.255-->
-      <InstanceId Value="0000620100FF" />
-      <AttributeId Value="02" />
-    </AttributeDescriptor>
-    <AccessSelection>
-      <AccessSelector Value="01" />
-      <AccessParameters>
-        <Structure Qty="04" >
-          <Structure Qty="04" >
-            <UInt16 Value="0008" />
-            <!--0.0.1.0.0.255-->
-            <OctetString Value="0000010000FF" />
-            <Int8 Value="02" />
-            <UInt16 Value="0000" />
-          </Structure>
-          <!--2020-03-01 00:00:01-->
-          <OctetString Value="07E40301FF000001FF8000FF" />
-          <!--2020-04-01 00:00:00-->
-          <OctetString Value="07E40401FF000000FF8000FF" />
-          <Array Qty="01" >
-            <Structure Qty="04" >
-              <UInt16 Value="0003" />
-              <!--1.0.15.8.0.255-->
-              <OctetString Value="01000F0800FF" />
-              <Int8 Value="02" />
-              <UInt16 Value="0000" />
-            </Structure>
-          </Array>
-        </Structure>
-      </AccessParameters>
-    </AccessSelection>
-  </GetRequestNormal>
-</GetRequest>
-*/
 void    QueryBillingPeriod39(const obis_t  obis, uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  bMonth, uchar  bYear)
 {
 #ifdef MONITOR_39_NAMES
   MonitorString("\n\n QueryEngMon39 "); MonitorCharDec(bMonth); MonitorString(" "); MonitorCharDec(bYear);
 #endif
 
-  uint wSize = 92 + GetHdlcAddressesSize(); // 0x5E 94
+  uint wSize = 92 - 18 + GetHdlcAddressesSize(); // 0x5E 94 TODO
 
   InitPush(0);
   PushChar(0x7E);
@@ -124,8 +82,8 @@ void    QueryBillingPeriod39(const obis_t  obis, uchar  bNS, uchar  bNR, uchar  
   PushTimeMonthYearDLMS(bMonth, bYear);
 
   PushChar(0x01); // array
-  PushChar(0x01);
-
+  PushChar(0x00);
+/*
   PushChar(0x02); // structure
   PushChar(0x04);
 
@@ -143,7 +101,7 @@ void    QueryBillingPeriod39(const obis_t  obis, uchar  bNS, uchar  bNR, uchar  
   PushChar(0x12); // <UInt16 Value="0000" />
   PushChar(0x00);
   PushChar(0x00);
-
+*/
   // DLMS finish
 
   PushIntLtl(MakeCRC16X25OutBuff(1, wSize-2));
@@ -156,50 +114,105 @@ void    QueryBillingPeriod39(const obis_t  obis, uchar  bNS, uchar  bNR, uchar  
 
 
 /*
-<HDLC len="5D" >
-<TargetAddress Value="1" />
-<SourceAddress Value="1" />
-<!--I frame.-->
-<FrameType Value="1E" />
 <GetRequest>
- <GetRequestNormal>
-   <!--Priority: HIGH ServiceClass: UN_CONFIRMED invokeID: 6-->
-   <InvokeIdAndPriority Value="86" />
-   <AttributeDescriptor>
-     <!--PROFILE_GENERIC-->
-     <ClassId Value="0007" />
-     <!--0.0.98.1.0.255-->
-     <InstanceId Value="0000620100FF" />
-     <AttributeId Value="02" />
-   </AttributeDescriptor>
-   <AccessSelection>
-     <AccessSelector Value="01" />
-     <AccessParameters>
-       <Structure Qty="04" >
-         <Structure Qty="04" >
-           <UInt16 Value="0008" />
-           <!--0.0.1.0.0.255-->
-           <OctetString Value="0000010000FF" />
-           <Int8 Value="02" />
-           <UInt16 Value="0000" />
-         </Structure>
-         <!--2020-03-01 00:00:01-->
-         <OctetString Value="07E40301FF000001FF8000FF" />
-         <!--2020-04-01 00:00:00-->
-         <OctetString Value="07E40401FF000000FF8000FF" />
-         <Array Qty="01" >
-           <Structure Qty="04" >
-             <UInt16 Value="0003" />
-             <!--1.0.15.8.0.255-->
-             <OctetString Value="01000F0800FF" />
-             <Int8 Value="02" />
-             <UInt16 Value="0000" />
-           </Structure>
-         </Array>
-       </Structure>
-     </AccessParameters>
-   </AccessSelection>
- </GetRequestNormal>
+  <GetRequestNormal>
+    <!--Priority: HIGH ServiceClass: UN_CONFIRMED invokeID: 6-->
+    <InvokeIdAndPriority Value="86" />
+    <AttributeDescriptor>
+      <!--PROFILE_GENERIC-->
+      <ClassId Value="0007" />
+      <!--0.0.98.1.0.255-->
+      <InstanceId Value="0000620100FF" />
+      <AttributeId Value="02" />
+    </AttributeDescriptor>
+    <AccessSelection>
+      <AccessSelector Value="01" />
+      <AccessParameters>
+        <Structure Qty="04" >
+          <Structure Qty="04" >
+            <UInt16 Value="0008" />
+            <!--0.0.1.0.0.255-->
+            <OctetString Value="0000010000FF" />
+            <Int8 Value="02" />
+            <UInt16 Value="0000" />
+          </Structure>
+          <!--2020-03-01 00:00:01-->
+          <OctetString Value="07E40301FF000001FF8000FF" />
+          <!--2020-04-01 00:00:00-->
+          <OctetString Value="07E40401FF000000FF8000FF" />
+          <Array Qty="01" >
+            <Structure Qty="04" >
+              <UInt16 Value="0003" />
+              <!--1.0.15.8.0.255-->
+              <OctetString Value="01000F0800FF" />
+              <Int8 Value="02" />
+              <UInt16 Value="0000" />
+            </Structure>
+          </Array>
+        </Structure>
+      </AccessParameters>
+    </AccessSelection>
+  </GetRequestNormal>
 </GetRequest>
-</HDLC>
+*/
+
+/*
+<GetRequest>
+  <GetRequestNormal>
+    <!--Priority: HIGH ServiceClass: CONFIRMED invokeID: 1-->
+    <InvokeIdAndPriority Value="193" />
+    <AttributeDescriptor>
+      <!--PROFILE_GENERIC-->
+      <ClassId Value="7" />
+      <!--1.0.98.1.0.255-->
+      <InstanceId Value="0100620100FF" />
+      <AttributeId Value="2" />
+    </AttributeDescriptor>
+    <AccessSelection>
+      <AccessSelector Value="1" />
+      <AccessParameters>
+        <Structure Qty="4" >
+          <Structure Qty="4" >
+            <UInt16 Value="8" />
+            <!--0.0.1.0.0.255-->
+            <OctetString Value="0000010000FF" />
+            <Int8 Value="2" />
+            <UInt16 Value="0" />
+          </Structure>
+          <!--2022-08-01 00:00:00-->
+          <OctetString Value="07E60801010000000000B4FF" />
+          <!--2022-08-01 00:00:01-->
+          <OctetString Value="07E60801010000010000B4FF" />
+          <Array Qty="0" >
+          </Array>
+        </Structure>
+      </AccessParameters>
+    </AccessSelection>
+  </GetRequestNormal>
+</GetRequest>
+
+<GetResponse>
+  <GetResponseNormal>
+    <!--Priority: HIGH ServiceClass: CONFIRMED invokeID: 1-->
+    <InvokeIdAndPriority Value="193" />
+    <Result>
+      <Data>
+        <Array Qty="1" >
+          <Structure Qty="9" >
+            <!--2022-08-01 00:00:00-->
+            <OctetString Value="07E60801FF0000000000B480" />
+            <UInt32 Value="4609470" />
+            <UInt32 Value="3074769" />
+            <UInt32 Value="1534701" />
+            <UInt32 Value="0" />
+            <UInt32 Value="0" />
+            <UInt32 Value="0" />
+            <UInt32 Value="5657" />
+            <UInt32 Value="8481" />
+          </Structure>
+        </Array>
+      </Data>
+    </Result>
+  </GetResponseNormal>
+</GetResponse>
 */

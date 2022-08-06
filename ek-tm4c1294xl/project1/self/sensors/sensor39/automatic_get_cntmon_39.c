@@ -120,10 +120,14 @@ double2 ReadCntMonCan39(uchar  ibMon)
     if (fKey == true) break;
     if (db2.fValid)
     {
-      mpdbChannelsC[0] = db2.dbValue / 1000;
-      mpboChannelsA[0] = true;
+      uchar i;
+      for (i=0; i<4; i++)
+      {
+        //mpdbChannelsC[i] = db2.dbValue / 1000;
+        mpboChannelsA[i] = true;
+      }
 
-      return GetDouble0(mpdbChannelsC[0]);
+      return GetDouble0(mpdbChannelsC[diCurr.ibLine]);
     }
   }
 
