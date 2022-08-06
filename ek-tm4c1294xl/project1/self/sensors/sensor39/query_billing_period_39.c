@@ -88,7 +88,7 @@ void    QueryBillingPeriod39(const obis_t  obis, uchar  bNS, uchar  bNR, uchar  
   PushChar(0x00); // ?
 
   PushChar(0x07); // <ClassId Value="0007" /> <!--PROFILE_GENERIC-->
-  PushOBIS_DLMS(obisBillingPeriod); // <!--0.0.98.1.0.255-->
+  PushOBIS_DLMS(obisBillingPeriodMon); // <!--0.0.98.1.0.255-->
   PushChar(0x02); // <AttributeId Value="02" />
 
   PushChar(0x01); // <AccessSelector Value="01" />
