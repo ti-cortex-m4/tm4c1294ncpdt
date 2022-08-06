@@ -65,6 +65,7 @@ AUTOMATIC2!C
 
 
 double2 TestProfile39(void);
+double2 TestReadCntMonCan39(void);
 double2 TestCntMonCanTariff39(void);
 double2 TestFragmentProfile39(void);
 double2 TestTimeCorrect39(void);
@@ -1930,7 +1931,7 @@ double2 ReadCntCurrCan(uchar  ibCan)
 #endif
 
 #ifndef SKIP_39
-    case 39: TestParam39(); return GetDouble2Error(); // ReadCntCurr39(); //TestCntMonCanTariff39(); //TestTimeCorrect39(); //ReadCntCurr39(); TODO
+    case 39: TestReadCntMonCan39(); //TestParam39(); return GetDouble2Error(); // ReadCntCurr39(); //TestCntMonCanTariff39(); //TestTimeCorrect39(); //ReadCntCurr39(); TODO
 #endif
 
     default: return GetDouble2Error();

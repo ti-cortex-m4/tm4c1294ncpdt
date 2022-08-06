@@ -8,6 +8,8 @@ automatic_get_cntmon_38.c
 #include "../../display/display.h"
 #include "../../keyboard/keyboard.h"
 #include "../../serial/ports.h"
+#include "../../serial/monitor.h"
+#include "../../serial/monitor_settings.h"
 #include "../../digitals/digitals.h"
 #include "dlms.h"
 #include "error39.h"
@@ -130,3 +132,21 @@ double2 ReadCntMonCan39(uchar  ibMon)
 
   return Fault(70+8);
 }
+
+
+
+#ifdef  MONITOR_39
+
+double2 TestReadCntMonCan39(void)
+{
+  fMonitorLogBasic = true;
+  fMonitorLogHex = true;
+
+  MonitorOpen(0);
+  double2 db2 = ReadCntMonCan39(8-1);
+  MonitorClose();
+
+  return db2;
+}
+
+#endif
