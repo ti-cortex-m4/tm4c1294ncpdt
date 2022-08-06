@@ -19,7 +19,7 @@ fragment_cntmon_39.c
 #include "dlms_read_register.h"
 #include "fragment_cntmon_39.h"
 
-
+#include "../../digitals/digitals.h" // TODO
 
 static double2 Fault(uchar  bError)
 {
@@ -40,13 +40,29 @@ double2 FragmentCntMonCan(const obis_t  obis, caller39  *pc, uchar  bMonth, ucha
   bool present = (EngMonPresent39() == 0);
   bool absent = (EngMonAbsent39() == 0);
 
-  ulong64_ counter = present ? ReadEngMon39() : GetULong64Error(0);
+  //ulong64_ counter = present ? ReadEngMon39() : GetULong64Error(0);
+  ulong64_ counter[4];
+  if (present) {
+      InitPop(12 + 5 + GetHdlcAddressesSize() + 1 + 1 + 12); // skip date/time TODO
+
+      counter[0] = PopUnsignedValueDLSM();
+      PopUnsignedValueDLSM();
+      PopUnsignedValueDLSM();
+      PopUnsignedValueDLSM();
+      PopUnsignedValueDLSM();
+      counter[1] = PopUnsignedValueDLSM();
+      counter[2] = PopUnsignedValueDLSM();
+      counter[3] = PopUnsignedValueDLSM();
+  }
 
 #ifdef MONITOR_39
   MonitorString("\n present="); MonitorBool(present);
   MonitorString("\n absent="); MonitorBool(absent);
-  MonitorString("\n valid="); MonitorBool(counter.fValid);
-  MonitorString("\n counter="); MonitorLongDec(counter.ddwValue);
+//  MonitorString("\n valid="); MonitorBool(counter.fValid);
+  MonitorString("\n counter[0]="); MonitorLongDec(counter[0].ddwValue);
+  MonitorString("\n counter[1]="); MonitorLongDec(counter[1].ddwValue);
+  MonitorString("\n counter[2]="); MonitorLongDec(counter[2].ddwValue);
+  MonitorString("\n counter[3]="); MonitorLongDec(counter[3].ddwValue);
 #endif
 
 
@@ -55,17 +71,21 @@ double2 FragmentCntMonCan(const obis_t  obis, caller39  *pc, uchar  bMonth, ucha
   if (Input39() != SER_GOODCHECK) return Fault(125+2);
   if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(125+3);
 
-
+/*
   double2 scaler = ReadRegisterScaler39(obis, pc);
   if (!scaler.fValid) return Fault(125+4);
-
+*/
 
   if (present) {
-    double db = (double)counter.ddwValue * scaler.dbValue;
+      mpdbChannelsC[0] = counter[0].ddwValue / 1000;
+      mpdbChannelsC[1] = counter[1].ddwValue / 1000;
+      mpdbChannelsC[2] = counter[2].ddwValue / 1000;
+      mpdbChannelsC[3] = counter[3].ddwValue / 1000;
+//    double db = (double)counter.ddwValue * scaler.dbValue;
 #ifdef MONITOR_39
-    MonitorString("\n result="); MonitorDouble6(db);
+    //MonitorString("\n result="); MonitorDouble6(db);
 #endif
-    return GetDouble0(db);
+    return GetDouble0(-1);
   }
 
   if (absent) {

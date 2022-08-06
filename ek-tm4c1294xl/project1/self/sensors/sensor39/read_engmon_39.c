@@ -53,7 +53,10 @@ uchar   EngMonPresent39(void)
   if (PopChar() != 1) return 40+1; // !array
   if (PopChar() != 1) return 40+2; // array size != 1
   if (PopChar() != 2) return 40+3; // !structure
-  if (PopChar() != 1) return 40+4; // structure size != 1
+  if (PopChar() != 9) return 40+4; // structure size != 9
+
+  if (PopChar() != 9) return 40+5; // octet-string
+  if (PopChar() != 12) return 40+6; // size != 9 TODO
 
   return 0;
 }
