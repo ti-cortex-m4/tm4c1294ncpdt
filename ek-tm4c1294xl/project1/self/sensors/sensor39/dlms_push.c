@@ -49,7 +49,6 @@ void    PushTimeMonthYearDLMS(uchar  bMonth, uchar  bYear)
 }
 
 
-
 void    PushTimeDLMS(time  tm)
 {
   uint wYear = 2000 + tm.bYear;
@@ -63,6 +62,27 @@ void    PushTimeDLMS(time  tm)
   PushChar(tm.bHour);
   PushChar(tm.bMinute);
   PushChar(tm.bSecond);
+
+  PushChar(0xFF);
+  PushChar(0x80);
+  PushChar(0x00);
+  PushChar(0xFF);
+}
+
+
+void    PushDateDLMS(date  dt)
+{
+  uint wYear = 2000 + dt.bYear;
+  PushChar(wYear / 0x100);
+  PushChar(wYear % 0x100);
+  PushChar(dt.bMonth);
+  PushChar(dt.bDay);
+
+  PushChar(0xFF);
+
+  PushChar(dt.bHour);
+  PushChar(dt.bMinute);
+  PushChar(dt.bSecond);
 
   PushChar(0xFF);
   PushChar(0x80);

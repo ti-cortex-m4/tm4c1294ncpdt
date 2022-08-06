@@ -50,11 +50,13 @@ status  CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
   time tm = tm2.tiValue;
 
 
-  uchar bMonth = ibMon + 1;
-  uchar bYear = (bMonth > tm.bMonth) ? tm.bYear-1 : tm.bYear;
+  date dt;
+  dt.bDay   = 1;
+  dt.bMonth = ibMon + 1;
+  dt.bYear  = (dt.bMonth > tm.bMonth) ? tm.bYear-1 : tm.bYear;
 
 
-  double2 db2 = FragmentCntMonCan(obisBillingPeriodMon, *GetOBIS(ibTariff), &c, bMonth, bYear); // TODO
+  double2 db2 = FragmentCntMonCan(obisBillingPeriodMon, *GetOBIS(ibTariff), &c, dt); // TODO
 
   DISC();
   if (Input39() != SER_GOODCHECK) return BadDigital(95+1);
