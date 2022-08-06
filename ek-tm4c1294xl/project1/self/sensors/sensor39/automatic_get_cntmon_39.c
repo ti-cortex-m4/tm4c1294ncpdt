@@ -170,8 +170,15 @@ double2 TestReadCntMonCan39(void)
 
   MonitorOpen(0);
 
-  double2 db2 = ReadCntMonCan39(7-1);
-  db2 = ReadCntMonCan39(8-1);
+  double2 db2;
+
+  uchar m;
+  for (m=8; m>=7; m--)
+  {
+    db2 = ReadCntMonCan39(m-1);
+    if (db2.bError)
+      break;
+  }
 
   MonitorClose();
 
