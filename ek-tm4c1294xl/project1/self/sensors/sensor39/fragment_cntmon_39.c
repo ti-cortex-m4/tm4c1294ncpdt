@@ -7,7 +7,7 @@ fragment_cntmon_39.c
 #include "../../main.h"
 #include "../../serial/monitor.h"
 #include "../../serial/ports_pop.h"
-#include "../../digitals/digitals.h"
+#include "../../digitals/digitals.h" // TODO
 #include "dlms.h"
 #include "dlms_obis.h"
 #include "error39.h"
@@ -74,10 +74,10 @@ double2 FragmentCntMonCan(const obis_t  obisBillingPeriod, const obis_t  obisSca
 
 
   if (present) {
-      mpdbChannelsC[0] = (double)counter[0].ddwValue* scaler.dbValue / 1000;
-      mpdbChannelsC[1] = (double)counter[1].ddwValue* scaler.dbValue / 1000;
-      mpdbChannelsC[2] = (double)counter[2].ddwValue* scaler.dbValue / 1000;
-      mpdbChannelsC[3] = (double)counter[3].ddwValue* scaler.dbValue / 1000;
+      mpdbChannelsC[0] = (double)counter[0].ddwValue * scaler.dbValue / 1000;
+      mpdbChannelsC[1] = (double)counter[1].ddwValue * scaler.dbValue / 1000;
+      mpdbChannelsC[2] = (double)counter[2].ddwValue * scaler.dbValue / 1000;
+      mpdbChannelsC[3] = (double)counter[3].ddwValue * scaler.dbValue / 1000;
 #ifdef MONITOR_39
     //MonitorString("\n result="); MonitorDouble6(db);
 #endif
