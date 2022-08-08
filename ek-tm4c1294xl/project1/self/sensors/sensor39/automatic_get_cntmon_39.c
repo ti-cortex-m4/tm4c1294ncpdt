@@ -105,7 +105,6 @@ double2 ReadCntMonCan39(uchar  ibMon)
       uchar i;
       for (i=0; i<4; i++)
       {
-        //mpdbChannelsC[i] = db2.dbValue / 1000;
         mpboChannelsA[i] = true;
       }
 
