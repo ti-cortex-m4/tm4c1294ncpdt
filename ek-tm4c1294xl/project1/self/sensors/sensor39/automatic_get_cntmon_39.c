@@ -48,11 +48,11 @@ double2 ReadCntMonCan38_Internal(uchar  ibMon)
   if (tm.bMonth != ibMon+1)
   {
     date dt;
-    dt.bDay = 1;
+    dt.bDay   = 1;
     dt.bMonth = (ibMon+1) % 12 + 1;
-    dt.bYear = (dt.bMonth > tm.bMonth) ? tm.bYear-1 : tm.bYear;
+    dt.bYear  = (dt.bMonth > tm.bMonth) ? tm.bYear-1 : tm.bYear;
 
-    double2 db2 = FragmentCntMonCan(obisBillingPeriodMon, obisCnt[0], &c, dt); // TODO
+    double2 db2 = FragmentCntMonCan(obisBillingPeriodMon, obisScalerForBillingPeriod, &c, dt);
 
     if (db2.bError == ERROR_NOT_PRESENTED) {
       Clear();
@@ -73,7 +73,7 @@ double2 ReadCntMonCan38_Internal(uchar  ibMon)
     dt.bMonth = tm.bMonth;
     dt.bYear  = tm.bYear;
 
-    double2 db2 = FragmentCntMonCan(obisBillingPeriodDay, obisCnt[0], &c, dt); // TODO
+    double2 db2 = FragmentCntMonCan(obisBillingPeriodDay, obisScalerForBillingPeriod, &c, dt);
 
     if (db2.bError == ERROR_NOT_PRESENTED) {
       Clear();
@@ -86,46 +86,6 @@ double2 ReadCntMonCan38_Internal(uchar  ibMon)
     if (Input39() != SER_GOODCHECK) return Fault(70+2);
 
     return db2;
-/*
-    time tm1;
-    tm1.bYear = tm.bYear;
-    tm1.bMonth = tm.bMonth;
-    tm1.bDay = tm.bDay;
-    tm1.bHour = 0;
-    tm1.bMinute = 0;
-    tm1.bSecond = 0;
-
-    time tm2;
-    tm2.bYear = tm.bYear;
-    tm2.bMonth = tm.bMonth;
-    tm2.bDay = tm.bDay;
-    tm2.bHour = 23;
-    tm2.bMinute = 59;
-    tm2.bSecond = 59;
-
-    record39 r = FragmentProfile39(&c, tm1, tm2, false);
-
-    if (r.bError != 0)
-    {
-      return Fault(70+3);
-    }
-    if (r.fFirst == false)
-    {
-      Clear();
-      sprintf(szLo+0, "сутки %02u.%02u.%02u ?", tm.bDay, tm.bMonth, tm.bYear);
-      Delay(1000);
-      return Fault(70+4);
-    }
-
-    double2 scaler = ReadRegisterScaler39(obisEngAbs[0], &c);  // TODO
-    if (!scaler.fValid) return Fault(70+5);
-
-    DISC();
-    if (Input39() != SER_GOODCHECK) return Fault(70+6);
-
-    //return GetDouble0((double)r.ddwValue * scaler.dbValue);
-    return GetDouble0(-1); // TODO
-*/
   }
 }
 
@@ -173,7 +133,7 @@ double2 TestReadCntMonCan39(void)
   double2 db2;
 
   uchar m;
-  for (m=8; m>=7; m--)
+  for (m=8; m>=6; m--)
   {
     db2 = ReadCntMonCan39(m-1);
     if (db2.bError)
