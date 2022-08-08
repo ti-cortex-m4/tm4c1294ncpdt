@@ -22,13 +22,22 @@ read_engmon_39.c
 <PDU>
 <GetResponse>
   <GetResponseNormal>
-    <!--Priority: HIGH ServiceClass: UN_CONFIRMED invokeID: 6-->
-    <InvokeIdAndPriority Value="86" />
+    <!--Priority: HIGH ServiceClass: CONFIRMED invokeID: 2-->
+    <InvokeIdAndPriority Value="194" />
     <Result>
       <Data>
-        <Array Qty="01" >
-          <Structure Qty="01" >
-            <UInt64 Value="00000000000030B3" />
+        <Array Qty="1" >
+          <Structure Qty="9" >
+            <!--2022-07-01 00:00:00-->
+            <OctetString Value="07E60701FF0000000000B480" />
+            <UInt32 Value="4609456" />
+            <UInt32 Value="3074755" />
+            <UInt32 Value="1534701" />
+            <UInt32 Value="0" />
+            <UInt32 Value="0" />
+            <UInt32 Value="0" />
+            <UInt32 Value="5617" />
+            <UInt32 Value="8481" />
           </Structure>
         </Array>
       </Data>
@@ -37,14 +46,6 @@ read_engmon_39.c
 </GetResponse>
 </PDU>
 */
-ulong64_ ReadEngMon39(void)
-{
-  InitPop(12 + 5 + GetHdlcAddressesSize());
-  return PopUnsignedValueDLSM();
-}
-
-
-
 uchar   EngMonPresent39(void)
 {
   InitPop(12 + GetHdlcAddressesSize());
@@ -57,24 +58,17 @@ uchar   EngMonPresent39(void)
   if (PopChar() != 9) return 40+5; // octet-string
   if (PopChar() != 12) return 40+6; // size != 12
 
-  return 0;
-}
-
-
-uchar   EngMonAbsent39(void) // TODO check absent
-{
-  InitPop(12 + GetHdlcAddressesSize());
-
-  if (PopChar() != 0) return 40+5; // !success
-  if (PopChar() != 1) return 40+6; // !array
-  if (PopChar() != 0) return 40+7; // array size != 0
+  uchar i;
+  for (i=0; i<12; i++) {
+    PopChar(); // skip date/time
+  }
 
   return 0;
 }
 
 
 
-/*
+/* TODO
 7e a0 1d 03 03 74 32 9d e6 e7 00 c4 01 81  00 01 01 02 01 15  00 00 00 00 00 00 0f 31  1d 75 7e
 00 success
 01 array
