@@ -77,10 +77,10 @@ double2 FragmentCntMonCan(const obis_t  obisBillingPeriod, const obis_t  obis, c
 */
 
   if (present) {
-      mpdbChannelsC[0] = counter[0].ddwValue / 1000;
-      mpdbChannelsC[1] = counter[1].ddwValue / 1000;
-      mpdbChannelsC[2] = counter[2].ddwValue / 1000;
-      mpdbChannelsC[3] = counter[3].ddwValue / 1000;
+      mpdbChannelsC[0] = (double)counter[0].ddwValue / 1000;
+      mpdbChannelsC[1] = (double)counter[1].ddwValue / 1000;
+      mpdbChannelsC[2] = (double)counter[2].ddwValue / 1000;
+      mpdbChannelsC[3] = (double)counter[3].ddwValue / 1000;
 //    double db = (double)counter.ddwValue * scaler.dbValue;
 #ifdef MONITOR_39
     //MonitorString("\n result="); MonitorDouble6(db);
