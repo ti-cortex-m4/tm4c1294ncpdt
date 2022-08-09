@@ -5,11 +5,13 @@ automatic_get_cntmon_38.c
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
+#include "../../memory/mem_factors.h"
 #include "../../display/display.h"
 #include "../../keyboard/keyboard.h"
 #include "../../serial/ports.h"
 #include "../../serial/monitor.h"
 #include "../../serial/monitor_settings.h"
+#include "../../devices/devices.h"
 #include "../../digitals/digitals.h"
 #include "dlms.h"
 #include "error39.h"
@@ -96,6 +98,18 @@ double2 ReadCntMonCan38_Internal(uchar  ibMon)
 
     DISC();
     if (Input39() != SER_GOODCHECK) return Fault(70+2);
+
+    mpdbChannelsC[0] = db8.mdbValue[0];
+    mpdbChannelsC[1] = db8.mdbValue[5];
+    mpdbChannelsC[2] = db8.mdbValue[6];
+    mpdbChannelsC[3] = db8.mdbValue[7];
+
+    uchar i;
+    for (i=0; i<4; i++)
+    {
+      mpdbChannelsC[i] = (mpdbChannelsC[i] / 1000) * mpdbTransCnt[ibDig];
+      mpboChannelsA[i] = true;
+    }
 
     return GetDouble0(-1);
   }

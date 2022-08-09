@@ -70,7 +70,7 @@ status  CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
     return ST_OK;
   }
 
-  if (db2.bError == ERROR_NOT_PRESENTED) {
+  if (db8.bError == ERROR_NOT_PRESENTED) {
     return ST_NOTPRESENTED;
   }
 
