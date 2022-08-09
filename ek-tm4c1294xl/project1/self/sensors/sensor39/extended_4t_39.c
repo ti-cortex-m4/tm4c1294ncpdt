@@ -55,14 +55,14 @@ status  CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
 
   if (db8.fValid)
   {
-    mpdbChannelsC[0] = db8.mdbValue[1];
-    mpdbChannelsC[1] = db8.mdbValue[2];
-    mpdbChannelsC[2] = db8.mdbValue[3];
-    mpdbChannelsC[3] = db8.mdbValue[4];
-
     uchar i;
-    for (i=0; i<4; i++)
-    {
+    for (i=0; i<4; i++) {
+      mpdbChannelsC[i] = 0;
+    }
+
+    mpdbChannelsC[0] = db8.mdbValue[1 + ibTariff];
+
+    for (i=0; i<4; i++) {
       mpdbChannelsC[i] = (mpdbChannelsC[i] / 1000) * mpdbTransCnt[ibDig];
       mpboChannelsA[i] = true;
     }
@@ -122,6 +122,15 @@ double2 TestCntMonCanTariff39(void)
       MonitorString(" tariff="); MonitorCharDec(t);
       status s = ReadCntMonCanTariff39(ibMonthAbs, t);
       MonitorString("\n status="); MonitorCharDec(s);
+
+      uchar i;
+      for (i=0; i<4; i++)
+      {
+        MonitorString("\n mpdbChannelsC[");
+        MonitorCharDec(i);
+        MonitorString("]=");
+        MonitorDouble6(mpdbChannelsC[i]);
+      }
     }
   }
 
