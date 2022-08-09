@@ -24,15 +24,6 @@ extended_4t_39.c
 
 
 
-const obis_t *GetOBIS(uchar  ibTariff)
-{
-  ASSERT(sizeof(obisEngAbsTariff)/sizeof(obisEngAbsTariff[0]) == 4);
-  ASSERT(ibTariff < 4);
-  return &obisEngAbsTariff[ibTariff];
-}
-
-
-
 static status BadDigital(uchar  bError)
 {
   Error39(bError);
@@ -56,15 +47,26 @@ status  CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
   dt.bYear  = (dt.bMonth > tm.bMonth) ? tm.bYear-1 : tm.bYear;
 
 
-  double2 db2 = FragmentCntMonCan(obisBillingPeriodMon, *GetOBIS(ibTariff), &c, dt); // TODO
+  double8 db8 = FragmentCntMonCan(obisBillingPeriodMon, obisScalerForBillingPeriod, &c, dt);
 
   DISC();
   if (Input39() != SER_GOODCHECK) return BadDigital(95+1);
 
 
-  if (db2.fValid) {
-    mpdbChannelsC[0] = (db2.dbValue / 1000) * mpdbTransCnt[ibDig];
-    mpboChannelsA[0] = true;
+  if (db8.fValid)
+  {
+    mpdbChannelsC[0] = db8.mdbValue[1];
+    mpdbChannelsC[1] = db8.mdbValue[2];
+    mpdbChannelsC[2] = db8.mdbValue[3];
+    mpdbChannelsC[3] = db8.mdbValue[4];
+
+    uchar i;
+    for (i=0; i<4; i++)
+    {
+      mpdbChannelsC[i] = (mpdbChannelsC[i] / 1000) * mpdbTransCnt[ibDig];
+      mpboChannelsA[i] = true;
+    }
+
     return ST_OK;
   }
 

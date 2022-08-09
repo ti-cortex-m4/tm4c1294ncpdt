@@ -52,9 +52,9 @@ double2 ReadCntMonCan38_Internal(uchar  ibMon)
     dt.bMonth = (ibMon+1) % 12 + 1;
     dt.bYear  = (dt.bMonth > tm.bMonth) ? tm.bYear-1 : tm.bYear;
 
-    double2 db2 = FragmentCntMonCan(obisBillingPeriodMon, obisScalerForBillingPeriod, &c, dt);
+    double8 db8 = FragmentCntMonCan(obisBillingPeriodMon, obisScalerForBillingPeriod, &c, dt);
 
-    if (db2.bError == ERROR_NOT_PRESENTED) {
+    if (db8.bError == ERROR_NOT_PRESENTED) {
       Clear();
       sprintf(szLo+1, "мес€ц %02u.%02u ?", dt.bMonth, dt.bYear);
       Delay(1000);
@@ -64,7 +64,19 @@ double2 ReadCntMonCan38_Internal(uchar  ibMon)
     DISC();
     if (Input39() != SER_GOODCHECK) return Fault(70+2);
 
-    return db2;
+    mpdbChannelsC[0] = db8.mdbValue[0];
+    mpdbChannelsC[1] = db8.mdbValue[5];
+    mpdbChannelsC[2] = db8.mdbValue[6];
+    mpdbChannelsC[3] = db8.mdbValue[7];
+
+    uchar i;
+    for (i=0; i<4; i++)
+    {
+      mpdbChannelsC[i] = (mpdbChannelsC[i] / 1000) * mpdbTransCnt[ibDig];
+      mpboChannelsA[i] = true;
+    }
+
+    return GetDouble0(-1);
   }
   else
   {
@@ -73,9 +85,9 @@ double2 ReadCntMonCan38_Internal(uchar  ibMon)
     dt.bMonth = tm.bMonth;
     dt.bYear  = tm.bYear;
 
-    double2 db2 = FragmentCntMonCan(obisBillingPeriodDay, obisScalerForBillingPeriod, &c, dt);
+    double8 db8 = FragmentCntMonCan(obisBillingPeriodDay, obisScalerForBillingPeriod, &c, dt);
 
-    if (db2.bError == ERROR_NOT_PRESENTED) {
+    if (db8.bError == ERROR_NOT_PRESENTED) {
       Clear();
       sprintf(szLo+0, "сутки %02u.%02u.%02u ?", dt.bDay, dt.bMonth, dt.bYear);
       Delay(1000);
@@ -85,7 +97,7 @@ double2 ReadCntMonCan38_Internal(uchar  ibMon)
     DISC();
     if (Input39() != SER_GOODCHECK) return Fault(70+2);
 
-    return db2;
+    return GetDouble0(-1);
   }
 }
 
