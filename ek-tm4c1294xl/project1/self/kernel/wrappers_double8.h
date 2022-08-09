@@ -8,11 +8,6 @@ WRAPPERS,H
 #define __WRAPPERS
 
 
-
-#include "wrappers_double8.h"
-
-
-
 #define ERROR_NOT_PRESENTED     3
 
 
