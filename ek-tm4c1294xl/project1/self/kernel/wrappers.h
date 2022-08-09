@@ -71,14 +71,6 @@ typedef struct
 
 typedef struct
 {
-  double        mdbValue[8];
-  bool          fValid;
-  uchar         bError;
-} double8;
-
-
-typedef struct
-{
   time          tiValue;
   bool          fValid;
   uchar         bError;

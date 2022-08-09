@@ -7,7 +7,6 @@ fragment_cntmon_39.c
 #include "../../main.h"
 #include "../../serial/monitor.h"
 #include "../../serial/ports_pop.h"
-#include "../../digitals/digitals.h" // TODO
 #include "dlms.h"
 #include "dlms_obis.h"
 #include "error39.h"
@@ -23,14 +22,14 @@ fragment_cntmon_39.c
 
 
 
-static double2 Fault(uchar  bError)
+static double8 Fault(uchar  bError)
 {
-  return GetDouble2Error1(Error39(bError));
+  return GetDouble8Error1(Error39(bError));
 }
 
 
 
-double2 FragmentCntMonCan(const obis_t  obisBillingPeriod, const obis_t  obisScaler, caller39  *pc, date  dt)
+double8 FragmentCntMonCan(const obis_t  obisBillingPeriod, const obis_t  obisScaler, caller39  *pc, date  dt)
 {
   (*pc).bNS++;
   (*pc).bInvokeId++;
@@ -41,25 +40,25 @@ double2 FragmentCntMonCan(const obis_t  obisBillingPeriod, const obis_t  obisSca
 
   bool present = (EngMonPresent39() == 0);
 
-  ulong64_ counter[4];
+  ulong64_ mddw[8];
   if (present)
   {
-    counter[0] = PopUnsignedValueDLSM();
-    PopUnsignedValueDLSM();
-    PopUnsignedValueDLSM();
-    PopUnsignedValueDLSM();
-    PopUnsignedValueDLSM();
-    counter[1] = PopUnsignedValueDLSM();
-    counter[2] = PopUnsignedValueDLSM();
-    counter[3] = PopUnsignedValueDLSM();
+    uchar i;
+    for (i=0; i<8; i++)
+    {
+      mddw[i] = PopUnsignedValueDLSM();
+    }
   }
 
 #ifdef MONITOR_39
   MonitorString("\n present="); MonitorBool(present);
-  MonitorString("\n counter[0]="); MonitorLongDec(counter[0].ddwValue);
-  MonitorString("\n counter[1]="); MonitorLongDec(counter[1].ddwValue);
-  MonitorString("\n counter[2]="); MonitorLongDec(counter[2].ddwValue);
-  MonitorString("\n counter[3]="); MonitorLongDec(counter[3].ddwValue);
+  for (i=0; i<8; i++)
+  {
+    MonitorString("\n counter[");
+    MonitorCharDec(i);
+    MonitorString("]=");
+    MonitorLongDec(mddw[0].ddwValue);
+  }
 #endif
 
 
@@ -73,22 +72,32 @@ double2 FragmentCntMonCan(const obis_t  obisBillingPeriod, const obis_t  obisSca
   if (!scaler.fValid) return Fault(125+4);
 
 
+  double  mdbValue[8];
+
   if (present) {
-      mpdbChannelsC[0] = (double)counter[0].ddwValue * scaler.dbValue / 1000;
-      mpdbChannelsC[1] = (double)counter[1].ddwValue * scaler.dbValue / 1000;
-      mpdbChannelsC[2] = (double)counter[2].ddwValue * scaler.dbValue / 1000;
-      mpdbChannelsC[3] = (double)counter[3].ddwValue * scaler.dbValue / 1000;
+    for (i=0; i<8; i++)
+    {
+      mdbValue[i] = (double)mddw[i].ddwValue * scaler.dbValue / 1000;
+    }
+
 #ifdef MONITOR_39
-    //MonitorString("\n result="); MonitorDouble6(db);
+    for (i=0; i<8; i++)
+    {
+      MonitorString("\n counter[");
+      MonitorCharDec(i);
+      MonitorString("]=");
+      MonitorLongDec(mddw[0].ddwValue);
+    }
 #endif
-    return GetDouble0(-1);
+
+    return GetDouble8Ok(mdbValue);
   }
 
   if (!present) {
 #ifdef MONITOR_39
     MonitorString("\n result is absent");
 #endif
-    return GetDouble2Error1(ERROR_NOT_PRESENTED);
+    return GetDouble8Error1(ERROR_NOT_PRESENTED);
   }
 
   return Fault(125+5);
