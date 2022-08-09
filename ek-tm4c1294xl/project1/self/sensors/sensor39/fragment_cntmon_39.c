@@ -39,6 +39,9 @@ double8 FragmentCntMonCan(const obis_t  obisBillingPeriod, const obis_t  obisSca
 
 
   bool present = (EngMonPresent39() == 0);
+#ifdef MONITOR_39
+  MonitorString("\n present="); MonitorBool(present);
+#endif
 
   ulong64_ mddw[8];
   if (present)
@@ -47,19 +50,14 @@ double8 FragmentCntMonCan(const obis_t  obisBillingPeriod, const obis_t  obisSca
     for (i=0; i<8; i++)
     {
       mddw[i] = PopUnsignedValueDLSM();
+#ifdef MONITOR_39
+      MonitorString("\n mddw[");
+      MonitorCharDec(i);
+      MonitorString("]=");
+      MonitorLongDec(mddw[i].ddwValue);
+#endif
     }
   }
-
-#ifdef MONITOR_39
-  MonitorString("\n present="); MonitorBool(present);
-  for (i=0; i<8; i++)
-  {
-    MonitorString("\n counter[");
-    MonitorCharDec(i);
-    MonitorString("]=");
-    MonitorLongDec(mddw[0].ddwValue);
-  }
-#endif
 
 
   (*pc).bNR++;
@@ -72,33 +70,26 @@ double8 FragmentCntMonCan(const obis_t  obisBillingPeriod, const obis_t  obisSca
   if (!scaler.fValid) return Fault(125+4);
 
 
-  double  mdbValue[8];
+  if (present)
+  {
+    double mdb[8];
 
-  if (present) {
+    uchar i;
     for (i=0; i<8; i++)
     {
-      mdbValue[i] = (double)mddw[i].ddwValue * scaler.dbValue / 1000;
-    }
-
+      mdb[i] = (double)mddw[i].ddwValue * scaler.dbValue / 1000;
 #ifdef MONITOR_39
-    for (i=0; i<8; i++)
-    {
-      MonitorString("\n counter[");
+      MonitorString("\n mdb[");
       MonitorCharDec(i);
       MonitorString("]=");
-      MonitorLongDec(mddw[0].ddwValue);
+      MonitorDouble6(mdb[i]);
+#endif
     }
-#endif
 
-    return GetDouble8Ok(mdbValue);
+    return GetDouble8Ok(mdb);
   }
-
-  if (!present) {
-#ifdef MONITOR_39
-    MonitorString("\n result is absent");
-#endif
+  else
+  {
     return GetDouble8Error1(ERROR_NOT_PRESENTED);
   }
-
-  return Fault(125+5);
 }

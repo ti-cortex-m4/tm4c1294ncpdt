@@ -40,7 +40,7 @@ double2 ReadCntCurr39_Internal(void)
     double2 db2 = ReadRegisterUnsignedValueWithScaler39(obisEngAbs[i], &c);
     if (!db2.fValid) return Fault(60+1+i);
 
-    mpdbChannelsC[i] = db2.dbValue / 1000;
+    mpdbChannelsC[i] = db2.dbValue / 1000; // TODO  * mpdbTransCnt[ibDig];
   }
 
   DISC();
