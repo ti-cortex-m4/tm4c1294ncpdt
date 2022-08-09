@@ -90,6 +90,9 @@ double8 FragmentCntMonCan(const obis_t  obisBillingPeriod, const obis_t  obisSca
   }
   else
   {
+#ifdef MONITOR_39
+  MonitorString("\n not presented");
+#endif
     return GetDouble8Error1(ERROR_NOT_PRESENTED);
   }
 }
