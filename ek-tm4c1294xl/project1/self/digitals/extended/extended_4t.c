@@ -161,7 +161,7 @@ static bool MakeDevices(uchar  ibMon, uchar  ibTrf)
 
           if ((diCurr.bDevice == 39) && (diPrev.ibLine != 0))
           {
-            vl.bStatus = ST_NOTPRESENTED;
+            vl.bStatus = ST_NOTSUPPORTED;
           }
 
           mpCntMonCan4T[c] = vl;
