@@ -115,14 +115,14 @@ double2 TestCntMonCanTariff39(void)
   uchar m;
   for (m=0; m<10; m++)
   {
-    uchar ibMonthAbs = (12 + bMonth - 1 - m) % 12;
+    uchar ibMonAbs = (12 + bMonth - 1 - m) % 12;
     
     uchar t;
     for (t=0; t<4; t++)
     {
-      MonitorString("\n\n month="); MonitorCharDec(ibMonthAbs+1);
+      MonitorString("\n\n month="); MonitorCharDec(ibMonAbs+1);
       MonitorString(" tariff="); MonitorCharDec(t);
-      status s = ReadCntMonCanTariff39(ibMonthAbs, t);
+      status s = ReadCntMonCanTariff39(ibMonAbs, t);
       MonitorString("\n status="); MonitorCharDec(s);
 
       uchar i;
