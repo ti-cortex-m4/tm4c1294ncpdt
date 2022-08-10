@@ -1931,7 +1931,7 @@ double2 ReadCntCurrCan(uchar  ibCan)
 #endif
 
 #ifndef SKIP_39
-    case 39: TestCntMonCanTariff39(); //TestParam39(); return GetDouble2Error(); // ReadCntCurr39(); //TestCntMonCanTariff39(); //TestTimeCorrect39(); //ReadCntCurr39(); TODO
+    case 39: TestReadCntMonCan39(); // ReadCntCurr39(); //TestCntMonCanTariff39(); //TestTimeCorrect39(); //ReadCntCurr39(); TODO
 #endif
 
     default: return GetDouble2Error();
