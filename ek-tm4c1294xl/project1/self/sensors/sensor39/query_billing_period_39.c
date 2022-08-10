@@ -21,7 +21,7 @@ void    QueryBillingPeriod39(const obis_t  obisBillingPeriod, uchar  bNS, uchar 
   MonitorString("\n\n QueryEngMon39 "); MonitorCharDec(dt.bDay); MonitorString("."); MonitorCharDec(dt.bMonth); MonitorString("."); MonitorCharDec(dt.bYear);
 #endif
 
-  uint wSize = 92 - 18 + GetHdlcAddressesSize(); // 0x5E 94 TODO
+  uint wSize = 74 + GetHdlcAddressesSize();
 
   InitPush(0);
   PushChar(0x7E);
@@ -31,7 +31,7 @@ void    QueryBillingPeriod39(const obis_t  obisBillingPeriod, uchar  bNS, uchar 
 
   PushChar(((bNR & 0x07) << 5) | 0x10 | ((bNS & 0x07) << 1) | 0x00);
 
-  PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
+  PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize()));
 
   // DLMS start
 
