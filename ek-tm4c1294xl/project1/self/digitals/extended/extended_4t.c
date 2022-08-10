@@ -159,6 +159,11 @@ static bool MakeDevices(uchar  ibMon, uchar  ibTrf)
           vl.mpdbValuesT[ibTrf] = mpdbChannelsC[diPrev.ibLine];
           vl.tiUpdate = *GetCurrTimeDate();
 
+          if ((diCurr.bDevice == 39) && (diPrev.ibLine != 0))
+          {
+            vl.bStatus = ST_NOTPRESENTED;
+          }
+
           mpCntMonCan4T[c] = vl;
         }
       }
