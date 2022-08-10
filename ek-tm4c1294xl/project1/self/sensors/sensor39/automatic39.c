@@ -120,3 +120,78 @@ bool    ChangeSpeed39(void)
 
   return true;
 }
+
+
+
+uchar   GetHdlcAddressesSize_(uchar  wAddr)
+{
+  if (wAddr == 0) {
+    return 1+1;
+  } else if (wAddr <= 0x7F) {
+    return 2+1;
+  } else {
+    return 4+1;
+  }
+}
+
+
+void    PushHdlcAddresses_(uchar  wAddr)
+{
+  if (wAddr == 0) {
+    PushChar(0x03);
+  } else if (wAddr <= 0x7F) {
+    PushChar(0x02);
+  } else {
+    PushChar(0x00);
+    PushChar(0x02);
+  }
+
+  uchar bHi = wAddr / 0x100;
+  uchar bLo = wAddr % 0x100;
+
+  bHi = (bHi << 2) & 0xFC;
+  if (bLo & 0x80) bHi |= 0x02;
+  bLo = (bLo << 1) | 0x01;
+
+  if (wAddr == 0) {
+  } else if (wAddr <= 0x7F) {
+    PushChar(bLo);
+  } else {
+    PushChar(bHi);
+    PushChar(bLo);
+  }
+
+  PushChar((bLogical << 1) + 0x01);
+}
+
+
+void    DISC_(uchar  bNumber)
+{
+#ifdef MONITOR_39_NAMES
+  MonitorString("\n\n DISC ");
+#endif
+
+  InitPush(0);
+
+  uint wSize = 5+GetHdlcAddressesSize_(bNumber); // 7
+
+  PushChar(0x7E);
+  PushFormatDLMS(wSize);
+  PushHdlcAddresses_(bNumber);
+  PushChar(0x53); // DISC
+
+  PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize_(bNumber))); // 5
+  PushChar(0x7E);
+
+  Query39(1000, wSize+2); // 9
+}
+
+
+bool    ChangeNumber39(uchar  bNumber)
+{
+  DISC_(bNumber);
+  if (Input39() != SER_GOODCHECK) return(0);
+  Beep();
+
+  return(1);
+}
