@@ -686,6 +686,10 @@ void    key_SearchByNumber(void)
          case 34:   if (ChangeNumber34(ibY) == 1) bRes = 0xEE;  break;
 #endif
 
+#ifndef SKIP_39
+         case 39:   if (ChangeNumber39(ibY) == 1) bRes = 0xEE;  break;
+#endif
+
         default:  Error();  return;
         }
 
