@@ -74,7 +74,7 @@ double2 ReadCntMonCan38_Internal(uchar  ibMon)
     uchar i;
     for (i=0; i<4; i++)
     {
-      mpdbChannelsC[i] = (mpdbChannelsC[i] / 1000) * mpdbTransCnt[ibDig];
+      mpdbChannelsC[i] = mpdbChannelsC[i] * mpdbTransCnt[ibDig];
       mpboChannelsA[i] = true;
     }
 
@@ -107,7 +107,7 @@ double2 ReadCntMonCan38_Internal(uchar  ibMon)
     uchar i;
     for (i=0; i<4; i++)
     {
-      mpdbChannelsC[i] = (mpdbChannelsC[i] / 1000) * mpdbTransCnt[ibDig];
+      mpdbChannelsC[i] = mpdbChannelsC[i] * mpdbTransCnt[ibDig];
       mpboChannelsA[i] = true;
     }
 
@@ -128,12 +128,6 @@ double2 ReadCntMonCan39(uchar  ibMon)
     if (fKey == true) break;
     if (db2.fValid)
     {
-      uchar i;
-      for (i=0; i<4; i++)
-      {
-        mpboChannelsA[i] = true;
-      }
-
       return GetDouble0(mpdbChannelsC[diCurr.ibLine]);
     }
   }
