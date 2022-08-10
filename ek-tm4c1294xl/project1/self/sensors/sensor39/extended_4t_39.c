@@ -63,7 +63,7 @@ status  CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
     mpdbChannelsC[0] = db8.mdbValue[1 + ibTariff];
 
     for (i=0; i<4; i++) {
-      mpdbChannelsC[i] = (mpdbChannelsC[i] / 1000) * mpdbTransCnt[ibDig];
+      mpdbChannelsC[i] = mpdbChannelsC[i] * mpdbTransCnt[ibDig];
       mpboChannelsA[i] = true;
     }
 

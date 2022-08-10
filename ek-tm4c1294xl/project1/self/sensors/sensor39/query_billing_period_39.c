@@ -18,7 +18,7 @@ query_billing_period_39.c
 void    QueryBillingPeriod39(const obis_t  obisBillingPeriod, uchar  bNS, uchar  bNR, uchar  bInvokeId, date  dt)
 {
 #ifdef MONITOR_39_NAMES
-  MonitorString("\n\n QueryEngMon39 "); MonitorCharDec(dt.bDay); MonitorString(" "); MonitorCharDec(dt.bMonth); MonitorString(" "); MonitorCharDec(dt.bYear);
+  MonitorString("\n\n QueryEngMon39 "); MonitorCharDec(dt.bDay); MonitorString("."); MonitorCharDec(dt.bMonth); MonitorString("."); MonitorCharDec(dt.bYear);
 #endif
 
   uint wSize = 92 - 18 + GetHdlcAddressesSize(); // 0x5E 94 TODO
