@@ -4,13 +4,13 @@ DEVICE_B12!C
 
 ------------------------------------------------------------------------------*/
 
-#include "../main.h"
-#include "../memory/mem_digitals.h"
-#include "../memory/mem_current.h"
-#include "../memory/mem_profile.h"
-#include "../memory/mem_factors.h"
-#include "../devices/devices.h"
-#include "../digitals/current/current2.h"
+#include "../../main.h"
+#include "../../memory/mem_digitals.h"
+#include "../../memory/mem_current.h"
+#include "../../memory/mem_profile.h"
+#include "../../memory/mem_factors.h"
+#include "../../devices/devices.h"
+#include "../../digitals/current/current2.h"
 #include "device_b.h"
 #include "device_b12.h"
 
