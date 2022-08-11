@@ -366,10 +366,6 @@ void    key_SearchBySpeed(void)
 #ifndef SKIP_38
             case 38:  if (ChangeSpeed38() == 1) bRes = 0xEE;  break;
 #endif
-
-#ifndef SKIP_39
-            case 39:  if (ChangeSpeed39() == 1) bRes = 0xEE;  break;
-#endif
             default:  Error();  return;
           }
 
