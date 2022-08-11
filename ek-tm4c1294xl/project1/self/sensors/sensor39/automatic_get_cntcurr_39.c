@@ -5,9 +5,11 @@ automatic_get_cntcurr_39.c
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
+#include "../../memory/mem_factors.h"
 #include "../../display/display.h"
 #include "../../keyboard/keyboard.h"
 #include "../../serial/ports.h"
+#include "../../devices/devices.h"
 #include "../../digitals/digitals.h"
 #include "dlms.h"
 #include "dlms_obis.h"
@@ -40,7 +42,7 @@ double2 ReadCntCurr39_Internal(void)
     double2 db2 = ReadRegisterUnsignedValueWithScaler39(obisEngAbs[i], &c);
     if (!db2.fValid) return Fault(60+1+i);
 
-    mpdbChannelsC[i] = db2.dbValue / 1000; // TODO  * mpdbTransCnt[ibDig];
+    mpdbChannelsC[i] = (db2.dbValue / 1000) * mpdbTransCnt[ibDig];
   }
 
   DISC();
