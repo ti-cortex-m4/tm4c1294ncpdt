@@ -102,8 +102,8 @@ record39 FragmentProfile39(caller39  *pc, time  tm1, time  tm2, bool  fProfile)
 
 double2 TestFragmentProfile39(void)
 {
-//  fMonitorLogBasic = false;
-//  fMonitorLogHex = false;
+  fMonitorLogBasic = false;
+  fMonitorLogHex = false;
 
   MonitorOpen(0);
 

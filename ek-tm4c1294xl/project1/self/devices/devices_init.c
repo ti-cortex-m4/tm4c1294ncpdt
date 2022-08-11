@@ -24,7 +24,7 @@ DEVICES_INIT!C
 #include "../digitals/max_shutdown.h"
 #include "../digitals/review/review.h"
 #include "../special/recalc_def.h"
-#include "../sensors/device_b.h"
+#include "../sensors/sensor2/device_b.h"
 #include "../serial/ports.h"
 #include "../serial/ports_modems.h"
 #include "../serial/modems.h"
