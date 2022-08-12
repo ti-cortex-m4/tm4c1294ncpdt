@@ -180,13 +180,6 @@ uchar   TestProfile39_Internal(caller39*  pc)
   if (!tm2.fValid) return 1;
   tiValue39 = tm2.tiValue;
 
-  tiValue39.bYear = 22; // TODO
-  tiValue39.bMonth = 8;
-  tiValue39.bDay = 3;
-  tiValue39.bHour = 1;
-  tiValue39.bMinute = 30;
-  tiValue39.bSecond = 0;
-
   dwValue39 = DateToHouIndex(tiValue39);
 
 
@@ -228,4 +221,3 @@ double2 TestProfile39(void)
 }
 
 #endif 
-
