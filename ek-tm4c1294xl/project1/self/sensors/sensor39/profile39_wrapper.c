@@ -135,7 +135,7 @@ void    QueryScaler_Profile39(void)
 
   c.bNS++;
   c.bInvokeId++;
-  QueryGetRegisterScalerDLMS(obisEngAbs[0], c);  // TODO
+  QueryGetRegisterScalerDLMS(obisScalerForProfile1, c);
 }
 
 
