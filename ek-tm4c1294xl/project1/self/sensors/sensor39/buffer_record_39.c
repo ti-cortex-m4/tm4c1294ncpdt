@@ -223,7 +223,7 @@ record39 FinishRecordProfile39(void) {
       r.tmValue = tm;
       r.fFirst = true;
 /*
-      FirstPrev = FirstCurr;
+      FirstPrev = FirstCurr; TODO
 
       FirstCurr.fExists = true;
       FirstCurr.tmTime = tm;
