@@ -130,8 +130,7 @@ static bool ReadData39(time  tiTime, ulong  mdwValue[4])
 
     mpdbEngFracDigCan[ibDig][c] -= (double)w*1000/dbPulse;
 #else
-    ulong dw = mdwValue[c];
-    uint w = (uint)(dw*dbPulse/1000);
+    uint w = (uint)(mdwValue[c]*dbScaler*dbPulse/1000);
     mpwChannels[c] = w;
 #endif
   }
@@ -185,7 +184,8 @@ uchar   TestProfile39_Internal(caller39*  pc)
 
   double2 scaler = ReadRegisterScaler39(obisScalerForProfile1, pc);
   if (!scaler.fValid) return 2;
-  dbScaler = scaler.dbValue;
+
+  SetScaler_Profile39(scaler.dbValue);
 
 
   InitHeader39();
