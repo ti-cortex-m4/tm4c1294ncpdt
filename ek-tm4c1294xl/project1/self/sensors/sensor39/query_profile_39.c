@@ -98,7 +98,7 @@ void    QueryProfile39(uchar  bNS, uchar  bNR, uchar  bInvokeId, time  tm1, time
 
   PushChar(0x07); // <ClassId Value="0007" /> <!--PROFILE_GENERIC-->
 
-  PushOBIS_DLMS(obisProfile); // <InstanceId Value="0100630100FF" /> <!--1.0.99.1.0.255-->
+  PushOBIS_DLMS(obisProfile1); // <InstanceId Value="0100630100FF" /> <!--1.0.99.1.0.255-->
 
   PushChar(0x02); // <AttributeId Value="02" />
 
