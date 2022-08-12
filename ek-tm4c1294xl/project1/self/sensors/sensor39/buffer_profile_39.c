@@ -64,7 +64,8 @@ void    AddProfile39(time  tmTime, ulong  mdwValue[4])
   {
     MonitorString("\n add profile overflow ");
     Error39(160+0);
-//    fProfileOveflow39 = true; TODO
+
+    fProfileOveflow39 = true;
   }
 }
 
