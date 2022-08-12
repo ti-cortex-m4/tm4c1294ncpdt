@@ -183,7 +183,7 @@ uchar   TestProfile39_Internal(caller39*  pc)
   dwValue39 = DateToHouIndex(tiValue39);
 
 
-  double2 scaler = ReadRegisterScaler39(obisEngAbs[0], pc);  // TODO
+  double2 scaler = ReadRegisterScaler39(obisScalerForProfile1, pc);
   if (!scaler.fValid) return 2;
   dbScaler = scaler.dbValue;
 

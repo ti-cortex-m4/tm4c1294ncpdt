@@ -21,19 +21,12 @@ const obis_t        obisEngAbs[4] = {
   {1, 0, 4, 8, 0, 255}, // Ch. 0; Sum Li Reactive power- (QIII+QIV); Time integral 1; Rate 0 (0 is total); Unspecified number of most recent billing periods
 };
 
-//const obis_t        obisEngAbsTariff[4] = {
-//  {1, 0, 15, 8, 1, 255}, // Ch. 0; Sum Li Active power (abs(QI+QIV)+abs(QII+QIII)); Time integral 1; Rate 1 (0 is total); Unspecified number of most recent billing periods
-//  {1, 0, 15, 8, 2, 255}, // Ch. 0; Sum Li Active power (abs(QI+QIV)+abs(QII+QIII)); Time integral 1; Rate 2 (0 is total); Unspecified number of most recent billing periods
-//  {1, 0, 15, 8, 3, 255}, // Ch. 0; Sum Li Active power (abs(QI+QIV)+abs(QII+QIII)); Time integral 1; Rate 3 (0 is total); Unspecified number of most recent billing periods
-//  {1, 0, 15, 8, 4, 255}, // Ch. 0; Sum Li Active power (abs(QI+QIV)+abs(QII+QIII)); Time integral 1; Rate 4 (0 is total); Unspecified number of most recent billing periods
-//};
-
 const obis_t        obisBillingPeriodMon = {1, 0, 98, 1, 0, 255}; // Ch. 0; Data of billing period; Scheme 1; #1; Unspecified number of most recent billing periods
 const obis_t        obisBillingPeriodDay = {1, 0, 98, 2, 0, 255}; // Ch. 0; Data of billing period; Scheme 2; #1; Unspecified number of most recent billing periods
-
 const obis_t        obisScalerForBillingPeriod = {1, 0, 1, 8, 0, 255}; // Ch. 0; Sum Li Active power+ (QI+QIV); Time integral 1; Rate 0 (0 is total); Unspecified number of most recent billing periods
 
-const obis_t        obisProfile = {1, 0, 99, 1, 0, 255}; // Ch. 0; Load profile with recording period 1; #1
+const obis_t        obisProfile1 = {1, 0, 99, 1, 0, 255}; // Ch. 0; Load profile with recording period 1; #1
+const obis_t        obisScalerForProfile1 = {1, 0, 1, 29, 0, 255}; // Ch. 0; Sum Li Active power+ (QI+QIV); Time integral 5
 
 const obis_t        obisU1      = {1, 0, 32, 7, 0, 255}; // Ch. 0; L1 Voltage; Inst. value
 const obis_t        obisU2      = {1, 0, 52, 7, 0, 255}; // Ch. 0; L2 Voltage; Inst. value

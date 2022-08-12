@@ -24,14 +24,12 @@ extern  const obis_t        obisEngAbs[4];
 
 extern  const obis_t        obisCnt[4];
 
-extern  const obis_t        obisEngAbsTariff[4];
-
 extern  const obis_t        obisBillingPeriodMon;
 extern  const obis_t        obisBillingPeriodDay;
-
 extern  const obis_t        obisScalerForBillingPeriod;
 
-extern  const obis_t        obisProfile;
+extern  const obis_t        obisProfile1;
+extern  const obis_t        obisScalerForProfile1;
 
 extern  const obis_t        obisU1;
 extern  const obis_t        obisU2;
