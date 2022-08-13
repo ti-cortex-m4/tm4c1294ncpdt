@@ -4,8 +4,8 @@ correct39_wrapper.h
 
 ------------------------------------------------------------------------------*/
 
-#ifndef __CURRENT39_WRAPPER
-#define __CURRENT39_WRAPPER
+#ifndef __CORRECT39_WRAPPER
+#define __CORRECT39_WRAPPER
 
 
 // верхний порог коррекции времени, секунд
@@ -16,7 +16,7 @@ correct39_wrapper.h
 
 
 
-void    Init_Current39(void);
+void    Init_Correct39(void);
 
 uchar   GetCounter_Correct39(void);
 

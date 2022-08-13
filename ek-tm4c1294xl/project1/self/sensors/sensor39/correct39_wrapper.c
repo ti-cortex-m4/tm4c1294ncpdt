@@ -9,45 +9,45 @@ correct39_wrapper.c
 
 
 
-static uchar            cbCorrects;
-static uint             wDeltaOld;
-static uint             wDeltaNew;
+static uint             cwCorrects39;
+static uint             wDeltaOld39;
+static uint             wDeltaNew39;
 
 
 
-void    Init_Current39(void)
+void    Init_Correct39(void)
 {
-  cbCorrects = 0;
-  wDeltaOld = 0;
-  wDeltaNew = 0;
+  cwCorrects39 = 0;
+  wDeltaOld39 = 0;
+  wDeltaNew39 = 0;
 }
 
 
 
 uchar   GetCounter_Correct39(void)
 {
-  return cbCorrects;
+  return cwCorrects39;
 }
 
 
 
 void    SaveFirstDelta_Current39(uint  wDelta)
 {
-  cbCorrects++;
-  wDeltaOld = wDelta;
+  cwCorrects39++;
+  wDeltaOld39 = wDelta;
 }
 
 
 
 bool    CheckNextDelta_Current39(uint  wDelta)
 {
-  wDeltaNew = wDelta;
-  return (wDeltaNew < wDeltaOld) && (cbCorrects < 100);
+  wDeltaNew39 = wDelta;
+  return (wDeltaNew39 < wDeltaOld39) && (cwCorrects39 < 300);
 }
 
 
 void    SaveNextDelta_Current39(void)
 {
-  cbCorrects++;
-  wDeltaOld = wDeltaNew;
+  cwCorrects39++;
+  wDeltaOld39 = wDeltaNew39;
 }
