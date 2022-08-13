@@ -25,4 +25,14 @@ correct39_wrapper.c
 #include "correct39_wrapper.h"
 
 
+static uchar            cbCorrects;
+static uint             wDeltaOld;
+static uint             wDeltaNew;
 
+
+bool    Init_Current39(void)
+{
+  cbCorrects = 0; // TODO
+  wDeltaOld = 0;
+  wDeltaNew = 0;
+}
