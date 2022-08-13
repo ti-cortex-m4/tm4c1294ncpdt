@@ -1,12 +1,15 @@
 
 
     case DEV_TIME1_O_39P:
+      MakePause(DEV_TIME2_O_39P); // TODO
+/*
       Clear(); ShowLo(szRepeats);
       sprintf(szLo+8,"%1u",GetCounter_Correct39()+1); DelayInf();
 
       cbRepeat = MaxRepeats();
       QueryTime_Profile39();
       SetCurr(DEV_TIME1_I_39P);
+*/
       break;
 
     case DEV_TIME1_I_39P:
@@ -24,7 +27,7 @@
 
 
     case DEV_RR_TIME1_O_39P:
-      Clear(); ShowPercent(65);
+//      Clear(); ShowPercent(65);
 
       cbRepeat = MaxRepeats();
       RR_Profile39();
@@ -94,7 +97,7 @@
 
 
     case DEV_CORRECT_O_39P:
-      Clear(); ShowPercent(66);
+//      Clear(); ShowPercent(66);
 
       cbRepeat = MaxRepeats();
       QueryCorrect_Profile39();
@@ -115,7 +118,7 @@
 
 
     case DEV_RR_CORRECT_O_39P:
-      Clear(); ShowPercent(67);
+//      Clear(); ShowPercent(67);
 
       cbRepeat = MaxRepeats();
       RR_Profile39();
