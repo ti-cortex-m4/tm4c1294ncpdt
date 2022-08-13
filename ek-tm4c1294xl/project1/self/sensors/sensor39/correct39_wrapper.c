@@ -31,7 +31,7 @@ uchar   GetCounter_Correct39(void)
 
 
 
-void    Write_Current39(uint  wDelta)
+void    SaveFirstDelta_Current39(uint  wDelta)
 {
   cbCorrects++;
   wDeltaOld = wDelta;
@@ -39,14 +39,14 @@ void    Write_Current39(uint  wDelta)
 
 
 
-bool    Read2_Current39(uint  wDelta)
+bool    CheckNextDelta_Current39(uint  wDelta)
 {
   wDeltaNew = wDelta;
   return (wDeltaNew < wDeltaOld) && (cbCorrects < 100);
 }
 
 
-void    Read3_Current39(void)
+void    SaveNextDelta_Current39(void)
 {
   cbCorrects++;
   wDeltaOld = wDeltaNew;
