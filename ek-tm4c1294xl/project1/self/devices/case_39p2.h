@@ -1,7 +1,10 @@
 
 
     case DEV_TIME1_O_39P:
-      Clear(); ShowPercent(64);
+      Clear(); ShowLo(szRepeats);
+      sprintf(szLo+8,"%1u",GetCounter_Correct39()+1); // TODO DelayInf();
+
+      //Clear(); ShowPercent(64);
 
       cbRepeat = MaxRepeats();
       QueryTime_Profile39();
@@ -56,15 +59,34 @@
           ShowDigitalDeltaTime(ibDig, dwSecondThat, dwSecondThis);
 
           ulong dwDelta = AbsLong(dwSecondThat - dwSecondThis);
-          if (dwDelta < GetCorrectLimit()) {
+          if (dwDelta < GetCorrectLimit())
+          {
             ShowLo(szCorrectNo); DelayInf();
             MakePause(DEV_TIME2_O_39P); // без коррекции
           }
-          else if (GetCurrHouIndex() == (tmThat.bHour*2 + tmThat.bMinute/30))
+          else if (dwDelta < bMAJORCORRECT_39)
           {
-            SetCorrectSecond39(dwSecondThis - dwSecondThat);
-            ShowLo(szCorrectYes); DelayInf();
-            MakePause(DEV_CORRECT_O_39P); // коррекция времени
+            if (GetCounter_Correct39() == 0)
+            {
+              SaveFirstDelta_Current39(dwDelta);
+
+              SetCorrectSecond39(dwSecondThis - dwSecondThat);
+              ShowLo(szCorrectYes); DelayInf();
+              MakePause(DEV_CORRECT_O_39P); // коррекция времени
+            }
+            else
+            {
+              if (CheckNextDelta_Current39(dwDelta))
+              {
+                SaveNextDelta_Current39();
+
+                MakePause(DEV_TIME1_O_39P); // снова проверяем время
+              }
+              else if (GetCurrHouIndex() == (tmThat.bHour*2 + tmThat.bMinute/30))
+              { ShowLo(szCorrectSkip); DelayInf(); MakePause(DEV_TIME2_O_39P); }
+              else
+              { ShowLo(szManageNo); DelayMsg();  ErrorProfile(); }
+            }
           }
           else
           { ShowLo(szCorrectBig); DelayMsg(); ErrorProfile(); } // разница времени слишком велика, коррекция невозможна
@@ -107,7 +129,7 @@
         if (!ValidateFrame_Profile39()) {
           PROFILE39_REPEAT_OR_ERROR(220+13, RR_Profile39(), DEV_RR_CORRECT_I_39P)
         } else {
-          MakePause(DEV_TIME2_O_39P);
+          MakePause(DEV_TIME1_O_39P); // снова проверяем время
         }  
       } else {
         PROFILE39_REPEAT_OR_ERROR(220+14, RR_Profile39(), DEV_RR_CORRECT_I_39P)
