@@ -30,9 +30,41 @@ static uint             wDeltaOld;
 static uint             wDeltaNew;
 
 
-bool    Init_Current39(void)
+
+uchar   GetCounter_Correct39(void)
+{
+  return cbCorrects;
+}
+
+
+
+void    Init_Current39(void)
 {
   cbCorrects = 0; // TODO
   wDeltaOld = 0;
   wDeltaNew = 0;
+}
+
+
+
+void    Write_Current39(uint  wDelta)
+{
+  cbCorrects++;
+  wDeltaOld = (uint)dwDelta;
+}
+
+
+
+void    Read1_Current39(uint  wDelta)
+{
+  cbCorrects++;
+  wDeltaOld = wDeltaNew;
+}
+
+void    Read2_Current39(uint  wDelta)
+{
+}
+
+void    Read3_Current39(uint  wDelta)
+{
 }
