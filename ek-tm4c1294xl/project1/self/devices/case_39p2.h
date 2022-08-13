@@ -2,9 +2,7 @@
 
     case DEV_TIME1_O_39P:
       Clear(); ShowLo(szRepeats);
-      sprintf(szLo+8,"%1u",GetCounter_Correct39()+1); // TODO DelayInf();
-
-      //Clear(); ShowPercent(64);
+      sprintf(szLo+8,"%1u",GetCounter_Correct39()+1); DelayInf();
 
       cbRepeat = MaxRepeats();
       QueryTime_Profile39();

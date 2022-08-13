@@ -79,7 +79,8 @@
         if (!ValidateFrame_Profile39()) {
           PROFILE39_REPEAT_OR_ERROR(220+5, RR_Profile39(), DEV_RR_AARQ_I_39P)
         } else {
-          Init_Current39();
+          Init_Correct39();
+
           MakePause(DEV_TIME1_O_39P);
         }  
       } else {

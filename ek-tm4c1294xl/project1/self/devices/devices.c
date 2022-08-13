@@ -7237,7 +7237,8 @@ void    RunDevices(void)
         if (!ValidateFrame_Profile39()) {
           PROFILE39_REPEAT_OR_ERROR(220+5, RR_Profile39(), DEV_RR_AARQ_I_39P)
         } else {
-          Init_Current39();
+          Init_Correct39();
+
           MakePause(DEV_TIME1_O_39P);
         }  
       } else {
@@ -7248,9 +7249,7 @@ void    RunDevices(void)
 
     case DEV_TIME1_O_39P:
       Clear(); ShowLo(szRepeats);
-      sprintf(szLo+8,"%1u",GetCounter_Correct39()+1); // TODO DelayInf();
-
-      //Clear(); ShowPercent(64);
+      sprintf(szLo+8,"%1u",GetCounter_Correct39()+1); DelayInf();
 
       cbRepeat = MaxRepeats();
       QueryTime_Profile39();
