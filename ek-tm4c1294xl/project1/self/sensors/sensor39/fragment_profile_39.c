@@ -21,14 +21,15 @@ fragment_profile_39.c
 
 
 
-static record39 Fault(uchar  bError)
+static bool Fault(uchar  bError)
 {
-  return GetRecordError39(Error39(bError));
+  Error39(bError);
+  return false;
 }
 
 
 
-record39 FragmentProfile39(caller39  *pc, time  tm1, time  tm2, bool  fProfile)
+bool    FragmentProfile39(caller39  *pc, time  tm1, time  tm2, bool  fProfile)
 {
   InitRecord39();
 
@@ -127,8 +128,8 @@ double2 TestFragmentProfile39(void)
   tm2.bMinute = 0;
   tm2.bSecond = 0;
 
-  uchar bError = FragmentProfile39(&c, tm1, tm2, false).bError;
-  if (bError != 0)  {
+  bool success = FragmentProfile39(&c, tm1, tm2, false);
+  if (!success)  {
     return GetDouble2Error();
   } else {
     return GetDouble0(0);
