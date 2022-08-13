@@ -12,8 +12,16 @@
       break;
 
     case DEV_14_39P:
-      Read1_Profile();
-      MakePause(DEV_15_39P);
+      if (mpSerial[ibPort] == SER_GOODCHECK) {
+        if (!ValidateFrame_Profile39()) {
+          PROFILE39_REPEAT_OR_ERROR(220+19, QueryProfile_Profile39(), DEV_14_39P)
+        } else {
+          Read1_Profile();
+          MakePause(DEV_15_39P);
+        }
+      } else {
+        PROFILE39_REPEAT_OR_ERROR(220+21, QueryProfile_Profile39(), DEV_14_39P)
+      }
       break;
 
     case DEV_15_39P:
@@ -58,8 +66,9 @@
         } else {
           Read3_Profile();
           if (UseBlocks_Profile39()) {
+            cbRepeat = MaxRepeats();
             QueryNextBlock_Profile39();
-            MakePause(DEV_READ_4_39P);
+            SetCurr(DEV_READ_4_39P);
           } else {
             MakePause(DEV_FINISH_39P);
           }
@@ -71,8 +80,16 @@
 
 
     case DEV_READ_4_39P:
-      Read4_Profile();
-      MakePause(DEV_20_39P);
+      if (mpSerial[ibPort] == SER_GOODCHECK) {
+        if (!ValidateFrame_Profile39()) {
+          PROFILE39_REPEAT_OR_ERROR(220+29, QueryNextBlock_Profile39(), DEV_READ_4_39P)
+        } else {
+          Read4_Profile();
+          MakePause(DEV_20_39P);
+        }
+      } else {
+        PROFILE39_REPEAT_OR_ERROR(220+30, QueryNextBlock_Profile39(), DEV_READ_4_39P)
+      }
       break;
 
     case DEV_20_39P:
