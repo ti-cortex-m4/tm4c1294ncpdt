@@ -921,13 +921,14 @@ typedef enum
   DEV_1_RR_I_39P        =  0x2445,
   DEV_2_RR_O_39P        =  0x2446,
   DEV_2_RR_I_39P        =  0x2447,
-  DEV_READ_4_39P        =  0x2448,
-  DEV_20_39P            =  0x2449,
-  DEV_3_RR_O_39P        =  0x2450,
-  DEV_3_RR_I_39P        =  0x2451,
-  DEV_4_RR_O_39P        =  0x2452,
-  DEV_4_RR_I_39P        =  0x2453,
-  DEV_FINISH_39P        =  0x2454,
+  DEV_READ_3_39P        =  0x2448,
+  DEV_READ_4_39P        =  0x2449,
+  DEV_20_39P            =  0x2450,
+  DEV_3_RR_O_39P        =  0x2451,
+  DEV_3_RR_I_39P        =  0x2452,
+  DEV_4_RR_O_39P        =  0x2453,
+  DEV_4_RR_I_39P        =  0x2454,
+  DEV_FINISH_39P        =  0x2455,
 
 #endif
 
