@@ -93,7 +93,7 @@
                 MakePause(DEV_POSTOPENCANAL_B2);
               }
               else if (GetCurrHouIndex() == (tiValueB.bHour*2 + tiValueB.bMinute/30))
-              { ShowLo(szCorrectNext); DelayInf(); MakePause(DEV_POSTCORRECT_B2); }
+              { ShowLo(szCorrectSkip); DelayInf(); MakePause(DEV_POSTCORRECT_B2); }
               else
               { ShowLo(szManageNo); DelayMsg();  ErrorProfile(); }
             }
