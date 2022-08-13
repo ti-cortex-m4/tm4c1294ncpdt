@@ -42,7 +42,7 @@ void    DISC_Profile39(void) {
   fMonitorLogBasic = true;
   fMonitorLogHex = true;
 
-  MonitorString("\n\n DISC_Profile39");
+  MonitorString("\n DISC_Profile39");
 #endif
 
   c = InitCaller39();
@@ -53,7 +53,7 @@ void    DISC_Profile39(void) {
 void    SNRM_Profile39(void)
 {
 #ifdef PROFILE_39_NAMES
-  MonitorString("\n\n SNRM_Profile39");
+  MonitorString("\n SNRM_Profile39");
 #endif
 
   SNRM();
@@ -62,7 +62,7 @@ void    SNRM_Profile39(void)
 
 void    AARQ_Profile39(void) {
 #ifdef PROFILE_39_NAMES
-  MonitorString("\n\n AARQ_Profile39");
+  MonitorString("\n AARQ_Profile39");
 #endif
 
   AARQ(c.bNS, c.bNR);
@@ -71,7 +71,7 @@ void    AARQ_Profile39(void) {
 
 void    RR_Profile39(void) {
 #ifdef PROFILE_39_NAMES
-  MonitorString("\n\n RR_Profile39");
+  MonitorString("\n RR_Profile39");
 #endif
 
   c.bNR++;
@@ -89,7 +89,7 @@ bool    ValidateFrame_Profile39(void)
 
 void    QueryTime_Profile39(void) {
 #ifdef PROFILE_39_NAMES
-  MonitorString("\n\n QueryTime_Profile39");
+  MonitorString("\n QueryTime_Profile39");
 #endif
 
   c.bNS++;
@@ -100,7 +100,7 @@ void    QueryTime_Profile39(void) {
 
 void    ReadTime_Profile39(void) {
 #ifdef PROFILE_39_NAMES
-  MonitorString("\n\n ReadTime_Profile39");
+  MonitorString("\n ReadTime_Profile39");
 #endif
 
   SetTime_Profile39(ReadTime39());
@@ -117,7 +117,7 @@ void    SetCorrectSecond39(sint  ddw)
 void    QueryCorrect_Profile39(void)
 {
 #ifdef PROFILE_39_NAMES
-  MonitorString("\n\n QueryCorrect_Profile39 "); MonitorSignedLongDec(wDeltaSeconds);
+  MonitorString("\n QueryCorrect_Profile39 "); MonitorSignedLongDec(wDeltaSeconds);
 #endif
 
   c.bNS++;
@@ -130,7 +130,7 @@ void    QueryCorrect_Profile39(void)
 void    QueryScaler_Profile39(void)
 {
 #ifdef PROFILE_39_NAMES
-  MonitorString("\n\n QueryScaler_Profile39");
+  MonitorString("\n QueryScaler_Profile39");
 #endif
 
   c.bNS++;
@@ -142,7 +142,7 @@ void    QueryScaler_Profile39(void)
 bool    ReadScaler_Profile39(void)
 {
 #ifdef PROFILE_39_NAMES
-  MonitorString("\n\n ReadScaler_Profile39");
+  MonitorString("\n ReadScaler_Profile39");
 #endif
 
   double2 scaler = ReadRegisterScalerDLMS();
@@ -154,7 +154,7 @@ bool    ReadScaler_Profile39(void)
 
 void    InitProfile_Profile39(void) {
 #ifdef PROFILE_39_NAMES
-  MonitorString("\n\n InitProfile_Profile39");
+  MonitorString("\n InitProfile_Profile39");
 #endif
 
   InitHeader39();
@@ -163,7 +163,7 @@ void    InitProfile_Profile39(void) {
 
 void    QueryProfile_Profile39(void) {
 #ifdef PROFILE_39_NAMES
-  MonitorString("\n\n QueryProfile_Profile39");
+  MonitorString("\n QueryProfile_Profile39");
 #endif
 
   InitRecord39();
@@ -178,7 +178,7 @@ void    QueryProfile_Profile39(void) {
 
 void    Read1_Profile(void) {
 #ifdef PROFILE_39_NAMES
-  MonitorString("\n\n Read1_Profile");
+  MonitorString("\n Read1_Profile");
 #endif
 
   fUseBlocks = UseBlocksDMLS();
@@ -190,7 +190,7 @@ void    Read1_Profile(void) {
 
 void    Read2_Profile(void) {
 #ifdef PROFILE_39_NAMES
-  MonitorString("\n\n Read2_Profile");
+  MonitorString("\n Read2_Profile");
 #endif
 
   AddRecord39(6 + GetHdlcAddressesSize());
@@ -199,7 +199,7 @@ void    Read2_Profile(void) {
 
 void    Read3_Profile(void) {
 #ifdef PROFILE_39_NAMES
-  MonitorString("\n\n Read3_Profile");
+  MonitorString("\n Read3_Profile");
 #endif
 
   bBlockNumber = 0;
@@ -208,7 +208,7 @@ void    Read3_Profile(void) {
 
 bool    UseBlocks_Profile39(void) {
 #ifdef PROFILE_39_NAMES
-  MonitorString("\n\n UseBlocks_Profile39");
+  MonitorString("\n UseBlocks_Profile39");
 #endif
 
   return fUseBlocks && (!fLastBlock);
@@ -217,7 +217,7 @@ bool    UseBlocks_Profile39(void) {
 
 void    QueryNextBlock_Profile39(void) {  
 #ifdef PROFILE_39_NAMES
-  MonitorString("\n\n QueryNextBlock_Profile39");
+  MonitorString("\n QueryNextBlock_Profile39");
 #endif
 
   bBlockNumber++;
@@ -230,7 +230,7 @@ void    QueryNextBlock_Profile39(void) {
 
 void    Read4_Profile(void) {
 #ifdef PROFILE_39_NAMES
-  MonitorString("\n\n Read4_Profile");
+  MonitorString("\n Read4_Profile");
 #endif
 
   fUseBlocks = UseBlocksDMLS();
@@ -242,7 +242,7 @@ void    Read4_Profile(void) {
 
 void    Read5_Profile(void) {
 #ifdef PROFILE_39_NAMES
-  MonitorString("\n\n Read5_Profile");
+  MonitorString("\n Read5_Profile");
 #endif
 
   AddRecord39(6 + GetHdlcAddressesSize());
@@ -252,7 +252,7 @@ void    Read5_Profile(void) {
 
 bool2   FinishProfile_Profile39(void) {
 #ifdef PROFILE_39_NAMES
-  MonitorString("\n\n FinishProfile_Profile39");
+  MonitorString("\n FinishProfile_Profile39");
 #endif
 
   bool success = FinishRecordProfile39();
