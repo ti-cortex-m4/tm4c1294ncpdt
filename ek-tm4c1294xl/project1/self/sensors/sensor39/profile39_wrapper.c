@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
 profile39_wrapper.c
 
-
+TODO ValidateFrame
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
@@ -39,8 +39,8 @@ static uchar            bBlockNumber;
 
 void    DISC_Profile39(void) {
 #ifdef PROFILE_39_NAMES
-  fMonitorLogBasic = false;
-  fMonitorLogHex = false;
+  fMonitorLogBasic = true;
+  fMonitorLogHex = true;
 
   MonitorString("\n\n DISC_Profile39");
 #endif
@@ -184,7 +184,7 @@ void    Read1_Profile(void) {
   fUseBlocks = UseBlocksDMLS();
   fLastBlock = LastBlockDMLS();
 
-  AddRecord39(fUseBlocks ? 20 + GetHdlcAddressesSize() : 13 + GetHdlcAddressesSize());
+  AddRecord39(fUseBlocks ? 19 + GetHdlcAddressesSize() : 13 + GetHdlcAddressesSize());
 }
 
 
@@ -236,7 +236,7 @@ void    Read4_Profile(void) {
   fUseBlocks = UseBlocksDMLS();
   fLastBlock = LastBlockDMLS();
 
-  AddRecord39(20 + GetHdlcAddressesSize());
+  AddRecord39(19 + GetHdlcAddressesSize());
 }
 
 
