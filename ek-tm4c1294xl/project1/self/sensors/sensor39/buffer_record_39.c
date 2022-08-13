@@ -74,23 +74,22 @@ record39 GetRecordError39(char  bError)
 
 
 
-static record39 Fault(uchar  bError)
+static bool Fault(uchar  bError)
 {
-  return GetRecordError39(Error39(bError));
+  Error39(bError);
+  return false;
 }
 
 
-static record39 FaultData(uchar  bError, uint  wData)
+static bool FaultData(uchar  bError, uint  wData)
 {
-  return GetRecordError39(ErrorData39(bError, wData));
+  ErrorData39(bError, wData);
+  return false;
 }
 
 
 
-record39 FinishRecord39(void) {
-  record39 r = GetRecordError39(0);
-
-
+bool    FinishRecord39(void) {
   InitPop39();
 
   uint wCapacity = GetPopCapacity39();
@@ -152,24 +151,14 @@ record39 FinishRecord39(void) {
     MonitorString(" "); MonitorLongDec(mdwValue[2]);
     MonitorString(" "); MonitorLongDec(mdwValue[3]);
 #endif
-
-    if (r.fFirst == false) {
-      r.bError = 0;
-      for (c=0; c<4; c++) r.mdwValue[c] = mdwValue[c];
-      r.tmValue = tm;
-      r.fFirst = true;
-    }
   }
 
-  return r;
+  return true;
 }
 
 
 
-record39 FinishRecordProfile39(void) {
-  record39 r = GetRecordError39(0);
-
-
+bool    FinishRecordProfile39(void) {
   InitPop39();
 
   if (GetPopCapacity39() < 2)
@@ -217,46 +206,11 @@ record39 FinishRecordProfile39(void) {
       mdwValue[c] = PopLong39();
     }
 
-    if (r.fFirst == false) {
-      r.bError = 0;
-      for (c=0; c<4; c++) r.mdwValue[c] = mdwValue[c];
-      r.tmValue = tm;
-      r.fFirst = true;
-/*
-      FirstPrev = FirstCurr; TODO
-
-      FirstCurr.fExists = true;
-      FirstCurr.tmTime = tm;
-      for (c=0; c<4; c++) FirstCurr.mdwValue[c] = mdwValue[c];
-*/
-    }
-/*
-#if BUFFER_RECORD_39
-    MonitorString("\n add record ");
-    MonitorTime(tm);
-    MonitorString(" "); MonitorLongDec(mdwValue[0]);
-    MonitorString(" "); MonitorLongDec(mdwValue[1]);
-    MonitorString(" "); MonitorLongDec(mdwValue[2]);
-    MonitorString(" "); MonitorLongDec(mdwValue[3]);
-#endif
-*/
     AddProfile39(tm, mdwValue);
   }
-/*
-  if (FirstPrev.fExists == true) {
-#if BUFFER_RECORD_39
-    MonitorString("\n add previous record ");
-    MonitorTime(FirstPrev.tmTime);
-    MonitorString(" "); MonitorLongDec(FirstPrev.mdwValue[0]);
-    MonitorString(" "); MonitorLongDec(FirstPrev.mdwValue[1]);
-    MonitorString(" "); MonitorLongDec(FirstPrev.mdwValue[2]);
-    MonitorString(" "); MonitorLongDec(FirstPrev.mdwValue[3]);
-#endif
-    AddProfile39(FirstPrev.tmTime, FirstPrev.mdwValue);
-  }
-*/
+
   if (IsProfileOveflow39())
     return Fault(150+9);
   else
-    return r;
+    return true;
 }

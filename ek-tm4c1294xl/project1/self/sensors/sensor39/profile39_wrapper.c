@@ -255,9 +255,9 @@ bool2   FinishProfile_Profile39(void) {
   MonitorString("\n\n FinishProfile_Profile39");
 #endif
 
-  record39 r = FinishRecordProfile39();
+  bool success = FinishRecordProfile39();
 
-  if (r.bError == 0)
+  if (success)
     return GetBool2(ReadHeader39(), true);
   else
     return GetBool2Error(); 
