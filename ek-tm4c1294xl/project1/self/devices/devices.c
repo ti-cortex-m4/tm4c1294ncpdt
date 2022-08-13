@@ -7248,7 +7248,7 @@ void    RunDevices(void)
 
 
     case DEV_TIME1_O_39P:
-      MakePause(DEV_TIME2_O_39P);
+      MakePause(DEV_TIME2_O_39P); // TODO
 /*
       Clear(); ShowLo(szRepeats);
       sprintf(szLo+8,"%1u",GetCounter_Correct39()+1); DelayInf();
@@ -7488,8 +7488,16 @@ void    RunDevices(void)
       break;
 
     case DEV_14_39P:
-      Read1_Profile();
-      MakePause(DEV_15_39P);
+      if (mpSerial[ibPort] == SER_GOODCHECK) {
+        if (!ValidateFrame_Profile39()) {
+          PROFILE39_REPEAT_OR_ERROR(220+19, QueryProfile_Profile39(), DEV_14_39P)
+        } else {
+          Read1_Profile();
+          MakePause(DEV_15_39P);
+        }
+      } else {
+        PROFILE39_REPEAT_OR_ERROR(220+21, QueryProfile_Profile39(), DEV_14_39P)
+      }
       break;
 
     case DEV_15_39P:
@@ -7533,22 +7541,34 @@ void    RunDevices(void)
           PROFILE39_REPEAT_OR_ERROR(220+25, RR_Profile39(), DEV_2_RR_I_39P)
         } else {
           Read3_Profile();
-          if (UseBlocks_Profile39()) {
-            QueryNextBlock_Profile39();
-            MakePause(DEV_READ_4_39P);
-          } else {
-            MakePause(DEV_FINISH_39P);
-          }
+          MakePause(DEV_READ_3_39P);
         }
       } else {
         PROFILE39_REPEAT_OR_ERROR(220+26, RR_Profile39(), DEV_2_RR_I_39P)
       }
       break;
 
+    case DEV_READ_3_39P:
+      if (UseBlocks_Profile39()) {
+        cbRepeat = MaxRepeats();
+        QueryNextBlock_Profile39();
+        SetCurr(DEV_READ_4_39P);
+      } else {
+        MakePause(DEV_FINISH_39P);
+      }
+      break;
 
     case DEV_READ_4_39P:
-      Read4_Profile();
-      MakePause(DEV_20_39P);
+      if (mpSerial[ibPort] == SER_GOODCHECK) {
+        if (!ValidateFrame_Profile39()) {
+          PROFILE39_REPEAT_OR_ERROR(220+29, QueryNextBlock_Profile39(), DEV_READ_4_39P)
+        } else {
+          Read4_Profile();
+          MakePause(DEV_20_39P);
+        }
+      } else {
+        PROFILE39_REPEAT_OR_ERROR(220+30, QueryNextBlock_Profile39(), DEV_READ_4_39P)
+      }
       break;
 
     case DEV_20_39P:
@@ -7591,7 +7611,7 @@ void    RunDevices(void)
         if (!ValidateFrame_Profile39()) {
           PROFILE39_REPEAT_OR_ERROR(220+29, RR_Profile39(), DEV_4_RR_I_39P)
         } else {
-          MakePause(DEV_FINISH_39P);
+          MakePause(DEV_READ_3_39P);
         }
       } else {
         PROFILE39_REPEAT_OR_ERROR(220+30, RR_Profile39(), DEV_4_RR_I_39P)
