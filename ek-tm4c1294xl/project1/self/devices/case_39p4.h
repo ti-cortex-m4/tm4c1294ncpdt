@@ -5,7 +5,7 @@
       break;
 
 
-    case DEV_QUERY_39P:
+    case DEV_QUERY_39P: // from step 25
       cbRepeat = MaxRepeats();
       QueryProfile_Profile39(); // steps 2, 3, 4
       SetCurr(DEV_14_39P);
@@ -78,7 +78,7 @@
         QueryNextBlock_Profile39();  // step 13, 14
         SetCurr(DEV_READ_4_39P);
       } else {
-        MakePause(DEV_FINISH_39P);
+        MakePause(DEV_FINISH_39P); // step 12a -> step 22
       }
       break;
 
@@ -106,7 +106,7 @@
 
     case DEV_3_RR_O_39P:
       cbRepeat = MaxRepeats();
-      RR_Profile39();
+      RR_Profile39(); // step 18
       SetCurr(DEV_3_RR_I_39P);
       break;
 
@@ -115,7 +115,7 @@
         if (!ValidateFrame_Profile39()) {
           PROFILE39_REPEAT_OR_ERROR(220+27, RR_Profile39(), DEV_3_RR_I_39P)
         } else {
-          Read5_Profile();
+          Read5_Profile(); // step 19
           MakePause(DEV_20_39P);
         }
       } else {
@@ -126,7 +126,7 @@
 
     case DEV_4_RR_O_39P:
       cbRepeat = MaxRepeats();
-      RR_Profile39();
+      RR_Profile39(); // step 20
       SetCurr(DEV_4_RR_I_39P);
       break;
 
@@ -135,7 +135,7 @@
         if (!ValidateFrame_Profile39()) {
           PROFILE39_REPEAT_OR_ERROR(220+29, RR_Profile39(), DEV_4_RR_I_39P)
         } else {
-          MakePause(DEV_READ_3_39P);
+          MakePause(DEV_READ_3_39P); // step 21 -> step 12
         }
       } else {
         PROFILE39_REPEAT_OR_ERROR(220+30, RR_Profile39(), DEV_4_RR_I_39P)
@@ -143,15 +143,15 @@
       break;
 
 
-    case DEV_FINISH_39P:
+    case DEV_FINISH_39P: // step 22
       {
-        bool2 b2 = FinishProfile_Profile39();
+        bool2 b2 = FinishProfile_Profile39(); // step 23
         if (!b2.fValid)
           ErrorProfile();
         else if (b2.fValue)
-          MakePause(DEV_QUERY_39P);
+          MakePause(DEV_QUERY_39P); // step 25
         else
-          DoneProfile();
+          DoneProfile(); // step 26
       }
       break;
 

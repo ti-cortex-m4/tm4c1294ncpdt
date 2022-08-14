@@ -245,7 +245,7 @@ void    Read5_Profile(void) {
   MonitorString("\n Read5_Profile");
 #endif
 
-  AddRecord39(6 + GetHdlcAddressesSize());
+  AddRecord39(6 + GetHdlcAddressesSize()); // step 19
 }
 
 
@@ -255,10 +255,10 @@ bool2   FinishProfile_Profile39(void) {
   MonitorString("\n FinishProfile_Profile39");
 #endif
 
-  bool success = FinishRecordProfile39();
+  bool success = FinishRecordProfile39(); // step 23
 
   if (success)
-    return GetBool2(ReadHeader39(), true);
+    return GetBool2(ReadHeader39(), true); // step 24
   else
     return GetBool2Error(); 
 }
