@@ -52,7 +52,7 @@ bool    FragmentProfile39(caller39  *pc, time  tm1, time  tm2, bool  fProfile)
     if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(130+3);
 
     AddRecord39(6 + GetHdlcAddressesSize()); // step 39.9
-  } // repeat: step 39.10
+  } // repeat: step 39.10 -> step 39.7
 
   (*pc).bNR++;
   RR((*pc).bNR); // step 39.11
@@ -62,27 +62,27 @@ bool    FragmentProfile39(caller39  *pc, time  tm1, time  tm2, bool  fProfile)
 
   uchar bBlockNumber = 0; // step 39.12
 
-  while (fUseBlocks && (!fLastBlock)) { // true: steps 39.13 -> step 39.14, false 12a -> step 22
+  while (fUseBlocks && (!fLastBlock)) { // true: steps 39.13 -> step 39.14, false: 39.16 -> step 22
     bBlockNumber++; // step 39.14
 
     (*pc).bNS++;
-    QueryNextBlock39((*pc).bNS, (*pc).bNR, (*pc).bInvokeId, bBlockNumber); // step step 39.15
+    QueryNextBlock39((*pc).bNS, (*pc).bNR, (*pc).bInvokeId, bBlockNumber); // step 39.15
     if (Input39() != SER_GOODCHECK) return Fault(130+6);
     if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(130+7);
 
-    fUseBlocks = UseBlocksDMLS(); // step 15
+    fUseBlocks = UseBlocksDMLS(); // step 39.16
     fLastBlock = LastBlockDMLS();
 
-    AddRecord39(19 + GetHdlcAddressesSize()); // step 16
+    AddRecord39(19 + GetHdlcAddressesSize()); // step 39.17
 
-    while (!LastSegmentDMLS()) { // step 17
+    while (!LastSegmentDMLS()) { // true: step 39.18
       (*pc).bNR++;
-      RR((*pc).bNR); // step 18
+      RR((*pc).bNR); // step 39.19
       if (Input39() != SER_GOODCHECK) return Fault(130+8);
       if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(130+9);
 
-      AddRecord39(6 + GetHdlcAddressesSize()); // step 19
-    } // step 19a
+      AddRecord39(6 + GetHdlcAddressesSize()); // step 39.20
+    } // repeat: step 39.21 -> step 39.18
 
     (*pc).bNR++;
     RR((*pc).bNR); // step 20

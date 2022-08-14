@@ -233,10 +233,10 @@ void    Read4_Profile(void) {
   MonitorString("\n Read4_Profile");
 #endif
 
-  fUseBlocks = UseBlocksDMLS(); // step 15
+  fUseBlocks = UseBlocksDMLS(); // step 39.16
   fLastBlock = LastBlockDMLS();
 
-  AddRecord39(19 + GetHdlcAddressesSize()); // step 16
+  AddRecord39(19 + GetHdlcAddressesSize()); // step 39.17
 }
 
 
