@@ -1,3 +1,1 @@
 profile pass
-profile scaler
-Kpr=2000
