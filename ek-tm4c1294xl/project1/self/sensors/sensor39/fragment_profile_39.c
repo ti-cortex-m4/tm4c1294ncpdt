@@ -73,7 +73,7 @@ bool    FragmentProfile39(caller39  *pc, time  tm1, time  tm2, bool  fProfile)
     fUseBlocks = UseBlocksDMLS(); // step 15
     fLastBlock = LastBlockDMLS();
 
-    AddRecord39(19 + GetHdlcAddressesSize());  // step 16
+    AddRecord39(19 + GetHdlcAddressesSize()); // step 16
 
     while (!LastSegmentDMLS()) { // step 17
       (*pc).bNR++;
@@ -81,17 +81,17 @@ bool    FragmentProfile39(caller39  *pc, time  tm1, time  tm2, bool  fProfile)
       if (Input39() != SER_GOODCHECK) return Fault(130+8);
       if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(130+9);
 
-      AddRecord39(6 + GetHdlcAddressesSize());  // step 19
+      AddRecord39(6 + GetHdlcAddressesSize()); // step 19
     } // step 19a
 
     (*pc).bNR++;
     RR((*pc).bNR); // step 20
     if (Input39() != SER_GOODCHECK) return Fault(130+10);
     if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(130+11);
-  }  // step 21 -> step 12
+  } // step 21 -> step 12
 
 
-  if (fProfile)  // step 22
+  if (fProfile) // step 22
     return FinishRecordProfile39(); // step 23
   else
     return FinishRecord39();
