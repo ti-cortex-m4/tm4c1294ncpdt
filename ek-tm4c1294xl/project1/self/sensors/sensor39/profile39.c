@@ -196,9 +196,9 @@ uchar   TestProfile39_Internal(caller39*  pc)
     bool success = FragmentProfile39(pc, t2.ti1, t2.ti2, true);
     if (!success) return 11;
 
-    if (ReadHeader39() == false) return 0;
+    if (ReadHeader39() == false) return 0; // step 24
     if (fKey == true) return 255;
-  }  
+  } // step 25
 }
 
 
