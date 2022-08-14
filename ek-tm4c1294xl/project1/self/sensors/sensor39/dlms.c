@@ -242,11 +242,11 @@ bool    AARE_CheckPass_Internal(void)
 
 bool    AARE_CheckPass(void)
 {
-  bool fSuccess = AARE_CheckPass_Internal();
-  if (!fSuccess) {
+  bool success = AARE_CheckPass_Internal();
+  if (!success) {
     Clear(); sprintf(szLo+4, "пароль ?"); Delay(1000);
   }
-  return fSuccess;
+  return success;
 }
 
 

@@ -149,14 +149,14 @@ uchar   ValidateFrame(uchar  bNS_client, uchar  bNR_client)
 #ifdef MONITOR_39_MONITOR
       MonitorString(" I-frame validation error: N(S) client / N(R) server "); MonitorCharHex((bNS_client + 1) % 8); MonitorCharHex(bNR_server % 8);
 #endif
-      return Error39(10+0);
+      return Error39(5+0);
     }
 
     if (bNR_client % 8 != bNS_server % 8) {
 #ifdef MONITOR_39_MONITOR
       MonitorString(" I-frame validation error: N(R) client / N(S) server "); MonitorCharHex(bNR_client % 8); MonitorCharHex(bNS_server % 8);
 #endif
-      return Error39(10+1);
+      return Error39(5+1);
     }
   } else if ((bControl & 0x03) == 0x01) {
 #ifdef MONITOR_39_MONITOR
@@ -168,13 +168,13 @@ uchar   ValidateFrame(uchar  bNS_client, uchar  bNR_client)
 #ifdef MONITOR_39_MONITOR
       MonitorString(" S-frame validation error: N(S) client / N(R) server "); MonitorCharHex((bNS_client + 1) % 8); MonitorCharHex(bNR_server % 8);
 #endif
-      return Error39(10+2);
+      return Error39(5+2);
     }
   } else if ((bControl & 0x03) == 0x03) {
 #ifdef MONITOR_39_MONITOR
     MonitorString(" U-frame validation ");
 #endif
-    return Error39(10+3);
+    return Error39(5+3);
   }
 
   return 0;

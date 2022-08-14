@@ -1,5 +1,5 @@
-dlms                                    1-3
-hdlc_monitor.c               10         10-13
+dlms                         0          1-3
+hdlc_monitor.c               5          5-8
 
 dlms_read_data.c             15         15-18
 dlms_read_register.c         20         20-36 !
