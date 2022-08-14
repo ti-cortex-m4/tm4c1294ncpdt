@@ -92,7 +92,7 @@ bool    FragmentProfile39(caller39  *pc, time  tm1, time  tm2, bool  fProfile)
 
 
   if (fProfile) // step 39.24
-    return FinishRecordProfile39(); // step 23
+    return FinishRecordProfile39(); // step 39.25
   else
     return FinishRecord39();
 }

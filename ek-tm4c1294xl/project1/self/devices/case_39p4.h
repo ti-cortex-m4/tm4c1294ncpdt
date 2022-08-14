@@ -5,7 +5,7 @@
       break;
 
 
-    case DEV_QUERY_39P: // from step 25
+    case DEV_QUERY_39P: // repeat: step 39.27
       cbRepeat = MaxRepeats();
       QueryProfile_Profile39(); // steps 39.2, 39.3, 39.4
       SetCurr(DEV_14_39P);
@@ -145,13 +145,13 @@
 
     case DEV_FINISH_39P: // step 39.24
       {
-        bool2 b2 = FinishProfile_Profile39(); // step 23
+        bool2 b2 = FinishProfile_Profile39(); // steps 39.25, 39.26
         if (!b2.fValid)
           ErrorProfile();
         else if (b2.fValue)
-          MakePause(DEV_QUERY_39P); // step 25
+          MakePause(DEV_QUERY_39P); // repeat: step 39.27
         else
-          DoneProfile(); // step 26
+          DoneProfile(); // finish: step 39.28
       }
       break;
 
