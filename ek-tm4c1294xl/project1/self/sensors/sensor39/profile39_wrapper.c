@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
 profile39_wrapper.c
 
-TODO ValidateFrame
+
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
@@ -245,7 +245,7 @@ void    Read5_Profile(void) {
   MonitorString("\n Read5_Profile");
 #endif
 
-  AddRecord39(6 + GetHdlcAddressesSize()); // step 19
+  AddRecord39(6 + GetHdlcAddressesSize()); // step 39.20
 }
 
 
