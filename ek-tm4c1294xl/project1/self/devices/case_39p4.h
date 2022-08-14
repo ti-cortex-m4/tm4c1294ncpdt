@@ -78,7 +78,7 @@
         QueryNextBlock_Profile39(); // steps 39.14, 39.15
         SetCurr(DEV_READ_4_39P);
       } else {
-        MakePause(DEV_FINISH_39P); // step 39.16 -> step 22 TODO
+        MakePause(DEV_FINISH_39P); // step 39.16 -> step 39.24
       }
       break;
 
@@ -99,7 +99,7 @@
       if (!LastSegmentDMLS()) { // true: step 38.18
         MakePause(DEV_3_RR_O_39P); // -> step 39.19
       } else {
-        MakePause(DEV_4_RR_O_39P);
+        MakePause(DEV_4_RR_O_39P); // -> step 39.22
       }
       break;
 
@@ -126,7 +126,7 @@
 
     case DEV_4_RR_O_39P:
       cbRepeat = MaxRepeats();
-      RR_Profile39(); // step 20
+      RR_Profile39(); // step 39.22
       SetCurr(DEV_4_RR_I_39P);
       break;
 
@@ -135,7 +135,7 @@
         if (!ValidateFrame_Profile39()) {
           PROFILE39_REPEAT_OR_ERROR(220+29, RR_Profile39(), DEV_4_RR_I_39P)
         } else {
-          MakePause(DEV_READ_3_39P); // step 21 -> step 12
+          MakePause(DEV_READ_3_39P); // repeat: step 39.23 -> step 39.13
         }
       } else {
         PROFILE39_REPEAT_OR_ERROR(220+30, RR_Profile39(), DEV_4_RR_I_39P)
@@ -143,7 +143,7 @@
       break;
 
 
-    case DEV_FINISH_39P: // step 22
+    case DEV_FINISH_39P: // step 39.24
       {
         bool2 b2 = FinishProfile_Profile39(); // step 23
         if (!b2.fValid)
