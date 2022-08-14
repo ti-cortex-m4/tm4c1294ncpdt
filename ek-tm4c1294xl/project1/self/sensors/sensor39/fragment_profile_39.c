@@ -31,19 +31,19 @@ static bool Fault(uchar  bError)
 
 bool    FragmentProfile39(caller39  *pc, time  tm1, time  tm2, bool  fProfile)
 {
-  InitRecord39(); // step 2
+  InitRecord39(); // step 39.2
 
 
   (*pc).bNS++;
   (*pc).bInvokeId++;
-  QueryProfile39((*pc).bNS, (*pc).bNR, (*pc).bInvokeId, tm1, tm2); // step 4
+  QueryProfile39((*pc).bNS, (*pc).bNR, (*pc).bInvokeId, tm1, tm2); // step 39.4
   if (Input39() != SER_GOODCHECK) return Fault(130+0);
   if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(130+1);
 
-  bool fUseBlocks = UseBlocksDMLS(); // step 5
+  bool fUseBlocks = UseBlocksDMLS(); // step 39.5
   bool fLastBlock = LastBlockDMLS();
 
-  AddRecord39(fUseBlocks ? 19 + GetHdlcAddressesSize() : 13 + GetHdlcAddressesSize()); // step 6
+  AddRecord39(fUseBlocks ? 19 + GetHdlcAddressesSize() : 13 + GetHdlcAddressesSize()); // step 39.6
 
   while (!LastSegmentDMLS()) { // step 7
     (*pc).bNR++;
