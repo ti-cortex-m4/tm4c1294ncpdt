@@ -157,7 +157,7 @@ void    InitProfile_Profile39(void) {
   MonitorString("\n InitProfile_Profile39");
 #endif
 
-  InitHeader39(); // step 1
+  InitHeader39(); // step 39.1
 }
 
 
@@ -166,13 +166,13 @@ void    QueryProfile_Profile39(void) {
   MonitorString("\n QueryProfile_Profile39");
 #endif
 
-  InitRecord39(); // step 2
+  InitRecord39(); // step 39.2
 
-  t2time t2 = QueryHeader39(); // step 3
+  t2time t2 = QueryHeader39(); // step 39.3
 
   c.bNS++;
   c.bInvokeId++;
-  QueryProfile39(c.bNS, c.bNR, c.bInvokeId, t2.ti1, t2.ti2); // step 4
+  QueryProfile39(c.bNS, c.bNR, c.bInvokeId, t2.ti1, t2.ti2); // step 39.4
 }
 
 
@@ -181,10 +181,10 @@ void    Read1_Profile(void) {
   MonitorString("\n Read1_Profile");
 #endif
 
-  fUseBlocks = UseBlocksDMLS(); // steps 5
+  fUseBlocks = UseBlocksDMLS(); // step 39.5
   fLastBlock = LastBlockDMLS();
 
-  AddRecord39(fUseBlocks ? 19 + GetHdlcAddressesSize() : 13 + GetHdlcAddressesSize()); // steps 6
+  AddRecord39(fUseBlocks ? 19 + GetHdlcAddressesSize() : 13 + GetHdlcAddressesSize()); // step 39.6
 }
 
 

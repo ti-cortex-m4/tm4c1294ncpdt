@@ -188,11 +188,11 @@ uchar   TestProfile39_Internal(caller39*  pc)
   SetScaler_Profile39(scaler.dbValue);
 
 
-  InitHeader39();  // step 1
+  InitHeader39(); // step 39.1
 
 
   while (true) {
-    t2time t2 = QueryHeader39(); // step 3
+    t2time t2 = QueryHeader39(); // step 39.3
     bool success = FragmentProfile39(pc, t2.ti1, t2.ti2, true);
     if (!success) return 11;
 

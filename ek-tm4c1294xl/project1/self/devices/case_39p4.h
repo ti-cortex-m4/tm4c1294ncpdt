@@ -1,13 +1,13 @@
 
     case DEV_INIT_39P:
-      InitProfile_Profile39();
+      InitProfile_Profile39(); // step 39.1
       MakePause(DEV_QUERY_39P);
       break;
 
 
     case DEV_QUERY_39P: // from step 25
       cbRepeat = MaxRepeats();
-      QueryProfile_Profile39(); // steps 2, 3, 4
+      QueryProfile_Profile39(); // steps 39.2, 39.3, 39.4
       SetCurr(DEV_14_39P);
       break;
 
@@ -16,7 +16,7 @@
         if (!ValidateFrame_Profile39()) {
           PROFILE39_REPEAT_OR_ERROR(220+19, QueryProfile_Profile39(), DEV_14_39P)
         } else {
-          Read1_Profile(); // steps 5, 6
+          Read1_Profile(); // steps 39.5, 39.6
           MakePause(DEV_15_39P);
         }
       } else {
