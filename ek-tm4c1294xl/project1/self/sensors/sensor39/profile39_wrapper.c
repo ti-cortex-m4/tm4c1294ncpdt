@@ -202,7 +202,7 @@ void    Read3_Profile(void) {
   MonitorString("\n Read3_Profile");
 #endif
 
-  bBlockNumber = 0; // step 11
+  bBlockNumber = 0; // step 39.12
 }
 
 
@@ -211,7 +211,7 @@ bool    UseBlocks_Profile39(void) {
   MonitorString("\n UseBlocks_Profile39");
 #endif
 
-  return fUseBlocks && (!fLastBlock); // step 12
+  return fUseBlocks && (!fLastBlock); // step 39.13
 }
 
 
@@ -220,10 +220,10 @@ void    QueryNextBlock_Profile39(void) {
   MonitorString("\n QueryNextBlock_Profile39");
 #endif
 
-  bBlockNumber++; // step 13
+  bBlockNumber++; // step 39.14
 
   c.bNS++;
-  QueryNextBlock39(c.bNS, c.bNR, c.bInvokeId, bBlockNumber);  // step 14
+  QueryNextBlock39(c.bNS, c.bNR, c.bInvokeId, bBlockNumber); // step 39.15
 }
 
 

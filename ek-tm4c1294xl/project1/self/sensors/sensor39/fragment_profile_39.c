@@ -55,18 +55,18 @@ bool    FragmentProfile39(caller39  *pc, time  tm1, time  tm2, bool  fProfile)
   } // repeat: step 39.10
 
   (*pc).bNR++;
-  RR((*pc).bNR); // step 39.11 10
+  RR((*pc).bNR); // step 39.11
   if (Input39() != SER_GOODCHECK) return Fault(130+4);
   if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(130+5);
 
 
-  uchar bBlockNumber = 0; // step 11
+  uchar bBlockNumber = 0; // step 39.12
 
-  while (fUseBlocks && (!fLastBlock)) { // true steps 12 -> step 13, false 12a -> step 22
-    bBlockNumber++; // step 13
+  while (fUseBlocks && (!fLastBlock)) { // true: steps 39.13 -> step 39.14, false 12a -> step 22
+    bBlockNumber++; // step 39.14
 
     (*pc).bNS++;
-    QueryNextBlock39((*pc).bNS, (*pc).bNR, (*pc).bInvokeId, bBlockNumber); // step 14
+    QueryNextBlock39((*pc).bNS, (*pc).bNR, (*pc).bInvokeId, bBlockNumber); // step step 39.15
     if (Input39() != SER_GOODCHECK) return Fault(130+6);
     if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(130+7);
 

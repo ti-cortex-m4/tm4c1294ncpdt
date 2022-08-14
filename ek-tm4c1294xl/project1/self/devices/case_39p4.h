@@ -28,7 +28,7 @@
       if (!LastSegmentDMLS()) { // true: step 39.7
         MakePause(DEV_1_RR_O_39P); // -> step 39.8
       } else {
-        MakePause(DEV_2_RR_O_39P); // -> step 39.10
+        MakePause(DEV_2_RR_O_39P); // -> step 39.11
       }
       break;
 
@@ -55,7 +55,7 @@
 
     case DEV_2_RR_O_39P:
       cbRepeat = MaxRepeats();
-      RR_Profile39(); // step 10
+      RR_Profile39(); // step 39.11
       SetCurr(DEV_2_RR_I_39P);
       break;
 
@@ -64,7 +64,7 @@
         if (!ValidateFrame_Profile39()) {
           PROFILE39_REPEAT_OR_ERROR(220+25, RR_Profile39(), DEV_2_RR_I_39P)
         } else {
-          Read3_Profile(); // step 11
+          Read3_Profile(); // step 39.12
           MakePause(DEV_READ_3_39P);
         }
       } else {
@@ -73,9 +73,9 @@
       break;
 
     case DEV_READ_3_39P:
-      if (UseBlocks_Profile39()) { // step 12
+      if (UseBlocks_Profile39()) { // step 39.13
         cbRepeat = MaxRepeats();
-        QueryNextBlock_Profile39();  // step 13, 14
+        QueryNextBlock_Profile39(); // steps 39.14, 39.15
         SetCurr(DEV_READ_4_39P);
       } else {
         MakePause(DEV_FINISH_39P); // step 12a -> step 22
