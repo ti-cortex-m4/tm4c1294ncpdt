@@ -193,7 +193,7 @@ void    Read2_Profile(void) {
   MonitorString("\n Read2_Profile");
 #endif
 
-  AddRecord39(6 + GetHdlcAddressesSize()); // step 9
+  AddRecord39(6 + GetHdlcAddressesSize()); // step 39.9
 }
 
 
