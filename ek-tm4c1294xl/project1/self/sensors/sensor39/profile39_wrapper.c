@@ -236,7 +236,7 @@ void    Read4_Profile(void) {
   fUseBlocks = UseBlocksDMLS(); // step 15
   fLastBlock = LastBlockDMLS();
 
-  AddRecord39(19 + GetHdlcAddressesSize());  // step 16
+  AddRecord39(19 + GetHdlcAddressesSize()); // step 16
 }
 
 
