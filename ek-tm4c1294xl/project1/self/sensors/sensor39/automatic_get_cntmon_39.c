@@ -93,11 +93,11 @@ double2 ReadCntMonCan38_Internal(uchar  ibMon)
       Clear();
       sprintf(szLo+0, "сутки %02u.%02u.%02u ?", dt.bDay, dt.bMonth, dt.bYear);
       Delay(1000);
-      return Fault(70+1);
+      return Fault(70+3);
     }
 
     DISC();
-    if (Input39() != SER_GOODCHECK) return Fault(70+2);
+    if (Input39() != SER_GOODCHECK) return Fault(70+4);
 
     mpdbChannelsC[0] = db8.mdbValue[0];
     mpdbChannelsC[1] = db8.mdbValue[5];
@@ -133,9 +133,9 @@ double2 ReadCntMonCan39(uchar  ibMon)
   }
 
   DISC();
-  if (Input39() != SER_GOODCHECK) return Fault(70+7);
+  if (Input39() != SER_GOODCHECK) return Fault(70+5);
 
-  return Fault(70+8);
+  return Fault(70+6);
 }
 
 
