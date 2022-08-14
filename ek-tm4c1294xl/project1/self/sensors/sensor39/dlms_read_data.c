@@ -50,7 +50,7 @@ ulong64_ PopUnsignedValueDLSM(void)
     return GetULong64Ok(value);
   }
 
-  return GetULong64Error(ErrorData39(15+0, bDataType));
+  return GetULong64Error(ErrorData39(10+0, bDataType));
 }
 
 
@@ -107,7 +107,7 @@ slong64_ PopSignedValueDLSM(void)
     return GetSLong64Ok(value);
   }
 
-  return GetSLong64Error(ErrorData39(15+1, bDataType));
+  return GetSLong64Error(ErrorData39(10+1, bDataType));
 }
 
 
@@ -122,7 +122,7 @@ ulong64_ ReadUnsignedValueDLSM(void)
 #endif
 
   if (bDataAccessResult != 0) {
-    return GetULong64Error(ErrorData39(15+2, bDataAccessResult));
+    return GetULong64Error(ErrorData39(10+2, bDataAccessResult));
   }
 
   ulong64_ value = PopUnsignedValueDLSM();
@@ -144,7 +144,7 @@ slong64_ ReadSignedValueDLSM(void)
 #endif
 
   if (bDataAccessResult != 0) {
-    return GetSLong64Error(ErrorData39(15+3, bDataAccessResult));
+    return GetSLong64Error(ErrorData39(10+3, bDataAccessResult));
   }
 
   return PopSignedValueDLSM();
