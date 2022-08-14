@@ -121,7 +121,7 @@ static bool ReadData39(time  tiTime, ulong  mdwValue[4])
   uchar c;
   for (c=0; c<4; c++)
   {
-#if false
+#if true
     double db = (double)mdwValue[c]*dbScaler;
     mpdbEngFracDigCan[ibDig][c] += db;
 
