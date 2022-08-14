@@ -25,17 +25,17 @@
       break;
 
     case DEV_15_39P:
-      if (!LastSegmentDMLS()) { // step 7
-        MakePause(DEV_1_RR_O_39P);
+      if (!LastSegmentDMLS()) { // true: step 39.7
+        MakePause(DEV_1_RR_O_39P); // -> step 39.8
       } else {
-        MakePause(DEV_2_RR_O_39P);
+        MakePause(DEV_2_RR_O_39P); // -> step 39.10
       }
       break;
 
 
     case DEV_1_RR_O_39P:
       cbRepeat = MaxRepeats();
-      RR_Profile39(); // step 8
+      RR_Profile39(); // step 39.8
       SetCurr(DEV_1_RR_I_39P);
       break;
 
@@ -44,8 +44,8 @@
         if (!ValidateFrame_Profile39()) {
           PROFILE39_REPEAT_OR_ERROR(220+23, RR_Profile39(), DEV_1_RR_I_39P)
         } else {
-          Read2_Profile(); // step 9
-          MakePause(DEV_15_39P);
+          Read2_Profile(); // step 39.9
+          MakePause(DEV_15_39P); // repeat: step 39.10
         }
       } else {
         PROFILE39_REPEAT_OR_ERROR(220+24, RR_Profile39(), DEV_1_RR_I_39P)
