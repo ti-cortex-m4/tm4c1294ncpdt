@@ -5,15 +5,15 @@ dlms_read_data.c             10         10-13
 dlms_read_register.c         15         15-38
 
 read_engmon_39.c             40         40-46
-TODO
+
 automatic_get_time_39.c      50         50-55
 automatic_get_cntcurr_39.c   60         60-67
-automatic_get_cntmon_39.c    70         70-78
-automatic39.c                80         80-91 !
+automatic_get_cntmon_39.c    70         70-75
+automatic39.c                80         80-85
 
-extended_4t_39.c             95         95-99
-params39.c                   100        100-123 ???
-
+extended_4t_39.c             90         90-94
+params39.c                   100        100-125 ???
+//down
 fragment_open_39.c           115        115-120
 fragment_open_time39.c       120        120-123
 fragment_cntmon_39           125        125-130
@@ -24,5 +24,5 @@ buffer_record_39.c           140        150-159 ?
 buffer_profile_39.c          160        160-160 ?
 
 current39                    200        200-216
-
+//up
 profile39                    220        220-250

@@ -151,7 +151,7 @@ float2  ReadParam39_Internal(void)
 
 
   DISC();
-  if (Input39() != SER_GOODCHECK) return Fault(100+20);
+  if (Input39() != SER_GOODCHECK) return Fault(100+24);
 
   return GetFloat0(-1);
 }
@@ -164,7 +164,7 @@ float2  ReadParam39(void)
 
   if (fBeginParam == false)
   {
-    if (!ReadParam39_Internal().fValid) return Fault(100+12);
+    if (!ReadParam39_Internal().fValid) return Fault(100+25);
 
     fBeginParam = true;
   }
