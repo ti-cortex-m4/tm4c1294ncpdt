@@ -157,7 +157,7 @@ void    InitProfile_Profile39(void) {
   MonitorString("\n InitProfile_Profile39");
 #endif
 
-  InitHeader39();
+  InitHeader39(); // step 1
 }
 
 
@@ -166,13 +166,13 @@ void    QueryProfile_Profile39(void) {
   MonitorString("\n QueryProfile_Profile39");
 #endif
 
-  InitRecord39();
+  InitRecord39(); // step 2
 
-  t2time t2 = QueryHeader39();
+  t2time t2 = QueryHeader39(); // step 3
 
   c.bNS++;
   c.bInvokeId++;
-  QueryProfile39(c.bNS, c.bNR, c.bInvokeId, t2.ti1, t2.ti2);
+  QueryProfile39(c.bNS, c.bNR, c.bInvokeId, t2.ti1, t2.ti2); // step 4
 }
 
 
@@ -181,10 +181,10 @@ void    Read1_Profile(void) {
   MonitorString("\n Read1_Profile");
 #endif
 
-  fUseBlocks = UseBlocksDMLS();
+  fUseBlocks = UseBlocksDMLS(); // steps 5
   fLastBlock = LastBlockDMLS();
 
-  AddRecord39(fUseBlocks ? 19 + GetHdlcAddressesSize() : 13 + GetHdlcAddressesSize());
+  AddRecord39(fUseBlocks ? 19 + GetHdlcAddressesSize() : 13 + GetHdlcAddressesSize()); // steps 6
 }
 
 
@@ -193,7 +193,7 @@ void    Read2_Profile(void) {
   MonitorString("\n Read2_Profile");
 #endif
 
-  AddRecord39(6 + GetHdlcAddressesSize());
+  AddRecord39(6 + GetHdlcAddressesSize()); // step 9
 }
 
 
@@ -202,7 +202,7 @@ void    Read3_Profile(void) {
   MonitorString("\n Read3_Profile");
 #endif
 
-  bBlockNumber = 0;
+  bBlockNumber = 0; // step 11
 }
 
 
@@ -211,7 +211,7 @@ bool    UseBlocks_Profile39(void) {
   MonitorString("\n UseBlocks_Profile39");
 #endif
 
-  return fUseBlocks && (!fLastBlock);
+  return fUseBlocks && (!fLastBlock); // step 12
 }
 
 
@@ -220,10 +220,10 @@ void    QueryNextBlock_Profile39(void) {
   MonitorString("\n QueryNextBlock_Profile39");
 #endif
 
-  bBlockNumber++;
+  bBlockNumber++; // step 13
 
   c.bNS++;
-  QueryNextBlock39(c.bNS, c.bNR, c.bInvokeId, bBlockNumber);  
+  QueryNextBlock39(c.bNS, c.bNR, c.bInvokeId, bBlockNumber);  // step 14
 }
 
 
@@ -233,10 +233,10 @@ void    Read4_Profile(void) {
   MonitorString("\n Read4_Profile");
 #endif
 
-  fUseBlocks = UseBlocksDMLS();
+  fUseBlocks = UseBlocksDMLS(); // step 15
   fLastBlock = LastBlockDMLS();
 
-  AddRecord39(19 + GetHdlcAddressesSize());
+  AddRecord39(19 + GetHdlcAddressesSize());  // step 16
 }
 
 

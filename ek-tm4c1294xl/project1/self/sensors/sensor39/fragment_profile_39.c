@@ -31,51 +31,51 @@ static bool Fault(uchar  bError)
 
 bool    FragmentProfile39(caller39  *pc, time  tm1, time  tm2, bool  fProfile)
 {
-  InitRecord39();
+  InitRecord39(); // step 2
 
 
   (*pc).bNS++;
   (*pc).bInvokeId++;
-  QueryProfile39((*pc).bNS, (*pc).bNR, (*pc).bInvokeId, tm1, tm2);
+  QueryProfile39((*pc).bNS, (*pc).bNR, (*pc).bInvokeId, tm1, tm2); // step 4
   if (Input39() != SER_GOODCHECK) return Fault(130+0);
   if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(130+1);
 
-  bool fUseBlocks = UseBlocksDMLS();
+  bool fUseBlocks = UseBlocksDMLS(); // step 5
   bool fLastBlock = LastBlockDMLS();
 
-  AddRecord39(fUseBlocks ? 19 + GetHdlcAddressesSize() : 13 + GetHdlcAddressesSize());
+  AddRecord39(fUseBlocks ? 19 + GetHdlcAddressesSize() : 13 + GetHdlcAddressesSize()); // step 6
 
-  while (!LastSegmentDMLS()) {
+  while (!LastSegmentDMLS()) { // step 7
     (*pc).bNR++;
-    RR((*pc).bNR);
+    RR((*pc).bNR); // step 8
     if (Input39() != SER_GOODCHECK) return Fault(130+2);
     if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(130+3);
 
-    AddRecord39(6 + GetHdlcAddressesSize());
+    AddRecord39(6 + GetHdlcAddressesSize()); // step 9
   }
 
   (*pc).bNR++;
-  RR((*pc).bNR);
+  RR((*pc).bNR); // step 10
   if (Input39() != SER_GOODCHECK) return Fault(130+4);
   if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(130+5);
 
 
-  uchar bBlockNumber = 0;
+  uchar bBlockNumber = 0; // step 11
 
-  while (fUseBlocks && (!fLastBlock)) {
-    bBlockNumber++;
+  while (fUseBlocks && (!fLastBlock)) { // step 12
+    bBlockNumber++; // step 13
 
     (*pc).bNS++;
-    QueryNextBlock39((*pc).bNS, (*pc).bNR, (*pc).bInvokeId, bBlockNumber);
+    QueryNextBlock39((*pc).bNS, (*pc).bNR, (*pc).bInvokeId, bBlockNumber); // step 14
     if (Input39() != SER_GOODCHECK) return Fault(130+6);
     if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(130+7);
 
-    fUseBlocks = UseBlocksDMLS();
+    fUseBlocks = UseBlocksDMLS(); // step 15
     fLastBlock = LastBlockDMLS();
 
-    AddRecord39(19 + GetHdlcAddressesSize());
+    AddRecord39(19 + GetHdlcAddressesSize());  // step 16
 
-    while (!LastSegmentDMLS()) {
+    while (!LastSegmentDMLS()) { // step 17
       (*pc).bNR++;
       RR((*pc).bNR);
       if (Input39() != SER_GOODCHECK) return Fault(130+8);
