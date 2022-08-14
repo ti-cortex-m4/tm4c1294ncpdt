@@ -1,1 +1,3 @@
 profile pass
+memset
+memcpy

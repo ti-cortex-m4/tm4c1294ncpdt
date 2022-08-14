@@ -71,7 +71,7 @@ bool    Automatic39(void)
   Show(bSize);
 
 
-  dbKpulse = 1000;
+  dbKpulse = 2000;
   dbKtrans = 1;
   SetAllFactors(dbKpulse, dbKtrans);
 
