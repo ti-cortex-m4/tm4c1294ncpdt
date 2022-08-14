@@ -255,10 +255,10 @@ bool2   FinishProfile_Profile39(void) {
   MonitorString("\n FinishProfile_Profile39");
 #endif
 
-  bool success = FinishRecordProfile39(); // step 23
+  bool success = FinishRecordProfile39(); // step 39.25
 
   if (success)
-    return GetBool2(ReadHeader39(), true); // step 24
+    return GetBool2(ReadHeader39(), true); // step 39.26
   else
     return GetBool2Error(); 
 }
