@@ -7248,15 +7248,12 @@ void    RunDevices(void)
 
 
     case DEV_TIME1_O_39P:
-      MakePause(DEV_TIME2_O_39P); // TODO
-/*
       Clear(); ShowLo(szRepeats);
       sprintf(szLo+8,"%1u",GetCounter_Correct39()+1); DelayInf();
 
       cbRepeat = MaxRepeats();
       QueryTime_Profile39();
       SetCurr(DEV_TIME1_I_39P);
-*/
       break;
 
     case DEV_TIME1_I_39P:
@@ -7274,8 +7271,6 @@ void    RunDevices(void)
 
 
     case DEV_RR_TIME1_O_39P:
-//      Clear(); ShowPercent(65);
-
       cbRepeat = MaxRepeats();
       RR_Profile39();
       SetCurr(DEV_RR_TIME1_I_39P);
@@ -7328,7 +7323,7 @@ void    RunDevices(void)
               {
                 SaveNextDelta_Current39();
 
-                MakePause(DEV_TIME1_O_39P); // снова проверяем время
+                MakeLongPause(DEV_TIME1_O_39P, 1); // снова проверяем время
               }
               else if (GetCurrHouIndex() == (tmThat.bHour*2 + tmThat.bMinute/30))
               { ShowLo(szCorrectSkip); DelayInf(); MakePause(DEV_TIME2_O_39P); }
@@ -7344,8 +7339,6 @@ void    RunDevices(void)
 
 
     case DEV_CORRECT_O_39P:
-//      Clear(); ShowPercent(66);
-
       cbRepeat = MaxRepeats();
       QueryCorrect_Profile39();
       SetCurr(DEV_CORRECT_I_39P);
@@ -7365,8 +7358,6 @@ void    RunDevices(void)
 
 
     case DEV_RR_CORRECT_O_39P:
-//      Clear(); ShowPercent(67);
-
       cbRepeat = MaxRepeats();
       RR_Profile39();
       SetCurr(DEV_RR_CORRECT_I_39P);
@@ -7377,7 +7368,7 @@ void    RunDevices(void)
         if (!ValidateFrame_Profile39()) {
           PROFILE39_REPEAT_OR_ERROR(220+13, RR_Profile39(), DEV_RR_CORRECT_I_39P)
         } else {
-          MakePause(DEV_TIME1_O_39P); // снова проверяем время
+          MakeLongPause(DEV_TIME1_O_39P, 1); // снова проверяем время
         }  
       } else {
         PROFILE39_REPEAT_OR_ERROR(220+14, RR_Profile39(), DEV_RR_CORRECT_I_39P)
@@ -7386,7 +7377,7 @@ void    RunDevices(void)
 
 
     case DEV_TIME2_O_39P:
-      Clear(); ShowPercent(68);
+      Clear(); ShowPercent(65);
 
       cbRepeat = MaxRepeats();
       QueryTime_Profile39();
@@ -7408,7 +7399,7 @@ void    RunDevices(void)
 
 
     case DEV_RR_TIME2_O_39P:
-      Clear(); ShowPercent(69);
+      Clear(); ShowPercent(66);
 
       cbRepeat = MaxRepeats();
       RR_Profile39();
@@ -7429,7 +7420,7 @@ void    RunDevices(void)
 
 
     case DEV_SCALER_O_39P:
-      Clear(); ShowPercent(70);
+      Clear(); ShowPercent(67);
 
       cbRepeat = MaxRepeats();
       QueryScaler_Profile39();
@@ -7455,7 +7446,7 @@ void    RunDevices(void)
 
 
     case DEV_RR_SCALER_O_39P:
-      Clear(); ShowPercent(71);
+      Clear(); ShowPercent(68);
 
       cbRepeat = MaxRepeats();
       RR_Profile39();
