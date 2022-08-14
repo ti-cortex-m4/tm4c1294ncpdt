@@ -6989,7 +6989,7 @@ void    RunDevices(void)
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         MakePause(DEV_SNRM_O_39C);
       } else {
-        CURRENT39_REPEAT_OR_ERROR(200+0, DISC_Current39(), DEV_DISC_I_39C)
+        CURRENT39_REPEAT_OR_ERROR(190+0, DISC_Current39(), DEV_DISC_I_39C)
       }
       break;
 
@@ -7006,7 +7006,7 @@ void    RunDevices(void)
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         MakePause(DEV_AARQ_O_39C);
       } else {
-        CURRENT39_REPEAT_OR_ERROR(200+1, SNRM_Current39(), DEV_SNRM_I_39C)
+        CURRENT39_REPEAT_OR_ERROR(190+1, SNRM_Current39(), DEV_SNRM_I_39C)
       }
       break;
 
@@ -7022,17 +7022,17 @@ void    RunDevices(void)
     case DEV_AARQ_I_39C:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateFrame_Current39()) {
-          CURRENT39_REPEAT_OR_ERROR(200+2, AARQ_Current39(), DEV_AARQ_I_39C)
+          CURRENT39_REPEAT_OR_ERROR(190+2, AARQ_Current39(), DEV_AARQ_I_39C)
         } else {
           if (AARE_CheckPass()) {
             MakePause(DEV_RR_AARQ_O_39C);
           } else {
-            Error39(200+3);
+            Error39(190+3);
             ErrorCurrent();
           }
         }
       } else {
-        CURRENT39_REPEAT_OR_ERROR(200+4, AARQ_Current39(), DEV_AARQ_I_39C)
+        CURRENT39_REPEAT_OR_ERROR(190+4, AARQ_Current39(), DEV_AARQ_I_39C)
       }
       break;
 
@@ -7048,13 +7048,13 @@ void    RunDevices(void)
     case DEV_RR_AARQ_I_39C:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateFrame_Current39()) {
-          CURRENT39_REPEAT_OR_ERROR(200+5, RR_Current39(), DEV_RR_AARQ_I_39C)
+          CURRENT39_REPEAT_OR_ERROR(190+5, RR_Current39(), DEV_RR_AARQ_I_39C)
         } else {
           ClearLine39();
           MakePause(DEV_VALUE_O_39C);
         }
       } else {
-        CURRENT39_REPEAT_OR_ERROR(200+6, RR_Current39(), DEV_RR_AARQ_I_39C)
+        CURRENT39_REPEAT_OR_ERROR(190+6, RR_Current39(), DEV_RR_AARQ_I_39C)
       }
       break;
 
@@ -7070,17 +7070,17 @@ void    RunDevices(void)
     case DEV_VALUE_I_39C:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateFrame_Current39()) {
-          CURRENT39_REPEAT_OR_ERROR(200+7, QueryValue_Current39(), DEV_VALUE_I_39C)
+          CURRENT39_REPEAT_OR_ERROR(190+7, QueryValue_Current39(), DEV_VALUE_I_39C)
         } else {
           if (ReadValue_Current39()) {
             MakePause(DEV_RR_VALUE_O_39C);
           } else {
-            Error39(200+8);
+            Error39(190+8);
             ErrorCurrent();
           }
         }
       } else {
-        CURRENT39_REPEAT_OR_ERROR(200+9, QueryValue_Current39(), DEV_VALUE_I_39C)
+        CURRENT39_REPEAT_OR_ERROR(190+9, QueryValue_Current39(), DEV_VALUE_I_39C)
       }
       break;
 
@@ -7096,7 +7096,7 @@ void    RunDevices(void)
     case DEV_RR_VALUE_I_39C:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateFrame_Current39()) {
-          CURRENT39_REPEAT_OR_ERROR(200+10, RR_Current39(), DEV_RR_VALUE_I_39C)
+          CURRENT39_REPEAT_OR_ERROR(190+10, RR_Current39(), DEV_RR_VALUE_I_39C)
         } else {
           if (IncLine39() < 4)
             MakePause(DEV_VALUE_O_39C);
@@ -7104,7 +7104,7 @@ void    RunDevices(void)
             MakePause(DEV_SCALER_O_39C);
         }
       } else {
-        CURRENT39_REPEAT_OR_ERROR(200+11, RR_Current39(), DEV_RR_VALUE_I_39C)
+        CURRENT39_REPEAT_OR_ERROR(190+11, RR_Current39(), DEV_RR_VALUE_I_39C)
       }
       break;
 
@@ -7125,12 +7125,12 @@ void    RunDevices(void)
           if (ReadScaler_Current39()) {
             MakePause(DEV_RR_SCALER_O_39C);
           } else {
-            Error39(200+13);
+            Error39(190+13);
             ErrorCurrent();
           }
         }
       } else {
-        CURRENT39_REPEAT_OR_ERROR(200+14, QueryScaler_Current39(), DEV_SCALER_I_39C)
+        CURRENT39_REPEAT_OR_ERROR(190+14, QueryScaler_Current39(), DEV_SCALER_I_39C)
       }
       break;
 
@@ -7146,12 +7146,12 @@ void    RunDevices(void)
     case DEV_RR_SCALER_I_39C:
       if (mpSerial[ibPort] == SER_GOODCHECK)  {
         if (!ValidateFrame_Current39()) {
-          CURRENT39_REPEAT_OR_ERROR(200+15, RR_Current39(), DEV_RR_SCALER_I_39C)
+          CURRENT39_REPEAT_OR_ERROR(190+15, RR_Current39(), DEV_RR_SCALER_I_39C)
         } else {
           ReadCurrent39();
         }
       } else {
-        CURRENT39_REPEAT_OR_ERROR(200+16, RR_Current39(), DEV_RR_SCALER_I_39C)
+        CURRENT39_REPEAT_OR_ERROR(190+16, RR_Current39(), DEV_RR_SCALER_I_39C)
       }
       break;
 

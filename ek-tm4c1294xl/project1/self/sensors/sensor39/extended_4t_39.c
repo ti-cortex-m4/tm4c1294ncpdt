@@ -37,7 +37,7 @@ status  CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
   caller39 c = InitCaller39();
   
   time2 tm2 = FragmentOpenTime39(&c);
-  if (!tm2.fValid) return BadDigital(95+0);
+  if (!tm2.fValid) return BadDigital(90+0);
   time tm = tm2.tiValue;
 
 
@@ -50,7 +50,7 @@ status  CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
   double8 db8 = FragmentCntMonCan(obisBillingPeriodMon, obisScalerForBillingPeriod, &c, dt);
 
   DISC();
-  if (Input39() != SER_GOODCHECK) return BadDigital(95+1);
+  if (Input39() != SER_GOODCHECK) return BadDigital(90+1);
 
 
   if (db8.fValid)
@@ -74,7 +74,7 @@ status  CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
     return ST_NOTPRESENTED;
   }
 
-  return BadDigital(95+2);
+  return BadDigital(90+2);
 }
 
 
@@ -94,9 +94,9 @@ status  ReadCntMonCanTariff39(uchar  ibMonAbs, uchar  ibTariff) // на начало мес
   }
 
   DISC();
-  if (Input39() != SER_GOODCHECK) return BadDigital(95+3);
+  if (Input39() != SER_GOODCHECK) return BadDigital(90+3);
 
-  return BadDigital(95+4);
+  return BadDigital(90+4);
 }
 
 
