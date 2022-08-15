@@ -1,0 +1,70 @@
+Terminal log file
+Date: 15.08.2022 - 21:00:52
+-----------------------------------------------
+
+
+ DISC 
+ Output HDLC:  Format=a008 wSize=0008 Control=53 U-frame F=1 DISC
+
+ Output: out=10 in=1000
+ 7e a0 08 02 35 41 53 a8 94 7e 
+ Input: in=10
+ 7e a0 08 41 02 35 1f b5 b2 7e 
+ Input HDLC:  Format=a008 wSize=0008 Control=1f U-frame F=1 DM
+
+ SNRM 
+ Output HDLC:  Format=a021 wSize=0021 Control=93 U-frame F=1 SNRM
+
+ Output: out=35 in=1000
+ 7e a0 21 02 35 41 93 51 63 81 80 14 05 02 00 80 06 02 00 80 07 04 00 00 00 01 08 04 00 00 00 01 ce 6a 7e 
+ Input: in=35
+ 7e a0 21 41 02 35 73 2a 2a 81 80 14 05 02 00 80 06 02 00 80 07 04 00 00 00 01 08 04 00 00 00 01 ce 6a 7e 
+ Input HDLC:  Format=a021 wSize=0021 Control=73 U-frame F=1 UA
+
+ AARQ 
+ Output HDLC:  Format=a043 wSize=0043 Control=10 I-frame N(R)=0 N(S)=0 F=1 I
+
+ Output: out=69 in=1000
+ 7e a0 43 02 35 41 10 f9 62 e6 e6 00 60 34 a1 09 06 07 60 85 74 05 08 01 01 8a 02 07 80 8b 07 60 85 74 05 08 02 01 ac 08 80 06 31 31 31 31 31 31 be 10 04 0e 01 00 00 00 06 5f 1f 04 00 00 7e 1f 01 00 ea 3e 7e 
+ Input: in=58
+ 7e a0 38 41 02 35 30 91 bf e6 e7 00 61 29 a1 09 06 07 60 85 74 05 08 01 01 a2 03 02 01 00 a3 05 a1 03 02 01 00 be 10 04 0e 08 00 06 5f 1f 04 00 00 10 1d 00 64 00 07 82 8b 7e 
+ Input HDLC:  Format=a038 wSize=0038 Control=30 I-frame N(R)=1 N(S)=0 F=1 I I-frame validation 
+
+ RR 
+ Output HDLC:  Format=a008 wSize=0008 Control=31 S-frame N(R)=1 F=1 RR
+
+ Output: out=10 in=1000
+ 7e a0 08 02 35 41 31 bc d4 7e 
+ Input: in=10
+ 7e a0 08 41 02 35 31 c9 7a 7e 
+ Input HDLC:  Format=a008 wSize=0008 Control=31 S-frame N(R)=1 F=1 RR S-frame validation 
+
+ QueryTime39 
+ Output HDLC:  Format=a01a wSize=001a Control=32 I-frame N(R)=1 N(S)=1 F=1 I
+
+ Output: out=28 in=1000
+ 7e a0 1a 02 35 41 32 ef 44 e6 e6 00 c0 01 c1 00 08 00 00 01 00 00 ff 02 00 60 1a 7e 
+ Input: in=33
+ 7e a0 1f 41 02 35 52 c8 af e6 e7 00 c4 01 c1 00 09 0c 07 e6 08 0f 01 15 08 0d 00 00 b4 00 8a 71 7e 
+ Input HDLC:  Format=a01f wSize=001f Control=52 I-frame N(R)=2 N(S)=1 F=1 I I-frame validation 
+
+ RR 
+ Output HDLC:  Format=a008 wSize=0008 Control=51 S-frame N(R)=2 F=1 RR
+
+ Output: out=10 in=1000
+ 7e a0 08 02 35 41 51 ba b7 7e 
+ Input: in=10
+ 7e a0 08 41 02 35 51 cf 19 7e 
+ Input HDLC:  Format=a008 wSize=0008 Control=51 S-frame N(R)=2 F=1 RR S-frame validation 
+
+ DISC 
+ Output HDLC:  Format=a008 wSize=0008 Control=53 U-frame F=1 DISC
+
+ Output: out=10 in=1000
+ 7e a0 08 02 35 41 53 a8 94 7e 
+ Input: in=35
+ 7e a0 21 41 02 35 73 2a 2a 81 80 14 05 02 00 80 06 02 00 80 07 04 00 00 00 01 08 04 00 00 00 01 ce 6a 7e 
+ Input HDLC:  Format=a021 wSize=0021 Control=73 U-frame F=1 UA
+-----------------------------------------------
+Date: 15.08.2022 - 21:04:49
+End log file
