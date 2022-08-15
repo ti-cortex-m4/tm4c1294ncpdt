@@ -1,3 +1,5 @@
 profile pass
 memset
 memcpy
+address 210
+логический адрес только 32 
