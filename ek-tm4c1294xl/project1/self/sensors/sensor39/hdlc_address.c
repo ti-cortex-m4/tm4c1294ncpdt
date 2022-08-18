@@ -57,7 +57,7 @@ void    PushHdlcAddresses0(uint wAddr)
     PushChar(bLo);
   }
 
-  PushChar((bLogical << 1) + 0x01);
+  PushChar((32 << 1) + 0x01); // client address
 }
 
 
