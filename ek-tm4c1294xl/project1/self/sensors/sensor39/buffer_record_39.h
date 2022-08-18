@@ -22,6 +22,5 @@ typedef struct
 
 void    InitRecord39(void);
 void    AddRecord39(uint  iwStart);
-record39 GetRecordError39(char  bError);
 bool    FinishRecord39(void);
 bool    FinishRecordProfile39(void);

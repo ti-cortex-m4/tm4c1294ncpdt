@@ -59,21 +59,6 @@ void    AddRecord39(uint  iwStart) {
 
 
 
-record39 GetRecordError39(char  bError)
-{
-  static const time tiZero = {0, 0, 0, 0, 0, 0};
-  record39 r;
-
-  r.bError = bError;
-  uchar c; for (c=0; c<4; c++) r.mdwValue[c] = 0;
-  r.tmValue = tiZero;
-  r.fFirst = false;
-
-  return r;
-}
-
-
-
 static bool Fault(uchar  bError)
 {
   Error39(bError);
