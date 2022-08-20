@@ -22,7 +22,7 @@ params34.c
 #include "query_register_39.h"
 #include "fragment_open_39.h"
 #include "dlms_read_register.h"
-#include "params39.h"
+#include "params40.h"
 
 
 
@@ -43,7 +43,7 @@ static float2 Fault(uchar  bError)
 
 
 
-float2  ReadParam39_Internal(void)
+float2  ReadParam40_Internal(void)
 {
   caller39 r = InitCaller39();
   if (FragmentOpen39(&r) != 0) return Fault(100+0);
@@ -164,7 +164,7 @@ float2  ReadParam40(void)
 
   if (fBeginParam == false)
   {
-    if (!ReadParam39_Internal().fValid) return Fault(100+9);
+    if (!ReadParam40_Internal().fValid) return Fault(100+9);
 
     fBeginParam = true;
   }
@@ -213,7 +213,7 @@ double2 TestParam39(void)
 {
   MonitorOpen(0);
 
-  ReadParam39_Internal();
+  ReadParam40_Internal();
 
   return GetDouble2(0, true);
 }
