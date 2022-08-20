@@ -31,68 +31,68 @@ static bool Fault(uchar  bError)
 
 bool    FragmentProfile39(caller39  *pc, time  tm1, time  tm2, bool  fProfile)
 {
-  InitRecord39(); // step 39.2
+  InitRecord39(); // step 40.2
 
 
   (*pc).bNS++;
   (*pc).bInvokeId++;
-  QueryProfile40(*pc, tm1, tm2); // step 39.4
+  QueryProfile40(*pc, tm1, tm2); // step 40.4
   if (Input39() != SER_GOODCHECK) return Fault(130+0);
   if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(130+1);
 
-  bool fUseBlocks = UseBlocksDMLS(); // step 39.5
+  bool fUseBlocks = UseBlocksDMLS(); // step 40.5
   bool fLastBlock = LastBlockDMLS();
 
-  AddRecord39(fUseBlocks ? 19 + GetHdlcAddressesSize() : 13 + GetHdlcAddressesSize()); // step 39.6
+  AddRecord39(fUseBlocks ? 19 + GetHdlcAddressesSize() : 13 + GetHdlcAddressesSize()); // step 40.6
 
-  while (!LastSegmentDMLS()) { // true: step 39.7, false: step 39.11
+  while (!LastSegmentDMLS()) { // true: step 40.7, false: step 40.11
     (*pc).bNR++;
-    RR((*pc).bNR); // step 39.8
+    RR((*pc).bNR); // step 40.8
     if (Input39() != SER_GOODCHECK) return Fault(130+2);
     if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(130+3);
 
-    AddRecord39(6 + GetHdlcAddressesSize()); // step 39.9
-  } // repeat: step 39.10 -> step 39.7
+    AddRecord39(6 + GetHdlcAddressesSize()); // step 40.9
+  } // repeat: step 40.10 -> step 40.7
 
   (*pc).bNR++;
-  RR((*pc).bNR); // step 39.11
+  RR((*pc).bNR); // step 40.11
   if (Input39() != SER_GOODCHECK) return Fault(130+4);
   if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(130+5);
 
 
-  uchar bBlockNumber = 0; // step 39.12
+  uchar bBlockNumber = 0; // step 40.12
 
-  while (fUseBlocks && (!fLastBlock)) { // true: steps 39.13 -> step 39.14, false: 39.16 -> step 39.24
-    bBlockNumber++; // step 39.14
+  while (fUseBlocks && (!fLastBlock)) { // true: steps 40.13 -> step 40.14, false: 40.16 -> step 40.24
+    bBlockNumber++; // step 40.14
 
     (*pc).bNS++;
-    QueryNextBlock39(*pc, bBlockNumber); // step 39.15
+    QueryNextBlock39(*pc, bBlockNumber); // step 40.15
     if (Input39() != SER_GOODCHECK) return Fault(130+6);
     if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(130+7);
 
-    fUseBlocks = UseBlocksDMLS(); // step 39.16
+    fUseBlocks = UseBlocksDMLS(); // step 40.16
     fLastBlock = LastBlockDMLS();
 
-    AddRecord39(19 + GetHdlcAddressesSize()); // step 39.17
+    AddRecord39(19 + GetHdlcAddressesSize()); // step 40.17
 
-    while (!LastSegmentDMLS()) { // true: step 39.18, false: step 39.22
+    while (!LastSegmentDMLS()) { // true: step 40.18, false: step 40.22
       (*pc).bNR++;
-      RR((*pc).bNR); // step 39.19
+      RR((*pc).bNR); // step 40.19
       if (Input39() != SER_GOODCHECK) return Fault(130+8);
       if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(130+9);
 
-      AddRecord39(6 + GetHdlcAddressesSize()); // step 39.20
-    } // repeat: step 39.21 -> step 39.18
+      AddRecord39(6 + GetHdlcAddressesSize()); // step 40.20
+    } // repeat: step 40.21 -> step 40.18
 
     (*pc).bNR++;
-    RR((*pc).bNR); // step 39.22
+    RR((*pc).bNR); // step 40.22
     if (Input39() != SER_GOODCHECK) return Fault(130+10);
     if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(130+11);
-  } // repeat: step 39.23 -> step 39.13
+  } // repeat: step 40.23 -> step 40.13
 
 
-  if (fProfile) // step 39.24
-    return FinishRecordProfile39(); // step 39.25
+  if (fProfile) // step 40.24
+    return FinishRecordProfile39(); // step 40.25
   else
     return FinishRecord39();
 }
