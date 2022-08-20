@@ -77,9 +77,6 @@ time2   ReadTimeCan39_Short(void)
   time2 tm2 = ReadTimeCan39_Internal();
   if (tm2.fValid)
   {
-    tiChannelC = tm2.tiValue;
-    mpboChannelsA[0] = true;
-
     return GetTime0(tm2.tiValue);
   }
 

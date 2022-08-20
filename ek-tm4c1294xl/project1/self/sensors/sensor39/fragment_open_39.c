@@ -16,21 +16,21 @@ fragment_open_39.c
 uchar   FragmentOpen39(caller39  *pc)
 {
   DISC();
-  if (Input39() != SER_GOODCHECK) return Error39(115+0);
+  if (Input39() != SER_GOODCHECK) return Error39(110+0);
 
   SNRM();
-  if (Input39() != SER_GOODCHECK) return Error39(115+1);
+  if (Input39() != SER_GOODCHECK) return Error39(110+1);
 
   AARQ((*pc).bNS, (*pc).bNR);
-  if (Input39() != SER_GOODCHECK) return Error39(115+2);
-  if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Error39(115+3);
+  if (Input39() != SER_GOODCHECK) return Error39(110+2);
+  if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Error39(110+3);
 
-  if (!AARE_CheckPass()) Error39(115+4);
+  if (!AARE_CheckPass()) Error39(110+4);
 
   (*pc).bNR++;
   RR((*pc).bNR);
-  if (Input39() != SER_GOODCHECK) return Error39(115+5);
-  if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Error39(115+6);
+  if (Input39() != SER_GOODCHECK) return Error39(110+5);
+  if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Error39(110+6);
 
   return 0;
 }
