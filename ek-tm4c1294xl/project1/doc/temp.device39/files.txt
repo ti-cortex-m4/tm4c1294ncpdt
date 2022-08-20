@@ -6,14 +6,14 @@ case_39p4.h
 
 
 
-automatic_get_cntcurr_39.c
-automatic_get_cntcurr_39.h
++	automatic_get_cntcurr_39.c
++	automatic_get_cntcurr_39.h
 automatic_get_cntmon_39.c
 automatic_get_cntmon_39.h
 +	automatic_get_time_39.c
 +	automatic_get_time_39.h
-automatic39.c
-automatic39.h
++	automatic39.c
++	automatic39.h
 buffer_array_39.c
 buffer_array_39.h
 buffer_profile_39.c

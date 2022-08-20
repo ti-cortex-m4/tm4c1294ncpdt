@@ -90,17 +90,17 @@ static void DISC0(uchar  bNumber)
 {
   InitPush(0);
 
-  uint wSize = 5+GetHdlcAddressesSize0(bNumber); // 7
+  uint wSize = 5+GetHdlcAddressesSize0(bNumber);
 
   PushChar(0x7E);
   PushFormatDLMS(wSize);
   PushHdlcAddresses0(bNumber);
   PushChar(0x53); // DISC
 
-  PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize0(bNumber))); // 5
+  PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize0(bNumber)));
   PushChar(0x7E);
 
-  Query39(1000, wSize+2); // 9
+  Query39(1000, wSize+2);
 }
 
 
