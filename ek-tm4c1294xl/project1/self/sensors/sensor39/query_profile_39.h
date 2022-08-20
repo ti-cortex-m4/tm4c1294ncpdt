@@ -4,4 +4,4 @@ query_profile_39.h
 
 ------------------------------------------------------------------------------*/
 
-void    QueryProfile39(caller39  c, time  tm1, time  tm2);
+void    QueryProfile40(caller39  c, time  tm1, time  tm2);

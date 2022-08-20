@@ -28,78 +28,78 @@ profile39*c
 
 
 
-uint                    wProfile39;
-time                    tiStart39;
+uint                    wProfile40;
+time                    tiStart40;
 
 double                  dbScaler;
 
-time                    tiValue39;
-ulong                   dwValue39;
+time                    tiValue40;
+ulong                   dwValue40;
 
 
 
-void    SetTime_Profile39(time  tm)
+void    SetTime_Profile40(time  tm)
 {
-  tiValue39 = tm;
-  dwValue39 = DateToHouIndex(tiValue39);
+  tiValue40 = tm;
+  dwValue40 = DateToHouIndex(tiValue40);
 }
 
 
-time    GetTime_Profile39(void)
+time    GetTime_Profile40(void)
 {
-  return tiValue39;
+  return tiValue40;
 }
 
 
-void    SetScaler_Profile39(double  db)
+void    SetScaler_Profile40(double  db)
 {
   dbScaler = db;
 }
 
 
 
-void    InitHeader39(void)
+void    InitHeader40(void)
 {
 /* TODO
-  if (!UseBound39())
-    wProfile39 = 0;
+  if (!UseBound40())
+    wProfile40 = 0;
   else
   {
-    wProfile39 = (mpcwStartRelCan[ibDig] / 6) * 6;
-    Clear(); sprintf(szLo+1,"начало %04u:%02u",wProfile39,(uchar)(wProfile39/48 + 1));
+    wProfile40 = (mpcwStartRelCan[ibDig] / 6) * 6;
+    Clear(); sprintf(szLo+1,"начало %04u:%02u",wProfile40,(uchar)(wProfile40/48 + 1));
     if (boShowMessages == true) DelayMsg();
   }
 */
-  wProfile39 = 0;
-  tiStart39 = tiValue39;
+  wProfile40 = 0;
+  tiStart40 = tiValue40;
 
-  uchar i = tiStart39.bHour*2 + tiStart39.bMinute/30;
+  uchar i = tiStart40.bHour*2 + tiStart40.bMinute/30;
   i = (i / 6) * 6;
 
-  tiStart39.bHour = i / 2;
-  tiStart39.bMinute = (i % 2)*30;
+  tiStart40.bHour = i / 2;
+  tiStart40.bMinute = (i % 2)*30;
 
-#ifdef MONITOR_39
-  MonitorString("\n InitHeader39 ");
-  MonitorString(" wProfile39="); MonitorIntDec(wProfile39);
-  MonitorString(" tiStart39="); MonitorTime(tiStart39);
+#ifdef MONITOR_40
+  MonitorString("\n InitHeader40 ");
+  MonitorString(" wProfile40="); MonitorIntDec(wProfile40);
+  MonitorString(" tiStart40="); MonitorTime(tiStart40);
 #endif
 }
 
 
 
-t2time  QueryHeader39(void)
+t2time  QueryHeader40(void)
 {
   HideCurrTime(1);
 
 
-  ulong dw = DateToHouIndex(tiStart39);
-  dw -= wProfile39;
+  ulong dw = DateToHouIndex(tiStart40);
+  dw -= wProfile40;
   time ti1 = HouIndexToDate(dw /*- 1*/);
   time ti2 = HouIndexToDate(dw + 6-1/* - 1*/); // TODO
 
-#ifdef MONITOR_39
-  MonitorString("\n QueryHeader39 ");
+#ifdef MONITOR_40
+  MonitorString("\n QueryHeader40 ");
   MonitorString(" from="); MonitorTime(ti1);
   MonitorString(" to="); MonitorTime(ti2);
 #endif
@@ -108,7 +108,7 @@ t2time  QueryHeader39(void)
 }
 
 
-static bool ReadData39(time  tiTime, ulong  mdwValue[4])
+static bool ReadData40(time  tiTime, ulong  mdwValue[4])
 {
   sprintf(szLo," %02u    %02u.%02u.%02u", tiTime.bHour, tiTime.bDay,tiTime.bMonth,tiTime.bYear);
 
@@ -135,7 +135,7 @@ static bool ReadData39(time  tiTime, ulong  mdwValue[4])
 #endif
   }
 
-#ifdef MONITOR_39
+#ifdef MONITOR_40
     MonitorString("\n profile "); MonitorTime(tiTime);
     MonitorString(" "); MonitorIntDec(mpwChannels[0]);
     MonitorString(" "); MonitorIntDec(mpwChannels[1]);
@@ -148,7 +148,7 @@ static bool ReadData39(time  tiTime, ulong  mdwValue[4])
 }
 
 
-bool    ReadHeader39(void)
+bool    ReadHeader40(void)
 {
   uchar bSize = GetProfileSize39();
 
@@ -159,12 +159,12 @@ bool    ReadHeader39(void)
     if (prf.fExists)
     {
       time tm = HouIndexToDate(DateToHouIndex(prf.tmTime) - 1);
-      if (ReadData39(tm, prf.mdwValue) == false) return false;
+      if (ReadData40(tm, prf.mdwValue) == false) return false;
     }
   }
 
-  wProfile39 += 6;
-  if (wProfile39 > wHOURS) return false;
+  wProfile40 += 6;
+  if (wProfile40 > wHOURS) return false;
 
   return true;
 }
@@ -173,37 +173,37 @@ bool    ReadHeader39(void)
 
 #ifdef  MONITOR_39
 
-uchar   TestProfile39_Internal(caller39*  pc)
+uchar   TestProfile40_Internal(caller39*  pc)
 {  
   time2 tm2 = FragmentOpenTime39(pc);
   if (!tm2.fValid) return 1;
-  tiValue39 = tm2.tiValue;
+  tiValue40 = tm2.tiValue;
 
-  dwValue39 = DateToHouIndex(tiValue39);
+  dwValue40 = DateToHouIndex(tiValue40);
 
 
   double2 scaler = ReadRegisterScaler39(obisScalerForProfile1, pc);
   if (!scaler.fValid) return 2;
 
-  SetScaler_Profile39(scaler.dbValue);
+  SetScaler_Profile40(scaler.dbValue);
 
 
-  InitHeader39(); // step 39.1
+  InitHeader40(); // step 40.1
 
 
   while (true) {
-    t2time t2 = QueryHeader39(); // step 39.3
+    t2time t2 = QueryHeader40(); // step 40.3
     bool success = FragmentProfile39(pc, t2.ti1, t2.ti2, true);
     if (!success) return 11;
 
-    if (ReadHeader39() == false) return 0; // step 39.26
+    if (ReadHeader40() == false) return 0; // step 40.26
     if (fKey == true) return 255;
-  } // repeat: step 39.27
-} // finish: step 39.28
+  } // repeat: step 40.27
+} // finish: step 40.28
 
 
 
-double2 TestProfile39(void)
+double2 TestProfile40(void)
 {
   fMonitorLogBasic = false;
   fMonitorLogHex = false;
@@ -212,7 +212,7 @@ double2 TestProfile39(void)
 
   caller39 c = InitCaller39();
 
-  uchar bError = TestProfile39_Internal(&c);
+  uchar bError = TestProfile40_Internal(&c);
   if (bError != 0)  {
     return GetDouble2Error();
   } else {

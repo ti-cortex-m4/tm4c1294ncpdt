@@ -44,7 +44,7 @@
 
     case DEV_CORRECT_40P:
       {
-        time tmThat = GetTime_Profile39();
+        time tmThat = GetTime_Profile40();
         if (DifferentDay(tmThat, tiCurr))
         { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); } // даты не совпадают, коррекция невозможна
         else
