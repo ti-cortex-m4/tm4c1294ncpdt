@@ -157,7 +157,7 @@ void    InitProfile_Profile39(void) {
   MonitorString("\n InitProfile_Profile39");
 #endif
 
-  InitHeader40(); // step 39.1
+  InitHeader40(); // step 40.1
 }
 
 
@@ -166,13 +166,13 @@ void    QueryProfile_Profile39(void) {
   MonitorString("\n QueryProfile_Profile39");
 #endif
 
-  InitRecord39(); // step 39.2
+  InitRecord39(); // step 40.2
 
-  t2time t2 = QueryHeader40(); // step 39.3
+  t2time t2 = QueryHeader40(); // step 40.3
 
   c.bNS++;
   c.bInvokeId++;
-  QueryProfile40(c, t2.ti1, t2.ti2); // step 39.4
+  QueryProfile40(c, t2.ti1, t2.ti2); // step 40.4
 }
 
 
@@ -181,10 +181,10 @@ void    Read1_Profile(void) {
   MonitorString("\n Read1_Profile");
 #endif
 
-  fUseBlocks = UseBlocksDMLS(); // step 39.5
+  fUseBlocks = UseBlocksDMLS(); // step 40.5
   fLastBlock = LastBlockDMLS();
 
-  AddRecord39(fUseBlocks ? 19 + GetHdlcAddressesSize() : 13 + GetHdlcAddressesSize()); // step 39.6
+  AddRecord39(fUseBlocks ? 19 + GetHdlcAddressesSize() : 13 + GetHdlcAddressesSize()); // step 40.6
 }
 
 
@@ -193,7 +193,7 @@ void    Read2_Profile(void) {
   MonitorString("\n Read2_Profile");
 #endif
 
-  AddRecord39(6 + GetHdlcAddressesSize()); // step 39.9
+  AddRecord39(6 + GetHdlcAddressesSize()); // step 40.9
 }
 
 
@@ -202,7 +202,7 @@ void    Read3_Profile(void) {
   MonitorString("\n Read3_Profile");
 #endif
 
-  bBlockNumber = 0; // step 39.12
+  bBlockNumber = 0; // step 40.12
 }
 
 
@@ -211,7 +211,7 @@ bool    UseBlocks_Profile39(void) {
   MonitorString("\n UseBlocks_Profile39");
 #endif
 
-  return fUseBlocks && (!fLastBlock); // step 39.13
+  return fUseBlocks && (!fLastBlock); // step 40.13
 }
 
 
@@ -220,10 +220,10 @@ void    QueryNextBlock_Profile39(void) {
   MonitorString("\n QueryNextBlock_Profile39");
 #endif
 
-  bBlockNumber++; // step 39.14
+  bBlockNumber++; // step 40.14
 
   c.bNS++;
-  QueryNextBlock39(c, bBlockNumber); // step 39.15
+  QueryNextBlock39(c, bBlockNumber); // step 40.15
 }
 
 
@@ -233,10 +233,10 @@ void    Read4_Profile(void) {
   MonitorString("\n Read4_Profile");
 #endif
 
-  fUseBlocks = UseBlocksDMLS(); // step 39.16
+  fUseBlocks = UseBlocksDMLS(); // step 40.16
   fLastBlock = LastBlockDMLS();
 
-  AddRecord39(19 + GetHdlcAddressesSize()); // step 39.17
+  AddRecord39(19 + GetHdlcAddressesSize()); // step 40.17
 }
 
 
@@ -245,7 +245,7 @@ void    Read5_Profile(void) {
   MonitorString("\n Read5_Profile");
 #endif
 
-  AddRecord39(6 + GetHdlcAddressesSize()); // step 39.20
+  AddRecord39(6 + GetHdlcAddressesSize()); // step 40.20
 }
 
 
@@ -255,10 +255,10 @@ bool2   FinishProfile_Profile39(void) {
   MonitorString("\n FinishProfile_Profile39");
 #endif
 
-  bool success = FinishRecordProfile39(); // step 39.25
+  bool success = FinishRecordProfile39(); // step 40.25
 
   if (success)
-    return GetBool2(ReadHeader40(), true); // step 39.26
+    return GetBool2(ReadHeader40(), true); // step 40.26
   else
     return GetBool2Error(); 
 }
