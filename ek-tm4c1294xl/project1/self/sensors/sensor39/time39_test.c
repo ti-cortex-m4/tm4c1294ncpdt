@@ -51,7 +51,7 @@ double2 TestTimeCorrect39(void)
 
   c.bNS++;
   c.bInvokeId++;
-  QueryCorrectTime39(c.bNS, c.bNR, c.bInvokeId, wDeltaSeconds1);
+  QueryCorrectTime39(c, wDeltaSeconds1);
   if (Input39() != SER_GOODCHECK) return Fault(2);
   if (ValidateFrame(c.bNS, c.bNR) != 0) return Fault(3);
 

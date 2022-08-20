@@ -83,6 +83,7 @@ DEVICES.C
 #include "../sensors/sensor39/dlms.h"
 #include "../sensors/sensor39/current39_wrapper.h"
 #include "../sensors/sensor39/profile39.h"
+#include "../sensors/sensor39/correct39.h"
 #include "../sensors/sensor39/correct39_wrapper.h"
 #include "../sensors/sensor39/profile39_wrapper.h"
 #include "../sensors/sensor39/hdlc_monitor.h"
@@ -7307,7 +7308,7 @@ void    RunDevices(void)
             ShowLo(szCorrectNo); DelayInf();
             MakePause(DEV_TIME2_O_39P); // без коррекции
           }
-          else if (dwDelta < bMAJORCORRECT_39)
+          else if (dwDelta < wLIMITCORRECT_39)
           {
             if (GetCounter_Correct39() == 0)
             {

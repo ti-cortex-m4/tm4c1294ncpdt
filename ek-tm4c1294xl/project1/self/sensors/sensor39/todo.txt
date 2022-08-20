@@ -2,3 +2,5 @@ profile pass
 memset
 memcpy
 c.bNS, c.bNR, c.bInvokeId x4
+коррекция времени 15 минут
+неправильный пароль при чтении времени

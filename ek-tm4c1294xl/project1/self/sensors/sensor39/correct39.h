@@ -1,14 +1,15 @@
 /*------------------------------------------------------------------------------
-time39.h
+correct39.h
 
 
 ------------------------------------------------------------------------------*/
 
-#include "caller39.h"
+#ifndef __CORRECT39
+#define __CORRECT39
 
 
+// верхний порог коррекции времени, секунд
+#define wLIMITCORRECT_39 900 // 15 минут
 
-void    QueryTime39(caller39 c);
-time    ReadTime39(void);
 
-void    QueryCorrectTime39(caller39 c, sint wSeconds);
+#endif

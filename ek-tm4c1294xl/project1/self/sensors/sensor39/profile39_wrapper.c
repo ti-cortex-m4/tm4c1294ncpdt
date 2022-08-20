@@ -122,7 +122,7 @@ void    QueryCorrect_Profile39(void)
 
   c.bNS++;
   c.bInvokeId++;
-  QueryCorrectTime39(c.bNS, c.bNR, c.bInvokeId, wDeltaSeconds);  
+  QueryCorrectTime39(c, wDeltaSeconds);
 }
 
 
