@@ -13,9 +13,10 @@ automatic39.c                80         80-85
 
 extended_4t_39.c             90         90-94
 params39.c                   100        100-109
+
+fragment_open_39.c           110        110-116
+fragment_open_time39.c       120        120-124
 //down
-fragment_open_39.c           115        115-120
-fragment_open_time39.c       120        120-123
 fragment_cntmon_39           125        125-130
 fragment_profile_39.c        130        130-141 !
 

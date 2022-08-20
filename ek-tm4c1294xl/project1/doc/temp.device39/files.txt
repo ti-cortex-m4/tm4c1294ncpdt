@@ -10,8 +10,8 @@ automatic_get_cntcurr_39.c
 automatic_get_cntcurr_39.h
 automatic_get_cntmon_39.c
 automatic_get_cntmon_39.h
-automatic_get_time_39.c
-automatic_get_time_39.h
++	automatic_get_time_39.c
++	automatic_get_time_39.h
 automatic39.c
 automatic39.h
 buffer_array_39.c
@@ -44,10 +44,10 @@ extended_4t_39.c
 extended_4t_39.h
 fragment_cntmon_39.c
 fragment_cntmon_39.h
-fragment_open_39.c
-fragment_open_39.h
-fragment_open_time_39.c
-fragment_open_time_39.h
++	fragment_open_39.c
++	fragment_open_39.h
++	fragment_open_time_39.c
++	fragment_open_time_39.h
 fragment_profile_39.c
 fragment_profile_39.h
 +	hdlc_address.c
