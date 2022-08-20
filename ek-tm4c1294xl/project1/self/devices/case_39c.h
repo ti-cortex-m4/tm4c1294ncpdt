@@ -149,7 +149,7 @@
     case DEV_SCALER_I_39C:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateFrame_Current39()) {
-          CURRENT39_REPEAT_OR_ERROR(211+12, QueryScaler_Current39(), DEV_SCALER_I_39C)
+          CURRENT39_REPEAT_OR_ERROR(190+12, QueryScaler_Current39(), DEV_SCALER_I_39C)
         } else {
           if (ReadScaler_Current39()) {
             MakePause(DEV_RR_SCALER_O_39C);
