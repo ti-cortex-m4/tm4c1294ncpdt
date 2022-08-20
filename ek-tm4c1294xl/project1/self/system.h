@@ -110,7 +110,7 @@ SYSTEM!H
 #define bDEVICES        15
 
 // максимальное количество типов цифровых счётчиков
-#define bMAXDEVICES     39
+#define bMAXDEVICES     40
 
 // максимальное количество линий учёта в цифровом счётчике
 #define bCHANNELS       128
