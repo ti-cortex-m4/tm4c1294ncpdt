@@ -38,8 +38,8 @@ dlms_read_data.c
 dlms_read_data.h
 dlms_read_register.c
 dlms_read_register.h
-error39.c
-error39.h
++	error39.c
++	error39.h
 extended_4t_39.c
 extended_4t_39.h
 fragment_cntmon_39.c
