@@ -16,7 +16,7 @@ DEVICES_INPUT,C
 #include "../sensors/sensor35/router35.h"
 #include "../sensors/sensor36/router36.h"
 #include "../sensors/sensor38/decompress38.h"
-#include "../sensors/sensor39/unpack39.h"
+#include "../sensors/sensor40/unpack39.h"
 #include "../serial/ports.h"
 #include "devices_input.h"
 

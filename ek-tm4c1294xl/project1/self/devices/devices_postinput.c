@@ -23,7 +23,7 @@ DEVICES_POSTINPUT,C
 #include "../sensors/sensor36/io36.h"
 #include "../sensors/sensor36/router36.h"
 #include "../sensors/sensor36/postinput36.h"
-#include "../sensors/sensor39/hdlc_monitor.h"
+#include "../sensors/sensor40/hdlc_monitor.h"
 #include "../digitals/digitals_status.h"
 #include "devices_postinput.h"
 

@@ -22,7 +22,7 @@ KEY_AUTOMATIC!C
 #include "../../sensors/sensor35/automatic35.h"
 #include "../../sensors/sensor36/automatic36.h"
 #include "../../sensors/sensor38/automatic38.h"
-#include "../../sensors/sensor39/automatic39.h"
+#include "../../sensors/sensor40/automatic39.h"
 #include "../../digitals/digitals.h"
 #include "../../digitals/digitals_messages.h"
 #include "../../digitals/digitals_display.h"

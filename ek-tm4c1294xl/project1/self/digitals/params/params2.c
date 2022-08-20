@@ -40,7 +40,7 @@ PARAMS2!C
 #include    "../../sensors/sensor36/params36.h"
 #include    "../../sensors/sensor36/params37.h"
 #include    "../../sensors/sensor38/params38.h"
-#include    "../../sensors/sensor39/params39.h"
+#include    "../../sensors/sensor40/params39.h"
 #include    "../../time/delay.h"
 #include    "../../console.h"
 #include    "../../flash/files.h"
