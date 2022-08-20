@@ -8,3 +8,4 @@ profile pass
 неправильный пароль при 30 min
 client address: 32
 повторы NS NR
+default timeouts
