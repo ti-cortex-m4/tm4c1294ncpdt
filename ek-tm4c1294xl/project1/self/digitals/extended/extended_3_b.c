@@ -11,7 +11,7 @@ EXTENDED_3_B!C
 #include "../../serial/ports.h"
 #include "../../serial/ports_devices.h"
 #include "../../devices/devices.h"
-#include "../../sensors/sensor2/automatic_b.h"
+#include "../../sensors/automatic_b.h"
 #include "../../flash/records.h"
 #include "extended_3.h"
 #include "extended_3_b.h"
