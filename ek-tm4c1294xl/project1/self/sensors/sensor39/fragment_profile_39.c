@@ -36,7 +36,7 @@ bool    FragmentProfile39(caller39  *pc, time  tm1, time  tm2, bool  fProfile)
 
   (*pc).bNS++;
   (*pc).bInvokeId++;
-  QueryProfile39(*pc, tm1, tm2); // step 39.4
+  QueryProfile40(*pc, tm1, tm2); // step 39.4
   if (Input39() != SER_GOODCHECK) return Fault(130+0);
   if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(130+1);
 
