@@ -5,6 +5,7 @@ correct39_wrapper.c
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
+#include "correct39.h"
 #include "correct39_wrapper.h"
 
 

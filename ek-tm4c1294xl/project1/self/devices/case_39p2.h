@@ -60,7 +60,7 @@
             ShowLo(szCorrectNo); DelayInf();
             MakePause(DEV_TIME2_O_39P); // без коррекции
           }
-          else if (dwDelta < bMAJORCORRECT_39)
+          else if (dwDelta < wLIMITCORRECT_39)
           {
             if (GetCounter_Correct39() == 0)
             {

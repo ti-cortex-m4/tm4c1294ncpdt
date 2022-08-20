@@ -15,6 +15,7 @@ time39.c
 #include "io39.h"
 #include "hdlc_address.h"
 #include "dlms_push.h"
+#include "correct39.h"
 #include "time39.h"
 
 
@@ -85,7 +86,7 @@ time    ReadTime39(void)
 
 
 
-void    QueryCorrectTime39(uchar  bNS, uchar  bNR, uchar  bInvokeId, sint  wSeconds)
+void    QueryCorrectTime39(caller39 c, sint wSeconds)
 {
 #ifdef MONITOR_39_NAMES
   MonitorString("\n\n QueryCorrectTime39 "); MonitorSignedLongDec(wSeconds);
@@ -98,7 +99,7 @@ void    QueryCorrectTime39(uchar  bNS, uchar  bNR, uchar  bInvokeId, sint  wSeco
   PushFormatDLMS(wSize);
   PushHdlcAddresses();
 
-  PushChar(((bNR & 0x07) << 5) | 0x10 | ((bNS & 0x07) << 1) | 0x00);
+  PushChar(((c.bNR & 0x07) << 5) | 0x10 | ((c.bNS & 0x07) << 1) | 0x00);
 
   PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize()));
 
@@ -110,7 +111,7 @@ void    QueryCorrectTime39(uchar  bNS, uchar  bNR, uchar  bInvokeId, sint  wSeco
 
   PushChar(0xC3); // Action-Request
   PushChar(0x01); // Action-Request-Normal
-  PushChar(0xC0 | (bInvokeId % 16)); // Invoke-Id-And-Priority
+  PushChar(0xC0 | (c.bInvokeId % 16)); // Invoke-Id-And-Priority
 
   PushChar(0x00);
   PushChar(8); // clock (class_id = 8)
@@ -122,8 +123,10 @@ void    QueryCorrectTime39(uchar  bNS, uchar  bNR, uchar  bInvokeId, sint  wSeco
 
   PushChar(0x10);
 
-  if (wSeconds < -900) wSeconds = -900;
-  else if (wSeconds > 900) wSeconds = 900;
+  if (wSeconds < -wLIMITCORRECT_39)
+    wSeconds = -wLIMITCORRECT_39;
+  else if (wSeconds > wLIMITCORRECT_39)
+    wSeconds = wLIMITCORRECT_39;
 
   PushIntBig(wSeconds);
 
