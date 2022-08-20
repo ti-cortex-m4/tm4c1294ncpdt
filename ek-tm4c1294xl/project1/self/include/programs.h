@@ -262,6 +262,7 @@ PROGRAMS!H
 #define bSET_PHONES                 180
 #define bSET_MAX_CONNECT            181
 #define bSET_CUSTOM_MODEM           203
+#define bSET_MODEM_ATDP             204
 
 #define bSET_SHOW_MESSAGES          199
 
@@ -320,6 +321,9 @@ PROGRAMS!H
 #define wSET_SKIP_FAILURE_REPEATS   427
 #define wSET_TIME_ZONE_34           428
 #define wSET_MAX_TIMER_35           429
+#define wSET_IGNORE_STATUS_38       433
+#define wSET_SHORT_PROFILE_B        434
+#define wSET_MODEM_DISCONNECT_BD    435
 
 #define wSET_REVIEW_FLAG            440
 #define wSET_REVIEW_CAN             441
@@ -340,6 +344,9 @@ PROGRAMS!H
 #define wSET_PLC_U_FLAG             419
 #define wSET_PLC_U_SIZE             420
 #define wSET_PLC_U_SHUTDOWN         421
+
+#define bGET_DEVICE19_LONG          144
+#define bGET_DEVICE19_DOUBLE        145
 
 #define wSET_INPUT_MODE_RESET       416
 #define bSET_SLAVE_MODEM            198

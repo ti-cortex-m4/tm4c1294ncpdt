@@ -35,6 +35,7 @@ typedef enum
   DEV_MODEM_POSTCONNECT =  0x1D,
 
   DEV_MODEM_STOP        =  0x20,
+  DEV_MODEM_STOP_MANUAL =  0x29,
   DEV_MODEM_POSTSTOP    =  0x21,
   DEV_MODEM_ESCAPE      =  0x22,
   DEV_MODEM_POSTESCAPE  =  0x23,
@@ -104,8 +105,11 @@ typedef enum
   DEV_HEADER_B2PLUS     =  0x210,
   DEV_POSTHEADER_B2PLUS =  0x211,
 
-  DEV_HEADER_B2NEXT     =  0x212,
-  DEV_POSTHEADER_B2NEXT =  0x213,
+  DEV_HEADER_B2x17      =  0x212,
+  DEV_POSTHEADER_B2x17  =  0x213,
+
+  DEV_HEADER_B2x16      =  0x216,
+  DEV_POSTHEADER_B2x16  =  0x217,
 
   DEV_ERROR_B2          =  0x214,
   DEV_POSTERROR_B2      =  0x215,
@@ -859,6 +863,8 @@ typedef enum
   DEV_INITHEADER_38P    =  0x2328,
   DEV_PAUSE_38P         =  0x2329,
   DEV_HEADER_38P        =  0x232A,
+  DEV_PAUSE_39P         =  0x232B,
+  DEV_HEADER_39P        =  0x232C,
 
 #endif
 

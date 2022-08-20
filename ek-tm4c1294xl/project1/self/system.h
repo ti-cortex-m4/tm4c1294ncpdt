@@ -107,7 +107,7 @@ SYSTEM!H
 #define bGROUPS         32
 
 // количество типов цифровых счётчиков
-#define bDEVICES        14
+#define bDEVICES        15
 
 // максимальное количество типов цифровых счётчиков
 #define bMAXDEVICES     39

@@ -16,6 +16,11 @@ watchdog.c
 
 
 
+extern  const entity enPowerUpResetCount;
+extern  const entity enWatchdogResetCount;
+
+
+
 #define WATCHDOG_VALUE  0x20000000
 
 
@@ -62,15 +67,23 @@ void ResetWatchdog(void)
 
 void InitWatchdog(void)
 {
-  DisableWatchdog();
-
   if (fWatchdogFlag != false)
     EnableWatchdog();
+  else
+    DisableWatchdog();
 
   fWatchdogReset = IsWatchdogReset();
   if (fWatchdogReset)
   {
     WARNING("watchdog reset\n");
+
+    cwWatchdogResetCount++;
+    SaveEntity(&enWatchdogResetCount);
+  }
+  else
+  {
+    cwPowerUpResetCount++;
+    SaveEntity(&enPowerUpResetCount);
   }
 }
 

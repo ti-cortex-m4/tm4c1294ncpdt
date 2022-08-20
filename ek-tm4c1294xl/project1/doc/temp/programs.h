@@ -95,8 +95,8 @@
 #define bSET_SETRECALC              230
 #define bSET_RECALC_ALWAYS          231
 
-#define bGET_DEVICESINT             144
-#define bGET_DEVICESREAL            145
++   #define bGET_DEVICESINT             144
++   #define bGET_DEVICESREAL            145
 
 +   #define bSET_ENABLE_PARAM           101
 +   #define bSET_QUICK_PARAM            102

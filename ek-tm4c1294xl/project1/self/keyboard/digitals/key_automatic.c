@@ -14,6 +14,7 @@ KEY_AUTOMATIC!C
 #include "../../serial/modems.h"
 #include "../../sensors/automatic1.h"
 #include "../../sensors/automatic_w.h"
+#include "../../sensors/sensor19/automatic19.h"
 #include "../../sensors/sensor31/automatic31.h"
 #include "../../sensors/sensor32/automatic32.h"
 #include "../../sensors/sensor33/automatic33.h"
@@ -211,6 +212,7 @@ uchar   i;
 
 #ifndef SKIP_38
           case 38: if (Automatic38() != 1) bRes = 0xEE; break;
+          case 39: if (Automatic39() != 1) bRes = 0xEE; break;
 #endif
 
 #ifndef SKIP_39

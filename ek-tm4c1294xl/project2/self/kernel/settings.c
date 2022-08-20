@@ -53,6 +53,7 @@ bool                    fWatchdogReset;
 
 bool                    ibDebugMode;
 
+bool                    fUDPDebugBroadcast;
 ulong                   dwUDPDebugIP;
 uint                    wUDPDebugPort;
 
@@ -67,6 +68,12 @@ bool                    fIOModeDebugFlag;
 
 ledMode                 bLED0Mode = LED_MODE_LINK;
 ledMode                 bLED1Mode;
+
+uint                    cwPowerUpResetCount;
+uint                    cwWatchdogResetCount;
+
+bool                    fPeriodicResetFlag;
+uint                    wPeriodicResetPeriod;
 
 uchar                   mbCustomerSettings[UART_COUNT];
 uchar                   mbCustomerSetting1_Delay[UART_COUNT];

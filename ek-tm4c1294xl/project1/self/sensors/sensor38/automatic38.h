@@ -5,4 +5,6 @@ automatic38.h
 ------------------------------------------------------------------------------*/
 
 bool    Automatic38(void);
+bool    Automatic39(void);
+
 bool    ChangeSpeed38(void);

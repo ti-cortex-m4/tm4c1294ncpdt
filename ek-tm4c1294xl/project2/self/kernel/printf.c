@@ -7,8 +7,11 @@ printf.c
 #include "../main.h"
 #include <stdarg.h>
 #include "utils/uartstdio.h"
+#include "utils/ustdlib.h"
 #include "settings.h"
+#include "../hardware/rom.h"
 #include "../udp/udp_log.h"
+#include "clock.h"
 #include "printf.h"
 
 
@@ -356,6 +359,81 @@ void DebugPrintF(const char *pcsz, ...)
   {
     memset(&mbPrintf, 0, sizeof(mbPrintf));
     iwPrintf = 0;
+
+    date_t days = SecondsToDate(GetClockSeconds());
+    iwPrintf = usprintf(mbPrintf, "<%d>%d(%u.%u.%u.%04X) %02d %02d:%02d:%02d: ",
+      5, wSerialNumber,
+      MAJOR_VERSION, MINOR_VERSION, GetROMBuildNumber(), GetROMChecksum(),
+      days.wDays, days.bHours, days.bMinutes, days.bSeconds
+    );
+
+    va_list va;
+    va_start(va, pcsz);
+
+    LogPrintVarArg(pcsz, va);
+
+    va_end(va);
+
+    UDPLog((unsigned char *)mbPrintf, iwPrintf);
+  }
+  else if (ibDebugMode == DEBUG_MODE_UART)
+  {
+    va_list va;
+    va_start(va, pcsz);
+
+    UARTvprintf(pcsz, va);
+
+    va_end(va);
+  }
+}
+
+void DebugPrintF_Warning(const char *pcsz, ...)
+{
+  if (ibDebugMode == DEBUG_MODE_UDP)
+  {
+    memset(&mbPrintf, 0, sizeof(mbPrintf));
+    iwPrintf = 0;
+
+    date_t days = SecondsToDate(GetClockSeconds());
+    iwPrintf = usprintf(mbPrintf, "<%d>%d(%u.%u.%u.%04X) %02d %02d:%02d:%02d: ",
+      4, wSerialNumber,
+      MAJOR_VERSION, MINOR_VERSION, GetROMBuildNumber(), GetROMChecksum(),
+      days.wDays, days.bHours, days.bMinutes, days.bSeconds
+    );
+
+    va_list va;
+    va_start(va, pcsz);
+
+    LogPrintVarArg(pcsz, va);
+
+    va_end(va);
+
+    UDPLog((unsigned char *)mbPrintf, iwPrintf);
+  }
+  else if (ibDebugMode == DEBUG_MODE_UART)
+  {
+    va_list va;
+    va_start(va, pcsz);
+
+    UARTvprintf(pcsz, va);
+
+    va_end(va);
+  }
+}
+
+void DebugPrintF_Error(const char *pcsz, ...)
+{
+  if (ibDebugMode == DEBUG_MODE_UDP)
+  {
+    memset(&mbPrintf, 0, sizeof(mbPrintf));
+    iwPrintf = 0;
+
+    date_t days = SecondsToDate(GetClockSeconds());
+    iwPrintf = usprintf(mbPrintf, "<%d>%d(%u.%u.%u.%04X) %02d %02d:%02d:%02d: ",
+      3, wSerialNumber,
+      MAJOR_VERSION, MINOR_VERSION, GetROMBuildNumber(), GetROMChecksum(),
+      days.wDays, days.bHours, days.bMinutes, days.bSeconds
+    );
 
     va_list va;
     va_start(va, pcsz);

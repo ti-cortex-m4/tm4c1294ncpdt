@@ -54,6 +54,7 @@ KEYBOARD_KEY!C
 #include "phones/key_phones.h"
 #include "phones/key_max_connect.h"
 #include "phones/key_custom_modem.h"
+#include "phones/key_modem_atdp.h"
 #include "phones2/key_phones20.h"
 #include "phones2/key_phones21.h"
 #include "phones2/key_phones22.h"
@@ -112,6 +113,9 @@ KEYBOARD_KEY!C
 #include "sensors/key_control_w.h"
 #include "sensors/key_time_zone34.h"
 #include "sensors/key_max_timer35.h"
+#include "sensors/key_ignore_status38.h"
+#include "sensors/key_short_profile_b.h"
+#include "sensors/key_modem_disconnet_bd.h"
 #include "digitals/review/key_review_flag.h"
 #include "digitals/review/key_review_can.h"
 #include "digitals/review/key_review_read_id.h"
@@ -174,6 +178,7 @@ KEYBOARD_KEY!C
 #include "sensors/key_plc_u_flag.h"
 #include "sensors/key_plc_u_size.h"
 #include "sensors/key_plc_u_shutdown.h"
+#include "sensors/key_device19.h"
 #include "gps/key_gps_config.h"
 #include "gps/key_gps_data.h"
 #include "gps/key_gps_gmt.h"
@@ -318,6 +323,7 @@ void    Keyboard_Key(void)
       case bSET_PHONES:         key_SetPhones();        break;
       case bSET_MAX_CONNECT:    key_SetMaxConnect();    break;
       case bSET_CUSTOM_MODEM:   key_SetCustomModem();   break;
+      case bSET_MODEM_ATDP:     key_SetModemATDP();     break;
 
       case bSET_SHOW_MESSAGES:  key_SetShowMessages();  break;
 
@@ -378,6 +384,9 @@ void    Keyboard_Key(void)
       case wSET_SKIP_FAILURE_REPEATS: key_SetSkipFailureRepeats(); break;
       case wSET_TIME_ZONE_34:   key_SetTimeZone34();    break;
       case wSET_MAX_TIMER_35:   key_SetMaxTimer35();    break;
+      case wSET_IGNORE_STATUS_38: key_SetIgnoreStatus38(); break;
+      case wSET_SHORT_PROFILE_B:key_SetShortProfileB(); break;
+      case wSET_MODEM_DISCONNECT_BD:key_SetModemDisconnectBD(); break;
 
       case wSET_REVIEW_FLAG:    key_SetReviewFlag();    break;
       case wSET_REVIEW_CAN:     key_SetReviewCan();     break;
@@ -398,6 +407,9 @@ void    Keyboard_Key(void)
       case wSET_PLC_U_FLAG:     key_SetPlcUFlag();      break;
       case wSET_PLC_U_SIZE:     key_SetPlcUSize();      break;
       case wSET_PLC_U_SHUTDOWN: key_SetPlcUShutdown();  break;
+
+      case bGET_DEVICE19_LONG:  key_GetDevice19Long();  break;
+      case bGET_DEVICE19_DOUBLE:key_GetDevice19Double();break;
 
       case wSET_INPUT_MODE_RESET: key_SetInputModeReset(); break;
       case bSET_SLAVE_MODEM: key_SetSlaveModem(); break;
@@ -560,6 +572,7 @@ void    Keyboard_Key(void)
       case bSET_PHONES:         key_SetPhones();        break;
       case bSET_MAX_CONNECT:    key_SetMaxConnect();    break;
       case bSET_CUSTOM_MODEM:   key_SetCustomModem();   break;
+      case bSET_MODEM_ATDP:     key_SetModemATDP();     break;
 
       case bSET_SHOW_MESSAGES:  key_SetShowMessages();  break;
 
@@ -703,6 +716,9 @@ void    Keyboard_Key(void)
       case wSET_SKIP_FAILURE_REPEATS: key_SetSkipFailureRepeats(); break;
       case wSET_TIME_ZONE_34:   key_SetTimeZone34();    break;
       case wSET_MAX_TIMER_35:   key_SetMaxTimer35();    break;
+      case wSET_IGNORE_STATUS_38: key_SetIgnoreStatus38(); break;
+      case wSET_SHORT_PROFILE_B:key_SetShortProfileB(); break;
+      case wSET_MODEM_DISCONNECT_BD:key_SetModemDisconnectBD(); break;
 
       case wSET_REVIEW_FLAG:    key_SetReviewFlag();    break;
       case wSET_REVIEW_CAN:     key_SetReviewCan();     break;
@@ -723,6 +739,9 @@ void    Keyboard_Key(void)
       case wSET_PLC_U_FLAG:     key_SetPlcUFlag();      break;
       case wSET_PLC_U_SIZE:     key_SetPlcUSize();      break;
       case wSET_PLC_U_SHUTDOWN: key_SetPlcUShutdown();  break;
+
+      case bGET_DEVICE19_LONG:  key_GetDevice19Long();  break;
+      case bGET_DEVICE19_DOUBLE:key_GetDevice19Double();break;
 
       case wSET_INPUT_MODE_RESET: key_SetInputModeReset(); break;
       case bSET_SLAVE_MODEM: key_SetSlaveModem(); break;
@@ -883,6 +902,7 @@ void    Keyboard_Key(void)
       case bSET_PHONES:         key_SetPhones();        break;
       case bSET_MAX_CONNECT:    key_SetMaxConnect();    break;
       case bSET_CUSTOM_MODEM:   key_SetCustomModem();   break;
+      case bSET_MODEM_ATDP:     key_SetModemATDP();     break;
 
       case bSET_SHOW_MESSAGES:  key_SetShowMessages();  break;
 
@@ -948,6 +968,9 @@ void    Keyboard_Key(void)
       case wSET_SKIP_FAILURE_REPEATS: key_SetSkipFailureRepeats(); break;
       case wSET_TIME_ZONE_34:   key_SetTimeZone34();    break;
       case wSET_MAX_TIMER_35:   key_SetMaxTimer35();    break;
+      case wSET_IGNORE_STATUS_38: key_SetIgnoreStatus38(); break;
+      case wSET_SHORT_PROFILE_B:key_SetShortProfileB(); break;
+      case wSET_MODEM_DISCONNECT_BD:key_SetModemDisconnectBD(); break;
 
       case wSET_REVIEW_FLAG:    key_SetReviewFlag();    break;
       case wSET_REVIEW_CAN:     key_SetReviewCan();     break;
@@ -968,6 +991,9 @@ void    Keyboard_Key(void)
       case wSET_PLC_U_FLAG:     key_SetPlcUFlag();      break;
       case wSET_PLC_U_SIZE:     key_SetPlcUSize();      break;
       case wSET_PLC_U_SHUTDOWN: key_SetPlcUShutdown();  break;
+
+      case bGET_DEVICE19_LONG:  key_GetDevice19Long();  break;
+      case bGET_DEVICE19_DOUBLE:key_GetDevice19Double();break;
 
       case wSET_INPUT_MODE_RESET: key_SetInputModeReset(); break;
       case bSET_SLAVE_MODEM: key_SetSlaveModem(); break;

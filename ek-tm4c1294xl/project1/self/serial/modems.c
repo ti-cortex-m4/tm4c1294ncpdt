@@ -14,6 +14,7 @@ MODEMS!C
 #include    "../keyboard/time/key_timedate.h"
 #include    "../time/delay.h"
 #include    "../flash/records.h"
+#include    "../digitals/phones.h"
 #include    "../digitals/digitals.h"
 #include    "../digitals/digitals_pause.h"
 #include    "../devices/devices.h"
@@ -25,6 +26,7 @@ MODEMS!C
 #include    "ports_modems.h"
 #include    "speeds_display.h"
 #include    "flow.h"
+#include    "modems.h"
 
 
 
@@ -67,7 +69,7 @@ void    KeyBreakConnect(void)
   wProgram = 0;
 
   fKeyOn = 1;
-  MakePause(DEV_MODEM_STOP);
+  MakePause(DEV_MODEM_STOP_MANUAL);
 
   if (diCurr.ibPhone != 0) AddModRecord(EVE_MODEM_KEYBREAK);
 }
@@ -184,10 +186,19 @@ void    QueryModemConnect(void)
 
   InitPush(0);
 
-  PushChar('A');
-  PushChar('T');
-  PushChar('D');
-  PushChar('P');
+  uchar bSize;
+  if (fModemATDP == false) {
+    PushChar('A');
+    PushChar('T');
+    PushChar('D');
+    bSize = 3;
+  } else {
+    PushChar('A');
+    PushChar('T');
+    PushChar('D');
+    PushChar('P');
+    bSize = 4;
+  }
 
   line ph = mpphPhones[diCurr.ibPhone - 1];
 
@@ -204,7 +215,7 @@ void    QueryModemConnect(void)
   PushChar('\r');
   PushChar('\n');
 
-  Query(SERIAL_MODEM, 4+i+2, 1);
+  Query(SERIAL_MODEM, bSize+i+2, 1);
 }
 
 
@@ -630,4 +641,3 @@ void    SaveConnect(void)
 {
   diLast = diCurr;
 }
-

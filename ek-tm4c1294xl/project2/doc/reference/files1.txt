@@ -1,0 +1,64 @@
+telnet.c
+OK
+
+telnet_accept.c
+??? // TODO tcp_accepted(pcb);
+
+telnet_close.c
+//    pState->pListenPCB = NULL; TODO ???
+//    pState->eTCPState = STATE_TCP_IDLE; TODO ???
+
+telnet_connected.c
+OK
+
+telnet_error.c
+OK
+
+telnet_handler.c
+OK
+
+telnet_listen.c
+OK
+
+telnet_open.c
+OK
+
+telnet_poll.c
+client
+???
+server
+previous
+            tcp_abort(pcb);
+current
+            TelnetCloseServer(pcb, pState->ucSerialPort);
+            StartServerConnection(pState->ucSerialPort);
+
+telnet_receive.c	OK
+previous
+        // If we don't have a listen PCB, then we are in client mode, and should try to reconnect.
+        if(pState->pListenPCB == NULL)
+        {
+            // Re-open the connection.
+            TelnetOpen(pState->ulTelnetRemoteIP, pState->usTelnetRemotePort,
+                       pState->usTelnetLocalPort, pState->ulSerialPort);
+        }
+        else
+        {
+            // Revert to listening state.
+            pState->eTCPState = STATE_TCP_LISTEN;
+        }
+current
+        StartConnection(pState->ucSerialPort);
+
+telnet_sent.c
+OK
+
+serial.c
+OK
+
+serial_handler.c
+
+serial_receive.c
+OK
+
+serial_send.c

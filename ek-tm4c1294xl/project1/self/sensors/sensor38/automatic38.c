@@ -35,6 +35,25 @@ bool    Automatic38(void)
 }
 
 
+bool    Automatic39(void)
+{
+  Clear();
+
+  QuerynNumber38();
+  if (Input38() != SER_GOODCHECK) return false;
+
+  ShowLong(ReadNumber38());
+  Delay(1000);
+
+
+  dbKpulse = 10000;                     // K преобразования
+  dbKtrans = 1;                         // K трансформации
+  SetAllFactors(dbKpulse,dbKtrans);     // сохранение К преобразования и К трансформации
+
+  return true;
+}
+
+
 
 bool    ChangeSpeed38(void)
 {

@@ -20,7 +20,7 @@ KEY_SEARCH!C
 #include "../../digitals/digitals.h"
 #include "../../digitals/digitals_display.h"
 #include "../../sensors/device_a.h"
-#include "../../sensors/device_b.h"
+#include "../../sensors/sensor2/device2.h"
 #include "../../sensors/sensor3/device_c.h"
 #include "../../sensors/sensor34/device34.h"
 #include "../../sensors/sensor38/automatic38.h"
@@ -364,7 +364,8 @@ void    key_SearchBySpeed(void)
 #endif
 
 #ifndef SKIP_38
-            case 38:  if (ChangeSpeed38() == 1) bRes = 0xEE;  break;
+            case 38:
+            case 39:  if (ChangeSpeed38() == 1) bRes = 0xEE;  break;
 #endif
             default:  Error();  return;
           }

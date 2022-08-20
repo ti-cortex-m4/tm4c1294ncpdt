@@ -16,13 +16,13 @@ AUTOMATIC1!C
 #include "../digitals/serials.h"
 #include "../energy.h"
 #include "device_a.h"
-#include "device_b.h"
+#include "sensor2/device2.h"
 #include "sensor3/device_c.h"
 #include "device_k.h"
 #include "sensor21/device_p.h"
 #include "device_v.h"
 #include "automatic_a.h"
-#include "automatic_b.h"
+#include "sensor2/automatic2.h"
 #include "sensor3/automatic_c.h"
 #include "automatic_k.h"
 #include "sensor21/input_p.h"
@@ -1040,69 +1040,6 @@ uchar   i;
   ShowPercent(100);
 
   SetAllFactors(dbKpulse,dbKtrans);
-
-  return(1);
-}
-
-#endif
-
-
-
-#ifndef SKIP_N
-
-bool    AutomaticN(void)
-{
-uchar   i;
-
-  for (i=0; i<MaxRepeats(); i++)
-  {
-    InitPush(0);
-    PushChar(0);
-    PushChar(diCurr.bAddress);
-
-    PushChar(8);
-
-    PushChar(0);
-    PushChar(0);
-    PushChar(0);
-    PushChar(0);
-    PushChar(0);
-    PushChar(0);
-    PushChar(0);
-    PushChar(0);
-
-    QueryIO(5+8, 5+8);
-
-    if (Input() == SER_GOODCHECK) break;
-    if (fKey == true) return(0);
-  }
-
-  if (i == MaxRepeats()) return(0);
-
-  sprintf(szLo+1,"версия:");
-  szLo[ 9] = InBuff(3);
-  szLo[10] = InBuff(4);
-  szLo[11] = InBuff(5);
-  szLo[12] = InBuff(6);
-  szLo[13] = InBuff(7);
-
-  DelayInf(); Clear();
-
-
-  for (i=0; i<MaxRepeats(); i++)
-  {
-    QueryEnergyAbsN();
-
-    if (Input() == SER_GOODCHECK) break;
-    if (fKey == true) return(0);
-  }
-
-  if (i == MaxRepeats()) return(0);
-  ShowPercent(50);
-
-  ReadEnergyN();
-
-  mpdwBase[ibDig] = mpdwChannelsA[0];
 
   return(1);
 }

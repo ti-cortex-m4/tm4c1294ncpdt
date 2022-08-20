@@ -127,6 +127,7 @@ const entity * const mpenEntities[] =
   &enWatchdogFlag,
   &enDebugMode,
 
+  &enUDPDebugBroadcast,
   &enUDPDebugIP,
   &enUDPDebugPort,
 
@@ -165,6 +166,13 @@ const entity * const mpenEntities[] =
   &enCustomerSetting1Timeout3,
   &enCustomerSetting1Timeout4,
 #endif
+
+  &enPeriodicResetFlag,
+  &enPeriodicResetPeriod,
+
+  // must be last in the list
+  &enPowerUpResetCount,
+  &enWatchdogResetCount,
 };
 
 

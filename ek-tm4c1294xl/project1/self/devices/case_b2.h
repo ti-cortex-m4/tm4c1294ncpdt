@@ -201,7 +201,7 @@
     case DEV_TOP_B2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        if (TestVersionB710()) ReadTopBNew(); else ReadTopBOld();
+        if (TestVersionB710()) ReadTopBx17(); else ReadTopBOld();
         MakePause(DEV_POSTTOP_B2);
       }
       else
@@ -225,14 +225,27 @@
         if (TestVersionB710())
         {
           cbRepeat = MaxRepeats();
-          QueryHeaderBNew();
-          SetCurr(DEV_HEADER_B2NEXT);
+          QueryHeaderBx17();
+          SetCurr(DEV_HEADER_B2x17);
         }
         else
         {
-          cbRepeat = MaxRepeats();
-          QueryHeaderB();
-          SetCurr(DEV_HEADER_B2);
+          if (boShortProfileB)
+          {
+            ShowLo(szProfile2x1); DelayInf();
+
+            cbRepeat = MaxRepeats();
+            QueryHeaderB();
+            SetCurr(DEV_HEADER_B2);
+          }
+          else
+          {
+            ShowLo(szProfile2x16); DelayInf();
+
+            cbRepeat = MaxRepeats();
+            QueryHeaderBx16();
+            SetCurr(DEV_HEADER_B2x16);
+          }
         }
       }
       else
@@ -318,6 +331,8 @@
       }
       break;
 
+
+    // ПРТ-М230
     case DEV_HEADER_B2PLUS:
       if (mpSerial[ibPort] == SER_GOODCHECK)
         MakePause(DEV_POSTHEADER_B2PLUS);
@@ -374,9 +389,11 @@
     }
       break;
 
-    case DEV_HEADER_B2NEXT:
+
+    // Меркурий-233 блоками по 17 получасов
+    case DEV_HEADER_B2x17:
       if (mpSerial[ibPort] == SER_GOODCHECK)
-        MakePause(DEV_POSTHEADER_B2NEXT);
+        MakePause(DEV_POSTHEADER_B2x17);
       else
       {
         if (cbRepeat == 0) ErrorProfile();
@@ -385,19 +402,20 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryHeaderBNew();
-          SetCurr(DEV_HEADER_B2NEXT);
+          QueryHeaderBx17();
+          SetCurr(DEV_HEADER_B2x17);
         }
       }
       break;
 
-    case DEV_POSTHEADER_B2NEXT:
-    {
+    case DEV_POSTHEADER_B2x17:
+      {
         NewBoundsAbs32(dwBaseCurr);
+
         uchar i;
         for (i=0; i<17; i++)
         {
-          if (ReadHeaderBNew(i,1) == 0) break;
+          if (ReadHeaderBx17(i,1) == 0) break;
           (dwBaseCurr == 0) ? (dwBaseCurr = 0x1FFF0) : (dwBaseCurr -= 0x0010);
         }
 
@@ -406,10 +424,51 @@
         else
         {
           cbRepeat = MaxRepeats();
-          QueryHeaderBNew();
-          SetCurr(DEV_HEADER_B2NEXT);
+          QueryHeaderBx17();
+          SetCurr(DEV_HEADER_B2x17);
         }
-    }
+      }
+      break;
+
+
+    // Меркурий-230 блоками по 16 получасов
+    case DEV_HEADER_B2x16:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+        MakePause(DEV_POSTHEADER_B2x16);
+      else
+      {
+        if (cbRepeat == 0) ErrorProfile();
+        else
+        {
+          ErrorLink();
+          cbRepeat--;
+
+          QueryHeaderBx16();
+          SetCurr(DEV_HEADER_B2x16);
+        }
+      }
+      break;
+
+    case DEV_POSTHEADER_B2x16:
+      {
+        NewBoundsAbs16(dwBaseCurr);
+
+        uchar i;
+        for (i=0; i<PROFILE2X16_SIZE; i++)
+        {
+          if (ReadHeaderBx16(i,1) == 0) break;
+          (wBaseCurr == 0) ? (wBaseCurr = 0xFFF0) : (wBaseCurr -= 0x0010);
+        }
+
+        if (i != PROFILE2X16_SIZE)
+          DoneProfile();
+        else
+        {
+          cbRepeat = MaxRepeats();
+          QueryHeaderBx16();
+          SetCurr(DEV_HEADER_B2x16);
+        }
+      }
       break;
 
 #endif

@@ -39,13 +39,16 @@ DEVICES.C
 #include "../special/recalc_def.h"
 #include "../special/defects.h"
 #include "../sensors/device_a.h"
-#include "../sensors/device_b.h"
-#include "../sensors/device_b2.h"
-#include "../sensors/device_b12.h"
+#include "../sensors/sensor2/device2.h"
+#include "../sensors/sensor2/profile2.h"
+#include "../sensors/sensor2/device12.h"
+#include "../sensors/sensor2/profile2x17.h"
+#include "../sensors/sensor2/profile2x16.h"
 #include "../sensors/sensor3/device_c.h"
 #include "../sensors/sensor3/profile_c.h"
 #include "../sensors/device_e.h"
 #include "../sensors/device_k.h"
+#include "../sensors/sensor19/device19.h"
 #include "../sensors/sensor21/device_p.h"
 #include "../sensors/device_q.h"
 #include "../sensors/sensor24/device_s.h"
@@ -78,6 +81,7 @@ DEVICES.C
 #include "../sensors/sensor38/device38.h"
 #include "../sensors/sensor38/current38.h"
 #include "../sensors/sensor38/profile38.h"
+#include "../sensors/sensor38/profile39.h"
 #include "../sensors/sensor38/auth38.h"
 #include "../sensors/sensor38/time38.h"
 #include "../sensors/sensor39/dlms.h"
@@ -91,6 +95,7 @@ DEVICES.C
 #include "../serial/ports.h"
 #include "../serial/ports_modems.h"
 #include "../serial/modems.h"
+#include "../serial/modems_disconnect.h"
 #include "../serial/speeds_display.h"
 #include "../serial/monitor.h"
 #include "../digitals/dsbl_answer.h"
@@ -306,7 +311,7 @@ void    RunDevices(void)
 
           AddModRecord(EVE_MODEM_ERROR);
         }
-        else if (diCurr.ibPhone != 0)
+        else if (IsModemConnect())
           MakePause(DEV_MODEM_POSTSTART);
         else
           MakePause(DEV_MODEM_POSTCONNECT);
@@ -564,13 +569,25 @@ void    RunDevices(void)
 
 
 
-    case DEV_MODEM_STOP:
+    case DEV_MODEM_STOP_MANUAL:
       if (fKeyOn == 0)
         ShowCanalNumber(ibDig);
       else
         ShowHi(szManual);
 
       if ((diCurr.ibPhone != 0) && (fConnect == 1))
+        MakePause(DEV_MODEM_POSTSTOP);
+      else
+        MakePause(DEV_MODEM_POSTBREAK);
+      break;
+
+    case DEV_MODEM_STOP:
+      if (fKeyOn == 0)
+        ShowCanalNumber(ibDig);
+      else
+        ShowHi(szManual);
+
+      if (IsModemDisconnect())
         MakePause(DEV_MODEM_POSTSTOP);
       else
         MakePause(DEV_MODEM_POSTBREAK);
@@ -1367,7 +1384,7 @@ void    RunDevices(void)
     case DEV_TOP_B2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        if (TestVersionB710()) ReadTopBNew(); else ReadTopBOld();
+        if (TestVersionB710()) ReadTopBx17(); else ReadTopBOld();
         MakePause(DEV_POSTTOP_B2);
       }
       else
@@ -1391,14 +1408,27 @@ void    RunDevices(void)
         if (TestVersionB710())
         {
           cbRepeat = MaxRepeats();
-          QueryHeaderBNew();
-          SetCurr(DEV_HEADER_B2NEXT);
+          QueryHeaderBx17();
+          SetCurr(DEV_HEADER_B2x17);
         }
         else
         {
-          cbRepeat = MaxRepeats();
-          QueryHeaderB();
-          SetCurr(DEV_HEADER_B2);
+          if (boShortProfileB)
+          {
+            ShowLo(szProfile2x1); DelayInf();
+
+            cbRepeat = MaxRepeats();
+            QueryHeaderB();
+            SetCurr(DEV_HEADER_B2);
+          }
+          else
+          {
+            ShowLo(szProfile2x16); DelayInf();
+
+            cbRepeat = MaxRepeats();
+            QueryHeaderBx16();
+            SetCurr(DEV_HEADER_B2x16);
+          }
         }
       }
       else
@@ -1484,6 +1514,8 @@ void    RunDevices(void)
       }
       break;
 
+
+    // ПРТ-М230
     case DEV_HEADER_B2PLUS:
       if (mpSerial[ibPort] == SER_GOODCHECK)
         MakePause(DEV_POSTHEADER_B2PLUS);
@@ -1540,9 +1572,11 @@ void    RunDevices(void)
     }
       break;
 
-    case DEV_HEADER_B2NEXT:
+
+    // Меркурий-233 блоками по 17 получасов
+    case DEV_HEADER_B2x17:
       if (mpSerial[ibPort] == SER_GOODCHECK)
-        MakePause(DEV_POSTHEADER_B2NEXT);
+        MakePause(DEV_POSTHEADER_B2x17);
       else
       {
         if (cbRepeat == 0) ErrorProfile();
@@ -1551,19 +1585,20 @@ void    RunDevices(void)
           ErrorLink();
           cbRepeat--;
 
-          QueryHeaderBNew();
-          SetCurr(DEV_HEADER_B2NEXT);
+          QueryHeaderBx17();
+          SetCurr(DEV_HEADER_B2x17);
         }
       }
       break;
 
-    case DEV_POSTHEADER_B2NEXT:
-    {
+    case DEV_POSTHEADER_B2x17:
+      {
         NewBoundsAbs32(dwBaseCurr);
+
         uchar i;
         for (i=0; i<17; i++)
         {
-          if (ReadHeaderBNew(i,1) == 0) break;
+          if (ReadHeaderBx17(i,1) == 0) break;
           (dwBaseCurr == 0) ? (dwBaseCurr = 0x1FFF0) : (dwBaseCurr -= 0x0010);
         }
 
@@ -1572,10 +1607,51 @@ void    RunDevices(void)
         else
         {
           cbRepeat = MaxRepeats();
-          QueryHeaderBNew();
-          SetCurr(DEV_HEADER_B2NEXT);
+          QueryHeaderBx17();
+          SetCurr(DEV_HEADER_B2x17);
         }
-    }
+      }
+      break;
+
+
+    // Меркурий-230 блоками по 16 получасов
+    case DEV_HEADER_B2x16:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+        MakePause(DEV_POSTHEADER_B2x16);
+      else
+      {
+        if (cbRepeat == 0) ErrorProfile();
+        else
+        {
+          ErrorLink();
+          cbRepeat--;
+
+          QueryHeaderBx16();
+          SetCurr(DEV_HEADER_B2x16);
+        }
+      }
+      break;
+
+    case DEV_POSTHEADER_B2x16:
+      {
+        NewBoundsAbs16(dwBaseCurr);
+
+        uchar i;
+        for (i=0; i<PROFILE2X16_SIZE; i++)
+        {
+          if (ReadHeaderBx16(i,1) == 0) break;
+          (wBaseCurr == 0) ? (wBaseCurr = 0xFFF0) : (wBaseCurr -= 0x0010);
+        }
+
+        if (i != PROFILE2X16_SIZE)
+          DoneProfile();
+        else
+        {
+          cbRepeat = MaxRepeats();
+          QueryHeaderBx16();
+          SetCurr(DEV_HEADER_B2x16);
+        }
+      }
       break;
 
 #endif
@@ -2632,6 +2708,34 @@ void    RunDevices(void)
           MakePause(DEV_POSTOPTION_K3);
         else
           ReadCurrentK(4);
+      }
+      break;
+
+#endif
+
+#ifndef SKIP_N
+
+    case DEV_START_N3:
+      cbRepeat = MaxRepeats();
+      QueryEnergyAbsN();
+      SetCurr(DEV_ENERGY_N3);
+      break;
+
+    case DEV_ENERGY_N3:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+        ReadCurrentN();
+      else
+      {
+        if (cbRepeat == 0)
+          ErrorCurrent();
+        else
+        {
+          ErrorLink();
+          cbRepeat--; mpwRepeat[ibDig]++;
+
+          QueryEnergyAbsN();
+          SetCurr(DEV_ENERGY_N3);
+        }
       }
       break;
 
@@ -6918,7 +7022,10 @@ void    RunDevices(void)
 
     case DEV_INITHEADER_38P:
       InitHeader38();
-      MakePause(DEV_PAUSE_38P);
+      if (diCurr.bDevice == 38)
+        MakePause(DEV_PAUSE_38P);
+      else
+        MakePause(DEV_PAUSE_39P);
       break;
 
     case DEV_PAUSE_38P:
@@ -6951,6 +7058,8 @@ void    RunDevices(void)
       {
         if (ReadData38() == false)
           DoneProfile();
+        else if (cwShutdown38 >= GetMaxShutdown())
+          DoneProfile();
         else
           MakePause(DEV_PAUSE_38P);
       }
@@ -6965,6 +7074,57 @@ void    RunDevices(void)
 
           QueryHeader38();
           SetCurr(DEV_HEADER_38P);
+        }
+      }
+      break;
+
+
+    case DEV_PAUSE_39P:
+      {
+        ulong dwSecNow = DateToSecIndex(tiCurr);
+        ulong dwHou = DateToHouIndex(tiCurr);
+        ulong dwSecPrev = DateToSecIndex(HouIndexToDate(dwHou));
+        ulong dwSecNext = DateToSecIndex(HouIndexToDate(dwHou + 1));
+        const char bGap = 30;
+        bool f1 = (dwSecNext - dwSecNow < bGap);
+        bool f2 = (dwSecNow - dwSecPrev < bGap);
+        if (f1 || f2)
+        {
+          Clear();
+          uchar bDelta = f1 ? bGap + (dwSecNext - dwSecNow) : bGap - (dwSecNow - dwSecPrev);
+          sprintf(szLo+3, "пауза: %u", bDelta);
+          MakeLongPause(DEV_PAUSE_39P, 1);
+        }
+        else
+        {
+          cbRepeat = MaxRepeats();
+          QueryHeader39();
+          SetCurr(DEV_HEADER_39P);
+        }
+      }
+      break;
+
+    case DEV_HEADER_39P:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+      {
+        if (ReadData39() == false)
+          DoneProfile();
+        else if (cwShutdown38 >= GetMaxShutdown())
+          DoneProfile();
+        else
+          MakePause(DEV_PAUSE_39P);
+      }
+      else
+      {
+        if (cbRepeat == 0)
+          ErrorProfile();
+        else
+        {
+          ErrorLink();
+          cbRepeat--;
+
+          QueryHeader39();
+          SetCurr(DEV_HEADER_39P);
         }
       }
       break;
