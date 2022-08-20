@@ -1,11 +1,11 @@
 /*------------------------------------------------------------------------------
-log39_include.h
+log40_include.h
 
 
 ------------------------------------------------------------------------------*/
 
-#ifndef __LOG39_INCLUDE
-#define __LOG39_INCLUDE
+#ifndef __LOG40_INCLUDE
+#define __LOG40_INCLUDE
 
 
 typedef struct
@@ -13,19 +13,19 @@ typedef struct
   time          tiNow;
   uchar         bError;
   uint          wData;
-} log39;
+} log40;
 
 
 typedef struct
 {
   time          tiNow;
   uint          wCounter;
-} counter39;
+} counter40;
 
 
 
-#define LOG39_SIZE      100
-#define COUNTER39_SIZE  0x100
+#define LOG40_SIZE      100
+#define COUNTER40_SIZE  0x100
 
 
 #endif

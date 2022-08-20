@@ -1,13 +1,13 @@
 /*------------------------------------------------------------------------------
-log39.h
+log40.h
 
 
 ------------------------------------------------------------------------------*/
 
-void    InitLog39(void);
+void    InitLog40(void);
 
-void    Log39(uchar  bError, uint  wData);
+void    Log40(uchar  bError, uint  wData);
 
-void    OutLog39(void);
-void    OutCounter39(void);
-void    OutResetLog39(void);
+void    OutLog40(void);
+void    OutCounter40(void);
+void    OutResetLog40(void);
