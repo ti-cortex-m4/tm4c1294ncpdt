@@ -9,3 +9,4 @@ profile pass
 client address: 32
 повторы NS NR
 default timeouts P90
+профили - правильный получас
