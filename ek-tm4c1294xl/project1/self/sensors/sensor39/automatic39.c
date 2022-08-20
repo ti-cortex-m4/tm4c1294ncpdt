@@ -54,7 +54,7 @@ bool    Automatic39(void)
 
   c.bNS++;
   c.bInvokeId++;
-  QueryId39(c.bNS, c.bNR, c.bInvokeId);
+  QueryId39(c);
   if (Input39() != SER_GOODCHECK) return Fault(80+1);
   if (ValidateFrame(c.bNS, c.bNR) != 0) return Fault(80+2);
 
