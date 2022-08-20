@@ -38,7 +38,8 @@ void    InitProfile39(void)
 void    AddProfile39(time  tmTime, ulong  mdwValue[4])
 {
 #ifdef MONITOR_40
-  MonitorString("\n add profile "); MonitorIntDec(cbProfileSize39);
+  MonitorString("\n add profile (end time) ");
+  MonitorString(" "); MonitorIntDec(cbProfileSize39);
   MonitorString(" "); MonitorTime(tmTime);
   MonitorString(" "); MonitorLongDec(mdwValue[0]);
   MonitorString(" "); MonitorLongDec(mdwValue[1]);
