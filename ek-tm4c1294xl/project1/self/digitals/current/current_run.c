@@ -296,7 +296,7 @@ void    NextCurrent(void)
 #endif
 
 #ifndef SKIP_40
-    case 40: DISC();  break; // TODO
+    case 40: DISC(); break;
 #endif
   }
 
