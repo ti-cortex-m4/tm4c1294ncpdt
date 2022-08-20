@@ -172,7 +172,7 @@ void    QueryProfile_Profile39(void) {
 
   c.bNS++;
   c.bInvokeId++;
-  QueryProfile39(c.bNS, c.bNR, c.bInvokeId, t2.ti1, t2.ti2); // step 39.4
+  QueryProfile39(c, t2.ti1, t2.ti2); // step 39.4
 }
 
 
@@ -223,7 +223,7 @@ void    QueryNextBlock_Profile39(void) {
   bBlockNumber++; // step 39.14
 
   c.bNS++;
-  QueryNextBlock39(c.bNS, c.bNR, c.bInvokeId, bBlockNumber); // step 39.15
+  QueryNextBlock39(c, bBlockNumber); // step 39.15
 }
 
 

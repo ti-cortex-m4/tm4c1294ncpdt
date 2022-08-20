@@ -20,12 +20,12 @@ buffer_profile_39.c
 buffer_profile_39.h
 buffer_record_39.c
 buffer_record_39.h
-caller39.c
-caller39.h
++	caller39.c
++	caller39.h
 correct39_wrapper.c
 correct39_wrapper.h
-crc16x25.c
-crc16x25.h
++	crc16x25.c
++	crc16x25.h
 current39_wrapper.c
 current39_wrapper.h
 dlms.c
@@ -42,7 +42,6 @@ error39.c
 error39.h
 extended_4t_39.c
 extended_4t_39.h
-files.txt
 fragment_cntmon_39.c
 fragment_cntmon_39.h
 fragment_open_39.c

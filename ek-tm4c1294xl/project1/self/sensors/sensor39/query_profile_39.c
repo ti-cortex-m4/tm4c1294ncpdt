@@ -64,7 +64,7 @@ query_profile_39.c
   </GetRequestNormal>
 </GetRequest>
 */
-void    QueryProfile39(uchar  bNS, uchar  bNR, uchar  bInvokeId, time  tm1, time  tm2)
+void    QueryProfile39(caller39  c, time  tm1, time  tm2)
 {
 #ifdef MONITOR_39  
   MonitorString("\n\n QueryProfile39 "); MonitorTime(tm1); MonitorTime(tm2);
@@ -78,7 +78,7 @@ void    QueryProfile39(uchar  bNS, uchar  bNR, uchar  bInvokeId, time  tm1, time
   PushFormatDLMS(wSize);
   PushHdlcAddresses();
 
-  PushChar(((bNR & 0x07) << 5) | 0x10 | ((bNS & 0x07) << 1) | 0x00);
+  PushChar(((c.bNR & 0x07) << 5) | 0x10 | ((c.bNS & 0x07) << 1) | 0x00);
 
   PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize()));
 
@@ -90,7 +90,7 @@ void    QueryProfile39(uchar  bNS, uchar  bNR, uchar  bInvokeId, time  tm1, time
 
   PushChar(0xC0); // Get-Request
   PushChar(0x01); // Get-Request-Normal
-  PushChar(0xC0 | (bInvokeId % 16)); // Invoke-Id-And-Priority
+  PushChar(0xC0 | (c.bInvokeId % 16)); // Invoke-Id-And-Priority
 
   PushChar(0x00); // ?
 
