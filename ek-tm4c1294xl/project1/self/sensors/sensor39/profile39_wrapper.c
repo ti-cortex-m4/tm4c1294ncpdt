@@ -103,7 +103,7 @@ void    ReadTime_Profile39(void) {
   MonitorString("\n ReadTime_Profile39");
 #endif
 
-  SetTime_Profile39(ReadTime39());
+  SetTime_Profile40(ReadTime39());
 }
 
 
@@ -146,7 +146,7 @@ bool    ReadScaler_Profile39(void)
 #endif
 
   double2 scaler = ReadRegisterScalerDLMS();
-  SetScaler_Profile39(scaler.fValid ? scaler.dbValue : -1);
+  SetScaler_Profile40(scaler.fValid ? scaler.dbValue : -1);
   return scaler.fValid;
 }
 
@@ -157,7 +157,7 @@ void    InitProfile_Profile39(void) {
   MonitorString("\n InitProfile_Profile39");
 #endif
 
-  InitHeader39(); // step 39.1
+  InitHeader40(); // step 39.1
 }
 
 
@@ -168,11 +168,11 @@ void    QueryProfile_Profile39(void) {
 
   InitRecord39(); // step 39.2
 
-  t2time t2 = QueryHeader39(); // step 39.3
+  t2time t2 = QueryHeader40(); // step 39.3
 
   c.bNS++;
   c.bInvokeId++;
-  QueryProfile39(c, t2.ti1, t2.ti2); // step 39.4
+  QueryProfile40(c, t2.ti1, t2.ti2); // step 39.4
 }
 
 
@@ -258,7 +258,7 @@ bool2   FinishProfile_Profile39(void) {
   bool success = FinishRecordProfile39(); // step 39.25
 
   if (success)
-    return GetBool2(ReadHeader39(), true); // step 39.26
+    return GetBool2(ReadHeader40(), true); // step 39.26
   else
     return GetBool2Error(); 
 }

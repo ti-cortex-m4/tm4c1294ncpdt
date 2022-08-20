@@ -296,7 +296,7 @@ void    DevicesPostInput(void)
     }
 #endif
 
-#ifndef SKIP_39
+#ifndef SKIP_40
     else if (diCurr.bDevice == 40)
     {
       if (ValidateInputHDLC())

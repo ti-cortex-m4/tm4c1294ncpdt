@@ -295,8 +295,8 @@ void    NextCurrent(void)
     case 37: QueryClose36(); break;
 #endif
 
-#ifndef SKIP_39
-    case 39: DISC();  break;
+#ifndef SKIP_40
+    case 40: DISC();  break; // TODO
 #endif
   }
 
