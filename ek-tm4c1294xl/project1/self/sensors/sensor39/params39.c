@@ -134,24 +134,24 @@ float2  ReadParam39_Internal(void)
 
 
   db2 = ReadRegisterSignedValueWithScaler39(obisC, &r);
-  if (!db2.fValid) return Fault(100+6);
+  if (!db2.fValid) return Fault(100+7);
   flC = db2.dbValue;
 
   db2 = ReadRegisterSignedValueWithScaler39(obisC1, &r);
-  if (!db2.fValid) return Fault(100+6);
+  if (!db2.fValid) return Fault(100+7);
   flC1 = db2.dbValue;
 
   db2 = ReadRegisterSignedValueWithScaler39(obisC2, &r);
-  if (!db2.fValid) return Fault(100+6);
+  if (!db2.fValid) return Fault(100+7);
   flC2 = db2.dbValue;
 
   db2 = ReadRegisterSignedValueWithScaler39(obisC3, &r);
-  if (!db2.fValid) return Fault(100+6);
+  if (!db2.fValid) return Fault(100+7);
   flC3 = db2.dbValue;
 
 
   DISC();
-  if (Input39() != SER_GOODCHECK) return Fault(100+7);
+  if (Input39() != SER_GOODCHECK) return Fault(100+8);
 
   return GetFloat0(-1);
 }
@@ -164,7 +164,7 @@ float2  ReadParam39(void)
 
   if (fBeginParam == false)
   {
-    if (!ReadParam39_Internal().fValid) return Fault(100+25);
+    if (!ReadParam39_Internal().fValid) return Fault(100+9);
 
     fBeginParam = true;
   }

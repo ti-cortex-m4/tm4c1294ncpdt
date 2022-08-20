@@ -60,8 +60,8 @@ include39.h
 log39.c
 log39.h
 log39_include.h
-params39.c
-params39.h
++	params39.c
++	params39.h
 profile39.c
 profile39.h
 profile39_wrapper.c
