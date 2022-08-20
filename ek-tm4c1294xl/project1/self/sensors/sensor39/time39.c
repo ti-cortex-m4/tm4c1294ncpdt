@@ -19,13 +19,13 @@ time39.c
 
 
 
-void    QueryTime39(uchar  bNS, uchar  bNR, uchar  bInvokeId)
+void    QueryTime39(caller39 c)
 {
 #ifdef MONITOR_39_NAMES
   MonitorString("\n\n QueryTime39 ");
 #endif
 
-  uint wSize = 23 + GetHdlcAddressesSize(); // 0x19 25
+  uint wSize = 23 + GetHdlcAddressesSize();
 
   InitPush(0);
   PushChar(0x7E);
@@ -33,9 +33,9 @@ void    QueryTime39(uchar  bNS, uchar  bNR, uchar  bInvokeId)
   PushFormatDLMS(wSize);
   PushHdlcAddresses();
 
-  PushChar((((bNR & 0x07) << 5) | 0x10 | ((bNS & 0x07) << 1) | 0x00));
+  PushChar((((c.bNR & 0x07) << 5) | 0x10 | ((c.bNS & 0x07) << 1) | 0x00));
   
-  PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
+  PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize()));
 
   // DLMS start
   
@@ -45,7 +45,7 @@ void    QueryTime39(uchar  bNS, uchar  bNR, uchar  bInvokeId)
   
   PushChar(0xC0); // Get-Request
   PushChar(0x01); // Get-Request-Normal
-  PushChar(0xC0 | (bInvokeId % 16)); // Invoke-Id-And-Priority
+  PushChar(0xC0 | (c.bInvokeId % 16)); // Invoke-Id-And-Priority
   
   PushChar(0x00);
   PushChar(8); // clock (class_id = 8)
@@ -61,7 +61,7 @@ void    QueryTime39(uchar  bNS, uchar  bNR, uchar  bInvokeId)
   
   PushChar(0x7E);
 
-  Query39(1000, wSize+2); // 27
+  Query39(1000, wSize+2);
 }
 
 
@@ -69,18 +69,18 @@ time    ReadTime39(void)
 {
   InitPop(15 + GetHdlcAddressesSize());
 
-  time ti;
-  ti.bYear   = PopIntBig() - 2000;
-  ti.bMonth  = PopChar();
-  ti.bDay    = PopChar();
+  time tm;
+  tm.bYear   = PopIntBig() - 2000;
+  tm.bMonth  = PopChar();
+  tm.bDay    = PopChar();
 
   PopChar();
 
-  ti.bHour   = PopChar();
-  ti.bMinute = PopChar();
-  ti.bSecond = PopChar();
+  tm.bHour   = PopChar();
+  tm.bMinute = PopChar();
+  tm.bSecond = PopChar();
 
-  return ti;
+  return tm;
 }
 
 

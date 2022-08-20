@@ -94,7 +94,7 @@ void    QueryTime_Profile39(void) {
 
   c.bNS++;
   c.bInvokeId++;
-  QueryTime39(c.bNS, c.bNR, c.bInvokeId);
+  QueryTime39(c);
 }
 
 
