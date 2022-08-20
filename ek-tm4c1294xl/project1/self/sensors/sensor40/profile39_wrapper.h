@@ -8,7 +8,7 @@ profile39_wrapper.h
 #define __PROFILE39_WRAPPER
 
 
-#define PROFILE39_REPEAT_OR_ERROR(error, method, action) { Error39(error); if (cbRepeat == 0) ErrorProfile(); else { ErrorLink(); cbRepeat--; method; SetCurr(action); } }
+#define PROFILE39_REPEAT_OR_ERROR(error, method, action) { Error40(error); if (cbRepeat == 0) ErrorProfile(); else { ErrorLink(); cbRepeat--; method; SetCurr(action); } }
 
 
 #endif

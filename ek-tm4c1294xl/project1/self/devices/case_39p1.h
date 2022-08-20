@@ -56,7 +56,7 @@
           if (AARE_CheckPass()) {
             MakePause(DEV_RR_AARQ_O_40P);
           } else {
-            Error39(210+3);
+            Error40(210+3);
             ErrorProfile();
           }
         }  
