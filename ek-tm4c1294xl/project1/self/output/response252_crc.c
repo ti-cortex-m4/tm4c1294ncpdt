@@ -29,7 +29,7 @@ RESPONSE252_CRC,C
 #include "../digitals/review/review_buff.h"
 #include "../sensors/sensor35/timeout35.h"
 #include "../sensors/sensor35/log35.h"
-#include "../sensors/sensor39/log39.h"
+#include "../sensors/sensor40/log39.h"
 #include "../output/out_echo.h"
 
 
