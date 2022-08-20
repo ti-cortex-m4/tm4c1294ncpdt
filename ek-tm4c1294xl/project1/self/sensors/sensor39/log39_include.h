@@ -4,6 +4,10 @@ log39_include.h
 
 ------------------------------------------------------------------------------*/
 
+#ifndef __LOG39_INCLUDE
+#define __LOG39_INCLUDE
+
+
 typedef struct
 {
   time          tiNow;
@@ -21,5 +25,7 @@ typedef struct
 
 
 #define LOG39_SIZE      100
-
 #define COUNTER39_SIZE  0x100
+
+
+#endif
