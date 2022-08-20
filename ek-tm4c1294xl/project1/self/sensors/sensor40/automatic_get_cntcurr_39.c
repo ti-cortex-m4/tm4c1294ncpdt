@@ -15,7 +15,7 @@ automatic_get_cntcurr_39.c
 #include "dlms_obis.h"
 #include "io39.h"
 #include "caller39.h"
-#include "error39.h"
+#include "error40.h"
 #include "fragment_open_39.h"
 #include "dlms_read_register.h"
 #include "automatic_get_cntcurr_39.h"
@@ -24,7 +24,7 @@ automatic_get_cntcurr_39.c
 
 static double2 Fault(uchar  bError)
 {
-  return GetDouble2Error1(Error39(bError));
+  return GetDouble2Error1(Error40(bError));
 }
 
 

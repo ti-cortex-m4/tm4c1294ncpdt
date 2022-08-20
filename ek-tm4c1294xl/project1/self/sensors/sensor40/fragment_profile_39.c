@@ -9,7 +9,7 @@ fragment_profile_39.c
 #include "../../serial/monitor.h"
 #include "../../serial/monitor_settings.h"
 #include "dlms.h"
-#include "error39.h"
+#include "error40.h"
 #include "caller39.h"
 #include "query_profile_39.h"
 #include "query_next_block_39.h"
@@ -23,7 +23,7 @@ fragment_profile_39.c
 
 static bool Fault(uchar  bError)
 {
-  Error39(bError);
+  Error40(bError);
   return false;
 }
 
@@ -99,7 +99,7 @@ bool    FragmentProfile39(caller39  *pc, time  tm1, time  tm2, bool  fProfile)
 
 
 
-#ifdef  MONITOR_39
+#ifdef  MONITOR_40
 
 double2 TestFragmentProfile39(void)
 {

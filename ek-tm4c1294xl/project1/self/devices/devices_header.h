@@ -91,7 +91,7 @@ DEVICES.C
 #include "../sensors/sensor40/correct39_wrapper.h"
 #include "../sensors/sensor40/profile39_wrapper.h"
 #include "../sensors/sensor40/hdlc_monitor.h"
-#include "../sensors/sensor40/error39.h"
+#include "../sensors/sensor40/error40.h"
 #include "../serial/ports.h"
 #include "../serial/ports_modems.h"
 #include "../serial/modems.h"

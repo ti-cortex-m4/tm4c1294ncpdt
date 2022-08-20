@@ -14,7 +14,7 @@ automatic_get_cntmon_38.c
 #include "../../devices/devices.h"
 #include "../../digitals/digitals.h"
 #include "dlms.h"
-#include "error39.h"
+#include "error40.h"
 #include "time39.h"
 #include "io39.h"
 #include "hdlc_address.h"
@@ -33,7 +33,7 @@ automatic_get_cntmon_38.c
 
 static double2 Fault(uchar  bError)
 {
-  return GetDouble2Error1(Error39(bError));
+  return GetDouble2Error1(Error40(bError));
 }
 
 
@@ -140,7 +140,7 @@ double2 ReadCntMonCan40(uchar  ibMon)
 
 
 
-#ifdef  MONITOR_39
+#ifdef  MONITOR_40
 
 double2 TestReadCntMonCan39(void)
 {

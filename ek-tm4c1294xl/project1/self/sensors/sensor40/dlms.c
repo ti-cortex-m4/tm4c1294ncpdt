@@ -15,7 +15,7 @@ dlms.c
 #include "../../digitals/address/ascii_address.h"
 #include "crc16x25.h"
 #include "io39.h"
-#include "error39.h"
+#include "error40.h"
 #include "hdlc_address.h"
 #include "dlms_push.h"
 #include "dlms.h"
@@ -24,7 +24,7 @@ dlms.c
 
 void    DISC(void)
 {
-#ifdef MONITOR_39_NAMES
+#ifdef MONITOR_40_NAMES
   MonitorString("\n\n DISC ");
 #endif
 
@@ -46,7 +46,7 @@ void    DISC(void)
 
 void    SNRM(void)
 {
-#ifdef MONITOR_39_NAMES
+#ifdef MONITOR_40_NAMES
   MonitorString("\n\n SNRM ");
 #endif
 
@@ -99,7 +99,7 @@ void    SNRM(void)
 // Green Book, 11.5 Encoding of the AARQ APDU
 void    AARQ(uchar  bNS, uchar  bNR)
 {
-#ifdef MONITOR_39_NAMES
+#ifdef MONITOR_40_NAMES
   MonitorString("\n\n AARQ ");
 #endif
 
@@ -226,16 +226,16 @@ bool    AARE_CheckPass_Internal(void)
       if (bResult == 0)
         return true;
       else if (bResult == 1) {
-        ErrorData39(0+1, bResult);
+        ErrorData40(0+1, bResult);
         return false;
       } else {
-        ErrorData39(0+2, bResult);
+        ErrorData40(0+2, bResult);
         return false;
       }
     }
   }
 
-  Error39(0+3);
+  Error40(0+3);
   return false;
 }
 
@@ -253,7 +253,7 @@ bool    AARE_CheckPass(void)
 
 void    RR(uchar  bNR)
 {
-#ifdef MONITOR_39_NAMES
+#ifdef MONITOR_40_NAMES
   MonitorString("\n\n RR ");
 #endif
 

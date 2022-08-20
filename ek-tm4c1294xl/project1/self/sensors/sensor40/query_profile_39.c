@@ -66,7 +66,7 @@ query_profile_39.c
 */
 void    QueryProfile40(caller39  c, time  tm1, time  tm2)
 {
-#ifdef MONITOR_39  
+#ifdef MONITOR_40  
   MonitorString("\n\n QueryProfile40 "); MonitorTime(tm1); MonitorTime(tm2);
 #endif  
 

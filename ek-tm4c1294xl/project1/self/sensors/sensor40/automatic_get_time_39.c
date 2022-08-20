@@ -13,7 +13,7 @@ automatic_get_time_39.c
 #include "time39.h"
 #include "io39.h"
 #include "caller39.h"
-#include "error39.h"
+#include "error40.h"
 #include "fragment_open_time_39.h"
 #include "automatic_get_time_39.h"
 
@@ -21,7 +21,7 @@ automatic_get_time_39.c
 
 static time2 Fault(uchar  bError)
 {
-  return GetTime2Error1(Error39(bError));
+  return GetTime2Error1(Error40(bError));
 }
 
 

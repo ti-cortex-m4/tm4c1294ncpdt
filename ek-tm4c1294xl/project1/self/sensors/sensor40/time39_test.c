@@ -10,7 +10,7 @@ time39_test.c
 #include "../../serial/monitor.h"
 #include "../../serial/monitor_settings.h"
 #include "dlms.h"
-#include "error39.h"
+#include "error40.h"
 #include "time39.h"
 #include "io39.h"
 #include "fragment_open_time_39.h"
@@ -19,11 +19,11 @@ time39_test.c
 
 
 
-#ifdef  MONITOR_39
+#ifdef  MONITOR_40
 
 static double2 Fault(uchar  bError)
 {
-  return GetDouble2Error1(Error39(bError));
+  return GetDouble2Error1(Error40(bError));
 }
 
 

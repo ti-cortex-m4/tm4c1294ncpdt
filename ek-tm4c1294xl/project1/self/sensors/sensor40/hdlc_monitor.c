@@ -10,13 +10,13 @@ hdlc_monitor.c
 #include "../../serial/monitor.h"
 #include "include39.h"
 #include "crc16x25.h"
-#include "error39.h"
+#include "error40.h"
 #include "hdlc_address.h"
 #include "hdlc_monitor.h"
 
 
 
-#ifdef MONITOR_39_MONITOR
+#ifdef MONITOR_40_MONITOR
 
 void    MonitorControl(uchar  bControl) {
   MonitorString(" Control="); MonitorCharHex(bControl);
@@ -67,7 +67,7 @@ void    MonitorControl(uchar  bControl) {
 
 void    MonitorOutputHDLC(void)
 {
-#ifdef MONITOR_39_MONITOR
+#ifdef MONITOR_40_MONITOR
 
   uint wFormat = OutBuff(1)*0x100 + OutBuff(2);
   uint wSize = wFormat & 0x0FFF;
@@ -82,7 +82,7 @@ void    MonitorOutputHDLC(void)
   MonitorString(" Format="); MonitorIntHex(wFormat); 
   MonitorString(" wSize="); MonitorIntHex(wSize);
 
-#ifdef MONITOR_39_CRC
+#ifdef MONITOR_40_CRC
   MonitorString(" wCRCexpected="); MonitorIntHex(wCRCexpected);
   MonitorString(" wCRCactual="); MonitorIntHex(wCRCactual);
   (wCRCexpected == wCRCactual) ? MonitorString(" CRC_ok") : MonitorString(" CRC_error");
@@ -107,13 +107,13 @@ bool    ValidateInputHDLC(void)
   int i = wSize-1;
   uint wCRCactual = InBuff(i) + InBuff(i+1)*0x100; 
 
-#ifdef MONITOR_39_MONITOR
+#ifdef MONITOR_40_MONITOR
 
   MonitorString("\n Input HDLC: ");
   MonitorString(" Format="); MonitorIntHex(wFormat);
   MonitorString(" wSize="); MonitorIntHex(wSize);
 
-#ifdef MONITOR_39_CRC
+#ifdef MONITOR_40_CRC
   MonitorString(" wCRCexpected="); MonitorIntHex(wCRCexpected);
   MonitorString(" wCRCactual="); MonitorIntHex(wCRCactual);
   (wCRCexpected == wCRCactual) ? MonitorString(" CRC_ok") : MonitorString(" CRC_error");
@@ -125,7 +125,7 @@ bool    ValidateInputHDLC(void)
     return false;
   }
 
-#ifdef MONITOR_39_MONITOR
+#ifdef MONITOR_40_MONITOR
   MonitorControl(InBuff(3 + GetHdlcAddressesSize()));  
 #endif 
 
@@ -139,42 +139,42 @@ uchar   ValidateFrame(uchar  bNS_client, uchar  bNR_client)
   uchar bControl = InBuff(3 + GetHdlcAddressesSize());
 
   if ((bControl & 0x01) == 0x00) {
-#ifdef MONITOR_39_MONITOR
+#ifdef MONITOR_40_MONITOR
     MonitorString(" I-frame validation ");
 #endif
     uchar bNS_server = (bControl & 0x0E) >> 1;
     uchar bNR_server = (bControl & 0xE0) >> 5;
 
     if ((bNS_client + 1) % 8 != bNR_server % 8) {
-#ifdef MONITOR_39_MONITOR
+#ifdef MONITOR_40_MONITOR
       MonitorString(" I-frame validation error: N(S) client / N(R) server "); MonitorCharHex((bNS_client + 1) % 8); MonitorCharHex(bNR_server % 8);
 #endif
-      return Error39(5+0);
+      return Error40(5+0);
     }
 
     if (bNR_client % 8 != bNS_server % 8) {
-#ifdef MONITOR_39_MONITOR
+#ifdef MONITOR_40_MONITOR
       MonitorString(" I-frame validation error: N(R) client / N(S) server "); MonitorCharHex(bNR_client % 8); MonitorCharHex(bNS_server % 8);
 #endif
-      return Error39(5+1);
+      return Error40(5+1);
     }
   } else if ((bControl & 0x03) == 0x01) {
-#ifdef MONITOR_39_MONITOR
+#ifdef MONITOR_40_MONITOR
     MonitorString(" S-frame validation ");
 #endif
     uchar bNR_server = (bControl & 0xE0) >> 5;
 
     if ((bNS_client + 1) % 8 != bNR_server % 8) {
-#ifdef MONITOR_39_MONITOR
+#ifdef MONITOR_40_MONITOR
       MonitorString(" S-frame validation error: N(S) client / N(R) server "); MonitorCharHex((bNS_client + 1) % 8); MonitorCharHex(bNR_server % 8);
 #endif
-      return Error39(5+2);
+      return Error40(5+2);
     }
   } else if ((bControl & 0x03) == 0x03) {
-#ifdef MONITOR_39_MONITOR
+#ifdef MONITOR_40_MONITOR
     MonitorString(" U-frame validation ");
 #endif
-    return Error39(5+3);
+    return Error40(5+3);
   }
 
   return 0;
@@ -188,7 +188,7 @@ bool    LastSegmentDMLS(void)
   uint wFormat = PopIntBig();
   bool fLastSegment = (wFormat & 0x0800) == 0;
 
-#ifdef MONITOR_39_MONITOR
+#ifdef MONITOR_40_MONITOR
   MonitorString("\n Last_Segment="); MonitorBool(fLastSegment);
 #endif
 
@@ -203,7 +203,7 @@ bool    UseBlocksDMLS(void)
   uint w = PopIntBig();
   bool fUseBlocks = (w == 0xC402);
 
-#ifdef MONITOR_39_MONITOR
+#ifdef MONITOR_40_MONITOR
   MonitorString("\n Use_Blocks="); MonitorIntHex(w); MonitorBool(fUseBlocks);
 #endif  
 
@@ -218,7 +218,7 @@ bool    LastBlockDMLS(void)
   uchar b = PopChar();
   bool fLastBlock = (b != 0);
 
-#ifdef MONITOR_39_MONITOR
+#ifdef MONITOR_40_MONITOR
   MonitorString("\n Last_Block="); MonitorCharHex(b); MonitorBool(fLastBlock);
 #endif  
 

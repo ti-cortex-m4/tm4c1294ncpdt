@@ -7,7 +7,7 @@ buffer_array_39.c
 #include "../../main.h"
 #include "../../serial/monitor.h"
 #include "include39.h"
-#include "error39.h"
+#include "error40.h"
 #include "buffer_array_39.h"
 
 
@@ -37,7 +37,7 @@ void    PushChar39(uchar  b) {
   if (iwPush < sizeof(mpbBuff)-1)
     mpbBuff[iwPush++] = b;
   else  
-    Error39(145+0);
+    Error40(145+0);
 }
 
 
