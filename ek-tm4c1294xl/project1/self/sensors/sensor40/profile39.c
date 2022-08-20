@@ -73,6 +73,11 @@ void    InitHeader40(void)
   wProfile40 = 0;
   tiStart40 = tiValue40;
 
+#ifdef MONITOR_40
+  MonitorString("\n InitHeader40 ");
+  MonitorString(" tiValue40="); MonitorTime(tiStart40);
+#endif
+
   uchar i = tiStart40.bHour*2 + tiStart40.bMinute/30;
   i = (i / 6) * 6;
 
@@ -80,7 +85,6 @@ void    InitHeader40(void)
   tiStart40.bMinute = (i % 2)*30;
 
 #ifdef MONITOR_40
-  MonitorString("\n InitHeader40 ");
   MonitorString(" wProfile40="); MonitorIntDec(wProfile40);
   MonitorString(" tiStart40="); MonitorTime(tiStart40);
 #endif
@@ -95,11 +99,11 @@ t2time  QueryHeader40(void)
 
   ulong dw = DateToHouIndex(tiStart40);
   dw -= wProfile40;
-  time ti1 = HouIndexToDate(dw /*- 1*/);
-  time ti2 = HouIndexToDate(dw + 6-1/* - 1*/); // TODO
+  time ti1 = HouIndexToDate(dw + 1);
+  time ti2 = HouIndexToDate(dw + 6);
 
 #ifdef MONITOR_40
-  MonitorString("\n QueryHeader40 ");
+  MonitorString("\n QueryHeader40 (end time)");
   MonitorString(" from="); MonitorTime(ti1);
   MonitorString(" to="); MonitorTime(ti2);
 #endif
@@ -110,6 +114,10 @@ t2time  QueryHeader40(void)
 
 static bool ReadData40(time  tiTime, ulong  mdwValue[4])
 {
+#ifdef MONITOR_40
+    MonitorString("\n read data (begin time) ");
+#endif
+
   sprintf(szLo," %02u    %02u.%02u.%02u", tiTime.bHour, tiTime.bDay,tiTime.bMonth,tiTime.bYear);
 
   if (SearchDefHouIndex(tiTime) == 0) return(1);
@@ -136,7 +144,7 @@ static bool ReadData40(time  tiTime, ulong  mdwValue[4])
   }
 
 #ifdef MONITOR_40
-    MonitorString("\n profile "); MonitorTime(tiTime);
+    MonitorString(" "); MonitorTime(tiTime);
     MonitorString(" "); MonitorIntDec(mpwChannels[0]);
     MonitorString(" "); MonitorIntDec(mpwChannels[1]);
     MonitorString(" "); MonitorIntDec(mpwChannels[2]);
