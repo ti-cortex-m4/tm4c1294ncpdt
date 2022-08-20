@@ -57,7 +57,7 @@ bool    SupportedExtended4T(uchar  ibCan)
     case 38:
     case 39: return true;
 
-    case 39: return true;
+    case 40: return true;
 
     default: return false;
   }
@@ -99,7 +99,7 @@ status  ReadCntMonCanTariff(uchar  ibCan, uchar  ibMon, uchar  ibTrf)
     case 38: 
     case 39: return ReadCntMonCanTariff38(ibMon, ibTrf);
 
-    case 39: return ReadCntMonCanTariff39(ibMon, ibTrf);
+    case 40: return ReadCntMonCanTariff40(ibMon, ibTrf);
 
     default: return ST_NOTSUPPORTED;
   }

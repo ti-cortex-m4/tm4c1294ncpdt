@@ -79,7 +79,7 @@ status  CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
 
 
 
-status  ReadCntMonCanTariff39(uchar  ibMonAbs, uchar  ibTariff) // на начало мес€ца
+status  ReadCntMonCanTariff40(uchar  ibMonAbs, uchar  ibTariff) // на начало мес€ца
 {
   Clear();
 
@@ -122,7 +122,7 @@ double2 TestCntMonCanTariff39(void)
     {
       MonitorString("\n\n month="); MonitorCharDec(ibMonAbs+1);
       MonitorString(" tariff="); MonitorCharDec(t);
-      status s = ReadCntMonCanTariff39(ibMonAbs, t);
+      status s = ReadCntMonCanTariff40(ibMonAbs, t);
       MonitorString("\n status="); MonitorCharDec(s);
 
       uchar i;
