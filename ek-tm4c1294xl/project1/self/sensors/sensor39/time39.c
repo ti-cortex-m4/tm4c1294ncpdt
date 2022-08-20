@@ -20,7 +20,7 @@ time39.c
 
 
 
-void    QueryTime39(caller39 c)
+void    QueryTime39(caller39  c)
 {
 #ifdef MONITOR_39_NAMES
   MonitorString("\n\n QueryTime39 ");
@@ -86,7 +86,7 @@ time    ReadTime39(void)
 
 
 
-void    QueryCorrectTime39(caller39 c, sint wSeconds)
+void    QueryCorrectTime39(caller39  c, sint  wSeconds)
 {
 #ifdef MONITOR_39_NAMES
   MonitorString("\n\n QueryCorrectTime39 "); MonitorSignedLongDec(wSeconds);
