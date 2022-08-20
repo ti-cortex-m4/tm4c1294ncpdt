@@ -20,7 +20,7 @@ query_register_39.c
 
 void    QueryGetRequestDLMS(const obis_t  obis, uchar  bClass, uchar  bAttribute, caller39  c)
 {
-  uint wSize = 23 + GetHdlcAddressesSize(); // 0x19 25
+  uint wSize = 23 + GetHdlcAddressesSize();
 
   InitPush(0);
   PushChar(0x7E);
@@ -30,7 +30,7 @@ void    QueryGetRequestDLMS(const obis_t  obis, uchar  bClass, uchar  bAttribute
 
   PushChar(((c.bNR & 0x07) << 5) | 0x10 | ((c.bNS & 0x07) << 1) | 0x00);
 
-  PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
+  PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize()));
 
   // DLMS start
 
@@ -56,7 +56,7 @@ void    QueryGetRequestDLMS(const obis_t  obis, uchar  bClass, uchar  bAttribute
 
   PushChar(0x7E);
 
-  Query39(1000, wSize+2); // 27
+  Query39(1000, wSize+2);
 }
 
 
