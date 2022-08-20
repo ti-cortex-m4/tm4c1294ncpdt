@@ -13,7 +13,7 @@ unpack39.c
 
 
 
-void    Decompress39(void)
+void    Unpack39(void)
 {
   if (mpSerial[ibPort] != SER_INPUT_MASTER)
     return;

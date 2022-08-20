@@ -212,7 +212,7 @@ void    DevicesInput(void)
 #ifndef SKIP_39
     else if (diCurr.bDevice == 39)
     {
-      Decompress39();
+      Unpack39();
     }
 #endif
 }
