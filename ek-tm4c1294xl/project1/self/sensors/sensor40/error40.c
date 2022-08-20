@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-error39.c
+error40.c
 
 
 ------------------------------------------------------------------------------*/
@@ -8,12 +8,12 @@ error39.c
 #include "../../serial/monitor.h"
 #include "include39.h"
 #include "log40.h"
-#include "error39.h"
+#include "error40.h"
 
 
 
-uchar   Error39(uchar  bError) {
-#ifdef  MONITOR_39  
+uchar   Error40(uchar  bError) {
+#ifdef  MONITOR_40  
   MonitorString("\n error="); MonitorCharDec(bError);
 #endif  
 
@@ -22,8 +22,8 @@ uchar   Error39(uchar  bError) {
 }
 
 
-uchar   ErrorData39(uchar  bError, uint  wData) {
-#ifdef  MONITOR_39  
+uchar   ErrorData40(uchar  bError, uint  wData) {
+#ifdef  MONITOR_40  
   MonitorString("\n error="); MonitorCharDec(bError);
   MonitorString(" data="); MonitorIntDec(wData);
 #endif  

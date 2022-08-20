@@ -9,7 +9,7 @@ fragment_cntmon_39.c
 #include "../../serial/ports_pop.h"
 #include "dlms.h"
 #include "dlms_obis.h"
-#include "error39.h"
+#include "error40.h"
 #include "io39.h"
 #include "query_register_39.h"
 #include "query_billing_period_39.h"
@@ -24,7 +24,7 @@ fragment_cntmon_39.c
 
 static double8 Fault(uchar  bError)
 {
-  return GetDouble8Error1(Error39(bError));
+  return GetDouble8Error1(Error40(bError));
 }
 
 
@@ -39,7 +39,7 @@ double8 FragmentCntMonCan(const obis_t  obisBillingPeriod, const obis_t  obisSca
 
 
   bool present = (EngMonPresent39() == 0);
-#ifdef MONITOR_39
+#ifdef MONITOR_40
   MonitorString("\n present="); MonitorBool(present);
 #endif
 
@@ -50,7 +50,7 @@ double8 FragmentCntMonCan(const obis_t  obisBillingPeriod, const obis_t  obisSca
     for (i=0; i<8; i++)
     {
       mddw[i] = PopUnsignedValueDLSM();
-#ifdef MONITOR_39
+#ifdef MONITOR_40
       MonitorString("\n mddw[");
       MonitorCharDec(i);
       MonitorString("]=");
@@ -78,7 +78,7 @@ double8 FragmentCntMonCan(const obis_t  obisBillingPeriod, const obis_t  obisSca
     for (i=0; i<8; i++)
     {
       mdb[i] = (double)mddw[i].ddwValue * scaler.dbValue / 1000;
-#ifdef MONITOR_39
+#ifdef MONITOR_40
       MonitorString("\n mdb[");
       MonitorCharDec(i);
       MonitorString("]=");
@@ -90,7 +90,7 @@ double8 FragmentCntMonCan(const obis_t  obisBillingPeriod, const obis_t  obisSca
   }
   else
   {
-#ifdef MONITOR_39
+#ifdef MONITOR_40
   MonitorString("\n not presented");
 #endif
     return GetDouble8Error1(ERROR_NOT_PRESENTED);

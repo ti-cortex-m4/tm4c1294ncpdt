@@ -10,7 +10,7 @@ buffer_record_39*c
 #include "../../serial/ports2.h"
 #include "../../serial/monitor.h"
 #include "include39.h"
-#include "error39.h"
+#include "error40.h"
 #include "buffer_array_39.h"
 #include "buffer_profile_39.h"
 #include "buffer_record_39.h"
@@ -25,7 +25,7 @@ void    InitRecord39(void) {
 
 void    AddRecord39(uint  iwStart) {
   if (IsPushOverflow39()) {
-    Error39(150+0);
+    Error40(150+0);
     return;
   }
 
@@ -61,14 +61,14 @@ void    AddRecord39(uint  iwStart) {
 
 static bool Fault(uchar  bError)
 {
-  Error39(bError);
+  Error40(bError);
   return false;
 }
 
 
 static bool FaultData(uchar  bError, uint  wData)
 {
-  ErrorData39(bError, wData);
+  ErrorData40(bError, wData);
   return false;
 }
 

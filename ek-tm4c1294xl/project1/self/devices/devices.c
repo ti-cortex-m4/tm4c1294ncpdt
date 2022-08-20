@@ -91,7 +91,7 @@ DEVICES.C
 #include "../sensors/sensor40/correct39_wrapper.h"
 #include "../sensors/sensor40/profile39_wrapper.h"
 #include "../sensors/sensor40/hdlc_monitor.h"
-#include "../sensors/sensor40/error39.h"
+#include "../sensors/sensor40/error40.h"
 #include "../serial/ports.h"
 #include "../serial/ports_modems.h"
 #include "../serial/modems.h"
@@ -7188,7 +7188,7 @@ void    RunDevices(void)
           if (AARE_CheckPass()) {
             MakePause(DEV_RR_AARQ_O_40C);
           } else {
-            Error39(190+3);
+            Error40(190+3);
             ErrorCurrent();
           }
         }
@@ -7236,7 +7236,7 @@ void    RunDevices(void)
           if (ReadValue_Current39()) {
             MakePause(DEV_RR_VALUE_O_40C);
           } else {
-            Error39(190+8);
+            Error40(190+8);
             ErrorCurrent();
           }
         }
@@ -7286,7 +7286,7 @@ void    RunDevices(void)
           if (ReadScaler_Current39()) {
             MakePause(DEV_RR_SCALER_O_40C);
           } else {
-            Error39(190+13);
+            Error40(190+13);
             ErrorCurrent();
           }
         }
@@ -7375,7 +7375,7 @@ void    RunDevices(void)
           if (AARE_CheckPass()) {
             MakePause(DEV_RR_AARQ_O_40P);
           } else {
-            Error39(210+3);
+            Error40(210+3);
             ErrorProfile();
           }
         }  
@@ -7596,7 +7596,7 @@ void    RunDevices(void)
           if (ReadScaler_Profile39()) {
             MakePause(DEV_RR_SCALER_O_40P);
           } else {
-            Error39(210+20);
+            Error40(210+20);
             ErrorProfile();
           }
         }

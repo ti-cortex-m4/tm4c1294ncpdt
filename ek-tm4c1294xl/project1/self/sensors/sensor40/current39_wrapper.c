@@ -91,7 +91,7 @@ bool    ValidateFrame_Current39(void)
 
 void    QueryValue_Current39(void)
 {
-#ifdef MONITOR_39_NAMES
+#ifdef MONITOR_40_NAMES
   MonitorString("\n\n QueryValue_Current39 ");  MonitorCharDec(ibLine39);
 #endif
 
@@ -111,7 +111,7 @@ bool    ReadValue_Current39(void)
 
 void    QueryScaler_Current39(void)
 {
-#ifdef MONITOR_39_NAMES
+#ifdef MONITOR_40_NAMES
   MonitorString("\n\n QueryScaler_Current39 ");
 #endif
 

@@ -11,7 +11,7 @@ Blue Book: 4.1.5 Common data types
 #include "../../serial/ports_devices.h"
 #include "../../serial/monitor.h"
 #include "include39.h"
-#include "error39.h"
+#include "error40.h"
 #include "hdlc_address.h"
 #include "dlms_read_data.h"
 
@@ -20,7 +20,7 @@ Blue Book: 4.1.5 Common data types
 ulong64_ PopUnsignedValueDLSM(void)
 {
   uchar bDataType = PopChar();
-#ifdef MONITOR_39  
+#ifdef MONITOR_40  
   MonitorString("\n DataType="); MonitorCharDec(bDataType);
 #endif  
 
@@ -50,14 +50,14 @@ ulong64_ PopUnsignedValueDLSM(void)
     return GetULong64Ok(value);
   }
 
-  return GetULong64Error(ErrorData39(10+0, bDataType));
+  return GetULong64Error(ErrorData40(10+0, bDataType));
 }
 
 
 slong64_ PopSignedValueDLSM(void)
 {
   uchar bDataType = PopChar();
-#ifdef MONITOR_39  
+#ifdef MONITOR_40  
   MonitorString("\n DataType="); MonitorCharDec(bDataType);
 #endif  
 
@@ -107,7 +107,7 @@ slong64_ PopSignedValueDLSM(void)
     return GetSLong64Ok(value);
   }
 
-  return GetSLong64Error(ErrorData39(10+1, bDataType));
+  return GetSLong64Error(ErrorData40(10+1, bDataType));
 }
 
 
@@ -117,16 +117,16 @@ ulong64_ ReadUnsignedValueDLSM(void)
   InitPop(12 + GetHdlcAddressesSize());
 
   uchar bDataAccessResult = PopChar();
-#ifdef MONITOR_39
+#ifdef MONITOR_40
   MonitorString("\n DataAccessResult="); MonitorCharDec(bDataAccessResult);
 #endif
 
   if (bDataAccessResult != 0) {
-    return GetULong64Error(ErrorData39(10+2, bDataAccessResult));
+    return GetULong64Error(ErrorData40(10+2, bDataAccessResult));
   }
 
   ulong64_ value = PopUnsignedValueDLSM();
-#ifdef MONITOR_39
+#ifdef MONITOR_40
   MonitorString("\n Value="); MonitorLong64Hex(value.ddwValue);
 #endif
 
@@ -139,12 +139,12 @@ slong64_ ReadSignedValueDLSM(void)
   InitPop(12 + GetHdlcAddressesSize());
 
   uchar bDataAccessResult = PopChar();
-#ifdef MONITOR_39
+#ifdef MONITOR_40
   MonitorString("\n DataAccessResult="); MonitorCharDec(bDataAccessResult);
 #endif
 
   if (bDataAccessResult != 0) {
-    return GetSLong64Error(ErrorData39(10+3, bDataAccessResult));
+    return GetSLong64Error(ErrorData40(10+3, bDataAccessResult));
   }
 
   return PopSignedValueDLSM();

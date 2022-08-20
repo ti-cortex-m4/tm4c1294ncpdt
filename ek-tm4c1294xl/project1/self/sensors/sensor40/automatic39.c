@@ -11,7 +11,7 @@ automatic39.c
 #include "../../serial/ports.h"
 #include "../../sensors/automatic1.h"
 #include "dlms.h"
-#include "error39.h"
+#include "error40.h"
 #include "crc16x25.h"
 #include "io39.h"
 #include "hdlc_address.h"
@@ -37,7 +37,7 @@ static void Show(uchar  bSize)
 
 static bool Fault(uchar  bError)
 {
-  Error39(bError);
+  Error40(bError);
   return false;
 }
 

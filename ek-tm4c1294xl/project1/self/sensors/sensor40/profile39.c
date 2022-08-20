@@ -171,7 +171,7 @@ bool    ReadHeader40(void)
 
 
 
-#ifdef  MONITOR_39
+#ifdef  MONITOR_40
 
 uchar   TestProfile40_Internal(caller39*  pc)
 {  

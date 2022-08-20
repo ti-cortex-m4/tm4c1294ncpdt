@@ -17,7 +17,7 @@ params34.c
 #include "../../time/delay.h"
 #include "dlms.h"
 #include "dlms_obis.h"
-#include "error39.h"
+#include "error40.h"
 #include "io39.h"
 #include "query_register_39.h"
 #include "fragment_open_39.h"
@@ -38,7 +38,7 @@ static float        flU1, flU2, flU3,
 
 static float2 Fault(uchar  bError)
 {
-  return GetFloat2Error1(Error39(bError));
+  return GetFloat2Error1(Error40(bError));
 }
 
 
@@ -207,7 +207,7 @@ float2  ReadParam40(void)
 
 
 
-#ifdef MONITOR_39
+#ifdef MONITOR_40
 
 double2 TestParam39(void)
 {

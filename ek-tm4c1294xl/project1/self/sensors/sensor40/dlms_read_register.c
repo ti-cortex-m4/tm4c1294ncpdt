@@ -12,7 +12,7 @@ Blue Book: 4.3.2 Register (class_id = 3, version = 0)
 #include "../../serial/ports_devices.h"
 #include "../../serial/monitor.h"
 #include "dlms.h"
-#include "error39.h"
+#include "error40.h"
 #include "io39.h"
 #include "hdlc_address.h"
 #include "query_register_39.h"
@@ -23,7 +23,7 @@ Blue Book: 4.3.2 Register (class_id = 3, version = 0)
 
 static double2 Fault(uchar  bError)
 {
-  return GetDouble2Error1(Error39(bError));
+  return GetDouble2Error1(Error40(bError));
 }
 
 
@@ -33,12 +33,12 @@ double2 ReadRegisterScalerDLMS(void)
   InitPop(12 + GetHdlcAddressesSize());
 
   uchar bDataAccessResult = PopChar();
-#ifdef MONITOR_39
+#ifdef MONITOR_40
   MonitorString("\n DataAccessResult="); MonitorCharDec(bDataAccessResult);
 #endif
 
   if (bDataAccessResult != 0) {
-    return GetDouble2Error1(ErrorData39(15+0, bDataAccessResult));
+    return GetDouble2Error1(ErrorData40(15+0, bDataAccessResult));
   }
 
   if (PopChar() != 2) return Fault(15+1); // !structure
@@ -52,7 +52,7 @@ double2 ReadRegisterScalerDLMS(void)
 
   double dbScaler = pow(10, scaler.ddwValue);
 
-#ifdef MONITOR_39
+#ifdef MONITOR_40
   MonitorString("\n Scaler="); MonitorCharHex(scaler.ddwValue % 0x100);
   MonitorString("\n Unit="); MonitorCharDec(unit.ddwValue % 0x100);
   MonitorString("\n ScalerValue="); MonitorDouble6(dbScaler);

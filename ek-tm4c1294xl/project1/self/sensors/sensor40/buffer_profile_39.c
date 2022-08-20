@@ -8,7 +8,7 @@ buffer_profile_39*c
 #include "../../serial/monitor.h"
 #include "../../time/timedate.h"
 #include "include39.h"
-#include "error39.h"
+#include "error40.h"
 #include "buffer_profile_39.h"
 
 
@@ -25,7 +25,7 @@ static bool         fProfileOveflow39;
 
 void    InitProfile39(void)
 {
-#ifdef MONITOR_39
+#ifdef MONITOR_40
   MonitorString("\n init profile ");
 #endif
 
@@ -37,7 +37,7 @@ void    InitProfile39(void)
 
 void    AddProfile39(time  tmTime, ulong  mdwValue[4])
 {
-#ifdef MONITOR_39
+#ifdef MONITOR_40
   MonitorString("\n add profile "); MonitorIntDec(cbProfileSize39);
   MonitorString(" "); MonitorTime(tmTime);
   MonitorString(" "); MonitorLongDec(mdwValue[0]);
@@ -63,7 +63,7 @@ void    AddProfile39(time  tmTime, ulong  mdwValue[4])
   else
   {
     MonitorString("\n add profile overflow ");
-    Error39(160+0);
+    Error40(160+0);
 
     fProfileOveflow39 = true;
   }
@@ -73,7 +73,7 @@ void    AddProfile39(time  tmTime, ulong  mdwValue[4])
 
 void    MonitorBuffPrf38(void)
 {
-#ifdef MONITOR_39
+#ifdef MONITOR_40
   uchar i;
   for (i=0; i<PROFILE39_SIZE; i++)
   {

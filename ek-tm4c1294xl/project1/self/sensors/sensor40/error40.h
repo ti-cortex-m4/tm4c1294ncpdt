@@ -1,8 +1,8 @@
 /*------------------------------------------------------------------------------
-error39.h
+error40.h
 
 
 ------------------------------------------------------------------------------*/
 
-uchar   Error39(uchar  bError);
-uchar   ErrorData39(uchar  bError, uint  wData);
+uchar   Error40(uchar  bError);
+uchar   ErrorData40(uchar  bError, uint  wData);

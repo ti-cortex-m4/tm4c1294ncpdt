@@ -16,7 +16,7 @@ extended_4t_39.c
 #include "../../digitals/max_repeats.h"
 #include "dlms.h"
 #include "dlms_obis.h"
-#include "error39.h"
+#include "error40.h"
 #include "io39.h"
 #include "fragment_open_time_39.h"
 #include "fragment_cntmon_39.h"
@@ -26,7 +26,7 @@ extended_4t_39.c
 
 static status BadDigital(uchar  bError)
 {
-  Error39(bError);
+  Error40(bError);
   return ST_BADDIGITAL;
 }
 
@@ -101,7 +101,7 @@ status  ReadCntMonCanTariff40(uchar  ibMonAbs, uchar  ibTariff) // на начало мес
 
 
 
-#ifdef  MONITOR_39
+#ifdef  MONITOR_40
 
 double2 TestCntMonCanTariff39(void)
 {
