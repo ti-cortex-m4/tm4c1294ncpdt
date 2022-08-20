@@ -24,7 +24,7 @@ query_next_block_39.c
   </GetRequestForNextDataBlock>
 </GetRequest>
 */
-void    QueryNextBlock39(uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  bBlockNumber)
+void    QueryNextBlock39(caller39  c, uchar  bBlockNumber)
 {
 #ifdef MONITOR_39_NAMES
   MonitorString("\n\n QueryNextBlock39 "); MonitorCharDec(bBlockNumber);
@@ -37,7 +37,7 @@ void    QueryNextBlock39(uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  bBlock
   PushFormatDLMS(wSize);
   PushHdlcAddresses();
 
-  PushChar(((bNR & 0x07) << 5) | 0x10 | ((bNS & 0x07) << 1) | 0x00);
+  PushChar(((c.bNR & 0x07) << 5) | 0x10 | ((c.bNS & 0x07) << 1) | 0x00);
 
   PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize()));
 
@@ -49,7 +49,7 @@ void    QueryNextBlock39(uchar  bNS, uchar  bNR, uchar  bInvokeId, uchar  bBlock
 
   PushChar(0xC0); // Get-Request
   PushChar(0x02); // Get-Request-Next
-  PushChar(0xC0 | (bInvokeId % 16)); // Invoke-Id-And-Priority
+  PushChar(0xC0 | (c.bInvokeId % 16)); // Invoke-Id-And-Priority
 
   PushLongBig(bBlockNumber); // <BlockNumber Value="00000001" />
 
