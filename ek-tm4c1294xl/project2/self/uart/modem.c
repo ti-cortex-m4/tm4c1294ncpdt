@@ -318,7 +318,7 @@ bool ModemConnect(const uchar u)
   if (!IsEOL(PopChar(u)))
     return false;
 
-  CONSOLE("%u: connect as modem to %u.%u.%u.%u port %u\n",
+  CONSOLE("[%u] connect as modem to %u.%u.%u.%u port %u\n",
     u,
     (dwIP >> 24), (dwIP >> 16) & 0xFF, (dwIP >> 8) & 0xFF, dwIP & 0xFF,
     wPort);
@@ -358,7 +358,7 @@ void ModemConnectFailed(const uchar u, const err_t err)
 
 static void ModemDisconnect(const uchar u)
 {
-  CONSOLE("%u: disconnect as modem\n", u);
+  CONSOLE("[%u] disconnect as modem\n", u);
 
   mbDisconnect[u] = DC_NORMALLY;
   TelnetCloseClient(u);

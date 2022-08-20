@@ -16,3 +16,5 @@ void    QueryEngMon38(uchar  ibMonRel);
 
 void    QueryNumber38(void);
 ulong   ReadNumber38(void);
+
+bool    GoodStatus38(uchar  bStatus);

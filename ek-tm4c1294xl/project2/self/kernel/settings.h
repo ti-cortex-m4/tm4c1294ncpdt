@@ -45,6 +45,7 @@ extern bool                    fWatchdogReset;
 
 extern bool                    ibDebugMode;
 
+extern bool                    fUDPDebugBroadcast;
 extern ulong                   dwUDPDebugIP;
 extern uint                    wUDPDebugPort;
 
@@ -59,6 +60,12 @@ extern bool                    fIOModeDebugFlag;
 
 extern ledMode                 bLED0Mode;
 extern ledMode                 bLED1Mode;
+
+extern uint                    cwPowerUpResetCount;
+extern uint                    cwWatchdogResetCount;
+
+extern bool                    fPeriodicResetFlag;
+extern uint                    wPeriodicResetPeriod;
 
 extern uchar                   mbCustomerSettings[UART_COUNT];
 extern uchar                   mbCustomerSetting1_Delay[UART_COUNT];

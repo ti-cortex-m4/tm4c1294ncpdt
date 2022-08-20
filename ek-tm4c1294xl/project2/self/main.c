@@ -7,17 +7,20 @@ MAIN,C
 #include "main.h"
 #include "inc/hw_ints.h"
 #include "inc/hw_memmap.h"
+#include "inc/hw_types.h"
+#include "inc/hw_flash.h"
 #include "driverlib/interrupt.h"
 #include "driverlib/gpio.h"
 #include "driverlib/sysctl.h"
 #include "driverlib/flash.h"
 #include "driverlib/pin_map.h"
-#include "utils/lwiplib_patched.h"
+#include "utils/lwiplib.h"
 #include "kernel/log.h"
 #include "kernel/tasks.h"
 #include "kernel/settings.h"
 #include "kernel/console_version.h"
 #include "kernel/console_pins.h"
+#include "kernel/periodic_reset.h"
 #include "hardware/gpio.h"
 #include "hardware/led.h"
 #include "hardware/sys_tick.h"
@@ -27,6 +30,7 @@ MAIN,C
 #include "hardware/rom.h"
 #include "hardware/uart_loader.h"
 #include "hardware/watchdog.h"
+#include "hardware/internal_temperature.h"
 #include "uart/uart.h"
 #include "uart/serial.h"
 #include "uart/uart_log.h"
@@ -104,8 +108,14 @@ int     main(void)
   // frequency is 10MHz or higher.
   SysCtlMOSCConfigSet(SYSCTL_MOSC_HIGHFREQ);
 
+  // ETH#02: Before Ethernet Initialization the Flash Prefetch must be turned OFF by writing 1 to FLASHCONF.FPFOFF.
+  HWREG(FLASH_CONF) |= FLASH_CONF_FPFOFF;
+
   // Run from the PLL at 120 MHz.
   ulong dwClockFreq = SysCtlClockFreqSet((SYSCTL_XTAL_25MHZ | SYSCTL_OSC_MAIN | SYSCTL_USE_PLL | SYSCTL_CFG_VCO_480), 120000000);
+  ASSERT(dwClockFreq != 0);
+
+  EnableWatchdog();
 
   InitGPIO();
 //  InitLEDs();
@@ -154,14 +164,20 @@ int     main(void)
   IntPrioritySet(INT_EMAC0, ETHERNET_INT_PRIORITY);
   IntPrioritySet(FAULT_SYSTICK, SYSTICK_INT_PRIORITY);
 
+  DelayMilliSecond(500);
+  CONSOLE("start\n");
   StartConnections();
 
   IntMasterEnable();
 
   ConsoleVersion();
+  CONSOLE("temperature: %d C\n", GetInternalTemperature());
   ConsolePins();
   InitWatchdog();
   InitLEDs_After();
+
+  // ETH#02: After completing Ethernet Initialization, the user code must turn ON the Flash Prefetch by clearing the FLASHCONF.FPFOFF bit to restore system performance.
+  HWREG(FLASH_CONF) &= ~(FLASH_CONF_FPFOFF);
 
   while (true)
   {
@@ -171,5 +187,6 @@ int     main(void)
     RunLwipDebug();
 
     ResetWatchdog();
+    RunPeriodicReset();
   }
 }

@@ -1850,9 +1850,7 @@ double2 ReadCntCurrCan(uchar  ibCan)
 #endif
 
 #ifndef SKIP_N
-    case 19: reBuffA = mpdwBase[ibCanal] * *PGetCanReal(mpreValueCntHou,ibCanal);
-             reBuffA += *PGetCanReal(mpreCount,ibCanal);
-             return(1);                break;
+    case 19: return GetDouble2((mpdwBase[ibCan] * mpdbValueCntHou[ibCan]) + mpdbCount[ibCan], true);
 #endif
 
 #ifndef SKIP_O
@@ -1919,7 +1917,8 @@ double2 ReadCntCurrCan(uchar  ibCan)
 #endif
 
 #ifndef SKIP_38
-    case 38: return ReadCntCurr38();
+    case 38: 
+    case 39: return ReadCntCurr38();
 #endif
 
 #ifndef SKIP_39
@@ -1998,7 +1997,7 @@ time2   ReadTimeCan(uchar  ibCan)
 #endif
 
 #ifndef SKIP_N
-    case 19: tiAlt = tiCurr; return(1);  break;
+    case 19: return GetTime2(tiCurr, true);
 #endif
 
 #ifndef SKIP_O
@@ -2065,7 +2064,8 @@ time2   ReadTimeCan(uchar  ibCan)
 #endif
 
 #ifndef SKIP_38
-    case 38: return ReadTimeCan38();
+    case 38: 
+    case 39: return ReadTimeCan38();
 #endif
 
 #ifndef SKIP_39
@@ -2157,9 +2157,10 @@ double2 ReadCntMonCan(uchar  ibMon, uchar  ibCan)
 #endif
 
 #ifndef SKIP_N
-    case 19: if (LoadCntMon(ibMon) == 0) return(0);
-             reBuffA = GetCanReal(mpreCntMonCan[ PrevSoftMon() ], ibCan);
-             return(1); break;
+    case 19: if (LoadCntMon(ibMon) == false)
+               return GetDouble2Error();
+             else
+               return GetDouble2(mpdbCntMonCan[ PrevSoftMon() ][ibCan], true);
 #endif
 
 #ifndef SKIP_O
@@ -2228,7 +2229,8 @@ double2 ReadCntMonCan(uchar  ibMon, uchar  ibCan)
 #endif
 
 #ifndef SKIP_38
-    case 38: return ReadCntMonCan38(ibMon);
+    case 38: 
+    case 39: return ReadCntMonCan38(ibMon);
 #endif
 
 #ifndef SKIP_39

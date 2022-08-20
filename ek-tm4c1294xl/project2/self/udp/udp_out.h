@@ -15,4 +15,4 @@ extern uint                    cwErrUPDOutSendBroadcast;
 
 
 
-err_t Out(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast);
+err_t Out(struct udp_pcb *pcb, struct pbuf *p, const ip_addr_t *addr, uint port, uchar broadcast);

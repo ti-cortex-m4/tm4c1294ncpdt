@@ -10,7 +10,7 @@ AUTOMATIC_0!C
 #include "../../serial/ports.h"
 #include "../../serial/ports_devices.h"
 #include "../../sensors/device_a.h"
-#include "../../sensors/device_b.h"
+#include "../../sensors/sensor2/device2.h"
 #include "../../sensors/sensor3/device_c.h"
 #include "../../sensors/device_k.h"
 #include "../../sensors/sensor21/input_p.h"
@@ -581,7 +581,7 @@ time2   ReadTimeCan_Short(uchar  ibCan)
 #endif
 
 #ifndef SKIP_N
-    case 19: tiAlt = tiCurr; return(1);  break;
+    case 19: return GetTime2(tiCurr, true);
 #endif
 
 #ifndef SKIP_O

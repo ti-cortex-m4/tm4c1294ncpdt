@@ -291,7 +291,12 @@ typedef enum
   AUTO_FLOW_ENBL        = MAX_TIMER_35 + sizeof(uchar) + bNVRAM_MARGIN,
   AUTO_FLOW_HOU         = AUTO_FLOW_ENBL + sizeof(bool) + bNVRAM_MARGIN,
 
-  ASCII_ADDRESS         = AUTO_FLOW_HOU + sizeof(mpibAutoFlowHou) + bNVRAM_MARGIN,
+  IGNORE_STATUS_38      = AUTO_FLOW_HOU + sizeof(mpibAutoFlowHou) + bNVRAM_MARGIN,
+  SHORT_PROFILE_B       = IGNORE_STATUS_38 + sizeof(bool) + bNVRAM_MARGIN,
+  MODEM_DISCONNECT_BETWEEN_DIGITALS = SHORT_PROFILE_B + sizeof(bool) + bNVRAM_MARGIN,
+  MODEM_ATDP            = MODEM_DISCONNECT_BETWEEN_DIGITALS + sizeof(bool) + bNVRAM_MARGIN,
+
+  ASCII_ADDRESS         = MODEM_ATDP + sizeof(bool) + bNVRAM_MARGIN,
 
   NVRAM_END             = ASCII_ADDRESS + sizeof(mpphAsciiAddress) + bNVRAM_MARGIN
 } nvram;

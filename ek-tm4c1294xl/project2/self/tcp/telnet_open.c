@@ -36,7 +36,7 @@ void TelnetOpen(uint32_t ulIPAddr, uint16_t usTelnetRemotePort, uint8_t ucSerial
 
     tState *pState = &g_sState[ucSerialPort];
 
-    CONSOLE("%u: open %d.%d.%d.%d port %d\n",
+    CONSOLE("[%u] open %d.%d.%d.%d port %d\n",
             pState->ucSerialPort,
             (ulIPAddr >> 24), (ulIPAddr >> 16) & 0xFF, (ulIPAddr >> 8) & 0xFF, ulIPAddr & 0xFF,
             usTelnetRemotePort);
@@ -62,7 +62,7 @@ void TelnetOpen(uint32_t ulIPAddr, uint16_t usTelnetRemotePort, uint8_t ucSerial
     void *pcb = tcp_new();
     if (pcb == NULL)
     {
-        ERROR("%u: open.tcp_new failed, NULL\n", pState->ucSerialPort);
+        ERROR("[%u] open.tcp_new failed, NULL\n", pState->ucSerialPort);
         ErrorTCPOperation(pState->ucSerialPort, ERR_MEM, TCP_NEW_OPEN);
         return;
     }
@@ -77,14 +77,14 @@ void TelnetOpen(uint32_t ulIPAddr, uint16_t usTelnetRemotePort, uint8_t ucSerial
     // reattempt the connection if we do not receive a response.
     tcp_poll(pcb, TelnetPoll, (3000 / TCP_SLOW_INTERVAL));
 
-    struct ip_addr sIPAddr;
+    struct ip4_addr sIPAddr;
     sIPAddr.addr = htonl(ulIPAddr);
 
     // Attempt to connect to the server.
     err_t err = tcp_connect(pcb, &sIPAddr, usTelnetRemotePort, TelnetConnected);
     if(err != ERR_OK)
     {
-        ERROR("%u: open.tcp_connect failed, error=%d\n", pState->ucSerialPort, err);
+        ERROR("[%u] open.tcp_connect failed, error=%d\n", pState->ucSerialPort, err);
         ErrorTCPOperation(pState->ucSerialPort, err, TCP_CONNECT_OPEN);
         return;
     }

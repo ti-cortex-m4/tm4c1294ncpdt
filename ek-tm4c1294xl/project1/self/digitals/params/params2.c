@@ -18,7 +18,7 @@ PARAMS2!C
 #include    "../../sensors/automatic_v.h"
 #include    "../../sensors/automatic_w.h"
 #include    "../../sensors/device_a.h"
-#include    "../../sensors/device_b.h"
+#include    "../../sensors/sensor2/device2.h"
 #include    "../../sensors/sensor3/device_c.h"
 #include    "../../sensors/device_k.h"
 #include    "../../sensors/sensor21/input_p.h"
@@ -1114,7 +1114,8 @@ float2  ReadParam(uint  iwPrm)
 #endif
 
 #ifndef SKIP_38
-    case 38: return ReadParam38();
+    case 38: 
+    case 39: return ReadParam38();
 #endif
 
 #ifndef SKIP_39

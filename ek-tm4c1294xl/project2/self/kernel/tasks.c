@@ -5,7 +5,7 @@ tasks.c
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-#include "utils/lwiplib_patched.h"
+#include "utils/lwiplib.h"
 #include "../kernel/log.h"
 #include "settings.h"
 #include "../tcp/telnet.h"
@@ -26,7 +26,7 @@ void StartServerConnection(uchar u)
 {
   ASSERT(u < UART_COUNT);
 
-  CONSOLE("%u: listen as server on port %u\n", u, mwPort[u]);
+  CONSOLE("[%u] listen as server on port %u\n", u, mwPort[u]);
   TelnetListen(mwPort[u], u);
 }
 
@@ -36,7 +36,7 @@ void StartClientConnection(uchar u)
   ASSERT(u < UART_COUNT);
 
   ulong dw = mdwDestinationIP[u];
-  CONSOLE("%u: connect as client to %u.%u.%u.%u port %u\n",
+  CONSOLE("[%u] connect as client to %u.%u.%u.%u port %u\n",
     u,
     (dw >> 24), (dw >> 16) & 0xFF, (dw >> 8) & 0xFF, dw & 0xFF,
     mwDestinationPort[u]);
@@ -58,7 +58,7 @@ void StartConnection(uchar u)
   {
     if (mbConnectionMode[u] == CONNECTION_MODE_IMMEDIATELY)
     {
-      CONSOLE("%u: connect as client immediately\n",u);
+      CONSOLE("[%u] connect as client immediately\n",u);
       StartClientConnection(u);
     }
   }
@@ -67,7 +67,7 @@ void StartConnection(uchar u)
   }
   else
   {
-    ERROR("%u: wrong routing mode %u\n", u, mbRoutingMode[u]);
+    ERROR("[%u] wrong routing mode %u\n", u, mbRoutingMode[u]);
   }
 }
 
@@ -100,7 +100,7 @@ void RunConnections(void)
       {
         if (pState->eTCPState == STATE_TCP_IDLE)
         {
-          CONSOLE("%u: connect as client immediately after reset\n",u);
+          CONSOLE("[%u] connect as client immediately after reset\n",u);
           StartClientConnection(u);
         }
       }
@@ -108,13 +108,13 @@ void RunConnections(void)
       {
         if ((pState->eTCPState == STATE_TCP_IDLE) && SerialReceiveAvailable(pState->ucSerialPort))
         {
-          CONSOLE("%u: connect as client on data\n",u);
+          CONSOLE("[%u] connect as client on data\n",u);
           StartClientConnection(u);
         }
       }
       else
       {
-        ERROR("%u: wrong connection mode %u", u, mbConnectionMode[u]);
+        ERROR("[%u] wrong connection mode %u", u, mbConnectionMode[u]);
       }
     }
     else if (IsModem(u))

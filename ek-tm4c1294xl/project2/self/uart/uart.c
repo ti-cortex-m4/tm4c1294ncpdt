@@ -31,7 +31,7 @@ static ulong GetBaudRate(uchar u)
   }
   else
   {
-    WARNING("%u: wrong baud rate %u", u, mibBaudRate[u]);
+    WARNING("[%u] wrong baud rate %u", u, mibBaudRate[u]);
     return mdwBaudRates[BAUD_RATE_DEFAULT];
   }
 }
@@ -49,7 +49,7 @@ static ulong GetParityMask(uchar u)
     case 3: return UART_CONFIG_PAR_ONE;
     case 4: return UART_CONFIG_PAR_ZERO;
 
-    default: WARNING("%u: wrong parity %u", u, mibParity[u]);
+    default: WARNING("[%u] wrong parity %u", u, mibParity[u]);
              return UART_CONFIG_PAR_NONE;
   }
 }
@@ -64,7 +64,7 @@ static ulong GetDataBitsMask(uchar u)
     case 0: return UART_CONFIG_WLEN_7;
     case 1: return UART_CONFIG_WLEN_8;
 
-    default: WARNING("%u: wrong data bits %u", u, mibDataBits[u]);
+    default: WARNING("[%u] wrong data bits %u", u, mibDataBits[u]);
              return UART_CONFIG_WLEN_8;
   }
 }
@@ -79,7 +79,7 @@ static ulong GetStopBitsMask(uchar u)
     case 0: return UART_CONFIG_STOP_ONE;
     case 1: return UART_CONFIG_STOP_TWO;
 
-    default: WARNING("%u: wrong stop bits %u", u, mibStopBits[u]);
+    default: WARNING("[%u] wrong stop bits %u", u, mibStopBits[u]);
              return UART_CONFIG_STOP_ONE;
   }
 }

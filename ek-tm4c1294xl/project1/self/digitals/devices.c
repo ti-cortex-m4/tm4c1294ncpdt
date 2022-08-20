@@ -30,7 +30,7 @@ message                 mpszDevices[bMAXDEVICES+1] = {
                                           ".устройство 16  ",
                                           ".устройство 17  ",
                                           ".устройство 18  ",
-                                          ".устройство 19  ",
+                                          ".ПИ-1.4         ",
                                           ".устройство 20  ",
                                           ".Elster A1140   ",
                                           ".СЕ304          ",
@@ -50,6 +50,7 @@ message                 mpszDevices[bMAXDEVICES+1] = {
                                           ".СЕ301 NNCL2    ",
                                           ".СЕ303 NNCL2    ",
                                           ".СЕ318          ",
+                                          ".СЕ318 S39      ",
                                           ".Меркурий-234   "
                                       };
 
@@ -188,7 +189,8 @@ bool    ValidDevice(uchar  bDevice)
 #endif
 
 #ifndef SKIP_38
-    case 38: return true;
+    case 38:
+    case 39: return true;
 #endif
 
 #ifndef SKIP_39

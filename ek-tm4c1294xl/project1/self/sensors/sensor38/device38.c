@@ -9,6 +9,7 @@ device38.c
 #include "../../serial/ports.h"
 #include "../../serial/ports2.h"
 #include "../../time/calendar.h"
+#include "../../devices/devices_init.h"
 #include "io38.h"
 #include "dff.h"
 #include "device38.h"
@@ -175,4 +176,23 @@ ulong   ReadNumber38(void)
   int64_t ddw = 0;
   DffDecodePositive(InBuffPtr(11), &ddw);
   return ddw % 0x100000000;
+}
+
+
+
+bool    GoodStatus38(uchar  bStatus)
+{
+  if (boIgnoreStatus38)
+  {
+    if (bStatus == 0)
+      return true;
+    else if (bStatus == 2)
+      return true;
+    else
+      return false;
+  }
+  else
+  {
+    return bStatus == 0;
+  }
 }

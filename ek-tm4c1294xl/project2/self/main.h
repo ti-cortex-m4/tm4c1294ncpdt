@@ -12,6 +12,7 @@ main.h
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
+#include "lwip/ip4_addr.h"
 #include "lwip/udp.h"
 #include "lwip/tcp.h"
 #include "driverlib/debug.h"
@@ -19,7 +20,7 @@ main.h
 
 
 #define MAJOR_VERSION   0
-#define MINOR_VERSION   17
+#define MINOR_VERSION   21
 
 
 #ifndef SINGLE_UART

@@ -284,7 +284,10 @@
 
     case DEV_INITHEADER_38P:
       InitHeader38();
-      MakePause(DEV_PAUSE_38P);
+      if (diCurr.bDevice == 38)
+        MakePause(DEV_PAUSE_38P);
+      else
+        MakePause(DEV_PAUSE_39P);
       break;
 
     case DEV_PAUSE_38P:
@@ -317,6 +320,8 @@
       {
         if (ReadData38() == false)
           DoneProfile();
+        else if (cwShutdown38 >= GetMaxShutdown())
+          DoneProfile();
         else
           MakePause(DEV_PAUSE_38P);
       }
@@ -331,6 +336,57 @@
 
           QueryHeader38();
           SetCurr(DEV_HEADER_38P);
+        }
+      }
+      break;
+
+
+    case DEV_PAUSE_39P:
+      {
+        ulong dwSecNow = DateToSecIndex(tiCurr);
+        ulong dwHou = DateToHouIndex(tiCurr);
+        ulong dwSecPrev = DateToSecIndex(HouIndexToDate(dwHou));
+        ulong dwSecNext = DateToSecIndex(HouIndexToDate(dwHou + 1));
+        const char bGap = 30;
+        bool f1 = (dwSecNext - dwSecNow < bGap);
+        bool f2 = (dwSecNow - dwSecPrev < bGap);
+        if (f1 || f2)
+        {
+          Clear();
+          uchar bDelta = f1 ? bGap + (dwSecNext - dwSecNow) : bGap - (dwSecNow - dwSecPrev);
+          sprintf(szLo+3, "пауза: %u", bDelta);
+          MakeLongPause(DEV_PAUSE_39P, 1);
+        }
+        else
+        {
+          cbRepeat = MaxRepeats();
+          QueryHeader39();
+          SetCurr(DEV_HEADER_39P);
+        }
+      }
+      break;
+
+    case DEV_HEADER_39P:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+      {
+        if (ReadData39() == false)
+          DoneProfile();
+        else if (cwShutdown38 >= GetMaxShutdown())
+          DoneProfile();
+        else
+          MakePause(DEV_PAUSE_39P);
+      }
+      else
+      {
+        if (cbRepeat == 0)
+          ErrorProfile();
+        else
+        {
+          ErrorLink();
+          cbRepeat--;
+
+          QueryHeader39();
+          SetCurr(DEV_HEADER_39P);
         }
       }
       break;
