@@ -63,7 +63,7 @@ double2 TestTimeCorrect39(void)
 
   c.bNS++;
   c.bInvokeId++;
-  QueryTime39(c.bNS, c.bNR, c.bInvokeId);
+  QueryTime39(c);
   if (Input39() != SER_GOODCHECK) return Fault(6);
   if (ValidateFrame(c.bNS, c.bNR) != 0) return Fault(7);
   time tmThat2 = ReadTime39();
