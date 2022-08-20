@@ -43,7 +43,7 @@ static bool Fault(uchar  bError)
 
 
 
-bool    Automatic39(void)
+bool    Automatic40(void)
 {
   Clear();
 
@@ -104,7 +104,7 @@ static void DISC0(uchar  bNumber)
 }
 
 
-bool    ChangeNumber39(uchar  bNumber)
+bool    ChangeNumber40(uchar  bNumber)
 {
   DISC0(bNumber);
   if (Input39() != SER_GOODCHECK) return(0);

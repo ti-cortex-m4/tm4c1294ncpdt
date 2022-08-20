@@ -41,7 +41,7 @@ time2   ReadTimeCan39_Internal(void)
 
 
 
-time2   ReadTimeCan39(void)
+time2   ReadTimeCan40(void)
 {
   Clear();
 
