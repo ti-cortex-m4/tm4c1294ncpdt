@@ -55,11 +55,11 @@ fragment_profile_39.h
 hdlc_monitor.c
 hdlc_monitor.h
 include39.h
-+	io39.c
-+	io39.h
-+	log39.c
-+	log39.h
-+	log39_include.h
++	io40.c
++	io40.h
++	log40.c
++	log40.h
++	log40_include.h
 +	params39.c
 +	params39.h
 profile39.c
