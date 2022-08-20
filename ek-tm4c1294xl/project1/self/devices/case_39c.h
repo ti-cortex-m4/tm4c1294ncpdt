@@ -56,7 +56,7 @@
           if (AARE_CheckPass()) {
             MakePause(DEV_RR_AARQ_O_40C);
           } else {
-            Error39(190+3);
+            Error40(190+3);
             ErrorCurrent();
           }
         }
@@ -104,7 +104,7 @@
           if (ReadValue_Current39()) {
             MakePause(DEV_RR_VALUE_O_40C);
           } else {
-            Error39(190+8);
+            Error40(190+8);
             ErrorCurrent();
           }
         }
@@ -154,7 +154,7 @@
           if (ReadScaler_Current39()) {
             MakePause(DEV_RR_SCALER_O_40C);
           } else {
-            Error39(190+13);
+            Error40(190+13);
             ErrorCurrent();
           }
         }

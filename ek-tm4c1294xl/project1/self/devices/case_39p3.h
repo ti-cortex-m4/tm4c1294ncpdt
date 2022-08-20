@@ -16,7 +16,7 @@
           if (ReadScaler_Profile39()) {
             MakePause(DEV_RR_SCALER_O_40P);
           } else {
-            Error39(210+20);
+            Error40(210+20);
             ErrorProfile();
           }
         }
