@@ -373,7 +373,7 @@ void    MakeParamDiv(uint  iwPrm)
       default: fl = 1; break;
     }
   }
-  else if (GetParamDevice(iwPrm) == 39)
+  else if (GetParamDevice(iwPrm) == 40)
   {
     switch (GetParamLine(iwPrm))
     {

@@ -53,7 +53,7 @@ double2 ReadCntCurr39_Internal(void)
 
 
 
-double2 ReadCntCurr39(void)
+double2 ReadCntCurr40(void)
 {
   Clear();
 

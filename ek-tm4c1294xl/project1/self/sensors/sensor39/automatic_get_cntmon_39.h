@@ -4,4 +4,4 @@ automatic_get_cntmon_39.h
 
 ------------------------------------------------------------------------------*/
 
-double2 ReadCntMonCan39(uchar  ibMon);
+double2 ReadCntMonCan40(uchar  ibMon);

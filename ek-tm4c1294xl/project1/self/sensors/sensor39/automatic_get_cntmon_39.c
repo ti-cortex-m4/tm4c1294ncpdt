@@ -117,7 +117,7 @@ double2 ReadCntMonCan38_Internal(uchar  ibMon)
 
 
 
-double2 ReadCntMonCan39(uchar  ibMon)
+double2 ReadCntMonCan40(uchar  ibMon)
 {
   Clear();
 
@@ -154,7 +154,7 @@ double2 TestReadCntMonCan39(void)
   uchar m;
   for (m=8; m>=6; m--)
   {
-    db2 = ReadCntMonCan39(m-1);
+    db2 = ReadCntMonCan40(m-1);
     if (db2.bError)
       break;
   }

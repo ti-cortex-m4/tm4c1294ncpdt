@@ -209,8 +209,8 @@ void    DevicesInput(void)
     }
 #endif
 
-#ifndef SKIP_39
-    else if (diCurr.bDevice == 39)
+#ifndef SKIP_40
+    else if (diCurr.bDevice == 40)
     {
       Unpack39();
     }

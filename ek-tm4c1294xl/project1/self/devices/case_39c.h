@@ -1,5 +1,5 @@
 
-#ifndef SKIP_39
+#ifndef SKIP_40
 
     case DEV_START_39C:
       MakePause(DEV_DISC_O_39C);

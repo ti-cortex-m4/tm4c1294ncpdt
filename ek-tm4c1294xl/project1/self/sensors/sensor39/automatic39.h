@@ -4,5 +4,5 @@ automatic39.h
 
 ------------------------------------------------------------------------------*/
 
-bool    Automatic39(void);
-bool    ChangeNumber39(uchar  bNumber);
+bool    Automatic40(void);
+bool    ChangeNumber40(uchar  bNumber);
