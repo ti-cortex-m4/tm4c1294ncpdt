@@ -134,7 +134,7 @@ void    InitDevices1(void)
 
   InitTimeoutHistogram35();
   InitLog35();
-  InitLog39();
+  InitLog40();
 }
 
 

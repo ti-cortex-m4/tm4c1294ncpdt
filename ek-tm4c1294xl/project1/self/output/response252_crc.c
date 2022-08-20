@@ -95,9 +95,9 @@ void    Response252_CRC(void)
     case 35: OutCounter35(); break;
     case 36: OutResetLog35(); break;
 
-    case 37: OutLog39(); break;
-    case 38: OutCounter39(); break;
-    case 39: OutResetLog39(); break;
+    case 37: OutLog40(); break;
+    case 38: OutCounter40(); break;
+    case 39: OutResetLog40(); break;
 
     default:
       ShowResponseCRC(bSTA_BADCOMMAND);
