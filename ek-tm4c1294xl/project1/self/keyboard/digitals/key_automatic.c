@@ -215,8 +215,8 @@ uchar   i;
           case 39: if (Automatic39() != 1) bRes = 0xEE; break;
 #endif
 
-#ifndef SKIP_39
-          case 39: if (Automatic39() != 1) bRes = 0xEE; break;
+#ifndef SKIP_40
+          case 40: if (Automatic40() != 1) bRes = 0xEE; break;
 #endif
         }
 

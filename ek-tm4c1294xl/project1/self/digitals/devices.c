@@ -193,8 +193,8 @@ bool    ValidDevice(uchar  bDevice)
     case 39: return true;
 #endif
 
-#ifndef SKIP_39
-    case 39: return true;
+#ifndef SKIP_40
+    case 40: return true;
 #endif
 
     default: return false;
