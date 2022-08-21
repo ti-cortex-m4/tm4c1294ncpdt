@@ -16,7 +16,7 @@ automatic40.c
 #include "io40.h"
 #include "hdlc_address.h"
 #include "dlms_push.h"
-#include "query_id_39.h"
+#include "query_serial_40.h"
 #include "fragment_open_40.h"
 #include "automatic40.h"
 

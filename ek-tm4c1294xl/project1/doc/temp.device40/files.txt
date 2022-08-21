@@ -32,8 +32,8 @@ current39_wrapper.h
 +	dlms.h
 dlms_aare.c
 dlms_aare.h
-dlms_obis.c
-dlms_obis.h
++	dlms_obis.c
++	dlms_obis.h
 +	dlms_push.c
 +	dlms_push.h
 +	dlms_read_data.c
