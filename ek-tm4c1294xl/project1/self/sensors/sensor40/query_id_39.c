@@ -15,10 +15,10 @@ query_id_39.c
 
 
 
-void    QueryId39(caller40 c)
+void    QuerySerial40(caller40  c)
 {
 #ifdef MONITOR_40_NAMES
-  MonitorString("\n\n QueryId39 ");
+  MonitorString("\n\n QuerySerial40 ");
 #endif
 
   uint wSize = 23 + GetHdlcAddressesSize();
@@ -46,7 +46,7 @@ void    QueryId39(caller40 c)
   PushChar(0);
   PushChar(1); // class
 
-  PushOBIS_DLMS(obisId);
+  PushOBIS_DLMS(obisSerial);
 
   PushChar(2); // attribute
   PushChar(0);

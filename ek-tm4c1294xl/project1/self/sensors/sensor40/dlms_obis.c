@@ -9,10 +9,9 @@ Blue Book: 7.5.1 Value group C codes – Electricity
 
 
 
-const obis_t        obisId      = {0, 0, 96, 1, 0, 255}; // Ch. 0; Device ID 1, manufacturing number
-const obis_t        obisLogical = {0, 0, 22, 0, 0, 255};
+const obis_t        obisSerial = {0, 0, 96, 1, 0, 255}; // Ch. 0; Device ID 1, manufacturing number
 
-const obis_t        obisTime    = {0, 0, 1, 0, 0, 255}; // Ch. 0; Clock object; #1
+const obis_t        obisTime = {0, 0, 1, 0, 0, 255}; // Ch. 0; Clock object; #1
 
 const obis_t        obisEngAbs[4] = {
   {1, 0, 1, 8, 0, 255}, // Ch. 0; Sum Li Active power+   (QI+QIV);   Time integral 1; Rate 0 (0 is total)
