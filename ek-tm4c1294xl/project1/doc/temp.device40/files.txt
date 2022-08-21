@@ -56,7 +56,7 @@ fragment_profile_39.h
 +	hdlc_address.h
 hdlc_monitor.c
 hdlc_monitor.h
-include39.h
+	include40.h
 +	io40.c
 +	io40.h
 +	log40.c
