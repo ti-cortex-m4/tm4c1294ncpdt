@@ -4,6 +4,8 @@ fragment_profile_39.c
 
 ------------------------------------------------------------------------------*/
 
+#include "fragment_profile_40.h"
+
 #include "../../main.h"
 #include "../../serial/ports.h"
 #include "../../serial/monitor.h"
@@ -15,9 +17,8 @@ fragment_profile_39.c
 #include "query_next_block_39.h"
 #include "io39.h"
 #include "buffer_record_39.h"
-#include "fragment_open_39.h"
 #include "hdlc_address.h"
-#include "fragment_profile_39.h"
+#include "fragment_open_40.h"
 
 
 

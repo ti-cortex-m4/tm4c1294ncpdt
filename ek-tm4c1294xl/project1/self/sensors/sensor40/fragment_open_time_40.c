@@ -4,6 +4,8 @@ fragment_open_time_39.c
 
 ------------------------------------------------------------------------------*/
 
+#include "fragment_open_time_40.h"
+
 #include "../../main.h"
 #include "../../time/delay.h"
 #include "dlms.h"
@@ -11,8 +13,7 @@ fragment_open_time_39.c
 #include "time39.h"
 #include "io39.h"
 #include "error40.h"
-#include "fragment_open_39.h"
-#include "fragment_open_time_39.h"
+#include "fragment_open_40.h"
 
 
 
