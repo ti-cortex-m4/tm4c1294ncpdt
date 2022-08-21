@@ -36,10 +36,10 @@ dlms_obis.c
 dlms_obis.h
 +	dlms_push.c
 +	dlms_push.h
-dlms_read_data.c
-dlms_read_data.h
-dlms_read_register.c
-dlms_read_register.h
++	dlms_read_data.c
++	dlms_read_data.h
++	dlms_read_register.c
++	dlms_read_register.h
 +	error39.c
 +	error39.h
 +	extended_4t_40.c
