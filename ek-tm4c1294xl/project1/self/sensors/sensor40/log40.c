@@ -40,10 +40,11 @@ void    Log40(uchar  bError, uint  wData)
 
   mLog40[cwLog40++ % LOG40_SIZE] = log;
 
-  ASSERT(bError < COUNTER40_SIZE);
-
-  mCounter40[bError].tiNow = log.tiNow;
-  mCounter40[bError].wCounter++;
+  if (bError < COUNTER40_SIZE)
+  {
+    mCounter40[bError].tiNow = log.tiNow;
+    mCounter40[bError].wCounter++;
+  }
 }
 
 
