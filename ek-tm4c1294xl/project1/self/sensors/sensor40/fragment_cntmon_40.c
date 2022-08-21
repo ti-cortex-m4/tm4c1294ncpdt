@@ -4,6 +4,8 @@ fragment_cntmon_39.c
 
 ------------------------------------------------------------------------------*/
 
+#include "fragment_cntmon_40.h"
+
 #include "../../main.h"
 #include "../../serial/monitor.h"
 #include "../../serial/ports_pop.h"
@@ -17,7 +19,6 @@ fragment_cntmon_39.c
 #include "hdlc_address.h"
 #include "dlms_read_data.h"
 #include "dlms_read_register.h"
-#include "fragment_cntmon_39.h"
 
 
 

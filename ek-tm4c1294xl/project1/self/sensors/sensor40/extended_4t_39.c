@@ -18,9 +18,9 @@ extended_4t_39.c
 #include "dlms_obis.h"
 #include "error40.h"
 #include "io39.h"
-#include "fragment_open_time_39.h"
-#include "fragment_cntmon_39.h"
 #include "extended_4t_39.h"
+#include "fragment_cntmon_40.h"
+#include "fragment_open_time_40.h"
 
 
 

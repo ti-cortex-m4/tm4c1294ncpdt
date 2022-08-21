@@ -24,10 +24,9 @@ automatic_get_cntmon_40.c
 #include "read_engmon_39.h"
 #include "dlms_read_register.h"
 #include "buffer_record_39.h"
-#include "fragment_open_time_39.h"
-#include "fragment_cntmon_39.h"
-#include "fragment_profile_39.h"
+#include "fragment_open_time_40.h"
 #include "automatic_get_cntmon_40.h"
+#include "fragment_cntmon_40.h"
 
 
 
