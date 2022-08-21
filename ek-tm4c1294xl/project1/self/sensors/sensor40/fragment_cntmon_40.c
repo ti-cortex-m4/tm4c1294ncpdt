@@ -12,7 +12,7 @@ fragment_cntmon_40.c
 #include "error40.h"
 #include "io40.h"
 #include "query_register_39.h"
-#include "query_billing_period_39.h"
+#include "query_billing_period_40.h"
 #include "read_engmon_39.h"
 #include "hdlc_address.h"
 #include "dlms_read_data.h"

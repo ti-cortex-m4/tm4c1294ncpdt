@@ -68,8 +68,8 @@ profile39.c
 profile39.h
 profile39_wrapper.c
 profile39_wrapper.h
-query_billing_period_39.c
-query_billing_period_39.h
++	query_billing_period_40.c
++	query_billing_period_40.h
 +	query_id_39.c
 +	query_id_39.h
 +	query_next_block_40.c
@@ -97,4 +97,4 @@ buffer_record_39.c
 fragment_profile_39.c
 profile39.c
 profile39_wrapper.c
-query_billing_period_39.c
++	query_billing_period_39.c

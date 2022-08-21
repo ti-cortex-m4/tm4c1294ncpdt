@@ -15,15 +15,6 @@ query_next_block_40.c
 
 
 
-/*
-<GetRequest>
-  <GetRequestForNextDataBlock>
-    <!--Priority: HIGH ServiceClass: UN_CONFIRMED invokeID: 10-->
-    <InvokeIdAndPriority Value="8A" />
-    <BlockNumber Value="00000001" />
-  </GetRequestForNextDataBlock>
-</GetRequest>
-*/
 void    QueryNextBlock40(caller40  c, uchar  bBlockNumber)
 {
 #ifdef MONITOR_40_NAMES
@@ -61,3 +52,15 @@ void    QueryNextBlock40(caller40  c, uchar  bBlockNumber)
 
   Query40(1000, wSize+2);
 }
+
+
+
+/*
+<GetRequest>
+  <GetRequestForNextDataBlock>
+    <!--Priority: HIGH ServiceClass: UN_CONFIRMED invokeID: 10-->
+    <InvokeIdAndPriority Value="8A" />
+    <BlockNumber Value="00000001" />
+  </GetRequestForNextDataBlock>
+</GetRequest>
+*/
