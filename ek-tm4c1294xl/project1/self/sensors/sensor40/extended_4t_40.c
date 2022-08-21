@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-extended_4t_39.c
+extended_4t_40.c
 
 
 ------------------------------------------------------------------------------*/
@@ -20,7 +20,7 @@ extended_4t_39.c
 #include "io40.h"
 #include "fragment_open_time_40.h"
 #include "fragment_cntmon_40.h"
-#include "extended_4t_39.h"
+#include "extended_4t_40.h"
 
 
 
@@ -32,7 +32,7 @@ static status BadDigital(uchar  bError)
 
 
 
-status  CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
+status  CntMonCanTariff40_Internal(uchar  ibMon, uchar  ibTariff)
 {
   caller40 c = InitCaller40();
   
@@ -86,7 +86,7 @@ status  ReadCntMonCanTariff40(uchar  ibMonAbs, uchar  ibTariff) // на начало мес
   uchar r;
   for (r=0; r<MaxRepeats(); r++)
   {
-    status s = CntMonCanTariff39_Internal(ibMonAbs, ibTariff);
+    status s = CntMonCanTariff40_Internal(ibMonAbs, ibTariff);
     if (fKey == true) break;
 
     if (s == ST_OK) return s;
