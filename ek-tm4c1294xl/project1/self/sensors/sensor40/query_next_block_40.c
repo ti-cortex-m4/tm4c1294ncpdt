@@ -11,7 +11,7 @@ query_next_block_39.c
 #include "io40.h"
 #include "hdlc_address.h"
 #include "dlms_push.h"
-#include "query_next_block_39.h"
+#include "query_next_block_40.h"
 
 
 
@@ -59,5 +59,5 @@ void    QueryNextBlock39(caller40  c, uchar  bBlockNumber)
 
   PushChar(0x7E);
 
-  Query40(1000, wSize+2); // 0x13
+  Query40(1000, wSize+2);
 }

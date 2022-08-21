@@ -70,6 +70,7 @@ double2 ReadRegisterUnsignedValue39(const obis_t  obis, caller40*  pc)
   QueryGetRegisterValueDLMS(obis, (*pc));
   if (Input40() != SER_GOODCHECK) return Fault(15+5);
   if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(15+6);
+
   ulong64_ value = ReadUnsignedValueDLSM();
   if (!value.fValid) return Fault(15+7);
 
@@ -89,6 +90,7 @@ double2 ReadRegisterSignedValue39(const obis_t  obis, caller40*  pc)
   QueryGetRegisterValueDLMS(obis, (*pc));
   if (Input40() != SER_GOODCHECK) return Fault(15+10);
   if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(15+11);
+
   slong64_ value = ReadSignedValueDLSM();
   if (!value.fValid) return Fault(15+12);
 
@@ -108,6 +110,7 @@ double2 ReadRegisterScaler39(const obis_t  obis, caller40*  pc)
   QueryGetRegisterScalerDLMS(obis, (*pc));
   if (Input40() != SER_GOODCHECK) return Fault(15+15);
   if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(15+16);
+
   double2 scaler = ReadRegisterScalerDLMS();
   if (!scaler.fValid) return Fault(15+17);
 
