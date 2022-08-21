@@ -32,7 +32,7 @@ static status BadDigital(uchar  bError)
 
 
 
-status  CntMonCanTariff40_Internal(uchar  ibMon, uchar  ibTariff)
+status  CntMonCanTariff40_Internal(uchar  ibMon, uchar  ibTrf)
 {
   caller40 c = InitCaller40();
   
@@ -60,7 +60,7 @@ status  CntMonCanTariff40_Internal(uchar  ibMon, uchar  ibTariff)
       mpdbChannelsC[i] = 0;
     }
 
-    mpdbChannelsC[0] = db8.mdbValue[1 + ibTariff];
+    mpdbChannelsC[0] = db8.mdbValue[1 + ibTrf];
 
     for (i=0; i<4; i++) {
       mpdbChannelsC[i] = mpdbChannelsC[i] * mpdbTransCnt[ibDig];
@@ -79,14 +79,14 @@ status  CntMonCanTariff40_Internal(uchar  ibMon, uchar  ibTariff)
 
 
 
-status  ReadCntMonCanTariff40(uchar  ibMonAbs, uchar  ibTariff) // на начало мес€ца
+status  ReadCntMonCanTariff40(uchar  ibMonAbs, uchar  ibTrf) // на начало мес€ца
 {
   Clear();
 
   uchar r;
   for (r=0; r<MaxRepeats(); r++)
   {
-    status s = CntMonCanTariff40_Internal(ibMonAbs, ibTariff);
+    status s = CntMonCanTariff40_Internal(ibMonAbs, ibTrf);
     if (fKey == true) break;
 
     if (s == ST_OK) return s;

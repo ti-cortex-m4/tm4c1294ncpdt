@@ -9,6 +9,7 @@ profile pass
 client address: 32
 повторы NS NR
 профили - правильный получас
+maximum information field length пїЅ transmit
 
 0             17:10:59 21.08.22           241           0             
 1             17:11:00 21.08.22           6             0             

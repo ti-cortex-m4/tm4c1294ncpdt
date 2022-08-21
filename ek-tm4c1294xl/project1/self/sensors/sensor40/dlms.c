@@ -30,17 +30,17 @@ void    DISC(void)
 
   InitPush(0);
 
-  uint wSize = 5+GetHdlcAddressesSize(); // 7
+  uint wSize = 5+GetHdlcAddressesSize();
 
   PushChar(0x7E);
   PushFormatDLMS(wSize);
   PushHdlcAddresses();
   PushChar(0x53); // DISC
 
-  PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
+  PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize()));
   PushChar(0x7E);
 
-  Query40(1000, wSize+2); // 9
+  Query40(1000, wSize+2);
 }
 
 
@@ -50,7 +50,7 @@ void    SNRM(void)
   MonitorString("\n\n SNRM ");
 #endif
 
-  uint wSize = 30 + GetHdlcAddressesSize(); // 32
+  uint wSize = 30 + GetHdlcAddressesSize();
 
   InitPush(0);
   PushChar(0x7E);
@@ -59,7 +59,7 @@ void    SNRM(void)
   PushHdlcAddresses();
   PushChar(0x93); // SNRM
   
-  PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
+  PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize()));
   
   PushChar(0x81); // format identifier
   PushChar(0x80); // group identifier
@@ -89,10 +89,10 @@ void    SNRM(void)
   PushChar(0x00);
   PushChar(0x01);
 
-  PushIntLtl(MakeCRC16X25OutBuff(1, wSize-2)); // 30
+  PushIntLtl(MakeCRC16X25OutBuff(1, wSize-2));
   PushChar(0x7E);
 
-  Query40(1000, wSize+2); // 34
+  Query40(1000, wSize+2);
 }
 
 
@@ -106,7 +106,7 @@ void    AARQ(uchar  bNS, uchar  bNR)
   line Pass = mpphAsciiAddress[diCurr.bAddress-1];
   uchar bPassSize = strlen((char const *)Pass.szLine);
 
-  uint wSize = 66 - 8 + bPassSize + GetHdlcAddressesSize(); // 0x44 68
+  uint wSize = 58 + bPassSize + GetHdlcAddressesSize();
 
   InitPush(0);
   PushChar(0x7E);
@@ -116,7 +116,7 @@ void    AARQ(uchar  bNS, uchar  bNR)
 
   PushChar(((bNR & 0x07) << 5) | 0x10 | ((bNS & 0x07) << 1) | 0x00);
   
-  PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
+  PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize()));
 
   // DLMS start
 
@@ -196,7 +196,7 @@ void    AARQ(uchar  bNS, uchar  bNR)
   PushIntLtl(MakeCRC16X25OutBuff(1, wSize-2));
   PushChar(0x7E);
 
-  Query40(1000, wSize+2); // 70
+  Query40(1000, wSize+2);
 }
 
 
@@ -216,8 +216,8 @@ void    RR(uchar  bNR)
 
   PushChar(((bNR & 0x07) << 5) | 0x10 | 0x01);
   
-  PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
+  PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize()));
   PushChar(0x7E);
 
-  Query40(1000, wSize+2); // 9
+  Query40(1000, wSize+2);
 }

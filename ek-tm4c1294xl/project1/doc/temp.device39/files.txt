@@ -28,8 +28,8 @@ correct39_wrapper.h
 +	crc16x25.h
 current39_wrapper.c
 current39_wrapper.h
-dlms.c
-dlms.h
++	dlms.c
++	dlms.h
 dlms_aare.c
 dlms_aare.h
 dlms_obis.c
@@ -42,8 +42,8 @@ dlms_read_register.c
 dlms_read_register.h
 +	error39.c
 +	error39.h
-extended_4t_39.c
-extended_4t_39.h
++	extended_4t_40.c
++	extended_4t_40.h
 fragment_cntmon_39.c
 fragment_cntmon_39.h
 +	fragment_open_40.c
@@ -92,8 +92,8 @@ read_engmon_39.h
 buffer_array_39.c
 buffer_profile_39.c
 buffer_record_39.c
-dlms.c
-extended_4t_39.c
++	dlms.c
++	extended_4t_39.c
 fragment_profile_39.c
 profile39.c
 profile39_wrapper.c

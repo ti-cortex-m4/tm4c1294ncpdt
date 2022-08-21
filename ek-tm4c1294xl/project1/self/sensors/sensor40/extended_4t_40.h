@@ -4,4 +4,4 @@ extended_4t_40.h
 
 ------------------------------------------------------------------------------*/
 
-status  ReadCntMonCanTariff40(uchar  ibMonAbs, uchar  ibTariff);
+status  ReadCntMonCanTariff40(uchar  ibMonAbs, uchar  ibTrf);
