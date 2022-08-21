@@ -183,7 +183,7 @@ bool    ReadHeader40(void)
 
 uchar   TestProfile40_Internal(caller40*  pc)
 {  
-  time2 tm2 = FragmentOpenTime39(pc);
+  time2 tm2 = FragmentOpenTime40(pc);
   if (!tm2.fValid) return 1;
   tiValue40 = tm2.tiValue;
 

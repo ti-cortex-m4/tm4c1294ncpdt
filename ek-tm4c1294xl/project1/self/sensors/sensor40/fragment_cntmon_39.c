@@ -29,7 +29,7 @@ static double8 Fault(uchar  bError)
 
 
 
-double8 FragmentCntMonCan(const obis_t  obisBillingPeriod, const obis_t  obisScaler, caller40  *pc, date  dt)
+double8 FragmentCntMonCan40(const obis_t  obisBillingPeriod, const obis_t  obisScaler, caller40  *pc, date  dt)
 {
   (*pc).bNS++;
   (*pc).bInvokeId++;

@@ -38,11 +38,11 @@ static double2 Fault(uchar  bError)
 
 
 
-double2 ReadCntMonCan38_Internal(uchar  ibMon)
+double2 ReadCntMonCan40_Internal(uchar  ibMon)
 {
   caller40 c = InitCaller40();
 
-  time2 tm2 = FragmentOpenTime39(&c);
+  time2 tm2 = FragmentOpenTime40(&c);
   if (!tm2.fValid) return Fault(70+0);
   time tm = tm2.tiValue;
 
@@ -54,7 +54,7 @@ double2 ReadCntMonCan38_Internal(uchar  ibMon)
     dt.bMonth = (ibMon+1) % 12 + 1;
     dt.bYear  = (dt.bMonth > tm.bMonth) ? tm.bYear-1 : tm.bYear;
 
-    double8 db8 = FragmentCntMonCan(obisBillingPeriodMon, obisScalerForBillingPeriod, &c, dt);
+    double8 db8 = FragmentCntMonCan40(obisBillingPeriodMon, obisScalerForBillingPeriod, &c, dt);
 
     if (db8.bError == ERROR_NOT_PRESENTED) {
       Clear();
@@ -87,7 +87,7 @@ double2 ReadCntMonCan38_Internal(uchar  ibMon)
     dt.bMonth = tm.bMonth;
     dt.bYear  = tm.bYear;
 
-    double8 db8 = FragmentCntMonCan(obisBillingPeriodDay, obisScalerForBillingPeriod, &c, dt);
+    double8 db8 = FragmentCntMonCan40(obisBillingPeriodDay, obisScalerForBillingPeriod, &c, dt);
 
     if (db8.bError == ERROR_NOT_PRESENTED) {
       Clear();
@@ -124,7 +124,7 @@ double2 ReadCntMonCan40(uchar  ibMon)
   uchar r;
   for (r=0; r<MaxRepeats(); r++)
   {
-    double2 db2 = ReadCntMonCan38_Internal(ibMon);
+    double2 db2 = ReadCntMonCan40_Internal(ibMon);
     if (fKey == true) break;
     if (db2.fValid)
     {

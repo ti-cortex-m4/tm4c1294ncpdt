@@ -37,7 +37,7 @@ double2 TestTimeCorrect39(void)
 
   caller40 c = InitCaller40();
 
-  time2 tmThat1 = FragmentOpenTime39(&c);
+  time2 tmThat1 = FragmentOpenTime40(&c);
   if (!tmThat1.fValid) return Fault(1);
 
 

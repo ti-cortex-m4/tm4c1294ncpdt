@@ -46,7 +46,7 @@ static float2 Fault(uchar  bError)
 float2  ReadParam40_Internal(void)
 {
   caller40 r = InitCaller40();
-  if (FragmentOpen39(&r) != 0) return Fault(100+0);
+  if (FragmentOpen40(&r) != 0) return Fault(100+0);
 
 
   double2 db2;
