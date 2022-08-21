@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
-query_next_block_39.h
+query_next_block_40.h
 
 
 ------------------------------------------------------------------------------*/
 
-void    QueryNextBlock39(caller40  c, uchar  bBlockNumber);
+void    QueryNextBlock40(caller40  c, uchar  bBlockNumber);
