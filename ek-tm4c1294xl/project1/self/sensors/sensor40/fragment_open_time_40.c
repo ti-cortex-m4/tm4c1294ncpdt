@@ -8,7 +8,7 @@ fragment_open_time_40.c
 #include "../../time/delay.h"
 #include "dlms.h"
 #include "caller40.h"
-#include "time39.h"
+#include "time40.h"
 #include "io40.h"
 #include "error40.h"
 #include "fragment_open_40.h"
@@ -30,10 +30,10 @@ time2   FragmentOpenTime40(caller40  *pc)
 
   (*pc).bNS++;
   (*pc).bInvokeId++;
-  QueryTime39(*pc);
+  QueryTime40(*pc);
   if (Input40() != SER_GOODCHECK) return Fault(120+1);
   if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(120+2);
-  time tm = ReadTime39();
+  time tm = ReadTime40();
 
   (*pc).bNR++;
   RR((*pc).bNR);

@@ -10,7 +10,7 @@ automatic_get_time_40.c
 #include "../../serial/ports.h"
 #include "../../digitals/digitals.h"
 #include "dlms.h"
-#include "time39.h"
+#include "time40.h"
 #include "io40.h"
 #include "caller40.h"
 #include "error40.h"

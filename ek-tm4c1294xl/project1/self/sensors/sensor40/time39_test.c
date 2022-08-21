@@ -11,9 +11,9 @@ time39_test.c
 #include "../../serial/monitor_settings.h"
 #include "dlms.h"
 #include "error40.h"
-#include "time39.h"
+#include "time40.h"
 #include "io40.h"
-#include "time39.h"
+#include "time40.h"
 #include "time39_test.h"
 #include "fragment_open_time_40.h"
 
@@ -51,7 +51,7 @@ double2 TestTimeCorrect39(void)
 
   c.bNS++;
   c.bInvokeId++;
-  QueryCorrectTime39(c, wDeltaSeconds1);
+  QueryCorrectTime40(c, wDeltaSeconds1);
   if (Input40() != SER_GOODCHECK) return Fault(2);
   if (ValidateFrame(c.bNS, c.bNR) != 0) return Fault(3);
 
@@ -63,10 +63,10 @@ double2 TestTimeCorrect39(void)
 
   c.bNS++;
   c.bInvokeId++;
-  QueryTime39(c);
+  QueryTime40(c);
   if (Input40() != SER_GOODCHECK) return Fault(6);
   if (ValidateFrame(c.bNS, c.bNR) != 0) return Fault(7);
-  time tmThat2 = ReadTime39();
+  time tmThat2 = ReadTime40();
 
   c.bNR++;
   RR(c.bNR);
