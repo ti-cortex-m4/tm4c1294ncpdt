@@ -18,7 +18,7 @@ profile39*c
 #include "../../devices/devices_time.h"
 #include "../../digitals/limits.h"
 #include "../../special/special.h"
-#include "io39.h"
+#include "io40.h"
 #include "buffer_record_39.h"
 #include "dlms_read_register.h"
 #include "buffer_profile_39.h"

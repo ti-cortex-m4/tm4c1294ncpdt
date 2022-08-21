@@ -11,7 +11,7 @@ automatic_get_time_40.c
 #include "../../digitals/digitals.h"
 #include "dlms.h"
 #include "time39.h"
-#include "io39.h"
+#include "io40.h"
 #include "caller40.h"
 #include "error40.h"
 #include "fragment_open_time_40.h"
@@ -34,7 +34,7 @@ time2   ReadTimeCan39_Internal(void)
   if (!tm2.fValid) return Fault(50+0);
 
   DISC();
-  if (Input39() != SER_GOODCHECK) return Fault(50+1);
+  if (Input40() != SER_GOODCHECK) return Fault(50+1);
 
   return GetTime0(tm2.tiValue);
 }
@@ -63,7 +63,7 @@ time2   ReadTimeCan40(void)
   }
 
   DISC();
-  if (Input39() != SER_GOODCHECK) return Fault(50+2);
+  if (Input40() != SER_GOODCHECK) return Fault(50+2);
 
   return Fault(50+3);
 }
@@ -81,7 +81,7 @@ time2   ReadTimeCan40_Short(void)
   }
 
   DISC();
-  if (Input39() != SER_GOODCHECK) return Fault(50+4);
+  if (Input40() != SER_GOODCHECK) return Fault(50+4);
 
   return Fault(50+5);
 }

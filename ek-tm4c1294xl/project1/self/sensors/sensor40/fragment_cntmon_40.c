@@ -12,7 +12,7 @@ fragment_cntmon_39.c
 #include "dlms.h"
 #include "dlms_obis.h"
 #include "error40.h"
-#include "io39.h"
+#include "io40.h"
 #include "query_register_39.h"
 #include "query_billing_period_39.h"
 #include "read_engmon_39.h"
@@ -35,7 +35,7 @@ double8 FragmentCntMonCan40(const obis_t  obisBillingPeriod, const obis_t  obisS
   (*pc).bNS++;
   (*pc).bInvokeId++;
   QueryBillingPeriod39(obisBillingPeriod, (*pc).bNS, (*pc).bNR, (*pc).bInvokeId, dt);
-  if (Input39() != SER_GOODCHECK) return Fault(125+0);
+  if (Input40() != SER_GOODCHECK) return Fault(125+0);
   if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(125+1);
 
 
@@ -63,7 +63,7 @@ double8 FragmentCntMonCan40(const obis_t  obisBillingPeriod, const obis_t  obisS
 
   (*pc).bNR++;
   RR((*pc).bNR);
-  if (Input39() != SER_GOODCHECK) return Fault(125+2);
+  if (Input40() != SER_GOODCHECK) return Fault(125+2);
   if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(125+3);
 
 

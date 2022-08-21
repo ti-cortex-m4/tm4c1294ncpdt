@@ -13,7 +13,7 @@ automatic40.c
 #include "dlms.h"
 #include "error40.h"
 #include "crc16x25.h"
-#include "io39.h"
+#include "io40.h"
 #include "hdlc_address.h"
 #include "dlms_push.h"
 #include "query_id_39.h"
@@ -55,7 +55,7 @@ bool    Automatic40(void)
   c.bNS++;
   c.bInvokeId++;
   QueryId39(c);
-  if (Input39() != SER_GOODCHECK) return Fault(80+1);
+  if (Input40() != SER_GOODCHECK) return Fault(80+1);
   if (ValidateFrame(c.bNS, c.bNR) != 0) return Fault(80+2);
 
 
@@ -79,7 +79,7 @@ bool    Automatic40(void)
 
 
   DISC();
-  if (Input39() != SER_GOODCHECK) return Fault(80+5);
+  if (Input40() != SER_GOODCHECK) return Fault(80+5);
 
   return true;
 }
@@ -100,14 +100,14 @@ static void DISC0(uchar  bNumber)
   PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize0(bNumber)));
   PushChar(0x7E);
 
-  Query39(1000, wSize+2);
+  Query40(1000, wSize+2);
 }
 
 
 bool    ChangeNumber40(uchar  bNumber)
 {
   DISC0(bNumber);
-  if (Input39() != SER_GOODCHECK) return(0);
+  if (Input40() != SER_GOODCHECK) return(0);
   Beep();
 
   return(1);

@@ -11,7 +11,7 @@ read_engmon_39.c
 #include "../../serial/monitor.h"
 #include "include39.h"
 #include "crc16x25.h"
-#include "io39.h"
+#include "io40.h"
 #include "hdlc_address.h"
 #include "dlms_read_data.h"
 #include "read_engmon_39.h"

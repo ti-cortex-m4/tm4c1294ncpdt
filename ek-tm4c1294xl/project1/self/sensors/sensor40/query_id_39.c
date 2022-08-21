@@ -8,7 +8,7 @@ query_id_39.c
 #include "../../serial/ports.h"
 #include "../../serial/monitor.h"
 #include "crc16x25.h"
-#include "io39.h"
+#include "io40.h"
 #include "hdlc_address.h"
 #include "dlms_push.h"
 #include "query_id_39.h"
@@ -57,5 +57,5 @@ void    QueryId39(caller40 c)
 
   PushChar(0x7E);
 
-  Query39(1000, wSize+2);
+  Query40(1000, wSize+2);
 }

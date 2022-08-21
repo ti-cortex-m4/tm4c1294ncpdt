@@ -17,10 +17,10 @@ extended_4t_39.c
 #include "dlms.h"
 #include "dlms_obis.h"
 #include "error40.h"
-#include "io39.h"
-#include "extended_4t_39.h"
-#include "fragment_cntmon_40.h"
+#include "io40.h"
 #include "fragment_open_time_40.h"
+#include "fragment_cntmon_40.h"
+#include "extended_4t_39.h"
 
 
 
@@ -50,7 +50,7 @@ status  CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
   double8 db8 = FragmentCntMonCan40(obisBillingPeriodMon, obisScalerForBillingPeriod, &c, dt);
 
   DISC();
-  if (Input39() != SER_GOODCHECK) return BadDigital(90+1);
+  if (Input40() != SER_GOODCHECK) return BadDigital(90+1);
 
 
   if (db8.fValid)
@@ -94,7 +94,7 @@ status  ReadCntMonCanTariff40(uchar  ibMonAbs, uchar  ibTariff) // на начало мес
   }
 
   DISC();
-  if (Input39() != SER_GOODCHECK) return BadDigital(90+3);
+  if (Input40() != SER_GOODCHECK) return BadDigital(90+3);
 
   return BadDigital(90+4);
 }
