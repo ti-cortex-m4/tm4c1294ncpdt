@@ -56,10 +56,10 @@ AUTOMATIC2!C
 #include "sensor38/automatic_get_time_38.h"
 #include "sensor38/automatic_get_cntcur_38.h"
 #include "sensor38/automatic_get_cntmon_38.h"
-#include "sensor40/automatic39.h"
-#include "sensor40/automatic_get_time_39.h"
-#include "sensor40/automatic_get_cntcurr_39.h"
-#include "sensor40/automatic_get_cntmon_39.h"
+#include "sensor40/automatic40.h"
+#include "sensor40/automatic_get_time_40.h"
+#include "sensor40/automatic_get_cntcurr_40.h"
+#include "sensor40/automatic_get_cntmon_40.h"
 #include "automatic2.h"
 
 

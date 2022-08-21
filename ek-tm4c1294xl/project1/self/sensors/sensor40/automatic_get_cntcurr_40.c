@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-automatic_get_cntcurr_39.c
+automatic_get_cntcurr_40.c
 
 
 ------------------------------------------------------------------------------*/
@@ -18,7 +18,7 @@ automatic_get_cntcurr_39.c
 #include "error40.h"
 #include "fragment_open_39.h"
 #include "dlms_read_register.h"
-#include "automatic_get_cntcurr_39.h"
+#include "automatic_get_cntcurr_40.h"
 
 
 

@@ -24,7 +24,7 @@ KEY_SEARCH!C
 #include "../../sensors/sensor3/device_c.h"
 #include "../../sensors/sensor34/device34.h"
 #include "../../sensors/sensor38/automatic38.h"
-#include "../../sensors/sensor40/automatic39.h"
+#include "../../sensors/sensor40/automatic40.h"
 
 
 

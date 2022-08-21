@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-automatic_get_time_39.c
+automatic_get_time_40.c
 
 
 ------------------------------------------------------------------------------*/
@@ -15,7 +15,7 @@ automatic_get_time_39.c
 #include "caller39.h"
 #include "error40.h"
 #include "fragment_open_time_39.h"
-#include "automatic_get_time_39.h"
+#include "automatic_get_time_40.h"
 
 
 

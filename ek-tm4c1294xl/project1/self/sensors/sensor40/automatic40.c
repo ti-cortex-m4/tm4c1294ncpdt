@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-automatic39.c
+automatic40.c
 
 
 ------------------------------------------------------------------------------*/
@@ -18,7 +18,7 @@ automatic39.c
 #include "dlms_push.h"
 #include "query_id_39.h"
 #include "fragment_open_39.h"
-#include "automatic39.h"
+#include "automatic40.h"
 
 
 
