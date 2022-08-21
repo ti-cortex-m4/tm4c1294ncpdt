@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-query_id_39.c
+query_serial_40.c
 
 
 ------------------------------------------------------------------------------*/
@@ -11,7 +11,7 @@ query_id_39.c
 #include "io40.h"
 #include "hdlc_address.h"
 #include "dlms_push.h"
-#include "query_id_39.h"
+#include "query_serial_40.h"
 
 
 
