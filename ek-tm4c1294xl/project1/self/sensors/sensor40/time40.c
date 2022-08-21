@@ -15,7 +15,7 @@ time40.c
 #include "io40.h"
 #include "hdlc_address.h"
 #include "dlms_push.h"
-#include "correct39.h"
+#include "correct40.h"
 #include "time40.h"
 
 
@@ -123,10 +123,10 @@ void    QueryCorrectTime40(caller40  c, sint  wSeconds)
 
   PushChar(0x10);
 
-  if (wSeconds < -wLIMITCORRECT_39)
-    wSeconds = -wLIMITCORRECT_39;
-  else if (wSeconds > wLIMITCORRECT_39)
-    wSeconds = wLIMITCORRECT_39;
+  if (wSeconds < -wLIMITCORRECT_40)
+    wSeconds = -wLIMITCORRECT_40;
+  else if (wSeconds > wLIMITCORRECT_40)
+    wSeconds = wLIMITCORRECT_40;
 
   PushIntBig(wSeconds);
 
