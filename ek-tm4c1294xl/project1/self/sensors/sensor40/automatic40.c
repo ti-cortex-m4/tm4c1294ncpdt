@@ -54,7 +54,7 @@ bool    Automatic40(void)
 
   c.bNS++;
   c.bInvokeId++;
-  QueryId39(c);
+  QuerySerial40(c);
   if (Input40() != SER_GOODCHECK) return Fault(80+1);
   if (ValidateFrame(c.bNS, c.bNR) != 0) return Fault(80+2);
 

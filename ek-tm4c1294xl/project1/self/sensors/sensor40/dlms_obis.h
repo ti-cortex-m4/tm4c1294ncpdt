@@ -15,7 +15,7 @@ typedef uchar           obis_t[6];
 
 
 
-extern  const obis_t        obisId;
+extern  const obis_t        obisSerial;
 extern  const obis_t        obisLogical;
 
 extern  const obis_t        obisTime;
