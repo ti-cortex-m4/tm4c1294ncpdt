@@ -15,15 +15,15 @@ const obis_t        obisLogical = {0, 0, 22, 0, 0, 255};
 const obis_t        obisTime    = {0, 0, 1, 0, 0, 255}; // Ch. 0; Clock object; #1
 
 const obis_t        obisEngAbs[4] = {
-  {1, 0, 1, 8, 0, 255}, // Ch. 0; Sum Li Active power+   (QI+QIV);   Time integral 1; Rate 0 (0 is total); Unspecified number of most recent billing periods
-  {1, 0, 2, 8, 0, 255}, // Ch. 0; Sum Li Active power-   (QII+QIII); Time integral 1; Rate 0 (0 is total); Unspecified number of most recent billing periods
-  {1, 0, 3, 8, 0, 255}, // Ch. 0; Sum Li Reactive power+ (QI+QII);   Time integral 1; Rate 0 (0 is total); Unspecified number of most recent billing periods
-  {1, 0, 4, 8, 0, 255}, // Ch. 0; Sum Li Reactive power- (QIII+QIV); Time integral 1; Rate 0 (0 is total); Unspecified number of most recent billing periods
+  {1, 0, 1, 8, 0, 255}, // Ch. 0; Sum Li Active power+   (QI+QIV);   Time integral 1; Rate 0 (0 is total)
+  {1, 0, 2, 8, 0, 255}, // Ch. 0; Sum Li Active power-   (QII+QIII); Time integral 1; Rate 0 (0 is total)
+  {1, 0, 3, 8, 0, 255}, // Ch. 0; Sum Li Reactive power+ (QI+QII);   Time integral 1; Rate 0 (0 is total)
+  {1, 0, 4, 8, 0, 255}, // Ch. 0; Sum Li Reactive power- (QIII+QIV); Time integral 1; Rate 0 (0 is total)
 };
 
-const obis_t        obisBillingPeriodMon = {1, 0, 98, 1, 0, 255}; // Ch. 0; Data of billing period; Scheme 1; #1; Unspecified number of most recent billing periods
-const obis_t        obisBillingPeriodDay = {1, 0, 98, 2, 0, 255}; // Ch. 0; Data of billing period; Scheme 2; #1; Unspecified number of most recent billing periods
-const obis_t        obisScalerForBillingPeriod = {1, 0, 1, 8, 0, 255}; // Ch. 0; Sum Li Active power+ (QI+QIV); Time integral 1; Rate 0 (0 is total); Unspecified number of most recent billing periods
+const obis_t        obisBillingPeriodMon = {1, 0, 98, 1, 0, 255}; // Ch. 0; Data of billing period; Scheme 1; #1
+const obis_t        obisBillingPeriodDay = {1, 0, 98, 2, 0, 255}; // Ch. 0; Data of billing period; Scheme 2; #1
+const obis_t        obisScalerForBillingPeriod = {1, 0, 1, 8, 0, 255}; // Ch. 0; Sum Li Active power+ (QI+QIV); Time integral 1; Rate 0 (0 is total)
 
 const obis_t        obisProfile1 = {1, 0, 99, 1, 0, 255}; // Ch. 0; Load profile with recording period 1; #1
 const obis_t        obisScalerForProfile1 = {1, 0, 1, 29, 0, 255}; // Ch. 0; Sum Li Active power+ (QI+QIV); Time integral 5
