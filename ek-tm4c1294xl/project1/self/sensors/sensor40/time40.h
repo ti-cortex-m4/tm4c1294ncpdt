@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-time39.h
+time40.h
 
 
 ------------------------------------------------------------------------------*/
@@ -8,7 +8,7 @@ time39.h
 
 
 
-void    QueryTime39(caller40  c);
-time    ReadTime39(void);
+void    QueryTime40(caller40  c);
+time    ReadTime40(void);
 
-void    QueryCorrectTime39(caller40  c, sint  wSeconds);
+void    QueryCorrectTime40(caller40  c, sint  wSeconds);

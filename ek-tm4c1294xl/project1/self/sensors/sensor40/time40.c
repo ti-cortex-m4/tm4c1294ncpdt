@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-time39.c
+time40.c
 
 
 ------------------------------------------------------------------------------*/
@@ -16,11 +16,11 @@ time39.c
 #include "hdlc_address.h"
 #include "dlms_push.h"
 #include "correct39.h"
-#include "time39.h"
+#include "time40.h"
 
 
 
-void    QueryTime39(caller40  c)
+void    QueryTime40(caller40  c)
 {
 #ifdef MONITOR_40_NAMES
   MonitorString("\n\n QueryTime39 ");
@@ -66,7 +66,7 @@ void    QueryTime39(caller40  c)
 }
 
 
-time    ReadTime39(void)
+time    ReadTime40(void)
 {
   InitPop(15 + GetHdlcAddressesSize());
 
@@ -86,7 +86,7 @@ time    ReadTime39(void)
 
 
 
-void    QueryCorrectTime39(caller40  c, sint  wSeconds)
+void    QueryCorrectTime40(caller40  c, sint  wSeconds)
 {
 #ifdef MONITOR_40_NAMES
   MonitorString("\n\n QueryCorrectTime39 "); MonitorSignedLongDec(wSeconds);

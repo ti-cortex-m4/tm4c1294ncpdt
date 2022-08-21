@@ -12,7 +12,7 @@ profile39_wrapper.c
 #include "dlms.h"
 #include "dlms_obis.h"
 #include "caller40.h"
-#include "time39.h"
+#include "time40.h"
 #include "hdlc_address.h"
 #include "hdlc_monitor.h"
 #include "buffer_record_39.h"
@@ -94,7 +94,7 @@ void    QueryTime_Profile39(void) {
 
   c.bNS++;
   c.bInvokeId++;
-  QueryTime39(c);
+  QueryTime40(c);
 }
 
 
@@ -103,7 +103,7 @@ void    ReadTime_Profile39(void) {
   MonitorString("\n ReadTime_Profile39");
 #endif
 
-  SetTime_Profile40(ReadTime39());
+  SetTime_Profile40(ReadTime40());
 }
 
 
@@ -122,7 +122,7 @@ void    QueryCorrect_Profile39(void)
 
   c.bNS++;
   c.bInvokeId++;
-  QueryCorrectTime39(c, wDeltaSeconds);
+  QueryCorrectTime40(c, wDeltaSeconds);
 }
 
 

@@ -15,7 +15,7 @@ automatic_get_cntmon_40.c
 #include "../../digitals/digitals.h"
 #include "dlms.h"
 #include "error40.h"
-#include "time39.h"
+#include "time40.h"
 #include "io40.h"
 #include "hdlc_address.h"
 #include "query_billing_period_39.h"
