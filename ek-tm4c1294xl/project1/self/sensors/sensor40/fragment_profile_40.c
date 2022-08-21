@@ -66,7 +66,7 @@ bool    FragmentProfile39(caller40  *pc, time  tm1, time  tm2, bool  fProfile)
     bBlockNumber++; // step 40.14
 
     (*pc).bNS++;
-    QueryNextBlock39(*pc, bBlockNumber); // step 40.15
+    QueryNextBlock40(*pc, bBlockNumber); // step 40.15
     if (Input40() != SER_GOODCHECK) return Fault(130+6);
     if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(130+7);
 
