@@ -15,7 +15,7 @@ io40.c
 #include "../../serial/input_wrapper.h"
 #include "../../serial/monitor.h"
 #include "../../digitals/wait_answer.h"
-#include "unpack39.h"
+#include "decompress40.h"
 #include "hdlc_monitor.h"
 #include "io40.h"
 
