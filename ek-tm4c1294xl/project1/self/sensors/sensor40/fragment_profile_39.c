@@ -110,7 +110,7 @@ double2 TestFragmentProfile39(void)
 
   caller40 c = InitCaller40();
 
-  if (FragmentOpen39(&c) != 0) return GetDouble2Error();
+  if (FragmentOpen40(&c) != 0) return GetDouble2Error();
 
   time tm1;
   tm1.bYear = 22;

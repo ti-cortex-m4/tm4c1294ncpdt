@@ -36,7 +36,7 @@ status  CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
 {
   caller40 c = InitCaller40();
   
-  time2 tm2 = FragmentOpenTime39(&c);
+  time2 tm2 = FragmentOpenTime40(&c);
   if (!tm2.fValid) return BadDigital(90+0);
   time tm = tm2.tiValue;
 
@@ -47,7 +47,7 @@ status  CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
   dt.bYear  = (dt.bMonth > tm.bMonth) ? tm.bYear-1 : tm.bYear;
 
 
-  double8 db8 = FragmentCntMonCan(obisBillingPeriodMon, obisScalerForBillingPeriod, &c, dt);
+  double8 db8 = FragmentCntMonCan40(obisBillingPeriodMon, obisScalerForBillingPeriod, &c, dt);
 
   DISC();
   if (Input39() != SER_GOODCHECK) return BadDigital(90+1);

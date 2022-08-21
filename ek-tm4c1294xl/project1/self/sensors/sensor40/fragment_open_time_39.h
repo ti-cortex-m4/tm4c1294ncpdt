@@ -4,4 +4,4 @@ fragment_open_time_39.h
 
 ------------------------------------------------------------------------------*/
 
-time2   FragmentOpenTime39(caller40  *pc);
+time2   FragmentOpenTime40(caller40  *pc);

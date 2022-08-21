@@ -30,7 +30,7 @@ time2   ReadTimeCan39_Internal(void)
 {
   caller40 c = InitCaller40();
 
-  time2 tm2 = FragmentOpenTime39(&c);
+  time2 tm2 = FragmentOpenTime40(&c);
   if (!tm2.fValid) return Fault(50+0);
 
   DISC();

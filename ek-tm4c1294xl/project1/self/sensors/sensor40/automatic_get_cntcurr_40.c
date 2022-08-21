@@ -33,7 +33,7 @@ double2 ReadCntCurr39_Internal(void)
 {
   caller40 c = InitCaller40();
 
-  uchar bError = FragmentOpen39(&c);
+  uchar bError = FragmentOpen40(&c);
   if (bError != 0) return Fault(60+0);
 
   uchar i;
