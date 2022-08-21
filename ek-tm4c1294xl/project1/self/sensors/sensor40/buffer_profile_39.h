@@ -4,8 +4,8 @@ buffer_profile_39.h
 
 ------------------------------------------------------------------------------*/
 
-#ifndef __BUFFER_PROFILE_39
-#define __BUFFER_PROFILE_39
+#ifndef __BUFFER_PROFILE_40
+#define __BUFFER_PROFILE_40
 
 
 typedef struct

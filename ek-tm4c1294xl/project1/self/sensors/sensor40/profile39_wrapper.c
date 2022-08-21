@@ -38,7 +38,7 @@ static uchar            bBlockNumber;
 
 
 void    DISC_Profile39(void) {
-#ifdef PROFILE_39_NAMES
+#ifdef PROFILE_40_NAMES
   fMonitorLogBasic = true;
   fMonitorLogHex = true;
 
@@ -52,7 +52,7 @@ void    DISC_Profile39(void) {
 
 void    SNRM_Profile39(void)
 {
-#ifdef PROFILE_39_NAMES
+#ifdef PROFILE_40_NAMES
   MonitorString("\n SNRM_Profile39");
 #endif
 
@@ -61,7 +61,7 @@ void    SNRM_Profile39(void)
 
 
 void    AARQ_Profile39(void) {
-#ifdef PROFILE_39_NAMES
+#ifdef PROFILE_40_NAMES
   MonitorString("\n AARQ_Profile39");
 #endif
 
@@ -70,7 +70,7 @@ void    AARQ_Profile39(void) {
 
 
 void    RR_Profile39(void) {
-#ifdef PROFILE_39_NAMES
+#ifdef PROFILE_40_NAMES
   MonitorString("\n RR_Profile39");
 #endif
 
@@ -88,7 +88,7 @@ bool    ValidateFrame_Profile39(void)
 
 
 void    QueryTime_Profile39(void) {
-#ifdef PROFILE_39_NAMES
+#ifdef PROFILE_40_NAMES
   MonitorString("\n QueryTime_Profile39");
 #endif
 
@@ -99,7 +99,7 @@ void    QueryTime_Profile39(void) {
 
 
 void    ReadTime_Profile39(void) {
-#ifdef PROFILE_39_NAMES
+#ifdef PROFILE_40_NAMES
   MonitorString("\n ReadTime_Profile39");
 #endif
 
@@ -116,7 +116,7 @@ void    SetCorrectSecond39(sint  ddw)
 
 void    QueryCorrect_Profile39(void)
 {
-#ifdef PROFILE_39_NAMES
+#ifdef PROFILE_40_NAMES
   MonitorString("\n QueryCorrect_Profile39 "); MonitorSignedLongDec(wDeltaSeconds);
 #endif
 
@@ -129,7 +129,7 @@ void    QueryCorrect_Profile39(void)
 
 void    QueryScaler_Profile39(void)
 {
-#ifdef PROFILE_39_NAMES
+#ifdef PROFILE_40_NAMES
   MonitorString("\n QueryScaler_Profile39");
 #endif
 
@@ -141,7 +141,7 @@ void    QueryScaler_Profile39(void)
 
 bool    ReadScaler_Profile39(void)
 {
-#ifdef PROFILE_39_NAMES
+#ifdef PROFILE_40_NAMES
   MonitorString("\n ReadScaler_Profile39");
 #endif
 
@@ -153,7 +153,7 @@ bool    ReadScaler_Profile39(void)
 
 
 void    InitProfile_Profile39(void) {
-#ifdef PROFILE_39_NAMES
+#ifdef PROFILE_40_NAMES
   MonitorString("\n InitProfile_Profile39");
 #endif
 
@@ -162,7 +162,7 @@ void    InitProfile_Profile39(void) {
 
 
 void    QueryProfile_Profile39(void) {
-#ifdef PROFILE_39_NAMES
+#ifdef PROFILE_40_NAMES
   MonitorString("\n QueryProfile_Profile39");
 #endif
 
@@ -177,7 +177,7 @@ void    QueryProfile_Profile39(void) {
 
 
 void    Read1_Profile(void) {
-#ifdef PROFILE_39_NAMES
+#ifdef PROFILE_40_NAMES
   MonitorString("\n Read1_Profile");
 #endif
 
@@ -189,7 +189,7 @@ void    Read1_Profile(void) {
 
 
 void    Read2_Profile(void) {
-#ifdef PROFILE_39_NAMES
+#ifdef PROFILE_40_NAMES
   MonitorString("\n Read2_Profile");
 #endif
 
@@ -198,7 +198,7 @@ void    Read2_Profile(void) {
 
 
 void    Read3_Profile(void) {
-#ifdef PROFILE_39_NAMES
+#ifdef PROFILE_40_NAMES
   MonitorString("\n Read3_Profile");
 #endif
 
@@ -207,7 +207,7 @@ void    Read3_Profile(void) {
 
 
 bool    UseBlocks_Profile39(void) {
-#ifdef PROFILE_39_NAMES
+#ifdef PROFILE_40_NAMES
   MonitorString("\n UseBlocks_Profile39");
 #endif
 
@@ -216,7 +216,7 @@ bool    UseBlocks_Profile39(void) {
 
 
 void    QueryNextBlock_Profile39(void) {  
-#ifdef PROFILE_39_NAMES
+#ifdef PROFILE_40_NAMES
   MonitorString("\n QueryNextBlock_Profile39");
 #endif
 
@@ -229,7 +229,7 @@ void    QueryNextBlock_Profile39(void) {
 
 
 void    Read4_Profile(void) {
-#ifdef PROFILE_39_NAMES
+#ifdef PROFILE_40_NAMES
   MonitorString("\n Read4_Profile");
 #endif
 
@@ -241,7 +241,7 @@ void    Read4_Profile(void) {
 
 
 void    Read5_Profile(void) {
-#ifdef PROFILE_39_NAMES
+#ifdef PROFILE_40_NAMES
   MonitorString("\n Read5_Profile");
 #endif
 
@@ -251,7 +251,7 @@ void    Read5_Profile(void) {
 
 
 bool2   FinishProfile_Profile39(void) {
-#ifdef PROFILE_39_NAMES
+#ifdef PROFILE_40_NAMES
   MonitorString("\n FinishProfile_Profile39");
 #endif
 

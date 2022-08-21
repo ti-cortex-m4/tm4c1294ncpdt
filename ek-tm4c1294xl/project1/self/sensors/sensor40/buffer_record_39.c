@@ -31,7 +31,7 @@ void    AddRecord39(uint  iwStart) {
 
   uint cwSize = IndexInBuff()-iwStart-3;
 
-#ifdef BUFFER_ARRAY_39
+#ifdef BUFFER_ARRAY_40
   MonitorArray39();
 
   MonitorString("\n AddToBuffer: start="); MonitorIntDec(iwStart);
@@ -44,7 +44,7 @@ void    AddRecord39(uint  iwStart) {
   for (i=0; i<cwSize; i++) {
     uchar b = PopChar();
 
-#ifdef BUFFER_ARRAY_39
+#ifdef BUFFER_ARRAY_40
     MonitorCharHex(b);
     if (i % 16 == 16-1) MonitorString("\n");
 #endif
@@ -52,7 +52,7 @@ void    AddRecord39(uint  iwStart) {
     PushChar39(b);
   }
 
-#ifdef BUFFER_ARRAY_39
+#ifdef BUFFER_ARRAY_40
   MonitorString("\n");
 #endif
 }
@@ -87,7 +87,7 @@ bool    FinishRecord39(void) {
 
   uchar bCount = PopChar39();
 
-#ifdef BUFFER_RECORD_39
+#ifdef BUFFER_RECORD_40
   MonitorString("\n count="); MonitorCharDec(bCount); MonitorString("\n");
 #endif
 
@@ -128,7 +128,7 @@ bool    FinishRecord39(void) {
        mdwValue[c] = PopLong39();
     }
 
-#if BUFFER_RECORD_39
+#if BUFFER_RECORD_40
     MonitorString("\n record ");
     MonitorTime(tm);
     MonitorString(" "); MonitorLongDec(mdwValue[0]);
@@ -154,7 +154,7 @@ bool    FinishRecordProfile39(void) {
 
   uchar bCount = PopChar39();
 
-#ifdef BUFFER_RECORD_39
+#ifdef BUFFER_RECORD_40
   MonitorString("\n count="); MonitorCharDec(bCount); MonitorString("\n");
 #endif
 
