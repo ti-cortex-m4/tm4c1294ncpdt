@@ -1,17 +1,17 @@
 /*------------------------------------------------------------------------------
-caller39.c
+caller40.c
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-#include "caller39.h"
+#include "caller40.h"
 
 
 
-caller39 InitCaller39(void)
+caller40 InitCaller40(void)
 {
-  caller39 c;
+  caller40 c;
 
   c.bNS = 0;
   c.bNR = 0;

@@ -64,7 +64,7 @@ query_profile_39.c
   </GetRequestNormal>
 </GetRequest>
 */
-void    QueryProfile40(caller39  c, time  tm1, time  tm2)
+void    QueryProfile40(caller40  c, time  tm1, time  tm2)
 {
 #ifdef MONITOR_40  
   MonitorString("\n\n QueryProfile40 "); MonitorTime(tm1); MonitorTime(tm2);

@@ -24,7 +24,7 @@ query_next_block_39.c
   </GetRequestForNextDataBlock>
 </GetRequest>
 */
-void    QueryNextBlock39(caller39  c, uchar  bBlockNumber)
+void    QueryNextBlock39(caller40  c, uchar  bBlockNumber)
 {
 #ifdef MONITOR_40_NAMES
   MonitorString("\n\n QueryNextBlock39 "); MonitorCharDec(bBlockNumber);
