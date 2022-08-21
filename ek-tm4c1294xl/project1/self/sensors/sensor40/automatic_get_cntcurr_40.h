@@ -1,8 +1,7 @@
 /*------------------------------------------------------------------------------
-automatic_get_time_39.h
+automatic_get_cntcurr_40.h
 
 
 ------------------------------------------------------------------------------*/
 
-time2   ReadTimeCan40(void);
-time2   ReadTimeCan40_Short(void);
+double2 ReadCntCurr40(void);
