@@ -12,7 +12,7 @@ time39_test.c
 #include "dlms.h"
 #include "error40.h"
 #include "time39.h"
-#include "io39.h"
+#include "io40.h"
 #include "time39.h"
 #include "time39_test.h"
 #include "fragment_open_time_40.h"
@@ -52,25 +52,25 @@ double2 TestTimeCorrect39(void)
   c.bNS++;
   c.bInvokeId++;
   QueryCorrectTime39(c, wDeltaSeconds1);
-  if (Input39() != SER_GOODCHECK) return Fault(2);
+  if (Input40() != SER_GOODCHECK) return Fault(2);
   if (ValidateFrame(c.bNS, c.bNR) != 0) return Fault(3);
 
   c.bNR++;
   RR(c.bNR);
-  if (Input39() != SER_GOODCHECK) return Fault(4);
+  if (Input40() != SER_GOODCHECK) return Fault(4);
   if (ValidateFrame(c.bNS, c.bNR) != 0) return Fault(5);
 
 
   c.bNS++;
   c.bInvokeId++;
   QueryTime39(c);
-  if (Input39() != SER_GOODCHECK) return Fault(6);
+  if (Input40() != SER_GOODCHECK) return Fault(6);
   if (ValidateFrame(c.bNS, c.bNR) != 0) return Fault(7);
   time tmThat2 = ReadTime39();
 
   c.bNR++;
   RR(c.bNR);
-  if (Input39() != SER_GOODCHECK) return Fault(8);
+  if (Input40() != SER_GOODCHECK) return Fault(8);
   if (ValidateFrame(c.bNS, c.bNR) != 0) return Fault(9);
 
 

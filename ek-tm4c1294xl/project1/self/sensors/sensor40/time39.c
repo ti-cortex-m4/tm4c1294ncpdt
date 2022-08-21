@@ -12,7 +12,7 @@ time39.c
 #include "include39.h"
 #include "crc16x25.h"
 #include "dlms_obis.h"
-#include "io39.h"
+#include "io40.h"
 #include "hdlc_address.h"
 #include "dlms_push.h"
 #include "correct39.h"
@@ -62,7 +62,7 @@ void    QueryTime39(caller40  c)
   
   PushChar(0x7E);
 
-  Query39(1000, wSize+2);
+  Query40(1000, wSize+2);
 }
 
 
@@ -136,5 +136,5 @@ void    QueryCorrectTime39(caller40  c, sint  wSeconds)
 
   PushChar(0x7E);
 
-  Query39(1000, wSize+2);
+  Query40(1000, wSize+2);
 }

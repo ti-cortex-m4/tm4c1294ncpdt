@@ -11,7 +11,7 @@ fragment_open_time_39.c
 #include "dlms.h"
 #include "caller40.h"
 #include "time39.h"
-#include "io39.h"
+#include "io40.h"
 #include "error40.h"
 #include "fragment_open_40.h"
 
@@ -32,13 +32,13 @@ time2   FragmentOpenTime40(caller40  *pc)
   (*pc).bNS++;
   (*pc).bInvokeId++;
   QueryTime39(*pc);
-  if (Input39() != SER_GOODCHECK) return Fault(120+1);
+  if (Input40() != SER_GOODCHECK) return Fault(120+1);
   if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(120+2);
   time tm = ReadTime39();
 
   (*pc).bNR++;
   RR((*pc).bNR);
-  if (Input39() != SER_GOODCHECK) return Fault(120+3);
+  if (Input40() != SER_GOODCHECK) return Fault(120+3);
   if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(120+4);
 
   return GetTime0(tm);

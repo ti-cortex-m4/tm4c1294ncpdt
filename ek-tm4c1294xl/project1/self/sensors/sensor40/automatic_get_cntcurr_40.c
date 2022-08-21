@@ -13,7 +13,7 @@ automatic_get_cntcurr_40.c
 #include "../../digitals/digitals.h"
 #include "dlms.h"
 #include "dlms_obis.h"
-#include "io39.h"
+#include "io40.h"
 #include "caller40.h"
 #include "error40.h"
 #include "fragment_open_40.h"
@@ -46,7 +46,7 @@ double2 ReadCntCurr39_Internal(void)
   }
 
   DISC();
-  if (Input39() != SER_GOODCHECK) return Fault(60+5);
+  if (Input40() != SER_GOODCHECK) return Fault(60+5);
 
   return GetDouble0(-1);
 }
@@ -73,7 +73,7 @@ double2 ReadCntCurr40(void)
   }
 
   DISC();
-  if (Input39() != SER_GOODCHECK) return Fault(60+6);
+  if (Input40() != SER_GOODCHECK) return Fault(60+6);
 
   return Fault(60+7);
 }

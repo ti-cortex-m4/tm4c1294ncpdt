@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-io39.c
+io40.c
 
 
 ------------------------------------------------------------------------------*/
@@ -17,11 +17,11 @@ io39.c
 #include "../../digitals/wait_answer.h"
 #include "unpack39.h"
 #include "hdlc_monitor.h"
-#include "io39.h"
+#include "io40.h"
 
 
 
-void    Query39(uint  cwIn, uchar  cbOut)
+void    Query40(uint  cwIn, uchar  cbOut)
 {
   MonitorOutputHDLC();
   Query(cwIn, cbOut, true);
@@ -29,7 +29,7 @@ void    Query39(uint  cwIn, uchar  cbOut)
 
 
 
-serial  Input39(void)
+serial  Input40(void)
 {
   InputStart();
   InitWaitAnswer();

@@ -15,7 +15,7 @@ fragment_profile_39.c
 #include "caller40.h"
 #include "query_profile_39.h"
 #include "query_next_block_39.h"
-#include "io39.h"
+#include "io40.h"
 #include "buffer_record_39.h"
 #include "hdlc_address.h"
 #include "fragment_open_40.h"
@@ -38,7 +38,7 @@ bool    FragmentProfile39(caller40  *pc, time  tm1, time  tm2, bool  fProfile)
   (*pc).bNS++;
   (*pc).bInvokeId++;
   QueryProfile40(*pc, tm1, tm2); // step 40.4
-  if (Input39() != SER_GOODCHECK) return Fault(130+0);
+  if (Input40() != SER_GOODCHECK) return Fault(130+0);
   if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(130+1);
 
   bool fUseBlocks = UseBlocksDMLS(); // step 40.5
@@ -49,7 +49,7 @@ bool    FragmentProfile39(caller40  *pc, time  tm1, time  tm2, bool  fProfile)
   while (!LastSegmentDMLS()) { // true: step 40.7, false: step 40.11
     (*pc).bNR++;
     RR((*pc).bNR); // step 40.8
-    if (Input39() != SER_GOODCHECK) return Fault(130+2);
+    if (Input40() != SER_GOODCHECK) return Fault(130+2);
     if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(130+3);
 
     AddRecord39(6 + GetHdlcAddressesSize()); // step 40.9
@@ -57,7 +57,7 @@ bool    FragmentProfile39(caller40  *pc, time  tm1, time  tm2, bool  fProfile)
 
   (*pc).bNR++;
   RR((*pc).bNR); // step 40.11
-  if (Input39() != SER_GOODCHECK) return Fault(130+4);
+  if (Input40() != SER_GOODCHECK) return Fault(130+4);
   if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(130+5);
 
 
@@ -68,7 +68,7 @@ bool    FragmentProfile39(caller40  *pc, time  tm1, time  tm2, bool  fProfile)
 
     (*pc).bNS++;
     QueryNextBlock39(*pc, bBlockNumber); // step 40.15
-    if (Input39() != SER_GOODCHECK) return Fault(130+6);
+    if (Input40() != SER_GOODCHECK) return Fault(130+6);
     if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(130+7);
 
     fUseBlocks = UseBlocksDMLS(); // step 40.16
@@ -79,7 +79,7 @@ bool    FragmentProfile39(caller40  *pc, time  tm1, time  tm2, bool  fProfile)
     while (!LastSegmentDMLS()) { // true: step 40.18, false: step 40.22
       (*pc).bNR++;
       RR((*pc).bNR); // step 40.19
-      if (Input39() != SER_GOODCHECK) return Fault(130+8);
+      if (Input40() != SER_GOODCHECK) return Fault(130+8);
       if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(130+9);
 
       AddRecord39(6 + GetHdlcAddressesSize()); // step 40.20
@@ -87,7 +87,7 @@ bool    FragmentProfile39(caller40  *pc, time  tm1, time  tm2, bool  fProfile)
 
     (*pc).bNR++;
     RR((*pc).bNR); // step 40.22
-    if (Input39() != SER_GOODCHECK) return Fault(130+10);
+    if (Input40() != SER_GOODCHECK) return Fault(130+10);
     if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(130+11);
   } // repeat: step 40.23 -> step 40.13
 

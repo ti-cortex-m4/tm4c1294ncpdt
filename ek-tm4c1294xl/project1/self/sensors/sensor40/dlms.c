@@ -14,7 +14,7 @@ dlms.c
 #include "../../serial/monitor.h"
 #include "../../digitals/address/ascii_address.h"
 #include "crc16x25.h"
-#include "io39.h"
+#include "io40.h"
 #include "error40.h"
 #include "hdlc_address.h"
 #include "dlms_push.h"
@@ -40,7 +40,7 @@ void    DISC(void)
   PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
   PushChar(0x7E);
 
-  Query39(1000, wSize+2); // 9
+  Query40(1000, wSize+2); // 9
 }
 
 
@@ -92,7 +92,7 @@ void    SNRM(void)
   PushIntLtl(MakeCRC16X25OutBuff(1, wSize-2)); // 30
   PushChar(0x7E);
 
-  Query39(1000, wSize+2); // 34
+  Query40(1000, wSize+2); // 34
 }
 
 
@@ -196,7 +196,7 @@ void    AARQ(uchar  bNS, uchar  bNR)
   PushIntLtl(MakeCRC16X25OutBuff(1, wSize-2));
   PushChar(0x7E);
 
-  Query39(1000, wSize+2); // 70
+  Query40(1000, wSize+2); // 70
 }
 
 
@@ -269,5 +269,5 @@ void    RR(uchar  bNR)
   PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize())); // 5
   PushChar(0x7E);
 
-  Query39(1000, wSize+2); // 9
+  Query40(1000, wSize+2); // 9
 }

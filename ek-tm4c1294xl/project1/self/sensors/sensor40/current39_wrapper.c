@@ -14,7 +14,7 @@ current39.c
 #include "../../devices/devices.h"
 #include "../../digitals/digitals.h"
 #include "../../digitals/current/current_run.h"
-#include "io39.h"
+#include "io40.h"
 #include "dlms.h"
 #include "caller40.h"
 #include "dlms_obis.h"

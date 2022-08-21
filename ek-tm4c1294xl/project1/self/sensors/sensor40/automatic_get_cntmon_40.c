@@ -16,7 +16,7 @@ automatic_get_cntmon_40.c
 #include "dlms.h"
 #include "error40.h"
 #include "time39.h"
-#include "io39.h"
+#include "io40.h"
 #include "hdlc_address.h"
 #include "query_billing_period_39.h"
 #include "query_profile_39.h"
@@ -63,7 +63,7 @@ double2 ReadCntMonCan40_Internal(uchar  ibMon)
     }
 
     DISC();
-    if (Input39() != SER_GOODCHECK) return Fault(70+2);
+    if (Input40() != SER_GOODCHECK) return Fault(70+2);
 
     mpdbChannelsC[0] = db8.mdbValue[0];
     mpdbChannelsC[1] = db8.mdbValue[5];
@@ -96,7 +96,7 @@ double2 ReadCntMonCan40_Internal(uchar  ibMon)
     }
 
     DISC();
-    if (Input39() != SER_GOODCHECK) return Fault(70+4);
+    if (Input40() != SER_GOODCHECK) return Fault(70+4);
 
     mpdbChannelsC[0] = db8.mdbValue[0];
     mpdbChannelsC[1] = db8.mdbValue[5];
@@ -132,7 +132,7 @@ double2 ReadCntMonCan40(uchar  ibMon)
   }
 
   DISC();
-  if (Input39() != SER_GOODCHECK) return Fault(70+5);
+  if (Input40() != SER_GOODCHECK) return Fault(70+5);
 
   return Fault(70+6);
 }

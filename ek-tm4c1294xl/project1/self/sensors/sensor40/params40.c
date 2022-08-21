@@ -18,7 +18,7 @@ params34.c
 #include "dlms.h"
 #include "dlms_obis.h"
 #include "error40.h"
-#include "io39.h"
+#include "io40.h"
 #include "query_register_39.h"
 #include "dlms_read_register.h"
 #include "params40.h"
@@ -151,7 +151,7 @@ float2  ReadParam40_Internal(void)
 
 
   DISC();
-  if (Input39() != SER_GOODCHECK) return Fault(100+8);
+  if (Input40() != SER_GOODCHECK) return Fault(100+8);
 
   return GetFloat0(-1);
 }
