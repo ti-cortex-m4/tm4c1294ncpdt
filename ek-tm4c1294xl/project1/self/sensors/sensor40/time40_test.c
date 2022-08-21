@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-time39_test.c
+time40_test.c
 
 ------------------------------------------------------------------------------*/
 
@@ -13,9 +13,9 @@ time39_test.c
 #include "error40.h"
 #include "time40.h"
 #include "io40.h"
-#include "time40.h"
-#include "time39_test.h"
 #include "fragment_open_time_40.h"
+#include "time40.h"
+#include "time40_test.h"
 
 
 
