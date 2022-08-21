@@ -11,7 +11,7 @@ profile39_wrapper.c
 #include "include39.h"
 #include "dlms.h"
 #include "dlms_obis.h"
-#include "caller39.h"
+#include "caller40.h"
 #include "time39.h"
 #include "hdlc_address.h"
 #include "hdlc_monitor.h"
