@@ -10,7 +10,7 @@ Blue Book: 4.1.5 Common data types
 #include "../../serial/ports2.h"
 #include "../../serial/ports_devices.h"
 #include "../../serial/monitor.h"
-#include "include39.h"
+#include "include40.h"
 #include "error40.h"
 #include "hdlc_address.h"
 #include "dlms_read_data.h"
