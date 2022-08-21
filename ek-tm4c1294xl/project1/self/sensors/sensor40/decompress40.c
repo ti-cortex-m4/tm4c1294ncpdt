@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-unpack39.c
+decompress40.c
 
 
 ------------------------------------------------------------------------------*/
@@ -9,11 +9,11 @@ unpack39.c
 #include "../../serial/ports.h"
 #include "../../serial/ports2.h"
 #include "../../serial/monitor.h"
-#include "unpack39.h"
+#include "decompress40.h"
 
 
 
-void    Unpack39(void)
+void    Decompress40(void)
 {
   if (mpSerial[ibPort] != SER_INPUT_MASTER)
     return;

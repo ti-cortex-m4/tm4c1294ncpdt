@@ -43,7 +43,7 @@ serial  Input40(void)
     if (GetWaitAnswer()) { mpSerial[ibPort] = SER_BADLINK; break; }
 
     if (mpSerial[ibPort] == SER_INPUT_MASTER)
-      Unpack39();
+      Decompress40();
 
     if (mpSerial[ibPort] == SER_POSTINPUT_MASTER)
     {
