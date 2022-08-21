@@ -28,7 +28,7 @@ static time2 Fault(uchar  bError)
 
 time2   ReadTimeCan39_Internal(void)
 {
-  caller39 c = InitCaller39();
+  caller40 c = InitCaller40();
 
   time2 tm2 = FragmentOpenTime39(&c);
   if (!tm2.fValid) return Fault(50+0);

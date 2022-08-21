@@ -29,7 +29,7 @@ static bool Fault(uchar  bError)
 
 
 
-bool    FragmentProfile39(caller39  *pc, time  tm1, time  tm2, bool  fProfile)
+bool    FragmentProfile39(caller40  *pc, time  tm1, time  tm2, bool  fProfile)
 {
   InitRecord39(); // step 40.2
 
@@ -108,7 +108,7 @@ double2 TestFragmentProfile39(void)
 
   MonitorOpen(0);
 
-  caller39 c = InitCaller39();
+  caller40 c = InitCaller40();
 
   if (FragmentOpen39(&c) != 0) return GetDouble2Error();
 

@@ -1,11 +1,11 @@
 /*------------------------------------------------------------------------------
-caller39.h
+caller40.h
 
 
 ------------------------------------------------------------------------------*/
 
-#ifndef __CALLER_39
-#define __CALLER_39
+#ifndef __CALLER_40
+#define __CALLER_40
 
 
 typedef struct
@@ -13,11 +13,11 @@ typedef struct
   uchar         bNS;
   uchar         bNR;
   uchar         bInvokeId;
-} caller39;
+} caller40;
 
 
 #endif
 
 
 
-caller39 InitCaller39(void);
+caller40 InitCaller40(void);

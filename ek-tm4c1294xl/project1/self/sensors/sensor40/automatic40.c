@@ -47,7 +47,7 @@ bool    Automatic40(void)
 {
   Clear();
 
-  caller39 c = InitCaller39();
+  caller40 c = InitCaller40();
 
   uchar bError = FragmentOpen39(&c);
   if (bError != 0) return Fault(80+0);

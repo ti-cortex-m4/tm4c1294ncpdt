@@ -13,7 +13,7 @@ fragment_open_39.c
 
 
 
-uchar   FragmentOpen39(caller39  *pc)
+uchar   FragmentOpen39(caller40  *pc)
 {
   DISC();
   if (Input39() != SER_GOODCHECK) return Error40(110+0);

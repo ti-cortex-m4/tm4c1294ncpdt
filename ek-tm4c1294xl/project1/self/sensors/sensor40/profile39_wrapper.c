@@ -26,7 +26,7 @@ profile39_wrapper.c
 
 
 
-static caller39         c;
+static caller40         c;
 
 static sint             wDeltaSeconds;
 
@@ -45,7 +45,7 @@ void    DISC_Profile39(void) {
   MonitorString("\n DISC_Profile39");
 #endif
 
-  c = InitCaller39();
+  c = InitCaller40();
   DISC();
 }
 

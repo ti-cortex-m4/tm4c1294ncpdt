@@ -34,7 +34,7 @@ static status BadDigital(uchar  bError)
 
 status  CntMonCanTariff39_Internal(uchar  ibMon, uchar  ibTariff)
 {
-  caller39 c = InitCaller39();
+  caller40 c = InitCaller40();
   
   time2 tm2 = FragmentOpenTime39(&c);
   if (!tm2.fValid) return BadDigital(90+0);

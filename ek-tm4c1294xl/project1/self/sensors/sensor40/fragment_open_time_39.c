@@ -23,7 +23,7 @@ static time2 Fault(uchar  bError)
 
 
 
-time2   FragmentOpenTime39(caller39  *pc)
+time2   FragmentOpenTime39(caller40  *pc)
 {
   uchar bError = FragmentOpen39(pc);
   if (bError != 0) return GetTime2Error1(120+0);

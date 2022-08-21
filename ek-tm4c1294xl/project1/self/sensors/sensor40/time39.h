@@ -8,7 +8,7 @@ time39.h
 
 
 
-void    QueryTime39(caller39  c);
+void    QueryTime39(caller40  c);
 time    ReadTime39(void);
 
-void    QueryCorrectTime39(caller39  c, sint  wSeconds);
+void    QueryCorrectTime39(caller40  c, sint  wSeconds);

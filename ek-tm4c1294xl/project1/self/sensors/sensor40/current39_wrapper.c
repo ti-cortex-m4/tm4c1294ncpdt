@@ -29,7 +29,7 @@ static uchar            ibLine39;
 
 
 
-static caller39         c;
+static caller40         c;
 
 static ulong64_         counter[4];
 static double2          scaler;
@@ -57,7 +57,7 @@ uchar   GetLine39(void)
 
 void    DISC_Current39(void)
 {
-  c = InitCaller39();
+  c = InitCaller40();
   DISC();
 }
 

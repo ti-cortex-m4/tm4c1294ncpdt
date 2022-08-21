@@ -15,7 +15,7 @@ query_id_39.c
 
 
 
-void    QueryId39(caller39 c)
+void    QueryId39(caller40 c)
 {
 #ifdef MONITOR_40_NAMES
   MonitorString("\n\n QueryId39 ");

@@ -4,4 +4,4 @@ query_next_block_39.h
 
 ------------------------------------------------------------------------------*/
 
-void    QueryNextBlock39(caller39  c, uchar  bBlockNumber);
+void    QueryNextBlock39(caller40  c, uchar  bBlockNumber);

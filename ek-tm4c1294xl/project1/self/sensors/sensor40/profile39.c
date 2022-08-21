@@ -181,7 +181,7 @@ bool    ReadHeader40(void)
 
 #ifdef  MONITOR_40
 
-uchar   TestProfile40_Internal(caller39*  pc)
+uchar   TestProfile40_Internal(caller40*  pc)
 {  
   time2 tm2 = FragmentOpenTime39(pc);
   if (!tm2.fValid) return 1;
@@ -218,7 +218,7 @@ double2 TestProfile40(void)
 
   MonitorOpen(0);
 
-  caller39 c = InitCaller39();
+  caller40 c = InitCaller40();
 
   uchar bError = TestProfile40_Internal(&c);
   if (bError != 0)  {

@@ -40,7 +40,7 @@ static double2 Fault(uchar  bError)
 
 double2 ReadCntMonCan38_Internal(uchar  ibMon)
 {
-  caller39 c = InitCaller39();
+  caller40 c = InitCaller40();
 
   time2 tm2 = FragmentOpenTime39(&c);
   if (!tm2.fValid) return Fault(70+0);
