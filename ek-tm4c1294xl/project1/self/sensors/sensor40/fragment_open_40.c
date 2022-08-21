@@ -9,6 +9,7 @@ fragment_open_40.c
 #include "caller40.h"
 #include "io40.h"
 #include "error40.h"
+#include "dlms_aare.h"
 #include "fragment_open_40.h"
 
 
