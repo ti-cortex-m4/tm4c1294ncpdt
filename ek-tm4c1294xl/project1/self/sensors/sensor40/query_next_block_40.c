@@ -24,10 +24,10 @@ query_next_block_40.c
   </GetRequestForNextDataBlock>
 </GetRequest>
 */
-void    QueryNextBlock39(caller40  c, uchar  bBlockNumber)
+void    QueryNextBlock40(caller40  c, uchar  bBlockNumber)
 {
 #ifdef MONITOR_40_NAMES
-  MonitorString("\n\n QueryNextBlock39 "); MonitorCharDec(bBlockNumber);
+  MonitorString("\n\n QueryNextBlock40 "); MonitorCharDec(bBlockNumber);
 #endif  
 
   uint wSize = 17 + GetHdlcAddressesSize();

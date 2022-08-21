@@ -223,7 +223,7 @@ void    QueryNextBlock_Profile39(void) {
   bBlockNumber++; // step 40.14
 
   c.bNS++;
-  QueryNextBlock39(c, bBlockNumber); // step 40.15
+  QueryNextBlock40(c, bBlockNumber); // step 40.15
 }
 
 
