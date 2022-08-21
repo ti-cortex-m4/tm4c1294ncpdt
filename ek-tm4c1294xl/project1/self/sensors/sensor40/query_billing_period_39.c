@@ -15,10 +15,10 @@ query_billing_period_39.c
 
 
 
-void    QueryBillingPeriod40(const obis_t  obisBillingPeriod, uchar  bNS, uchar  bNR, uchar  bInvokeId, date  dt)
+void    QueryBillingPeriod40(const obis_t  obisBillingPeriod, caller40  c, date  dt)
 {
 #ifdef MONITOR_40_NAMES
-  MonitorString("\n\n QueryBillingPeriod39 ");
+  MonitorString("\n\n QueryBillingPeriod40 ");
   MonitorCharDec(dt.bDay); MonitorString("."); MonitorCharDec(dt.bMonth); MonitorString("."); MonitorCharDec(dt.bYear);
 #endif
 
@@ -30,7 +30,7 @@ void    QueryBillingPeriod40(const obis_t  obisBillingPeriod, uchar  bNS, uchar 
   PushFormatDLMS(wSize);
   PushHdlcAddresses();
 
-  PushChar(((bNR & 0x07) << 5) | 0x10 | ((bNS & 0x07) << 1) | 0x00);
+  PushChar(((c.bNR & 0x07) << 5) | 0x10 | ((c.bNS & 0x07) << 1) | 0x00);
 
   PushIntLtl(MakeCRC16X25OutBuff(1, 3+GetHdlcAddressesSize()));
 
@@ -42,7 +42,7 @@ void    QueryBillingPeriod40(const obis_t  obisBillingPeriod, uchar  bNS, uchar 
 
   PushChar(0xC0); // Get-Request
   PushChar(0x01); // Get-Request-Normal
-  PushChar(0xC0 | (bInvokeId % 16)); // Invoke-Id-And-Priority
+  PushChar(0xC0 | (c.bInvokeId % 16)); // Invoke-Id-And-Priority
 
   PushChar(0x00); // ?
 
