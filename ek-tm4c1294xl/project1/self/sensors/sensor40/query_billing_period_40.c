@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-query_billing_period_39.c
+query_billing_period_40.c
 
 
 ------------------------------------------------------------------------------*/
@@ -11,7 +11,7 @@ query_billing_period_39.c
 #include "io40.h"
 #include "hdlc_address.h"
 #include "dlms_push.h"
-#include "query_billing_period_39.h"
+#include "query_billing_period_40.h"
 
 
 
