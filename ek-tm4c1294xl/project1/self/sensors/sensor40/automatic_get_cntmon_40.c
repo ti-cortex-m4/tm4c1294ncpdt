@@ -18,7 +18,6 @@ automatic_get_cntmon_40.c
 #include "time40.h"
 #include "io40.h"
 #include "hdlc_address.h"
-#include "query_billing_period_39.h"
 #include "query_profile_39.h"
 #include "query_next_block_40.h"
 #include "read_engmon_39.h"
@@ -26,6 +25,7 @@ automatic_get_cntmon_40.c
 #include "fragment_open_time_40.h"
 #include "automatic_get_cntmon_40.h"
 #include "fragment_cntmon_40.h"
+#include "query_billing_period_40.h"
 
 
 
