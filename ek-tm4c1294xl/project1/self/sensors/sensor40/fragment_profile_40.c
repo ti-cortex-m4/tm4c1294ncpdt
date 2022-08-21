@@ -12,7 +12,7 @@ fragment_profile_40.c
 #include "error40.h"
 #include "caller40.h"
 #include "query_profile_39.h"
-#include "query_next_block_39.h"
+#include "query_next_block_40.h"
 #include "io40.h"
 #include "buffer_record_39.h"
 #include "hdlc_address.h"
