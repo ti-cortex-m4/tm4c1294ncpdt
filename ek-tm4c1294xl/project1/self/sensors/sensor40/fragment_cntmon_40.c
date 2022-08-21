@@ -32,7 +32,7 @@ double8 FragmentCntMonCan40(const obis_t  obisBillingPeriod, const obis_t  obisS
 {
   (*pc).bNS++;
   (*pc).bInvokeId++;
-  QueryBillingPeriod40(obisBillingPeriod, (*pc).bNS, (*pc).bNR, (*pc).bInvokeId, dt);
+  QueryBillingPeriod40(obisBillingPeriod, *pc, dt);
   if (Input40() != SER_GOODCHECK) return Fault(125+0);
   if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(125+1);
 
