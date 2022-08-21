@@ -23,7 +23,6 @@ automatic_get_cntmon_40.c
 #include "query_next_block_39.h"
 #include "read_engmon_39.h"
 #include "dlms_read_register.h"
-#include "buffer_record_39.h"
 #include "fragment_open_time_40.h"
 #include "automatic_get_cntmon_40.h"
 #include "fragment_cntmon_40.h"
