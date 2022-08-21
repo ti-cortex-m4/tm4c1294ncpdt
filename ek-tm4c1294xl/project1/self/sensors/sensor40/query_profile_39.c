@@ -15,55 +15,6 @@ query_profile_40.c
 
 
 
-/*
-<GetRequest>
-  <GetRequestNormal>
-    <!--Priority: HIGH ServiceClass: UN_CONFIRMED invokeID: 10-->
-    <InvokeIdAndPriority Value="8A" />
-    <AttributeDescriptor>
-      <!--PROFILE_GENERIC-->
-      <ClassId Value="0007" />
-      <!--1.0.99.1.0.255-->
-      <InstanceId Value="0100630100FF" />
-      <AttributeId Value="02" />
-    </AttributeDescriptor>
-    <AccessSelection>
-      <AccessSelector Value="01" />
-      <AccessParameters>
-        <Structure Qty="04" >
-          <Structure Qty="04" >
-            <UInt16 Value="0008" />
-            <!--0.0.1.0.0.255-->
-            <OctetString Value="0000010000FF" />
-            <Int8 Value="02" />
-            <UInt16 Value="0000" />
-          </Structure>
-          <!--2020-04-14 00:00:00-->
-          <OctetString Value="07E4040EFF000000FF8000FF" />
-          <!--2020-04-14 23:59:59-->
-          <OctetString Value="07E4040EFF173B3BFF8000FF" />
-          <Array Qty="02" >
-            <Structure Qty="04" >
-              <UInt16 Value="0008" />
-              <!--0.0.1.0.0.255-->
-              <OctetString Value="0000010000FF" />
-              <Int8 Value="02" />
-              <UInt16 Value="0000" />
-            </Structure>
-            <Structure Qty="04" >
-              <UInt16 Value="0003" />
-              <!--1.0.15.8.0.255-->
-              <OctetString Value="01000F0800FF" />
-              <Int8 Value="02" />
-              <UInt16 Value="0000" />
-            </Structure>
-          </Array>
-        </Structure>
-      </AccessParameters>
-    </AccessSelection>
-  </GetRequestNormal>
-</GetRequest>
-*/
 void    QueryProfile40(caller40  c, time  tm1, time  tm2)
 {
 #ifdef MONITOR_40  
@@ -207,3 +158,54 @@ void    QueryProfile40(caller40  c, time  tm1, time  tm2)
   Query40(1000, wSize+2);
 }
 
+
+
+/*
+<GetRequest>
+  <GetRequestNormal>
+    <!--Priority: HIGH ServiceClass: UN_CONFIRMED invokeID: 10-->
+    <InvokeIdAndPriority Value="8A" />
+    <AttributeDescriptor>
+      <!--PROFILE_GENERIC-->
+      <ClassId Value="0007" />
+      <!--1.0.99.1.0.255-->
+      <InstanceId Value="0100630100FF" />
+      <AttributeId Value="02" />
+    </AttributeDescriptor>
+    <AccessSelection>
+      <AccessSelector Value="01" />
+      <AccessParameters>
+        <Structure Qty="04" >
+          <Structure Qty="04" >
+            <UInt16 Value="0008" />
+            <!--0.0.1.0.0.255-->
+            <OctetString Value="0000010000FF" />
+            <Int8 Value="02" />
+            <UInt16 Value="0000" />
+          </Structure>
+          <!--2020-04-14 00:00:00-->
+          <OctetString Value="07E4040EFF000000FF8000FF" />
+          <!--2020-04-14 23:59:59-->
+          <OctetString Value="07E4040EFF173B3BFF8000FF" />
+          <Array Qty="02" >
+            <Structure Qty="04" >
+              <UInt16 Value="0008" />
+              <!--0.0.1.0.0.255-->
+              <OctetString Value="0000010000FF" />
+              <Int8 Value="02" />
+              <UInt16 Value="0000" />
+            </Structure>
+            <Structure Qty="04" >
+              <UInt16 Value="0003" />
+              <!--1.0.15.8.0.255-->
+              <OctetString Value="01000F0800FF" />
+              <Int8 Value="02" />
+              <UInt16 Value="0000" />
+            </Structure>
+          </Array>
+        </Structure>
+      </AccessParameters>
+    </AccessSelection>
+  </GetRequestNormal>
+</GetRequest>
+*/
