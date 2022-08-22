@@ -26,12 +26,12 @@ correct39_wrapper.c
 correct39_wrapper.h
 +	crc16x25.c
 +	crc16x25.h
-current39_wrapper.c
++	current39_wrapper.c
 +	current39_wrapper.h
 +	dlms.c
 +	dlms.h
-dlms_aare.c
-dlms_aare.h
++	dlms_aare.c
++	dlms_aare.h
 +	dlms_obis.c
 +	dlms_obis.h
 +	dlms_push.c
