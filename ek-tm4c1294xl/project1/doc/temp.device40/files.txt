@@ -50,8 +50,8 @@ fragment_cntmon_39.h
 +	fragment_open_40.h
 +	fragment_open_time_40.c
 +	fragment_open_time_40.h
-fragment_profile_39.c
-fragment_profile_39.h
++	fragment_profile_39.c
++	fragment_profile_39.h
 +	hdlc_address.c
 +	hdlc_address.h
 +	hdlc_monitor.c
