@@ -5,19 +5,11 @@ dlms_aare.c
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-//#include "../../memory/mem_digitals.h"
-//#include "../../time/delay.h"
-//#include "../../display/display.h"
-//#include "../../serial/ports.h"
-//#include "../../serial/ports2.h"
-//#include "../../serial/ports_devices.h"
-//#include "../../serial/monitor.h"
-//#include "../../digitals/address/ascii_address.h"
-//#include "crc16x25.h"
-//#include "io40.h"
-//#include "error40.h"
-//#include "hdlc_address.h"
-//#include "dlms_push.h"
+#include "../../time/delay.h"
+#include "../../display/display.h"
+#include "../../serial/ports.h"
+#include "error40.h"
+#include "hdlc_address.h"
 #include "dlms_aare.h"
 
 
