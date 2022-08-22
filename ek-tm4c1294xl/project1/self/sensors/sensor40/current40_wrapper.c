@@ -25,30 +25,30 @@ current39.c
 
 
 
-static uchar            ibLine40;
+static uchar            ibLine;
 
 static caller40         c;
 
-static ulong64_         counter[4];
+static ulong64_         mddwCounter[4];
 static double2          dbScaler;
 
 
 
 void    ClearLine40(void)
 {
-  ibLine40 = 0;
+  ibLine = 0;
 }
 
 
 uchar   IncLine40(void)
 {
-  return ++ibLine40;
+  return ++ibLine;
 }
 
 
 uchar   GetLine40(void)
 {
-  return ibLine40;
+  return ibLine;
 }
 
 
@@ -90,19 +90,19 @@ bool    ValidateFrame_Current40(void)
 void    QueryValue_Current40(void)
 {
 #ifdef MONITOR_40_NAMES
-  MonitorString("\n\n QueryValue_Current40 ");  MonitorCharDec(ibLine40);
+  MonitorString("\n\n QueryValue_Current40 ");  MonitorCharDec(ibLine);
 #endif
 
   c.bNS++;
   c.bInvokeId++;
-  QueryGetRegisterValueDLMS(obisEngAbs[ibLine40], c);
+  QueryGetRegisterValueDLMS(obisEngAbs[ibLine], c);
 }
 
 
 bool    ReadValue_Current40(void)
 {
-  counter[ibLine40] = ReadUnsignedValueDLSM();
-  return counter[ibLine40].fValid;
+  mddwCounter[ibLine] = ReadUnsignedValueDLSM();
+  return mddwCounter[ibLine].fValid;
 }
 
 
@@ -134,8 +134,8 @@ void    ReadCurrent40(void)
   uchar i;
   for (i=0; i<4; i++)
   {
-    uint64_t ddwCounter = counter[i].ddwValue;
-    mpdwBaseDig[i] = ((double)ddwCounter * scaler / 1000) * mpdbPulseMnt[ibDig];
+    uint64_t counter = mddwCounter[i].ddwValue;
+    mpdwBaseDig[i] = ((double)counter * scaler / 1000) * mpdbPulseMnt[ibDig];
   }
 
   MakeCurrent();
