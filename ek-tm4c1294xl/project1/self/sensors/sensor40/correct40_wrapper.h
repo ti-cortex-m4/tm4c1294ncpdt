@@ -1,14 +1,14 @@
 /*------------------------------------------------------------------------------
-correct39_wrapper.h
+correct40_wrapper.h
 
 
 ------------------------------------------------------------------------------*/
 
-void    Init_Correct39(void);
+void    Init_Correct40(void);
 
-uchar   GetCounter_Correct39(void);
+uchar   GetCounter_Correct40(void);
 
-void    SaveFirstDelta_Current39(uint  wDelta);
+void    SaveFirstDelta_Current40(uint  wDelta);
 
-bool    CheckNextDelta_Current39(uint  wDelta);
-void    SaveNextDelta_Current39(void);
+bool    CheckNextDelta_Current40(uint  wDelta);
+void    SaveNextDelta_Current40(void);

@@ -2,42 +2,42 @@
 
     case DEV_TIME1_O_40P:
       Clear(); ShowLo(szRepeats);
-      sprintf(szLo+8,"%1u",GetCounter_Correct39()+1); DelayInf();
+      sprintf(szLo+8,"%1u",GetCounter_Correct40()+1); DelayInf();
 
       cbRepeat = MaxRepeats();
-      QueryTime_Profile39();
+      QueryTime_Profile40();
       SetCurr(DEV_TIME1_I_40P);
       break;
 
     case DEV_TIME1_I_40P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
-        if (!ValidateFrame_Profile39()) {
-          PROFILE39_REPEAT_OR_ERROR(210+7, QueryTime_Profile39(), DEV_TIME1_I_40P)
+        if (!ValidateFrame_Profile40()) {
+          PROFILE40_REPEAT_OR_ERROR(210+7, QueryTime_Profile40(), DEV_TIME1_I_40P)
         } else {
-          ReadTime_Profile39();
+          ReadTime_Profile40();
           MakePause(DEV_RR_TIME1_O_40P);
         }
       } else {
-        PROFILE39_REPEAT_OR_ERROR(210+8, QueryTime_Profile39(), DEV_TIME1_I_40P)
+        PROFILE40_REPEAT_OR_ERROR(210+8, QueryTime_Profile40(), DEV_TIME1_I_40P)
       }
       break;
 
 
     case DEV_RR_TIME1_O_40P:
       cbRepeat = MaxRepeats();
-      RR_Profile39();
+      RR_Profile40();
       SetCurr(DEV_RR_TIME1_I_40P);
       break;
 
     case DEV_RR_TIME1_I_40P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
-        if (!ValidateFrame_Profile39()) {
-          PROFILE39_REPEAT_OR_ERROR(210+9, RR_Profile39(), DEV_RR_TIME1_I_40P)
+        if (!ValidateFrame_Profile40()) {
+          PROFILE40_REPEAT_OR_ERROR(210+9, RR_Profile40(), DEV_RR_TIME1_I_40P)
         } else {
           MakePause(DEV_CORRECT_40P);
         }  
       } else {
-        PROFILE39_REPEAT_OR_ERROR(210+10, RR_Profile39(), DEV_RR_TIME1_I_40P)
+        PROFILE40_REPEAT_OR_ERROR(210+10, RR_Profile40(), DEV_RR_TIME1_I_40P)
       }
       break;
 
@@ -62,19 +62,19 @@
           }
           else if (dwDelta < wLIMITCORRECT_40)
           {
-            if (GetCounter_Correct39() == 0)
+            if (GetCounter_Correct40() == 0)
             {
-              SaveFirstDelta_Current39(dwDelta);
+              SaveFirstDelta_Current40(dwDelta);
 
-              SetCorrectSecond39(dwSecondThis - dwSecondThat);
+              SetCorrectSecond40(dwSecondThis - dwSecondThat);
               ShowLo(szCorrectYes); DelayInf();
               MakePause(DEV_CORRECT_O_40P); // коррекция времени
             }
             else
             {
-              if (CheckNextDelta_Current39(dwDelta))
+              if (CheckNextDelta_Current40(dwDelta))
               {
-                SaveNextDelta_Current39();
+                SaveNextDelta_Current40();
 
                 MakeLongPause(DEV_TIME1_O_40P, 1); // снова проверяем время
               }
@@ -93,38 +93,38 @@
 
     case DEV_CORRECT_O_40P:
       cbRepeat = MaxRepeats();
-      QueryCorrect_Profile39();
+      QueryCorrect_Profile40();
       SetCurr(DEV_CORRECT_I_40P);
       break;
 
     case DEV_CORRECT_I_40P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
-        if (!ValidateFrame_Profile39()) {
-          PROFILE39_REPEAT_OR_ERROR(210+11, QueryCorrect_Profile39(), DEV_CORRECT_I_40P)
+        if (!ValidateFrame_Profile40()) {
+          PROFILE40_REPEAT_OR_ERROR(210+11, QueryCorrect_Profile40(), DEV_CORRECT_I_40P)
         } else {
           MakePause(DEV_RR_CORRECT_O_40P);
         }
       } else {
-        PROFILE39_REPEAT_OR_ERROR(210+12, QueryCorrect_Profile39(), DEV_CORRECT_I_40P)
+        PROFILE40_REPEAT_OR_ERROR(210+12, QueryCorrect_Profile40(), DEV_CORRECT_I_40P)
       }
       break;
 
 
     case DEV_RR_CORRECT_O_40P:
       cbRepeat = MaxRepeats();
-      RR_Profile39();
+      RR_Profile40();
       SetCurr(DEV_RR_CORRECT_I_40P);
       break;
 
     case DEV_RR_CORRECT_I_40P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
-        if (!ValidateFrame_Profile39()) {
-          PROFILE39_REPEAT_OR_ERROR(210+13, RR_Profile39(), DEV_RR_CORRECT_I_40P)
+        if (!ValidateFrame_Profile40()) {
+          PROFILE40_REPEAT_OR_ERROR(210+13, RR_Profile40(), DEV_RR_CORRECT_I_40P)
         } else {
           MakeLongPause(DEV_TIME1_O_40P, 1); // снова проверяем время
         }  
       } else {
-        PROFILE39_REPEAT_OR_ERROR(210+14, RR_Profile39(), DEV_RR_CORRECT_I_40P)
+        PROFILE40_REPEAT_OR_ERROR(210+14, RR_Profile40(), DEV_RR_CORRECT_I_40P)
       }
       break;
 
@@ -133,20 +133,20 @@
       Clear(); ShowPercent(65);
 
       cbRepeat = MaxRepeats();
-      QueryTime_Profile39();
+      QueryTime_Profile40();
       SetCurr(DEV_TIME2_I_40P);
       break;
 
     case DEV_TIME2_I_40P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
-        if (!ValidateFrame_Profile39()) {
-          PROFILE39_REPEAT_OR_ERROR(210+15, QueryTime_Profile39(), DEV_TIME2_I_40P)
+        if (!ValidateFrame_Profile40()) {
+          PROFILE40_REPEAT_OR_ERROR(210+15, QueryTime_Profile40(), DEV_TIME2_I_40P)
         } else {
-          ReadTime_Profile39();
+          ReadTime_Profile40();
           MakePause(DEV_RR_TIME2_O_40P);
         }
       } else {
-        PROFILE39_REPEAT_OR_ERROR(210+16, QueryTime_Profile39(), DEV_TIME2_I_40P)
+        PROFILE40_REPEAT_OR_ERROR(210+16, QueryTime_Profile40(), DEV_TIME2_I_40P)
       }
       break;
 
@@ -155,18 +155,18 @@
       Clear(); ShowPercent(66);
 
       cbRepeat = MaxRepeats();
-      RR_Profile39();
+      RR_Profile40();
       SetCurr(DEV_RR_TIME2_I_40P);
       break;
 
     case DEV_RR_TIME2_I_40P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
-        if (!ValidateFrame_Profile39()) {
-          PROFILE39_REPEAT_OR_ERROR(210+17, RR_Profile39(), DEV_RR_TIME2_I_40P)
+        if (!ValidateFrame_Profile40()) {
+          PROFILE40_REPEAT_OR_ERROR(210+17, RR_Profile40(), DEV_RR_TIME2_I_40P)
         } else {
           MakePause(DEV_SCALER_O_40P);
         }  
       } else {
-        PROFILE39_REPEAT_OR_ERROR(210+18, RR_Profile39(), DEV_RR_TIME2_I_40P)
+        PROFILE40_REPEAT_OR_ERROR(210+18, RR_Profile40(), DEV_RR_TIME2_I_40P)
       }
       break;

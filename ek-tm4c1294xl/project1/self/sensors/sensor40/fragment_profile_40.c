@@ -33,7 +33,7 @@ static bool Fault(uchar  bError)
 
 bool    FragmentProfile40(caller40  *pc, time  tm1, time  tm2)
 {
-  InitRecord39(); // step 40.2
+  InitRecord40(); // step 40.2
 
 
   (*pc).bNS++;
@@ -45,7 +45,7 @@ bool    FragmentProfile40(caller40  *pc, time  tm1, time  tm2)
   bool fUseBlocks = UseBlocksDMLS(); // step 40.5
   bool fLastBlock = LastBlockDMLS();
 
-  AddRecord39(fUseBlocks ? 19 + GetHdlcAddressesSize() : 13 + GetHdlcAddressesSize()); // step 40.6
+  AddRecord40(fUseBlocks ? 19 + GetHdlcAddressesSize() : 13 + GetHdlcAddressesSize()); // step 40.6
 
   while (!LastSegmentDMLS()) { // true: step 40.7, false: step 40.11
     (*pc).bNR++;
@@ -53,7 +53,7 @@ bool    FragmentProfile40(caller40  *pc, time  tm1, time  tm2)
     if (Input40() != SER_GOODCHECK) return Fault(130+2);
     if (ValidateFrameHDLC((*pc).bNS, (*pc).bNR) != 0) return Fault(130+3);
 
-    AddRecord39(6 + GetHdlcAddressesSize()); // step 40.9
+    AddRecord40(6 + GetHdlcAddressesSize()); // step 40.9
   } // repeat: step 40.10 -> step 40.7
 
   (*pc).bNR++;
@@ -75,7 +75,7 @@ bool    FragmentProfile40(caller40  *pc, time  tm1, time  tm2)
     fUseBlocks = UseBlocksDMLS(); // step 40.16
     fLastBlock = LastBlockDMLS();
 
-    AddRecord39(19 + GetHdlcAddressesSize()); // step 40.17
+    AddRecord40(19 + GetHdlcAddressesSize()); // step 40.17
 
     while (!LastSegmentDMLS()) { // true: step 40.18, false: step 40.22
       (*pc).bNR++;
@@ -83,7 +83,7 @@ bool    FragmentProfile40(caller40  *pc, time  tm1, time  tm2)
       if (Input40() != SER_GOODCHECK) return Fault(130+8);
       if (ValidateFrameHDLC((*pc).bNS, (*pc).bNR) != 0) return Fault(130+9);
 
-      AddRecord39(6 + GetHdlcAddressesSize()); // step 40.20
+      AddRecord40(6 + GetHdlcAddressesSize()); // step 40.20
     } // repeat: step 40.21 -> step 40.18
 
     (*pc).bNR++;
@@ -128,7 +128,7 @@ double2 TestFragmentProfile39(void)
   if (!FragmentProfile40(&c, tm1, tm2))
     return GetDouble2Error();
 
-  if (!FinishRecord39())
+  if (!FinishRecord40())
     return GetDouble2Error();
 
   return GetDouble0(0);

@@ -37,12 +37,12 @@ static uchar            bBlockNumber;
 
 
 
-void    DISC_Profile39(void) {
+void    DISC_Profile40(void) {
 #ifdef PROFILE_40_NAMES
   fMonitorLogBasic = true;
   fMonitorLogHex = true;
 
-  MonitorString("\n DISC_Profile39");
+  MonitorString("\n DISC_Profile40");
 #endif
 
   c = InitCaller40();
@@ -50,28 +50,28 @@ void    DISC_Profile39(void) {
 }
 
 
-void    SNRM_Profile39(void)
+void    SNRM_Profile40(void)
 {
 #ifdef PROFILE_40_NAMES
-  MonitorString("\n SNRM_Profile39");
+  MonitorString("\n SNRM_Profile40");
 #endif
 
   SNRM();
 }
 
 
-void    AARQ_Profile39(void) {
+void    AARQ_Profile40(void) {
 #ifdef PROFILE_40_NAMES
-  MonitorString("\n AARQ_Profile39");
+  MonitorString("\n AARQ_Profile40");
 #endif
 
   AARQ(c.bNS, c.bNR);
 }
 
 
-void    RR_Profile39(void) {
+void    RR_Profile40(void) {
 #ifdef PROFILE_40_NAMES
-  MonitorString("\n RR_Profile39");
+  MonitorString("\n RR_Profile40");
 #endif
 
   c.bNR++;
@@ -80,16 +80,16 @@ void    RR_Profile39(void) {
 
 
 
-bool    ValidateFrame_Profile39(void)
+bool    ValidateFrame_Profile40(void)
 {
   return ValidateFrameHDLC(c.bNS, c.bNR) == 0;
 }
 
 
 
-void    QueryTime_Profile39(void) {
+void    QueryTime_Profile40(void) {
 #ifdef PROFILE_40_NAMES
-  MonitorString("\n QueryTime_Profile39");
+  MonitorString("\n QueryTime_Profile40");
 #endif
 
   c.bNS++;
@@ -98,9 +98,9 @@ void    QueryTime_Profile39(void) {
 }
 
 
-void    ReadTime_Profile39(void) {
+void    ReadTime_Profile40(void) {
 #ifdef PROFILE_40_NAMES
-  MonitorString("\n ReadTime_Profile39");
+  MonitorString("\n ReadTime_Profile40");
 #endif
 
   SetTime_Profile40(ReadTime40());
@@ -108,16 +108,16 @@ void    ReadTime_Profile39(void) {
 
 
 
-void    SetCorrectSecond39(sint  ddw)
+void    SetCorrectSecond40(sint  ddw)
 {
   wDeltaSeconds = ddw;
 }
 
 
-void    QueryCorrect_Profile39(void)
+void    QueryCorrect_Profile40(void)
 {
 #ifdef PROFILE_40_NAMES
-  MonitorString("\n QueryCorrect_Profile39 "); MonitorSignedLongDec(wDeltaSeconds);
+  MonitorString("\n QueryCorrect_Profile40 "); MonitorSignedLongDec(wDeltaSeconds);
 #endif
 
   c.bNS++;
@@ -127,10 +127,10 @@ void    QueryCorrect_Profile39(void)
 
 
 
-void    QueryScaler_Profile39(void)
+void    QueryScaler_Profile40(void)
 {
 #ifdef PROFILE_40_NAMES
-  MonitorString("\n QueryScaler_Profile39");
+  MonitorString("\n QueryScaler_Profile40");
 #endif
 
   c.bNS++;
@@ -139,10 +139,10 @@ void    QueryScaler_Profile39(void)
 }
 
 
-bool    ReadScaler_Profile39(void)
+bool    ReadScaler_Profile40(void)
 {
 #ifdef PROFILE_40_NAMES
-  MonitorString("\n ReadScaler_Profile39");
+  MonitorString("\n ReadScaler_Profile40");
 #endif
 
   double2 scaler = ReadRegisterScalerDLMS();
@@ -152,21 +152,21 @@ bool    ReadScaler_Profile39(void)
 
 
 
-void    InitProfile_Profile39(void) {
+void    InitProfile_Profile40(void) {
 #ifdef PROFILE_40_NAMES
-  MonitorString("\n InitProfile_Profile39");
+  MonitorString("\n InitProfile_Profile40");
 #endif
 
   InitHeader40(); // step 40.1
 }
 
 
-void    QueryProfile_Profile39(void) {
+void    QueryProfile_Profile40(void) {
 #ifdef PROFILE_40_NAMES
-  MonitorString("\n QueryProfile_Profile39");
+  MonitorString("\n QueryProfile_Profile40");
 #endif
 
-  InitRecord39(); // step 40.2
+  InitRecord40(); // step 40.2
 
   t2time t2 = QueryHeader40(); // step 40.3
 
@@ -184,7 +184,7 @@ void    Read1_Profile(void) {
   fUseBlocks = UseBlocksDMLS(); // step 40.5
   fLastBlock = LastBlockDMLS();
 
-  AddRecord39(fUseBlocks ? 19 + GetHdlcAddressesSize() : 13 + GetHdlcAddressesSize()); // step 40.6
+  AddRecord40(fUseBlocks ? 19 + GetHdlcAddressesSize() : 13 + GetHdlcAddressesSize()); // step 40.6
 }
 
 
@@ -193,7 +193,7 @@ void    Read2_Profile(void) {
   MonitorString("\n Read2_Profile");
 #endif
 
-  AddRecord39(6 + GetHdlcAddressesSize()); // step 40.9
+  AddRecord40(6 + GetHdlcAddressesSize()); // step 40.9
 }
 
 
@@ -206,18 +206,18 @@ void    Read3_Profile(void) {
 }
 
 
-bool    UseBlocks_Profile39(void) {
+bool    UseBlocks_Profile40(void) {
 #ifdef PROFILE_40_NAMES
-  MonitorString("\n UseBlocks_Profile39");
+  MonitorString("\n UseBlocks_Profile40");
 #endif
 
   return fUseBlocks && (!fLastBlock); // step 40.13
 }
 
 
-void    QueryNextBlock_Profile39(void) {  
+void    QueryNextBlock_Profile40(void) {
 #ifdef PROFILE_40_NAMES
-  MonitorString("\n QueryNextBlock_Profile39");
+  MonitorString("\n QueryNextBlock_Profile40");
 #endif
 
   bBlockNumber++; // step 40.14
@@ -236,7 +236,7 @@ void    Read4_Profile(void) {
   fUseBlocks = UseBlocksDMLS(); // step 40.16
   fLastBlock = LastBlockDMLS();
 
-  AddRecord39(19 + GetHdlcAddressesSize()); // step 40.17
+  AddRecord40(19 + GetHdlcAddressesSize()); // step 40.17
 }
 
 
@@ -245,17 +245,17 @@ void    Read5_Profile(void) {
   MonitorString("\n Read5_Profile");
 #endif
 
-  AddRecord39(6 + GetHdlcAddressesSize()); // step 40.20
+  AddRecord40(6 + GetHdlcAddressesSize()); // step 40.20
 }
 
 
 
-bool2   FinishProfile_Profile39(void) {
+bool2   FinishProfile_Profile40(void) {
 #ifdef PROFILE_40_NAMES
-  MonitorString("\n FinishProfile_Profile39");
+  MonitorString("\n FinishProfile_Profile40");
 #endif
 
-  bool success = FinishRecordProfile39(); // step 40.25
+  bool success = FinishRecordProfile40(); // step 40.25
 
   if (success)
     return GetBool2(ReadHeader40(), true); // step 40.26
