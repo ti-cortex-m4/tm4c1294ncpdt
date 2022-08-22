@@ -56,7 +56,7 @@ bool    Automatic40(void)
   c.bInvokeId++;
   QuerySerial40(c);
   if (Input40() != SER_GOODCHECK) return Fault(80+1);
-  if (ValidateFrame(c.bNS, c.bNR) != 0) return Fault(80+2);
+  if (ValidateFrameHDLC(c.bNS, c.bNR) != 0) return Fault(80+2);
 
 
   InitPop(12 + GetHdlcAddressesSize());

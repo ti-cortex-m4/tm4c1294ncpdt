@@ -34,7 +34,7 @@ double8 FragmentCntMonCan40(const obis_t  obisBillingPeriod, const obis_t  obisS
   (*pc).bInvokeId++;
   QueryBillingPeriod40(obisBillingPeriod, *pc, dt);
   if (Input40() != SER_GOODCHECK) return Fault(125+0);
-  if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(125+1);
+  if (ValidateFrameHDLC((*pc).bNS, (*pc).bNR) != 0) return Fault(125+1);
 
 
   bool present = (IsEngMonPresent40() == 0);
@@ -62,7 +62,7 @@ double8 FragmentCntMonCan40(const obis_t  obisBillingPeriod, const obis_t  obisS
   (*pc).bNR++;
   RR((*pc).bNR);
   if (Input40() != SER_GOODCHECK) return Fault(125+2);
-  if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(125+3);
+  if (ValidateFrameHDLC((*pc).bNS, (*pc).bNR) != 0) return Fault(125+3);
 
 
   double2 scaler = ReadRegisterScaler39(obisScaler, pc);

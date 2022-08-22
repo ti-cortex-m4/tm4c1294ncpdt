@@ -82,7 +82,7 @@ void    RR_Profile39(void) {
 
 bool    ValidateFrame_Profile39(void)
 {
-  return ValidateFrame(c.bNS, c.bNR) == 0;
+  return ValidateFrameHDLC(c.bNS, c.bNR) == 0;
 }
 
 

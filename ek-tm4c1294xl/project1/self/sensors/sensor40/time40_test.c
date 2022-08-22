@@ -53,25 +53,25 @@ double2 TestTimeCorrect39(void)
   c.bInvokeId++;
   QueryCorrectTime40(c, wDeltaSeconds1);
   if (Input40() != SER_GOODCHECK) return Fault(2);
-  if (ValidateFrame(c.bNS, c.bNR) != 0) return Fault(3);
+  if (ValidateFrameHDLC(c.bNS, c.bNR) != 0) return Fault(3);
 
   c.bNR++;
   RR(c.bNR);
   if (Input40() != SER_GOODCHECK) return Fault(4);
-  if (ValidateFrame(c.bNS, c.bNR) != 0) return Fault(5);
+  if (ValidateFrameHDLC(c.bNS, c.bNR) != 0) return Fault(5);
 
 
   c.bNS++;
   c.bInvokeId++;
   QueryTime40(c);
   if (Input40() != SER_GOODCHECK) return Fault(6);
-  if (ValidateFrame(c.bNS, c.bNR) != 0) return Fault(7);
+  if (ValidateFrameHDLC(c.bNS, c.bNR) != 0) return Fault(7);
   time tmThat2 = ReadTime40();
 
   c.bNR++;
   RR(c.bNR);
   if (Input40() != SER_GOODCHECK) return Fault(8);
-  if (ValidateFrame(c.bNS, c.bNR) != 0) return Fault(9);
+  if (ValidateFrameHDLC(c.bNS, c.bNR) != 0) return Fault(9);
 
 
   time tmThis2 = *GetCurrTimeDate();

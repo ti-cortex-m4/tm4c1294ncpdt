@@ -134,7 +134,7 @@ bool    ValidateInputHDLC(void)
 
 
 
-uchar   ValidateFrame(uchar  bNS_client, uchar  bNR_client)
+uchar   ValidateFrameHDLC(uchar  bNS_client, uchar  bNR_client)
 {
   uchar bControl = InBuff(3 + GetHdlcAddressesSize());
 
@@ -185,6 +185,7 @@ uchar   ValidateFrame(uchar  bNS_client, uchar  bNR_client)
 bool    LastSegmentDMLS(void)
 {
   InitPop(1);
+
   uint wFormat = PopIntBig();
   bool fLastSegment = (wFormat & 0x0800) == 0;
 
@@ -200,6 +201,7 @@ bool    LastSegmentDMLS(void)
 bool    UseBlocksDMLS(void)
 {
   InitPop(9 + GetHdlcAddressesSize());
+
   uint w = PopIntBig();
   bool fUseBlocks = (w == 0xC402);
 
@@ -215,6 +217,7 @@ bool    UseBlocksDMLS(void)
 bool    LastBlockDMLS(void)
 {
   InitPop(12 + GetHdlcAddressesSize());
+
   uchar b = PopChar();
   bool fLastBlock = (b != 0);
 

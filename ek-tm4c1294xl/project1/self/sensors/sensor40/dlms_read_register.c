@@ -69,7 +69,7 @@ double2 ReadRegisterUnsignedValue39(const obis_t  obis, caller40*  pc)
   (*pc).bInvokeId++;
   QueryGetRegisterValueDLMS(obis, (*pc));
   if (Input40() != SER_GOODCHECK) return Fault(15+5);
-  if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(15+6);
+  if (ValidateFrameHDLC((*pc).bNS, (*pc).bNR) != 0) return Fault(15+6);
 
   ulong64_ value = ReadUnsignedValueDLSM();
   if (!value.fValid) return Fault(15+7);
@@ -77,7 +77,7 @@ double2 ReadRegisterUnsignedValue39(const obis_t  obis, caller40*  pc)
   (*pc).bNR++;
   RR((*pc).bNR);
   if (Input40() != SER_GOODCHECK) return Fault(15+8);
-  if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(15+9);
+  if (ValidateFrameHDLC((*pc).bNS, (*pc).bNR) != 0) return Fault(15+9);
 
   return GetDouble0(value.ddwValue);
 }
@@ -89,7 +89,7 @@ double2 ReadRegisterSignedValue39(const obis_t  obis, caller40*  pc)
   (*pc).bInvokeId++;
   QueryGetRegisterValueDLMS(obis, (*pc));
   if (Input40() != SER_GOODCHECK) return Fault(15+10);
-  if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(15+11);
+  if (ValidateFrameHDLC((*pc).bNS, (*pc).bNR) != 0) return Fault(15+11);
 
   slong64_ value = ReadSignedValueDLSM();
   if (!value.fValid) return Fault(15+12);
@@ -97,7 +97,7 @@ double2 ReadRegisterSignedValue39(const obis_t  obis, caller40*  pc)
   (*pc).bNR++;
   RR((*pc).bNR);
   if (Input40() != SER_GOODCHECK) return Fault(15+13);
-  if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(15+14);
+  if (ValidateFrameHDLC((*pc).bNS, (*pc).bNR) != 0) return Fault(15+14);
 
   return GetDouble0(value.ddwValue);
 }
@@ -109,7 +109,7 @@ double2 ReadRegisterScaler39(const obis_t  obis, caller40*  pc)
   (*pc).bInvokeId++;
   QueryGetRegisterScalerDLMS(obis, (*pc));
   if (Input40() != SER_GOODCHECK) return Fault(15+15);
-  if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(15+16);
+  if (ValidateFrameHDLC((*pc).bNS, (*pc).bNR) != 0) return Fault(15+16);
 
   double2 scaler = ReadRegisterScalerDLMS();
   if (!scaler.fValid) return Fault(15+17);
@@ -117,7 +117,7 @@ double2 ReadRegisterScaler39(const obis_t  obis, caller40*  pc)
   (*pc).bNR++;
   RR((*pc).bNR);
   if (Input40() != SER_GOODCHECK) return Fault(15+18);
-  if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(15+19);
+  if (ValidateFrameHDLC((*pc).bNS, (*pc).bNR) != 0) return Fault(15+19);
 
   return GetDouble0(scaler.dbValue);
 }

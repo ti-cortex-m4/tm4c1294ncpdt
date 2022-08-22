@@ -32,13 +32,13 @@ time2   FragmentOpenTime40(caller40  *pc)
   (*pc).bInvokeId++;
   QueryTime40(*pc);
   if (Input40() != SER_GOODCHECK) return Fault(120+1);
-  if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(120+2);
+  if (ValidateFrameHDLC((*pc).bNS, (*pc).bNR) != 0) return Fault(120+2);
   time tm = ReadTime40();
 
   (*pc).bNR++;
   RR((*pc).bNR);
   if (Input40() != SER_GOODCHECK) return Fault(120+3);
-  if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(120+4);
+  if (ValidateFrameHDLC((*pc).bNS, (*pc).bNR) != 0) return Fault(120+4);
 
   return GetTime0(tm);
 }
