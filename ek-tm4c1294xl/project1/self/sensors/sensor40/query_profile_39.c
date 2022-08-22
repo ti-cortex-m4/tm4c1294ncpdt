@@ -99,51 +99,7 @@ void    QueryProfile40(caller40  c, time  tm1, time  tm2)
 
   PushChar(0x01);
   PushChar(0x00);
-/*
-//          <Structure Qty="04" >
 
-  PushChar(0x02);
-  PushChar(0x04);
-
-  PushChar(0x12); // <UInt16 Value="0008" />
-  PushChar(0x00);
-  PushChar(0x08);
-
-  PushChar(0x09); // <OctetString Value="0000010000FF" />
-  PushChar(0x06);
-  PushOBIS_DLMS(obisTime); // <!--0.0.1.0.0.255-->
-
-  PushChar(0x0F); // <Int8 Value="02" />
-  PushChar(0x02);
-
-  PushChar(0x12); // <UInt16 Value="0000" />
-  PushChar(0x00);
-  PushChar(0x00);
-
-//          </Structure>
-
-//          <Structure Qty="04" >
-
-  PushChar(0x02);
-  PushChar(0x04);
-
-  PushChar(0x12); // <UInt16 Value="0003" />
-  PushChar(0x00);
-  PushChar(0x03);
-
-  PushChar(0x09); // <OctetString Value="01000F0800FF" />
-  PushChar(0x06);
-  PushOBIS_DLMS(obisEngAbs); // <!--1.0.15.8.0.255-->
-
-  PushChar(0x0F); // <Int8 Value="02" />
-  PushChar(0x02);
-
-  PushChar(0x12); // <UInt16 Value="0000" />
-  PushChar(0x00);
-  PushChar(0x00);
-
-//          </Structure>
-*/
 //        </Array>
 //      </Structure>
 //    </AccessParameters>
