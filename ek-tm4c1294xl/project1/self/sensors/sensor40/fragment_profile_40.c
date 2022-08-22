@@ -21,6 +21,8 @@ fragment_profile_40.c
 
 
 
+#ifdef  MONITOR_40
+
 static bool Fault(uchar  bError)
 {
   Error40(bError);
@@ -91,15 +93,10 @@ bool    FragmentProfile39(caller40  *pc, time  tm1, time  tm2)
   } // repeat: step 40.23 -> step 40.13
 
 
-  if (fProfile) // step 40.24
-    return FinishRecordProfile39(); // step 40.25
-  else
-    return FinishRecord39();
+  return true;
 }
 
 
-
-#ifdef  MONITOR_40
 
 double2 TestFragmentProfile39(void)
 {
@@ -128,13 +125,13 @@ double2 TestFragmentProfile39(void)
   tm2.bMinute = 0;
   tm2.bSecond = 0;
 
-  bool success1 = FragmentProfile39(&c, tm1, tm2, false);
-  bool success2 = FinishRecord39();
-  if (!success)  {
+  if (!FragmentProfile39(&c, tm1, tm2))
     return GetDouble2Error();
-  } else {
-    return GetDouble0(0);
-  }
+
+  if (!FinishRecord39())
+    return GetDouble2Error();
+
+  return GetDouble0(0);
 }
 
 #endif
