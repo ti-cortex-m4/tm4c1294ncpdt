@@ -5,21 +5,28 @@ dlms_aare.c
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-#include "../../memory/mem_digitals.h"
-#include "../../time/delay.h"
-#include "../../display/display.h"
-#include "../../serial/ports.h"
-#include "../../serial/ports2.h"
-#include "../../serial/ports_devices.h"
-#include "../../serial/monitor.h"
-#include "../../digitals/address/ascii_address.h"
-#include "crc16x25.h"
-#include "io40.h"
-#include "error40.h"
-#include "hdlc_address.h"
-#include "dlms_push.h"
+//#include "../../memory/mem_digitals.h"
+//#include "../../time/delay.h"
+//#include "../../display/display.h"
+//#include "../../serial/ports.h"
+//#include "../../serial/ports2.h"
+//#include "../../serial/ports_devices.h"
+//#include "../../serial/monitor.h"
+//#include "../../digitals/address/ascii_address.h"
+//#include "crc16x25.h"
+//#include "io40.h"
+//#include "error40.h"
+//#include "hdlc_address.h"
+//#include "dlms_push.h"
 #include "dlms_aare.h"
 
+
+
+static bool Fault(uchar  bError, uint  wData)
+{
+  ErrorData40(bError, wData);
+  return false;
+}
 
 
 bool    AARE_CheckPass_Internal(void)
@@ -39,17 +46,14 @@ bool    AARE_CheckPass_Internal(void)
       if (bResult == 0)
         return true;
       else if (bResult == 1) {
-        ErrorData40(0+1, bResult);
-        return false;
+        return Fault(0+1, bResult);
       } else {
-        ErrorData40(0+2, bResult);
-        return false;
+        return Fault(0+2, bResult);
       }
     }
   }
 
-  Error40(0+3);
-  return false;
+  return Fault(0+3, wSize);
 }
 
 
