@@ -90,7 +90,7 @@ DEVICES.C
 #include "../sensors/sensor40/profile39.h"
 #include "../sensors/sensor40/correct40.h"
 #include "../sensors/sensor40/correct40_wrapper.h"
-#include "../sensors/sensor40/profile39_wrapper.h"
+#include "../sensors/sensor40/profile40_wrapper.h"
 #include "../sensors/sensor40/hdlc_monitor.h"
 #include "../sensors/sensor40/error40.h"
 #include "../serial/ports.h"

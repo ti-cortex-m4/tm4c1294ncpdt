@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-profile39_wrapper.c
+profile40_wrapper.c
 
 
 ------------------------------------------------------------------------------*/
@@ -22,7 +22,7 @@ profile39_wrapper.c
 #include "dlms_read_register.h"
 #include "query_register_39.h"
 #include "profile39.h"
-#include "profile39_wrapper.h"
+#include "profile40_wrapper.h"
 
 
 
