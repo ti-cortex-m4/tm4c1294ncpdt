@@ -110,7 +110,7 @@ bool    ReadValue_Current40(void)
 void    QueryScaler_Current40(void)
 {
 #ifdef MONITOR_40_NAMES
-  MonitorString("\n\n QueryScaler_Current40 ");
+  MonitorString("\n\n QueryScaler_Current40");
 #endif
 
   c.bNS++;
