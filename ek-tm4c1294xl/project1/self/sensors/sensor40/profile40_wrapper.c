@@ -146,7 +146,7 @@ bool    ReadScaler_Profile40(void)
 #endif
 
   double2 scaler = ReadRegisterScalerDLMS();
-  SetScaler_Profile40(scaler.fValid ? scaler.dbValue : -1);
+  SetScaler_Profile40(scaler.fValid ? scaler.dbValue : 1);
   return scaler.fValid;
 }
 
