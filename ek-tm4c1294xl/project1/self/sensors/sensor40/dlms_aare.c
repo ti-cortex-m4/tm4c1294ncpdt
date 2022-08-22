@@ -21,6 +21,7 @@ static bool Fault(uchar  bError, uint  wData)
 }
 
 
+
 bool    AARE_CheckPass_Internal(void)
 {
   uint wSize = (InBuff(1) & 0x07)*0x100 + InBuff(2);
