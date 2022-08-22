@@ -24,14 +24,14 @@ uchar   FragmentOpen40(caller40  *pc)
 
   AARQ((*pc).bNS, (*pc).bNR);
   if (Input40() != SER_GOODCHECK) return Error40(110+2);
-  if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Error40(110+3);
+  if (ValidateFrameHDLC((*pc).bNS, (*pc).bNR) != 0) return Error40(110+3);
 
   if (!AARE_CheckPass()) Error40(110+4);
 
   (*pc).bNR++;
   RR((*pc).bNR);
   if (Input40() != SER_GOODCHECK) return Error40(110+5);
-  if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Error40(110+6);
+  if (ValidateFrameHDLC((*pc).bNS, (*pc).bNR) != 0) return Error40(110+6);
 
   return 0;
 }
