@@ -201,8 +201,12 @@ uchar   TestProfile40_Internal(caller40*  pc)
 
   while (true) {
     t2time t2 = QueryHeader40(); // step 40.3
-    bool success = FragmentProfile39(pc, t2.ti1, t2.ti2, true);
-    if (!success) return 11;
+
+    if (!FragmentProfile39(pc, t2.ti1, t2.ti2))
+      return 3;
+
+    if (!FinishRecordProfile39()) // step 40.25
+      return 4;
 
     if (ReadHeader40() == false) return 0; // step 40.26
     if (fKey == true) return 255;
