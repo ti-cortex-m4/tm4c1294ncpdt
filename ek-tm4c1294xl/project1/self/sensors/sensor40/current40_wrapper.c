@@ -27,12 +27,10 @@ current39.c
 
 static uchar            ibLine40;
 
-
-
 static caller40         c;
 
 static ulong64_         counter[4];
-static double2          scaler;
+static double2          dbScaler;
 
 
 
@@ -85,7 +83,7 @@ void    RR_Current40(void)
 bool    ValidateFrame_Current40(void)
 {
   return ValidateFrame(c.bNS, c.bNR) == 0;
-};
+}
 
 
 
@@ -123,21 +121,21 @@ void    QueryScaler_Current40(void)
 
 bool    ReadScaler_Current40(void)
 {
-  scaler = ReadRegisterScalerDLMS();
-  return scaler.fValid;
+  dbScaler = ReadRegisterScalerDLMS();
+  return dbScaler.fValid;
 }
 
 
 
 void    ReadCurrent40(void)
 {
-  double dbScaler = scaler.dbValue;
+  double scaler = dbScaler.dbValue;
 
   uchar i;
   for (i=0; i<4; i++)
   {
     uint64_t ddwCounter = counter[i].ddwValue;
-    mpdwBaseDig[i] = ((double)ddwCounter * dbScaler / 1000) * mpdbPulseMnt[ibDig];
+    mpdwBaseDig[i] = ((double)ddwCounter * scaler / 1000) * mpdbPulseMnt[ibDig];
   }
 
   MakeCurrent();
