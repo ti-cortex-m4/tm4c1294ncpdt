@@ -5,8 +5,10 @@ profile39*c
 
 #include "../../main.h"
 #include "../../memory/mem_factors.h"
+#include "../../memory/mem_digitals.h"
 #include "../../memory/mem_profile.h"
 #include "../../memory/mem_energy_spec.h"
+#include "../../memory/mem_limits.h"
 #include "../../display/display.h"
 #include "../../keyboard/keyboard.h"
 #include "../../keyboard/time/key_timedate.h"
@@ -60,17 +62,15 @@ void    SetScaler_Profile40(double  db)
 
 void    InitHeader40(void)
 {
-/* TODO
-  if (!UseBound40())
+  if (!UseBounds())
     wProfile40 = 0;
   else
   {
     wProfile40 = (mpcwStartRelCan[ibDig] / 6) * 6;
-    Clear(); sprintf(szLo+1,"начало %04u:%02u",wProfile40,(uchar)(wProfile40/48 + 1));
+    Clear(); sprintf(szLo+1, "начало %04u:%02u", wProfile40, (uchar)(wProfile40/48 + 1));
     if (boShowMessages == true) DelayMsg();
   }
-*/
-  wProfile40 = 0;
+
   tiStart40 = tiValue40;
 
 #ifdef MONITOR_40
