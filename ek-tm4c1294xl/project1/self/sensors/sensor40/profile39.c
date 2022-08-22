@@ -202,7 +202,7 @@ uchar   TestProfile40_Internal(caller40*  pc)
   while (true) {
     t2time t2 = QueryHeader40(); // step 40.3
 
-    if (!FragmentProfile39(pc, t2.ti1, t2.ti2))
+    if (!FragmentProfile40(pc, t2.ti1, t2.ti2))
       return 3;
 
     if (!FinishRecordProfile39()) // step 40.25
