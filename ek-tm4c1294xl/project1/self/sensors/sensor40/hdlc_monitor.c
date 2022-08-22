@@ -72,10 +72,10 @@ void    MonitorOutputHDLC(void)
   uint wFormat = OutBuff(1)*0x100 + OutBuff(2);
   uint wSize = wFormat & 0x0FFF;
 
-  uint wCRCexpected = MakeCRC16X25OutBuff(1, wSize-2);
+  uint wCrcExpected = MakeCRC16X25OutBuff(1, wSize-2);
   
   int i = wSize-1;
-  uint wCRCactual = OutBuff(i) + OutBuff(i+1)*0x100;
+  uint wCrcActual = OutBuff(i) + OutBuff(i+1)*0x100;
 
   MonitorString("\n Output HDLC: ");
 
@@ -83,9 +83,9 @@ void    MonitorOutputHDLC(void)
   MonitorString(" wSize="); MonitorIntHex(wSize);
 
 #ifdef MONITOR_40_CRC
-  MonitorString(" wCRCexpected="); MonitorIntHex(wCRCexpected);
-  MonitorString(" wCRCactual="); MonitorIntHex(wCRCactual);
-  (wCRCexpected == wCRCactual) ? MonitorString(" CRC_ok") : MonitorString(" CRC_error");
+  MonitorString(" wCrcExpected="); MonitorIntHex(wCrcExpected);
+  MonitorString(" wCrcActual="); MonitorIntHex(wCrcActual);
+  (wCrcExpected == wCrcActual) ? MonitorString(" CRC:ok") : MonitorString(" CRC:error");
 #endif
 
   MonitorControl(OutBuff(3 + GetHdlcAddressesSize()));
@@ -102,10 +102,10 @@ bool    ValidateInputHDLC(void)
   uint wFormat = PopIntBig();
   uint wSize = wFormat & 0x07FF;
 
-  uint wCRCexpected = MakeCRC16X25InBuff(1, wSize-2);
+  uint wCrcExpected = MakeCRC16X25InBuff(1, wSize-2);
   
   int i = wSize-1;
-  uint wCRCactual = InBuff(i) + InBuff(i+1)*0x100; 
+  uint wCrcActual = InBuff(i) + InBuff(i+1)*0x100;
 
 #ifdef MONITOR_40_MONITOR
 
@@ -114,14 +114,14 @@ bool    ValidateInputHDLC(void)
   MonitorString(" wSize="); MonitorIntHex(wSize);
 
 #ifdef MONITOR_40_CRC
-  MonitorString(" wCRCexpected="); MonitorIntHex(wCRCexpected);
-  MonitorString(" wCRCactual="); MonitorIntHex(wCRCactual);
-  (wCRCexpected == wCRCactual) ? MonitorString(" CRC_ok") : MonitorString(" CRC_error");
+  MonitorString(" wCrcExpected="); MonitorIntHex(wCrcExpected);
+  MonitorString(" wCrcActual="); MonitorIntHex(wCrcActual);
+  (wCrcExpected == wCrcActual) ? MonitorString(" CRC:ok") : MonitorString(" CRC:error");
 #endif
 
 #endif 
 
-  if (wCRCexpected != wCRCactual) { 
+  if (wCrcExpected != wCrcActual) {
     return false;
   }
 
