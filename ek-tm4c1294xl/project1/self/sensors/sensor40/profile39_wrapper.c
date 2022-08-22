@@ -16,7 +16,7 @@ profile39_wrapper.c
 #include "hdlc_address.h"
 #include "hdlc_monitor.h"
 #include "buffer_record_39.h"
-#include "query_profile_39.h"
+#include "query_profile_40.h"
 #include "query_next_block_40.h"
 #include "dlms_read_data.h"
 #include "dlms_read_register.h"

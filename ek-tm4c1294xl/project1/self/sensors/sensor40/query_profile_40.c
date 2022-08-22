@@ -11,7 +11,7 @@ query_profile_40.c
 #include "io40.h"
 #include "hdlc_address.h"
 #include "dlms_push.h"
-#include "query_profile_39.h"
+#include "query_profile_40.h"
 
 
 

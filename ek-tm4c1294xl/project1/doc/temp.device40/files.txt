@@ -27,7 +27,7 @@ correct39_wrapper.h
 +	crc16x25.c
 +	crc16x25.h
 current39_wrapper.c
-current39_wrapper.h
++	current39_wrapper.h
 +	dlms.c
 +	dlms.h
 dlms_aare.c
@@ -74,8 +74,8 @@ profile39_wrapper.h
 +	query_id_39.h
 +	query_next_block_40.c
 +	query_next_block_40.h
-query_profile_39.c
-query_profile_39.h
++	query_profile_39.c
++	query_profile_39.h
 +	query_register_39.c
 +	query_register_39.h
 read_engmon_39.c
