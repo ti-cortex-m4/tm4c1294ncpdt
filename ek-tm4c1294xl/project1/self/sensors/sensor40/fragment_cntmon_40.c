@@ -37,7 +37,7 @@ double8 FragmentCntMonCan40(const obis_t  obisBillingPeriod, const obis_t  obisS
   if (ValidateFrame((*pc).bNS, (*pc).bNR) != 0) return Fault(125+1);
 
 
-  bool present = (EngMonPresent39() == 0);
+  bool present = (IsEngMonPresent40() == 0);
 #ifdef MONITOR_40
   MonitorString("\n present="); MonitorBool(present);
 #endif
