@@ -8,7 +8,7 @@ include40.h
 #define __INCLUDE40
 
 
-#define MONITOR_40          1 // TODO
+//#define MONITOR_40          1
 #define MONITOR_40_NAMES    1
 //#define MONITOR_40_MONITOR  1
 //#define MONITOR_40_CRC      1
