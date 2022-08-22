@@ -29,7 +29,7 @@ static bool Fault(uchar  bError)
 
 
 
-bool    FragmentProfile39(caller40  *pc, time  tm1, time  tm2, bool  fProfile)
+bool    FragmentProfile39(caller40  *pc, time  tm1, time  tm2)
 {
   InitRecord39(); // step 40.2
 
@@ -128,7 +128,8 @@ double2 TestFragmentProfile39(void)
   tm2.bMinute = 0;
   tm2.bSecond = 0;
 
-  bool success = FragmentProfile39(&c, tm1, tm2, false);
+  bool success1 = FragmentProfile39(&c, tm1, tm2, false);
+  bool success2 = FinishRecord39();
   if (!success)  {
     return GetDouble2Error();
   } else {
