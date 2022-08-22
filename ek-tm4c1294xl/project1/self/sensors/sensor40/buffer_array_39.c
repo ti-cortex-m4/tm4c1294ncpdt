@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-buffer_array_39.c
+buffer_array_40.c
 
 
 ------------------------------------------------------------------------------*/
@@ -8,7 +8,7 @@ buffer_array_39.c
 #include "../../serial/monitor.h"
 #include "include40.h"
 #include "error40.h"
-#include "buffer_array_39.h"
+#include "buffer_array_40.h"
 
 
 
@@ -18,85 +18,85 @@ static uint                 iwPush, iwPop;
 
 
 
-void    MonitorArray39(void) {
+void    MonitorArray40(void) {
 #ifdef BUFFER_ARRAY_40
-  MonitorString("\n MonitorArray39");
+  MonitorString("\n MonitorArray40");
   MonitorArrayHex(mpbBuff, iwPush);
 #endif
 }
 
 
 
-void    InitPush39(void) {
+void    InitPush40(void) {
   memset(&mpbBuff, 0xFF, sizeof(mpbBuff));
   iwPush = 0;
 }
 
 
-void    PushChar39(uchar  b) {
+void    PushChar40(uchar  b) {
   if (iwPush < sizeof(mpbBuff)-1)
     mpbBuff[iwPush++] = b;
   else  
-    Error40(145+0);
+    ErrorData40(144+0, iwPush);
 }
 
 
-bool    IsPushOverflow39(void)
+bool    IsPushOverflow40(void)
 {
   return iwPush >= sizeof(mpbBuff)-1;
 }
 
 
 
-void    InitPop39(void) {
-  MonitorArray39();
+void    InitPop40(void) {
+  MonitorArray40();
 
   iwPop = 0;
 }
 
 
-uint    GetPopCapacity39(void) {
+uint    GetPopCapacity40(void) {
   return sizeof(mpbBuff) - iwPop;
 }
 
 
-uchar   PopChar39(void) {
+uchar   PopChar40(void) {
   return mpbBuff[iwPop++];
 }
 
 
-uint    PopInt39(void) {
-  return PopChar39()*0x100 + PopChar39();
+uint    PopInt40(void) {
+  return PopChar40()*0x100 + PopChar40();
 }
 
 
-ulong   PopLong39(void) {
-  return PopInt39()*0x10000 + PopInt39();
+ulong   PopLong40(void) {
+  return PopInt40()*0x10000 + PopInt40();
 }
 
 
-uint64_t PopLongLong39(void) {
-  return PopLong39()*0x100000000 + PopLong39();
+uint64_t PopLongLong40(void) {
+  return PopLong40()*0x100000000 + PopLong40();
 }
 
 
-time    PopTimeDate39(void)
+time    PopTimeDate40(void)
 {
   time tm;
-  tm.bYear   = PopInt39() - 2000;
-  tm.bMonth  = PopChar39();
-  tm.bDay    = PopChar39();
+  tm.bYear   = PopInt40() - 2000;
+  tm.bMonth  = PopChar40();
+  tm.bDay    = PopChar40();
 
-  PopChar39();
+  PopChar40();
 
-  tm.bHour   = PopChar39();
-  tm.bMinute = PopChar39();
-  tm.bSecond = PopChar39();
+  tm.bHour   = PopChar40();
+  tm.bMinute = PopChar40();
+  tm.bSecond = PopChar40();
 
-  PopChar39();
-  PopChar39();
-  PopChar39();
-  PopChar39();
+  PopChar40();
+  PopChar40();
+  PopChar40();
+  PopChar40();
 
   return tm;
 }
