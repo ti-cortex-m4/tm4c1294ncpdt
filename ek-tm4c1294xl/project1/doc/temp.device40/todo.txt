@@ -8,4 +8,3 @@ profile pass
 неправильный пароль при 30 min
 client address: 32
 профили - правильный получас
-maximum information field length пїЅ transmit
