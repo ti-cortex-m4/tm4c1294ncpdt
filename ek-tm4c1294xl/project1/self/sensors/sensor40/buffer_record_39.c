@@ -17,13 +17,13 @@ buffer_record_39*c
 
 
 
-void    InitRecord39(void) {
+void    InitRecord40(void) {
   InitPush39();
 }
 
 
 
-void    AddRecord39(uint  iwStart) {
+void    AddRecord40(uint  iwStart) {
   if (IsPushOverflow39()) {
     Error40(150+0);
     return;
@@ -74,7 +74,7 @@ static bool FaultData(uchar  bError, uint  wData)
 
 
 
-bool    FinishRecord39(void) {
+bool    FinishRecord40(void) {
   InitPop39();
 
   uint wCapacity = GetPopCapacity39();
@@ -143,7 +143,7 @@ bool    FinishRecord39(void) {
 
 
 
-bool    FinishRecordProfile39(void) {
+bool    FinishRecordProfile40(void) {
   InitPop39();
 
   if (GetPopCapacity39() < 2)

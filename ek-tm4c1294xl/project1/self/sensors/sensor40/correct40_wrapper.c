@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-correct39_wrapper.c
+correct40_wrapper.c
 
 
 ------------------------------------------------------------------------------*/
@@ -10,45 +10,45 @@ correct39_wrapper.c
 
 
 
-static uint             cwCorrects39;
-static uint             wDeltaOld39;
-static uint             wDeltaNew39;
+static uint             cwCorrects40;
+static uint             wDeltaOld40;
+static uint             wDeltaNew40;
 
 
 
-void    Init_Correct39(void)
+void    Init_Correct40(void)
 {
-  cwCorrects39 = 0;
-  wDeltaOld39 = 0;
-  wDeltaNew39 = 0;
+  cwCorrects40 = 0;
+  wDeltaOld40 = 0;
+  wDeltaNew40 = 0;
 }
 
 
 
-uchar   GetCounter_Correct39(void)
+uchar   GetCounter_Correct40(void)
 {
-  return cwCorrects39;
+  return cwCorrects40;
 }
 
 
 
-void    SaveFirstDelta_Current39(uint  wDelta)
+void    SaveFirstDelta_Current40(uint  wDelta)
 {
-  cwCorrects39++;
-  wDeltaOld39 = wDelta;
+  cwCorrects40++;
+  wDeltaOld40 = wDelta;
 }
 
 
 
-bool    CheckNextDelta_Current39(uint  wDelta)
+bool    CheckNextDelta_Current40(uint  wDelta)
 {
-  wDeltaNew39 = wDelta;
-  return (wDeltaNew39 < wDeltaOld39) && (cwCorrects39 < 300);
+  wDeltaNew40 = wDelta;
+  return (wDeltaNew40 < wDeltaOld40) && (cwCorrects40 < 300);
 }
 
 
-void    SaveNextDelta_Current39(void)
+void    SaveNextDelta_Current40(void)
 {
-  cwCorrects39++;
-  wDeltaOld39 = wDeltaNew39;
+  cwCorrects40++;
+  wDeltaOld40 = wDeltaNew40;
 }

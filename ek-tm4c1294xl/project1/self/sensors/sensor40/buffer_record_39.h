@@ -20,7 +20,7 @@ typedef struct
 #endif
 
 
-void    InitRecord39(void);
-void    AddRecord39(uint  iwStart);
-bool    FinishRecord39(void);
-bool    FinishRecordProfile39(void);
+void    InitRecord40(void);
+void    AddRecord40(uint  iwStart);
+bool    FinishRecord40(void);
+bool    FinishRecordProfile40(void);

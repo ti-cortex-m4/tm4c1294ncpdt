@@ -1,47 +1,47 @@
 /*------------------------------------------------------------------------------
-profile39_wrapper.h
+profile40_wrapper.h
 
 
 ------------------------------------------------------------------------------*/
 
-#ifndef __PROFILE39_WRAPPER
-#define __PROFILE39_WRAPPER
+#ifndef __PROFILE40_WRAPPER
+#define __PROFILE40_WRAPPER
 
 
-#define PROFILE39_REPEAT_OR_ERROR(error, method, action) { Error40(error); if (cbRepeat == 0) ErrorProfile(); else { ErrorLink(); cbRepeat--; method; SetCurr(action); } }
+#define PROFILE40_REPEAT_OR_ERROR(error, method, action) { Error40(error); if (cbRepeat == 0) ErrorProfile(); else { ErrorLink(); cbRepeat--; method; SetCurr(action); } }
 
 
 #endif
 
 
 
-void    DISC_Profile39(void);
-void    SNRM_Profile39(void);
-void    AARQ_Profile39(void);
-void    RR_Profile39(void);
+void    DISC_Profile40(void);
+void    SNRM_Profile40(void);
+void    AARQ_Profile40(void);
+void    RR_Profile40(void);
 
-bool    ValidateFrame_Profile39(void);
+bool    ValidateFrame_Profile40(void);
 
-void    QueryTime_Profile39(void);
-void    ReadTime_Profile39(void);
+void    QueryTime_Profile40(void);
+void    ReadTime_Profile40(void);
 
-void    SetCorrectSecond39(sint  ddw);
-void    QueryCorrect_Profile39(void);
+void    SetCorrectSecond40(sint  ddw);
+void    QueryCorrect_Profile40(void);
 
-void    QueryScaler_Profile39(void);
-bool    ReadScaler_Profile39(void);
+void    QueryScaler_Profile40(void);
+bool    ReadScaler_Profile40(void);
 
-void    InitProfile_Profile39(void);
-void    QueryProfile_Profile39(void);
+void    InitProfile_Profile40(void);
+void    QueryProfile_Profile40(void);
 
 void    Read1_Profile(void);
 void    Read2_Profile(void);
 void    Read3_Profile(void);
 
-bool    UseBlocks_Profile39(void);
-void    QueryNextBlock_Profile39(void);
+bool    UseBlocks_Profile40(void);
+void    QueryNextBlock_Profile40(void);
 
 void    Read4_Profile(void);
 void    Read5_Profile(void);
 
-bool2   FinishProfile_Profile39(void);
+bool2   FinishProfile_Profile40(void);
