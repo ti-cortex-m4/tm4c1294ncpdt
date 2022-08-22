@@ -25,7 +25,7 @@ current39.c
 
 
 
-static uchar            ibLine39;
+static uchar            ibLine40;
 
 
 
@@ -36,45 +36,45 @@ static double2          scaler;
 
 
 
-void    ClearLine39(void)
+void    ClearLine40(void)
 {
-  ibLine39 = 0;
+  ibLine40 = 0;
 }
 
 
-uchar   IncLine39(void)
+uchar   IncLine40(void)
 {
-  return ++ibLine39;
+  return ++ibLine40;
 }
 
 
-uchar   GetLine39(void)
+uchar   GetLine40(void)
 {
-  return ibLine39;
+  return ibLine40;
 }
 
 
 
-void    DISC_Current39(void)
+void    DISC_Current40(void)
 {
   c = InitCaller40();
   DISC();
 }
 
 
-void    SNRM_Current39(void)
+void    SNRM_Current40(void)
 {
   SNRM();
 }
 
 
-void    AARQ_Current39(void)
+void    AARQ_Current40(void)
 {
   AARQ(c.bNS, c.bNR);
 }
 
 
-void    RR_Current39(void)
+void    RR_Current40(void)
 {
   c.bNR++;
   RR(c.bNR);
@@ -82,37 +82,37 @@ void    RR_Current39(void)
 
 
 
-bool    ValidateFrame_Current39(void)
+bool    ValidateFrame_Current40(void)
 {
   return ValidateFrame(c.bNS, c.bNR) == 0;
 };
 
 
 
-void    QueryValue_Current39(void)
+void    QueryValue_Current40(void)
 {
 #ifdef MONITOR_40_NAMES
-  MonitorString("\n\n QueryValue_Current39 ");  MonitorCharDec(ibLine39);
+  MonitorString("\n\n QueryValue_Current40 ");  MonitorCharDec(ibLine40);
 #endif
 
   c.bNS++;
   c.bInvokeId++;
-  QueryGetRegisterValueDLMS(obisEngAbs[ibLine39], c);
+  QueryGetRegisterValueDLMS(obisEngAbs[ibLine40], c);
 }
 
 
-bool    ReadValue_Current39(void)
+bool    ReadValue_Current40(void)
 {
-  counter[ibLine39] = ReadUnsignedValueDLSM();
-  return counter[ibLine39].fValid;
+  counter[ibLine40] = ReadUnsignedValueDLSM();
+  return counter[ibLine40].fValid;
 }
 
 
 
-void    QueryScaler_Current39(void)
+void    QueryScaler_Current40(void)
 {
 #ifdef MONITOR_40_NAMES
-  MonitorString("\n\n QueryScaler_Current39 ");
+  MonitorString("\n\n QueryScaler_Current40 ");
 #endif
 
   c.bNS++;
@@ -121,7 +121,7 @@ void    QueryScaler_Current39(void)
 }
 
 
-bool    ReadScaler_Current39(void)
+bool    ReadScaler_Current40(void)
 {
   scaler = ReadRegisterScalerDLMS();
   return scaler.fValid;
@@ -129,7 +129,7 @@ bool    ReadScaler_Current39(void)
 
 
 
-void    ReadCurrent39(void)
+void    ReadCurrent40(void)
 {
   double dbScaler = scaler.dbValue;
 
