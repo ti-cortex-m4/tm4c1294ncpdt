@@ -23,4 +23,4 @@ typedef struct
 void    InitRecord40(void);
 void    AddRecord40(uint  iwStart);
 bool    FinishRecord40(void);
-bool    FinishRecordProfile40(void);
+bool    FinishRecord40_AddProfile40(void);
