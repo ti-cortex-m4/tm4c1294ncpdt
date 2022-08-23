@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-buffer_profile_39*c
+buffer_profile_40.c
 
 
 ------------------------------------------------------------------------------*/
@@ -9,7 +9,7 @@ buffer_profile_39*c
 #include "../../time/timedate.h"
 #include "include40.h"
 #include "error40.h"
-#include "buffer_profile_39.h"
+#include "buffer_profile_40.h"
 
 
 
