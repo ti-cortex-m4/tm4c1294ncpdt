@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-buffer_record_39*c
+buffer_record_40.c
 
 
 ------------------------------------------------------------------------------*/
@@ -13,7 +13,7 @@ buffer_record_39*c
 #include "error40.h"
 #include "buffer_array_40.h"
 #include "buffer_profile_40.h"
-#include "buffer_record_39.h"
+#include "buffer_record_40.h"
 
 
 
