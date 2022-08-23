@@ -14,7 +14,7 @@ typedef struct
   ulong         mdwValue[4];
   time          tmValue;
   bool          fFirst;
-} record39;
+} record40;
 
 
 #endif
