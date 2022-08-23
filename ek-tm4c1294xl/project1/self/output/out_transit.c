@@ -13,7 +13,7 @@ OUT_TRANSIT!C
 #include "../serial/monitor.h"
 #include "../sensors/unpack_k.h"
 #include "../sensors/unpack_w.h"
-#include "../sensors/device40/decompress40.h"
+#include "../sensors/sensor40/decompress40.h"
 #include "../digitals/wait_answer.h"
 #include "../hardware/watchdog.h"
 #include "out_transit.h"
