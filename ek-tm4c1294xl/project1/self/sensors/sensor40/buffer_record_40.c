@@ -74,9 +74,9 @@ static bool FaultData(uchar  bError, uint  wData)
 
 
 
-bool    FinishRecord40(void) {
+bool    FinishRecord40_Monitor(void) {
 #if BUFFER_RECORD_40
-  MonitorString("\n FinishRecord40");
+  MonitorString("\n FinishRecord40_Monitor");
 #endif
 
   InitPop40();
@@ -125,9 +125,9 @@ bool    FinishRecord40(void) {
     uchar c;
     for (c=0; c<4; c++)
     {
-      uchar bTypeLong32 = PopChar40();
-      if (bTypeLong32 != 0x06) // double-long-unsigned 32
-        return FaultData(150+8, bTypeLong32);
+      uchar bType2 = PopChar40();
+      if (bType != 0x06) // double-long-unsigned 32
+        return FaultData(150+8, bType);
 
        mdwValue[c] = PopLong40();
     }
@@ -149,7 +149,7 @@ bool    FinishRecord40(void) {
 
 bool    FinishRecord40_AddProfile40(void) {
 #if BUFFER_RECORD_40
-  MonitorString("\n FinishRecordProfile40");
+  MonitorString("\n FinishRecord40_AddProfile40");
 #endif
 
   InitPop40();
