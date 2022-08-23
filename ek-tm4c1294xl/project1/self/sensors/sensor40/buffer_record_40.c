@@ -24,6 +24,10 @@ void    InitRecord40(void) {
 
 
 void    AddRecord40(uint  iwStart) {
+#ifdef BUFFER_ARRAY_40
+  MonitorString("\n AddRecord40 "); MonitorIntDec(iwStart);
+#endif
+
   if (IsPushOverflow40()) {
     Error40(150+0);
     return;
@@ -33,9 +37,6 @@ void    AddRecord40(uint  iwStart) {
 
 #ifdef BUFFER_ARRAY_40
   MonitorArray40();
-
-  MonitorString("\n AddToBuffer: start="); MonitorIntDec(iwStart);
-  MonitorString("\n");
 #endif
 
   InitPop(iwStart);
@@ -102,7 +103,7 @@ bool    FinishRecord40_Monitor(void) {
     if (wCapacity < 2 + 2+12 + 4*(1+4))
       return FaultData(150+3, wCapacity);
 
-    uchar bType = PopChar40();
+    bType = PopChar40();
     if (bType != 0x02) // structure
       return FaultData(150+4, bType);
 
@@ -125,7 +126,7 @@ bool    FinishRecord40_Monitor(void) {
     uchar c;
     for (c=0; c<4; c++)
     {
-      uchar bType2 = PopChar40();
+      bType = PopChar40();
       if (bType != 0x06) // double-long-unsigned 32
         return FaultData(150+8, bType);
 
