@@ -75,6 +75,10 @@ static bool FaultData(uchar  bError, uint  wData)
 
 
 bool    FinishRecord40(void) {
+#if BUFFER_RECORD_40
+  MonitorString("\n FinishRecord40");
+#endif
+
   InitPop40();
 
   uint wCapacity = GetPopCapacity40();
@@ -144,6 +148,10 @@ bool    FinishRecord40(void) {
 
 
 bool    FinishRecordProfile40(void) {
+#if BUFFER_RECORD_40
+  MonitorString("\n FinishRecordProfile40");
+#endif
+
   InitPop40();
 
   if (GetPopCapacity40() < 2)
