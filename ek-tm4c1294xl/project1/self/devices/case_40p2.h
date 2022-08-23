@@ -2,7 +2,7 @@
 
     case DEV_TIME1_O_40P:
       Clear(); ShowLo(szRepeats);
-      sprintf(szLo+8,"%1u",GetCounter_Correct40()+1); DelayInf();
+      sprintf(szLo+8, "%1u", GetCounter_Correct40()+1); DelayInf();
 
       cbRepeat = MaxRepeats();
       QueryTime_Profile40();

@@ -17,13 +17,13 @@ buffer_profile_39*c
 
 
 
-static profile39    mpProfile39[PROFILE39_SIZE];
+static profile40    mpProfile39[PROFILE39_SIZE];
 static uchar        cbProfileSize39;
 static bool         fProfileOveflow39;
 
 
 
-void    InitProfile39(void)
+void    InitProfile40(void)
 {
 #ifdef MONITOR_40
   MonitorString("\n init profile ");
@@ -35,7 +35,7 @@ void    InitProfile39(void)
 }
 
 
-void    AddProfile39(time  tmTime, ulong  mdwValue[4])
+void    AddProfile40(time  tmTime, ulong  mdwValue[4])
 {
 #ifdef MONITOR_40
   MonitorString("\n add profile (end time) ");
@@ -78,7 +78,7 @@ void    MonitorBuffPrf38(void)
   uchar i;
   for (i=0; i<PROFILE39_SIZE; i++)
   {
-    profile39 prf = GetProfile39(i);
+    profile40 prf = GetProfile40(i);
 
     MonitorString("\n "); MonitorTime(prf.tmTime);
     MonitorString(" "); MonitorLongDec(prf.mdwValue[0]);
@@ -91,20 +91,20 @@ void    MonitorBuffPrf38(void)
 }
 
 
-profile39 GetProfile39(uchar  i)
+profile40 GetProfile40(uchar  i)
 {
   ASSERT(i < PROFILE39_SIZE);
   return mpProfile39[i];
 }
 
 
-uchar   GetProfileSize39(void)
+uchar   GetProfileSize40(void)
 {
   return cbProfileSize39;
 }
 
 
-bool    IsProfileOveflow39(void)
+bool    IsProfileOveflow40(void)
 {
   return fProfileOveflow39;
 }

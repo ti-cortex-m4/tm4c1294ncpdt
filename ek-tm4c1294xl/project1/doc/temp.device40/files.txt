@@ -1,5 +1,5 @@
-+	case_39c.h
-+	case_39p1.h
+case_39c.h
+case_39p1.h
 case_39p2.h
 case_39p3.h
 case_39p4.h

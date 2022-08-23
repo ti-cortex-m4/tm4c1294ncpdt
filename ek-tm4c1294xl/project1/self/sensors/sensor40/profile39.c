@@ -158,12 +158,12 @@ static bool ReadData40(time  tiTime, ulong  mdwValue[4])
 
 bool    ReadHeader40(void)
 {
-  uchar bSize = GetProfileSize39();
+  uchar bSize = GetProfileSize40();
 
   uchar i;
   for (i=0; i<bSize; i++)
   {
-    profile39 prf = GetProfile39(bSize - i - 1);
+    profile40 prf = GetProfile40(bSize - i - 1);
     if (prf.fExists)
     {
       time tm = HouIndexToDate(DateToHouIndex(prf.tmTime) - 1);
