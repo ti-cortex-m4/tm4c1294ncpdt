@@ -93,7 +93,7 @@ bool    FinishRecord40_Monitor(void) {
   uchar bCount = PopChar40();
 
 #ifdef BUFFER_RECORD_40
-  MonitorString("\n count="); MonitorCharDec(bCount); MonitorString("\n");
+  MonitorString("\n Count="); MonitorCharDec(bCount); MonitorString("\n");
 #endif
 
   uchar i;
@@ -120,7 +120,8 @@ bool    FinishRecord40_Monitor(void) {
       return FaultData(150+7, bSize);
 
 
-    time tm = PopTimeDate40();
+    time tmHhrEnd = PopTimeDate40();
+
     ulong mdwValue[4];
 
     uchar c;
@@ -134,7 +135,7 @@ bool    FinishRecord40_Monitor(void) {
     }
 
 #if BUFFER_RECORD_40
-    MonitorString("\n "); MonitorTime(tm);
+    MonitorString("\n "); MonitorTime(tmHhrEnd);
     MonitorString(" "); MonitorLongDec(mdwValue[0]);
     MonitorString(" "); MonitorLongDec(mdwValue[1]);
     MonitorString(" "); MonitorLongDec(mdwValue[2]);
@@ -165,7 +166,7 @@ bool    FinishRecord40_AddProfile40(void) {
   uchar bCount = PopChar40();
 
 #ifdef BUFFER_RECORD_40
-  MonitorString("\n count="); MonitorCharDec(bCount); MonitorString("\n");
+  MonitorString("\n Count="); MonitorCharDec(bCount); MonitorString("\n");
 #endif
 
   InitProfile40();
@@ -194,19 +195,21 @@ bool    FinishRecord40_AddProfile40(void) {
       return FaultData(150+7, bSize);
 
 
-    time tm = PopTimeDate40();
+    time tmHhrEnd = PopTimeDate40();
+
     ulong mdwValue[4];
 
-    uchar c;
-    for (c=0; c<4; c++)
+    uchar i;
+    for (i=0; i<4; i++)
     {
-      if (PopChar40() != 0x06) // double-long-unsigned 32
-        return Fault(150+8);
+      bType = PopChar40();
+      if (bType != 0x06) // double-long-unsigned 32
+        return FaultData(150+8, bType);
 
-      mdwValue[c] = PopLong40();
+      mdwValue[i] = PopLong40();
     }
 
-    AddProfile40(tm, mdwValue);
+    AddProfile40(tmHhrEnd, mdwValue);
   }
 
   if (IsProfileOveflow40())

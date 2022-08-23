@@ -18,8 +18,8 @@ case_39p4.h
 +	buffer_array_39.h
 +	buffer_profile_39.c
 +	buffer_profile_39.h
-buffer_record_39.c
-buffer_record_39.h
++	buffer_record_39.c
++	buffer_record_39.h
 +	caller39.c
 +	caller39.h
 +	correct39_wrapper.c
@@ -86,15 +86,3 @@ profile39.h
 +	time40_test.h
 +	unpack40.c
 +	unpack40.h
-
-
-
-+	buffer_array_39.c
-buffer_profile_39.c
-buffer_record_39.c
-+	dlms.c
-+	extended_4t_39.c
-+	fragment_profile_39.c
-profile39.c
-+	profile39_wrapper.c
-+	query_billing_period_39.c
