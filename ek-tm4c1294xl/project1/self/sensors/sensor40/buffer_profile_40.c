@@ -40,7 +40,7 @@ void    InitProfile40(void)
 void    AddProfile40(time  tmHhrEnd, ulong  mdwValue[4])
 {
 #ifdef MONITOR_40
-  MonitorString("\n add profile (end time) ");
+  MonitorString("\n AddProfile40 (period end time)");
   MonitorString(" "); MonitorIntDec(cbProfileSize);
   MonitorString(" "); MonitorTime(tmHhrEnd);
   MonitorString(" "); MonitorLongDec(mdwValue[0]);
@@ -57,24 +57,26 @@ void    AddProfile40(time  tmHhrEnd, ulong  mdwValue[4])
     mpProfile[p].fExists = true;
     mpProfile[p].tmHhrEnd = tmHhrEnd;
 
-    uchar c;
-    for (c=0; c<4; c++)
-      mpProfile[p].mdwValue[c] = mdwValue[c];
+    uchar i;
+    for (i=0; i<4; i++)
+      mpProfile[p].mdwValue[i] = mdwValue[i];
 
     cbProfileSize++;
   }
   else
   {
-    MonitorString("\n add profile overflow ");
-    Error40(160+0);
+#ifdef MONITOR_40
+    MonitorString("\n overflow !");
+#endif
 
+    Error40(160+0);
     fProfileOveflow = true;
   }
 }
 
 
 
-void    MonitorBuffPrf38(void)
+void    MonitorProfile40(void)
 {
 #ifdef MONITOR_40
   uchar p;

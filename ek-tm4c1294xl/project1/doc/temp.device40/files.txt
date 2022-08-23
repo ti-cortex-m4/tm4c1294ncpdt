@@ -16,8 +16,8 @@ case_39p4.h
 +	automatic40.h
 +	buffer_array_39.c
 +	buffer_array_39.h
-buffer_profile_39.c
-buffer_profile_39.h
++	buffer_profile_39.c
++	buffer_profile_39.h
 buffer_record_39.c
 buffer_record_39.h
 +	caller39.c
