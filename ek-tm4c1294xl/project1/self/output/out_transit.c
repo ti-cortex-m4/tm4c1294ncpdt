@@ -13,6 +13,7 @@ OUT_TRANSIT!C
 #include "../serial/monitor.h"
 #include "../sensors/unpack_k.h"
 #include "../sensors/unpack_w.h"
+#include "../sensors/device40/decompress40.h"
 #include "../digitals/wait_answer.h"
 #include "../hardware/watchdog.h"
 #include "out_transit.h"
@@ -356,6 +357,9 @@ uchar   j;
       ResetWatchdog();
       ShowWaitAnswer(1);
       if (GetWaitAnswer()) { mpSerial[ibPort] = SER_BADLINK; break; }
+
+      if (mpSerial[ibPort] == SER_INPUT_MASTER)
+        Decompress40();
 
       if (mpSerial[ibPort] == SER_POSTINPUT_MASTER)
         break;
