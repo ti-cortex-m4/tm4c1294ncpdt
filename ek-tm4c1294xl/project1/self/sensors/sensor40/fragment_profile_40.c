@@ -128,7 +128,7 @@ double2 TestFragmentProfile39(void)
   if (!FragmentProfile40(&c, tm1, tm2))
     return GetDouble2Error();
 
-  if (!FinishRecord40())
+  if (!FinishRecord40_Monitor())
     return GetDouble2Error();
 
   return GetDouble0(0);

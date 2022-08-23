@@ -205,7 +205,7 @@ uchar   TestProfile40_Internal(caller40*  pc)
     if (!FragmentProfile40(pc, t2.ti1, t2.ti2))
       return 3;
 
-    if (!FinishRecordProfile40()) // step 40.25
+    if (!FinishRecord40_AddProfile40()) // step 40.25
       return 4;
 
     if (ReadHeader40() == false) return 0; // step 40.26
