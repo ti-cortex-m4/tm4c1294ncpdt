@@ -1,5 +1,5 @@
 +	case_39c.h
-case_39p1.h
++	case_39p1.h
 case_39p2.h
 case_39p3.h
 case_39p4.h
@@ -44,8 +44,8 @@ buffer_record_39.h
 +	error39.h
 +	extended_4t_40.c
 +	extended_4t_40.h
-fragment_cntmon_39.c
-fragment_cntmon_39.h
++	fragment_cntmon_39.c
++	fragment_cntmon_39.h
 +	fragment_open_40.c
 +	fragment_open_40.h
 +	fragment_open_time_40.c

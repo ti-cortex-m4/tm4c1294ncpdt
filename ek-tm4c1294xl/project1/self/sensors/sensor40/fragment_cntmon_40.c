@@ -42,18 +42,18 @@ double8 FragmentCntMonCan40(const obis_t  obisBillingPeriod, const obis_t  obisS
   MonitorString("\n present="); MonitorBool(present);
 #endif
 
-  ulong64_ mddw[8];
+  ulong64_ mddwPulse[8];
   if (present)
   {
     uchar i;
     for (i=0; i<8; i++)
     {
-      mddw[i] = PopUnsignedValueDLSM();
+      mddwPulse[i] = PopUnsignedValueDLSM();
 #ifdef MONITOR_40
-      MonitorString("\n mddw[");
+      MonitorString("\n mddwPulse[");
       MonitorCharDec(i);
       MonitorString("]=");
-      MonitorLongDec(mddw[i].ddwValue);
+      MonitorLongDec(mddwPulse[i].ddwValue);
 #endif
     }
   }
@@ -71,21 +71,21 @@ double8 FragmentCntMonCan40(const obis_t  obisBillingPeriod, const obis_t  obisS
 
   if (present)
   {
-    double mdb[8];
+    double mdbEnergy[8];
 
     uchar i;
     for (i=0; i<8; i++)
     {
-      mdb[i] = (double)mddw[i].ddwValue * scaler.dbValue / 1000;
+      mdbEnergy[i] = (double)mddwPulse[i].ddwValue * scaler.dbValue / 1000;
 #ifdef MONITOR_40
-      MonitorString("\n mdb[");
+      MonitorString("\n mdbEnergy[");
       MonitorCharDec(i);
       MonitorString("]=");
-      MonitorDouble6(mdb[i]);
+      MonitorDouble6(mdbEnergy[i]);
 #endif
     }
 
-    return GetDouble8Ok(mdb);
+    return GetDouble8Ok(mdbEnergy);
   }
   else
   {
