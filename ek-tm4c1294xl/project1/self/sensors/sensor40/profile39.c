@@ -21,7 +21,7 @@ profile39*c
 #include "../../digitals/limits.h"
 #include "../../special/special.h"
 #include "io40.h"
-#include "buffer_record_39.h"
+#include "buffer_record_40.h"
 #include "dlms_read_register.h"
 #include "buffer_profile_40.h"
 #include "profile39.h"
