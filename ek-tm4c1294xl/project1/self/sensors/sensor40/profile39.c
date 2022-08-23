@@ -166,7 +166,7 @@ bool    ReadHeader40(void)
     profile40 prf = GetProfile40(bSize - i - 1);
     if (prf.fExists)
     {
-      time tm = HouIndexToDate(DateToHouIndex(prf.tmTime) - 1);
+      time tm = HouIndexToDate(DateToHouIndex(prf.tmHhrEnd) - 1);
       if (ReadData40(tm, prf.mdwValue) == false) return false;
     }
   }
