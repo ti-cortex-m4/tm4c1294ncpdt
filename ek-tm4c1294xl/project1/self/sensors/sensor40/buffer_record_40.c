@@ -119,8 +119,8 @@ bool    FinishRecord40_Monitor(void) {
     if (bSize != 12) // string size
       return FaultData(150+7, bSize);
 
-    time tm = PopTimeDate40();
 
+    time tm = PopTimeDate40();
     ulong mdwValue[4];
 
     uchar c;
@@ -134,8 +134,7 @@ bool    FinishRecord40_Monitor(void) {
     }
 
 #if BUFFER_RECORD_40
-    MonitorString("\n record ");
-    MonitorTime(tm);
+    MonitorString("\n "); MonitorTime(tm);
     MonitorString(" "); MonitorLongDec(mdwValue[0]);
     MonitorString(" "); MonitorLongDec(mdwValue[1]);
     MonitorString(" "); MonitorLongDec(mdwValue[2]);
@@ -171,26 +170,31 @@ bool    FinishRecord40_AddProfile40(void) {
 
   InitProfile40();
 
-  uchar i;
-  for (i=0; i<bCount; i++)
+  uchar r;
+  for (r=0; r<bCount; r++)
   {
-    if (GetPopCapacity40() < 2 + 2+12 + 4*(1+4))
-      return Fault(150+3);
+    wCapacity = GetPopCapacity40();
+    if (wCapacity < 2 + 2+12 + 4*(1+4))
+      return FaultData(150+3, wCapacity);
 
-    if (PopChar40() != 0x02) // structure
-      return Fault(150+4);
+    bType = PopChar40();
+    if (bType != 0x02) // structure
+      return FaultData(150+4, bType);
 
-    if (PopChar40() != 5) // structure size
-      return Fault(150+5);
+    uchar bSize = PopChar40();
+    if (bSize != 5) // structure size
+      return FaultData(150+5, bSize);
 
-    if (PopChar40() != 0x09) // string
-      return Fault(150+6);
+    bType = PopChar40();
+    if (bType != 0x09) // string
+      return FaultData(150+6, bType);
 
-    if (PopChar40() != 12) // string size
-      return Fault(150+7);
+    bSize = PopChar40();
+    if (bSize != 12) // string size
+      return FaultData(150+7, bSize);
+
 
     time tm = PopTimeDate40();
-
     ulong mdwValue[4];
 
     uchar c;
