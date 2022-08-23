@@ -85,9 +85,9 @@ bool    FinishRecord40(void) {
   if (wCapacity < 2)
     return FaultData(150+1, wCapacity);
 
-  uchar bTypeArray = PopChar40();
-  if (bTypeArray != 0x01) // array
-    return FaultData(150+2, bTypeArray);
+  uchar bType = PopChar40();
+  if (bType != 0x01) // array
+    return FaultData(150+2, bType);
 
   uchar bCount = PopChar40();
 
@@ -102,21 +102,21 @@ bool    FinishRecord40(void) {
     if (wCapacity < 2 + 2+12 + 4*(1+4))
       return FaultData(150+3, wCapacity);
 
-    uchar bTypeStructure = PopChar40();
-    if (bTypeStructure != 0x02) // structure
-      return FaultData(150+4, bTypeStructure);
+    uchar bType = PopChar40();
+    if (bType != 0x02) // structure
+      return FaultData(150+4, bType);
 
-    uchar bSizeStructure = PopChar40();
-    if (bSizeStructure != 5) // structure size
-      return FaultData(150+5, bSizeStructure);
+    uchar bSize = PopChar40();
+    if (bSize != 5) // structure size
+      return FaultData(150+5, bSize);
 
-    uchar bTypeString = PopChar40();
-    if (bTypeString != 0x09) // string
-      return FaultData(150+6, bTypeString);
+    bType = PopChar40();
+    if (bType != 0x09) // string
+      return FaultData(150+6, bType);
 
-    uchar bSizeString = PopChar40();
-    if (bSizeString != 12) // string size
-      return FaultData(150+7, bSizeString);
+    bSize = PopChar40();
+    if (bSize != 12) // string size
+      return FaultData(150+7, bSize);
 
     time tm = PopTimeDate40();
 
@@ -147,7 +147,7 @@ bool    FinishRecord40(void) {
 
 
 
-bool    FinishRecordProfile40(void) {
+bool    FinishRecord40_AddProfile40(void) {
 #if BUFFER_RECORD_40
   MonitorString("\n FinishRecordProfile40");
 #endif

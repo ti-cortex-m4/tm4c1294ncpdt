@@ -255,7 +255,7 @@ bool2   FinishProfile_Profile40(void) {
   MonitorString("\n FinishProfile_Profile40");
 #endif
 
-  bool success = FinishRecordProfile40(); // step 40.25
+  bool success = FinishRecord40_AddProfile40(); // step 40.25
 
   if (success)
     return GetBool2(ReadHeader40(), true); // step 40.26
