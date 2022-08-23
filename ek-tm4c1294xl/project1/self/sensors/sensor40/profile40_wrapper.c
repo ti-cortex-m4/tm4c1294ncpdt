@@ -15,7 +15,7 @@ profile40_wrapper.c
 #include "time40.h"
 #include "hdlc_address.h"
 #include "hdlc_monitor.h"
-#include "buffer_record_39.h"
+#include "buffer_record_40.h"
 #include "query_profile_40.h"
 #include "query_next_block_40.h"
 #include "dlms_read_data.h"

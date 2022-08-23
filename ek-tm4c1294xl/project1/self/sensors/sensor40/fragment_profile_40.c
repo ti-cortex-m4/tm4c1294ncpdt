@@ -14,7 +14,7 @@ fragment_profile_40.c
 #include "query_profile_40.h"
 #include "query_next_block_40.h"
 #include "io40.h"
-#include "buffer_record_39.h"
+#include "buffer_record_40.h"
 #include "hdlc_address.h"
 #include "fragment_open_40.h"
 #include "fragment_profile_40.h"
