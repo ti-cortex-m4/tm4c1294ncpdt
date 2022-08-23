@@ -20,9 +20,9 @@ profile40_wrapper.c
 #include "query_next_block_40.h"
 #include "dlms_read_data.h"
 #include "dlms_read_register.h"
-#include "query_register_39.h"
 #include "profile39.h"
 #include "profile40_wrapper.h"
+#include "query_register_40.h"
 
 
 
