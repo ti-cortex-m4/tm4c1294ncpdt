@@ -22,8 +22,8 @@ buffer_record_39.c
 buffer_record_39.h
 +	caller39.c
 +	caller39.h
-correct39_wrapper.c
-correct39_wrapper.h
++	correct39_wrapper.c
++	correct39_wrapper.h
 +	crc16x25.c
 +	crc16x25.h
 +	current39_wrapper.c

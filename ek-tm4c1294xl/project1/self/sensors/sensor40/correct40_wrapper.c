@@ -10,45 +10,47 @@ correct40_wrapper.c
 
 
 
-static uint             cwCorrects40;
-static uint             wDeltaOld40;
-static uint             wDeltaNew40;
+static uint             cwCorrects;
+
+static uint             wDeltaOld;
+static uint             wDeltaNew;
 
 
 
 void    Init_Correct40(void)
 {
-  cwCorrects40 = 0;
-  wDeltaOld40 = 0;
-  wDeltaNew40 = 0;
+  cwCorrects = 0;
+
+  wDeltaOld = 0;
+  wDeltaNew = 0;
 }
 
 
 
 uchar   GetCounter_Correct40(void)
 {
-  return cwCorrects40;
+  return cwCorrects;
 }
 
 
 
 void    SaveFirstDelta_Current40(uint  wDelta)
 {
-  cwCorrects40++;
-  wDeltaOld40 = wDelta;
+  cwCorrects++;
+  wDeltaOld = wDelta;
 }
 
 
 
 bool    CheckNextDelta_Current40(uint  wDelta)
 {
-  wDeltaNew40 = wDelta;
-  return (wDeltaNew40 < wDeltaOld40) && (cwCorrects40 < 300);
+  wDeltaNew = wDelta;
+  return (wDeltaNew < wDeltaOld) && (cwCorrects < 300);
 }
 
 
 void    SaveNextDelta_Current40(void)
 {
-  cwCorrects40++;
-  wDeltaOld40 = wDeltaNew40;
+  cwCorrects++;
+  wDeltaOld = wDeltaNew;
 }
