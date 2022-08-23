@@ -158,7 +158,7 @@ bool    FinishRecordProfile40(void) {
   MonitorString("\n count="); MonitorCharDec(bCount); MonitorString("\n");
 #endif
 
-  InitProfile39();
+  InitProfile40();
 
   uchar i;
   for (i=0; i<bCount; i++)
@@ -191,10 +191,10 @@ bool    FinishRecordProfile40(void) {
       mdwValue[c] = PopLong40();
     }
 
-    AddProfile39(tm, mdwValue);
+    AddProfile40(tm, mdwValue);
   }
 
-  if (IsProfileOveflow39())
+  if (IsProfileOveflow40())
     return Fault(150+9);
   else
     return true;

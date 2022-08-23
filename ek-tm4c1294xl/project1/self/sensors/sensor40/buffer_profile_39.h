@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-buffer_profile_39.h
+buffer_profile_40.h
 
 
 ------------------------------------------------------------------------------*/
@@ -11,18 +11,18 @@ buffer_profile_39.h
 typedef struct
 {
   bool          fExists;
-  time          tmTime;
+  time          tmHhrEnd;
   ulong         mdwValue[4];
-} profile39;
+} profile40;
 
 
 #endif
 
 
 
-void    InitProfile39(void);
-void    AddProfile39(time  tmTime, ulong  mdwValue[4]);
+void    InitProfile40(void);
+void    AddProfile40(time  tmHhrEnd, ulong  mdwValue[4]);
 
-profile39 GetProfile39(uchar  i);
-uchar   GetProfileSize39(void);
-bool    IsProfileOveflow39(void);
+profile40 GetProfile40(uchar  p);
+uchar   GetProfileSize40(void);
+bool    IsProfileOveflow40(void);
