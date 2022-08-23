@@ -208,6 +208,7 @@ void    Response0_CRC(void)
       case bINQ_TRANSIT_EXECUTE3: SafeTransitExecute3(); break;
       case bINQ_TRANSIT_EXECUTE4: SafeTransitExecute4(); break;
       case bINQ_TRANSIT_W:        TransitW();            break;
+      case bINQ_TRANSIT_DEVICE40: SafeTransitDevice40(); break;
 
       case bINQ_FLOW: OutFlow(); break;
       case bINQ_ENBL_ANSWER: OutEnableAnswer(); break;
