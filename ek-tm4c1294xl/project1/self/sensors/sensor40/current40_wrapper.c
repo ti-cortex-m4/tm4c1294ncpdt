@@ -20,7 +20,7 @@ current39.c
 #include "dlms_obis.h"
 #include "dlms_read_data.h"
 #include "dlms_read_register.h"
-#include "query_register_39.h"
+#include "query_register_40.h"
 #include "current40_wrapper.h"
 
 

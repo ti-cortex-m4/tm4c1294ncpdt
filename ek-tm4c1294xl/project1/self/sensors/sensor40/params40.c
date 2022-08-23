@@ -19,7 +19,7 @@ params34.c
 #include "dlms_obis.h"
 #include "error40.h"
 #include "io40.h"
-#include "query_register_39.h"
+#include "query_register_40.h"
 #include "dlms_read_register.h"
 #include "params40.h"
 #include "fragment_open_40.h"
