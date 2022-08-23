@@ -155,11 +155,13 @@ bool    FinishRecord40_AddProfile40(void) {
 
   InitPop40();
 
-  if (GetPopCapacity40() < 2)
-    return Fault(150+1);
+  uint wCapacity = GetPopCapacity40();
+  if (wCapacity < 2)
+    return FaultData(150+1, wCapacity);
 
-  if (PopChar40() != 0x01) // array
-    return Fault(150+2);
+  uchar bType = PopChar40();
+  if (bType != 0x01) // array
+    return FaultData(150+2, bType);
 
   uchar bCount = PopChar40();
 
