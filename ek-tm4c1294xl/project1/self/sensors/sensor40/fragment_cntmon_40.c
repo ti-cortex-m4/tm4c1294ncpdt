@@ -11,7 +11,7 @@ fragment_cntmon_40.c
 #include "dlms_obis.h"
 #include "error40.h"
 #include "io40.h"
-#include "query_register_39.h"
+#include "query_register_40.h"
 #include "query_billing_period_40.h"
 #include "read_engmon_39.h"
 #include "hdlc_address.h"
