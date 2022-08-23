@@ -12,7 +12,7 @@ buffer_record_39*c
 #include "include40.h"
 #include "error40.h"
 #include "buffer_array_40.h"
-#include "buffer_profile_39.h"
+#include "buffer_profile_40.h"
 #include "buffer_record_39.h"
 
 

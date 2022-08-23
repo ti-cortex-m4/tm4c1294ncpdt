@@ -23,7 +23,7 @@ profile39*c
 #include "io40.h"
 #include "buffer_record_39.h"
 #include "dlms_read_register.h"
-#include "buffer_profile_39.h"
+#include "buffer_profile_40.h"
 #include "profile39.h"
 #include "fragment_open_time_40.h"
 #include "fragment_profile_40.h"
