@@ -31,7 +31,6 @@ profile40.c
 
 
 static time             tiDevice;
-static ulong            dwDevice;
 
 static uint             wProfile;
 static time             tiBegin;
