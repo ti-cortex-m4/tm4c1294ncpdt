@@ -30,13 +30,13 @@ profile39*c
 
 
 
+time                    tiValue40;
+ulong                   dwValue40;
+
 uint                    wProfile40;
 time                    tiStart40;
 
 double                  dbScaler;
-
-time                    tiValue40;
-ulong                   dwValue40;
 
 
 
