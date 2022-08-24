@@ -34,7 +34,7 @@ static time             tiDevice;
 static ulong            dwDevice;
 
 static uint             wProfile;
-static time             tiStart;
+static time             tiBegin;
 
 static double           dbScaler;
 
@@ -76,17 +76,17 @@ void    InitHeader40(void)
     if (boShowMessages == true) DelayMsg();
   }
 
-  tiStart = tiDevice;
+  tiBegin = tiDevice;
 
-  uchar i = tiStart.bHour*2 + tiStart.bMinute/30;
+  uchar i = tiBegin.bHour*2 + tiBegin.bMinute/30;
   i = (i / 6) * 6;
 
-  tiStart.bHour = i / 2;
-  tiStart.bMinute = (i % 2)*30;
+  tiBegin.bHour = i / 2;
+  tiBegin.bMinute = (i % 2)*30;
 
 #ifdef MONITOR_40
   MonitorString(" wProfile="); MonitorIntDec(wProfile);
-  MonitorString(" tiStart="); MonitorTime(tiStart);
+  MonitorString(" tiBegin="); MonitorTime(tiBegin);
 #endif
 }
 
@@ -97,7 +97,7 @@ t2time  GetTimesProfile40(void)
   HideCurrTime(1);
 
 
-  ulong dw = DateToHouIndex(tiStart);
+  ulong dw = DateToHouIndex(tiBegin);
   dw -= wProfile;
   time tm1 = HouIndexToDate(dw + 1);
   time tm2 = HouIndexToDate(dw + 6);
