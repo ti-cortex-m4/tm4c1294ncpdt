@@ -156,7 +156,7 @@ static bool ReadData40(time  tiTime, ulong  mdwValue[4])
 }
 
 
-bool    ReadHeader40(void)
+bool    ReadProfiles40(void)
 {
   uchar bSize = GetProfileSize40();
 
@@ -208,7 +208,7 @@ uchar   TestProfile40_Internal(caller40*  pc)
     if (!FinishRecord40_AddProfile40()) // step 40.25
       return 4;
 
-    if (ReadHeader40() == false) return 0; // step 40.26
+    if (ReadProfiles40() == false) return 0; // step 40.26
     if (fKey == true) return 255;
   } // repeat: step 40.27
 } // finish: step 40.28

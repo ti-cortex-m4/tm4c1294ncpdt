@@ -75,7 +75,7 @@ static bool FaultData(uchar  bError, uint  wData)
 
 
 
-bool    FinishRecord40_AddProfile40(void) {
+bool    FinishRecord40_AddProfiles40(void) {
 #if BUFFER_RECORD_40
   MonitorString("\n FinishRecord40_AddProfile40");
 #endif
