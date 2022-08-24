@@ -30,8 +30,8 @@ profile40.c
 
 
 
-static time             tiValue;
-static ulong            dwValue;
+static time             tiDevice;
+static ulong            dwDevice;
 
 static uint             wProfile;
 static time             tiStart;
@@ -42,14 +42,14 @@ static double           dbScaler;
 
 void    SetTime_Profile40(time  tm)
 {
-  tiValue = tm;
-  dwValue = DateToHouIndex(tiValue);
+  tiDevice = tm;
+  dwDevice = DateToHouIndex(tiDevice);
 }
 
 
 time    GetTime_Profile40(void)
 {
-  return tiValue;
+  return tiDevice;
 }
 
 
@@ -64,7 +64,7 @@ void    InitHeader40(void)
 {
 #ifdef MONITOR_40
   MonitorString("\n InitHeader40 ");
-  MonitorString(" tiValue="); MonitorTime(tiValue);
+  MonitorString(" tiDevice="); MonitorTime(tiDevice);
 #endif
 
   if (!UseBounds())
@@ -76,7 +76,7 @@ void    InitHeader40(void)
     if (boShowMessages == true) DelayMsg();
   }
 
-  tiStart = tiValue;
+  tiStart = tiDevice;
 
   uchar i = tiStart.bHour*2 + tiStart.bMinute/30;
   i = (i / 6) * 6;
@@ -113,7 +113,7 @@ t2time  GetTimesProfile40(void)
 
 
 
-static bool ProcessProfile40(time  tiTime, ulong  mdwValue[4])
+static bool ProcessProfile40(time  tiTime, ulong  mdwDevice[4])
 {
 #ifdef MONITOR_40
     MonitorString("\n ReadData40 (begin time)");
@@ -130,7 +130,7 @@ static bool ProcessProfile40(time  tiTime, ulong  mdwValue[4])
   for (i=0; i<4; i++)
   {
 #if true
-    double db = (double)mdwValue[i]*dbScaler;
+    double db = (double)mdwDevice[i]*dbScaler;
     mpdbEngFracDigCan[ibDig][i] += db;
 
     uint w = (uint)(mpdbEngFracDigCan[ibDig][i]*dbPulse/1000);
@@ -138,7 +138,7 @@ static bool ProcessProfile40(time  tiTime, ulong  mdwValue[4])
 
     mpdbEngFracDigCan[ibDig][i] -= (double)w*1000/dbPulse;
 #else
-    uint w = (uint)(mdwValue[i]*dbScaler*dbPulse/1000);
+    uint w = (uint)(mdwDevice[i]*dbScaler*dbPulse/1000);
     mpwChannels[i] = w;
 #endif
   }
@@ -167,7 +167,7 @@ bool    ReadProfiles40(void)
     if (prf.fExists)
     {
       time tm = HouIndexToDate(DateToHouIndex(prf.tmHhrEnd) - 1);
-      if (ProcessProfile40(tm, prf.mdwValue) == false) return false;
+      if (ProcessProfile40(tm, prf.mdwDevice) == false) return false;
     }
   }
 
@@ -185,9 +185,9 @@ uchar   TestProfile40_Internal(caller40*  pc)
 {  
   time2 tm2 = FragmentOpenTime40(pc);
   if (!tm2.fValid) return 1;
-  tiValue = tm2.tiValue;
+  tiDevice = tm2.tiDevice;
 
-  dwValue = DateToHouIndex(tiValue);
+  dwDevice = DateToHouIndex(tiDevice);
 
 
   double2 scaler = ReadRegisterScaler39(obisScalerForProfile1, pc);
