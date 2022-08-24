@@ -99,23 +99,23 @@ t2time  QueryHeader40(void)
 
   ulong dw = DateToHouIndex(tiStart);
   dw -= wProfile;
-  time ti1 = HouIndexToDate(dw + 1);
-  time ti2 = HouIndexToDate(dw + 6);
+  time tm1 = HouIndexToDate(dw + 1);
+  time tm2 = HouIndexToDate(dw + 6);
 
 #ifdef MONITOR_40
   MonitorString("\n QueryHeader40 (end time)");
-  MonitorString(" from="); MonitorTime(ti1);
-  MonitorString(" to="); MonitorTime(ti2);
+  MonitorString(" from="); MonitorTime(tm1);
+  MonitorString(" to="); MonitorTime(tm2);
 #endif
 
-  return GetTuple2Time(ti1,ti2);
+  return GetTuple2Time(tm1,tm2);
 }
 
 
 static bool ReadData40(time  tiTime, ulong  mdwValue[4])
 {
 #ifdef MONITOR_40
-    MonitorString("\n read data (begin time) ");
+    MonitorString("\n ReadData40 (begin time)");
 #endif
 
   sprintf(szLo," %02u    %02u.%02u.%02u", tiTime.bHour, tiTime.bDay,tiTime.bMonth,tiTime.bYear);
@@ -126,20 +126,20 @@ static bool ReadData40(time  tiTime, ulong  mdwValue[4])
 
   double dbPulse = mpdbPulseHou[ibDig];
 
-  uchar c;
-  for (c=0; c<4; c++)
+  uchar i;
+  for (i=0; i<4; i++)
   {
 #if true
-    double db = (double)mdwValue[c]*dbScaler;
-    mpdbEngFracDigCan[ibDig][c] += db;
+    double db = (double)mdwValue[i]*dbScaler;
+    mpdbEngFracDigCan[ibDig][i] += db;
 
-    uint w = (uint)(mpdbEngFracDigCan[ibDig][c]*dbPulse/1000);
-    mpwChannels[c] = w;
+    uint w = (uint)(mpdbEngFracDigCan[ibDig][i]*dbPulse/1000);
+    mpwChannels[i] = w;
 
-    mpdbEngFracDigCan[ibDig][c] -= (double)w*1000/dbPulse;
+    mpdbEngFracDigCan[ibDig][i] -= (double)w*1000/dbPulse;
 #else
-    uint w = (uint)(mdwValue[c]*dbScaler*dbPulse/1000);
-    mpwChannels[c] = w;
+    uint w = (uint)(mdwValue[i]*dbScaler*dbPulse/1000);
+    mpwChannels[i] = w;
 #endif
   }
 
