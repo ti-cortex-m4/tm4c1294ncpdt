@@ -42,7 +42,6 @@ static double           dbScaler;
 void    SetTime_Profile40(time  tm)
 {
   tiDevice = tm;
-  dwDevice = DateToHouIndex(tiDevice);
 }
 
 
@@ -112,15 +111,15 @@ t2time  GetTimesProfile40(void)
 
 
 
-static bool ProcessProfile40(time  tiTime, ulong  mdwValue[4])
+static bool ProcessProfile40(time  tm, ulong  mdwValue[4])
 {
 #ifdef MONITOR_40
     MonitorString("\n ReadData40 (begin time)");
 #endif
 
-  sprintf(szLo," %02u    %02u.%02u.%02u", tiTime.bHour, tiTime.bDay,tiTime.bMonth,tiTime.bYear);
+  sprintf(szLo," %02u    %02u.%02u.%02u", tm.bHour, tm.bDay,tm.bMonth,tm.bYear);
 
-  if (SearchDefHouIndex(tiTime) == 0) return(1);
+  if (SearchDefHouIndex(tm) == 0) return(1);
   ShowProgressDigHou();
 
   double dbPulse = mpdbPulseHou[ibDig];
@@ -143,14 +142,14 @@ static bool ProcessProfile40(time  tiTime, ulong  mdwValue[4])
   }
 
 #ifdef MONITOR_40
-    MonitorString(" "); MonitorTime(tiTime);
+    MonitorString(" "); MonitorTime(tm);
     MonitorString(" "); MonitorIntDec(mpwChannels[0]);
     MonitorString(" "); MonitorIntDec(mpwChannels[1]);
     MonitorString(" "); MonitorIntDec(mpwChannels[2]);
     MonitorString(" "); MonitorIntDec(mpwChannels[3]);
 #endif
 
-  if (IsDefect(ibDig)) MakeSpecial(tiTime);
+  if (IsDefect(ibDig)) MakeSpecial(tm);
   return MakeStopHou(0);
 }
 
@@ -184,9 +183,7 @@ uchar   TestProfile40_Internal(caller40*  pc)
 {  
   time2 tm2 = FragmentOpenTime40(pc);
   if (!tm2.fValid) return 1;
-  tiDevice = tm2.tiDevice;
-
-  dwDevice = DateToHouIndex(tiDevice);
+  tiDevice = tm2.tiValue;
 
 
   double2 scaler = ReadRegisterScaler39(obisScalerForProfile1, pc);
@@ -204,7 +201,7 @@ uchar   TestProfile40_Internal(caller40*  pc)
     if (!FragmentProfile40(pc, t2.ti1, t2.ti2))
       return 3;
 
-    if (!FinishRecord40_AddProfile40()) // step 40.25
+    if (!FinishRecord40_AddProfiles40()) // step 40.25
       return 4;
 
     if (ReadProfiles40() == false) return 0; // step 40.26
