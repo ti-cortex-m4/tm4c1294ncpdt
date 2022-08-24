@@ -9,7 +9,7 @@ time    GetTime_Profile40(void);
 void    SetScaler_Profile40(double  db);
 
 void    InitHeader40(void);
-t2time  QueryHeader40(void);
+t2time  GetDatesProfile40(void);
 bool    ReadProfiles40(void);
 
 double2 TestProfile40(void);

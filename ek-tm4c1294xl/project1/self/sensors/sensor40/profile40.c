@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-profile39*c
+profile40.c
 
 ------------------------------------------------------------------------------*/
 
@@ -24,9 +24,9 @@ profile39*c
 #include "buffer_record_40.h"
 #include "dlms_read_register.h"
 #include "buffer_profile_40.h"
-#include "profile39.h"
 #include "fragment_open_time_40.h"
 #include "fragment_profile_40.h"
+#include "profile40.h"
 
 
 
@@ -92,7 +92,7 @@ void    InitHeader40(void)
 
 
 
-t2time  QueryHeader40(void)
+t2time  GetDatesProfile40(void)
 {
   HideCurrTime(1);
 
@@ -103,7 +103,7 @@ t2time  QueryHeader40(void)
   time tm2 = HouIndexToDate(dw + 6);
 
 #ifdef MONITOR_40
-  MonitorString("\n QueryHeader40 (end time)");
+  MonitorString("\n GetDatesProfile40 (end time)");
   MonitorString(" from="); MonitorTime(tm1);
   MonitorString(" to="); MonitorTime(tm2);
 #endif
@@ -121,7 +121,6 @@ static bool ProcessProfile40(time  tiTime, ulong  mdwValue[4])
   sprintf(szLo," %02u    %02u.%02u.%02u", tiTime.bHour, tiTime.bDay,tiTime.bMonth,tiTime.bYear);
 
   if (SearchDefHouIndex(tiTime) == 0) return(1);
-
   ShowProgressDigHou();
 
   double dbPulse = mpdbPulseHou[ibDig];
@@ -200,7 +199,7 @@ uchar   TestProfile40_Internal(caller40*  pc)
 
 
   while (true) {
-    t2time t2 = QueryHeader40(); // step 40.3
+    t2time t2 = GetDatesProfile40(); // step 40.3
 
     if (!FragmentProfile40(pc, t2.ti1, t2.ti2))
       return 3;
