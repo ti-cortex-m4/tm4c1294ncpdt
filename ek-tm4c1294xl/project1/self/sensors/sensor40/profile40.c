@@ -92,7 +92,7 @@ void    InitHeader40(void)
 
 
 
-t2time  GetDatesProfile40(void)
+t2time  GetTimesProfile40(void)
 {
   HideCurrTime(1);
 
@@ -103,13 +103,14 @@ t2time  GetDatesProfile40(void)
   time tm2 = HouIndexToDate(dw + 6);
 
 #ifdef MONITOR_40
-  MonitorString("\n GetDatesProfile40 (end time)");
+  MonitorString("\n GetTimesProfile40 (end time)");
   MonitorString(" from="); MonitorTime(tm1);
   MonitorString(" to="); MonitorTime(tm2);
 #endif
 
   return GetTuple2Time(tm1,tm2);
 }
+
 
 
 static bool ProcessProfile40(time  tiTime, ulong  mdwValue[4])
@@ -199,7 +200,7 @@ uchar   TestProfile40_Internal(caller40*  pc)
 
 
   while (true) {
-    t2time t2 = GetDatesProfile40(); // step 40.3
+    t2time t2 = GetTimesProfile40(); // step 40.3
 
     if (!FragmentProfile40(pc, t2.ti1, t2.ti2))
       return 3;

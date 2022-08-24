@@ -168,7 +168,7 @@ void    QueryProfile_Profile40(void) {
 
   InitRecord40(); // step 40.2
 
-  t2time t2 = QueryHeader40(); // step 40.3
+  t2time t2 = GetTimesProfile40(); // step 40.3
 
   c.bNS++;
   c.bInvokeId++;
