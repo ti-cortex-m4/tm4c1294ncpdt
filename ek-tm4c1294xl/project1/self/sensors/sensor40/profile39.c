@@ -62,6 +62,11 @@ void    SetScaler_Profile40(double  db)
 
 void    InitHeader40(void)
 {
+#ifdef MONITOR_40
+  MonitorString("\n InitHeader40 ");
+  MonitorString(" tiValue="); MonitorTime(tiValue);
+#endif
+
   if (!UseBounds())
     wProfile = 0;
   else
@@ -72,11 +77,6 @@ void    InitHeader40(void)
   }
 
   tiStart = tiValue;
-
-#ifdef MONITOR_40
-  MonitorString("\n InitHeader40 ");
-  MonitorString(" tiValue="); MonitorTime(tiStart);
-#endif
 
   uchar i = tiStart.bHour*2 + tiStart.bMinute/30;
   i = (i / 6) * 6;
