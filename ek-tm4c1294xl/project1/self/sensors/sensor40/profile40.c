@@ -164,8 +164,8 @@ bool    ReadProfiles40(void)
     profile40 prf = GetProfile40(bSize - i - 1);
     if (prf.fExists)
     {
-      time tm = HouIndexToDate(DateToHouIndex(prf.tmHhrEnd) - 1);
-      if (ProcessProfile40(tm, prf.mdwValue) == false) return false;
+      time tmHhrBegin = HouIndexToDate(DateToHouIndex(prf.tmHhrEnd) - 1);
+      if (ProcessProfile40(tmHhrBegin, prf.mdwValue) == false) return false;
     }
   }
 
