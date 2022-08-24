@@ -87,7 +87,7 @@ DEVICES.C
 #include "../sensors/sensor40/dlms.h"
 #include "../sensors/sensor40/dlms_aare.h"
 #include "../sensors/sensor40/current40_wrapper.h"
-#include "../sensors/sensor40/profile39.h"
+#include "../sensors/sensor40/profile40.h"
 #include "../sensors/sensor40/correct40.h"
 #include "../sensors/sensor40/correct40_wrapper.h"
 #include "../sensors/sensor40/profile40_wrapper.h"
