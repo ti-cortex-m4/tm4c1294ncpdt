@@ -382,13 +382,9 @@ uchar   j;
       mpSerial[ibPort] = SER_BEGIN;
       ibPort = j;
 
-      //InitPushCRC();
-      //for (i=0; i<iwInBuffSave; i++) PushChar(mpbInBuffSave[i]);
-      //Output(iwInBuffSave);
       InitPush(0);
       for (i=0; i<iwInBuffSave; i++) PushChar(mpbInBuffSave[i]);
-//      Output(iwInBuffSave);
-      Answer(iwInBuffSave,SER_OUTPUT_SLAVE);
+      Answer(iwInBuffSave, SER_OUTPUT_SLAVE);
     }
   }
 }
