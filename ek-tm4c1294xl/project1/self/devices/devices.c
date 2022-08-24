@@ -7411,7 +7411,7 @@ void    RunDevices(void)
 
     case DEV_TIME1_O_40P:
       Clear(); ShowLo(szRepeats);
-      sprintf(szLo+8,"%1u",GetCounter_Correct40()+1); DelayInf();
+      sprintf(szLo+8, "%1u", GetCounter_Correct40()+1); DelayInf();
 
       cbRepeat = MaxRepeats();
       QueryTime_Profile40();
@@ -7725,7 +7725,7 @@ void    RunDevices(void)
       break;
 
     case DEV_20_40P:
-      if (!LastSegmentDMLS()) { // true: step 38.18
+      if (!LastSegmentDMLS()) { // true: step 40.18
         MakePause(DEV_3_RR_O_40P); // -> step 40.19
       } else {
         MakePause(DEV_4_RR_O_40P); // -> step 40.22
