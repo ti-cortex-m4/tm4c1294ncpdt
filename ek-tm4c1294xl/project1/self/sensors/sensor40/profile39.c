@@ -30,13 +30,13 @@ profile39*c
 
 
 
-time                    tiValue40;
-ulong                   dwValue40;
+static time             tiValue40;
+static ulong            dwValue40;
 
-uint                    wProfile40;
-time                    tiStart40;
+static uint             wProfile40;
+static time             tiStart40;
 
-double                  dbScaler;
+static double           dbScaler;
 
 
 
