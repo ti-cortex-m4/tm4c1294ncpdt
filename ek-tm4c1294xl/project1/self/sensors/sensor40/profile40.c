@@ -113,7 +113,7 @@ t2time  GetTimesProfile40(void)
 
 
 
-static bool ProcessProfile40(time  tiTime, ulong  mdwDevice[4])
+static bool ProcessProfile40(time  tiTime, ulong  mdwValue[4])
 {
 #ifdef MONITOR_40
     MonitorString("\n ReadData40 (begin time)");
@@ -130,7 +130,7 @@ static bool ProcessProfile40(time  tiTime, ulong  mdwDevice[4])
   for (i=0; i<4; i++)
   {
 #if true
-    double db = (double)mdwDevice[i]*dbScaler;
+    double db = (double)mdwValue[i]*dbScaler;
     mpdbEngFracDigCan[ibDig][i] += db;
 
     uint w = (uint)(mpdbEngFracDigCan[ibDig][i]*dbPulse/1000);
@@ -138,7 +138,7 @@ static bool ProcessProfile40(time  tiTime, ulong  mdwDevice[4])
 
     mpdbEngFracDigCan[ibDig][i] -= (double)w*1000/dbPulse;
 #else
-    uint w = (uint)(mdwDevice[i]*dbScaler*dbPulse/1000);
+    uint w = (uint)(mdwValue[i]*dbScaler*dbPulse/1000);
     mpwChannels[i] = w;
 #endif
   }
@@ -167,7 +167,7 @@ bool    ReadProfiles40(void)
     if (prf.fExists)
     {
       time tm = HouIndexToDate(DateToHouIndex(prf.tmHhrEnd) - 1);
-      if (ProcessProfile40(tm, prf.mdwDevice) == false) return false;
+      if (ProcessProfile40(tm, prf.mdwValue) == false) return false;
     }
   }
 
