@@ -250,15 +250,15 @@ void    Read5_Profile(void) {
 
 
 
-bool2   FinishProfile_Profile40(void) {
+bool2   FinishProfile_Profiles40(void) {
 #ifdef PROFILE_40_NAMES
   MonitorString("\n FinishProfile_Profile40");
 #endif
 
-  bool success = FinishRecord40_AddProfile40(); // step 40.25
+  bool success = FinishRecord40_AddProfiles40(); // step 40.25
 
   if (success)
-    return GetBool2(ReadHeader40(), true); // step 40.26
+    return GetBool2(ReadProfiles40(), true); // step 40.26
   else
     return GetBool2Error(); 
 }

@@ -44,4 +44,4 @@ void    QueryNextBlock_Profile40(void);
 void    Read4_Profile(void);
 void    Read5_Profile(void);
 
-bool2   FinishProfile_Profile40(void);
+bool2   FinishProfile_Profiles40(void);

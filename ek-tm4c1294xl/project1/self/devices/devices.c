@@ -7774,7 +7774,7 @@ void    RunDevices(void)
 
     case DEV_FINISH_40P: // step 40.24
       {
-        bool2 b2 = FinishProfile_Profile40(); // steps 40.25, 40.26
+        bool2 b2 = FinishProfile_Profiles40(); // steps 40.25, 40.26
         if (!b2.fValid)
           ErrorProfile();
         else if (b2.fValue)
