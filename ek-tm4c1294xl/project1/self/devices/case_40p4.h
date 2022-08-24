@@ -96,7 +96,7 @@
       break;
 
     case DEV_20_40P:
-      if (!LastSegmentDMLS()) { // true: step 38.18
+      if (!LastSegmentDMLS()) { // true: step 40.18
         MakePause(DEV_3_RR_O_40P); // -> step 40.19
       } else {
         MakePause(DEV_4_RR_O_40P); // -> step 40.22
