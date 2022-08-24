@@ -112,7 +112,7 @@ t2time  QueryHeader40(void)
 }
 
 
-static bool ReadData40(time  tiTime, ulong  mdwValue[4])
+static bool ProcessProfile40(time  tiTime, ulong  mdwValue[4])
 {
 #ifdef MONITOR_40
     MonitorString("\n ReadData40 (begin time)");
@@ -167,7 +167,7 @@ bool    ReadProfiles40(void)
     if (prf.fExists)
     {
       time tm = HouIndexToDate(DateToHouIndex(prf.tmHhrEnd) - 1);
-      if (ReadData40(tm, prf.mdwValue) == false) return false;
+      if (ProcessProfile40(tm, prf.mdwValue) == false) return false;
     }
   }
 
