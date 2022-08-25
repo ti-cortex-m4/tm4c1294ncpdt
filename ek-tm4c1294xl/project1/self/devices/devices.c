@@ -7410,12 +7410,19 @@ void    RunDevices(void)
 
 
     case DEV_TIME1_O_40P:
-      Clear(); ShowLo(szRepeats);
-      sprintf(szLo+8, "%1u", GetCounter_Correct40()+1); DelayInf();
+      if (fCurrCtrl == true)
+      {
+        Clear(); ShowLo(szRepeats);
+        sprintf(szLo+8, "%1u", GetCounter_Correct40()+1); DelayInf();
 
-      cbRepeat = MaxRepeats();
-      QueryTime_Profile40();
-      SetCurr(DEV_TIME1_I_40P);
+        cbRepeat = MaxRepeats();
+        QueryTime_Profile40();
+        SetCurr(DEV_TIME1_I_40P);
+      }
+      else
+      {
+        MakePause(DEV_TIME2_O_40P);
+      }
       break;
 
     case DEV_TIME1_I_40P:
