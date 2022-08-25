@@ -17,7 +17,7 @@
 #if true
           Error40(210+24);
           Beep(); // TODO
-          MakePause(DEV_TIME2_O_40P);
+          MakePause(DEV_DISC_O_40P);
 #else
           PROFILE40_REPEAT_OR_ERROR(210+24, QueryProfile_Profile40(), DEV_14_40P)
 #endif
@@ -94,7 +94,7 @@
 #if true
           Error40(210+30);
           Beep(); // TODO
-          MakePause(DEV_TIME2_O_40P);
+          MakePause(DEV_DISC_O_40P);
 #else
           PROFILE40_REPEAT_OR_ERROR(210+30, QueryNextBlock_Profile40(), DEV_READ_4_40P)
 #endif
