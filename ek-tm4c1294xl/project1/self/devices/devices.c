@@ -7643,7 +7643,13 @@ void    RunDevices(void)
     case DEV_14_40P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateFrame_Profile40()) {
+#if true
+          Error40(210+24);
+          Beep(); // TODO
+          MakePause(DEV_TIME2_O_40P);
+#else
           PROFILE40_REPEAT_OR_ERROR(210+24, QueryProfile_Profile40(), DEV_14_40P)
+#endif
         } else {
           Read1_Profile(); // steps 40.5, 40.6
           MakePause(DEV_15_40P);
@@ -7714,12 +7720,13 @@ void    RunDevices(void)
     case DEV_READ_4_40P:
       if (mpSerial[ibPort] == SER_GOODCHECK) {
         if (!ValidateFrame_Profile40()) {
-        {
+#if true
           Error40(210+30);
           Beep(); // TODO
           MakePause(DEV_TIME2_O_40P);
-        }
-        //PROFILE40_REPEAT_OR_ERROR(210+30, QueryNextBlock_Profile40(), DEV_READ_4_40P)
+#else
+          PROFILE40_REPEAT_OR_ERROR(210+30, QueryNextBlock_Profile40(), DEV_READ_4_40P)
+#endif
         } else {
           Read4_Profile(); // steps 40.16, 40.17
           MakePause(DEV_20_40P);
