@@ -48,6 +48,7 @@ static void Show(uchar  c)
 void    key_SetAddresses(void)
 {
 static uchar c;
+static line  address;
 
   if (bKey == bKEY_ENTER)
   {
@@ -91,6 +92,12 @@ static uchar c;
 
         mpdwAddress2[c] = dw;
         SaveCache(&chAddress2);
+
+        memset(&address, 0, sizeof(address));
+        sprintf(address.szLine, "%d", dw);
+
+        mpphAsciiAddress[c] = address;
+        SaveCache(&chAsciiAddress);
 
         AddSysRecordReprogram(EVE_EDIT_ADDRESS21);
 
