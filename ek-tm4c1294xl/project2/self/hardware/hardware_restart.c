@@ -42,11 +42,11 @@ static void InitPL6(void)
 void InitHardwareRestart(void)
 {
   InitPL6();
-  SetPL6To0();
+  SetPL6To1();
 }
 
 void HardwareRestart(void)
 {
-  SetPL6To1();
+  SetPL6To0();
   DelaySecond(1);
 }
