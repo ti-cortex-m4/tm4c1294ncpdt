@@ -6,7 +6,7 @@ periodic_reset.c
 
 #include "../main.h"
 #include "../hardware/delay.h"
-#include "../hardware/restart.h"
+#include "../hardware/hardware_restart.h"
 #include "../kernel/settings.h"
 #include "../kernel/log.h"
 #include "clock.h"
@@ -23,7 +23,8 @@ void RunPeriodicReset(void) {
       CONSOLE("periodic restart \n");
       DelaySecond(1);
 
-      Restart();
+      //Restart();
+      HardwareRestart();
     }
   }
 }
