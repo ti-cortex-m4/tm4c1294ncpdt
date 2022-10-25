@@ -20,7 +20,7 @@ main.h
 
 
 #define MAJOR_VERSION   0
-#define MINOR_VERSION   22
+#define MINOR_VERSION   23
 
 
 #ifndef SINGLE_UART
