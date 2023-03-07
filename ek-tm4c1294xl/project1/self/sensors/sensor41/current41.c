@@ -14,14 +14,14 @@ current38.c
 #include "../../devices/devices.h"
 #include "../../digitals/digitals.h"
 #include "../../digitals/current/current_run.h"
-#include "dff.h"
-#include "current38.h"
+#include "../sensor38/dff.h"
+#include "current41.h"
 
 
 
-void    ReadCurrent38(void)
+void    ReadCurrent41(void)
 {
-  uchar* pbIn = InBuffPtr(10);
+  uchar* pbIn = InBuffPtr(16);
 
   uchar i;
   for (i=0; i<4; i++)

@@ -85,12 +85,12 @@ void    QueryParams41(void)
   PushChar(0x52); // Ô
   PushChar(0x1C);
 
-  Query41(250, 46);
+  Query38(250, 46);
 }
 
 
 
-float   cosinusDegrees(double  degrees)
+static float cosinusDegrees41(double  degrees)
 {
   return cos(M_PI*degrees/180);
 }
@@ -104,7 +104,7 @@ float2  ReadParam41(void)
   if (fBeginParam == false)
   {
     QueryParams41();
-    if (Input41() != SER_GOODCHECK) return GetFloat2Error();
+    if (Input38() != SER_GOODCHECK) return GetFloat2Error();
 
     uchar* pbIn = InBuffPtr(16);
 
@@ -152,9 +152,9 @@ float2  ReadParam41(void)
     case PAR_F2 : return GetFloat2(mpeValues[16]/100, true);
     case PAR_F3 : return GetFloat2(mpeValues[17]/100, true);
 
-    case PAR_C1 : return GetFloat2(cosinusDegrees(mpeValues[18]/10), true);
-    case PAR_C2 : return GetFloat2(cosinusDegrees(mpeValues[19]/10), true);
-    case PAR_C3 : return GetFloat2(cosinusDegrees(mpeValues[20]/10), true);
+    case PAR_C1 : return GetFloat2(cosinusDegrees41(mpeValues[18]/10), true);
+    case PAR_C2 : return GetFloat2(cosinusDegrees41(mpeValues[19]/10), true);
+    case PAR_C3 : return GetFloat2(cosinusDegrees41(mpeValues[20]/10), true);
 
     default: return GetFloat2Error();
   }
