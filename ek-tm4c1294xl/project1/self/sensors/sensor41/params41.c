@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-params34.c
+params41.c
 
 
 ------------------------------------------------------------------------------*/
@@ -13,10 +13,10 @@ params34.c
 #include "../../digitals/params/params2.h"
 #include "../../display/display.h"
 #include "../../time/delay.h"
-#include "device38.h"
-#include "io38.h"
-#include "dff.h"
-#include "params38.h"
+#include "device41.h"
+#include "../sensor38/io38.h"
+#include "../sensor38/dff.h"
+#include "params41.h"
 
 
 
@@ -28,17 +28,38 @@ static float        mpeValues[3*7];
 
 
 
-void    QueryParams38(void)
+void    QueryParams41(void)
 {
   InitPush(0);
 
   PushChar(0xC0);
-  PushChar(0x06);
+  PushChar(0x05);
 
-  PushAddress38();
+  PushChar(0);
+  PushChar(0);
+  PushChar(0);
+  PushChar(0);
 
+  PushChar(0x02);
   PushChar(0x00);
-  PushChar(0x06);
+  PushChar(0x05);
+  PushChar(0x01);
+
+  PushAddress41();
+
+  PushChar(0x04);
+  PushChar(0x02);
+  PushChar(0x80);
+  PushChar(0x05);
+  PushChar(0x02);
+  PushChar(0x81);
+  PushChar(0x04);
+  PushChar(0x02);
+  PushChar(0x84);
+  PushChar(0x8D);
+  PushChar(0x02);
+  PushChar(0x83);
+  PushChar(0x7F);
 
   PushChar(0x0A);
   PushChar(0x00);
@@ -64,7 +85,7 @@ void    QueryParams38(void)
   PushChar(0x52); // Ô
   PushChar(0x1C);
 
-  Query38(250, 30);
+  Query41(250, 46);
 }
 
 
@@ -76,16 +97,16 @@ float   cosinusDegrees(double  degrees)
 
 
 
-float2  ReadParam38(void)
+float2  ReadParam41(void)
 {
   Clear();
 
   if (fBeginParam == false)
   {
-    QueryParams38();
-    if (Input38() != SER_GOODCHECK) return GetFloat2Error();
+    QueryParams41();
+    if (Input41() != SER_GOODCHECK) return GetFloat2Error();
 
-    uchar* pbIn = InBuffPtr(10);
+    uchar* pbIn = InBuffPtr(16);
 
     uchar j;
     for (j=0; j<7; j++)
