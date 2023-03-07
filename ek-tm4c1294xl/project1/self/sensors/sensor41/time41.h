@@ -1,18 +1,18 @@
 /*------------------------------------------------------------------------------
-time38.h
+time41.h
 
 
 ------------------------------------------------------------------------------*/
 
-time    SecondsToTime38(ulong  dw);
-ulong   TimeToSeconds38(time  ti);
+time    SecondsToTime41(ulong  dw);
+ulong   TimeToSeconds41(time  ti);
 
-void    QueryTime38(void);
-time    ReadTime38(void);
+void    QueryTime41(void);
+time    ReadTime41(void);
 
-void    SetCorrectSecond38(int64_t  ddw);
-void    QueryCorrect38(void);
-uchar   ReadCorrect38(void);
+//void    SetCorrectSecond41(int64_t  ddw);
+//void    QueryCorrect41(void);
+//uchar   ReadCorrect41(void);
 
-void    QueryManage38(void);
-uchar   ReadManage38(void);
+//void    QueryManage41(void);
+//uchar   ReadManage41(void);

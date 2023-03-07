@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-automatic_get_time_38.c
+automatic_get_time_41.c
 
 
 ------------------------------------------------------------------------------*/
@@ -12,27 +12,27 @@ automatic_get_time_38.c
 #include "../../devices/devices.h"
 #include "../../digitals/digitals.h"
 #include "device38.h"
-#include "time38.h"
+#include "time41.h"
 #include "io38.h"
-#include "automatic_get_time_38.h"
+#include "automatic_get_time_41.h"
 
 
 
-time2   ReadTimeCan38(void)
+time2   ReadTimeCan41(void)
 {
   Clear();
 
   uchar r;
   for (r=0; r<MaxRepeats(); r++)
   {
-    QueryTime38();
-    if (Input38() == SER_GOODCHECK) break;
+    QueryTime41();
+    if (Input41() == SER_GOODCHECK) break;
   }
 
   if (r == MaxRepeats()) return GetTime2Error();
   ShowPercent(25);
 
-  time ti = ReadTime38();
+  time ti = ReadTime41();
 
 
   tiChannelC = ti;

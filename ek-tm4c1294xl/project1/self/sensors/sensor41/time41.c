@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-time38.c
+time41.c
 
 
 ------------------------------------------------------------------------------*/
@@ -13,15 +13,15 @@ time38.c
 #include "device38.h"
 #include "io38.h"
 #include "dff.h"
-#include "time38.h"
+#include "time41.h"
 
 
 
-static int32_t          dwCorrectSecond38;
+//static int32_t          dwCorrectSecond38;
 
 
 
-time    SecondsToTime38(ulong  dw)
+time    SecondsToTime41(ulong  dw)
 {
   time ti = SecIndexToDate(dw);
   ti.bYear += 12;
@@ -29,7 +29,7 @@ time    SecondsToTime38(ulong  dw)
 }
 
 
-ulong   TimeToSeconds38(time  ti)
+ulong   TimeToSeconds41(time  ti)
 {
   ti.bYear -= 12;
   return DateToSecIndex(ti);
@@ -37,7 +37,7 @@ ulong   TimeToSeconds38(time  ti)
 
 
 
-void    QueryTime38(void)
+void    QueryTime41(void)
 {
   InitPush(0);
 
@@ -54,7 +54,7 @@ void    QueryTime38(void)
   PushChar(0x05);
   PushChar(0x01);
 
-  PushAddress38();
+  PushAddress41();
 
   PushChar(0x04);
   PushChar(0x02);
@@ -74,27 +74,27 @@ void    QueryTime38(void)
   PushChar(0x00);
   PushChar(0x01);
 
-  Query38(250, 33);
+  Query41(250, 33);
 }
 
 
-time    ReadTime38(void)
+time    ReadTime41(void)
 {
   int64_t ddw = 0;
   DffDecodePositive(InBuffPtr(17), &ddw);
-  return SecondsToTime38(ddw % 0x100000000);
+  return SecondsToTime41(ddw % 0x100000000);
 }
 
 
-
-void    SetCorrectSecond38(int64_t  ddw)
+/*
+void    SetCorrectSecond41(int64_t  ddw)
 {
   dwCorrectSecond38 = ddw;
 }
 
 
 
-void    QueryCorrect38(void)
+void    QueryCorrect41(void)
 {
 //  MonitorString("\n QueryCorrect38 ");
 
@@ -103,7 +103,7 @@ void    QueryCorrect38(void)
   PushChar(0xC0);
   PushChar(0x06);
 
-  PushAddress38();
+  PushAddress41();
 
   PushChar(0x00);
   PushChar(0x06);
@@ -113,21 +113,21 @@ void    QueryCorrect38(void)
 
   PushChar(0x0F); // выполнить коррекцию времени
 
-  uchar n = Encode38(dwCorrectSecond38, OutBuffPtr(GetPush()));
+  uchar n = Encode41(dwCorrectSecond38, OutBuffPtr(GetPush()));
   Skip(n);
 
-  Query38(100+18, 14+n);
+  Query41(100+18, 14+n);
 }
 
 
-uchar   ReadCorrect38(void)
+uchar   ReadCorrect41(void)
 {
   return InBuff(11);
 }
 
 
 
-void    QueryManage38(void)
+void    QueryManage41(void)
 {
 //  MonitorString("\n QueryManage38 ");
 
@@ -136,7 +136,7 @@ void    QueryManage38(void)
   PushChar(0xC0);
   PushChar(0x06);
 
-  PushAddress38();
+  PushAddress41();
 
   PushChar(0x00);
   PushChar(0x06);
@@ -145,17 +145,18 @@ void    QueryManage38(void)
   PushChar(0);
   PushChar(1); // текущее время/дата
 
-  ulong dw = TimeToSeconds38(*GetCurrTimeDate());
+  ulong dw = TimeToSeconds41(*GetCurrTimeDate());
 
-  uchar n = Encode38(dw, OutBuffPtr(GetPush()));
+  uchar n = Encode41(dw, OutBuffPtr(GetPush()));
   Skip(n);
 
-  Query38(100+18, 14+n);
+  Query41(100+18, 14+n);
 }
 
 
 
-uchar   ReadManage38(void)
+uchar   ReadManage41(void)
 {
   return InBuff(11);
 }
+*/

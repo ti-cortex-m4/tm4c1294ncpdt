@@ -60,6 +60,7 @@ AUTOMATIC2!C
 #include "sensor40/automatic_get_time_40.h"
 #include "sensor40/automatic_get_cntcurr_40.h"
 #include "sensor40/automatic_get_cntmon_40.h"
+#include "sensor41/automatic_get_time_41.h"
 #include "automatic2.h"
 
 
@@ -2070,6 +2071,10 @@ time2   ReadTimeCan(uchar  ibCan)
 
 #ifndef SKIP_40
     case 40: return ReadTimeCan40();
+#endif
+
+#ifndef SKIP_41
+    case 41: return ReadTimeCan41();
 #endif
 
     default: return GetTime2Error();
