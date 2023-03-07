@@ -71,7 +71,8 @@ bool    StartCurrent(uchar  ibCanal)
         (diCurr.bDevice == 35) ||
         (diCurr.bDevice == 36) || (diCurr.bDevice == 37) ||
         (diCurr.bDevice == 38) || (diCurr.bDevice == 39) ||
-        (diCurr.bDevice == 40))
+        (diCurr.bDevice == 40) ||
+        (diCurr.bDevice == 41))
     {
       if (mpboReadyCan[ibDig] == false)
       {
@@ -213,6 +214,10 @@ bool    StartCurrent(uchar  ibCanal)
 
 #ifndef SKIP_40
     case 40: SetNext(DEV_START_40C);  break;
+#endif
+
+#ifndef SKIP_41
+    case 41: SetNext(DEV_START_41C);  break;
 #endif
   }
 
