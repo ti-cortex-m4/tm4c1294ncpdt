@@ -938,6 +938,13 @@ typedef enum
 
 #endif
 
+#ifndef SKIP_41
+
+  DEV_START_41C         =  0x2500,
+  DEV_ENERGY_41C        =  0x2501,
+
+#endif
+
   DEV_PAUSE             =  1
 
 } device;

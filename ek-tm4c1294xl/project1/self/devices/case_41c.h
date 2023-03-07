@@ -1,17 +1,17 @@
 
-#ifndef SKIP_38
+#ifndef SKIP_41
 
-    case DEV_START_38C:
+    case DEV_START_41C:
       Clear();
 
       cbRepeat = MaxRepeats();
-      QueryEngAbs38();
-      SetCurr(DEV_ENERGY_38C);
+      QueryEngAbs41();
+      SetCurr(DEV_ENERGY_41C);
       break;
 
-    case DEV_ENERGY_38C:
+    case DEV_ENERGY_41C:
       if (mpSerial[ibPort] == SER_GOODCHECK)
-        ReadCurrent38();
+        ReadCurrent41();
       else
       {
         if (cbRepeat == 0) ErrorCurrent();
@@ -20,8 +20,8 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryEngAbs38();
-          SetCurr(DEV_ENERGY_38C);
+          QueryEngAbs41();
+          SetCurr(DEV_ENERGY_41C);
         }
       }
       break;

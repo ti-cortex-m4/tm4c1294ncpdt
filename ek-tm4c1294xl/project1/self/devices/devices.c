@@ -93,6 +93,7 @@ DEVICES.C
 #include "../sensors/sensor40/profile40_wrapper.h"
 #include "../sensors/sensor40/hdlc_monitor.h"
 #include "../sensors/sensor40/error40.h"
+#include "../sensors/sensor31/current31.h"
 #include "../serial/ports.h"
 #include "../serial/ports_modems.h"
 #include "../serial/modems.h"
@@ -7800,6 +7801,35 @@ void    RunDevices(void)
           MakePause(DEV_QUERY_40P); // repeat: step 40.27
         else
           DoneProfile(); // finish: step 40.28
+      }
+      break;
+
+#endif
+
+#ifndef SKIP_41
+
+    case DEV_START_41C:
+      Clear();
+
+      cbRepeat = MaxRepeats();
+      QueryEngAbs41();
+      SetCurr(DEV_ENERGY_41C);
+      break;
+
+    case DEV_ENERGY_41C:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+        ReadCurrent41();
+      else
+      {
+        if (cbRepeat == 0) ErrorCurrent();
+        else
+        {
+          ErrorLink();
+          cbRepeat--;
+
+          QueryEngAbs41();
+          SetCurr(DEV_ENERGY_41C);
+        }
       }
       break;
 
