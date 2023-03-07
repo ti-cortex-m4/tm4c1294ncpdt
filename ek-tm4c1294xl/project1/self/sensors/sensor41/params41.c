@@ -96,17 +96,17 @@ static float cosinusDegrees(double  degrees)
 }
 
 
-static void Read41(uchar  *pbIn, uchar  j, uchar  bSize)
+static void Read41(uchar  *pbIn, uchar  ibStart, uchar  bSize)
 {
   *(pbIn++);
 
   uchar i;
-  for (i=0; i<3; i++)
+  for (i=0; i<bSize; i++)
   {
     int64_t ddw = 0;
     pbIn = DffDecode(pbIn, &ddw);
 
-    mpeValues[j*3+i] = ddw % 0x100000000;
+    mpeValues[ibStart+i] = ddw % 0x100000000;
   }
 }
 
