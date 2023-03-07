@@ -28,12 +28,33 @@ void    QueryEngAbs41(void)
   InitPush(0);
 
   PushChar(0xC0);
-  PushChar(0x06);
+  PushChar(0x05);
+
+  PushChar(0);
+  PushChar(0);
+  PushChar(0);
+  PushChar(0);
+
+  PushChar(0x02);
+  PushChar(0x00);
+  PushChar(0x05);
+  PushChar(0x01);
 
   PushAddress41();
 
-  PushChar(0x00);
-  PushChar(0x06);
+  PushChar(0x04);
+  PushChar(0x02);
+  PushChar(0x80);
+  PushChar(0x05);
+  PushChar(0x02);
+  PushChar(0x81);
+  PushChar(0x04);
+  PushChar(0x02);
+  PushChar(0x84);
+  PushChar(0x8D);
+  PushChar(0x02);
+  PushChar(0x83);
+  PushChar(0x7F);
 
   PushChar(0x0A); // GET_DATA_SINGLE_EX
   PushChar(0x00);
@@ -54,7 +75,7 @@ void    QueryEngAbs41(void)
   PushChar(0x02);
   PushChar(0x00);
 
-  Query38(250, 25);
+  Query38(250, 44);
 }
 
 /*

@@ -34,7 +34,7 @@ double2 ReadCntCurr41(void)
 
   if (r == MaxRepeats()) return GetDouble2Error();
 
-  uchar* pbIn = InBuffPtr(10);
+  uchar* pbIn = InBuffPtr(16);
 
   uchar i;
   for (i=0; i<4; i++)
