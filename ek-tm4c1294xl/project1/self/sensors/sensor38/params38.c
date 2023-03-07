@@ -69,7 +69,7 @@ void    QueryParams38(void)
 
 
 
-static float cosinusDegrees38(double  degrees)
+static float cosinusDegrees(double  degrees)
 {
   return cos(M_PI*degrees/180);
 }
@@ -131,9 +131,9 @@ float2  ReadParam38(void)
     case PAR_F2 : return GetFloat2(mpeValues[16]/100, true);
     case PAR_F3 : return GetFloat2(mpeValues[17]/100, true);
 
-    case PAR_C1 : return GetFloat2(cosinusDegrees38(mpeValues[18]/10), true);
-    case PAR_C2 : return GetFloat2(cosinusDegrees38(mpeValues[19]/10), true);
-    case PAR_C3 : return GetFloat2(cosinusDegrees38(mpeValues[20]/10), true);
+    case PAR_C1 : return GetFloat2(cosinusDegrees(mpeValues[18]/10), true);
+    case PAR_C2 : return GetFloat2(cosinusDegrees(mpeValues[19]/10), true);
+    case PAR_C3 : return GetFloat2(cosinusDegrees(mpeValues[20]/10), true);
 
     default: return GetFloat2Error();
   }

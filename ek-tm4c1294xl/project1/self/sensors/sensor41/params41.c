@@ -24,7 +24,7 @@ params41.c
 
 
 
-static float        mpeValues[3*7];
+static float        mpeValues[24];
 
 
 
@@ -71,13 +71,13 @@ void    QueryParams41(void)
   PushChar(0x1C);
 
   PushChar(0x0E); // P
-  PushChar(0x1C);
+  PushChar(0x1E);
 
   PushChar(0x10); // Q
-  PushChar(0x1C);
+  PushChar(0x1E);
 
   PushChar(0x0D); // S
-  PushChar(0x1C);
+  PushChar(0x1E);
 
   PushChar(0x1A); // f
   PushChar(0x1C);
@@ -90,11 +90,25 @@ void    QueryParams41(void)
 
 
 
-static float cosinusDegrees41(double  degrees)
+static float cosinusDegrees(double  degrees)
 {
   return cos(M_PI*degrees/180);
 }
 
+
+static void Read41(uchar  *pbIn, uchar  j, uchar  bSize)
+{
+  *(pbIn++);
+
+  uchar i;
+  for (i=0; i<3; i++)
+  {
+    int64_t ddw = 0;
+    pbIn = DffDecode(pbIn, &ddw);
+
+    mpeValues[j*3+i] = ddw % 0x100000000;
+  }
+}
 
 
 float2  ReadParam41(void)
@@ -108,20 +122,13 @@ float2  ReadParam41(void)
 
     uchar* pbIn = InBuffPtr(16);
 
-    uchar j;
-    for (j=0; j<7; j++)
-    {
-      *(pbIn++);
-
-      uchar i;
-      for (i=0; i<3; i++)
-      {
-        int64_t ddw = 0;
-        pbIn = DffDecode(pbIn, &ddw);
-
-        mpeValues[j*3+i] = ddw % 0x100000000;
-      }
-    }
+    Read41(pbIn, 0, 3);
+    Read41(pbIn, 3, 3);
+    Read41(pbIn, 6, 4);
+    Read41(pbIn, 10, 4);
+    Read41(pbIn, 14, 4);
+    Read41(pbIn, 18, 3);
+    Read41(pbIn, 21, 3);
 
     fBeginParam = true;
   }
@@ -136,25 +143,28 @@ float2  ReadParam41(void)
     case PAR_I2 : return GetFloat2(mpeValues[4], true);
     case PAR_I3 : return GetFloat2(mpeValues[5], true);
 
-    case PAR_P1 : return GetFloat2(mpeValues[6], true);
-    case PAR_P2 : return GetFloat2(mpeValues[7], true);
-    case PAR_P3 : return GetFloat2(mpeValues[8], true);
+    case PAR_P  : return GetFloat2(mpeValues[6], true);
+    case PAR_P1 : return GetFloat2(mpeValues[7], true);
+    case PAR_P2 : return GetFloat2(mpeValues[8], true);
+    case PAR_P3 : return GetFloat2(mpeValues[9], true);
 
-    case PAR_Q1 : return GetFloat2(mpeValues[9], true);
-    case PAR_Q2 : return GetFloat2(mpeValues[10], true);
-    case PAR_Q3 : return GetFloat2(mpeValues[11], true);
+    case PAR_Q  : return GetFloat2(mpeValues[10], true);
+    case PAR_Q1 : return GetFloat2(mpeValues[11], true);
+    case PAR_Q2 : return GetFloat2(mpeValues[12], true);
+    case PAR_Q3 : return GetFloat2(mpeValues[13], true);
 
-    case PAR_S1 : return GetFloat2(mpeValues[12], true);
-    case PAR_S2 : return GetFloat2(mpeValues[13], true);
-    case PAR_S3 : return GetFloat2(mpeValues[14], true);
+    case PAR_S  : return GetFloat2(mpeValues[14], true);
+    case PAR_S1 : return GetFloat2(mpeValues[15], true);
+    case PAR_S2 : return GetFloat2(mpeValues[16], true);
+    case PAR_S3 : return GetFloat2(mpeValues[17], true);
 
-    case PAR_F1 : return GetFloat2(mpeValues[15]/100, true);
-    case PAR_F2 : return GetFloat2(mpeValues[16]/100, true);
-    case PAR_F3 : return GetFloat2(mpeValues[17]/100, true);
+    case PAR_F1 : return GetFloat2(mpeValues[18]/100, true);
+    case PAR_F2 : return GetFloat2(mpeValues[19]/100, true);
+    case PAR_F3 : return GetFloat2(mpeValues[20]/100, true);
 
-    case PAR_C1 : return GetFloat2(cosinusDegrees41(mpeValues[18]/10), true);
-    case PAR_C2 : return GetFloat2(cosinusDegrees41(mpeValues[19]/10), true);
-    case PAR_C3 : return GetFloat2(cosinusDegrees41(mpeValues[20]/10), true);
+    case PAR_C1 : return GetFloat2(cosinusDegrees(mpeValues[21]/10), true);
+    case PAR_C2 : return GetFloat2(cosinusDegrees(mpeValues[22]/10), true);
+    case PAR_C3 : return GetFloat2(cosinusDegrees(mpeValues[23]/10), true);
 
     default: return GetFloat2Error();
   }
