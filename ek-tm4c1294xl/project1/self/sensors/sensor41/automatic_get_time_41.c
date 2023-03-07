@@ -11,9 +11,9 @@ automatic_get_time_41.c
 #include "../../serial/ports.h"
 #include "../../devices/devices.h"
 #include "../../digitals/digitals.h"
-#include "device38.h"
+#include "device41.h"
 #include "time41.h"
-#include "io38.h"
+#include "../sensor38/io38.h"
 #include "automatic_get_time_41.h"
 
 
@@ -26,7 +26,7 @@ time2   ReadTimeCan41(void)
   for (r=0; r<MaxRepeats(); r++)
   {
     QueryTime41();
-    if (Input41() == SER_GOODCHECK) break;
+    if (Input38() == SER_GOODCHECK) break;
   }
 
   if (r == MaxRepeats()) return GetTime2Error();

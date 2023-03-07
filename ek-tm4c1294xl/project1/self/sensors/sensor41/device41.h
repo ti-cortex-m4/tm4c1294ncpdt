@@ -10,10 +10,10 @@ device41.h
 
 void    PushAddress41(void);
 
-//void    QueryEngAbs41(void);
+void    QueryEngAbs41(void);
 //void    QueryEngDay41(uchar  ibDayRel);
 //void    QueryEngMon41(uchar  ibMonRel);
-//
+
 //void    QueryNumber41(void);
 //ulong   ReadNumber41(void);
 //

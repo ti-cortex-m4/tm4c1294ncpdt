@@ -10,8 +10,8 @@ device41.c
 #include "../../serial/ports2.h"
 #include "../../time/calendar.h"
 #include "../../devices/devices_init.h"
-#include "io38.h"
-#include "dff.h"
+#include "../sensor38/io38.h"
+#include "../sensor38/dff.h"
 #include "device41.h"
 
 
@@ -22,7 +22,7 @@ void    PushAddress41(void)
 }
 
 
-/*
+
 void    QueryEngAbs41(void)
 {
   InitPush(0);
@@ -54,10 +54,10 @@ void    QueryEngAbs41(void)
   PushChar(0x02);
   PushChar(0x00);
 
-  Query41(250, 25);
+  Query38(250, 25);
 }
 
-
+/*
 // значения счетчиков на начало суток
 void    QueryEngDay41(uchar  ibDayRel)
 {
@@ -100,7 +100,7 @@ void    QueryEngDay41(uchar  ibDayRel)
   PushChar(ibDayRel);
   PushChar(ibDayRel);
 
-  Query41(250, 33);
+  Query38(250, 33);
 }
 
 
@@ -146,7 +146,7 @@ void    QueryEngMon41(uchar  ibMonRel)
   PushChar(ibMonRel);
   PushChar(ibMonRel);
 
-  Query41(250, 33);
+  Query38(250, 33);
 }
 
 
@@ -167,7 +167,7 @@ void    QueryNumber41(void)
   PushChar(0);
   PushChar(5);
 
-  Query41(250, 14);
+  Query38(250, 14);
 }
 
 

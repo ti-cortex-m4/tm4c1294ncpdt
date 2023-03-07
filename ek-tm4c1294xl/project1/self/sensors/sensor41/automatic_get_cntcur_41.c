@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-automatic_get_cntcur_38.c
+automatic_get_cntcur_41.c
 
 
 ------------------------------------------------------------------------------*/
@@ -12,21 +12,21 @@ automatic_get_cntcur_38.c
 #include "../../serial/ports2.h"
 #include "../../devices/devices.h"
 #include "../../digitals/digitals.h"
-#include "device38.h"
-#include "io38.h"
-#include "dff.h"
-#include "automatic_get_cntcur_38.h"
+#include "device41.h"
+#include "../sensor38/io38.h"
+#include "../sensor38/dff.h"
+#include "automatic_get_cntcur_41.h"
 
 
 
-double2 ReadCntCurr38(void)
+double2 ReadCntCurr41(void)
 {
   Clear();
 
   uchar r;
   for (r=0; r<MaxRepeats(); r++)
   {
-    QueryEngAbs38();
+    QueryEngAbs41();
 
     if (Input38() == SER_GOODCHECK) break;
     if (fKey == true) return GetDouble2Error();

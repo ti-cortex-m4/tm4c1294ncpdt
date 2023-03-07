@@ -10,9 +10,9 @@ time41.c
 #include "../../serial/monitor.h"
 #include "../../time/rtc.h"
 #include "../../time/calendar.h"
-#include "device38.h"
-#include "io38.h"
-#include "dff.h"
+#include "device41.h"
+#include "../sensor38/io38.h"
+#include "../sensor38/dff.h"
 #include "time41.h"
 
 
@@ -74,7 +74,7 @@ void    QueryTime41(void)
   PushChar(0x00);
   PushChar(0x01);
 
-  Query41(250, 33);
+  Query38(250, 33);
 }
 
 
@@ -116,7 +116,7 @@ void    QueryCorrect41(void)
   uchar n = Encode41(dwCorrectSecond38, OutBuffPtr(GetPush()));
   Skip(n);
 
-  Query41(100+18, 14+n);
+  Query38(100+18, 14+n);
 }
 
 
@@ -150,7 +150,7 @@ void    QueryManage41(void)
   uchar n = Encode41(dw, OutBuffPtr(GetPush()));
   Skip(n);
 
-  Query41(100+18, 14+n);
+  Query38(100+18, 14+n);
 }
 
 
