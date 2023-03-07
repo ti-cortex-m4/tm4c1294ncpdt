@@ -51,11 +51,12 @@ message                 mpszDevices[bMAXDEVICES+1] = {
                                           ".СЕ303 NNCL2    ",
                                           ".СЕ318          ",
                                           ".СЕ318 S39      ",
-                                          ".Меркурий-234   "
+                                          ".Меркурий-234   ",
+                                          ".CE318 S35M     "
                                       };
 
 uchar const             mpbMaxLines[bMAXDEVICES+1] =
-{ 1, 4, 4, 4, 4, 16, 64, 16, 4, 6, 1, 1, 4, 4, 1, 4, 4, 1, 1, 1, 1, 4, 4, 4, 1, 2, 2, 1, 4, 4, 4, 6, 1, 1, 4, 1, 2, 4, 4, 4, 4 };
+{ 1, 4, 4, 4, 4, 16, 64, 16, 4, 6, 1, 1, 4, 4, 1, 4, 4, 1, 1, 1, 1, 4, 4, 4, 1, 2, 2, 1, 4, 4, 4, 6, 1, 1, 4, 1, 2, 4, 4, 4, 4, 4 };
 
 
 
@@ -195,6 +196,10 @@ bool    ValidDevice(uchar  bDevice)
 
 #ifndef SKIP_40
     case 40: return true;
+#endif
+
+#ifndef SKIP_41
+    case 41: return true;
 #endif
 
     default: return false;
