@@ -81,6 +81,16 @@ uchar*  ReadValue41(uchar  *pbIn, uchar  i)
 }
 
 
+uchar*  ReadValuePositive41(uchar  *pbIn, uchar  i)
+{
+  int64_t ddw = 0;
+  pbIn = DffDecodePositive(pbIn, &ddw);
+
+  mpeValues[i] = ddw % 0x100000000;
+  return pbIn;
+}
+
+
 float2  ReadParam41(void)
 {
   Clear();
@@ -115,10 +125,10 @@ float2  ReadParam41(void)
     pbIn = ReadValue41(pbIn, 13);
 
     *(pbIn++);
-    pbIn = ReadValue41(pbIn, 14); // S
-    pbIn = ReadValue41(pbIn, 15);
-    pbIn = ReadValue41(pbIn, 16);
-    pbIn = ReadValue41(pbIn, 17);
+    pbIn = ReadValuePositive41(pbIn, 14); // S
+    pbIn = ReadValuePositive41(pbIn, 15);
+    pbIn = ReadValuePositive41(pbIn, 16);
+    pbIn = ReadValuePositive41(pbIn, 17);
 
     *(pbIn++);
     pbIn = ReadValue41(pbIn, 18); // f
