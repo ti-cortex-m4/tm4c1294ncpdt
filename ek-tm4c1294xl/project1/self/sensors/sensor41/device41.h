@@ -7,8 +7,9 @@ device41.h
 #include "include41.h"
 
 
-
+void    BeforeAddress41(void);
 void    PushAddress41(void);
+void    AfterAddress41(void);
 
 void    QueryEngAbs41(void);
 //void    QueryEngDay41(uchar  ibDayRel);

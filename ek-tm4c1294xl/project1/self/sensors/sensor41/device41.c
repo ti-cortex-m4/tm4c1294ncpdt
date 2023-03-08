@@ -16,9 +16,45 @@ device41.c
 
 
 
+void    BeforeAddress41(void)
+{
+  PushChar(0xC0);
+  PushChar(0x05);
+
+  PushChar(0);
+  PushChar(0);
+  PushChar(0);
+  PushChar(0);
+
+  PushChar(0x02);
+  PushChar(0x00);
+  PushChar(0x05);
+  PushChar(0x01);
+
+}
+
+
 void    PushAddress41(void)
 {
   PushLongLtl(mpdwAddress1[diCurr.bAddress-1]);
+}
+
+
+void    AfterAddress41(void)
+{
+  PushChar(0x04);
+  PushChar(0x02);
+  PushChar(0x80);
+  PushChar(0x05);
+  PushChar(0x02);
+  PushChar(0x81);
+  PushChar(0x04);
+  PushChar(0x02);
+  PushChar(0x84);
+  PushChar(0x8D);
+  PushChar(0x02);
+  PushChar(0x83);
+  PushChar(0x7F);
 }
 
 
