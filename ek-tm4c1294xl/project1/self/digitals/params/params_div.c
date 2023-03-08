@@ -394,6 +394,9 @@ void    MakeParamDiv(uint  iwPrm)
     {
       case PAR_U  :
       case PAR_I  :
+      case PAR_P  :
+      case PAR_Q  :
+      case PAR_S  :
       case PAR_F  :
       case PAR_C  :
         mpboEnblParams[iwPrm] = false; break;
