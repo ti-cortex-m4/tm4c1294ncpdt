@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-automatic_get_cntmon_38.c
+automatic_get_cntmon_41.c
 
 
 ------------------------------------------------------------------------------*/
@@ -12,22 +12,22 @@ automatic_get_cntmon_38.c
 #include "../../serial/ports2.h"
 #include "../../devices/devices.h"
 #include "../../digitals/digitals.h"
-#include "device38.h"
-#include "io38.h"
-#include "dff.h"
-#include "automatic_get_time_38.h"
-#include "automatic_get_cntmon_38.h"
+#include "device41.h"
+#include "../sensor38/io38.h"
+#include "../sensor38/dff.h"
+#include "automatic_get_time_41.h"
+#include "automatic_get_cntmon_41.h"
 
 
 
-bool    ReadEngDay38_Full(uchar  ibDayRel)
+bool    ReadEngDay41_Full(uchar  ibDayRel)
 {
   Clear();
 
   uchar r;
   for (r=0; r<MaxRepeats(); r++)
   {
-    QueryEngDay38(0);
+    QueryEngDay41(0);
 
     if (Input38() == SER_GOODCHECK) break;
     if (fKey == true) return false;
@@ -36,7 +36,7 @@ bool    ReadEngDay38_Full(uchar  ibDayRel)
   if (r == MaxRepeats()) return false;
 
 
-  uchar* pbIn = InBuffPtr(10);
+  uchar* pbIn = InBuffPtr(16);
 
   uchar i;
   for (i=0; i<4; i++)
@@ -49,7 +49,7 @@ bool    ReadEngDay38_Full(uchar  ibDayRel)
     uchar bStatus = (ddw % 0x100) & 0x03;
     ulong dw = (ddw >> 3) % 0x100000000;
 
-    if (!GoodStatus38(bStatus)) {
+    if (!GoodStatus41(bStatus)) {
       Clear();
       sprintf(szLo+1, "сутки -%u (%u) ?", ibDayRel, bStatus);
       Delay(1000);
@@ -72,21 +72,21 @@ bool    ReadEngDay38_Full(uchar  ibDayRel)
 
 
 
-bool    ReadEngMon38_Full(uchar  ibMonRel)
+bool    ReadEngMon41_Full(uchar  ibMonRel)
 {
   Clear();
 
   uchar r;
   for (r=0; r<MaxRepeats(); r++)
   {
-    QueryEngMon38(ibMonRel);
+    QueryEngMon41(ibMonRel);
 
     if (Input38() == SER_GOODCHECK) break;
     if (fKey == true) return false;
   }
 
 
-  uchar* pbIn = InBuffPtr(10);
+  uchar* pbIn = InBuffPtr(16);
 
   uchar i;
   for (i=0; i<4; i++)
@@ -99,7 +99,7 @@ bool    ReadEngMon38_Full(uchar  ibMonRel)
     uchar bStatus = (ddw % 0x100) & 0x03;
     ulong dw = (ddw >> 3) % 0x100000000;
 
-    if (!GoodStatus38(bStatus)) {
+    if (!GoodStatus41(bStatus)) {
       Clear();
       sprintf(szLo+1, "мес€ц -%u (%u) ?", ibMonRel, bStatus);
       Delay(1000);
@@ -122,22 +122,22 @@ bool    ReadEngMon38_Full(uchar  ibMonRel)
 
 
 
-double2 ReadCntMonCan38(uchar  ibMonAbs)
+double2 ReadCntMonCan41(uchar  ibMonAbs)
 {
   Clear();
 
-  time2 ti2 = ReadTimeCan38();
+  time2 ti2 = ReadTimeCan41();
   if (ti2.fValid == false) return GetDouble2Error();
   time ti = ti2.tiValue;
 
   if (ti.bMonth != ibMonAbs+1)
   {
     uchar ibMonRel = (bMONTHS+ti.bMonth-2-ibMonAbs) % bMONTHS;
-    if (ReadEngMon38_Full(ibMonRel) == false) return GetDouble2Error();
+    if (ReadEngMon41_Full(ibMonRel) == false) return GetDouble2Error();
   }
   else
   {
-    if (ReadEngDay38_Full(0) == false) return GetDouble2Error();
+    if (ReadEngDay41_Full(0) == false) return GetDouble2Error();
   }
 
   return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);

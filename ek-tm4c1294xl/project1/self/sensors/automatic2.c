@@ -62,6 +62,7 @@ AUTOMATIC2!C
 #include "sensor40/automatic_get_cntmon_40.h"
 #include "sensor41/automatic_get_time_41.h"
 #include "sensor41/automatic_get_cntcur_41.h"
+#include "sensor41/automatic_get_cntmon_41.h"
 #include "automatic2.h"
 
 
@@ -2245,6 +2246,10 @@ double2 ReadCntMonCan(uchar  ibMon, uchar  ibCan)
 
 #ifndef SKIP_40
     case 40: return ReadCntMonCan40(ibMon);
+#endif
+
+#ifndef SKIP_41
+    case 41: return ReadCntMonCan41(ibMon);
 #endif
 
     default: return GetDouble2Error();

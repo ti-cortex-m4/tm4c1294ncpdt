@@ -63,34 +63,9 @@ void    QueryEngAbs41(void)
 {
   InitPush(0);
 
-  PushChar(0xC0);
-  PushChar(0x05);
-
-  PushChar(0);
-  PushChar(0);
-  PushChar(0);
-  PushChar(0);
-
-  PushChar(0x02);
-  PushChar(0x00);
-  PushChar(0x05);
-  PushChar(0x01);
-
+  BeforeAddress41();
   PushAddress41();
-
-  PushChar(0x04);
-  PushChar(0x02);
-  PushChar(0x80);
-  PushChar(0x05);
-  PushChar(0x02);
-  PushChar(0x81);
-  PushChar(0x04);
-  PushChar(0x02);
-  PushChar(0x84);
-  PushChar(0x8D);
-  PushChar(0x02);
-  PushChar(0x83);
-  PushChar(0x7F);
+  AfterAddress41();
 
   PushChar(0x0A); // GET_DATA_SINGLE_EX
   PushChar(0x00);
@@ -114,21 +89,17 @@ void    QueryEngAbs41(void)
   Query38(250, 44);
 }
 
-/*
+
 // значени€ счетчиков на начало суток
 void    QueryEngDay41(uchar  ibDayRel)
 {
-//  MonitorString("\n QueryEngDay38 "); MonitorCharDec(ibDayRel);
+//  MonitorString("\n QueryEngDay41 "); MonitorCharDec(ibDayRel);
 
   InitPush(0);
 
-  PushChar(0xC0);
-  PushChar(0x06);
-
+  BeforeAddress41();
   PushAddress41();
-
-  PushChar(0x00);
-  PushChar(0x06);
+  AfterAddress41();
 
   PushChar(0x0B); // GET_DATA_MULTIPLE_EX
   PushChar(0x00);
@@ -157,24 +128,20 @@ void    QueryEngDay41(uchar  ibDayRel)
   PushChar(ibDayRel);
   PushChar(ibDayRel);
 
-  Query38(250, 33);
+  Query38(250, 52);
 }
 
 
 // значени€ счетчиков на начало мес€ца
 void    QueryEngMon41(uchar  ibMonRel)
 {
-//  MonitorString("\n QueryEngMon38 "); MonitorCharDec(ibMonRel);
+//  MonitorString("\n QueryEngMon41 "); MonitorCharDec(ibMonRel);
 
   InitPush(0);
 
-  PushChar(0xC0);
-  PushChar(0x06);
-
+  BeforeAddress41();
   PushAddress41();
-
-  PushChar(0x00);
-  PushChar(0x06);
+  AfterAddress41();
 
   PushChar(0x0B); // GET_DATA_MULTIPLE_EX
   PushChar(0x00);
@@ -203,9 +170,9 @@ void    QueryEngMon41(uchar  ibMonRel)
   PushChar(ibMonRel);
   PushChar(ibMonRel);
 
-  Query38(250, 33);
+  Query38(250, 52);
 }
-*/
+
 
 
 void    QueryNumber41(void)
@@ -236,7 +203,7 @@ ulong   ReadNumber41(void)
 }
 
 
-/*
+
 bool    GoodStatus41(uchar  bStatus)
 {
   if (boIgnoreStatus38)
@@ -253,4 +220,3 @@ bool    GoodStatus41(uchar  bStatus)
     return bStatus == 0;
   }
 }
-*/
