@@ -205,7 +205,7 @@ void    QueryEngMon41(uchar  ibMonRel)
 
   Query38(250, 33);
 }
-
+*/
 
 
 void    QueryNumber41(void)
@@ -236,7 +236,7 @@ ulong   ReadNumber41(void)
 }
 
 
-
+/*
 bool    GoodStatus41(uchar  bStatus)
 {
   if (boIgnoreStatus38)

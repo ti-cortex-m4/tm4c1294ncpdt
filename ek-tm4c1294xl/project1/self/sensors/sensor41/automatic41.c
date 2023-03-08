@@ -11,7 +11,7 @@ automatic41.c
 #include "../../time/delay.h"
 #include "../../serial/ports.h"
 #include "device41.h"
-#include "io38.h"
+#include "../sensor38/io38.h"
 #include "automatic41.h"
 
 
@@ -20,33 +20,14 @@ bool    Automatic41(void)
 {
   Clear();
 
-  QueryNumber38();
+  QueryNumber41();
   if (Input38() != SER_GOODCHECK) return false;
 
-  ShowLong(ReadNumber38());
+  ShowLong(ReadNumber41());
   Delay(1000);
 
 
   dbKpulse = 1000;                      // K преобразования
-  dbKtrans = 1;                         // K трансформации
-  SetAllFactors(dbKpulse,dbKtrans);     // сохранение К преобразования и К трансформации
-
-  return true;
-}
-
-
-bool    Automatic39(void)
-{
-  Clear();
-
-  QueryNumber38();
-  if (Input38() != SER_GOODCHECK) return false;
-
-  ShowLong(ReadNumber38());
-  Delay(1000);
-
-
-  dbKpulse = 10000;                     // K преобразования
   dbKtrans = 1;                         // K трансформации
   SetAllFactors(dbKpulse,dbKtrans);     // сохранение К преобразования и К трансформации
 
