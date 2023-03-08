@@ -24,7 +24,7 @@ params41.c
 
 
 
-static float        mpeValues[24];
+static float        mpeValues[21];
 
 
 
@@ -32,34 +32,9 @@ void    QueryParams41(void)
 {
   InitPush(0);
 
-  PushChar(0xC0);
-  PushChar(0x05);
-
-  PushChar(0);
-  PushChar(0);
-  PushChar(0);
-  PushChar(0);
-
-  PushChar(0x02);
-  PushChar(0x00);
-  PushChar(0x05);
-  PushChar(0x01);
-
+  BeforeAddress41();
   PushAddress41();
-
-  PushChar(0x04);
-  PushChar(0x02);
-  PushChar(0x80);
-  PushChar(0x05);
-  PushChar(0x02);
-  PushChar(0x81);
-  PushChar(0x04);
-  PushChar(0x02);
-  PushChar(0x84);
-  PushChar(0x8D);
-  PushChar(0x02);
-  PushChar(0x83);
-  PushChar(0x7F);
+  AfterAddress41();
 
   PushChar(0x0A);
   PushChar(0x00);
@@ -105,7 +80,7 @@ float2  ReadParam41(void)
     QueryParams41();
     if (Input38() != SER_GOODCHECK) return GetFloat2Error();
 
-    uchar* pbIn = InBuffPtr(10);
+    uchar* pbIn = InBuffPtr(16);
 
     uchar j;
     for (j=0; j<7; j++)
