@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-automatic38.c
+automatic41.c
 
 
 ------------------------------------------------------------------------------*/
@@ -10,13 +10,13 @@ automatic38.c
 #include "../../hardware/beep.h"
 #include "../../time/delay.h"
 #include "../../serial/ports.h"
-#include "device38.h"
+#include "device41.h"
 #include "io38.h"
-#include "automatic38.h"
+#include "automatic41.h"
 
 
 
-bool    Automatic38(void)
+bool    Automatic41(void)
 {
   Clear();
 
@@ -55,7 +55,7 @@ bool    Automatic39(void)
 
 
 
-bool    ChangeSpeed38(void)
+bool    ChangeSpeed41(void)
 {
   InitPush(0);
 
@@ -77,6 +77,6 @@ bool    ChangeSpeed38(void)
   if (Input38() != SER_GOODCHECK) return false;
   Beep();
 
-  ShowLong(ReadNumber38());
+  ShowLong(ReadNumber41());
   return true;
 }

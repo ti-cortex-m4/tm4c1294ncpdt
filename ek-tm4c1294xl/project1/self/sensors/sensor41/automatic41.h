@@ -1,10 +1,9 @@
 /*------------------------------------------------------------------------------
-automatic38.h
+automatic41.h
 
 
 ------------------------------------------------------------------------------*/
 
-bool    Automatic38(void);
-bool    Automatic39(void);
+bool    Automatic41(void);
 
-bool    ChangeSpeed38(void);
+bool    ChangeSpeed41(void);
