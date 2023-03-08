@@ -96,60 +96,31 @@ static float cosinusDegrees(double  degrees)
 }
 
 
-static void ReadValue41(uchar  *pbIn, uchar  i)
-{
-  int64_t ddw = 0;
-  pbIn = DffDecode(pbIn, &ddw);
-
-  mpeValues[i] = ddw % 0x100000000;
-}
-
-
 float2  ReadParam41(void)
 {
   Clear();
 
   if (fBeginParam == false)
   {
-    QueryParams41();
+    QueryParams38();
     if (Input38() != SER_GOODCHECK) return GetFloat2Error();
 
-    uchar* pbIn = InBuffPtr(16);
+    uchar* pbIn = InBuffPtr(10);
 
-    *(pbIn++);
-    ReadValue41(pbIn, 0);
-    ReadValue41(pbIn, 1);
-    ReadValue41(pbIn, 2);
+    uchar j;
+    for (j=0; j<7; j++)
+    {
+      *(pbIn++);
 
-    *(pbIn++);
-    ReadValue41(pbIn, 3);
-    ReadValue41(pbIn, 4);
-    ReadValue41(pbIn, 5);
+      uchar i;
+      for (i=0; i<3; i++)
+      {
+        int64_t ddw = 0;
+        pbIn = DffDecode(pbIn, &ddw);
 
-    *(pbIn++);
-    ReadValue41(pbIn, 6);
-    ReadValue41(pbIn, 7);
-    ReadValue41(pbIn, 8);
-
-    *(pbIn++);
-    ReadValue41(pbIn, 9);
-    ReadValue41(pbIn, 10);
-    ReadValue41(pbIn, 11);
-
-    *(pbIn++);
-    ReadValue41(pbIn, 12);
-    ReadValue41(pbIn, 13);
-    ReadValue41(pbIn, 14);
-
-    *(pbIn++);
-    ReadValue41(pbIn, 15);
-    ReadValue41(pbIn, 16);
-    ReadValue41(pbIn, 17);
-
-    *(pbIn++);
-    ReadValue41(pbIn, 18);
-    ReadValue41(pbIn, 19);
-    ReadValue41(pbIn, 20);
+        mpeValues[j*3+i] = ddw % 0x100000000;
+      }
+    }
 
     fBeginParam = true;
   }
