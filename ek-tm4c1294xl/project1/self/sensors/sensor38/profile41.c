@@ -68,7 +68,7 @@ void    InitHeader41(void)
   wRelStart41 = wProfile41;
   wRelEnd41 = wRelStart41 + 5;
 
-#ifdef MONITOR_41
+#ifdef MONITOR_38
   MonitorString("\n QueryProfile41 ");
   MonitorString(" wProfile41="); MonitorIntDec(wProfile41);
   MonitorString(" tiStart41="); MonitorTime(tiStart41);
@@ -90,7 +90,7 @@ uchar   PushIndex41(uint  iw30MinRel)
 
 void    QueryProfile41(uint  iw30MinRelStart, uint  iw30MinRelEnd)
 {
-#ifdef MONITOR_41
+#ifdef MONITOR_38
   MonitorString("\n QueryProfile41 "); MonitorIntDec(iw30MinRelStart); MonitorString(" "); MonitorIntDec(iw30MinRelEnd);
 #endif
 
@@ -155,7 +155,7 @@ void    QueryHeader41(void)
 {
   HideCurrTime(1);
 
-#ifdef MONITOR_41
+#ifdef MONITOR_38
   MonitorString("\n QueryHeader41 ");
   MonitorString(" wProfile41="); MonitorIntDec(wProfile41);
   MonitorString(" wRelStart41="); MonitorIntDec(wRelStart41);
@@ -202,7 +202,7 @@ bool    ReadBlock41(uchar  ibBlock)
 {
   sprintf(szLo," %02u    %02u.%02u.%02u", tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
 
-#ifdef MONITOR_41
+#ifdef MONITOR_38
   if (tiDig.bMinute % 30 != 0) MonitorString(" ??? ");
   MonitorString(" eff.="); MonitorTime(tiDig);
 #endif
@@ -228,7 +228,7 @@ bool    ReadData41(void)
   {
     *(pbIn++);
 
-#ifdef MONITOR_41
+#ifdef MONITOR_38
     MonitorString("\n ");
 #endif
 
@@ -246,7 +246,7 @@ bool    ReadData41(void)
       mpPrf41[h].bStatus = (ddw % 0x100) & 0x03;
       mpPrf41[h].mpdwValue[c] = (ddw >> 3) % 0x100000000;
 
-#ifdef MONITOR_41
+#ifdef MONITOR_38
       MonitorString("\n "); MonitorTime(mpPrf41[h].tiTime);
       MonitorString(" "); MonitorLongDec(mpPrf41[h].mpdwValue[c]);
       MonitorString(" "); MonitorCharDec(mpPrf41[h].bStatus);
@@ -258,7 +258,7 @@ bool    ReadData41(void)
   ulong dwHouNow = DateToHouIndex(tiCurr);
   uchar d = dwHouNow - dwHouStart41;
 
-#ifdef MONITOR_41
+#ifdef MONITOR_38
   MonitorString("\n delta="); MonitorCharDec(d);
 #endif
 
@@ -266,7 +266,7 @@ bool    ReadData41(void)
   uchar h;
   for (h=0; h<6; h++) {
 
-#ifdef MONITOR_41
+#ifdef MONITOR_38
     MonitorString("\n");
 
     uchar i;
@@ -281,7 +281,7 @@ bool    ReadData41(void)
 
     bool difference = DifferentDateTime(tiVirtual, mpPrf41[h].tiTime);
 
-#ifdef MONITOR_41
+#ifdef MONITOR_38
     MonitorString(" vrt.="); MonitorTime(tiVirtual);
     MonitorString(" act.="); MonitorTime(mpPrf41[h].tiTime);
     MonitorBool(difference);
@@ -309,7 +309,7 @@ bool    ReadData41(void)
 
 
 
-#ifdef MONITOR_41
+#ifdef MONITOR_38
 
 void    RunProfile41(void)
 {
