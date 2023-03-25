@@ -12,6 +12,7 @@ params41.c
 #include "../../digitals/params/params2.h"
 #include "../../display/display.h"
 #include "../../time/delay.h"
+#include "device38.h"
 #include "io38.h"
 #include "dff.h"
 #include "params41.h"
@@ -58,7 +59,7 @@ void    QueryParams41(void)
   PushChar(0x19); // cos Ф
   PushChar(0x1C);
 
-  Query38(250, 46);
+  Query38(250, 30);
 }
 
 
@@ -116,10 +117,10 @@ float2  ReadParam41(void)
     pbIn = ReadValue41(pbIn, 13);
 
     *(pbIn++);
-    pbIn = ReadValue41(pbIn, 14); // S
-    pbIn = ReadValue41(pbIn, 15);
-    pbIn = ReadValue41(pbIn, 16);
-    pbIn = ReadValue41(pbIn, 17);
+    pbIn = ReadValuePositive41(pbIn, 14); // S
+    pbIn = ReadValuePositive41(pbIn, 15);
+    pbIn = ReadValuePositive41(pbIn, 16);
+    pbIn = ReadValuePositive41(pbIn, 17);
 
     *(pbIn++);
     pbIn = ReadValue41(pbIn, 18); // f
@@ -163,9 +164,9 @@ float2  ReadParam41(void)
     case PAR_F2 : return GetFloat2(mpeValues[19]/100, true);
     case PAR_F3 : return GetFloat2(mpeValues[20]/100, true);
 
-    case PAR_C1 : return GetFloat2(mpeValues[21], true);
-    case PAR_C2 : return GetFloat2(mpeValues[22], true);
-    case PAR_C3 : return GetFloat2(mpeValues[23], true);
+    case PAR_C1 : return GetFloat2(mpeValues[21]/1000, true);
+    case PAR_C2 : return GetFloat2(mpeValues[22]/1000, true);
+    case PAR_C3 : return GetFloat2(mpeValues[23]/1000, true);
 
     default: return GetFloat2Error();
   }
