@@ -30,6 +30,8 @@ void    ResetRecordsDsbl(void)
   mpfRecordDsbl[EVE_PROFILE_OK2] = true;
   mpfRecordDsbl[EVE_PROFILE2] = true;
 
+  // 81, 82, 83, 84, 63 calculate counts in sem2reader
+
   SaveCache(&chRecordDsbl);
 }
 
