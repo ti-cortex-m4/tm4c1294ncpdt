@@ -938,6 +938,42 @@ typedef enum
 
 #endif
 
+#ifndef SKIP_41
+
+  DEV_START_41C         =  0x2300,
+  DEV_ENERGY_41C        =  0x2301,
+
+  DEV_START_41P         =  0x2310,
+
+  DEV_PREVTIME1_41P     =  0x2311,
+  DEV_TIME1_41P         =  0x2312,
+  DEV_POSTTIME1_41P     =  0x2313,
+
+  DEV_PREVAUTHKEY1_41P  =  0x2314,
+  DEV_AUTHKEY1_41P      =  0x2315,
+  DEV_POSTAUTHKEY1_41P  =  0x2316,
+  DEV_AUTHREQ1_41P      =  0x2317,
+  DEV_PREVCORRECT_41P   =  0x2318,
+  DEV_CORRECT_41P       =  0x2319,
+
+  DEV_PREVAUTHKEY2_41P  =  0x2320,
+  DEV_AUTHKEY2_41P      =  0x2321,
+  DEV_POSTAUTHKEY2_41P  =  0x2322,
+  DEV_AUTHREQ2_41P      =  0x2323,
+  DEV_PREVMANAGE_41P    =  0x2324,
+  DEV_MANAGE_41P        =  0x2325,
+
+  DEV_PREVTIME2_41P     =  0x2326,
+  DEV_TIME2_41P         =  0x2327,
+
+  DEV_INITHEADER_41P    =  0x2328,
+  DEV_PAUSE_41P         =  0x2329,
+  DEV_HEADER_41P        =  0x232A,
+  DEV_PAUSE_39P         =  0x232B,
+  DEV_HEADER_39P        =  0x232C,
+
+#endif
+
   DEV_PAUSE             =  1
 
 } device;
