@@ -12,7 +12,7 @@
     // чтение времени для коррекции времения
     case DEV_PREVTIME1_41P:
       cbRepeat = MaxRepeats();
-      QueryTime41();
+      QueryTime38();
       SetCurr(DEV_TIME1_41P);
       break;
 
@@ -31,7 +31,7 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryTime41();
+          QueryTime38();
           SetCurr(DEV_TIME1_41P);
         }
       }
@@ -56,7 +56,7 @@
           else if (GetCurrHouIndex() == (tiValue41.bHour*2 + tiValue41.bMinute/30))
           {
             if (boControlQ == false) {
-              SetCorrectSecond41(dwSecond2 - dwSecond1);
+              SetCorrectSecond38(dwSecond2 - dwSecond1);
               ShowLo(szCorrectYes); DelayInf();
               MakePause(DEV_PREVAUTHKEY1_41P); // коррекция времени
             } else {
@@ -74,14 +74,14 @@
 // начало коррекции времени
     case DEV_PREVAUTHKEY1_41P:
       cbRepeat = MaxRepeats();
-      QueryAuthRequest41();
+      QueryAuthRequest38();
       SetCurr(DEV_AUTHKEY1_41P);
       break;
 
     case DEV_AUTHKEY1_41P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        ReadAuthRequest41();
+        ReadAuthRequest38();
         MakePause(DEV_POSTAUTHKEY1_41P);
       }
       else
@@ -92,7 +92,7 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryAuthRequest41();
+          QueryAuthRequest38();
           SetCurr(DEV_AUTHKEY1_41P);
         }
       }
@@ -101,14 +101,14 @@
 
     case DEV_POSTAUTHKEY1_41P:
       cbRepeat = MaxRepeats();
-      QueryAuthResponse41();
+      QueryAuthResponse38();
       SetCurr(DEV_AUTHREQ1_41P);
       break;
 
     case DEV_AUTHREQ1_41P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        uchar bAuth = ReadAuthResponse41();
+        uchar bAuth = ReadAuthResponse38();
         if (bAuth == 0)
           MakePause(DEV_PREVCORRECT_41P);
         else {
@@ -124,7 +124,7 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryAuthResponse41();
+          QueryAuthResponse38();
           SetCurr(DEV_AUTHREQ1_41P);
         }
       }
@@ -133,14 +133,14 @@
 
     case DEV_PREVCORRECT_41P:
       cbRepeat = MaxRepeats();
-      QueryCorrect41();
+      QueryCorrect38();
       SetCurr(DEV_CORRECT_41P);
       break;
 
     case DEV_CORRECT_41P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        uchar bCorrect = ReadCorrect41();
+        uchar bCorrect = ReadCorrect38();
         if (bCorrect != 0) {
           Clear(); sprintf(szLo+1,"коррекция: %u ?",bCorrect); DelayMsg();
         }
@@ -155,7 +155,7 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryCorrect41();
+          QueryCorrect38();
           SetCurr(DEV_CORRECT_41P);
         }
       }
@@ -165,14 +165,14 @@
 // начало установки времени
     case DEV_PREVAUTHKEY2_41P:
       cbRepeat = MaxRepeats();
-      QueryAuthRequest41();
+      QueryAuthRequest38();
       SetCurr(DEV_AUTHKEY2_41P);
       break;
 
     case DEV_AUTHKEY2_41P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        ReadAuthRequest41();
+        ReadAuthRequest38();
         MakePause(DEV_POSTAUTHKEY2_41P);
       }
       else
@@ -183,7 +183,7 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryAuthRequest41();
+          QueryAuthRequest38();
           SetCurr(DEV_AUTHKEY2_41P);
         }
       }
@@ -192,14 +192,14 @@
 
     case DEV_POSTAUTHKEY2_41P:
       cbRepeat = MaxRepeats();
-      QueryAuthResponse41();
+      QueryAuthResponse38();
       SetCurr(DEV_AUTHREQ2_41P);
       break;
 
     case DEV_AUTHREQ2_41P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        uchar bAuth = ReadAuthResponse41();
+        uchar bAuth = ReadAuthResponse38();
         if (bAuth == 0)
           MakePause(DEV_PREVMANAGE_41P);
         else {
@@ -215,7 +215,7 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryAuthResponse41();
+          QueryAuthResponse38();
           SetCurr(DEV_AUTHREQ2_41P);
         }
       }
@@ -224,14 +224,14 @@
 
     case DEV_PREVMANAGE_41P:
       cbRepeat = MaxRepeats();
-      QueryManage41();
+      QueryManage38();
       SetCurr(DEV_MANAGE_41P);
       break;
 
     case DEV_MANAGE_41P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        uchar bManage = ReadManage41();
+        uchar bManage = ReadManage38();
         if (bManage != 0) {
           Clear(); sprintf(szLo+1,"установка: %u ?",bManage); DelayMsg();
         }
@@ -246,7 +246,7 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryManage41();
+          QueryManage38();
           SetCurr(DEV_MANAGE_41P);
         }
       }
@@ -256,7 +256,7 @@
 // чтение времени для чтения профилей
     case DEV_PREVTIME2_41P:
       cbRepeat = MaxRepeats();
-      QueryTime41();
+      QueryTime38();
       SetCurr(DEV_TIME2_41P);
       break;
 
@@ -275,7 +275,7 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryTime41();
+          QueryTime38();
           SetCurr(DEV_TIME2_41P);
         }
       }

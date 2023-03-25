@@ -259,6 +259,10 @@ bool    StartProfile(uchar  ibCanal)
 #ifndef SKIP_40
     case 40: SetNext(DEV_START_40P); break;
 #endif
+
+#ifndef SKIP_41
+    case 41: SetNext(DEV_START_41P); break;
+#endif
   }
 
   exExtended = EXT_PROFILE_30MIN;
