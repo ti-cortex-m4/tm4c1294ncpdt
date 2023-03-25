@@ -40,7 +40,7 @@ profile38.c
 
 uint                    wProfile41;
 uint                    wRelStart41, wRelEnd41;
-profile41               mpPrf41[6];
+profile38               mpPrf41[6];
 time                    tiStart41;
 ulong                   dwHouStart41;
 
@@ -101,7 +101,7 @@ void    QueryProfile41(uint  iw30MinRelStart, uint  iw30MinRelEnd)
   bSize += PushChar(0xC0);
   bSize += PushChar(0x06);
 
-  PushAddress41();
+  PushAddress38();
   bSize += 4;
 
   bSize += PushChar(0x00);
@@ -147,7 +147,7 @@ void    QueryProfile41(uint  iw30MinRelStart, uint  iw30MinRelEnd)
   bSize += PushIndex41(iw30MinRelStart);
   bSize += PushIndex41(iw30MinRelEnd);
 */
-  Query41(250, bSize+3);
+  Query38(250, bSize+3);
 }
 
 
@@ -238,7 +238,7 @@ bool    ReadData41(void)
       int64_t ddw = 0;
       pbIn = DffDecodePositive(pbIn, &ddw);
 
-      mpPrf41[h].tiTime = SecondsToTime41(ddw % 0x100000000);
+      mpPrf41[h].tiTime = SecondsToTime38(ddw % 0x100000000);
 
       ddw = 0;
       pbIn = DffDecodePositive(pbIn, &ddw);
@@ -313,17 +313,29 @@ bool    ReadData41(void)
 
 void    RunProfile41(void)
 {
-  QueryTime41();
-  if (Input41() != SER_GOODCHECK) { MonitorString("\n error 1"); return; }
+uchar r;
 
-  tiValue41 = ReadTime41();
+  QueryTime38();
+  if (Input38() != SER_GOODCHECK) { MonitorString("\n error 1"); return; }
+
+  tiValue41 = ReadTime38();
   dwValue41 = DateToHouIndex(tiValue41);
 
   InitHeader41();
 
   while (true) {
-    QueryHeader41();
-    if (Input41() != SER_GOODCHECK) { MonitorString("\n error 2"); return; }
+    r = 0;
+    while (true) {
+       QueryHeader41();
+       if (Input38() != SER_GOODCHECK) { MonitorString("\n error 2"); return; }
+
+       if (IndexInBuff() == 14) {
+          MonitorString("\n empty answer, repeat");
+          if (++r > 3) { MonitorString("\n error 3"); return; }
+       } else {
+          break;
+       }
+    }
 
     if (ReadData41() == false) { MonitorString("\n finish "); return; }
     if (fKey == true) return;
