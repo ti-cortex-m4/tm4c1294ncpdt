@@ -28,7 +28,7 @@ static float        mpeValues[3*7];
 
 
 
-void    QueryParams38(void)
+void    QueryParams41(void)
 {
   InitPush(0);
 
@@ -76,7 +76,7 @@ float   cosinusDegrees(double  degrees)
 
 
 
-float2  ReadParam38(void)
+float2  ReadParam41(void)
 {
   Clear();
 
