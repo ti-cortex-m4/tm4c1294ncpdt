@@ -34,52 +34,52 @@ profile38.c
 #include "io38.h"
 #include "dff.h"
 #include "profile38_include.h"
-#include "profile38.h"
+#include "profile41.h"
 
 
 
-uint                    wProfile38;
-uint                    wRelStart38, wRelEnd38;
-profile38               mpPrf38[6];
-time                    tiStart38;
-ulong                   dwHouStart38;
+uint                    wProfile41;
+uint                    wRelStart41, wRelEnd41;
+profile41               mpPrf41[6];
+time                    tiStart41;
+ulong                   dwHouStart41;
 
-time                    tiValue38;
-ulong                   dwValue38;
+time                    tiValue41;
+ulong                   dwValue41;
 
-uint                    cwShutdown38;
+uint                    cwShutdown41;
 
 
 
-void    InitHeader38(void)
+void    InitHeader41(void)
 {
   if (!UseBounds())
-    wProfile38 = 0;
+    wProfile41 = 0;
   else
   {
-    wProfile38 = (mpcwStartRelCan[ibDig] / 6) * 6;
-    sprintf(szLo," начало %04u:%02u ",wProfile38,(uchar)(wProfile38/48 + 1));
+    wProfile41 = (mpcwStartRelCan[ibDig] / 6) * 6;
+    sprintf(szLo," начало %04u:%02u ",wProfile41,(uchar)(wProfile41/48 + 1));
     if (boShowMessages == true) DelayMsg();
   }
 
-  tiStart38 = tiValue38;
-  dwHouStart38 = DateToHouIndex(tiCurr);
+  tiStart41 = tiValue41;
+  dwHouStart41 = DateToHouIndex(tiCurr);
 
-  wRelStart38 = wProfile38;
-  wRelEnd38 = wRelStart38 + 5;
+  wRelStart41 = wProfile41;
+  wRelEnd41 = wRelStart41 + 5;
 
-#ifdef MONITOR_38
-  MonitorString("\n QueryProfile38 ");
-  MonitorString(" wProfile38="); MonitorIntDec(wProfile38);
-  MonitorString(" tiStart38="); MonitorTime(tiStart38);
-  MonitorString(" wRelStart38="); MonitorIntDec(wRelStart38);
-  MonitorString(" wRelEnd38="); MonitorIntDec(wRelEnd38);
+#ifdef MONITOR_41
+  MonitorString("\n QueryProfile41 ");
+  MonitorString(" wProfile41="); MonitorIntDec(wProfile41);
+  MonitorString(" tiStart41="); MonitorTime(tiStart41);
+  MonitorString(" wRelStart41="); MonitorIntDec(wRelStart41);
+  MonitorString(" wRelEnd41="); MonitorIntDec(wRelEnd41);
 #endif
 }
 
 
 
-uchar   PushIndex38(uint  iw30MinRel)
+uchar   PushIndex41(uint  iw30MinRel)
 {
   int64_t ddw = iw30MinRel;
   uchar n = DffEncode(ddw, OutBuffPtr(GetPush()));
@@ -88,10 +88,10 @@ uchar   PushIndex38(uint  iw30MinRel)
 }
 
 
-void    QueryProfile38(uint  iw30MinRelStart, uint  iw30MinRelEnd)
+void    QueryProfile41(uint  iw30MinRelStart, uint  iw30MinRelEnd)
 {
-#ifdef MONITOR_38
-  MonitorString("\n QueryProfile38 "); MonitorIntDec(iw30MinRelStart); MonitorString(" "); MonitorIntDec(iw30MinRelEnd);
+#ifdef MONITOR_41
+  MonitorString("\n QueryProfile41 "); MonitorIntDec(iw30MinRelStart); MonitorString(" "); MonitorIntDec(iw30MinRelEnd);
 #endif
 
   InitPush(0);
@@ -101,7 +101,7 @@ void    QueryProfile38(uint  iw30MinRelStart, uint  iw30MinRelEnd)
   bSize += PushChar(0xC0);
   bSize += PushChar(0x06);
 
-  PushAddress38();
+  PushAddress41();
   bSize += 4;
 
   bSize += PushChar(0x00);
@@ -125,49 +125,49 @@ void    QueryProfile38(uint  iw30MinRelStart, uint  iw30MinRelEnd)
     bSize += PushChar(0xD5); // 213
     bSize += PushChar(0x01);
     bSize += PushChar(0x03);
-    bSize += PushIndex38(iw30MinRelStart);
-    bSize += PushIndex38(iw30MinRelEnd);
+    bSize += PushIndex41(iw30MinRelStart);
+    bSize += PushIndex41(iw30MinRelEnd);
   }
 /*
   bSize += PushChar(0xD6); // 214
   bSize += PushChar(0x01);
   bSize += PushChar(0x03);
-  bSize += PushIndex38(iw30MinRelStart);
-  bSize += PushIndex38(iw30MinRelEnd);
+  bSize += PushIndex41(iw30MinRelStart);
+  bSize += PushIndex41(iw30MinRelEnd);
 
   bSize += PushChar(0xD7); // 215
   bSize += PushChar(0x01);
   bSize += PushChar(0x03);
-  bSize += PushIndex38(iw30MinRelStart);
-  bSize += PushIndex38(iw30MinRelEnd);
+  bSize += PushIndex41(iw30MinRelStart);
+  bSize += PushIndex41(iw30MinRelEnd);
 
   bSize += PushChar(0xD8); // 216
   bSize += PushChar(0x01);
   bSize += PushChar(0x03);
-  bSize += PushIndex38(iw30MinRelStart);
-  bSize += PushIndex38(iw30MinRelEnd);
+  bSize += PushIndex41(iw30MinRelStart);
+  bSize += PushIndex41(iw30MinRelEnd);
 */
-  Query38(250, bSize+3);
+  Query41(250, bSize+3);
 }
 
 
-void    QueryHeader38(void)
+void    QueryHeader41(void)
 {
   HideCurrTime(1);
 
-#ifdef MONITOR_38
-  MonitorString("\n QueryHeader38 ");
-  MonitorString(" wProfile38="); MonitorIntDec(wProfile38);
-  MonitorString(" wRelStart38="); MonitorIntDec(wRelStart38);
-  MonitorString(" wRelEnd38="); MonitorIntDec(wRelEnd38);
+#ifdef MONITOR_41
+  MonitorString("\n QueryHeader41 ");
+  MonitorString(" wProfile41="); MonitorIntDec(wProfile41);
+  MonitorString(" wRelStart41="); MonitorIntDec(wRelStart41);
+  MonitorString(" wRelEnd41="); MonitorIntDec(wRelEnd41);
 #endif
 
-  QueryProfile38(wRelStart38, wRelEnd38);
+  QueryProfile41(wRelStart41, wRelEnd41);
 }
 
 
 
-void    MakeData38(uchar  h)
+void    MakeData41(uchar  h)
 {
   ShowProgressDigHou();
 
@@ -176,7 +176,7 @@ void    MakeData38(uchar  h)
   uchar i;
   for (i=0; i<1; i++)
   {
-    double db = mpPrf38[h].mpdwValue[i];
+    double db = mpPrf41[h].mpdwValue[i];
     mpdbEngFracDigCan[ibDig][i] += db;
 
     uint w = (uint)(mpdbEngFracDigCan[ibDig][i]*dbPulse/10000);
@@ -188,7 +188,7 @@ void    MakeData38(uchar  h)
   uchar i;
   for (i=0; i<1; i++)
   {
-    ulong dw = mpPrf38[h].mpdwValue[i];
+    ulong dw = mpPrf41[h].mpdwValue[i];
     uint w = (uint)(dw*dbPulse/10000);
 
     mpwChannels[i] = w;
@@ -198,18 +198,18 @@ void    MakeData38(uchar  h)
 
 
 
-bool    ReadBlock38(uchar  ibBlock)
+bool    ReadBlock41(uchar  ibBlock)
 {
   sprintf(szLo," %02u    %02u.%02u.%02u", tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
 
-#ifdef MONITOR_38
+#ifdef MONITOR_41
   if (tiDig.bMinute % 30 != 0) MonitorString(" ??? ");
   MonitorString(" eff.="); MonitorTime(tiDig);
 #endif
 
   if (SearchDefHouIndex(tiDig) == 0) return(1);
 
-  MakeData38(ibBlock);
+  MakeData41(ibBlock);
 
   if (IsDefect(ibDig)) MakeSpecial(tiDig);
   return(MakeStopHou(0));
@@ -217,9 +217,9 @@ bool    ReadBlock38(uchar  ibBlock)
 
 
 
-bool    ReadData38(void)
+bool    ReadData41(void)
 {
-  memset(&mpPrf38, 0, sizeof(mpPrf38));
+  memset(&mpPrf41, 0, sizeof(mpPrf41));
 
   uchar* pbIn = InBuffPtr(10);
 
@@ -228,7 +228,7 @@ bool    ReadData38(void)
   {
     *(pbIn++);
 
-#ifdef MONITOR_38
+#ifdef MONITOR_41
     MonitorString("\n ");
 #endif
 
@@ -238,27 +238,27 @@ bool    ReadData38(void)
       int64_t ddw = 0;
       pbIn = DffDecodePositive(pbIn, &ddw);
 
-      mpPrf38[h].tiTime = SecondsToTime38(ddw % 0x100000000);
+      mpPrf41[h].tiTime = SecondsToTime41(ddw % 0x100000000);
 
       ddw = 0;
       pbIn = DffDecodePositive(pbIn, &ddw);
 
-      mpPrf38[h].bStatus = (ddw % 0x100) & 0x03;
-      mpPrf38[h].mpdwValue[c] = (ddw >> 3) % 0x100000000;
+      mpPrf41[h].bStatus = (ddw % 0x100) & 0x03;
+      mpPrf41[h].mpdwValue[c] = (ddw >> 3) % 0x100000000;
 
-#ifdef MONITOR_38
-      MonitorString("\n "); MonitorTime(mpPrf38[h].tiTime);
-      MonitorString(" "); MonitorLongDec(mpPrf38[h].mpdwValue[c]);
-      MonitorString(" "); MonitorCharDec(mpPrf38[h].bStatus);
+#ifdef MONITOR_41
+      MonitorString("\n "); MonitorTime(mpPrf41[h].tiTime);
+      MonitorString(" "); MonitorLongDec(mpPrf41[h].mpdwValue[c]);
+      MonitorString(" "); MonitorCharDec(mpPrf41[h].bStatus);
 #endif
     }
   }
 
 
   ulong dwHouNow = DateToHouIndex(tiCurr);
-  uchar d = dwHouNow - dwHouStart38;
+  uchar d = dwHouNow - dwHouStart41;
 
-#ifdef MONITOR_38
+#ifdef MONITOR_41
   MonitorString("\n delta="); MonitorCharDec(d);
 #endif
 
@@ -266,66 +266,66 @@ bool    ReadData38(void)
   uchar h;
   for (h=0; h<6; h++) {
 
-#ifdef MONITOR_38
+#ifdef MONITOR_41
     MonitorString("\n");
 
     uchar i;
     for (i=0; i<1; i++) {
-      MonitorLongDec4(mpPrf38[h].mpdwValue[i]); MonitorString("  ");
+      MonitorLongDec4(mpPrf41[h].mpdwValue[i]); MonitorString("  ");
     }
 #endif
 
-    ulong dw = DateToHouIndex(tiStart38);
-    dw -= (wProfile38 + h - d);
+    ulong dw = DateToHouIndex(tiStart41);
+    dw -= (wProfile41 + h - d);
     time tiVirtual = HouIndexToDate(dw);
 
-    bool difference = DifferentDateTime(tiVirtual, mpPrf38[h].tiTime);
+    bool difference = DifferentDateTime(tiVirtual, mpPrf41[h].tiTime);
 
-#ifdef MONITOR_38
+#ifdef MONITOR_41
     MonitorString(" vrt.="); MonitorTime(tiVirtual);
-    MonitorString(" act.="); MonitorTime(mpPrf38[h].tiTime);
+    MonitorString(" act.="); MonitorTime(mpPrf41[h].tiTime);
     MonitorBool(difference);
-    MonitorString(" #"); MonitorCharDec(mpPrf38[h].bStatus); MonitorString(" ");
+    MonitorString(" #"); MonitorCharDec(mpPrf41[h].bStatus); MonitorString(" ");
 #endif
 
-    if ((difference == true) && (mpPrf38[h].bStatus == 2))
+    if ((difference == true) && (mpPrf41[h].bStatus == 2))
       tiDig = tiVirtual;
-    else if ((mpPrf38[h].tiTime.bMinute % 30 != 0) && (mpPrf38[h].bStatus == 0))
+    else if ((mpPrf41[h].tiTime.bMinute % 30 != 0) && (mpPrf41[h].bStatus == 0))
       tiDig = tiVirtual;
     else
-      tiDig = mpPrf38[h].tiTime;
+      tiDig = mpPrf41[h].tiTime;
 
-    if (ReadBlock38(h) == false) return false;
+    if (ReadBlock41(h) == false) return false;
   }
 
-  wProfile38 += 6;
-  if (wProfile38 > wHOURS) return false;
+  wProfile41 += 6;
+  if (wProfile41 > wHOURS) return false;
 
-  wRelStart38 += 6;
-  wRelEnd38 = wRelStart38 + 5;
+  wRelStart41 += 6;
+  wRelEnd41 = wRelStart41 + 5;
 
   return true;
 }
 
 
 
-#ifdef MONITOR_38
+#ifdef MONITOR_41
 
-void    RunProfile38(void)
+void    RunProfile41(void)
 {
-  QueryTime38();
-  if (Input38() != SER_GOODCHECK) { MonitorString("\n error 1"); return; }
+  QueryTime41();
+  if (Input41() != SER_GOODCHECK) { MonitorString("\n error 1"); return; }
 
-  tiValue38 = ReadTime38();
-  dwValue38 = DateToHouIndex(tiValue38);
+  tiValue41 = ReadTime41();
+  dwValue41 = DateToHouIndex(tiValue41);
 
-  InitHeader38();
+  InitHeader41();
 
   while (true) {
-    QueryHeader38();
-    if (Input38() != SER_GOODCHECK) { MonitorString("\n error 2"); return; }
+    QueryHeader41();
+    if (Input41() != SER_GOODCHECK) { MonitorString("\n error 2"); return; }
 
-    if (ReadData38() == false) { MonitorString("\n finish "); return; }
+    if (ReadData41() == false) { MonitorString("\n finish "); return; }
     if (fKey == true) return;
   }
 }
