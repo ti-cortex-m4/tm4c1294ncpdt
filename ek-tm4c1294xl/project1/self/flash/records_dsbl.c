@@ -33,11 +33,10 @@ void    ResetRecordsDsbl(void)
   mpfRecordDsbl[EVE_CANAL_DISABLED] = true; // 62
   mpfRecordDsbl[EVE_PROFILE_DISABLED] = true; // 63
 
-//  —писок наиболее частых событий (количество/код)
-//  179       81
-//  180       82
-//  180       83
-//  179       84
+  mpfRecordDsbl[EVE_MODEMCONNECT1] = true; // 81
+  mpfRecordDsbl[EVE_MODEMCONNECT2] = true; // 82
+  mpfRecordDsbl[EVE_MODEMBREAK1] = true; // 83
+  mpfRecordDsbl[EVE_MODEMBREAK2] = true; // 84
 
 //  59        94
 //  20        93
