@@ -30,13 +30,15 @@ void    ResetRecordsDsbl(void)
   mpfRecordDsbl[EVE_PROFILE_OK2] = true;
   mpfRecordDsbl[EVE_PROFILE2] = true;
 
+  mpfRecordDsbl[EVE_CANAL_DISABLED] = true; // 62
+  mpfRecordDsbl[EVE_PROFILE_DISABLED] = true; // 63
+
 //  —писок наиболее частых событий (количество/код)
-//  1409      63
-//  416       62
+//  179       81
 //  180       82
 //  180       83
-//  179       81
 //  179       84
+
 //  59        94
 //  20        93
 //  2         91
