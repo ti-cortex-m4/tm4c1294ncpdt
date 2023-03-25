@@ -313,8 +313,6 @@ bool    ReadData41(void)
 
 void    RunProfile41(void)
 {
-uchar r;
-
   QueryTime38();
   if (Input38() != SER_GOODCHECK) { MonitorString("\n error 1"); return; }
 
@@ -324,7 +322,7 @@ uchar r;
   InitHeader41();
 
   while (true) {
-    r = 0;
+    uchar r = 0;
     while (true) {
        QueryHeader41();
        if (Input38() != SER_GOODCHECK) { MonitorString("\n error 2"); return; }
