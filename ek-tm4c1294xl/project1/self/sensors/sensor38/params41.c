@@ -91,7 +91,7 @@ float2  ReadParam41(void)
     QueryParams41();
     if (Input38() != SER_GOODCHECK) return GetFloat2Error();
 
-    uchar* pbIn = InBuffPtr(16);
+    uchar* pbIn = InBuffPtr(10);
 
     *(pbIn++);
     pbIn = ReadValue41(pbIn, 0); // U
