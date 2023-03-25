@@ -1,27 +1,27 @@
 
 #ifndef SKIP_38
 
-    case DEV_START_38P:
+    case DEV_START_41P:
        if (fCurrCtrl == true)
-         MakePause(DEV_PREVTIME1_38P);
+         MakePause(DEV_PREVTIME1_41P);
        else
-        MakePause(DEV_PREVTIME2_38P);    
+        MakePause(DEV_PREVTIME2_41P);
       break;
 
 
     // чтение времени для коррекции времения
-    case DEV_PREVTIME1_38P:
+    case DEV_PREVTIME1_41P:
       cbRepeat = MaxRepeats();
-      QueryTime38();
-      SetCurr(DEV_TIME1_38P);
+      QueryTime41();
+      SetCurr(DEV_TIME1_41P);
       break;
 
-    case DEV_TIME1_38P:
+    case DEV_TIME1_41P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        tiValue38 = ReadTime38();
-        dwValue38 = DateToHouIndex(tiValue38);
-        MakePause(DEV_POSTTIME1_38P);
+        tiValue41 = ReadTime41();
+        dwValue41 = DateToHouIndex(tiValue41);
+        MakePause(DEV_POSTTIME1_41P);
       }
       else
       {
@@ -31,19 +31,19 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryTime38();
-          SetCurr(DEV_TIME1_38P);
+          QueryTime41();
+          SetCurr(DEV_TIME1_41P);
         }
       }
       break;
 
-    case DEV_POSTTIME1_38P:
+    case DEV_POSTTIME1_41P:
       {
-        if (DifferentDay(tiValue38, tiCurr))
+        if (DifferentDay(tiValue41, tiCurr))
         { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); } // даты не совпадают, коррекция невозможна
         else
         {
-          ulong dwSecond1 = GetSecondIndex(tiValue38);
+          ulong dwSecond1 = GetSecondIndex(tiValue41);
           ulong dwSecond2 = GetSecondIndex(tiCurr);
           
           ShowDigitalDeltaTime(ibDig, dwSecond1, dwSecond2);
@@ -51,17 +51,17 @@
           ulong dwDelta = AbsLong(dwSecond1 - dwSecond2);
           if (dwDelta < GetCorrectLimit()) {
             ShowLo(szCorrectNo); DelayInf();
-            MakePause(DEV_PREVTIME2_38P); // без коррекции
+            MakePause(DEV_PREVTIME2_41P); // без коррекции
           }
-          else if (GetCurrHouIndex() == (tiValue38.bHour*2 + tiValue38.bMinute/30))
+          else if (GetCurrHouIndex() == (tiValue41.bHour*2 + tiValue41.bMinute/30))
           {
             if (boControlQ == false) {
-              SetCorrectSecond38(dwSecond2 - dwSecond1);
+              SetCorrectSecond41(dwSecond2 - dwSecond1);
               ShowLo(szCorrectYes); DelayInf();
-              MakePause(DEV_PREVAUTHKEY1_38P); // коррекция времени
+              MakePause(DEV_PREVAUTHKEY1_41P); // коррекция времени
             } else {
               ShowLo(szManageYes); DelayInf();
-              MakePause(DEV_PREVAUTHKEY2_38P); // установка времени
+              MakePause(DEV_PREVAUTHKEY2_41P); // установка времени
             }
           }
           else
@@ -72,17 +72,17 @@
 
 
 // начало коррекции времени
-    case DEV_PREVAUTHKEY1_38P:
+    case DEV_PREVAUTHKEY1_41P:
       cbRepeat = MaxRepeats();
-      QueryAuthRequest38();
-      SetCurr(DEV_AUTHKEY1_38P);
+      QueryAuthRequest41();
+      SetCurr(DEV_AUTHKEY1_41P);
       break;
 
-    case DEV_AUTHKEY1_38P:
+    case DEV_AUTHKEY1_41P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        ReadAuthRequest38();
-        MakePause(DEV_POSTAUTHKEY1_38P);
+        ReadAuthRequest41();
+        MakePause(DEV_POSTAUTHKEY1_41P);
       }
       else
       {
@@ -92,25 +92,25 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryAuthRequest38();
-          SetCurr(DEV_AUTHKEY1_38P);
+          QueryAuthRequest41();
+          SetCurr(DEV_AUTHKEY1_41P);
         }
       }
       break;
 
 
-    case DEV_POSTAUTHKEY1_38P:
+    case DEV_POSTAUTHKEY1_41P:
       cbRepeat = MaxRepeats();
-      QueryAuthResponse38();
-      SetCurr(DEV_AUTHREQ1_38P);
+      QueryAuthResponse41();
+      SetCurr(DEV_AUTHREQ1_41P);
       break;
 
-    case DEV_AUTHREQ1_38P:
+    case DEV_AUTHREQ1_41P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        uchar bAuth = ReadAuthResponse38();
+        uchar bAuth = ReadAuthResponse41();
         if (bAuth == 0)
-          MakePause(DEV_PREVCORRECT_38P);
+          MakePause(DEV_PREVCORRECT_41P);
         else {
           Clear(); sprintf(szLo+2,"пароль: %u ?",bAuth); DelayMsg();
           ErrorProfile();
@@ -124,28 +124,28 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryAuthResponse38();
-          SetCurr(DEV_AUTHREQ1_38P);
+          QueryAuthResponse41();
+          SetCurr(DEV_AUTHREQ1_41P);
         }
       }
       break;
 
 
-    case DEV_PREVCORRECT_38P:
+    case DEV_PREVCORRECT_41P:
       cbRepeat = MaxRepeats();
-      QueryCorrect38();
-      SetCurr(DEV_CORRECT_38P);
+      QueryCorrect41();
+      SetCurr(DEV_CORRECT_41P);
       break;
 
-    case DEV_CORRECT_38P:
+    case DEV_CORRECT_41P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        uchar bCorrect = ReadCorrect38();
+        uchar bCorrect = ReadCorrect41();
         if (bCorrect != 0) {
           Clear(); sprintf(szLo+1,"коррекция: %u ?",bCorrect); DelayMsg();
         }
 
-        MakePause(DEV_PREVTIME2_38P);
+        MakePause(DEV_PREVTIME2_41P);
       }
       else
       {
@@ -155,25 +155,25 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryCorrect38();
-          SetCurr(DEV_CORRECT_38P);
+          QueryCorrect41();
+          SetCurr(DEV_CORRECT_41P);
         }
       }
       break;
 // конец коррекции времени
 
 // начало установки времени
-    case DEV_PREVAUTHKEY2_38P:
+    case DEV_PREVAUTHKEY2_41P:
       cbRepeat = MaxRepeats();
-      QueryAuthRequest38();
-      SetCurr(DEV_AUTHKEY2_38P);
+      QueryAuthRequest41();
+      SetCurr(DEV_AUTHKEY2_41P);
       break;
 
-    case DEV_AUTHKEY2_38P:
+    case DEV_AUTHKEY2_41P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        ReadAuthRequest38();
-        MakePause(DEV_POSTAUTHKEY2_38P);
+        ReadAuthRequest41();
+        MakePause(DEV_POSTAUTHKEY2_41P);
       }
       else
       {
@@ -183,25 +183,25 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryAuthRequest38();
-          SetCurr(DEV_AUTHKEY2_38P);
+          QueryAuthRequest41();
+          SetCurr(DEV_AUTHKEY2_41P);
         }
       }
       break;
 
 
-    case DEV_POSTAUTHKEY2_38P:
+    case DEV_POSTAUTHKEY2_41P:
       cbRepeat = MaxRepeats();
-      QueryAuthResponse38();
-      SetCurr(DEV_AUTHREQ2_38P);
+      QueryAuthResponse41();
+      SetCurr(DEV_AUTHREQ2_41P);
       break;
 
-    case DEV_AUTHREQ2_38P:
+    case DEV_AUTHREQ2_41P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        uchar bAuth = ReadAuthResponse38();
+        uchar bAuth = ReadAuthResponse41();
         if (bAuth == 0)
-          MakePause(DEV_PREVMANAGE_38P);
+          MakePause(DEV_PREVMANAGE_41P);
         else {
           Clear(); sprintf(szLo+2,"пароль: %u ?",bAuth); DelayMsg();
           ErrorProfile();
@@ -215,28 +215,28 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryAuthResponse38();
-          SetCurr(DEV_AUTHREQ2_38P);
+          QueryAuthResponse41();
+          SetCurr(DEV_AUTHREQ2_41P);
         }
       }
       break;
 
 
-    case DEV_PREVMANAGE_38P:
+    case DEV_PREVMANAGE_41P:
       cbRepeat = MaxRepeats();
-      QueryManage38();
-      SetCurr(DEV_MANAGE_38P);
+      QueryManage41();
+      SetCurr(DEV_MANAGE_41P);
       break;
 
-    case DEV_MANAGE_38P:
+    case DEV_MANAGE_41P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        uchar bManage = ReadManage38();
+        uchar bManage = ReadManage41();
         if (bManage != 0) {
           Clear(); sprintf(szLo+1,"установка: %u ?",bManage); DelayMsg();
         }
 
-        MakePause(DEV_PREVTIME2_38P);
+        MakePause(DEV_PREVTIME2_41P);
       }
       else
       {
@@ -246,26 +246,26 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryManage38();
-          SetCurr(DEV_MANAGE_38P);
+          QueryManage41();
+          SetCurr(DEV_MANAGE_41P);
         }
       }
       break;
 // конец установки времени
 
 // чтение времени для чтения профилей
-    case DEV_PREVTIME2_38P:
+    case DEV_PREVTIME2_41P:
       cbRepeat = MaxRepeats();
-      QueryTime38();
-      SetCurr(DEV_TIME2_38P);
+      QueryTime41();
+      SetCurr(DEV_TIME2_41P);
       break;
 
-    case DEV_TIME2_38P:
+    case DEV_TIME2_41P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        tiValue38 = ReadTime38();
-        dwValue38 = DateToHouIndex(tiValue38);
-        MakePause(DEV_INITHEADER_38P);
+        tiValue41 = ReadTime41();
+        dwValue41 = DateToHouIndex(tiValue41);
+        MakePause(DEV_INITHEADER_41P);
       }
       else
       {
@@ -275,22 +275,22 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryTime38();
-          SetCurr(DEV_TIME2_38P);
+          QueryTime41();
+          SetCurr(DEV_TIME2_41P);
         }
       }
       break;
 
 
-    case DEV_INITHEADER_38P:
-      InitHeader38();
-      if (diCurr.bDevice == 38)
-        MakePause(DEV_PAUSE_38P);
+    case DEV_INITHEADER_41P:
+      InitHeader41();
+      if (diCurr.bDevice == 41)
+        MakePause(DEV_PAUSE_41P);
       else
         MakePause(DEV_PAUSE_39P);
       break;
 
-    case DEV_PAUSE_38P:
+    case DEV_PAUSE_41P:
       {
         ulong dwSecNow = DateToSecIndex(tiCurr);
         ulong dwHou = DateToHouIndex(tiCurr);
@@ -304,26 +304,26 @@
           Clear();
           uchar bDelta = f1 ? bGap + (dwSecNext - dwSecNow) : bGap - (dwSecNow - dwSecPrev);
           sprintf(szLo+3, "пауза: %u", bDelta);
-          MakeLongPause(DEV_PAUSE_38P, 1);
+          MakeLongPause(DEV_PAUSE_41P, 1);
         }
         else
         {
           cbRepeat = MaxRepeats();
-          QueryHeader38();
-          SetCurr(DEV_HEADER_38P);
+          QueryHeader41();
+          SetCurr(DEV_HEADER_41P);
         }
       }
       break;
 
-    case DEV_HEADER_38P:
+    case DEV_HEADER_41P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        if (ReadData38() == false)
+        if (ReadData41() == false)
           DoneProfile();
-        else if (cwShutdown38 >= GetMaxShutdown())
+        else if (cwShutdown41 >= GetMaxShutdown())
           DoneProfile();
         else
-          MakePause(DEV_PAUSE_38P);
+          MakePause(DEV_PAUSE_41P);
       }
       else
       {
@@ -334,8 +334,8 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryHeader38();
-          SetCurr(DEV_HEADER_38P);
+          QueryHeader41();
+          SetCurr(DEV_HEADER_41P);
         }
       }
       break;
@@ -371,7 +371,7 @@
       {
         if (ReadData39() == false)
           DoneProfile();
-        else if (cwShutdown38 >= GetMaxShutdown())
+        else if (cwShutdown41 >= GetMaxShutdown())
           DoneProfile();
         else
           MakePause(DEV_PAUSE_39P);
