@@ -19,7 +19,7 @@
     case DEV_TIME1_41P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        tiValue41 = ReadTime41();
+        tiValue41 = ReadTime38();
         dwValue41 = DateToHouIndex(tiValue41);
         MakePause(DEV_POSTTIME1_41P);
       }
@@ -263,7 +263,7 @@
     case DEV_TIME2_41P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        tiValue41 = ReadTime41();
+        tiValue41 = ReadTime38();
         dwValue41 = DateToHouIndex(tiValue41);
         MakePause(DEV_INITHEADER_41P);
       }
@@ -284,10 +284,7 @@
 
     case DEV_INITHEADER_41P:
       InitHeader41();
-      if (diCurr.bDevice == 41)
-        MakePause(DEV_PAUSE_41P);
-      else
-        MakePause(DEV_PAUSE_39P);
+      MakePause(DEV_PAUSE_41P);
       break;
 
     case DEV_PAUSE_41P:
@@ -336,57 +333,6 @@
 
           QueryHeader41();
           SetCurr(DEV_HEADER_41P);
-        }
-      }
-      break;
-
-
-    case DEV_PAUSE_39P:
-      {
-        ulong dwSecNow = DateToSecIndex(tiCurr);
-        ulong dwHou = DateToHouIndex(tiCurr);
-        ulong dwSecPrev = DateToSecIndex(HouIndexToDate(dwHou));
-        ulong dwSecNext = DateToSecIndex(HouIndexToDate(dwHou + 1));
-        const char bGap = 30;
-        bool f1 = (dwSecNext - dwSecNow < bGap);
-        bool f2 = (dwSecNow - dwSecPrev < bGap);
-        if (f1 || f2)
-        {
-          Clear();
-          uchar bDelta = f1 ? bGap + (dwSecNext - dwSecNow) : bGap - (dwSecNow - dwSecPrev);
-          sprintf(szLo+3, "пауза: %u", bDelta);
-          MakeLongPause(DEV_PAUSE_39P, 1);
-        }
-        else
-        {
-          cbRepeat = MaxRepeats();
-          QueryHeader39();
-          SetCurr(DEV_HEADER_39P);
-        }
-      }
-      break;
-
-    case DEV_HEADER_39P:
-      if (mpSerial[ibPort] == SER_GOODCHECK)
-      {
-        if (ReadData39() == false)
-          DoneProfile();
-        else if (cwShutdown41 >= GetMaxShutdown())
-          DoneProfile();
-        else
-          MakePause(DEV_PAUSE_39P);
-      }
-      else
-      {
-        if (cbRepeat == 0)
-          ErrorProfile();
-        else
-        {
-          ErrorLink();
-          cbRepeat--;
-
-          QueryHeader39();
-          SetCurr(DEV_HEADER_39P);
         }
       }
       break;
