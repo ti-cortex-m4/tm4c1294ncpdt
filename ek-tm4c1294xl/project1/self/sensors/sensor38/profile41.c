@@ -200,7 +200,10 @@ void    MakeData41(uchar  h)
 
 bool    ReadBlock41(uchar  ibBlock)
 {
-  sprintf(szLo," %02u    %02u.%02u.%02u", tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
+  if (tiDig.bYear == 0)
+    sprintf(szLo," выключено: %-4u   ",cwShutdown41);
+  else
+    sprintf(szLo," %02u    %02u.%02u.%02u", tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
 
 #ifdef MONITOR_38
   if (tiDig.bMinute % 30 != 0) MonitorString(" ??? ");
@@ -238,7 +241,13 @@ bool    ReadData41(void)
       int64_t ddw = 0;
       pbIn = DffDecodePositive(pbIn, &ddw);
 
-      mpPrf41[h].tiTime = SecondsToTime38(ddw % 0x100000000);
+      if (ddw == 1) {
+          mpPrf41[h].tiTime = tiZero;
+         if (c == 0) cwShutdown41++;
+      } else {
+          mpPrf41[h].tiTime = SecondsToTime38(ddw % 0x100000000);
+         if (c == 0) cwShutdown41 = 0;
+      }
 
       ddw = 0;
       pbIn = DffDecodePositive(pbIn, &ddw);
