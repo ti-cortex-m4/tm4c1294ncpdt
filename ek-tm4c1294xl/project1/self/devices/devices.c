@@ -8113,7 +8113,7 @@ void    RunDevices(void)
         else
         {
           cbRepeat = MaxRepeats();
-          QueryHeader41();
+          QueryHeader41(0);
           SetCurr(DEV_HEADER_41P);
         }
       }
@@ -8122,7 +8122,7 @@ void    RunDevices(void)
     case DEV_HEADER_41P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        if (ReadData41() == false)
+        if (ReadData41(0) == false)
           DoneProfile();
         else if (cwShutdown41 >= GetMaxShutdown())
           DoneProfile();
@@ -8138,7 +8138,7 @@ void    RunDevices(void)
           ErrorLink();
           cbRepeat--;
 
-          QueryHeader41();
+          QueryHeader41(0);
           SetCurr(DEV_HEADER_41P);
         }
       }

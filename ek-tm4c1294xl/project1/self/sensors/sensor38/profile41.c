@@ -128,25 +128,7 @@ void    QueryProfile41(uchar c, uint  iw30MinRelStart, uint  iw30MinRelEnd)
     bSize += PushIndex41(iw30MinRelStart);
     bSize += PushIndex41(iw30MinRelEnd);
   }
-/*
-  bSize += PushChar(0xD6); // 214
-  bSize += PushChar(0x01);
-  bSize += PushChar(0x03);
-  bSize += PushIndex41(iw30MinRelStart);
-  bSize += PushIndex41(iw30MinRelEnd);
 
-  bSize += PushChar(0xD7); // 215
-  bSize += PushChar(0x01);
-  bSize += PushChar(0x03);
-  bSize += PushIndex41(iw30MinRelStart);
-  bSize += PushIndex41(iw30MinRelEnd);
-
-  bSize += PushChar(0xD8); // 216
-  bSize += PushChar(0x01);
-  bSize += PushChar(0x03);
-  bSize += PushIndex41(iw30MinRelStart);
-  bSize += PushIndex41(iw30MinRelEnd);
-*/
   Query38(250, bSize+3);
 }
 
@@ -272,10 +254,7 @@ bool    ReadData41(uchar  c)
 #ifdef MONITOR_38
     MonitorString("\n");
 
-    uchar i;
-    for (i=0; i<1; i++) {
-      MonitorLongDec4(mpPrf41[h].mpdwValue[i]); MonitorString("  ");
-    }
+    MonitorLongDec4(mpPrf41[h].mpdwValue[c]); MonitorString("  ");
 #endif
 
     ulong dw = DateToHouIndex(tiStart41);
