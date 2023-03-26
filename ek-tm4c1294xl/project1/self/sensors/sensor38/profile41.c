@@ -88,7 +88,7 @@ uchar   PushIndex41(uint  iw30MinRel)
 }
 
 
-void    QueryProfile41(uint  iw30MinRelStart, uint  iw30MinRelEnd)
+void    QueryProfile41(uchar c, uint  iw30MinRelStart, uint  iw30MinRelEnd)
 {
 #ifdef MONITOR_38
   MonitorString("\n QueryProfile41 "); MonitorIntDec(iw30MinRelStart); MonitorString(" "); MonitorIntDec(iw30MinRelEnd);
@@ -113,7 +113,7 @@ void    QueryProfile41(uint  iw30MinRelStart, uint  iw30MinRelEnd)
   {
     bSize += PushChar(0x00);
 
-    bSize += PushChar(0xD5); // 213
+    bSize += PushChar(0xD5 + c); // 213
     bSize += PushChar(0x03);
     bSize += PushChar(iw30MinRelStart);
     bSize += PushChar(iw30MinRelEnd);
@@ -122,7 +122,7 @@ void    QueryProfile41(uint  iw30MinRelStart, uint  iw30MinRelEnd)
   {
     bSize += PushChar(0x80);
 
-    bSize += PushChar(0xD5); // 213
+    bSize += PushChar(0xD5 + c); // 213
     bSize += PushChar(0x01);
     bSize += PushChar(0x03);
     bSize += PushIndex41(iw30MinRelStart);
@@ -151,7 +151,7 @@ void    QueryProfile41(uint  iw30MinRelStart, uint  iw30MinRelEnd)
 }
 
 
-void    QueryHeader41(void)
+void    QueryHeader41(uchar  c)
 {
   HideCurrTime(1);
 
@@ -162,43 +162,39 @@ void    QueryHeader41(void)
   MonitorString(" wRelEnd41="); MonitorIntDec(wRelEnd41);
 #endif
 
-  QueryProfile41(wRelStart41, wRelEnd41);
+  QueryProfile41(c, wRelStart41, wRelEnd41);
 }
 
 
 
-void    MakeData41(uchar  h)
+void    MakeData41(uchar  h, uchar  c)
 {
   ShowProgressDigHou();
 
   double dbPulse = mpdbPulseHou[ibDig];
 
-  uchar i;
-  for (i=0; i<1; i++)
   {
-    double db = mpPrf41[h].mpdwValue[i];
-    mpdbEngFracDigCan[ibDig][i] += db;
+    double db = mpPrf41[h].mpdwValue[c];
+    mpdbEngFracDigCan[ibDig][c] += db;
 
-    uint w = (uint)(mpdbEngFracDigCan[ibDig][i]*dbPulse/10000);
-    mpwChannels[i] = w;
+    uint w = (uint)(mpdbEngFracDigCan[ibDig][c]*dbPulse/10000);
+    mpwChannels[c] = w;
 
-    mpdbEngFracDigCan[ibDig][i] -= (double)w*10000/dbPulse;
+    mpdbEngFracDigCan[ibDig][c] -= (double)w*10000/dbPulse;
   }
 /*
-  uchar i;
-  for (i=0; i<1; i++)
   {
-    ulong dw = mpPrf41[h].mpdwValue[i];
+    ulong dw = mpPrf41[h].mpdwValue[c];
     uint w = (uint)(dw*dbPulse/10000);
 
-    mpwChannels[i] = w;
+    mpwChannels[c] = w;
   }
 */
 }
 
 
 
-bool    ReadBlock41(uchar  ibBlock)
+bool    ReadBlock41(uchar  ibBlock, uchar  c)
 {
   if (tiDig.bYear == 0)
     sprintf(szLo," выключено: %-4u   ",cwShutdown41);
@@ -212,7 +208,7 @@ bool    ReadBlock41(uchar  ibBlock)
 
   if (SearchDefHouIndex(tiDig) == 0) return(1);
 
-  MakeData41(ibBlock);
+  MakeData41(ibBlock, c);
 
   if (IsDefect(ibDig)) MakeSpecial(tiDig);
   return(MakeStopHou(0));
@@ -220,19 +216,17 @@ bool    ReadBlock41(uchar  ibBlock)
 
 
 
-bool    ReadData41(void)
+bool    ReadData41(uchar  c)
 {
   memset(&mpPrf41, 0, sizeof(mpPrf41));
 
   uchar* pbIn = InBuffPtr(10);
 
-  uchar c;
-  for (c=0; c<1; c++)
   {
     *(pbIn++);
 
 #ifdef MONITOR_38
-    MonitorString("\n ");
+    MonitorString("\n c="); MonitorCharDec(c);
 #endif
 
     uchar h;
@@ -241,14 +235,12 @@ bool    ReadData41(void)
       int64_t ddw = 0;
       pbIn = DffDecodePositive(pbIn, &ddw);
 
-      if (c == 0) {
-        if (ddw == 1) {
-          mpPrf41[h].tiTime = tiZero;
-          cwShutdown41++;
-        } else {
-          mpPrf41[h].tiTime = SecondsToTime38(ddw % 0x100000000);
-          cwShutdown41 = 0;
-        }
+      if (ddw == 1) {
+        mpPrf41[h].tiTime = tiZero;
+        if (c == 0) cwShutdown41++;
+      } else {
+        mpPrf41[h].tiTime = SecondsToTime38(ddw % 0x100000000);
+        if (c == 0) cwShutdown41 = 0;
       }
 
       ddw = 0;
@@ -306,7 +298,7 @@ bool    ReadData41(void)
     else
       tiDig = mpPrf41[h].tiTime;
 
-    if (ReadBlock41(h) == false) return false;
+    if (ReadBlock41(h,c) == false) return false;
   }
 
   wProfile41 += 6;
@@ -332,10 +324,12 @@ void    RunProfile41(void)
 
   InitHeader41();
 
+  uchar c = 0;
+
   while (true) {
     uchar r = 0;
     while (true) {
-       QueryHeader41();
+       QueryHeader41(c);
        if (Input38() != SER_GOODCHECK) { MonitorString("\n error 2"); return; }
 
        if (IndexInBuff() == 14) {
@@ -346,7 +340,7 @@ void    RunProfile41(void)
        }
     }
 
-    if (ReadData41() == false) { MonitorString("\n finish "); return; }
+    if (ReadData41(c) == false) { MonitorString("\n finish "); return; }
     if (fKey == true) return;
   }
 }
