@@ -241,12 +241,14 @@ bool    ReadData41(void)
       int64_t ddw = 0;
       pbIn = DffDecodePositive(pbIn, &ddw);
 
-      if (ddw == 1) {
+      if (c == 0) {
+        if (ddw == 1) {
           mpPrf41[h].tiTime = tiZero;
-         if (c == 0) cwShutdown41++;
-      } else {
+          cwShutdown41++;
+        } else {
           mpPrf41[h].tiTime = SecondsToTime38(ddw % 0x100000000);
-         if (c == 0) cwShutdown41 = 0;
+          cwShutdown41 = 0;
+        }
       }
 
       ddw = 0;
