@@ -167,7 +167,7 @@ void    QueryHeader41(uchar  c)
 
 
 
-void    MakeData41(uchar  h, uchar  c)
+void    MakeData41(uchar  c, uchar  h)
 {
   ShowProgressDigHou();
 
@@ -194,7 +194,7 @@ void    MakeData41(uchar  h, uchar  c)
 
 
 
-bool    ReadBlock41(uchar  ibBlock, uchar  c)
+bool    ReadBlock41(uchar  c, uchar  ibBlock)
 {
   if (tiDig.bYear == 0)
     sprintf(szLo," выключено: %-4u   ",cwShutdown41);
@@ -208,7 +208,7 @@ bool    ReadBlock41(uchar  ibBlock, uchar  c)
 
   if (SearchDefHouIndex(tiDig) == 0) return(1);
 
-  MakeData41(ibBlock, c);
+  MakeData41(c, ibBlock);
 
   if (IsDefect(ibDig)) MakeSpecial(tiDig);
   return(MakeStopHou(0));
@@ -298,7 +298,7 @@ bool    ReadData41(uchar  c)
     else
       tiDig = mpPrf41[h].tiTime;
 
-    if (ReadBlock41(h,c) == false) return false;
+    if (ReadBlock41(c,h) == false) return false;
   }
 
   wProfile41 += 6;
