@@ -307,6 +307,7 @@ void    RunProfile41(void)
 
   while (true) {
     uchar r = 0;
+
     while (true) {
        QueryHeader41(c);
        if (Input38() != SER_GOODCHECK) { MonitorString("\n error 2"); return; }
