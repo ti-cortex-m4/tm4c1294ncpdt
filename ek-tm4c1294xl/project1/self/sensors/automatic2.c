@@ -1919,8 +1919,9 @@ double2 ReadCntCurrCan(uchar  ibCan)
 
 #ifndef SKIP_38
     case 38: 
-    case 39:
-    case 41: RunProfile41(); return GetDouble2(-1,true); //return ReadCntCurr38();
+    case 39: return ReadCntCurr38();
+
+    case 41: RunProfile41(); return GetDouble2(-1,true); //return ReadCntCurr41();
 #endif
 
 #ifndef SKIP_40
