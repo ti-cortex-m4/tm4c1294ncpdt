@@ -8122,7 +8122,7 @@ void    RunDevices(void)
     case DEV_HEADER_41P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        if (ReadData41() == false)
+        if (ReadData41(0) == false)
           DoneProfile();
         else if (cwShutdown41 >= GetMaxShutdown())
           DoneProfile();
