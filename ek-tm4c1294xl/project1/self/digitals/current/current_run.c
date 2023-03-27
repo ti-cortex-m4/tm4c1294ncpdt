@@ -208,8 +208,9 @@ bool    StartCurrent(uchar  ibCanal)
 
 #ifndef SKIP_38
     case 38:
-    case 39:
-    case 41: SetNext(DEV_START_38C);  break;
+    case 39: SetNext(DEV_START_38C);  break;
+
+    case 41: SetNext(DEV_START_41C);  break;
 #endif
 
 #ifndef SKIP_40
