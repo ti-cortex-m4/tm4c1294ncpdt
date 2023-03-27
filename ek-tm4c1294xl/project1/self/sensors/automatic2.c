@@ -2079,7 +2079,7 @@ time2   ReadTimeCan(uchar  ibCan)
 #endif
 
 #ifndef SKIP_41
-    case 41: return ReadTimeCan41();
+    case 41: RunProfile41(); return GetTime2Error(); //return ReadTimeCan41();
 #endif
 
     default: return GetTime2Error();
@@ -2241,7 +2241,7 @@ double2 ReadCntMonCan(uchar  ibMon, uchar  ibCan)
 #ifndef SKIP_38
     case 38: 
     case 39:
-    case 41: RunProfile41(); return GetDouble2(-1,true); //return ReadCntMonCan38(ibMon);
+    case 41: return ReadCntMonCan38(ibMon);
 #endif
 
 #ifndef SKIP_40
