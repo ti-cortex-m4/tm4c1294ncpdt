@@ -940,6 +940,9 @@ typedef enum
 
 #ifndef SKIP_41
 
+  DEV_START_41C         =  0x2500,
+  DEV_ENERGY_41C        =  0x2501,
+
   DEV_START_41P         =  0x2510,
 
   DEV_PREVTIME1_41P     =  0x2511,

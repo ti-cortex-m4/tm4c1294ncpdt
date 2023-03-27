@@ -16,7 +16,7 @@ automatic_get_cntcur_41.c
 #include "../sensor38/io38.h"
 #include "../sensor38/dff.h"
 #include "include41.h"
-#include "automatic_get_cntcur_41.h"
+#include "automatic_get_cntcurr_41.h"
 
 
 
