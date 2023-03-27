@@ -1,5 +1,5 @@
 
-#ifndef SKIP_38
+#ifndef SKIP_41
 
     case DEV_START_41P:
        if (fCurrCtrl == true)
