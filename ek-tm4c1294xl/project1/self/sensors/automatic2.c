@@ -61,6 +61,7 @@ AUTOMATIC2!C
 #include "sensor40/automatic_get_cntcurr_40.h"
 #include "sensor40/automatic_get_cntmon_40.h"
 #include "sensor41/automatic_get_time_41.h"
+#include "sensor41/automatic_get_cntcurr_41.h"
 #include "automatic2.h"
 
 

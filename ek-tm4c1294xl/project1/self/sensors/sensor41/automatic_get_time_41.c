@@ -11,9 +11,10 @@ automatic_get_time_41.c
 #include "../../serial/ports.h"
 #include "../../devices/devices.h"
 #include "../../digitals/digitals.h"
-#include "device38.h"
-#include "time38.h"
-#include "io38.h"
+#include "../sensor38/device38.h"
+#include "../sensor38/time38.h"
+#include "../sensor38/io38.h"
+#include "include41.h"
 #include "automatic_get_time_41.h"
 
 

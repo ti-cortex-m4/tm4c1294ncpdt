@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-automatic_get_cntcur_38.c
+automatic_get_cntcur_41.c
 
 
 ------------------------------------------------------------------------------*/
@@ -12,14 +12,15 @@ automatic_get_cntcur_38.c
 #include "../../serial/ports2.h"
 #include "../../devices/devices.h"
 #include "../../digitals/digitals.h"
-#include "device38.h"
-#include "io38.h"
-#include "dff.h"
-#include "automatic_get_cntcur_38.h"
+#include "../sensor38/device38.h"
+#include "../sensor38/io38.h"
+#include "../sensor38/dff.h"
+#include "include41.h"
+#include "automatic_get_cntcur_41.h"
 
 
 
-double2 ReadCntCurr38(void)
+double2 ReadCntCurr41(void)
 {
   Clear();
 
@@ -37,7 +38,7 @@ double2 ReadCntCurr38(void)
   uchar* pbIn = InBuffPtr(10);
 
   uchar i;
-  for (i=0; i<4; i++)
+  for (i=0; i<MAX_LINE_41; i++)
   {
     *(pbIn++);
 
@@ -49,7 +50,7 @@ double2 ReadCntCurr38(void)
   }
 
 
-  for (i=0; i<4; i++)
+  for (i=0; i<MAX_LINE_41; i++)
   {
     mpdbChannelsC[i] *= mpdbTransCnt[ibDig];
     mpboChannelsA[i] = true;
