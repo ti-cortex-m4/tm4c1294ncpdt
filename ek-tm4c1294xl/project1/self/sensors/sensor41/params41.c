@@ -12,9 +12,9 @@ params41.c
 #include "../../digitals/params/params2.h"
 #include "../../display/display.h"
 #include "../../time/delay.h"
-#include "device38.h"
-#include "io38.h"
-#include "dff.h"
+#include "../sensor38/device38.h"
+#include "../sensor38/io38.h"
+#include "../sensor38/dff.h"
 #include "params41.h"
 
 

@@ -82,7 +82,6 @@ DEVICES.C
 #include "../sensors/sensor38/current38.h"
 #include "../sensors/sensor38/profile38.h"
 #include "../sensors/sensor38/profile39.h"
-#include "../sensors/sensor38/profile41.h"
 #include "../sensors/sensor38/auth38.h"
 #include "../sensors/sensor38/time38.h"
 #include "../sensors/sensor40/dlms.h"
@@ -94,6 +93,7 @@ DEVICES.C
 #include "../sensors/sensor40/profile40_wrapper.h"
 #include "../sensors/sensor40/hdlc_monitor.h"
 #include "../sensors/sensor40/error40.h"
+#include "../sensors/sensor41/profile41.h"
 #include "../serial/ports.h"
 #include "../serial/ports_modems.h"
 #include "../serial/modems.h"
@@ -8122,7 +8122,7 @@ void    RunDevices(void)
     case DEV_HEADER_41P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        if (ReadData41(0) == false)
+        if (ReadData41() == false)
           DoneProfile();
         else if (cwShutdown41 >= GetMaxShutdown())
           DoneProfile();
