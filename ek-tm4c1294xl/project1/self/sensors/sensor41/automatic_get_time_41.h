@@ -1,16 +1,7 @@
 /*------------------------------------------------------------------------------
-include41.h
+automatic_get_time_41.h
 
 
 ------------------------------------------------------------------------------*/
 
-#ifndef __INCLUDE41
-#define __INCLUDE41
-
-
-#define MAX_LINE_41 1
-
-#define MONITOR_41  1
-
-
-#endif
+time2   ReadTimeCan41(void);

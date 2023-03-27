@@ -29,11 +29,11 @@ profile38.c
 #include "../../digitals/digitals.h"
 #include "../../digitals/limits.h"
 #include "../../special/special.h"
-#include "device38.h"
-#include "time38.h"
-#include "io38.h"
-#include "dff.h"
-#include "profile38_include.h"
+#include "../sensor38/device38.h"
+#include "../sensor38/time38.h"
+#include "../sensor38/io38.h"
+#include "../sensor38/dff.h"
+#include "../sensor38/profile38_include.h"
 #include "profile41.h"
 
 

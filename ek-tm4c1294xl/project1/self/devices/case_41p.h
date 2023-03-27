@@ -306,7 +306,7 @@
         else
         {
           cbRepeat = MaxRepeats();
-          QueryHeader41();
+          QueryHeader41(0);
           SetCurr(DEV_HEADER_41P);
         }
       }
@@ -331,7 +331,7 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryHeader41();
+          QueryHeader41(0);
           SetCurr(DEV_HEADER_41P);
         }
       }
