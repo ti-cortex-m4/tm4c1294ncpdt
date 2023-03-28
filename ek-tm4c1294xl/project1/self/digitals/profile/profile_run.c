@@ -74,7 +74,8 @@ bool    StartProfile(uchar  ibCanal)
         (diCurr.bDevice == 35) ||
         (diCurr.bDevice == 36) || (diCurr.bDevice == 37) ||
         (diCurr.bDevice == 38) || (diCurr.bDevice == 39) ||
-        (diCurr.bDevice == 40))
+        (diCurr.bDevice == 40) ||
+        (diCurr.bDevice == 41))
     {
       if (mpboReadyCan[ibDig] == false)
       {
