@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-automatic_get_cntmon_38.c
+automatic_get_cntmon_41.c
 
 
 ------------------------------------------------------------------------------*/
@@ -12,15 +12,15 @@ automatic_get_cntmon_38.c
 #include "../../serial/ports2.h"
 #include "../../devices/devices.h"
 #include "../../digitals/digitals.h"
-#include "device38.h"
-#include "io38.h"
-#include "dff.h"
-#include "automatic_get_time_38.h"
-#include "automatic_get_cntmon_38.h"
+#include "../sensor38/device38.h"
+#include "../sensor38/io38.h"
+#include "../sensor38/dff.h"
+#include "automatic_get_time_41.h"
+#include "automatic_get_cntmon_41.h"
 
 
 
-bool    ReadEngDay38_Full(uchar  ibDayRel)
+bool    ReadEngDay41_Full(uchar  ibDayRel)
 {
   Clear();
 
@@ -39,7 +39,7 @@ bool    ReadEngDay38_Full(uchar  ibDayRel)
   uchar* pbIn = InBuffPtr(10);
 
   uchar i;
-  for (i=0; i<4; i++)
+  for (i=0; i<MAX_LINE_41; i++)
   {
     *(pbIn++);
 
@@ -61,7 +61,7 @@ bool    ReadEngDay38_Full(uchar  ibDayRel)
   }
 
 
-  for (i=0; i<4; i++)
+  for (i=0; i<MAX_LINE_41; i++)
   {
     mpdbChannelsC[i] *= mpdbTransCnt[ibDig];
     mpboChannelsA[i] = true;
@@ -72,7 +72,7 @@ bool    ReadEngDay38_Full(uchar  ibDayRel)
 
 
 
-bool    ReadEngMon38_Full(uchar  ibMonRel)
+bool    ReadEngMon41_Full(uchar  ibMonRel)
 {
   Clear();
 
@@ -89,7 +89,7 @@ bool    ReadEngMon38_Full(uchar  ibMonRel)
   uchar* pbIn = InBuffPtr(10);
 
   uchar i;
-  for (i=0; i<4; i++)
+  for (i=0; i<MAX_LINE_41; i++)
   {
     *(pbIn++);
 
@@ -111,7 +111,7 @@ bool    ReadEngMon38_Full(uchar  ibMonRel)
   }
 
 
-  for (i=0; i<4; i++)
+  for (i=0; i<MAX_LINE_41; i++)
   {
     mpdbChannelsC[i] *= mpdbTransCnt[ibDig];
     mpboChannelsA[i] = true;
@@ -133,11 +133,11 @@ double2 ReadCntMonCan38(uchar  ibMonAbs)
   if (ti.bMonth != ibMonAbs+1)
   {
     uchar ibMonRel = (bMONTHS+ti.bMonth-2-ibMonAbs) % bMONTHS;
-    if (ReadEngMon38_Full(ibMonRel) == false) return GetDouble2Error();
+    if (ReadEngMon41_Full(ibMonRel) == false) return GetDouble2Error();
   }
   else
   {
-    if (ReadEngDay38_Full(0) == false) return GetDouble2Error();
+    if (ReadEngDay41_Full(0) == false) return GetDouble2Error();
   }
 
   return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
