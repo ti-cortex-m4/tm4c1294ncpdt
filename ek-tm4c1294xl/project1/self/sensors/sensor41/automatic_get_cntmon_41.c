@@ -15,6 +15,7 @@ automatic_get_cntmon_41.c
 #include "../sensor38/device38.h"
 #include "../sensor38/io38.h"
 #include "../sensor38/dff.h"
+#include "include41.h"
 #include "automatic_get_time_41.h"
 #include "automatic_get_cntmon_41.h"
 
@@ -122,11 +123,11 @@ bool    ReadEngMon41_Full(uchar  ibMonRel)
 
 
 
-double2 ReadCntMonCan38(uchar  ibMonAbs)
+double2 ReadCntMonCan41(uchar  ibMonAbs)
 {
   Clear();
 
-  time2 ti2 = ReadTimeCan38();
+  time2 ti2 = ReadTimeCan41();
   if (ti2.fValid == false) return GetDouble2Error();
   time ti = ti2.tiValue;
 
