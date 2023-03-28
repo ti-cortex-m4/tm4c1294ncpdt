@@ -34,6 +34,7 @@ profile38.c
 #include "../sensor38/io38.h"
 #include "../sensor38/dff.h"
 #include "../sensor38/profile38_include.h"
+#include "include41.h"
 #include "profile41.h"
 
 
@@ -48,6 +49,8 @@ time                    tiValue41;
 ulong                   dwValue41;
 
 uint                    cwShutdown41;
+
+uchar                   cbRepeatProfile41;
 
 
 
@@ -68,7 +71,7 @@ void    InitHeader41(void)
   wRelStart41 = wProfile41;
   wRelEnd41 = wRelStart41 + 5;
 
-#ifdef MONITOR_38
+#ifdef MONITOR_41
   MonitorString("\n QueryProfile41 ");
   MonitorString(" wProfile41="); MonitorIntDec(wProfile41);
   MonitorString(" tiStart41="); MonitorTime(tiStart41);
@@ -90,7 +93,7 @@ uchar   PushIndex41(uint  iw30MinRel)
 
 void    QueryProfile41(uchar c, uint  iw30MinRelStart, uint  iw30MinRelEnd)
 {
-#ifdef MONITOR_38
+#ifdef MONITOR_41
   MonitorString("\n QueryProfile41 "); MonitorIntDec(iw30MinRelStart); MonitorString(" "); MonitorIntDec(iw30MinRelEnd);
 #endif
 
@@ -137,7 +140,7 @@ void    QueryHeader41(uchar  c)
 {
   HideCurrTime(1);
 
-#ifdef MONITOR_38
+#ifdef MONITOR_41
   MonitorString("\n QueryHeader41 ");
   MonitorString(" wProfile41="); MonitorIntDec(wProfile41);
   MonitorString(" wRelStart41="); MonitorIntDec(wRelStart41);
@@ -183,7 +186,7 @@ bool    ReadBlock41(uchar  c, uchar  ibBlock)
   else
     sprintf(szLo," %02u    %02u.%02u.%02u", tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
 
-#ifdef MONITOR_38
+#ifdef MONITOR_41
   if (tiDig.bMinute % 30 != 0) MonitorString(" ??? ");
   MonitorString(" eff.="); MonitorTime(tiDig);
 #endif
@@ -207,7 +210,7 @@ bool    ReadData41(uchar  c)
   {
     *(pbIn++);
 
-#ifdef MONITOR_38
+#ifdef MONITOR_41
     MonitorString("\n c="); MonitorCharDec(c);
 #endif
 
@@ -231,7 +234,7 @@ bool    ReadData41(uchar  c)
       mpPrf41[h].bStatus = (ddw % 0x100) & 0x03;
       mpPrf41[h].mpdwValue[c] = (ddw >> 3) % 0x100000000;
 
-#ifdef MONITOR_38
+#ifdef MONITOR_41
       MonitorString("\n "); MonitorTime(mpPrf41[h].tiTime);
       MonitorString(" "); MonitorLongDec(mpPrf41[h].mpdwValue[c]);
       MonitorString(" "); MonitorCharDec(mpPrf41[h].bStatus);
@@ -243,7 +246,7 @@ bool    ReadData41(uchar  c)
   ulong dwHouNow = DateToHouIndex(tiCurr);
   uchar d = dwHouNow - dwHouStart41;
 
-#ifdef MONITOR_38
+#ifdef MONITOR_41
   MonitorString("\n delta="); MonitorCharDec(d);
 #endif
 
@@ -251,7 +254,7 @@ bool    ReadData41(uchar  c)
   uchar h;
   for (h=0; h<6; h++) {
 
-#ifdef MONITOR_38
+#ifdef MONITOR_41
     MonitorString("\n");
 
     MonitorLongDec4(mpPrf41[h].mpdwValue[c]); MonitorString("  ");
@@ -263,7 +266,7 @@ bool    ReadData41(uchar  c)
 
     bool difference = DifferentDateTime(tiVirtual, mpPrf41[h].tiTime);
 
-#ifdef MONITOR_38
+#ifdef MONITOR_41
     MonitorString(" vrt.="); MonitorTime(tiVirtual);
     MonitorString(" act.="); MonitorTime(mpPrf41[h].tiTime);
     MonitorBool(difference);
@@ -291,7 +294,26 @@ bool    ReadData41(uchar  c)
 
 
 
-#ifdef MONITOR_38
+void    ClearRepeatProfile41(void)
+{
+  cbRepeatProfile41 = 0;
+}
+
+
+bool    NextRepeatProfile41(void)
+{
+  bool f = ++cbRepeatProfile41 < 5;
+
+#ifdef MONITOR_41
+  MonitorString("\n empty answer, repeat "); MonitorCharDec(cbRepeatProfile41);
+#endif
+
+  return f;
+}
+
+
+
+#ifdef MONITOR_41
 
 void    RunProfile41(void)
 {
@@ -303,24 +325,22 @@ void    RunProfile41(void)
 
   InitHeader41();
 
-  uchar c = 0;
-
   while (true) {
-    uchar r = 0;
 
+    uchar r = 0;
     while (true) {
-       QueryHeader41(c);
+       QueryHeader41(0);
        if (Input38() != SER_GOODCHECK) { MonitorString("\n error 2"); return; }
 
        if (IndexInBuff() == 14) {
-          MonitorString("\n empty answer, repeat");
-          if (++r > 3) { MonitorString("\n error 3"); return; }
+          MonitorString("\n empty answer, repeat "); MonitorCharDec(r);
+          if (++r > 5) { MonitorString("\n error 3"); return; }
        } else {
           break;
        }
     }
 
-    if (ReadData41(c) == false) { MonitorString("\n finish "); return; }
+    if (ReadData41(0) == false) { MonitorString("\n finish "); return; }
     if (fKey == true) return;
   }
 }
