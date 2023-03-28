@@ -305,6 +305,8 @@
         }
         else
         {
+          ClearRepeatProfile41();
+
           cbRepeat = MaxRepeats();
           QueryHeader41(0);
           SetCurr(DEV_HEADER_41P);
@@ -315,12 +317,22 @@
     case DEV_HEADER_41P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        if (ReadData41(0) == false)
-          DoneProfile();
-        else if (cwShutdown41 >= GetMaxShutdown())
-          DoneProfile();
+        if (IndexInBuff() == 14)
+        {
+          if (NextRepeatProfile41())
+            QueryHeader41(0);
+          else
+            ErrorProfile();
+        }
         else
-          MakePause(DEV_PAUSE_41P);
+        {
+          if (ReadData41(0) == false)
+            DoneProfile();
+          else if (cwShutdown41 >= GetMaxShutdown())
+            DoneProfile();
+          else
+            MakePause(DEV_PAUSE_41P);
+        }
       }
       else
       {

@@ -17,4 +17,7 @@ uchar   PushIndex41(uint  iw30MinRel);
 void    QueryProfile41(uchar c, uint  iw30MinRelStart, uint  iw30MinRelEnd);
 bool    ReadData41(uchar  c);
 
+void    ClearRepeatProfile41(void);
+bool    NextRepeatProfile41(void);
+
 void    RunProfile41(void);
