@@ -209,7 +209,7 @@ float2  ReadParam40(void)
 
 #ifdef MONITOR_40
 
-double2 TestParam39(void)
+double2 TestParam40(void)
 {
   MonitorOpen(0);
 

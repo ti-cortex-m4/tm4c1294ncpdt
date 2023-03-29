@@ -48,7 +48,7 @@ void    QueryEngMonTariff41(uchar  ibMonRel)
   PushChar(0x1E); // энергия по 4 тарифам
   PushChar(ibMonRel);
   PushChar(ibMonRel);
-
+/*
   PushChar(0x0A); // A-
   PushChar(0x02);
   PushChar(0x1E);
@@ -66,8 +66,8 @@ void    QueryEngMonTariff41(uchar  ibMonRel)
   PushChar(0x1E);
   PushChar(ibMonRel);
   PushChar(ibMonRel);
-
-  Query38(250, 33);
+*/
+  Query38(250, 33-15);
 }
 
 
@@ -90,7 +90,7 @@ status   ReadEngMonTariff41_Full(uchar  ibMonRel, uchar  ibTariff)
   uchar* pbIn = InBuffPtr(10);
 
   uchar i;
-  for (i=0; i<4; i++)
+  for (i=0; i<MAX_LINE_41; i++)
   {
     *(pbIn++);
 
@@ -136,7 +136,7 @@ status  ReadCntMonCanTariff41(uchar  ibMonAbs, uchar  ibTariff) // на начало мес
 
 
   uchar i;
-  for (i=0; i<4; i++)
+  for (i=0; i<MAX_LINE_41; i++)
   {
     mpdbChannelsC[i] *= mpdbTransCnt[ibDig];
     mpboChannelsA[i] = true;
@@ -145,3 +145,44 @@ status  ReadCntMonCanTariff41(uchar  ibMonAbs, uchar  ibTariff) // на начало мес
   return ST_OK;
 }
 
+
+
+#ifdef  MONITOR_41
+
+double2 TestCntMonCanTariff41(void)
+{
+  fMonitorLogBasic = false;
+  fMonitorLogHex = false;
+
+  MonitorOpen(0);
+
+  uchar bMonth = (*GetCurrTimeDate()).bMonth;
+
+  uchar m;
+  for (m=0; m<10; m++)
+  {
+    uchar ibMonAbs = (12 + bMonth - 1 - m) % 12;
+
+    uchar t;
+    for (t=0; t<4; t++)
+    {
+      MonitorString("\n\n month="); MonitorCharDec(ibMonAbs+1);
+      MonitorString(" tariff="); MonitorCharDec(t);
+      status s = ReadCntMonCanTariff40(ibMonAbs, t);
+      MonitorString("\n status="); MonitorCharDec(s);
+
+      uchar i;
+      for (i=0; i<4; i++)
+      {
+        MonitorString("\n mpdbChannelsC[");
+        MonitorCharDec(i);
+        MonitorString("]=");
+        MonitorDouble6(mpdbChannelsC[i]);
+      }
+    }
+  }
+
+  return GetDouble0(0);
+}
+
+#endif
