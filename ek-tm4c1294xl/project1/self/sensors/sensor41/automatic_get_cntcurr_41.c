@@ -27,7 +27,7 @@ double2 ReadCntCurr41(void)
   uchar r;
   for (r=0; r<MaxRepeats(); r++)
   {
-    QueryEngAbs38();
+    QueryEngAbs41();
 
     if (Input38() == SER_GOODCHECK) break;
     if (fKey == true) return GetDouble2Error();

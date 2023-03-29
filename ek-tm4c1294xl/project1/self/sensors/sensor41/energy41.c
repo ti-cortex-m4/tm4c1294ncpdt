@@ -12,6 +12,7 @@ device41.c
 #include "../../devices/devices_init.h"
 #include "../sensor38/io38.h"
 #include "../sensor38/dff.h"
+#include "../sensor38/device38.h"
 #include "energy41.h"
 
 
@@ -34,7 +35,7 @@ void    QueryEngAbs41(void)
   PushChar(0x01); // A+
   PushChar(0x02);
   PushChar(0x00);
-
+/*
   PushChar(0x02); // A-
   PushChar(0x02);
   PushChar(0x00);
@@ -46,15 +47,15 @@ void    QueryEngAbs41(void)
   PushChar(0x04); // R-
   PushChar(0x02);
   PushChar(0x00);
-
-  Query38(250, 25);
+*/
+  Query38(250, 25-9);
 }
 
 
 // значени€ счетчиков на начало суток
 void    QueryEngDay41(uchar  ibDayRel)
 {
-//  MonitorString("\n QueryEngDay38 "); MonitorCharDec(ibDayRel);
+//  MonitorString("\n QueryEngDay41 "); MonitorCharDec(ibDayRel);
 
   InitPush(0);
 
@@ -74,7 +75,7 @@ void    QueryEngDay41(uchar  ibDayRel)
   PushChar(0x00);
   PushChar(ibDayRel);
   PushChar(ibDayRel);
-
+/*
   PushChar(0x02); // A-
   PushChar(0x02);
   PushChar(0x00);
@@ -92,15 +93,15 @@ void    QueryEngDay41(uchar  ibDayRel)
   PushChar(0x00);
   PushChar(ibDayRel);
   PushChar(ibDayRel);
-
-  Query38(250, 33);
+*/
+  Query38(250, 33-15);
 }
 
 
 // значени€ счетчиков на начало мес€ца
 void    QueryEngMon41(uchar  ibMonRel)
 {
-//  MonitorString("\n QueryEngMon38 "); MonitorCharDec(ibMonRel);
+//  MonitorString("\n QueryEngMon41 "); MonitorCharDec(ibMonRel);
 
   InitPush(0);
 
@@ -120,7 +121,7 @@ void    QueryEngMon41(uchar  ibMonRel)
   PushChar(0x00); // обща€ энерги€
   PushChar(ibMonRel);
   PushChar(ibMonRel);
-
+/*
   PushChar(0x0A); // A-
   PushChar(0x02);
   PushChar(0x00);
@@ -138,6 +139,6 @@ void    QueryEngMon41(uchar  ibMonRel)
   PushChar(0x00);
   PushChar(ibMonRel);
   PushChar(ibMonRel);
-
-  Query38(250, 33);
+*/
+  Query38(250, 33-15);
 }
