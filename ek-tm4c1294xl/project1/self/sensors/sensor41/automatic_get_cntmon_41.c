@@ -15,7 +15,7 @@ automatic_get_cntmon_41.c
 #include "../sensor38/device38.h"
 #include "../sensor38/io38.h"
 #include "../sensor38/dff.h"
-#include "include41.h"
+#include "energy41.h"
 #include "automatic_get_time_41.h"
 #include "automatic_get_cntmon_41.h"
 
@@ -28,7 +28,7 @@ bool    ReadEngDay41_Full(uchar  ibDayRel)
   uchar r;
   for (r=0; r<MaxRepeats(); r++)
   {
-    QueryEngDay38(0);
+    QueryEngDay41(0);
 
     if (Input38() == SER_GOODCHECK) break;
     if (fKey == true) return false;
@@ -80,7 +80,7 @@ bool    ReadEngMon41_Full(uchar  ibMonRel)
   uchar r;
   for (r=0; r<MaxRepeats(); r++)
   {
-    QueryEngMon38(ibMonRel);
+    QueryEngMon41(ibMonRel);
 
     if (Input38() == SER_GOODCHECK) break;
     if (fKey == true) return false;
