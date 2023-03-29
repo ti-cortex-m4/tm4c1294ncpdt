@@ -23,6 +23,12 @@ extended_4t_41.c
 #include "automatic_get_time_41.h"
 #include "extended_4t_41.h"
 
+#ifdef  MONITOR_41
+#include "../../time/rtc.h"
+#include "../../serial/monitor.h"
+#include "../../serial/monitor_settings.h"
+#endif
+
 
 
 // значени€ счетчиков на начало мес€цев
@@ -103,6 +109,11 @@ status   ReadEngMonTariff41_Full(uchar  ibMonRel, uchar  ibTariff)
       uchar bStatus = (ddw % 0x100) & 0x03;
       ulong dw = (ddw >> 3) % 0x100000000;
 
+#ifdef MONITOR_41
+      MonitorString("\n status="); MonitorCharDec(bStatus);
+      MonitorString(" value="); MonitorLongDec(dw);
+#endif
+
       if (!GoodStatus38(bStatus)) {
         Clear();
         sprintf(szLo+1, "мес€ц -%u (%u) ?", ibMonRel, bStatus);
@@ -159,7 +170,7 @@ double2 TestCntMonCanTariff41(void)
   uchar bMonth = (*GetCurrTimeDate()).bMonth;
 
   uchar m;
-  for (m=0; m<10; m++)
+  for (m=0; m<5; m++)
   {
     uchar ibMonAbs = (12 + bMonth - 1 - m) % 12;
 
@@ -168,11 +179,11 @@ double2 TestCntMonCanTariff41(void)
     {
       MonitorString("\n\n month="); MonitorCharDec(ibMonAbs+1);
       MonitorString(" tariff="); MonitorCharDec(t);
-      status s = ReadCntMonCanTariff40(ibMonAbs, t);
+      status s = ReadCntMonCanTariff41(ibMonAbs, t);
       MonitorString("\n status="); MonitorCharDec(s);
 
       uchar i;
-      for (i=0; i<4; i++)
+      for (i=0; i<MAX_LINE_41; i++)
       {
         MonitorString("\n mpdbChannelsC[");
         MonitorCharDec(i);
