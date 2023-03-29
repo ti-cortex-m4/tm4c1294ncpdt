@@ -28,7 +28,7 @@ static double2 Fault(uchar  bError)
 
 
 
-double2 TestTimeCorrect39(void)
+double2 TestTimeCorrect40(void)
 {
   fMonitorLogBasic = false;
   fMonitorLogHex = false;

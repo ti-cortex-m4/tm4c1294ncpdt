@@ -103,7 +103,7 @@ status  ReadCntMonCanTariff40(uchar  ibMonAbs, uchar  ibTrf) // на начало мес€ца
 
 #ifdef  MONITOR_40
 
-double2 TestCntMonCanTariff39(void)
+double2 TestCntMonCanTariff40(void)
 {
   fMonitorLogBasic = false;
   fMonitorLogHex = false;

@@ -139,7 +139,7 @@ double2 ReadCntMonCan40(uchar  ibMon)
 
 #ifdef  MONITOR_40
 
-double2 TestReadCntMonCan39(void)
+double2 TestReadCntMonCan40(void)
 {
   fMonitorLogBasic = true;
   fMonitorLogHex = true;
