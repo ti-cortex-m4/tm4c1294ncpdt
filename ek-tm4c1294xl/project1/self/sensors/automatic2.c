@@ -2080,7 +2080,7 @@ time2   ReadTimeCan(uchar  ibCan)
 #endif
 
 #ifndef SKIP_41
-    case 41: RunProfile41(); return GetTime2Error(); //return ReadTimeCan41();
+    case 41: return ReadTimeCan41();
 #endif
 
     default: return GetTime2Error();
