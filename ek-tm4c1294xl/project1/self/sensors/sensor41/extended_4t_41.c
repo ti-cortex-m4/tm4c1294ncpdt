@@ -170,7 +170,7 @@ double2 TestCntMonCanTariff41(void)
   uchar bMonth = (*GetCurrTimeDate()).bMonth;
 
   uchar m;
-  for (m=0; m<5; m++)
+  for (m=0; m<4; m++)
   {
     uchar ibMonAbs = (12 + bMonth - 1 - m) % 12;
 
