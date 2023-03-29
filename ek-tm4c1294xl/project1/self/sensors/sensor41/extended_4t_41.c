@@ -19,6 +19,7 @@ extended_4t_41.c
 #include "../sensor38/device38.h"
 #include "../sensor38/io38.h"
 #include "../sensor38/dff.h"
+#include "include41.h"
 #include "automatic_get_time_41.h"
 #include "extended_4t_41.h"
 
@@ -27,7 +28,7 @@ extended_4t_41.c
 // значени€ счетчиков на начало мес€цев
 void    QueryEngMonTariff41(uchar  ibMonRel)
 {
-//  MonitorString("\n QueryEngMonTariff38 "); MonitorCharDec(ibMonRel);
+//  MonitorString("\n QueryEngMonTariff41 "); MonitorCharDec(ibMonRel);
 
   InitPush(0);
 
@@ -71,12 +72,12 @@ void    QueryEngMonTariff41(uchar  ibMonRel)
 
 
 
-status   ReadEngMonTariff38_Full(uchar  ibMonRel, uchar  ibTariff)
+status   ReadEngMonTariff41_Full(uchar  ibMonRel, uchar  ibTariff)
 {
   uchar r;
   for (r=0; r<MaxRepeats(); r++)
   {
-    QueryEngMonTariff38(ibMonRel);
+    QueryEngMonTariff41(ibMonRel);
 
     if (Input38() == SER_GOODCHECK) break;
     if (fKey == true) return ST_BADDIGITAL;
@@ -122,15 +123,15 @@ status   ReadEngMonTariff38_Full(uchar  ibMonRel, uchar  ibTariff)
 
 
 
-status  ReadCntMonCanTariff38(uchar  ibMonAbs, uchar  ibTariff) // на начало мес€ца
+status  ReadCntMonCanTariff41(uchar  ibMonAbs, uchar  ibTariff) // на начало мес€ца
 {
-  time2 ti2 = ReadTimeCan38();
+  time2 ti2 = ReadTimeCan41();
   if (ti2.fValid == 0) return ST_BADDIGITAL;
   time ti = ti2.tiValue;
 
 
   uchar ibMonRel = (bMONTHS+ti.bMonth-1-ibMonAbs) % bMONTHS;
-  status st = ReadEngMonTariff38_Full(ibMonRel, ibTariff);
+  status st = ReadEngMonTariff41_Full(ibMonRel, ibTariff);
   if (st != ST_OK) return st;
 
 
