@@ -1,20 +1,13 @@
 /*------------------------------------------------------------------------------
-device38.h
+energy41.h
 
 
 ------------------------------------------------------------------------------*/
 
-#include "include38.h"
+#include "include41.h"
 
 
 
-void    PushAddress38(void);
-
-void    QueryEngAbs38(void);
-void    QueryEngDay38(uchar  ibDayRel);
-void    QueryEngMon38(uchar  ibMonRel);
-
-void    QueryNumber38(void);
-ulong   ReadNumber38(void);
-
-bool    GoodStatus38(uchar  bStatus);
+void    QueryEngAbs41(void);
+void    QueryEngDay41(uchar  ibDayRel);
+void    QueryEngMon41(uchar  ibMonRel);

@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
-device38.c
+device41.c
 
-Ёнергомера CE318
+
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
@@ -10,20 +10,13 @@ device38.c
 #include "../../serial/ports2.h"
 #include "../../time/calendar.h"
 #include "../../devices/devices_init.h"
-#include "io38.h"
-#include "dff.h"
-#include "device38.h"
+#include "../sensor38/io38.h"
+#include "../sensor38/dff.h"
+#include "energy41.h"
 
 
 
-void    PushAddress38(void)
-{
-  PushLongLtl(mpdwAddress1[diCurr.bAddress-1]);
-}
-
-
-
-void    QueryEngAbs38(void)
+void    QueryEngAbs41(void)
 {
   InitPush(0);
 
@@ -59,7 +52,7 @@ void    QueryEngAbs38(void)
 
 
 // значени€ счетчиков на начало суток
-void    QueryEngDay38(uchar  ibDayRel)
+void    QueryEngDay41(uchar  ibDayRel)
 {
 //  MonitorString("\n QueryEngDay38 "); MonitorCharDec(ibDayRel);
 
@@ -105,7 +98,7 @@ void    QueryEngDay38(uchar  ibDayRel)
 
 
 // значени€ счетчиков на начало мес€ца
-void    QueryEngMon38(uchar  ibMonRel)
+void    QueryEngMon41(uchar  ibMonRel)
 {
 //  MonitorString("\n QueryEngMon38 "); MonitorCharDec(ibMonRel);
 
@@ -147,52 +140,4 @@ void    QueryEngMon38(uchar  ibMonRel)
   PushChar(ibMonRel);
 
   Query38(250, 33);
-}
-
-
-
-void    QueryNumber38(void)
-{
-  InitPush(0);
-
-  PushChar(0xC0);
-  PushChar(0x06);
-
-  PushAddress38();
-
-  PushChar(0x00);
-  PushChar(0x06);
-
-  PushChar(6);
-  PushChar(0);
-  PushChar(5);
-
-  Query38(250, 14);
-}
-
-
-ulong   ReadNumber38(void)
-{
-  int64_t ddw = 0;
-  DffDecodePositive(InBuffPtr(11), &ddw);
-  return ddw % 0x100000000;
-}
-
-
-
-bool    GoodStatus38(uchar  bStatus)
-{
-  if (boIgnoreStatus38)
-  {
-    if (bStatus == 0)
-      return true;
-    else if (bStatus == 2)
-      return true;
-    else
-      return false;
-  }
-  else
-  {
-    return bStatus == 0;
-  }
 }
