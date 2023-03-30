@@ -180,7 +180,7 @@ double2 TestCntMonCanTariff41(void)
       MonitorString("\n\n month="); MonitorCharDec(ibMonAbs+1);
       MonitorString(" tariff="); MonitorCharDec(t);
       status s = ReadCntMonCanTariff41(ibMonAbs, t);
-      MonitorString("\n status="); MonitorCharDec(s);
+      MonitorString("\n result="); MonitorCharDec(s);
 
       uchar i;
       for (i=0; i<MAX_LINE_41; i++)
