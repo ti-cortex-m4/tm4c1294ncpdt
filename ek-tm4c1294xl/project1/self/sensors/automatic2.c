@@ -65,7 +65,7 @@ AUTOMATIC2!C
 #include "sensor41/automatic_get_cntmon_41.h"
 #include "automatic2.h"
 
-
+double2 TestCntMonCanTariff41(void);
 
 #ifndef SKIP_A
 
@@ -1929,7 +1929,7 @@ double2 ReadCntCurrCan(uchar  ibCan)
 #endif
 
 #ifndef SKIP_41
-    case 41: return ReadCntCurr41();
+    case 41: RunAuth38(); return GetDouble2Error(); //ReadCntCurr41();
 #endif
 
     default: return GetDouble2Error();

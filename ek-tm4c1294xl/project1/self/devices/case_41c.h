@@ -5,7 +5,7 @@
       Clear();
 
       cbRepeat = MaxRepeats();
-      QueryEngAbs38();
+      QueryEngAbs41();
       SetCurr(DEV_ENERGY_41C);
       break;
 
@@ -20,7 +20,7 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryEngAbs38();
+          QueryEngAbs41();
           SetCurr(DEV_ENERGY_41C);
         }
       }
