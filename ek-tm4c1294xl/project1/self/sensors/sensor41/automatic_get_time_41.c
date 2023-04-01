@@ -46,16 +46,12 @@ time2   ReadTimeCan41(void)
 }
 
 
+
 time2   ReadTimeCan41_Short(void)
 {
-  QueryTime36();
-  if (Input36() != SER_GOODCHECK) return GetTime2Error();
-  time ti = ReadTime36();
+  QueryTime38();
+  if (Input38() != SER_GOODCHECK) return GetTime2Error();
+  time ti = ReadTime38();
 
-  QueryDate36();
-  if (Input36() != SER_GOODCHECK) return GetTime2Error();
-  ti = ReadDate36(ti);
-
-  QueryClose36();
   return GetTime2(ti, true);
 }
