@@ -5,3 +5,4 @@ automatic_get_time_41.h
 ------------------------------------------------------------------------------*/
 
 time2   ReadTimeCan41(void);
+time2   ReadTimeCan41_Short(void);
