@@ -7813,7 +7813,7 @@ void    RunDevices(void)
       Clear();
 
       cbRepeat = MaxRepeats();
-      QueryEngAbs38();
+      QueryEngAbs41();
       SetCurr(DEV_ENERGY_41C);
       break;
 
@@ -7828,7 +7828,7 @@ void    RunDevices(void)
           ErrorLink();
           cbRepeat--;
 
-          QueryEngAbs38();
+          QueryEngAbs41();
           SetCurr(DEV_ENERGY_41C);
         }
       }
