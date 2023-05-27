@@ -1,27 +1,26 @@
 /*------------------------------------------------------------------------------
-KEY_SHORT_PROFILE_B!C
+KEY_PROFILE_INTERVAL!C
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../../console.h"
 #include "../../devices/devices_init.h"
-#include "../common/key_flag.h"
+#include "../common/key_bool.h"
 
 
 
 //                                         0123456789ABCDEF
-static char const       szMessage1[]    = "  Размер блока  ",
-                        szMessage2[]    = "   при опросе   ",
-                        szMessage3[]    = "  Меркурий-230  ",
-                        szTrue[]        = " 1 получас      ",
-                        szFalse[]       = " 16 получасов   ";
+static char const       szMessage1[]    = "Приостанавливать",
+                        szMessage2[]    = "     опрос      ",
+                        szMessage3[]    = "  при переходе  ",
+                        szMessage4[]    = " через получас  ";
 
-static char const       *pszMessages[]  = { szMessage1, szMessage2, szMessage3, "" };
-
+static char const       *pszMessages[]  = { szMessage1, szMessage2, szMessage3, szMessage4, "" };
 
 
-void    key_SetShortProfileB(void)
+
+void    key_SetProfileInterval(void)
 {
-  key_SetFlag(&chShortProfileB, pszMessages, szTrue, szFalse);
+  key_SetBool(&chProfileInterval, pszMessages);
 }
