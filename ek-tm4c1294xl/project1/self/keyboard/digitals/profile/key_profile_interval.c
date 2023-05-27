@@ -1,12 +1,12 @@
 /*------------------------------------------------------------------------------
-KEY_PROFILE_INTERVAL!C
+key_profile_interval.c
 
 
 ------------------------------------------------------------------------------*/
 
-#include "../../console.h"
-#include "../../digitals/profile/profile_interval.h"
-#include "../common/key_bool.h"
+#include "../../../console.h"
+#include "../../../digitals/profile/profile_interval.h"
+#include "../../common/key_bool.h"
 
 
 

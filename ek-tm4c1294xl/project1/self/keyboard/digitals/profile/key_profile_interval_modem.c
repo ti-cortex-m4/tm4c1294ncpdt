@@ -4,24 +4,23 @@ key_profile_interval_modem.c
 
 ------------------------------------------------------------------------------*/
 
-#include "../../main.h"
-#include "../../memory/mem_digitals.h"
-#include "../../devices/devices_init.h"
-#include "../common/key_char_blocked.h"
+#include "../../../main.h"
+#include "../../../digitals/profile/profile_interval.h"
+#include "../../common/key_char_blocked.h"
 
 
 
 //                                          0123456789ABCDEF
 static char const       szMessage1[]     = "    “аймаут     ",
-                        szMessage3[]     = "  до перехода   ",
-                        szMessage4[]     = " через получас  ";
-                        szMessage4[]     = "по пр€мой св€зи ";
+                        szMessage2[]     = "  до перехода   ",
+                        szMessage3[]     = " через получас  ",
+                        szMessage4[]     = "по модемн. св€зи";
 
 static char const       *pszMessages[]   = { szMessage1, szMessage2, szMessage3, szMessage4, szNumberLimits, "" };
 
 
 
-void    key_SetProfileIntervalDirect(void)
+void    key_SetProfileIntervalModem(void)
 {
-  key_SetCharBlocked(&chProfileIntervalDirect, pszMessages, 1, 250, boProfileInterval, wSET_PROFILE_INTERVAL);
+  key_SetCharBlocked(&chProfileIntervalModem, pszMessages, 1, 250, boProfileInterval, wSET_PROFILE_INTERVAL);
 }

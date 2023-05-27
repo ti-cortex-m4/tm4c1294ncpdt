@@ -15,10 +15,10 @@ bool                    boProfileInterval;
 cache const             chProfileInterval = {PROFILE_INTERVAL, &boProfileInterval, sizeof(bool)};
 
 uchar                   bProfileIntervalDirect;
-cache const             chProfileIntervalDirect = {PROFILE_INTERVAL_DIRECT, &boProfileIntervalDirect, sizeof(uchar)};
+cache const             chProfileIntervalDirect = {PROFILE_INTERVAL_DIRECT, &bProfileIntervalDirect, sizeof(uchar)};
 
 uchar                   bProfileIntervalModem;
-cache const             chProfileIntervalModem = {PROFILE_INTERVAL_MODEM, &boProfileIntervalModem, sizeof(uchar)};
+cache const             chProfileIntervalModem = {PROFILE_INTERVAL_MODEM, &bProfileIntervalModem, sizeof(uchar)};
 
 
 
