@@ -325,6 +325,8 @@ PROGRAMS!H
 #define wSET_SHORT_PROFILE_B        434
 #define wSET_MODEM_DISCONNECT_BD    435
 #define wSET_PROFILE_INTERVAL       436
+#define wSET_PROFILE_INTERVAL_DIRECT    437
+#define wSET_PROFILE_INTERVAL_MODEM     438
 
 #define wSET_REVIEW_FLAG            440
 #define wSET_REVIEW_CAN             441
