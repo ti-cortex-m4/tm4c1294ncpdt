@@ -13,4 +13,5 @@ extern  uchar                   ibProfileIntervalDig;
 void    InitProfileInterval(void);
 void    ResetProfileInterval(void);
 
-bool    StopProfileInterval(void);
+uchar   GetProfileIntervalTimeout(void);
+bool    IsStopProfileInterval(void);
