@@ -45,7 +45,7 @@ PROFILE_RUN!C
 
 
 
-bool    StartProfile(uchar  ibCanal)
+uchar   StartProfile(uchar  ibCanal)
 {
   ibDig = ibCanal;
 
@@ -112,6 +112,20 @@ bool    StartProfile(uchar  ibCanal)
     Work();
     OK();
     return(0);
+  }
+
+
+  if (boProfileInterval == true)
+  {
+    if ((tiCurr.bMinute % 30)*60 + tiCurr.bSecond >= (uint)30*60 - 120)
+    {
+       ShowHi("опрос профилей  ");
+       ShowLo("будет продолжен ");
+       DelayMsg();
+       ShowHi("после перехода  ");
+       ShowLo("через получас   ");
+       return(0);
+    }
   }
 
 
