@@ -5,7 +5,7 @@ KEY_PROFILE_INTERVAL!C
 ------------------------------------------------------------------------------*/
 
 #include "../../console.h"
-#include "../../digitals/profile/profile_core.h"
+#include "../../digitals/profile/profile_interval.h"
 #include "../common/key_bool.h"
 
 

@@ -10,5 +10,5 @@ extern  uchar                   ibProfileIntervalDig;
 
 
 
-void    InitProfile(void);
-void    ResetProfile(void);
+void    InitProfileInterval(void);
+void    ResetProfileInterval(void);
