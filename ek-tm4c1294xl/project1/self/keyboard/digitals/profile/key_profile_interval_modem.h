@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
-key_profile_interval_direct.h
+key_profile_interval_modem.h
 
 
 ------------------------------------------------------------------------------*/
 
-void    key_SetProfileIntervalDirect(void);
+void    key_SetProfileIntervalModem(void);
