@@ -13,6 +13,15 @@ profile_interval.c
 
 bool                    boProfileInterval;
 cache const             chProfileInterval = {PROFILE_INTERVAL, &boProfileInterval, sizeof(bool)};
+
+uchar                   bProfileIntervalDirect;
+cache const             chProfileIntervalDirect = {PROFILE_INTERVAL_DIRECT, &boProfileIntervalDirect, sizeof(uchar)};
+
+uchar                   bProfileIntervalModem;
+cache const             chProfileIntervalModem = {PROFILE_INTERVAL_MODEM, &boProfileIntervalModem, sizeof(uchar)};
+
+
+
 uchar                   ibProfileIntervalDig;
 
 
@@ -20,6 +29,9 @@ uchar                   ibProfileIntervalDig;
 void    InitProfileInterval(void)
 {
   LoadCacheBool(&chProfileInterval, true);
+  LoadCacheChar(&chProfileIntervalDirect, 1, 250, 60);
+  LoadCacheChar(&chProfileIntervalModem, 1, 250, 180);
+
   ibProfileIntervalDig = 0xFF;
 }
 
@@ -27,6 +39,8 @@ void    InitProfileInterval(void)
 void    ResetProfileInterval(void)
 {
   SaveCacheBool(&chProfileInterval, true);
+  SaveCacheChar(&chProfileIntervalDirect, 60);
+  SaveCacheChar(&chProfileIntervalModem, 180);
 }
 
 

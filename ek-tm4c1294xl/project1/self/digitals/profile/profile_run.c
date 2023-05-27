@@ -126,6 +126,9 @@ uchar   StartProfile(uchar  ibCanal)
      ShowHi(" после перехода ");
      ShowLo(" через получас  ");
      DelayMsg();
+     ShowHi("     через      ");
+     Clear(); sprintf(szLo+5,"%u сек.", (uint)(GetProfileIntervalTimeout() + bTimeoutProfile));
+     DelayMsg();
 
      return(0);
   }
@@ -313,9 +316,6 @@ void    RunProfile(bool  _fCtrlHou)
       DelayMsg();
       ShowHi(" после перехода ");
       ShowLo(" через получас  ");
-      DelayMsg();
-      ShowHi("     через      ");
-      Clear(); sprintf(szLo+5,"%u сек.", (uint)(GetProfileIntervalTimeout() + bTimeoutProfile));
       DelayMsg();
 
       if (StartProfile(ibProfileIntervalDig) == 1) { OpenSpecial(); DisableAnswer(); } else { Work(); OK(); }
