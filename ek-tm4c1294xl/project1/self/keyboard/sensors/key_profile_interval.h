@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
-KEY_SHORT_PROFILE_B!H
+KEY_PROFILE_INTERVAL!H
 
 
 ------------------------------------------------------------------------------*/
 
-void    key_SetShortProfileB(void);
+void    key_SetProfileInterval(void);
