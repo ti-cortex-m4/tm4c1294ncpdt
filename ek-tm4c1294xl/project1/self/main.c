@@ -65,6 +65,7 @@ MAIN,C
 #include "digitals/params/params.h"
 #include "digitals/current/current2.h"
 #include "digitals/profile/profile_core.h"
+#include "digitals/profile/profile_interval.h"
 #include "digitals/extended/diagram.h"
 #include "devices/devices_init.h"
 #include "devices/devices.h"
@@ -147,6 +148,7 @@ int     main(void)
   InitPhones2();
   InitAsciiAddress();
   InitProfile();
+  InitProfileInterval();
   InitSpeeds();
   InitInputModeReset();
   InitSlaveModem();
