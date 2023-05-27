@@ -31,8 +31,14 @@ void    ResetProfileInterval(void)
 
 
 
-bool    StopProfileInterval(void)
+uchar   GetProfileIntervalTimeout(void)
 {
-  uchar bTimeout = diCurr.ibPhone == 0 ? 30 : 120;
+  return diCurr.ibPhone == 0 ? 30 : 120;
+}
+
+
+bool    IsStopProfileInterval(void)
+{
+  uchar bTimeout = GetProfileIntervalTimeout();
   return ((tiCurr.bMinute % 30)*60 + tiCurr.bSecond >= (uint)30*60 - bTimeout);
 }

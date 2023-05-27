@@ -116,11 +116,11 @@ uchar   StartProfile(uchar  ibCanal)
   }
 
 
-  if ((boProfileInterval == true) && StopProfileInterval())
+  if ((boProfileInterval == true) && IsStopProfileInterval())
   {
      ibProfileIntervalDig = ibDig;
 
-     ShowHi(" опрос профилей ");
+     ShowHi(" Опрос профилей ");
      ShowLo("будет продолжен ");
      DelayMsg();
      ShowHi(" после перехода ");
@@ -307,7 +307,7 @@ void    RunProfile(bool  _fCtrlHou)
 
     if ((boManualProfile == false) && (boProfileInterval == true) && (ibProfileIntervalDig != 0xFF))
     {
-      ShowHi("  продолжение   ");
+      ShowHi("  Продолжение   ");
       ShowLo("опроса профилей ");
       DelayMsg();
       ShowHi(" после перехода ");
