@@ -298,5 +298,7 @@ typedef enum
 
   ASCII_ADDRESS         = MODEM_ATDP + sizeof(bool) + bNVRAM_MARGIN,
 
-  NVRAM_END             = ASCII_ADDRESS + sizeof(mpphAsciiAddress) + bNVRAM_MARGIN
+  PROFILE_INTERVAL      = ASCII_ADDRESS + sizeof(mpphAsciiAddress) + bNVRAM_MARGIN,
+
+  NVRAM_END             = PROFILE_INTERVAL + sizeof(bool) + bNVRAM_MARGIN
 } nvram;
