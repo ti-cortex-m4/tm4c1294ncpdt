@@ -34,6 +34,7 @@ PROFILE_RUN!C
 #include "../../digitals/dsbl_answer.h"
 #include "../../digitals/schedule/enbl_hours.h"
 #include "../../digitals/skip_failure.h"
+#include "../../digitals/profile/profile_core.h"
 #include "../../special/special.h"
 #include "../../special/recalc.h"
 #include "../../special/recalc3.h"
@@ -119,11 +120,14 @@ uchar   StartProfile(uchar  ibCanal)
   {
     if ((tiCurr.bMinute % 30)*60 + tiCurr.bSecond >= (uint)30*60 - 120)
     {
-       ShowHi("опрос профилей  ");
+       ibProfileIntervalDig = ibDig;
+
+       ShowHi(" опрос профилей ");
        ShowLo("будет продолжен ");
        DelayMsg();
-       ShowHi("после перехода  ");
-       ShowLo("через получас   ");
+       ShowHi(" после перехода ");
+       ShowLo(" через получас  ");
+
        return(0);
     }
   }
@@ -304,7 +308,20 @@ void    RunProfile(bool  _fCtrlHou)
 
 //    if (boDTREnable == true) DTROff_All();
 
-    if (StartProfile(0) == 1) { OpenSpecial(); DisableAnswer(); } else { Work(); OK(); }
+    if ((boManualProfile == false) && (boProfileInterval == true) && (ibProfileIntervalDig != 0xFF))
+    {
+      ShowHi("  продолжение   ");
+      ShowLo("опроса профилей ");
+      DelayMsg();
+      ShowHi(" после перехода ");
+      ShowLo(" через получас  ");
+
+      if (StartProfile(ibProfileIntervalDig) == 1) { OpenSpecial(); DisableAnswer(); } else { Work(); OK(); }
+    }
+      else
+    {
+      if (StartProfile(0) == 1) { OpenSpecial(); DisableAnswer(); } else { Work(); OK(); }
+    }
   }
 
 }
