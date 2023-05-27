@@ -298,5 +298,7 @@ RESERVE(MODEM_ATDP, sizeof(bool) + bNVRAM_MARGIN)
 
 RESERVE(ASCII_ADDRESS, sizeof(mpphAsciiAddress) + bNVRAM_MARGIN)
 
+RESERVE(PROFILE_INTERVAL, sizeof(bool) + bNVRAM_MARGIN)
+
 END(NVRAM_END)
 } nvram;
