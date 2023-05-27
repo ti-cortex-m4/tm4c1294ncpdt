@@ -34,7 +34,7 @@ PROFILE_RUN!C
 #include "../../digitals/dsbl_answer.h"
 #include "../../digitals/schedule/enbl_hours.h"
 #include "../../digitals/skip_failure.h"
-#include "../../digitals/profile/profile_core.h"
+#include "../../digitals/profile/profile_interval.h"
 #include "../../special/special.h"
 #include "../../special/recalc.h"
 #include "../../special/recalc3.h"
