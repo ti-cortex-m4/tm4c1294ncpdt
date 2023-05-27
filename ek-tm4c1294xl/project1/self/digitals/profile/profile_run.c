@@ -116,20 +116,17 @@ uchar   StartProfile(uchar  ibCanal)
   }
 
 
-  if (boProfileInterval == true)
+  if ((boProfileInterval == true) && StopProfileInterval())
   {
-    if ((tiCurr.bMinute % 30)*60 + tiCurr.bSecond >= (uint)30*60 - 120)
-    {
-       ibProfileIntervalDig = ibDig;
+     ibProfileIntervalDig = ibDig;
 
-       ShowHi(" опрос профилей ");
-       ShowLo("будет продолжен ");
-       DelayMsg();
-       ShowHi(" после перехода ");
-       ShowLo(" через получас  ");
+     ShowHi(" опрос профилей ");
+     ShowLo("будет продолжен ");
+     DelayMsg();
+     ShowHi(" после перехода ");
+     ShowLo(" через получас  ");
 
-       return(0);
-    }
+     return(0);
   }
 
 

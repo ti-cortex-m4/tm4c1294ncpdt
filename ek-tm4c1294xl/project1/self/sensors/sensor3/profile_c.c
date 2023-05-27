@@ -21,6 +21,7 @@ PROFILE_C!C
 #include "../../devices/devices_time.h"
 #include "../../digitals/limits.h"
 #include "../../digitals/max_shutdown.h"
+#include "../../digitals/profile/profile_interval.h"
 #include "../../special/special.h"
 #include "profile_c.h"
 
@@ -197,6 +198,14 @@ bool    ReadHeaderC6(void)
   wProfileC += 6;
   if (wProfileC > wHOURS) return(0);
 
-  MonitorString("\n");
-  return(1);
+  if ((boProfileInterval == true) && StopProfileInterval())
+  {
+    ShowLo(" приостановка...");
+    return(0);
+  }
+  else
+  {
+    MonitorString("\n");
+    return(1);
+  }
 }

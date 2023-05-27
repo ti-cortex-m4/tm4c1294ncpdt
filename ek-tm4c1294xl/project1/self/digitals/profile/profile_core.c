@@ -8,7 +8,6 @@ PROFILE_CORE!C
 #include "../../memory/mem_digitals.h"
 #include "../../flash/files.h"
 #include "../../nvram/cache.h"
-#include "../../nvram/cache2.h"
 #include "profile_core.h"
 
 
