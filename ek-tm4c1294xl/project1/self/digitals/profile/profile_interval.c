@@ -5,8 +5,6 @@ profile_interval.c
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-//#include "../../memory/mem_digitals.h"
-//#include "../../flash/files.h"
 #include "../../nvram/cache.h"
 #include "../../nvram/cache2.h"
 #include "profile_interval.h"
@@ -26,8 +24,15 @@ void    InitProfileInterval(void)
 }
 
 
-
 void    ResetProfileInterval(void)
 {
   SaveCacheBool(&chProfileInterval, true);
+}
+
+
+
+bool    StopProfileInterval(void)
+{
+  uchar bTimeout = diCurr.ibPhone == 0 ? 30 : 120;
+  return ((tiCurr.bMinute % 30)*60 + tiCurr.bSecond >= (uint)30*60 - bTimeout);
 }
