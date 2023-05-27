@@ -116,6 +116,7 @@ KEYBOARD_KEY!C
 #include "sensors/key_ignore_status38.h"
 #include "sensors/key_short_profile_b.h"
 #include "sensors/key_modem_disconnet_bd.h"
+#include "sensors/key_profile_interval.h"
 #include "digitals/review/key_review_flag.h"
 #include "digitals/review/key_review_can.h"
 #include "digitals/review/key_review_read_id.h"
@@ -387,6 +388,7 @@ void    Keyboard_Key(void)
       case wSET_IGNORE_STATUS_38: key_SetIgnoreStatus38(); break;
       case wSET_SHORT_PROFILE_B:key_SetShortProfileB(); break;
       case wSET_MODEM_DISCONNECT_BD:key_SetModemDisconnectBD(); break;
+      case wSET_PROFILE_INTERVAL:key_SetProfileInterval(); break;
 
       case wSET_REVIEW_FLAG:    key_SetReviewFlag();    break;
       case wSET_REVIEW_CAN:     key_SetReviewCan();     break;
@@ -719,6 +721,7 @@ void    Keyboard_Key(void)
       case wSET_IGNORE_STATUS_38: key_SetIgnoreStatus38(); break;
       case wSET_SHORT_PROFILE_B:key_SetShortProfileB(); break;
       case wSET_MODEM_DISCONNECT_BD:key_SetModemDisconnectBD(); break;
+      case wSET_PROFILE_INTERVAL:key_SetProfileInterval(); break;
 
       case wSET_REVIEW_FLAG:    key_SetReviewFlag();    break;
       case wSET_REVIEW_CAN:     key_SetReviewCan();     break;
@@ -971,6 +974,7 @@ void    Keyboard_Key(void)
       case wSET_IGNORE_STATUS_38: key_SetIgnoreStatus38(); break;
       case wSET_SHORT_PROFILE_B:key_SetShortProfileB(); break;
       case wSET_MODEM_DISCONNECT_BD:key_SetModemDisconnectBD(); break;
+      case wSET_PROFILE_INTERVAL:key_SetProfileInterval(); break;
 
       case wSET_REVIEW_FLAG:    key_SetReviewFlag();    break;
       case wSET_REVIEW_CAN:     key_SetReviewCan();     break;
