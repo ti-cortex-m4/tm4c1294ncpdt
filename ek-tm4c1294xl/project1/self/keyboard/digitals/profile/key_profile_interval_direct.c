@@ -1,20 +1,19 @@
 /*------------------------------------------------------------------------------
-KEY_PLC_U_SIZE,C
+key_profile_interval_direct.c
 
 
 ------------------------------------------------------------------------------*/
 
-#include "../../main.h"
-#include "../../memory/mem_digitals.h"
-#include "../../devices/devices_init.h"
-#include "../common/key_char_blocked.h"
+#include "../../../main.h"
+#include "../../../digitals/profile/profile_interval.h"
+#include "../../common/key_char_blocked.h"
 
 
 
 //                                          0123456789ABCDEF
 static char const       szMessage1[]     = "    “аймаут     ",
-                        szMessage3[]     = "  до перехода   ",
-                        szMessage4[]     = " через получас  ";
+                        szMessage2[]     = "  до перехода   ",
+                        szMessage3[]     = " через получас  ",
                         szMessage4[]     = "по пр€мой св€зи ";
 
 static char const       *pszMessages[]   = { szMessage1, szMessage2, szMessage3, szMessage4, szNumberLimits, "" };
