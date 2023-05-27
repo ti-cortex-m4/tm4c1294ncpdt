@@ -312,6 +312,9 @@ void    RunProfile(bool  _fCtrlHou)
       DelayMsg();
       ShowHi(" после перехода ");
       ShowLo(" через получас  ");
+      DelayMsg();
+      ShowHi("     через      ");
+      Clear(); sprintf(szLo+5,"%u сек.", (uint)(GetProfileIntervalTimeout() + bTimeoutProfile));
 
       if (StartProfile(ibProfileIntervalDig) == 1) { OpenSpecial(); DisableAnswer(); } else { Work(); OK(); }
     }
