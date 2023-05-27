@@ -8,6 +8,7 @@ PROFILE_CORE!C
 #include "../../memory/mem_digitals.h"
 #include "../../flash/files.h"
 #include "../../nvram/cache.h"
+#include "../../nvram/cache2.h"
 #include "profile_core.h"
 
 
@@ -18,6 +19,10 @@ cache const             chEnblProfile = {ENBL_PROFILE, &boEnblProfile, sizeof(bo
 cache const             chTimeoutCurrent = {TIMEOUT_CURRENT, &bTimeoutCurrent, sizeof(uchar)};
 cache const             chTimeoutProfile = {TIMEOUT_PROFILE, &bTimeoutProfile, sizeof(uchar)};
 
+bool                    boProfileInterval;
+cache const             chProfileInterval = {PROFILE_INTERVAL, &boProfileInterval, sizeof(bool)};
+uchar                   ibProfileIntervalDig;
+
 
 
 void    InitProfile(void)
@@ -27,6 +32,9 @@ void    InitProfile(void)
 
   LoadCache(&chTimeoutCurrent);
   LoadCache(&chTimeoutProfile);
+
+  LoadCacheBool(&chProfileInterval, true);
+  ibProfileIntervalDig = 0xFF;
 }
 
 
@@ -44,4 +52,6 @@ void    ResetProfile(void)
 
   bTimeoutProfile = 60;
   SaveCache(&chTimeoutProfile);
+
+  SaveCacheBool(&chProfileInterval, true);
 }
