@@ -1,14 +1,8 @@
 /*------------------------------------------------------------------------------
-PROFILE_CORE!H
+profile_interval.h
 
 
 ------------------------------------------------------------------------------*/
-
-extern  cache const             chEnblCurrent;
-extern  cache const             chEnblProfile;
-
-extern  cache const             chTimeoutCurrent;
-extern  cache const             chTimeoutProfile;
 
 extern  bool                    boProfileInterval;
 extern  cache const             chProfileInterval;

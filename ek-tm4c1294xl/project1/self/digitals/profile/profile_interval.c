@@ -1,23 +1,17 @@
 /*------------------------------------------------------------------------------
-PROFILE_CORE!C
+profile_interval.c
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-#include "../../memory/mem_digitals.h"
-#include "../../flash/files.h"
+//#include "../../memory/mem_digitals.h"
+//#include "../../flash/files.h"
 #include "../../nvram/cache.h"
 #include "../../nvram/cache2.h"
-#include "profile_core.h"
+#include "profile_interval.h"
 
 
-
-cache const             chEnblCurrent = {ENBL_CURRENT, &boEnblCurrent, sizeof(bool)};
-cache const             chEnblProfile = {ENBL_PROFILE, &boEnblProfile, sizeof(bool)};
-
-cache const             chTimeoutCurrent = {TIMEOUT_CURRENT, &bTimeoutCurrent, sizeof(uchar)};
-cache const             chTimeoutProfile = {TIMEOUT_PROFILE, &bTimeoutProfile, sizeof(uchar)};
 
 bool                    boProfileInterval;
 cache const             chProfileInterval = {PROFILE_INTERVAL, &boProfileInterval, sizeof(bool)};
@@ -25,33 +19,15 @@ uchar                   ibProfileIntervalDig;
 
 
 
-void    InitProfile(void)
+void    InitProfileInterval(void)
 {
-  LoadCache(&chEnblCurrent);
-  LoadCache(&chEnblProfile);
-
-  LoadCache(&chTimeoutCurrent);
-  LoadCache(&chTimeoutProfile);
-
   LoadCacheBool(&chProfileInterval, true);
   ibProfileIntervalDig = 0xFF;
 }
 
 
 
-void    ResetProfile(void)
+void    ResetProfileInterval(void)
 {
-  boEnblCurrent = false;
-  SaveCache(&chEnblCurrent);
-
-  boEnblProfile = true;
-  SaveCache(&chEnblProfile);
-
-  bTimeoutCurrent = 2;
-  SaveCache(&chTimeoutCurrent);
-
-  bTimeoutProfile = 60;
-  SaveCache(&chTimeoutProfile);
-
   SaveCacheBool(&chProfileInterval, true);
 }
