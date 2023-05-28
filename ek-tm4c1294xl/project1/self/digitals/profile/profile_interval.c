@@ -64,7 +64,7 @@ uchar   GetProfileIntervalDig(void)
 }
 
 
-uchar   GetAndReserProfileIntervalDig(void)
+uchar   GetAndResetProfileIntervalDig(void)
 {
   uchar c = ibProfileIntervalDig;
   ibProfileIntervalDig = 0xFF;
