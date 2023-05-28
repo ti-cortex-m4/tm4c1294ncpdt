@@ -15,12 +15,12 @@ extern  cache const             chProfileIntervalModem;
 
 
 
-extern  uchar                   ibProfileIntervalDig;
-
-
-
 void    InitProfileInterval(void);
 void    ResetProfileInterval(void);
 
 uchar   GetProfileIntervalTimeout(void);
 bool    IsFinishedProfileInterval(void);
+
+uchar   GetProfileIntervalDig(void);
+uchar   GetAndResetProfileIntervalDig(void);
+void    SetProfileIntervalDig(uchar  c);

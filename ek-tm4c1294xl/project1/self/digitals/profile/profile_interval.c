@@ -55,3 +55,24 @@ bool    IsFinishedProfileInterval(void)
 {
   return ((tiCurr.bMinute % 30)*60 + tiCurr.bSecond >= (uint)30*60 - GetProfileIntervalTimeout());
 }
+
+
+
+uchar   GetProfileIntervalDig(void)
+{
+  return ibProfileIntervalDig;
+}
+
+
+uchar   GetAndReserProfileIntervalDig(void)
+{
+  uchar c = ibProfileIntervalDig;
+  ibProfileIntervalDig = 0xFF;
+  return c;
+}
+
+
+void    SetProfileIntervalDig(uchar  c)
+{
+  ibProfileIntervalDig = c;
+}

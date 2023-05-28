@@ -203,6 +203,8 @@ bool    ReadHeaderC6(void)
     ibProfileIntervalDig = ibDig;
 
     ShowLo(" приостановка...");
+    DelayMsg();
+
     return(0);
   }
   else
