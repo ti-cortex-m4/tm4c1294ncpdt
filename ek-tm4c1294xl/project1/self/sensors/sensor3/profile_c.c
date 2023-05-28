@@ -198,8 +198,10 @@ bool    ReadHeaderC6(void)
   wProfileC += 6;
   if (wProfileC > wHOURS) return(0);
 
-  if ((boProfileInterval == true) && IsStopProfileInterval())
+  if ((boProfileInterval == true) && IsFinishedProfileInterval())
   {
+    ibProfileIntervalDig = ibDig;
+
     ShowLo(" приостановка...");
     return(0);
   }

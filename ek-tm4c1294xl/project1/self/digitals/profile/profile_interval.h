@@ -23,4 +23,4 @@ void    InitProfileInterval(void);
 void    ResetProfileInterval(void);
 
 uchar   GetProfileIntervalTimeout(void);
-bool    IsStopProfileInterval(void);
+bool    IsFinishedProfileInterval(void);

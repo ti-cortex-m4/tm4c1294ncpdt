@@ -51,8 +51,7 @@ uchar   GetProfileIntervalTimeout(void)
 }
 
 
-bool    IsStopProfileInterval(void)
+bool    IsFinishedProfileInterval(void)
 {
-  uchar bTimeout = GetProfileIntervalTimeout();
-  return ((tiCurr.bMinute % 30)*60 + tiCurr.bSecond >= (uint)30*60 - bTimeout);
+  return ((tiCurr.bMinute % 30)*60 + tiCurr.bSecond >= (uint)30*60 - GetProfileIntervalTimeout());
 }
