@@ -29,8 +29,8 @@ uchar                   ibProfileIntervalDig;
 void    InitProfileInterval(void)
 {
   LoadCacheBool(&chProfileInterval, true);
-  LoadCacheChar(&chProfileIntervalDirect, 1, 250, 60);
-  LoadCacheChar(&chProfileIntervalModem, 1, 250, 180);
+  LoadCacheChar(&chProfileIntervalDirect, 1, 250, 30);
+  LoadCacheChar(&chProfileIntervalModem, 1, 250, 120);
 
   ibProfileIntervalDig = 0xFF;
 }
@@ -39,8 +39,8 @@ void    InitProfileInterval(void)
 void    ResetProfileInterval(void)
 {
   SaveCacheBool(&chProfileInterval, true);
-  SaveCacheChar(&chProfileIntervalDirect, 60);
-  SaveCacheChar(&chProfileIntervalModem, 180);
+  SaveCacheChar(&chProfileIntervalDirect, 30);
+  SaveCacheChar(&chProfileIntervalModem, 120);
 }
 
 
