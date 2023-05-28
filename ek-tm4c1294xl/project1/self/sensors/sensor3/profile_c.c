@@ -200,7 +200,7 @@ bool    ReadHeaderC6(void)
 
   if ((boProfileInterval == true) && IsFinishedProfileInterval())
   {
-    ibProfileIntervalDig = ibDig;
+    SetProfileIntervalDig(ibDig);
 
     ShowLo(" приостановка...");
     DelayMsg();

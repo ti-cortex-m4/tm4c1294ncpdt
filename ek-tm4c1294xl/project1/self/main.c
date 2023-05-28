@@ -202,7 +202,7 @@ int     main(void)
     ASSERT((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_WORK) || (enGlobal == GLB_REPROGRAM));
 
 Lo(12, ToBCD(ibDig));
-Lo(14, ToBCD(ibProfileIntervalDig));
+Lo(14, ToBCD(GetProfileIntervalDig()));
 
     ResetWatchdog();
 

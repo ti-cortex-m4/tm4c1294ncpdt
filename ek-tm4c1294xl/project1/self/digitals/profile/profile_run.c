@@ -118,7 +118,7 @@ bool    StartProfile(uchar  ibCanal)
 
   if ((boProfileInterval == true) && IsFinishedProfileInterval())
   {
-     ibProfileIntervalDig = ibDig;
+     SetProfileIntervalDig(ibDig);
 
      ShowHi(" Опрос профилей ");
      ShowLo("будет продолжен ");
@@ -309,7 +309,7 @@ void    RunProfile(bool  _fCtrlHou)
 
 //    if (boDTREnable == true) DTROff_All();
 
-    if ((boManualProfile == false) && (boProfileInterval == true) && (ibProfileIntervalDig != 0xFF))
+    if ((boManualProfile == false) && (boProfileInterval == true) && (GetProfileIntervalDig() != 0xFF))
     {
       ShowHi("  Продолжение   ");
       ShowLo("опроса профилей ");
@@ -318,9 +318,7 @@ void    RunProfile(bool  _fCtrlHou)
       ShowLo(" через получас  ");
       DelayMsg();
 
-      uchar c = ibProfileIntervalDig;
-      ibProfileIntervalDig = 0xFF;
-      if (StartProfile(c) == 1) { OpenSpecial(); DisableAnswer(); } else { Work(); OK(); }
+      if (StartProfile(GetAndResetProfileIntervalDig()) == 1) { OpenSpecial(); DisableAnswer(); } else { Work(); OK(); }
     }
     else
     {
@@ -413,11 +411,9 @@ void    NextProfile(void)
   }
 
   bool fStop;
-  if ((boProfileInterval == true) && (ibProfileIntervalDig != 0xFF))
+  if ((boProfileInterval == true) && (GetProfileIntervalDig() != 0xFF))
   {
-    uchar c = ibProfileIntervalDig;
-    ibProfileIntervalDig = 0xFF;
-    fStop = StartProfile(c);
+    fStop = StartProfile(GetAndResetProfileIntervalDig());
   }
   else
   {
