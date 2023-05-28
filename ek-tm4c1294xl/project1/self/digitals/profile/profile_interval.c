@@ -47,7 +47,7 @@ void    ResetProfileInterval(void)
 
 uchar   GetProfileIntervalTimeout(void)
 {
-  return diCurr.ibPhone == 0 ? 30 : 120;
+  return diCurr.ibPhone == 0 ? bProfileIntervalDirect : bProfileIntervalModem;
 }
 
 
