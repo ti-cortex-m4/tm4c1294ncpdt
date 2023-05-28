@@ -412,7 +412,19 @@ void    NextProfile(void)
 #endif
   }
 
-  if (StartProfile(ibDig+1) == 0) // опрос завершён
+  bool fStop;
+  if ((boProfileInterval == true) && (ibProfileIntervalDig != 0xFF))
+  {
+    uchar c = ibProfileIntervalDig;
+    ibProfileIntervalDig = 0xFF;
+    fStop = StartProfile(c);
+  }
+  else
+  {
+    fStop = StartProfile(ibDig+1);
+  }
+
+  if (fStop == 0) // опрос завершён
   {
     ShowHi(szWorkDone);
     sprintf(szLo+4,"за %u:%02u", (uint)(cwHouLength / 60), (uchar)(cwHouLength % 60)); if (boHideMessages == false) DelayMsg();
