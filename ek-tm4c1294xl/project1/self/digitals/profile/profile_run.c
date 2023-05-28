@@ -46,7 +46,7 @@ PROFILE_RUN!C
 
 
 
-uchar   StartProfile(uchar  ibCanal)
+bool    StartProfile(uchar  ibCanal)
 {
   ibDig = ibCanal;
 
@@ -318,9 +318,11 @@ void    RunProfile(bool  _fCtrlHou)
       ShowLo(" через получас  ");
       DelayMsg();
 
-      if (StartProfile(ibProfileIntervalDig) == 1) { OpenSpecial(); DisableAnswer(); } else { Work(); OK(); }
+      uchar c = ibProfileIntervalDig;
+      ibProfileIntervalDig = 0xFF;
+      if (StartProfile(c) == 1) { OpenSpecial(); DisableAnswer(); } else { Work(); OK(); }
     }
-      else
+    else
     {
       if (StartProfile(0) == 1) { OpenSpecial(); DisableAnswer(); } else { Work(); OK(); }
     }
