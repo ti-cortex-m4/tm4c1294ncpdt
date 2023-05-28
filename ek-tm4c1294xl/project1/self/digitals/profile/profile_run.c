@@ -116,7 +116,7 @@ uchar   StartProfile(uchar  ibCanal)
   }
 
 
-  if ((boProfileInterval == true) && IsStopProfileInterval())
+  if ((boProfileInterval == true) && IsFinishedProfileInterval())
   {
      ibProfileIntervalDig = ibDig;
 
