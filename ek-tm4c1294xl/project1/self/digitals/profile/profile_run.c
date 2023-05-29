@@ -401,17 +401,17 @@ void    NextProfile(void)
 #endif
   }
 
-  bool fStop;
+  bool fStart;
   if ((boProfileInterval == true) && (GetProfileIntervalDig() != 0xFF))
   {
-    fStop = StartProfile(GetAndResetProfileIntervalDig());
+    fStart = 0;
   }
   else
   {
-    fStop = StartProfile(ibDig+1);
+    fStart = StartProfile(ibDig+1);
   }
 
-  if (fStop == 0) // опрос завершён
+  if (fStart == 0) // опрос завершён
   {
     ShowHi(szWorkDone);
     sprintf(szLo+4,"за %u:%02u", (uint)(cwHouLength / 60), (uchar)(cwHouLength % 60)); if (boHideMessages == false) DelayMsg();
