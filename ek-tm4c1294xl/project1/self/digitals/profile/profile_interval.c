@@ -81,10 +81,29 @@ void    SetProfileIntervalDig(uchar  c)
 
 
 
+void    ShowProfileIntervalDigitalMesage(void)
+{
+  ShowLo(" приостановка...");
+  DelayMsg();
+}
+
+
 void    ShowProfileIntervalBeforeMesage(void)
 {
   ShowHi(" Опрос профилей ");
   ShowLo("будет продолжен ");
+  DelayMsg();
+
+  ShowHi(" после перехода ");
+  ShowLo(" через получас  ");
+  DelayMsg();
+}
+
+
+void    ShowProfileIntervalAfterMesage(void)
+{
+  ShowHi("  Продолжение   ");
+  ShowLo("опроса профилей ");
   DelayMsg();
 
   ShowHi(" после перехода ");
