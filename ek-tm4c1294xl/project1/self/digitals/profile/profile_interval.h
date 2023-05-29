@@ -24,3 +24,5 @@ bool    IsFinishedProfileInterval(void);
 uchar   GetProfileIntervalDig(void);
 uchar   GetAndResetProfileIntervalDig(void);
 void    SetProfileIntervalDig(uchar  c);
+
+void    ShowProfileIntervalBeforeMesage(void);

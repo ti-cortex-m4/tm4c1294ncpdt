@@ -119,16 +119,7 @@ bool    StartProfile(uchar  ibCanal)
   if ((boProfileInterval == true) && IsFinishedProfileInterval())
   {
      SetProfileIntervalDig(ibDig);
-
-     ShowHi(" Опрос профилей ");
-     ShowLo("будет продолжен ");
-     DelayMsg();
-     ShowHi(" после перехода ");
-     ShowLo(" через получас  ");
-     DelayMsg();
-     ShowHi("     через      ");
-     Clear(); sprintf(szLo+5,"%u сек.", (uint)(GetProfileIntervalTimeout() + bTimeoutProfile));
-     DelayMsg();
+     ShowProfileIntervalBeforeMesage();
 
      return(0);
   }

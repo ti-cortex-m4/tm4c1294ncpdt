@@ -7,6 +7,8 @@ profile_interval.c
 #include "../../main.h"
 #include "../../nvram/cache.h"
 #include "../../nvram/cache2.h"
+#include "../../display/display.h"
+#include "../../time/delay.h"
 #include "profile_interval.h"
 
 
@@ -75,4 +77,17 @@ uchar   GetAndResetProfileIntervalDig(void)
 void    SetProfileIntervalDig(uchar  c)
 {
   ibProfileIntervalDig = c;
+}
+
+
+
+void    ShowProfileIntervalBeforeMesage(void)
+{
+  ShowHi(" Опрос профилей ");
+  ShowLo("будет продолжен ");
+  DelayMsg();
+
+  ShowHi(" после перехода ");
+  ShowLo(" через получас  ");
+  DelayMsg();
 }
