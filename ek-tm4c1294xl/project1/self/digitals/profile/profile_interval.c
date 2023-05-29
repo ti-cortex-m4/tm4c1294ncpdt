@@ -81,7 +81,7 @@ void    SetProfileIntervalDig(uchar  c)
 
 
 
-void    ShowProfileIntervalDigitalMesage(void)
+void    ShowProfileIntervalInitMesage(void)
 {
   ShowLo(" приостановка...");
   DelayMsg();

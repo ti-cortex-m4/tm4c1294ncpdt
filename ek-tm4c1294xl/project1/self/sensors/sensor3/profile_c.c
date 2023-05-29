@@ -202,7 +202,7 @@ bool    ReadHeaderC6(void)
   {
     SetProfileIntervalDig(ibDig);
 
-    ShowProfileIntervalDigitalMesage();
+    ShowProfileIntervalInitMesage();
     ShowProfileIntervalBeforeMesage();
 
     return(0);

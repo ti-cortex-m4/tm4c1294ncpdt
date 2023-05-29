@@ -25,6 +25,6 @@ uchar   GetProfileIntervalDig(void);
 uchar   GetAndResetProfileIntervalDig(void);
 void    SetProfileIntervalDig(uchar  c);
 
-void    ShowProfileIntervalDigitalMesage(void);
+void    ShowProfileIntervalInitMesage(void);
 void    ShowProfileIntervalBeforeMesage(void);
 void    ShowProfileIntervalAfterMesage(void);
