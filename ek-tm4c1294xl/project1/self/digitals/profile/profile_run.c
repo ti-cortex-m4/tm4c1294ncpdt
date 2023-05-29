@@ -302,12 +302,7 @@ void    RunProfile(bool  _fCtrlHou)
 
     if ((boManualProfile == false) && (boProfileInterval == true) && (GetProfileIntervalDig() != 0xFF))
     {
-      ShowHi("  Продолжение   ");
-      ShowLo("опроса профилей ");
-      DelayMsg();
-      ShowHi(" после перехода ");
-      ShowLo(" через получас  ");
-      DelayMsg();
+      ShowProfileIntervalAfterMesage();
 
       if (StartProfile(GetAndResetProfileIntervalDig()) == 1) { OpenSpecial(); DisableAnswer(); } else { Work(); OK(); }
     }
