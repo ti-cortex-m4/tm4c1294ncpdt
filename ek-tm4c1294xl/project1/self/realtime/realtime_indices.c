@@ -1,17 +1,16 @@
 /*------------------------------------------------------------------------------
-timeout35.c
+realtime_indices.c
 
 
 ------------------------------------------------------------------------------*/
 
-#include "realtime_indices.h"
-
 #include "../../main.h"
 #include "../../memory/mem_settings.h"
 #include "../../serial/ports.h"
+#include "realtime_indices.h"
 
 
-
+/*
 static uint             mwTimeoutHistogramAbs35[0x100],
                         mwTimeoutHistogramDay35[0x100];
 
@@ -24,7 +23,7 @@ static uchar            mbTimeoutDelta35[DELTA_SIZE];
 
 
 
-void    InitTimeoutHistogram35(void)
+void    InitRealtimeIndices(void)
 {
   memset(&mwTimeoutHistogramAbs35, 0, sizeof(mwTimeoutHistogramAbs35));
   memset(&mwTimeoutHistogramDay35, 0, sizeof(mwTimeoutHistogramDay35));
@@ -34,7 +33,7 @@ void    InitTimeoutHistogram35(void)
 }
 
 
-void    NextDayResetTimeoutHistogram35(void)
+void    NextDayResetRealtimeIndices(void)
 {
   memset(&mwTimeoutHistogramDay35, 0, sizeof(mwTimeoutHistogramDay35));
 }
@@ -93,7 +92,7 @@ void    OutResetTimeoutHistogramAll35(void)
 {
   if (enGlobal == GLB_REPROGRAM)
   {
-    InitTimeoutHistogram35();
+    InitRealtimeIndices();
     Result(bRES_OK);
   }
   else
@@ -105,9 +104,10 @@ void    OutResetTimeoutHistogramDay35(void)
 {
   if (enGlobal == GLB_REPROGRAM)
   {
-    NextDayResetTimeoutHistogram35();
+    NextDayResetRealtimeIndices();
     Result(bRES_OK);
   }
   else
     Result(bRES_NEEDREPROGRAM);
 }
+*/
