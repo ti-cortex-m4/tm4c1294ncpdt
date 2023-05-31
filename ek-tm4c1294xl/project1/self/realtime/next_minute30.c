@@ -17,6 +17,7 @@ NEXT_MINUTE30!C
 #include "../kernel/arrays_buff.h"
 #include "next_params_time.h"
 #include "period30.h"
+#include "realtime_indices.h"
 #include "realtime_storage.h"
 
 
@@ -35,6 +36,7 @@ void    NextMinute30(void)
   if (++iwHardHou >= wHOURS) iwHardHou = 0;
   if (++ibSoftHou >= 2)      ibSoftHou = 0;
   SavePointersHou();
+  SaveRealtimeIndices();
 
   memset(&mpwImpHouCan[ibSoftHou], 0, sizeof(uint)*bCANALS);
   MakeCurrHouCan();
