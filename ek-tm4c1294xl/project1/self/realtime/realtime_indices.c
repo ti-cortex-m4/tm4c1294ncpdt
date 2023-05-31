@@ -5,8 +5,8 @@ realtime_indices.c
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-//#include "../../memory/mem_settings.h"
-//#include "../../serial/ports.h"
+#include "../memory/mem_realtime.h"
+#include "../serial/ports.h"
 #include "realtime_indices.h"
 
 
@@ -30,19 +30,27 @@ void    NextDayResetRealtimeIndices(void)
 {
   memset(&mwTimeoutHistogramDay35, 0, sizeof(mwTimeoutHistogramDay35));
 }
+*/
 
 
-
-void    Timeout35(uint  wTimeout)
+void    SaveRealtimeIndices(void)
 {
-  uchar i = wTimeout < 0x100 ? wTimeout : 0xFF;
+  realtime_indices ri;
 
-  mwTimeoutHistogramAbs35[i]++;
-  mwTimeoutHistogramDay35[i]++;
+  ri.tiCurr = tiCurr;
 
-  mbRealtimeIndices[cwRealtimeIndices++ % REALTIME_INDICES_SIZE] = i;
+  ri.ibSoftHou = ibSoftHou;
+  ri.iwHardHou = iwHardHou;
+
+  ri.ibSoftDay = ibSoftDay;
+  ri.ibHardDay = ibHardDay;
+
+  ri.ibSoftMon = ibSoftMon;
+  ri.ibHardMon = ibHardMon;
+
+  mbRealtimeIndices[cwRealtimeIndices++ % REALTIME_INDICES_SIZE] = ri;
 }
-
+/*
 
 
 uchar   GetRealtimeIndices(void)
@@ -70,14 +78,14 @@ void    OutRealtimeIndices(void)
 {
   InitPushCRC();
 
-//  PushIntLtl(cwRealtimeIndices);
-//  Push(&mbRealtimeIndices, sizeof(mbRealtimeIndices));
+  PushIntLtl(cwRealtimeIndices);
+  Push(&mbRealtimeIndices, sizeof(mbRealtimeIndices));
 //  PushChar(GetRealtimeIndices());
 //
 //  Push(&mwTimeoutHistogramAbs35, sizeof(mwTimeoutHistogramAbs35));
 //  Push(&mwTimeoutHistogramDay35, sizeof(mwTimeoutHistogramDay35));
-//
-//  Output(2+sizeof(mbRealtimeIndices)+1+sizeof(mwTimeoutHistogramAbs35)+sizeof(mwTimeoutHistogramDay35));
+
+  Output(2+sizeof(mbRealtimeIndices));
 }
 
 /*

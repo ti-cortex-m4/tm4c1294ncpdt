@@ -24,6 +24,7 @@ RESPONSE252_CRC,C
 #include "../serial/slave_modem.h"
 #include "../realtime/throughput.h"
 #include "../realtime/period30.h"
+#include "../realtime/realtime_indices.h"
 #include "../output/out_digitals.h"
 #include "../digitals/review/review_out.h"
 #include "../digitals/review/review_buff.h"
@@ -98,6 +99,8 @@ void    Response252_CRC(void)
     case 37: OutLog40(); break;
     case 38: OutCounter40(); break;
     case 39: OutResetLog40(); break;
+
+    case 40: OutRealtimeIndices(); break;
 
     default:
       ShowResponseCRC(bSTA_BADCOMMAND);
