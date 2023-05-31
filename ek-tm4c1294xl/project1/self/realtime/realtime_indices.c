@@ -4,35 +4,28 @@ realtime_indices.c
 
 ------------------------------------------------------------------------------*/
 
-#include "../../main.h"
-#include "../../memory/mem_settings.h"
-#include "../../serial/ports.h"
+#include "../main.h"
+//#include "../../memory/mem_settings.h"
+//#include "../../serial/ports.h"
 #include "realtime_indices.h"
 
 
-/*
-static uint             mwTimeoutHistogramAbs35[0x100],
-                        mwTimeoutHistogramDay35[0x100];
 
-
-
-#define DELTA_SIZE      10
-
-static uint             cwTimeoutDelta35;
-static uchar            mbTimeoutDelta35[DELTA_SIZE];
+static uint             cwRealtimeIndices;
+static realtime_indices mbRealtimeIndices[REALTIME_INDICES_SIZE];
 
 
 
 void    InitRealtimeIndices(void)
 {
-  memset(&mwTimeoutHistogramAbs35, 0, sizeof(mwTimeoutHistogramAbs35));
-  memset(&mwTimeoutHistogramDay35, 0, sizeof(mwTimeoutHistogramDay35));
+//  memset(&mwTimeoutHistogramAbs35, 0, sizeof(mwTimeoutHistogramAbs35));
+//  memset(&mwTimeoutHistogramDay35, 0, sizeof(mwTimeoutHistogramDay35));
 
-  cwTimeoutDelta35 = 0;
-  memset(&mbTimeoutDelta35, 0, sizeof(mbTimeoutDelta35));
+  cwRealtimeIndices = 0;
+  memset(&mbRealtimeIndices, 0, sizeof(mbRealtimeIndices));
 }
 
-
+/*
 void    NextDayResetRealtimeIndices(void)
 {
   memset(&mwTimeoutHistogramDay35, 0, sizeof(mwTimeoutHistogramDay35));
@@ -47,20 +40,20 @@ void    Timeout35(uint  wTimeout)
   mwTimeoutHistogramAbs35[i]++;
   mwTimeoutHistogramDay35[i]++;
 
-  mbTimeoutDelta35[cwTimeoutDelta35++ % DELTA_SIZE] = i;
+  mbRealtimeIndices[cwRealtimeIndices++ % REALTIME_INDICES_SIZE] = i;
 }
 
 
 
-uchar   GetTimeoutDelta35(void)
+uchar   GetRealtimeIndices(void)
 {
   uint  w = 0;
   uchar c = 0;
 
   uchar i;
-  for (i=0; i<DELTA_SIZE; i++)
+  for (i=0; i<REALTIME_INDICES_SIZE; i++)
   {
-    uchar j = mbTimeoutDelta35[(DELTA_SIZE + cwTimeoutDelta35 - i) % DELTA_SIZE];
+    uchar j = mbRealtimeIndices[(REALTIME_INDICES_SIZE + cwRealtimeIndices - i) % REALTIME_INDICES_SIZE];
     if (j != 0)
     {
       w += j;
@@ -70,24 +63,24 @@ uchar   GetTimeoutDelta35(void)
 
   return w/c;
 }
+*/
 
 
-
-void    OutTimeoutHistogramAll35(void)
+void    OutRealtimeIndices(void)
 {
   InitPushCRC();
 
-  PushIntLtl(cwTimeoutDelta35);
-  Push(&mbTimeoutDelta35, sizeof(mbTimeoutDelta35));
-  PushChar(GetTimeoutDelta35());
-
-  Push(&mwTimeoutHistogramAbs35, sizeof(mwTimeoutHistogramAbs35));
-  Push(&mwTimeoutHistogramDay35, sizeof(mwTimeoutHistogramDay35));
-
-  Output(2+sizeof(mbTimeoutDelta35)+1+sizeof(mwTimeoutHistogramAbs35)+sizeof(mwTimeoutHistogramDay35));
+//  PushIntLtl(cwRealtimeIndices);
+//  Push(&mbRealtimeIndices, sizeof(mbRealtimeIndices));
+//  PushChar(GetRealtimeIndices());
+//
+//  Push(&mwTimeoutHistogramAbs35, sizeof(mwTimeoutHistogramAbs35));
+//  Push(&mwTimeoutHistogramDay35, sizeof(mwTimeoutHistogramDay35));
+//
+//  Output(2+sizeof(mbRealtimeIndices)+1+sizeof(mwTimeoutHistogramAbs35)+sizeof(mwTimeoutHistogramDay35));
 }
 
-
+/*
 void    OutResetTimeoutHistogramAll35(void)
 {
   if (enGlobal == GLB_REPROGRAM)
