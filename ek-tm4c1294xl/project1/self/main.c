@@ -94,6 +94,7 @@ MAIN,C
 #include "realtime/realtime_init.h"
 #include "realtime/throughput.h"
 #include "realtime/period30.h"
+#include "realtime/realtime_indices.h"
 #include "output/response_crc.h"
 
 
@@ -164,6 +165,7 @@ int     main(void)
   PrintStart();
   InitStorage();
   InitDefects_Custom();
+  InitRealtimeIndices();
   InitRealtime_Custom();
   InitThroughput();
   InitPeriod30();
