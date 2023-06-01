@@ -4,5 +4,5 @@ bcd_time.h
 
 ------------------------------------------------------------------------------*/
 
-time        BcdTimeToTime(uint32_t  t);
-uint32_t    TimeToBcdTime(time  tm);
+time    BcdTimeToTime(ulong  dw);
+ulong   TimeToBcdTime(time  tm);

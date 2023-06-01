@@ -9,7 +9,7 @@ bcd_time.c
 
 
 
-time        BcdTimeToTime(uint32_t  t)
+time    BcdTimeToTime(ulong  t)
 {
   time tm;
 
@@ -25,9 +25,9 @@ time        BcdTimeToTime(uint32_t  t)
 }
 
 
-uint32_t    TimeToBcdTime(time  tm)
+ulong   TimeToBcdTime(time  tm)
 {
-  uint32_t dw = 0;
+  ulong dw = 0;
 
   dw |= (tm.bSecond      & 0x3F);
   dw |= (tm.bMinute      & 0x3F) << 6;
