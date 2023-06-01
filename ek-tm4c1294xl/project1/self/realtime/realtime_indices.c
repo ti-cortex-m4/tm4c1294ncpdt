@@ -7,22 +7,15 @@ realtime_indices.c
 #include "../main.h"
 #include "../memory/mem_realtime.h"
 #include "../serial/ports.h"
+#include "../time/bcd_time.h"
 #include "realtime_indices.h"
 
 
 
 typedef struct
 {
-  time      tiCurr;
-
-  uchar     ibSoftHou;
-  uint      iwHardHou;
-
-  uchar     ibSoftDay;
-  uchar     ibHardDay;
-
-  uchar     ibSoftMon;
-  uchar     ibHardMon;
+  ulong     dwCurr;
+  ulong     dwIndices;
 } realtime_indices;
 
 
@@ -47,16 +40,20 @@ void    SaveRealtimeIndices(void)
 {
   realtime_indices ri;
 
-  ri.tiCurr = tiCurr;
+  ri.dwCurr = TimeToBcdTime(tiCurr);
 
-  ri.ibSoftHou = ibSoftHou;
-  ri.iwHardHou = iwHardHou;
+  ulong dw = 0;
 
-  ri.ibSoftDay = ibSoftDay;
-  ri.ibHardDay = ibHardDay;
+  dw |= (ibSoftHou & 0x03);
+  dw |= (iwHardHou & 0xFFF) << 2;
 
-  ri.ibSoftMon = ibSoftMon;
-  ri.ibHardMon = ibHardMon;
+  dw |= (ibSoftDay & 0x03) << 2+12;
+  dw |= (ibHardDay & 0x1F) << 2+12+2;
+
+  dw |= (ibSoftMon & 0x03) << 2+12+2+5;
+  dw |= (ibHardMon & 0x1F) << 2+12+2+5+2;
+
+  ri.dwIndices = dw;
 
   mbRealtimeIndices[cwRealtimeIndices++ % REALTIME_INDICES_SIZE] = ri;
 }
