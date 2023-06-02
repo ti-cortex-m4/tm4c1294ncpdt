@@ -20,7 +20,8 @@ typedef struct
 
 
 
-#define REALTIME_INDICES_SIZE   (uint)(48*14)
+#define REALTIME_INDICES_DAYS   1
+#define REALTIME_INDICES_SIZE   (uint)(48*REALTIME_INDICES_DAYS)
 
 
 
@@ -47,11 +48,11 @@ void    SaveRealtimeIndices(void)
   dw |= (ibSoftHou & 0x03);
   dw |= (iwHardHou & 0xFFF) << 2;
 
-  dw |= (ibSoftDay & 0x03) << 2+12;
-  dw |= (ibHardDay & 0x1F) << 2+12+2;
+  dw |= (ibSoftDay & 0x03) << (2+12);
+  dw |= (ibHardDay & 0x1F) << (2+12+2);
 
-  dw |= (ibSoftMon & 0x03) << 2+12+2+5;
-  dw |= (ibHardMon & 0x1F) << 2+12+2+5+2;
+  dw |= (ibSoftMon & 0x03) << (2+12+2+5);
+  dw |= (ibHardMon & 0x1F) << (2+12+2+5+2);
 
   ri.dwIndices = dw;
 
@@ -63,8 +64,21 @@ void    OutRealtimeIndices(void)
 {
   InitPushCRC();
 
-  PushIntLtl(cwRealtimeIndices);
-  Push(&mbRealtimeIndices, sizeof(mbRealtimeIndices));
+  if (bInBuff5 < REALTIME_INDICES_DAYS)
+  {
+    uint wSize = 0;
+    wSize += PushIntLtl(cwRealtimeIndices);
 
-  Output(2+sizeof(mbRealtimeIndices));
+    uint i;
+    for (i=0; i<REALTIME_INDICES_SIZE; i++)
+    {
+      realtime_indices ri = mbRealtimeIndices[i];
+
+      wSize += PushLongLtl(ri.dwCurr);
+      wSize += PushLongLtl(ri.dwIndices);
+    }
+
+    Output(wSize);
+  }
+  else Result(bRES_BADADDRESS);
 }
