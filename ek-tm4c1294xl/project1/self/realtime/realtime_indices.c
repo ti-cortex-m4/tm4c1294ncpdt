@@ -72,7 +72,7 @@ void    OutRealtimeIndices(void)
     uint i;
     for (i=0; i<REALTIME_INDICES_SIZE; i++)
     {
-      realtime_indices ri = mbRealtimeIndices[i];
+      realtime_indices ri = mbRealtimeIndices[i + (uint)(48*bInBuff5)];
 
       wSize += PushLongLtl(ri.dwCurr);
       wSize += PushLongLtl(ri.dwIndices);
