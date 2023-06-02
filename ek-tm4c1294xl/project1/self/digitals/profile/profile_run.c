@@ -300,7 +300,12 @@ void    RunProfile(bool  _fCtrlHou)
 
 //    if (boDTREnable == true) DTROff_All();
 
-    if ((boManualProfile == false) && (boProfileInterval == true) && (GetProfileIntervalDig() != 0xFF))
+    if (boManualProfile == true)
+    {
+      SetProfileIntervalDig(0xFF);
+    }
+
+    if ((boProfileInterval == true) && (GetProfileIntervalDig() != 0xFF))
     {
       ShowProfileIntervalAfterMesage();
 
