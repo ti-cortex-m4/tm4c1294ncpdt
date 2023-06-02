@@ -64,7 +64,7 @@ void    OutRealtimeIndices(void)
 {
   InitPushCRC();
 
-  if (bInBuff5 < REALTIME_INDICES_DAYS)
+  if (bInBuff6 < REALTIME_INDICES_DAYS)
   {
     uint wSize = 0;
     wSize += PushIntLtl(cwRealtimeIndices);
@@ -72,7 +72,7 @@ void    OutRealtimeIndices(void)
     uint i;
     for (i=0; i<REALTIME_INDICES_SIZE; i++)
     {
-      realtime_indices ri = mbRealtimeIndices[i + (uint)(48*bInBuff5)];
+      realtime_indices ri = mbRealtimeIndices[i + (uint)(48*bInBuff6)];
 
       wSize += PushLongLtl(ri.dwCurr);
       wSize += PushLongLtl(ri.dwIndices);
