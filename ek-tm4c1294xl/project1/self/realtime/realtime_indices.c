@@ -68,6 +68,7 @@ void    OutRealtimeIndices(void)
   {
     uint wSize = 0;
     wSize += PushIntLtl(cwRealtimeIndices);
+    wSize += PushIntLtl(REALTIME_INDICES_SIZE);
 
     uint i;
     for (i=0; i<REALTIME_INDICES_SIZE; i++)
