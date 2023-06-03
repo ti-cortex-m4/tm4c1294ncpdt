@@ -20,7 +20,7 @@ typedef struct
 
 
 
-#define REALTIME_INDICES_DAYS   1
+#define REALTIME_INDICES_DAYS   2
 #define REALTIME_INDICES_SIZE   (uint)(48*REALTIME_INDICES_DAYS)
 
 
@@ -70,10 +70,12 @@ void    OutRealtimeIndices(void)
     wSize += PushIntLtl(cwRealtimeIndices);
     wSize += PushIntLtl(REALTIME_INDICES_SIZE);
 
+    uint j = (uint)(48*bInBuff6);
+
     uint i;
-    for (i=0; i<REALTIME_INDICES_SIZE; i++)
+    for (i=0; i<48; i++)
     {
-      realtime_indices ri = mbRealtimeIndices[i + (uint)(48*bInBuff6)];
+      realtime_indices ri = mbRealtimeIndices[i + j];
 
       wSize += PushLongLtl(ri.dwCurr);
       wSize += PushLongLtl(ri.dwIndices);
