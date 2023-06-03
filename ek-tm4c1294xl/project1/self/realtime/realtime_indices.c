@@ -20,7 +20,7 @@ typedef struct
 
 
 
-#define REALTIME_INDICES_DAYS   2
+#define REALTIME_INDICES_DAYS   3
 #define REALTIME_INDICES_SIZE   (uint)(48*REALTIME_INDICES_DAYS)
 
 
