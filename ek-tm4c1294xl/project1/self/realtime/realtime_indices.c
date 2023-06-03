@@ -67,6 +67,7 @@ void    OutRealtimeIndices(void)
   if (bInBuff6 < REALTIME_INDICES_DAYS)
   {
     uint wSize = 0;
+    wSize += PushChar(REALTIME_INDICES_DAYS);
     wSize += PushIntLtl(cwRealtimeIndices);
     wSize += PushIntLtl(REALTIME_INDICES_SIZE);
 
