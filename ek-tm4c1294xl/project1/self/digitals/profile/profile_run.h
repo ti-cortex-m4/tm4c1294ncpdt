@@ -10,3 +10,5 @@ void    ErrorProfile(void);
 
 void    DoneProfile(void);
 void    DoneProfile_Stop(void);
+
+void    PauseProfile(void);

@@ -116,11 +116,12 @@ bool    StartProfile(uchar  ibCanal)
   }
 
 
-  if ((boProfileInterval == true) && IsFinishedProfileInterval())
+  if ((boProfileInterval == true) && IsFinishedProfileInterval()) // manual
   {
      SetProfileIntervalDig(ibDig);
      ShowProfileIntervalBeforeMesage();
 
+     AddDigRecord(EVE_CHECKUP_START); // TODO
      return(0);
   }
 
@@ -517,4 +518,14 @@ void    DoneProfile_Stop(void)
   MakePause(DEV_MODEM_STOP);
 
   if (diCurr.ibPhone != 0) AddModRecord(EVE_MODEM_PROFILEDONE2);
+}
+
+
+
+void    PauseProfile(void)
+{
+  fKeyOn = 0;
+  MakePause(DEV_MODEM_STOP);
+
+//  if (diCurr.ibPhone != 0) AddModRecord(EVE_MODEM_PROFILEDONE1);
 }

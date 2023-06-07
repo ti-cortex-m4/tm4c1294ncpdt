@@ -181,7 +181,7 @@ bool    ReadHeaderC1_Shutdown(void)
 }
 
 
-bool    ReadHeaderC6(void)
+uchar   ReadHeaderC6(void)
 {
   uchar i;
   for (i=0; i<6; i++)
@@ -205,7 +205,8 @@ bool    ReadHeaderC6(void)
     ShowProfileIntervalInitMesage();
     ShowProfileIntervalBeforeMesage();
 
-    return(0);
+    AddDigRecord(EVE_CHECKUP_NEXT); // TODO
+    return(0xFF);
   }
   else
   {
