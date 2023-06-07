@@ -2033,8 +2033,11 @@ void    RunDevices(void)
           break;
         }
         case REVIEW_SUCCESS: {
-          if (ReadHeaderC6() == 0)
+          uchar b = ReadHeaderC6();
+          if (b == 0)
             DoneProfile();
+          else if (b == 0xFF)
+            PauseProfile();
           else {
             RestartReview();
             if (fReviewReadId == true)
