@@ -14,6 +14,7 @@ PROFILE_C!C
 #include "../../keyboard/time/key_timedate.h"
 #include "../../time/calendar.h"
 #include "../../time/delay.h"
+#include "../../flash/records.h"
 #include "../../serial/ports_stack.h"
 #include "../../serial/ports_devices.h"
 #include "../../serial/monitor.h"
