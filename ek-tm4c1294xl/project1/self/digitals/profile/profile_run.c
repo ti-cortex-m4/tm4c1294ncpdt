@@ -522,7 +522,7 @@ void    DoneProfile_Stop(void)
 
 
 
-void    PauseProfile(void)
+void    IntervalProfile(void)
 {
   fKeyOn = 0;
   MakePause(DEV_MODEM_STOP);

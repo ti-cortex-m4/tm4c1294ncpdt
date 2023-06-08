@@ -2037,7 +2037,7 @@ void    RunDevices(void)
           if (bResult == 0)
             DoneProfile();
           else if (bResult == 0xFF)
-            PauseProfile();
+            IntervalProfile();
           else {
             RestartReview();
             if (fReviewReadId == true)
