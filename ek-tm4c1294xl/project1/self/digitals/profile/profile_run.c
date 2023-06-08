@@ -116,12 +116,12 @@ bool    StartProfile(uchar  ibCanal)
   }
 
 
-  if ((boProfileInterval == true) && IsFinishedProfileInterval()) // manual
+  if ((boProfileInterval == true) && IsFinishedProfileInterval())
   {
      SetProfileIntervalDig(ibDig);
      ShowProfileIntervalBeforeMesage();
 
-     AddDigRecord(EVE_CHECKUP_START); // TODO
+     AddDigRecord(EVE_PROFILE_INTERVAL1);
      return(0);
   }
 
