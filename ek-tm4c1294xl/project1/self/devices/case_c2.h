@@ -268,10 +268,10 @@
           break;
         }
         case REVIEW_SUCCESS: {
-          uchar b = ReadHeaderC6();
-          if (b == 0)
+          uchar bResult = ReadHeaderC6();
+          if (bResult == 0)
             DoneProfile();
-          else if (b == 0xFF)
+          else if (bResult == 0xFF)
             PauseProfile();
           else {
             RestartReview();

@@ -205,7 +205,7 @@ uchar   ReadHeaderC6(void)
     ShowProfileIntervalInitMesage();
     ShowProfileIntervalBeforeMesage();
 
-    AddDigRecord(EVE_CHECKUP_NEXT); // TODO
+    AddDigRecord(EVE_PROFILE_INTERVAL2);
     return(0xFF);
   }
   else
