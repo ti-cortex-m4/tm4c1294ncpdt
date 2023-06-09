@@ -86,7 +86,9 @@ bool    StartProfile(uchar  ibCanal)
           ShowLo(szDisabledCan); if (boHideMessages == false) DelayInf();
           AddDigRecord(EVE_CANAL_DISABLED);
         }
-        else if ((GetEnblPrtHou(diCurr.ibPort, GetCurrHouIndex()) == false) && (boManualProfile == false))
+        else if ((GetEnblPrtHou(diCurr.ibPort, GetCurrHouIndex()) == false)
+                && (boManualProfile == false)
+                && !((boProfileInterval == true) && (GetProfileIntervalDig() != 0xFF)))
         {
           ShowCanalNumber(ibDig);
           sprintf(szHi+14,"%02u",GetCurrHouIndex());
