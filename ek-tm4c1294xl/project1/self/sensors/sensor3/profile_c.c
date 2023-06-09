@@ -145,7 +145,7 @@ bool    ReadHeaderC(uchar  ibBlock)
 }
 
 
-bool    ReadHeaderC1(void)
+uchar   ReadHeaderC1(void)
 {
   cwShutdownC = 0;
 
@@ -159,7 +159,7 @@ bool    ReadHeaderC1(void)
   }
 }
 
-bool    ReadHeaderC1_Shutdown(void)
+uchar   ReadHeaderC1_Shutdown(void)
 {
   if (++cwShutdownC > GetMaxShutdown())
     return(0);
