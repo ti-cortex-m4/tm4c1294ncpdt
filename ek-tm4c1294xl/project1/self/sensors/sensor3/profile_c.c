@@ -153,7 +153,18 @@ uchar   ReadHeaderC1(void)
     return(0);
   else if (++wProfileC > wHOURS)
     return(0);
-  else {
+  else if ((boProfileInterval == true) && IsFinishedProfileInterval())
+  {
+    SetProfileIntervalDig(ibDig);
+
+    ShowProfileIntervalInitMesage();
+    ShowProfileIntervalBeforeMesage();
+
+    AddDigRecord(EVE_PROFILE_INTERVAL_BREAK);
+    return(0xFF);
+  }
+  else
+  {
     MonitorString("\n");
     return(1);
   }
@@ -176,8 +187,21 @@ uchar   ReadHeaderC1_Shutdown(void)
       return(0);
     else if (++wProfileC > wHOURS)
       return(0);
+    else if ((boProfileInterval == true) && IsFinishedProfileInterval())
+    {
+      SetProfileIntervalDig(ibDig);
+
+      ShowProfileIntervalInitMesage();
+      ShowProfileIntervalBeforeMesage();
+
+      AddDigRecord(EVE_PROFILE_INTERVAL_BREAK);
+      return(0xFF);
+    }
     else
+    {
+      MonitorString("\n");
       return(1);
+    }
   }
 }
 
