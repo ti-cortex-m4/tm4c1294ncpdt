@@ -123,7 +123,7 @@ bool    StartProfile(uchar  ibCanal, bool  boIntervalProfile)
      SetProfileIntervalDig(ibDig);
      ShowProfileIntervalBeforeMesage();
 
-     AddDigRecord(EVE_PROFILE_INTERVAL1);
+     AddDigRecord(EVE_PROFILE_INTERVAL_STOP);
      return(0);
   }
 
@@ -311,6 +311,7 @@ void    RunProfile(bool  _fCtrlHou)
     if ((boProfileInterval == true) && (GetProfileIntervalDig() != 0xFF))
     {
       ShowProfileIntervalAfterMesage();
+      AddDigRecord(EVE_PROFILE_INTERVAL_START);
 
       if (StartProfile(GetAndResetProfileIntervalDig(), true) == 1) { OpenSpecial(); DisableAnswer(); } else { Work(); OK(); }
     }
