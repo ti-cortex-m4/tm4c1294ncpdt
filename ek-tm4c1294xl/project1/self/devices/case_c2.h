@@ -393,8 +393,11 @@
           break;
         }
         case REVIEW_SUCCESS: {
-          if (ReadHeaderC1_Shutdown() == 0)
+          uchar bResult = ReadHeaderC1_Shutdown();
+          if (bResult == 0)
             DoneProfile();
+          else if (bResult == 0xFF)
+            IntervalProfile();
           else {
             RestartReview();
             if (fReviewReadId == true)
@@ -424,8 +427,11 @@
             break;
           }
           case REVIEW_SUCCESS: {
-            if (ReadHeaderC1() == 0)
+            uchar bResult = ReadHeaderC1();
+            if (bResult == 0)
               DoneProfile();
+            else if (bResult == 0xFF)
+              IntervalProfile();
             else {
               RestartReview();
               if (fReviewReadId == true)
