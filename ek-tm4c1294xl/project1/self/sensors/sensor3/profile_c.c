@@ -145,7 +145,7 @@ bool    ReadHeaderC(uchar  ibBlock)
 }
 
 
-uchar   ReadHeaderC1(void)
+bool    ReadHeaderC1(void)
 {
   cwShutdownC = 0;
 
@@ -153,16 +153,6 @@ uchar   ReadHeaderC1(void)
     return(0);
   else if (++wProfileC > wHOURS)
     return(0);
-  else if ((boProfileInterval == true) && IsFinishedProfileInterval())
-  {
-    SetProfileIntervalDig(ibDig);
-
-    ShowProfileIntervalInitMesage();
-    ShowProfileIntervalBeforeMesage();
-
-    AddDigRecord(EVE_PROFILE_INTERVAL_BREAK);
-    return(0xFF);
-  }
   else
   {
     MonitorString("\n");
@@ -170,7 +160,7 @@ uchar   ReadHeaderC1(void)
   }
 }
 
-uchar   ReadHeaderC1_Shutdown(void)
+bool    ReadHeaderC1_Shutdown(void)
 {
   if (++cwShutdownC > GetMaxShutdown())
     return(0);
@@ -187,19 +177,8 @@ uchar   ReadHeaderC1_Shutdown(void)
       return(0);
     else if (++wProfileC > wHOURS)
       return(0);
-    else if ((boProfileInterval == true) && IsFinishedProfileInterval())
-    {
-      SetProfileIntervalDig(ibDig);
-
-      ShowProfileIntervalInitMesage();
-      ShowProfileIntervalBeforeMesage();
-
-      AddDigRecord(EVE_PROFILE_INTERVAL_BREAK);
-      return(0xFF);
-    }
     else
     {
-      MonitorString("\n");
       return(1);
     }
   }
