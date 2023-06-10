@@ -390,9 +390,10 @@ void    Keyboard_Key(void)
       case wSET_IGNORE_STATUS_38: key_SetIgnoreStatus38(); break;
       case wSET_SHORT_PROFILE_B:key_SetShortProfileB(); break;
       case wSET_MODEM_DISCONNECT_BD:key_SetModemDisconnectBD(); break;
-      case wSET_PROFILE_INTERVAL:key_SetProfileInterval(); break;
-      case wSET_PROFILE_INTERVAL_DIRECT:key_SetProfileIntervalDirect(); break;
-      case wSET_PROFILE_INTERVAL_MODEM:key_SetProfileIntervalModem(); break;
+
+      case wSET_PROFILE_INTERVAL: key_SetProfileInterval(); break;
+      case wSET_PROFILE_INTERVAL_DIRECT: key_SetProfileIntervalDirect(); break;
+      case wSET_PROFILE_INTERVAL_MODEM: key_SetProfileIntervalModem(); break;
 
       case wSET_REVIEW_FLAG:    key_SetReviewFlag();    break;
       case wSET_REVIEW_CAN:     key_SetReviewCan();     break;
@@ -725,9 +726,10 @@ void    Keyboard_Key(void)
       case wSET_IGNORE_STATUS_38: key_SetIgnoreStatus38(); break;
       case wSET_SHORT_PROFILE_B:key_SetShortProfileB(); break;
       case wSET_MODEM_DISCONNECT_BD:key_SetModemDisconnectBD(); break;
-      case wSET_PROFILE_INTERVAL:key_SetProfileInterval(); break;
-      case wSET_PROFILE_INTERVAL_DIRECT:key_SetProfileIntervalDirect(); break;
-      case wSET_PROFILE_INTERVAL_MODEM:key_SetProfileIntervalModem(); break;
+
+      case wSET_PROFILE_INTERVAL: key_SetProfileInterval(); break;
+      case wSET_PROFILE_INTERVAL_DIRECT: key_SetProfileIntervalDirect(); break;
+      case wSET_PROFILE_INTERVAL_MODEM: key_SetProfileIntervalModem(); break;
 
       case wSET_REVIEW_FLAG:    key_SetReviewFlag();    break;
       case wSET_REVIEW_CAN:     key_SetReviewCan();     break;
@@ -980,9 +982,10 @@ void    Keyboard_Key(void)
       case wSET_IGNORE_STATUS_38: key_SetIgnoreStatus38(); break;
       case wSET_SHORT_PROFILE_B:key_SetShortProfileB(); break;
       case wSET_MODEM_DISCONNECT_BD:key_SetModemDisconnectBD(); break;
-      case wSET_PROFILE_INTERVAL:key_SetProfileInterval(); break;
-      case wSET_PROFILE_INTERVAL_DIRECT:key_SetProfileIntervalDirect(); break;
-      case wSET_PROFILE_INTERVAL_MODEM:key_SetProfileIntervalModem(); break;
+
+      case wSET_PROFILE_INTERVAL: key_SetProfileInterval(); break;
+      case wSET_PROFILE_INTERVAL_DIRECT: key_SetProfileIntervalDirect(); break;
+      case wSET_PROFILE_INTERVAL_MODEM: key_SetProfileIntervalModem(); break;
 
       case wSET_REVIEW_FLAG:    key_SetReviewFlag();    break;
       case wSET_REVIEW_CAN:     key_SetReviewCan();     break;

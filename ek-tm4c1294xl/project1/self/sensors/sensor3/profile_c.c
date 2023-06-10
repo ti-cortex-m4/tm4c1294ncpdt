@@ -153,8 +153,7 @@ bool    ReadHeaderC1(void)
     return(0);
   else if (++wProfileC > wHOURS)
     return(0);
-  else
-  {
+  else {
     MonitorString("\n");
     return(1);
   }
@@ -178,9 +177,7 @@ bool    ReadHeaderC1_Shutdown(void)
     else if (++wProfileC > wHOURS)
       return(0);
     else
-    {
       return(1);
-    }
   }
 }
 
