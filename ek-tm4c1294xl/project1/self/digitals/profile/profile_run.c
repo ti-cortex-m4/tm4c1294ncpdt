@@ -46,7 +46,7 @@ PROFILE_RUN!C
 
 
 
-bool    StartProfile(uchar  ibCanal)
+bool    StartProfile(uchar  ibCanal, bool  boIntervalProfile)
 {
   ibDig = ibCanal;
 
@@ -88,7 +88,7 @@ bool    StartProfile(uchar  ibCanal)
         }
         else if ((GetEnblPrtHou(diCurr.ibPort, GetCurrHouIndex()) == false)
                 && (boManualProfile == false)
-                && !((boProfileInterval == true) && (GetProfileIntervalDig() != 0xFF)))
+                && (boIntervalProfile == false))
         {
           ShowCanalNumber(ibDig);
           sprintf(szHi+14,"%02u",GetCurrHouIndex());
@@ -118,7 +118,7 @@ bool    StartProfile(uchar  ibCanal)
   }
 
 
-  if ((boProfileInterval == true) && IsFinishedProfileInterval())
+  if ((boManualProfile == false) && (boProfileInterval == true) && IsFinishedProfileInterval())
   {
      SetProfileIntervalDig(ibDig);
      ShowProfileIntervalBeforeMesage();
@@ -312,11 +312,11 @@ void    RunProfile(bool  _fCtrlHou)
     {
       ShowProfileIntervalAfterMesage();
 
-      if (StartProfile(GetAndResetProfileIntervalDig()) == 1) { OpenSpecial(); DisableAnswer(); } else { Work(); OK(); }
+      if (StartProfile(GetAndResetProfileIntervalDig(), true) == 1) { OpenSpecial(); DisableAnswer(); } else { Work(); OK(); }
     }
     else
     {
-      if (StartProfile(0) == 1) { OpenSpecial(); DisableAnswer(); } else { Work(); OK(); }
+      if (StartProfile(0, false) == 1) { OpenSpecial(); DisableAnswer(); } else { Work(); OK(); }
     }
   }
 
@@ -411,7 +411,7 @@ void    NextProfile(void)
   }
   else
   {
-    fStart = StartProfile(ibDig+1);
+    fStart = StartProfile(ibDig+1, false);
   }
 
   if (fStart == 0) // опрос завершён
