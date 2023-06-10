@@ -12,9 +12,9 @@ key_profile_interval.c
 
 //                                         0123456789ABCDEF
 static char const       szMessage1[]    = "ѕриостанавливать",
-                        szMessage2[]    = "     опрос      ",
+                        szMessage2[]    = " опрос профилей ",
                         szMessage3[]    = "  при переходе  ",
-                        szMessage4[]    = " через получас  ";
+                        szMessage4[]    = "через получас ? ";
 
 static char const       *pszMessages[]  = { szMessage1, szMessage2, szMessage3, szMessage4, "" };
 

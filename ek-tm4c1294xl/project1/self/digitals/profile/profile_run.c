@@ -46,7 +46,7 @@ PROFILE_RUN!C
 
 
 
-bool    StartProfile(uchar  ibCanal, bool  boIntervalProfile)
+bool    StartProfile(uchar  ibCanal)
 {
   ibDig = ibCanal;
 
@@ -86,9 +86,7 @@ bool    StartProfile(uchar  ibCanal, bool  boIntervalProfile)
           ShowLo(szDisabledCan); if (boHideMessages == false) DelayInf();
           AddDigRecord(EVE_CANAL_DISABLED);
         }
-        else if ((GetEnblPrtHou(diCurr.ibPort, GetCurrHouIndex()) == false)
-                && (boManualProfile == false)
-                && (boIntervalProfile == false))
+        else if ((GetEnblPrtHou(diCurr.ibPort, GetCurrHouIndex()) == false) && (boManualProfile == false))
         {
           ShowCanalNumber(ibDig);
           sprintf(szHi+14,"%02u",GetCurrHouIndex());
@@ -313,11 +311,11 @@ void    RunProfile(bool  _fCtrlHou)
       ShowProfileIntervalAfterMesage();
       AddDigRecord(EVE_PROFILE_INTERVAL_START);
 
-      if (StartProfile(GetAndResetProfileIntervalDig(), true) == 1) { OpenSpecial(); DisableAnswer(); } else { Work(); OK(); }
+      if (StartProfile(GetAndResetProfileIntervalDig()) == 1) { OpenSpecial(); DisableAnswer(); } else { Work(); OK(); }
     }
     else
     {
-      if (StartProfile(0, false) == 1) { OpenSpecial(); DisableAnswer(); } else { Work(); OK(); }
+      if (StartProfile(0) == 1) { OpenSpecial(); DisableAnswer(); } else { Work(); OK(); }
     }
   }
 
@@ -412,7 +410,7 @@ void    NextProfile(void)
   }
   else
   {
-    fStart = StartProfile(ibDig+1, false);
+    fStart = StartProfile(ibDig+1);
   }
 
   if (fStart == 0) // опрос завершён
