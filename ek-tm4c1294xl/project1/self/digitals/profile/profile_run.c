@@ -92,7 +92,7 @@ bool    StartProfile(uchar  ibCanal, bool  boIntervalProfile)
         {
           ShowCanalNumber(ibDig);
           sprintf(szHi+14,"%02u",GetCurrHouIndex());
-          ShowLo(szDisabledHou); if (boHideMessages == false) DelayMsg();
+          ShowLo(szDisabledHou); if (boHideMessages == false) DelayInf();
           AddDigRecord(EVE_PROFILE_DISABLED);
         }
         else break;
