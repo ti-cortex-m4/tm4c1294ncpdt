@@ -527,6 +527,4 @@ void    IntervalProfile(void)
 {
   fKeyOn = 0;
   MakePause(DEV_MODEM_STOP);
-
-//  if (diCurr.ibPhone != 0) AddModRecord(EVE_MODEM_PROFILEDONE1);
 }

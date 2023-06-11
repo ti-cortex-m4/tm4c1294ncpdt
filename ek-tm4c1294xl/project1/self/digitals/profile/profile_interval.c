@@ -24,7 +24,7 @@ cache const             chProfileIntervalModem = {PROFILE_INTERVAL_MODEM, &bProf
 
 
 
-uchar                   ibProfileIntervalDig;
+static uchar            ibProfileIntervalDig;
 
 
 
