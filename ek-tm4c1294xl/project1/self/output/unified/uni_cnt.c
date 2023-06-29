@@ -62,7 +62,7 @@ void    GetCntCanMonAllUni(bool  fDouble)
     InitPushUni();
     uint wSize = 0;
 
-    uchar ibMon = (bMONTHS+ibHardMon-bInBuffB-1) % bMONTHS;
+    uchar ibMon = (bMONTHS+ibHardMon-bInBuffB-1) % bMONTHS; // неизвестно, нужно ли здесь -1
     LoadCntMon(ibMon);
     LoadExt4Values(ibMon);
 
@@ -115,7 +115,7 @@ void    GetCntCanMonTrfUni(bool  fDouble)
     InitPushUni();
     uint wSize = 0;
 
-    uchar ibMon = (bMONTHS+ibHardMon-bInBuffB-1) % bMONTHS;
+    uchar ibMon = (bMONTHS+ibHardMon-bInBuffB) % bMONTHS;
     LoadExt4TValues(ibMon);
 
     uchar c;
