@@ -5,10 +5,11 @@ KEY_MNT_ESC_S!C
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-#include "../../memory/mem_extended_1.h"
+//#include "../../memory/mem_extended_1.h"
 #include "../../display/display.h"
 #include "../keyboard.h"
-#include "../../digitals/extended/extended_1.h"
+#include "../../devices/devices_init.h"
+#include "key_profile2mode.h"
 
 
 
@@ -58,7 +59,7 @@ void    key_SetProfile2Mode(void)
     {
       if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
       {
-        enProfile2Mode = InvertBool(enProfile2Mode);
+        enProfile2Mode = enProfile2Mode;
         Show(enProfile2Mode);
       }
       else Beep();

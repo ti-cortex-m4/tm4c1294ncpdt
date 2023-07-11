@@ -24,8 +24,10 @@ bool    UseProfile2x1(void) {
 
 
 bool    UseProfile2Top(void) {
+  return !UseProfile2x17();
 }
 
 
 bool    UseProfile2Top17(void) {
+  return UseProfile2x17();
 }
