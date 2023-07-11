@@ -4,7 +4,6 @@ profile2mode.h
 
 ------------------------------------------------------------------------------*/
 
-
 bool    UseProfile2x1(void);
 bool    UseProfile2x16(void);
 bool    UseProfile2x17(void);

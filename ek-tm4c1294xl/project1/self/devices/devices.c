@@ -1417,7 +1417,7 @@ void    RunDevices(void)
         }
         else
         {
-          if (enModeProfileB)
+          if (enProfile2Mode)
           {
             ShowLo(szProfile2x1); DelayInf();
 

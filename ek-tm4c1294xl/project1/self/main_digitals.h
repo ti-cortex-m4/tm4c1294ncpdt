@@ -42,8 +42,8 @@ typedef enum
 typedef enum
 {
   AUTOMATIC     = 0,
-  BLOCK_1       = 1,
-  BLOCK_16      = 2,
-  BLOCK_17      = 3,
-  BY_DIGIRAL    = 4
-} profile2;
+  SIZE_1        = 1,
+  SIZE_16       = 2,
+  SIZE_17       = 3,
+  BY_DIGITAL    = 4
+} profile2mode;
