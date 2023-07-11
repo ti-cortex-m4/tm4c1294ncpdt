@@ -26,8 +26,8 @@ extern  cache const             chMaxTimer35;
 extern  bool                    boIgnoreStatus38;
 extern  cache const             chIgnoreStatus38;
 
-extern  bool                    boShortProfileB;
-extern  cache const             chShortProfileB;
+extern  bool                    enModeProfileB;
+extern  cache const             chModeProfileB;
 
 extern  bool                    boModemDisconnectBetweenDigitals;
 extern  cache const             chModemDisconnectBetweenDigitals;

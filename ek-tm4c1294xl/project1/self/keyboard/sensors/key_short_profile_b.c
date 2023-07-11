@@ -23,5 +23,5 @@ static char const       *pszMessages[]  = { szMessage1, szMessage2, szMessage3, 
 
 void    key_SetShortProfileB(void)
 {
-  key_SetFlag(&chShortProfileB, pszMessages, szTrue, szFalse);
+  key_SetFlag(&chModeProfileB, pszMessages, szTrue, szFalse);
 }
