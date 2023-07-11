@@ -322,7 +322,8 @@ PROGRAMS!H
 #define wSET_TIME_ZONE_34           428
 #define wSET_MAX_TIMER_35           429
 #define wSET_IGNORE_STATUS_38       433
-#define wSET_SHORT_PROFILE_B        434
+#define wSET_PROFILE_2_MODE         434
+#define wSET_PROFILE_2_MODE_CAN     534
 #define wSET_MODEM_DISCONNECT_BD    435
 #define wSET_PROFILE_INTERVAL           436
 #define wSET_PROFILE_INTERVAL_DIRECT    437

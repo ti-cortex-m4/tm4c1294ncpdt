@@ -117,7 +117,8 @@ KEYBOARD_KEY!C
 #include "sensors/key_time_zone34.h"
 #include "sensors/key_max_timer35.h"
 #include "sensors/key_ignore_status38.h"
-#include "sensors/key_short_profile_b.h"
+#include "sensors/key_profile2mode.h"
+#include "sensors/key_profile2mode_can.h"
 #include "sensors/key_modem_disconnet_bd.h"
 #include "digitals/review/key_review_flag.h"
 #include "digitals/review/key_review_can.h"
@@ -388,8 +389,9 @@ void    Keyboard_Key(void)
       case wSET_TIME_ZONE_34:   key_SetTimeZone34();    break;
       case wSET_MAX_TIMER_35:   key_SetMaxTimer35();    break;
       case wSET_IGNORE_STATUS_38: key_SetIgnoreStatus38(); break;
-      case wSET_SHORT_PROFILE_B:key_SetShortProfileB(); break;
-      case wSET_MODEM_DISCONNECT_BD:key_SetModemDisconnectBD(); break;
+      case wSET_PROFILE_2_MODE: key_SetProfile2Mode(); break;
+      case wSET_PROFILE_2_MODE_CAN: key_SetProfile2ModeCan(); break;
+      case wSET_MODEM_DISCONNECT_BD: key_SetModemDisconnectBD(); break;
 
       case wSET_PROFILE_INTERVAL: key_SetProfileInterval(); break;
       case wSET_PROFILE_INTERVAL_DIRECT: key_SetProfileIntervalDirect(); break;
@@ -724,8 +726,9 @@ void    Keyboard_Key(void)
       case wSET_TIME_ZONE_34:   key_SetTimeZone34();    break;
       case wSET_MAX_TIMER_35:   key_SetMaxTimer35();    break;
       case wSET_IGNORE_STATUS_38: key_SetIgnoreStatus38(); break;
-      case wSET_SHORT_PROFILE_B:key_SetShortProfileB(); break;
-      case wSET_MODEM_DISCONNECT_BD:key_SetModemDisconnectBD(); break;
+      case wSET_PROFILE_2_MODE: key_SetProfile2Mode(); break;
+      case wSET_PROFILE_2_MODE_CAN: key_SetProfile2ModeCan(); break;
+      case wSET_MODEM_DISCONNECT_BD: key_SetModemDisconnectBD(); break;
 
       case wSET_PROFILE_INTERVAL: key_SetProfileInterval(); break;
       case wSET_PROFILE_INTERVAL_DIRECT: key_SetProfileIntervalDirect(); break;
@@ -980,8 +983,9 @@ void    Keyboard_Key(void)
       case wSET_TIME_ZONE_34:   key_SetTimeZone34();    break;
       case wSET_MAX_TIMER_35:   key_SetMaxTimer35();    break;
       case wSET_IGNORE_STATUS_38: key_SetIgnoreStatus38(); break;
-      case wSET_SHORT_PROFILE_B:key_SetShortProfileB(); break;
-      case wSET_MODEM_DISCONNECT_BD:key_SetModemDisconnectBD(); break;
+      case wSET_PROFILE_2_MODE: key_SetProfile2Mode(); break;
+      case wSET_PROFILE_2_MODE_CAN: key_SetProfile2ModeCan(); break;
+      case wSET_MODEM_DISCONNECT_BD: key_SetModemDisconnectBD(); break;
 
       case wSET_PROFILE_INTERVAL: key_SetProfileInterval(); break;
       case wSET_PROFILE_INTERVAL_DIRECT: key_SetProfileIntervalDirect(); break;

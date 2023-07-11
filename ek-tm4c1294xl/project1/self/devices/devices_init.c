@@ -82,8 +82,9 @@ bool                    boIgnoreStatus38;
 cache const             chIgnoreStatus38 = {IGNORE_STATUS_38, &boIgnoreStatus38, sizeof(bool)};
 
 profile2mode            enProfile2Mode;
-profile2mode            enProfile2ModeCan[bCANALS];
 cache const             chProfile2Mode = {PROFILE_2_MODE, &enProfile2Mode, sizeof(bool)};
+profile2mode            enProfile2ModeCan[bCANALS];
+cache const             chProfile2ModeCan = {PROFILE_2_MODE_CAN, &enProfile2ModeCan, sizeof(enProfile2ModeCan)};
 
 bool                    boModemDisconnectBetweenDigitals;
 cache const             chModemDisconnectBetweenDigitals = {MODEM_DISCONNECT_BETWEEN_DIGITALS, &boModemDisconnectBetweenDigitals, sizeof(bool)};
@@ -110,6 +111,7 @@ void    InitDevices1(void)
   LoadCacheChar(&chMaxTimer35, 60, 250, 120);
   LoadCacheBool(&chIgnoreStatus38, false);
   LoadCacheChar(&chProfile2Mode, P2M_AUTOMATIC, P2M_BY_DIGITAL, P2M_AUTOMATIC);
+  LoadCache(&chProfile2ModeCan); // TODO default
   LoadCacheBool(&chModemDisconnectBetweenDigitals, true);
 
   LoadProfileFrac6_All();
@@ -204,6 +206,8 @@ void    ResetDevices(bool  fFull)
 
   SaveCacheBool(&chIgnoreStatus38, false);
   SaveCacheChar(&chProfile2Mode, P2M_AUTOMATIC);
+  memset(&enProfile2ModeCan, P2M_AUTOMATIC, sizeof(enProfile2ModeCan));
+  SaveCache(&chProfile2ModeCan);
   SaveCacheBool(&chModemDisconnectBetweenDigitals, true);
 
   memset(&mpdbEngFracDigCan, 0, sizeof(mpdbEngFracDigCan));

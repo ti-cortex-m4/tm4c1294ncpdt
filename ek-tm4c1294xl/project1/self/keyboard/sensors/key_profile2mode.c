@@ -1,44 +1,61 @@
 /*------------------------------------------------------------------------------
-KEY_MNT_ESC_S!C
+key_profile2mode.c
 
 
 ------------------------------------------------------------------------------*/
 
-#include "../../main.h"
-//#include "../../memory/mem_extended_1.h"
-#include "../../display/display.h"
-#include "../keyboard.h"
+#include "../../console.h"
 #include "../../devices/devices_init.h"
 #include "key_profile2mode.h"
 
 
 
 //                                         0123456789ABCDEF
-static char const       szMntEscS1[]    = "Время обновления",
-                        szMntEscS2[]    = "    значений    ",
-                        szMntEscS3[]    = "   счетчиков    ",
-                        szAutomatic[]   = " автоматичски   ",
-                        szSize1[]       = " по 1 получасу  ",
-                        szSize16[]      = " по 16 получасов",
-                        szSize17[]      = " по 17 получасов",
+static char const       szMessage1[]    = "  Размер блока  ",
+                        szMessage2[]    = "   при опросе   ",
+                        szMessage3[]    = "  Меркурий-230  ",
+                        szAutomatic[]   = " автоматически  ",
+                        szSize1[]       = " 1 получас      ",
+                        szSize16[]      = " 16 получасов   ",
+                        szSize17[]      = " 17 получасов   ",
                         szByDigital[]   = " по каналам     ";
 
-static char const       *pszMessages[]  = { szMntEscS1, szMntEscS2, szMntEscS3, szMntEscS4, "" };
+static char const       *pszMessages[]  = { szMessage1, szMessage2, szMessage3, "" };
+
+
+
+// TODO switch
+void    ShowProfile2Mode(profile2mode p2m)
+{
+  if (p2m == P2M_SIZE_1)
+    strcpy(szLo, szSize1);
+  else if (p2m == P2M_SIZE_16)
+    strcpy(szLo, szSize16);
+  else if (p2m == P2M_SIZE_17)
+    strcpy(szLo, szSize17);
+  else if (p2m == P2M_BY_DIGITAL)
+    strcpy(szLo, szByDigital);
+  else
+    strcpy(szLo, szAutomatic);
+}
+
+
+profile2mode NextProfile2Mode(profile2mode p2m) {
+  if (p2m == P2M_SIZE_1)
+    return P2M_SIZE_16;
+  else if (p2m == P2M_SIZE_16)
+    return P2M_SIZE_17;
+  else if (p2m == P2M_SIZE_17)
+    return P2M_BY_DIGITAL;
+  else
+    return P2M_AUTOMATIC;
+}
 
 
 
 static void Show(void)
 {
-  if (enProfile2Mode == P2M_SIZE_1)
-    strcpy(szLo, szSize1);
-  else if (enProfile2Mode == P2M_SIZE_16)
-    strcpy(szLo, szSize16);
-  else if (enProfile2Mode == P2M_SIZE_17)
-    strcpy(szLo, szSize17);
-  else if (enProfile2Mode == P2M_BY_DIGITAL)
-    strcpy(szLo, szByDigital);
-  else
-    strcpy(szLo, szAutomatic);
+  ShowProfile2Mode(enProfile2Mode);
 
   if (enGlobal != GLB_WORK)
     szLo[0] = '.';
@@ -67,14 +84,9 @@ void    key_SetProfile2Mode(void)
     {
       if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
       {
-        if (enProfile2Mode == P2M_SIZE_1)
-          enProfile2Mode = P2M_SIZE_16;
-        else if (enProfile2Mode == P2M_SIZE_16)
-          enProfile2Mode = P2M_SIZE_17;
-        else if (enProfile2Mode == P2M_SIZE_17)
-           enProfile2Mode = P2M_BY_DIGITAL;
-        else
-           enProfile2Mode = P2M_AUTOMATIC;
+        enProfile2Mode = NextProfile2Mode(enProfile2Mode);
+
+        SaveCache(&chProfile2Mode);
 
         Show();
       }
