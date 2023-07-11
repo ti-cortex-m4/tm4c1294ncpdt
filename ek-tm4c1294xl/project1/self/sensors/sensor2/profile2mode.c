@@ -20,14 +20,3 @@ bool    UseProfile2x17(void) {
 bool    UseProfile2x1(void) {
   return (enProfile2Mode == P2M_SIZE_1);
 }
-
-
-
-bool    UseProfile2Top(void) {
-  return !UseProfile2x17();
-}
-
-
-bool    UseProfile2Top17(void) {
-  return UseProfile2x17();
-}

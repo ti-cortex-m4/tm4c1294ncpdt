@@ -17,20 +17,28 @@ KEY_MNT_ESC_S!C
 static char const       szMntEscS1[]    = "Время обновления",
                         szMntEscS2[]    = "    значений    ",
                         szMntEscS3[]    = "   счетчиков    ",
-                        szMntEscS4[]    = "    в буфере    ",
-                        szMinute30[]    = " 30 минут       ",
-                        szMinute3[]     = " 3 минуты       ";
+                        szAutomatic[]   = " автоматичски   ",
+                        szSize1[]       = " по 1 получасу  ",
+                        szSize16[]      = " по 16 получасов",
+                        szSize17[]      = " по 17 получасов",
+                        szByDigital[]   = " по каналам     ";
 
-static char const       *pszMntEscS[]  = { szMntEscS1, szMntEscS2, szMntEscS3, szMntEscS4, "" };
+static char const       *pszMessages[]  = { szMntEscS1, szMntEscS2, szMntEscS3, szMntEscS4, "" };
 
 
 
-static void Show(bool  bo)
+static void Show(void)
 {
-  if (bo == false)
-    strcpy(szLo,szMinute30);
+  if (enProfile2Mode == P2M_SIZE_1)
+    strcpy(szLo, szSize1);
+  else if (enProfile2Mode == P2M_SIZE_16)
+    strcpy(szLo, szSize16);
+  else if (enProfile2Mode == P2M_SIZE_17)
+    strcpy(szLo, szSize17);
+  else if (enProfile2Mode == P2M_BY_DIGITAL)
+    strcpy(szLo, szByDigital);
   else
-    strcpy(szLo,szMinute3);
+    strcpy(szLo, szAutomatic);
 
   if (enGlobal != GLB_WORK)
     szLo[0] = '.';
@@ -46,8 +54,8 @@ void    key_SetProfile2Mode(void)
       enKeyboard = KBD_INPUT1;
       Clear();
 
-      LoadSlide(pszMntEscS);
-      Show(enProfile2Mode);
+      LoadSlide(pszMessages);
+      Show();
     }
     else Beep();
   }
@@ -59,8 +67,16 @@ void    key_SetProfile2Mode(void)
     {
       if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
       {
-        enProfile2Mode = enProfile2Mode;
-        Show(enProfile2Mode);
+        if (enProfile2Mode == P2M_SIZE_1)
+          enProfile2Mode = P2M_SIZE_16;
+        else if (enProfile2Mode == P2M_SIZE_16)
+          enProfile2Mode = P2M_SIZE_17;
+        else if (enProfile2Mode == P2M_SIZE_17)
+           enProfile2Mode = P2M_BY_DIGITAL;
+        else
+           enProfile2Mode = P2M_AUTOMATIC;
+
+        Show();
       }
       else Beep();
     }

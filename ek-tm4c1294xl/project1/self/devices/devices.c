@@ -1389,7 +1389,7 @@ void    RunDevices(void)
     case DEV_TOP_B2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        if (TestVersionB710()) ReadTopBx17(); else ReadTopBOld(); // ???
+        if (UseProfile2x17()) ReadTopBx17(); else ReadTopBOld();
         MakePause(DEV_POSTTOP_B2);
       }
       else

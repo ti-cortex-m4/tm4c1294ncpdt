@@ -109,7 +109,7 @@ void    InitDevices1(void)
   LoadCacheChar(&chTimeZone34, 0, 13, 3);
   LoadCacheChar(&chMaxTimer35, 60, 250, 120);
   LoadCacheBool(&chIgnoreStatus38, false);
-  LoadCacheBool(&chProfile2Mode, false);
+  LoadCacheChar(&chProfile2Mode, P2M_AUTOMATIC, P2M_BY_DIGITAL, P2M_AUTOMATIC);
   LoadCacheBool(&chModemDisconnectBetweenDigitals, true);
 
   LoadProfileFrac6_All();
@@ -203,7 +203,7 @@ void    ResetDevices(bool  fFull)
   SaveCacheChar(&chMaxTimer35, 120);
 
   SaveCacheBool(&chIgnoreStatus38, false);
-  SaveCacheBool(&chProfile2Mode, false);
+  SaveCacheChar(&chProfile2Mode, P2M_AUTOMATIC);
   SaveCacheBool(&chModemDisconnectBetweenDigitals, true);
 
   memset(&mpdbEngFracDigCan, 0, sizeof(mpdbEngFracDigCan));
