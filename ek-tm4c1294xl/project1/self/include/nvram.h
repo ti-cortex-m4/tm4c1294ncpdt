@@ -41,6 +41,11 @@ NVRAM!H
 #include "../digitals/address/ascii_address.h"
 
 
+
+extern  profile2mode            enProfile2ModeCan[bCANALS];
+
+
+
 // количество байтов
 #define dwNVRAM_BYTES   (ulong)(128*1024)
 
