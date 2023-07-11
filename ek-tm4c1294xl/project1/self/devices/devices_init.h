@@ -27,6 +27,7 @@ extern  bool                    boIgnoreStatus38;
 extern  cache const             chIgnoreStatus38;
 
 extern  profile2mode            enProfile2Mode;
+extern  profile2mode            enProfile2ModeCan[bCANALS];
 extern  cache const             chProfile2Mode;
 
 extern  bool                    boModemDisconnectBetweenDigitals;

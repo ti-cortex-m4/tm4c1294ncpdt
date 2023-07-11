@@ -201,7 +201,7 @@
     case DEV_TOP_B2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        if (TestVersionB710()) ReadTopBx17(); else ReadTopBOld();
+        if (TestVersionB710()) ReadTopBx17(); else ReadTopBOld(); // ???
         MakePause(DEV_POSTTOP_B2);
       }
       else
@@ -222,30 +222,29 @@
       cbIteration = 0;
       if (diCurr.bDevice == 2)
       {
-        if (TestVersionB710())
+        if (UseProfile2x17())
         {
+          ShowLo(szProfile2x17); DelayInf();
+
           cbRepeat = MaxRepeats();
           QueryHeaderBx17();
           SetCurr(DEV_HEADER_B2x17);
         }
+        else if (UseProfile2x1())
+        {
+          ShowLo(szProfile2x1); DelayInf();
+
+          cbRepeat = MaxRepeats();
+          QueryHeaderB();
+          SetCurr(DEV_HEADER_B2);
+        }
         else
         {
-          if (boShortProfileB)
-          {
-            ShowLo(szProfile2x1); DelayInf();
+          ShowLo(szProfile2x16); DelayInf();
 
-            cbRepeat = MaxRepeats();
-            QueryHeaderB();
-            SetCurr(DEV_HEADER_B2);
-          }
-          else
-          {
-            ShowLo(szProfile2x16); DelayInf();
-
-            cbRepeat = MaxRepeats();
-            QueryHeaderBx16();
-            SetCurr(DEV_HEADER_B2x16);
-          }
+          cbRepeat = MaxRepeats();
+          QueryHeaderBx16();
+          SetCurr(DEV_HEADER_B2x16);
         }
       }
       else

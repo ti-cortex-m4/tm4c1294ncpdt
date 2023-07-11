@@ -82,6 +82,7 @@ bool                    boIgnoreStatus38;
 cache const             chIgnoreStatus38 = {IGNORE_STATUS_38, &boIgnoreStatus38, sizeof(bool)};
 
 profile2mode            enProfile2Mode;
+profile2mode            enProfile2ModeCan[bCANALS];
 cache const             chProfile2Mode = {PROFILE_2_MODE, &enProfile2Mode, sizeof(bool)};
 
 bool                    boModemDisconnectBetweenDigitals;
