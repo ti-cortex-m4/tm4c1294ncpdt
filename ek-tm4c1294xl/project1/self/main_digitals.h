@@ -41,9 +41,9 @@ typedef enum
 // режим опроса профилей счетчика Меркурий-230
 typedef enum
 {
-  AUTOMATIC     = 0,
-  SIZE_1        = 1,
-  SIZE_16       = 2,
-  SIZE_17       = 3,
-  BY_DIGITAL    = 4
+  P2M_AUTOMATIC     = 0,
+  P2M_SIZE_1        = 1,
+  P2M_SIZE_16       = 2,
+  P2M_SIZE_17       = 3,
+  P2M_BY_DIGITAL    = 4
 } profile2mode;
