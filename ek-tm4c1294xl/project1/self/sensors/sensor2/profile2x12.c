@@ -79,7 +79,7 @@ void    QueryHeaderBx12(void)
   PushChar((dwBaseCurr % 0x10000) / 0x100);
   PushChar(dwBaseCurr % 0x100);
 
-  PushChar(0xFF);
+  PushChar(15*12); // 180d = B4h
 
   QueryIO((uint)(1+15*12+2), 3+3+2);
 }
