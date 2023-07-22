@@ -228,7 +228,7 @@
           QueryHeaderBx12();
           SetCurr(DEV_HEADER_B2x12);
         }
-        if (TestVersionB710())
+        else if (TestVersionB710())
         {
           cbRepeat = MaxRepeats();
           QueryHeaderBx17();
