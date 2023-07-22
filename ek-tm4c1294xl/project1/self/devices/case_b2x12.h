@@ -26,7 +26,7 @@
         uchar i;
         for (i=0; i<12; i++)
         {
-          if (ReadHeaderBx12(i,0) == 0) break;
+          if (ReadHeaderBx12(i,1) == 0) break;
           (dwBaseCurr == 0) ? (dwBaseCurr = 0x1FFF0) : (dwBaseCurr -= 0x0010);
         }
 

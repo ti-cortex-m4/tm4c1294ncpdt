@@ -105,7 +105,7 @@ bool    ReadHeaderBx12(uchar  ibBlock, bool  fDelay)
       (tiDig.bYear   == 0))
   {
     if (++iwMajor > GetMaxShutdown()) return(0);
-    sprintf(szLo," выключено: %-4u   ",iwMajor); if (fDelay == 1) DelayOff();
+    sprintf(szLo," выключено: %-4u   ",iwMajor); //if (fDelay == 1) DelayOff();
 
     if (iwDigHou != 0)
     {
@@ -170,4 +170,3 @@ bool    ReadHeaderBx12(uchar  ibBlock, bool  fDelay)
   MakeSpecial(ti);
   return(MakeStopHou(0));
 }
-
