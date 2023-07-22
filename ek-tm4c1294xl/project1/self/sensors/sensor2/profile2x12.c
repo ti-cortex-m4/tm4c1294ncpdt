@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-PROFILE2X17!C
+PROFILE2X12!C
 
 
 ------------------------------------------------------------------------------*/
@@ -30,11 +30,11 @@ PROFILE2X17!C
 #include "../../special/special.h"
 #include "../../flash/records.h"
 #include "../../energy.h"
-#include "profile2x17.h"
+#include "profile2x12.h"
 
 
 
-void    ReadTopBx17(void)
+void    ReadTopBx12(void)
 {
   // адрес обрабатываемого блока
   if (!UseBounds())
@@ -68,7 +68,7 @@ void    ReadTopBx17(void)
 }
 
 
-void    QueryHeaderBx17(void)
+void    QueryHeaderBx12(void)
 {
   InitPush(0);
 
@@ -81,15 +81,15 @@ void    QueryHeaderBx17(void)
 
   PushChar(0xFF);
 
-  QueryIO((uint)(1+15*17+2), 3+3+2);
+  QueryIO((uint)(1+15*12+2), 3+3+2);
 }
 
 
-bool    ReadHeaderBx17(uchar  ibBlock, bool  fDelay)
+bool    ReadHeaderBx12(uchar  ibBlock, bool  fDelay)
 {
   HideCurrTime(1);
 
-  InitPop((uint)(1+(17-1-ibBlock)*15));
+  InitPop((uint)(1+(12-1-ibBlock)*15));
 
   PopChar();
   tiDig.bHour   = FromBCD(PopChar());                   // время/дата часового блока
