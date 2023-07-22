@@ -1,9 +1,9 @@
 /*------------------------------------------------------------------------------
-PROFILE2X17!H
+PROFILE2X12!H
 
 
 ------------------------------------------------------------------------------*/
 
-void    ReadTopBx17(void);
-void    QueryHeaderBx17(void);
-bool    ReadHeaderBx17(uchar  ibBlock, bool  fDelay);
+void    ReadTopBx12(void);
+void    QueryHeaderBx12(void);
+bool    ReadHeaderBx12(uchar  ibBlock, bool  fDelay);
