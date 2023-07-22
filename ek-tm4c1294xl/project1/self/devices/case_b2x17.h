@@ -1,10 +1,10 @@
 
 #ifndef SKIP_B
 
-    // Меркурий-230 блоками по 16 получасов
-    case DEV_HEADER_B2x16:
+    // Меркурий-233 блоками по 17 получасов
+    case DEV_HEADER_B2x17:
       if (mpSerial[ibPort] == SER_GOODCHECK)
-        MakePause(DEV_POSTHEADER_B2x16);
+        MakePause(DEV_POSTHEADER_B2x17);
       else
       {
         if (cbRepeat == 0) ErrorProfile();
@@ -13,30 +13,30 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryHeaderBx16();
-          SetCurr(DEV_HEADER_B2x16);
+          QueryHeaderBx17();
+          SetCurr(DEV_HEADER_B2x17);
         }
       }
       break;
 
-    case DEV_POSTHEADER_B2x16:
+    case DEV_POSTHEADER_B2x17:
       {
-        NewBoundsAbs16(dwBaseCurr);
+        NewBoundsAbs32(dwBaseCurr);
 
         uchar i;
-        for (i=0; i<PROFILE2X16_SIZE; i++)
+        for (i=0; i<17; i++)
         {
-          if (ReadHeaderBx16(i,1) == 0) break;
-          (wBaseCurr == 0) ? (wBaseCurr = 0xFFF0) : (wBaseCurr -= 0x0010);
+          if (ReadHeaderBx17(i,1) == 0) break;
+          (dwBaseCurr == 0) ? (dwBaseCurr = 0x1FFF0) : (dwBaseCurr -= 0x0010);
         }
 
-        if (i != PROFILE2X16_SIZE)
+        if (i != 17)
           DoneProfile();
         else
         {
           cbRepeat = MaxRepeats();
-          QueryHeaderBx16();
-          SetCurr(DEV_HEADER_B2x16);
+          QueryHeaderBx17();
+          SetCurr(DEV_HEADER_B2x17);
         }
       }
       break;
