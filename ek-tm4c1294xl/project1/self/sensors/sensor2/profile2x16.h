@@ -16,7 +16,9 @@ PROFILE2X16!H
 
 
 extern  char const              szProfile2x1[],
-                                szProfile2x16[];
+                                szProfile2x12[],
+                                szProfile2x16[],
+                                szProfile2x17[];
 
 
 
