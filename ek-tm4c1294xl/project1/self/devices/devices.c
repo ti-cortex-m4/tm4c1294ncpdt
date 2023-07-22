@@ -1412,12 +1412,16 @@ void    RunDevices(void)
       {
         if (TestVersionB910())
         {
+          ShowLo(szProfile2x12); DelayInf();
+
           cbRepeat = MaxRepeats();
           QueryHeaderBx12();
           SetCurr(DEV_HEADER_B2x12);
         }
         else if (TestVersionB710())
         {
+          ShowLo(szProfile2x17); DelayInf();
+
           cbRepeat = MaxRepeats();
           QueryHeaderBx17();
           SetCurr(DEV_HEADER_B2x17);
