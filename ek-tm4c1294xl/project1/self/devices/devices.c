@@ -1410,6 +1410,12 @@ void    RunDevices(void)
       cbIteration = 0;
       if (diCurr.bDevice == 2)
       {
+        if (TestVersionB910())
+        {
+          cbRepeat = MaxRepeats();
+          QueryHeaderBx12();
+          SetCurr(DEV_HEADER_B2x12);
+        }
         if (TestVersionB710())
         {
           cbRepeat = MaxRepeats();
@@ -1669,7 +1675,7 @@ void    RunDevices(void)
 
 #ifndef SKIP_B
 
-    // Меркурий-233 блоками по 12 получасов
+    // Меркурий-234 блоками по 12 получасов (версия 9.1.0+)
     case DEV_HEADER_B2x12:
       if (mpSerial[ibPort] == SER_GOODCHECK)
         MakePause(DEV_POSTHEADER_B2x12);

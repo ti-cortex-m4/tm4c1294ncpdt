@@ -147,6 +147,13 @@ bool    TestVersionB710(void)
 }
 
 
+// проверка версии: 9.1.0 и выше
+bool    TestVersionB910(void)
+{
+  return ((uint)100*bVersionB1 + 10*bVersionB2 + bVersionB3 >= 910);
+}
+
+
 
 // посылка запроса на чтение логического номера
 void    QueryIdB(void)

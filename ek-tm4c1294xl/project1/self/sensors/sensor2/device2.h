@@ -32,6 +32,7 @@ ulong   ReadSerialB(void);
 void    QueryVersionB(void);
 void    ReadVersionB(void);
 bool    TestVersionB710(void);
+bool    TestVersionB910(void);
 
 void    QueryIdB(void);
 bool    ReadIdB(void);

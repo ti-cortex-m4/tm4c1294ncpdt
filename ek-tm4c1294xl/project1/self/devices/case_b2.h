@@ -222,6 +222,12 @@
       cbIteration = 0;
       if (diCurr.bDevice == 2)
       {
+        if (TestVersionB910())
+        {
+          cbRepeat = MaxRepeats();
+          QueryHeaderBx12();
+          SetCurr(DEV_HEADER_B2x12);
+        }
         if (TestVersionB710())
         {
           cbRepeat = MaxRepeats();
