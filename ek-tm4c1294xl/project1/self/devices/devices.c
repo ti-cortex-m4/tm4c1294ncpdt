@@ -1577,6 +1577,9 @@ void    RunDevices(void)
     }
       break;
 
+#endif
+
+#ifndef SKIP_B
 
     // Меркурий-233 блоками по 17 получасов
     case DEV_HEADER_B2x17:
@@ -1618,6 +1621,9 @@ void    RunDevices(void)
       }
       break;
 
+#endif
+
+#ifndef SKIP_B
 
     // Меркурий-230 блоками по 16 получасов
     case DEV_HEADER_B2x16:
