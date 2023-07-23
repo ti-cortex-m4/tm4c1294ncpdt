@@ -153,7 +153,7 @@ bool    ReadHeaderBx12(uchar  ibBlock, bool  fDelay)
 
 
   ShowProgressDigHou();
-  if (fDelay == 1) DelayOff();
+  if (fDelay == 1) Delay(50);
 
   PopChar();
 
