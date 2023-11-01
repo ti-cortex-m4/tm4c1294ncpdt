@@ -302,5 +302,7 @@ typedef enum
   PROFILE_INTERVAL_DIRECT = PROFILE_INTERVAL + sizeof(bool) + bNVRAM_MARGIN,
   PROFILE_INTERVAL_MODEM = PROFILE_INTERVAL_DIRECT + sizeof(uchar) + bNVRAM_MARGIN,
 
-  NVRAM_END             = PROFILE_INTERVAL_MODEM + sizeof(uchar) + bNVRAM_MARGIN
+  HEX_ADDRESSES         = PROFILE_INTERVAL_MODEM + sizeof(uchar) + bNVRAM_MARGIN,
+
+  NVRAM_END             = HEX_ADDRESSES + sizeof(bool) + bNVRAM_MARGIN
 } nvram;
