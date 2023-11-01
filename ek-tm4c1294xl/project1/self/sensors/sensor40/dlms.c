@@ -154,7 +154,16 @@ void    AARQ(uchar  bNS, uchar  bNR)
   PushChar(0x80);
 #if true
   PushChar(bPassSize);
-  Push(Pass.szLine, bPassSize);
+
+  if (fHexAddresses == true) {
+    uchar i;
+    for (i=0; i<bPassSize; i++) {
+      PushChar(Pass.szLine[i]);
+    }
+  }
+  else {
+    Push(Pass.szLine, bPassSize);
+  }
 #else
   PushChar(0x08); // length
   PushChar(0x78); // xRwPbExF
