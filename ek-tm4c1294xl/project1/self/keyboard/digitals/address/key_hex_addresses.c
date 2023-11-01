@@ -1,27 +1,26 @@
 /*------------------------------------------------------------------------------
-KEY_SERIALS_MANUAL.C
+key_hex_addresses.c
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../../console.h"
-#include "../../digitals/serials.h"
 #include "../common/key_flag.h"
-#include "key_serials_manual.h"
+#include "key_hex_addresses.h"
 
 
 
 //                                         0123456789ABCDEF
-static char const       szMessage1[]    = "   Установка    ",
-                        szMessage2[]    = "заводск. номеров",
-                        szTrue[]        = " ручная         ",
-                        szFalse[]       = " автоматическая ";
+static char const       szMessage1[]    = "  Тип задания   ",
+                        szMessage2[]    = "    адресов     ",
+                        szTrue[]        = " байты          ",
+                        szFalse[]       = " символы        ";
 
 static char const       *pszMessages[]  = { szMessage1, szMessage2, "" };
 
 
 
-void    key_SetSerialsManual(void)
+void    key_SetHexAddresses(void)
 {
-  key_SetFlag(&chSerialsManual, pszMessages, szTrue, szFalse);
+  key_SetFlag(&chHexAddresses, pszMessages, szTrue, szFalse);
 }

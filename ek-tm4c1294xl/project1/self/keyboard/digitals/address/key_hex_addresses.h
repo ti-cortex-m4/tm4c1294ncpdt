@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
-KEY_SERIALS_MANUAL.H
+key_hex_addresses.h
 
 
 ------------------------------------------------------------------------------*/
 
-void    key_SetSerialsManual(void);
+void    key_SetHexAddresses(void);
