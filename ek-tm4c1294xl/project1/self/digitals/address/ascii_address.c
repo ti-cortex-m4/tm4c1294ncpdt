@@ -15,8 +15,8 @@ ascii_address.h
 line                    mpphAsciiAddress[bCANALS];
 cache const             chAsciiAddress = {ASCII_ADDRESS, &mpphAsciiAddress, sizeof(mpphAsciiAddress)};
 
-bool                    fHexAddressess;
-cache const             chHexAddressess = {HEX_ADDRESSES, &fHexAddressess, sizeof(bool)};
+bool                    fHexAddresses;
+cache const             chHexAddresses = {HEX_ADDRESSES, &fHexAddresses, sizeof(bool)};
 
 
 
@@ -24,7 +24,7 @@ void    InitAsciiAddress(void)
 {
   LoadCache(&chAsciiAddress);
 
-  LoadCacheBool(&chHexAddressess, false);
+  LoadCacheBool(&chHexAddresses, false);
 }
 
 
@@ -34,6 +34,6 @@ void    ResetAsciiAddress(void)
   memset(&mpphAsciiAddress, 0, sizeof(mpphAsciiAddress));
   SaveCache(&chAsciiAddress);
 
-  SaveCacheBool(&chHexAddressess, false);
+  SaveCacheBool(&chHexAddresses, false);
 }
 

@@ -4,8 +4,10 @@ key_hex_addresses.c
 
 ------------------------------------------------------------------------------*/
 
-#include "../../console.h"
-#include "../common/key_flag.h"
+#include "../../../main.h"
+#include "../../../console.h"
+#include "../../common/key_flag.h"
+#include "../../../digitals/address/ascii_address.h"
 #include "key_hex_addresses.h"
 
 
