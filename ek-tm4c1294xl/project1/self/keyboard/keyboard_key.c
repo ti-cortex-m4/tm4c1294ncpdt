@@ -29,6 +29,8 @@ KEYBOARD_KEY!C
 #include "digitals/current/key_timeout_current.h"
 #include "digitals/profile/key_timeout_profile.h"
 #include "digitals/key_addresses.h"
+#include "digitals/address/key_ascii_addresses.h"
+#include "digitals/address/key_hex_addresses.h"
 #include "digitals/key_enbl_keys.h"
 #include "digitals/key_keys.h"
 #include "digitals/key_serials_manual.h"
@@ -191,11 +193,6 @@ KEYBOARD_KEY!C
 #include "key_health.h"
 
 
-
-#include "digitals/address/key_ascii_addresses.h"
-
-
-
 void    Keyboard_Key(void)
 {
   if (enGlobal == GLB_PROGRAM)
@@ -315,6 +312,7 @@ void    Keyboard_Key(void)
 
       case bSET_ADDRESSES:      key_SetAddresses();     break;
       case bSET_ASCII_ADDRESSES:key_SetAsciiAddresses();break;
+      case bSET_HEX_ADDRESSES:  key_SetHexAddresses();  break;
       case bSET_ENBL_KEYS:      key_SetEnblKeys();      break;
       case bSET_KEYS:           key_SetKeys();          break;
       case wSET_KEYS_LEVEL_B:   key_SetKeysLevelB();    break;
@@ -568,6 +566,7 @@ void    Keyboard_Key(void)
 
       case bSET_ADDRESSES:      key_SetAddresses();     break;
       case bSET_ASCII_ADDRESSES:key_SetAsciiAddresses();break;
+      case bSET_HEX_ADDRESSES:  key_SetHexAddresses();  break;
       case bSET_ENBL_KEYS:      key_SetEnblKeys();      break;
       case bSET_KEYS:           key_SetKeys();          break;
       case wSET_KEYS_LEVEL_B:   key_SetKeysLevelB();    break;
@@ -902,6 +901,7 @@ void    Keyboard_Key(void)
 
       case bSET_ADDRESSES:      key_SetAddresses();     break;
       case bSET_ASCII_ADDRESSES:key_SetAsciiAddresses();break;
+      case bSET_HEX_ADDRESSES:  key_SetHexAddresses();  break;
       case bSET_ENBL_KEYS:      key_SetEnblKeys();      break;
       case bSET_KEYS:           key_SetKeys();          break;
       case wSET_KEYS_LEVEL_B:   key_SetKeysLevelB();    break;

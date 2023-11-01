@@ -251,6 +251,7 @@ PROGRAMS!H
 
 #define bSET_ADDRESSES              100
 #define bSET_ASCII_ADDRESSES        210
+#define bSET_HEX_ADDRESSES          211
 #define bSET_ENBL_KEYS              170
 #define bSET_KEYS                   171
 #define wSET_KEYS_LEVEL_B           271
