@@ -14,17 +14,31 @@ link_up_reset.c
 
 
 
+static uint8_t cbLinkUpReset;
+
+
+
 void InitLinkUpReset(void) {
+    cbLinkUpReset = 10;
 }
 
 
 void LinkUpReset_Start(void) {
+    cbLinkUpReset = 9;
 }
 
 
 void LinkUpReset_1Hz(void) {
+    if (cbLinkUpReset != 10) && (cbLinkUpReset > 0) {
+        cbLinkUpReset--;
+    }
 }
 
 
 void RunLinkUpReset(void) {
+    if (cbLinkUpReset == 0) {
+        CONSOLE("link up restart \n");
+        DelayMilliSecond(100);
+        Restart();
+    }
 }
