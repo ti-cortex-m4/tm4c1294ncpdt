@@ -12,6 +12,7 @@ timer2.c
 #include "driverlib/sysctl.h"
 #include "driverlib/timer.h"
 #include "../kernel/clock.h"
+#include "../kernel/link_status_up.h"
 #include "../uart/modem.h"
 #include "../uart/server_to_modem.h"
 #include "../uart/modem_to_server.h"
@@ -49,6 +50,7 @@ void Timer2IntHandler(void)
 
     Clock_1Hz();
     ModemToServer_1Hz();
+    LinkStatusUp_1Hz();
   }
 
   Modem_10Hz();
