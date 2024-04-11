@@ -4,4 +4,6 @@ link_status_up.h
 
 ------------------------------------------------------------------------------*/
 
-void RunPeriodicReset(void);
+void InitLinkStatusUp(void);
+void LinkStatusUp_1Hz(void);
+void RunLinkStatusUp(void);

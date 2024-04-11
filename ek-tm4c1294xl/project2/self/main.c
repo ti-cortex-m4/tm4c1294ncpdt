@@ -21,6 +21,7 @@ MAIN,C
 #include "kernel/console_version.h"
 #include "kernel/console_pins.h"
 #include "kernel/periodic_reset.h"
+#include "kernel/link_status_up.h"
 #include "hardware/gpio.h"
 #include "hardware/led.h"
 #include "hardware/sys_tick.h"
@@ -176,6 +177,7 @@ int     main(void)
   CONSOLE("temperature: %d C\n", GetInternalTemperature());
   ConsolePins();
   InitWatchdog();
+  InitLinkStatusUp();
   InitLEDs_After();
 
   // ETH#02: After completing Ethernet Initialization, the user code must turn ON the Flash Prefetch by clearing the FLASHCONF.FPFOFF bit to restore system performance.
@@ -190,5 +192,6 @@ int     main(void)
 
     ResetWatchdog();
     RunPeriodicReset();
+    RunLinkStatusUp();
   }
 }
