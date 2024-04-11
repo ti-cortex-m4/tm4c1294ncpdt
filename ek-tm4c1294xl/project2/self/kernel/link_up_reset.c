@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-link_status_up.c
+link_up_reset.c
 
 
 ------------------------------------------------------------------------------*/
@@ -10,28 +10,19 @@ link_status_up.c
 //#include "../kernel/settings.h"
 //#include "../kernel/log.h"
 //#include "clock.h"
-#include "link_status_up.h"
+#include "link_up_reset.h"
 
 
 
 void InitLinkUpReset(void) {
-//  if ((fPeriodicResetFlag == 1) && (wPeriodicResetPeriod >= 1) && (wPeriodicResetPeriod <= 1440))
-//  {
-//    uint minutes = GetClockSeconds() / 60;
-//    if (minutes >= wPeriodicResetPeriod)
-//    {
-//      CONSOLE("periodic restart \n");
-//      DelaySecond(1);
-//
-//      //Restart();
-//      HardwareRestart();
-//    }
-//  }
 }
 
 
-void    LinkUpReset_1Hz(void) {
+void LinkUpReset_Start(void) {
+}
 
+
+void LinkUpReset_1Hz(void) {
 }
 
 
