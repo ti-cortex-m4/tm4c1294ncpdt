@@ -99,6 +99,12 @@ bool IsModemModeCommand(const uchar u)
 }
 
 
+bool IsModemModeData(const uchar u)
+{
+  return IsModem(u) && (mbModemMode[u] == MM_DATA);
+}
+
+
 void ProcessModemModeCommand(const uchar u, const uchar b)
 {
   if (mbInputMode[u] == IM_BEGIN)
