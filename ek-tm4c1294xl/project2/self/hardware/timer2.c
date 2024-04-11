@@ -50,7 +50,7 @@ void Timer2IntHandler(void)
 
     Clock_1Hz();
     ModemToServer_1Hz();
-    LinkStatusUp_1Hz();
+    LinkUpReset_1Hz();
   }
 
   Modem_10Hz();

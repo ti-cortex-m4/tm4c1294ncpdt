@@ -177,7 +177,7 @@ int     main(void)
   CONSOLE("temperature: %d C\n", GetInternalTemperature());
   ConsolePins();
   InitWatchdog();
-  InitLinkStatusUp();
+  InitLinkUpReset();
   InitLEDs_After();
 
   // ETH#02: After completing Ethernet Initialization, the user code must turn ON the Flash Prefetch by clearing the FLASHCONF.FPFOFF bit to restore system performance.
@@ -192,6 +192,6 @@ int     main(void)
 
     ResetWatchdog();
     RunPeriodicReset();
-    RunLinkStatusUp();
+    RunLinkUpReset();
   }
 }
