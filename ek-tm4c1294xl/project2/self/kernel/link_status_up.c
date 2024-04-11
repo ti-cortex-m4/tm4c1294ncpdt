@@ -14,7 +14,7 @@ link_status_up.c
 
 
 
-void InitLinkStatusUp(void) {
+void InitLinkUpReset(void) {
 //  if ((fPeriodicResetFlag == 1) && (wPeriodicResetPeriod >= 1) && (wPeriodicResetPeriod <= 1440))
 //  {
 //    uint minutes = GetClockSeconds() / 60;
@@ -30,10 +30,10 @@ void InitLinkStatusUp(void) {
 }
 
 
-void    LinkStatusUp_1Hz(void) {
+void    LinkUpReset_1Hz(void) {
 
 }
 
 
-void RunLinkStatusUp(void) {
+void RunLinkUpReset(void) {
 }
