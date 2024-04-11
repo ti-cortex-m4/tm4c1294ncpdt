@@ -8,6 +8,7 @@ TELNET.C
 #include "lwip/sys.h"
 #include "../kernel/log.h"
 #include "../kernel/settings.h"
+#include "../kernel/link_up_reset.h"
 #include "telnet.h"
 
 
@@ -113,6 +114,7 @@ void TelnetNotifyLinkStatus(bool bLinkStatusUp)
     if(bLinkStatusUp)
     {
         CONSOLE("link status: up, ignore\n");
+        LinkUpReset_Start();
     }
     else
     {
