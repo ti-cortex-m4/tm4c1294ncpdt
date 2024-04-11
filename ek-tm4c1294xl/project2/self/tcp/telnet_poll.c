@@ -65,7 +65,9 @@ err_t TelnetPoll(void *arg, struct tcp_pcb *pcb)
             pState->ulConnectionTimeout++;
             if ((pState->ulMaxTimeout != 0) && (pState->ulConnectionTimeout > pState->ulMaxTimeout))
             {
-               ModemDisconnectedByTimeout(pState->ucSerialPort);
+               if (IsModemModeData(pState->ucSerialPort)) {
+                   ModemDisconnectedByTimeout(pState->ucSerialPort);
+               }
 
                CONSOLE("[%u] poll - close client connection by timeout\n", pState->ucSerialPort);
                return TelnetCloseClient(pState->ucSerialPort);

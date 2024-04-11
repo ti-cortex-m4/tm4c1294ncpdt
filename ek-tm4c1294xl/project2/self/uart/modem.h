@@ -56,6 +56,7 @@ void InitModem(void);
 void ModemSetVerbose(const bool f);
 bool IsModem(const uchar u);
 bool IsModemModeCommand(const uchar u);
+bool IsModemModeData(const uchar u);
 void ProcessModemModeCommand(const uchar u, const uchar b);
 void ProcessModemModeData(const uchar u, const uchar b);
 void Modem_10Hz(void);
