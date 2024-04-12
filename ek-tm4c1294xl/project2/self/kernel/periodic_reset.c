@@ -15,7 +15,7 @@ periodic_reset.c
 
 
 void RunPeriodicReset(void) {
-  if ((fPeriodicResetFlag == 1) && (wPeriodicResetPeriod >= 1) && (wPeriodicResetPeriod <= 1440))
+  if ((fPeriodicResetFlag == 1) && (wPeriodicResetPeriod >= 1) && (wPeriodicResetPeriod <= 30))
   {
     uint minutes = GetClockSeconds() / 60;
     if (minutes >= wPeriodicResetPeriod)

@@ -114,11 +114,12 @@ void TelnetNotifyLinkStatus(bool bLinkStatusUp)
     if(bLinkStatusUp)
     {
         CONSOLE("link status: up, ignore\n");
-        LinkUpReset_Start();
+        LinkUpReset_LinkUp();
     }
     else
     {
         CONSOLE("link status: down\n");
+        LinkUpReset_LinkDown();
 
         uint8_t u;
         for(u = 0; u < UART_COUNT; u++)
