@@ -140,6 +140,8 @@ const message * const mppcszControls[] =
   &enLED1Mode.szName,
   &enPeriodicResetFlag.szName,
   &enPeriodicResetPeriod.szName,
+  &enLinkUpResetFlag.szName,
+  &enLinkUpResetTimeout.szName,
 };
 
 
