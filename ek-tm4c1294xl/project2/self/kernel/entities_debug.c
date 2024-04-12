@@ -116,6 +116,13 @@ const entity enWatchdogResetCount = {
   "",
 };
 
+const entity enLinkUpResetCount = {
+  EEPROM_LINK_UP_RESET_COUNT, &cwLinkUpResetCount, sizeof(uint), INT, 0,
+  0, 0xFFFE, 0,
+  "",
+  "",
+};
+
 
 const entity enPeriodicResetFlag = {
   EEPROM_PERIODIC_RESET_FLAG, &fPeriodicResetFlag, sizeof(uchar), CHAR, 0,
@@ -126,7 +133,22 @@ const entity enPeriodicResetFlag = {
 
 const entity enPeriodicResetPeriod = {
   EEPROM_PERIODIC_RESET_PERIOD, &wPeriodicResetPeriod, sizeof(uint), INT, 0,
-  1, 24, 24,
+  1, 30, 30,
   "PERIODIC_RESET_PERIOD",
-  "AI=PERIODIC_RESET_PERIOD;E=1;D=Periodic reset period (minutes);T=INT;C=EDIT;V=PERIODIC_RESET_PERIOD<1||PERIODIC_RESET_PERIOD>1440?\"Periodic reset period must be between 1 and 1440 minutes\":\"\";S=PERIODIC_RESET_FLAG==1?\"e\":\"i\"",
+  "AI=PERIODIC_RESET_PERIOD;E=1;D=Periodic reset period (minutes);T=INT;C=EDIT;V=PERIODIC_RESET_PERIOD<1||PERIODIC_RESET_PERIOD>30?\"Periodic reset period must be between 1 and 30 minutes\":\"\";S=PERIODIC_RESET_FLAG==1?\"e\":\"i\"",
+};
+
+
+const entity enLinkUpResetFlag = {
+  EEPROM_LINK_UP_RESET_FLAG, &fLinkUpResetFlag, sizeof(uchar), CHAR, 0,
+  0, 1, 1,
+  "LINK_UP_RESET_FLAG",
+  "AI=LINK_UP_RESET_FLAG;D=Link up reset;T=INT;C=STATIC;O=0-No/0/1-Yes/1",
+};
+
+const entity enLinkUpResetTimeout = {
+  EEPROM_LINK_UP_RESET_TIMEOUT, &wLinkUpResetTimeout, sizeof(uint), INT, 0,
+  1, 60, 60,
+  "LINK_UP_RESET_TIMEOUT",
+  "AI=LINK_UP_RESET_TIMEOUT;E=1;D=Link up reset timeout (seconds);T=INT;C=EDIT;V=LINK_UP_RESET_TIMEOUT<1||LINK_UP_RESET_TIMEOUT>60?\"Link up reset timeout must be between 1 and 60 seconds\":\"\";S=LINK_UP_RESET_FLAG==1?\"e\":\"i\"",
 };

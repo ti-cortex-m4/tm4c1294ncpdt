@@ -63,9 +63,13 @@ extern ledMode                 bLED1Mode;
 
 extern uint                    cwPowerUpResetCount;
 extern uint                    cwWatchdogResetCount;
+extern uint                    cwLinkUpResetCount;
 
 extern bool                    fPeriodicResetFlag;
 extern uint                    wPeriodicResetPeriod;
+
+extern bool                    fLinkUpResetFlag;
+extern uint                    wLinkUpResetTimeout;
 
 extern uchar                   mbCustomerSettings[UART_COUNT];
 extern uchar                   mbCustomerSetting1_Delay[UART_COUNT];

@@ -170,9 +170,13 @@ const entity * const mpenEntities[] =
   &enPeriodicResetFlag,
   &enPeriodicResetPeriod,
 
+  &enLinkUpResetFlag,
+  &enLinkUpResetTimeout,
+
   // must be last in the list
   &enPowerUpResetCount,
   &enWatchdogResetCount,
+  &enLinkUpResetCount,
 };
 
 
