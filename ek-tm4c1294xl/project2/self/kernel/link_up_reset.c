@@ -20,7 +20,7 @@ static volatile uchar   cbLinkUpReset;
 
 static bool isEnabled(void)
 {
-  return true;
+  return fLinkUpResetFlag == true;
 }
 
 
@@ -33,7 +33,7 @@ void InitLinkUpReset(void)
 
 void LinkUpReset_LinkUp(void)
 {
-  if (enLinkUpReset == LUR_LINK_DOWN)
+  if (isEnabled() && (enLinkUpReset == LUR_LINK_DOWN))
   {
     enLinkUpReset = LUR_LINK_UP;
     cbLinkUpReset = 5;
@@ -43,13 +43,16 @@ void LinkUpReset_LinkUp(void)
 
 void LinkUpReset_LinkDown(void)
 {
-  enLinkUpReset = LUR_LINK_DOWN;
+  if (isEnabled())
+  {
+    enLinkUpReset = LUR_LINK_DOWN;
+  }
 }
 
 
 void LinkUpReset_1Hz(void)
 {
-  if ((enLinkUpReset == LUR_LINK_UP) && (cbLinkUpReset > 0))
+  if (isEnabled() && (enLinkUpReset == LUR_LINK_UP) && (cbLinkUpReset > 0))
   {
     cbLinkUpReset--;
   }
@@ -58,7 +61,7 @@ void LinkUpReset_1Hz(void)
 
 void RunLinkUpReset(void)
 {
-  if (cbLinkUpReset == 0)
+  if (isEnabled() && (cbLinkUpReset == 0))
   {
     WARNING("link up restart \n");
 
