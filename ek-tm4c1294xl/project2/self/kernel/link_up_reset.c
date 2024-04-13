@@ -18,6 +18,12 @@ static volatile uchar   cbLinkUpReset;
 
 
 
+static bool isEnabled(void)
+{
+  return true;
+}
+
+
 void InitLinkUpReset(void)
 {
   enLinkUpReset = LUR_LINK_UNKNOWN;
