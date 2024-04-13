@@ -158,6 +158,7 @@ int     main(void)
   InitTimer1(dwClockFreq);
   InitTimer2(dwClockFreq);
   InitCustomerSettings1();
+  InitLinkUpReset();
 
   // Set the interrupt priorities.  We set the SysTick interrupt to a higher
   // priority than the Ethernet interrupt to ensure that the file system
@@ -177,7 +178,6 @@ int     main(void)
   CONSOLE("temperature: %d C\n", GetInternalTemperature());
   ConsolePins();
   InitWatchdog();
-  InitLinkUpReset();
   InitLEDs_After();
 
   // ETH#02: After completing Ethernet Initialization, the user code must turn ON the Flash Prefetch by clearing the FLASHCONF.FPFOFF bit to restore system performance.
