@@ -18,34 +18,35 @@ static volatile uchar   cbLinkUpReset;
 
 
 void InitLinkUpReset(void) {
-    enLinkUpReset = LUR_LINK_UNKNOWN;
-    cbLinkUpReset = 10;
+  enLinkUpReset = LUR_LINK_UNKNOWN;
+  cbLinkUpReset = 5;
 }
 
 
 void LinkUpReset_LinkUp(void) {
+  if (enLinkUpReset == LUR_LINK_DOWN) {
     enLinkUpReset = LUR_LINK_UP;
-    cbLinkUpReset = 9;
+    cbLinkUpReset = 5;
+  }
 }
 
 
 void LinkUpReset_LinkDown(void) {
-    enLinkUpReset = LUR_LINK_DOWN;
-    cbLinkUpReset = 10;
+  enLinkUpReset = LUR_LINK_DOWN;
 }
 
 
 void LinkUpReset_1Hz(void) {
-    if ((cbLinkUpReset != 10) && (cbLinkUpReset > 0)) {
-        cbLinkUpReset--;
-    }
+  if ((enLinkUpReset == LUR_LINK_UP) && (cbLinkUpReset > 0)) {
+    cbLinkUpReset--;
+  }
 }
 
 
 void RunLinkUpReset(void) {
-    if (cbLinkUpReset == 0) {
-        CONSOLE("link up restart \n");
-        DelayMilliSecond(100);
-        Restart();
-    }
+  if (cbLinkUpReset == 0) {
+    CONSOLE("link up restart \n");
+    DelayMilliSecond(100);
+    Restart();
+  }
 }
