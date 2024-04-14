@@ -35,6 +35,8 @@ void LinkUpReset_LinkUp(void)
 {
   if (isEnabled() && (enLinkUpReset == LUR_LINK_DOWN))
   {
+    CONSOLE("link status: up \n");
+
     enLinkUpReset = LUR_LINK_UP;
     cbLinkUpReset = 5;
   }
@@ -45,6 +47,7 @@ void LinkUpReset_LinkDown(void)
 {
   if (isEnabled())
   {
+    CONSOLE("link status: down \n");
     enLinkUpReset = LUR_LINK_DOWN;
   }
 }
@@ -54,6 +57,7 @@ void LinkUpReset_1Hz(void)
 {
   if (isEnabled() && (enLinkUpReset == LUR_LINK_UP) && (cbLinkUpReset > 0))
   {
+    CONSOLE("link status: decrement \n");
     cbLinkUpReset--;
   }
 }
@@ -63,7 +67,7 @@ void RunLinkUpReset(void)
 {
   if (isEnabled() && (cbLinkUpReset == 0))
   {
-    WARNING("link up restart \n");
+    WARNING("link status: restart \n");
 
     cwLinkUpResetCount++;
     SaveEntity(&enLinkUpResetCount);
