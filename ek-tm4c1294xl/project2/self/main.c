@@ -155,10 +155,10 @@ int     main(void)
   InitModem();
   InitModemToServer();
   InitServerToModem();
+  InitLinkUpReset();
   InitTimer1(dwClockFreq);
   InitTimer2(dwClockFreq);
   InitCustomerSettings1();
-  InitLinkUpReset();
 
   // Set the interrupt priorities.  We set the SysTick interrupt to a higher
   // priority than the Ethernet interrupt to ensure that the file system
