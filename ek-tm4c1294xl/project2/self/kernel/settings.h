@@ -70,6 +70,7 @@ extern uint                    wPeriodicResetPeriod;
 
 extern bool                    fLinkUpResetFlag;
 extern uint                    wLinkUpResetTimeout;
+extern bool                    fLinkUpResetMode;
 
 extern uchar                   mbCustomerSettings[UART_COUNT];
 extern uchar                   mbCustomerSetting1_Delay[UART_COUNT];
