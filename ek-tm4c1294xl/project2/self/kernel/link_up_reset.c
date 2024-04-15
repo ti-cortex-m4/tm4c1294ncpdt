@@ -7,6 +7,7 @@ link_up_reset.c
 #include "../main.h"
 #include "../hardware/delay.h"
 #include "../hardware/restart.h"
+#include "../hardware/hardware_restart.h"
 #include "../kernel/settings.h"
 #include "../kernel/log.h"
 #include "link_up_reset.h"
@@ -71,8 +72,11 @@ void RunLinkUpReset(void)
 
     cwLinkUpResetCount++;
     SaveEntity(&enLinkUpResetCount);
-
     DelayMilliSecond(100);
-    Restart();
+
+    if (fLinkUpResetMode == false)
+      Restart();
+    else
+      HardwareRestart();
   }
 }
