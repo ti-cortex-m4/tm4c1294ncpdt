@@ -28,7 +28,11 @@ static bool isEnabled(void)
 void InitLinkUpReset(void)
 {
   enLinkUpReset = LUR_LINK_UNKNOWN;
-  cbLinkUpReset = 5;
+
+  if ((wLinkUpResetTimeout >= 1) && (wLinkUpResetTimeout <= 60))
+    cbLinkUpReset = wLinkUpResetTimeout;
+  else
+    cbLinkUpReset = 5;
 }
 
 
