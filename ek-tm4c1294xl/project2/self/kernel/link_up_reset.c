@@ -72,6 +72,7 @@ void RunLinkUpReset(void)
 
     cwLinkUpResetCount++;
     SaveEntity(&enLinkUpResetCount);
+
     DelayMilliSecond(100);
 
     if (fLinkUpResetMode == false)
