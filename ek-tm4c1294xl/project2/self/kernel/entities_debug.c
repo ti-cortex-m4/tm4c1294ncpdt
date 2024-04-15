@@ -157,5 +157,5 @@ const entity enLinkUpResetMode = {
   EEPROM_LINK_UP_RESET_MODE, &fLinkUpResetMode, sizeof(uchar), CHAR, 0,
   0, 1, 0,
   "LINK_UP_RESET_MODE",
-  "AI=LINK_UP_RESET_MODE;D=Link up reset mode;T=INT;C=STATIC;O=0-Software reset/0/1-Hardware reset/1",
+  "AI=LINK_UP_RESET_MODE;E=1;D=Link up reset mode;T=INT;C=STATIC;O=0-Software reset/0/1-Hardware reset/1;S=LINK_UP_RESET_FLAG==1?\"e\":\"i\"",
 };
