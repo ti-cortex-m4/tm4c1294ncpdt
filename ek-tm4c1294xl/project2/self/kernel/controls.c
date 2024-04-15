@@ -142,6 +142,7 @@ const message * const mppcszControls[] =
   &enPeriodicResetPeriod.szName,
   &enLinkUpResetFlag.szName,
   &enLinkUpResetTimeout.szName,
+  &enLinkUpResetMode.szName,
 };
 
 
