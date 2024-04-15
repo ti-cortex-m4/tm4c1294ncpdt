@@ -172,6 +172,7 @@ const entity * const mpenEntities[] =
 
   &enLinkUpResetFlag,
   &enLinkUpResetTimeout,
+  &enLinkUpResetMode,
 
   // must be last in the list
   &enPowerUpResetCount,

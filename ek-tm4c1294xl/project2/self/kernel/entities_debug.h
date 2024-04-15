@@ -31,3 +31,4 @@ extern const entity enPeriodicResetPeriod;
 
 extern const entity enLinkUpResetFlag;
 extern const entity enLinkUpResetTimeout;
+extern const entity enLinkUpResetMode;

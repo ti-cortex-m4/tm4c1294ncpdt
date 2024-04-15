@@ -148,14 +148,14 @@ const entity enLinkUpResetFlag = {
 
 const entity enLinkUpResetTimeout = {
   EEPROM_LINK_UP_RESET_TIMEOUT, &wLinkUpResetTimeout, sizeof(uint), INT, 0,
-  1, 60, 60,
+  1, 60, 5,
   "LINK_UP_RESET_TIMEOUT",
   "AI=LINK_UP_RESET_TIMEOUT;E=1;D=Link up reset timeout (seconds);T=INT;C=EDIT;V=LINK_UP_RESET_TIMEOUT<1||LINK_UP_RESET_TIMEOUT>60?\"Link up reset timeout must be between 1 and 60 seconds\":\"\";S=LINK_UP_RESET_FLAG==1?\"e\":\"i\"",
 };
 
 const entity enLinkUpResetMode = {
   EEPROM_LINK_UP_RESET_MODE, &fLinkUpResetMode, sizeof(uchar), CHAR, 0,
-  0, 1, 1,
+  0, 1, 0,
   "LINK_UP_RESET_MODE",
   "AI=LINK_UP_RESET_MODE;D=Link up reset mode;T=INT;C=STATIC;O=0-Software reset/0/1-Hardware reset/1",
 };
