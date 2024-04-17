@@ -133,9 +133,9 @@ const entity enPeriodicResetFlag = {
 
 const entity enPeriodicResetPeriod = {
   EEPROM_PERIODIC_RESET_PERIOD, &wPeriodicResetPeriod, sizeof(uint), INT, 0,
-  1, 30, 30,
+  1, 24, 24,
   "PERIODIC_RESET_PERIOD",
-  "AI=PERIODIC_RESET_PERIOD;E=1;D=Periodic reset period (minutes);T=INT;C=EDIT;V=PERIODIC_RESET_PERIOD<1||PERIODIC_RESET_PERIOD>30?\"Periodic reset period must be between 1 and 30 minutes\":\"\";S=PERIODIC_RESET_FLAG==1?\"e\":\"i\"",
+  "AI=PERIODIC_RESET_PERIOD;E=1;D=Periodic reset period (minutes);T=INT;C=EDIT;V=PERIODIC_RESET_PERIOD<1||PERIODIC_RESET_PERIOD>1440?\"Periodic reset period must be between 1 and 1440 minutes\":\"\";S=PERIODIC_RESET_FLAG==1?\"e\":\"i\"",
 };
 
 
