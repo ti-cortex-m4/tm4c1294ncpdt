@@ -25,14 +25,20 @@ static bool isEnabled(void)
 }
 
 
+static uchar getTimeout(void)
+{
+  if ((wLinkUpResetTimeout >= 1) && (wLinkUpResetTimeout <= 60))
+    return wLinkUpResetTimeout;
+  else
+    return 5;
+}
+
+
+
 void InitLinkUpReset(void)
 {
   enLinkUpReset = LUR_LINK_UNKNOWN;
-
-  if ((wLinkUpResetTimeout >= 1) && (wLinkUpResetTimeout <= 60))
-    cbLinkUpReset = wLinkUpResetTimeout;
-  else
-    cbLinkUpReset = 5;
+  cbLinkUpReset = getTimeout();
 }
 
 
@@ -43,7 +49,7 @@ void LinkUpReset_LinkUp(void)
     CONSOLE("link status: up \n");
 
     enLinkUpReset = LUR_LINK_UP;
-    cbLinkUpReset = 5;
+    cbLinkUpReset = getTimeout();
   }
 }
 
