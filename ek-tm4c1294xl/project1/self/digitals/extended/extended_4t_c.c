@@ -42,6 +42,11 @@ static bool QueryCntMonTariffC_Full(uchar  ibMon, uchar  bTrf) // на начало меся
   for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
+
+    if (bTrf == 1) {
+        MonitorString("\n # ibMon="); MonitorCharHex(ibMon);
+    }
+
     QueryCntMonTariffC(ibMon, bTrf);
 
     if (RevInput() == SER_GOODCHECK) break;
@@ -67,6 +72,13 @@ status ReadCntMonCanTariffC(uchar  ibCan, uchar  ibMon, uchar  ibTrf) // на нача
   if (ti2.fValid == false) return ST_BADDIGITAL;
 
   uchar m = (ibMon + 0)%12;
+
+  if (ibTrf == 0) {
+      MonitorString("\n * ibMon="); MonitorCharHex(ibMon);
+      MonitorString("\n * m="); MonitorCharHex(m);
+      MonitorString("\n * bMonth="); MonitorCharHex(ti2.tiValue.bMonth);
+  }
+
   if (QueryCntMonTariffC_Full(-((12-1+ti2.tiValue.bMonth-m)%12), ibTrf+1) == 0) return ST_BADDIGITAL;
 
   ShowPercent(60+ibTrf);

@@ -185,12 +185,20 @@ void    MakeExtended4T(void)
 
     ibMonthP = 0xFF;
 
+    MonitorOpen(0);
+    MonitorString("\n ibHardMon="); MonitorCharDec(ibHardMon);
+
     uchar m;
     for (m=0; m<bExt4TMonths; m++)
     {
       if (fKey == true) break;
 
+      MonitorString("\n m="); MonitorCharDec(m);
+
       uchar ibMon = (bMONTHS + ibHardMon - m) % bMONTHS;
+
+      MonitorString("\n ibMon="); MonitorCharDec(ibMon);
+
       LoadExt4TValues(ibMon);
 
       status bStatus = mpCntMonCan4T[ibDig].bStatus;
