@@ -4,7 +4,7 @@
 		<cconfiguration id="com.ti.ccstudio.buildDefinitions.TMS470.Debug.954048065">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.ti.ccstudio.buildDefinitions.TMS470.Debug.954048065" moduleId="org.eclipse.cdt.core.settings" name="Debug">
 				<macros>
-					<stringMacro name="SW_ROOT" type="VALUE_PATH_DIR" value="D:\Cortex\tm4c1294ncpdt\sw-tm4c-2.1.1.71"/>
+					<stringMacro name="SW_ROOT" type="VALUE_PATH_DIR" value="E:\Cortex\tm4c1294ncpdt\sw-tm4c-2.1.1.71"/>
 				</macros>
 				<externalSettings/>
 				<extensions>
@@ -100,7 +100,7 @@
 		<cconfiguration id="com.ti.ccstudio.buildDefinitions.TMS470.Release.316780728">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.ti.ccstudio.buildDefinitions.TMS470.Release.316780728" moduleId="org.eclipse.cdt.core.settings" name="Release">
 				<macros>
-					<stringMacro name="SW_ROOT" type="VALUE_PATH_DIR" value="D:/TI/SW-EK-TM4C1294XL-2.1.0.12573"/>
+					<stringMacro name="SW_ROOT" type="VALUE_PATH_DIR" value="E:/TI/SW-EK-TM4C1294XL-2.1.0.12573"/>
 				</macros>
 				<externalSettings/>
 				<extensions>
@@ -186,7 +186,7 @@
 		<cconfiguration id="com.ti.ccstudio.buildDefinitions.TMS470.Debug.954048065.126437432">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.ti.ccstudio.buildDefinitions.TMS470.Debug.954048065.126437432" moduleId="org.eclipse.cdt.core.settings" name="Debug.no_display">
 				<macros>
-					<stringMacro name="SW_ROOT" type="VALUE_PATH_DIR" value="D:\Cortex\tm4c1294ncpdt\sw-tm4c-2.1.1.71"/>
+					<stringMacro name="SW_ROOT" type="VALUE_PATH_DIR" value="E:\Cortex\tm4c1294ncpdt\sw-tm4c-2.1.1.71"/>
 				</macros>
 				<externalSettings/>
 				<extensions>

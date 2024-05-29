@@ -55,7 +55,7 @@ QUERIES2!H
 #define wUNI_GETPARAMS1                0x00F1
 #define wUNI_GETPARAMS2                0x80F1
 
-#define wUNI_GETTRANSIT                0x00F8
+#define wUNI_GETTRANSIT                 0x00F8
 
 #define wUNI_GETQUERY_CRC              0xFFF0
 
