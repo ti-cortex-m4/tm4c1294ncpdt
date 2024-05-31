@@ -17,6 +17,7 @@ u_transit2.c
 //#include "../sensors/sensor40/decompress40.h"
 #include "../../digitals/wait_answer.h"
 #include "../../hardware/watchdog.h"
+#include "response_uni.h"
 #include "u_transit2.h"
 
 
@@ -44,7 +45,7 @@ uchar   ibPortSave;
 
     InitPush(0);
     for (i=0; i<iwInBuffSave-13; i++) PushChar(mpbInBuffSave[i+9]);
-    Query(bInBuff7+bInBuff8*0x100, iwInBuffSave-13, 1);
+    Query(bInBuff8+bInBuff7*0x100, iwInBuffSave-13, 1);
 
     InitWaitAnswer();
 
@@ -77,9 +78,9 @@ uchar   ibPortSave;
       mpSerial[ibPort] = SER_BEGIN;
       ibPort = ibPortSave;
 
-      InitPushCRC();
+      InitPushUni();
       for (i=0; i<iwInBuffSave; i++) PushChar(mpbInBuffSave[i]);
-      Output(iwInBuffSave);
+      Output2(iwInBuffSave);
     }
   }
 }
