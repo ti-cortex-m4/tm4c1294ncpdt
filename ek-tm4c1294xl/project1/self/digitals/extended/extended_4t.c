@@ -186,6 +186,8 @@ void    MakeExtended4T(void)
     ibMonthP = 0xFF;
 
     MonitorOpen(0);
+    MonitorString("\n *******************************************************");
+    MonitorString("\n "); MonitorTime(*GetCurrTimeDate());
     MonitorString("\n ibHardMon="); MonitorCharDec(ibHardMon);
 
     uchar m;
