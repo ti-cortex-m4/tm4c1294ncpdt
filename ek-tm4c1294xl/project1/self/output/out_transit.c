@@ -20,7 +20,7 @@ OUT_TRANSIT!C
 
 
 
-void    SafeTransitExecute1(void )
+void    SafeTransitExecute1(void)
 {
 uint    i;
 uchar   j;
