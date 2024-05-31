@@ -23,7 +23,7 @@ u_transit2.c
 void    GetTransitExecuteUni1(void)
 {
 uint    i;
-uchar   ibPortSave;
+uchar   p;
 
   if (bInBuff6 >= bPORTS)
     Result2(bRES_BADADDRESS);
@@ -36,7 +36,7 @@ uchar   ibPortSave;
     SaveInBuff();
     iwInBuffSave = IndexInBuff();
 
-    ibPortSave = ibPort;
+    p = ibPort;
     ibPort = bInBuff6;
 
     InitPush(0);
@@ -62,7 +62,7 @@ uchar   ibPortSave;
     if (mpSerial[ibPort] != SER_POSTINPUT_MASTER)
     {
       mpSerial[ibPort] = SER_BEGIN;
-      ibPort = ibPortSave;
+      ibPort = p;
 
       Result2(bRES_BADMODE);
     }
@@ -72,7 +72,7 @@ uchar   ibPortSave;
       iwInBuffSave = IndexInBuff();
 
       mpSerial[ibPort] = SER_BEGIN;
-      ibPort = ibPortSave;
+      ibPort = p;
 
       InitPushUni();
       for (i=0; i<iwInBuffSave; i++) PushChar(mpbInBuffSave[i]);
@@ -85,7 +85,7 @@ uchar   ibPortSave;
 void    GetTransitExecuteUni3(void) //TODO
 {
 uint    i;
-uchar   ibPortSave;
+uchar   p;
 
   if (bInBuff6 >= bPORTS)
     Result2(bRES_BADADDRESS);
@@ -98,7 +98,7 @@ uchar   ibPortSave;
     SaveInBuff();
     iwInBuffSave = IndexInBuff();
 
-    ibPortSave = ibPort;
+    p = ibPort;
     ibPort = bInBuff6;
 
     InitPush(0);
@@ -124,7 +124,7 @@ uchar   ibPortSave;
     if (mpSerial[ibPort] != SER_POSTINPUT_MASTER)
     {
       mpSerial[ibPort] = SER_BEGIN;
-      ibPort = ibPortSave;
+      ibPort = p;
 
       Result2(bRES_BADMODE);
     }
@@ -134,7 +134,7 @@ uchar   ibPortSave;
       iwInBuffSave = IndexInBuff();
 
       mpSerial[ibPort] = SER_BEGIN;
-      ibPort = ibPortSave;
+      ibPort = p;
 
       InitPushUni();
       for (i=0; i<iwInBuffSave; i++) PushChar(mpbInBuffSave[i]);
@@ -147,7 +147,7 @@ uchar   ibPortSave;
 void    GetTransitExecuteUni4(void)
 {
 uint    i;
-uchar   ibPortSave;
+uchar   p;
 
   if (bInBuff6 >= bPORTS)
     Result2(bRES_BADADDRESS);
@@ -160,7 +160,7 @@ uchar   ibPortSave;
     SaveInBuff();
     iwInBuffSave = IndexInBuff();
 
-    ibPortSave = ibPort;
+    p = ibPort;
     ibPort = bInBuff6;
 
     InitPush(0);
@@ -187,7 +187,7 @@ uchar   ibPortSave;
     iwInBuffSave = IndexInBuff();
 
     mpSerial[ibPort] = SER_BEGIN;
-    ibPort = ibPortSave;
+    ibPort = p;
 
     InitPushUni();
     for (i=0; i<iwInBuffSave; i++) PushChar(mpbInBuffSave[i]);
@@ -199,7 +199,7 @@ uchar   ibPortSave;
 void    GetTransitExecuteUniW(void) //TODO
 {
 uint    i;
-uchar   ibPortSave;
+uchar   p;
 
   if (bInBuff6 >= bPORTS)
     Result2(bRES_BADADDRESS);
@@ -212,7 +212,7 @@ uchar   ibPortSave;
     SaveInBuff();
     iwInBuffSave = IndexInBuff();
 
-    ibPortSave = ibPort;
+    p = ibPort;
     ibPort = bInBuff6;
 
     InitPush(0);
@@ -238,7 +238,7 @@ uchar   ibPortSave;
     if (mpSerial[ibPort] != SER_POSTINPUT_MASTER)
     {
       mpSerial[ibPort] = SER_BEGIN;
-      ibPort = ibPortSave;
+      ibPort = p;
 
       Result2(bRES_BADMODE);
     }
@@ -248,7 +248,7 @@ uchar   ibPortSave;
       iwInBuffSave = IndexInBuff();
 
       mpSerial[ibPort] = SER_BEGIN;
-      ibPort = ibPortSave;
+      ibPort = p;
 
       InitPushUni();
       for (i=0; i<iwInBuffSave; i++) PushChar(mpbInBuffSave[i]);
@@ -261,7 +261,7 @@ uchar   ibPortSave;
 void    GetTransitExecuteUni40(void)
 {
 uint    i;
-uchar   ibPortSave;
+uchar   p;
 
   if (bInBuff6 >= bPORTS)
     Result2(bRES_BADADDRESS);
@@ -274,7 +274,7 @@ uchar   ibPortSave;
     SaveInBuff();
     iwInBuffSave = IndexInBuff();
 
-    ibPortSave = ibPort;
+    p = ibPort;
     ibPort = bInBuff6;
 
     InitPush(0);
@@ -303,7 +303,7 @@ uchar   ibPortSave;
     if (mpSerial[ibPort] != SER_POSTINPUT_MASTER)
     {
       mpSerial[ibPort] = SER_BEGIN;
-      ibPort = ibPortSave;
+      ibPort = p;
 
       Result2(bRES_BADMODE);
     }
@@ -313,7 +313,7 @@ uchar   ibPortSave;
       iwInBuffSave = IndexInBuff();
 
       mpSerial[ibPort] = SER_BEGIN;
-      ibPort = ibPortSave;
+      ibPort = p;
 
       InitPush(0);
       for (i=0; i<iwInBuffSave; i++) PushChar(mpbInBuffSave[i]);
