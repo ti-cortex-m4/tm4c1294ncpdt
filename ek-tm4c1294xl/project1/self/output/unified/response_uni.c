@@ -262,6 +262,10 @@ void    RunResponseUni(void)
         GetQueryCRCUni();
         break;
 
+      case wUNI_GETTRANSIT2:
+        GetTransit2();
+        break;
+
       default:
         ShowCommandUni(bSTA_BADCOMMAND);
         Result2(bUNI_BADCOMMAND);
