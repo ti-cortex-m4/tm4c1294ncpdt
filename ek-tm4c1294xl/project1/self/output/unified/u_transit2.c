@@ -13,7 +13,7 @@ u_transit2.c
 
 #ifndef MODBUS
 
-void    GetTransit2(void)
+void    GetTransitExecute1(void)
 {
 uint    i;
 
