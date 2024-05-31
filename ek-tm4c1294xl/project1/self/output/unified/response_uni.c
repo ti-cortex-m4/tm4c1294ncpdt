@@ -190,7 +190,7 @@ void    RunResponseUni(void)
     if ((mpbDelayUni[ibPort] == 0) &&
         (bInBuff5 + bInBuff4*0x100 != wUNI_GETOPEN) &&
         (bInBuff5 + bInBuff4*0x100 != wUNI_GETQUERY_CRC) &&
-        (bInBuff5 + bInBuff4*0x100 != wUNI_GETTRANSIT2))
+        (bInBuff5 + bInBuff4*0x100 != wUNI_TRANSIT_EXECUTE1))
     {
       if (boEnblPassUni == true)
       {
@@ -259,12 +259,15 @@ void    RunResponseUni(void)
       case wUNI_GETEVENTS_FIX: GetEventsUni_Fix(); break;
       case wUNI_GETEVENTS_MESSAGES: GetEventsMessagesUni(); break;
 
+      case wUNI_TRANSIT_EXECUTE1: GetTransitExecuteUni1(); break;
+//      case bINQ_TRANSIT_EXECUTE2: SafeTransitExecute2(); break;
+//      case bINQ_TRANSIT_EXECUTE3: SafeTransitExecute3(); break;
+//      case bINQ_TRANSIT_EXECUTE4: SafeTransitExecute4(); break;
+//      case bINQ_TRANSIT_W:        TransitW();            break;
+//      case bINQ_TRANSIT_DEVICE40: SafeTransitDevice40(); break;
+
       case wUNI_GETQUERY_CRC:
         GetQueryCRCUni();
-        break;
-
-      case wUNI_GETTRANSIT2:
-        GetTransitExecuteUni1();
         break;
 
       default:
