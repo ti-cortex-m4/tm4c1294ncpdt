@@ -11,6 +11,10 @@ u_transit2.c
 #include "../../serial/ports_devices.h"
 #include "../../serial/save_in_buff.h"
 #include "../../serial/speeds.h"
+#include "../../serial/monitor.h"
+#include "../../sensors/unpack_k.h"
+#include "../../sensors/unpack_w.h"
+#include "../../sensors/sensor40/decompress40.h"
 #include "../../digitals/wait_answer.h"
 #include "../../hardware/watchdog.h"
 #include "response_uni.h"
@@ -22,8 +26,6 @@ u_transit2.c
 
 void    GetTransitExecuteUni1(void)
 {
-uint    i;
-
   if (bInBuff6 >= bPORTS)
     Result2(bRES_BADADDRESS);
   else if (IsSlave(bInBuff6))
@@ -39,6 +41,7 @@ uint    i;
     ibPort = bInBuff6;
 
     InitPush(0);
+    uint i;
     for (i=0; i<iwInBuffSave-13; i++) PushChar(mpbInBuffSave[i+9]);
     Query(bInBuff8+bInBuff7*0x100, iwInBuffSave-13, 1);
 
@@ -83,8 +86,6 @@ uint    i;
 
 void    GetTransitExecuteUni3(void)
 {
-uint    i;
-
   if (bInBuff6 >= bPORTS)
     Result2(bRES_BADADDRESS);
   else if (IsSlave(bInBuff6))
@@ -103,6 +104,7 @@ uint    i;
     cwInBuffBcc = 0;
 
     InitPush(0);
+    uint i;
     for (i=0; i<iwInBuffSave-14; i++) PushChar(mpbInBuffSave[i+10]);
     Query(bInBuff8+bInBuff7*0x100, iwInBuffSave-14, 1);
 
@@ -143,8 +145,6 @@ uint    i;
 
 void    GetTransitExecuteUni4(void)
 {
-uint    i;
-
   if (bInBuff6 >= bPORTS)
     Result2(bRES_BADADDRESS);
   else if (IsSlave(bInBuff6))
@@ -160,6 +160,7 @@ uint    i;
     ibPort = bInBuff6;
 
     InitPush(0);
+    uint i;
     for (i=0; i<iwInBuffSave-13; i++) PushChar(mpbInBuffSave[i+9]);
     Query(bInBuff8+bInBuff7*0x100, iwInBuffSave-13, 1);
 
@@ -194,8 +195,6 @@ uint    i;
 
 void    GetTransitExecuteUniW(void)
 {
-uint    i;
-
   if (bInBuff6 >= bPORTS)
     Result2(bRES_BADADDRESS);
   else if (IsSlave(bInBuff6))
@@ -214,6 +213,7 @@ uint    i;
     cwInBuffBcc = 0;
 
     InitPush(0);
+    uint i;
     for (i=0; i<iwInBuffSave-14; i++) PushChar(mpbInBuffSave[i+10]);
     Query(bInBuff8+bInBuff7*0x100, iwInBuffSave-14, 1);
 
@@ -228,7 +228,7 @@ uint    i;
       if (GetWaitAnswer()) { mpSerial[ibPort] = SER_BADLINK; break; }
 
       if (mpSerial[ibPort] == SER_INPUT_MASTER)
-        DecompressK(0);
+        UnpackW(false,3);
 
       if (mpSerial[ibPort] == SER_POSTINPUT_MASTER)
         break;
@@ -254,8 +254,6 @@ uint    i;
 
 void    GetTransitExecuteUni40(void)
 {
-uint    i;
-
   if (bInBuff6 >= bPORTS)
     Result2(bRES_BADADDRESS);
   else if (IsSlave(bInBuff6))
@@ -271,6 +269,7 @@ uint    i;
     ibPort = bInBuff6;
 
     InitPush(0);
+    uint i;
     for (i=0; i<iwInBuffSave-13; i++) PushChar(mpbInBuffSave[i+9]);
     Query(bInBuff8+bInBuff7*0x100, iwInBuffSave-13, 1);
 
