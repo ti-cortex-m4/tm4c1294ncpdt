@@ -23,7 +23,6 @@ u_transit2.c
 void    GetTransitExecuteUni1(void)
 {
 uint    i;
-uchar   p;
 
   if (bInBuff6 >= bPORTS)
     Result2(bRES_BADADDRESS);
@@ -36,7 +35,7 @@ uchar   p;
     SaveInBuff();
     iwInBuffSave = IndexInBuff();
 
-    p = ibPort;
+    uchar p = ibPort;
     ibPort = bInBuff6;
 
     InitPush(0);
@@ -85,7 +84,6 @@ uchar   p;
 void    GetTransitExecuteUni3(void) //TODO
 {
 uint    i;
-uchar   p;
 
   if (bInBuff6 >= bPORTS)
     Result2(bRES_BADADDRESS);
@@ -98,7 +96,7 @@ uchar   p;
     SaveInBuff();
     iwInBuffSave = IndexInBuff();
 
-    p = ibPort;
+    uchar p = ibPort;
     ibPort = bInBuff6;
 
     InitPush(0);
@@ -147,7 +145,6 @@ uchar   p;
 void    GetTransitExecuteUni4(void)
 {
 uint    i;
-uchar   p;
 
   if (bInBuff6 >= bPORTS)
     Result2(bRES_BADADDRESS);
@@ -160,7 +157,7 @@ uchar   p;
     SaveInBuff();
     iwInBuffSave = IndexInBuff();
 
-    p = ibPort;
+    uchar p = ibPort;
     ibPort = bInBuff6;
 
     InitPush(0);
@@ -199,7 +196,6 @@ uchar   p;
 void    GetTransitExecuteUniW(void) //TODO
 {
 uint    i;
-uchar   p;
 
   if (bInBuff6 >= bPORTS)
     Result2(bRES_BADADDRESS);
@@ -212,7 +208,7 @@ uchar   p;
     SaveInBuff();
     iwInBuffSave = IndexInBuff();
 
-    p = ibPort;
+    uchar p = ibPort;
     ibPort = bInBuff6;
 
     InitPush(0);
@@ -261,7 +257,6 @@ uchar   p;
 void    GetTransitExecuteUni40(void)
 {
 uint    i;
-uchar   p;
 
   if (bInBuff6 >= bPORTS)
     Result2(bRES_BADADDRESS);
@@ -274,7 +269,7 @@ uchar   p;
     SaveInBuff();
     iwInBuffSave = IndexInBuff();
 
-    p = ibPort;
+    uchar p = ibPort;
     ibPort = bInBuff6;
 
     InitPush(0);

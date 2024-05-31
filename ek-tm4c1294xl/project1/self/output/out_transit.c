@@ -23,7 +23,7 @@ OUT_TRANSIT!C
 void    SafeTransitExecute1(void)
 {
 uint    i;
-uchar   j;
+uchar   p;
 
   if (bInBuff5 >= bPORTS)
     Result(bRES_BADADDRESS);
@@ -36,7 +36,7 @@ uchar   j;
     SaveInBuff();
     iwInBuffSave = IndexInBuff();
 
-    j = ibPort;
+    p = ibPort;
 
     ibPort = bInBuff5;
 
@@ -63,7 +63,7 @@ uchar   j;
     if (mpSerial[ibPort] != SER_POSTINPUT_MASTER)
     {
       mpSerial[ibPort] = SER_BEGIN;
-      ibPort = j;
+      ibPort = p;
 
       Result(bRES_BADMODE);
     }
@@ -73,7 +73,7 @@ uchar   j;
       iwInBuffSave = IndexInBuff();
 
       mpSerial[ibPort] = SER_BEGIN;
-      ibPort = j;
+      ibPort = p;
 
       InitPushCRC();
       for (i=0; i<iwInBuffSave; i++) PushChar(mpbInBuffSave[i]);
@@ -86,7 +86,7 @@ uchar   j;
 void    SafeTransitExecute2(void)
 {
 uint    i;
-uchar   j;
+uchar   p;
 
   if (bInBuff5 >= bPORTS)
     Result(bRES_BADADDRESS);
@@ -99,7 +99,7 @@ uchar   j;
     SaveInBuff();
     iwInBuffSave = IndexInBuff();
 
-    j = ibPort;
+    p = ibPort;
 
     ibPort = bInBuff5;
 
@@ -126,7 +126,7 @@ uchar   j;
     if (mpSerial[ibPort] != SER_POSTINPUT_MASTER)
     {
       mpSerial[ibPort] = SER_BEGIN;
-      ibPort = j;
+      ibPort = p;
 
       Result(bRES_BADMODE);
     }
@@ -136,7 +136,7 @@ uchar   j;
       iwInBuffSave = IndexInBuff();
 
       mpSerial[ibPort] = SER_BEGIN;
-      ibPort = j;
+      ibPort = p;
 
       InitPushCRC();
       for (i=0; i<iwInBuffSave; i++) PushChar(mpbInBuffSave[i]);
@@ -150,7 +150,7 @@ uchar   j;
 void    SafeTransitExecute3(void)
 {
 uint    i;
-uchar   j;
+uchar   p;
 
   if (bInBuff5 >= bPORTS)
     Result(bRES_BADADDRESS);
@@ -163,7 +163,7 @@ uchar   j;
     SaveInBuff();
     iwInBuffSave = IndexInBuff();
 
-    j = ibPort;
+    p = ibPort;
 
     ibPort = bInBuff5;
 
@@ -199,7 +199,7 @@ uchar   j;
     iwInBuffSave = IndexInBuff();
 
     mpSerial[ibPort] = SER_BEGIN;
-    ibPort = j;
+    ibPort = p;
 
     InitPushCRC();
     if (iwInBuffSave > 0)
@@ -213,7 +213,7 @@ uchar   j;
 void    SafeTransitExecute4(void)
 {
 uint    i;
-uchar   j;
+uchar   p;
 
   if (bInBuff5 >= bPORTS)
     Result(bRES_BADADDRESS);
@@ -226,7 +226,7 @@ uchar   j;
     SaveInBuff();
     iwInBuffSave = IndexInBuff();
 
-    j = ibPort;
+    p = ibPort;
 
     ibPort = bInBuff5;
 
@@ -254,7 +254,7 @@ uchar   j;
     iwInBuffSave = IndexInBuff();
 
     mpSerial[ibPort] = SER_BEGIN;
-    ibPort = j;
+    ibPort = p;
 
     InitPushCRC();
     for (i=0; i<iwInBuffSave; i++) PushChar(mpbInBuffSave[i]);
@@ -327,7 +327,7 @@ void    SafeTransitExecuteW(void)
 void    SafeTransitDevice40(void)
 {
 uint    i;
-uchar   j;
+uchar   p;
 
   if (bInBuff5 >= bPORTS)
     Result(bRES_BADADDRESS);
@@ -340,8 +340,7 @@ uchar   j;
     SaveInBuff();
     iwInBuffSave = IndexInBuff();
 
-    j = ibPort;
-
+    p = ibPort;
     ibPort = bInBuff5;
 
     InitPush(0);
@@ -370,7 +369,7 @@ uchar   j;
     if (mpSerial[ibPort] != SER_POSTINPUT_MASTER)
     {
       mpSerial[ibPort] = SER_BEGIN;
-      ibPort = j;
+      ibPort = p;
 
       Result(bRES_BADMODE);
     }
@@ -380,7 +379,7 @@ uchar   j;
       iwInBuffSave = IndexInBuff();
 
       mpSerial[ibPort] = SER_BEGIN;
-      ibPort = j;
+      ibPort = p;
 
       InitPush(0);
       for (i=0; i<iwInBuffSave; i++) PushChar(mpbInBuffSave[i]);
