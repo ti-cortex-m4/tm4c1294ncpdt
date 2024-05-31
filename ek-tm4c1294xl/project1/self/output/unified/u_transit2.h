@@ -4,4 +4,4 @@ u_transit2.h
 
 ------------------------------------------------------------------------------*/
 
-void    GetTransitExecute1(void);
+void    GetTransitExecuteUni1(void);
