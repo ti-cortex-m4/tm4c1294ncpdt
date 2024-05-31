@@ -5,8 +5,18 @@ u_transit2.c
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
+#include "../../keyboard/keyboard.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports2.h"
+#include "../../serial/ports_devices.h"
+#include "../../serial/save_in_buff.h"
+#include "../../serial/speeds.h"
+//#include "../serial/monitor.h"
+//#include "../sensors/unpack_k.h"
+//#include "../sensors/unpack_w.h"
+//#include "../sensors/sensor40/decompress40.h"
+#include "../../digitals/wait_answer.h"
+#include "../../hardware/watchdog.h"
 #include "u_transit2.h"
 
 
