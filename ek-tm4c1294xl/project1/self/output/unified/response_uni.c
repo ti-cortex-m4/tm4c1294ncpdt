@@ -263,7 +263,7 @@ void    RunResponseUni(void)
         break;
 
       case wUNI_GETTRANSIT2:
-        GetTransitExecute1();
+        GetTransitExecuteUni1();
         break;
 
       default:
