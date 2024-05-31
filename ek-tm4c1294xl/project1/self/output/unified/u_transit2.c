@@ -30,11 +30,11 @@ uint    i;
 uchar   ibPortSave;
 
   if (bInBuff6 >= bPORTS)
-    Result(bRES_BADADDRESS);
+    Result2(bRES_BADADDRESS);
   else if (IsSlave(bInBuff6))
-    Result(bRES_BADPORT);
-  else if (IndexInBuff() <= 10)
-    Result(bRES_BADDATA);
+    Result2(bRES_BADPORT);
+  else if (IndexInBuff() <= 13)
+    Result2(bRES_BADDATA);
   else
   {
     SaveInBuff();
