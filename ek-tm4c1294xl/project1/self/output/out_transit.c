@@ -264,7 +264,7 @@ uchar   j;
 
 
 
-void    TransitW(void)
+void    SafeTransitExecuteW(void)
 {
   if (bInBuff5 >= bPORTS)
     Result(bRES_BADADDRESS);
