@@ -26,11 +26,11 @@ u_transit2.c
 void    GetTransitExecuteUni1(void)
 {
 uint    i;
-uchar   j;
+uchar   ibPortSave;
 
-  if (bInBuff5 >= bPORTS)
+  if (bInBuff6 >= bPORTS)
     Result(bRES_BADADDRESS);
-  else if (IsSlave(bInBuff5))
+  else if (IsSlave(bInBuff6))
     Result(bRES_BADPORT);
   else if (IndexInBuff() <= 10)
     Result(bRES_BADDATA);
@@ -39,13 +39,12 @@ uchar   j;
     SaveInBuff();
     iwInBuffSave = IndexInBuff();
 
-    j = ibPort;
-
-    ibPort = bInBuff5;
+    ibPortSave = ibPort;
+    ibPort = bInBuff6;
 
     InitPush(0);
-    for (i=0; i<iwInBuffSave-10; i++) PushChar(mpbInBuffSave[i+8]);
-    Query(bInBuff6+bInBuff7*0x100, iwInBuffSave-10, 1);
+    for (i=0; i<iwInBuffSave-13; i++) PushChar(mpbInBuffSave[i+9]);
+    Query(bInBuff7+bInBuff8*0x100, iwInBuffSave-13, 1);
 
     InitWaitAnswer();
 
@@ -66,7 +65,7 @@ uchar   j;
     if (mpSerial[ibPort] != SER_POSTINPUT_MASTER)
     {
       mpSerial[ibPort] = SER_BEGIN;
-      ibPort = j;
+      ibPort = ibPortSave;
 
       Result(bRES_BADMODE);
     }
@@ -76,7 +75,7 @@ uchar   j;
       iwInBuffSave = IndexInBuff();
 
       mpSerial[ibPort] = SER_BEGIN;
-      ibPort = j;
+      ibPort = ibPortSave;
 
       InitPushCRC();
       for (i=0; i<iwInBuffSave; i++) PushChar(mpbInBuffSave[i]);
