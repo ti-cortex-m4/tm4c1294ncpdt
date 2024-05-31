@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-U_QUERY_CRC!C
+u_transit2.c
 
 
 ------------------------------------------------------------------------------*/
@@ -7,13 +7,13 @@ U_QUERY_CRC!C
 #include "../../main.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports2.h"
-#include "u_query_crc.h"
+#include "u_transit2.h"
 
 
 
 #ifndef MODBUS
 
-void    GetQueryCRCUni(void) 
+void    GetTransit2(void)
 {
 uint    i;
 
