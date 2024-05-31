@@ -82,7 +82,7 @@ uchar   ibPortSave;
 }
 
 
-void    GetTransitExecuteUni3(void)
+void    GetTransitExecuteUni3(void) //TODO
 {
 uint    i;
 uchar   ibPortSave;
@@ -183,29 +183,20 @@ uchar   ibPortSave;
                (mpSerial[ibPort] == SER_BADLINK)) break;
     }
 
-    if (mpSerial[ibPort] != SER_POSTINPUT_MASTER)
-    {
-      mpSerial[ibPort] = SER_BEGIN;
-      ibPort = ibPortSave;
+    SaveInBuff();
+    iwInBuffSave = IndexInBuff();
 
-      Result2(bRES_BADMODE);
-    }
-    else
-    {
-      SaveInBuff();
-      iwInBuffSave = IndexInBuff();
+    mpSerial[ibPort] = SER_BEGIN;
+    ibPort = ibPortSave;
 
-      mpSerial[ibPort] = SER_BEGIN;
-      ibPort = ibPortSave;
-
-      InitPushUni();
-      for (i=0; i<iwInBuffSave; i++) PushChar(mpbInBuffSave[i]);
-      Output2(iwInBuffSave);
-    }
+    InitPushUni();
+    for (i=0; i<iwInBuffSave; i++) PushChar(mpbInBuffSave[i]);
+    Output2(iwInBuffSave);
   }
 }
 
-void    GetTransitExecuteUniW(void)
+
+void    GetTransitExecuteUniW(void) //TODO
 {
 uint    i;
 uchar   ibPortSave;
@@ -265,6 +256,7 @@ uchar   ibPortSave;
     }
   }
 }
+
 
 void    GetTransitExecuteUni40(void)
 {
@@ -299,6 +291,9 @@ uchar   ibPortSave;
       ShowWaitAnswer(1);
       if (GetWaitAnswer()) { mpSerial[ibPort] = SER_BADLINK; break; }
 
+      if (mpSerial[ibPort] == SER_INPUT_MASTER)
+        Decompress40();
+
       if (mpSerial[ibPort] == SER_POSTINPUT_MASTER)
         break;
       else if ((mpSerial[ibPort] == SER_OVERFLOW) ||
@@ -320,9 +315,9 @@ uchar   ibPortSave;
       mpSerial[ibPort] = SER_BEGIN;
       ibPort = ibPortSave;
 
-      InitPushUni();
+      InitPush(0);
       for (i=0; i<iwInBuffSave; i++) PushChar(mpbInBuffSave[i]);
-      Output2(iwInBuffSave);
+      Answer(iwInBuffSave, SER_OUTPUT_SLAVE);
     }
   }
 }
