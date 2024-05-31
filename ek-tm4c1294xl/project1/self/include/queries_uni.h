@@ -57,8 +57,13 @@ QUERIES2!H
 
 #define wUNI_GETTRANSIT                0x00F8
 
+#define wUNI_TRANSIT_EXECUTE1          0xFFE0
+#define wUNI_TRANSIT_EXECUTE3          0xFFE2
+#define wUNI_TRANSIT_EXECUTE4          0xFFE3
+#define wUNI_TRANSIT_EXECUTE_W         0xFFE4
+#define wUNI_TRANSIT_EXECUTE_DEVICE40  0xFFE5
+
 #define wUNI_GETQUERY_CRC              0xFFF0
-#define wUNI_GETTRANSIT2               0xFFF1
 
 
 #define bUNI_OK                        0
