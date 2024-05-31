@@ -81,7 +81,7 @@ uint    i;
 }
 
 
-void    GetTransitExecuteUni3(void) //TODO
+void    GetTransitExecuteUni3(void)
 {
 uint    i;
 
@@ -103,8 +103,8 @@ uint    i;
     cwInBuffBcc = 0;
 
     InitPush(0);
-    for (i=0; i<iwInBuffSave-13; i++) PushChar(mpbInBuffSave[i+9]);
-    Query(bInBuff8+bInBuff7*0x100, iwInBuffSave-13, 1);
+    for (i=0; i<iwInBuffSave-14; i++) PushChar(mpbInBuffSave[i+10]);
+    Query(bInBuff8+bInBuff7*0x100, iwInBuffSave-14, 1);
 
     InitWaitAnswer();
 
