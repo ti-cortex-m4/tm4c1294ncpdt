@@ -99,6 +99,9 @@ uint    i;
     uchar p = ibPort;
     ibPort = bInBuff6;
 
+    cbHeaderBcc = bInBuff8;
+    cwInBuffBcc = 0;
+
     InitPush(0);
     for (i=0; i<iwInBuffSave-13; i++) PushChar(mpbInBuffSave[i+9]);
     Query(bInBuff8+bInBuff7*0x100, iwInBuffSave-13, 1);
@@ -113,31 +116,27 @@ uint    i;
       ShowWaitAnswer(1);
       if (GetWaitAnswer()) { mpSerial[ibPort] = SER_BADLINK; break; }
 
+      if (mpSerial[ibPort] == SER_INPUT_MASTER)
+        DecompressK(0);
+
       if (mpSerial[ibPort] == SER_POSTINPUT_MASTER)
         break;
       else if ((mpSerial[ibPort] == SER_OVERFLOW) ||
                (mpSerial[ibPort] == SER_BADLINK)) break;
     }
 
-    if (mpSerial[ibPort] != SER_POSTINPUT_MASTER)
-    {
-      mpSerial[ibPort] = SER_BEGIN;
-      ibPort = p;
+    MonitorIn();
 
-      Result2(bRES_BADMODE);
-    }
-    else
-    {
-      SaveInBuff();
-      iwInBuffSave = IndexInBuff();
+    SaveInBuff();
+    iwInBuffSave = IndexInBuff();
 
-      mpSerial[ibPort] = SER_BEGIN;
-      ibPort = p;
+    mpSerial[ibPort] = SER_BEGIN;
+    ibPort = p;
 
-      InitPushUni();
+    InitPushUni();
+    if (iwInBuffSave > 0)
       for (i=0; i<iwInBuffSave; i++) PushChar(mpbInBuffSave[i]);
-      Output2(iwInBuffSave);
-    }
+    Output2(iwInBuffSave);
   }
 }
 

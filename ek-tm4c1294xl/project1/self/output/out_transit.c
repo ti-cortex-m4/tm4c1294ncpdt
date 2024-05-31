@@ -23,7 +23,6 @@ OUT_TRANSIT!C
 void    SafeTransitExecute1(void)
 {
 uint    i;
-uchar   p;
 
   if (bInBuff5 >= bPORTS)
     Result(bRES_BADADDRESS);
@@ -36,8 +35,7 @@ uchar   p;
     SaveInBuff();
     iwInBuffSave = IndexInBuff();
 
-    p = ibPort;
-
+    uchar p = ibPort;
     ibPort = bInBuff5;
 
     InitPush(0);
@@ -86,7 +84,6 @@ uchar   p;
 void    SafeTransitExecute2(void)
 {
 uint    i;
-uchar   p;
 
   if (bInBuff5 >= bPORTS)
     Result(bRES_BADADDRESS);
@@ -99,8 +96,7 @@ uchar   p;
     SaveInBuff();
     iwInBuffSave = IndexInBuff();
 
-    p = ibPort;
-
+    uchar p = ibPort;
     ibPort = bInBuff5;
 
     InitPush(0);
@@ -150,7 +146,6 @@ uchar   p;
 void    SafeTransitExecute3(void)
 {
 uint    i;
-uchar   p;
 
   if (bInBuff5 >= bPORTS)
     Result(bRES_BADADDRESS);
@@ -163,8 +158,7 @@ uchar   p;
     SaveInBuff();
     iwInBuffSave = IndexInBuff();
 
-    p = ibPort;
-
+    uchar p = ibPort;
     ibPort = bInBuff5;
 
     cbHeaderBcc = bInBuff8;
@@ -213,7 +207,6 @@ uchar   p;
 void    SafeTransitExecute4(void)
 {
 uint    i;
-uchar   p;
 
   if (bInBuff5 >= bPORTS)
     Result(bRES_BADADDRESS);
@@ -226,8 +219,7 @@ uchar   p;
     SaveInBuff();
     iwInBuffSave = IndexInBuff();
 
-    p = ibPort;
-
+    uchar p = ibPort;
     ibPort = bInBuff5;
 
     InitPush(0);
@@ -327,7 +319,6 @@ void    SafeTransitExecuteW(void)
 void    SafeTransitDevice40(void)
 {
 uint    i;
-uchar   p;
 
   if (bInBuff5 >= bPORTS)
     Result(bRES_BADADDRESS);
@@ -340,7 +331,7 @@ uchar   p;
     SaveInBuff();
     iwInBuffSave = IndexInBuff();
 
-    p = ibPort;
+    uchar p = ibPort;
     ibPort = bInBuff5;
 
     InitPush(0);
