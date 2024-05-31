@@ -68,7 +68,7 @@ uchar   ibPortSave;
       mpSerial[ibPort] = SER_BEGIN;
       ibPort = ibPortSave;
 
-      Result(bRES_BADMODE);
+      Result2(bRES_BADMODE);
     }
     else
     {
