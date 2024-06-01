@@ -189,8 +189,12 @@ void    RunResponseUni(void)
 
     if ((mpbDelayUni[ibPort] == 0) &&
         (bInBuff5 + bInBuff4*0x100 != wUNI_GETOPEN) &&
-        (bInBuff5 + bInBuff4*0x100 != wUNI_GETQUERY_CRC) &&
-        (bInBuff5 + bInBuff4*0x100 != wUNI_TRANSIT_EXECUTE1))
+        (bInBuff5 + bInBuff4*0x100 != wUNI_TRANSIT_EXECUTE1) &&
+        (bInBuff5 + bInBuff4*0x100 != wUNI_TRANSIT_EXECUTE3) &&
+        (bInBuff5 + bInBuff4*0x100 != wUNI_TRANSIT_EXECUTE4) &&
+        (bInBuff5 + bInBuff4*0x100 != wUNI_TRANSIT_W) &&
+        (bInBuff5 + bInBuff4*0x100 != wUNI_TRANSIT_DEVICE40) &&
+        (bInBuff5 + bInBuff4*0x100 != wUNI_GETQUERY_CRC))
     {
       if (boEnblPassUni == true)
       {
