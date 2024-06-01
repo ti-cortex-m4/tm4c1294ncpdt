@@ -260,11 +260,10 @@ void    RunResponseUni(void)
       case wUNI_GETEVENTS_MESSAGES: GetEventsMessagesUni(); break;
 
       case wUNI_TRANSIT_EXECUTE1: GetTransitExecuteUni1(); break;
-//      case bINQ_TRANSIT_EXECUTE2: SafeTransitExecute2(); break;
-//      case bINQ_TRANSIT_EXECUTE3: SafeTransitExecute3(); break;
-//      case bINQ_TRANSIT_EXECUTE4: SafeTransitExecute4(); break;
-//      case bINQ_TRANSIT_W:        TransitW();            break;
-//      case bINQ_TRANSIT_DEVICE40: SafeTransitDevice40(); break;
+      case wUNI_TRANSIT_EXECUTE3: GetTransitExecuteUni3(); break;
+      case wUNI_TRANSIT_EXECUTE4: GetTransitExecuteUni4(); break;
+      case wUNI_TRANSIT_W:        GetTransitExecuteUniW(); break;
+      case wUNI_TRANSIT_DEVICE40: GetTransitExecuteUni40(); break;
 
       case wUNI_GETQUERY_CRC:
         GetQueryCRCUni();
