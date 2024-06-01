@@ -5,7 +5,7 @@
 <stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_PROGRAM.Texas Instruments XDS100v2 USB Emulator_0/CORTEX_M4_0" value="${build_artifact:project1}"/>
 <stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_PROJECT.Texas Instruments XDS100v2 USB Emulator_0/CORTEX_M4_0" value="project1"/>
 <stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_TARGET_CONFIG" value="${target_config_active_default:project1}"/>
-<stringAttribute key="com.ti.ccstudio.debug.debugModel.MRU_PROGRAM.Texas Instruments XDS100v2 USB Emulator_0/CORTEX_M4_0" value="E:/Cortex\tm4c1294ncpdt\ek-tm4c1294xl\project1\Debug\project1.out"/>
+<stringAttribute key="com.ti.ccstudio.debug.debugModel.MRU_PROGRAM.Texas Instruments XDS100v2 USB Emulator_0/CORTEX_M4_0" value="D:/Cortex\tm4c1294ncpdt\ek-tm4c1294xl\project1\Debug\project1.out"/>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
 <listEntry value="/project1"/>
 </listAttribute>
