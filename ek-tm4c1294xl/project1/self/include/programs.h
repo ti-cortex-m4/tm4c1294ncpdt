@@ -335,7 +335,7 @@ PROGRAMS!H
 #define wSET_REVIEW_BORDERS         444
 #define wSET_REVIEW_MARGINS         445
 #define wSET_REVIEW_WRN_PERCENT     446
-#define wSET_REVIEW_WRN_MAXIMUM         447
+#define wSET_REVIEW_WRN_MAXIMUM     447
 
 #define wSET_AUTO_FLOW_ENBL         448
 #define wSET_AUTO_FLOW_HOURS        449

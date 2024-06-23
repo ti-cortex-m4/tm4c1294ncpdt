@@ -23,9 +23,9 @@ review.h
 #define REVIEW_WRN_PERCENT_MAX  50000
 #define REVIEW_WRN_PERCENT_DEF  400
 
-#define REVIEW_WRN_MAXIMUM_MIN    1
-#define REVIEW_WRN_MAXIMUM_MAX    0xFFFF
-#define REVIEW_WRN_MAXIMUM_DEF    0x7FFF
+#define REVIEW_WRN_MAXIMUM_MIN  1
+#define REVIEW_WRN_MAXIMUM_MAX  0xFFFF
+#define REVIEW_WRN_MAXIMUM_DEF  0x7FFF
 
 
 
@@ -40,7 +40,7 @@ extern uchar                   bReviewRepeats;
 extern uchar                   bReviewBorders;
 extern uchar                   bReviewMargins;
 extern uint                    wReviewWrnPercent;
-extern uint                    wReviewWrnTop;
+extern uint                    wReviewWrnMaximum;
 
 extern uint                    mcwReviewEvents[REVIEW_EVENTS_SIZE];
 extern uint                    mcwReviewWarnings[REVIEW_EVENTS_SIZE];
@@ -52,7 +52,7 @@ extern cache const             chReviewRepeats;
 extern cache const             chReviewBorders;
 extern cache const             chReviewMargins;
 extern cache const             chReviewWrnPercent;
-extern cache const             chReviewWrnTop;
+extern cache const             chReviewWrnMaximum;
 
 
 

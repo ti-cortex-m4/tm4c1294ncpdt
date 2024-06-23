@@ -4,4 +4,4 @@ key_review_wrn_top.h
 
 ------------------------------------------------------------------------------*/
 
-void    key_SetReviewWrnTop(void);
+void    key_SetReviewWrMaximum(void);
