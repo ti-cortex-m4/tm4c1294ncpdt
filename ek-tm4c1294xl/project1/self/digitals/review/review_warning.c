@@ -56,8 +56,8 @@ static review_wrn WarningCommon2(uint  wPrev, uint  wCurr, uchar  c)
   }
 
   if ((wPrev != 0) && (wCurr != 0)) {
-    ulong dwCurrMax = (ulong)wPrev*wReviewWrnTrend/100;
-    ulong dwCurrMin = (ulong)wPrev*100/wReviewWrnTrend;
+    ulong dwCurrMax = (ulong)wPrev*wReviewWrnPercent/100;
+    ulong dwCurrMin = (ulong)wPrev*100/wReviewWrnPercent;
 
     if (wCurr > dwCurrMax) {
       ulong dwTrend = (ulong)wCurr*100/wPrev;

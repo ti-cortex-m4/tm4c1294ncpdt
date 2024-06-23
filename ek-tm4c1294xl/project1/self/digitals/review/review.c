@@ -17,7 +17,7 @@ bool                    fReviewReadId;
 uchar                   bReviewRepeats;
 uchar                   bReviewBorders;
 uchar                   bReviewMargins;
-uint                    wReviewWrnTrend;
+uint                    wReviewWrnPercent;
 uint                    wReviewWrnTop;
 
 uint                    mcwReviewEvents[REVIEW_EVENTS_SIZE];
@@ -29,7 +29,7 @@ cache const             chReviewReadId = {REVIEW_READ_ID, &fReviewReadId, sizeof
 cache const             chReviewRepeats = {REVIEW_REPEATS, &bReviewRepeats, sizeof(uchar)};
 cache const             chReviewBorders = {REVIEW_BORDERS, &bReviewBorders, sizeof(uchar)};
 cache const             chReviewMargins = {REVIEW_MARGINS, &bReviewMargins, sizeof(uchar)};
-cache const             chReviewWrnPercent = {REVIEW_WRN_PERCENT, &wReviewWrnTrend, sizeof(uint)};
+cache const             chReviewWrnPercent = {REVIEW_WRN_PERCENT, &wReviewWrnPercent, sizeof(uint)};
 cache const             chReviewWrnTop = {REVIEW_WRN_TOP, &wReviewWrnTop, sizeof(uint)};
 
 
