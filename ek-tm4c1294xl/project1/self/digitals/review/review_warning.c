@@ -63,14 +63,14 @@ static review_wrn WarningCommon2(uint  wPrev, uint  wCurr, uchar  c)
       ulong dwTrend = (ulong)wCurr*100/wPrev;
       ShowTrend(szTrendTop, dwTrend, c);
       MonitorString(" WARNING: value > "); MonitorLongDec(dwCurrMax); MonitorString(" "); MonitorIntDec(dwTrend); MonitorString("%%");
-      return REVIEW_WRN_TREND_TOP;
+      return REVIEW_WRN_PERCENT_TOP;
     }
 
     if ((wPrev != 0) && (wCurr < dwCurrMin)) {
       ulong dwTrend = (ulong)wPrev*100/wCurr;
       ShowTrend(szTrendBottom, dwTrend, c);
       MonitorString(" WARNING: value < "); MonitorLongDec(dwCurrMin); MonitorString(" "); MonitorIntDec(dwTrend); MonitorString("%%");
-      return REVIEW_WRN_TREND_BOTTOM;
+      return REVIEW_WRN_PERCENT_BOTTOM;
     }
   }
 

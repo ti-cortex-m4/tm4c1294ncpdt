@@ -24,5 +24,5 @@ static char const       *pszMessages[]  = { szMessage1, szMessage2, szMessage3, 
 
 void    key_SetReviewWrnTrend(void)
 {
-  key_SetIntBlocked(&chReviewWrnTrend, pszMessages, REVIEW_WRN_TREND_MIN, REVIEW_WRN_TREND_MAX, fReviewFlag, wSET_REVIEW_FLAG);
+  key_SetIntBlocked(&chReviewWrnTrend, pszMessages, REVIEW_WRN_PERCENT_MIN, REVIEW_WRN_PERCENT_MAX, fReviewFlag, wSET_REVIEW_FLAG);
 }
