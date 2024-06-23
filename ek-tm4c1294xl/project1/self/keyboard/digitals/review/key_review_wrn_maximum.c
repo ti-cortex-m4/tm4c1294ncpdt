@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-key_review_wrn_top.c
+key_review_wrn_maximum.c
 
 
 ------------------------------------------------------------------------------*/
@@ -7,7 +7,7 @@ key_review_wrn_top.c
 #include "../../../console.h"
 #include "../../../digitals/review/review.h"
 #include "../../common/key_int_blocked.h"
-#include "key_review_wrn_top.h"
+#include "key_review_wrn_maximum.h"
 
 
 
@@ -21,7 +21,7 @@ static char const       *pszMessages[]  = { szMessage1, szMessage2, szMessage3, 
 
 
 
-void    key_SetReviewWrMaximum(void)
+void    key_SetReviewWrnMaximum(void)
 {
   key_SetIntBlocked(&chReviewWrnMaximum, pszMessages, REVIEW_WRN_MAXIMUM_MIN, REVIEW_WRN_MAXIMUM_MAX, fReviewFlag, wSET_REVIEW_FLAG);
 }

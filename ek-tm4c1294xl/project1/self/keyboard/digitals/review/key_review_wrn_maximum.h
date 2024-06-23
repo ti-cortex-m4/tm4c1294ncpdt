@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
-key_review_wrn_top.h
+key_review_wrn_maximum.h
 
 
 ------------------------------------------------------------------------------*/
 
-void    key_SetReviewWrMaximum(void);
+void    key_SetReviewWrnMaximum(void);
