@@ -51,7 +51,7 @@ extern cache const             chReviewReadId;
 extern cache const             chReviewRepeats;
 extern cache const             chReviewBorders;
 extern cache const             chReviewMargins;
-extern cache const             chReviewWrnTrend;
+extern cache const             chReviewWrnPercent;
 extern cache const             chReviewWrnTop;
 
 

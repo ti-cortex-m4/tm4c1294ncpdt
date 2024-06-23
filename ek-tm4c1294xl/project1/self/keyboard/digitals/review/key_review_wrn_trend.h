@@ -4,4 +4,4 @@ key_review_wrn_trend.h
 
 ------------------------------------------------------------------------------*/
 
-void    key_SetReviewWrnTrend(void);
+void    key_SetReviewWrnPercent(void);

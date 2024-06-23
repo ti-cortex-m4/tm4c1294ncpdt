@@ -29,7 +29,7 @@ cache const             chReviewReadId = {REVIEW_READ_ID, &fReviewReadId, sizeof
 cache const             chReviewRepeats = {REVIEW_REPEATS, &bReviewRepeats, sizeof(uchar)};
 cache const             chReviewBorders = {REVIEW_BORDERS, &bReviewBorders, sizeof(uchar)};
 cache const             chReviewMargins = {REVIEW_MARGINS, &bReviewMargins, sizeof(uchar)};
-cache const             chReviewWrnTrend = {REVIEW_WRN_PERCENT, &wReviewWrnTrend, sizeof(uint)};
+cache const             chReviewWrnPercent = {REVIEW_WRN_PERCENT, &wReviewWrnTrend, sizeof(uint)};
 cache const             chReviewWrnTop = {REVIEW_WRN_TOP, &wReviewWrnTop, sizeof(uint)};
 
 
@@ -42,7 +42,7 @@ void InitReview(void)
   LoadCacheChar(&chReviewRepeats, REVIEW_REPEATS_MIN, REVIEW_REPEATS_MAX, REVIEW_REPEATS_DEF);
   LoadCacheChar(&chReviewBorders, REVIEW_BORDERS_MIN, REVIEW_BORDERS_MAX, REVIEW_BORDERS_DEF);
   LoadCacheChar(&chReviewMargins, REVIEW_MARGINS_MIN, REVIEW_MARGINS_MAX, REVIEW_MARGINS_DEF);
-  LoadCacheInt(&chReviewWrnTrend, REVIEW_WRN_PERCENT_MIN, REVIEW_WRN_PERCENT_MAX, REVIEW_WRN_PERCENT_DEF);
+  LoadCacheInt(&chReviewWrnPercent, REVIEW_WRN_PERCENT_MIN, REVIEW_WRN_PERCENT_MAX, REVIEW_WRN_PERCENT_DEF);
   LoadCacheInt(&chReviewWrnTop, REVIEW_WRN_TOP_MIN, REVIEW_WRN_TOP_MAX, REVIEW_WRN_TOP_DEF);
 
   memset(&mcwReviewEvents, 0, sizeof(mcwReviewEvents));
@@ -66,7 +66,7 @@ void ResetReview(bool  fFull)
     SaveCacheChar(&chReviewRepeats, REVIEW_REPEATS_DEF);
     SaveCacheChar(&chReviewBorders, REVIEW_BORDERS_DEF);
     SaveCacheChar(&chReviewMargins, REVIEW_MARGINS_DEF);
-    SaveCacheInt(&chReviewWrnTrend, REVIEW_WRN_PERCENT_DEF);
+    SaveCacheInt(&chReviewWrnPercent, REVIEW_WRN_PERCENT_DEF);
     SaveCacheInt(&chReviewWrnTop, REVIEW_WRN_TOP_DEF);
   }
 }
