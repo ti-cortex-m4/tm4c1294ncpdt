@@ -401,7 +401,7 @@ void    Keyboard_Key(void)
       case wSET_REVIEW_REPEATS: key_SetReviewRepeats(); break;
       case wSET_REVIEW_BORDERS: key_SetReviewBorders(); break;
       case wSET_REVIEW_MARGINS: key_SetReviewMargins(); break;
-      case wSET_REVIEW_WRN_PERCENT: key_SetReviewWrnTrend(); break;
+      case wSET_REVIEW_WRN_PERCENT: key_SetReviewWrnPercent(); break;
       case wSET_REVIEW_WRN_TOP: key_SetReviewWrnTop(); break;
 
       case wSET_AUTO_FLOW_ENBL: key_SetAutoFlowEnbl();  break;
@@ -737,7 +737,7 @@ void    Keyboard_Key(void)
       case wSET_REVIEW_REPEATS: key_SetReviewRepeats(); break;
       case wSET_REVIEW_BORDERS: key_SetReviewBorders(); break;
       case wSET_REVIEW_MARGINS: key_SetReviewMargins(); break;
-      case wSET_REVIEW_WRN_PERCENT: key_SetReviewWrnTrend(); break;
+      case wSET_REVIEW_WRN_PERCENT: key_SetReviewWrnPercent(); break;
       case wSET_REVIEW_WRN_TOP: key_SetReviewWrnTop(); break;
 
       case wSET_AUTO_FLOW_ENBL: key_SetAutoFlowEnbl();  break;
@@ -993,7 +993,7 @@ void    Keyboard_Key(void)
       case wSET_REVIEW_REPEATS: key_SetReviewRepeats(); break;
       case wSET_REVIEW_BORDERS: key_SetReviewBorders(); break;
       case wSET_REVIEW_MARGINS: key_SetReviewMargins(); break;
-      case wSET_REVIEW_WRN_PERCENT: key_SetReviewWrnTrend(); break;
+      case wSET_REVIEW_WRN_PERCENT: key_SetReviewWrnPercent(); break;
       case wSET_REVIEW_WRN_TOP: key_SetReviewWrnTop(); break;
 
       case wSET_AUTO_FLOW_ENBL: key_SetAutoFlowEnbl();  break;
