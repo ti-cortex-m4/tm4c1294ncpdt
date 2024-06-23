@@ -125,7 +125,7 @@ KEYBOARD_KEY!C
 #include "digitals/review/key_review_repeats.h"
 #include "digitals/review/key_review_borders.h"
 #include "digitals/review/key_review_margins.h"
-#include "digitals/review/key_review_wrn_trend.h"
+#include "digitals/review/key_review_wrn_percent.h"
 #include "digitals/review/key_review_wrn_top.h"
 #include "digitals/schedule/key_auto_flow_enbl.h"
 #include "digitals/schedule/key_auto_flow_hours.h"
