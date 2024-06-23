@@ -52,7 +52,7 @@ static review_wrn WarningCommon2(uint  wPrev, uint  wCurr, uchar  c)
   if (wCurr > wReviewWrnTop) {
     Show(szTop, c);
     MonitorString(" WARNING: value > "); MonitorIntDec(wReviewWrnTop);
-    return REVIEW_WRN_TOP;
+    return REVIEW_WRN_MAXIMUM;
   }
 
   if ((wPrev != 0) && (wCurr != 0)) {

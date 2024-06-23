@@ -23,5 +23,5 @@ static char const       *pszMessages[]  = { szMessage1, szMessage2, szMessage3, 
 
 void    key_SetReviewWrnTop(void)
 {
-  key_SetIntBlocked(&chReviewWrnTop, pszMessages, REVIEW_WRN_TOP_MIN, REVIEW_WRN_TOP_MAX, fReviewFlag, wSET_REVIEW_FLAG);
+  key_SetIntBlocked(&chReviewWrnTop, pszMessages, REVIEW_WRN_MAXIMUM_MIN, REVIEW_WRN_MAXIMUM_MAX, fReviewFlag, wSET_REVIEW_FLAG);
 }

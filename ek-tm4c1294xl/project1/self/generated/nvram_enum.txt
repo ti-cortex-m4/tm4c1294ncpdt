@@ -269,9 +269,9 @@ typedef enum
   REVIEW_BORDERS        = REVIEW_REPEATS + sizeof(uchar) + bNVRAM_MARGIN,
   REVIEW_MARGINS        = REVIEW_BORDERS + sizeof(uchar) + bNVRAM_MARGIN,
   REVIEW_WRN_PERCENT    = REVIEW_MARGINS + sizeof(uchar) + bNVRAM_MARGIN,
-  REVIEW_WRN_TOP        = REVIEW_WRN_PERCENT + sizeof(uint) + bNVRAM_MARGIN,
+  REVIEW_WRN_MAXIMUM    = REVIEW_WRN_PERCENT + sizeof(uint) + bNVRAM_MARGIN,
 
-  PTR_DIAGRAM           = REVIEW_WRN_TOP + sizeof(uint) + bNVRAM_MARGIN,
+  PTR_DIAGRAM           = REVIEW_WRN_MAXIMUM + sizeof(uint) + bNVRAM_MARGIN,
   ENBL_DIAGRAM          = PTR_DIAGRAM + sizeof(t2uint) + bNVRAM_MARGIN,
 
   SKIP_FAILURE_ENBL     = ENBL_DIAGRAM + sizeof(bool) + bNVRAM_MARGIN,
