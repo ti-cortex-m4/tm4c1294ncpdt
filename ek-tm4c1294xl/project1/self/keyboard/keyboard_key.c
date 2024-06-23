@@ -402,7 +402,7 @@ void    Keyboard_Key(void)
       case wSET_REVIEW_BORDERS: key_SetReviewBorders(); break;
       case wSET_REVIEW_MARGINS: key_SetReviewMargins(); break;
       case wSET_REVIEW_WRN_PERCENT: key_SetReviewWrnPercent(); break;
-      case wSET_REVIEW_WRN_MAXIMUM: key_SetReviewWrMaximum(); break;
+      case wSET_REVIEW_WRN_MAXIMUM: key_SetReviewWrnMaximum(); break;
 
       case wSET_AUTO_FLOW_ENBL: key_SetAutoFlowEnbl();  break;
       case wSET_AUTO_FLOW_HOURS:key_SetAutoFlowHours(); break;
@@ -738,7 +738,7 @@ void    Keyboard_Key(void)
       case wSET_REVIEW_BORDERS: key_SetReviewBorders(); break;
       case wSET_REVIEW_MARGINS: key_SetReviewMargins(); break;
       case wSET_REVIEW_WRN_PERCENT: key_SetReviewWrnPercent(); break;
-      case wSET_REVIEW_WRN_MAXIMUM: key_SetReviewWrMaximum(); break;
+      case wSET_REVIEW_WRN_MAXIMUM: key_SetReviewWrnMaximum(); break;
 
       case wSET_AUTO_FLOW_ENBL: key_SetAutoFlowEnbl();  break;
       case wSET_AUTO_FLOW_HOURS:key_SetAutoFlowHours(); break;
@@ -994,7 +994,7 @@ void    Keyboard_Key(void)
       case wSET_REVIEW_BORDERS: key_SetReviewBorders(); break;
       case wSET_REVIEW_MARGINS: key_SetReviewMargins(); break;
       case wSET_REVIEW_WRN_PERCENT: key_SetReviewWrnPercent(); break;
-      case wSET_REVIEW_WRN_MAXIMUM: key_SetReviewWrMaximum(); break;
+      case wSET_REVIEW_WRN_MAXIMUM: key_SetReviewWrnMaximum(); break;
 
       case wSET_AUTO_FLOW_ENBL: key_SetAutoFlowEnbl();  break;
       case wSET_AUTO_FLOW_HOURS:key_SetAutoFlowHours(); break;
