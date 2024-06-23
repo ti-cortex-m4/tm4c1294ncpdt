@@ -39,7 +39,7 @@ extern bool                    fReviewReadId;
 extern uchar                   bReviewRepeats;
 extern uchar                   bReviewBorders;
 extern uchar                   bReviewMargins;
-extern uint                    wReviewWrnTrend;
+extern uint                    wReviewWrnPercent;
 extern uint                    wReviewWrnTop;
 
 extern uint                    mcwReviewEvents[REVIEW_EVENTS_SIZE];
