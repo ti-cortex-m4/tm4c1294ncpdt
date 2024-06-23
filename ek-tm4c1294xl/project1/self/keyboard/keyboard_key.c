@@ -126,7 +126,7 @@ KEYBOARD_KEY!C
 #include "digitals/review/key_review_borders.h"
 #include "digitals/review/key_review_margins.h"
 #include "digitals/review/key_review_wrn_percent.h"
-#include "digitals/review/key_review_wrn_top.h"
+#include "digitals/review/key_review_wrn_maximum.h"
 #include "digitals/schedule/key_auto_flow_enbl.h"
 #include "digitals/schedule/key_auto_flow_hours.h"
 #include "digitals/key_dsbl_esc.h"
@@ -402,7 +402,7 @@ void    Keyboard_Key(void)
       case wSET_REVIEW_BORDERS: key_SetReviewBorders(); break;
       case wSET_REVIEW_MARGINS: key_SetReviewMargins(); break;
       case wSET_REVIEW_WRN_PERCENT: key_SetReviewWrnPercent(); break;
-      case wSET_REVIEW_WRN_MAXIMUM: key_SetReviewWrnTop(); break;
+      case wSET_REVIEW_WRN_MAXIMUM: key_SetReviewWrMaximum(); break;
 
       case wSET_AUTO_FLOW_ENBL: key_SetAutoFlowEnbl();  break;
       case wSET_AUTO_FLOW_HOURS:key_SetAutoFlowHours(); break;
@@ -738,7 +738,7 @@ void    Keyboard_Key(void)
       case wSET_REVIEW_BORDERS: key_SetReviewBorders(); break;
       case wSET_REVIEW_MARGINS: key_SetReviewMargins(); break;
       case wSET_REVIEW_WRN_PERCENT: key_SetReviewWrnPercent(); break;
-      case wSET_REVIEW_WRN_MAXIMUM: key_SetReviewWrnTop(); break;
+      case wSET_REVIEW_WRN_MAXIMUM: key_SetReviewWrMaximum(); break;
 
       case wSET_AUTO_FLOW_ENBL: key_SetAutoFlowEnbl();  break;
       case wSET_AUTO_FLOW_HOURS:key_SetAutoFlowHours(); break;
@@ -994,7 +994,7 @@ void    Keyboard_Key(void)
       case wSET_REVIEW_BORDERS: key_SetReviewBorders(); break;
       case wSET_REVIEW_MARGINS: key_SetReviewMargins(); break;
       case wSET_REVIEW_WRN_PERCENT: key_SetReviewWrnPercent(); break;
-      case wSET_REVIEW_WRN_MAXIMUM: key_SetReviewWrnTop(); break;
+      case wSET_REVIEW_WRN_MAXIMUM: key_SetReviewWrMaximum(); break;
 
       case wSET_AUTO_FLOW_ENBL: key_SetAutoFlowEnbl();  break;
       case wSET_AUTO_FLOW_HOURS:key_SetAutoFlowHours(); break;
