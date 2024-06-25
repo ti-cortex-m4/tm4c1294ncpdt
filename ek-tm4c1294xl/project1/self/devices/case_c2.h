@@ -180,16 +180,13 @@
 //      }
 //      else
       cbIteration = 0;
-      if (boShortProfileC == false)
-      {
+      if (boShortProfileC == false) {
         InitHeaderC6();
 
         StartReview();
         RestartReview();
         MakePause(DEV_DATA_6_C2);
-      }
-      else
-      {
+      } else {
         InitHeaderC1();
 
         StartReview();
@@ -218,9 +215,9 @@
     case DEV_ERROR_6_C2:
       mpcwOutput1[ibDig]++; //Beep();
 
-      if (++cbIteration > bITERATIONS) ErrorProfile();
-      else
-      {
+      if (++cbIteration > bITERATIONS)
+        ErrorProfile();
+      else {
         cbRepeat = MaxRepeats();
         QueryIdC();
         SetCurr(DEV_POSTERROR_6_C2);
@@ -343,9 +340,9 @@
     case DEV_ERROR_1_C2:
       mpcwOutput1[ibDig]++; //Beep();
 
-      if (++cbIteration > bITERATIONS) ErrorProfile();
-      else
-      {
+      if (++cbIteration > bITERATIONS)
+        ErrorProfile();
+      else {
         cbRepeat = MaxRepeats();
         QueryIdC();
         SetCurr(DEV_POSTERROR_1_C2);
