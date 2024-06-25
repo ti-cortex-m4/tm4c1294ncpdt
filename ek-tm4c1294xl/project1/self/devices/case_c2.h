@@ -227,23 +227,17 @@
     case DEV_POSTERROR_6_C2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        if (ReadIdC() == 1)
-        {
+        if (ReadIdC() == 1) {
           QueryHeaderC6();
           SetCurr(DEV_HEADER_6_C2);
-        }
-        else
-        {
+        } else {
           ShowLo(szFailure2);
           MakePause(DEV_ERROR_6_C2);
         }
-      }
-      else
-      {
+      } else {
         if (cbRepeat == 0)
           ErrorProfile();
-        else
-        {
+        else {
           ErrorLink();
           cbRepeat--;
 
@@ -352,23 +346,17 @@
     case DEV_POSTERROR_1_C2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        if (ReadIdC() == 1)
-        {
+        if (ReadIdC() == 1) {
           QueryHeaderC1();
           SetCurr(DEV_HEADER_1_C2);
-        }
-        else
-        {
+        } else {
           ShowLo(szFailure2);
           MakePause(DEV_ERROR_1_C2);
         }
-      }
-      else
-      {
+      } else {
         if (cbRepeat == 0)
           ErrorProfile();
-        else
-        {
+        else {
           ErrorLink();
           cbRepeat--;
 
