@@ -16,23 +16,23 @@ review_warning.c
 
 
 
-//                                         0123456789ABCDEF
-static char const       szZero[]        = "  просечка ?    ",
-                        szRepeat[]      = "   повтор ?     ",
-                        szTop[]         = "   выброс ?     ",
-                        szTrendTop[]    = "   рост %u%%     ",
-                        szTrendBottom[] = "   спад %u%%     ";
+//                                           0123456789ABCDEF
+static char const       szZero[]          = "  просечка ?    ",
+                        szRepeat[]        = "   повтор ?     ",
+                        szTop[]           = "   выброс ?     ",
+                        szPercentTop[]    = "   рост %u%%     ",
+                        szPercentBottom[] = "   спад %u%%     ";
 
 
 
-static void Show(char const  *sz, uchar  c)
+static void Show1(char const  *sz, uchar  c)
 {
   ShowLo(sz);
   sprintf(szLo+14, "%2u", c+1);
   DelayInf(); Clear();
 }
 
-static void ShowPercent(char const  *sz, uint  wPercent, uchar  c)
+static void Show2(char const  *sz, uint  wPercent, uchar  c)
 {
   sprintf(szLo, sz, wPercent);
   sprintf(szLo+14, "%2u", c+1);
@@ -44,13 +44,13 @@ static review_wrn WarningCommon2(uint  wPrev, uint  wCurr, uchar  c)
   MonitorString(" "); MonitorIntDec(wPrev); MonitorString(" -> "); MonitorIntDec(wCurr);
 
   if ((wPrev != 0) && (wCurr == 0)) {
-    Show(szZero, c);
+    Show1(szZero, c);
     MonitorString(" WARNING: value 0");
     return REVIEW_WRN_ZERO;
   }
 
   if (wCurr > wReviewWrnMaximum) {
-    Show(szTop, c);
+    Show1(szTop, c);
     MonitorString(" WARNING: value > "); MonitorIntDec(wReviewWrnMaximum);
     return REVIEW_WRN_MAXIMUM;
   }
@@ -60,16 +60,16 @@ static review_wrn WarningCommon2(uint  wPrev, uint  wCurr, uchar  c)
     ulong dwCurrMin = (ulong)wPrev*100/wReviewWrnPercent;
 
     if (wCurr > dwCurrMax) {
-      ulong dwTrend = (ulong)wCurr*100/wPrev;
-      ShowPercent(szTrendTop, dwTrend, c);
-      MonitorString(" WARNING: value > "); MonitorLongDec(dwCurrMax); MonitorString(" "); MonitorIntDec(dwTrend); MonitorString("%%");
+      ulong dwPercent = (ulong)wCurr*100/wPrev;
+      Show2(szPercentTop, dwPercent, c);
+      MonitorString(" WARNING: value > "); MonitorLongDec(dwCurrMax); MonitorString(" "); MonitorIntDec(dwPercent); MonitorString("%%");
       return REVIEW_WRN_PERCENT_TOP;
     }
 
     if ((wPrev != 0) && (wCurr < dwCurrMin)) {
-      ulong dwTrend = (ulong)wPrev*100/wCurr;
-      ShowPercent(szTrendBottom, dwTrend, c);
-      MonitorString(" WARNING: value < "); MonitorLongDec(dwCurrMin); MonitorString(" "); MonitorIntDec(dwTrend); MonitorString("%%");
+      ulong dwPercent = (ulong)wPrev*100/wCurr;
+      Show2(szPercentBottom, dwPercent, c);
+      MonitorString(" WARNING: value < "); MonitorLongDec(dwCurrMin); MonitorString(" "); MonitorIntDec(dwPercent); MonitorString("%%");
       return REVIEW_WRN_PERCENT_BOTTOM;
     }
   }
@@ -82,7 +82,7 @@ static review_wrn WarningRepeats2(uint  wPrev, uint  wCurr, uchar  c)
   MonitorString(" "); MonitorIntDec(wPrev); MonitorString(" => "); MonitorIntDec(wCurr);
 
   if ((wPrev != 0) && (wCurr == wPrev)) {
-    Show(szRepeat, c);
+    Show1(szRepeat, c);
     MonitorString(" WARNING: repeat ?");
     return REVIEW_WRN_REPEAT;
   }
@@ -177,7 +177,7 @@ static bool WarningReviewBuffX1(void)
   return false;
 }
 
-// показывается сообщения об ошибках
+// показывает сообщения об ошибках
 bool WarningReviewBuff(uchar  bSize)
 {
   switch(bSize) {
