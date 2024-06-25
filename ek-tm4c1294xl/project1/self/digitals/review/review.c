@@ -14,9 +14,9 @@ review.c
 bool                    fReviewFlag;
 bool                    mfReviewCan[bCANALS];
 bool                    fReviewReadId;
-uchar                   bReviewRepeats;
-uchar                   bReviewBorders;
-uchar                   bReviewMargins;
+uchar                   bReviewRepeats; // базовое количество повторов
+uchar                   bReviewBorders; // проверочное количество повторов
+uchar                   bReviewMargins; // максимальное количество повторов
 uint                    wReviewWrnPercent;
 uint                    wReviewWrnMaximum;
 

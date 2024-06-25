@@ -24,12 +24,14 @@ bool                    fIdRepeat;
 
 
 
+// вызывается когда начинается опрос профилей
 void StartReview(void)
 {
   StartReviewBuff();
   StartReviewCan(ibDig);
 }
 
+// вызывается когда начинается опрос следующего х1 или х6 блока профилей
 void RestartReview(void)
 {
   RestartReviewBuff();

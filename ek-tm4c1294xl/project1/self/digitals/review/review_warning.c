@@ -32,7 +32,7 @@ static void Show(char const  *sz, uchar  c)
   DelayInf(); Clear();
 }
 
-static void ShowTrend(char const  *sz, uint  wPercent, uchar  c)
+static void ShowPercent(char const  *sz, uint  wPercent, uchar  c)
 {
   sprintf(szLo, sz, wPercent);
   sprintf(szLo+14, "%2u", c+1);
@@ -61,14 +61,14 @@ static review_wrn WarningCommon2(uint  wPrev, uint  wCurr, uchar  c)
 
     if (wCurr > dwCurrMax) {
       ulong dwTrend = (ulong)wCurr*100/wPrev;
-      ShowTrend(szTrendTop, dwTrend, c);
+      ShowPercent(szTrendTop, dwTrend, c);
       MonitorString(" WARNING: value > "); MonitorLongDec(dwCurrMax); MonitorString(" "); MonitorIntDec(dwTrend); MonitorString("%%");
       return REVIEW_WRN_PERCENT_TOP;
     }
 
     if ((wPrev != 0) && (wCurr < dwCurrMin)) {
       ulong dwTrend = (ulong)wPrev*100/wCurr;
-      ShowTrend(szTrendBottom, dwTrend, c);
+      ShowPercent(szTrendBottom, dwTrend, c);
       MonitorString(" WARNING: value < "); MonitorLongDec(dwCurrMin); MonitorString(" "); MonitorIntDec(dwTrend); MonitorString("%%");
       return REVIEW_WRN_PERCENT_BOTTOM;
     }
@@ -177,6 +177,7 @@ static bool WarningReviewBuffX1(void)
   return false;
 }
 
+// показывается сообщения об ошибках
 bool WarningReviewBuff(uchar  bSize)
 {
   switch(bSize) {
