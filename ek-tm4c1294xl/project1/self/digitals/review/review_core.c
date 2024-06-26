@@ -66,7 +66,7 @@ static review_code ReadReview2(uchar  ibMin, uchar  ibMax, uchar  bSize)
     Show();
 
     cbRepeatCurr++;
-    SaveReviewBuff(ibMin,ibMax);
+    SaveReviewBuff(ibMin, ibMax);
 
     WarningReviewBuff(bSize);
     return REVIEW_REPEAT;
@@ -78,7 +78,7 @@ static review_code ReadReview2(uchar  ibMin, uchar  ibMax, uchar  bSize)
       Clear(); strcpy(szLo+0, "ошибка проверки"); DelayMsg(); Clear();
       return REVIEW_ERROR;
     } else {
-      if (TestReviewBuff(ibMin,ibMax)) {
+      if (TestReviewBuff(ibMin, ibMax)) {
         if (++cbRepeatCurr >= bReviewRepeatMax) {
           NextReviewBuff();
           return REVIEW_SUCCESS;
@@ -87,7 +87,7 @@ static review_code ReadReview2(uchar  ibMin, uchar  ibMax, uchar  bSize)
         }
       } else {
         cbRepeatCurr = 0;
-        SaveReviewBuff(ibMin,ibMax);
+        SaveReviewBuff(ibMin, ibMax);
 
         if (!WarningReviewBuff(bSize)) {
           Clear(); strcpy(szLo+3, "проверка !"); DelayInf(); Clear();
