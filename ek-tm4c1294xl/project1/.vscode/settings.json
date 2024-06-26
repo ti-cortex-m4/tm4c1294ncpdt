@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "key_review_repeat_basic.h": "c"
+        "key_review_repeat_basic.h": "c",
+        "*.txt": "c"
     }
 }
