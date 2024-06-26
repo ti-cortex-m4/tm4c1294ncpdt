@@ -4,4 +4,4 @@ key_review_margins.h
 
 ------------------------------------------------------------------------------*/
 
-void    key_SetReviewMargins(void);
+void    key_SetReviewRepeatTotal(void);

@@ -74,7 +74,7 @@ static review_code ReadReview2(uchar  ibMin, uchar  ibMax, uchar  bSize)
     cbMargins++;
     Show();
 
-    if (cbMargins >= bReviewMargins) {
+    if (cbMargins >= bReviewRepeatTotal) {
       Clear(); strcpy(szLo+0, "ошибка проверки"); DelayMsg(); Clear();
       return REVIEW_ERROR;
     } else {
