@@ -7,9 +7,9 @@ review.h
 #ifndef __REVIEW
 #define __REVIEW
 
-#define REVIEW_REPEATS_MIN    2
-#define REVIEW_REPEATS_MAX    5
-#define REVIEW_REPEATS_DEF    2
+#define REVIEW_REPEAT_BASIC_MIN    2
+#define REVIEW_REPEAT_BASIC_MAX    5
+#define REVIEW_REPEAT_BASIC_DEF    2
 
 #define REVIEW_BORDERS_MIN    2
 #define REVIEW_BORDERS_MAX    5

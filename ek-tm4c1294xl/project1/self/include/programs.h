@@ -331,9 +331,9 @@ PROGRAMS!H
 #define wSET_REVIEW_FLAG            440
 #define wSET_REVIEW_CAN             441
 #define wSET_REVIEW_READ_ID         442
-#define wSET_REVIEW_REPEATS         443
+#define wSET_REVIEW_REPEAT_BASIC    443
 #define wSET_REVIEW_BORDERS         444
-#define wSET_REVIEW_REPEAT_TOTAL         445
+#define wSET_REVIEW_REPEAT_TOTAL    445
 #define wSET_REVIEW_WRN_PERCENT     446
 #define wSET_REVIEW_WRN_MAXIMUM     447
 
