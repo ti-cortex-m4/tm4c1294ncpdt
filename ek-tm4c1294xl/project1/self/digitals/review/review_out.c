@@ -22,7 +22,7 @@ void OutReview(void)
 
   wSize += PushBool(fReviewFlag);
   wSize += PushBool(fReviewReadId);
-  wSize += PushChar(bReviewRepeats);
+  wSize += PushChar(bReviewRepeatBasic);
   wSize += PushChar(bReviewBorders);
   wSize += PushChar(bReviewRepeatTotal);
   wSize += PushIntBig(wReviewWrnPercent);
