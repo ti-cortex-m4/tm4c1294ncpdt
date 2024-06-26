@@ -24,7 +24,7 @@ void OutReview(void)
   wSize += PushBool(fReviewReadId);
   wSize += PushChar(bReviewRepeats);
   wSize += PushChar(bReviewBorders);
-  wSize += PushChar(bReviewMargins);
+  wSize += PushChar(bReviewRepeatTotal);
   wSize += PushIntBig(wReviewWrnPercent);
   wSize += PushIntBig(wReviewWrnMaximum);
 

@@ -38,7 +38,7 @@ extern bool                    mfReviewCan[bCANALS];
 extern bool                    fReviewReadId;
 extern uchar                   bReviewRepeats;
 extern uchar                   bReviewBorders;
-extern uchar                   bReviewMargins;
+extern uchar                   bReviewRepeatTotal;
 extern uint                    wReviewWrnPercent;
 extern uint                    wReviewWrnMaximum;
 
@@ -50,7 +50,7 @@ extern cache const             chReviewCan;
 extern cache const             chReviewReadId;
 extern cache const             chReviewRepeats;
 extern cache const             chReviewBorders;
-extern cache const             chReviewMargins;
+extern cache const             chReviewRepeatTotal;
 extern cache const             chReviewWrnPercent;
 extern cache const             chReviewWrnMaximum;
 
