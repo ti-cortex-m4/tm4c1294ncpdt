@@ -6,6 +6,7 @@
         "review_core.h": "c",
         "console.h": "c",
         "key_review_wrn_percent.h": "c",
-        "key_review_wrn_maximum.h": "c"
+        "key_review_wrn_maximum.h": "c",
+        "key_review_repeat_total.h": "c"
     }
 }
