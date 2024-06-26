@@ -17,7 +17,7 @@ review_core.c
 
 
 
-static uchar            cbRepeats, cbMargins;
+static uchar            cbRepeats, cbRepeatTotal;
 
 uchar                   bMaxRepeats;
 bool                    fIdRepeat;
@@ -37,7 +37,7 @@ void RestartReview(void)
   RestartReviewBuff();
 
   cbRepeats = 0;
-  cbMargins = 0;
+  cbRepeatTotal = 0;
 
   bMaxRepeats = bReviewRepeats;
   fIdRepeat = false;
@@ -52,7 +52,7 @@ static bool UseReview(void)
 
 static void Show(void)
 {
-  sprintf(szHi+10, "%2u", cbMargins);
+  sprintf(szHi+10, "%2u", cbRepeatTotal);
 }
 
 
@@ -61,8 +61,8 @@ static review_code ReadReview2(uchar  ibMin, uchar  ibMax, uchar  bSize)
 {
   if (!UseReview()) {
     return REVIEW_SUCCESS;
-  } else if (cbMargins == 0) {
-    cbMargins++;
+  } else if (cbRepeatTotal == 0) {
+    cbRepeatTotal++;
     Show();
 
     cbRepeats++;
@@ -71,10 +71,10 @@ static review_code ReadReview2(uchar  ibMin, uchar  ibMax, uchar  bSize)
     WarningReviewBuff(bSize);
     return REVIEW_REPEAT;
   } else {
-    cbMargins++;
+    cbRepeatTotal++;
     Show();
 
-    if (cbMargins >= bReviewRepeatTotal) {
+    if (cbRepeatTotal >= bReviewRepeatTotal) {
       Clear(); strcpy(szLo+0, "ошибка проверки"); DelayMsg(); Clear();
       return REVIEW_ERROR;
     } else {
