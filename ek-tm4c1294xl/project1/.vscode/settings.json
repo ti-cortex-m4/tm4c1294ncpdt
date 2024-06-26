@@ -3,6 +3,9 @@
         "review_can.h": "c",
         "review_warning.h": "c",
         "review_buff.h": "c",
-        "review_core.h": "c"
+        "review_core.h": "c",
+        "console.h": "c",
+        "key_review_wrn_percent.h": "c",
+        "key_review_wrn_maximum.h": "c"
     }
 }
