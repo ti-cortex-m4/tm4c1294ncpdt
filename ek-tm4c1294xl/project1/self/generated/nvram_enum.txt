@@ -266,8 +266,8 @@ typedef enum
   REVIEW_CAN            = REVIEW_FLAG + sizeof(bool) + bNVRAM_MARGIN,
   REVIEW_READ_ID        = REVIEW_CAN + sizeof(mfReviewCan) + bNVRAM_MARGIN,
   REVIEW_REPEAT_BASIC        = REVIEW_READ_ID + sizeof(bool) + bNVRAM_MARGIN,
-  REVIEW_BORDERS        = REVIEW_REPEAT_BASIC + sizeof(uchar) + bNVRAM_MARGIN,
-  REVIEW_REPEAT_TOTAL        = REVIEW_BORDERS + sizeof(uchar) + bNVRAM_MARGIN,
+  REVIEW_REPEAT_WARNING        = REVIEW_REPEAT_BASIC + sizeof(uchar) + bNVRAM_MARGIN,
+  REVIEW_REPEAT_TOTAL        = REVIEW_REPEAT_WARNING + sizeof(uchar) + bNVRAM_MARGIN,
   REVIEW_WRN_PERCENT    = REVIEW_REPEAT_TOTAL + sizeof(uchar) + bNVRAM_MARGIN,
   REVIEW_WRN_MAXIMUM    = REVIEW_WRN_PERCENT + sizeof(uint) + bNVRAM_MARGIN,
 
