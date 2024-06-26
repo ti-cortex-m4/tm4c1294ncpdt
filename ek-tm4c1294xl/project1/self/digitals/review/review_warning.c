@@ -177,7 +177,6 @@ static bool WarningReviewBuffX1(void)
   return false;
 }
 
-// показывает сообщения об ошибках
 bool WarningReviewBuff(uchar  bSize)
 {
   switch(bSize) {

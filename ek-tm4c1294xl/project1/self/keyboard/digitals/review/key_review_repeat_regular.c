@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-key_review_repeat_basic.c
+key_review_repeat_regular.c
 
 
 ------------------------------------------------------------------------------*/
@@ -7,7 +7,7 @@ key_review_repeat_basic.c
 #include "../../../console.h"
 #include "../../../digitals/review/review.h"
 #include "../../common/key_char_blocked.h"
-#include "key_review_repeat_basic.h"
+#include "key_review_repeat_regular.h"
 
 
 
