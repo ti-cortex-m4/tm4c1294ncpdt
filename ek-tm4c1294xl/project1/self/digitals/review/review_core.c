@@ -20,7 +20,7 @@ review_core.c
 static uchar            cbRepeats, cbRepeatTotal;
 
 uchar                   bReviewRepeatMax;
-bool                    fReviewUseId;
+bool                    fReviewIdRepeat;
 
 
 
@@ -40,7 +40,7 @@ void RestartReview(void)
   cbRepeatTotal = 0;
 
   bReviewRepeatMax = bReviewRepeatBasic;
-  fReviewUseId = false;
+  fReviewIdRepeat = false;
 }
 
 
@@ -102,7 +102,7 @@ static review_code ReadReview(uchar  ibMin, uchar  ibMax, uchar  bSize)
 {
   review_code rc = ReadReview2(ibMin, ibMax, bSize);
 
-  if ((rc == REVIEW_REPEAT) && (fReviewUseId == true)) {
+  if ((rc == REVIEW_REPEAT) && (fReviewIdRepeat == true)) {
     rc = REVIEW_ID_REPEAT;
     MonitorString("\n REVIEW_ID_REPEAT");
   }
