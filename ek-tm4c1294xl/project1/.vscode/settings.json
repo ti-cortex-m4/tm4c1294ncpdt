@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "review_can.h": "c",
+        "review_warning.h": "c",
+        "review_buff.h": "c",
+        "review_core.h": "c"
+    }
+}

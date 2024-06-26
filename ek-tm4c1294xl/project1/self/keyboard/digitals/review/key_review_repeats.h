@@ -4,4 +4,4 @@ key_review_repeats.h
 
 ------------------------------------------------------------------------------*/
 
-void    key_SetReviewRepeats(void);
+void    key_SetReviewRepeatBasic(void);
