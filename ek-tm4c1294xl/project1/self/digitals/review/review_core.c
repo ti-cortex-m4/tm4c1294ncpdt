@@ -39,7 +39,7 @@ void RestartReview(void)
   cbRepeatCurr = 0;
   cbRepeatTotal = 0;
 
-  bReviewRepeatMax = bReviewRepeatBasic;
+  bReviewRepeatMax = bReviewRepeatRegular;
   fReviewIdRepeat = false;
 }
 

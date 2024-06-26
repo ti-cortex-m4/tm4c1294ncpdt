@@ -14,7 +14,7 @@ review.c
 bool                    fReviewFlag;
 bool                    mfReviewCan[bCANALS];
 bool                    fReviewReadId;
-uchar                   bReviewRepeatBasic; // базовое количество повторов
+uchar                   bReviewRepeatRegular; // базовое количество повторов
 uchar                   bReviewRepeatWarning; // проверочное количество повторов
 uchar                   bReviewRepeatTotal; // максимальное количество повторов
 uint                    wReviewWrnPercent;
@@ -26,7 +26,7 @@ uint                    mcwReviewWarnings[REVIEW_EVENTS_SIZE];
 cache const             chReviewFlag = {REVIEW_FLAG, &fReviewFlag, sizeof(bool)};
 cache const             chReviewCan = {REVIEW_CAN, &mfReviewCan, sizeof(mfReviewCan)};
 cache const             chReviewReadId = {REVIEW_READ_ID, &fReviewReadId, sizeof(bool)};
-cache const             chReviewRepeatBasic = {REVIEW_REPEAT_BASIC, &bReviewRepeatBasic, sizeof(uchar)};
+cache const             chReviewRepeatRegular = {REVIEW_REPEAT_BASIC, &bReviewRepeatRegular, sizeof(uchar)};
 cache const             chReviewRepeatWarning = {REVIEW_REPEAT_WARNING, &bReviewRepeatWarning, sizeof(uchar)};
 cache const             chReviewRepeatTotal = {REVIEW_REPEAT_TOTAL, &bReviewRepeatTotal, sizeof(uchar)};
 cache const             chReviewWrnPercent = {REVIEW_WRN_PERCENT, &wReviewWrnPercent, sizeof(uint)};
@@ -39,7 +39,7 @@ void InitReview(void)
   LoadCacheBool(&chReviewFlag, false);
   LoadCache(&chReviewCan);
   LoadCacheBool(&chReviewReadId, false);
-  LoadCacheChar(&chReviewRepeatBasic, REVIEW_REPEAT_BASIC_MIN, REVIEW_REPEAT_BASIC_MAX, REVIEW_REPEAT_BASIC_DEF);
+  LoadCacheChar(&chReviewRepeatRegular, REVIEW_REPEAT_BASIC_MIN, REVIEW_REPEAT_BASIC_MAX, REVIEW_REPEAT_BASIC_DEF);
   LoadCacheChar(&chReviewRepeatWarning, REVIEW_REPEAT_WARNING_MIN, REVIEW_REPEAT_WARNING_MAX, REVIEW_REPEAT_WARNING_DEF);
   LoadCacheChar(&chReviewRepeatTotal, REVIEW_REPEAT_TOTAL_MIN, REVIEW_REPEAT_TOTAL_MAX, REVIEW_REPEAT_TOTAL_DEF);
   LoadCacheInt(&chReviewWrnPercent, REVIEW_WRN_PERCENT_MIN, REVIEW_WRN_PERCENT_MAX, REVIEW_WRN_PERCENT_DEF);
@@ -63,7 +63,7 @@ void ResetReview(bool  fFull)
     SaveCache(&chReviewCan);
 
     SaveCacheBool(&chReviewReadId, false);
-    SaveCacheChar(&chReviewRepeatBasic, REVIEW_REPEAT_BASIC_DEF);
+    SaveCacheChar(&chReviewRepeatRegular, REVIEW_REPEAT_BASIC_DEF);
     SaveCacheChar(&chReviewRepeatWarning, REVIEW_REPEAT_WARNING_DEF);
     SaveCacheChar(&chReviewRepeatTotal, REVIEW_REPEAT_TOTAL_DEF);
     SaveCacheInt(&chReviewWrnPercent, REVIEW_WRN_PERCENT_DEF);
