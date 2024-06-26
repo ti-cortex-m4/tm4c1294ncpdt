@@ -1,12 +1,6 @@
 {
     "files.associations": {
-        "review_can.h": "c",
-        "review_warning.h": "c",
-        "review_buff.h": "c",
-        "review_core.h": "c",
-        "console.h": "c",
-        "key_review_wrn_percent.h": "c",
-        "key_review_wrn_maximum.h": "c",
-        "key_review_repeat_total.h": "c"
+        "key_auto_flow_hours.h": "c",
+        "key_dsbl_esc.h": "c"
     }
 }
