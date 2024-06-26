@@ -26,7 +26,7 @@ uint                    mcwReviewWarnings[REVIEW_EVENTS_SIZE];
 cache const             chReviewFlag = {REVIEW_FLAG, &fReviewFlag, sizeof(bool)};
 cache const             chReviewCan = {REVIEW_CAN, &mfReviewCan, sizeof(mfReviewCan)};
 cache const             chReviewReadId = {REVIEW_READ_ID, &fReviewReadId, sizeof(bool)};
-cache const             chReviewRepeatRegular = {REVIEW_REPEAT_BASIC, &bReviewRepeatRegular, sizeof(uchar)};
+cache const             chReviewRepeatRegular = {REVIEW_REPEAT_REGULAR, &bReviewRepeatRegular, sizeof(uchar)};
 cache const             chReviewRepeatWarning = {REVIEW_REPEAT_WARNING, &bReviewRepeatWarning, sizeof(uchar)};
 cache const             chReviewRepeatTotal = {REVIEW_REPEAT_TOTAL, &bReviewRepeatTotal, sizeof(uchar)};
 cache const             chReviewWrnPercent = {REVIEW_WRN_PERCENT, &wReviewWrnPercent, sizeof(uint)};
@@ -39,7 +39,7 @@ void InitReview(void)
   LoadCacheBool(&chReviewFlag, false);
   LoadCache(&chReviewCan);
   LoadCacheBool(&chReviewReadId, false);
-  LoadCacheChar(&chReviewRepeatRegular, REVIEW_REPEAT_BASIC_MIN, REVIEW_REPEAT_BASIC_MAX, REVIEW_REPEAT_BASIC_DEF);
+  LoadCacheChar(&chReviewRepeatRegular, REVIEW_REPEAT_REGULAR_MIN, REVIEW_REPEAT_REGULAR_MAX, REVIEW_REPEAT_REGULAR_DEF);
   LoadCacheChar(&chReviewRepeatWarning, REVIEW_REPEAT_WARNING_MIN, REVIEW_REPEAT_WARNING_MAX, REVIEW_REPEAT_WARNING_DEF);
   LoadCacheChar(&chReviewRepeatTotal, REVIEW_REPEAT_TOTAL_MIN, REVIEW_REPEAT_TOTAL_MAX, REVIEW_REPEAT_TOTAL_DEF);
   LoadCacheInt(&chReviewWrnPercent, REVIEW_WRN_PERCENT_MIN, REVIEW_WRN_PERCENT_MAX, REVIEW_WRN_PERCENT_DEF);
@@ -63,7 +63,7 @@ void ResetReview(bool  fFull)
     SaveCache(&chReviewCan);
 
     SaveCacheBool(&chReviewReadId, false);
-    SaveCacheChar(&chReviewRepeatRegular, REVIEW_REPEAT_BASIC_DEF);
+    SaveCacheChar(&chReviewRepeatRegular, REVIEW_REPEAT_REGULAR_DEF);
     SaveCacheChar(&chReviewRepeatWarning, REVIEW_REPEAT_WARNING_DEF);
     SaveCacheChar(&chReviewRepeatTotal, REVIEW_REPEAT_TOTAL_DEF);
     SaveCacheInt(&chReviewWrnPercent, REVIEW_WRN_PERCENT_DEF);
