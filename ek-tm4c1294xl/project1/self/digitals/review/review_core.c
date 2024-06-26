@@ -17,7 +17,7 @@ review_core.c
 
 
 
-static uchar            cbRepeats, cbRepeatTotal;
+static uchar            cbRepeatCurr, cbRepeatTotal;
 
 uchar                   bReviewRepeatMax;
 bool                    fReviewIdRepeat;
@@ -36,7 +36,7 @@ void RestartReview(void)
 {
   RestartReviewBuff();
 
-  cbRepeats = 0;
+  cbRepeatCurr = 0;
   cbRepeatTotal = 0;
 
   bReviewRepeatMax = bReviewRepeatBasic;
@@ -65,7 +65,7 @@ static review_code ReadReview2(uchar  ibMin, uchar  ibMax, uchar  bSize)
     cbRepeatTotal++;
     Show();
 
-    cbRepeats++;
+    cbRepeatCurr++;
     SaveReviewBuff(ibMin,ibMax);
 
     WarningReviewBuff(bSize);
@@ -79,14 +79,14 @@ static review_code ReadReview2(uchar  ibMin, uchar  ibMax, uchar  bSize)
       return REVIEW_ERROR;
     } else {
       if (TestReviewBuff(ibMin,ibMax)) {
-        if (++cbRepeats >= bReviewRepeatMax) {
+        if (++cbRepeatCurr >= bReviewRepeatMax) {
           NextReviewBuff();
           return REVIEW_SUCCESS;
         } else {
           return REVIEW_REPEAT;
         }
       } else {
-        cbRepeats = 0;
+        cbRepeatCurr = 0;
         SaveReviewBuff(ibMin,ibMax);
 
         if (!WarningReviewBuff(bSize)) {
