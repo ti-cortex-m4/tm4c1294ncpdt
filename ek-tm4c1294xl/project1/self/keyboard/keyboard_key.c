@@ -122,7 +122,7 @@ KEYBOARD_KEY!C
 #include "digitals/review/key_review_flag.h"
 #include "digitals/review/key_review_can.h"
 #include "digitals/review/key_review_read_id.h"
-#include "digitals/review/key_review_repeats.h"
+#include "digitals/review/key_review_repeat_basic.h"
 #include "digitals/review/key_review_borders.h"
 #include "digitals/review/key_review_margins.h"
 #include "digitals/review/key_review_wrn_percent.h"
