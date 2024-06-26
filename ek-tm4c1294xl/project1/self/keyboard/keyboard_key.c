@@ -399,7 +399,7 @@ void    Keyboard_Key(void)
       case wSET_REVIEW_CAN:     key_SetReviewCan();     break;
       case wSET_REVIEW_READ_ID: key_SetReviewReadId();  break;
       case wSET_REVIEW_REPEAT_BASIC: key_SetReviewRepeatBasic(); break;
-      case wSET_REVIEW_BORDERS: key_SetReviewBorders(); break;
+      case wSET_REVIEW_BORDERS: key_SetReviewRepeatWarning(); break;
       case wSET_REVIEW_REPEAT_TOTAL: key_SetReviewRepeatTotal(); break;
       case wSET_REVIEW_WRN_PERCENT: key_SetReviewWrnPercent(); break;
       case wSET_REVIEW_WRN_MAXIMUM: key_SetReviewWrnMaximum(); break;
@@ -735,7 +735,7 @@ void    Keyboard_Key(void)
       case wSET_REVIEW_CAN:     key_SetReviewCan();     break;
       case wSET_REVIEW_READ_ID: key_SetReviewReadId();  break;
       case wSET_REVIEW_REPEAT_BASIC: key_SetReviewRepeatBasic(); break;
-      case wSET_REVIEW_BORDERS: key_SetReviewBorders(); break;
+      case wSET_REVIEW_BORDERS: key_SetReviewRepeatWarning(); break;
       case wSET_REVIEW_REPEAT_TOTAL: key_SetReviewRepeatTotal(); break;
       case wSET_REVIEW_WRN_PERCENT: key_SetReviewWrnPercent(); break;
       case wSET_REVIEW_WRN_MAXIMUM: key_SetReviewWrnMaximum(); break;
@@ -991,7 +991,7 @@ void    Keyboard_Key(void)
       case wSET_REVIEW_CAN:     key_SetReviewCan();     break;
       case wSET_REVIEW_READ_ID: key_SetReviewReadId();  break;
       case wSET_REVIEW_REPEAT_BASIC: key_SetReviewRepeatBasic(); break;
-      case wSET_REVIEW_BORDERS: key_SetReviewBorders(); break;
+      case wSET_REVIEW_BORDERS: key_SetReviewRepeatWarning(); break;
       case wSET_REVIEW_REPEAT_TOTAL: key_SetReviewRepeatTotal(); break;
       case wSET_REVIEW_WRN_PERCENT: key_SetReviewWrnPercent(); break;
       case wSET_REVIEW_WRN_MAXIMUM: key_SetReviewWrnMaximum(); break;

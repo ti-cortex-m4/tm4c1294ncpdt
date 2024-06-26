@@ -4,4 +4,4 @@ key_review_borders.h
 
 ------------------------------------------------------------------------------*/
 
-void    key_SetReviewBorders(void);
+void    key_SetReviewRepeatWarning(void);

@@ -21,7 +21,7 @@ static char const       *pszMessages[]  = { szMessage1, szMessage2, szMessage3, 
 
 
 
-void    key_SetReviewBorders(void)
+void    key_SetReviewRepeatWarning(void)
 {
-  key_SetCharBlocked(&chReviewBorders, pszMessages, REVIEW_BORDERS_MIN, REVIEW_BORDERS_MAX, fReviewFlag, wSET_REVIEW_FLAG);
+  key_SetCharBlocked(&chReviewRepeatWarning, pszMessages, REVIEW_BORDERS_MIN, REVIEW_BORDERS_MAX, fReviewFlag, wSET_REVIEW_FLAG);
 }
