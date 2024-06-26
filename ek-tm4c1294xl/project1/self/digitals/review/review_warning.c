@@ -99,7 +99,7 @@ static bool WarningCommon(uint  wPrev, uint  wCurr, uchar  i)
 
   review_wrn rw = WarningCommon2(wPrev, wCurr, c);
   if (rw != REVIEW_WRN_OK) {
-    bMaxRepeats = bReviewBorders;
+    bReviewRepeatMax = bReviewBorders;
     fIdRepeat = true;
 
     mcwReviewWarnings[rw]++;
@@ -117,7 +117,7 @@ static bool WarningRepeats(uint  wPrev, uint  wCurr, uchar  i)
 
   review_wrn rw = WarningRepeats2(wPrev, wCurr, c);
   if (rw != REVIEW_WRN_OK) {
-    bMaxRepeats = bReviewBorders;
+    bReviewRepeatMax = bReviewBorders;
     fIdRepeat = true;
 
     mcwReviewWarnings[rw]++;
