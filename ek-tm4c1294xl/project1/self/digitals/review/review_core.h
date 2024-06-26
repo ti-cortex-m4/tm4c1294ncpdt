@@ -18,7 +18,7 @@ typedef enum
 
 
 extern  uchar                   bReviewRepeatMax;
-extern  bool                    fIdRepeat;
+extern  bool                    fReviewUseId;
 
 
 
